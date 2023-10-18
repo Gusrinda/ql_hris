@@ -29,7 +29,7 @@ class _SplashPageState extends State<SplashPage> {
       backgroundColor: MyColorsConst.whiteColor,
       body: Center(
         child: Image.asset(
-          "assets/images/logo_ql.png",
+          "assets/images/logo_SJ.png",
           width: size.width / 2,
         ),
       ),

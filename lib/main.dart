@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ql_absensi_express_mobile/pages/splash/splash_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ql_absensi_express_mobile/sentry/my_sentry.dart';
 
 import 'utils/const.dart';
@@ -29,12 +30,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'QL Absensi Express',
+      title: 'SJ Absensi Express',
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
         brightness: Brightness.light,
         primaryColor: MyColorsConst.primaryColor,
         dividerColor: Colors.transparent,
+        textTheme:
+                    GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
       ),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,

@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/authentication/forgot_password/bloc/forgot_password_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/authentication/forgot_password/change_pass_notification_page.dart';
-import 'package:ql_absensi_express_mobile/pages/authentication/forgot_password/forgot_password_page.dart';
 import 'package:ql_absensi_express_mobile/pages/authentication/login/bloc/login_bloc.dart';
 import 'package:ql_absensi_express_mobile/pages/authentication/login/login_page.dart';
-import 'package:ql_absensi_express_mobile/pages/authentication/register/bloc/register_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/authentication/register/register_page.dart';
 import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/add/bloc/add_check_in_out_bloc.dart';
 import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/add/bloc/location_acio_bloc.dart';
 import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/add/bloc/time_acio_bloc.dart';
@@ -42,24 +37,6 @@ class RouteGenerator {
           return BlocProvider(
             create: (context) => LoginBloc()..add(LoginChecked()),
             child: LoginPage(),
-          );
-        });
-      case ForgotPasswordPage.routeName:
-        return MaterialPageRoute(builder: (context) {
-          return BlocProvider(
-            create: (context) => ForgotPasswordBloc(),
-            child: ForgotPasswordPage(),
-          );
-        });
-      case ChangePassNotificationPage.routeName:
-        return MaterialPageRoute(builder: (context) {
-          return const ChangePassNotificationPage();
-        });
-      case RegisterPage.routeName:
-        return MaterialPageRoute(builder: (context) {
-          return BlocProvider(
-            create: (context) => RegisterBloc(),
-            child: RegisterPage(),
           );
         });
       case HomePage.routeName:

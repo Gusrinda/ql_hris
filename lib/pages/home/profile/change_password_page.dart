@@ -70,7 +70,7 @@ class ChangePasswordPage extends StatelessWidget {
         contents: [
           TextFormCustomV1(
             titleText: "Password Lama",
-            hintText: "masukkan password lama",
+            // hintText: "masukkan password lama",
             isPassword: true,
             keyboardType: TextInputType.visiblePassword,
             controller: oldPasswordController,
@@ -81,7 +81,7 @@ class ChangePasswordPage extends StatelessWidget {
           const SizedBox(height: 20),
           TextFormCustomV1(
             titleText: "Password Baru",
-            hintText: "masukkan password baru",
+            // hintText: "masukkan password baru",
             isPassword: true,
             keyboardType: TextInputType.visiblePassword,
             controller: newPasswordController,
@@ -97,7 +97,7 @@ class ChangePasswordPage extends StatelessWidget {
           const SizedBox(height: 20),
           TextFormCustomV1(
             titleText: "Konfirmasi Password Baru",
-            hintText: "masukkan konfirmasi password baru",
+            // hintText: "masukkan konfirmasi password baru",
             isPassword: true,
             keyboardType: TextInputType.visiblePassword,
             controller: confirmNewPasswordController,

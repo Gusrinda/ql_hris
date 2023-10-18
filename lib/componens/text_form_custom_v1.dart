@@ -3,7 +3,6 @@ import 'package:ql_absensi_express_mobile/utils/const.dart';
 
 class TextFormCustomV1 extends StatefulWidget {
   final String titleText;
-  final String hintText;
   final double? width, height;
   final EdgeInsetsGeometry? margin;
   final double? textSize;
@@ -15,7 +14,6 @@ class TextFormCustomV1 extends StatefulWidget {
   const TextFormCustomV1({
     Key? key,
     required this.titleText,
-    required this.hintText,
     this.width,
     this.height,
     this.margin,
@@ -54,14 +52,13 @@ class _TextFormCustomV1State extends State<TextFormCustomV1> {
             style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.bold,
-              color: MyColorsConst.primaryColor,
+              color: MyColorsConst.lightDarkColor,
             ),
           ),
           const SizedBox(height: 6),
           Container(
             decoration: const BoxDecoration(
               color: MyColorsConst.whiteColor,
-              borderRadius: BorderRadius.all(Radius.circular(12)),
               boxShadow: [
                 BoxShadow(
                   color: MyColorsConst.shadowColor,
@@ -84,7 +81,6 @@ class _TextFormCustomV1State extends State<TextFormCustomV1> {
               ),
               validator: widget.validator,
               decoration: InputDecoration(
-                hintText: widget.hintText,
                 hintStyle: TextStyle(
                   fontSize: widget.textSize,
                   color: MyColorsConst.lightDarkColor,
@@ -117,13 +113,10 @@ class _TextFormCustomV1State extends State<TextFormCustomV1> {
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                 border: InputBorder.none,
-                focusedBorder: const OutlineInputBorder(
+                focusedBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(
                     color: MyColorsConst.primaryColor,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(12),
+                    width: 2,
                   ),
                 ),
                 filled: true,

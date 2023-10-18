@@ -25,31 +25,11 @@ class AuthenticationLayout extends StatelessWidget {
   final layoutData = [
     {
       "hideAppBar": true,
-      "title": "Login",
-      "subTitle": "Masuk ke Akun",
-      "paddingTop": 80.0,
-      "icon": "assets/icons/login.svg",
-    },
-    {
-      "hideAppBar": false,
-      "title": "Lupa Password",
-      "subTitle": "",
-      "paddingTop": 30.0,
-      "icon": "assets/icons/lupa_password.svg",
-    },
-    {
-      "hideAppBar": false,
-      "title": "Ganti Password",
-      "subTitle": "",
-      "paddingTop": 30.0,
-      "icon": "assets/icons/lupa_password.svg",
-    },
-    {
-      "hideAppBar": true,
-      "title": "Register",
-      "subTitle": "Buat Akunmu",
-      "paddingTop": 40.0,
-      "icon": "assets/icons/register.svg",
+      "title": "Selamat Datang!",
+      "subTitle": "Masukan data logiin anda",
+      // "paddingTop": 80.0,
+      "image": "assets/images/city.png",
+      "image2": "assets/images/Logo_Success_Jaya.png"
     },
   ];
 
@@ -70,33 +50,40 @@ class AuthenticationLayout extends StatelessWidget {
         body: SingleChildScrollView(
           child: Center(
             child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(
-                    height:
-                        layoutData[layoutState.index]["paddingTop"] as double),
-                Text(
-                  layoutData[layoutState.index]["title"] as String,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                Image.asset(
+                  width: size.width * 100,
+                  layoutData[layoutState.index]["image"] as String,
+                  // fit: BoxFit.fitWidth,
+                ),
+                Image.asset(
+                  width: size.width * 1 / 2,
+                  layoutData[layoutState.index]["image2"] as String,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        layoutData[layoutState.index]["title"] as String,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        layoutData[layoutState.index]["subTitle"] as String,
+                        style: const TextStyle(
+                          color: MyColorsConst.lightDarkColor,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 10),
-                Text(
-                  layoutData[layoutState.index]["subTitle"] as String,
-                  style: const TextStyle(
-                    fontSize: 12,
-                  ),
-                ),
-                SizedBox(height: size.height * 1 / 25),
-                SvgPicture.asset(
-                  width: size.width * 1.2 / 2,
-                  layoutData[layoutState.index]["icon"] as String,
-                  fit: BoxFit.fitWidth,
-                ),
-                SizedBox(height: size.height * 1 / 15),
                 Form(
                   key: formKey,
                   autovalidateMode: autovalidateMode,
