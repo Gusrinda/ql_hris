@@ -18,7 +18,8 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     Timer(
       Duration(seconds: 2),
-      () => Navigator.of(context).pushNamedAndRemoveUntil(LoginPage.routeName, (Route<dynamic> route) => false),
+      () => Navigator.of(context).pushNamedAndRemoveUntil(
+          LoginPage.routeName, (Route<dynamic> route) => false),
     );
   }
 

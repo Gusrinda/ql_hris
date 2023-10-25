@@ -107,11 +107,12 @@ class HomeCheckInOutPage extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 40, vertical: 20),
                             decoration: BoxDecoration(
-                              color: Color(0xFFD9FFD9),
-                              borderRadius: BorderRadius.all(Radius.circular(10))
-                            ),
+                                color: Color(0xFFD9FFD9),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
                             child: Column(),
                           ),
                           BlocBuilder<CheckInOutBloc, CheckInOutState>(

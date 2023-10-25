@@ -21,7 +21,7 @@ AppBar appBarCustomV1({
     elevation: 1,
     backgroundColor: MyColorsConst.whiteColor,
     iconTheme: const IconThemeData(
-      color: MyColorsConst.whiteColor,
+      color: MyColorsConst.primaryColor,
     ),
     actions: actions,
   );
