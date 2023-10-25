@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/absensi/absensi_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/home_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/cubit/home_cubit.dart';
@@ -10,30 +11,32 @@ import 'package:sj_presensi_mobile/pages/home/profile/profile_page.dart';
 import 'package:sj_presensi_mobile/pages/home/report/bloc/reports_history_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/report/reports_history_page.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
-
 class HomePage extends StatelessWidget {
   static const routeName = 'HomePage';
-  const HomePage({super.key});
+
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar:
-          BlocBuilder<HomeNavigationCubit, HomeNavigationState>(
+      bottomNavigationBar: BlocBuilder<HomeNavigationCubit, HomeNavigationState>(
         builder: (context, state) {
           return BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
             currentIndex: state.index,
+            showSelectedLabels: true,
             showUnselectedLabels: true,
             selectedItemColor: MyColorsConst.primaryColor,
             unselectedItemColor: MyColorsConst.lightDarkColor,
             selectedLabelStyle: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 8,
+              fontWeight: FontWeight.w500,
+              fontSize: 7,
             ),
             unselectedLabelStyle: const TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 8,
+              fontWeight: FontWeight.w500,
+              fontSize: 7,
             ),
+            iconSize: 21,
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(
@@ -82,7 +85,7 @@ class HomePage extends StatelessWidget {
                   provider.getNavBarItem(HomeNavBarItem.profile);
                   break;
                 case 4:
-                  provider.getNavBarItem(HomeNavBarItem.profile);
+                  provider.getNavBarItem(HomeNavBarItem.absensi);
                   break;
               }
             },
@@ -90,41 +93,44 @@ class HomePage extends StatelessWidget {
         },
       ),
       body: BlocBuilder<HomeNavigationCubit, HomeNavigationState>(
-          builder: (context, state) {
-        if (state.navbarItem == HomeNavBarItem.home) {
-          return BlocProvider(
-            create: (context) =>
-                CheckInOutBloc()..add(AttendanceStateChecked()),
-            child: const HomeCheckInOutPage(),
-          );
-        } else if (state.navbarItem == HomeNavBarItem.history) {
-          return BlocProvider(
-            create: (context) => HistoryBloc()
-              ..add(
-                GetAttendancesHistory(
-                  date: DateTime.now(),
+        builder: (context, state) {
+          if (state.navbarItem == HomeNavBarItem.home) {
+            return BlocProvider(
+              create: (context) =>
+                  CheckInOutBloc()..add(AttendanceStateChecked()),
+              child: const HomeCheckInOutPage(),
+            );
+          } else if (state.navbarItem == HomeNavBarItem.history) {
+            return BlocProvider(
+              create: (context) => HistoryBloc()
+                ..add(
+                  GetAttendancesHistory(
+                    date: DateTime.now(),
+                  ),
                 ),
-              ),
-            child: const HistoryPage(),
-          );
-        } else if (state.navbarItem == HomeNavBarItem.reports) {
-          return BlocProvider(
-            create: (context) => ReportsHistoryBloc()
-              ..add(
-                GetReportsHistory(
-                  date: DateTime.now(),
+              child: const HistoryPage(),
+            );
+          } else if (state.navbarItem == HomeNavBarItem.reports) {
+            return BlocProvider(
+              create: (context) => ReportsHistoryBloc()
+                ..add(
+                  GetReportsHistory(
+                    date: DateTime.now(),
+                  ),
                 ),
-              ),
-            child: ReportsHistoryPage(),
-          );
-        } else if (state.navbarItem == HomeNavBarItem.profile) {
-          return BlocProvider(
-            create: (context) => ProfileBloc()..add(GetDataProfile()),
-            child: ProfilePage(),
-          );
-        }
-        return Container();
-      }),
+              child: ReportsHistoryPage(),
+            );
+          } else if (state.navbarItem == HomeNavBarItem.profile) {
+            return BlocProvider(
+              create: (context) => ProfileBloc()..add(GetDataProfile()),
+              child: ProfilePage(),
+            );
+          } else if (state.navbarItem == HomeNavBarItem.absensi) {
+            return AbsensiPage();
+          }
+          return Container();
+        },
+      ),
     );
   }
 }
