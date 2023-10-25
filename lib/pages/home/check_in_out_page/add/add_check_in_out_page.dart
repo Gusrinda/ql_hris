@@ -134,31 +134,50 @@ class AddCheckInOutPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     BlocBuilder<TimeAcioBloc, TimeAcioState>(
                       builder: (context, state) {
                         var data = state is TimeAcioLoadSuccess ? state : null;
-                        return Column(
+                        return Row(
                           children: [
-                            buildDetailCard(
-                              title: "Tanggal",
-                              text: data != null
-                                  ? DateFormat('EEEE, dd-MM-yyyy', 'id_ID')
-                                      .format(data.dateTime)
-                                  : "-",
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.calendar_month_rounded,
+                                    color: MyColorsConst.primaryColor,
+                                  ),
+                                  const SizedBox(
+                                      width: 5), // Atur jarak sesuai kebutuhan
+                                  Text(
+                                    '${data != null ? DateFormat('dd/MM/yyyy', 'id_ID').format(data.dateTime) : "-"}',
+                                  ),
+                                ],
+                              ),
                             ),
-                            const SizedBox(height: 24),
-                            buildDetailCard(
-                              title: "Waktu",
-                              text: data != null
-                                  ? DateFormat('HH:mm:ss').format(data.dateTime)
-                                  : "-",
+                            const SizedBox(width: 20),
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  const Spacer(),
+                                  Icon(
+                                    Icons.access_time_filled,
+                                    color: MyColorsConst.primaryColor,
+                                  ),
+                                  const SizedBox(
+                                      width: 5), // Atur jarak sesuai kebutuhan
+                                  Text(
+                                    '${data != null ? DateFormat('HH:mm:ss').format(data.dateTime) : "-"}',
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         );
                       },
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 5),
                     BlocBuilder<LocationAcioBloc, LocationAcioState>(
                       builder: (context, state) {
                         var isLoading = true;
@@ -178,6 +197,17 @@ class AddCheckInOutPage extends StatelessWidget {
                             ));
                         return Column(
                           children: [
+                            const SizedBox(height: 24),
+                            buildDetailCard(
+                              title: "Lokasi",
+                              text: isLoading
+                                  ? "Loading..."
+                                  : data != null
+                                      ? data.location
+                                      : "-",
+                              textSize: 12,
+                              textBold: FontWeight.normal,
+                            ),
                             buildDetailCard(
                               title: "Status",
                               text: isLoading
@@ -192,17 +222,6 @@ class AddCheckInOutPage extends StatelessWidget {
                                       ? MyColorsConst.greenColor
                                       : MyColorsConst.yellowColor
                                   : MyColorsConst.darkColor,
-                            ),
-                            const SizedBox(height: 24),
-                            buildDetailCard(
-                              title: "Lokasi",
-                              text: isLoading
-                                  ? "Loading..."
-                                  : data != null
-                                      ? data.location
-                                      : "-",
-                              textSize: 12,
-                              textBold: FontWeight.normal,
                             ),
                           ],
                         );
@@ -258,7 +277,7 @@ class AddCheckInOutPage extends StatelessWidget {
   Widget buildDetailCard({
     required title,
     required text,
-    double textSize = 16.0,
+    double textSize = 10.0,
     Color color = MyColorsConst.darkColor,
     textBold = FontWeight.bold,
   }) {
@@ -275,19 +294,11 @@ class AddCheckInOutPage extends StatelessWidget {
               topLeft: Radius.circular(8),
               topRight: Radius.circular(8),
             ),
-            gradient: LinearGradient(
-              colors: [
-                Color.fromARGB(255, 0, 125, 255),
-                Color.fromARGB(255, 51, 255, 204),
-              ],
-              begin: Alignment.bottomLeft,
-              end: Alignment.topRight,
-            ),
           ),
           child: Text(
             title,
             style: const TextStyle(
-              color: MyColorsConst.whiteColor,
+              color: MyColorsConst.darkColor,
               fontWeight: FontWeight.bold,
               fontSize: 12,
             ),
@@ -303,14 +314,6 @@ class AddCheckInOutPage extends StatelessWidget {
               bottomLeft: Radius.circular(12),
               bottomRight: Radius.circular(12),
             ),
-            boxShadow: [
-              BoxShadow(
-                color: MyColorsConst.shadowColor,
-                blurRadius: 2,
-                offset: Offset(0, 4),
-                spreadRadius: 1,
-              ),
-            ],
           ),
           child: Text(
             text,

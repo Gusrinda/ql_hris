@@ -30,10 +30,10 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV1> {
       onTap: imageFile == null ? () => _pickImage(ImageSource.camera) : null,
       child: Container(
         width: double.infinity,
-        height: size.width * 3 / 6,
+        height: size.width * 1,
         alignment: Alignment.center,
         decoration: const BoxDecoration(
-          color: MyColorsConst.lightDarkColor,
+          color: MyColorsConst.shadowColor,
           borderRadius: BorderRadius.all(
             Radius.circular(10),
           ),
@@ -53,12 +53,12 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV1> {
                         fit: BoxFit.fitWidth,
                       ),
                     )
-                  : Column(
+                  : const Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         Icon(
-                          Icons.photo_camera,
+                          Icons.camera_alt,
                           color: MyColorsConst.semiDarkColor,
                           size: 45,
                         ),

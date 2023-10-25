@@ -12,19 +12,14 @@ AppBar appBarCustomV1({
       child: Text(
         title,
         style: const TextStyle(
-          color: MyColorsConst.whiteColor,
-          fontSize: 16,
+          color: MyColorsConst.darkColor,
+          fontSize: 12,
           fontWeight: FontWeight.bold,
         ),
       ),
     ),
-    elevation: 0,
-    backgroundColor: MyColorsConst.primaryColor,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(
-        bottom: Radius.circular(12),
-      ),
-    ),
+    elevation: 1,
+    backgroundColor: MyColorsConst.whiteColor,
     iconTheme: const IconThemeData(
       color: MyColorsConst.whiteColor,
     ),
