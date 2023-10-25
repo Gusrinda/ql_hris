@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class TextFormCustomV1 extends StatefulWidget {
-  final String titleText;
+  final String? titleText;
   final double? width, height;
   final EdgeInsetsGeometry? margin;
   final double? textSize;
@@ -13,7 +13,7 @@ class TextFormCustomV1 extends StatefulWidget {
   final TextEditingController? controller;
   const TextFormCustomV1({
     Key? key,
-    required this.titleText,
+    this.titleText,
     this.width,
     this.height,
     this.margin,
@@ -48,10 +48,10 @@ class _TextFormCustomV1State extends State<TextFormCustomV1> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            widget.titleText,
+            widget.titleText!,
             style: const TextStyle(
               fontSize: 12,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w600,
               color: MyColorsConst.lightDarkColor,
             ),
           ),

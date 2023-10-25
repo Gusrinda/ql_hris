@@ -4,7 +4,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
-import 'package:sj_presensi_mobile/componens/text_form_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/HRIS/text_form_custom_HRIS1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/authentication_layout.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/bloc/login_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/home_page.dart';
@@ -49,28 +49,31 @@ class LoginPage extends StatelessWidget {
         layoutState: AuthenticationLayoutState.login,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         contents: [
-          TextFormCustomV1(
-            titleText: "NIK",
+          TextFormCustomHRIS1(
+            labelText: "NIK",
             keyboardType: TextInputType.emailAddress,
             controller: emailController,
             validator: MultiValidator([
-              RequiredValidator(errorText: "* Required!"),
-              EmailValidator(errorText: "Email not Valid!")
+              RequiredValidator(errorText: "Masukkan NIK yang terdaftar"),
+              // EmailValidator(errorText: "Email not Valid!")
             ]),
           ),
           const SizedBox(height: 20),
-          TextFormCustomV1(
-            titleText: "Password",
+          TextFormCustomHRIS1(
+            labelText: "Password",
             isPassword: true,
             controller: passwordController,
             keyboardType: TextInputType.visiblePassword,
             validator: MultiValidator([
-              RequiredValidator(errorText: "* Required!"),
+              RequiredValidator(errorText: "Masukkan Password"),
             ]),
           ),
           const SizedBox(height: 40),
           TextButtonCustomV1(
+            width: MediaQuery.of(context).size.width,
+            height: 50,
             text: "Login",
+            textSize: 12,
             backgroundColor: MyColorsConst.primaryColor,
             textColor: MyColorsConst.whiteColor,
             onPressed: () {
