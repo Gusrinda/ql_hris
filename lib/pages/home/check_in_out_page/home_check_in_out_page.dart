@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ql_absensi_express_mobile/componens/dialog_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/componens/loading_dialog_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/pages/authentication/login/login_page.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
+import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
 class HomeCheckInOutPage extends StatelessWidget {
   // static const routeName = 'HomeCheckInOutPage';
@@ -56,97 +57,117 @@ class HomeCheckInOutPage extends StatelessWidget {
         }
       },
       child: SafeArea(
-        child: SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: size.height - (size.height * 1 / 9.5),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    BlocBuilder<CheckInOutBloc, CheckInOutState>(
-                      builder: (context, state) {
-                        String? name;
-                        if (state is InfoCheckInOutSuccessInBackground) {
-                          name = state.name;
-                        } else if (state is CheckInOutSuccessInBackground) {
-                          name = state.name;
-                        }
-                        return RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            style: const TextStyle(
-                              color: MyColorsConst.darkColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                            ),
-                            children: <TextSpan>[
-                              const TextSpan(text: 'Hi'),
-                              TextSpan(
-                                text: ' ${name ?? "-"}',
-                                style: const TextStyle(
-                                    color: MyColorsConst.primaryColor),
+        child: BlocBuilder<CheckInOutBloc, CheckInOutState>(
+          builder: (context, state) {
+            String? name;
+            if (state is InfoCheckInOutSuccessInBackground) {
+              name = state.name;
+            } else if (state is CheckInOutSuccessInBackground) {
+              name = state.name;
+            }
+            return Scaffold(
+              backgroundColor: MyColorsConst.whiteColor,
+              appBar: appBarCustomMain(
+                title: "Selamat Datang, ${name ?? "-"}!",
+                padLeft: 8,
+                actions: [
+                  IconButton(
+                    splashRadius: 20,
+                    iconSize: 20,
+                    icon: const Icon(Icons.notifications_active),
+                    onPressed: () async {},
+                  ),
+                ],
+              ),
+              body: SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxHeight: size.height - (size.height * 1 / 9.5),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 16),
+                    child: Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              style: const TextStyle(
+                                color: MyColorsConst.darkColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
                               ),
-                              const TextSpan(text: '\nYuk isi presensimu!'),
-                            ],
+                              children: <TextSpan>[
+                                const TextSpan(text: '\nYuk isi absensimu!'),
+                              ],
+                            ),
                           ),
-                        );
-                      },
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                            decoration: BoxDecoration(
+                              color: Color(0xFFD9FFD9),
+                              borderRadius: BorderRadius.all(Radius.circular(10))
+                            ),
+                            child: Column(),
+                          ),
+                          BlocBuilder<CheckInOutBloc, CheckInOutState>(
+                            builder: (context, state) {
+                              return buttonCheckInOut(
+                                size: size,
+                                iconPath: "assets/images/homepage_checkin.png",
+                                title: "Check In",
+                                color: MyColorsConst.greenColor,
+                                enable: state is CheckInOutSuccessInBackground
+                                    ? state.isCheckin
+                                    : false,
+                                onPressed: () async {
+                                  await Navigator.of(context).pushNamed(
+                                    AddCheckInOutPage.routeName,
+                                    arguments:
+                                        ProcessCheckInOutPageState.checkin,
+                                  );
+                                  context
+                                      .read<CheckInOutBloc>()
+                                      .add(AttendanceStateChecked());
+                                },
+                              );
+                            },
+                          ),
+                          BlocBuilder<CheckInOutBloc, CheckInOutState>(
+                            builder: (context, state) {
+                              return buttonCheckInOut(
+                                size: size,
+                                iconPath: "assets/images/homepage_checkout.png",
+                                title: "Check Out",
+                                color: MyColorsConst.redColor,
+                                enable: state is CheckInOutSuccessInBackground
+                                    ? !state.isCheckin
+                                    : false,
+                                onPressed: () async {
+                                  await Navigator.of(context).pushNamed(
+                                    AddCheckInOutPage.routeName,
+                                    arguments:
+                                        ProcessCheckInOutPageState.checkout,
+                                  );
+                                  context
+                                      .read<CheckInOutBloc>()
+                                      .add(AttendanceStateChecked());
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                    BlocBuilder<CheckInOutBloc, CheckInOutState>(
-                      builder: (context, state) {
-                        return buttonCheckInOut(
-                          size: size,
-                          iconPath: "assets/images/homepage_checkin.png",
-                          title: "Check In",
-                          color: MyColorsConst.greenColor,
-                          enable: state is CheckInOutSuccessInBackground
-                              ? state.isCheckin
-                              : false,
-                          onPressed: () async {
-                            await Navigator.of(context).pushNamed(
-                              AddCheckInOutPage.routeName,
-                              arguments: ProcessCheckInOutPageState.checkin,
-                            );
-                            context
-                                .read<CheckInOutBloc>()
-                                .add(AttendanceStateChecked());
-                          },
-                        );
-                      },
-                    ),
-                    BlocBuilder<CheckInOutBloc, CheckInOutState>(
-                      builder: (context, state) {
-                        return buttonCheckInOut(
-                          size: size,
-                          iconPath: "assets/images/homepage_checkout.png",
-                          title: "Check Out",
-                          color: MyColorsConst.redColor,
-                          enable: state is CheckInOutSuccessInBackground
-                              ? !state.isCheckin
-                              : false,
-                          onPressed: () async {
-                            await Navigator.of(context).pushNamed(
-                              AddCheckInOutPage.routeName,
-                              arguments: ProcessCheckInOutPageState.checkout,
-                            );
-                            context
-                                .read<CheckInOutBloc>()
-                                .add(AttendanceStateChecked());
-                          },
-                        );
-                      },
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );

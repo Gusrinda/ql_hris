@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
 enum AuthenticationLayoutState {
   login,

@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:ql_absensi_express_mobile/services/model/report_model.dart';
-import 'package:ql_absensi_express_mobile/services/reports_services.dart';
-import 'package:ql_absensi_express_mobile/utils/services.dart';
-import 'package:ql_absensi_express_mobile/utils/shared_pref.dart';
+import 'package:sj_presensi_mobile/services/model/report_model.dart';
+import 'package:sj_presensi_mobile/services/reports_services.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
+import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
 part 'add_report_event.dart';
 part 'add_report_state.dart';

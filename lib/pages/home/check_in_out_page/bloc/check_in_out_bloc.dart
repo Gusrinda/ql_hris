@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:ql_absensi_express_mobile/services/attendances_services.dart';
-import 'package:ql_absensi_express_mobile/utils/services.dart';
-import 'package:ql_absensi_express_mobile/utils/shared_pref.dart';
+import 'package:sj_presensi_mobile/services/attendances_services.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
+import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
 part 'check_in_out_event.dart';
 part 'check_in_out_state.dart';

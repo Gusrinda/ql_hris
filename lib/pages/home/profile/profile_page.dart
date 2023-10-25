@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:ql_absensi_express_mobile/componens/appbar_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/componens/dialog_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/componens/image_form_custom_v2.dart';
-import 'package:ql_absensi_express_mobile/componens/loading_dialog_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/componens/text_button_custom_v2.dart';
-import 'package:ql_absensi_express_mobile/componens/text_form_custom_v2.dart';
-import 'package:ql_absensi_express_mobile/pages/authentication/login/login_page.dart';
-import 'package:ql_absensi_express_mobile/pages/home/profile/bloc/profile_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/profile/change_password_page.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/image_form_custom_v2.dart';
+import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/text_button_custom_v2.dart';
+import 'package:sj_presensi_mobile/componens/text_form_custom_v2.dart';
+import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/change_password_page.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
 class ProfilePage extends StatelessWidget {
   // static const routeName = 'ProfilePage';

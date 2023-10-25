@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
-AppBar appBarCustomV1({
+AppBar appBarCustomMain({
   required String title,
   double padLeft = 8,
   List<Widget>? actions,
@@ -12,22 +12,17 @@ AppBar appBarCustomV1({
       child: Text(
         title,
         style: const TextStyle(
-          color: MyColorsConst.whiteColor,
-          fontSize: 16,
+          color: Colors.black,
+          fontSize: 12,
           fontWeight: FontWeight.bold,
         ),
       ),
     ),
-    elevation: 0,
-    backgroundColor: MyColorsConst.primaryColor,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(
-        bottom: Radius.circular(12),
-      ),
-    ),
-    iconTheme: const IconThemeData(
-      color: MyColorsConst.whiteColor,
-    ),
+    elevation: 1,
+    backgroundColor: MyColorsConst.whiteColor,
     actions: actions,
+    iconTheme: const IconThemeData(
+      color: MyColorsConst.primaryColor,
+    ),
   );
 }

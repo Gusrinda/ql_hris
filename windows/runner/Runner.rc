@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "ql_absensi_express_mobile" "\0"
+            VALUE "FileDescription", "sj_presensi_mobile" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "ql_absensi_express_mobile" "\0"
+            VALUE "InternalName", "sj_presensi_mobile" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "ql_absensi_express_mobile.exe" "\0"
-            VALUE "ProductName", "ql_absensi_express_mobile" "\0"
+            VALUE "OriginalFilename", "sj_presensi_mobile.exe" "\0"
+            VALUE "ProductName", "sj_presensi_mobile" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

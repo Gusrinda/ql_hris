@@ -1,5 +1,5 @@
-name: ql_absensi_express_mobile
-description: QL Absensi Express Apps.
+name: sj_presensi_mobile
+description: SJ Presensi Apps.
 publish_to: 'none'
 version: 2.0.0+16
 
@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   shared_preferences: ^2.0.18
+  change_app_package_name: ^1.1.0
   http: ^1.1.0
   bloc: ^8.1.1
   flutter_bloc: ^8.1.2

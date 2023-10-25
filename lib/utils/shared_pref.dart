@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:ql_absensi_express_mobile/sentry/my_sentry.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
-import 'package:ql_absensi_express_mobile/utils/services.dart';
+import 'package:sj_presensi_mobile/sentry/my_sentry.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GeneralSharedPreferences {

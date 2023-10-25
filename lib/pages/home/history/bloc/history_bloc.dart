@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:ql_absensi_express_mobile/sentry/my_sentry.dart';
-import 'package:ql_absensi_express_mobile/services/attendances_services.dart';
-import 'package:ql_absensi_express_mobile/services/model/attendances_model.dart';
-import 'package:ql_absensi_express_mobile/utils/services.dart';
-import 'package:ql_absensi_express_mobile/utils/shared_pref.dart';
+import 'package:sj_presensi_mobile/sentry/my_sentry.dart';
+import 'package:sj_presensi_mobile/services/attendances_services.dart';
+import 'package:sj_presensi_mobile/services/model/attendances_model.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
+import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
 part 'history_event.dart';
 part 'history_state.dart';

@@ -1,4 +1,4 @@
-package com.example.ql_absensi_express_mobile
+package com.example.sj_presensi_mobile
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:ql_absensi_express_mobile/pages/splash/splash_page.dart';
+import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ql_absensi_express_mobile/sentry/my_sentry.dart';
+import 'package:sj_presensi_mobile/sentry/my_sentry.dart';
 
 import 'utils/const.dart';
 import 'utils/routes.dart';

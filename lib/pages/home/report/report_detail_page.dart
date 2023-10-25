@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:ql_absensi_express_mobile/componens/appbar_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/services/model/report_model.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
+import 'package:sj_presensi_mobile/services/model/report_model.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
 class ReportDetailPage extends StatelessWidget {
   static const routeName = '/ReportDetailPage';
@@ -96,7 +96,7 @@ class ReportDetailPage extends StatelessWidget {
     assert(content.length == 3, 'The list must contain exactly 3 values.');
     var cardItem = {
       true: {
-        "title": "Laporan Pagi",
+        "title": " Pagi",
         "icon": Icons.wb_sunny_outlined,
         "subTitles": [
           "Task kemarin yang belum selesai",

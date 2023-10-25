@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ql_absensi_express_mobile/services/sentry_services.dart';
-import 'package:ql_absensi_express_mobile/utils/services.dart';
+import 'package:sj_presensi_mobile/services/sentry_services.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
 import 'dart:io' show Platform;
 
 class MySentry {

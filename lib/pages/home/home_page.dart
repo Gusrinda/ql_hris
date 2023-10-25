@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/home_check_in_out_page.dart';
-import 'package:ql_absensi_express_mobile/pages/home/cubit/home_cubit.dart';
-import 'package:ql_absensi_express_mobile/pages/home/history/bloc/history_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/history/history_page.dart';
-import 'package:ql_absensi_express_mobile/pages/home/profile/bloc/profile_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/profile/profile_page.dart';
-import 'package:ql_absensi_express_mobile/pages/home/report/bloc/reports_history_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/report/reports_history_page.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/home_check_in_out_page.dart';
+import 'package:sj_presensi_mobile/pages/home/cubit/home_cubit.dart';
+import 'package:sj_presensi_mobile/pages/home/history/bloc/history_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/profile_page.dart';
+import 'package:sj_presensi_mobile/pages/home/report/bloc/reports_history_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/report/reports_history_page.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = 'HomePage';
@@ -23,27 +23,41 @@ class HomePage extends StatelessWidget {
         builder: (context, state) {
           return BottomNavigationBar(
             currentIndex: state.index,
-            showUnselectedLabels: false,
+            showUnselectedLabels: true,
             selectedItemColor: MyColorsConst.primaryColor,
             unselectedItemColor: MyColorsConst.lightDarkColor,
+            selectedLabelStyle: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 8,
+            ),
+            unselectedLabelStyle: const TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 8,
+            ),
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.home,
+                  Icons.assignment,
                 ),
-                label: "Home",
+                label: "Absensi",
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.history_edu_rounded,
+                  Icons.access_time_filled,
                 ),
-                label: "History",
+                label: "Lembur",
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.task_rounded,
+                  Icons.directions_car,
                 ),
-                label: "Report",
+                label: "Perjalanan Dinas",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.article,
+                ),
+                label: "Pengajuan Cuti",
               ),
               BottomNavigationBarItem(
                 icon: Icon(
@@ -65,6 +79,9 @@ class HomePage extends StatelessWidget {
                   provider.getNavBarItem(HomeNavBarItem.reports);
                   break;
                 case 3:
+                  provider.getNavBarItem(HomeNavBarItem.profile);
+                  break;
+                case 4:
                   provider.getNavBarItem(HomeNavBarItem.profile);
                   break;
               }

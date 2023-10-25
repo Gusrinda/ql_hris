@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:ql_absensi_express_mobile/componens/appbar_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/componens/dialog_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/componens/image_form_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/componens/loading_dialog_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/componens/text_button_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/pages/authentication/login/login_page.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/add/add_check_in_out_form_model.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/add/bloc/add_check_in_out_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/add/bloc/location_acio_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/add/bloc/time_acio_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/home_page.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/image_form_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
+import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_form_model.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/add_check_in_out_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/location_acio_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/time_acio_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/home_page.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
 enum ProcessCheckInOutPageState { checkin, checkout }
 

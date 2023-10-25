@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:ql_absensi_express_mobile/services/auth_services.dart';
-import 'package:ql_absensi_express_mobile/services/model/profile_model.dart';
-import 'package:ql_absensi_express_mobile/services/profile_services.dart';
-import 'package:ql_absensi_express_mobile/utils/services.dart';
-import 'package:ql_absensi_express_mobile/utils/shared_pref.dart';
+import 'package:sj_presensi_mobile/services/auth_services.dart';
+import 'package:sj_presensi_mobile/services/model/profile_model.dart';
+import 'package:sj_presensi_mobile/services/profile_services.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
+import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';
@@ -91,7 +91,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         }
       }
     });
-    
+
     on<EditDataProfile>((event, emit) async {
       if (event.phoneNumber != null) {
         emit(ProfileLoading());

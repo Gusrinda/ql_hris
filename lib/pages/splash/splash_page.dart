@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:ql_absensi_express_mobile/pages/authentication/login/login_page.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
 class SplashPage extends StatefulWidget {
   static const routeName = 'SplashPage';
@@ -29,7 +29,7 @@ class _SplashPageState extends State<SplashPage> {
       backgroundColor: MyColorsConst.whiteColor,
       body: Center(
         child: Image.asset(
-          "assets/images/logo_sj.png",
+          "assets/images/logo_SJ.png",
           width: size.width / 2,
         ),
       ),

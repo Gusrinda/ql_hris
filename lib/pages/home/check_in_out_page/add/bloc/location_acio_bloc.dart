@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/add/location.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/location.dart';
 
 part 'location_acio_event.dart';
 part 'location_acio_state.dart';
@@ -48,7 +48,8 @@ class LocationAcioBloc extends Bloc<LocationAcioEvent, LocationAcioState> {
           },
         ).catchError((onError) {
           emit(LocationAcioLoadFailed(
-            message: "Failed get the current location, please check your internet connection and try again!",
+            message:
+                "Failed get the current location, please check your internet connection and try again!",
           ));
         });
       },

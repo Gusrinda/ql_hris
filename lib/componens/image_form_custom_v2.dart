@@ -6,8 +6,8 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:ql_absensi_express_mobile/sentry/my_sentry.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/sentry/my_sentry.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
 class ImageFormCustomV2 extends StatefulWidget {
   String? imagePath;

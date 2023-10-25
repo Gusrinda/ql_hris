@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/authentication/login/bloc/login_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/authentication/login/login_page.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/add/bloc/add_check_in_out_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/add/bloc/location_acio_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/add/bloc/time_acio_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/add/location.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/add/time.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
-import 'package:ql_absensi_express_mobile/pages/home/cubit/home_cubit.dart';
-import 'package:ql_absensi_express_mobile/pages/home/home_page.dart';
-import 'package:ql_absensi_express_mobile/pages/home/profile/bloc/profile_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/profile/change_password_page.dart';
-import 'package:ql_absensi_express_mobile/pages/home/report/add/add_report_page.dart';
-import 'package:ql_absensi_express_mobile/pages/home/report/add/bloc/add_report_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/report/report_detail_page.dart';
-import 'package:ql_absensi_express_mobile/pages/splash/splash_page.dart';
-import 'package:ql_absensi_express_mobile/services/model/report_model.dart';
-import 'package:ql_absensi_express_mobile/services/model/report_detail_page_model.dart';
+import 'package:sj_presensi_mobile/pages/authentication/login/bloc/login_bloc.dart';
+import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/add_check_in_out_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/location_acio_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/time_acio_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/location.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/time.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
+import 'package:sj_presensi_mobile/pages/home/cubit/home_cubit.dart';
+import 'package:sj_presensi_mobile/pages/home/home_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/change_password_page.dart';
+import 'package:sj_presensi_mobile/pages/home/report/add/add_report_page.dart';
+import 'package:sj_presensi_mobile/pages/home/report/add/bloc/add_report_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/report/report_detail_page.dart';
+import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
+import 'package:sj_presensi_mobile/services/model/report_model.dart';
+import 'package:sj_presensi_mobile/services/model/report_detail_page_model.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
