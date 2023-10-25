@@ -13,6 +13,22 @@ class MyGeneralConst {
   static const CODE_UNKWON_ERROR = 403;
 }
 
+const MaterialColor themeAppColor = MaterialColor(
+    0xff0068D4,
+    <int, Color>{
+      50: Color(0xff0068D4),
+      100: Color(0xff0068D4),
+      200: Color(0xff0068D4),
+      300: Color(0xff0068D4),
+      400: Color(0xff0068D4),
+      500: Color(0xff0068D4),
+      600: Color(0xff0068D4),
+      700: Color(0xff0068D4),
+      800: Color(0xff0068D4),
+      900: Color(0xff0068D4),
+    },
+  );
+
 class MyColorsConst {
   static const whiteColor = Colors.white;
   static const disableColor = Color.fromARGB(255, 180, 180, 180);
@@ -22,7 +38,7 @@ class MyColorsConst {
   static const yellowColor = Color.fromARGB(255, 255, 187, 0);
 
   static const shadowColor = Color.fromARGB(255, 209, 209, 209);
-  static const lightDarkColor = Color.fromARGB(255, 142, 142, 142);
+  static const lightDarkColor = Color(0xFFBDBDBD);
   static const semiDarkColor = Color.fromARGB(255, 104, 104, 104);
   static const darkColor = Color.fromARGB(255, 10, 10, 10);
 

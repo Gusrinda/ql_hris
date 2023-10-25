@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         brightness: Brightness.light,
         primaryColor: MyColorsConst.primaryColor,
+        primarySwatch: themeAppColor,
         dividerColor: Colors.transparent,
         textTheme:
                     GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
