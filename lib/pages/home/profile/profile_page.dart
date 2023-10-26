@@ -67,8 +67,16 @@ class ProfilePage extends StatelessWidget {
       },
       child: Scaffold(
         appBar: appBarCustomV1(
-          title: "Profile",
-          padLeft: 16,
+          title: "Selamat Datang, Trial!",
+          padLeft: 8,
+          actions: [
+            IconButton(
+              splashRadius: 20,
+              iconSize: 20,
+              icon: const Icon(Icons.notifications_active),
+              onPressed: () async {},
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -112,42 +120,29 @@ class ProfilePage extends StatelessWidget {
                 const SizedBox(height: 20),
                 TextFormCustomV2(
                   hintText: "employee id",
-                  color: MyColorsConst.primaryLightColor,
-                  icon: Icons.numbers,
+                  color: MyColorsConst.whiteColor,
+                  icon: Icons.account_box_rounded,
                   controller: idController,
                 ),
                 const SizedBox(height: 16),
                 TextFormCustomV2(
                   hintText: "email",
-                  color: MyColorsConst.primaryLightColor,
+                  color: MyColorsConst.whiteColor,
                   icon: Icons.email,
                   controller: emailController,
                 ),
                 const SizedBox(height: 16),
                 TextFormCustomV2(
                   hintText: "nomor telepon",
-                  color: MyColorsConst.primaryLightColor,
+                  color: MyColorsConst.whiteColor,
                   icon: Icons.phone_rounded,
                   keyboardType: TextInputType.phone,
                   controller: phoneController,
-                  editable: true,
-                  changeSuffix: true,
-                  onPressed: (onEdit) {
-                    if (!onEdit) {
-                      context.read<ProfileBloc>().add(
-                            EditDataProfile(
-                              phoneNumber: phoneController.text.trim().isEmpty
-                                  ? null
-                                  : phoneController.text.trim(),
-                            ),
-                          );
-                    }
-                  },
                 ),
                 const SizedBox(height: 16),
                 TextFormCustomV2(
                   hintText: "ganti password",
-                  color: MyColorsConst.primaryLightColor,
+                  color: MyColorsConst.whiteColor,
                   icon: Icons.lock_rounded,
                   editable: true,
                   onPressed: (onEdit) {
@@ -156,14 +151,22 @@ class ProfilePage extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 16),
-                TextButtonCustomV2(
-                  text: "Logout",
-                  color: MyColorsConst.redColor,
-                  icon: Icons.logout_outlined,
-                  onPressed: () {
-                    context.read<ProfileBloc>().add(LogoutProfile());
-                  },
-                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      context.read<ProfileBloc>().add(LogoutProfile());
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          MyColorsConst.redColor),
+                    ),
+                    child: Text(
+                      "Logout",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                )
               ],
             ),
           ),

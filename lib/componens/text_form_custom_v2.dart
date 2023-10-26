@@ -69,7 +69,7 @@ class _TextFormCustomV2State extends State<TextFormCustomV2> {
                 child: Icon(
                   widget.icon,
                   size: 30,
-                  color: MyColorsConst.whiteColor,
+                  color: MyColorsConst.primaryColor,
                 ),
               ),
             ),

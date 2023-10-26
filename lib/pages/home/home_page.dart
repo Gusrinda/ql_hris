@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
 import 'package:sj_presensi_mobile/pages/home/absensi/absensi_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/home_check_in_out_page.dart';
@@ -10,7 +12,9 @@ import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/profile_page.dart';
 import 'package:sj_presensi_mobile/pages/home/report/bloc/reports_history_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/report/reports_history_page.dart';
+import 'package:sj_presensi_mobile/pages/lembur/lembur_page.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
+
 class HomePage extends StatelessWidget {
   static const routeName = 'HomePage';
 
@@ -19,7 +23,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BlocBuilder<HomeNavigationCubit, HomeNavigationState>(
+      bottomNavigationBar:
+          BlocBuilder<HomeNavigationCubit, HomeNavigationState>(
         builder: (context, state) {
           return BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
@@ -77,16 +82,16 @@ class HomePage extends StatelessWidget {
                   provider.getNavBarItem(HomeNavBarItem.home);
                   break;
                 case 1:
-                  provider.getNavBarItem(HomeNavBarItem.history);
+                  provider.getNavBarItem(HomeNavBarItem.lembur);
                   break;
                 case 2:
-                  provider.getNavBarItem(HomeNavBarItem.reports);
+                  provider.getNavBarItem(HomeNavBarItem.dinas);
                   break;
                 case 3:
-                  provider.getNavBarItem(HomeNavBarItem.profile);
+                  provider.getNavBarItem(HomeNavBarItem.cuti);
                   break;
                 case 4:
-                  provider.getNavBarItem(HomeNavBarItem.absensi);
+                  provider.getNavBarItem(HomeNavBarItem.profile);
                   break;
               }
             },
@@ -101,7 +106,7 @@ class HomePage extends StatelessWidget {
                   CheckInOutBloc()..add(AttendanceStateChecked()),
               child: const HomeCheckInOutPage(),
             );
-          } else if (state.navbarItem == HomeNavBarItem.history) {
+          } else if (state.navbarItem == HomeNavBarItem.lembur) {
             return BlocProvider(
               create: (context) => HistoryBloc()
                 ..add(
@@ -109,9 +114,9 @@ class HomePage extends StatelessWidget {
                     date: DateTime.now(),
                   ),
                 ),
-              child: const HistoryPage(),
+              child: const LemburPage(),
             );
-          } else if (state.navbarItem == HomeNavBarItem.reports) {
+          } else if (state.navbarItem == HomeNavBarItem.dinas) {
             return BlocProvider(
               create: (context) => ReportsHistoryBloc()
                 ..add(
@@ -119,15 +124,15 @@ class HomePage extends StatelessWidget {
                     date: DateTime.now(),
                   ),
                 ),
-              child: ReportsHistoryPage(),
+              child: DinasPage(),
             );
+          } else if (state.navbarItem == HomeNavBarItem.cuti) {
+            return CutiPage();
           } else if (state.navbarItem == HomeNavBarItem.profile) {
             return BlocProvider(
               create: (context) => ProfileBloc()..add(GetDataProfile()),
               child: ProfilePage(),
             );
-          } else if (state.navbarItem == HomeNavBarItem.absensi) {
-            return AbsensiPage();
           }
           return Container();
         },

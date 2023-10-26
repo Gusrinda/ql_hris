@@ -151,7 +151,7 @@ class AddCheckInOutPage extends StatelessWidget {
                                   const SizedBox(
                                       width: 5), // Atur jarak sesuai kebutuhan
                                   Text(
-                                    '${data != null ? DateFormat('dd/MM/yyyy', 'id_ID').format(data.dateTime) : "-"}',
+                                    '${data != null ? DateFormat('EEEE, dd-MM-yyyy', 'id_ID').format(data.dateTime) : "-"}',
                                   ),
                                 ],
                               ),
@@ -166,7 +166,7 @@ class AddCheckInOutPage extends StatelessWidget {
                                     color: MyColorsConst.primaryColor,
                                   ),
                                   const SizedBox(
-                                      width: 5), // Atur jarak sesuai kebutuhan
+                                      width: 5), 
                                   Text(
                                     '${data != null ? DateFormat('HH:mm:ss').format(data.dateTime) : "-"}',
                                   ),
@@ -197,7 +197,7 @@ class AddCheckInOutPage extends StatelessWidget {
                             ));
                         return Column(
                           children: [
-                            const SizedBox(height: 24),
+                            const SizedBox(height: 10),
                             buildDetailCard(
                               title: "Lokasi",
                               text: isLoading
@@ -209,7 +209,7 @@ class AddCheckInOutPage extends StatelessWidget {
                               textBold: FontWeight.normal,
                             ),
                             buildDetailCard(
-                              title: "Status",
+                              title: "Keterangan",
                               text: isLoading
                                   ? "Loading..."
                                   : data != null
@@ -282,19 +282,11 @@ class AddCheckInOutPage extends StatelessWidget {
     textBold = FontWeight.bold,
   }) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           width: 100,
           padding: const EdgeInsets.all(8),
-          alignment: Alignment.center,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(8),
-              topRight: Radius.circular(8),
-            ),
-          ),
           child: Text(
             title,
             style: const TextStyle(
@@ -306,8 +298,7 @@ class AddCheckInOutPage extends StatelessWidget {
         ),
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(16),
-          alignment: Alignment.center,
+          padding: const EdgeInsets.all(8),
           decoration: const BoxDecoration(
             color: MyColorsConst.whiteColor,
             borderRadius: BorderRadius.only(
@@ -317,7 +308,6 @@ class AddCheckInOutPage extends StatelessWidget {
           ),
           child: Text(
             text,
-            textAlign: TextAlign.center,
             style: TextStyle(
               color: color,
               fontSize: textSize,

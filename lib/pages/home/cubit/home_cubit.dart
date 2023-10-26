@@ -20,27 +20,27 @@ class HomeNavigationCubit extends Cubit<HomeNavigationState> {
           index: 0,
         ));
         break;
-      case HomeNavBarItem.history:
+      case HomeNavBarItem.lembur:
         emit(HomeNavigationState(
-          navbarItem: HomeNavBarItem.history,
+          navbarItem: HomeNavBarItem.lembur,
           index: 1,
         ));
         break;
-      case HomeNavBarItem.reports:
+      case HomeNavBarItem.dinas:
         emit(HomeNavigationState(
-          navbarItem: HomeNavBarItem.reports,
+          navbarItem: HomeNavBarItem.dinas,
           index: 2,
+        ));
+        break;
+      case HomeNavBarItem.cuti:
+        emit(HomeNavigationState(
+          navbarItem: HomeNavBarItem.cuti,
+          index: 3,
         ));
         break;
       case HomeNavBarItem.profile:
         emit(HomeNavigationState(
           navbarItem: HomeNavBarItem.profile,
-          index: 3,
-        ));
-        break;
-      case HomeNavBarItem.absensi:
-        emit(HomeNavigationState(
-          navbarItem: HomeNavBarItem.absensi,
           index: 4,
         ));
         break;
