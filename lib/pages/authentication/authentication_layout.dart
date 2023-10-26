@@ -4,9 +4,7 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 
 enum AuthenticationLayoutState {
   login,
-  forgotPassword,
   changePassword,
-  register
 }
 
 class AuthenticationLayout extends StatelessWidget {

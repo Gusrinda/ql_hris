@@ -138,7 +138,12 @@ class _DialogCustomState extends State<DialogCustom> {
           borderRadius: BorderRadius.circular(10),
         ),
       ),
-      child: Text(text),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 12,
+        ),
+      ),
     );
   }
 }

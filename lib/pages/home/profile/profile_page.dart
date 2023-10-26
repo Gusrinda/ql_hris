@@ -5,6 +5,7 @@ import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/image_form_custom_v2.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v2.dart';
 import 'package:sj_presensi_mobile/componens/text_form_custom_v2.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
@@ -150,23 +151,15 @@ class ProfilePage extends StatelessWidget {
                         .pushNamed(ChangePasswordPage.routeName);
                   },
                 ),
-                const SizedBox(height: 16),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      context.read<ProfileBloc>().add(LogoutProfile());
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          MyColorsConst.redColor),
-                    ),
-                    child: Text(
-                      "Logout",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                )
+                const SizedBox(height: 100),
+                TextButtonCustomV1(
+                  text: "Logout",
+                  backgroundColor: Color.fromARGB(255, 236, 48, 35),
+                  textColor: MyColorsConst.whiteColor,
+                  onPressed: () {
+                    context.read<ProfileBloc>().add(LogoutProfile());
+                  },
+                ),
               ],
             ),
           ),
