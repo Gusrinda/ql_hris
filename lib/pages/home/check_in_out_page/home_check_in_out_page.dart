@@ -69,13 +69,16 @@ class HomeCheckInOutPage extends StatelessWidget {
               backgroundColor: MyColorsConst.whiteColor,
               appBar: appBarCustomMain(
                 title: "Selamat Datang, ${name ?? "-"}!",
-                padLeft: 8,
+                // padLeft: 10,
                 actions: [
-                  IconButton(
-                    splashRadius: 20,
-                    iconSize: 20,
-                    icon: const Icon(Icons.notifications_active),
-                    onPressed: () async {},
+                  Container(
+                    margin: EdgeInsets.only(right: 10),
+                    child: IconButton(
+                      splashRadius: 25,
+                      iconSize: 20,
+                      icon: const Icon(Icons.notifications_active),
+                      onPressed: () async {},
+                    ),
                   ),
                 ],
               ),
@@ -86,39 +89,25 @@ class HomeCheckInOutPage extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 16),
+                        horizontal: 16, vertical: 10),
                     child: Center(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          RichText(
-                            textAlign: TextAlign.center,
-                            text: TextSpan(
-                              style: const TextStyle(
-                                color: MyColorsConst.darkColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                              ),
-                              children: <TextSpan>[
-                                const TextSpan(text: '\nYuk isi absensimu!'),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                            decoration: BoxDecoration(
-                              color: Color(0xFFD9FFD9),
-                              borderRadius: BorderRadius.all(Radius.circular(10))
-                            ),
-                            child: Column(),
-                          ),
+                          SizedBox(height: 30,),
+                          Text("Yuk isi absensimu!", style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14
+                          ),),
+                          SizedBox(height: 40,),
                           BlocBuilder<CheckInOutBloc, CheckInOutState>(
                             builder: (context, state) {
                               return buttonCheckInOut(
                                 size: size,
-                                iconPath: "assets/images/homepage_checkin.png",
+                                iconPath: "assets/images/check_in_door.png",
                                 title: "Check In",
                                 color: MyColorsConst.greenColor,
                                 enable: state is CheckInOutSuccessInBackground
@@ -137,11 +126,12 @@ class HomeCheckInOutPage extends StatelessWidget {
                               );
                             },
                           ),
+                          SizedBox(height: 40,),
                           BlocBuilder<CheckInOutBloc, CheckInOutState>(
                             builder: (context, state) {
                               return buttonCheckInOut(
                                 size: size,
-                                iconPath: "assets/images/homepage_checkout.png",
+                                iconPath: "assets/images/check_out_door.png",
                                 title: "Check Out",
                                 color: MyColorsConst.redColor,
                                 enable: state is CheckInOutSuccessInBackground
@@ -183,30 +173,41 @@ class HomeCheckInOutPage extends StatelessWidget {
   }) {
     return Column(
       children: [
-        Image.asset(
-          iconPath,
-          width: size.width / 2,
-        ),
-        SizedBox(
-          width: size.width * 3 / 6 + 15,
-          height: size.width * 1 / 5,
+        Container(
+          width: size.width * 1 / 2,
+          height: size.width * 1 / 2,
           child: ElevatedButton(
             onPressed: enable ? onPressed : null,
             style: OutlinedButton.styleFrom(
-              backgroundColor: enable ? color : MyColorsConst.disableColor,
+              backgroundColor: enable ? color : Colors.grey.shade200,
               padding: const EdgeInsets.symmetric(vertical: 12),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
                 side: BorderSide.none,
               ),
             ),
-            child: Text(
-              title,
-              style: const TextStyle(
-                color: MyColorsConst.whiteColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 10),
+                  child: Image.asset(
+                    iconPath,
+                    width: size.width / 3,
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  title,
+                  // textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: MyColorsConst.darkColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
             ),
           ),
         ),

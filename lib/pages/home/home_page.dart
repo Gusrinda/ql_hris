@@ -24,6 +24,7 @@ class HomePage extends StatelessWidget {
           return BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             currentIndex: state.index,
+            backgroundColor: MyColorsConst.whiteColor,
             showSelectedLabels: true,
             showUnselectedLabels: true,
             selectedItemColor: MyColorsConst.primaryColor,
