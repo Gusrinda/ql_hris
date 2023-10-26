@@ -141,72 +141,85 @@ class CardPerintahLembur extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 18),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: Color(0xFFDDDDDD)),
-      ),
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 10),
-          Column(
+    return Stack(
+      children: [
+        Container(
+          height: 100,
+          decoration: BoxDecoration(
+            color: MyColorsConst.primaryColor,
+            borderRadius: BorderRadius.circular(15),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(bottom: 18, left: 5),
+          height: 100,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: Color(0xFFDDDDDD)),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Surat Perintah Lembur",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(
-                height: 4,
-              ),
-              Row(
+              const SizedBox(height: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(
-                    Icons.calendar_month_rounded,
-                    color: MyColorsConst.lightDarkColor,
-                    size: 10,
-                  ),
-                  const SizedBox(width: 5), // Atur jarak sesuai kebutuhan
                   Text(
-                    '09 Oktober 2023',
+                    "Surat Perintah Lembur",
                     style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w400),
+                      color: Colors.black,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ],
-              ),
-              const SizedBox(
-                height: 4,
-              ),
-              Row(
-                children: [
-                  Icon(
-                    Icons.access_time_filled,
-                    color: MyColorsConst.lightDarkColor,
-                    size: 10,
+                  const SizedBox(
+                    height: 4,
                   ),
-                  const SizedBox(width: 5),
-                  Text(
-                    "09.00 - 17.00",
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w400),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.calendar_month_rounded,
+                        color: MyColorsConst.lightDarkColor,
+                        size: 10,
+                      ),
+                      const SizedBox(width: 5), // Atur jarak sesuai kebutuhan
+                      Text(
+                        '09 Oktober 2023',
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.access_time_filled,
+                        color: MyColorsConst.lightDarkColor,
+                        size: 10,
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        "09.00 - 17.00",
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

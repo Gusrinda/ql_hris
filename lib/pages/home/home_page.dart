@@ -79,7 +79,8 @@ class HomePage extends StatelessWidget {
               var provider = BlocProvider.of<HomeNavigationCubit>(context);
               switch (index) {
                 case 0:
-                  provider.getNavBarItem(HomeNavBarItem.home);
+                  // provider.getNavBarItem(HomeNavBarItem.home);
+                  provider.getNavBarItem(HomeNavBarItem.absensi);
                   break;
                 case 1:
                   provider.getNavBarItem(HomeNavBarItem.lembur);
@@ -100,13 +101,17 @@ class HomePage extends StatelessWidget {
       ),
       body: BlocBuilder<HomeNavigationCubit, HomeNavigationState>(
         builder: (context, state) {
-          if (state.navbarItem == HomeNavBarItem.home) {
-            return BlocProvider(
-              create: (context) =>
-                  CheckInOutBloc()..add(AttendanceStateChecked()),
-              child: const HomeCheckInOutPage(),
-            );
-          } else if (state.navbarItem == HomeNavBarItem.lembur) {
+          // if (state.navbarItem == HomeNavBarItem.home) {
+          //   return BlocProvider(
+          //     create: (context) =>
+          //         CheckInOutBloc()..add(AttendanceStateChecked()),
+          //     child: const HomeCheckInOutPage(),
+          //   );
+          // } 
+          if (state.navbarItem == HomeNavBarItem.absensi) {
+            return AbsensiPage();
+          }
+           else if (state.navbarItem == HomeNavBarItem.lembur) {
             return BlocProvider(
               create: (context) => HistoryBloc()
                 ..add(
