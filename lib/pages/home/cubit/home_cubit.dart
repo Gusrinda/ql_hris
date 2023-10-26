@@ -14,9 +14,15 @@ class HomeNavigationCubit extends Cubit<HomeNavigationState> {
 
   void getNavBarItem(HomeNavBarItem navbarItem) {
     switch (navbarItem) {
-      case HomeNavBarItem.home:
+      // case HomeNavBarItem.home:
+      //   emit(HomeNavigationState(
+      //     navbarItem: HomeNavBarItem.home,
+      //     index: 0,
+      //   ));
+      //   break;
+      case HomeNavBarItem.absensi:
         emit(HomeNavigationState(
-          navbarItem: HomeNavBarItem.home,
+          navbarItem: HomeNavBarItem.absensi,
           index: 0,
         ));
         break;
