@@ -30,11 +30,12 @@ class TextButtonCustomV1 extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
+          elevation: 0,
           backgroundColor:
               onPressed != null ? backgroundColor : MyColorsConst.disableColor,
           padding: const EdgeInsets.symmetric(vertical: 12),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(6),
             side: BorderSide.none,
           ),
         ),
@@ -44,6 +45,7 @@ class TextButtonCustomV1 extends StatelessWidget {
             Text(
               text,
               style: TextStyle(
+                fontFamily: 'Poppins',
                 color: textColor,
                 fontWeight: FontWeight.bold,
                 fontSize: textSize,

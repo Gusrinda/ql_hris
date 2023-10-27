@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/image_form_custom_v2.dart';
@@ -67,7 +68,7 @@ class ProfilePage extends StatelessWidget {
         }
       },
       child: Scaffold(
-        appBar: appBarCustomV1(
+        appBar: appBarCustomMain(
           title: "Selamat Datang, Trial!",
           padLeft: 8,
           actions: [
@@ -109,7 +110,7 @@ class ProfilePage extends StatelessWidget {
                             );
                           },
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 25),
                         Text(
                           data?.name ?? "-",
                           style: const TextStyle(
@@ -121,40 +122,41 @@ class ProfilePage extends StatelessWidget {
                     );
                   },
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 25),
                 TextFormCustomV2(
-                  hintText: "employee id",
+                  hintText: "Employee ID",
                   color: MyColorsConst.whiteColor,
-                  icon: Icons.account_box_rounded,
+                  icon: Icons.badge_rounded,
                   controller: idController,
                 ),
                 const SizedBox(height: 16),
                 TextFormCustomV2(
-                  hintText: "email",
+                  hintText: "Email",
                   color: MyColorsConst.whiteColor,
-                  icon: Icons.email,
+                  icon: Icons.email_rounded,
                   controller: emailController,
                 ),
                 const SizedBox(height: 16),
                 TextFormCustomV2(
-                  hintText: "nomor telepon",
+                  hintText: "Nomor Telepon",
                   color: MyColorsConst.whiteColor,
-                  icon: Icons.phone_rounded,
+                  icon: Icons.phone,
                   controller: phoneController,
                 ),
                 const SizedBox(height: 16),
                 TextFormCustomV2(
-                  hintText: "ganti password",
+                  hintText: "Ganti Password",
                   color: MyColorsConst.whiteColor,
-                  icon: Icons.lock_rounded,
+                  icon: Icons.lock,
                   editable: true,
                   onPressed: (onEdit) {
                     Navigator.of(context)
                         .pushNamed(ChangePasswordPage.routeName);
                   },
                 ),
-                const SizedBox(height: 100),
+                const SizedBox(height: 60),
                 TextButtonCustomV1(
+                  height: 45,
                   text: "Logout",
                   backgroundColor: Color.fromARGB(255, 236, 48, 35),
                   textColor: MyColorsConst.whiteColor,

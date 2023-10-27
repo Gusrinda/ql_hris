@@ -44,13 +44,12 @@ class _TextFormCustomV2State extends State<TextFormCustomV2> {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
             flex: 1,
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 8),
               decoration: BoxDecoration(
                 color: widget.color,
                 borderRadius: const BorderRadius.only(
@@ -61,7 +60,7 @@ class _TextFormCustomV2State extends State<TextFormCustomV2> {
               child: Center(
                 child: Icon(
                   widget.icon,
-                  size: 30,
+                  size: 25,
                   color: MyColorsConst.primaryColor,
                 ),
               ),
@@ -69,28 +68,38 @@ class _TextFormCustomV2State extends State<TextFormCustomV2> {
           ),
           Expanded(
             flex: 5,
-            child: TextFormField(
-              controller: widget.controller,
-              enabled: localEnable,
-              keyboardType: widget.keyboardType,
-              validator: widget.validator,
-              decoration: InputDecoration(
-                hintText: widget.hintText,
-                hintStyle: const TextStyle(
+            child: Padding(
+              padding: const EdgeInsets.all(4),
+              child: TextFormField(
+                controller: widget.controller,
+                style: TextStyle(
+                  fontFamily: 'Poppins',
                   fontSize: 12,
-                  color: MyColorsConst.lightDarkColor,
+                  color: MyColorsConst.darkColor,
                   fontWeight: FontWeight.w400,
-                  fontStyle: FontStyle.italic,
                 ),
-                isDense: true,
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 13.5,
+                enabled: localEnable,
+                keyboardType: widget.keyboardType,
+                validator: widget.validator,
+                decoration: InputDecoration(
+                  hintText: widget.hintText,
+                  hintStyle: const TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 12,
+                    color: MyColorsConst.lightDarkColor,
+                    fontWeight: FontWeight.w400,
+                    fontStyle: FontStyle.italic,
+                  ),
+                  isDense: true,
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 13.5,
+                  ),
+                  border: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  filled: true,
+                  fillColor: Colors.transparent,
                 ),
-                border: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                filled: true,
-                fillColor: Colors.transparent,
               ),
             ),
           ),
@@ -120,7 +129,7 @@ class _TextFormCustomV2State extends State<TextFormCustomV2> {
                                 : Icons.edit
                             : Icons.edit
                         : null,
-                    size: 25,
+                    size: 20,
                     color: MyColorsConst.primaryColor,
                   ),
                 ),

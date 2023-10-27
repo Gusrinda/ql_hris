@@ -64,7 +64,7 @@ class _AbsensiPageState extends State<AbsensiPage> {
                             fixedSize: Size.fromWidth(
                                 MediaQuery.of(context).size.width * 0.4),
                             side: BorderSide(
-                                width: 2, color: MyColorsConst.primaryColor),
+                                width: 1.5, color: MyColorsConst.primaryColor),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(4),
@@ -79,7 +79,7 @@ class _AbsensiPageState extends State<AbsensiPage> {
                             fixedSize: Size.fromWidth(
                                 MediaQuery.of(context).size.width * 0.4),
                             side: BorderSide(
-                                width: 2, color: MyColorsConst.primaryColor),
+                                width: 1.5, color: MyColorsConst.primaryColor),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(4),
@@ -99,7 +99,7 @@ class _AbsensiPageState extends State<AbsensiPage> {
                             fixedSize: Size.fromWidth(
                                 MediaQuery.of(context).size.width * 0.4),
                             side: BorderSide(
-                                width: 2, color: MyColorsConst.primaryColor),
+                                width: 1.5, color: MyColorsConst.primaryColor),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(4),
@@ -114,7 +114,7 @@ class _AbsensiPageState extends State<AbsensiPage> {
                             fixedSize: Size.fromWidth(
                                 MediaQuery.of(context).size.width * 0.4),
                             side: BorderSide(
-                                width: 2, color: MyColorsConst.primaryColor),
+                                width: 1.5, color: MyColorsConst.primaryColor),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(4),

@@ -69,6 +69,7 @@ class _LemburPageState extends State<LemburPage> {
                       const Text(
                         "Bulan",
                         style: TextStyle(
+                          fontFamily: 'Poppins',
                           color: MyColorsConst.darkColor,
                           fontSize: 12,
                           fontWeight: FontWeight.normal,
@@ -87,6 +88,7 @@ class _LemburPageState extends State<LemburPage> {
                       const Text(
                         "Tahun",
                         style: TextStyle(
+                          fontFamily: 'Poppins',
                           color: MyColorsConst.darkColor,
                           fontSize: 12,
                           fontWeight: FontWeight.normal,
@@ -161,6 +163,7 @@ class SuratLemburPerTanggal extends StatelessWidget {
           Text(
             tanggal,
             style: TextStyle(
+                fontFamily: 'Poppins',
                 color: MyColorsConst.darkColor,
                 fontSize: 12,
                 fontWeight: FontWeight.w400),
@@ -220,7 +223,7 @@ class CardPerintahLembur extends StatelessWidget {
         Container(
           height: 100,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(6),
             color: warnaStatus,
           ),
         ),
@@ -228,7 +231,7 @@ class CardPerintahLembur extends StatelessWidget {
           height: 100,
           margin: EdgeInsets.only(bottom: 15, left: 5),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(6),
               border: Border.all(color: Color(0xFFDDDDDD)),
               color: MyColorsConst.whiteColor),
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
@@ -244,6 +247,7 @@ class CardPerintahLembur extends StatelessWidget {
                       Text(
                         "Surat Perintah Lembur",
                         style: TextStyle(
+                          fontFamily: 'Poppins',
                           color: Colors.black,
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -251,7 +255,7 @@ class CardPerintahLembur extends StatelessWidget {
                       ),
                       Spacer(),
                       Container(
-                        padding: EdgeInsets.all(4),
+                        padding: EdgeInsets.all(5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: warnaStatus.withOpacity(0.1),
@@ -259,6 +263,7 @@ class CardPerintahLembur extends StatelessWidget {
                         child: Text(
                           status,
                           style: TextStyle(
+                            fontFamily: 'Poppins',
                             color: warnaStatus,
                             fontSize: 10,
                             fontWeight: FontWeight.w500,
@@ -281,6 +286,7 @@ class CardPerintahLembur extends StatelessWidget {
                       Text(
                         '09 Oktober 2023',
                         style: TextStyle(
+                            fontFamily: 'Poppins',
                             color: Colors.grey,
                             fontSize: 10,
                             fontWeight: FontWeight.w400),
@@ -301,6 +307,7 @@ class CardPerintahLembur extends StatelessWidget {
                       Text(
                         "09.00 - 17.00",
                         style: TextStyle(
+                            fontFamily: 'Poppins',
                             color: Colors.grey,
                             fontSize: 10,
                             fontWeight: FontWeight.w400),
