@@ -137,7 +137,6 @@ class ProfilePage extends StatelessWidget {
                   hintText: "nomor telepon",
                   color: MyColorsConst.whiteColor,
                   icon: Icons.phone_rounded,
-                  keyboardType: TextInputType.phone,
                   controller: phoneController,
                 ),
                 const SizedBox(height: 16),

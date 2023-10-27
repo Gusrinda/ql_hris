@@ -37,17 +37,10 @@ class _TextFormCustomV2State extends State<TextFormCustomV2> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.width,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(color: Color(0xFFDDDDDD)),
         color: MyColorsConst.whiteColor,
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-        boxShadow: [
-          BoxShadow(
-            color: MyColorsConst.shadowColor,
-            blurRadius: 2,
-            offset: Offset(2, 2),
-            spreadRadius: 1,
-          ),
-        ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
