@@ -1,14 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
-import 'package:month_picker_dialog/month_picker_dialog.dart';
-import 'package:sj_presensi_mobile/componens/datepicker_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
-import 'package:sj_presensi_mobile/componens/sortby_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/monthpicker_custom.dart';
+import 'package:sj_presensi_mobile/componens/yearpicker_custom.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/home/absensi/detail_absensi_pade.dart';
 import 'package:sj_presensi_mobile/pages/home/history/bloc/history_bloc.dart';
 import 'package:sj_presensi_mobile/services/model/attendances_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -61,68 +60,48 @@ class HistoryPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  "Periode",
-                  style: TextStyle(
-                    color: MyColorsConst.primaryColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 12),
                 Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      "Tanggal",
-                      style: TextStyle(
-                        color: MyColorsConst.darkColor,
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    DatePickerCustomV1(
-                      onDateSelected: (date) => context.read<HistoryBloc>().add(
-                            GetAttendancesHistory(
-                              date: date ?? DateTime.now(),
-                            ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Bulan",
+                          style: TextStyle(
+                            color: MyColorsConst.darkColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal,
                           ),
+                        ),
+                        MonthPicker(
+                          onTap: (bool? sortState) {
+                            print('Sort state: $sortState');
+                          },
+                        )
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Tahun",
+                          style: TextStyle(
+                            color: MyColorsConst.darkColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        YearPickerCustom(
+                          onTap: (bool? sortState) {
+                            print('Sort state: $sortState');
+                          },
+                        )
+                      ],
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Sort By ",
-                      style: TextStyle(
-                        color: MyColorsConst.darkColor,
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    SortByCustomV1(
-                      onTap: (sortState) => context.read<HistoryBloc>().add(
-                            SortByDateAttendancesHistory(
-                              sortState: sortState ?? false,
-                            ),
-                          ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  "Rekam Presensi",
-                  style: TextStyle(
-                    color: MyColorsConst.primaryColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 20),
                 Expanded(
                   child: BlocBuilder<HistoryBloc, HistoryState>(
                     builder: (context, state) {
@@ -145,6 +124,14 @@ class HistoryPage extends StatelessWidget {
                                   dataCheckOut: data.length > 1
                                       ? data.elementAt(1)
                                       : null,
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const DetailAbsensiPage(),
+                                      ),
+                                    );
+                                  },
                                 );
                               },
                             )
@@ -180,91 +167,86 @@ class HistoryPage extends StatelessWidget {
     );
   }
 
-  Container buildCard({
+  Widget buildCard({
     required Key key,
     required date,
     required state,
     AttendanceDetailModel? dataCheckIn,
     AttendanceDetailModel? dataCheckOut,
+    String? url,
+    DateTime? datetime,
+    bool? onSite,
+    bool checkIn = true,
+    VoidCallback? onTap,
   }) {
     var stateDict = {
       "attend_no_checkout": {
         "name": "Tidak Check Out",
-        "mainColor": MyColorsConst.primaryColor,
-        "subColor": MyColorsConst.primaryLight2Color,
       },
       "attend": {
         "name": "Hadir",
-        "mainColor": MyColorsConst.primaryColor,
-        "subColor": MyColorsConst.primaryLight2Color,
       },
       "working": {
         "name": "Bekerja",
-        "mainColor": MyColorsConst.primaryColor,
-        "subColor": MyColorsConst.primaryLight2Color,
       },
       "absent": {
         "name": "Tidak Hadir",
-        "mainColor": MyColorsConst.redColor,
-        "subColor": MyColorsConst.lightRedColor,
       },
       "day_off": {
         "name": "Libur",
-        "mainColor": MyColorsConst.darkColor,
-        "subColor": MyColorsConst.lightDarkColor,
       },
     };
-    return Container(
-      key: key,
-      margin: const EdgeInsets.only(bottom: 8),
-      child: ListTileTheme(
-        dense: true,
-        child: ExpansionTile(
-          collapsedBackgroundColor: stateDict[state]!["mainColor"] as Color,
-          collapsedTextColor: MyColorsConst.whiteColor,
-          collapsedIconColor: MyColorsConst.whiteColor,
-          backgroundColor: stateDict[state]!["mainColor"] as Color,
-          textColor: MyColorsConst.whiteColor,
-          iconColor: MyColorsConst.whiteColor,
-          title: SizedBox(
-            width: double.infinity,
-            child: Row(
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        key: key,
+        margin: const EdgeInsets.only(bottom: 20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(6),
+          border: Border.all(color: Color(0xFFDDDDDD)),
+          color: MyColorsConst.whiteColor,
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  DateFormat('EEEE, dd-MM-yyyy', 'id_ID').format(date),
-                  style: const TextStyle(fontSize: 14),
+                  DateFormat('EEEE, dd/MM/yyyy', 'id_ID').format(date),
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
                 Text(
                   stateDict[state]!["name"] as String,
-                  style: const TextStyle(fontSize: 14),
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ],
             ),
-          ),
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              color: stateDict[state]!["subColor"] as Color,
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  buildSubCard(
-                    checkIn: true,
-                    url: dataCheckIn?.imagePath,
-                    datetime: dataCheckIn?.time,
-                    onSite: dataCheckIn?.onSite,
-                  ),
-                  buildSubCard(
-                    checkIn: false,
-                    url: dataCheckOut?.imagePath,
-                    datetime: dataCheckOut?.time,
-                    onSite: dataCheckOut?.onSite,
-                  ),
-                ],
-              ),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                buildSubCard(
+                  checkIn: true,
+                  datetime: dataCheckIn?.time,
+                ),
+                buildSubCard(
+                  checkIn: false,
+                  datetime: dataCheckOut?.time,
+                ),
+              ],
             ),
           ],
         ),
@@ -273,83 +255,28 @@ class HistoryPage extends StatelessWidget {
   }
 
   Padding buildSubCard({
-    String? url,
-    DateTime? datetime,
-    bool? onSite,
-    checkIn = true,
+    required DateTime? datetime,
+    bool checkIn = true,
   }) {
-    var errImage = Builder(builder: (context) {
-      final size = MediaQuery.of(context).size;
-      return Container(
-        width: size.width * 1 / 6,
-        height: size.width * 1 / 6,
-        decoration: const BoxDecoration(
-          color: MyColorsConst.lightDarkColor,
-          shape: BoxShape.circle,
-        ),
-        child: Icon(
-          Icons.close,
-          size: size.width * 1 / 6,
-          color: MyColorsConst.semiDarkColor,
-        ),
-      );
-    });
     return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
+      padding: EdgeInsets.symmetric(vertical: 10),
+      child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            checkIn ? "Check In" : "Check Out",
+            checkIn ? "In " : "Out ",
             style: TextStyle(
-              fontSize: 14,
-              color:
-                  checkIn ? MyColorsConst.greenColor : MyColorsConst.redColor,
+              fontSize: 12,
+              color: MyColorsConst.disableColor,
+              fontWeight: FontWeight.w400,
             ),
           ),
-          const SizedBox(height: 6),
-          url != null
-              ? CachedNetworkImage(
-                  imageUrl: url,
-                  imageBuilder: (context, imageProvider) {
-                    final size = MediaQuery.of(context).size;
-                    return Container(
-                      width: size.width * 1 / 6,
-                      height: size.width * 1 / 6,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                        ),
-                        shape: BoxShape.circle,
-                      ),
-                    );
-                  },
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => errImage,
-                )
-              : errImage,
-          const SizedBox(height: 6),
           Text(
             datetime != null ? DateFormat('HH:mm:ss').format(datetime) : "-",
             style: TextStyle(
-              fontSize: 14,
-              color:
-                  checkIn ? MyColorsConst.greenColor : MyColorsConst.redColor,
-            ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            onSite != null
-                ? onSite
-                    ? "On Scope"
-                    : "Out Scope"
-                : "-",
-            style: TextStyle(
-              fontSize: 14,
-              color:
-                  checkIn ? MyColorsConst.greenColor : MyColorsConst.redColor,
+              fontSize: 12,
+              color: MyColorsConst.lightDarkColor,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ],

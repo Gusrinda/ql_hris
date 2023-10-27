@@ -11,20 +11,7 @@ class MonthPicker extends StatefulWidget {
 
 class _MonthPickerState extends State<MonthPicker> {
   bool _sortState = false;
-  final List<String> _months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ];
+  final List<String> _months = [];
 
   String? _selectedMonth;
 

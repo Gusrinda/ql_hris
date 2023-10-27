@@ -1,13 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
 import 'package:sj_presensi_mobile/componens/monthpicker_custom.dart';
 import 'package:sj_presensi_mobile/componens/yearpicker_custom.dart';
 import 'package:sj_presensi_mobile/pages/cuti/add_cuti.dart';
-import 'package:sj_presensi_mobile/pages/home/history/bloc/history_bloc.dart';
-import 'package:sj_presensi_mobile/pages/home/report/bloc/reports_history_bloc.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class CutiPage extends StatefulWidget {
