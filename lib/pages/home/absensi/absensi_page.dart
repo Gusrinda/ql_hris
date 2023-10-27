@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/home_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/cubit/home_cubit.dart';
@@ -26,8 +27,20 @@ class _AbsensiPageState extends State<AbsensiPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Absensi Page'),
+      appBar: appBarCustomMain(
+        // title: "Selamat Datang, ${name ?? "-"}!",
+        title: "Selamat Datang, Trial!",
+        actions: [
+          Container(
+            margin: EdgeInsets.only(right: 10),
+            child: IconButton(
+              splashRadius: 25,
+              iconSize: 20,
+              icon: const Icon(Icons.notifications_active),
+              onPressed: () async {},
+            ),
+          ),
+        ],
       ),
       body: BlocBuilder<HomeNavigationCubit, HomeNavigationState>(
         builder: (context, state) {
@@ -35,7 +48,7 @@ class _AbsensiPageState extends State<AbsensiPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               SizedBox(
-                height: 30,
+                height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -112,29 +125,28 @@ class _AbsensiPageState extends State<AbsensiPage> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 30,
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: BlocBuilder<HomeNavigationCubit, HomeNavigationState>(
-                  builder: (context, state) {
-                    return isLeftSelected == true
-                        ? BlocProvider(
-                            create: (context) =>
-                                CheckInOutBloc()..add(AttendanceStateChecked()),
-                            child: const HomeCheckInOutPage(),
-                          )
-                        : BlocProvider(
-                            create: (context) => HistoryBloc()
-                              ..add(
-                                GetAttendancesHistory(
-                                  date: DateTime.now(),
+              Expanded(
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: BlocBuilder<HomeNavigationCubit, HomeNavigationState>(
+                    builder: (context, state) {
+                      return isLeftSelected == true
+                          ? BlocProvider(
+                              create: (context) => CheckInOutBloc()
+                                ..add(AttendanceStateChecked()),
+                              child: const HomeCheckInOutPage(),
+                            )
+                          : BlocProvider(
+                              create: (context) => HistoryBloc()
+                                ..add(
+                                  GetAttendancesHistory(
+                                    date: DateTime.now(),
+                                  ),
                                 ),
-                              ),
-                            child: const HistoryPage(),
-                          );
-                  },
+                              child: const HistoryPage(),
+                            );
+                    },
+                  ),
                 ),
               )
             ],

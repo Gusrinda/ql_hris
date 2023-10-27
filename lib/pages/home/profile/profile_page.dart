@@ -71,11 +71,14 @@ class ProfilePage extends StatelessWidget {
           title: "Selamat Datang, Trial!",
           padLeft: 8,
           actions: [
-            IconButton(
-              splashRadius: 20,
-              iconSize: 20,
-              icon: const Icon(Icons.notifications_active),
-              onPressed: () async {},
+            Container(
+              margin: EdgeInsets.only(right: 10),
+              child: IconButton(
+                splashRadius: 25,
+                iconSize: 20,
+                icon: const Icon(Icons.notifications_active),
+                onPressed: () async {},
+              ),
             ),
           ],
         ),

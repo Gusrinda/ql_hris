@@ -67,21 +67,21 @@ class HomeCheckInOutPage extends StatelessWidget {
             }
             return Scaffold(
               backgroundColor: MyColorsConst.whiteColor,
-              appBar: appBarCustomMain(
-                title: "Selamat Datang, ${name ?? "-"}!",
-                // padLeft: 10,
-                actions: [
-                  Container(
-                    margin: EdgeInsets.only(right: 10),
-                    child: IconButton(
-                      splashRadius: 25,
-                      iconSize: 20,
-                      icon: const Icon(Icons.notifications_active),
-                      onPressed: () async {},
-                    ),
-                  ),
-                ],
-              ),
+              // appBar: appBarCustomMain(
+              //   title: "Selamat Datang, ${name ?? "-"}!",
+              //   // padLeft: 10,
+              //   actions: [
+              //     Container(
+              //       margin: EdgeInsets.only(right: 10),
+              //       child: IconButton(
+              //         splashRadius: 25,
+              //         iconSize: 20,
+              //         icon: const Icon(Icons.notifications_active),
+              //         onPressed: () async {},
+              //       ),
+              //     ),
+              //   ],
+              // ),
               body: SingleChildScrollView(
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
@@ -96,13 +96,19 @@ class HomeCheckInOutPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(height: 30,),
-                          Text("Yuk isi absensimu!", style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14
-                          ),),
-                          SizedBox(height: 40,),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Text(
+                            "Yuk isi absensimu!",
+                            style: TextStyle(
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14),
+                          ),
+                          SizedBox(
+                            height: 40,
+                          ),
                           BlocBuilder<CheckInOutBloc, CheckInOutState>(
                             builder: (context, state) {
                               return buttonCheckInOut(
@@ -126,7 +132,9 @@ class HomeCheckInOutPage extends StatelessWidget {
                               );
                             },
                           ),
-                          SizedBox(height: 40,),
+                          SizedBox(
+                            height: 40,
+                          ),
                           BlocBuilder<CheckInOutBloc, CheckInOutState>(
                             builder: (context, state) {
                               return buttonCheckInOut(
