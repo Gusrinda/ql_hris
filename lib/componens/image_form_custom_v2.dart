@@ -40,106 +40,107 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV2> {
         });
       },
       child: Container(
-        width: size.width * 1 / 4,
-        height: size.width * 1 / 4,
-        padding: const EdgeInsets.all(5.0),
+        width: size.width * 1 / 4 + 10,
+        height: size.width * 1 / 4 + 10,
+        padding: const EdgeInsets.all(3.0),
         decoration: const BoxDecoration(
-          color: Colors.white,
+          color: MyColorsConst.primaryColor,
           shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: MyColorsConst.shadowColor,
-              blurRadius: 2,
-              offset: Offset(2, 2),
-              spreadRadius: 1,
-            ),
-          ],
         ),
-        child: SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-          child: Stack(
-            children: [
-              imageFile == null
-                  ? widget.imagePath != null
-                      ? CachedNetworkImage(
-                          imageUrl: widget.imagePath!,
-                          imageBuilder: (context, imageProvider) {
-                            final size = MediaQuery.of(context).size;
-                            return Container(
-                              width: size.width,
-                              height: size.width,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: imageProvider,
-                                  fit: BoxFit.cover,
+        child: Container(
+          width: size.width * 1 / 4 + 10,
+          height: size.width * 1 / 4 + 10,
+          padding: const EdgeInsets.all(2.0),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+          ),
+          child: SizedBox(
+            width: double.infinity,
+            height: double.infinity,
+            child: Stack(
+              children: [
+                imageFile == null
+                    ? widget.imagePath != null
+                        ? CachedNetworkImage(
+                            imageUrl: widget.imagePath!,
+                            imageBuilder: (context, imageProvider) {
+                              final size = MediaQuery.of(context).size;
+                              return Container(
+                                width: size.width,
+                                height: size.width,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: imageProvider,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  shape: BoxShape.circle,
                                 ),
-                                shape: BoxShape.circle,
-                              ),
-                            );
-                          },
-                          placeholder: (context, url) {
-                            final size = MediaQuery.of(context).size;
-                            return SizedBox(
-                              width: size.width,
-                              height: size.width,
-                              child: const CircularProgressIndicator(),
-                            );
-                          },
-                          errorWidget: (context, url, error) =>
-                              Builder(builder: (context) {
-                            final size = MediaQuery.of(context).size;
-                            return Container(
-                              width: size.width * 1 / 4,
-                              height: size.width * 1 / 4,
-                              decoration: const BoxDecoration(
-                                color: MyColorsConst.lightDarkColor,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Center(
-                                child: Icon(
-                                  Icons.close,
-                                  size: size.width * 1 / 5,
-                                  color: MyColorsConst.semiDarkColor,
+                              );
+                            },
+                            placeholder: (context, url) {
+                              final size = MediaQuery.of(context).size;
+                              return SizedBox(
+                                width: size.width,
+                                height: size.width,
+                                child: const CircularProgressIndicator(),
+                              );
+                            },
+                            errorWidget: (context, url, error) =>
+                                Builder(builder: (context) {
+                              final size = MediaQuery.of(context).size;
+                              return Container(
+                                width: size.width * 1 / 4,
+                                height: size.width * 1 / 4,
+                                decoration: const BoxDecoration(
+                                  color: MyColorsConst.lightDarkColor,
+                                  shape: BoxShape.circle,
                                 ),
-                              ),
-                            );
-                          }),
-                        )
-                      : SvgPicture.asset(
+                                child: Center(
+                                  child: Icon(
+                                    Icons.close,
+                                    size: size.width * 1 / 5,
+                                    color: MyColorsConst.semiDarkColor,
+                                  ),
+                                ),
+                              );
+                            }),
+                          )
+                        : SvgPicture.asset(
+                            width: size.width * 1 / 4,
+                            "assets/icons/bi_people_circle.svg",
+                            fit: BoxFit.fitWidth,
+                            color: MyColorsConst.primaryColor,
+                          )
+                    : ClipOval(
+                        child: Image.file(
                           width: size.width * 1 / 4,
-                          "assets/icons/bi_people_circle.svg",
+                          height: size.width * 1 / 4,
+                          imageFile!,
                           fit: BoxFit.fitWidth,
-                          color: MyColorsConst.primaryLightColor,
-                        )
-                  : ClipOval(
-                      child: Image.file(
-                        width: size.width * 1 / 4,
-                        height: size.width * 1 / 4,
-                        imageFile!,
-                        fit: BoxFit.fitWidth,
+                        ),
                       ),
-                    ),
-              Positioned(
-                bottom: 0,
-                right: 0,
-                child: CircleAvatar(
-                  backgroundColor: MyColorsConst.whiteColor,
-                  radius: 15,
+                Positioned(
+                  bottom: 0,
+                  right: 0,
                   child: CircleAvatar(
-                    backgroundColor: MyColorsConst.greenColor,
-                    radius: 12,
-                    child: Icon(
-                      imageFile == null && widget.imagePath == null
-                          ? Icons.add
-                          : Icons.edit,
-                      color: MyColorsConst.whiteColor,
-                      size: 20,
+                    backgroundColor: MyColorsConst.whiteColor,
+                    radius: 14,
+                    child: CircleAvatar(
+                      backgroundColor: MyColorsConst.greenColor,
+                      radius: 12,
+                      child: Icon(
+                        imageFile == null && widget.imagePath == null
+                            ? Icons.add
+                            : Icons.edit,
+                        color: MyColorsConst.whiteColor,
+                        size: 17,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

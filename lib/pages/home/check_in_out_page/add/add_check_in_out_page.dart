@@ -141,20 +141,23 @@ class AddCheckInOutPage extends StatelessWidget {
                         var data = state is TimeAcioLoadSuccess ? state : null;
                         return Row(
                           children: [
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.calendar_month_rounded,
-                                    color: MyColorsConst.primaryColor,
-                                  ),
-                                  const SizedBox(
-                                      width: 5), // Atur jarak sesuai kebutuhan
-                                  Text(
-                                    '${data != null ? DateFormat('EEEE, dd-MM-yyyy', 'id_ID').format(data.dateTime) : "-"}',
-                                  ),
-                                ],
-                              ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.calendar_month_rounded,
+                                  color: MyColorsConst.primaryColor,
+                                  size: 20,
+                                ),
+                                const SizedBox(
+                                    width: 5), // Atur jarak sesuai kebutuhan
+                                Text(
+                                  '${data != null ? DateFormat('EEEE, dd-MM-yyyy', 'id_ID').format(data.dateTime) : "-"}',
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ],
                             ),
                             const SizedBox(width: 20),
                             Expanded(
@@ -164,11 +167,15 @@ class AddCheckInOutPage extends StatelessWidget {
                                   Icon(
                                     Icons.access_time_filled,
                                     color: MyColorsConst.primaryColor,
+                                    size: 20,
                                   ),
-                                  const SizedBox(
-                                      width: 5), 
+                                  const SizedBox(width: 5),
                                   Text(
                                     '${data != null ? DateFormat('HH:mm:ss').format(data.dateTime) : "-"}',
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500),
                                   ),
                                 ],
                               ),
@@ -178,6 +185,9 @@ class AddCheckInOutPage extends StatelessWidget {
                       },
                     ),
                     const SizedBox(height: 5),
+                    Divider(
+                    thickness: 1.5,
+                    color: Colors.grey.shade300,),
                     BlocBuilder<LocationAcioBloc, LocationAcioState>(
                       builder: (context, state) {
                         var isLoading = true;
@@ -197,7 +207,6 @@ class AddCheckInOutPage extends StatelessWidget {
                             ));
                         return Column(
                           children: [
-                            const SizedBox(height: 10),
                             buildDetailCard(
                               title: "Lokasi",
                               text: isLoading
@@ -285,7 +294,7 @@ class AddCheckInOutPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          width: 100,
+          // width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.all(8),
           child: Text(
             title,
