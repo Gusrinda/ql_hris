@@ -107,7 +107,7 @@ class _LemburPageState extends State<LemburPage> {
                 shrinkWrap: true,
                 itemCount: daftarTanggal.length,
                 itemBuilder: (BuildContext c, int index) {
-                  return SuratLemburPerTanggl(
+                  return SuratLemburPerTanggal(
                     tanggal: daftarTanggal[index],
                     urutan: index,
                     daftarPermohonan: daftarPermohonan,
@@ -138,8 +138,8 @@ class _LemburPageState extends State<LemburPage> {
   }
 }
 
-class SuratLemburPerTanggl extends StatelessWidget {
-  const SuratLemburPerTanggl({
+class SuratLemburPerTanggal extends StatelessWidget {
+  const SuratLemburPerTanggal({
     super.key,
     required this.daftarPermohonan,
     required this.daftar,

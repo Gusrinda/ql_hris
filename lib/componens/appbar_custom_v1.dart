@@ -24,5 +24,6 @@ AppBar appBarCustomV1({
       color: MyColorsConst.primaryColor,
     ),
     actions: actions,
+    centerTitle: true,
   );
 }
