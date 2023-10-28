@@ -11,7 +11,7 @@ class LemburPage extends StatefulWidget {
   const LemburPage({super.key});
 
   @override
-  _LemburPageState createState() => _LemburPageState();
+  State<LemburPage> createState() => _LemburPageState();
 }
 
 class _LemburPageState extends State<LemburPage> {

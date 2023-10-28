@@ -5,16 +5,17 @@ import 'package:sj_presensi_mobile/componens/HRIS/hero_widget.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/text_form_custom.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
+import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
-class CutiForm extends StatefulWidget {
-  const CutiForm({Key? key}) : super(key: key);
+class AddCutiPage extends StatefulWidget {
+  const AddCutiPage({Key? key}) : super(key: key);
 
   @override
-  State<CutiForm> createState() => _CutiFormState();
+  State<AddCutiPage> createState() => _AddCutiPageState();
 }
 
-class _CutiFormState extends State<CutiForm> {
+class _AddCutiPageState extends State<AddCutiPage> {
   final TextEditingController _controller = TextEditingController();
   String? selectedValue;
 
@@ -134,7 +135,14 @@ class _CutiFormState extends State<CutiForm> {
                 text: "Kirim",
                 backgroundColor: MyColorsConst.primaryColor,
                 textColor: MyColorsConst.whiteColor,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CutiPage(),
+                    ),
+                  );
+                },
               ),
             ],
           ),

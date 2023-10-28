@@ -11,7 +11,6 @@ import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/add_check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/location_acio_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/time_acio_bloc.dart';
-import 'package:sj_presensi_mobile/pages/home/home_page.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 enum ProcessCheckInOutPageState { checkin, checkout }

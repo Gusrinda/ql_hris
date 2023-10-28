@@ -7,7 +7,7 @@ import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/monthpicker_custom.dart';
 import 'package:sj_presensi_mobile/componens/yearpicker_custom.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
-import 'package:sj_presensi_mobile/pages/home/absensi/detail_absensi_pade.dart';
+import 'package:sj_presensi_mobile/pages/home/history/detail_absensi_pade.dart';
 import 'package:sj_presensi_mobile/pages/home/history/bloc/history_bloc.dart';
 import 'package:sj_presensi_mobile/services/model/attendances_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -128,7 +128,8 @@ class HistoryPage extends StatelessWidget {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => const DetailAbsensiPage(),
+                                        builder: (context) =>
+                                            const DetailHistoryAbsensiPage(),
                                       ),
                                     );
                                   },
@@ -267,7 +268,7 @@ class HistoryPage extends StatelessWidget {
             checkIn ? "In " : "Out ",
             style: TextStyle(
               fontSize: 12,
-              color: MyColorsConst.disableColor,
+              color: MyColorsConst.lightDarkColor,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -275,7 +276,7 @@ class HistoryPage extends StatelessWidget {
             datetime != null ? DateFormat('HH:mm:ss').format(datetime) : "-",
             style: TextStyle(
               fontSize: 12,
-              color: MyColorsConst.lightDarkColor,
+              color: Color(0xFF969696),
               fontWeight: FontWeight.w600,
             ),
           ),
