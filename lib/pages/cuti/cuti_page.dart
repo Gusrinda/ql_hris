@@ -1,20 +1,18 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
 import 'package:sj_presensi_mobile/componens/monthpicker_custom.dart';
 import 'package:sj_presensi_mobile/componens/yearpicker_custom.dart';
-import 'package:sj_presensi_mobile/pages/cuti/cuti_form.dart';
-import 'package:sj_presensi_mobile/pages/home/history/bloc/history_bloc.dart';
-import 'package:sj_presensi_mobile/pages/home/report/bloc/reports_history_bloc.dart';
+import 'package:sj_presensi_mobile/pages/cuti/add_cuti.dart';
+import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class CutiPage extends StatefulWidget {
   const CutiPage({Key? key}) : super(key: key);
 
   @override
-  _CutiPageState createState() => _CutiPageState();
+  State<CutiPage> createState() => _CutiPageState();
 }
 
 class _CutiPageState extends State<CutiPage> {
@@ -124,7 +122,7 @@ class _CutiPageState extends State<CutiPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const CutiForm(),
+              builder: (context) => const AddCutiPage(),
             ),
           );
         },
@@ -178,6 +176,14 @@ class SuratCutiPerTanggl extends StatelessWidget {
                 isLast: index == daftar[urutan] - 1,
                 status:
                     daftarPermohonan[Random().nextInt(daftarPermohonan.length)],
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DetailCutiPage(),
+                    ),
+                  );
+                },
               );
             },
           ),
@@ -193,11 +199,13 @@ class CardPerintahLembur extends StatelessWidget {
     required this.isAlreadyRead,
     required this.isLast,
     required this.status,
+    this.onTap,
   });
 
   final bool isAlreadyRead;
   final bool isLast;
   final String status;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -215,105 +223,108 @@ class CardPerintahLembur extends StatelessWidget {
       default:
         warnaStatus = Colors.grey;
     }
-    return Stack(
-      children: [
-        Container(
-          height: 100,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: warnaStatus,
+    return GestureDetector(
+      onTap: onTap,
+      child: Stack(
+        children: [
+          Container(
+            height: 100,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: warnaStatus,
+            ),
           ),
-        ),
-        Container(
-          height: 100,
-          margin: EdgeInsets.only(bottom: 18, left: 5),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(color: Color(0xFFDDDDDD)),
-            color: MyColorsConst.whiteColor,
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 10),
-                  Row(
-                    children: [
-                      Text(
-                        "Cuti Sehari",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Spacer(),
-                      Container(
-                        padding: EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: warnaStatus.withOpacity(0.1),
-                        ),
-                        child: Text(
-                          status,
+          Container(
+            height: 100,
+            margin: EdgeInsets.only(bottom: 18, left: 5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: Color(0xFFDDDDDD)),
+              color: MyColorsConst.whiteColor,
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Text(
+                          "Cuti Sehari",
                           style: TextStyle(
-                            color: warnaStatus,
-                            fontSize: 10,
+                            color: Colors.black,
+                            fontSize: 12,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.calendar_month_rounded,
-                        color: MyColorsConst.lightDarkColor,
-                        size: 10,
-                      ),
-                      SizedBox(width: 5), // Atur jarak sesuai kebutuhan
-                      Text(
-                        '09 Oktober 2023',
-                        style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.access_time_filled,
-                        color: MyColorsConst.lightDarkColor,
-                        size: 10,
-                      ),
-                      SizedBox(width: 5),
-                      Text(
-                        "09.00 - 17.00",
-                        style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
+                        Spacer(),
+                        Container(
+                          padding: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: warnaStatus.withOpacity(0.1),
+                          ),
+                          child: Text(
+                            status,
+                            style: TextStyle(
+                              color: warnaStatus,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.calendar_month_rounded,
+                          color: MyColorsConst.lightDarkColor,
+                          size: 10,
+                        ),
+                        SizedBox(width: 5), // Atur jarak sesuai kebutuhan
+                        Text(
+                          '09 Oktober 2023',
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.access_time_filled,
+                          color: MyColorsConst.lightDarkColor,
+                          size: 10,
+                        ),
+                        SizedBox(width: 5),
+                        Text(
+                          "09.00 - 17.00",
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

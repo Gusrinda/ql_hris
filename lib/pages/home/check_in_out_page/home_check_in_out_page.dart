@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
-import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class HomeCheckInOutPage extends StatelessWidget {

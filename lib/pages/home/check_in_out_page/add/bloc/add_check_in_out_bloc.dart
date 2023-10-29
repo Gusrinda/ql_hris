@@ -1,10 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_form_model.dart';
-import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/location.dart';
-import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/time.dart';
 import 'package:sj_presensi_mobile/services/attendances_services.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:sj_presensi_mobile/utils/shared_pref.dart';
