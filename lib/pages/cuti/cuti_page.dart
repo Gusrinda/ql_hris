@@ -163,7 +163,7 @@ class SuratCutiPerTanggl extends StatelessWidget {
                 fontSize: 12,
                 fontWeight: FontWeight.w400),
           ),
-          SizedBox(
+          const SizedBox(
             height: 12,
           ),
           ListView.builder(
@@ -230,15 +230,15 @@ class CardPerintahLembur extends StatelessWidget {
           Container(
             height: 100,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(6),
               color: warnaStatus,
             ),
           ),
           Container(
             height: 100,
-            margin: EdgeInsets.only(bottom: 18, left: 5),
+            margin: EdgeInsets.only(bottom: 15, left: 5),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(6),
               border: Border.all(color: Color(0xFFDDDDDD)),
               color: MyColorsConst.whiteColor,
             ),
@@ -288,7 +288,7 @@ class CardPerintahLembur extends StatelessWidget {
                           color: MyColorsConst.lightDarkColor,
                           size: 10,
                         ),
-                        SizedBox(width: 5), // Atur jarak sesuai kebutuhan
+                        SizedBox(width: 5), 
                         Text(
                           '09 Oktober 2023',
                           style: TextStyle(
