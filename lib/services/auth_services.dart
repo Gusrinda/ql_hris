@@ -17,15 +17,15 @@ class AuthServices {
     );
   }
 
-  static Future<Object> login(email, password) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/auth/login");
+  static Future<Object> login(username, password) async {
+    var url = Uri.parse("${MyGeneralConst.API_URL}/login");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.post,
       body: json.encode(
         {
-          "inputEmail": email,
-          "inputPassword": password,
+          "username": username,
+          "password": password,
         },
       ),
     );
@@ -54,8 +54,8 @@ class AuthServices {
   }
 
   static Future<Object> checkTokenAvailable(String token) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/user/get-profile");
-    // var url = Uri.https(MyGeneralConst.API_URL, "user/get-profile");
+    var url = Uri.parse("${MyGeneralConst.API_URL}/me");
+    print("URL ME: ${url}");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,

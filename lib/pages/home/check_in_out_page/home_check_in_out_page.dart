@@ -25,7 +25,7 @@ class HomeCheckInOutPage extends StatelessWidget {
             context: context,
             builder: (_) => const DialogCustom(
               state: DialogCustomItem.info,
-              message: "Anda sudah melakukan presensi harian!",
+              message: "Anda sudah melakukan presensi hari ini!",
             ),
           );
         } else if (state is CheckInOutFailed) {
@@ -67,100 +67,88 @@ class HomeCheckInOutPage extends StatelessWidget {
             }
             return Scaffold(
               backgroundColor: MyColorsConst.whiteColor,
-              // appBar: appBarCustomMain(
-              //   title: "Selamat Datang, ${name ?? "-"}!",
-              //   // padLeft: 10,
-              //   actions: [
-              //     Container(
-              //       margin: EdgeInsets.only(right: 10),
-              //       child: IconButton(
-              //         splashRadius: 25,
-              //         iconSize: 20,
-              //         icon: const Icon(Icons.notifications_active),
-              //         onPressed: () async {},
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              body: SingleChildScrollView(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxHeight: size.height - (size.height * 1 / 9.5),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 10),
-                    child: Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Text(
-                            "Yuk isi absensimu!",
-                            style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14),
-                          ),
-                          SizedBox(
-                            height: 40,
-                          ),
-                          BlocBuilder<CheckInOutBloc, CheckInOutState>(
-                            builder: (context, state) {
-                              return buttonCheckInOut(
-                                size: size,
-                                iconPath: "assets/images/check_in_door.png",
-                                title: "Check In",
-                                color: MyColorsConst.greenColor,
-                                enable: state is CheckInOutSuccessInBackground
-                                    ? state.isCheckin
-                                    : false,
-                                onPressed: () async {
-                                  await Navigator.of(context).pushNamed(
-                                    AddCheckInOutPage.routeName,
-                                    arguments:
-                                        ProcessCheckInOutPageState.checkin,
-                                  );
-                                  context
-                                      .read<CheckInOutBloc>()
-                                      .add(AttendanceStateChecked());
-                                },
-                              );
-                            },
-                          ),
-                          SizedBox(
-                            height: 40,
-                          ),
-                          BlocBuilder<CheckInOutBloc, CheckInOutState>(
-                            builder: (context, state) {
-                              return buttonCheckInOut(
-                                size: size,
-                                iconPath: "assets/images/check_out_door.png",
-                                title: "Check Out",
-                                color: MyColorsConst.redColor,
-                                enable: state is CheckInOutSuccessInBackground
-                                    ? !state.isCheckin
-                                    : false,
-                                onPressed: () async {
-                                  await Navigator.of(context).pushNamed(
-                                    AddCheckInOutPage.routeName,
-                                    arguments:
-                                        ProcessCheckInOutPageState.checkout,
-                                  );
-                                  context
-                                      .read<CheckInOutBloc>()
-                                      .add(AttendanceStateChecked());
-                                },
-                              );
-                            },
-                          ),
-                        ],
-                      ),
+              appBar: appBarCustomMain(
+                title: "Selamat Datang, ${name ?? "-"}!",
+                // padLeft: 10,
+                actions: [
+                  Container(
+                    margin: EdgeInsets.only(right: 10),
+                    child: IconButton(
+                      splashRadius: 25,
+                      iconSize: 20,
+                      icon: const Icon(Icons.notifications_active),
+                      onPressed: () async {},
                     ),
+                  ),
+                ],
+              ),
+              body: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Yuk isi absensimu!",
+                        style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14),
+                      ),
+                      BlocBuilder<CheckInOutBloc, CheckInOutState>(
+                        builder: (context, state) {
+                          return buttonCheckInOut(
+                            size: size,
+                            iconPath: "assets/images/check_in_door.png",
+                            title: "Check In",
+                            color: MyColorsConst.greenColor,
+                            enable: state is CheckInOutSuccessInBackground
+                                ? state.isCheckin
+                                : false,
+                            onPressed: () async {
+                              await Navigator.of(context).pushNamed(
+                                AddCheckInOutPage.routeName,
+                                arguments: ProcessCheckInOutPageState.checkin,
+                              );
+                              context
+                                  .read<CheckInOutBloc>()
+                                  .add(AttendanceStateChecked());
+                            },
+                          );
+                        },
+                      ),
+                      BlocBuilder<CheckInOutBloc, CheckInOutState>(
+                        builder: (context, state) {
+                          return buttonCheckInOut(
+                            size: size,
+                            iconPath: "assets/images/check_out_door.png",
+                            title: "Check Out",
+                            color: MyColorsConst.redColor,
+                            enable: state is CheckInOutSuccessInBackground
+                                ? !state.isCheckin
+                                : false,
+                            onPressed: () async {
+                              await Navigator.of(context).pushNamed(
+                                AddCheckInOutPage.routeName,
+                                arguments: ProcessCheckInOutPageState.checkout,
+                              );
+                              context
+                                  .read<CheckInOutBloc>()
+                                  .add(AttendanceStateChecked());
+                            },
+                          );
+                        },
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                    ],
                   ),
                 ),
               ),

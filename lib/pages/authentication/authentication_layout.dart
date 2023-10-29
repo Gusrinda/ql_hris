@@ -37,7 +37,7 @@ class AuthenticationLayout extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+        // resizeToAvoidBottomInset: false,
         appBar: layoutData[layoutState.index]["hideAppBar"] as bool
             ? null
             : AppBar(

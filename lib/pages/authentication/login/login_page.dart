@@ -14,7 +14,7 @@ class LoginPage extends StatelessWidget {
   static const routeName = 'LoginPage';
   LoginPage({super.key});
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController emailController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   @override
@@ -51,8 +51,8 @@ class LoginPage extends StatelessWidget {
         contents: [
           TextFormCustomHRIS1(
             labelText: "NIK",
-            keyboardType: TextInputType.emailAddress,
-            controller: emailController,
+            // keyboardType: TextInputType.emailAddress,
+            controller: usernameController,
             validator: MultiValidator([
               RequiredValidator(errorText: "Masukkan NIK yang terdaftar"),
               // EmailValidator(errorText: "Email not Valid!")
@@ -79,7 +79,7 @@ class LoginPage extends StatelessWidget {
             onPressed: () {
               context.read<LoginBloc>().add(
                     LoginSubmited(
-                      email: emailController.text,
+                      username: usernameController.text,
                       password: passwordController.text,
                       status: _formKey.currentState!.validate(),
                     ),

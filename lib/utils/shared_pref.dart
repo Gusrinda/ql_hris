@@ -6,8 +6,7 @@ import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GeneralSharedPreferences {
-  static final Future<SharedPreferences> _pref =
-      SharedPreferences.getInstance();
+  static final Future<SharedPreferences> _pref = SharedPreferences.getInstance();
 
   static Future<Object> saveUserToken(String token) async {
     var pref = await _pref;

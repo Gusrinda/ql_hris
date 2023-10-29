@@ -14,9 +14,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       (event, emit) async {
         if (event.status) {
           emit(LoginLoading());
-          var res = await AuthServices.login(event.email, event.password);
+          print("Status: ${event.status}");
+          print("Username: ${event.username}, Password: ${event.password}");
+          var res = await AuthServices.login(event.username, event.password);
           if (res is ServicesSuccess) {
-            await GeneralSharedPreferences.saveUserToken(res.response["token"]);
+            try {
+              await GeneralSharedPreferences.saveUserToken(res.response["token"].toString());
+              print("Token: ${res.response["token"]}");
+              // print("Res: ${res.response}");
+            } catch (e) {
+              print("An error occurred: $e");
+            }
             emit(LoginSuccess(message: "Login berhasil!"));
           } else if (res is ServicesFailure) {
             emit(LoginFailed(

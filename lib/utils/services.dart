@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'const.dart';
@@ -45,8 +46,10 @@ class GeneralServices {
       Object? body,
       String? imagePath}) async {
     try {
+      print("URL API: ${url}");
       final connectivityResult = await (Connectivity().checkConnectivity());
-      if (!(connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi)) {
+      if (!(connectivityResult == ConnectivityResult.mobile ||
+          connectivityResult == ConnectivityResult.wifi)) {
         throw const HttpException("No Internet Connection");
       }
       http.Response response;
@@ -80,10 +83,14 @@ class GeneralServices {
           headers: headers,
         );
       }
+
+      // debugPrint(response.body.toString());
+
       if (response.statusCode == 200) {
+        final responseBody = json.decode(response.body);
         return ServicesSuccess(
           code: response.statusCode,
-          response: json.decode(response.body)['data'],
+          response: responseBody,
         );
       }
       return ServicesFailure(
