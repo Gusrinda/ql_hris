@@ -28,87 +28,90 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV1> {
     final size = MediaQuery.of(context).size;
     return InkWell(
       onTap: imageFile == null ? () => _pickImage(ImageSource.camera) : null,
-      child: Container(
-        width: double.infinity,
-        height: size.width * 1,
-        alignment: Alignment.center,
-        decoration: const BoxDecoration(
-          color: MyColorsConst.shadowColor,
-          borderRadius: BorderRadius.all(
-            Radius.circular(10),
-          ),
-        ),
-        child: Stack(
-          fit: StackFit.expand,
+      child: AspectRatio(
+        aspectRatio: 1,
+        child: Container(
+          width: double.infinity,
+          // height: size.width,
           alignment: Alignment.center,
-          children: [
-            SizedBox(
-              width: double.infinity,
-              height: double.infinity,
-              child: imageFile != null
-                  ? ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.file(
-                        imageFile!,
-                        fit: BoxFit.fitWidth,
-                      ),
-                    )
-                  : const Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.camera_alt,
-                          color: MyColorsConst.semiDarkColor,
-                          size: 45,
-                        ),
-                        SizedBox(height: 6),
-                        Text(
-                          "Ketuk untuk ambil gambar",
-                          style: TextStyle(
-                            color: MyColorsConst.darkColor,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
+          decoration: const BoxDecoration(
+            color: MyColorsConst.shadowColor,
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
             ),
-            Visibility(
-              visible: imageFile != null,
-              child: Positioned(
-                bottom: 8,
-                left: 8,
-                child: InkWell(
-                  onTap: () => _pickImage(ImageSource.camera),
-                  child: Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      color: MyColorsConst.redColor,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: const [
-                        Icon(
-                          Icons.replay,
-                          size: 15,
-                          color: MyColorsConst.whiteColor,
+          ),
+          child: Stack(
+            fit: StackFit.expand,
+            alignment: Alignment.center,
+            children: [
+              SizedBox(
+                width: double.infinity,
+                height: double.infinity,
+                child: imageFile != null
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          imageFile!,
+                          fit: BoxFit.fitWidth,
                         ),
-                        SizedBox(width: 6),
-                        Text(
-                          "Ambil Ulang",
-                          style: TextStyle(
-                            color: MyColorsConst.whiteColor,
-                            fontSize: 12,
+                      )
+                    : const Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.camera_alt,
+                            color: MyColorsConst.semiDarkColor,
+                            size: 45,
                           ),
-                        ),
-                      ],
+                          SizedBox(height: 6),
+                          Text(
+                            "Ketuk untuk ambil gambar",
+                            style: TextStyle(
+                              color: MyColorsConst.darkColor,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+              ),
+              Visibility(
+                visible: imageFile != null,
+                child: Positioned(
+                  bottom: 8,
+                  left: 8,
+                  child: InkWell(
+                    onTap: () => _pickImage(ImageSource.camera),
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: MyColorsConst.redColor,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: const [
+                          Icon(
+                            Icons.replay,
+                            size: 15,
+                            color: MyColorsConst.whiteColor,
+                          ),
+                          SizedBox(width: 6),
+                          Text(
+                            "Ambil Ulang",
+                            style: TextStyle(
+                              color: MyColorsConst.whiteColor,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

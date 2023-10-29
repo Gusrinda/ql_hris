@@ -20,7 +20,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         var res =
             await ProfileServices.getDataProfiel(resToken.response["token"]);
         if (res is ServicesSuccess) {
-          profileModel = ProfileModel.fromMap(res.response);
+          profileModel = ProfileModel.fromMap(res.response["data"]);
           emit(GetDataProfileSuccess(
             imagePath: profileModel?.imagePath,
             name: profileModel?.name,

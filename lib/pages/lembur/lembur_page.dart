@@ -189,107 +189,108 @@ class CardPerintahLembur extends StatelessWidget {
       default:
         warnaStatus = Colors.grey;
     }
-    return GestureDetector(
-      onTap: onTap,
-      child: Stack(
-        children: [
-          Container(
-            height: 100,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-              color: warnaStatus,
-            ),
+    return Stack(
+      children: [
+        Container(
+          height: 100,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(6),
+            color: warnaStatus,
           ),
-          Container(
-            height: 100,
-            margin: EdgeInsets.only(bottom: 15, left: 5),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
-                border: Border.all(color: Color(0xFFDDDDDD)),
-                color: MyColorsConst.whiteColor),
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Lembur Regular",
+        ),
+        Container(
+          height: 100,
+          margin: EdgeInsets.only(bottom: 15, left: 5),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(color: Color(0xFFDDDDDD)),
+              color: MyColorsConst.whiteColor),
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        "Surat Perintah Lembur",
+                        style: TextStyle(
+                          fontFamily: 'Poppins',
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Spacer(),
+                      Container(
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: warnaStatus.withOpacity(0.1),
+                        ),
+                        child: Text(
+                          status,
                           style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
+                            fontFamily: 'Poppins',
+                            color: warnaStatus,
+                            fontSize: 10,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        Spacer(),
-                        Container(
-                          padding: EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: warnaStatus.withOpacity(0.1),
-                          ),
-                          child: Text(
-                            status,
-                            style: TextStyle(
-                              color: warnaStatus,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.calendar_month_rounded,
-                          color: MyColorsConst.lightDarkColor,
-                          size: 10,
-                        ),
-                        SizedBox(width: 5), 
-                        Text(
-                          '09 Oktober 2023',
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.access_time_filled,
-                          color: MyColorsConst.lightDarkColor,
-                          size: 10,
-                        ),
-                        SizedBox(width: 5),
-                        Text(
-                          "09.00 - 17.00",
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.calendar_month_rounded,
+                        color: MyColorsConst.lightDarkColor,
+                        size: 10,
+                      ),
+                      SizedBox(width: 5), // Atur jarak sesuai kebutuhan
+                      Text(
+                        '09 Oktober 2023',
+                        style: TextStyle(
+                            fontFamily: 'Poppins',
+                            color: Colors.grey,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.access_time_filled,
+                        color: MyColorsConst.lightDarkColor,
+                        size: 10,
+                      ),
+                      SizedBox(width: 5),
+                      Text(
+                        "09.00 - 17.00",
+                        style: TextStyle(
+                            fontFamily: 'Poppins',
+                            color: Colors.grey,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

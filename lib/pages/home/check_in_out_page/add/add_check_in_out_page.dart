@@ -193,7 +193,8 @@ class AddCheckInOutPage extends StatelessWidget {
                         if (state is! LocationAcioLoading) isLoading = false;
                         var data =
                             state is LocationAcioLoadSuccess ? state : null;
-
+                        print("LATITUDE: ${data?.latitude}");
+                        print("LONGITUDE: ${data?.longitude}");
                         context
                             .read<AddCheckInOutBloc>()
                             .add(AddCheckInOutFormDataAdded(

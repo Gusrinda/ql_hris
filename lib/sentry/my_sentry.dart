@@ -10,7 +10,7 @@ class MySentry {
       platform = "Android";
     }
 
-    platform = "QL Absensi Express: $platform";
+    platform = "Sukses Jaya Absensi Express: $platform";
     var res = await SentryServices.addSentry(platform, exception, stackTrace);
     if (res is ServicesSuccess) {
       debugPrint(res.response["message"]);
