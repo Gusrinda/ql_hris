@@ -176,7 +176,7 @@ class ProfilePage extends StatelessWidget {
         SvgPicture.asset(
           "assets/icons/bi_people_circle.svg",
           fit: BoxFit.fitWidth,
-          color: MyColorsConst.primaryLightColor,
+          colorFilter: ColorFilter.mode(MyColorsConst.primaryLightColor, BlendMode.srcIn),
         ),
         const Positioned(
           bottom: 0,

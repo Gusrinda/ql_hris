@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/history/bloc/history_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class HomeCheckInOutPage extends StatelessWidget {
@@ -80,6 +83,29 @@ class HomeCheckInOutPage extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BlocProvider(
+                        create: (context) => HistoryBloc()
+                          ..add(
+                            GetAttendancesHistory(
+                              date: DateTime.now(),
+                            ),
+                          ),
+                        child: const HistoryPage(),
+                      ),
+                    ),
+                  );
+                },
+                backgroundColor: MyColorsConst.primaryLightColor,
+                child: const Icon(
+                  Icons.pending_actions_rounded,
+                  size: 32,
+                ),
               ),
               body: Padding(
                 padding:

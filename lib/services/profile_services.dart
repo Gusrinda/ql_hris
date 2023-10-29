@@ -5,7 +5,7 @@ import 'package:sj_presensi_mobile/utils/services.dart';
 
 class ProfileServices {
   static Future<Object> getDataProfiel(String token) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/user/get-profile");
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/default_users/1");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
