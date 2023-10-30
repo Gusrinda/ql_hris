@@ -121,7 +121,7 @@ class _DinasPageState extends State<DinasPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const DinasForm(),
+              builder: (context) => const AddDinasPage(),
             ),
           );
         },
@@ -217,15 +217,15 @@ class CardPerintahLembur extends StatelessWidget {
         Container(
           height: 100,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(6),
             color: warnaStatus,
           ),
         ),
         Container(
           height: 100,
-          margin: EdgeInsets.only(bottom: 18, left: 5),
+          margin: EdgeInsets.only(bottom: 15, left: 5),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(6),
             border: Border.all(color: Color(0xFFDDDDDD)),
             color: MyColorsConst.whiteColor,
           ),
@@ -249,7 +249,7 @@ class CardPerintahLembur extends StatelessWidget {
                       ),
                       Spacer(),
                       Container(
-                        padding: EdgeInsets.all(4),
+                        padding: EdgeInsets.all(5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: warnaStatus.withOpacity(0.1),

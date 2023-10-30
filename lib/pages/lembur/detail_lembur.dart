@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
-class DetailCutiPage extends StatefulWidget {
-  const DetailCutiPage({Key? key}) : super(key: key);
+class DetailLemburPage extends StatefulWidget {
+  const DetailLemburPage({Key? key}) : super(key: key);
 
   @override
-  State<DetailCutiPage> createState() => _DetailCutiPageState();
+  State<DetailLemburPage> createState() => _DetailLemburPageState();
 }
 
-class _DetailCutiPageState extends State<DetailCutiPage> {
+class _DetailLemburPageState extends State<DetailLemburPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarCustomV1(
-        title: "Detail Pengajuan Cuti",
+        title: "Detail Lembur",
         padLeft: 8,
       ),
       body: SingleChildScrollView(
@@ -36,24 +36,24 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                       children: [
                         Row(
                           children: [
-                            Text(
-                              "Cuti Sehari",
+                            const Text(
+                              "Lembur Regular",
                               style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 12,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                             Spacer(),
                             Container(
-                              padding: EdgeInsets.all(4),
+                              padding: EdgeInsets.all(5),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 color:
                                     MyColorsConst.primaryColor.withOpacity(0.1),
                               ),
-                              child: Text(
-                                'Menunggu Disetujui',
+                              child: const Text(
+                                'Active',
                                 style: TextStyle(
                                   color: MyColorsConst.primaryColor,
                                   fontSize: 10,
@@ -66,14 +66,14 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                         const SizedBox(
                           height: 4,
                         ),
-                        Row(
+                        const Row(
                           children: [
                             Icon(
                               Icons.calendar_month_rounded,
                               color: MyColorsConst.lightDarkColor,
                               size: 10,
                             ),
-                            SizedBox(width: 5), // Atur jarak sesuai kebutuhan
+                            SizedBox(width: 5),
                             Text(
                               '09 Oktober 2023',
                               style: TextStyle(
@@ -86,7 +86,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                         const SizedBox(
                           height: 4,
                         ),
-                        Row(
+                        const Row(
                           children: [
                             Icon(
                               Icons.access_time_filled,
@@ -107,10 +107,10 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                           color: Color(0xFFDDDDDD),
                           thickness: 1,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
-                        Text(
+                        const Text(
                           'Alasan',
                           style: TextStyle(
                             fontSize: 10,
@@ -121,7 +121,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                         const SizedBox(
                           height: 5,
                         ),
-                        Text(
+                        const Text(
                           'Acara Keluarga',
                           style: TextStyle(
                             fontSize: 10,
@@ -132,8 +132,65 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          'Catatan',
+                        Row(
+                          children: [
+                            const Column(
+                              children: [
+                                Text(
+                                  'No Dokumen',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  '135346246219',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              width:
+                                  MediaQuery.of(context).size.width * 1.8 / 3,
+                              child: const Column(
+                                children: [
+                                  Text(
+                                    'File Ref.',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    'file.pdf',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: MyColorsConst.primaryColor,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text(
+                          'Keterangan',
                           style: TextStyle(
                             fontSize: 10,
                             color: Colors.black,
@@ -143,7 +200,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                         const SizedBox(
                           height: 5,
                         ),
-                        Text(
+                        const Text(
                           'lorem ipsum',
                           style: TextStyle(
                             fontSize: 10,
