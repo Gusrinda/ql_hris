@@ -13,17 +13,52 @@ class CheckInOutBloc extends Bloc<CheckInOutEvent, CheckInOutState> {
       (event, emit) async {
         emit(CheckInOutLoading());
         var resToken = await GeneralSharedPreferences.getUserToken();
-        emit(
-          CheckInOutSuccessInBackground(
-            name: "trial",
-            isCheckin: true,
-          ),
-        );
+        // emit(
+        //   CheckInOutSuccessInBackground(
+        //     name: "trial",
+        //     isCheckin: true,
+        //   ),
+        // );
+
+        if (resToken is ServicesSuccess) {
+          var res = await AttendancesServices.getAttendanceState(
+              resToken.response["token"]);
+          if (res is ServicesSuccess) {
+            final jsonData = res.response["data"];
+            final status = jsonData["status"];
+
+            if (status == "ATTEND") {
+              emit(InfoCheckInOutSuccessInBackground(
+                name: "Employee",
+              ));
+            } else if (status == "NOT ATTEND") {
+              emit(CheckInOutSuccessInBackground(
+                name: "Employee",
+                isCheckin: true,
+              ));
+            } else if (status == "WORKING") {
+              emit(CheckInOutSuccessInBackground(
+                name: "Employee",
+                isCheckin: false,
+              ));
+            }
+          } else if (res is ServicesFailure) {
+            if (res.errorResponse == null) {
+              await GeneralSharedPreferences.removeUserToken();
+              emit(CheckInOutFailedUserExpired(message: "Token expired"));
+            } else {
+              emit(CheckInOutFailed(message: res.errorResponse));
+            }
+          }
+        } else if (resToken is ServicesFailure) {
+          emit(CheckInOutFailedInBackground());
+        }
+
         // if (resToken is ServicesSuccess) {
         //   var res = await AttendancesServices.getAttendanceState(
         //       resToken.response["token"]);
         //   if (res is ServicesSuccess) {
-        //     if (res.response["state"] == "attend") {
+        //     if (res.response["status"] == "ATTEND") {
         //       emit(InfoCheckInOutSuccessInBackground(
         //           name: res.response["user_name"]));
         //     } else {

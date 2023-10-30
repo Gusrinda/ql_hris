@@ -34,7 +34,7 @@ class GeneralServices {
   };
   static Map<String, String> addToken2Headers(String token) {
     Map<String, String> headers = Map<String, String>.from(_headers)
-      ..addAll({'Authorization': "Bearer $token"});
+      ..addAll({'Authorization': "Bearer $token", 'Source': "mobile"});
 
     return headers;
   }
@@ -56,7 +56,7 @@ class GeneralServices {
       if (method == GeneralServicesMethod.post) {
         response = await http.post(
           url,
-          headers: headers,
+          headers: headers ,
           body: body,
         );
       } else if (method == GeneralServicesMethod.postMultiPart) {
@@ -69,7 +69,7 @@ class GeneralServices {
           ..fields.addAll(bodyFormed)
           ..headers.addAll(headers!)
           ..files
-              .add(await http.MultipartFile.fromPath('inputImage', imagePath!));
+              .add(await http.MultipartFile.fromPath('foto', imagePath!));
         var res = await request.send();
         response = await http.Response.fromStream(res);
       } else if (method == GeneralServicesMethod.get) {

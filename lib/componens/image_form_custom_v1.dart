@@ -150,6 +150,7 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV1> {
             imageFile = File(imageComp!.path);
             widget.onImageSelected(imageFile?.path);
           });
+          print("ImageFile: ${imageFile}");
         } else {
           setState(() {
             widget.onImageSelectedError("Failed to take a picture!");

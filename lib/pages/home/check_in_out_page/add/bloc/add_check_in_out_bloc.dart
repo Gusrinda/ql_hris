@@ -13,6 +13,11 @@ class AddCheckInOutBloc extends Bloc<AddCheckInOutEvent, AddCheckInOutState> {
   AddCheckInOutBloc() : super(AddCheckInOutInitial()) {
     on<AddCheckInOutSubmited>((event, emit) async {
       emit(AddCheckInOutLoading());
+      // print("Image Submit : ${formDataSubmited.imagePath}");
+      print("Address Submit : ${formDataSubmited.address}");
+      print("isOnSite Submit : ${formDataSubmited.isOnSite}");
+      print("Latitude Submit : ${formDataSubmited.latitude}");
+      print("Longitude Submit : ${formDataSubmited.longitude}");
       if (formDataSubmited.imagePath == null) {
         emit(AddCheckInOutFailed(message: "Foto kehadiran harus di isi!"));
       } else if (formDataSubmited.address == null ||
@@ -23,6 +28,7 @@ class AddCheckInOutBloc extends Bloc<AddCheckInOutEvent, AddCheckInOutState> {
       } else {
         var resToken = await GeneralSharedPreferences.getUserToken();
         if (resToken is ServicesSuccess) {
+          print("resToken : ${resToken.response["token"]}");
           var res = await AttendancesServices.addAttendance(
             resToken.response["token"],
             formDataSubmited.imagePath,
