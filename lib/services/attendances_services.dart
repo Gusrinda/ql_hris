@@ -14,7 +14,7 @@ class AttendancesServices {
     );
   }
 
-  static Future<Object> addAttendance(
+  static Future<Object> addAttendanceIn(
       String token, imagePath, address, isOnsite, latitude, longitude) async {
     var url = Uri.parse(
         "${MyGeneralConst.API_URL}/operation/presensi_absensi/checkin");
@@ -24,8 +24,23 @@ class AttendancesServices {
       headers: GeneralServices.addToken2Headers(token),
       body: {
         "address": address,
-        // "foto": imagePath,
-        // "inputOnsite": isOnSite,
+        "lat": latitude,
+        "long": longitude,
+      },
+      imagePath: imagePath,
+    );
+  }
+
+    static Future<Object> addAttendanceOut(
+      String token, imagePath, address, isOnsite, latitude, longitude) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/presensi_absensi/checkout");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.postMultiPart,
+      headers: GeneralServices.addToken2Headers(token),
+      body: {
+        "address": address,
         "lat": latitude,
         "long": longitude,
       },
