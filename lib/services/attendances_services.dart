@@ -6,7 +6,8 @@ import 'package:http/http.dart' as http;
 
 class AttendancesServices {
   static Future<Object> getAttendanceState(String token) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/presensi_absensi/status");
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/presensi_absensi/status");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -31,7 +32,7 @@ class AttendancesServices {
     );
   }
 
-    static Future<Object> addAttendanceOut(
+  static Future<Object> addAttendanceOut(
       String token, imagePath, address, isOnsite, latitude, longitude) async {
     var url = Uri.parse(
         "${MyGeneralConst.API_URL}/operation/presensi_absensi/checkout");
@@ -48,10 +49,27 @@ class AttendancesServices {
     );
   }
 
+  // static Future<Object> getAttendancesHistory(
+  //     String token, DateTime date) async {
+  //   var url = Uri.parse(
+  //       "${MyGeneralConst.API_URL}/attendance/get-user-attendances?inputTahun=${date.year}&inputBulan=${date.month}");
+  //   return await GeneralServices.baseService(
+  //     url: url,
+  //     method: GeneralServicesMethod.get,
+  //     headers: GeneralServices.addToken2Headers(token),
+  //   );
+  // }
+
   static Future<Object> getAttendancesHistory(
       String token, DateTime date) async {
+    var lastDate = DateTime(date.year, date.month + 1, 0).day;
+    var lastDateStr = lastDate.toString();
+    var formattedDate =
+        "${date.year}-${date.month.toString().padLeft(2, '0')}-$lastDateStr";
+    print("Tanggal Terakhir bulan ini adalah tanggal $formattedDate");
     var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/attendance/get-user-attendances?inputTahun=${date.year}&inputBulan=${date.month}");
+        "${MyGeneralConst.API_URL}/operation/presensi_absensi?scopes=filter&date_from=${date.year}-${date.month}-1&date_to=$formattedDate");
+        
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,

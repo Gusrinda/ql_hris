@@ -9,6 +9,9 @@ import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/location.dar
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/time.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/cubit/home_cubit.dart';
+import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/history/bloc/history_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
 import 'package:sj_presensi_mobile/pages/home/home_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/change_password_page.dart';
@@ -59,10 +62,13 @@ class RouteGenerator {
       //   return MaterialPageRoute(builder: (context) {
       //     return ProfilePage();
       //   });
-      // case HomeCheckInOutPage.routeName:
-      //   return MaterialPageRoute(builder: (context) {
-      //     return const HomeCheckInOutPage();
-      //   });
+      case HistoryPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return BlocProvider(
+            create: (context) => HistoryAttendanceBloc(),
+            child: const HistoryPage(),
+          );
+        });
       case AddCheckInOutPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return MultiBlocProvider(

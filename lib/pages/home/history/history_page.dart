@@ -7,23 +7,23 @@ import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/monthpicker_custom.dart';
 import 'package:sj_presensi_mobile/componens/yearpicker_custom.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/detail_hitory_absensi.dart';
-import 'package:sj_presensi_mobile/pages/home/history/bloc/history_bloc.dart';
-import 'package:sj_presensi_mobile/services/model/attendances_model.dart';
+import 'package:sj_presensi_mobile/services/model/history_attendance_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class HistoryPage extends StatelessWidget {
-  // static const routeName = 'HistoryPage';
+  static const routeName = '/HistoryPage';
   const HistoryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return BlocListener<HistoryBloc, HistoryState>(
+    return BlocListener<HistoryAttendanceBloc, HistoryAttendanceState>(
       listener: (context, state) async {
-        if (state is HistoryLoading) {
+        if (state is HistoryAttendanceLoading) {
           LoadingDialog.showLoadingDialog(context);
-        } else if (state is HistoryFailed) {
+        } else if (state is HistoryAttendanceFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
             context: context,
@@ -103,38 +103,43 @@ class HistoryPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 Expanded(
-                  child: BlocBuilder<HistoryBloc, HistoryState>(
+                  child: BlocBuilder<HistoryAttendanceBloc,
+                      HistoryAttendanceState>(
                     builder: (context, state) {
-                      var attendances = context.read<HistoryBloc>().attendances;
+                      var attendances =
+                          context.read<HistoryAttendanceBloc>().attendances;
                       return attendances.isNotEmpty
                           ? ListView.builder(
+                              shrinkWrap: true,
                               itemCount: attendances.length,
                               itemBuilder: (context, index) {
-                                var data = attendances
-                                    .elementAt(index)
-                                    .attendancesDetails;
-                                return buildCard(
-                                  key:
-                                      Key("${attendances.elementAt(index).id}"),
-                                  date: attendances.elementAt(index).date,
-                                  state: attendances.elementAt(index).status,
-                                  dataCheckIn: data!.isNotEmpty
-                                      ? data.elementAt(0)
-                                      : null,
-                                  dataCheckOut: data.length > 1
-                                      ? data.elementAt(1)
-                                      : null,
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const DetailHistoryAbsensiPage(),
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
+                                return Container(); 
+                                  
+                                }
+                              //   var data = attendances.data;
+                              //   if (data != null && data.isNotEmpty) {
+                              //     return buildCard(
+                              //       key: Key("${data[index].id}"),
+                              //       date: data[index].tanggal,
+                              //       state: data[index].status,
+                              //       dataCheckIn:
+                              //           data.length > 0 ? data[0] : null,
+                              //       dataCheckOut:
+                              //           data.length > 1 ? data[1] : null,
+                              //       onTap: () {
+                              //         Navigator.push(
+                              //           context,
+                              //           MaterialPageRoute(
+                              //             builder: (context) =>
+                              //                 const DetailHistoryAbsensiPage(),
+                              //           ),
+                              //         );
+                              //       },
+                              //     );
+                              //   } else {
+                              //     return Container(); // Atau widget lainnya jika tidak ada data
+                              //   }
+                              // },
                             )
                           : Center(
                               child: Column(
@@ -172,8 +177,8 @@ class HistoryPage extends StatelessWidget {
     required Key key,
     required date,
     required state,
-    AttendanceDetailModel? dataCheckIn,
-    AttendanceDetailModel? dataCheckOut,
+    Datum? dataCheckIn,
+    Datum? dataCheckOut,
     String? url,
     DateTime? datetime,
     bool? onSite,
@@ -241,11 +246,15 @@ class HistoryPage extends StatelessWidget {
               children: [
                 buildSubCard(
                   checkIn: true,
-                  datetime: dataCheckIn?.time,
+                  datetime: dataCheckIn != null
+                      ? DateTime.parse(dataCheckIn.checkinTime!)
+                      : null,
                 ),
                 buildSubCard(
                   checkIn: false,
-                  datetime: dataCheckOut?.time,
+                  datetime: dataCheckOut != null
+                      ? DateTime.parse(dataCheckOut.checkoutTime!)
+                      : null,
                 ),
               ],
             ),

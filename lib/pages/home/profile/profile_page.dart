@@ -18,6 +18,9 @@ class ProfilePage extends StatelessWidget {
   final TextEditingController idController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -159,7 +162,10 @@ class ProfilePage extends StatelessWidget {
                   backgroundColor: Color.fromARGB(255, 236, 48, 35),
                   textColor: MyColorsConst.whiteColor,
                   onPressed: () {
-                    context.read<ProfileBloc>().add(LogoutProfile());
+                    context.read<ProfileBloc>().add(LogoutProfile(
+                      username: usernameController.text,
+                      password: passwordController.text,
+                    ));
                   },
                 ),
               ],
