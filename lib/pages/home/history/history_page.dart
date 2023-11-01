@@ -7,14 +7,13 @@ import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/monthpicker_custom.dart';
 import 'package:sj_presensi_mobile/componens/yearpicker_custom.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
-import 'package:sj_presensi_mobile/pages/home/history/detail_hitory_absensi.dart';
+import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dart';
 import 'package:sj_presensi_mobile/pages/home/history/bloc/history_bloc.dart';
 import 'package:sj_presensi_mobile/services/model/attendances_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class HistoryPage extends StatelessWidget {
-  // static const routeName = 'HistoryPage';
-  const HistoryPage({super.key});
+  const HistoryPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -105,58 +104,58 @@ class HistoryPage extends StatelessWidget {
                 Expanded(
                   child: BlocBuilder<HistoryBloc, HistoryState>(
                     builder: (context, state) {
-                      var attendances = context.read<HistoryBloc>().attendances;
-                      return attendances.isNotEmpty
-                          ? ListView.builder(
-                              itemCount: attendances.length,
-                              itemBuilder: (context, index) {
-                                var data = attendances
-                                    .elementAt(index)
-                                    .attendancesDetails;
-                                return buildCard(
-                                  key:
-                                      Key("${attendances.elementAt(index).id}"),
-                                  date: attendances.elementAt(index).date,
-                                  state: attendances.elementAt(index).status,
-                                  dataCheckIn: data!.isNotEmpty
-                                      ? data.elementAt(0)
-                                      : null,
-                                  dataCheckOut: data.length > 1
-                                      ? data.elementAt(1)
-                                      : null,
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const DetailHistoryAbsensiPage(),
-                                      ),
-                                    );
-                                  },
-                                );
-                              },
-                            )
-                          : Center(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Lottie.asset(
-                                    "assets/lotties/json/lottie_nodata.json",
-                                    height: size.width * 1 / 2,
-                                  ),
-                                  const SizedBox(height: 8),
-                                  const Text(
-                                    "Tidak ada data yang ditampilkan!",
-                                    style: TextStyle(
-                                      color: MyColorsConst.darkColor,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
+                      if (state is HistorySuccessInBackground) {
+                        final attendancesModel = state.attendancesModel;
+                        if (attendancesModel.isNotEmpty) {
+                          return ListView.builder(
+                            itemCount: attendancesModel.length,
+                            itemBuilder: (context, index) {
+                              final attendance = attendancesModel[index];
+                              final data = attendance.attendancesDetails;
+                              return buildCard(
+                                key: Key("${attendance.id}"),
+                                date: attendance.date,
+                                state: attendance.status,
+                                dataCheckIn: data!.isNotEmpty ? data[0] : null,
+                                dataCheckOut: data.length > 1 ? data[1] : null,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const DetailHistoryAbsensiPage(),
                                     ),
+                                  );
+                                },
+                              );
+                            },
+                          );
+                        } else {
+                          return Center(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Lottie.asset(
+                                  "assets/lotties/json/lottie_nodata.json",
+                                  height: size.width * 1 / 2,
+                                ),
+                                const SizedBox(height: 8),
+                                const Text(
+                                  "Tidak ada data yang ditampilkan!",
+                                  style: TextStyle(
+                                    color: MyColorsConst.darkColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
                                   ),
-                                ],
-                              ),
-                            );
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                      } else {
+                        return Center(child: CircularProgressIndicator());
+                      }
                     },
                   ),
                 ),

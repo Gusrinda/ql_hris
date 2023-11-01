@@ -20,7 +20,7 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
         var res = await AttendancesServices.getAttendancesHistory(
             resToken.response["token"], event.date);
         if (res is ServicesSuccess) {
-          attendances = AttendanceModel.attendancesFromMap(res.response);
+          attendances = AttendanceModel.attendancesFromMap(res.response["data"]);
           attendances.sort(
             (a, b) {
               if (sortState) {

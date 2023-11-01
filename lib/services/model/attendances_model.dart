@@ -1,5 +1,61 @@
 import 'package:intl/intl.dart';
 
+import 'dart:convert';
+
+// class AttendanceModel {
+//   int? id;
+//   DateTime? date;
+//   String? status;
+//   List<AttendanceDetailModel>? attendancesDetails;
+
+//   AttendanceModel({
+//     this.id,
+//     this.date,
+//     this.status,
+//     this.attendancesDetails,
+//   });
+
+//   factory AttendanceModel.fromJson(String json) {
+//     final Map<String, dynamic> data = jsonDecode(json);
+//     return AttendanceModel(
+//       id: data['data'][0]['id'],
+//       date: DateTime.parse(data['data'][0]['tanggal']),
+//       status: data['data'][0]['status'],
+//       attendancesDetails: AttendanceDetailModel.attendanceDetailsFromMap(data['data']),
+//     );
+//   }
+// }
+
+// class AttendanceDetailModel {
+//   DateTime? time;
+//   String? imagePath;
+//   bool? onSite;
+//   String? status;
+
+//   AttendanceDetailModel({
+//     this.time,
+//     this.imagePath,
+//     this.onSite,
+//     this.status,
+//   });
+
+//   factory AttendanceDetailModel.fromJson(Map<String, dynamic> json) {
+//     return AttendanceDetailModel(
+//       time: DateTime.parse(json['checkin_time']),
+//       imagePath: json['checkin_foto'],
+//       onSite: json['checkin_on_scope'],
+//       status: json['status'],
+//     );
+//   }
+
+//   static List<AttendanceDetailModel> attendanceDetailsFromMap(Map<String, dynamic> data) {
+//     final List<AttendanceDetailModel> details = [];
+//     details.add(AttendanceDetailModel.fromJson(data));
+//     return details;
+//   }
+// }
+
+
 class AttendanceModel {
   int? id;
   DateTime? date;

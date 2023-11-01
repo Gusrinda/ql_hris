@@ -55,7 +55,6 @@ class AuthServices {
 
   static Future<Object> checkTokenAvailable(String token) async {
     var url = Uri.parse("${MyGeneralConst.API_URL}/me");
-    print("URL ME: ${url}");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
