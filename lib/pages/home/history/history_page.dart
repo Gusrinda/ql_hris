@@ -19,6 +19,15 @@ class HistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
+    String convertDateFormat(String inputFormat) {
+      final parts = inputFormat.split('/');
+      final day = parts[0].padLeft(2, '0');
+      final month = parts[1].padLeft(2, '0');
+      final year = parts[2];
+      return '$year-$month-$day';
+    }
+
     return BlocListener<HistoryAttendanceBloc, HistoryAttendanceState>(
       listener: (context, state) async {
         // print("LISTEN STATUS SEKARANG ${state}");
@@ -123,18 +132,76 @@ class HistoryPage extends StatelessWidget {
                                 var data = attendances;
                                 if (data != null && data.isNotEmpty) {
                                   return ListTile(
-                                    title: Text(data[index].id.toString()),
-                                    subtitle: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      subtitle: Container(
+                                    margin: const EdgeInsets.only(bottom: 20),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(6),
+                                      border:
+                                          Border.all(color: Color(0xFFDDDDDD)),
+                                      color: MyColorsConst.whiteColor,
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 12, vertical: 10),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                            "Check In : ${data[index].checkinTime}"),
-                                        Text(
-                                            "Check Out : ${data[index].checkoutTime}")
+                                        Column(
+                                          children: [
+                                            Text(
+                                              "${convertDateFormat(data[index].tanggal!)}",
+                                              style: TextStyle(
+                                                  color:
+                                                      MyColorsConst.darkColor,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              "in ${data[index].checkinTime}",
+                                            )
+                                          ],
+                                        ),
+                                        Column(
+                                          children: [
+                                            Container(
+                                              padding: EdgeInsets.all(4),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                color: MyColorsConst
+                                                    .primaryColor
+                                                    .withOpacity(0.1),
+                                              ),
+                                              child: Text(
+                                                "${data[index].status}",
+                                                style: TextStyle(
+                                                  color: MyColorsConst
+                                                      .primaryColor,
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              "in ${data[index].checkoutTime}",
+                                            )
+                                          ],
+                                        ),
                                       ],
                                     ),
-                                  );
+                                  )
+                                      // Text(
+                                      //     "Check In : ${data[index].checkinTime}"),
+                                      // Text(
+                                      //
+                                      );
                                   // return buildCard(
                                   //   key: Key("${data[index].id}"),
                                   //   date: DateFormat("dd/MM/yyyy").parse(
