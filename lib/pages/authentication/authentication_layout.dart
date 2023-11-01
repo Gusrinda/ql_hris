@@ -30,6 +30,15 @@ class AuthenticationLayout extends StatelessWidget {
       "image2": "assets/images/Logo_Success_Jaya.png",
       "imageBottom": "assets/images/loginBottomHRIS.png",
     },
+    {
+      "hideAppBar": true,
+      "title": "Selamat Datang!",
+      "subTitle": "Masukan data login anda",
+      // "paddingTop": 80.0,
+      "image": "assets/images/city.png",
+      "image2": "assets/images/Logo_Success_Jaya.png",
+      "imageBottom": "assets/images/loginBottomHRIS.png",
+    },
   ];
 
   @override
@@ -52,7 +61,7 @@ class AuthenticationLayout extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
+              children: [
                 Container(
                   height: 200,
                   child: Image.asset(
@@ -102,7 +111,7 @@ class AuthenticationLayout extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                Container(
                   child: Image.asset(
                     width: MediaQuery.of(context).size.width,
                     layoutData[layoutState.index]["imageBottom"] as String,

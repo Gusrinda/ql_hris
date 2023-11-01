@@ -85,29 +85,29 @@ class HomeCheckInOutPage extends StatelessWidget {
                   ),
                 ],
               ),
-              floatingActionButton: FloatingActionButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BlocProvider(
-                        create: (context) => HistoryAttendanceBloc()
-                          ..add(
-                            GetAttendancesHistory(
-                              date: DateTime.now(),
-                            ),
-                          ),
-                        child: const HistoryPage(),
-                      ),
-                    ),
-                  );
-                },
-                backgroundColor: MyColorsConst.primaryLightColor,
-                child: const Icon(
-                  Icons.pending_actions_rounded,
-                  size: 32,
-                ),
-              ),
+              // floatingActionButton: FloatingActionButton(
+              //   onPressed: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => BlocProvider(
+              //           create: (context) => HistoryBloc()
+              //             ..add(
+              //               GetAttendancesHistory(
+              //                 date: DateTime.now(),
+              //               ),
+              //             ),
+              //           child: const HistoryPage(),
+              //         ),
+              //       ),
+              //     );
+              //   },
+              //   backgroundColor: MyColorsConst.primaryLightColor,
+              //   child: const Icon(
+              //     Icons.pending_actions_rounded,
+              //     size: 32,
+              //   ),
+              // ),
               body: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
