@@ -11,6 +11,7 @@ class MyGeneralConst {
   static const CODE_NO_INTERNET_CONECCTION = 401;
   static const CODE_INVALID_FORMAT = 402;
   static const CODE_UNKWON_ERROR = 403;
+  static const CODE_INTERNAL_ERROR = 500;
 }
 
 const MaterialColor themeAppColor = MaterialColor(

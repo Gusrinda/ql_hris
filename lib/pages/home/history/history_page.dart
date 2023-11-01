@@ -20,12 +20,10 @@ class HistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    String convertDateFormat(String inputFormat) {
-      final parts = inputFormat.split('/');
-      final day = parts[0].padLeft(2, '0');
-      final month = parts[1].padLeft(2, '0');
-      final year = parts[2];
-      return '$year-$month-$day';
+    String getDayFromDate(String date) {
+      DateTime dateTime = DateFormat("dd/MM/yyyy").parse(date);
+      String day = DateFormat.EEEE().format(dateTime);
+      return day;
     }
 
     return BlocListener<HistoryAttendanceBloc, HistoryAttendanceState>(
@@ -150,7 +148,7 @@ class HistoryPage extends StatelessWidget {
                                         Column(
                                           children: [
                                             Text(
-                                              "${convertDateFormat(data[index].tanggal!)}",
+                                              "${getDayFromDate("${data[index].tanggal}")}, ${data[index].tanggal}",
                                               style: TextStyle(
                                                   color:
                                                       MyColorsConst.darkColor,
