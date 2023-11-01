@@ -112,3 +112,10 @@ class GeneralServices {
     }
   }
 }
+
+
+// {
+//   code : 404,
+//   data : asaas,
+//   message : asas
+// }

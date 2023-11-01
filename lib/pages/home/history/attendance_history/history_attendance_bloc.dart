@@ -27,20 +27,25 @@ class HistoryAttendanceBloc
       if (resToken is ServicesSuccess) {
         var res = await AttendancesServices.getAttendancesHistory(
             resToken.response["token"], event.date);
-            
+
         if (res is ServicesSuccess) {
           debugPrint(res.response.toString());
-          if (res.response is HistoryAttendanceModel) {
+          if (res.response is Map<String, dynamic>) {
             print(res.response);
-            // HistoryAttendanceModel dataResponse = res.response;
-            // attendances = data;
+
+            //Mengubah hasil response api ke model kelas
+            HistoryAttendanceModel dataResponse =
+                HistoryAttendanceModel.fromJson(res.response);
+
+            //Masukkan data dari model ke kebutuhan
+            attendances = dataResponse.data ?? [];
+
             emit(
-              HistorySuccessInBackground(
-                historyAttendanceModel: res.response,
-              ),
+              HistorySuccessInBackground(dataHistory: attendances),
             );
           } else {
-            emit(HistoryFailedInBackground(message: 'Response format is invalid'));
+            emit(HistoryFailedInBackground(
+                message: 'Response format is invalid'));
           }
         } else if (res is ServicesFailure) {
           if (res.errorResponse == null) {
