@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:sj_presensi_mobile/componens/camera_view.dart';
+import 'package:sj_presensi_mobile/main.dart';
 import 'package:sj_presensi_mobile/sentry/my_sentry.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -28,6 +31,19 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV1> {
     final size = MediaQuery.of(context).size;
     return InkWell(
       onTap: imageFile == null ? () => _pickImage(ImageSource.camera) : null,
+      // onTap: imageFile == null
+      //     ? () async {
+      //         final firstCamera = cameras[1];
+
+      //         Navigator.push(
+      //           context,
+      //           MaterialPageRoute(
+      //               builder: (context) => CameraCapturePage(
+      //                     camera: firstCamera,
+      //                   )),
+      //         );
+      //       }
+      //     : null,
       child: AspectRatio(
         aspectRatio: 1,
         child: Container(
@@ -141,8 +157,18 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV1> {
     try {
       var status = await Permission.camera.request();
       if (status.isGranted) {
-        final image = await ImagePicker().pickImage(
-            source: source, preferredCameraDevice: CameraDevice.front);
+        // final image = await ImagePicker().pickImage(
+        //     source: source, preferredCameraDevice: CameraDevice.front);
+
+        final firstCamera = cameras[1];
+
+        final image = await Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => CameraCapturePage(
+                      camera: firstCamera,
+                    )));
+
         if (image != null) {
           final imageComp = await testCompressAndGetFile(
               File(image.path), _addStringComp(image.path, image.name));
