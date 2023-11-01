@@ -8,7 +8,7 @@ import 'package:sj_presensi_mobile/componens/monthpicker_custom.dart';
 import 'package:sj_presensi_mobile/componens/yearpicker_custom.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
-import 'package:sj_presensi_mobile/pages/home/history/detail_hitory_absensi.dart';
+// import 'package:sj_presensi_mobile/pages/home/history/detail_hitory_absensi.dart';
 import 'package:sj_presensi_mobile/services/model/history_attendance_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -21,6 +21,8 @@ class HistoryPage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return BlocListener<HistoryAttendanceBloc, HistoryAttendanceState>(
       listener: (context, state) async {
+        // print("LISTEN STATUS SEKARANG ${state}");
+
         if (state is HistoryAttendanceLoading) {
           LoadingDialog.showLoadingDialog(context);
         } else if (state is HistoryAttendanceFailed) {
@@ -106,40 +108,57 @@ class HistoryPage extends StatelessWidget {
                   child: BlocBuilder<HistoryAttendanceBloc,
                       HistoryAttendanceState>(
                     builder: (context, state) {
+                      // Aku butuh data attendance
+                      // Data attendace didapat dari BLOC historyAttendance
                       var attendances =
                           context.read<HistoryAttendanceBloc>().attendances;
+
+                      debugPrint("ATTENDANCE ? ${attendances}");
+
                       return attendances.isNotEmpty
                           ? ListView.builder(
                               shrinkWrap: true,
                               itemCount: attendances.length,
                               itemBuilder: (context, index) {
-                                return Container(); 
-                                  
+                                var data = attendances;
+                                if (data != null && data.isNotEmpty) {
+                                  return ListTile(
+                                    title: Text(data[index].id.toString()),
+                                    subtitle: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                            "Check In : ${data[index].checkinTime}"),
+                                        Text(
+                                            "Check Out : ${data[index].checkoutTime}")
+                                      ],
+                                    ),
+                                  );
+                                  // return buildCard(
+                                  //   key: Key("${data[index].id}"),
+                                  //   date: DateFormat("dd/MM/yyyy").parse(
+                                  //       data[index].tanggal ?? '01/01/2023'),
+                                  //   state: data[index].status,
+                                  //   dataAbsensi: data[index],
+                                  //   // dataCheckIn:
+                                  //   //     data.length > 0 ? data[0] : null,
+                                  //   // dataCheckOut:
+                                  //   //     data.length > 1 ? data[1] : null,
+                                  //   onTap: () {
+                                  //     Navigator.push(
+                                  //       context,
+                                  //       MaterialPageRoute(
+                                  //         builder: (context) =>
+                                  //             const DetailHistoryAbsensiPage(),
+                                  //       ),
+                                  //     );
+                                  //   },
+                                  // );
+                                } else {
+                                  return Container(); // Atau widget lainnya jika tidak ada data
                                 }
-                              //   var data = attendances.data;
-                              //   if (data != null && data.isNotEmpty) {
-                              //     return buildCard(
-                              //       key: Key("${data[index].id}"),
-                              //       date: data[index].tanggal,
-                              //       state: data[index].status,
-                              //       dataCheckIn:
-                              //           data.length > 0 ? data[0] : null,
-                              //       dataCheckOut:
-                              //           data.length > 1 ? data[1] : null,
-                              //       onTap: () {
-                              //         Navigator.push(
-                              //           context,
-                              //           MaterialPageRoute(
-                              //             builder: (context) =>
-                              //                 const DetailHistoryAbsensiPage(),
-                              //           ),
-                              //         );
-                              //       },
-                              //     );
-                              //   } else {
-                              //     return Container(); // Atau widget lainnya jika tidak ada data
-                              //   }
-                              // },
+                              },
                             )
                           : Center(
                               child: Column(
@@ -158,37 +177,10 @@ class HistoryPage extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                     ),
-                                  );
-                                },
-                              );
-                            },
-                          );
-                        } else {
-                          return Center(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Lottie.asset(
-                                  "assets/lotties/json/lottie_nodata.json",
-                                  height: size.width * 1 / 2,
-                                ),
-                                const SizedBox(height: 8),
-                                const Text(
-                                  "Tidak ada data yang ditampilkan!",
-                                  style: TextStyle(
-                                    color: MyColorsConst.darkColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
                                   ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }
-                      } else {
-                        return Center(child: CircularProgressIndicator());
-                      }
+                                ],
+                              ),
+                            );
                     },
                   ),
                 ),
@@ -204,8 +196,7 @@ class HistoryPage extends StatelessWidget {
     required Key key,
     required date,
     required state,
-    Datum? dataCheckIn,
-    Datum? dataCheckOut,
+    Datum? dataAbsensi,
     String? url,
     DateTime? datetime,
     bool? onSite,
@@ -273,14 +264,16 @@ class HistoryPage extends StatelessWidget {
               children: [
                 buildSubCard(
                   checkIn: true,
-                  datetime: dataCheckIn != null
-                      ? DateTime.parse(dataCheckIn.checkinTime!)
+                  datetime: dataAbsensi?.checkinTime != null
+                      ? DateFormat("dd/MM/yyyy")
+                          .parse(dataAbsensi?.checkinTime ?? '01/01/2023')
                       : null,
                 ),
                 buildSubCard(
                   checkIn: false,
-                  datetime: dataCheckOut != null
-                      ? DateTime.parse(dataCheckOut.checkoutTime!)
+                  datetime: dataAbsensi?.checkoutTime != null
+                      ? DateFormat("dd/MM/yyyy")
+                          .parse(dataAbsensi?.checkoutTime ?? '01/01/2023')
                       : null,
                 ),
               ],

@@ -91,7 +91,7 @@ class HomeCheckInOutPage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => BlocProvider(
-                        create: (context) => HistoryBloc()
+                        create: (context) => HistoryAttendanceBloc()
                           ..add(
                             GetAttendancesHistory(
                               date: DateTime.now(),

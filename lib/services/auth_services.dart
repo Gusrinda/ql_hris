@@ -45,7 +45,7 @@ class AuthServices {
   }
 
   static Future<Object> logout(username, password) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/logout");
+    var url = Uri.parse("${MyGeneralConst.API_URL}/logout/salah");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.post,

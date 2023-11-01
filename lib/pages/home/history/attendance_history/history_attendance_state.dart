@@ -12,14 +12,14 @@ class HitoryAttendanceInitial extends HistoryAttendanceState {}
 class HistoryAttendanceLoading extends HistoryAttendanceState {}
 
 class HistorySuccessInBackground extends HistoryAttendanceState {
-  List<HistoryAttendanceModel> historyAttendanceModel;
+  List<Datum> dataHistory;
 
   HistorySuccessInBackground({
-    required this.historyAttendanceModel,
+    required this.dataHistory,
   });
 
   @override
-  List<Object> get props => [historyAttendanceModel];
+  List<Object> get props => [dataHistory];
 }
 
 class HistoryFailedInBackground extends HistoryAttendanceState {
