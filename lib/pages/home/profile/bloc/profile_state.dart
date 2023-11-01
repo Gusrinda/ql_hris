@@ -13,7 +13,14 @@ class ProfileLoading extends ProfileState {}
 
 class ProfileSuccessInBackground extends ProfileState {}
 
-class LogoutSuccessInBackground extends ProfileState {}
+class LogoutSuccessInBackground extends ProfileState {
+  String message;
+
+  LogoutSuccessInBackground({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
 
 class ChangePasswordSuccess extends ProfileState {
   String message;

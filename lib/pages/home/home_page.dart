@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
-import 'package:sj_presensi_mobile/pages/home/absensi/absensi_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/home_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/cubit/home_cubit.dart';
@@ -106,26 +105,22 @@ class HomePage extends StatelessWidget {
               child: const HomeCheckInOutPage(),
             );
           } 
-           else if (state.navbarItem == HomeNavBarItem.lembur) {
-            return BlocProvider(
-              create: (context) => HistoryBloc()
-                ..add(
-                  GetAttendancesHistory(
-                    date: DateTime.now(),
-                  ),
-                ),
-              child: const LemburPage(),
-            );
-          } else if (state.navbarItem == HomeNavBarItem.dinas) {
-            return BlocProvider(
-              create: (context) => ReportsHistoryBloc()
-                ..add(
-                  GetReportsHistory(
-                    date: DateTime.now(),
-                  ),
-                ),
-              child: DinasPage(),
-            );
+          //  else if (state.navbarItem == HomeNavBarItem.lembur) {
+          //   return BlocProvider(
+          //     create: (context) => HistoryBloc()
+          //       ..add(
+          //         GetAttendancesHistory(
+          //           date: DateTime.now(),
+          //         ),
+          //       ),
+          //     child: const LemburPage(),
+          //   );
+          // } 
+          else if (state.navbarItem == HomeNavBarItem.lembur) {
+              return  LemburPage();
+          }
+          else if (state.navbarItem == HomeNavBarItem.dinas) {
+              return DinasPage();
           } else if (state.navbarItem == HomeNavBarItem.cuti) {
             return CutiPage();
           } else if (state.navbarItem == HomeNavBarItem.profile) {

@@ -1,43 +1,43 @@
-part of 'history_bloc.dart';
+// part of 'history_bloc.dart';
 
-abstract class HistoryState extends Equatable {
-  const HistoryState();
+// abstract class HistoryState extends Equatable {
+//   const HistoryState();
 
-  @override
-  List<Object> get props => [];
-}
+//   @override
+//   List<Object> get props => [];
+// }
 
-class HistoryInitial extends HistoryState {}
+// class HistoryInitial extends HistoryState {}
 
-class HistoryLoading extends HistoryState {}
+// class HistoryLoading extends HistoryState {}
 
-class HistorySuccessInBackground extends HistoryState {
-  List<AttendanceModel> attendancesModel;
+// class HistorySuccessInBackground extends HistoryState {
+//   List<AttendanceModel> attendancesModel;
 
-  HistorySuccessInBackground({
-    required this.attendancesModel,
-  });
+//   HistorySuccessInBackground({
+//     required this.attendancesModel,
+//   });
 
-  @override
-  List<Object> get props => [attendancesModel];
-}
+//   @override
+//   List<Object> get props => [attendancesModel];
+// }
 
-class HistoryFailedInBackground extends HistoryState {}
+// class HistoryFailedInBackground extends HistoryState {}
 
-class HistoryFailed extends HistoryState {
-  String message;
+// class HistoryFailed extends HistoryState {
+//   String message;
 
-  HistoryFailed({required this.message});
+//   HistoryFailed({required this.message});
 
-  @override
-  List<Object> get props => [message];
-}
+//   @override
+//   List<Object> get props => [message];
+// }
 
-class HistoryFailedUserExpired extends HistoryState {
-  String message;
+// class HistoryFailedUserExpired extends HistoryState {
+//   String message;
 
-  HistoryFailedUserExpired({required this.message});
+//   HistoryFailedUserExpired({required this.message});
 
-  @override
-  List<Object> get props => [message];
-}
+//   @override
+//   List<Object> get props => [message];
+// }

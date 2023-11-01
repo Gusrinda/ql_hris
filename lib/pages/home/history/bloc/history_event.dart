@@ -1,30 +1,30 @@
-part of 'history_bloc.dart';
+// part of 'history_bloc.dart';
 
-abstract class HistoryEvent extends Equatable {
-  const HistoryEvent();
+// abstract class HistoryEvent extends Equatable {
+//   const HistoryEvent();
 
-  @override
-  List<Object> get props => [];
-}
+//   @override
+//   List<Object> get props => [];
+// }
 
-class GetAttendancesHistory extends HistoryEvent{
-  DateTime date;
+// class GetAttendancesHistory extends HistoryEvent{
+//   DateTime date;
 
-  GetAttendancesHistory({
-    required this.date,
-  });
+//   GetAttendancesHistory({
+//     required this.date,
+//   });
 
-  @override
-  List<Object> get props => [date];
-}
+//   @override
+//   List<Object> get props => [date];
+// }
 
-class SortByDateAttendancesHistory extends HistoryEvent{
-  bool sortState;
+// class SortByDateAttendancesHistory extends HistoryEvent{
+//   bool sortState;
 
-  SortByDateAttendancesHistory({
-    required this.sortState,
-  });
+//   SortByDateAttendancesHistory({
+//     required this.sortState,
+//   });
 
-  @override
-  List<Object> get props => [sortState];
-}
+//   @override
+//   List<Object> get props => [sortState];
+// }

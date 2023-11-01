@@ -4,7 +4,7 @@ import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/home_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/cubit/home_cubit.dart';
-import 'package:sj_presensi_mobile/pages/home/history/bloc/history_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -137,7 +137,7 @@ class _AbsensiPageState extends State<AbsensiPage> {
                               child: const HomeCheckInOutPage(),
                             )
                           : BlocProvider(
-                              create: (context) => HistoryBloc()
+                              create: (context) => HistoryAttendanceBloc()
                                 ..add(
                                   GetAttendancesHistory(
                                     date: DateTime.now(),
