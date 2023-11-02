@@ -32,8 +32,8 @@ class AuthenticationLayout extends StatelessWidget {
     },
     {
       "hideAppBar": true,
-      "title": "Selamat Datang!",
-      "subTitle": "Masukan data login anda",
+      "title": "Ganti Password",
+      "subTitle": "Masukan data password anda",
       // "paddingTop": 80.0,
       "image": "assets/images/city.png",
       "image2": "assets/images/Logo_Success_Jaya.png",
