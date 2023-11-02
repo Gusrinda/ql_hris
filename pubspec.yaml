@@ -25,16 +25,16 @@ dependencies:
   freezed_annotation: ^2.1.0
   geocoding: ^2.0.5
   geolocator: ^10.1.0
+  image_picker: ^1.0.4
+  permission_handler: ^11.0.0
+  month_picker_dialog: ^2.0.2
   google_fonts: ^5.1.0
   http: ^1.1.0
-  image_picker: ^1.0.4
   # image_picker:
   #   git:
   #     url: https://github.com/Gusrinda/image_picker_custom
   intl: ^0.18.1
   lottie: ^2.2.0
-  month_picker_dialog: ^2.0.2
-  permission_handler: ^11.0.0
   shared_preferences: ^2.0.18
 
 dev_dependencies:
