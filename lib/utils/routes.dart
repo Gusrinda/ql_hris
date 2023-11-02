@@ -10,7 +10,7 @@ import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/location.dar
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/time.dart';
 import 'package:sj_presensi_mobile/pages/home/cubit/home_cubit.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
-import 'package:sj_presensi_mobile/pages/home/history/detail_hitory_absensi.dart';
+import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dart';
 import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
 import 'package:sj_presensi_mobile/pages/home/home_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
