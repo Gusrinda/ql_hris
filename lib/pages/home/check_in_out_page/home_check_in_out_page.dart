@@ -122,8 +122,7 @@ class HomeCheckInOutPage extends StatelessWidget {
                       Text(
                         "Yuk isi absensimu!",
                         style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14),
+                            fontWeight: FontWeight.w600, fontSize: 14),
                       ),
                       BlocBuilder<CheckInOutBloc, CheckInOutState>(
                         builder: (context, state) {
@@ -135,6 +134,7 @@ class HomeCheckInOutPage extends StatelessWidget {
                             enable: state is CheckInOutSuccessInBackground
                                 ? state.isCheckin
                                 : false,
+                            checkInType: true,
                             onPressed: () async {
                               await Navigator.of(context).pushNamed(
                                 AddCheckInOutPage.routeName,
@@ -157,6 +157,7 @@ class HomeCheckInOutPage extends StatelessWidget {
                             enable: state is CheckInOutSuccessInBackground
                                 ? !state.isCheckin
                                 : false,
+                            checkInType: false,
                             onPressed: () async {
                               await Navigator.of(context).pushNamed(
                                 AddCheckInOutPage.routeName,
@@ -190,6 +191,7 @@ class HomeCheckInOutPage extends StatelessWidget {
     color,
     enable,
     required VoidCallback onPressed,
+    required bool checkInType,
   }) {
     return Column(
       children: [
@@ -201,7 +203,8 @@ class HomeCheckInOutPage extends StatelessWidget {
             style: OutlinedButton.styleFrom(
               elevation: enable ? 5 : 0,
               backgroundColor: enable ? color : Colors.grey.shade200,
-              foregroundColor: enable ? MyColorsConst.greenColor : MyColorsConst.redColor,
+              foregroundColor:
+                  enable ? MyColorsConst.greenColor : MyColorsConst.redColor,
               padding: const EdgeInsets.symmetric(vertical: 12),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
@@ -213,7 +216,11 @@ class HomeCheckInOutPage extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(top: 10),
                   child: Image.asset(
-                    enable ? iconPath : "assets/images/closed_door.png",
+                    enable
+                        ? iconPath
+                        : (checkInType
+                            ? "assets/images/closed_door.png"
+                            : "assets/images/closed_out_door.png"),
                     width: size.width / 3,
                   ),
                 ),
