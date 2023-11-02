@@ -52,7 +52,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         } else if (res is ServicesFailure) {
           if (res.errorResponse == null) {
             await GeneralSharedPreferences.removeUserToken();
-            emit(ProfileFailedUserExpired(message: "Token expired"));
+            emit(ProfileFailedUserExpired(message: "Logout berhasil"));
           } else {
             emit(ProfileFailed(message: res.errorResponse));
           }

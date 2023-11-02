@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
@@ -18,8 +19,16 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
-void main() {
+List<CameraDescription> cameras = [];
+
+void main() async {
   HttpOverrides.global = MyHttpOverrides();
+  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    cameras = await availableCameras();
+  } on CameraException catch (e) {
+    debugPrint(e.code);
+  }
   runApp(const MyApp());
 }
 
@@ -37,8 +46,7 @@ class MyApp extends StatelessWidget {
         primaryColor: MyColorsConst.primaryColor,
         primarySwatch: themeAppColor,
         dividerColor: Colors.transparent,
-        textTheme:
-                    GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
       ),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,

@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
-import 'package:sj_presensi_mobile/services/model/history_attendance_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 final Map<String, dynamic> stateDict = {

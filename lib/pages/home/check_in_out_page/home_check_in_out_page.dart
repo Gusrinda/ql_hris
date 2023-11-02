@@ -70,7 +70,7 @@ class HomeCheckInOutPage extends StatelessWidget {
             return Scaffold(
               backgroundColor: MyColorsConst.whiteColor,
               appBar: appBarCustomMain(
-                title: "Selamat Datang, ${name ?? "-"}!",
+                title: "Selamat Datang, ${name ?? "Employe"}!",
                 // padLeft: 10,
                 actions: [
                   Container(
@@ -122,7 +122,6 @@ class HomeCheckInOutPage extends StatelessWidget {
                       Text(
                         "Yuk isi absensimu!",
                         style: TextStyle(
-                            fontFamily: 'Poppins',
                             fontWeight: FontWeight.w600,
                             fontSize: 14),
                       ),
@@ -132,7 +131,7 @@ class HomeCheckInOutPage extends StatelessWidget {
                             size: size,
                             iconPath: "assets/images/check_in_door.png",
                             title: "Check In",
-                            color: MyColorsConst.greenColor,
+                            color: MyColorsConst.whiteColor,
                             enable: state is CheckInOutSuccessInBackground
                                 ? state.isCheckin
                                 : false,
@@ -154,7 +153,7 @@ class HomeCheckInOutPage extends StatelessWidget {
                             size: size,
                             iconPath: "assets/images/check_out_door.png",
                             title: "Check Out",
-                            color: MyColorsConst.redColor,
+                            color: MyColorsConst.whiteColor,
                             enable: state is CheckInOutSuccessInBackground
                                 ? !state.isCheckin
                                 : false,
@@ -200,10 +199,12 @@ class HomeCheckInOutPage extends StatelessWidget {
           child: ElevatedButton(
             onPressed: enable ? onPressed : null,
             style: OutlinedButton.styleFrom(
+              elevation: enable ? 5 : 0,
               backgroundColor: enable ? color : Colors.grey.shade200,
+              foregroundColor: enable ? MyColorsConst.greenColor : MyColorsConst.redColor,
               padding: const EdgeInsets.symmetric(vertical: 12),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10),
                 side: BorderSide.none,
               ),
             ),
@@ -212,7 +213,7 @@ class HomeCheckInOutPage extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(top: 10),
                   child: Image.asset(
-                    iconPath,
+                    enable ? iconPath : "assets/images/closed_door.png",
                     width: size.width / 3,
                   ),
                 ),
@@ -222,8 +223,8 @@ class HomeCheckInOutPage extends StatelessWidget {
                 Text(
                   title,
                   // textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: MyColorsConst.darkColor,
+                  style: TextStyle(
+                    color: enable ? MyColorsConst.darkColor : Colors.grey,
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
                   ),

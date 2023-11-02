@@ -29,7 +29,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             emit(LoginSuccess(message: "Login berhasil!"));
           } else if (res is ServicesFailure) {
             emit(LoginFailed(
-                message: "Login failed! ${res.errorResponse ?? ''}"));
+                // message: "Login failed! ${res.errorResponse ?? ''}"));
+                message: "Login Gagal! \nAkun tidak ditemukan"));
           }
         }
       },
