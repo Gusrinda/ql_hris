@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/bloc/login_bloc.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/add_check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/location_acio_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/time_acio_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/location.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/time.dart';
-import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/cubit/home_cubit.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
-import 'package:sj_presensi_mobile/pages/home/history/bloc/history_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/history/detail_hitory_absensi.dart';
 import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
 import 'package:sj_presensi_mobile/pages/home/home_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
@@ -19,10 +19,7 @@ import 'package:sj_presensi_mobile/pages/home/report/add/add_report_page.dart';
 import 'package:sj_presensi_mobile/pages/home/report/add/bloc/add_report_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/report/report_detail_page.dart';
 import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
-import 'package:sj_presensi_mobile/services/model/report_model.dart';
 import 'package:sj_presensi_mobile/services/model/report_detail_page_model.dart';
-import 'package:sj_presensi_mobile/utils/const.dart';
-import 'package:sj_presensi_mobile/utils/services.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -68,6 +65,11 @@ class RouteGenerator {
             create: (context) => HistoryAttendanceBloc(),
             child: const HistoryPage(),
           );
+        });
+      case DetailHistoryAbsensiPage.routeName:
+      final data = settings.arguments as DetailHistoryAbsensiPage;
+        return MaterialPageRoute(builder: (context) {
+            return DetailHistoryAbsensiPage(data: data.data);
         });
       case AddCheckInOutPage.routeName:
         return MaterialPageRoute(builder: (context) {
