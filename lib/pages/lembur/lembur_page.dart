@@ -145,7 +145,7 @@ class SuratLemburPerTanggal extends StatelessWidget {
                 isLast: index == daftar[urutan] - 1,
                 status:
                     daftarPermohonan[Random().nextInt(daftarPermohonan.length)],
-                    onTap: () {
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -218,7 +218,6 @@ class CardPerintahLembur extends StatelessWidget {
                       Text(
                         "Surat Perintah Lembur",
                         style: TextStyle(
-                          fontFamily: 'Poppins',
                           color: Colors.black,
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -234,7 +233,6 @@ class CardPerintahLembur extends StatelessWidget {
                         child: Text(
                           status,
                           style: TextStyle(
-                            fontFamily: 'Poppins',
                             color: warnaStatus,
                             fontSize: 10,
                             fontWeight: FontWeight.w500,
@@ -257,7 +255,6 @@ class CardPerintahLembur extends StatelessWidget {
                       Text(
                         '09 Oktober 2023',
                         style: TextStyle(
-                            fontFamily: 'Poppins',
                             color: Colors.grey,
                             fontSize: 10,
                             fontWeight: FontWeight.w400),
@@ -278,7 +275,6 @@ class CardPerintahLembur extends StatelessWidget {
                       Text(
                         "09.00 - 17.00",
                         style: TextStyle(
-                            fontFamily: 'Poppins',
                             color: Colors.grey,
                             fontSize: 10,
                             fontWeight: FontWeight.w400),
