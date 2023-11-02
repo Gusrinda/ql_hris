@@ -44,17 +44,12 @@ class AuthServices {
     );
   }
 
-  static Future<Object> logout(username, password) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/logout/salah");
+  static Future<Object> logout(String token) async {
+    var url = Uri.parse("${MyGeneralConst.API_URL}/auth/logout");
     return await GeneralServices.baseService(
       url: url,
-      method: GeneralServicesMethod.post,
-      body: json.encode(
-        {
-          "username": username,
-          "password": password,
-        },
-      ),
+      method: GeneralServicesMethod.delete,
+      headers: GeneralServices.addToken2Headers(token),
     );
   }
 

@@ -45,12 +45,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       emit(ProfileLoading());
       var resToken = await GeneralSharedPreferences.getUserToken();
       if (resToken is ServicesSuccess) {
-        var res = await AuthServices.logout(event.username, event.password);
+        var res = await AuthServices.logout(resToken.response["token"]);
         if (res is ServicesSuccess) {
-          emit(LogoutSuccessInBackground(message: "Logout berhasil"));
+          emit(LogoutSuccessInBackground(message: 'Logout Success'));
           await GeneralSharedPreferences.removeUserToken();
-        } 
-        else if (res is ServicesFailure) {
+        } else if (res is ServicesFailure) {
           if (res.errorResponse == null) {
             await GeneralSharedPreferences.removeUserToken();
             emit(ProfileFailedUserExpired(message: "Logout berhasil"));
@@ -58,11 +57,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
             emit(ProfileFailed(message: res.errorResponse));
           }
         }
-      } 
-      else if (resToken is ServicesFailure) {
+      } else if (resToken is ServicesFailure) {
         emit(ProfileFailedInBackground());
       }
     });
+
 
     on<EditImageProfile>((event, emit) async {
       if (event.imagePath != null) {
