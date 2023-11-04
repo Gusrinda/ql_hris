@@ -8,6 +8,7 @@ import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
+import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class HomeCheckInOutPage extends StatelessWidget {
@@ -79,7 +80,13 @@ class HomeCheckInOutPage extends StatelessWidget {
                       splashRadius: 25,
                       iconSize: 20,
                       icon: const Icon(Icons.notifications_active),
-                      onPressed: () async {},
+                      onPressed: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NotifikasiPage()),
+                        );
+                      },
                     ),
                   ),
                 ],

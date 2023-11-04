@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:sj_presensi_mobile/sentry/my_sentry.dart';
 import 'package:sj_presensi_mobile/services/attendances_services.dart';
 import 'package:sj_presensi_mobile/services/model/history_attendance_model.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
@@ -20,6 +22,8 @@ class HistoryAttendanceBloc
     extends Bloc<HistoryAttendanceEvent, HistoryAttendanceState> {
   List<Datum> attendances = [];
   bool sortState = false;
+  DateTime? selectedMonth;
+  DateTime? selectedYear;
   HistoryAttendanceBloc() : super(HitoryAttendanceInitial()) {
     on<GetAttendancesHistory>((event, emit) async {
       emit(HistoryAttendanceLoading());
@@ -59,5 +63,52 @@ class HistoryAttendanceBloc
         emit(HistoryFailedInBackground(message: 'Response invalid'));
       }
     });
+
+    // on<SortByAttendancesHistory>((event, emit) async {
+    //   emit(HistoryAttendanceLoading());
+    //   try {
+    //     if (selectedMonth != null) {
+    //       var filteredAttendances = attendances.where((attendance) {
+    //         var formattedDate =
+    //             DateFormat('yyyy-MM-dd').parse(attendance.tanggal!);
+    //         var date = DateTime.parse(formattedDate.toString());
+    //         return date.month == selectedMonth?.month &&
+    //             date.year == selectedMonth?.year;
+    //       }).toList();
+
+    //       emit(HistorySuccessInBackground(dataHistory: filteredAttendances));
+    //     }
+    //     else {
+    //       emit(HistorySuccessInBackground(dataHistory: attendances));
+    //     }
+    //   } catch (e, st) {
+    //     emit(HistoryAttendanceFailed(message: "Gagal Melakukan Sorting"));
+    //     await MySentry.sendReport(e.toString(), st.toString());
+    //   }
+    // });
   }
 }
+
+// on<SortByMonthAttendancesHistory>((event, emit) async {
+//   emit(HistoryAttendanceLoading());
+//   try {
+//     sortState = event.sortState;
+//     attendances.sort(
+//       (a, b) {
+//         if (sortState) {
+//           return a.tanggal!.compareTo(b.tanggal!);
+//         }
+
+//         return b.tanggal!.compareTo(a.tanggal!);
+//       },
+//     );
+//     emit(
+//       HistorySuccessInBackground(
+//         dataHistory: attendances,
+//       ),
+//     );
+//   } catch (e, st) {
+//     emit(HistoryFailedInBackground(message: "Gagal Melakukan Sorting"));
+//     await MySentry.sendReport(e.toString(), st.toString());
+//   }
+// });

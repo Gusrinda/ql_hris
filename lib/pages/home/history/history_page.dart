@@ -5,8 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
-import 'package:sj_presensi_mobile/componens/monthpicker_custom.dart';
-import 'package:sj_presensi_mobile/componens/yearpicker_custom.dart';
+import 'package:sj_presensi_mobile/componens/monthYearPicker_custom.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dart';
@@ -30,9 +29,15 @@ final Map<String, dynamic> stateDict = {
   },
 };
 
-class HistoryPage extends StatelessWidget {
+class HistoryPage extends StatefulWidget {
   static const routeName = '/HistoryPage';
   const HistoryPage({super.key});
+
+  @override
+  State<HistoryPage> createState() => _HistoryPageState();
+}
+
+class _HistoryPageState extends State<HistoryPage> {
   String getDayFromDate(String date) {
     DateTime dateTime = DateFormat("dd/MM/yyyy").parse(date);
     String day = DateFormat.EEEE("id").format(dateTime);
@@ -66,9 +71,13 @@ class HistoryPage extends StatelessWidget {
     }
   }
 
+  DateTime? selectedMonth;
+  DateTime? selectedYear;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return BlocListener<HistoryAttendanceBloc, HistoryAttendanceState>(
       listener: (context, state) async {
         // print("LISTEN STATUS SEKARANG ${state}");
@@ -126,15 +135,37 @@ class HistoryPage extends StatelessWidget {
                           "Bulan",
                           style: TextStyle(
                             color: MyColorsConst.darkColor,
-                            fontSize: 12,
+                            fontSize: 10,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
                         MonthPicker(
-                          onTap: (bool? sortState) {
-                            print('Sort state: $sortState');
+                          onTap: (DateTime? months, DateTime? years) {
+                            if (months != null) {
+                              setState(() {
+                                selectedMonth = months;
+                              });
+                              print(
+                                  "ini bulan terpilih ${selectedMonth} ${selectedYear}");
+                              DateTime newDate;
+                              if (selectedYear != null) {
+                                newDate = DateTime(selectedYear!.year,
+                                    selectedMonth!.month, DateTime.now().day);
+                              } else {
+                                newDate = DateTime(DateTime.now().year,
+                                    selectedMonth!.month, DateTime.now().day);
+                              }
+
+                              context.read<HistoryAttendanceBloc>().add(
+                                    GetAttendancesHistory(
+                                      date: newDate,
+                                    ),
+                                  );
+                            }
                           },
-                        )
+                          selectedYear:
+                              selectedYear, // Meneruskan nilai dari variabel selectedYear
+                        ),
                       ],
                     ),
                     Column(
@@ -144,15 +175,37 @@ class HistoryPage extends StatelessWidget {
                           "Tahun",
                           style: TextStyle(
                             color: MyColorsConst.darkColor,
-                            fontSize: 12,
+                            fontSize: 10,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
                         YearPickerCustom(
-                          onTap: (bool? sortState) {
-                            print('Sort state: $sortState');
+                          onTap: (DateTime? years, DateTime? months) {
+                            if (years != null) {
+                              setState(() {
+                                selectedYear = years;
+                              });
+                              print(
+                                  "ini tahun yang dipilih ${selectedYear} ${selectedMonth}");
+
+                              DateTime newDate;
+                              if (selectedMonth != null) {
+                                newDate = DateTime(
+                                    selectedYear!.year, selectedMonth!.month);
+                              } else {
+                                newDate = DateTime(
+                                    selectedYear!.year, DateTime.now().month);
+                              }
+
+                              context.read<HistoryAttendanceBloc>().add(
+                                    GetAttendancesHistory(
+                                      date: newDate,
+                                    ),
+                                  );
+                            }
                           },
-                        )
+                          selectedMonth: selectedMonth,
+                        ),
                       ],
                     ),
                   ],
@@ -204,14 +257,14 @@ class HistoryPage extends StatelessWidget {
                                               children: [
                                                 Text(
                                                   "${getDayFromDate("${data[index].tanggal}")}, ${data[index].tanggal}",
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       color: MyColorsConst
                                                           .darkColor,
                                                       fontSize: 14,
                                                       fontWeight:
                                                           FontWeight.w500),
                                                 ),
-                                                Spacer(),
+                                                const Spacer(),
                                                 Container(
                                                   padding: EdgeInsets.all(4),
                                                   decoration: BoxDecoration(
@@ -235,7 +288,7 @@ class HistoryPage extends StatelessWidget {
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 10,
                                             ),
                                             Row(
@@ -252,7 +305,7 @@ class HistoryPage extends StatelessWidget {
                                                     fontWeight: FontWeight.w400,
                                                   ),
                                                 ),
-                                                Spacer(),
+                                                const Spacer(),
                                                 Text(
                                                   data[index].checkoutTime !=
                                                           null
@@ -293,7 +346,7 @@ class HistoryPage extends StatelessWidget {
                                                     data[index].checkinAddress,
                                                 checkinOnScope:
                                                     data[index].checkinOnScope,
-                                                    checkoutOnScope:
+                                                checkoutOnScope:
                                                     data[index].checkoutOnScope,
                                               ),
                                             ));
@@ -314,7 +367,7 @@ class HistoryPage extends StatelessWidget {
                                   const Text(
                                     "Tidak ada data yang ditampilkan!",
                                     style: TextStyle(
-                                      color: MyColorsConst.darkColor,
+                                      color: MyColorsConst.semiDarkColor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                     ),
@@ -332,126 +385,4 @@ class HistoryPage extends StatelessWidget {
       ),
     );
   }
-
-  // Widget buildCard({
-  //   required Key key,
-  //   required date,
-  //   required state,
-  //   Datum? dataAbsensi,
-  //   String? url,
-  //   DateTime? datetime,
-  //   bool? onSite,
-  //   bool checkIn = true,
-  //   VoidCallback? onTap,
-  // }) {
-  //   var stateDict = {
-  //     "attend_no_checkout": {
-  //       "name": "Tidak Check Out",
-  //     },
-  //     "attend": {
-  //       "name": "Hadir",
-  //     },
-  //     "working": {
-  //       "name": "Bekerja",
-  //     },
-  //     "absent": {
-  //       "name": "Tidak Hadir",
-  //     },
-  //     "day_off": {
-  //       "name": "Libur",
-  //     },
-  //   };
-  //   return GestureDetector(
-  //     onTap: onTap,
-  //     child: Container(
-  //       key: key,
-  //       margin: const EdgeInsets.only(bottom: 20),
-  //       decoration: BoxDecoration(
-  //         borderRadius: BorderRadius.circular(6),
-  //         border: Border.all(color: Color(0xFFDDDDDD)),
-  //         color: MyColorsConst.whiteColor,
-  //       ),
-  //       padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-  //       child: Column(
-  //         children: [
-  //           SizedBox(
-  //             height: 10,
-  //           ),
-  //           Row(
-  //             mainAxisSize: MainAxisSize.max,
-  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //             children: [
-  //               Text(
-  //                 DateFormat('EEEE, dd/MM/yyyy', 'id_ID').format(date),
-  //                 style: const TextStyle(
-  //                   color: Colors.black,
-  //                   fontSize: 14,
-  //                   fontWeight: FontWeight.w500,
-  //                 ),
-  //               ),
-  //               Text(
-  //                 stateDict[state]!["name"] as String,
-  //                 style: const TextStyle(
-  //                   color: Colors.black,
-  //                   fontSize: 12,
-  //                   fontWeight: FontWeight.w400,
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //           Row(
-  //             mainAxisSize: MainAxisSize.max,
-  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //             children: [
-  //               buildSubCard(
-  //                 checkIn: true,
-  //                 datetime: dataAbsensi?.checkinTime != null
-  //                     ? DateFormat("dd/MM/yyyy")
-  //                         .parse(dataAbsensi?.checkinTime ?? '01/01/2023')
-  //                     : null,
-  //               ),
-  //               buildSubCard(
-  //                 checkIn: false,
-  //                 datetime: dataAbsensi?.checkoutTime != null
-  //                     ? DateFormat("dd/MM/yyyy")
-  //                         .parse(dataAbsensi?.checkoutTime ?? '01/01/2023')
-  //                     : null,
-  //               ),
-  //             ],
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // Padding buildSubCard({
-  //   required DateTime? datetime,
-  //   bool checkIn = true,
-  // }) {
-  //   return Padding(
-  //     padding: EdgeInsets.symmetric(vertical: 10),
-  //     child: Row(
-  //       mainAxisSize: MainAxisSize.min,
-  //       children: [
-  //         Text(
-  //           checkIn ? "In " : "Out ",
-  //           style: TextStyle(
-  // fontSize: 12,
-  // color: MyColorsConst.lightDarkColor,
-  // fontWeight: FontWeight.w400,
-  //           ),
-  //         ),
-  //         Text(
-  //           datetime != null ? DateFormat('HH:mm:ss').format(datetime) : "-",
-  //           style: TextStyle(
-  //             fontSize: 12,
-  //             color: Color(0xFF969696),
-  //             fontWeight: FontWeight.w600,
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 }

@@ -44,7 +44,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Container(
                               padding: EdgeInsets.all(5),
                               decoration: BoxDecoration(
@@ -118,9 +118,6 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        const SizedBox(
-                          height: 5,
-                        ),
                         const Text(
                           'Acara Keluarga',
                           style: TextStyle(
@@ -144,9 +141,6 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 5,
-                                ),
                                 Text(
                                   '135346246219',
                                   style: TextStyle(
@@ -157,7 +151,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                 ),
                               ],
                             ),
-                            Container(
+                            SizedBox(
                               width:
                                   MediaQuery.of(context).size.width * 1.8 / 3,
                               child: const Column(
@@ -196,9 +190,6 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                             color: Colors.black,
                             fontWeight: FontWeight.w600,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 5,
                         ),
                         const Text(
                           'lorem ipsum',

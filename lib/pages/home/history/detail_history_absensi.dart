@@ -338,7 +338,7 @@ Padding buildCardImage({
                     ),
                   ),
                   Text(
-                    address != null ? address : "-",
+                    address ?? "-",
                     style: const TextStyle(
                       fontSize: 10,
                       color: MyColorsConst.darkColor,
