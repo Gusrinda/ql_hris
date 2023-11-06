@@ -2,8 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
-import 'package:sj_presensi_mobile/componens/monthYearPicker_custom.dart';
+import 'package:sj_presensi_mobile/componens/HRIS/monthYearPicker_custom.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas.dart';
+import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class DinasPage extends StatefulWidget {
@@ -41,11 +42,30 @@ class _DinasPageState extends State<DinasPage> {
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 10),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset.zero,
+                ),
+              ],
+            ),
+            height: MediaQuery.of(context).size.width * 0.1,
+            width: MediaQuery.of(context).size.width * 0.1,
             child: IconButton(
               splashRadius: 25,
               iconSize: 20,
               icon: const Icon(Icons.notifications_active),
-              onPressed: () async {},
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => NotifikasiPage()),
+                );
+              },
             ),
           ),
         ],

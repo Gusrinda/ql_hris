@@ -2,9 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
-import 'package:sj_presensi_mobile/componens/monthYearPicker_custom.dart';
+import 'package:sj_presensi_mobile/componens/HRIS/monthYearPicker_custom.dart';
 import 'package:sj_presensi_mobile/pages/cuti/add_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
+import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class CutiPage extends StatefulWidget {
@@ -42,11 +43,30 @@ class _CutiPageState extends State<CutiPage> {
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 10),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset.zero,
+                ),
+              ],
+            ),
+            height: MediaQuery.of(context).size.width * 0.1,
+            width: MediaQuery.of(context).size.width * 0.1,
             child: IconButton(
               splashRadius: 25,
               iconSize: 20,
               icon: const Icon(Icons.notifications_active),
-              onPressed: () async {},
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => NotifikasiPage()),
+                );
+              },
             ),
           ),
         ],
@@ -111,14 +131,14 @@ class _CutiPageState extends State<CutiPage> {
                 shrinkWrap: true,
                 itemCount: daftarTanggal.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return SuratCutiPerTanggl(
+                  return SuratCutiPerTanggal(
                     tanggal: daftarTanggal[index],
                     urutan: index,
                     daftarPermohonan: daftarPermohonan,
                     daftar: daftar,
                   );
                 },
-              )
+              ),
             ],
           ),
         ],
@@ -142,8 +162,8 @@ class _CutiPageState extends State<CutiPage> {
   }
 }
 
-class SuratCutiPerTanggl extends StatelessWidget {
-  const SuratCutiPerTanggl({
+class SuratCutiPerTanggal extends StatelessWidget {
+  const SuratCutiPerTanggal({
     super.key,
     required this.daftarPermohonan,
     required this.daftar,

@@ -74,22 +74,35 @@ class HomeCheckInOutPage extends StatelessWidget {
                 title: "Selamat Datang, ${name ?? "Employe"}!",
                 // padLeft: 10,
                 actions: [
-                  Container(
-                    margin: EdgeInsets.only(right: 10),
-                    child: IconButton(
-                      splashRadius: 25,
-                      iconSize: 20,
-                      icon: const Icon(Icons.notifications_active),
-                      onPressed: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => NotifikasiPage()),
-                        );
-                      },
-                    ),
-                  ),
-                ],
+          Container(
+            margin: const EdgeInsets.only(right: 10),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset.zero,
+                ),
+              ],
+            ),
+            height: MediaQuery.of(context).size.width * 0.1,
+            width: MediaQuery.of(context).size.width * 0.1,
+            child: IconButton(
+              splashRadius: 25,
+              iconSize: 20,
+              icon: const Icon(Icons.notifications_active),
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => NotifikasiPage()),
+                );
+              },
+            ),
+          ),
+        ],
               ),
               floatingActionButton: FloatingActionButton(
                 onPressed: () {

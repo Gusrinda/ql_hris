@@ -42,7 +42,7 @@ class MyColorsConst {
   static const lightDarkColor = Color(0xFFBDBDBD);
   static const semiDarkColor = Color.fromARGB(255, 104, 104, 104);
   static const darkColor = Color.fromARGB(255, 10, 10, 10);
-  static const semidarkColor = Color.fromRGBO(48, 48, 48, 1);
+  static const semidarkColor2 = Color.fromRGBO(71, 69, 69, 1);
 
   static const primaryColor = Color.fromARGB(255, 0, 104, 212);
   static const primaryLightColor = Color.fromARGB(255, 0, 125, 255);

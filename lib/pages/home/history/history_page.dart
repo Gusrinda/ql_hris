@@ -5,7 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
-import 'package:sj_presensi_mobile/componens/monthYearPicker_custom.dart';
+import 'package:sj_presensi_mobile/componens/HRIS/monthYearPicker_custom.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dart';
@@ -359,15 +359,15 @@ class _HistoryPageState extends State<HistoryPage> {
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Lottie.asset(
-                                    "assets/lotties/json/lottie_nodata.json",
+                                  Image.asset(
+                                    "assets/images/box_nodata.png",
                                     height: size.width * 1 / 2,
                                   ),
                                   const SizedBox(height: 8),
                                   const Text(
                                     "Tidak ada data yang ditampilkan!",
                                     style: TextStyle(
-                                      color: MyColorsConst.semiDarkColor,
+                                      color: MyColorsConst.darkColor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                     ),

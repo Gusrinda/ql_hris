@@ -51,8 +51,8 @@ class _DialogCustomState extends State<DialogCustom> {
 
   final dataLottie = [
     {
-      "asset": 'assets/lotties/json/lottie_success.json',
-      "color": Colors.green,
+      "asset": 'assets/lotties/json/success.json',
+      "color": Color.fromARGB(255, 11, 83, 143),
     },
     {
       "asset": 'assets/lotties/json/lottie_warning.json',
@@ -133,7 +133,8 @@ class _DialogCustomState extends State<DialogCustom> {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         fixedSize: const Size(100, 30),
-        backgroundColor: color,
+        backgroundColor: Colors.white,
+        side: BorderSide(color: color),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -141,6 +142,7 @@ class _DialogCustomState extends State<DialogCustom> {
       child: Text(
         text,
         style: TextStyle(
+          color: color,
           fontSize: 12,
         ),
       ),
