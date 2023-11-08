@@ -1,8 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:sj_presensi_mobile/sentry/my_sentry.dart';
 import 'package:sj_presensi_mobile/services/attendances_services.dart';
 import 'package:sj_presensi_mobile/services/model/history_attendance_model.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';

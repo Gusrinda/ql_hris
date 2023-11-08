@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:lottie/lottie.dart';
+import 'package:sj_presensi_mobile/componens/HRIS/monthYearPicker_custom.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
-import 'package:sj_presensi_mobile/componens/HRIS/monthYearPicker_custom.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dart';
@@ -43,6 +42,7 @@ class _HistoryPageState extends State<HistoryPage> {
     String day = DateFormat.EEEE("id").format(dateTime);
     return day;
   }
+  
 
   String mapStatusToString(String status) {
     if (stateDict.containsKey(status)) {
@@ -164,7 +164,7 @@ class _HistoryPageState extends State<HistoryPage> {
                             }
                           },
                           selectedYear:
-                              selectedYear, // Meneruskan nilai dari variabel selectedYear
+                              selectedYear, 
                         ),
                       ],
                     ),
