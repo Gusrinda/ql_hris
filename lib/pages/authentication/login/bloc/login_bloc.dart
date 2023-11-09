@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'dart:developer';
 import 'package:sj_presensi_mobile/services/auth_services.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:sj_presensi_mobile/utils/shared_pref.dart';
@@ -20,7 +19,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           var res = await AuthServices.login(event.username, event.password);
           if (res is ServicesSuccess) {
             try {
-              await GeneralSharedPreferences.saveUserToken(res.response["token"].toString());
+              await GeneralSharedPreferences.saveUserToken(res.response["token"].toString(), res.response['data']['id']);
               print("Token: ${res.response["token"]}");
               // print("Res: ${res.response}");
             } catch (e) {

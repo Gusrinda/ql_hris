@@ -9,18 +9,30 @@ import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_form_custom_v2.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/change_password_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/password_change.dart';
+import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   // static const routeName = 'ProfilePage';
   ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController idController = TextEditingController();
+
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController phoneController = TextEditingController();
+
   final TextEditingController usernameController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
 
+  GetDataProfileSuccess? data;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +41,11 @@ class ProfilePage extends StatelessWidget {
         if (state is ProfileLoading) {
           LoadingDialog.showLoadingDialog(context);
         } else if (state is GetDataProfileSuccess) {
-          idController.text = state.employeeId ?? "";
+          setState(() {
+            data = state;
+          });
+          // print('apa didalam ${data}');
+          idController.text = state.employeeId.toString() ?? "";
           emailController.text = state.email ?? "";
           phoneController.text = state.phoneNumber ?? "";
           LoadingDialog.dismissDialog(context);
@@ -70,16 +86,35 @@ class ProfilePage extends StatelessWidget {
       },
       child: Scaffold(
         appBar: appBarCustomMain(
-          title: "Selamat Datang, Trial!",
+          title: "Selamat Datang, ${data?.username ?? "-"}",
           padLeft: 8,
           actions: [
             Container(
-              margin: EdgeInsets.only(right: 10),
+              margin: const EdgeInsets.only(right: 10),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset.zero,
+                  ),
+                ],
+              ),
+              height: MediaQuery.of(context).size.width * 0.1,
+              width: MediaQuery.of(context).size.width * 0.1,
               child: IconButton(
                 splashRadius: 25,
                 iconSize: 20,
                 icon: const Icon(Icons.notifications_active),
-                onPressed: () async {},
+                onPressed: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => NotifikasiPage()),
+                  );
+                },
               ),
             ),
           ],
@@ -91,7 +126,7 @@ class ProfilePage extends StatelessWidget {
               children: [
                 BlocBuilder<ProfileBloc, ProfileState>(
                   builder: (context, state) {
-                    var data = state is GetDataProfileSuccess ? state : null;
+                    data = state is GetDataProfileSuccess ? state : null;
                     return Column(
                       children: [
                         ImageFormCustomV2(
@@ -113,7 +148,7 @@ class ProfilePage extends StatelessWidget {
                         ),
                         const SizedBox(height: 25),
                         Text(
-                          data?.name ?? "-",
+                          data?.username ?? "-",
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -163,9 +198,9 @@ class ProfilePage extends StatelessWidget {
                   textColor: MyColorsConst.whiteColor,
                   onPressed: () {
                     context.read<ProfileBloc>().add(LogoutProfile(
-                      username: usernameController.text,
-                      password: passwordController.text,
-                    ));
+                          username: usernameController.text,
+                          password: passwordController.text,
+                        ));
                   },
                 ),
               ],
@@ -182,7 +217,8 @@ class ProfilePage extends StatelessWidget {
         SvgPicture.asset(
           "assets/icons/bi_people_circle.svg",
           fit: BoxFit.fitWidth,
-          colorFilter: ColorFilter.mode(MyColorsConst.primaryLightColor, BlendMode.srcIn),
+          colorFilter: ColorFilter.mode(
+              MyColorsConst.primaryLightColor, BlendMode.srcIn),
         ),
         const Positioned(
           bottom: 0,

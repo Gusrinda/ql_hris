@@ -8,13 +8,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 class GeneralSharedPreferences {
   static final Future<SharedPreferences> _pref = SharedPreferences.getInstance();
 
-  static Future<Object> saveUserToken(String token) async {
+  static Future<Object> saveUserToken(String token, int id) async {
     var pref = await _pref;
     return await pref
         .setString(
       MyGeneralConst.PREF_USER_TOKEN,
       json.encode(
-        {"token": token},
+        {"token": token, "id" : id},
       ),
     )
         .then(
@@ -33,6 +33,21 @@ class GeneralSharedPreferences {
   }
 
   static Future<Object> getUserToken() async {
+    var pref = await _pref;
+    var data = pref.getString(MyGeneralConst.PREF_USER_TOKEN);
+    if (data != null) {
+      return ServicesSuccess(
+        code: MyGeneralConst.CODE_PROCESS_SUCCESS,
+        response: json.decode(data),
+      );
+    }
+    return ServicesFailure(
+      code: MyGeneralConst.CODE_NULL_RESPONSE,
+      errorResponse: "User Token not found!",
+    );
+  }
+
+  static Future<Object> getUserId() async {
     var pref = await _pref;
     var data = pref.getString(MyGeneralConst.PREF_USER_TOKEN);
     if (data != null) {

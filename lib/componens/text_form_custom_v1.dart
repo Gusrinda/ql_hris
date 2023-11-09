@@ -3,6 +3,7 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 
 class TextFormCustomV1 extends StatefulWidget {
   final String? titleText;
+  final String hintText;
   final double? width, height;
   final EdgeInsetsGeometry? margin;
   final double? textSize;
@@ -23,6 +24,7 @@ class TextFormCustomV1 extends StatefulWidget {
     this.enable = true,
     this.validator,
     this.controller,
+    required this.hintText,
   }) : super(key: key);
 
   @override
@@ -52,21 +54,15 @@ class _TextFormCustomV1State extends State<TextFormCustomV1> {
             style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              color: MyColorsConst.lightDarkColor,
+              color: MyColorsConst.darkColor,
             ),
           ),
           const SizedBox(height: 6),
           Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(color: Color(0xFFDDDDDD)),
               color: MyColorsConst.whiteColor,
-              boxShadow: [
-                BoxShadow(
-                  color: MyColorsConst.shadowColor,
-                  blurRadius: 2,
-                  offset: Offset(2, 2),
-                  spreadRadius: 1,
-                ),
-              ],
             ),
             child: TextFormField(
               controller: widget.controller,
@@ -81,6 +77,7 @@ class _TextFormCustomV1State extends State<TextFormCustomV1> {
               ),
               validator: widget.validator,
               decoration: InputDecoration(
+                hintText: widget.hintText,
                 hintStyle: TextStyle(
                   fontSize: widget.textSize,
                   color: MyColorsConst.lightDarkColor,
@@ -101,7 +98,7 @@ class _TextFormCustomV1State extends State<TextFormCustomV1> {
                             _isPasswordShowed
                                 ? Icons.visibility
                                 : Icons.visibility_off,
-                            color: MyColorsConst.darkColor,
+                            color: MyColorsConst.lightDarkColor,
                             size: 24,
                           ),
                         ),
@@ -113,12 +110,6 @@ class _TextFormCustomV1State extends State<TextFormCustomV1> {
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                 border: InputBorder.none,
-                focusedBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: MyColorsConst.primaryColor,
-                    width: 2,
-                  ),
-                ),
                 filled: true,
                 fillColor: widget.enable! ? Colors.transparent : Colors.black12,
               ),

@@ -18,11 +18,12 @@ AppBar appBarCustomMain({
         ),
       ),
     ),
-    elevation: 1,
+    // elevation: 1,
     backgroundColor: MyColorsConst.whiteColor,
     actions: actions,
     iconTheme: const IconThemeData(
       color: MyColorsConst.primaryColor,
     ),
+    shadowColor: Colors.grey.withOpacity(0.2),
   );
 }

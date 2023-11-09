@@ -36,7 +36,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                       children: [
                         Row(
                           children: [
-                            Text(
+                            const Text(
                               "Cuti Sehari",
                               style: TextStyle(
                                 color: Colors.black,
@@ -44,7 +44,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Container(
                               padding: EdgeInsets.all(4),
                               decoration: BoxDecoration(
@@ -52,7 +52,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                                 color:
                                     MyColorsConst.primaryColor.withOpacity(0.1),
                               ),
-                              child: Text(
+                              child: const Text(
                                 'Menunggu Disetujui',
                                 style: TextStyle(
                                   color: MyColorsConst.primaryColor,
@@ -66,7 +66,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                         const SizedBox(
                           height: 4,
                         ),
-                        Row(
+                        const Row(
                           children: [
                             Icon(
                               Icons.calendar_month_rounded,
@@ -86,7 +86,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                         const SizedBox(
                           height: 4,
                         ),
-                        Row(
+                        const Row(
                           children: [
                             Icon(
                               Icons.access_time_filled,
@@ -107,10 +107,10 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                           color: Color(0xFFDDDDDD),
                           thickness: 1,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
-                        Text(
+                        const Text(
                           'Alasan',
                           style: TextStyle(
                             fontSize: 10,
@@ -118,10 +118,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text(
+                        const Text(
                           'Acara Keluarga',
                           style: TextStyle(
                             fontSize: 10,
@@ -132,7 +129,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Text(
+                        const Text(
                           'Catatan',
                           style: TextStyle(
                             fontSize: 10,
@@ -140,10 +137,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text(
+                        const Text(
                           'lorem ipsum',
                           style: TextStyle(
                             fontSize: 10,

@@ -41,15 +41,16 @@ class ChangePasswordFailed extends ProfileState {
 }
 
 class GetDataProfileSuccess extends ProfileState {
+  
   String? imagePath;
-  String? name;
-  String? employeeId;
+  String? username;
+  int? employeeId;
   String? email;
   String? phoneNumber;
 
   GetDataProfileSuccess({
     required this.imagePath,
-    required this.name,
+    required this.username,
     this.employeeId,
     required this.email,
     this.phoneNumber,
@@ -58,7 +59,7 @@ class GetDataProfileSuccess extends ProfileState {
   @override
   List<Object> get props => [
         imagePath ?? "",
-        name ?? "",
+        username ?? "",
         employeeId ?? "",
         email ?? "",
         phoneNumber ?? "",

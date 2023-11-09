@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 enum AuthenticationLayoutState {
   login,
-  changePassword,
+  // changePassword,
 }
 
 class AuthenticationLayout extends StatelessWidget {
@@ -30,15 +29,15 @@ class AuthenticationLayout extends StatelessWidget {
       "image2": "assets/images/Logo_Success_Jaya.png",
       "imageBottom": "assets/images/loginBottomHRIS.png",
     },
-    {
-      "hideAppBar": true,
-      "title": "Ganti Password",
-      "subTitle": "Masukan data password anda",
-      // "paddingTop": 80.0,
-      "image": "assets/images/city.png",
-      "image2": "assets/images/Logo_Success_Jaya.png",
-      "imageBottom": "assets/images/loginBottomHRIS.png",
-    },
+    // {
+    //   "hideAppBar": true,
+    //   "title": "Ganti Password",
+    //   "subTitle": "Masukan data password anda",
+    //   // "paddingTop": 80.0,
+    //   "image": "assets/images/city.png",
+    //   "image2": "assets/images/Logo_Success_Jaya.png",
+    //   "imageBottom": "assets/images/loginBottomHRIS.png",
+    // },
   ];
 
   @override

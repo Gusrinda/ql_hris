@@ -14,7 +14,7 @@ import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dar
 import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
 import 'package:sj_presensi_mobile/pages/home/home_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/change_password_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/password_change.dart';
 import 'package:sj_presensi_mobile/pages/home/report/add/add_report_page.dart';
 import 'package:sj_presensi_mobile/pages/home/report/add/bloc/add_report_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/report/report_detail_page.dart';
@@ -67,9 +67,9 @@ class RouteGenerator {
           );
         });
       case DetailHistoryAbsensiPage.routeName:
-      final data = settings.arguments as DetailHistoryAbsensiPage;
+        final data = settings.arguments as DetailHistoryAbsensiPage;
         return MaterialPageRoute(builder: (context) {
-            return DetailHistoryAbsensiPage(data: data.data);
+          return DetailHistoryAbsensiPage(data: data.data);
         });
       case AddCheckInOutPage.routeName:
         return MaterialPageRoute(builder: (context) {

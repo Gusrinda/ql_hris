@@ -1,4 +1,3 @@
-import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/services/model/report_model.dart';
 
 class ReportDetailPageModel {

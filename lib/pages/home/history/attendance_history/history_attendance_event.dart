@@ -18,24 +18,28 @@ class GetAttendancesHistory extends HistoryAttendanceEvent {
   List<Object> get props => [date];
 }
 
-class SortByMonthAttendancesHistory extends HistoryAttendanceEvent {
-  bool sortState;
+class SortByAttendancesHistory extends HistoryAttendanceEvent {
+  final DateTime? selectedMonth;
+  final DateTime? selectedYear;
 
-  SortByMonthAttendancesHistory({
-    required this.sortState,
-  });
-
-  @override
-  List<Object> get props => [sortState];
-}
-
-class SortByYearAttendancesHistory extends HistoryAttendanceEvent {
-  bool sortState;
-
-  SortByYearAttendancesHistory({
-    required this.sortState,
-  });
+  SortByAttendancesHistory({this.selectedYear, this.selectedMonth});
 
   @override
-  List<Object> get props => [sortState];
+  List<Object> get props => [
+        selectedMonth != null ? selectedMonth! : "",
+        selectedYear != null ? selectedYear! : ""
+      ];
 }
+
+
+
+// class SortByYearAttendancesHistory extends HistoryAttendanceEvent {
+//   bool sortState;
+
+//   SortByYearAttendancesHistory({
+//     required this.sortState,
+//   });
+
+//   @override
+//   List<Object> get props => [sortState];
+// }

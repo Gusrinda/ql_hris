@@ -7,6 +7,7 @@ import 'package:sj_presensi_mobile/pages/home/check_in_out_page/home_check_in_ou
 import 'package:sj_presensi_mobile/pages/home/cubit/home_cubit.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/profile_page.dart';
+import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/list_lembur_bloc.dart';
 import 'package:sj_presensi_mobile/pages/lembur/lembur_page.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -102,7 +103,7 @@ class HomePage extends StatelessWidget {
                   CheckInOutBloc()..add(AttendanceStateChecked()),
               child: const HomeCheckInOutPage(),
             );
-          } 
+          }
           //  else if (state.navbarItem == HomeNavBarItem.lembur) {
           //   return BlocProvider(
           //     create: (context) => HistoryBloc()
@@ -113,12 +114,19 @@ class HomePage extends StatelessWidget {
           //       ),
           //     child: const LemburPage(),
           //   );
-          // } 
+          // }
           else if (state.navbarItem == HomeNavBarItem.lembur) {
-              return  LemburPage();
-          }
-          else if (state.navbarItem == HomeNavBarItem.dinas) {
-              return DinasPage();
+            return BlocProvider(
+              create: (context) => ListLemburBloc()
+                ..add(
+                  GetListLembur(
+                    date: DateTime.now(),
+                  ),
+                ),
+              child: LemburPage(),
+            );
+          } else if (state.navbarItem == HomeNavBarItem.dinas) {
+            return DinasPage();
           } else if (state.navbarItem == HomeNavBarItem.cuti) {
             return CutiPage();
           } else if (state.navbarItem == HomeNavBarItem.profile) {

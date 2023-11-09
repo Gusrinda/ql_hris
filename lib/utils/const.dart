@@ -15,20 +15,20 @@ class MyGeneralConst {
 }
 
 const MaterialColor themeAppColor = MaterialColor(
-    0xff0068D4,
-    <int, Color>{
-      50: Color(0xff0068D4),
-      100: Color(0xff0068D4),
-      200: Color(0xff0068D4),
-      300: Color(0xff0068D4),
-      400: Color(0xff0068D4),
-      500: Color(0xff0068D4),
-      600: Color(0xff0068D4),
-      700: Color(0xff0068D4),
-      800: Color(0xff0068D4),
-      900: Color(0xff0068D4),
-    },
-  );
+  0xff0068D4,
+  <int, Color>{
+    50: Color(0xff0068D4),
+    100: Color(0xff0068D4),
+    200: Color(0xff0068D4),
+    300: Color(0xff0068D4),
+    400: Color(0xff0068D4),
+    500: Color(0xff0068D4),
+    600: Color(0xff0068D4),
+    700: Color(0xff0068D4),
+    800: Color(0xff0068D4),
+    900: Color(0xff0068D4),
+  },
+);
 
 class MyColorsConst {
   static const whiteColor = Colors.white;
@@ -42,6 +42,7 @@ class MyColorsConst {
   static const lightDarkColor = Color(0xFFBDBDBD);
   static const semiDarkColor = Color.fromARGB(255, 104, 104, 104);
   static const darkColor = Color.fromARGB(255, 10, 10, 10);
+  static const semidarkColor2 = Color.fromRGBO(71, 69, 69, 1);
 
   static const primaryColor = Color.fromARGB(255, 0, 104, 212);
   static const primaryLightColor = Color.fromARGB(255, 0, 125, 255);

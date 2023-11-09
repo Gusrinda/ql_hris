@@ -17,13 +17,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       emit(ProfileLoading());
       var resToken = await GeneralSharedPreferences.getUserToken();
       if (resToken is ServicesSuccess) {
-        var res =
-            await ProfileServices.getDataProfiel(resToken.response["token"]);
+        var res = await ProfileServices.getDataProfilel(resToken.response["token"], resToken.response["id"] ?? 1);
+        // print(res); //print apakah rervice berhasil
         if (res is ServicesSuccess) {
+          print(res.response);
           profileModel = ProfileModel.fromMap(res.response["data"]);
           emit(GetDataProfileSuccess(
             imagePath: profileModel?.imagePath,
-            name: profileModel?.name,
+            username: profileModel?.username,
             employeeId: profileModel?.employeeId,
             email: profileModel?.email,
             phoneNumber: profileModel?.phoneNumber,
@@ -62,7 +63,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       }
     });
 
-
     on<EditImageProfile>((event, emit) async {
       if (event.imagePath != null) {
         emit(ProfileLoading());
@@ -72,7 +72,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
             resToken.response["token"],
             profileModel?.email,
             profileModel?.employeeId,
-            profileModel?.name,
+            profileModel?.username,
             profileModel?.phoneNumber,
             imagePath: event.imagePath,
           );
@@ -102,7 +102,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
             resToken.response["token"],
             profileModel?.email,
             profileModel?.employeeId,
-            profileModel?.name,
+            profileModel?.username,
             event.phoneNumber,
           );
           if (res is ServicesSuccess) {

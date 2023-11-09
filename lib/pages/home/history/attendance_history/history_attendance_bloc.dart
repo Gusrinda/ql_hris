@@ -20,6 +20,8 @@ class HistoryAttendanceBloc
     extends Bloc<HistoryAttendanceEvent, HistoryAttendanceState> {
   List<Datum> attendances = [];
   bool sortState = false;
+  DateTime? selectedMonth;
+  DateTime? selectedYear;
   HistoryAttendanceBloc() : super(HitoryAttendanceInitial()) {
     on<GetAttendancesHistory>((event, emit) async {
       emit(HistoryAttendanceLoading());
@@ -59,5 +61,52 @@ class HistoryAttendanceBloc
         emit(HistoryFailedInBackground(message: 'Response invalid'));
       }
     });
+
+    // on<SortByAttendancesHistory>((event, emit) async {
+    //   emit(HistoryAttendanceLoading());
+    //   try {
+    //     if (selectedMonth != null) {
+    //       var filteredAttendances = attendances.where((attendance) {
+    //         var formattedDate =
+    //             DateFormat('yyyy-MM-dd').parse(attendance.tanggal!);
+    //         var date = DateTime.parse(formattedDate.toString());
+    //         return date.month == selectedMonth?.month &&
+    //             date.year == selectedMonth?.year;
+    //       }).toList();
+
+    //       emit(HistorySuccessInBackground(dataHistory: filteredAttendances));
+    //     }
+    //     else {
+    //       emit(HistorySuccessInBackground(dataHistory: attendances));
+    //     }
+    //   } catch (e, st) {
+    //     emit(HistoryAttendanceFailed(message: "Gagal Melakukan Sorting"));
+    //     await MySentry.sendReport(e.toString(), st.toString());
+    //   }
+    // });
   }
 }
+
+// on<SortByMonthAttendancesHistory>((event, emit) async {
+//   emit(HistoryAttendanceLoading());
+//   try {
+//     sortState = event.sortState;
+//     attendances.sort(
+//       (a, b) {
+//         if (sortState) {
+//           return a.tanggal!.compareTo(b.tanggal!);
+//         }
+
+//         return b.tanggal!.compareTo(a.tanggal!);
+//       },
+//     );
+//     emit(
+//       HistorySuccessInBackground(
+//         dataHistory: attendances,
+//       ),
+//     );
+//   } catch (e, st) {
+//     emit(HistoryFailedInBackground(message: "Gagal Melakukan Sorting"));
+//     await MySentry.sendReport(e.toString(), st.toString());
+//   }
+// });

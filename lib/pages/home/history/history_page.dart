@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:lottie/lottie.dart';
+import 'package:sj_presensi_mobile/componens/HRIS/monthYearPicker_custom.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
-import 'package:sj_presensi_mobile/componens/monthpicker_custom.dart';
-import 'package:sj_presensi_mobile/componens/yearpicker_custom.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dart';
@@ -30,14 +28,21 @@ final Map<String, dynamic> stateDict = {
   },
 };
 
-class HistoryPage extends StatelessWidget {
+class HistoryPage extends StatefulWidget {
   static const routeName = '/HistoryPage';
   const HistoryPage({super.key});
+
+  @override
+  State<HistoryPage> createState() => _HistoryPageState();
+}
+
+class _HistoryPageState extends State<HistoryPage> {
   String getDayFromDate(String date) {
     DateTime dateTime = DateFormat("dd/MM/yyyy").parse(date);
     String day = DateFormat.EEEE("id").format(dateTime);
     return day;
   }
+  
 
   String mapStatusToString(String status) {
     if (stateDict.containsKey(status)) {
@@ -66,9 +71,13 @@ class HistoryPage extends StatelessWidget {
     }
   }
 
+  DateTime? selectedMonth;
+  DateTime? selectedYear;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return BlocListener<HistoryAttendanceBloc, HistoryAttendanceState>(
       listener: (context, state) async {
         // print("LISTEN STATUS SEKARANG ${state}");
@@ -126,15 +135,37 @@ class HistoryPage extends StatelessWidget {
                           "Bulan",
                           style: TextStyle(
                             color: MyColorsConst.darkColor,
-                            fontSize: 12,
+                            fontSize: 10,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
                         MonthPicker(
-                          onTap: (bool? sortState) {
-                            print('Sort state: $sortState');
+                          onTap: (DateTime? months, DateTime? years) {
+                            if (months != null) {
+                              setState(() {
+                                selectedMonth = months;
+                              });
+                              print(
+                                  "ini bulan terpilih ${selectedMonth} ${selectedYear}");
+                              DateTime newDate;
+                              if (selectedYear != null) {
+                                newDate = DateTime(selectedYear!.year,
+                                    selectedMonth!.month, DateTime.now().day);
+                              } else {
+                                newDate = DateTime(DateTime.now().year,
+                                    selectedMonth!.month, DateTime.now().day);
+                              }
+
+                              context.read<HistoryAttendanceBloc>().add(
+                                    GetAttendancesHistory(
+                                      date: newDate,
+                                    ),
+                                  );
+                            }
                           },
-                        )
+                          selectedYear:
+                              selectedYear, 
+                        ),
                       ],
                     ),
                     Column(
@@ -144,15 +175,37 @@ class HistoryPage extends StatelessWidget {
                           "Tahun",
                           style: TextStyle(
                             color: MyColorsConst.darkColor,
-                            fontSize: 12,
+                            fontSize: 10,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
                         YearPickerCustom(
-                          onTap: (bool? sortState) {
-                            print('Sort state: $sortState');
+                          onTap: (DateTime? years, DateTime? months) {
+                            if (years != null) {
+                              setState(() {
+                                selectedYear = years;
+                              });
+                              print(
+                                  "ini tahun yang dipilih ${selectedYear} ${selectedMonth}");
+
+                              DateTime newDate;
+                              if (selectedMonth != null) {
+                                newDate = DateTime(
+                                    selectedYear!.year, selectedMonth!.month);
+                              } else {
+                                newDate = DateTime(
+                                    selectedYear!.year, DateTime.now().month);
+                              }
+
+                              context.read<HistoryAttendanceBloc>().add(
+                                    GetAttendancesHistory(
+                                      date: newDate,
+                                    ),
+                                  );
+                            }
                           },
-                        )
+                          selectedMonth: selectedMonth,
+                        ),
                       ],
                     ),
                   ],
@@ -204,14 +257,14 @@ class HistoryPage extends StatelessWidget {
                                               children: [
                                                 Text(
                                                   "${getDayFromDate("${data[index].tanggal}")}, ${data[index].tanggal}",
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       color: MyColorsConst
                                                           .darkColor,
                                                       fontSize: 14,
                                                       fontWeight:
                                                           FontWeight.w500),
                                                 ),
-                                                Spacer(),
+                                                const Spacer(),
                                                 Container(
                                                   padding: EdgeInsets.all(4),
                                                   decoration: BoxDecoration(
@@ -235,7 +288,7 @@ class HistoryPage extends StatelessWidget {
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 10,
                                             ),
                                             Row(
@@ -252,7 +305,7 @@ class HistoryPage extends StatelessWidget {
                                                     fontWeight: FontWeight.w400,
                                                   ),
                                                 ),
-                                                Spacer(),
+                                                const Spacer(),
                                                 Text(
                                                   data[index].checkoutTime !=
                                                           null
@@ -293,7 +346,7 @@ class HistoryPage extends StatelessWidget {
                                                     data[index].checkinAddress,
                                                 checkinOnScope:
                                                     data[index].checkinOnScope,
-                                                    checkoutOnScope:
+                                                checkoutOnScope:
                                                     data[index].checkoutOnScope,
                                               ),
                                             ));
@@ -306,8 +359,8 @@ class HistoryPage extends StatelessWidget {
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Lottie.asset(
-                                    "assets/lotties/json/lottie_nodata.json",
+                                  Image.asset(
+                                    "assets/images/box_nodata.png",
                                     height: size.width * 1 / 2,
                                   ),
                                   const SizedBox(height: 8),
