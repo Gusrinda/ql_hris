@@ -114,7 +114,7 @@ class GeneralServices {
       }
       return ServicesFailure(
         code: response.statusCode,
-        errorResponse: json.decode(response.body)['errormsg'],
+        errorResponse: json.decode(response.body)['message'],
       );
     } on HttpException {
       return ServicesFailure(

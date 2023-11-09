@@ -42,7 +42,7 @@ class GeneralSharedPreferences {
       );
     }
     return ServicesFailure(
-      code: MyGeneralConst.CODE_NULL_RESPONSE,
+      code: MyGeneralConst.CODE_BAD_REQUEST,
       errorResponse: "User Token not found!",
     );
   }
@@ -57,7 +57,7 @@ class GeneralSharedPreferences {
       );
     }
     return ServicesFailure(
-      code: MyGeneralConst.CODE_NULL_RESPONSE,
+      code: MyGeneralConst.CODE_BAD_REQUEST,
       errorResponse: "User Token not found!",
     );
   }
@@ -72,7 +72,7 @@ class GeneralSharedPreferences {
       );
     } else {
       return ServicesFailure(
-        code: MyGeneralConst.CODE_NULL_RESPONSE,
+        code: MyGeneralConst.CODE_BAD_REQUEST,
         errorResponse: "Remove User Token Failed!",
       );
     }

@@ -84,6 +84,7 @@ class AddCheckInOutBloc extends Bloc<AddCheckInOutEvent, AddCheckInOutState> {
         }
       }
     });
+    
     on<AddCheckInOutFormDataAdded>((event, emit) async {
       formDataSubmited = formDataSubmited.copyWith(
         imagePath: event.formData.imagePath,
@@ -97,5 +98,7 @@ class AddCheckInOutBloc extends Bloc<AddCheckInOutEvent, AddCheckInOutState> {
         emit(AddCheckInOutButtonActivate(isOnSite: formDataSubmited.isOnSite!));
       }
     });
+
+    
   }
 }

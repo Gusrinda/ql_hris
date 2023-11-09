@@ -40,26 +40,26 @@ class AddCheckInOutPage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MultiBlocListener(
       listeners: [
-        BlocListener<LocationAcioBloc, LocationAcioState>(
-          listener: (context, state) async {
-            // if (state is LocationAcioLoading) {
-            //   LoadingDialog.showLoadingDialog(context);
-            // } else if (state is LocationAcioLoadSuccess) {
-            //   LoadingDialog.dismissDialog(context);
-            // } else
-            if (state is LocationAcioLoadFailed) {
-              // LoadingDialog.dismissDialog(context);
-              await showDialog(
-                context: context,
-                builder: (_) => DialogCustom(
-                  state: DialogCustomItem.error,
-                  message: state.message,
-                ),
-              );
-              Navigator.of(context).popUntil((route) => route.isFirst);
-            }
-          },
-        ),
+        // BlocListener<LocationAcioBloc, LocationAcioState>(
+        //   listener: (context, state) async {
+        //     // if (state is LocationAcioLoading) {
+        //     //   LoadingDialog.showLoadingDialog(context);
+        //     // } else if (state is LocationAcioLoadSuccess) {
+        //     //   LoadingDialog.dismissDialog(context);
+        //     // } else
+        //     if (state is LocationAcioLoadFailed) {
+        //       // LoadingDialog.dismissDialog(context);
+        //       await showDialog(
+        //         context: context,
+        //         builder: (_) => DialogCustom(
+        //           state: DialogCustomItem.error,
+        //           message: state.message,
+        //         ),
+        //       );
+        //       Navigator.of(context).popUntil((route) => route.isFirst);
+        //     }
+        //   },
+        // ),
         BlocListener<AddCheckInOutBloc, AddCheckInOutState>(
           listener: (context, state) async {
             if (state is AddCheckInOutLoading) {
@@ -185,8 +185,9 @@ class AddCheckInOutPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 5),
                     Divider(
-                    thickness: 1.5,
-                    color: Colors.grey.shade300,),
+                      thickness: 1.5,
+                      color: Colors.grey.shade300,
+                    ),
                     BlocBuilder<LocationAcioBloc, LocationAcioState>(
                       builder: (context, state) {
                         var isLoading = true;
@@ -229,7 +230,7 @@ class AddCheckInOutPage extends StatelessWidget {
                               color: data != null
                                   ? data.isOnSite
                                       ? MyColorsConst.greenColor
-                                      : MyColorsConst.yellowColor
+                                      : MyColorsConst.redColor
                                   : MyColorsConst.darkColor,
                             ),
                           ],
@@ -264,12 +265,13 @@ class AddCheckInOutPage extends StatelessWidget {
                               showDialog(
                                 context: context,
                                 builder: (_) => DialogCustom(
-                                  state: DialogCustomItem.warning,
+                                  state: DialogCustomItem.error,
                                   message:
-                                      "Anda sedang berada di luar area kantor!\nApakah masih ingin melanjutkan?",
-                                  onContinue: () => context
-                                      .read<AddCheckInOutBloc>()
-                                      .add(AddCheckInOutSubmited()),
+                                      "Anda sedang berada di luar area kantor! \nPresensi Tidak dapat dilanjutkan.",
+                                  durationInSec: 5,
+                                  // onContinue: () => context
+                                  //     .read<AddCheckInOutBloc>()
+                                  //     .add(AddCheckInOutSubmited()),
                                 ),
                               );
                             }
