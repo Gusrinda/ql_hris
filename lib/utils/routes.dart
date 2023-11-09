@@ -18,6 +18,8 @@ import 'package:sj_presensi_mobile/pages/home/profile/password_change.dart';
 import 'package:sj_presensi_mobile/pages/home/report/add/add_report_page.dart';
 import 'package:sj_presensi_mobile/pages/home/report/add/bloc/add_report_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/report/report_detail_page.dart';
+import 'package:sj_presensi_mobile/pages/lembur/detail_lembur.dart';
+import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/detail_lembur_bloc.dart';
 import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
 import 'package:sj_presensi_mobile/services/model/report_detail_page_model.dart';
 
@@ -70,6 +72,13 @@ class RouteGenerator {
         final data = settings.arguments as DetailHistoryAbsensiPage;
         return MaterialPageRoute(builder: (context) {
           return DetailHistoryAbsensiPage(data: data.data);
+        });
+      case DetailLemburPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return BlocProvider(
+            create: (context) => DetailLemburBloc(),
+            child: DetailLemburPage(),
+          );
         });
       case AddCheckInOutPage.routeName:
         return MaterialPageRoute(builder: (context) {

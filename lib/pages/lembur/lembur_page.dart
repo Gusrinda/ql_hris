@@ -7,6 +7,7 @@ import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/lembur/detail_lembur.dart';
+import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/detail_lembur_bloc.dart';
 import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/list_lembur_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -248,8 +249,18 @@ class _LemburPageState extends State<LemburPage> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            const DetailLemburPage(),
+                                        builder: (context) => BlocProvider(
+                                          create: (context) =>
+                                              DetailLemburBloc()
+                                                ..add(
+                                                  GetDetailLembur(
+                                                    id: data[index].id ?? 0,
+                                                  ),
+                                                ),
+                                          child: DetailLemburPage(
+                                              // id: data[index].id ?? 0,
+                                              ),
+                                        ),
                                       ),
                                     );
                                   },
@@ -288,7 +299,7 @@ class _LemburPageState extends State<LemburPage> {
                                                 Row(
                                                   children: [
                                                     Text(
-                                                      "${data[index].nomor}",
+                                                      "${data[index].nomor ?? 0}",
                                                       style: const TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 14,

@@ -16,4 +16,14 @@ class LemburServices {
       headers: GeneralServices.addToken2Headers(token),
     );
   }
+
+  static Future<Object> getDetailLembur(String token, int lemburId) async {
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/t_lembur/$lemburId");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token),
+    );
+  }
 }
