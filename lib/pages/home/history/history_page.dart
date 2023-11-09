@@ -9,7 +9,7 @@ import 'package:sj_presensi_mobile/componens/monthpicker_custom.dart';
 import 'package:sj_presensi_mobile/componens/yearpicker_custom.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
-import 'package:sj_presensi_mobile/pages/home/history/detail_hitory_absensi.dart';
+import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 final Map<String, dynamic> stateDict = {

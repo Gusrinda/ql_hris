@@ -68,7 +68,7 @@ class AttendancesServices {
         "${date.year}-${date.month.toString().padLeft(2, '0')}-$lastDateStr";
     print("Tanggal Terakhir bulan ini adalah tanggal $formattedDate");
     var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/presensi_absensi?scopes=filter&date_from=${date.year}-10-1&date_to=$formattedDate");
+        "${MyGeneralConst.API_URL}/operation/presensi_absensi?scopes=filter&date_from=${date.year}-${date.month}-1&date_to=$formattedDate");
 
     return await GeneralServices.baseService(
       url: url,
