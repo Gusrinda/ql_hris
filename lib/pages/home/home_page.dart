@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sj_presensi_mobile/pages/cuti/cuti_bloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
@@ -128,7 +129,15 @@ class HomePage extends StatelessWidget {
           } else if (state.navbarItem == HomeNavBarItem.dinas) {
             return DinasPage();
           } else if (state.navbarItem == HomeNavBarItem.cuti) {
-            return CutiPage();
+            return BlocProvider(
+              create: (context) => ListCutiBloc()
+              ..add(
+                  GetListCuti(
+                    date: DateTime.now(),
+                  ),
+                ),
+              child: CutiPage(),
+            );
           } else if (state.navbarItem == HomeNavBarItem.profile) {
             return BlocProvider(
               create: (context) => ProfileBloc()..add(GetDataProfile()),

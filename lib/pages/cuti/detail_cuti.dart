@@ -1,17 +1,84 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
+final Map<String, dynamic> stateDict = {
+  "IN APPROVAL": {
+    "name": "Menunggu Disetujui",
+  },
+  "APPROVAL": {
+    "name": "Disetujui",
+  },
+  "REJECTED": {
+    "name": "Ditolak",
+  },
+};
+
 class DetailCutiPage extends StatefulWidget {
-  const DetailCutiPage({Key? key}) : super(key: key);
+  static const routeName = '/DetailCutiPage';
+
+  const DetailCutiPage({
+    super.key,
+    this.data,
+    this.dateFrom,
+    this.dateTo,
+    this.datumAlasanId,
+    this.status,
+    this.keterangan,
+  });
+  final dynamic data;
+  final String? dateFrom;
+  final String? dateTo;
+  final int? datumAlasanId;
+  final String? status;
+  final String? keterangan;
 
   @override
   State<DetailCutiPage> createState() => _DetailCutiPageState();
 }
 
 class _DetailCutiPageState extends State<DetailCutiPage> {
+  String mapStatusToString(String status) {
+    if (stateDict.containsKey(status)) {
+      return stateDict[status]['name'];
+    } else {
+      return 'Undefined';
+    }
+  }
+
+  Color getColorFromStatus(String status) {
+    if (stateDict.containsKey(status)) {
+      switch (status) {
+        case "IN APPROVAL":
+          return Colors.blue;
+        case "REJECTED":
+          return Colors.red;
+        case "APPROVAL":
+          return Colors.green;
+        default:
+          return Colors.grey; // warna default
+      }
+    } else {
+      return Colors.grey; // warna default
+    }
+  }
+
+  String formatDate(String? dateString) {
+    if (dateString != null) {
+      DateTime date = DateFormat("dd/MM/yyyy").parse(dateString);
+      return DateFormat('d MMMM y', 'id_ID').format(date);
+    } else {
+      return 'Tanggal tidak tersedia';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    String currentStatus = widget.status as String;
+    Color currentColor = getColorFromStatus(currentStatus);
+
     return Scaffold(
       appBar: appBarCustomV1(
         title: "Detail Pengajuan Cuti",
@@ -40,7 +107,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                               "Cuti Sehari",
                               style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 12,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -49,13 +116,12 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                               padding: EdgeInsets.all(4),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
-                                color:
-                                    MyColorsConst.primaryColor.withOpacity(0.1),
+                                color: currentColor.withOpacity(0.1),
                               ),
-                              child: const Text(
-                                'Menunggu Disetujui',
+                              child: Text(
+                                mapStatusToString(widget.status as String),
                                 style: TextStyle(
-                                  color: MyColorsConst.primaryColor,
+                                  color: currentColor,
                                   fontSize: 10,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -64,9 +130,9 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                           ],
                         ),
                         const SizedBox(
-                          height: 4,
+                          height: 20,
                         ),
-                        const Row(
+                        Row(
                           children: [
                             Icon(
                               Icons.calendar_month_rounded,
@@ -75,7 +141,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                             ),
                             SizedBox(width: 5), // Atur jarak sesuai kebutuhan
                             Text(
-                              '09 Oktober 2023',
+                              '${formatDate(widget.dateFrom)} - ${formatDate(widget.dateTo)}',
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontSize: 10,
@@ -86,23 +152,23 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                         const SizedBox(
                           height: 4,
                         ),
-                        const Row(
-                          children: [
-                            Icon(
-                              Icons.access_time_filled,
-                              color: MyColorsConst.lightDarkColor,
-                              size: 10,
-                            ),
-                            SizedBox(width: 5),
-                            Text(
-                              "09.00 - 17.00",
-                              style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ],
-                        ),
+                        // const Row(
+                        //   children: [
+                        //     Icon(
+                        //       Icons.access_time_filled,
+                        //       color: MyColorsConst.lightDarkColor,
+                        //       size: 10,
+                        //     ),
+                        //     SizedBox(width: 5),
+                        //     Text(
+                        //       "09.00 - 17.00",
+                        //       style: TextStyle(
+                        //           color: Colors.grey,
+                        //           fontSize: 10,
+                        //           fontWeight: FontWeight.w400),
+                        //     ),
+                        //   ],
+                        // ),
                         const Divider(
                           color: Color(0xFFDDDDDD),
                           thickness: 1,
@@ -118,9 +184,9 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        const Text(
-                          'Acara Keluarga',
-                          style: TextStyle(
+                        Text(
+                          '${widget.datumAlasanId}',
+                          style: const TextStyle(
                             fontSize: 10,
                             color: Colors.black,
                             fontWeight: FontWeight.w400,
@@ -137,9 +203,9 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        const Text(
-                          'lorem ipsum',
-                          style: TextStyle(
+                        Text(
+                          '${widget.keterangan ?? '-'}',
+                          style: const TextStyle(
                             fontSize: 10,
                             color: Colors.black,
                             fontWeight: FontWeight.w400,

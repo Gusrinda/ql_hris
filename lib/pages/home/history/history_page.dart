@@ -64,10 +64,10 @@ class _HistoryPageState extends State<HistoryPage> {
         case "ATTEND":
           return Colors.green;
         default:
-          return Colors.black; // warna default
+          return Colors.grey; // warna default
       }
     } else {
-      return Colors.black; // warna default
+      return Colors.grey; // warna default
     }
   }
 

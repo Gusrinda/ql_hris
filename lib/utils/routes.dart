@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/bloc/login_bloc.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/cuti/cuti_bloc/list_cuti_bloc.dart';
+import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/add_check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/location_acio_bloc.dart';
@@ -20,6 +22,7 @@ import 'package:sj_presensi_mobile/pages/home/report/add/bloc/add_report_bloc.da
 import 'package:sj_presensi_mobile/pages/home/report/report_detail_page.dart';
 import 'package:sj_presensi_mobile/pages/lembur/detail_lembur.dart';
 import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/detail_lembur_bloc.dart';
+import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/list_lembur_bloc.dart';
 import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
 import 'package:sj_presensi_mobile/services/model/report_detail_page_model.dart';
 
@@ -79,6 +82,11 @@ class RouteGenerator {
             create: (context) => DetailLemburBloc(),
             child: DetailLemburPage(),
           );
+        });
+      case DetailCutiPage.routeName:
+        final data = settings.arguments as DetailCutiPage;
+        return MaterialPageRoute(builder: (context) {
+          return DetailCutiPage(data: data.data);
         });
       case AddCheckInOutPage.routeName:
         return MaterialPageRoute(builder: (context) {
