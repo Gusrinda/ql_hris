@@ -34,31 +34,31 @@ class _AddCutiPageState extends State<AddCutiPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               FormTipeCuti(
                 input: "",
                 onTap: () {},
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               FormTipeAlasan(
                 input: "",
                 onTap: () {},
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              FormTanggalCuti(
-                input: "",
-                onTap: () {},
-              ),
-              SizedBox(
+              // FormTanggalCuti(
+              //   input: "",
+              //   onTap: () {},
+              // ),
+              const SizedBox(
                 height: 20,
               ),
-              Hero(
+              const Hero(
                 tag: 'Label-RowJamVisiting',
                 flightShuttleBuilder: flightShuttleBuilder,
                 child: Row(
@@ -66,7 +66,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                     Expanded(
                       flex: 1,
                       child: FormTextLabel(
-                        label: "Jam Mulai",
+                        label: "Tanggal Mulai",
                         labelColor: MyColorsConst.darkColor,
                       ),
                     ),
@@ -76,14 +76,14 @@ class _AddCutiPageState extends State<AddCutiPage> {
                     Expanded(
                       flex: 1,
                       child: FormTextLabel(
-                        label: "Jam Berakhir",
+                        label: "Tanggal Berakhir",
                         labelColor: MyColorsConst.darkColor,
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 4,
               ),
               Row(
@@ -92,43 +92,55 @@ class _AddCutiPageState extends State<AddCutiPage> {
                     flex: 1,
                     child: FormTextField(
                       textAlign: TextAlign.center,
-                      textEditingController: TextEditingController(
-                          text: DateFormat('HH:mm', 'id_ID')
-                              .format(DateTime.now())),
+                      // textEditingController: TextEditingController(
+                      //     text: DateFormat('HH:mm', 'id_ID')
+                      //         .format(DateTime.now())),
                       readOnly: true,
-                      trailing: Icon(
-                        Icons.access_time_filled,
+                      trailing: const Icon(
+                        Icons.calendar_month_rounded,
                         color: MyColorsConst.primaryColor,
+                        size: 20,
                       ),
+                      hintText: "Masukkan Tanggal",
+                      style: const TextStyle(
+                        fontSize: 10,
+                      ),
+                      onTap: () {},
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
                   Expanded(
                     flex: 1,
                     child: FormTextField(
                       textAlign: TextAlign.center,
-                      textEditingController: TextEditingController(
-                          text: DateFormat('HH:mm', 'id_ID')
-                              .format(DateTime.now().add(Duration(hours: 1)))),
+                      // textEditingController: TextEditingController(
+                      //     text: DateFormat('HH:mm', 'id_ID').format(
+                      //         DateTime.now().add(const Duration(hours: 1)))),
                       readOnly: true,
-                      trailing: Icon(
-                        Icons.access_time_filled,
+                      trailing: const Icon(
+                        Icons.calendar_month_rounded,
                         color: MyColorsConst.primaryColor,
+                        size: 20,
                       ),
+                      hintText: "Masukkan Tanggal",
+                      style: const TextStyle(
+                        fontSize: 10,
+                      ),
+                      onTap: () {},
                     ),
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               FormCatatanCuti(
                 input: "",
                 onTap: () {},
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               TextButtonCustomV1(

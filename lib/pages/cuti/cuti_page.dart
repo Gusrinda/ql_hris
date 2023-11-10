@@ -1,10 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/monthYearPicker_custom.dart';
+import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
@@ -12,13 +10,14 @@ import 'package:sj_presensi_mobile/pages/cuti/add_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/cuti_bloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
+import 'package:sj_presensi_mobile/services/model/cuti/list_cuti_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 final Map<String, dynamic> stateDict = {
   "IN APPROVAL": {
     "name": "Menunggu Disetujui",
   },
-  "APPROVAL": {
+  "Aktif": {
     "name": "Disetujui",
   },
   "REJECTED": {
@@ -27,90 +26,73 @@ final Map<String, dynamic> stateDict = {
 };
 
 class CutiPage extends StatefulWidget {
-  const CutiPage({
-    super.key,
-  });
+  const CutiPage({Key? key}) : super(key: key);
 
   @override
-  State<CutiPage> createState() => _CutiPageState();
+  _CutiPageState createState() => _CutiPageState();
 }
 
+String mapStatusToString(String status) {
+  if (stateDict.containsKey(status)) {
+    return stateDict[status]['name'];
+  } else {
+    return 'Undefined';
+  }
+}
+
+Color getColorFromStatus(String status) {
+  if (stateDict.containsKey(status)) {
+    switch (status) {
+      case "IN APPROVAL":
+        return Colors.blue;
+      case "REJECTED":
+        return Colors.red;
+      case "Aktif":
+        return Colors.green;
+      default:
+        return Colors.grey; // warna default
+    }
+  } else {
+    return Colors.grey; // warna default
+  }
+}
+
+String extractTime(String? timeString) {
+  if (timeString != null) {
+    return timeString.substring(0, 5);
+  } else {
+    return '';
+  }
+}
+
+String formatDate(String? dateString) {
+  if (dateString != null) {
+    DateTime date = DateFormat("dd/MM/yyyy").parse(dateString);
+    return DateFormat('d MMMM y', 'id_ID').format(date);
+  } else {
+    return 'Tanggal tidak tersedia';
+  }
+}
+
+Map<String, List<Datum>> groupByDate(List<Datum> data) {
+  Map<String, List<Datum>> groupedData = {};
+  data.forEach((item) {
+    String date = formatDate(item.createdAt);
+    if (groupedData[date] == null) {
+      groupedData[date] = [item];
+    } else {
+      groupedData[date]!.add(item);
+    }
+  });
+  return groupedData;
+}
+
+DateTime? selectedMonth;
+DateTime? selectedYear;
+
 class _CutiPageState extends State<CutiPage> {
-  String mapStatusToString(String status) {
-    if (stateDict.containsKey(status)) {
-      return stateDict[status]['name'];
-    } else {
-      return 'Undefined';
-    }
-  }
-
-  Color getColorFromStatus(String status) {
-    if (stateDict.containsKey(status)) {
-      switch (status) {
-        case "IN APPROVAL":
-          return Colors.blue;
-        case "REJECTED":
-          return Colors.red;
-        case "APPROVAL":
-          return Colors.green;
-        default:
-          return Colors.grey; // warna default
-      }
-    } else {
-      return Colors.grey; // warna default
-    }
-  }
-
-  DateTime? selectedMonth;
-  DateTime? selectedYear;
-
-  String extractTime(String? timeString) {
-    if (timeString != null) {
-      return timeString.substring(0, 5);
-    } else {
-      return '';
-    }
-  }
-
-  String formatDate(String? dateString) {
-    if (dateString != null) {
-      DateTime date = DateFormat("dd/MM/yyyy").parse(dateString);
-      return DateFormat('d MMMM y', 'id_ID').format(date);
-    } else {
-      return 'Tanggal tidak tersedia';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    // Color? warnaStatus;
-    // switch (status) {
-    //   case "Menunggu Disetujui":
-    //     warnaStatus = Colors.blue;
-    //     break;
-    //   case "Ditolak":
-    //     warnaStatus = Colors.red;
-    //     break;
-    //   case "Disetujui":
-    //     warnaStatus = Colors.green;
-    //     break;
-    //   default:
-    //     warnaStatus = Colors.grey;
-    // }
-    List<String> daftarPermohonan = [
-      "Menunggu Disetujui",
-      "Ditolak",
-      "Disetujui"
-    ];
-
-    List<String> daftarTanggal = [
-      "Hari ini",
-      "Kemarin",
-    ];
-    List<int> daftar = [1, 3];
-
-    final size = MediaQuery.of(context).size;
-
     return BlocListener<ListCutiBloc, ListCutiState>(
       listener: (context, state) async {
         if (state is ListCutiLoading) {
@@ -183,17 +165,6 @@ class _CutiPageState extends State<CutiPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Daftar Pengajuan Cuti",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: MyColorsConst.darkColor,
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -215,7 +186,7 @@ class _CutiPageState extends State<CutiPage> {
                               selectedMonth = months;
                             });
                             print(
-                                "ini bulan terpilih ${selectedMonth} ${selectedYear}");
+                                "ini bulan dipilih ${selectedMonth} ${selectedYear}");
                             DateTime newDate;
                             if (selectedYear != null) {
                               newDate = DateTime(selectedYear!.year,
@@ -278,192 +249,44 @@ class _CutiPageState extends State<CutiPage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 15),
               Expanded(
                 child: BlocBuilder<ListCutiBloc, ListCutiState>(
                   builder: (context, state) {
                     var listcuti = context.read<ListCutiBloc>().listcuti;
+                    var groupedData = groupByDate(listcuti);
 
                     debugPrint("LIST CUTI ? ${listcuti}");
 
                     return listcuti.isNotEmpty
                         ? ListView.builder(
-                            // physics: NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
-                            itemCount: listcuti.length,
+                            itemCount: groupedData.length,
                             itemBuilder: (context, index) {
-                              var data = listcuti;
+                              var date = groupedData.keys.toList()[index];
+                              var dataList = groupedData[date]!;
 
-                              String currentStatus =
-                                  data[index].status as String;
-                              Color currentColor =
-                                  getColorFromStatus(currentStatus);
-
-                              return ListTile(
-                                contentPadding: EdgeInsets.zero,
-                                subtitle: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => DetailCutiPage(
-                                          data: data,
-                                          dateFrom: data[index].dateFrom,
-                                          dateTo: data[index].dateTo,
-                                          datumAlasanId: data[index].datumAlasanId,
-                                          status: data[index].status,
-                                          keterangan: data[index].keterangan,
-                                        ),
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    child: Text(
+                                      date,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
                                       ),
-                                    );
-                                  },
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        height: 100,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                          color: currentColor,
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 100,
-                                        margin: const EdgeInsets.only(
-                                            bottom: 15, left: 5),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                          border: Border.all(
-                                              color: const Color(0xFFDDDDDD)),
-                                          color: MyColorsConst.whiteColor,
-                                        ),
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 12, vertical: 10),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                const SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    const Text(
-                                                      "Cuti Sehari",
-                                                      style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                    ),
-                                                    const Spacer(),
-                                                    Container(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              4),
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        color: currentColor
-                                                            .withOpacity(0.1),
-                                                      ),
-                                                      child: Text(
-                                                        mapStatusToString(
-                                                            data[index].status
-                                                                as String),
-                                                        style: TextStyle(
-                                                          color: currentColor,
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                const SizedBox(
-                                                  height: 20,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    const Icon(
-                                                      Icons
-                                                          .calendar_month_rounded,
-                                                      color: MyColorsConst
-                                                          .lightDarkColor,
-                                                      size: 10,
-                                                    ),
-                                                    SizedBox(width: 5),
-                                                    Text(
-                                                      '${formatDate(data[index].dateFrom)} - ${formatDate(data[index].dateTo)}',
-                                                      style: const TextStyle(
-                                                          color: Colors.grey,
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.w400),
-                                                    ),
-                                                  ],
-                                                ),
-                                                const SizedBox(
-                                                  height: 4,
-                                                ),
-                                                // Row(
-                                                //   children: [
-                                                //     const Icon(
-                                                //       Icons.calendar_month_rounded,
-                                                //       color: MyColorsConst
-                                                //           .lightDarkColor,
-                                                //       size: 10,
-                                                //     ),
-                                                //     SizedBox(width: 5),
-                                                //     Text(
-                                                //       "${extractTime(data[index].timeFrom)} - ${extractTime(data[index].timeTo)}",
-                                                //       style: const TextStyle(
-                                                //           color: Colors.grey,
-                                                //           fontSize: 10,
-                                                //           fontWeight:
-                                                //               FontWeight.w400),
-                                                //     ),
-                                                //   ],
-                                                // ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
+                                  ListViewByDate(dataList: dataList),
+                                ],
                               );
                             },
                           )
                         : Center(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  "assets/images/box_nodata.png",
-                                  height: size.width * 1 / 2,
-                                ),
-                                const SizedBox(height: 8),
-                                const Text(
-                                  "Tidak ada data yang ditampilkan!",
-                                  style: TextStyle(
-                                    color: MyColorsConst.darkColor,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
+                            child: EmptyStateBuilder(),
                           );
                   },
                 ),
@@ -491,197 +314,176 @@ class _CutiPageState extends State<CutiPage> {
   }
 }
 
-// class SuratCutiPerTanggal extends StatelessWidget {
-//   const SuratCutiPerTanggal({
-//     super.key,
-//     required this.daftarPermohonan,
-//     required this.daftar,
-//     required this.tanggal,
-//     required this.urutan,
-//   });
-//   final int urutan;
-//   final String tanggal;
-//   final List<String> daftarPermohonan;
-//   final List<int> daftar;
+class ListViewByDate extends StatelessWidget {
+  const ListViewByDate({Key? key, required this.dataList}) : super(key: key);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       margin: const EdgeInsets.only(bottom: 20),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Text(
-//             tanggal,
-//             style: const TextStyle(
-//                 color: MyColorsConst.darkColor,
-//                 fontSize: 12,
-//                 fontWeight: FontWeight.w400),
-//           ),
-//           const SizedBox(
-//             height: 12,
-//           ),
-//           ListView.builder(
-//             // physics: NeverScrollableScrollPhysics(),
-//             shrinkWrap: true,
-//             itemCount: daftar[urutan],
-//             itemBuilder: (BuildContext c, int index) {
-//               return CardPerintahCuti(
-//                 isAlreadyRead: index == daftar[urutan] - 1,
-//                 isLast: index == daftar[urutan] - 1,
-//                 status:
-//                     daftarPermohonan[Random().nextInt(daftarPermohonan.length)],
-                // onTap: () {
-                //   Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) => const DetailCutiPage(),
-                //     ),
-                //   );
-                // },
-//               );
-//             },
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+  final List<Datum> dataList;
 
-// class CardPerintahCuti extends StatelessWidget {
-//   const CardPerintahCuti({
-//     super.key,
-//     required this.isAlreadyRead,
-//     required this.isLast,
-//     required this.status,
-//     this.onTap,
-//   });
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: dataList.length,
+      itemBuilder: (context, index) {
+        var data = dataList[index];
+        String currentStatus = data.status as String;
+        Color currentColor = getColorFromStatus(currentStatus);
 
-//   final bool isAlreadyRead;
-//   final bool isLast;
-//   final String status;
-//   final VoidCallback? onTap;
+        return ListViewCuti(
+          data: data,
+          currentStatus: currentStatus,
+          currentColor: currentColor,
+        );
+      },
+    );
+  }
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     Color? warnaStatus;
-//     switch (status) {
-//       case "Menunggu Disetujui":
-//         warnaStatus = Colors.blue;
-//         break;
-//       case "Ditolak":
-//         warnaStatus = Colors.red;
-//         break;
-//       case "Disetujui":
-//         warnaStatus = Colors.green;
-//         break;
-//       default:
-//         warnaStatus = Colors.grey;
-//     }
-//     return GestureDetector(
-//       onTap: onTap,
-//       child: Stack(
-//         children: [
-//           Container(
-//             height: 100,
-//             decoration: BoxDecoration(
-//               borderRadius: BorderRadius.circular(6),
-//               color: warnaStatus,
-//             ),
-//           ),
-//           Container(
-//             height: 100,
-//             margin: const EdgeInsets.only(bottom: 15, left: 5),
-//             decoration: BoxDecoration(
-//               borderRadius: BorderRadius.circular(6),
-//               border: Border.all(color: const Color(0xFFDDDDDD)),
-//               color: MyColorsConst.whiteColor,
-//             ),
-//             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     const SizedBox(
-//                       height: 10,
-//                     ),
-//                     Row(
-//                       children: [
-//                         const Text(
-//                           "Cuti Sehari",
-//                           style: TextStyle(
-//                             color: Colors.black,
-//                             fontSize: 14,
-//                             fontWeight: FontWeight.w500,
-//                           ),
-//                         ),
-//                         const Spacer(),
-//                         Container(
-//                           padding: const EdgeInsets.all(4),
-//                           decoration: BoxDecoration(
-//                             borderRadius: BorderRadius.circular(5),
-//                             color: warnaStatus.withOpacity(0.1),
-//                           ),
-//                           child: Text(
-//                             status,
-//                             style: TextStyle(
-//                               color: warnaStatus,
-//                               fontSize: 10,
-//                               fontWeight: FontWeight.w500,
-//                             ),
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                     const SizedBox(
-//                       height: 4,
-//                     ),
-//                     const Row(
-//                       children: [
-//                         Icon(
-//                           Icons.calendar_month_rounded,
-//                           color: MyColorsConst.lightDarkColor,
-//                           size: 10,
-//                         ),
-//                         SizedBox(width: 5),
-//                         Text(
-//                           '09 Oktober 2023',
-//                           style: TextStyle(
-//                               color: Colors.grey,
-//                               fontSize: 10,
-//                               fontWeight: FontWeight.w400),
-//                         ),
-//                       ],
-//                     ),
-//                     const SizedBox(
-//                       height: 4,
-//                     ),
-//                     const Row(
-//                       children: [
-//                         Icon(
-//                           Icons.access_time_filled,
-//                           color: MyColorsConst.lightDarkColor,
-//                           size: 10,
-//                         ),
-//                         SizedBox(width: 5),
-//                         Text(
-//                           "09.00 - 17.00",
-//                           style: TextStyle(
-//                               color: Colors.grey,
-//                               fontSize: 10,
-//                               fontWeight: FontWeight.w400),
-//                         ),
-//                       ],
-//                     ),
-//                   ],
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+class ListViewCuti extends StatelessWidget {
+  const ListViewCuti({
+    Key? key,
+    required this.data,
+    required this.currentStatus,
+    required this.currentColor,
+  }) : super(key: key);
+
+  final Datum data;
+  final String currentStatus;
+  final Color currentColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      subtitle: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DetailCutiPage(
+                data: data,
+                dateFrom: data.dateFrom,
+                dateTo: data.dateTo,
+                datumAlasanId: data.datumAlasanId,
+                status: data.status,
+                keterangan: data.keterangan,
+              ),
+            ),
+          );
+        },
+        child: Stack(
+          children: [
+            Container(
+              height: 90,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                color: currentColor,
+              ),
+            ),
+            Container(
+              height: 90,
+              margin: const EdgeInsets.only(bottom: 15, left: 5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: const Color(0xFFDDDDDD)),
+                color: MyColorsConst.whiteColor,
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          const Text(
+                            "Cuti Sehari",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const Spacer(),
+                          Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: currentColor.withOpacity(0.1),
+                            ),
+                            child: Text(
+                              mapStatusToString(currentStatus),
+                              style: TextStyle(
+                                color: currentColor,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.calendar_month_rounded,
+                            color: MyColorsConst.lightDarkColor,
+                            size: 10,
+                          ),
+                          const SizedBox(width: 5),
+                          Text(
+                            '${formatDate(data.dateFrom)} - ${formatDate(data.dateTo)}',
+                            style: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class EmptyStateBuilder extends StatelessWidget {
+  const EmptyStateBuilder({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          "assets/images/box_nodata.png",
+          height: size.width * 1 / 2,
+        ),
+        const SizedBox(height: 8),
+        const Text(
+          "Tidak ada data yang ditampilkan!",
+          style: TextStyle(
+            color: MyColorsConst.darkColor,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
+      ],
+    );
+  }
+}

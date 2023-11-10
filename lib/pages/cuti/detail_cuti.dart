@@ -152,23 +152,6 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                         const SizedBox(
                           height: 4,
                         ),
-                        // const Row(
-                        //   children: [
-                        //     Icon(
-                        //       Icons.access_time_filled,
-                        //       color: MyColorsConst.lightDarkColor,
-                        //       size: 10,
-                        //     ),
-                        //     SizedBox(width: 5),
-                        //     Text(
-                        //       "09.00 - 17.00",
-                        //       style: TextStyle(
-                        //           color: Colors.grey,
-                        //           fontSize: 10,
-                        //           fontWeight: FontWeight.w400),
-                        //     ),
-                        //   ],
-                        // ),
                         const Divider(
                           color: Color(0xFFDDDDDD),
                           thickness: 1,

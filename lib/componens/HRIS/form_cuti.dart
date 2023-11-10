@@ -38,8 +38,8 @@ class FormTipeCuti extends StatelessWidget {
             color: Colors.transparent,
             child: FormTextField(
               readOnly: true,
-              trailing: Padding(
-                padding: const EdgeInsets.all(12.0),
+              trailing: const Padding(
+                padding: EdgeInsets.all(12.0),
                 child: Icon(
                   Icons.keyboard_arrow_down,
                   color: MyColorsConst.primaryColor,
@@ -76,7 +76,7 @@ class FormTipeAlasan extends StatelessWidget {
           tag: 'Label-TipeAlasan',
           flightShuttleBuilder: flightShuttleBuilder,
           child: FormTextLabel(
-            label: "Tipe Alasan",
+            label: "Alasan",
             labelColor: MyColorsConst.darkColor,
           ),
         ),
@@ -89,8 +89,8 @@ class FormTipeAlasan extends StatelessWidget {
             color: Colors.transparent,
             child: FormTextField(
               readOnly: true,
-              trailing: Padding(
-                padding: const EdgeInsets.all(12.0),
+              trailing: const Padding(
+                padding: EdgeInsets.all(12.0),
                 child: Icon(
                   Icons.keyboard_arrow_down,
                   color: MyColorsConst.primaryColor,
@@ -107,57 +107,57 @@ class FormTipeAlasan extends StatelessWidget {
   }
 }
 
-class FormTanggalCuti extends StatelessWidget {
-  const FormTanggalCuti({
-    Key? key,
-    this.enabled = true,
-    this.input = "",
-    this.onTap,
-  }) : super(key: key);
-  final bool enabled;
-  final String input;
-  final VoidCallback? onTap;
+// class FormTanggalCuti extends StatelessWidget {
+//   const FormTanggalCuti({
+//     Key? key,
+//     this.enabled = true,
+//     this.input = "",
+//     this.onTap,
+//   }) : super(key: key);
+//   final bool enabled;
+//   final String input;
+//   final VoidCallback? onTap;
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const Hero(
-          tag: 'Label-TanggalCuti',
-          flightShuttleBuilder: flightShuttleBuilder,
-          child: FormTextLabel(
-            label: "Tanggal Cuti",
-            labelColor: MyColorsConst.darkColor,
-          ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Hero(
-          tag: 'Form-TanggalCuti',
-          child: Material(
-            color: Colors.transparent,
-            child: FormTextField(
-              readOnly: true,
-              trailing: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Icon(
-                  Icons.calendar_month_rounded,
-                  color: MyColorsConst.primaryColor,
-                  size: 20,
-                ),
-              ),
-              hintText: "Pilih Tanggal Cuti",
-              onTap: onTap,
-              textEditingController: TextEditingController(text: input),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.stretch,
+//       children: [
+//         const Hero(
+//           tag: 'Label-TanggalCuti',
+//           flightShuttleBuilder: flightShuttleBuilder,
+//           child: FormTextLabel(
+//             label: "Tanggal Cuti",
+//             labelColor: MyColorsConst.darkColor,
+//           ),
+//         ),
+//         const SizedBox(
+//           height: 10,
+//         ),
+//         Hero(
+//           tag: 'Form-TanggalCuti',
+//           child: Material(
+//             color: Colors.transparent,
+//             child: FormTextField(
+//               readOnly: true,
+//               trailing: Padding(
+//                 padding: const EdgeInsets.all(12.0),
+//                 child: Icon(
+//                   Icons.calendar_month_rounded,
+//                   color: MyColorsConst.primaryColor,
+//                   size: 20,
+//                 ),
+//               ),
+//               hintText: "Pilih Tanggal Cuti",
+//               onTap: onTap,
+//               textEditingController: TextEditingController(text: input),
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
 class FormCatatanCuti extends StatelessWidget {
   const FormCatatanCuti({
