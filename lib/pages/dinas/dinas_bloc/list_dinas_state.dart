@@ -1,6 +1,6 @@
 part of 'list_dinas_bloc.dart';
 
-class ListDinasState extends Equatable {
+abstract class ListDinasState extends Equatable {
   const ListDinasState();
 
   @override

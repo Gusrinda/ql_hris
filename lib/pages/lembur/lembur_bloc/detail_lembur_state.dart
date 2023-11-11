@@ -1,6 +1,6 @@
 part of 'detail_lembur_bloc.dart';
 
-class DetailLemburState extends Equatable {
+abstract class DetailLemburState extends Equatable {
   const DetailLemburState();
 
   @override

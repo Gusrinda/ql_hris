@@ -1,6 +1,6 @@
 part of 'detail_lembur_bloc.dart';
 
-class DetailLemburEvent extends Equatable {
+abstract class DetailLemburEvent extends Equatable {
   const DetailLemburEvent();
 
   @override

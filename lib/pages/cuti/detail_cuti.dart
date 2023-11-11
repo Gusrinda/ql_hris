@@ -7,7 +7,7 @@ final Map<String, dynamic> stateDict = {
   "IN APPROVAL": {
     "name": "Menunggu Disetujui",
   },
-  "APPROVAL": {
+  "Aktif": {
     "name": "Disetujui",
   },
   "REJECTED": {
@@ -23,16 +23,18 @@ class DetailCutiPage extends StatefulWidget {
     this.data,
     this.dateFrom,
     this.dateTo,
-    this.datumAlasanId,
+    this.alasanValue,
     this.status,
     this.keterangan,
+    this.tipeCutiValue,
   });
   final dynamic data;
   final String? dateFrom;
   final String? dateTo;
-  final int? datumAlasanId;
+  final String? alasanValue;
   final String? status;
   final String? keterangan;
+  final String? tipeCutiValue;
 
   @override
   State<DetailCutiPage> createState() => _DetailCutiPageState();
@@ -54,7 +56,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
           return Colors.blue;
         case "REJECTED":
           return Colors.red;
-        case "APPROVAL":
+        case "Aktif":
           return Colors.green;
         default:
           return Colors.grey; // warna default
@@ -103,9 +105,9 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                       children: [
                         Row(
                           children: [
-                            const Text(
-                              "Cuti Sehari",
-                              style: TextStyle(
+                            Text(
+                              "${widget.tipeCutiValue}",
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
@@ -134,15 +136,16 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                         ),
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.calendar_month_rounded,
                               color: MyColorsConst.lightDarkColor,
                               size: 10,
                             ),
-                            SizedBox(width: 5), // Atur jarak sesuai kebutuhan
+                            const SizedBox(
+                                width: 5), // Atur jarak sesuai kebutuhan
                             Text(
                               '${formatDate(widget.dateFrom)} - ${formatDate(widget.dateTo)}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 10,
                                   fontWeight: FontWeight.w400),
@@ -168,7 +171,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                           ),
                         ),
                         Text(
-                          '${widget.datumAlasanId}',
+                          '${widget.alasanValue}',
                           style: const TextStyle(
                             fontSize: 10,
                             color: Colors.black,

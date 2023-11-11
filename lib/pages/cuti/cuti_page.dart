@@ -7,7 +7,7 @@ import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/cuti/add_cuti.dart';
-import 'package:sj_presensi_mobile/pages/cuti/cuti_bloc/list_cuti_bloc.dart';
+import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/list_cuti_model.dart';
@@ -365,9 +365,10 @@ class ListViewCuti extends StatelessWidget {
                 data: data,
                 dateFrom: data.dateFrom,
                 dateTo: data.dateTo,
-                datumAlasanId: data.datumAlasanId,
+                alasanValue: data.alasanValue,
                 status: data.status,
                 keterangan: data.keterangan,
+                tipeCutiValue: data.tipeCutiValue,
               ),
             ),
           );
@@ -401,9 +402,9 @@ class ListViewCuti extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          const Text(
-                            "Cuti Sehari",
-                            style: TextStyle(
+                          Text(
+                            "${data.tipeCutiValue}",
+                            style: const TextStyle(
                               color: Colors.black,
                               fontSize: 14,
                               fontWeight: FontWeight.w500,

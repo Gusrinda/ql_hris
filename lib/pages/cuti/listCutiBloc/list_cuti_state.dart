@@ -1,6 +1,6 @@
 part of 'list_cuti_bloc.dart';
 
-class ListCutiState extends Equatable {
+abstract class ListCutiState extends Equatable {
   const ListCutiState();
 
   @override

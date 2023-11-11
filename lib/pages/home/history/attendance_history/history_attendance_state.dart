@@ -1,6 +1,6 @@
 part of 'history_attendance_bloc.dart';
 
-class HistoryAttendanceState extends Equatable {
+abstract class HistoryAttendanceState extends Equatable {
   const HistoryAttendanceState();
 
   @override

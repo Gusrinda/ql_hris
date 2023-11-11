@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sj_presensi_mobile/pages/cuti/cuti_bloc/list_cuti_bloc.dart';
+import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dinas_bloc/list_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
