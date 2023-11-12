@@ -29,6 +29,7 @@ class FormTextField extends StatelessWidget {
     this.errorMaxLines,
     this.textAlign = TextAlign.start,
     this.contentPadding,
+    this.suffixIcon,
   }) : super(key: key);
 
   final String? hintText;
@@ -55,6 +56,8 @@ class FormTextField extends StatelessWidget {
   final int? errorMaxLines;
   final TextAlign textAlign;
   final EdgeInsetsGeometry? contentPadding;
+  final Widget? suffixIcon;
+  
 
   @override
   Widget build(BuildContext context) {

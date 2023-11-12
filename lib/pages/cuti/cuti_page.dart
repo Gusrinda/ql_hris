@@ -6,6 +6,7 @@ import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/add_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
@@ -26,6 +27,7 @@ final Map<String, dynamic> stateDict = {
 };
 
 class CutiPage extends StatefulWidget {
+  static const routeName = 'CutiPage';
   const CutiPage({Key? key}) : super(key: key);
 
   @override
@@ -299,7 +301,16 @@ class _CutiPageState extends State<CutiPage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const AddCutiPage(),
+                builder: (context) {
+                  final addCutiBloc = AddCutiBloc()
+                    ..add(OnSelectAlasanCuti())
+                    ..add(OnSelectTipeCuti());
+
+                  return BlocProvider.value(
+                    value: addCutiBloc,
+                    child: AddCutiPage(),
+                  );
+                },
               ),
             );
           },

@@ -14,14 +14,14 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-GetTipeCuti _$GetTipeCutiFromJson(Map<String, dynamic> json) {
-  return _GetTipeCuti.fromJson(json);
+GetTipeCutiModel _$GetTipeCutiModelFromJson(Map<String, dynamic> json) {
+  return _GetTipeCutiModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$GetTipeCuti {
+mixin _$GetTipeCutiModel {
   @JsonKey(name: "data")
-  List<Datum>? get data => throw _privateConstructorUsedError;
+  List<DataTipeCuti>? get data => throw _privateConstructorUsedError;
   @JsonKey(name: "total")
   int? get total => throw _privateConstructorUsedError;
   @JsonKey(name: "current_page")
@@ -45,18 +45,18 @@ mixin _$GetTipeCuti {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $GetTipeCutiCopyWith<GetTipeCuti> get copyWith =>
+  $GetTipeCutiModelCopyWith<GetTipeCutiModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GetTipeCutiCopyWith<$Res> {
-  factory $GetTipeCutiCopyWith(
-          GetTipeCuti value, $Res Function(GetTipeCuti) then) =
-      _$GetTipeCutiCopyWithImpl<$Res, GetTipeCuti>;
+abstract class $GetTipeCutiModelCopyWith<$Res> {
+  factory $GetTipeCutiModelCopyWith(
+          GetTipeCutiModel value, $Res Function(GetTipeCutiModel) then) =
+      _$GetTipeCutiModelCopyWithImpl<$Res, GetTipeCutiModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: "data") List<Datum>? data,
+      {@JsonKey(name: "data") List<DataTipeCuti>? data,
       @JsonKey(name: "total") int? total,
       @JsonKey(name: "current_page") int? currentPage,
       @JsonKey(name: "per_page") int? perPage,
@@ -70,9 +70,9 @@ abstract class $GetTipeCutiCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GetTipeCutiCopyWithImpl<$Res, $Val extends GetTipeCuti>
-    implements $GetTipeCutiCopyWith<$Res> {
-  _$GetTipeCutiCopyWithImpl(this._value, this._then);
+class _$GetTipeCutiModelCopyWithImpl<$Res, $Val extends GetTipeCutiModel>
+    implements $GetTipeCutiModelCopyWith<$Res> {
+  _$GetTipeCutiModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -98,7 +98,7 @@ class _$GetTipeCutiCopyWithImpl<$Res, $Val extends GetTipeCuti>
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<Datum>?,
+              as List<DataTipeCuti>?,
       total: freezed == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
@@ -144,15 +144,15 @@ class _$GetTipeCutiCopyWithImpl<$Res, $Val extends GetTipeCuti>
 }
 
 /// @nodoc
-abstract class _$$GetTipeCutiImplCopyWith<$Res>
-    implements $GetTipeCutiCopyWith<$Res> {
-  factory _$$GetTipeCutiImplCopyWith(
-          _$GetTipeCutiImpl value, $Res Function(_$GetTipeCutiImpl) then) =
-      __$$GetTipeCutiImplCopyWithImpl<$Res>;
+abstract class _$$GetTipeCutiModelImplCopyWith<$Res>
+    implements $GetTipeCutiModelCopyWith<$Res> {
+  factory _$$GetTipeCutiModelImplCopyWith(_$GetTipeCutiModelImpl value,
+          $Res Function(_$GetTipeCutiModelImpl) then) =
+      __$$GetTipeCutiModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "data") List<Datum>? data,
+      {@JsonKey(name: "data") List<DataTipeCuti>? data,
       @JsonKey(name: "total") int? total,
       @JsonKey(name: "current_page") int? currentPage,
       @JsonKey(name: "per_page") int? perPage,
@@ -166,11 +166,11 @@ abstract class _$$GetTipeCutiImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$GetTipeCutiImplCopyWithImpl<$Res>
-    extends _$GetTipeCutiCopyWithImpl<$Res, _$GetTipeCutiImpl>
-    implements _$$GetTipeCutiImplCopyWith<$Res> {
-  __$$GetTipeCutiImplCopyWithImpl(
-      _$GetTipeCutiImpl _value, $Res Function(_$GetTipeCutiImpl) _then)
+class __$$GetTipeCutiModelImplCopyWithImpl<$Res>
+    extends _$GetTipeCutiModelCopyWithImpl<$Res, _$GetTipeCutiModelImpl>
+    implements _$$GetTipeCutiModelImplCopyWith<$Res> {
+  __$$GetTipeCutiModelImplCopyWithImpl(_$GetTipeCutiModelImpl _value,
+      $Res Function(_$GetTipeCutiModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -188,11 +188,11 @@ class __$$GetTipeCutiImplCopyWithImpl<$Res>
     Object? next = freezed,
     Object? processedTime = freezed,
   }) {
-    return _then(_$GetTipeCutiImpl(
+    return _then(_$GetTipeCutiModelImpl(
       data: freezed == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<Datum>?,
+              as List<DataTipeCuti>?,
       total: freezed == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
@@ -239,9 +239,9 @@ class __$$GetTipeCutiImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GetTipeCutiImpl implements _GetTipeCuti {
-  const _$GetTipeCutiImpl(
-      {@JsonKey(name: "data") final List<Datum>? data,
+class _$GetTipeCutiModelImpl implements _GetTipeCutiModel {
+  const _$GetTipeCutiModelImpl(
+      {@JsonKey(name: "data") final List<DataTipeCuti>? data,
       @JsonKey(name: "total") this.total,
       @JsonKey(name: "current_page") this.currentPage,
       @JsonKey(name: "per_page") this.perPage,
@@ -254,13 +254,13 @@ class _$GetTipeCutiImpl implements _GetTipeCuti {
       @JsonKey(name: "processed_time") this.processedTime})
       : _data = data;
 
-  factory _$GetTipeCutiImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GetTipeCutiImplFromJson(json);
+  factory _$GetTipeCutiModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GetTipeCutiModelImplFromJson(json);
 
-  final List<Datum>? _data;
+  final List<DataTipeCuti>? _data;
   @override
   @JsonKey(name: "data")
-  List<Datum>? get data {
+  List<DataTipeCuti>? get data {
     final value = _data;
     if (value == null) return null;
     if (_data is EqualUnmodifiableListView) return _data;
@@ -301,14 +301,14 @@ class _$GetTipeCutiImpl implements _GetTipeCuti {
 
   @override
   String toString() {
-    return 'GetTipeCuti(data: $data, total: $total, currentPage: $currentPage, perPage: $perPage, from: $from, to: $to, lastPage: $lastPage, hasNext: $hasNext, prev: $prev, next: $next, processedTime: $processedTime)';
+    return 'GetTipeCutiModel(data: $data, total: $total, currentPage: $currentPage, perPage: $perPage, from: $from, to: $to, lastPage: $lastPage, hasNext: $hasNext, prev: $prev, next: $next, processedTime: $processedTime)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GetTipeCutiImpl &&
+            other is _$GetTipeCutiModelImpl &&
             const DeepCollectionEquality().equals(other._data, _data) &&
             (identical(other.total, total) || other.total == total) &&
             (identical(other.currentPage, currentPage) ||
@@ -344,20 +344,21 @@ class _$GetTipeCutiImpl implements _GetTipeCuti {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$GetTipeCutiImplCopyWith<_$GetTipeCutiImpl> get copyWith =>
-      __$$GetTipeCutiImplCopyWithImpl<_$GetTipeCutiImpl>(this, _$identity);
+  _$$GetTipeCutiModelImplCopyWith<_$GetTipeCutiModelImpl> get copyWith =>
+      __$$GetTipeCutiModelImplCopyWithImpl<_$GetTipeCutiModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$GetTipeCutiImplToJson(
+    return _$$GetTipeCutiModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _GetTipeCuti implements GetTipeCuti {
-  const factory _GetTipeCuti(
-          {@JsonKey(name: "data") final List<Datum>? data,
+abstract class _GetTipeCutiModel implements GetTipeCutiModel {
+  const factory _GetTipeCutiModel(
+          {@JsonKey(name: "data") final List<DataTipeCuti>? data,
           @JsonKey(name: "total") final int? total,
           @JsonKey(name: "current_page") final int? currentPage,
           @JsonKey(name: "per_page") final int? perPage,
@@ -368,14 +369,14 @@ abstract class _GetTipeCuti implements GetTipeCuti {
           @JsonKey(name: "prev") final dynamic prev,
           @JsonKey(name: "next") final dynamic next,
           @JsonKey(name: "processed_time") final double? processedTime}) =
-      _$GetTipeCutiImpl;
+      _$GetTipeCutiModelImpl;
 
-  factory _GetTipeCuti.fromJson(Map<String, dynamic> json) =
-      _$GetTipeCutiImpl.fromJson;
+  factory _GetTipeCutiModel.fromJson(Map<String, dynamic> json) =
+      _$GetTipeCutiModelImpl.fromJson;
 
   @override
   @JsonKey(name: "data")
-  List<Datum>? get data;
+  List<DataTipeCuti>? get data;
   @override
   @JsonKey(name: "total")
   int? get total;
@@ -408,16 +409,16 @@ abstract class _GetTipeCuti implements GetTipeCuti {
   double? get processedTime;
   @override
   @JsonKey(ignore: true)
-  _$$GetTipeCutiImplCopyWith<_$GetTipeCutiImpl> get copyWith =>
+  _$$GetTipeCutiModelImplCopyWith<_$GetTipeCutiModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-Datum _$DatumFromJson(Map<String, dynamic> json) {
-  return _Datum.fromJson(json);
+DataTipeCuti _$DataTipeCutiFromJson(Map<String, dynamic> json) {
+  return _DataTipeCuti.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Datum {
+mixin _$DataTipeCuti {
   @JsonKey(name: "meta_read")
   bool? get metaRead => throw _privateConstructorUsedError;
   @JsonKey(name: "meta_delete")
@@ -555,13 +556,15 @@ mixin _$Datum {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DatumCopyWith<Datum> get copyWith => throw _privateConstructorUsedError;
+  $DataTipeCutiCopyWith<DataTipeCuti> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DatumCopyWith<$Res> {
-  factory $DatumCopyWith(Datum value, $Res Function(Datum) then) =
-      _$DatumCopyWithImpl<$Res, Datum>;
+abstract class $DataTipeCutiCopyWith<$Res> {
+  factory $DataTipeCutiCopyWith(
+          DataTipeCuti value, $Res Function(DataTipeCuti) then) =
+      _$DataTipeCutiCopyWithImpl<$Res, DataTipeCuti>;
   @useResult
   $Res call(
       {@JsonKey(name: "meta_read") bool? metaRead,
@@ -638,9 +641,9 @@ abstract class $DatumCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DatumCopyWithImpl<$Res, $Val extends Datum>
-    implements $DatumCopyWith<$Res> {
-  _$DatumCopyWithImpl(this._value, this._then);
+class _$DataTipeCutiCopyWithImpl<$Res, $Val extends DataTipeCuti>
+    implements $DataTipeCutiCopyWith<$Res> {
+  _$DataTipeCutiCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -992,10 +995,11 @@ class _$DatumCopyWithImpl<$Res, $Val extends Datum>
 }
 
 /// @nodoc
-abstract class _$$DatumImplCopyWith<$Res> implements $DatumCopyWith<$Res> {
-  factory _$$DatumImplCopyWith(
-          _$DatumImpl value, $Res Function(_$DatumImpl) then) =
-      __$$DatumImplCopyWithImpl<$Res>;
+abstract class _$$DataTipeCutiImplCopyWith<$Res>
+    implements $DataTipeCutiCopyWith<$Res> {
+  factory _$$DataTipeCutiImplCopyWith(
+          _$DataTipeCutiImpl value, $Res Function(_$DataTipeCutiImpl) then) =
+      __$$DataTipeCutiImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1073,11 +1077,11 @@ abstract class _$$DatumImplCopyWith<$Res> implements $DatumCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$DatumImplCopyWithImpl<$Res>
-    extends _$DatumCopyWithImpl<$Res, _$DatumImpl>
-    implements _$$DatumImplCopyWith<$Res> {
-  __$$DatumImplCopyWithImpl(
-      _$DatumImpl _value, $Res Function(_$DatumImpl) _then)
+class __$$DataTipeCutiImplCopyWithImpl<$Res>
+    extends _$DataTipeCutiCopyWithImpl<$Res, _$DataTipeCutiImpl>
+    implements _$$DataTipeCutiImplCopyWith<$Res> {
+  __$$DataTipeCutiImplCopyWithImpl(
+      _$DataTipeCutiImpl _value, $Res Function(_$DataTipeCutiImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1151,7 +1155,7 @@ class __$$DatumImplCopyWithImpl<$Res>
     Object? lastEditorTelp = freezed,
     Object? lastEditorMKaryId = freezed,
   }) {
-    return _then(_$DatumImpl(
+    return _then(_$DataTipeCutiImpl(
       metaRead: freezed == metaRead
           ? _value.metaRead
           : metaRead // ignore: cast_nullable_to_non_nullable
@@ -1426,8 +1430,8 @@ class __$$DatumImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$DatumImpl implements _Datum {
-  const _$DatumImpl(
+class _$DataTipeCutiImpl implements _DataTipeCuti {
+  const _$DataTipeCutiImpl(
       {@JsonKey(name: "meta_read") this.metaRead,
       @JsonKey(name: "meta_delete") this.metaDelete,
       @JsonKey(name: "meta_update") this.metaUpdate,
@@ -1497,8 +1501,8 @@ class _$DatumImpl implements _Datum {
       @JsonKey(name: "last_editor.telp") this.lastEditorTelp,
       @JsonKey(name: "last_editor.m_kary_id") this.lastEditorMKaryId});
 
-  factory _$DatumImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DatumImplFromJson(json);
+  factory _$DataTipeCutiImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DataTipeCutiImplFromJson(json);
 
   @override
   @JsonKey(name: "meta_read")
@@ -1704,14 +1708,14 @@ class _$DatumImpl implements _Datum {
 
   @override
   String toString() {
-    return 'Datum(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, datumMCompId: $datumMCompId, datumMDirId: $datumMDirId, group: $group, key: $key, code: $code, value: $value, isActive: $isActive, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, mDirId: $mDirId, mDirMCompId: $mDirMCompId, mDirNama: $mDirNama, mDirDesc: $mDirDesc, mDirIsActive: $mDirIsActive, mDirCreatorId: $mDirCreatorId, mDirLastEditorId: $mDirLastEditorId, mDirCreatedAt: $mDirCreatedAt, mDirUpdatedAt: $mDirUpdatedAt, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, creatorTelp: $creatorTelp, creatorMKaryId: $creatorMKaryId, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage, lastEditorTelp: $lastEditorTelp, lastEditorMKaryId: $lastEditorMKaryId)';
+    return 'DataTipeCuti(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, datumMCompId: $datumMCompId, datumMDirId: $datumMDirId, group: $group, key: $key, code: $code, value: $value, isActive: $isActive, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, mDirId: $mDirId, mDirMCompId: $mDirMCompId, mDirNama: $mDirNama, mDirDesc: $mDirDesc, mDirIsActive: $mDirIsActive, mDirCreatorId: $mDirCreatorId, mDirLastEditorId: $mDirLastEditorId, mDirCreatedAt: $mDirCreatedAt, mDirUpdatedAt: $mDirUpdatedAt, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, creatorTelp: $creatorTelp, creatorMKaryId: $creatorMKaryId, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage, lastEditorTelp: $lastEditorTelp, lastEditorMKaryId: $lastEditorMKaryId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DatumImpl &&
+            other is _$DataTipeCutiImpl &&
             (identical(other.metaRead, metaRead) ||
                 other.metaRead == metaRead) &&
             (identical(other.metaDelete, metaDelete) ||
@@ -1899,19 +1903,19 @@ class _$DatumImpl implements _Datum {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$DatumImplCopyWith<_$DatumImpl> get copyWith =>
-      __$$DatumImplCopyWithImpl<_$DatumImpl>(this, _$identity);
+  _$$DataTipeCutiImplCopyWith<_$DataTipeCutiImpl> get copyWith =>
+      __$$DataTipeCutiImplCopyWithImpl<_$DataTipeCutiImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DatumImplToJson(
+    return _$$DataTipeCutiImplToJson(
       this,
     );
   }
 }
 
-abstract class _Datum implements Datum {
-  const factory _Datum(
+abstract class _DataTipeCuti implements DataTipeCuti {
+  const factory _DataTipeCuti(
       {@JsonKey(name: "meta_read") final bool? metaRead,
       @JsonKey(name: "meta_delete") final bool? metaDelete,
       @JsonKey(name: "meta_update") final bool? metaUpdate,
@@ -1989,9 +1993,10 @@ abstract class _Datum implements Datum {
       final dynamic lastEditorProfilImage,
       @JsonKey(name: "last_editor.telp") final dynamic lastEditorTelp,
       @JsonKey(name: "last_editor.m_kary_id")
-      final dynamic lastEditorMKaryId}) = _$DatumImpl;
+      final dynamic lastEditorMKaryId}) = _$DataTipeCutiImpl;
 
-  factory _Datum.fromJson(Map<String, dynamic> json) = _$DatumImpl.fromJson;
+  factory _DataTipeCuti.fromJson(Map<String, dynamic> json) =
+      _$DataTipeCutiImpl.fromJson;
 
   @override
   @JsonKey(name: "meta_read")
@@ -2196,6 +2201,6 @@ abstract class _Datum implements Datum {
   dynamic get lastEditorMKaryId;
   @override
   @JsonKey(ignore: true)
-  _$$DatumImplCopyWith<_$DatumImpl> get copyWith =>
+  _$$DataTipeCutiImplCopyWith<_$DataTipeCutiImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

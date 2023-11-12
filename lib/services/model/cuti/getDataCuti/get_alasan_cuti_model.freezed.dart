@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-GetAlasanCuti _$GetAlasanCutiFromJson(Map<String, dynamic> json) {
-  return _GetAlasanCuti.fromJson(json);
+GetAlasanCutiModel _$GetAlasanCutiModelFromJson(Map<String, dynamic> json) {
+  return _GetAlasanCutiModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$GetAlasanCuti {
+mixin _$GetAlasanCutiModel {
   @JsonKey(name: "data")
   List<Datum>? get data => throw _privateConstructorUsedError;
   @JsonKey(name: "total")
@@ -45,15 +45,15 @@ mixin _$GetAlasanCuti {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $GetAlasanCutiCopyWith<GetAlasanCuti> get copyWith =>
+  $GetAlasanCutiModelCopyWith<GetAlasanCutiModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GetAlasanCutiCopyWith<$Res> {
-  factory $GetAlasanCutiCopyWith(
-          GetAlasanCuti value, $Res Function(GetAlasanCuti) then) =
-      _$GetAlasanCutiCopyWithImpl<$Res, GetAlasanCuti>;
+abstract class $GetAlasanCutiModelCopyWith<$Res> {
+  factory $GetAlasanCutiModelCopyWith(
+          GetAlasanCutiModel value, $Res Function(GetAlasanCutiModel) then) =
+      _$GetAlasanCutiModelCopyWithImpl<$Res, GetAlasanCutiModel>;
   @useResult
   $Res call(
       {@JsonKey(name: "data") List<Datum>? data,
@@ -70,9 +70,9 @@ abstract class $GetAlasanCutiCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GetAlasanCutiCopyWithImpl<$Res, $Val extends GetAlasanCuti>
-    implements $GetAlasanCutiCopyWith<$Res> {
-  _$GetAlasanCutiCopyWithImpl(this._value, this._then);
+class _$GetAlasanCutiModelCopyWithImpl<$Res, $Val extends GetAlasanCutiModel>
+    implements $GetAlasanCutiModelCopyWith<$Res> {
+  _$GetAlasanCutiModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -144,11 +144,11 @@ class _$GetAlasanCutiCopyWithImpl<$Res, $Val extends GetAlasanCuti>
 }
 
 /// @nodoc
-abstract class _$$GetAlasanCutiImplCopyWith<$Res>
-    implements $GetAlasanCutiCopyWith<$Res> {
-  factory _$$GetAlasanCutiImplCopyWith(
-          _$GetAlasanCutiImpl value, $Res Function(_$GetAlasanCutiImpl) then) =
-      __$$GetAlasanCutiImplCopyWithImpl<$Res>;
+abstract class _$$GetAlasanCutiModelImplCopyWith<$Res>
+    implements $GetAlasanCutiModelCopyWith<$Res> {
+  factory _$$GetAlasanCutiModelImplCopyWith(_$GetAlasanCutiModelImpl value,
+          $Res Function(_$GetAlasanCutiModelImpl) then) =
+      __$$GetAlasanCutiModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -166,11 +166,11 @@ abstract class _$$GetAlasanCutiImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$GetAlasanCutiImplCopyWithImpl<$Res>
-    extends _$GetAlasanCutiCopyWithImpl<$Res, _$GetAlasanCutiImpl>
-    implements _$$GetAlasanCutiImplCopyWith<$Res> {
-  __$$GetAlasanCutiImplCopyWithImpl(
-      _$GetAlasanCutiImpl _value, $Res Function(_$GetAlasanCutiImpl) _then)
+class __$$GetAlasanCutiModelImplCopyWithImpl<$Res>
+    extends _$GetAlasanCutiModelCopyWithImpl<$Res, _$GetAlasanCutiModelImpl>
+    implements _$$GetAlasanCutiModelImplCopyWith<$Res> {
+  __$$GetAlasanCutiModelImplCopyWithImpl(_$GetAlasanCutiModelImpl _value,
+      $Res Function(_$GetAlasanCutiModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -188,7 +188,7 @@ class __$$GetAlasanCutiImplCopyWithImpl<$Res>
     Object? next = freezed,
     Object? processedTime = freezed,
   }) {
-    return _then(_$GetAlasanCutiImpl(
+    return _then(_$GetAlasanCutiModelImpl(
       data: freezed == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
@@ -239,8 +239,8 @@ class __$$GetAlasanCutiImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$GetAlasanCutiImpl implements _GetAlasanCuti {
-  const _$GetAlasanCutiImpl(
+class _$GetAlasanCutiModelImpl implements _GetAlasanCutiModel {
+  const _$GetAlasanCutiModelImpl(
       {@JsonKey(name: "data") final List<Datum>? data,
       @JsonKey(name: "total") this.total,
       @JsonKey(name: "current_page") this.currentPage,
@@ -254,8 +254,8 @@ class _$GetAlasanCutiImpl implements _GetAlasanCuti {
       @JsonKey(name: "processed_time") this.processedTime})
       : _data = data;
 
-  factory _$GetAlasanCutiImpl.fromJson(Map<String, dynamic> json) =>
-      _$$GetAlasanCutiImplFromJson(json);
+  factory _$GetAlasanCutiModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GetAlasanCutiModelImplFromJson(json);
 
   final List<Datum>? _data;
   @override
@@ -301,14 +301,14 @@ class _$GetAlasanCutiImpl implements _GetAlasanCuti {
 
   @override
   String toString() {
-    return 'GetAlasanCuti(data: $data, total: $total, currentPage: $currentPage, perPage: $perPage, from: $from, to: $to, lastPage: $lastPage, hasNext: $hasNext, prev: $prev, next: $next, processedTime: $processedTime)';
+    return 'GetAlasanCutiModel(data: $data, total: $total, currentPage: $currentPage, perPage: $perPage, from: $from, to: $to, lastPage: $lastPage, hasNext: $hasNext, prev: $prev, next: $next, processedTime: $processedTime)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GetAlasanCutiImpl &&
+            other is _$GetAlasanCutiModelImpl &&
             const DeepCollectionEquality().equals(other._data, _data) &&
             (identical(other.total, total) || other.total == total) &&
             (identical(other.currentPage, currentPage) ||
@@ -344,19 +344,20 @@ class _$GetAlasanCutiImpl implements _GetAlasanCuti {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$GetAlasanCutiImplCopyWith<_$GetAlasanCutiImpl> get copyWith =>
-      __$$GetAlasanCutiImplCopyWithImpl<_$GetAlasanCutiImpl>(this, _$identity);
+  _$$GetAlasanCutiModelImplCopyWith<_$GetAlasanCutiModelImpl> get copyWith =>
+      __$$GetAlasanCutiModelImplCopyWithImpl<_$GetAlasanCutiModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$GetAlasanCutiImplToJson(
+    return _$$GetAlasanCutiModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _GetAlasanCuti implements GetAlasanCuti {
-  const factory _GetAlasanCuti(
+abstract class _GetAlasanCutiModel implements GetAlasanCutiModel {
+  const factory _GetAlasanCutiModel(
           {@JsonKey(name: "data") final List<Datum>? data,
           @JsonKey(name: "total") final int? total,
           @JsonKey(name: "current_page") final int? currentPage,
@@ -368,10 +369,10 @@ abstract class _GetAlasanCuti implements GetAlasanCuti {
           @JsonKey(name: "prev") final dynamic prev,
           @JsonKey(name: "next") final dynamic next,
           @JsonKey(name: "processed_time") final double? processedTime}) =
-      _$GetAlasanCutiImpl;
+      _$GetAlasanCutiModelImpl;
 
-  factory _GetAlasanCuti.fromJson(Map<String, dynamic> json) =
-      _$GetAlasanCutiImpl.fromJson;
+  factory _GetAlasanCutiModel.fromJson(Map<String, dynamic> json) =
+      _$GetAlasanCutiModelImpl.fromJson;
 
   @override
   @JsonKey(name: "data")
@@ -408,7 +409,7 @@ abstract class _GetAlasanCuti implements GetAlasanCuti {
   double? get processedTime;
   @override
   @JsonKey(ignore: true)
-  _$$GetAlasanCutiImplCopyWith<_$GetAlasanCutiImpl> get copyWith =>
+  _$$GetAlasanCutiModelImplCopyWith<_$GetAlasanCutiModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

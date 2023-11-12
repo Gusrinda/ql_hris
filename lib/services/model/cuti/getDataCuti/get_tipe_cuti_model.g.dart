@@ -6,10 +6,11 @@ part of 'get_tipe_cuti_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GetTipeCutiImpl _$$GetTipeCutiImplFromJson(Map<String, dynamic> json) =>
-    _$GetTipeCutiImpl(
+_$GetTipeCutiModelImpl _$$GetTipeCutiModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$GetTipeCutiModelImpl(
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) => Datum.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => DataTipeCuti.fromJson(e as Map<String, dynamic>))
           .toList(),
       total: json['total'] as int?,
       currentPage: json['current_page'] as int?,
@@ -23,7 +24,8 @@ _$GetTipeCutiImpl _$$GetTipeCutiImplFromJson(Map<String, dynamic> json) =>
       processedTime: (json['processed_time'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$$GetTipeCutiImplToJson(_$GetTipeCutiImpl instance) =>
+Map<String, dynamic> _$$GetTipeCutiModelImplToJson(
+        _$GetTipeCutiModelImpl instance) =>
     <String, dynamic>{
       'data': instance.data,
       'total': instance.total,
@@ -38,7 +40,8 @@ Map<String, dynamic> _$$GetTipeCutiImplToJson(_$GetTipeCutiImpl instance) =>
       'processed_time': instance.processedTime,
     };
 
-_$DatumImpl _$$DatumImplFromJson(Map<String, dynamic> json) => _$DatumImpl(
+_$DataTipeCutiImpl _$$DataTipeCutiImplFromJson(Map<String, dynamic> json) =>
+    _$DataTipeCutiImpl(
       metaRead: json['meta_read'] as bool?,
       metaDelete: json['meta_delete'] as bool?,
       metaUpdate: json['meta_update'] as bool?,
@@ -108,7 +111,7 @@ _$DatumImpl _$$DatumImplFromJson(Map<String, dynamic> json) => _$DatumImpl(
       lastEditorMKaryId: json['last_editor.m_kary_id'],
     );
 
-Map<String, dynamic> _$$DatumImplToJson(_$DatumImpl instance) =>
+Map<String, dynamic> _$$DataTipeCutiImplToJson(_$DataTipeCutiImpl instance) =>
     <String, dynamic>{
       'meta_read': instance.metaRead,
       'meta_delete': instance.metaDelete,

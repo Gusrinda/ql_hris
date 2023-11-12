@@ -81,21 +81,23 @@ class GeneralServices {
         for (var key in body.keys) {
           if (body[key] != null) bodyFormed[key] = body[key].toString();
         }
-        var request = http.MultipartRequest('PUT', url) // Menggunakan 'PUT' untuk metode permintaan
+        var request = http.MultipartRequest(
+            'PUT', url) // Menggunakan 'PUT' untuk metode permintaan
           ..fields.addAll(bodyFormed)
           ..headers.addAll(headers!)
-          ..files.add(await http.MultipartFile.fromPath('foto', imagePath!)); // Mengunggah berkas gambar
+          ..files.add(await http.MultipartFile.fromPath(
+              'foto', imagePath!)); // Mengunggah berkas gambar
         var res = await request.send();
         response = await http.Response.fromStream(res);
       }
-      
+
       // else if (method == GeneralServicesMethod.put) {
       //   response = await http.put(
       //     url,
       //     headers: headers,
       //     body: body,
       //   );
-      // } 
+      // }
       else {
         response = await http.delete(
           url,
@@ -131,7 +133,6 @@ class GeneralServices {
     }
   }
 }
-
 
 // {
 //   code : 404,
