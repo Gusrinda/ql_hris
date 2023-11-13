@@ -18,8 +18,13 @@ class AddCutiPage extends StatefulWidget {
   static const routeName = '/AddCutiPage';
   AddCutiPage({super.key});
 
-  final TextEditingController alasanController = TextEditingController();
-  final TextEditingController tipeCutiController = TextEditingController();
+  final TextEditingController idAlasanController = TextEditingController();
+  final TextEditingController valueAlasanController = TextEditingController();
+
+  //Controller Tipe Cuti
+  final TextEditingController idTipeCutiController = TextEditingController();
+  final TextEditingController valueTipeCutiController = TextEditingController();
+
   final TextEditingController keteranganController = TextEditingController();
   final TextEditingController dateFromController = TextEditingController();
   final TextEditingController dateToController = TextEditingController();
@@ -31,6 +36,7 @@ class AddCutiPage extends StatefulWidget {
 class _AddCutiPageState extends State<AddCutiPage> {
   String? selectedValue;
   String? selectedTipeValue;
+  String? selectedIDTipeValue;
   DateTime? selectedDate;
   DateTime? selectedDateFrom;
   DateTime? selectedDateTo;
@@ -76,15 +82,13 @@ class _AddCutiPageState extends State<AddCutiPage> {
           }).toList(),
         );
 
-        if (selectedValue != null && selectedValue is Datum) {
-          widget.alasanController.text = selectedValue?.id?.toString() ?? '';
+        if (selectedValue != null) {
+          widget.valueAlasanController.text = selectedValue.value?.toString() ?? '';
+          widget.idAlasanController.text = selectedValue.id?.toString() ?? '';
         }
       } else {
         print("Tidak ada item dalam selectAlasanCuti");
       }
-
-      // Perbarui tampilan setelah pemilihan alasan cuti
-      setState(() {});
     }
 
     // Fungsi untuk menampilkan menu alasan cuti
@@ -99,24 +103,26 @@ class _AddCutiPageState extends State<AddCutiPage> {
         // Tampilkan menu dan lakukan pemilihan alasan cuti
         final DataTipeCuti? selectedTipeValue = await showMenu(
           context: context,
-          position: RelativeRect.fromLTRB(100, 0, 0, 0),
+          position: const RelativeRect.fromLTRB(100, 0, 0, 0),
           items: selectTipeCuti.map((tipe) {
             return PopupMenuItem<DataTipeCuti>(
+              value: tipe,
               child: Text(
                 tipe.value ?? '',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                 ),
               ),
-              value: tipe,
             );
           }).toList(),
         );
 
-        if (selectedTipeValue != null && selectedTipeValue is DataTipeCuti) {
+        if (selectedTipeValue != null) {
           selectedTipeCutiDisplay = selectedTipeValue.value ?? '';
-          widget.tipeCutiController.text =
-              selectedTipeValue?.id?.toString() ?? '';
+          widget.valueTipeCutiController.text =
+              selectedTipeValue.value?.toString() ?? '';
+          widget.idTipeCutiController.text =
+              selectedTipeValue.id?.toString() ?? '';
 
           setState(() {
             this.selectedTipeValue = selectedTipeValue.value;
@@ -125,9 +131,6 @@ class _AddCutiPageState extends State<AddCutiPage> {
       } else {
         print("Tidak ada item dalam selectAlasanCuti");
       }
-
-      // Perbarui tampilan setelah pemilihan alasan cuti
-      setState(() {});
     }
 
     return BlocListener<AddCutiBloc, AddCutiState>(
@@ -190,23 +193,30 @@ class _AddCutiPageState extends State<AddCutiPage> {
                     const SizedBox(
                       height: 8,
                     ),
-                    FormTipeCuti(
+                    FormCuti(
                       input: selectedTipeCutiDisplay,
                       onTap: () {
                         _showTipeMenu(context);
                       },
-                      controller: widget.tipeCutiController,
+                      idController: widget.idTipeCutiController,
+                      valueController: widget.valueTipeCutiController,
+                      hintText: 'Pilih Tipe Cuti',
+                      labelTag: 'Label-TipeCuti',
+                      formTag: 'Form-TipeCuti',
                     ),
                     const SizedBox(
                       height: 20,
                     ),
-                    FormTipeAlasan(
+                    FormCuti(
                       input: selectedValue ?? "",
                       onTap: () {
                         _showAlasanMenu(context);
                       },
-                      controller: widget.alasanController,
-                      // alasanList: selectAlasanCuti,
+                      idController: widget.idAlasanController,
+                      valueController: widget.valueAlasanController,
+                      hintText: 'Pilih Alasan Cuti',
+                      labelTag: 'Label-AlasanCuti',
+                      formTag: 'Form-AlasanCuti',
                     ),
                     const SizedBox(
                       height: 20,
@@ -298,9 +308,9 @@ class _AddCutiPageState extends State<AddCutiPage> {
                               context.read<AddCutiBloc>().add(
                                     AddCutiSubmited(
                                       alasan: int.parse(
-                                          widget.alasanController.text),
+                                          widget.idAlasanController.text),
                                       tipeCuti: int.parse(
-                                          widget.tipeCutiController.text),
+                                          widget.idTipeCutiController.text),
                                       keterangan:
                                           widget.keteranganController.text,
                                       dateFrom: widget.dateFromController.text,

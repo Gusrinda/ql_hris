@@ -258,7 +258,7 @@ class _CutiPageState extends State<CutiPage> {
                     var listcuti = context.read<ListCutiBloc>().listcuti;
                     var groupedData = groupByDate(listcuti);
 
-                    debugPrint("LIST CUTI ? ${listcuti}");
+                    // debugPrint("LIST CUTI ? ${listcuti}");
 
                     return listcuti.isNotEmpty
                         ? ListView.builder(

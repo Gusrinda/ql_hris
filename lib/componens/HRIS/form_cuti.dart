@@ -59,18 +59,26 @@ import '../HRIS/hero_widget.dart';
 //   }
 // }
 
-class FormTipeCuti extends StatelessWidget {
-  const FormTipeCuti({
+class FormCuti extends StatelessWidget {
+  const FormCuti({
     Key? key,
     this.enabled = true,
     this.input = "",
     this.onTap,
-    required this.controller,
+    required this.hintText,
+    required this.labelTag,
+    required this.formTag,
+    required this.valueController,
+    required this.idController,
   }) : super(key: key);
 
   final bool enabled;
   final String input;
-  final TextEditingController controller;
+  final String hintText;
+  final String labelTag;
+  final String formTag;
+  final TextEditingController valueController;
+  final TextEditingController idController;
   final VoidCallback? onTap;
 
   @override
@@ -78,8 +86,8 @@ class FormTipeCuti extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Hero(
-          tag: 'Label-TipeCuti',
+        Hero(
+          tag: labelTag,
           flightShuttleBuilder: flightShuttleBuilder,
           child: FormTextLabel(
             label: "Tipe Cuti",
@@ -90,7 +98,7 @@ class FormTipeCuti extends StatelessWidget {
           height: 10,
         ),
         Hero(
-          tag: 'Form-TipeCuti',
+          tag: formTag,
           child: Material(
             color: Colors.transparent,
             child: Container(
@@ -101,11 +109,11 @@ class FormTipeCuti extends StatelessWidget {
               child: TextFormField(
                 readOnly: true,
                 onTap: onTap,
-                controller: controller,
+                controller: valueController, // Menggunakan valueController
                 style: TextStyle(
                   fontSize: 12,
                 ),
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   contentPadding: EdgeInsets.all(12),
                   border: InputBorder.none,
                   suffixIcon: Padding(
@@ -115,7 +123,7 @@ class FormTipeCuti extends StatelessWidget {
                       color: MyColorsConst.primaryColor,
                     ),
                   ),
-                  hintText: "Pilih Tipe Cuti",
+                  hintText: hintText,
                   hintStyle: TextStyle(
                     fontSize: 12,
                     fontStyle: FontStyle.italic,
@@ -130,81 +138,82 @@ class FormTipeCuti extends StatelessWidget {
   }
 }
 
-class FormTipeAlasan extends StatelessWidget {
-  const FormTipeAlasan({
-    Key? key,
-    this.enabled = true,
-    this.input = "",
-    required this.controller,
-    // required this.alasanList,
-    this.onTap,
-  }) : super(key: key);
 
-  final bool enabled;
-  final String input;
-  final VoidCallback? onTap;
-  final TextEditingController controller;
+// class FormTipeAlasan extends StatelessWidget {
+//   const FormTipeAlasan({
+//     Key? key,
+//     this.enabled = true,
+//     this.input = "",
+//     required this.controller,
+//     // required this.alasanList,
+//     this.onTap,
+//   }) : super(key: key);
+
+//   final bool enabled;
+//   final String input;
+//   final VoidCallback? onTap;
+//   final TextEditingController controller;
   
-  // final List<Datum> alasanList;
+//   // final List<Datum> alasanList;
 
-  @override
-  Widget build(BuildContext context) {
-    // print("isi alasan: $alasanList");
+//   @override
+//   Widget build(BuildContext context) {
+//     // print("isi alasan: $alasanList");
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const Hero(
-          tag: 'Label-TipeAlasan',
-          flightShuttleBuilder: flightShuttleBuilder,
-          child: FormTextLabel(
-            label: "Alasan",
-            labelColor: MyColorsConst.darkColor,
-          ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Hero(
-          tag: 'Form-AlasanCuti',
-          child: Material(
-            color: Colors.transparent,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
-                border: Border.all(color: Color(0xFFDDDDDD)),
-              ),
-              child: TextFormField(
-                readOnly: true,
-                onTap: onTap,
-                controller: controller,
-                style: TextStyle(
-                  fontSize: 12,
-                ),
-                decoration: const InputDecoration(
-                  contentPadding: EdgeInsets.all(12),
-                  border: InputBorder.none,
-                  suffixIcon: Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: Icon(
-                      Icons.keyboard_arrow_down,
-                      color: MyColorsConst.primaryColor,
-                    ),
-                  ),
-                  hintText: "Alasan Cuti",
-                  hintStyle: TextStyle(
-                    fontSize: 12,
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.stretch,
+//       children: [
+//         const Hero(
+//           tag: 'Label-TipeAlasan',
+//           flightShuttleBuilder: flightShuttleBuilder,
+//           child: FormTextLabel(
+//             label: "Alasan",
+//             labelColor: MyColorsConst.darkColor,
+//           ),
+//         ),
+//         const SizedBox(
+//           height: 10,
+//         ),
+//         Hero(
+//           tag: 'Form-AlasanCuti',
+//           child: Material(
+//             color: Colors.transparent,
+//             child: Container(
+//               decoration: BoxDecoration(
+//                 borderRadius: BorderRadius.circular(6),
+//                 border: Border.all(color: Color(0xFFDDDDDD)),
+//               ),
+//               child: TextFormField(
+//                 readOnly: true,
+//                 onTap: onTap,
+//                 controller: controller,
+//                 style: TextStyle(
+//                   fontSize: 12,
+//                 ),
+//                 decoration: const InputDecoration(
+//                   contentPadding: EdgeInsets.all(12),
+//                   border: InputBorder.none,
+//                   suffixIcon: Padding(
+//                     padding: EdgeInsets.all(12.0),
+//                     child: Icon(
+//                       Icons.keyboard_arrow_down,
+//                       color: MyColorsConst.primaryColor,
+//                     ),
+//                   ),
+//                   hintText: "Alasan Cuti",
+//                   hintStyle: TextStyle(
+//                     fontSize: 12,
+//                     fontStyle: FontStyle.italic,
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
 
 // class FormTipeAlasan extends StatelessWidget {
 //   const FormTipeAlasan({

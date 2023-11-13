@@ -56,12 +56,12 @@ class AddCutiBloc extends Bloc<AddCutiEvent, AddCutiState> {
           var res =
               await CutiServices.getAlasanCuti(resToken.response["token"]);
 
-          print("Respons API Alasan Cuti: $res");
+          // print("Respons API Alasan Cuti: $res");
 
           if (res is ServicesSuccess) {
-            debugPrint(res.response.toString());
+            // debugPrint(res.response.toString());
             if (res.response is Map<String, dynamic>) {
-              print(res.response);
+              // print(res.response);
 
               //Mengubah hasil response api ke model kelas
               GetAlasanCutiModel dataResponse =
@@ -98,12 +98,12 @@ class AddCutiBloc extends Bloc<AddCutiEvent, AddCutiState> {
         if (resToken is ServicesSuccess) {
           var res = await CutiServices.getTipeCuti(resToken.response["token"]);
 
-          print("Respons API Tipe Cuti: $res");
+          // print("Respons API Tipe Cuti: $res");
 
           if (res is ServicesSuccess) {
-            debugPrint(res.response.toString());
+            // debugPrint(res.response.toString());
             if (res.response is Map<String, dynamic>) {
-              print(res.response);
+              // print(res.response);
 
               //Mengubah hasil response api ke model kelas
               GetTipeCutiModel dataResponse =
