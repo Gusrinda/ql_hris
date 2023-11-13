@@ -18,7 +18,6 @@ class AddCutiPage extends StatefulWidget {
   static const routeName = '/AddCutiPage';
   AddCutiPage({super.key});
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController alasanController = TextEditingController();
   final TextEditingController tipeCutiController = TextEditingController();
   final TextEditingController keteranganController = TextEditingController();
@@ -30,7 +29,6 @@ class AddCutiPage extends StatefulWidget {
 }
 
 class _AddCutiPageState extends State<AddCutiPage> {
-  final TextEditingController _controller = TextEditingController();
   String? selectedValue;
   String? selectedTipeValue;
   DateTime? selectedDate;
@@ -50,6 +48,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
   Widget build(BuildContext context) {
     var selectAlasanCuti = context.read<AddCutiBloc>().dataAlasanCuti;
     var selectTipeCuti = context.read<AddCutiBloc>().dataTipeCuti;
+    String selectedTipeCutiDisplay = "";
 
     // Fungsi untuk menampilkan menu alasan cuti
     void _showAlasanMenu(BuildContext context) async {
@@ -63,9 +62,9 @@ class _AddCutiPageState extends State<AddCutiPage> {
         // Tampilkan menu dan lakukan pemilihan alasan cuti
         final Datum? selectedValue = await showMenu(
           context: context,
-          position: RelativeRect.fromLTRB(0, 100, 0, 0),
+          position: RelativeRect.fromLTRB(100, 0, 0, 0),
           items: selectAlasanCuti.map((alasan) {
-            return PopupMenuItem(
+            return PopupMenuItem<Datum>(
               child: Text(
                 alasan.value ?? '',
                 style: TextStyle(
@@ -78,14 +77,10 @@ class _AddCutiPageState extends State<AddCutiPage> {
         );
 
         if (selectedValue != null && selectedValue is Datum) {
-          widget.alasanController.text = selectedValue.value ?? '';
-          setState(() {
-            this.selectedValue = selectedValue.value;
-          });
+          widget.alasanController.text = selectedValue?.id?.toString() ?? '';
         }
       } else {
         print("Tidak ada item dalam selectAlasanCuti");
-        // Tambahkan log atau tindakan lain sesuai kebutuhan
       }
 
       // Perbarui tampilan setelah pemilihan alasan cuti
@@ -104,9 +99,9 @@ class _AddCutiPageState extends State<AddCutiPage> {
         // Tampilkan menu dan lakukan pemilihan alasan cuti
         final DataTipeCuti? selectedTipeValue = await showMenu(
           context: context,
-          position: RelativeRect.fromLTRB(0, 100, 0, 0),
+          position: RelativeRect.fromLTRB(100, 0, 0, 0),
           items: selectTipeCuti.map((tipe) {
-            return PopupMenuItem(
+            return PopupMenuItem<DataTipeCuti>(
               child: Text(
                 tipe.value ?? '',
                 style: TextStyle(
@@ -119,15 +114,16 @@ class _AddCutiPageState extends State<AddCutiPage> {
         );
 
         if (selectedTipeValue != null && selectedTipeValue is DataTipeCuti) {
-          widget.tipeCutiController.text = selectedTipeValue.value ?? '';
+          selectedTipeCutiDisplay = selectedTipeValue.value ?? '';
+          widget.tipeCutiController.text =
+              selectedTipeValue?.id?.toString() ?? '';
+
           setState(() {
-            this.selectedTipeValue =
-                selectedTipeValue.value; // Update selectedValue
+            this.selectedTipeValue = selectedTipeValue.value;
           });
         }
       } else {
         print("Tidak ada item dalam selectAlasanCuti");
-        // Tambahkan log atau tindakan lain sesuai kebutuhan Anda
       }
 
       // Perbarui tampilan setelah pemilihan alasan cuti
@@ -186,16 +182,6 @@ class _AddCutiPageState extends State<AddCutiPage> {
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             child: BlocBuilder<AddCutiBloc, AddCutiState>(
               builder: (context, state) {
-                var selectAlasanCuti =
-                    context.read<AddCutiBloc>().dataAlasanCuti;
-                var selectTipeCuti = context.read<AddCutiBloc>().dataTipeCuti;
-
-                // Mendapatkan list alasan cuti dari dataBloc
-                // List<String> alasanCutiList =
-                //     selectAlasanCuti.map((data) => data.value ?? "").toList();
-
-                debugPrint("Alasan Cuti ${selectAlasanCuti}");
-                debugPrint("Alasan Cuti ${selectTipeCuti}");
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -205,7 +191,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                       height: 8,
                     ),
                     FormTipeCuti(
-                      input: selectedTipeValue ?? "",
+                      input: selectedTipeCutiDisplay,
                       onTap: () {
                         _showTipeMenu(context);
                       },
@@ -311,8 +297,10 @@ class _AddCutiPageState extends State<AddCutiPage> {
                           : () {
                               context.read<AddCutiBloc>().add(
                                     AddCutiSubmited(
-                                      alasan: widget.alasanController.text,
-                                      tipeCuti: widget.tipeCutiController.text,
+                                      alasan: int.parse(
+                                          widget.alasanController.text),
+                                      tipeCuti: int.parse(
+                                          widget.tipeCutiController.text),
                                       keterangan:
                                           widget.keteranganController.text,
                                       dateFrom: widget.dateFromController.text,

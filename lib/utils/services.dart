@@ -33,7 +33,10 @@ class GeneralServices {
   };
   static Map<String, String> addToken2Headers(String token) {
     Map<String, String> headers = Map<String, String>.from(_headers)
-      ..addAll({'Authorization': "Bearer $token", 'Source': "mobile"});
+      ..addAll({
+        'Authorization': "Bearer $token",
+        // 'Source': "mobile"
+      });
 
     return headers;
   }

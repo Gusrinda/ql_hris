@@ -8,8 +8,8 @@ abstract class AddCutiEvent extends Equatable {
 }
 
 class AddCutiSubmited extends AddCutiEvent {
-  String alasan;
-  String tipeCuti;
+  int alasan;
+  int tipeCuti;
   String keterangan;
   String dateFrom;
   String dateTo;

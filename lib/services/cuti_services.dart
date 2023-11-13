@@ -18,16 +18,16 @@ class CutiServices {
     );
   }
 
-  static Future<Object> addCuti(
-      String token, keterangan, alasan, tipeCuti, dateFrom, dateTo) async {
+  static Future<Object> addCuti(String token, keterangan, int alasan,
+      int tipeCuti, String dateFrom, String dateTo) async {
     var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_cuti");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.post,
       headers: GeneralServices.addToken2Headers(token),
       body: json.encode({
-        "alasan.value": alasan,
-        "tipe_cuti.value": tipeCuti,
+        "alasan_id": alasan,
+        "tipe_cuti_id": tipeCuti,
         "date_from": dateFrom,
         "date_to": dateTo,
         "keterangan": keterangan,
