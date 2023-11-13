@@ -83,7 +83,8 @@ class _AddCutiPageState extends State<AddCutiPage> {
         );
 
         if (selectedValue != null) {
-          widget.valueAlasanController.text = selectedValue.value?.toString() ?? '';
+          widget.valueAlasanController.text =
+              selectedValue.value?.toString() ?? '';
           widget.idAlasanController.text = selectedValue.id?.toString() ?? '';
         }
       } else {
@@ -203,6 +204,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                       hintText: 'Pilih Tipe Cuti',
                       labelTag: 'Label-TipeCuti',
                       formTag: 'Form-TipeCuti',
+                      labelForm: 'Tipe Cuti',
                     ),
                     const SizedBox(
                       height: 20,
@@ -214,6 +216,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                       },
                       idController: widget.idAlasanController,
                       valueController: widget.valueAlasanController,
+                      labelForm: 'Alasan Cuti',
                       hintText: 'Pilih Alasan Cuti',
                       labelTag: 'Label-AlasanCuti',
                       formTag: 'Form-AlasanCuti',
