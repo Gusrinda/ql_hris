@@ -5,10 +5,10 @@ part 'get_tipe_cuti_model.freezed.dart';
 part 'get_tipe_cuti_model.g.dart';
 
 @freezed
-class GetTipeCuti with _$GetTipeCuti {
-    const factory GetTipeCuti({
+class GetTipeCutiModel with _$GetTipeCutiModel {
+    const factory GetTipeCutiModel({
         @JsonKey(name: "data")
-        List<Datum>? data,
+        List<DataTipeCuti>? data,
         @JsonKey(name: "total")
         int? total,
         @JsonKey(name: "current_page")
@@ -29,14 +29,14 @@ class GetTipeCuti with _$GetTipeCuti {
         dynamic next,
         @JsonKey(name: "processed_time")
         double? processedTime,
-    }) = _GetTipeCuti;
+    }) = _GetTipeCutiModel;
 
-    factory GetTipeCuti.fromJson(Map<String, dynamic> json) => _$GetTipeCutiFromJson(json);
+    factory GetTipeCutiModel.fromJson(Map<String, dynamic> json) => _$GetTipeCutiModelFromJson(json);
 }
 
 @freezed
-class Datum with _$Datum {
-    const factory Datum({
+class DataTipeCuti with _$DataTipeCuti {
+    const factory DataTipeCuti({
         @JsonKey(name: "meta_read")
         bool? metaRead,
         @JsonKey(name: "meta_delete")
@@ -171,7 +171,7 @@ class Datum with _$Datum {
         dynamic lastEditorTelp,
         @JsonKey(name: "last_editor.m_kary_id")
         dynamic lastEditorMKaryId,
-    }) = _Datum;
+    }) = _DataTipeCuti;
 
-    factory Datum.fromJson(Map<String, dynamic> json) => _$DatumFromJson(json);
+    factory DataTipeCuti.fromJson(Map<String, dynamic> json) => _$DataTipeCutiFromJson(json);
 }

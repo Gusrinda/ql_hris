@@ -5,8 +5,8 @@ part 'get_alasan_cuti_model.freezed.dart';
 part 'get_alasan_cuti_model.g.dart';
 
 @freezed
-class GetAlasanCuti with _$GetAlasanCuti {
-    const factory GetAlasanCuti({
+class GetAlasanCutiModel with _$GetAlasanCutiModel {
+    const factory GetAlasanCutiModel({
         @JsonKey(name: "data")
         List<Datum>? data,
         @JsonKey(name: "total")
@@ -29,9 +29,9 @@ class GetAlasanCuti with _$GetAlasanCuti {
         dynamic next,
         @JsonKey(name: "processed_time")
         double? processedTime,
-    }) = _GetAlasanCuti;
+    }) = _GetAlasanCutiModel;
 
-    factory GetAlasanCuti.fromJson(Map<String, dynamic> json) => _$GetAlasanCutiFromJson(json);
+    factory GetAlasanCutiModel.fromJson(Map<String, dynamic> json) => _$GetAlasanCutiModelFromJson(json);
 }
 
 @freezed

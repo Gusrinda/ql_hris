@@ -18,25 +18,26 @@ class CutiServices {
     );
   }
 
-  static Future<Object> addCuti(String token, keterangan, DateTime dateFrom,
-      dateTo, int alasanId, tipeCutiId) async {
+  static Future<Object> addCuti(String token, keterangan, int alasan,
+      int tipeCuti, String dateFrom, String dateTo) async {
     var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_cuti");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.post,
       headers: GeneralServices.addToken2Headers(token),
       body: json.encode({
-        "alasanId": alasanId,
-        "tipeCutiId": tipeCutiId,
-        "dateFrom": dateFrom,
-        "dateTo": dateTo,
+        "alasan_id": alasan,
+        "tipe_cuti_id": tipeCuti,
+        "date_from": dateFrom,
+        "date_to": dateTo,
         "keterangan": keterangan,
       }),
     );
   }
 
   static Future<Object> getAlasanCuti(String token) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_general?scopes=alasanCuti");
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_general?scopes=alasanCuti");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -45,11 +46,12 @@ class CutiServices {
   }
 
   static Future<Object> getTipeCuti(String token) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_general?scopes=tipeCuti");
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_general?scopes=tipeCuti");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
       headers: GeneralServices.addToken2Headers(token),
     );
-  }  
+  }
 }

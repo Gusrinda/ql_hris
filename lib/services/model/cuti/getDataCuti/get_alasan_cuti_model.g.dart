@@ -6,8 +6,9 @@ part of 'get_alasan_cuti_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$GetAlasanCutiImpl _$$GetAlasanCutiImplFromJson(Map<String, dynamic> json) =>
-    _$GetAlasanCutiImpl(
+_$GetAlasanCutiModelImpl _$$GetAlasanCutiModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$GetAlasanCutiModelImpl(
       data: (json['data'] as List<dynamic>?)
           ?.map((e) => Datum.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -23,7 +24,8 @@ _$GetAlasanCutiImpl _$$GetAlasanCutiImplFromJson(Map<String, dynamic> json) =>
       processedTime: (json['processed_time'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$$GetAlasanCutiImplToJson(_$GetAlasanCutiImpl instance) =>
+Map<String, dynamic> _$$GetAlasanCutiModelImplToJson(
+        _$GetAlasanCutiModelImpl instance) =>
     <String, dynamic>{
       'data': instance.data,
       'total': instance.total,
