@@ -45,10 +45,10 @@ class AuthServices {
   }
 
   static Future<Object> logout(String token) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/auth/logout");
+    var url = Uri.parse("${MyGeneralConst.API_URL}/logout");
     return await GeneralServices.baseService(
       url: url,
-      method: GeneralServicesMethod.delete,
+      method: GeneralServicesMethod.post,
       headers: GeneralServices.addToken2Headers(token),
     );
   }
