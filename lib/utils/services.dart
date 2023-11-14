@@ -30,6 +30,7 @@ enum GeneralServicesMethod {
   postMultiPart,
   delete,
   put,
+  putMultipart,
 }
 
 class GeneralServices {
@@ -82,21 +83,21 @@ class GeneralServices {
           headers: headers,
         );
       } 
-      // else if (method == GeneralServicesMethod.put) {
-      //   body = body as Map<String, dynamic>;
-      //   Map<String, String> bodyFormed = {};
-      //   for (var key in body.keys) {
-      //     if (body[key] != null) bodyFormed[key] = body[key].toString();
-      //   }
-      //   var request = http.MultipartRequest(
-      //       'PUT', url) // Menggunakan 'PUT' untuk metode permintaan
-      //     ..fields.addAll(bodyFormed)
-      //     ..headers.addAll(headers!)
-      //     ..files.add(await http.MultipartFile.fromPath(
-      //         'foto', imagePath!)); // Mengunggah berkas gambar
-      //   var res = await request.send();
-      //   response = await http.Response.fromStream(res);
-      // }
+      else if (method == GeneralServicesMethod.putMultipart) {
+        body = body as Map<String, dynamic>;
+        Map<String, String> bodyFormed = {};
+        for (var key in body.keys) {
+          if (body[key] != null) bodyFormed[key] = body[key].toString();
+        }
+        var request = http.MultipartRequest(
+            'PUT', url) // Menggunakan 'PUT' untuk metode permintaan
+          ..fields.addAll(bodyFormed)
+          ..headers.addAll(headers!)
+          ..files.add(await http.MultipartFile.fromPath(
+              'foto', imagePath!)); // Mengunggah berkas gambar
+        var res = await request.send();
+        response = await http.Response.fromStream(res);
+      }
       else if (method == GeneralServicesMethod.put) {
         response = await http.put(
           url,

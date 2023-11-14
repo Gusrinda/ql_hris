@@ -16,22 +16,37 @@ class ProfileServices {
     );
   }
 
-  // static Future<Object> editDataProfile(
-  //     String token, int userId, password, confirmPassword,
+  static Future<Object> editImageProfile(String token, int userId, email,
+      {String? imagePath}) async {
+    print("hasil image: ${imagePath}");
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/default_users/$userId");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.putMultipart,
+      headers: GeneralServices.addToken2Headers(token),
+      body: {
+        "inputEmail": email,
+      },
+      imagePath: imagePath,
+    );
+  }
+
+  // static Future<Object> editImageProfile(
+  //     String token, int userId, email,
   //     {String? imagePath}) async {
-  //   print("hasil password: ${password}");
-  //   print("hasil confirmpassword: ${confirmPassword}");
-  //   print("hasil image: ${imagePath}");
   //   var url =
   //       Uri.parse("${MyGeneralConst.API_URL}/operation/default_users/$userId");
+  //   var body = {
+  //     "inputEmail": email,
+  //   };
   //   return await GeneralServices.baseService(
   //     url: url,
-  //     method: GeneralServicesMethod.put,
+  //     method: imagePath != null
+  //         ? GeneralServicesMethod.putMultipart
+  //         : GeneralServicesMethod.put,
   //     headers: GeneralServices.addToken2Headers(token),
-  //     body: {
-  //       "password": password,
-  //       "password_confirm": confirmPassword,
-  //     },
+  //     body: imagePath == null ? json.encode(body) : body,
   //     imagePath: imagePath,
   //   );
   // }
@@ -45,13 +60,16 @@ class ProfileServices {
     var url =
         Uri.parse("${MyGeneralConst.API_URL}/operation/default_users/$userId");
     return await GeneralServices.baseService(
-        url: url,
-        method: GeneralServicesMethod.put,
-        headers: GeneralServices.addToken2Headers(token),
-        body: jsonEncode({
+      url: url,
+      method: GeneralServicesMethod.put,
+      headers: GeneralServices.addToken2Headers(token),
+      body: jsonEncode(
+        {
           "password": password,
           "password_confirm": confirmPassword,
-        }));
+        },
+      ),
+    );
   }
 
   // static Future<Object> editProfile(

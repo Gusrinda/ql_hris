@@ -69,12 +69,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         emit(ProfileLoading());
         var resToken = await GeneralSharedPreferences.getUserToken();
         if (resToken is ServicesSuccess) {
-          var res = await ProfileServices.editDataProfile(
+          var res = await ProfileServices.editImageProfile(
             resToken.response["token"],
             resToken.response["id"] ?? 1,
             profileModel?.email,
-            profileModel?.employeeId,
-            // imagePath: event.imagePath,
+            imagePath: event.imagePath,
           );
           if (res is ServicesSuccess) {
             print(res.response);
@@ -98,10 +97,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     //     emit(ProfileLoading());
     //     var resToken = await GeneralSharedPreferences.getUserToken();
     //     if (resToken is ServicesSuccess) {
-    //       var res = await ProfileServices.editProfile(
+    //       var res = await ProfileServices.editImageProfile(
     //         resToken.response["token"],
+    //         resToken.response["id"] ?? 1,
     //         profileModel?.email,
-    //         profileModel?.employeeId,
     //         profileModel?.username,
     //         event.phoneNumber,
     //       );
