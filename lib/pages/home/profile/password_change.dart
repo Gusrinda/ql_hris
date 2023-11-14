@@ -109,7 +109,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   hintText: "Masukkan password lama",
                   isPassword: true,
                   keyboardType: TextInputType.visiblePassword,
-                  controller: oldPasswordController,
+                  controller: confirmNewPasswordController,
                   validator: MultiValidator([
                     RequiredValidator(errorText: "* Required!"),
                   ]),
@@ -120,7 +120,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   hintText: "Masukkan password baru",
                   isPassword: true,
                   keyboardType: TextInputType.visiblePassword,
-                  controller: newPasswordController,
+                  controller: oldPasswordController,
                   validator: MultiValidator([
                     RequiredValidator(errorText: "* Required!"),
                     MinLengthValidator(8,
@@ -136,7 +136,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   hintText: "Konfirmasi password baru",
                   isPassword: true,
                   keyboardType: TextInputType.visiblePassword,
-                  controller: confirmNewPasswordController,
+                  controller: newPasswordController,
                   validator: (val) => MatchValidator(
                     errorText: 'passwords do not match!',
                   ).validateMatch(
@@ -150,11 +150,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   backgroundColor: MyColorsConst.primaryColor,
                   textColor: MyColorsConst.whiteColor,
                   onPressed: () {
+                    print('password lama ${oldPasswordController}');
+                    print('password baru ${newPasswordController}');
                     context.read<ProfileBloc>().add(
                           EditPasswordProfile(
                             oldPassword: oldPasswordController.text,
                             newPassword: newPasswordController.text,
-                            status: _formKey.currentState!.validate(),
                           ),
                         );
                   },

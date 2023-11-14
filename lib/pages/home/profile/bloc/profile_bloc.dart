@@ -68,12 +68,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         emit(ProfileLoading());
         var resToken = await GeneralSharedPreferences.getUserToken();
         if (resToken is ServicesSuccess) {
-          var res = await ProfileServices.editProfile(
+          var res = await ProfileServices.editDataProfile(
             resToken.response["token"],
             profileModel?.email,
             profileModel?.employeeId,
-            profileModel?.username,
-            profileModel?.phoneNumber,
             imagePath: event.imagePath,
           );
           if (res is ServicesSuccess) {
@@ -93,40 +91,39 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       }
     });
 
-    on<EditDataProfile>((event, emit) async {
-      if (event.phoneNumber != null) {
-        emit(ProfileLoading());
-        var resToken = await GeneralSharedPreferences.getUserToken();
-        if (resToken is ServicesSuccess) {
-          var res = await ProfileServices.editProfile(
-            resToken.response["token"],
-            profileModel?.email,
-            profileModel?.employeeId,
-            profileModel?.username,
-            event.phoneNumber,
-          );
-          if (res is ServicesSuccess) {
-            emit(ProfileSuccessInBackground());
-          } else if (res is ServicesFailure) {
-            if (res.errorResponse == null) {
-              await GeneralSharedPreferences.removeUserToken();
-              emit(ProfileFailedUserExpired(message: "Token expired"));
-            } else {
-              emit(ProfileFailed(message: res.errorResponse));
-            }
-          }
-        } else if (resToken is ServicesFailure) {
-          emit(ProfileFailedInBackground());
-        }
-      }
-    });
+    // on<EditDataProfile>((event, emit) async {
+    //   if (event.phoneNumber != null) {
+    //     emit(ProfileLoading());
+    //     var resToken = await GeneralSharedPreferences.getUserToken();
+    //     if (resToken is ServicesSuccess) {
+    //       var res = await ProfileServices.editProfile(
+    //         resToken.response["token"],
+    //         profileModel?.email,
+    //         profileModel?.employeeId,
+    //         profileModel?.username,
+    //         event.phoneNumber,
+    //       );
+    //       if (res is ServicesSuccess) {
+    //         emit(ProfileSuccessInBackground());
+    //       } else if (res is ServicesFailure) {
+    //         if (res.errorResponse == null) {
+    //           await GeneralSharedPreferences.removeUserToken();
+    //           emit(ProfileFailedUserExpired(message: "Token expired"));
+    //         } else {
+    //           emit(ProfileFailed(message: res.errorResponse));
+    //         }
+    //       }
+    //     } else if (resToken is ServicesFailure) {
+    //       emit(ProfileFailedInBackground());
+    //     }
+    //   }
+    // });
 
     on<EditPasswordProfile>((event, emit) async {
-      if (event.status) {
         emit(ProfileLoading());
         var resToken = await GeneralSharedPreferences.getUserToken();
         if (resToken is ServicesSuccess) {
-          var res = await ProfileServices.editProfilePassword(
+          var res = await ProfileServices.editDataProfile(
             resToken.response["token"],
             event.oldPassword,
             event.newPassword,
@@ -144,7 +141,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         } else if (resToken is ServicesFailure) {
           emit(ProfileFailedInBackground());
         }
-      }
     });
   }
 }

@@ -9,6 +9,7 @@ import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/lembur/detail_lembur.dart';
 import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/detail_lembur_bloc.dart';
 import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/list_lembur_bloc.dart';
+import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -118,11 +119,19 @@ class _LemburPageState extends State<LemburPage> {
                 iconSize: 20,
                 icon: const Icon(Icons.notifications_active),
                 onPressed: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => NotifikasiPage()),
-                  );
-                },
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider(
+                              create: (context) => NotifikasiBloc()
+                                ..add(
+                                  GetListNotifikasi(),
+                                ),
+                              child: NotifikasiPage(),
+                            ),
+                          ),
+                        );
+                      },
               ),
             ),
           ],

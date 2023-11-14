@@ -9,6 +9,7 @@ import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas_bloc/add_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/list_dinas_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -156,11 +157,19 @@ class _DinasPageState extends State<DinasPage> {
                 iconSize: 20,
                 icon: const Icon(Icons.notifications_active),
                 onPressed: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => NotifikasiPage()),
-                  );
-                },
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider(
+                              create: (context) => NotifikasiBloc()
+                                ..add(
+                                  GetListNotifikasi(),
+                                ),
+                              child: NotifikasiPage(),
+                            ),
+                          ),
+                        );
+                      },
               ),
             ),
           ],

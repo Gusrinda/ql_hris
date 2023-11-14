@@ -25,6 +25,8 @@ import 'package:sj_presensi_mobile/pages/home/report/add/bloc/add_report_bloc.da
 import 'package:sj_presensi_mobile/pages/home/report/report_detail_page.dart';
 import 'package:sj_presensi_mobile/pages/lembur/detail_lembur.dart';
 import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/detail_lembur_bloc.dart';
+import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
+import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
 import 'package:sj_presensi_mobile/services/model/report_detail_page_model.dart';
 
@@ -66,6 +68,13 @@ class RouteGenerator {
       //   return MaterialPageRoute(builder: (context) {
       //     return ProfilePage();
       //   });
+      case NotifikasiPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return BlocProvider(
+            create: (context) => NotifikasiBloc(),
+            child: const NotifikasiPage(),
+          );
+        });
       case HistoryPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(

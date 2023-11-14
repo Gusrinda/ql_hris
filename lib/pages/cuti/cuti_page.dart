@@ -10,6 +10,7 @@ import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/add_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
+import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/list_cuti_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -158,11 +159,19 @@ class _CutiPageState extends State<CutiPage> {
                 iconSize: 20,
                 icon: const Icon(Icons.notifications_active),
                 onPressed: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => NotifikasiPage()),
-                  );
-                },
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider(
+                              create: (context) => NotifikasiBloc()
+                                ..add(
+                                  GetListNotifikasi(),
+                                ),
+                              child: NotifikasiPage(),
+                            ),
+                          ),
+                        );
+                      },
               ),
             ),
           ],

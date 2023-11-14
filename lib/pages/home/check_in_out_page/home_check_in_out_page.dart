@@ -8,6 +8,7 @@ import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
+import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -74,35 +75,43 @@ class HomeCheckInOutPage extends StatelessWidget {
                 title: "Selamat Datang, ${name ?? "Employe"}!",
                 // padLeft: 10,
                 actions: [
-          Container(
-            margin: const EdgeInsets.only(right: 10),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset.zero,
-                ),
-              ],
-            ),
-            height: MediaQuery.of(context).size.width * 0.1,
-            width: MediaQuery.of(context).size.width * 0.1,
-            child: IconButton(
-              splashRadius: 25,
-              iconSize: 20,
-              icon: const Icon(Icons.notifications_active),
-              onPressed: () async {
-                await Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => NotifikasiPage()),
-                );
-              },
-            ),
-          ),
-        ],
+                  Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: Offset.zero,
+                        ),
+                      ],
+                    ),
+                    height: MediaQuery.of(context).size.width * 0.1,
+                    width: MediaQuery.of(context).size.width * 0.1,
+                    child: IconButton(
+                      splashRadius: 25,
+                      iconSize: 20,
+                      icon: const Icon(Icons.notifications_active),
+                      onPressed: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider(
+                              create: (context) => NotifikasiBloc()
+                                ..add(
+                                  GetListNotifikasi(),
+                                ),
+                              child: NotifikasiPage(),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
               floatingActionButton: FloatingActionButton(
                 onPressed: () {

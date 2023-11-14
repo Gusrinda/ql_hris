@@ -10,6 +10,7 @@ import 'package:sj_presensi_mobile/componens/text_form_custom_v2.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/password_change.dart';
+import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -112,7 +113,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 onPressed: () async {
                   await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => NotifikasiPage()),
+                    MaterialPageRoute(
+                      builder: (context) => BlocProvider(
+                        create: (context) => NotifikasiBloc()
+                          ..add(
+                            GetListNotifikasi(),
+                          ),
+                        child: NotifikasiPage(),
+                      ),
+                    ),
                   );
                 },
               ),
