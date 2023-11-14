@@ -10,18 +10,16 @@ import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
-class ChangePasswordPage extends StatefulWidget {
+class ChangePasswordPage extends StatelessWidget {
   static const routeName = '/ChangePasswordPage';
   ChangePasswordPage({super.key});
 
-  @override
-  State<ChangePasswordPage> createState() => _ChangePasswordPageState();
-}
-
-class _ChangePasswordPageState extends State<ChangePasswordPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   final TextEditingController oldPasswordController = TextEditingController();
+
   final TextEditingController newPasswordController = TextEditingController();
+
   final TextEditingController confirmNewPasswordController =
       TextEditingController();
 
@@ -77,90 +75,96 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 10,
-                ),
-                Center(
-                  child: Align(
-                    alignment: Alignment.topCenter,
-                    child: Image.asset(
-                      "assets/images/change_password.png",
+            child: Form(
+              key: _formKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Center(
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: Image.asset(
+                        "assets/images/change_password.png",
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text(
-                  'Password barumu harus berbeda dari password yang digunakan sebelumnya',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: MyColorsConst.darkColor,
+                  const SizedBox(
+                    height: 10,
                   ),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                TextFormCustomV1(
-                  titleText: "Password Lama",
-                  hintText: "Masukkan password lama",
-                  isPassword: true,
-                  keyboardType: TextInputType.visiblePassword,
-                  controller: confirmNewPasswordController,
-                  validator: MultiValidator([
-                    RequiredValidator(errorText: "* Required!"),
-                  ]),
-                ),
-                const SizedBox(height: 20),
-                TextFormCustomV1(
-                  titleText: "Password Baru",
-                  hintText: "Masukkan password baru",
-                  isPassword: true,
-                  keyboardType: TextInputType.visiblePassword,
-                  controller: oldPasswordController,
-                  validator: MultiValidator([
-                    RequiredValidator(errorText: "* Required!"),
-                    MinLengthValidator(8,
-                        errorText: 'password must be at least 8 digits long!'),
-                    PatternValidator(r'(?=.*?[#?!@$%^&*-])',
-                        errorText:
-                            'passwords must have at least one special character!')
-                  ]),
-                ),
-                const SizedBox(height: 20),
-                TextFormCustomV1(
-                  titleText: "Konfirmasi Password Baru",
-                  hintText: "Konfirmasi password baru",
-                  isPassword: true,
-                  keyboardType: TextInputType.visiblePassword,
-                  controller: newPasswordController,
-                  validator: (val) => MatchValidator(
-                    errorText: 'passwords do not match!',
-                  ).validateMatch(
-                    val ?? "",
-                    newPasswordController.text,
+                  const Text(
+                    'Password barumu harus berbeda dari password yang digunakan sebelumnya',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: MyColorsConst.darkColor,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 40),
-                TextButtonCustomV1(
-                  text: "Ganti Password",
-                  backgroundColor: MyColorsConst.primaryColor,
-                  textColor: MyColorsConst.whiteColor,
-                  onPressed: () {
-                    print('password lama ${oldPasswordController}');
-                    print('password baru ${newPasswordController}');
-                    context.read<ProfileBloc>().add(
-                          EditPasswordProfile(
-                            oldPassword: oldPasswordController.text,
-                            newPassword: newPasswordController.text,
-                          ),
-                        );
-                  },
-                ),
-              ],
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  TextFormCustomV1(
+                    titleText: "Password Lama",
+                    hintText: "Masukkan password lama",
+                    isPassword: true,
+                    keyboardType: TextInputType.visiblePassword,
+                    controller: oldPasswordController,
+                    validator: MultiValidator([
+                      RequiredValidator(errorText: "* Required!"),
+                    ]),
+                  ),
+                  const SizedBox(height: 20),
+                  TextFormCustomV1(
+                    titleText: "Password Baru",
+                    hintText: "Masukkan password baru",
+                    isPassword: true,
+                    keyboardType: TextInputType.visiblePassword,
+                    controller: newPasswordController,
+                    validator: MultiValidator([
+                      RequiredValidator(errorText: "* Required!"),
+                      MinLengthValidator(8,
+                          errorText:
+                              'password must be at least 8 digits long!'),
+                      PatternValidator(r'(?=.*?[#?!@$%^&*-])',
+                          errorText:
+                              'passwords must have at least one special character!')
+                    ]),
+                  ),
+                  const SizedBox(height: 20),
+                  TextFormCustomV1(
+                    titleText: "Konfirmasi Password Baru",
+                    hintText: "Konfirmasi password baru",
+                    isPassword: true,
+                    keyboardType: TextInputType.visiblePassword,
+                    controller: confirmNewPasswordController,
+                    validator: (val) => MatchValidator(
+                      errorText: 'passwords do not match!',
+                    ).validateMatch(
+                      val ?? "",
+                      newPasswordController.text,
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  TextButtonCustomV1(
+                    text: "Ganti Password",
+                    backgroundColor: MyColorsConst.primaryColor,
+                    textColor: MyColorsConst.whiteColor,
+                    onPressed: () {
+                      print('password lama: ${newPasswordController}');
+                      print('password baru: ${confirmNewPasswordController}');
+                      context.read<ProfileBloc>().add(
+                            EditPasswordProfile(
+                              oldPassword: newPasswordController.text,
+                              newPassword: confirmNewPasswordController.text,
+                              status: _formKey.currentState!.validate(),
+                            ),
+                          );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

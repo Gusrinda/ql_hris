@@ -41,7 +41,6 @@ class ChangePasswordFailed extends ProfileState {
 }
 
 class GetDataProfileSuccess extends ProfileState {
-  
   String? imagePath;
   String? username;
   int? employeeId;

@@ -16,23 +16,42 @@ class ProfileServices {
     );
   }
 
+  // static Future<Object> editDataProfile(
+  //     String token, int userId, password, confirmPassword,
+  //     {String? imagePath}) async {
+  //   print("hasil password: ${password}");
+  //   print("hasil confirmpassword: ${confirmPassword}");
+  //   print("hasil image: ${imagePath}");
+  //   var url =
+  //       Uri.parse("${MyGeneralConst.API_URL}/operation/default_users/$userId");
+  //   return await GeneralServices.baseService(
+  //     url: url,
+  //     method: GeneralServicesMethod.put,
+  //     headers: GeneralServices.addToken2Headers(token),
+  //     body: {
+  //       "password": password,
+  //       "password_confirm": confirmPassword,
+  //     },
+  //     imagePath: imagePath,
+  //   );
+  // }
+
   static Future<Object> editDataProfile(
-      String token, password, confirmPassword,
-      {String? imagePath}) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/default_users");
-    var body = {
-      "password" : password,
-      "password_confirm" : confirmPassword,
-    };
+    String token,
+    int userId,
+    password,
+    confirmPassword,
+  ) async {
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/default_users/$userId");
     return await GeneralServices.baseService(
-      url: url,
-      method: imagePath != null
-          ? GeneralServicesMethod.put
-          : GeneralServicesMethod.put,
-      headers: GeneralServices.addToken2Headers(token),
-      body: imagePath == null ? json.encode(body) : body,
-      imagePath: imagePath,
-    );
+        url: url,
+        method: GeneralServicesMethod.put,
+        headers: GeneralServices.addToken2Headers(token),
+        body: jsonEncode({
+          "password": password,
+          "password_confirm": confirmPassword,
+        }));
   }
 
   // static Future<Object> editProfile(

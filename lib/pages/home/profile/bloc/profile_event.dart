@@ -41,10 +41,12 @@ class EditDataProfile extends ProfileEvent {
 class EditPasswordProfile extends ProfileEvent {
   String oldPassword;
   String newPassword;
+  bool status;
 
   EditPasswordProfile({
     required this.oldPassword,
     required this.newPassword,
+    required this.status,
   });
 
   @override

@@ -55,6 +55,13 @@ class _ProfilePageState extends State<ProfilePage> {
           context.read<ProfileBloc>().add(GetDataProfile());
         } else if (state is LogoutSuccessInBackground) {
           LoadingDialog.dismissDialog(context);
+          await showDialog(
+            context: context,
+            builder: (_) => DialogCustom(
+              state: DialogCustomItem.success,
+              message: state.message,
+            ),
+          );
           Navigator.of(context)
               .pushNamedAndRemoveUntil(LoginPage.routeName, (route) => false);
         } else if (state is ProfileFailed) {

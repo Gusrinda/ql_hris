@@ -61,7 +61,7 @@ class _DialogCustomState extends State<DialogCustom> {
       "text": 'WARNING!',
     },
     {
-      "asset": 'assets/lotties/json/lottie_error.json',
+      "asset": 'assets/lotties/json/error.json',
       "color": Colors.red,
       "text": 'ERROR!',
     },
