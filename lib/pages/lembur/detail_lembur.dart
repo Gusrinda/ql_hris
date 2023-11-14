@@ -7,6 +7,8 @@ import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/detail_lembur_bloc.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
+import 'package:url_launcher/link.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailLemburPage extends StatefulWidget {
   static const routeName = '/DetailLemburPage';
@@ -245,13 +247,26 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                         const SizedBox(
                                           height: 5,
                                         ),
-                                        Text(
-                                          '${data.doc}',
-                                          style: const TextStyle(
-                                            fontSize: 10,
-                                            color: MyColorsConst.primaryColor,
-                                            fontWeight: FontWeight.w400,
-                                          ),
+                                        Column(
+                                          children: [
+                                            Link(
+                                              target: LinkTarget.self,
+                                              uri: Uri.parse('${data.doc}'),
+                                              builder: (context, followLink) =>
+                                                  GestureDetector(
+                                                onTap: followLink,
+                                                child: Text(
+                                                  "file.pdf",
+                                                  style: const TextStyle(
+                                                    fontSize: 10,
+                                                    color: MyColorsConst
+                                                        .primaryColor,
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
