@@ -53,18 +53,22 @@ class _DialogCustomState extends State<DialogCustom> {
     {
       "asset": 'assets/lotties/json/success.json',
       "color": Color.fromARGB(255, 11, 83, 143),
+      "text": 'SUCCESS!',
     },
     {
       "asset": 'assets/lotties/json/lottie_warning.json',
       "color": Colors.orange,
+      "text": 'WARNING!',
     },
     {
       "asset": 'assets/lotties/json/lottie_error.json',
       "color": Colors.red,
+      "text": 'ERROR!',
     },
     {
       "asset": 'assets/lotties/json/lottie_info.json',
       "color": Colors.blue,
+      "text": 'INFO!',
     },
   ];
 
@@ -81,13 +85,22 @@ class _DialogCustomState extends State<DialogCustom> {
           children: [
             Lottie.asset(dataLottie[widget.state.index]["asset"] as String,
                 height: 100),
-            const SizedBox(height: 25),
+            const SizedBox(height: 10),
+            Text(
+              dataLottie[widget.state.index]["text"] as String,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: MyColorsConst.darkColor,
+              ),
+            ),
+            const SizedBox(height: 15),
             Text(
               widget.message,
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 12),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             widget.state != DialogCustomItem.warning
                 ? dialogButton(
                     context,

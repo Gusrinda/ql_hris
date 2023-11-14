@@ -7,6 +7,9 @@ final Map<String, dynamic> stateDict = {
   "IN APPROVAL": {
     "name": "Menunggu Disetujui",
   },
+  "DRAFT": {
+    "name": "Menunggu Disetujui",
+  },
   "Aktif": {
     "name": "Disetujui",
   },
@@ -53,6 +56,8 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
     if (stateDict.containsKey(status)) {
       switch (status) {
         case "IN APPROVAL":
+          return Colors.blue;
+        case "DRAFT":
           return Colors.blue;
         case "REJECTED":
           return Colors.red;

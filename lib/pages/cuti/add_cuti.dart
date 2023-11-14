@@ -92,16 +92,16 @@ class _AddCutiPageState extends State<AddCutiPage> {
       }
     }
 
-    // Fungsi untuk menampilkan menu alasan cuti
+    // Fungsi untuk menampilkan menu Tipe cuti
     void _showTipeMenu(BuildContext context) async {
       if (selectTipeCuti.isEmpty) {
-        // Memastikan data alasan cuti sudah diambil
+        // Memastikan data Tipe cuti sudah diambil
         context.read<AddCutiBloc>().add(OnSelectTipeCuti());
         selectTipeCuti = context.read<AddCutiBloc>().dataTipeCuti;
       }
 
       if (selectTipeCuti.isNotEmpty) {
-        // Tampilkan menu dan lakukan pemilihan alasan cuti
+        // Tampilkan menu dan lakukan pemilihan Tipe cuti
         final DataTipeCuti? selectedTipeValue = await showMenu(
           context: context,
           position: const RelativeRect.fromLTRB(100, 0, 0, 0),
@@ -194,7 +194,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                     const SizedBox(
                       height: 8,
                     ),
-                    FormCuti(
+                    FormDropDown(
                       input: selectedTipeCutiDisplay,
                       onTap: () {
                         _showTipeMenu(context);
@@ -209,7 +209,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    FormCuti(
+                    FormDropDown(
                       input: selectedValue ?? "",
                       onTap: () {
                         _showAlasanMenu(context);

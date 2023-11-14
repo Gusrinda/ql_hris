@@ -24,6 +24,9 @@ final Map<String, dynamic> stateDict = {
   "REJECTED": {
     "name": "Ditolak",
   },
+  "DRAFT": {
+    "name": "Menunggu Disetujui",
+  },
 };
 
 class CutiPage extends StatefulWidget {
@@ -46,6 +49,8 @@ Color getColorFromStatus(String status) {
   if (stateDict.containsKey(status)) {
     switch (status) {
       case "IN APPROVAL":
+        return Colors.blue;
+      case "DRAFT":
         return Colors.blue;
       case "REJECTED":
         return Colors.red;

@@ -7,7 +7,8 @@ import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas.dart';
-import 'package:sj_presensi_mobile/pages/dinas/dinas_bloc/list_dinas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/dinas/add_dinas_bloc/add_dinas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/list_dinas_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -21,6 +22,9 @@ final Map<String, dynamic> stateDict = {
   },
   "REJECTED": {
     "name": "Ditolak",
+  },
+  "DRAFT": {
+    "name": "Menunggu Disetujui",
   },
 };
 
@@ -43,6 +47,8 @@ Color getColorFromStatus(String status) {
   if (stateDict.containsKey(status)) {
     switch (status) {
       case "IN APPROVAL":
+        return Colors.blue;
+      case "DRAFT":
         return Colors.blue;
       case "REJECTED":
         return Colors.red;
@@ -295,9 +301,23 @@ class _DinasPageState extends State<DinasPage> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => const AddDinasPage(),
-              ),
+              MaterialPageRoute(builder: (context) {
+                final addCutiBloc = AddDinasBloc()
+                  ..add(OnSelectDivisi())
+                  ..add(OnSelectDepartemen())
+                  ..add(OnSelectPosisi())
+                  ..add(OnSelectTemplateSpd())
+                  ..add(OnSelectDirektorat())
+                  ..add(OnSelectJenisSpd())
+                  ..add(OnSelectZona())
+                  ..add(OnSelectLokasiTujuan())
+                  ..add(OnSelectPic());
+
+                return BlocProvider.value(
+                  value: addCutiBloc,
+                  child: AddDinasPage(),
+                );
+              }),
             );
           },
           backgroundColor: MyColorsConst.primaryLightColor,
@@ -326,7 +346,7 @@ class ListViewByDate extends StatelessWidget {
       itemCount: dataList.length,
       itemBuilder: ((context, index) {
         var data = dataList[index];
-        String currentStatus = data.status as String;
+        String currentStatus = data.status as String? ?? '';
         Color currentColor = getColorFromStatus(currentStatus);
 
         return ListViewDinas(
@@ -357,14 +377,14 @@ class ListViewDinas extends StatelessWidget {
       subtitle: Stack(
         children: [
           Container(
-            height: 100,
+            height: 120,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6),
               color: currentColor,
             ),
           ),
           Container(
-            height: 100,
+            height: 120,
             margin: const EdgeInsets.only(bottom: 15, left: 5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6),
@@ -418,7 +438,7 @@ class ListViewDinas extends StatelessWidget {
                           fontWeight: FontWeight.w400),
                     ),
                     const SizedBox(
-                      height: 4,
+                      height: 8,
                     ),
                     Row(
                       children: [

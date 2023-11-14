@@ -5,8 +5,8 @@ import 'package:sj_presensi_mobile/services/model/cuti/getDataCuti/get_alasan_cu
 import '../../utils/const.dart';
 import '../HRIS/hero_widget.dart';
 
-class FormCuti extends StatelessWidget {
-  const FormCuti({
+class FormDropDown extends StatelessWidget {
+  const FormDropDown({
     Key? key,
     this.enabled = true,
     this.input = "",
@@ -17,6 +17,8 @@ class FormCuti extends StatelessWidget {
     required this.formTag,
     required this.valueController,
     required this.idController,
+    this.validator,
+    this.errorTextStyle,
   }) : super(key: key);
 
   final bool enabled;
@@ -28,6 +30,8 @@ class FormCuti extends StatelessWidget {
   final TextEditingController valueController;
   final TextEditingController idController;
   final VoidCallback? onTap;
+  final String? Function(String?)? validator;
+  final TextStyle? errorTextStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +65,7 @@ class FormCuti extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12,
                 ),
+                validator: validator,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.all(12),
                   border: InputBorder.none,
@@ -75,6 +80,96 @@ class FormCuti extends StatelessWidget {
                   hintStyle: TextStyle(
                     fontSize: 12,
                     fontStyle: FontStyle.italic,
+                  ),
+                  errorStyle: errorTextStyle,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class FormTemplateSpd extends StatelessWidget {
+  const FormTemplateSpd({
+    Key? key,
+    this.enabled = true,
+    this.input = "",
+    this.onTap,
+    required this.hintText,
+    required this.labelForm,
+    required this.labelTag,
+    required this.formTag,
+    required this.valueController,
+    required this.idController,
+    this.validator,
+    this.errorTextStyle,
+  }) : super(key: key);
+
+  final bool enabled;
+  final String input;
+  final String labelForm;
+  final String hintText;
+  final String labelTag;
+  final String formTag;
+  final TextEditingController valueController;
+  final TextEditingController idController;
+  final VoidCallback? onTap;
+  final String? Function(String?)? validator;
+  final TextStyle? errorTextStyle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Hero(
+          tag: labelTag,
+          flightShuttleBuilder: flightShuttleBuilder,
+          child: FormTextLabel(
+            label: labelForm,
+            labelColor: MyColorsConst.darkColor,
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Hero(
+          tag: formTag,
+          child: Material(
+            color: Colors.transparent,
+            child: Container(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(color: Color(0xFFDDDDDD)),
+                ),
+                child: TextFormField(
+                  readOnly: true,
+                  onTap: onTap,
+                  controller: valueController, // Menggunakan valueController
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                  validator: validator,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.all(12),
+                    border: InputBorder.none,
+                    suffixIcon: Padding(
+                      padding: EdgeInsets.all(12.0),
+                      child: Icon(
+                        Icons.search,
+                        color: MyColorsConst.primaryColor,
+                      ),
+                    ),
+                    hintText: hintText,
+                    hintStyle: TextStyle(
+                      fontSize: 12,
+                      fontStyle: FontStyle.italic,
+                    ),
+                    errorStyle: errorTextStyle,
                   ),
                 ),
               ),
