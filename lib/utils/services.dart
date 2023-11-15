@@ -40,7 +40,10 @@ class GeneralServices {
   };
   static Map<String, String> addToken2Headers(String token) {
     Map<String, String> headers = Map<String, String>.from(_headers)
-      ..addAll({'Authorization': "Bearer $token", 'Source': "mobile"});
+      ..addAll({
+        'Authorization': "Bearer $token",
+        // 'Source': "mobile"
+      });
 
     return headers;
   }
@@ -82,8 +85,7 @@ class GeneralServices {
           url,
           headers: headers,
         );
-      } 
-      else if (method == GeneralServicesMethod.putMultipart) {
+      } else if (method == GeneralServicesMethod.putMultipart) {
         body = body as Map<String, dynamic>;
         Map<String, String> bodyFormed = {};
         for (var key in body.keys) {
@@ -97,15 +99,13 @@ class GeneralServices {
               'profile_image', imagePath!)); // Mengunggah berkas gambar
         var res = await request.send();
         response = await http.Response.fromStream(res);
-      }
-      else if (method == GeneralServicesMethod.put) {
+      } else if (method == GeneralServicesMethod.put) {
         response = await http.put(
           url,
           headers: headers,
           body: body,
         );
-      }
-      else {
+      } else {
         response = await http.delete(
           url,
           headers: headers,

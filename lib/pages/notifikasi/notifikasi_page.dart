@@ -118,6 +118,7 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return BlocListener<NotifikasiBloc, NotifikasiState>(
       listener: (context, state) async {
         if (state is ListNotifikasiLoading) {
@@ -156,44 +157,66 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
           // centerTitle: true,
           padLeft: 8,
         ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: Column(
+        body: BlocBuilder<NotifikasiBloc, NotifikasiState>(
+          builder: (context, state) {
+            var listNotifikasi = context.read<NotifikasiBloc>().listNotifikasi;
+
+            return Stack(
               children: [
-                BlocBuilder<NotifikasiBloc, NotifikasiState>(
-                  builder: (context, state) {
-                    var listNotifikasi =
-                        context.read<NotifikasiBloc>().listNotifikasi;
+                if (listNotifikasi.isNotEmpty)
+                  SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 20),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: listNotifikasi.length,
+                        itemBuilder: (context, index) {
+                          var data = listNotifikasi;
+                          if (data[index].trxName != null &&
+                              data[index].actionType != null) {
+                            getIconAndColor(
+                                data[index].trxName!, data[index].actionType!);
 
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: listNotifikasi.length,
-                      itemBuilder: (context, index) {
-                        var data = listNotifikasi;
-                        if (data[index].trxName != null &&
-                            data[index].actionType != null) {
-                          getIconAndColor(
-                              data[index].trxName!, data[index].actionType!);
-
-                          return CardListNotifikasi(
-                            tipeNotifikasi: data[index].trxName!,
-                            status: data[index].actionType!,
-                            iconNotifikasi: iconNotifikasi,
-                            warnaStatus: warnaStatus,
-                            data: data[index],
-                          );
-                        } else {
-                          // Handle jika trxName atau actionType null
-                          return SizedBox.shrink();
-                        }
-                      },
-                    );
-                  },
-                ),
+                            return CardListNotifikasi(
+                              tipeNotifikasi: data[index].trxName!,
+                              status: data[index].actionType!,
+                              iconNotifikasi: iconNotifikasi,
+                              warnaStatus: warnaStatus,
+                              data: data[index],
+                            );
+                          } else {
+                            return SizedBox.shrink();
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                if (listNotifikasi.isEmpty)
+                  Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/images/box_nodata.png",
+                          height: size.width * 1 / 2,
+                        ),
+                        const SizedBox(height: 8),
+                        const Text(
+                          "Tidak ada data yang ditampilkan!",
+                          style: TextStyle(
+                            color: MyColorsConst.darkColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
               ],
-            ),
-          ),
+            );
+          },
         ),
       ),
     );
@@ -217,11 +240,9 @@ class CardListNotifikasi extends StatelessWidget {
   final Datum data;
 
   String mapStatusToString(String status) {
-    // Define the logic to map status to a string
-    // For example:
     switch (status) {
       case "Pengajuan Cuti":
-        return "Pengajuan Cuti"; // Adjust this according to your logic
+        return "Pengajuan Cuti";
       case "Disetujui":
         return "Disetujui";
       case "Ditolak":

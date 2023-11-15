@@ -5,8 +5,10 @@ import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/add_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
+import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas_bloc/add_dinas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/add_check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/location_acio_bloc.dart';
@@ -103,14 +105,27 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
             create: (context) => AddCutiBloc(),
-            child: AddCutiPage(),
+            child: AddCutiPage(
+              reloadDataCallback: () {
+                context
+                    .read<ListCutiBloc>()
+                    .add(GetListCuti(date: DateTime.now()));
+              },
+            ),
           );
         });
+
       case AddDinasPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
             create: (context) => AddDinasBloc(),
-            child: AddDinasPage(),
+            child: AddDinasPage(
+              reloadDataCallback: () {
+                context
+                    .read<ListDinasBloc>()
+                    .add(GetListDinas(date: DateTime.now()));
+              },
+            ),
           );
         });
       case AddCheckInOutPage.routeName:

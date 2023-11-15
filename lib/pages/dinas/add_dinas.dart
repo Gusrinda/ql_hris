@@ -23,7 +23,8 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 
 class AddDinasPage extends StatefulWidget {
   static const routeName = '/AddDinasPage';
-  AddDinasPage({super.key});
+  AddDinasPage({super.key, required this.reloadDataCallback});
+  final VoidCallback reloadDataCallback;
 
   // Divisi Controller
   final TextEditingController idDivisiController = TextEditingController();
@@ -631,6 +632,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
               ),
             );
             Navigator.of(context).pop();
+            widget.reloadDataCallback();
           } else if (state is AddDinasFailed) {
             LoadingDialog.dismissDialog(context);
             await showDialog(

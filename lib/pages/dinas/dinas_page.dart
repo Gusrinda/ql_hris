@@ -97,6 +97,15 @@ DateTime? selectedMonth;
 DateTime? selectedYear;
 
 class _DinasPageState extends State<DinasPage> {
+
+  void initState() {
+    super.initState();
+    loadData();
+  }
+  void loadData() {
+    context.read<ListDinasBloc>().add(GetListDinas(date: DateTime.now()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<ListDinasBloc, ListDinasState>(
@@ -324,7 +333,7 @@ class _DinasPageState extends State<DinasPage> {
 
                 return BlocProvider.value(
                   value: addCutiBloc,
-                  child: AddDinasPage(),
+                  child: AddDinasPage(reloadDataCallback: loadData,),
                 );
               }),
             );
