@@ -119,19 +119,19 @@ class _LemburPageState extends State<LemburPage> {
                 iconSize: 20,
                 icon: const Icon(Icons.notifications_active),
                 onPressed: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BlocProvider(
-                              create: (context) => NotifikasiBloc()
-                                ..add(
-                                  GetListNotifikasi(),
-                                ),
-                              child: NotifikasiPage(),
-                            ),
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BlocProvider(
+                        create: (context) => NotifikasiBloc()
+                          ..add(
+                            GetListNotifikasi(),
                           ),
-                        );
-                      },
+                        child: NotifikasiPage(),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ],
@@ -276,116 +276,115 @@ class _LemburPageState extends State<LemburPage> {
                                   child: Stack(
                                     children: [
                                       Container(
-                                        height: 100,
+                                        height: 90,
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(6),
-                                          color: Colors.blue,
+                                          color: Color(0XFF0068D4),
                                         ),
                                       ),
                                       Container(
-                                        height: 100,
+                                        height: 90,
                                         margin: const EdgeInsets.only(
-                                            bottom: 15, left: 5),
+                                            bottom: 7, left: 5),
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(6),
-                                          border: Border.all(
-                                              color: const Color(0xFFDDDDDD)),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black
+                                                    .withOpacity(0.1),
+                                                offset: Offset(0, 0),
+                                                blurRadius: 5)
+                                          ],
                                           color: MyColorsConst.whiteColor,
                                         ),
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 12, vertical: 10),
+                                            horizontal: 15, vertical: 15),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
-                                            const SizedBox(height: 10),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                            Row(
                                               children: [
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      "${data[index].nomor ?? 0}",
-                                                      style: const TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
+                                                Text(
+                                                  "${data[index].nomor ?? 0}",
+                                                  style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                                const Spacer(),
+                                                Container(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 6,
+                                                      vertical: 3),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            4),
+                                                    color: Colors.blue
+                                                        .withOpacity(0.1),
+                                                  ),
+                                                  child: Text(
+                                                    '${data[index].tipeLemburValue}',
+                                                    style: const TextStyle(
+                                                      color: Color(0XFF0068D4),
+                                                      fontSize: 10,
+                                                      fontWeight:
+                                                          FontWeight.w500,
                                                     ),
-                                                    const Spacer(),
-                                                    Container(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              5),
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                        color: Colors.blue
-                                                            .withOpacity(0.1),
-                                                      ),
-                                                      child: Text(
-                                                        '${data[index].tipeLemburValue}',
-                                                        style: const TextStyle(
-                                                          color: Colors.blue,
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 4,
+                                            ),
+                                            Row(
+                                              children: [
+                                                const Icon(
+                                                  Icons.calendar_month_rounded,
+                                                  color: MyColorsConst
+                                                      .lightDarkColor,
+                                                  size: 10,
                                                 ),
                                                 const SizedBox(
-                                                  height: 4,
+                                                    width:
+                                                        5), // Atur jarak sesuai kebutuhan
+                                                Text(
+                                                  '${formatDate(data[index].tanggal)}',
+                                                  style: const TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 10,
+                                                      fontWeight:
+                                                          FontWeight.w400),
                                                 ),
-                                                Row(
-                                                  children: [
-                                                    const Icon(
-                                                      Icons
-                                                          .calendar_month_rounded,
-                                                      color: MyColorsConst
-                                                          .lightDarkColor,
-                                                      size: 10,
-                                                    ),
-                                                    const SizedBox(
-                                                        width:
-                                                            5), // Atur jarak sesuai kebutuhan
-                                                    Text(
-                                                      '${formatDate(data[index].tanggal)}',
-                                                      style: const TextStyle(
-                                                          color: Colors.grey,
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.w400),
-                                                    ),
-                                                  ],
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 4,
+                                            ),
+                                            Row(
+                                              children: [
+                                                const Icon(
+                                                  Icons.access_time_filled,
+                                                  color: MyColorsConst
+                                                      .lightDarkColor,
+                                                  size: 10,
                                                 ),
-                                                const SizedBox(
-                                                  height: 4,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    const Icon(
-                                                      Icons.access_time_filled,
-                                                      color: MyColorsConst
-                                                          .lightDarkColor,
-                                                      size: 10,
-                                                    ),
-                                                    const SizedBox(width: 5),
-                                                    Text(
-                                                      "${extractTime(data[index].jamMulai)} - ${extractTime(data[index].jamSelesai)}",
-                                                      style: const TextStyle(
-                                                          color: Colors.grey,
-                                                          fontSize: 10,
-                                                          fontWeight:
-                                                              FontWeight.w400),
-                                                    ),
-                                                  ],
+                                                const SizedBox(width: 5),
+                                                Text(
+                                                  "${extractTime(data[index].jamMulai)} - ${extractTime(data[index].jamSelesai)}",
+                                                  style: const TextStyle(
+                                                      color: Colors.grey,
+                                                      fontSize: 10,
+                                                      fontWeight:
+                                                          FontWeight.w400),
                                                 ),
                                               ],
                                             ),

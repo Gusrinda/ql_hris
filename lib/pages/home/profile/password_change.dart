@@ -124,12 +124,12 @@ class ChangePasswordPage extends StatelessWidget {
                     controller: newPasswordController,
                     validator: MultiValidator([
                       RequiredValidator(errorText: "* Required!"),
-                      MinLengthValidator(8,
-                          errorText:
-                              'password must be at least 8 digits long!'),
-                      PatternValidator(r'(?=.*?[#?!@$%^&*-])',
-                          errorText:
-                              'passwords must have at least one special character!')
+                      // MinLengthValidator(8,
+                      //     errorText:
+                      //         'password must be at least 8 digits long!'),
+                      // PatternValidator(r'(?=.*?[#?!@$%^&*-])',
+                      //     errorText:
+                      //         'passwords must have at least one special character!')
                     ]),
                   ),
                   const SizedBox(height: 20),

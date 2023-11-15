@@ -48,13 +48,13 @@ Color getColorFromStatus(String status) {
   if (stateDict.containsKey(status)) {
     switch (status) {
       case "IN APPROVAL":
-        return Colors.blue;
+        return const Color(0xFF0068D4);
       case "DRAFT":
-        return Colors.blue;
+        return const Color(0xFF0068D4);
       case "REJECTED":
-        return Colors.red;
+        return const Color(0xFFED1B24);
       case "Aktif":
-        return Colors.green;
+        return const Color(0xFF0CA356);
       default:
         return Colors.grey; // warna default
     }
@@ -157,19 +157,19 @@ class _DinasPageState extends State<DinasPage> {
                 iconSize: 20,
                 icon: const Icon(Icons.notifications_active),
                 onPressed: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BlocProvider(
-                              create: (context) => NotifikasiBloc()
-                                ..add(
-                                  GetListNotifikasi(),
-                                ),
-                              child: NotifikasiPage(),
-                            ),
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BlocProvider(
+                        create: (context) => NotifikasiBloc()
+                          ..add(
+                            GetListNotifikasi(),
                           ),
-                        );
-                      },
+                        child: NotifikasiPage(),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ],
@@ -386,85 +386,114 @@ class ListViewDinas extends StatelessWidget {
       subtitle: Stack(
         children: [
           Container(
-            height: 120,
+            margin: EdgeInsets.only(right: 3),
+            height: 105,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6),
               color: currentColor,
             ),
           ),
           Container(
-            height: 120,
-            margin: const EdgeInsets.only(bottom: 15, left: 5),
+            height: 105,
+            margin: const EdgeInsets.only(bottom: 7, left: 5, right: 3),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: const Color(0xFFDDDDDD)),
+              // border: Border.all(color: const Color(0xFFDDDDDD)),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    offset: Offset(0, 0),
+                    blurRadius: 5)
+              ],
               color: MyColorsConst.whiteColor,
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const SizedBox(height: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        const Text(
-                          "Surat Perjalanan Dinas",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const Spacer(),
-                        Container(
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: currentColor.withOpacity(0.1),
-                          ),
-                          child: Text(
-                            mapStatusToString(currentStatus),
-                            style: TextStyle(
-                              color: currentColor,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ],
+                    const Text(
+                      "Surat Perjalanan Dinas",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                    const SizedBox(
-                      height: 4,
+                    const Spacer(),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6, vertical: 3),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: currentColor.withOpacity(0.1),
+                      ),
+                      child: Text(
+                        mapStatusToString(currentStatus),
+                        style: TextStyle(
+                          color: currentColor,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                     ),
-                    Text(
-                      "${data.mDivisiNama} | ${data.mDeptNama}",
-                      style: const TextStyle(
+                  ],
+                ),
+                const SizedBox(
+                  height: 4,
+                ),
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "${data.mDivisiNama}",
+                        style: const TextStyle(
                           color: MyColorsConst.darkColor,
                           fontSize: 10,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      const TextSpan(
+                        text: " | ",
+                        style: TextStyle(
+                          color: Color(
+                              0XFF0068D4), // Set the color of the pipe to blue
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      TextSpan(
+                        text: "${data.mDeptNama}",
+                        style: const TextStyle(
+                          color: MyColorsConst.darkColor,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.access_time_filled,
+                      color: MyColorsConst.lightDarkColor,
+                      size: 10,
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      "Dibuat Tanggal ${formatDate(data.createdAt)}",
+                      style: const TextStyle(
+                          color: Color(0XFF8F8F8F),
+                          fontSize: 10,
                           fontWeight: FontWeight.w400),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.access_time_filled,
-                          color: MyColorsConst.lightDarkColor,
-                          size: 10,
-                        ),
-                        const SizedBox(width: 5),
-                        Text(
-                          "Dibuat Tanggal ${formatDate(data.createdAt)}",
-                          style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ],
                     ),
                   ],
                 ),

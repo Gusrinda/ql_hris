@@ -29,33 +29,25 @@ class AuthenticationLayout extends StatelessWidget {
       "image2": "assets/images/Logo_Success_Jaya.png",
       "imageBottom": "assets/images/loginBottomHRIS.png",
     },
-    // {
-    //   "hideAppBar": true,
-    //   "title": "Ganti Password",
-    //   "subTitle": "Masukan data password anda",
-    //   // "paddingTop": 80.0,
-    //   "image": "assets/images/city.png",
-    //   "image2": "assets/images/Logo_Success_Jaya.png",
-    //   "imageBottom": "assets/images/loginBottomHRIS.png",
-    // },
   ];
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Scaffold(
-        // resizeToAvoidBottomInset: false,
-        appBar: layoutData[layoutState.index]["hideAppBar"] as bool
-            ? null
-            : AppBar(
-                backgroundColor: MyColorsConst.whiteColor,
-                elevation: 0,
-                iconTheme: const IconThemeData(
-                  color: MyColorsConst.primaryColor, //change your color here
-                ),
+    return Scaffold(
+      // resizeToAvoidBottomInset: false,
+      appBar: layoutData[layoutState.index]["hideAppBar"] as bool
+          ? null
+          : AppBar(
+              backgroundColor: MyColorsConst.whiteColor,
+              elevation: 0,
+              iconTheme: const IconThemeData(
+                color: MyColorsConst.primaryColor, //change your color here
               ),
-        body: SingleChildScrollView(
+            ),
+      body: SingleChildScrollView(
+        child: Container(
+          height: size.height,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,17 +61,16 @@ class AuthenticationLayout extends StatelessWidget {
                   // fit: BoxFit.fitWidth,
                 ),
               ),
-              SizedBox(
-                child: Image.asset(
-                  width: size.width * 1 / 2,
-                  layoutData[layoutState.index]["image2"] as String,
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Image.asset(
+                      width: size.width * 1 / 3,
+                      layoutData[layoutState.index]["image2"] as String,
+                    ),
+                    SizedBox(height: 30,),
                     Text(
                       layoutData[layoutState.index]["title"] as String,
                       style: const TextStyle(
@@ -98,20 +89,22 @@ class AuthenticationLayout extends StatelessWidget {
                   ],
                 ),
               ),
-              Form(
-                key: formKey,
-                autovalidateMode: autovalidateMode,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: contents,
+              SizedBox(
+                child: Form(
+                  key: formKey,
+                  autovalidateMode: autovalidateMode,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: contents,
+                    ),
                   ),
                 ),
               ),
               Container(
+                width: MediaQuery.of(context).size.width,
                 child: Image.asset(
-                  width: MediaQuery.of(context).size.width,
                   layoutData[layoutState.index]["imageBottom"] as String,
                   // fit: BoxFit.fitHeight,
                 ),

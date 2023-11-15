@@ -73,7 +73,6 @@ class _TextFormCustomV2State extends State<TextFormCustomV2> {
               child: TextFormField(
                 controller: widget.controller,
                 style: TextStyle(
-                  fontFamily: 'Poppins',
                   fontSize: 12,
                   color: MyColorsConst.darkColor,
                   fontWeight: FontWeight.w400,
@@ -84,7 +83,6 @@ class _TextFormCustomV2State extends State<TextFormCustomV2> {
                 decoration: InputDecoration(
                   hintText: widget.hintText,
                   hintStyle: const TextStyle(
-                    fontFamily: 'Poppins',
                     fontSize: 12,
                     color: MyColorsConst.lightDarkColor,
                     fontWeight: FontWeight.w400,

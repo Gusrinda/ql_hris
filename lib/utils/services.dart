@@ -94,7 +94,7 @@ class GeneralServices {
           ..fields.addAll(bodyFormed)
           ..headers.addAll(headers!)
           ..files.add(await http.MultipartFile.fromPath(
-              'foto', imagePath!)); // Mengunggah berkas gambar
+              'profile_image', imagePath!)); // Mengunggah berkas gambar
         var res = await request.send();
         response = await http.Response.fromStream(res);
       }

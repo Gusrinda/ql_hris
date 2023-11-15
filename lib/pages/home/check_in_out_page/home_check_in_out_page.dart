@@ -72,7 +72,7 @@ class HomeCheckInOutPage extends StatelessWidget {
             return Scaffold(
               backgroundColor: MyColorsConst.whiteColor,
               appBar: appBarCustomMain(
-                title: "Selamat Datang, ${name ?? "Employe"}!",
+                title: "Selamat Datang, ${name ?? "Pegawai SJ"}",
                 // padLeft: 10,
                 actions: [
                   Container(

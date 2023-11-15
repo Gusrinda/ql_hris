@@ -152,7 +152,7 @@ class AddCheckInOutPage extends StatelessWidget {
                                 Text(
                                   '${data != null ? DateFormat('EEEE, dd-MM-yyyy', 'id_ID').format(data.dateTime) : "-"}',
                                   style: TextStyle(
-                                      fontFamily: 'Poppins',
+                                      // fontFamily: 'Poppins',
                                       fontSize: 12,
                                       fontWeight: FontWeight.w500),
                                 ),
@@ -172,7 +172,7 @@ class AddCheckInOutPage extends StatelessWidget {
                                   Text(
                                     '${data != null ? DateFormat('HH:mm:ss').format(data.dateTime) : "-"}',
                                     style: TextStyle(
-                                        fontFamily: 'Poppins',
+                                        // fontFamily: 'Poppins',
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500),
                                   ),

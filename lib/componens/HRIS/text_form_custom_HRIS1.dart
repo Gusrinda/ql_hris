@@ -63,12 +63,12 @@ class _TextFormCustomHRIS1State extends State<TextFormCustomHRIS1> {
             decoration: InputDecoration(
               labelText: widget.labelText,
               labelStyle: TextStyle(
-                fontFamily: "Poppins",
+                // fontFamily: "Poppins",
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
               ),
               floatingLabelStyle: TextStyle(
-                fontFamily: "Poppins",
+                // fontFamily: "Poppins",
                 fontSize: 14,
                 fontWeight: FontWeight.w500
               ),

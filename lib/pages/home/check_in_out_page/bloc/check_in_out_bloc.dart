@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:sj_presensi_mobile/services/attendances_services.dart';
+import 'package:sj_presensi_mobile/services/profile_services.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
@@ -16,22 +17,25 @@ class CheckInOutBloc extends Bloc<CheckInOutEvent, CheckInOutState> {
         if (resToken is ServicesSuccess) {
           var res = await AttendancesServices.getAttendanceState(
               resToken.response["token"]);
-          if (res is ServicesSuccess) {
+          var resUser = await ProfileServices.getDataProfilel(
+              resToken.response["token"], resToken.response["id"]);
+          if (res is ServicesSuccess && resUser is ServicesSuccess) {
+            final name = resUser.response["data"]["name"] ?? 'Pegawai SJ';
             final jsonData = res.response["data"];
             final status = jsonData["status"];
 
             if (status == "ATTEND") {
               emit(InfoCheckInOutSuccessInBackground(
-                name: "Employee",
+                name: name,
               ));
             } else if (status == "NOT ATTEND") {
               emit(CheckInOutSuccessInBackground(
-                name: "Employee",
+                name: name,
                 isCheckin: true,
               ));
             } else if (status == "WORKING") {
               emit(CheckInOutSuccessInBackground(
-                name: "Employee",
+                name: name,
                 isCheckin: false,
               ));
             }

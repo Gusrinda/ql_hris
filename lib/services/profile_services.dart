@@ -25,9 +25,9 @@ class ProfileServices {
       url: url,
       method: GeneralServicesMethod.putMultipart,
       headers: GeneralServices.addToken2Headers(token),
-      body: {
-        "inputEmail": email,
-      },
+      // body: {
+      //   "inputEmail": email,
+      // },
       imagePath: imagePath,
     );
   }
