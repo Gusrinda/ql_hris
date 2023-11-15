@@ -30,3 +30,10 @@ class SortByCuti extends ListCutiEvent {
         selectedYear != null ? selectedYear! : ""
       ];
 }
+
+class CutiAdded extends ListCutiEvent {
+  CutiAdded();
+
+  @override
+  List<Object> get props => [];
+}

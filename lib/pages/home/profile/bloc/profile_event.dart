@@ -66,3 +66,5 @@ class EditImageProfile extends ProfileEvent {
   @override
   List<Object> get props => [imagePath ?? ""];
 }
+
+

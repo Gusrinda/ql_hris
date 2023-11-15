@@ -19,6 +19,22 @@ class ProfileModel {
         username: json["username"],
         phoneNumber: json["telp"],
       );
+
+  // ProfileModel copyWith({
+  //   String? imagePath,
+  //   String? email,
+  //   int? employeeId,
+  //   String? username,
+  //   String? phoneNumber,
+  // }) {
+  //   return ProfileModel(
+  //     imagePath: imagePath ?? this.imagePath,
+  //     email: email ?? this.email,
+  //     employeeId: employeeId ?? this.employeeId,
+  //     username: username ?? this.username,
+  //     phoneNumber: phoneNumber ?? this.phoneNumber,
+  //   );
+  // }
 }
 
 // import 'package:freezed_annotation/freezed_annotation.dart';

@@ -16,7 +16,8 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 
 class AddCutiPage extends StatefulWidget {
   static const routeName = '/AddCutiPage';
-  AddCutiPage({super.key});
+  AddCutiPage({super.key, required this.reloadDataCallback});
+   final VoidCallback reloadDataCallback;
 
   final TextEditingController idAlasanController = TextEditingController();
   final TextEditingController valueAlasanController = TextEditingController();
@@ -148,6 +149,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
             ),
           );
           Navigator.of(context).pop();
+          widget.reloadDataCallback();
         } else if (state is AddCutiFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(

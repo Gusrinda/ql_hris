@@ -99,6 +99,14 @@ DateTime? selectedMonth;
 DateTime? selectedYear;
 
 class _CutiPageState extends State<CutiPage> {
+  void initState() {
+    super.initState();
+    loadData();
+  }
+  void loadData() {
+    context.read<ListCutiBloc>().add(GetListCuti(date: DateTime.now()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<ListCutiBloc, ListCutiState>(
@@ -159,19 +167,19 @@ class _CutiPageState extends State<CutiPage> {
                 iconSize: 20,
                 icon: const Icon(Icons.notifications_active),
                 onPressed: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BlocProvider(
-                              create: (context) => NotifikasiBloc()
-                                ..add(
-                                  GetListNotifikasi(),
-                                ),
-                              child: NotifikasiPage(),
-                            ),
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BlocProvider(
+                        create: (context) => NotifikasiBloc()
+                          ..add(
+                            GetListNotifikasi(),
                           ),
-                        );
-                      },
+                        child: NotifikasiPage(),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ],
@@ -315,16 +323,15 @@ class _CutiPageState extends State<CutiPage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) {
-                  final addCutiBloc = AddCutiBloc()
+                builder: (context) => BlocProvider(
+                  create: (context) => AddCutiBloc()
                     ..add(OnSelectAlasanCuti())
-                    ..add(OnSelectTipeCuti());
-
-                  return BlocProvider.value(
-                    value: addCutiBloc,
-                    child: AddCutiPage(),
-                  );
-                },
+                    ..add(OnSelectTipeCuti()),
+                  child: AddCutiPage(
+                    // Teruskan callback ke AddCutiPage
+                    reloadDataCallback: loadData,
+                  ),
+                ),
               ),
             );
           },

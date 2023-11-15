@@ -11,6 +11,7 @@ part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileModel? profileModel;
+  ProfileModel formDataSubmited = ProfileModel();
 
   ProfileBloc() : super(ProfileInitial()) {
     on<GetDataProfile>((event, emit) async {
