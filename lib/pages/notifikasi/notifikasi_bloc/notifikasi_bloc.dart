@@ -9,7 +9,7 @@ part 'notifikasi_event.dart';
 part 'notifikasi_state.dart';
 
 class NotifikasiBloc extends Bloc<NotifikasiEvent, NotifikasiState> {
-  List<Datum> listNotifikasi = [];
+  List<DataNotif> listNotifikasi = [];
   NotifikasiBloc() : super(ListNotifikasiInitial()) {
     on<GetListNotifikasi>((event, emit) async {
       emit(ListNotifikasiLoading());

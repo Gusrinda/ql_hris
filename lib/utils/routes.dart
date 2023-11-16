@@ -99,7 +99,10 @@ class RouteGenerator {
       case DetailCutiPage.routeName:
         final data = settings.arguments as DetailCutiPage;
         return MaterialPageRoute(builder: (context) {
-          return DetailCutiPage(data: data.data);
+          return DetailCutiPage(
+            data: data.data,
+            nomor: data.nomor,
+          );
         });
       case AddCutiPage.routeName:
         return MaterialPageRoute(builder: (context) {

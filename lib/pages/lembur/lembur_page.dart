@@ -334,7 +334,7 @@ class _LemburPageState extends State<LemburPage> {
                                                     '${data[index].tipeLemburValue}',
                                                     style: const TextStyle(
                                                       color: Color(0XFF0068D4),
-                                                      fontSize: 10,
+                                                      fontSize: 8,
                                                       fontWeight:
                                                           FontWeight.w500,
                                                     ),

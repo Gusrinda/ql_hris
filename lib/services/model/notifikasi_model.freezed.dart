@@ -23,7 +23,7 @@ mixin _$NotifikasiModel {
   @JsonKey(name: "current_page")
   int? get currentPage => throw _privateConstructorUsedError;
   @JsonKey(name: "data")
-  List<Datum>? get data => throw _privateConstructorUsedError;
+  List<DataNotif>? get data => throw _privateConstructorUsedError;
   @JsonKey(name: "first_page_url")
   String? get firstPageUrl => throw _privateConstructorUsedError;
   @JsonKey(name: "from")
@@ -61,7 +61,7 @@ abstract class $NotifikasiModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: "current_page") int? currentPage,
-      @JsonKey(name: "data") List<Datum>? data,
+      @JsonKey(name: "data") List<DataNotif>? data,
       @JsonKey(name: "first_page_url") String? firstPageUrl,
       @JsonKey(name: "from") int? from,
       @JsonKey(name: "last_page") int? lastPage,
@@ -110,7 +110,7 @@ class _$NotifikasiModelCopyWithImpl<$Res, $Val extends NotifikasiModel>
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<Datum>?,
+              as List<DataNotif>?,
       firstPageUrl: freezed == firstPageUrl
           ? _value.firstPageUrl
           : firstPageUrl // ignore: cast_nullable_to_non_nullable
@@ -169,7 +169,7 @@ abstract class _$$NotifikasiModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: "current_page") int? currentPage,
-      @JsonKey(name: "data") List<Datum>? data,
+      @JsonKey(name: "data") List<DataNotif>? data,
       @JsonKey(name: "first_page_url") String? firstPageUrl,
       @JsonKey(name: "from") int? from,
       @JsonKey(name: "last_page") int? lastPage,
@@ -216,7 +216,7 @@ class __$$NotifikasiModelImplCopyWithImpl<$Res>
       data: freezed == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<Datum>?,
+              as List<DataNotif>?,
       firstPageUrl: freezed == firstPageUrl
           ? _value.firstPageUrl
           : firstPageUrl // ignore: cast_nullable_to_non_nullable
@@ -270,7 +270,7 @@ class __$$NotifikasiModelImplCopyWithImpl<$Res>
 class _$NotifikasiModelImpl implements _NotifikasiModel {
   const _$NotifikasiModelImpl(
       {@JsonKey(name: "current_page") this.currentPage,
-      @JsonKey(name: "data") final List<Datum>? data,
+      @JsonKey(name: "data") final List<DataNotif>? data,
       @JsonKey(name: "first_page_url") this.firstPageUrl,
       @JsonKey(name: "from") this.from,
       @JsonKey(name: "last_page") this.lastPage,
@@ -291,10 +291,10 @@ class _$NotifikasiModelImpl implements _NotifikasiModel {
   @override
   @JsonKey(name: "current_page")
   final int? currentPage;
-  final List<Datum>? _data;
+  final List<DataNotif>? _data;
   @override
   @JsonKey(name: "data")
-  List<Datum>? get data {
+  List<DataNotif>? get data {
     final value = _data;
     if (value == null) return null;
     if (_data is EqualUnmodifiableListView) return _data;
@@ -411,7 +411,7 @@ class _$NotifikasiModelImpl implements _NotifikasiModel {
 abstract class _NotifikasiModel implements NotifikasiModel {
   const factory _NotifikasiModel(
       {@JsonKey(name: "current_page") final int? currentPage,
-      @JsonKey(name: "data") final List<Datum>? data,
+      @JsonKey(name: "data") final List<DataNotif>? data,
       @JsonKey(name: "first_page_url") final String? firstPageUrl,
       @JsonKey(name: "from") final int? from,
       @JsonKey(name: "last_page") final int? lastPage,
@@ -432,7 +432,7 @@ abstract class _NotifikasiModel implements NotifikasiModel {
   int? get currentPage;
   @override
   @JsonKey(name: "data")
-  List<Datum>? get data;
+  List<DataNotif>? get data;
   @override
   @JsonKey(name: "first_page_url")
   String? get firstPageUrl;
@@ -472,12 +472,12 @@ abstract class _NotifikasiModel implements NotifikasiModel {
       throw _privateConstructorUsedError;
 }
 
-Datum _$DatumFromJson(Map<String, dynamic> json) {
-  return _Datum.fromJson(json);
+DataNotif _$DataNotifFromJson(Map<String, dynamic> json) {
+  return _DataNotif.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Datum {
+mixin _$DataNotif {
   @JsonKey(name: "id")
   int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: "m_comp_id")
@@ -525,13 +525,14 @@ mixin _$Datum {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DatumCopyWith<Datum> get copyWith => throw _privateConstructorUsedError;
+  $DataNotifCopyWith<DataNotif> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DatumCopyWith<$Res> {
-  factory $DatumCopyWith(Datum value, $Res Function(Datum) then) =
-      _$DatumCopyWithImpl<$Res, Datum>;
+abstract class $DataNotifCopyWith<$Res> {
+  factory $DataNotifCopyWith(DataNotif value, $Res Function(DataNotif) then) =
+      _$DataNotifCopyWithImpl<$Res, DataNotif>;
   @useResult
   $Res call(
       {@JsonKey(name: "id") int? id,
@@ -559,9 +560,9 @@ abstract class $DatumCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DatumCopyWithImpl<$Res, $Val extends Datum>
-    implements $DatumCopyWith<$Res> {
-  _$DatumCopyWithImpl(this._value, this._then);
+class _$DataNotifCopyWithImpl<$Res, $Val extends DataNotif>
+    implements $DataNotifCopyWith<$Res> {
+  _$DataNotifCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -688,10 +689,11 @@ class _$DatumCopyWithImpl<$Res, $Val extends Datum>
 }
 
 /// @nodoc
-abstract class _$$DatumImplCopyWith<$Res> implements $DatumCopyWith<$Res> {
-  factory _$$DatumImplCopyWith(
-          _$DatumImpl value, $Res Function(_$DatumImpl) then) =
-      __$$DatumImplCopyWithImpl<$Res>;
+abstract class _$$DataNotifImplCopyWith<$Res>
+    implements $DataNotifCopyWith<$Res> {
+  factory _$$DataNotifImplCopyWith(
+          _$DataNotifImpl value, $Res Function(_$DataNotifImpl) then) =
+      __$$DataNotifImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -720,11 +722,11 @@ abstract class _$$DatumImplCopyWith<$Res> implements $DatumCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$DatumImplCopyWithImpl<$Res>
-    extends _$DatumCopyWithImpl<$Res, _$DatumImpl>
-    implements _$$DatumImplCopyWith<$Res> {
-  __$$DatumImplCopyWithImpl(
-      _$DatumImpl _value, $Res Function(_$DatumImpl) _then)
+class __$$DataNotifImplCopyWithImpl<$Res>
+    extends _$DataNotifCopyWithImpl<$Res, _$DataNotifImpl>
+    implements _$$DataNotifImplCopyWith<$Res> {
+  __$$DataNotifImplCopyWithImpl(
+      _$DataNotifImpl _value, $Res Function(_$DataNotifImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -753,7 +755,7 @@ class __$$DatumImplCopyWithImpl<$Res>
     Object? updatedAt = freezed,
     Object? text = freezed,
   }) {
-    return _then(_$DatumImpl(
+    return _then(_$DataNotifImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -848,8 +850,8 @@ class __$$DatumImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$DatumImpl implements _Datum {
-  const _$DatumImpl(
+class _$DataNotifImpl implements _DataNotif {
+  const _$DataNotifImpl(
       {@JsonKey(name: "id") this.id,
       @JsonKey(name: "m_comp_id") this.mCompId,
       @JsonKey(name: "m_dir_id") this.mDirId,
@@ -873,8 +875,8 @@ class _$DatumImpl implements _Datum {
       @JsonKey(name: "updated_at") this.updatedAt,
       @JsonKey(name: "text") this.text});
 
-  factory _$DatumImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DatumImplFromJson(json);
+  factory _$DataNotifImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DataNotifImplFromJson(json);
 
   @override
   @JsonKey(name: "id")
@@ -945,14 +947,14 @@ class _$DatumImpl implements _Datum {
 
   @override
   String toString() {
-    return 'Datum(id: $id, mCompId: $mCompId, mDirId: $mDirId, nomor: $nomor, generateApprovalId: $generateApprovalId, generateApprovalDetId: $generateApprovalDetId, trxTable: $trxTable, trxId: $trxId, trxName: $trxName, trxNomor: $trxNomor, trxDate: $trxDate, trxObject: $trxObject, trxCreatorId: $trxCreatorId, actionType: $actionType, actionUserId: $actionUserId, actionAt: $actionAt, actionNote: $actionNote, creatorId: $creatorId, lastEditorId: $lastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, text: $text)';
+    return 'DataNotif(id: $id, mCompId: $mCompId, mDirId: $mDirId, nomor: $nomor, generateApprovalId: $generateApprovalId, generateApprovalDetId: $generateApprovalDetId, trxTable: $trxTable, trxId: $trxId, trxName: $trxName, trxNomor: $trxNomor, trxDate: $trxDate, trxObject: $trxObject, trxCreatorId: $trxCreatorId, actionType: $actionType, actionUserId: $actionUserId, actionAt: $actionAt, actionNote: $actionNote, creatorId: $creatorId, lastEditorId: $lastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, text: $text)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DatumImpl &&
+            other is _$DataNotifImpl &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other.mCompId, mCompId) &&
             const DeepCollectionEquality().equals(other.mDirId, mDirId) &&
@@ -1021,19 +1023,19 @@ class _$DatumImpl implements _Datum {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$DatumImplCopyWith<_$DatumImpl> get copyWith =>
-      __$$DatumImplCopyWithImpl<_$DatumImpl>(this, _$identity);
+  _$$DataNotifImplCopyWith<_$DataNotifImpl> get copyWith =>
+      __$$DataNotifImplCopyWithImpl<_$DataNotifImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DatumImplToJson(
+    return _$$DataNotifImplToJson(
       this,
     );
   }
 }
 
-abstract class _Datum implements Datum {
-  const factory _Datum(
+abstract class _DataNotif implements DataNotif {
+  const factory _DataNotif(
       {@JsonKey(name: "id") final int? id,
       @JsonKey(name: "m_comp_id") final dynamic mCompId,
       @JsonKey(name: "m_dir_id") final dynamic mDirId,
@@ -1056,9 +1058,10 @@ abstract class _Datum implements Datum {
       @JsonKey(name: "last_editor_id") final dynamic lastEditorId,
       @JsonKey(name: "created_at") final String? createdAt,
       @JsonKey(name: "updated_at") final String? updatedAt,
-      @JsonKey(name: "text") final String? text}) = _$DatumImpl;
+      @JsonKey(name: "text") final String? text}) = _$DataNotifImpl;
 
-  factory _Datum.fromJson(Map<String, dynamic> json) = _$DatumImpl.fromJson;
+  factory _DataNotif.fromJson(Map<String, dynamic> json) =
+      _$DataNotifImpl.fromJson;
 
   @override
   @JsonKey(name: "id")
@@ -1128,7 +1131,7 @@ abstract class _Datum implements Datum {
   String? get text;
   @override
   @JsonKey(ignore: true)
-  _$$DatumImplCopyWith<_$DatumImpl> get copyWith =>
+  _$$DataNotifImplCopyWith<_$DataNotifImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

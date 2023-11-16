@@ -93,34 +93,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       }
     });
 
-    // on<EditDataProfile>((event, emit) async {
-    //   if (event.phoneNumber != null) {
-    //     emit(ProfileLoading());
-    //     var resToken = await GeneralSharedPreferences.getUserToken();
-    //     if (resToken is ServicesSuccess) {
-    //       var res = await ProfileServices.editImageProfile(
-    //         resToken.response["token"],
-    //         resToken.response["id"] ?? 1,
-    //         profileModel?.email,
-    //         profileModel?.username,
-    //         event.phoneNumber,
-    //       );
-    //       if (res is ServicesSuccess) {
-    //         emit(ProfileSuccessInBackground());
-    //       } else if (res is ServicesFailure) {
-    //         if (res.errorResponse == null) {
-    //           await GeneralSharedPreferences.removeUserToken();
-    //           emit(ProfileFailedUserExpired(message: "Token expired"));
-    //         } else {
-    //           emit(ProfileFailed(message: res.errorResponse));
-    //         }
-    //       }
-    //     } else if (resToken is ServicesFailure) {
-    //       emit(ProfileFailedInBackground());
-    //     }
-    //   }
-    // });
-
     on<EditPasswordProfile>((event, emit) async {
       if (event.status) {
         emit(ProfileLoading());

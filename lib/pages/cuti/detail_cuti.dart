@@ -30,6 +30,7 @@ class DetailCutiPage extends StatefulWidget {
     this.status,
     this.keterangan,
     this.tipeCutiValue,
+    required this.nomor,
   });
   final dynamic data;
   final String? dateFrom;
@@ -38,6 +39,7 @@ class DetailCutiPage extends StatefulWidget {
   final String? status;
   final String? keterangan;
   final String? tipeCutiValue;
+  final dynamic nomor;
 
   @override
   State<DetailCutiPage> createState() => _DetailCutiPageState();
@@ -45,8 +47,8 @@ class DetailCutiPage extends StatefulWidget {
 
 class _DetailCutiPageState extends State<DetailCutiPage> {
   String mapStatusToString(String status) {
-    if (stateDict.containsKey(status)) {
-      return stateDict[status]['name'];
+    if (widget.status != null && stateDict.containsKey(widget.status)) {
+      return stateDict[widget.status]['name'];
     } else {
       return 'Undefined';
     }

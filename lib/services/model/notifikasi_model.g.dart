@@ -11,7 +11,7 @@ _$NotifikasiModelImpl _$$NotifikasiModelImplFromJson(
     _$NotifikasiModelImpl(
       currentPage: json['current_page'] as int?,
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) => Datum.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => DataNotif.fromJson(e as Map<String, dynamic>))
           .toList(),
       firstPageUrl: json['first_page_url'] as String?,
       from: json['from'] as int?,
@@ -46,7 +46,8 @@ Map<String, dynamic> _$$NotifikasiModelImplToJson(
       'total': instance.total,
     };
 
-_$DatumImpl _$$DatumImplFromJson(Map<String, dynamic> json) => _$DatumImpl(
+_$DataNotifImpl _$$DataNotifImplFromJson(Map<String, dynamic> json) =>
+    _$DataNotifImpl(
       id: json['id'] as int?,
       mCompId: json['m_comp_id'],
       mDirId: json['m_dir_id'],
@@ -73,7 +74,7 @@ _$DatumImpl _$$DatumImplFromJson(Map<String, dynamic> json) => _$DatumImpl(
       text: json['text'] as String?,
     );
 
-Map<String, dynamic> _$$DatumImplToJson(_$DatumImpl instance) =>
+Map<String, dynamic> _$$DataNotifImplToJson(_$DataNotifImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'm_comp_id': instance.mCompId,
