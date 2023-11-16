@@ -10,7 +10,7 @@ import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/lembur/detail_lembur.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
-import 'package:sj_presensi_mobile/services/model/cuti/getDataCuti/get_alasan_cuti_model.dart';
+import 'package:sj_presensi_mobile/services/model/cuti/list_cuti_model.dart';
 import 'package:sj_presensi_mobile/services/model/notifikasi_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -211,7 +211,7 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
                             iconNotifikasi: iconNotifikasi,
                             warnaStatus: warnaStatus,
                             data: data[index],
-                            dataCuti: widget.dataCuti,
+                            dataCuti: dataCuti,
                           );
                         } else {
                           return SizedBox.shrink();
@@ -284,23 +284,41 @@ class CardListNotifikasi extends StatelessWidget {
   void _redirectToDetailPage(BuildContext context) {
     print("tipe Notifikasi ini adalah: $tipeNotifikasi");
     print("data apa ini: $data");
-    print("Data Nomor TRX: ${data.trxNomor}");
+
     if (tipeNotifikasi == "Pengajuan Cuti" && data != null) {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => DetailCutiPage(
-      //       data: dataCuti,
-      //       dateFrom: dataCuti.dateFrom,
-      //       dateTo: dataCuti.dateTo,
-      //       alasanValue: dataCuti.alasanValue,
-      //       status: dataCuti.status,
-      //       keterangan: dataCuti.keterangan,
-      //       tipeCutiValue: dataCuti.tipeCutiValue,
-      //       nomorFromList: dataCuti.nomor,
-      //     ),
-      //   ),
-      // );
+      print("Data Nomor TRX: ${data.trxNomor}");
+
+      // Initialize matchingDataCuti to null
+      Datum? matchingDataCuti;
+
+      // Find the matching dataCuti in the list
+      for (Datum cuti in dataCuti) {
+        if (cuti.nomor == data.trxNomor) {
+          matchingDataCuti = cuti;
+          break;
+        }
+      }
+
+      if (matchingDataCuti != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailCutiPage(
+              data: matchingDataCuti,
+              dateFrom: matchingDataCuti?.dateFrom,
+              dateTo: matchingDataCuti?.dateTo,
+              alasanValue: matchingDataCuti?.alasanValue,
+              status: matchingDataCuti?.status,
+              keterangan: matchingDataCuti?.keterangan,
+              tipeCutiValue: matchingDataCuti?.tipeCutiValue,
+              nomorFromList: matchingDataCuti?.nomor,
+            ),
+          ),
+        );
+      } else {
+        // Handle case when no matching data is found
+        print("No matching data found in the list.");
+      }
     } else if (tipeNotifikasi == "Pengajuan Surat Perjalanan Dinas") {
       Navigator.push(
         context,
@@ -317,14 +335,6 @@ class CardListNotifikasi extends StatelessWidget {
         ),
       );
     }
-    // else if (tipeNotifikasi == "Lembur") {
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => DetailLemburPage(data: data),
-    //     ),
-    //   );
-    // }
   }
 
   @override
