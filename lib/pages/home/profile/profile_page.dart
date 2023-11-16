@@ -94,7 +94,7 @@ class _ProfilePageState extends State<ProfilePage> {
       },
       child: Scaffold(
         appBar: appBarCustomMain(
-          title: "Selamat Datang, ${data?.username ?? "-"}",
+          title: "Selamat Datang, ${data?.username ?? "-"}!",
           padLeft: 8,
           actions: [
             Container(
@@ -272,4 +272,8 @@ class _ProfilePageState extends State<ProfilePage> {
       //     : Image.network("assets/lotties/gif/loading.gif", loadingBuilder: ),
     );
   }
+}
+
+class UserData {
+  static String username = "";
 }

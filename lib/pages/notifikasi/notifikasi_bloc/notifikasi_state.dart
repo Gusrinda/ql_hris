@@ -12,7 +12,7 @@ class ListNotifikasiInitial extends NotifikasiState {}
 class ListNotifikasiLoading extends NotifikasiState {}
 
 class ListNotifikasiSuccessInBackground extends NotifikasiState {
-  List<Datum> listNotifikasi;
+  List<DataNotif> listNotifikasi;
 
   ListNotifikasiSuccessInBackground({
     required this.listNotifikasi,

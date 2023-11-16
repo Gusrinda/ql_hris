@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:sj_presensi_mobile/componens/HRIS/usernameProfile.dart';
 import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/monthYearPicker_custom.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
@@ -30,7 +31,9 @@ final Map<String, dynamic> stateDict = {
 };
 
 class DinasPage extends StatefulWidget {
-  const DinasPage({Key? key}) : super(key: key);
+  const DinasPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<DinasPage> createState() => _DinasPageState();
@@ -97,11 +100,12 @@ DateTime? selectedMonth;
 DateTime? selectedYear;
 
 class _DinasPageState extends State<DinasPage> {
-
+  @override
   void initState() {
     super.initState();
     loadData();
   }
+
   void loadData() {
     context.read<ListDinasBloc>().add(GetListDinas(date: DateTime.now()));
   }
@@ -333,7 +337,9 @@ class _DinasPageState extends State<DinasPage> {
 
                 return BlocProvider.value(
                   value: addCutiBloc,
-                  child: AddDinasPage(reloadDataCallback: loadData,),
+                  child: AddDinasPage(
+                    reloadDataCallback: loadData,
+                  ),
                 );
               }),
             );

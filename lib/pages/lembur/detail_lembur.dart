@@ -127,7 +127,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                       '${data.tipeLemburValue}',
                                       style: const TextStyle(
                                         color: MyColorsConst.primaryColor,
-                                        fontSize: 10,
+                                        fontSize: 9,
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),

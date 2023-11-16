@@ -50,13 +50,13 @@ Color getColorFromStatus(String status) {
   if (stateDict.containsKey(status)) {
     switch (status) {
       case "IN APPROVAL":
-        return const Color(0xFF0068D4);
+        return Colors.blue;
       case "DRAFT":
-        return const Color(0xFF0068D4);
+        return Colors.blue;
       case "REJECTED":
-        return const Color(0xFFED1B24);
+        return Colors.red;
       case "Aktif":
-        return const Color(0xFF0CA356);
+        return Colors.green;
       default:
         return Colors.grey; // warna default
     }
@@ -103,6 +103,7 @@ class _CutiPageState extends State<CutiPage> {
     super.initState();
     loadData();
   }
+
   void loadData() {
     context.read<ListCutiBloc>().add(GetListCuti(date: DateTime.now()));
   }
@@ -184,8 +185,8 @@ class _CutiPageState extends State<CutiPage> {
             ),
           ],
         ),
-        body: Container(
-          margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -395,12 +396,12 @@ class ListViewCuti extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => DetailCutiPage(
                 data: data,
-                dateFrom: data.dateFrom,
-                dateTo: data.dateTo,
-                alasanValue: data.alasanValue,
-                status: data.status,
-                keterangan: data.keterangan,
-                tipeCutiValue: data.tipeCutiValue,
+                dateFrom: data?.dateFrom,
+                dateTo: data?.dateTo,
+                alasanValue: data?.alasanValue,
+                status: data?.status,
+                keterangan: data?.keterangan,
+                tipeCutiValue: data?.tipeCutiValue, nomor: data.nomor,
               ),
             ),
           );
@@ -408,7 +409,6 @@ class ListViewCuti extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              margin: EdgeInsets.only(right: 3),
               height: 90,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
@@ -417,69 +417,70 @@ class ListViewCuti extends StatelessWidget {
             ),
             Container(
               height: 90,
-              margin: const EdgeInsets.only(bottom: 7, left: 5, right: 3),
+              margin: const EdgeInsets.only(bottom: 15, left: 5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
-                // border: Border.all(color: const Color(0xFFDDDDDD)),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      offset: Offset(0, 0),
-                      blurRadius: 5)
-                ],
+                border: Border.all(color: const Color(0xFFDDDDDD)),
                 color: MyColorsConst.whiteColor,
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "${data.tipeCutiValue}",
-                        style: const TextStyle(
-                          color: MyColorsConst.darkColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
+                      const SizedBox(
+                        height: 10,
                       ),
-                      const Spacer(),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: currentColor.withOpacity(0.1),
-                        ),
-                        child: Text(
-                          mapStatusToString(currentStatus),
-                          style: TextStyle(
-                            color: currentColor,
-                            fontSize: 10,
-                            fontWeight: FontWeight.w500,
+                      Row(
+                        children: [
+                          Text(
+                            "${data.tipeCutiValue}",
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ),
+                          const Spacer(),
+                          Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: currentColor.withOpacity(0.1),
+                            ),
+                            child: Text(
+                              mapStatusToString(currentStatus),
+                              style: TextStyle(
+                                color: currentColor,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.calendar_month_rounded,
-                        color: MyColorsConst.lightDarkColor,
-                        size: 10,
+                      const SizedBox(
+                        height: 15,
                       ),
-                      const SizedBox(width: 5),
-                      Text(
-                        '${formatDate(data.dateFrom)} - ${formatDate(data.dateTo)}',
-                        style: const TextStyle(
-                          color: MyColorsConst.darkColor,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
-                        ),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.calendar_month_rounded,
+                            color: MyColorsConst.lightDarkColor,
+                            size: 10,
+                          ),
+                          const SizedBox(width: 5),
+                          Text(
+                            '${formatDate(data.dateFrom)} - ${formatDate(data.dateTo)}',
+                            style: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

@@ -5,6 +5,10 @@ import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
+import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/lembur/detail_lembur.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
 import 'package:sj_presensi_mobile/services/model/notifikasi_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -41,10 +45,16 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
   void getIconAndColor(String trxName, String actionType) {
     switch (trxName) {
       case "Pengajuan Cuti":
-        if (actionType == "MENGAJUKAN") {
+        if (actionType == "DITERIMA") {
           iconNotifikasi = const Icon(
             Icons.article_outlined,
             color: Colors.green,
+            size: 30,
+          );
+        } else if (actionType == "MENGAJUKAN") {
+          iconNotifikasi = const Icon(
+            Icons.article_outlined,
+            color: Colors.blue,
             size: 30,
           );
         } else if (actionType == "Ditolak") {
@@ -55,11 +65,17 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
           );
         }
         break;
-      case "Cuti":
-        if (actionType == "Disetujui") {
+      case "Pengajuan Surat Perjalanan Dinas":
+        if (actionType == "DITERIMA") {
           iconNotifikasi = const Icon(
             Icons.article_outlined,
             color: Colors.green,
+            size: 30,
+          );
+        } else if (actionType == "MENGAJUKAN") {
+          iconNotifikasi = const Icon(
+            Icons.directions_car,
+            color: Colors.blue,
             size: 30,
           );
         } else if (actionType == "Ditolak") {
@@ -93,9 +109,20 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
     }
 
     switch (actionType) {
-      case "MENGAJUKAN":
-        if (trxName == "Pengajuan Cuti" || trxName == "Dinas") {
+      case "DITERIMA":
+        if (trxName == "Pengajuan Cuti" ||
+            trxName == "Pengajuan Surat Perjalanan Dinas") {
           warnaStatus = Colors.green;
+        } else if (trxName == "Lembur") {
+          warnaStatus = Colors.red;
+        } else if (trxName == "Event") {
+          warnaStatus = Colors.blue;
+        }
+        break;
+      case "MENGAJUKAN":
+        if (trxName == "Pengajuan Cuti" ||
+            trxName == "Pengajuan Surat Perjalanan Dinas") {
+          warnaStatus = Colors.blue;
         } else if (trxName == "Lembur") {
           warnaStatus = Colors.red;
         } else if (trxName == "Event") {
@@ -164,32 +191,30 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
             return Stack(
               children: [
                 if (listNotifikasi.isNotEmpty)
-                  SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: listNotifikasi.length,
-                        itemBuilder: (context, index) {
-                          var data = listNotifikasi;
-                          if (data[index].trxName != null &&
-                              data[index].actionType != null) {
-                            getIconAndColor(
-                                data[index].trxName!, data[index].actionType!);
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 20),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: listNotifikasi.length,
+                      itemBuilder: (context, index) {
+                        var data = listNotifikasi;
+                        if (data[index].trxName != null &&
+                            data[index].actionType != null) {
+                          getIconAndColor(
+                              data[index].trxName!, data[index].actionType!);
 
-                            return CardListNotifikasi(
-                              tipeNotifikasi: data[index].trxName!,
-                              status: data[index].actionType!,
-                              iconNotifikasi: iconNotifikasi,
-                              warnaStatus: warnaStatus,
-                              data: data[index],
-                            );
-                          } else {
-                            return SizedBox.shrink();
-                          }
-                        },
-                      ),
+                          return CardListNotifikasi(
+                            tipeNotifikasi: data[index].trxName!,
+                            status: data[index].actionType!,
+                            iconNotifikasi: iconNotifikasi,
+                            warnaStatus: warnaStatus,
+                            data: data[index],
+                          );
+                        } else {
+                          return SizedBox.shrink();
+                        }
+                      },
                     ),
                   ),
                 if (listNotifikasi.isEmpty)
@@ -237,14 +262,14 @@ class CardListNotifikasi extends StatelessWidget {
   final String status;
   final Icon? iconNotifikasi;
   final Color? warnaStatus;
-  final Datum data;
+  final DataNotif data;
 
   String mapStatusToString(String status) {
     switch (status) {
       case "Pengajuan Cuti":
         return "Pengajuan Cuti";
-      case "Disetujui":
-        return "Disetujui";
+      case "Pengajuan Surat Perjalanan Dinas":
+        return "Pengajuan Surat Perjalanan Dinas";
       case "Ditolak":
         return "Ditolak";
       default:
@@ -252,75 +277,116 @@ class CardListNotifikasi extends StatelessWidget {
     }
   }
 
+  void _redirectToDetailPage(BuildContext context) {
+    print("tipe Notifikasi ini adalah: $tipeNotifikasi");
+    print("data apa ini: $data");
+    if (tipeNotifikasi == "Pengajuan Cuti" && data != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DetailCutiPage(nomor: data.trxNomor),
+        ),
+      );
+    } else if (tipeNotifikasi == "Pengajuan Surat Perjalanan Dinas") {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => ListDinasBloc()
+              ..add(
+                GetListDinas(
+                  date: DateTime.now(),
+                ),
+              ),
+            child: DinasPage(),
+          ),
+        ),
+      );
+    }
+    // else if (tipeNotifikasi == "Lembur") {
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => DetailLemburPage(data: data),
+    //     ),
+    //   );
+    // }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: warnaStatus?.withOpacity(0.4) ?? Colors.transparent,
+    return GestureDetector(
+      onTap: () {
+        _redirectToDetailPage(context);
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: warnaStatus?.withOpacity(0.4) ?? Colors.transparent,
+                  ),
+                  child: iconNotifikasi,
                 ),
-                child: iconNotifikasi,
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          mapStatusToString(tipeNotifikasi),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        Text(
-                          data.trxDate != null
-                              ? DateFormat('dd MMM')
-                                  .format(data.trxDate!.toLocal())
-                              : '',
-                          style: TextStyle(
-                            color: MyColorsConst.semidarkColor2,
-                            fontSize: 10,
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            mapStatusToString(tipeNotifikasi),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600),
                           ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      data.text ?? '',
-                      style: TextStyle(
-                        color: MyColorsConst.semiDarkColor,
-                        fontSize: 10,
+                          Text(
+                            data.trxDate != null
+                                ? DateFormat('dd MMM')
+                                    .format(data.trxDate!.toLocal())
+                                : '',
+                            style: TextStyle(
+                              color: MyColorsConst.semidarkColor2,
+                              fontSize: 10,
+                            ),
+                          )
+                        ],
                       ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Divider(
-            color: Colors.grey,
-          )
-        ],
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        data.text ?? '',
+                        style: TextStyle(
+                          color: MyColorsConst.semiDarkColor,
+                          fontSize: 10,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Divider(
+              color: Colors.grey,
+            )
+          ],
+        ),
       ),
     );
   }

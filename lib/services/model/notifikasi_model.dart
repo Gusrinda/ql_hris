@@ -10,7 +10,7 @@ class NotifikasiModel with _$NotifikasiModel {
         @JsonKey(name: "current_page")
         int? currentPage,
         @JsonKey(name: "data")
-        List<Datum>? data,
+        List<DataNotif>? data,
         @JsonKey(name: "first_page_url")
         String? firstPageUrl,
         @JsonKey(name: "from")
@@ -39,8 +39,8 @@ class NotifikasiModel with _$NotifikasiModel {
 }
 
 @freezed
-class Datum with _$Datum {
-    const factory Datum({
+class DataNotif with _$DataNotif {
+    const factory DataNotif({
         @JsonKey(name: "id")
         int? id,
         @JsonKey(name: "m_comp_id")
@@ -85,9 +85,9 @@ class Datum with _$Datum {
         String? updatedAt,
         @JsonKey(name: "text")
         String? text,
-    }) = _Datum;
+    }) = _DataNotif;
 
-    factory Datum.fromJson(Map<String, dynamic> json) => _$DatumFromJson(json);
+    factory DataNotif.fromJson(Map<String, dynamic> json) => _$DataNotifFromJson(json);
 }
 
 @freezed
