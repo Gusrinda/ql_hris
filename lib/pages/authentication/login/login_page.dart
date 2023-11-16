@@ -71,7 +71,7 @@ class LoginPage extends StatelessWidget {
           const SizedBox(height: 40),
           TextButtonCustomV1(
             width: MediaQuery.of(context).size.width,
-            height: 50,
+            height: 40,
             text: "Login",
             textSize: 12,
             backgroundColor: MyColorsConst.primaryColor,
