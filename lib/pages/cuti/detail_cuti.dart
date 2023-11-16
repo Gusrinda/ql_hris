@@ -30,16 +30,18 @@ class DetailCutiPage extends StatefulWidget {
     this.status,
     this.keterangan,
     this.tipeCutiValue,
-    required this.nomor,
+    this.nomorFromNotif,
+    this.nomorFromList,
   });
-  final dynamic data;
+  final dynamic? data;
   final String? dateFrom;
   final String? dateTo;
   final String? alasanValue;
   final String? status;
   final String? keterangan;
   final String? tipeCutiValue;
-  final dynamic nomor;
+  final String? nomorFromNotif;
+  final String? nomorFromList;
 
   @override
   State<DetailCutiPage> createState() => _DetailCutiPageState();
@@ -113,7 +115,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                         Row(
                           children: [
                             Text(
-                              "${widget.tipeCutiValue}",
+                              "${widget.tipeCutiValue ?? '-'}",
                               style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 14,
@@ -151,7 +153,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                             const SizedBox(
                                 width: 5), // Atur jarak sesuai kebutuhan
                             Text(
-                              '${formatDate(widget.dateFrom)} - ${formatDate(widget.dateTo)}',
+                              '${formatDate(widget.dateFrom ?? '-' )} - ${formatDate(widget.dateTo ?? '-')}',
                               style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 10,
@@ -178,7 +180,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                           ),
                         ),
                         Text(
-                          '${widget.alasanValue}',
+                          '${widget.alasanValue ?? '-'}',
                           style: const TextStyle(
                             fontSize: 10,
                             color: Colors.black,

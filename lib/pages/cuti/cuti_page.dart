@@ -396,12 +396,13 @@ class ListViewCuti extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => DetailCutiPage(
                 data: data,
-                dateFrom: data?.dateFrom,
-                dateTo: data?.dateTo,
-                alasanValue: data?.alasanValue,
-                status: data?.status,
-                keterangan: data?.keterangan,
-                tipeCutiValue: data?.tipeCutiValue, nomor: data.nomor,
+                dateFrom: data.dateFrom,
+                dateTo: data.dateTo,
+                alasanValue: data.alasanValue,
+                status: data.status,
+                keterangan: data.keterangan,
+                tipeCutiValue: data.tipeCutiValue,
+                nomorFromList: data.nomor,
               ),
             ),
           );

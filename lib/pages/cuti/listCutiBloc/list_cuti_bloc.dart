@@ -16,8 +16,7 @@ class ListCutiBloc extends Bloc<ListCutiEvent, ListCutiState> {
       emit(ListCutiLoading());
       var resToken = await GeneralSharedPreferences.getUserToken();
       if (resToken is ServicesSuccess) {
-        var res = await CutiServices.getListCuti(
-            resToken.response["token"], event.date);
+        var res = await CutiServices.getListCuti(resToken.response["token"], event.date);
         print(res);
         if (res is ServicesSuccess) {
           debugPrint(res.response.toString());

@@ -10,6 +10,7 @@ import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/lembur/detail_lembur.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
+import 'package:sj_presensi_mobile/services/model/cuti/getDataCuti/get_alasan_cuti_model.dart';
 import 'package:sj_presensi_mobile/services/model/notifikasi_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -187,7 +188,7 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
         body: BlocBuilder<NotifikasiBloc, NotifikasiState>(
           builder: (context, state) {
             var listNotifikasi = context.read<NotifikasiBloc>().listNotifikasi;
-
+            var listCuti = context.read<NotifikasiBloc>().listcuti;
             return Stack(
               children: [
                 if (listNotifikasi.isNotEmpty)
@@ -199,17 +200,18 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
                       itemCount: listNotifikasi.length,
                       itemBuilder: (context, index) {
                         var data = listNotifikasi;
+                        var dataCuti = listCuti;
                         if (data[index].trxName != null &&
                             data[index].actionType != null) {
                           getIconAndColor(
                               data[index].trxName!, data[index].actionType!);
-
                           return CardListNotifikasi(
                             tipeNotifikasi: data[index].trxName!,
                             status: data[index].actionType!,
                             iconNotifikasi: iconNotifikasi,
                             warnaStatus: warnaStatus,
                             data: data[index],
+                            dataCuti: widget.dataCuti,
                           );
                         } else {
                           return SizedBox.shrink();
@@ -249,20 +251,22 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
 }
 
 class CardListNotifikasi extends StatelessWidget {
-  const CardListNotifikasi({
-    Key? key,
-    required this.tipeNotifikasi,
-    required this.status,
-    this.iconNotifikasi,
-    this.warnaStatus,
-    required this.data,
-  }) : super(key: key);
+  const CardListNotifikasi(
+      {Key? key,
+      required this.tipeNotifikasi,
+      required this.status,
+      this.iconNotifikasi,
+      this.warnaStatus,
+      required this.data,
+      required this.dataCuti})
+      : super(key: key);
 
   final String tipeNotifikasi;
   final String status;
   final Icon? iconNotifikasi;
   final Color? warnaStatus;
   final DataNotif data;
+  final List<Datum> dataCuti;
 
   String mapStatusToString(String status) {
     switch (status) {
@@ -280,13 +284,23 @@ class CardListNotifikasi extends StatelessWidget {
   void _redirectToDetailPage(BuildContext context) {
     print("tipe Notifikasi ini adalah: $tipeNotifikasi");
     print("data apa ini: $data");
+    print("Data Nomor TRX: ${data.trxNomor}");
     if (tipeNotifikasi == "Pengajuan Cuti" && data != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => DetailCutiPage(nomor: data.trxNomor),
-        ),
-      );
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => DetailCutiPage(
+      //       data: dataCuti,
+      //       dateFrom: dataCuti.dateFrom,
+      //       dateTo: dataCuti.dateTo,
+      //       alasanValue: dataCuti.alasanValue,
+      //       status: dataCuti.status,
+      //       keterangan: dataCuti.keterangan,
+      //       tipeCutiValue: dataCuti.tipeCutiValue,
+      //       nomorFromList: dataCuti.nomor,
+      //     ),
+      //   ),
+      // );
     } else if (tipeNotifikasi == "Pengajuan Surat Perjalanan Dinas") {
       Navigator.push(
         context,

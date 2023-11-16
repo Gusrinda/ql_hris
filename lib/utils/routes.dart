@@ -101,7 +101,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) {
           return DetailCutiPage(
             data: data.data,
-            nomor: data.nomor,
           );
         });
       case AddCutiPage.routeName:
