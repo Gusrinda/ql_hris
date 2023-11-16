@@ -12,7 +12,7 @@ class LemburInitial extends ListLemburState {}
 class LemburLoading extends ListLemburState {}
 
 class LemburSuccessInBackground extends ListLemburState {
-  List<Datum> dataLembur;
+  List<DataLembur> dataLembur;
 
   LemburSuccessInBackground({
     required this.dataLembur,

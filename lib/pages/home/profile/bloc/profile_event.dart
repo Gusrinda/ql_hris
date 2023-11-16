@@ -57,9 +57,11 @@ class EditPasswordProfile extends ProfileEvent {
 }
 
 class EditImageProfile extends ProfileEvent {
+  // int? userId;
   String? imagePath;
 
   EditImageProfile({
+    // required this.userId,
     required this.imagePath,
   });
 

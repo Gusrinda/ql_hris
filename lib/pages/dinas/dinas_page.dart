@@ -43,7 +43,7 @@ String mapStatusToString(String status) {
   if (stateDict.containsKey(status)) {
     return stateDict[status]['name'];
   } else {
-    return 'Undefined';
+    return 'Menunggu Disetujui';
   }
 }
 
@@ -62,7 +62,7 @@ Color getColorFromStatus(String status) {
         return Colors.grey; // warna default
     }
   } else {
-    return Colors.grey; // warna default
+    return const Color(0xFF0068D4); // warna default
   }
 }
 

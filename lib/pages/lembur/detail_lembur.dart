@@ -15,9 +15,28 @@ class DetailLemburPage extends StatefulWidget {
 
   const DetailLemburPage({
     Key? key,
+    this.tipeLemburValue,
+    this.nomorFromList,
+    this.tanggal,
+    this.jamMulai,
+    this.jamSelesai,
+    this.noDoc,
+    this.doc,
+    this.keterangan,
+    this.data,
+    this.alasanValue,
     // required this.id,
   }) : super(key: key);
-  // final int id;
+  final dynamic? data;
+  final String? tipeLemburValue;
+  final String? nomorFromList;
+  final String? tanggal;
+  final String? jamMulai;
+  final String? jamSelesai;
+  final String? noDoc;
+  final String? doc;
+  final String? keterangan;
+  final String? alasanValue;
 
   @override
   _DetailLemburPageState createState() => _DetailLemburPageState();
@@ -43,267 +62,220 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<DetailLemburBloc, DetailLemburState>(
-      listener: (context, state) async {
-        if (state is DetailLemburLoading) {
-          LoadingDialog.showLoadingDialog(context);
-        } else if (state is DetailLemburFailed) {
-          LoadingDialog.dismissDialog(context);
-          await showDialog(
-            context: context,
-            builder: (_) => DialogCustom(
-              state: DialogCustomItem.error,
-              message: state.message,
-            ),
-          );
-        } else if (state is DetailLemburFailedUserExpired) {
-          LoadingDialog.dismissDialog(context);
-          await showDialog(
-            context: context,
-            builder: (_) => DialogCustom(
-              state: DialogCustomItem.error,
-              message: state.message,
-            ),
-          );
-          Navigator.of(context)
-              .pushNamedAndRemoveUntil(LoginPage.routeName, (route) => false);
-        } else if (state is DetailLemburFailedInBackground) {
-          LoadingDialog.dismissDialog(context);
-          Navigator.of(context)
-              .pushNamedAndRemoveUntil(LoginPage.routeName, (route) => false);
-        } else {
-          LoadingDialog.dismissDialog(context);
-        }
-      },
-      child: Scaffold(
-        appBar: appBarCustomV1(
-          title: "Detail Lembur",
-          padLeft: 8,
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    BlocBuilder<DetailLemburBloc, DetailLemburState>(
-                      builder: (context, state) {
-                        var detaillembur =
-                            context.read<DetailLemburBloc>().detaillembur;
-
-                        debugPrint("DETAIL LEMBUR ? ${detaillembur}");
-                        var data = detaillembur;
-
-                        return Container(
-                          padding: const EdgeInsets.all(16.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6),
-                            border: Border.all(color: Color(0xFFDDDDDD)),
-                            color: MyColorsConst.whiteColor,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    "${data.nomor}",
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  const Spacer(),
-                                  Container(
-                                    padding: EdgeInsets.all(5),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: MyColorsConst.primaryColor
-                                          .withOpacity(0.1),
-                                    ),
-                                    child: Text(
-                                      '${data.tipeLemburValue}',
-                                      style: const TextStyle(
-                                        color: MyColorsConst.primaryColor,
-                                        fontSize: 9,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+    return Scaffold(
+      appBar: appBarCustomV1(
+        title: "Detail Lembur",
+        padLeft: 8,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(color: Color(0xFFDDDDDD)),
+                      color: MyColorsConst.whiteColor,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "${widget.nomorFromList}",
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
                               ),
-                              const SizedBox(
-                                height: 4,
+                            ),
+                            const Spacer(),
+                            Container(
+                              padding: EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color:
+                                    MyColorsConst.primaryColor.withOpacity(0.1),
                               ),
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.calendar_month_rounded,
-                                    color: MyColorsConst.lightDarkColor,
-                                    size: 10,
-                                  ),
-                                  const SizedBox(width: 5),
-                                  Text(
-                                    '${formatDate(data.tanggal)}',
-                                    style: const TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 4,
-                              ),
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.access_time_filled,
-                                    color: MyColorsConst.lightDarkColor,
-                                    size: 10,
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    "${extractTime(data.jamMulai)} - ${extractTime(data.jamSelesai)}",
-                                    style: const TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const Divider(
-                                color: Color(0xFFDDDDDD),
-                                thickness: 1,
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Text(
-                                'Alasan',
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              Text(
-                                '${data.alasanId}',
+                              child: Text(
+                                '${widget.tipeLemburValue}',
                                 style: const TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
+                                  color: MyColorsConst.primaryColor,
+                                  fontSize: 9,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              const SizedBox(
-                                height: 10,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.calendar_month_rounded,
+                              color: MyColorsConst.lightDarkColor,
+                              size: 10,
+                            ),
+                            const SizedBox(width: 5),
+                            Text(
+                              '${formatDate(widget.tanggal)}',
+                              style: const TextStyle(
+                                color: Colors.grey,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w400,
                               ),
-                              Row(
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.access_time_filled,
+                              color: MyColorsConst.lightDarkColor,
+                              size: 10,
+                            ),
+                            SizedBox(width: 5),
+                            Text(
+                              "${extractTime(widget.jamMulai)} - ${extractTime(widget.jamSelesai)}",
+                              style: const TextStyle(
+                                color: Colors.grey,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Divider(
+                          color: Color(0xFFDDDDDD),
+                          thickness: 1,
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        const Text(
+                          'Alasan',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Text(
+                          '${widget.alasanValue}',
+                          style: const TextStyle(
+                            fontSize: 10,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'No Dokumen',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Text(
+                                  '${widget.noDoc}',
+                                  style: const TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            // const SizedBox(
+                            //   width: 50,
+                            // ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
+                                  const Text(
+                                    'File Ref.',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
                                     children: [
-                                      const Text(
-                                        'No Dokumen',
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        '${data.noDoc}',
-                                        style: const TextStyle(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
+                                      Link(
+                                        target: LinkTarget.self,
+                                        uri: Uri.parse('${widget.doc}'),
+                                        builder: (context, followLink) =>
+                                            GestureDetector(
+                                          onTap: followLink,
+                                          child: Text(
+                                            "file.pdf",
+                                            style: const TextStyle(
+                                              fontSize: 10,
+                                              color: MyColorsConst.primaryColor,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ],
                                   ),
-                                  // const SizedBox(
-                                  //   width: 50,
-                                  // ),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        const Text(
-                                          'File Ref.',
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        Column(
-                                          children: [
-                                            Link(
-                                              target: LinkTarget.self,
-                                              uri: Uri.parse('${data.doc}'),
-                                              builder: (context, followLink) =>
-                                                  GestureDetector(
-                                                onTap: followLink,
-                                                child: Text(
-                                                  "file.pdf",
-                                                  style: const TextStyle(
-                                                    fontSize: 10,
-                                                    color: MyColorsConst
-                                                        .primaryColor,
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
                                 ],
                               ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              const Text(
-                                'Keterangan',
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              Text(
-                                data.keterangan != null
-                                    ? '${data.keterangan}'
-                                    : '-',
-                                style: const TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text(
+                          'Keterangan',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
                           ),
-                        );
-                      },
+                        ),
+                        Text(
+                          widget.keterangan != null
+                              ? '${widget.keterangan}'
+                              : '-',
+                          style: const TextStyle(
+                            fontSize: 10,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  )
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -141,36 +141,34 @@ class FormTemplateSpd extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: Container(
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6),
-                  border: Border.all(color: Color(0xFFDDDDDD)),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: Color(0xFFDDDDDD)),
+              ),
+              child: TextFormField(
+                readOnly: true,
+                onTap: onTap,
+                controller: valueController, // Menggunakan valueController
+                style: TextStyle(
+                  fontSize: 12,
                 ),
-                child: TextFormField(
-                  readOnly: true,
-                  onTap: onTap,
-                  controller: valueController, // Menggunakan valueController
-                  style: TextStyle(
+                validator: validator,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(12),
+                  border: InputBorder.none,
+                  suffixIcon: Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Icon(
+                      Icons.search,
+                      color: MyColorsConst.primaryColor,
+                    ),
+                  ),
+                  hintText: hintText,
+                  hintStyle: TextStyle(
                     fontSize: 12,
+                    fontStyle: FontStyle.italic,
                   ),
-                  validator: validator,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(12),
-                    border: InputBorder.none,
-                    suffixIcon: Padding(
-                      padding: EdgeInsets.all(12.0),
-                      child: Icon(
-                        Icons.search,
-                        color: MyColorsConst.primaryColor,
-                      ),
-                    ),
-                    hintText: hintText,
-                    hintStyle: TextStyle(
-                      fontSize: 12,
-                      fontStyle: FontStyle.italic,
-                    ),
-                    errorStyle: errorTextStyle,
-                  ),
+                  errorStyle: errorTextStyle,
                 ),
               ),
             ),
@@ -188,18 +186,21 @@ class FormCatatanCuti extends StatelessWidget {
     this.input = "",
     this.onTap,
     required this.controller,
+    required this.validator,
+    this.errorTextStyle,
   }) : super(key: key);
 
   final bool enabled;
   final String input;
   final VoidCallback? onTap;
   final TextEditingController controller;
+  final String? Function(String?) validator;
+  final TextStyle? errorTextStyle;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      // ignore: prefer_const_literals_to_create_immutables
       children: [
         const Hero(
           tag: 'Label-CatatanCuti',
@@ -212,24 +213,42 @@ class FormCatatanCuti extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        // ignore: prefer_const_constructors
         Hero(
           tag: 'Form-CatatanCuti',
           flightShuttleBuilder: flightShuttleBuilder,
-          // ignore: prefer_const_constructors
           child: Material(
             color: Colors.transparent,
-            // ignore: prefer_const_constructors
-            child: FormTextField(
-              maxLines: 5,
-              readOnly: false,
-              hintText: "Tuliskan Catatan",
-              onTap: onTap,
-              textEditingController: controller,
-              textInputAction: TextInputAction.next,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(color: Color(0xFFDDDDDD)),
+                  ),
+                  child: TextFormField(
+                    maxLines: 5,
+                    readOnly: false,
+                    decoration: InputDecoration(
+                      hintText: "Tuliskan Catatan",
+                      hintStyle: TextStyle(
+                        fontSize: 12,
+                        fontStyle: FontStyle.italic,
+                      ),
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.all(12),
+                      errorStyle: errorTextStyle,
+                    ),
+                    onTap: onTap,
+                    controller: controller,
+                    textInputAction: TextInputAction.next,
+                    validator: validator,
+                  ),
+                ),
+              ],
             ),
           ),
-        )
+        ),
       ],
     );
   }

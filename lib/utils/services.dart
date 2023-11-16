@@ -88,12 +88,11 @@ class GeneralServices {
         for (var key in body.keys) {
           if (body[key] != null) bodyFormed[key] = body[key].toString();
         }
-        var request = http.MultipartRequest(
-            'PUT', url) // Menggunakan 'PUT' untuk metode permintaan
+        var request = http.MultipartRequest('POST', url)
           ..fields.addAll(bodyFormed)
           ..headers.addAll(headers!)
-          ..files.add(await http.MultipartFile.fromPath(
-              'profile_image', imagePath!)); // Mengunggah berkas gambar
+          ..files.add(
+              await http.MultipartFile.fromPath('profil_image', imagePath!));
         var res = await request.send();
         response = await http.Response.fromStream(res);
       } else if (method == GeneralServicesMethod.put) {

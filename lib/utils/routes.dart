@@ -90,10 +90,10 @@ class RouteGenerator {
           return DetailHistoryAbsensiPage(data: data.data);
         });
       case DetailLemburPage.routeName:
+      final data = settings.arguments as DetailCutiPage;
         return MaterialPageRoute(builder: (context) {
-          return BlocProvider(
-            create: (context) => DetailLemburBloc(),
-            child: DetailLemburPage(),
+          return DetailLemburPage(
+            data: data.data
           );
         });
       case DetailCutiPage.routeName:

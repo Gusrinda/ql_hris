@@ -10,7 +10,7 @@ part 'list_lembur_event.dart';
 part 'list_lembur_state.dart';
 
 class ListLemburBloc extends Bloc<ListLemburEvent, ListLemburState> {
-  List<Datum> listlembur = [];
+  List<DataLembur> listlembur = [];
   ListLemburBloc() : super(LemburInitial()) {
     on<GetListLembur>((event, emit) async {
      emit(LemburLoading());

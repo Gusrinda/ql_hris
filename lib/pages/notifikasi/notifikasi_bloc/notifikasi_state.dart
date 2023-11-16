@@ -14,14 +14,16 @@ class ListNotifikasiLoading extends NotifikasiState {}
 class ListNotifikasiSuccessInBackground extends NotifikasiState {
   List<DataNotif> listNotifikasi;
   List<Datum> listCuti;
+  List<DataLembur> listlembur;
 
   ListNotifikasiSuccessInBackground({
     required this.listNotifikasi,
     required this.listCuti,
+    required this.listlembur,
   });
 
   @override
-  List<Object> get props => [listNotifikasi, listCuti];
+  List<Object> get props => [listNotifikasi, listCuti, listlembur];
 }
 
 class ListNotifikasiFailedInBackground extends NotifikasiState {

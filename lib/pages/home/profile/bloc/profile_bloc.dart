@@ -48,6 +48,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       emit(ProfileLoading());
       var resToken = await GeneralSharedPreferences.getUserToken();
       if (resToken is ServicesSuccess) {
+        print("ini res tokennya ${resToken}");
         var res = await AuthServices.logout(resToken.response["token"]);
         if (res is ServicesSuccess) {
           emit(LogoutSuccessInBackground(message: 'Logout Success'));
@@ -70,12 +71,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         emit(ProfileLoading());
         var resToken = await GeneralSharedPreferences.getUserToken();
         if (resToken is ServicesSuccess) {
+          print("ini res tokennya ${resToken}");
           var res = await ProfileServices.editImageProfile(
             resToken.response["token"],
             resToken.response["id"] ?? 1,
-            profileModel?.email,
             imagePath: event.imagePath,
           );
+          print("ini res: ${res}");
           if (res is ServicesSuccess) {
             print(res.response);
             emit(ProfileSuccessInBackground());

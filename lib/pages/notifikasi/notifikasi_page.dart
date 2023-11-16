@@ -9,8 +9,10 @@ import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/lembur/detail_lembur.dart';
+import 'package:sj_presensi_mobile/pages/lembur/lembur_page.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/list_cuti_model.dart';
+import 'package:sj_presensi_mobile/services/model/lembur/lembur_model.dart';
 import 'package:sj_presensi_mobile/services/model/notifikasi_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -87,7 +89,7 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
           );
         }
         break;
-      case "Lembur":
+      case "Pengajuan Lembur":
         iconNotifikasi = const Icon(
           Icons.access_time,
           color: Colors.red,
@@ -114,7 +116,7 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
         if (trxName == "Pengajuan Cuti" ||
             trxName == "Pengajuan Surat Perjalanan Dinas") {
           warnaStatus = Colors.green;
-        } else if (trxName == "Lembur") {
+        } else if (trxName == "Pengajuan Lembur") {
           warnaStatus = Colors.red;
         } else if (trxName == "Event") {
           warnaStatus = Colors.blue;
@@ -124,7 +126,7 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
         if (trxName == "Pengajuan Cuti" ||
             trxName == "Pengajuan Surat Perjalanan Dinas") {
           warnaStatus = Colors.blue;
-        } else if (trxName == "Lembur") {
+        } else if (trxName == "Pengajuan Lembur") {
           warnaStatus = Colors.red;
         } else if (trxName == "Event") {
           warnaStatus = Colors.blue;
@@ -133,7 +135,7 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
       case "Ditolak":
         if (trxName == "Cuti" || trxName == "Dinas") {
           warnaStatus = Colors.red;
-        } else if (trxName == "Lembur") {
+        } else if (trxName == "Pengajuan Lembur") {
           warnaStatus = Colors.red;
         } else if (trxName == "Event") {
           warnaStatus = Colors.blue;
@@ -189,6 +191,7 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
           builder: (context, state) {
             var listNotifikasi = context.read<NotifikasiBloc>().listNotifikasi;
             var listCuti = context.read<NotifikasiBloc>().listcuti;
+            var listLembur = context.read<NotifikasiBloc>().listlembur;
             return Stack(
               children: [
                 if (listNotifikasi.isNotEmpty)
@@ -201,6 +204,7 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
                       itemBuilder: (context, index) {
                         var data = listNotifikasi;
                         var dataCuti = listCuti;
+                        var dataLembur = listLembur;
                         if (data[index].trxName != null &&
                             data[index].actionType != null) {
                           getIconAndColor(
@@ -212,6 +216,7 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
                             warnaStatus: warnaStatus,
                             data: data[index],
                             dataCuti: dataCuti,
+                            dataLembur: dataLembur,
                           );
                         } else {
                           return SizedBox.shrink();
@@ -251,15 +256,16 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
 }
 
 class CardListNotifikasi extends StatelessWidget {
-  const CardListNotifikasi(
-      {Key? key,
-      required this.tipeNotifikasi,
-      required this.status,
-      this.iconNotifikasi,
-      this.warnaStatus,
-      required this.data,
-      required this.dataCuti})
-      : super(key: key);
+  const CardListNotifikasi({
+    Key? key,
+    required this.tipeNotifikasi,
+    required this.status,
+    this.iconNotifikasi,
+    this.warnaStatus,
+    required this.data,
+    required this.dataCuti,
+    required this.dataLembur,
+  }) : super(key: key);
 
   final String tipeNotifikasi;
   final String status;
@@ -267,6 +273,7 @@ class CardListNotifikasi extends StatelessWidget {
   final Color? warnaStatus;
   final DataNotif data;
   final List<Datum> dataCuti;
+  final List<DataLembur> dataLembur;
 
   String mapStatusToString(String status) {
     switch (status) {
@@ -274,8 +281,8 @@ class CardListNotifikasi extends StatelessWidget {
         return "Pengajuan Cuti";
       case "Pengajuan Surat Perjalanan Dinas":
         return "Pengajuan Surat Perjalanan Dinas";
-      case "Ditolak":
-        return "Ditolak";
+      case "Pengajuan Lembur":
+        return "Pengajuan Lembur";
       default:
         return 'Undefined';
     }
@@ -288,10 +295,8 @@ class CardListNotifikasi extends StatelessWidget {
     if (tipeNotifikasi == "Pengajuan Cuti" && data != null) {
       print("Data Nomor TRX: ${data.trxNomor}");
 
-      // Initialize matchingDataCuti to null
       Datum? matchingDataCuti;
 
-      // Find the matching dataCuti in the list
       for (Datum cuti in dataCuti) {
         if (cuti.nomor == data.trxNomor) {
           matchingDataCuti = cuti;
@@ -316,7 +321,6 @@ class CardListNotifikasi extends StatelessWidget {
           ),
         );
       } else {
-        // Handle case when no matching data is found
         print("No matching data found in the list.");
       }
     } else if (tipeNotifikasi == "Pengajuan Surat Perjalanan Dinas") {
@@ -334,6 +338,43 @@ class CardListNotifikasi extends StatelessWidget {
           ),
         ),
       );
+    } else if (tipeNotifikasi == "Pengajuan Lembur" && data != null) {
+      DataLembur? matchDataLembur;
+
+      for (DataLembur lembur in dataLembur) {
+        if (lembur.nomor == data.trxNomor) {
+          matchDataLembur = lembur;
+          break;
+        }
+      }
+
+      if (matchDataLembur != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailLemburPage(
+              data: matchDataLembur,
+              tipeLemburValue: matchDataLembur?.tipeLemburValue,
+              nomorFromList: matchDataLembur?.nomor,
+              alasanValue: matchDataLembur?.alasanValue,
+              tanggal: matchDataLembur?.tanggal,
+              keterangan: matchDataLembur?.keterangan,
+              jamMulai: matchDataLembur?.jamMulai,
+              jamSelesai: matchDataLembur?.jamSelesai,
+              noDoc: matchDataLembur?.noDoc,
+              doc: matchDataLembur?.doc,
+            ),
+          ),
+        );
+      } else {
+        print("No matching data found in the list.");
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailLemburPage(),
+          ),
+        );
+      }
     }
   }
 
@@ -372,9 +413,10 @@ class CardListNotifikasi extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600),
+                              color: Colors.black,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                           Text(
                             data.trxDate != null
@@ -385,7 +427,7 @@ class CardListNotifikasi extends StatelessWidget {
                               color: MyColorsConst.semidarkColor2,
                               fontSize: 10,
                             ),
-                          )
+                          ),
                         ],
                       ),
                       SizedBox(
@@ -400,7 +442,7 @@ class CardListNotifikasi extends StatelessWidget {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
             SizedBox(
@@ -408,7 +450,7 @@ class CardListNotifikasi extends StatelessWidget {
             ),
             Divider(
               color: Colors.grey,
-            )
+            ),
           ],
         ),
       ),

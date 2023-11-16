@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:sj_presensi_mobile/services/dinas_services.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/list_dinas_model.dart';
+import 'package:sj_presensi_mobile/services/profile_services.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
@@ -18,8 +19,11 @@ class ListDinasBloc extends Bloc<ListDinasEvent, ListDinasState> {
       if (resToken is ServicesSuccess) {
         var res = await DinasServices.getListDinas(
             resToken.response["token"], event.date);
+         var resUser = await ProfileServices.getDataProfilel(
+              resToken.response["token"], resToken.response["id"]);
         print(res);
-        if (res is ServicesSuccess) {
+        if (res is ServicesSuccess && resUser is ServicesSuccess) {
+          final name = resUser.response["data"]["name"] ?? 'Pegawai SJ';
           debugPrint(res.response.toString());
           if (res.response is Map<String, dynamic>) {
             print(res.response);
