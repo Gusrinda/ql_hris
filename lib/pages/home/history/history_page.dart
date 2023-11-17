@@ -42,7 +42,6 @@ class _HistoryPageState extends State<HistoryPage> {
     String day = DateFormat.EEEE("id").format(dateTime);
     return day;
   }
-  
 
   String mapStatusToString(String status) {
     if (stateDict.containsKey(status)) {
@@ -163,8 +162,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                   );
                             }
                           },
-                          selectedYear:
-                              selectedYear, 
+                          selectedYear: selectedYear,
                         ),
                       ],
                     ),
@@ -237,13 +235,20 @@ class _HistoryPageState extends State<HistoryPage> {
                                     contentPadding: EdgeInsets.zero,
                                     subtitle: GestureDetector(
                                       child: Container(
-                                        margin:
-                                            const EdgeInsets.only(bottom: 20),
+                                        margin: const EdgeInsets.only(
+                                            bottom: 7, left: 5),
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(6),
-                                          border: Border.all(
-                                              color: Color(0xFFDDDDDD)),
+                                          // border: Border.all(
+                                          //     color: Color(0xFFDDDDDD)),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black
+                                                    .withOpacity(0.1),
+                                                offset: Offset(0, 0),
+                                                blurRadius: 5)
+                                          ],
                                           color: MyColorsConst.whiteColor,
                                         ),
                                         padding: EdgeInsets.symmetric(

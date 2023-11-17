@@ -13,13 +13,15 @@ class ListDinasLoading extends ListDinasState {}
 
 class ListDinasSuccessInBackground extends ListDinasState {
   List<Datum> dataDinas;
+  String username;
 
   ListDinasSuccessInBackground({
     required this.dataDinas,
+    required this.username,
   });
 
   @override
-  List<Object> get props => [dataDinas];
+  List<Object> get props => [dataDinas, username];
 }
 
 class ListDinasFailedInBackground extends ListDinasState {

@@ -10,6 +10,7 @@ import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/add_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
+import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/list_cuti_model.dart';
@@ -99,6 +100,7 @@ DateTime? selectedMonth;
 DateTime? selectedYear;
 
 class _CutiPageState extends State<CutiPage> {
+  String? username;
   void initState() {
     super.initState();
     loadData();
@@ -114,6 +116,12 @@ class _CutiPageState extends State<CutiPage> {
       listener: (context, state) async {
         if (state is ListCutiLoading) {
           LoadingDialog.showLoadingDialog(context);
+        } else if (state is ListCutiSuccessInBackground) {
+          LoadingDialog.dismissDialog(context);
+
+          setState(() {
+            username = state.username;
+          });
         } else if (state is ListCutiFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
@@ -144,7 +152,7 @@ class _CutiPageState extends State<CutiPage> {
       },
       child: Scaffold(
         appBar: appBarCustomMain(
-          title: "Selamat Datang, Trial!",
+          title: "Selamat Datang, ${username ?? '-'}!",
           padLeft: 8,
           actions: [
             Container(
