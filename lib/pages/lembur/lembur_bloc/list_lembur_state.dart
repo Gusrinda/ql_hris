@@ -12,14 +12,16 @@ class LemburInitial extends ListLemburState {}
 class LemburLoading extends ListLemburState {}
 
 class LemburSuccessInBackground extends ListLemburState {
-  List<Datum> dataLembur;
+  List<DataLembur> dataLembur;
+  String username;
 
   LemburSuccessInBackground({
     required this.dataLembur,
+    required this.username,
   });
 
   @override
-  List<Object> get props => [dataLembur];
+  List<Object> get props => [dataLembur, username];
 }
 
 class LemburFailedInBackground extends ListLemburState {

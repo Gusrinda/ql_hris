@@ -21,7 +21,7 @@ LemburModel _$LemburModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$LemburModel {
   @JsonKey(name: "data")
-  List<Datum>? get data => throw _privateConstructorUsedError;
+  List<DataLembur>? get data => throw _privateConstructorUsedError;
   @JsonKey(name: "total")
   int? get total => throw _privateConstructorUsedError;
   @JsonKey(name: "current_page")
@@ -56,7 +56,7 @@ abstract class $LemburModelCopyWith<$Res> {
       _$LemburModelCopyWithImpl<$Res, LemburModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: "data") List<Datum>? data,
+      {@JsonKey(name: "data") List<DataLembur>? data,
       @JsonKey(name: "total") int? total,
       @JsonKey(name: "current_page") int? currentPage,
       @JsonKey(name: "per_page") int? perPage,
@@ -98,7 +98,7 @@ class _$LemburModelCopyWithImpl<$Res, $Val extends LemburModel>
       data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<Datum>?,
+              as List<DataLembur>?,
       total: freezed == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
@@ -152,7 +152,7 @@ abstract class _$$LemburModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "data") List<Datum>? data,
+      {@JsonKey(name: "data") List<DataLembur>? data,
       @JsonKey(name: "total") int? total,
       @JsonKey(name: "current_page") int? currentPage,
       @JsonKey(name: "per_page") int? perPage,
@@ -192,7 +192,7 @@ class __$$LemburModelImplCopyWithImpl<$Res>
       data: freezed == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<Datum>?,
+              as List<DataLembur>?,
       total: freezed == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
@@ -241,7 +241,7 @@ class __$$LemburModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LemburModelImpl implements _LemburModel {
   const _$LemburModelImpl(
-      {@JsonKey(name: "data") final List<Datum>? data,
+      {@JsonKey(name: "data") final List<DataLembur>? data,
       @JsonKey(name: "total") this.total,
       @JsonKey(name: "current_page") this.currentPage,
       @JsonKey(name: "per_page") this.perPage,
@@ -257,10 +257,10 @@ class _$LemburModelImpl implements _LemburModel {
   factory _$LemburModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$LemburModelImplFromJson(json);
 
-  final List<Datum>? _data;
+  final List<DataLembur>? _data;
   @override
   @JsonKey(name: "data")
-  List<Datum>? get data {
+  List<DataLembur>? get data {
     final value = _data;
     if (value == null) return null;
     if (_data is EqualUnmodifiableListView) return _data;
@@ -357,7 +357,7 @@ class _$LemburModelImpl implements _LemburModel {
 
 abstract class _LemburModel implements LemburModel {
   const factory _LemburModel(
-          {@JsonKey(name: "data") final List<Datum>? data,
+          {@JsonKey(name: "data") final List<DataLembur>? data,
           @JsonKey(name: "total") final int? total,
           @JsonKey(name: "current_page") final int? currentPage,
           @JsonKey(name: "per_page") final int? perPage,
@@ -375,7 +375,7 @@ abstract class _LemburModel implements LemburModel {
 
   @override
   @JsonKey(name: "data")
-  List<Datum>? get data;
+  List<DataLembur>? get data;
   @override
   @JsonKey(name: "total")
   int? get total;
@@ -412,12 +412,12 @@ abstract class _LemburModel implements LemburModel {
       throw _privateConstructorUsedError;
 }
 
-Datum _$DatumFromJson(Map<String, dynamic> json) {
-  return _Datum.fromJson(json);
+DataLembur _$DataLemburFromJson(Map<String, dynamic> json) {
+  return _DataLembur.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Datum {
+mixin _$DataLembur {
   @JsonKey(name: "meta_read")
   bool? get metaRead => throw _privateConstructorUsedError;
   @JsonKey(name: "meta_delete")
@@ -723,13 +723,15 @@ mixin _$Datum {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DatumCopyWith<Datum> get copyWith => throw _privateConstructorUsedError;
+  $DataLemburCopyWith<DataLembur> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DatumCopyWith<$Res> {
-  factory $DatumCopyWith(Datum value, $Res Function(Datum) then) =
-      _$DatumCopyWithImpl<$Res, Datum>;
+abstract class $DataLemburCopyWith<$Res> {
+  factory $DataLemburCopyWith(
+          DataLembur value, $Res Function(DataLembur) then) =
+      _$DataLemburCopyWithImpl<$Res, DataLembur>;
   @useResult
   $Res call(
       {@JsonKey(name: "meta_read") bool? metaRead,
@@ -892,9 +894,9 @@ abstract class $DatumCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$DatumCopyWithImpl<$Res, $Val extends Datum>
-    implements $DatumCopyWith<$Res> {
-  _$DatumCopyWithImpl(this._value, this._then);
+class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
+    implements $DataLemburCopyWith<$Res> {
+  _$DataLemburCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -1666,10 +1668,11 @@ class _$DatumCopyWithImpl<$Res, $Val extends Datum>
 }
 
 /// @nodoc
-abstract class _$$DatumImplCopyWith<$Res> implements $DatumCopyWith<$Res> {
-  factory _$$DatumImplCopyWith(
-          _$DatumImpl value, $Res Function(_$DatumImpl) then) =
-      __$$DatumImplCopyWithImpl<$Res>;
+abstract class _$$DataLemburImplCopyWith<$Res>
+    implements $DataLemburCopyWith<$Res> {
+  factory _$$DataLemburImplCopyWith(
+          _$DataLemburImpl value, $Res Function(_$DataLemburImpl) then) =
+      __$$DataLemburImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1833,11 +1836,11 @@ abstract class _$$DatumImplCopyWith<$Res> implements $DatumCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$DatumImplCopyWithImpl<$Res>
-    extends _$DatumCopyWithImpl<$Res, _$DatumImpl>
-    implements _$$DatumImplCopyWith<$Res> {
-  __$$DatumImplCopyWithImpl(
-      _$DatumImpl _value, $Res Function(_$DatumImpl) _then)
+class __$$DataLemburImplCopyWithImpl<$Res>
+    extends _$DataLemburCopyWithImpl<$Res, _$DataLemburImpl>
+    implements _$$DataLemburImplCopyWith<$Res> {
+  __$$DataLemburImplCopyWithImpl(
+      _$DataLemburImpl _value, $Res Function(_$DataLemburImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1995,7 +1998,7 @@ class __$$DatumImplCopyWithImpl<$Res>
     Object? lastEditorTelp = freezed,
     Object? lastEditorMKaryId = freezed,
   }) {
-    return _then(_$DatumImpl(
+    return _then(_$DataLemburImpl(
       metaRead: freezed == metaRead
           ? _value.metaRead
           : metaRead // ignore: cast_nullable_to_non_nullable
@@ -2606,8 +2609,8 @@ class __$$DatumImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$DatumImpl implements _Datum {
-  const _$DatumImpl(
+class _$DataLemburImpl implements _DataLembur {
+  const _$DataLemburImpl(
       {@JsonKey(name: "meta_read") this.metaRead,
       @JsonKey(name: "meta_delete") this.metaDelete,
       @JsonKey(name: "meta_update") this.metaUpdate,
@@ -2761,8 +2764,8 @@ class _$DatumImpl implements _Datum {
       @JsonKey(name: "last_editor.telp") this.lastEditorTelp,
       @JsonKey(name: "last_editor.m_kary_id") this.lastEditorMKaryId});
 
-  factory _$DatumImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DatumImplFromJson(json);
+  factory _$DataLemburImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DataLemburImplFromJson(json);
 
   @override
   @JsonKey(name: "meta_read")
@@ -3220,14 +3223,14 @@ class _$DatumImpl implements _Datum {
 
   @override
   String toString() {
-    return 'Datum(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, nomor: $nomor, datumMCompId: $datumMCompId, datumMDirId: $datumMDirId, datumMKaryId: $datumMKaryId, tanggal: $tanggal, jamMulai: $jamMulai, jamSelesai: $jamSelesai, datumTipeLemburId: $datumTipeLemburId, datumAlasanId: $datumAlasanId, noDoc: $noDoc, doc: $doc, keterangan: $keterangan, status: $status, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, mDirId: $mDirId, mDirMCompId: $mDirMCompId, mDirNama: $mDirNama, mDirDesc: $mDirDesc, mDirIsActive: $mDirIsActive, mDirCreatorId: $mDirCreatorId, mDirLastEditorId: $mDirLastEditorId, mDirCreatedAt: $mDirCreatedAt, mDirUpdatedAt: $mDirUpdatedAt, mKaryId: $mKaryId, mKaryMCompId: $mKaryMCompId, mKaryMDirId: $mKaryMDirId, mKaryMDivisiId: $mKaryMDivisiId, mKaryMDeptId: $mKaryMDeptId, mKaryMZonaId: $mKaryMZonaId, mKaryGradingId: $mKaryGradingId, mKaryCostcontreId: $mKaryCostcontreId, mKaryKode: $mKaryKode, mKaryMPosisiId: $mKaryMPosisiId, mKaryMJamKerjaId: $mKaryMJamKerjaId, mKaryKodePresensi: $mKaryKodePresensi, mKaryNik: $mKaryNik, mKaryNamaDepan: $mKaryNamaDepan, mKaryNamaBelakang: $mKaryNamaBelakang, mKaryNamaLengkap: $mKaryNamaLengkap, mKaryNamaPanggilan: $mKaryNamaPanggilan, mKaryJkId: $mKaryJkId, mKaryTempatLahir: $mKaryTempatLahir, mKaryTglLahir: $mKaryTglLahir, mKaryProvinsiId: $mKaryProvinsiId, mKaryKotaId: $mKaryKotaId, mKaryKecamatanId: $mKaryKecamatanId, mKaryKodePos: $mKaryKodePos, mKaryAlamatAsli: $mKaryAlamatAsli, mKaryAlamatDomisili: $mKaryAlamatDomisili, mKaryNoTlp: $mKaryNoTlp, mKaryNoTlpLainnya: $mKaryNoTlpLainnya, mKaryNoDarurat: $mKaryNoDarurat, mKaryNamaKontakDarurat: $mKaryNamaKontakDarurat, mKaryAgamaId: $mKaryAgamaId, mKaryGolDarahId: $mKaryGolDarahId, mKaryStatusNikahId: $mKaryStatusNikahId, mKaryJmlTanggungan: $mKaryJmlTanggungan, mKaryHubDgnKaryawan: $mKaryHubDgnKaryawan, mKaryCutiJatahReguler: $mKaryCutiJatahReguler, mKaryCutiSisaReguler: $mKaryCutiSisaReguler, mKaryCutiPanjang: $mKaryCutiPanjang, mKaryCutiSisaPanjang: $mKaryCutiSisaPanjang, mKaryStatusKaryId: $mKaryStatusKaryId, mKaryLamaKontrakAwal: $mKaryLamaKontrakAwal, mKaryLamaKontrakAkhir: $mKaryLamaKontrakAkhir, mKaryTglMasuk: $mKaryTglMasuk, mKaryTglBerhenti: $mKaryTglBerhenti, mKaryAlasanBerhenti: $mKaryAlasanBerhenti, mKaryUkBaju: $mKaryUkBaju, mKaryUkCelana: $mKaryUkCelana, mKaryUkSepatu: $mKaryUkSepatu, mKaryDesc: $mKaryDesc, mKaryIsActive: $mKaryIsActive, mKaryCreatorId: $mKaryCreatorId, mKaryLastEditorId: $mKaryLastEditorId, mKaryCreatedAt: $mKaryCreatedAt, mKaryUpdatedAt: $mKaryUpdatedAt, tipeLemburId: $tipeLemburId, tipeLemburMCompId: $tipeLemburMCompId, tipeLemburMDirId: $tipeLemburMDirId, tipeLemburGroup: $tipeLemburGroup, tipeLemburKey: $tipeLemburKey, tipeLemburCode: $tipeLemburCode, tipeLemburValue: $tipeLemburValue, tipeLemburIsActive: $tipeLemburIsActive, tipeLemburCreatorId: $tipeLemburCreatorId, tipeLemburLastEditorId: $tipeLemburLastEditorId, tipeLemburCreatedAt: $tipeLemburCreatedAt, tipeLemburUpdatedAt: $tipeLemburUpdatedAt, alasanId: $alasanId, alasanMCompId: $alasanMCompId, alasanMDirId: $alasanMDirId, alasanGroup: $alasanGroup, alasanKey: $alasanKey, alasanCode: $alasanCode, alasanValue: $alasanValue, alasanIsActive: $alasanIsActive, alasanCreatorId: $alasanCreatorId, alasanLastEditorId: $alasanLastEditorId, alasanCreatedAt: $alasanCreatedAt, alasanUpdatedAt: $alasanUpdatedAt, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, creatorTelp: $creatorTelp, creatorMKaryId: $creatorMKaryId, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage, lastEditorTelp: $lastEditorTelp, lastEditorMKaryId: $lastEditorMKaryId)';
+    return 'DataLembur(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, nomor: $nomor, datumMCompId: $datumMCompId, datumMDirId: $datumMDirId, datumMKaryId: $datumMKaryId, tanggal: $tanggal, jamMulai: $jamMulai, jamSelesai: $jamSelesai, datumTipeLemburId: $datumTipeLemburId, datumAlasanId: $datumAlasanId, noDoc: $noDoc, doc: $doc, keterangan: $keterangan, status: $status, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, mDirId: $mDirId, mDirMCompId: $mDirMCompId, mDirNama: $mDirNama, mDirDesc: $mDirDesc, mDirIsActive: $mDirIsActive, mDirCreatorId: $mDirCreatorId, mDirLastEditorId: $mDirLastEditorId, mDirCreatedAt: $mDirCreatedAt, mDirUpdatedAt: $mDirUpdatedAt, mKaryId: $mKaryId, mKaryMCompId: $mKaryMCompId, mKaryMDirId: $mKaryMDirId, mKaryMDivisiId: $mKaryMDivisiId, mKaryMDeptId: $mKaryMDeptId, mKaryMZonaId: $mKaryMZonaId, mKaryGradingId: $mKaryGradingId, mKaryCostcontreId: $mKaryCostcontreId, mKaryKode: $mKaryKode, mKaryMPosisiId: $mKaryMPosisiId, mKaryMJamKerjaId: $mKaryMJamKerjaId, mKaryKodePresensi: $mKaryKodePresensi, mKaryNik: $mKaryNik, mKaryNamaDepan: $mKaryNamaDepan, mKaryNamaBelakang: $mKaryNamaBelakang, mKaryNamaLengkap: $mKaryNamaLengkap, mKaryNamaPanggilan: $mKaryNamaPanggilan, mKaryJkId: $mKaryJkId, mKaryTempatLahir: $mKaryTempatLahir, mKaryTglLahir: $mKaryTglLahir, mKaryProvinsiId: $mKaryProvinsiId, mKaryKotaId: $mKaryKotaId, mKaryKecamatanId: $mKaryKecamatanId, mKaryKodePos: $mKaryKodePos, mKaryAlamatAsli: $mKaryAlamatAsli, mKaryAlamatDomisili: $mKaryAlamatDomisili, mKaryNoTlp: $mKaryNoTlp, mKaryNoTlpLainnya: $mKaryNoTlpLainnya, mKaryNoDarurat: $mKaryNoDarurat, mKaryNamaKontakDarurat: $mKaryNamaKontakDarurat, mKaryAgamaId: $mKaryAgamaId, mKaryGolDarahId: $mKaryGolDarahId, mKaryStatusNikahId: $mKaryStatusNikahId, mKaryJmlTanggungan: $mKaryJmlTanggungan, mKaryHubDgnKaryawan: $mKaryHubDgnKaryawan, mKaryCutiJatahReguler: $mKaryCutiJatahReguler, mKaryCutiSisaReguler: $mKaryCutiSisaReguler, mKaryCutiPanjang: $mKaryCutiPanjang, mKaryCutiSisaPanjang: $mKaryCutiSisaPanjang, mKaryStatusKaryId: $mKaryStatusKaryId, mKaryLamaKontrakAwal: $mKaryLamaKontrakAwal, mKaryLamaKontrakAkhir: $mKaryLamaKontrakAkhir, mKaryTglMasuk: $mKaryTglMasuk, mKaryTglBerhenti: $mKaryTglBerhenti, mKaryAlasanBerhenti: $mKaryAlasanBerhenti, mKaryUkBaju: $mKaryUkBaju, mKaryUkCelana: $mKaryUkCelana, mKaryUkSepatu: $mKaryUkSepatu, mKaryDesc: $mKaryDesc, mKaryIsActive: $mKaryIsActive, mKaryCreatorId: $mKaryCreatorId, mKaryLastEditorId: $mKaryLastEditorId, mKaryCreatedAt: $mKaryCreatedAt, mKaryUpdatedAt: $mKaryUpdatedAt, tipeLemburId: $tipeLemburId, tipeLemburMCompId: $tipeLemburMCompId, tipeLemburMDirId: $tipeLemburMDirId, tipeLemburGroup: $tipeLemburGroup, tipeLemburKey: $tipeLemburKey, tipeLemburCode: $tipeLemburCode, tipeLemburValue: $tipeLemburValue, tipeLemburIsActive: $tipeLemburIsActive, tipeLemburCreatorId: $tipeLemburCreatorId, tipeLemburLastEditorId: $tipeLemburLastEditorId, tipeLemburCreatedAt: $tipeLemburCreatedAt, tipeLemburUpdatedAt: $tipeLemburUpdatedAt, alasanId: $alasanId, alasanMCompId: $alasanMCompId, alasanMDirId: $alasanMDirId, alasanGroup: $alasanGroup, alasanKey: $alasanKey, alasanCode: $alasanCode, alasanValue: $alasanValue, alasanIsActive: $alasanIsActive, alasanCreatorId: $alasanCreatorId, alasanLastEditorId: $alasanLastEditorId, alasanCreatedAt: $alasanCreatedAt, alasanUpdatedAt: $alasanUpdatedAt, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, creatorTelp: $creatorTelp, creatorMKaryId: $creatorMKaryId, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage, lastEditorTelp: $lastEditorTelp, lastEditorMKaryId: $lastEditorMKaryId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DatumImpl &&
+            other is _$DataLemburImpl &&
             (identical(other.metaRead, metaRead) ||
                 other.metaRead == metaRead) &&
             (identical(other.metaDelete, metaDelete) ||
@@ -3583,19 +3586,19 @@ class _$DatumImpl implements _Datum {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$DatumImplCopyWith<_$DatumImpl> get copyWith =>
-      __$$DatumImplCopyWithImpl<_$DatumImpl>(this, _$identity);
+  _$$DataLemburImplCopyWith<_$DataLemburImpl> get copyWith =>
+      __$$DataLemburImplCopyWithImpl<_$DataLemburImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$DatumImplToJson(
+    return _$$DataLemburImplToJson(
       this,
     );
   }
 }
 
-abstract class _Datum implements Datum {
-  const factory _Datum(
+abstract class _DataLembur implements DataLembur {
+  const factory _DataLembur(
       {@JsonKey(name: "meta_read") final bool? metaRead,
       @JsonKey(name: "meta_delete") final bool? metaDelete,
       @JsonKey(name: "meta_update") final bool? metaUpdate,
@@ -3770,9 +3773,10 @@ abstract class _Datum implements Datum {
       final dynamic lastEditorProfilImage,
       @JsonKey(name: "last_editor.telp") final dynamic lastEditorTelp,
       @JsonKey(name: "last_editor.m_kary_id")
-      final dynamic lastEditorMKaryId}) = _$DatumImpl;
+      final dynamic lastEditorMKaryId}) = _$DataLemburImpl;
 
-  factory _Datum.fromJson(Map<String, dynamic> json) = _$DatumImpl.fromJson;
+  factory _DataLembur.fromJson(Map<String, dynamic> json) =
+      _$DataLemburImpl.fromJson;
 
   @override
   @JsonKey(name: "meta_read")
@@ -4229,6 +4233,6 @@ abstract class _Datum implements Datum {
   dynamic get lastEditorMKaryId;
   @override
   @JsonKey(ignore: true)
-  _$$DatumImplCopyWith<_$DatumImpl> get copyWith =>
+  _$$DataLemburImplCopyWith<_$DataLemburImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -9,7 +9,7 @@ part of 'lembur_model.dart';
 _$LemburModelImpl _$$LemburModelImplFromJson(Map<String, dynamic> json) =>
     _$LemburModelImpl(
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) => Datum.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => DataLembur.fromJson(e as Map<String, dynamic>))
           .toList(),
       total: json['total'] as int?,
       currentPage: json['current_page'] as int?,
@@ -38,7 +38,8 @@ Map<String, dynamic> _$$LemburModelImplToJson(_$LemburModelImpl instance) =>
       'processed_time': instance.processedTime,
     };
 
-_$DatumImpl _$$DatumImplFromJson(Map<String, dynamic> json) => _$DatumImpl(
+_$DataLemburImpl _$$DataLemburImplFromJson(Map<String, dynamic> json) =>
+    _$DataLemburImpl(
       metaRead: json['meta_read'] as bool?,
       metaDelete: json['meta_delete'] as bool?,
       metaUpdate: json['meta_update'] as bool?,
@@ -192,7 +193,7 @@ _$DatumImpl _$$DatumImplFromJson(Map<String, dynamic> json) => _$DatumImpl(
       lastEditorMKaryId: json['last_editor.m_kary_id'],
     );
 
-Map<String, dynamic> _$$DatumImplToJson(_$DatumImpl instance) =>
+Map<String, dynamic> _$$DataLemburImplToJson(_$DataLemburImpl instance) =>
     <String, dynamic>{
       'meta_read': instance.metaRead,
       'meta_delete': instance.metaDelete,

@@ -10,6 +10,7 @@ import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/add_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
+import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/list_cuti_model.dart';
@@ -50,13 +51,13 @@ Color getColorFromStatus(String status) {
   if (stateDict.containsKey(status)) {
     switch (status) {
       case "IN APPROVAL":
-        return Colors.blue;
+        return const Color(0xFF0068D4);
       case "DRAFT":
-        return Colors.blue;
+        return const Color(0xFF0068D4);
       case "REJECTED":
-        return Colors.red;
+        return const Color(0xFFED1B24);
       case "Aktif":
-        return Colors.green;
+        return const Color(0xFF0CA356);
       default:
         return Colors.grey; // warna default
     }
@@ -99,6 +100,7 @@ DateTime? selectedMonth;
 DateTime? selectedYear;
 
 class _CutiPageState extends State<CutiPage> {
+  String? username;
   void initState() {
     super.initState();
     loadData();
@@ -114,6 +116,12 @@ class _CutiPageState extends State<CutiPage> {
       listener: (context, state) async {
         if (state is ListCutiLoading) {
           LoadingDialog.showLoadingDialog(context);
+        } else if (state is ListCutiSuccessInBackground) {
+          LoadingDialog.dismissDialog(context);
+
+          setState(() {
+            username = state.username;
+          });
         } else if (state is ListCutiFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
@@ -144,7 +152,7 @@ class _CutiPageState extends State<CutiPage> {
       },
       child: Scaffold(
         appBar: appBarCustomMain(
-          title: "Selamat Datang, Trial!",
+          title: "Selamat Datang, ${username ?? '-'}!",
           padLeft: 8,
           actions: [
             Container(
@@ -185,8 +193,8 @@ class _CutiPageState extends State<CutiPage> {
             ),
           ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        body: Container(
+          margin: EdgeInsets.only(top: 20, left: 20, right: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -410,6 +418,7 @@ class ListViewCuti extends StatelessWidget {
         child: Stack(
           children: [
             Container(
+              margin: EdgeInsets.only(right: 3),
               height: 90,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
@@ -418,70 +427,70 @@ class ListViewCuti extends StatelessWidget {
             ),
             Container(
               height: 90,
-              margin: const EdgeInsets.only(bottom: 15, left: 5),
+              margin: const EdgeInsets.only(bottom: 7, left: 5, right: 3),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
-                border: Border.all(color: const Color(0xFFDDDDDD)),
+                // border: Border.all(color: const Color(0xFFDDDDDD)),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      offset: Offset(0, 0),
+                      blurRadius: 5)
+                ],
                 color: MyColorsConst.whiteColor,
               ),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
                     children: [
-                      const SizedBox(
-                        height: 10,
+                      Text(
+                        "${data.tipeCutiValue}",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            "${data.tipeCutiValue}",
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
+                      const Spacer(),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6, vertical: 3),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: currentColor.withOpacity(0.1),
+                        ),
+                        child: Text(
+                          mapStatusToString(currentStatus),
+                          style: TextStyle(
+                            color: currentColor,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w500,
                           ),
-                          const Spacer(),
-                          Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: currentColor.withOpacity(0.1),
-                            ),
-                            child: Text(
-                              mapStatusToString(currentStatus),
-                              style: TextStyle(
-                                color: currentColor,
-                                fontSize: 10,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                      const SizedBox(
-                        height: 15,
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.calendar_month_rounded,
+                        color: MyColorsConst.lightDarkColor,
+                        size: 10,
                       ),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.calendar_month_rounded,
-                            color: MyColorsConst.lightDarkColor,
-                            size: 10,
-                          ),
-                          const SizedBox(width: 5),
-                          Text(
-                            '${formatDate(data.dateFrom)} - ${formatDate(data.dateTo)}',
-                            style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
+                      const SizedBox(width: 5),
+                      Text(
+                        '${formatDate(data.dateFrom)} - ${formatDate(data.dateTo)}',
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ],
                   ),

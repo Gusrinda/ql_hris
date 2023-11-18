@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:sj_presensi_mobile/componens/HRIS/form_cuti.dart';
+import 'package:sj_presensi_mobile/componens/HRIS/form_add_data.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/text_form_custom.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
@@ -312,9 +312,21 @@ class _AddDinasPageState extends State<AddDinasPage> {
       }
 
       if (selectPosisi.isNotEmpty) {
+        final Size screenSize = MediaQuery.of(context).size;
+
+        const double menuWidth = 150.0;
+        const double menuHeight = 150.0;
+
+        final double centerY = (screenSize.height - menuHeight) / 2 + 200;
+
         final DataPosisi? selectedPosisiValue = await showMenu(
           context: context,
-          position: const RelativeRect.fromLTRB(100, 0, 0, 0),
+          position: RelativeRect.fromLTRB(
+            (screenSize.width - menuWidth) / 2 + 100,
+            centerY,
+            (screenSize.width + menuWidth) / 2 + 100,
+            centerY + menuHeight,
+          ),
           items: selectPosisi.map((posisi) {
             return PopupMenuItem<DataPosisi>(
               value: posisi,
@@ -350,9 +362,26 @@ class _AddDinasPageState extends State<AddDinasPage> {
       }
 
       if (selectTemplateSpd.isNotEmpty) {
+        final RenderBox renderBox = context.findRenderObject() as RenderBox;
+        final Offset offset = renderBox.localToGlobal(Offset.zero);
+
+        const double menuWidth = 150.0;
+        const double additionalOffset = 10.0;
         final DataTemplateSpd? selectedTemplateSpdValue = await showMenu(
           context: context,
-          position: const RelativeRect.fromLTRB(100, 0, 0, 0),
+          position: RelativeRect.fromRect(
+            Rect.fromPoints(
+              Offset(offset.dx + renderBox.size.width + additionalOffset,
+                  offset.dy),
+              Offset(
+                  offset.dx +
+                      renderBox.size.width +
+                      menuWidth +
+                      additionalOffset,
+                  offset.dy + renderBox.size.height),
+            ),
+            Offset.zero & MediaQuery.of(context).size,
+          ),
           items: selectTemplateSpd.map((templatespd) {
             return PopupMenuItem<DataTemplateSpd>(
               value: templatespd,
@@ -388,9 +417,26 @@ class _AddDinasPageState extends State<AddDinasPage> {
       }
 
       if (selectDirektorat.isNotEmpty) {
+        final RenderBox renderBox = context.findRenderObject() as RenderBox;
+        final Offset offset = renderBox.localToGlobal(Offset.zero);
+
+        const double menuWidth = 150.0;
+        const double additionalOffset = 10.0;
         final DataDirektorat? selectedDirektoratValue = await showMenu(
           context: context,
-          position: const RelativeRect.fromLTRB(100, 0, 0, 0),
+          position: RelativeRect.fromRect(
+            Rect.fromPoints(
+              Offset(offset.dx + renderBox.size.width + additionalOffset,
+                  offset.dy),
+              Offset(
+                  offset.dx +
+                      renderBox.size.width +
+                      menuWidth +
+                      additionalOffset,
+                  offset.dy + renderBox.size.height),
+            ),
+            Offset.zero & MediaQuery.of(context).size,
+          ),
           items: selectDirektorat.map((direktorat) {
             return PopupMenuItem<DataDirektorat>(
               value: direktorat,
@@ -426,9 +472,20 @@ class _AddDinasPageState extends State<AddDinasPage> {
       }
 
       if (selectJenisSpd.isNotEmpty) {
+        final Size screenSize = MediaQuery.of(context).size;
+
+        const double menuWidth = 200.0;
+        const double menuHeight = 200.0;
+
+        final double centerY = (screenSize.height - menuHeight) / 2;
         final DataJenisSpd? selectedJenisSpdValue = await showMenu(
           context: context,
-          position: const RelativeRect.fromLTRB(100, 0, 0, 0),
+          position: RelativeRect.fromLTRB(
+            (screenSize.width - menuWidth) / 2 + 150,
+            centerY,
+            (screenSize.width + menuWidth) / 2 + 150,
+            centerY + menuHeight,
+          ),
           items: selectJenisSpd.map((jenisspd) {
             return PopupMenuItem<DataJenisSpd>(
               value: jenisspd,
@@ -464,9 +521,21 @@ class _AddDinasPageState extends State<AddDinasPage> {
       }
 
       if (selectZonaAsal.isNotEmpty) {
+        final Size screenSize = MediaQuery.of(context).size;
+
+        const double menuWidth = 150.0;
+        const double menuHeight = 150.0;
+
+        final double centerY = (screenSize.height - menuHeight) / 2 + 50.0;
+
         final DataZona? selectedZonaAsalValue = await showMenu(
           context: context,
-          position: const RelativeRect.fromLTRB(100, 0, 0, 0),
+          position: RelativeRect.fromLTRB(
+            (screenSize.width - menuWidth) / 2 + 200,
+            centerY,
+            (screenSize.width + menuWidth) / 2 + 200,
+            centerY + menuHeight,
+          ),
           items: selectZonaAsal.map((zonaasal) {
             return PopupMenuItem<DataZona>(
               value: zonaasal,
@@ -502,9 +571,21 @@ class _AddDinasPageState extends State<AddDinasPage> {
       }
 
       if (selectZonaTujuan.isNotEmpty) {
+        final Size screenSize = MediaQuery.of(context).size;
+
+        const double menuWidth = 150.0;
+        const double menuHeight = 150.0;
+
+        final double centerY = (screenSize.height - menuHeight) / 2 + 150.0;
+
         final DataZona? selectedZonaTujuanValue = await showMenu(
           context: context,
-          position: const RelativeRect.fromLTRB(100, 0, 0, 0),
+          position: RelativeRect.fromLTRB(
+            (screenSize.width - menuWidth) / 2 + 150,
+            centerY,
+            (screenSize.width + menuWidth) / 2 + 150,
+            centerY + menuHeight,
+          ),
           items: selectZonaTujuan.map((zonatujuan) {
             return PopupMenuItem<DataZona>(
               value: zonatujuan,
@@ -540,9 +621,20 @@ class _AddDinasPageState extends State<AddDinasPage> {
       }
 
       if (selectLokasiTujuan.isNotEmpty) {
+        final Size screenSize = MediaQuery.of(context).size;
+
+        const double menuWidth = 150.0;
+        const double menuHeight = 150.0;
+
+        final double centerY = (screenSize.height - menuHeight) / 2;
         final DataLokasiTujuan? selectedLokasiTujuanValue = await showMenu(
           context: context,
-          position: const RelativeRect.fromLTRB(100, 0, 0, 0),
+          position: RelativeRect.fromLTRB(
+            (screenSize.width - menuWidth) / 2 + 150,
+            centerY,
+            (screenSize.width + menuWidth) / 2 + 150,
+            centerY + menuHeight,
+          ),
           items: selectLokasiTujuan.map((lokasitujuan) {
             return PopupMenuItem<DataLokasiTujuan>(
               value: lokasitujuan,

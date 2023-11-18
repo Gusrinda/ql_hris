@@ -3,7 +3,10 @@ import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:sj_presensi_mobile/services/cuti_services.dart';
+import 'package:sj_presensi_mobile/services/lembur_services.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/list_cuti_model.dart';
+// import 'package:sj_presensi_mobile/services/model/lembur/detail_lembur_model.dart';
+import 'package:sj_presensi_mobile/services/model/lembur/lembur_model.dart';
 import 'package:sj_presensi_mobile/services/model/notifikasi_model.dart';
 import 'package:sj_presensi_mobile/services/notifikasi_services.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
@@ -15,6 +18,7 @@ part 'notifikasi_state.dart';
 class NotifikasiBloc extends Bloc<NotifikasiEvent, NotifikasiState> {
   List<DataNotif> listNotifikasi = [];
   List<Datum> listcuti = [];
+  List<DataLembur> listlembur = [];
   NotifikasiBloc() : super(ListNotifikasiInitial()) {
     on<GetListNotifikasi>((event, emit) async {
       emit(ListNotifikasiLoading());
@@ -26,7 +30,11 @@ class NotifikasiBloc extends Bloc<NotifikasiEvent, NotifikasiState> {
         DateTime date = DateTime.now();
         var resCuti =
             await CutiServices.getListCuti(resToken.response["token"], date);
-        if (res is ServicesSuccess && resCuti is ServicesSuccess) {
+        var resLembur = await LemburServices.getListLembur(
+            resToken.response["token"], date);
+        if (res is ServicesSuccess &&
+            resCuti is ServicesSuccess &&
+            resLembur is ServicesSuccess) {
           if (res.response is Map<String, dynamic>) {
             print(res.response);
             NotifikasiModel dataResponse =
@@ -39,9 +47,16 @@ class NotifikasiBloc extends Bloc<NotifikasiEvent, NotifikasiState> {
             //Masukkan data dari model ke kebutuhan
             listcuti = dataResponseCuti.data ?? [];
 
+            LemburModel dataResponseLembur =
+                LemburModel.fromJson(resLembur.response);
+            listlembur = dataResponseLembur.data ?? [];
+
             emit(
               ListNotifikasiSuccessInBackground(
-                  listNotifikasi: listNotifikasi, listCuti: listcuti),
+                listNotifikasi: listNotifikasi,
+                listCuti: listcuti,
+                listlembur: listlembur,
+              ),
             );
           } else {
             emit(ListNotifikasiFailedInBackground(

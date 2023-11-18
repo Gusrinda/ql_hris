@@ -4,12 +4,14 @@ class ProfileModel {
   int? employeeId;
   String? username;
   String? phoneNumber;
+  String? password;
   ProfileModel({
     this.imagePath,
     this.email,
     this.employeeId,
     this.username,
     this.phoneNumber,
+    this.password,
   });
 
   factory ProfileModel.fromMap(Map<String, dynamic> json) => ProfileModel(
@@ -18,6 +20,7 @@ class ProfileModel {
         employeeId: json["id"],
         username: json["username"],
         phoneNumber: json["telp"],
+        password: json["password"],
       );
 
   // ProfileModel copyWith({

@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:sj_presensi_mobile/services/cuti_services.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/list_cuti_model.dart';
+import 'package:sj_presensi_mobile/services/profile_services.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
@@ -17,8 +18,10 @@ class ListCutiBloc extends Bloc<ListCutiEvent, ListCutiState> {
       var resToken = await GeneralSharedPreferences.getUserToken();
       if (resToken is ServicesSuccess) {
         var res = await CutiServices.getListCuti(resToken.response["token"], event.date);
-        print(res);
-        if (res is ServicesSuccess) {
+        var resUser = await ProfileServices.getDataProfilel(
+            resToken.response["token"], resToken.response["id"]);
+        if (res is ServicesSuccess && resUser is ServicesSuccess) {
+          final username = resUser.response["data"]["username"] ?? 'Pegawai SJ';
           debugPrint(res.response.toString());
           if (res.response is Map<String, dynamic>) {
             print(res.response);
@@ -30,7 +33,7 @@ class ListCutiBloc extends Bloc<ListCutiEvent, ListCutiState> {
             listcuti = dataResponse.data ?? [];
 
             emit(
-              ListCutiSuccessInBackground(dataCuti: listcuti),
+              ListCutiSuccessInBackground(dataCuti: listcuti, username: username,),
             );
           } else {
             emit(ListCutiFailedInBackground(

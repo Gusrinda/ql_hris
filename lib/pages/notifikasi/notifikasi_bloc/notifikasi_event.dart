@@ -3,7 +3,7 @@ part of 'notifikasi_bloc.dart';
 abstract class NotifikasiEvent extends Equatable {
   const NotifikasiEvent();
 
-   @override
+  @override
   List<Object> get props => [];
 }
 

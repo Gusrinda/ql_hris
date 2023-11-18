@@ -16,29 +16,30 @@ class ProfileServices {
     );
   }
 
-  static Future<Object> editImageProfile(String token, int userId, email,
+  static Future<Object> editImageProfile(String token, int userId,
       {String? imagePath}) async {
+    print("hasil id: ${userId}");
     print("hasil image: ${imagePath}");
-    var url =
-        Uri.parse("${MyGeneralConst.API_URL}/operation/default_users/$userId");
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/default_users/update_foto_profil");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.putMultipart,
       headers: GeneralServices.addToken2Headers(token),
-      // body: {
-      //   "inputEmail": email,
-      // },
+      body: {
+        "id": userId,
+      },
       imagePath: imagePath,
     );
   }
 
   // static Future<Object> editImageProfile(
-  //     String token, int userId, email,
+  //     String token, int userId, password,
   //     {String? imagePath}) async {
   //   var url =
   //       Uri.parse("${MyGeneralConst.API_URL}/operation/default_users/$userId");
   //   var body = {
-  //     "inputEmail": email,
+  //     "password": password,
   //   };
   //   return await GeneralServices.baseService(
   //     url: url,

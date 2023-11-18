@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:sj_presensi_mobile/componens/HRIS/form_cuti.dart';
+import 'package:sj_presensi_mobile/componens/HRIS/form_add_data.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/hero_widget.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/text_form_custom.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
@@ -17,7 +17,7 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 class AddCutiPage extends StatefulWidget {
   static const routeName = '/AddCutiPage';
   AddCutiPage({super.key, required this.reloadDataCallback});
-   final VoidCallback reloadDataCallback;
+  final VoidCallback reloadDataCallback;
 
   final TextEditingController idAlasanController = TextEditingController();
   final TextEditingController valueAlasanController = TextEditingController();
@@ -35,6 +35,7 @@ class AddCutiPage extends StatefulWidget {
 }
 
 class _AddCutiPageState extends State<AddCutiPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String? selectedValue;
   String? selectedTipeValue;
   String? selectedIDTipeValue;
@@ -57,42 +58,6 @@ class _AddCutiPageState extends State<AddCutiPage> {
     var selectTipeCuti = context.read<AddCutiBloc>().dataTipeCuti;
     String selectedTipeCutiDisplay = "";
 
-    // Fungsi untuk menampilkan menu alasan cuti
-    void _showAlasanMenu(BuildContext context) async {
-      if (selectAlasanCuti.isEmpty) {
-        // Memastikan data alasan cuti sudah diambil
-        context.read<AddCutiBloc>().add(OnSelectAlasanCuti());
-        selectAlasanCuti = context.read<AddCutiBloc>().dataAlasanCuti;
-      }
-
-      if (selectAlasanCuti.isNotEmpty) {
-        // Tampilkan menu dan lakukan pemilihan alasan cuti
-        final Datum? selectedValue = await showMenu(
-          context: context,
-          position: RelativeRect.fromLTRB(100, 0, 0, 0),
-          items: selectAlasanCuti.map((alasan) {
-            return PopupMenuItem<Datum>(
-              child: Text(
-                alasan.value ?? '',
-                style: TextStyle(
-                  fontSize: 12,
-                ),
-              ),
-              value: alasan,
-            );
-          }).toList(),
-        );
-
-        if (selectedValue != null) {
-          widget.valueAlasanController.text =
-              selectedValue.value?.toString() ?? '';
-          widget.idAlasanController.text = selectedValue.id?.toString() ?? '';
-        }
-      } else {
-        print("Tidak ada item dalam selectAlasanCuti");
-      }
-    }
-
     // Fungsi untuk menampilkan menu Tipe cuti
     void _showTipeMenu(BuildContext context) async {
       if (selectTipeCuti.isEmpty) {
@@ -103,9 +68,27 @@ class _AddCutiPageState extends State<AddCutiPage> {
 
       if (selectTipeCuti.isNotEmpty) {
         // Tampilkan menu dan lakukan pemilihan Tipe cuti
+        final RenderBox renderBox = context.findRenderObject() as RenderBox;
+        final Offset offset = renderBox.localToGlobal(Offset.zero);
+
+        const double menuWidth = 150.0;
+        const double additionalOffset = 10.0;
+
         final DataTipeCuti? selectedTipeValue = await showMenu(
           context: context,
-          position: const RelativeRect.fromLTRB(100, 0, 0, 0),
+          position: RelativeRect.fromRect(
+            Rect.fromPoints(
+              Offset(offset.dx + renderBox.size.width + additionalOffset,
+                  offset.dy),
+              Offset(
+                  offset.dx +
+                      renderBox.size.width +
+                      menuWidth +
+                      additionalOffset,
+                  offset.dy + renderBox.size.height),
+            ),
+            Offset.zero & MediaQuery.of(context).size,
+          ),
           items: selectTipeCuti.map((tipe) {
             return PopupMenuItem<DataTipeCuti>(
               value: tipe,
@@ -129,6 +112,62 @@ class _AddCutiPageState extends State<AddCutiPage> {
           setState(() {
             this.selectedTipeValue = selectedTipeValue.value;
           });
+        }
+      } else {
+        print("Tidak ada item dalam selectAlasanCuti");
+      }
+    }
+
+    // Fungsi untuk menampilkan menu alasan cuti
+    void _showAlasanMenu(BuildContext context) async {
+      if (selectAlasanCuti.isEmpty) {
+        // Memastikan data alasan cuti sudah diambil
+        context.read<AddCutiBloc>().add(OnSelectAlasanCuti());
+        selectAlasanCuti = context.read<AddCutiBloc>().dataAlasanCuti;
+      }
+
+      if (selectAlasanCuti.isNotEmpty) {
+        // Tampilkan menu dan lakukan pemilihan alasan cuti
+        final RenderBox renderBox = context.findRenderObject() as RenderBox;
+        final Offset offset = renderBox.localToGlobal(Offset.zero);
+
+        const double menuWidth = 150.0;
+        const double additionalOffset = 10.0;
+
+        final Datum? selectedValue = await showMenu(
+          context: context,
+          position: RelativeRect.fromRect(
+            Rect.fromPoints(
+              Offset(offset.dx + renderBox.size.width + additionalOffset,
+                  offset.dy),
+              Offset(
+                  offset.dx +
+                      renderBox.size.width +
+                      menuWidth +
+                      additionalOffset,
+                  offset.dy + renderBox.size.height),
+            ),
+            Offset.zero & MediaQuery.of(context).size,
+          ),
+          items: selectAlasanCuti.map((alasan) {
+            return PopupMenuItem<Datum>(
+              child: ListTile(
+                title: Text(
+                  alasan.value ?? '',
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+              value: alasan,
+            );
+          }).toList(),
+        );
+
+        if (selectedValue != null) {
+          widget.valueAlasanController.text =
+              selectedValue.value?.toString() ?? '';
+          widget.idAlasanController.text = selectedValue.id?.toString() ?? '';
         }
       } else {
         print("Tidak ada item dalam selectAlasanCuti");
@@ -188,143 +227,181 @@ class _AddCutiPageState extends State<AddCutiPage> {
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             child: BlocBuilder<AddCutiBloc, AddCutiState>(
               builder: (context, state) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    FormDropDown(
-                      input: selectedTipeCutiDisplay,
-                      onTap: () {
-                        _showTipeMenu(context);
-                      },
-                      idController: widget.idTipeCutiController,
-                      valueController: widget.valueTipeCutiController,
-                      hintText: 'Pilih Tipe Cuti',
-                      labelTag: 'Label-TipeCuti',
-                      formTag: 'Form-TipeCuti',
-                      labelForm: 'Tipe Cuti',
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    FormDropDown(
-                      input: selectedValue ?? "",
-                      onTap: () {
-                        _showAlasanMenu(context);
-                      },
-                      idController: widget.idAlasanController,
-                      valueController: widget.valueAlasanController,
-                      labelForm: 'Alasan Cuti',
-                      hintText: 'Pilih Alasan Cuti',
-                      labelTag: 'Label-AlasanCuti',
-                      formTag: 'Form-AlasanCuti',
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Hero(
-                      tag: 'Label-RowJamVisiting',
-                      flightShuttleBuilder: flightShuttleBuilder,
-                      child: Row(
+                return Form(
+                  key: _formKey,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      FormDropDown(
+                        input: selectedTipeCutiDisplay,
+                        onTap: () {
+                          _showTipeMenu(context);
+                        },
+                        idController: widget.idTipeCutiController,
+                        valueController: widget.valueTipeCutiController,
+                        hintText: 'Pilih Tipe Cuti',
+                        labelTag: 'Label-TipeCuti',
+                        formTag: 'Form-TipeCuti',
+                        labelForm: 'Tipe Cuti',
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Pilih Tipe Cuti';
+                          }
+                          return null;
+                        },
+                        errorTextStyle: TextStyle(fontSize: 8),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      FormDropDown(
+                        input: selectedValue ?? "",
+                        onTap: () {
+                          _showAlasanMenu(context);
+                        },
+                        idController: widget.idAlasanController,
+                        valueController: widget.valueAlasanController,
+                        labelForm: 'Alasan Cuti',
+                        hintText: 'Pilih Alasan Cuti',
+                        labelTag: 'Label-AlasanCuti',
+                        formTag: 'Form-AlasanCuti',
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Pilih Alasan';
+                          }
+                          return null;
+                        },
+                        errorTextStyle: TextStyle(fontSize: 8),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Hero(
+                        tag: 'Label-RowJamVisiting',
+                        flightShuttleBuilder: flightShuttleBuilder,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: FormTextLabel(
+                                label: "Tanggal Mulai",
+                                labelColor: MyColorsConst.darkColor,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: FormTextLabel(
+                                label: "Tanggal Berakhir",
+                                labelColor: MyColorsConst.darkColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      Row(
                         children: [
                           Expanded(
                             flex: 1,
-                            child: FormTextLabel(
-                              label: "Tanggal Mulai",
-                              labelColor: MyColorsConst.darkColor,
+                            child: _buildDateTextField(
+                              "Masukkan Tanggal",
+                              widget.dateFromController,
+                              selectedDateFrom,
+                              (selectedDate) {
+                                setState(() {
+                                  selectedDateFrom = selectedDate;
+                                });
+                                print("Selected Date From: $selectedDateFrom");
+                              },
+                              (value) {
+                                if (value == null) {
+                                  return 'Pilih Tanggal';
+                                }
+                                return null;
+                              },
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 20,
                           ),
                           Expanded(
                             flex: 1,
-                            child: FormTextLabel(
-                              label: "Tanggal Berakhir",
-                              labelColor: MyColorsConst.darkColor,
+                            child: _buildDateTextField(
+                              "Masukkan Tanggal",
+                              widget.dateToController,
+                              selectedDateTo,
+                              (selectedDate) {
+                                setState(() {
+                                  selectedDateTo = selectedDate;
+                                });
+                                print("Selected Date To: $selectedDateTo");
+                              },
+                              (value) {
+                                if (value == null) {
+                                  return 'Pilih Tanggal';
+                                }
+                                return null;
+                              },
                             ),
                           ),
                         ],
                       ),
-                    ),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: _buildDateTextField(
-                            "Masukkan Tanggal",
-                            widget.dateFromController,
-                            selectedDateFrom,
-                            (selectedDate) {
-                              setState(() {
-                                selectedDateFrom = selectedDate;
-                              });
-                              print("Selected Date From: $selectedDateFrom");
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: _buildDateTextField(
-                            "Masukkan Tanggal",
-                            widget.dateToController,
-                            selectedDateTo,
-                            (selectedDate) {
-                              setState(() {
-                                selectedDateTo = selectedDate;
-                              });
-                              print("Selected Date To: $selectedDateTo");
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    FormCatatanCuti(
-                      input: widget.keteranganController.text,
-                      onTap: () {},
-                      controller: widget.keteranganController,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextButtonCustomV1(
-                      text: "Kirim",
-                      backgroundColor: MyColorsConst.primaryColor,
-                      textColor: MyColorsConst.whiteColor,
-                      onPressed: state is AddCutiLoading
-                          ? null
-                          : () {
-                              context.read<AddCutiBloc>().add(
-                                    AddCutiSubmited(
-                                      alasan: int.parse(
-                                          widget.idAlasanController.text),
-                                      tipeCuti: int.parse(
-                                          widget.idTipeCutiController.text),
-                                      keterangan:
-                                          widget.keteranganController.text,
-                                      dateFrom: widget.dateFromController.text,
-                                      dateTo: widget.dateToController.text,
-                                    ),
-                                  );
-                            },
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      FormCatatanCuti(
+                        input: widget.keteranganController.text,
+                        onTap: () {},
+                        controller: widget.keteranganController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Pilih Tipe Cuti';
+                          }
+                          return null;
+                        },
+                        errorTextStyle: TextStyle(fontSize: 8),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextButtonCustomV1(
+                        text: "Kirim",
+                        backgroundColor: MyColorsConst.primaryColor,
+                        textColor: MyColorsConst.whiteColor,
+                        onPressed: state is AddCutiLoading
+                            ? null
+                            : () {
+                                context.read<AddCutiBloc>().add(
+                                      AddCutiSubmited(
+                                        alasan: int.parse(
+                                            widget.idAlasanController.text),
+                                        tipeCuti: int.parse(
+                                            widget.idTipeCutiController.text),
+                                        keterangan:
+                                            widget.keteranganController.text,
+                                        dateFrom:
+                                            widget.dateFromController.text,
+                                        dateTo: widget.dateToController.text,
+                                      ),
+                                    );
+                              },
+                      ),
+                    ],
+                  ),
                 );
               },
             ),
@@ -339,6 +416,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
     TextEditingController controller,
     DateTime? selectedDate,
     Function(DateTime) onDateSelected,
+    String? Function(DateTime?)? validator,
   ) {
     return InkWell(
       onTap: () async {

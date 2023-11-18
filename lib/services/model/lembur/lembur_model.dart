@@ -8,7 +8,7 @@ part 'lembur_model.g.dart';
 class LemburModel with _$LemburModel {
     const factory LemburModel({
         @JsonKey(name: "data")
-        List<Datum>? data,
+        List<DataLembur>? data,
         @JsonKey(name: "total")
         int? total,
         @JsonKey(name: "current_page")
@@ -35,8 +35,8 @@ class LemburModel with _$LemburModel {
 }
 
 @freezed
-class Datum with _$Datum {
-    const factory Datum({
+class DataLembur with _$DataLembur {
+    const factory DataLembur({
         @JsonKey(name: "meta_read")
         bool? metaRead,
         @JsonKey(name: "meta_delete")
@@ -339,7 +339,7 @@ class Datum with _$Datum {
         dynamic lastEditorTelp,
         @JsonKey(name: "last_editor.m_kary_id")
         dynamic lastEditorMKaryId,
-    }) = _Datum;
+    }) = _DataLembur;
 
-    factory Datum.fromJson(Map<String, dynamic> json) => _$DatumFromJson(json);
+    factory DataLembur.fromJson(Map<String, dynamic> json) => _$DataLemburFromJson(json);
 }

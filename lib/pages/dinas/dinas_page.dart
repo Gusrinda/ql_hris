@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:sj_presensi_mobile/componens/HRIS/usernameProfile.dart';
-import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/monthYearPicker_custom.dart';
+import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
@@ -43,7 +42,7 @@ String mapStatusToString(String status) {
   if (stateDict.containsKey(status)) {
     return stateDict[status]['name'];
   } else {
-    return 'Undefined';
+    return 'Menunggu Disetujui';
   }
 }
 
@@ -62,7 +61,7 @@ Color getColorFromStatus(String status) {
         return Colors.grey; // warna default
     }
   } else {
-    return Colors.grey; // warna default
+    return const Color(0xFF0068D4); // warna default
   }
 }
 
@@ -100,6 +99,7 @@ DateTime? selectedMonth;
 DateTime? selectedYear;
 
 class _DinasPageState extends State<DinasPage> {
+  String? username;
   @override
   void initState() {
     super.initState();
@@ -116,6 +116,12 @@ class _DinasPageState extends State<DinasPage> {
       listener: (context, state) async {
         if (state is ListDinasLoading) {
           LoadingDialog.showLoadingDialog(context);
+        } else if (state is ListDinasSuccessInBackground) {
+          LoadingDialog.dismissDialog(context);
+
+          setState(() {
+            username = state.username;
+          });
         } else if (state is ListDinasFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
@@ -146,7 +152,7 @@ class _DinasPageState extends State<DinasPage> {
       },
       child: Scaffold(
         appBar: appBarCustomMain(
-          title: "Selamat Datang, Trial!",
+          title: "Selamat Datang, ${username ?? '-'}!",
           padLeft: 8,
           actions: [
             Container(
