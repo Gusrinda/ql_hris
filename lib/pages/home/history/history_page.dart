@@ -42,7 +42,6 @@ class _HistoryPageState extends State<HistoryPage> {
     String day = DateFormat.EEEE("id").format(dateTime);
     return day;
   }
-  
 
   String mapStatusToString(String status) {
     if (stateDict.containsKey(status)) {
@@ -56,15 +55,15 @@ class _HistoryPageState extends State<HistoryPage> {
     if (stateDict.containsKey(status)) {
       switch (status) {
         case "WORKING":
-          return Colors.blue;
+          return Color(0XFF0068D4);
         case "NOT ATTEND":
-          return Colors.red;
+          return Color(0XFFED1B24);
         case "ATTEND NO CHECKOUT":
-          return Colors.green;
+          return Color(0XFF0CA356);
         case "ATTEND":
-          return Colors.green;
+          return Color(0XFF0CA356);
         default:
-          return Colors.grey; // warna default
+          return Colors.black; // warna default
       }
     } else {
       return Colors.grey; // warna default
@@ -163,8 +162,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                   );
                             }
                           },
-                          selectedYear:
-                              selectedYear, 
+                          selectedYear: selectedYear,
                         ),
                       ],
                     ),
@@ -238,7 +236,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                     subtitle: GestureDetector(
                                       child: Container(
                                         margin:
-                                            const EdgeInsets.only(bottom: 20),
+                                            const EdgeInsets.only(bottom: 7),
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(6),
@@ -266,7 +264,10 @@ class _HistoryPageState extends State<HistoryPage> {
                                                 ),
                                                 const Spacer(),
                                                 Container(
-                                                  padding: EdgeInsets.all(4),
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 6,
+                                                      vertical: 3),
                                                   decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -293,29 +294,59 @@ class _HistoryPageState extends State<HistoryPage> {
                                             ),
                                             Row(
                                               children: [
-                                                Text(
-                                                  data[index].checkinTime !=
-                                                          null
-                                                      ? "in ${data[index].checkinTime}"
-                                                      : "in -",
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: MyColorsConst
-                                                        .lightDarkColor,
-                                                    fontWeight: FontWeight.w400,
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text: 'in ',
+                                                    style: const TextStyle(
+                                                      fontSize: 12,
+                                                      color: Color(0XFF8F8F8F),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                        text: data[index]
+                                                                    .checkinTime !=
+                                                                null
+                                                            ? "${data[index].checkinTime}"
+                                                            : "-",
+                                                        style: const TextStyle(
+                                                          fontSize: 12,
+                                                          color:
+                                                              Color(0XFF8F8F8F),
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                                 const Spacer(),
-                                                Text(
-                                                  data[index].checkoutTime !=
-                                                          null
-                                                      ? "out ${data[index].checkoutTime}"
-                                                      : "out -",
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: MyColorsConst
-                                                        .lightDarkColor,
-                                                    fontWeight: FontWeight.w400,
+                                                Text.rich(
+                                                  TextSpan(
+                                                    text: 'out ',
+                                                    style: const TextStyle(
+                                                      fontSize: 12,
+                                                      color: Color(0XFF8F8F8F),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                        text: data[index]
+                                                                    .checkoutTime !=
+                                                                null
+                                                            ? "${data[index].checkoutTime}"
+                                                            : "-",
+                                                        style: const TextStyle(
+                                                          fontSize: 12,
+                                                          color:
+                                                              Color(0XFF8F8F8F),
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ],

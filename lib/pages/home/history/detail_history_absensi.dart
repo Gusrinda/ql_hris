@@ -73,13 +73,13 @@ Color getColorFromStatus(String status) {
   if (stateDict.containsKey(status)) {
     switch (status) {
       case "WORKING":
-        return Colors.blue;
+        return Color(0XFF0068D4);
       case "NOT ATTEND":
-        return Colors.red;
+        return Color(0XFFED1B24);
       case "ATTEND NO CHECKOUT":
-        return Colors.green;
+        return Color(0XFF0CA356);
       case "ATTEND":
-        return Colors.green;
+        return Color(0XFF0CA356);
       default:
         return Colors.black; // warna default
     }
@@ -143,7 +143,7 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                               ),
                             ),
                             Container(
-                              padding: const EdgeInsets.all(4),
+                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 color: currentColor.withOpacity(0.1),
@@ -164,25 +164,49 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                         ),
                         Row(
                           children: [
-                            Text(
-                              widget.checkinTime != null
-                                  ? "in ${widget.checkinTime}"
-                                  : "in -",
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: MyColorsConst.lightDarkColor,
-                                fontWeight: FontWeight.w400,
+                            Text.rich(
+                              TextSpan(
+                                text: 'in ',
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Color(0XFF8F8F8F),
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: widget.checkinTime != null
+                                        ? "${widget.checkinTime}"
+                                        : "-",
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      color: Color(0XFF8F8F8F),
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                             const Spacer(),
-                            Text(
-                              widget.checkoutTime != null
-                                  ? "out ${widget.checkoutTime}"
-                                  : "out -",
-                              style: const TextStyle(
-                                fontSize: 12,
-                                color: MyColorsConst.lightDarkColor,
-                                fontWeight: FontWeight.w400,
+                            Text.rich(
+                              TextSpan(
+                                text: 'out ',
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Color(0XFF8F8F8F),
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: widget.checkoutTime != null
+                                        ? "${widget.checkoutTime}"
+                                        : "-",
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      color: Color(0XFF8F8F8F),
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],

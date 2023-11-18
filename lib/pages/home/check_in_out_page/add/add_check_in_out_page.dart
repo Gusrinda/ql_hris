@@ -265,13 +265,13 @@ class AddCheckInOutPage extends StatelessWidget {
                               showDialog(
                                 context: context,
                                 builder: (_) => DialogCustom(
-                                  state: DialogCustomItem.error,
+                                  state: DialogCustomItem.warning,
                                   message:
-                                      "Anda sedang berada di luar area kantor! \nPresensi Tidak dapat dilanjutkan.",
+                                      "Anda sedang berada di luar area kantor! \nPresensi akan gagal apabila dilanjutkan.",
                                   durationInSec: 5,
-                                  // onContinue: () => context
-                                  //     .read<AddCheckInOutBloc>()
-                                  //     .add(AddCheckInOutSubmited()),
+                                  onContinue: () => context
+                                      .read<AddCheckInOutBloc>()
+                                      .add(AddCheckInOutSubmited()),
                                 ),
                               );
                             }
