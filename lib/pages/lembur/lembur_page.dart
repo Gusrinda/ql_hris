@@ -305,14 +305,14 @@ class CardListView extends StatelessWidget {
                   child: Stack(
                     children: [
                       Container(
-                        height: 90,
+                        height: 110,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(6),
                           color: Color(0XFF0068D4),
                         ),
                       ),
                       Container(
-                        height: 90,
+                        height: 110,
                         margin: const EdgeInsets.only(bottom: 7, left: 5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(6),
@@ -332,28 +332,34 @@ class CardListView extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Text(
-                                  "${data[index].nomor ?? 0}",
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w500,
+                                Expanded(
+                                  flex: 3,
+                                  child: Text(
+                                    "${data[index].nomor ?? 0}",
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ),
                                 const Spacer(),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 6, vertical: 3),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
-                                    color: Colors.blue.withOpacity(0.1),
-                                  ),
-                                  child: Text(
-                                    '${data[index].tipeLemburValue}',
-                                    style: const TextStyle(
-                                      color: Color(0XFF0068D4),
-                                      fontSize: 8,
-                                      fontWeight: FontWeight.w500,
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 6, vertical: 3),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4),
+                                      color: Colors.blue.withOpacity(0.1),
+                                    ),
+                                    child: Text(
+                                      '${data[index].tipeLemburValue}',
+                                      style: const TextStyle(
+                                        color: Color(0XFF0068D4),
+                                        fontSize: 8,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
                                   ),
                                 ),

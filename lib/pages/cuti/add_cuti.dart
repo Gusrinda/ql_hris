@@ -10,6 +10,7 @@ import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
+import 'package:sj_presensi_mobile/pages/cuti/cuti_selector.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/getDataCuti/get_alasan_cuti_model.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/getDataCuti/get_tipe_cuti_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -58,52 +59,23 @@ class _AddCutiPageState extends State<AddCutiPage> {
     var selectTipeCuti = context.read<AddCutiBloc>().dataTipeCuti;
     String selectedTipeCutiDisplay = "";
 
-    // Fungsi untuk menampilkan menu Tipe cuti
     void _showTipeMenu(BuildContext context) async {
       if (selectTipeCuti.isEmpty) {
-        // Memastikan data Tipe cuti sudah diambil
         context.read<AddCutiBloc>().add(OnSelectTipeCuti());
         selectTipeCuti = context.read<AddCutiBloc>().dataTipeCuti;
       }
 
       if (selectTipeCuti.isNotEmpty) {
-        // Tampilkan menu dan lakukan pemilihan Tipe cuti
-        final RenderBox renderBox = context.findRenderObject() as RenderBox;
-        final Offset offset = renderBox.localToGlobal(Offset.zero);
-
-        const double menuWidth = 150.0;
-        const double additionalOffset = 10.0;
-
-        final DataTipeCuti? selectedTipeValue = await showMenu(
+        final selectedTipeValue = await showSearch<DataTipeCuti?>(
           context: context,
-          position: RelativeRect.fromRect(
-            Rect.fromPoints(
-              Offset(offset.dx + renderBox.size.width + additionalOffset,
-                  offset.dy),
-              Offset(
-                  offset.dx +
-                      renderBox.size.width +
-                      menuWidth +
-                      additionalOffset,
-                  offset.dy + renderBox.size.height),
-            ),
-            Offset.zero & MediaQuery.of(context).size,
+          delegate: TipeCutiSearchDelegate(
+            tipeCutiData: selectTipeCuti,
+            filteredData:
+                selectTipeCuti,
           ),
-          items: selectTipeCuti.map((tipe) {
-            return PopupMenuItem<DataTipeCuti>(
-              value: tipe,
-              child: Text(
-                tipe.value ?? '',
-                style: const TextStyle(
-                  fontSize: 12,
-                ),
-              ),
-            );
-          }).toList(),
         );
 
         if (selectedTipeValue != null) {
-          selectedTipeCutiDisplay = selectedTipeValue.value ?? '';
           widget.valueTipeCutiController.text =
               selectedTipeValue.value?.toString() ?? '';
           widget.idTipeCutiController.text =
@@ -114,63 +86,37 @@ class _AddCutiPageState extends State<AddCutiPage> {
           });
         }
       } else {
-        print("Tidak ada item dalam selectAlasanCuti");
+        print("Tidak ada item dalam selectTemplateSpd");
       }
     }
 
-    // Fungsi untuk menampilkan menu alasan cuti
     void _showAlasanMenu(BuildContext context) async {
       if (selectAlasanCuti.isEmpty) {
-        // Memastikan data alasan cuti sudah diambil
         context.read<AddCutiBloc>().add(OnSelectAlasanCuti());
         selectAlasanCuti = context.read<AddCutiBloc>().dataAlasanCuti;
       }
 
       if (selectAlasanCuti.isNotEmpty) {
-        // Tampilkan menu dan lakukan pemilihan alasan cuti
-        final RenderBox renderBox = context.findRenderObject() as RenderBox;
-        final Offset offset = renderBox.localToGlobal(Offset.zero);
-
-        const double menuWidth = 150.0;
-        const double additionalOffset = 10.0;
-
-        final Datum? selectedValue = await showMenu(
+        final selectedValue = await showSearch<Datum?>(
           context: context,
-          position: RelativeRect.fromRect(
-            Rect.fromPoints(
-              Offset(offset.dx + renderBox.size.width + additionalOffset,
-                  offset.dy),
-              Offset(
-                  offset.dx +
-                      renderBox.size.width +
-                      menuWidth +
-                      additionalOffset,
-                  offset.dy + renderBox.size.height),
-            ),
-            Offset.zero & MediaQuery.of(context).size,
+          delegate: AlasanCutiSearchDelegate(
+            alasanCutiData: selectAlasanCuti,
+            filteredData:
+                selectAlasanCuti, 
           ),
-          items: selectAlasanCuti.map((alasan) {
-            return PopupMenuItem<Datum>(
-              child: ListTile(
-                title: Text(
-                  alasan.value ?? '',
-                  style: TextStyle(
-                    fontSize: 12,
-                  ),
-                ),
-              ),
-              value: alasan,
-            );
-          }).toList(),
         );
 
         if (selectedValue != null) {
           widget.valueAlasanController.text =
               selectedValue.value?.toString() ?? '';
           widget.idAlasanController.text = selectedValue.id?.toString() ?? '';
+
+          setState(() {
+            this.selectedValue = selectedValue.value;
+          });
         }
       } else {
-        print("Tidak ada item dalam selectAlasanCuti");
+        print("Tidak ada item dalam selectTemplateSpd");
       }
     }
 

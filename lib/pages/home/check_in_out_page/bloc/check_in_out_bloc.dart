@@ -20,7 +20,7 @@ class CheckInOutBloc extends Bloc<CheckInOutEvent, CheckInOutState> {
           var resUser = await ProfileServices.getDataProfilel(
               resToken.response["token"], resToken.response["id"]);
           if (res is ServicesSuccess && resUser is ServicesSuccess) {
-            final name = resUser.response["data"]["name"] ?? 'Pegawai SJ';
+            final name = resUser.response["data"]["username"] ?? 'Pegawai SJ';
             final jsonData = res.response["data"];
             final status = jsonData["status"];
 

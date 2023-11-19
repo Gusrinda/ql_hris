@@ -106,9 +106,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
             event.oldPassword,
             event.newPassword,
           );
-          print('inires kan ${res}');
           if (res is ServicesSuccess) {
-            emit(ChangePasswordSuccess(message: "Ubah password berhasil!"));
+            emit(ChangePasswordSuccess(message: "Password berhasil diganti"));
           } else if (res is ServicesFailure) {
             if (res.errorResponse == null) {
               await GeneralSharedPreferences.removeUserToken();

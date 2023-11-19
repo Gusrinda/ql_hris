@@ -77,12 +77,13 @@ class _DialogCustomState extends State<DialogCustom> {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       child: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
+            const SizedBox(height: 20),
             Lottie.asset(dataLottie[widget.state.index]["asset"] as String,
                 height: 100),
             const SizedBox(height: 10),
@@ -130,6 +131,7 @@ class _DialogCustomState extends State<DialogCustom> {
                       )
                     ],
                   ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

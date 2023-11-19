@@ -10,6 +10,8 @@ import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas_bloc/add_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/addDinas_selector_case1.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/addDinas_selector_case2.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_departemen_model.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_direktorat_model.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_divisi_model.dart';
@@ -205,7 +207,6 @@ class _AddDinasPageState extends State<AddDinasPage> {
                       ),
                     );
               } else {
-                // Lanjutkan dengan langkah berikutnya
                 continueStep();
               }
             },
@@ -236,20 +237,12 @@ class _AddDinasPageState extends State<AddDinasPage> {
       }
 
       if (selectDivisi.isNotEmpty) {
-        final DataDivisi? selectedDivisiValue = await showMenu(
+        final selectedDivisiValue = await showSearch<DataDivisi?>(
           context: context,
-          position: const RelativeRect.fromLTRB(100, 0, 0, 0),
-          items: selectDivisi.map((divisi) {
-            return PopupMenuItem<DataDivisi>(
-              value: divisi,
-              child: Text(
-                divisi.nama ?? '',
-                style: const TextStyle(
-                  fontSize: 12,
-                ),
-              ),
-            );
-          }).toList(),
+          delegate: DivisiSearchDelegate(
+            divisiData: selectDivisi,
+            filteredData: selectDivisi,
+          ),
         );
 
         if (selectedDivisiValue != null) {
@@ -274,20 +267,12 @@ class _AddDinasPageState extends State<AddDinasPage> {
       }
 
       if (selectDepartemen.isNotEmpty) {
-        final DataDepartemen? selectedDepartemenValue = await showMenu(
+        final selectedDepartemenValue = await showSearch<DataDepartemen?>(
           context: context,
-          position: const RelativeRect.fromLTRB(100, 0, 0, 0),
-          items: selectDepartemen.map((departemen) {
-            return PopupMenuItem<DataDepartemen>(
-              value: departemen,
-              child: Text(
-                departemen.nama ?? '',
-                style: const TextStyle(
-                  fontSize: 12,
-                ),
-              ),
-            );
-          }).toList(),
+          delegate: DepartemenSearchDelegate(
+            departemenData: selectDepartemen,
+            filteredData: selectDepartemen,
+          ),
         );
 
         if (selectedDepartemenValue != null) {
@@ -312,32 +297,12 @@ class _AddDinasPageState extends State<AddDinasPage> {
       }
 
       if (selectPosisi.isNotEmpty) {
-        final Size screenSize = MediaQuery.of(context).size;
-
-        const double menuWidth = 150.0;
-        const double menuHeight = 150.0;
-
-        final double centerY = (screenSize.height - menuHeight) / 2 + 200;
-
-        final DataPosisi? selectedPosisiValue = await showMenu(
+        final selectedPosisiValue = await showSearch<DataPosisi?>(
           context: context,
-          position: RelativeRect.fromLTRB(
-            (screenSize.width - menuWidth) / 2 + 100,
-            centerY,
-            (screenSize.width + menuWidth) / 2 + 100,
-            centerY + menuHeight,
+          delegate: PosisiSearchDelegate(
+            posisiData: selectPosisi,
+            filteredData: selectPosisi,
           ),
-          items: selectPosisi.map((posisi) {
-            return PopupMenuItem<DataPosisi>(
-              value: posisi,
-              child: Text(
-                posisi.descKerja ?? '',
-                style: const TextStyle(
-                  fontSize: 12,
-                ),
-              ),
-            );
-          }).toList(),
         );
 
         if (selectedPosisiValue != null) {
@@ -362,37 +327,12 @@ class _AddDinasPageState extends State<AddDinasPage> {
       }
 
       if (selectTemplateSpd.isNotEmpty) {
-        final RenderBox renderBox = context.findRenderObject() as RenderBox;
-        final Offset offset = renderBox.localToGlobal(Offset.zero);
-
-        const double menuWidth = 150.0;
-        const double additionalOffset = 10.0;
-        final DataTemplateSpd? selectedTemplateSpdValue = await showMenu(
+        final selectedTemplateSpdValue = await showSearch<DataTemplateSpd?>(
           context: context,
-          position: RelativeRect.fromRect(
-            Rect.fromPoints(
-              Offset(offset.dx + renderBox.size.width + additionalOffset,
-                  offset.dy),
-              Offset(
-                  offset.dx +
-                      renderBox.size.width +
-                      menuWidth +
-                      additionalOffset,
-                  offset.dy + renderBox.size.height),
-            ),
-            Offset.zero & MediaQuery.of(context).size,
+          delegate: TemplateSpdSearchDelegate(
+            templateSpdData: selectTemplateSpd,
+            filteredData: selectTemplateSpd,
           ),
-          items: selectTemplateSpd.map((templatespd) {
-            return PopupMenuItem<DataTemplateSpd>(
-              value: templatespd,
-              child: Text(
-                templatespd.kode ?? '',
-                style: const TextStyle(
-                  fontSize: 12,
-                ),
-              ),
-            );
-          }).toList(),
         );
 
         if (selectedTemplateSpdValue != null) {
@@ -417,37 +357,12 @@ class _AddDinasPageState extends State<AddDinasPage> {
       }
 
       if (selectDirektorat.isNotEmpty) {
-        final RenderBox renderBox = context.findRenderObject() as RenderBox;
-        final Offset offset = renderBox.localToGlobal(Offset.zero);
-
-        const double menuWidth = 150.0;
-        const double additionalOffset = 10.0;
-        final DataDirektorat? selectedDirektoratValue = await showMenu(
+        final selectedDirektoratValue = await showSearch<DataDirektorat?>(
           context: context,
-          position: RelativeRect.fromRect(
-            Rect.fromPoints(
-              Offset(offset.dx + renderBox.size.width + additionalOffset,
-                  offset.dy),
-              Offset(
-                  offset.dx +
-                      renderBox.size.width +
-                      menuWidth +
-                      additionalOffset,
-                  offset.dy + renderBox.size.height),
-            ),
-            Offset.zero & MediaQuery.of(context).size,
+          delegate: DirektoratSearchDelegate(
+            direktoratData: selectDirektorat,
+            filteredData: selectDirektorat,
           ),
-          items: selectDirektorat.map((direktorat) {
-            return PopupMenuItem<DataDirektorat>(
-              value: direktorat,
-              child: Text(
-                direktorat.nama ?? '',
-                style: const TextStyle(
-                  fontSize: 12,
-                ),
-              ),
-            );
-          }).toList(),
         );
 
         if (selectedDirektoratValue != null) {
@@ -472,33 +387,13 @@ class _AddDinasPageState extends State<AddDinasPage> {
       }
 
       if (selectJenisSpd.isNotEmpty) {
-        final Size screenSize = MediaQuery.of(context).size;
-
-        const double menuWidth = 200.0;
-        const double menuHeight = 200.0;
-
-        final double centerY = (screenSize.height - menuHeight) / 2;
-        final DataJenisSpd? selectedJenisSpdValue = await showMenu(
+        final selectedJenisSpdValue = await showSearch<DataJenisSpd?>(
           context: context,
-          position: RelativeRect.fromLTRB(
-            (screenSize.width - menuWidth) / 2 + 150,
-            centerY,
-            (screenSize.width + menuWidth) / 2 + 150,
-            centerY + menuHeight,
+          delegate: JenisSpdSearchDelegate(
+            jenisSpdData: selectJenisSpd,
+            filteredData: selectJenisSpd,
           ),
-          items: selectJenisSpd.map((jenisspd) {
-            return PopupMenuItem<DataJenisSpd>(
-              value: jenisspd,
-              child: Text(
-                jenisspd.value ?? '',
-                style: const TextStyle(
-                  fontSize: 12,
-                ),
-              ),
-            );
-          }).toList(),
         );
-
         if (selectedJenisSpdValue != null) {
           widget.valueJenisSpdController.text =
               selectedJenisSpdValue.value?.toString() ?? '';
@@ -521,32 +416,12 @@ class _AddDinasPageState extends State<AddDinasPage> {
       }
 
       if (selectZonaAsal.isNotEmpty) {
-        final Size screenSize = MediaQuery.of(context).size;
-
-        const double menuWidth = 150.0;
-        const double menuHeight = 150.0;
-
-        final double centerY = (screenSize.height - menuHeight) / 2 + 50.0;
-
-        final DataZona? selectedZonaAsalValue = await showMenu(
+        final selectedZonaAsalValue = await showSearch<DataZona?>(
           context: context,
-          position: RelativeRect.fromLTRB(
-            (screenSize.width - menuWidth) / 2 + 200,
-            centerY,
-            (screenSize.width + menuWidth) / 2 + 200,
-            centerY + menuHeight,
+          delegate: ZonaAsalSearchDelegate(
+            zonaData: selectZonaAsal,
+            filteredData: selectZonaAsal,
           ),
-          items: selectZonaAsal.map((zonaasal) {
-            return PopupMenuItem<DataZona>(
-              value: zonaasal,
-              child: Text(
-                zonaasal.nama ?? '',
-                style: const TextStyle(
-                  fontSize: 12,
-                ),
-              ),
-            );
-          }).toList(),
         );
 
         if (selectedZonaAsalValue != null) {
@@ -571,32 +446,12 @@ class _AddDinasPageState extends State<AddDinasPage> {
       }
 
       if (selectZonaTujuan.isNotEmpty) {
-        final Size screenSize = MediaQuery.of(context).size;
-
-        const double menuWidth = 150.0;
-        const double menuHeight = 150.0;
-
-        final double centerY = (screenSize.height - menuHeight) / 2 + 150.0;
-
-        final DataZona? selectedZonaTujuanValue = await showMenu(
+        final selectedZonaTujuanValue = await showSearch<DataZona?>(
           context: context,
-          position: RelativeRect.fromLTRB(
-            (screenSize.width - menuWidth) / 2 + 150,
-            centerY,
-            (screenSize.width + menuWidth) / 2 + 150,
-            centerY + menuHeight,
+          delegate: ZonaTujuanSearchDelegate(
+            zonaTujuanData: selectZonaTujuan,
+            filteredData: selectZonaTujuan,
           ),
-          items: selectZonaTujuan.map((zonatujuan) {
-            return PopupMenuItem<DataZona>(
-              value: zonatujuan,
-              child: Text(
-                zonatujuan.nama ?? '',
-                style: const TextStyle(
-                  fontSize: 12,
-                ),
-              ),
-            );
-          }).toList(),
         );
 
         if (selectedZonaTujuanValue != null) {
@@ -621,31 +476,12 @@ class _AddDinasPageState extends State<AddDinasPage> {
       }
 
       if (selectLokasiTujuan.isNotEmpty) {
-        final Size screenSize = MediaQuery.of(context).size;
-
-        const double menuWidth = 150.0;
-        const double menuHeight = 150.0;
-
-        final double centerY = (screenSize.height - menuHeight) / 2;
-        final DataLokasiTujuan? selectedLokasiTujuanValue = await showMenu(
+        final selectedLokasiTujuanValue = await showSearch<DataLokasiTujuan?>(
           context: context,
-          position: RelativeRect.fromLTRB(
-            (screenSize.width - menuWidth) / 2 + 150,
-            centerY,
-            (screenSize.width + menuWidth) / 2 + 150,
-            centerY + menuHeight,
+          delegate: LokasiTujuanSearchDelegate(
+            lokasiTujuanData: selectLokasiTujuan,
+            filteredData: selectLokasiTujuan,
           ),
-          items: selectLokasiTujuan.map((lokasitujuan) {
-            return PopupMenuItem<DataLokasiTujuan>(
-              value: lokasitujuan,
-              child: Text(
-                lokasitujuan.nama ?? '',
-                style: const TextStyle(
-                  fontSize: 12,
-                ),
-              ),
-            );
-          }).toList(),
         );
 
         if (selectedLokasiTujuanValue != null) {
@@ -670,20 +506,12 @@ class _AddDinasPageState extends State<AddDinasPage> {
       }
 
       if (selectPic.isNotEmpty) {
-        final DataPic? selectedPicValue = await showMenu(
+        final selectedPicValue = await showSearch<DataPic?>(
           context: context,
-          position: const RelativeRect.fromLTRB(100, 0, 0, 0),
-          items: selectPic.map((pic) {
-            return PopupMenuItem<DataPic>(
-              value: pic,
-              child: Text(
-                pic.name ?? '',
-                style: const TextStyle(
-                  fontSize: 12,
-                ),
-              ),
-            );
-          }).toList(),
+          delegate: PicSearchDelegate(
+            picData: selectPic,
+            filteredData: selectPic,
+          ),
         );
 
         if (selectedPicValue != null) {
@@ -1159,21 +987,21 @@ class _AddDinasPageState extends State<AddDinasPage> {
             setState(() {
               selectedTanggal = pickedDate;
             });
-            print("Selected Date From: $selectedTanggal");
+            print("Pilih Tanggal: $selectedTanggal");
           } else if (controller == widget.tanggalAwalController) {
             widget.tanggalAwalController.text =
                 DateFormat('yyyy-MM-dd').format(pickedDate);
             setState(() {
               selectedTanggalAwal = pickedDate;
             });
-            print("Selected Date To: $selectedTanggalAwal");
+            print("Pilih tanggal awal: $selectedTanggalAwal");
           } else if (controller == widget.tanggalAkhirController) {
             widget.tanggalAkhirController.text =
                 DateFormat('yyyy-MM-dd').format(pickedDate);
             setState(() {
               selectedTanggalAkhir = pickedDate;
             });
-            print("Selected Date To: $selectedTanggalAkhir");
+            print("Pilih tanggal akhir: $selectedTanggalAkhir");
           }
         }
       },
