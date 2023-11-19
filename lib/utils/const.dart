@@ -39,7 +39,7 @@ class MyColorsConst {
   static const yellowColor = Color.fromARGB(255, 255, 187, 0);
 
   static const shadowColor = Color.fromARGB(255, 209, 209, 209);
-  static const lightDarkColor = Color(0xFFBDBDBD);
+  static const lightDarkColor = Color(0xFF8F8F8F);
   static const semiDarkColor = Color.fromARGB(255, 104, 104, 104);
   static const darkColor = Color.fromARGB(255, 10, 10, 10);
   static const semidarkColor2 = Color.fromRGBO(71, 69, 69, 1);

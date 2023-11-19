@@ -70,9 +70,7 @@ class AddCheckInOutBloc extends Bloc<AddCheckInOutEvent, AddCheckInOutState> {
                     AddCheckInOutSuccess(message: "Check-Out Berhasil!"));
               } else if (res is ServicesFailure) {
                 if (res.errorResponse == null) {
-                  await GeneralSharedPreferences.removeUserToken();
-                  emit(
-                      AddCheckInOutFailedUserExpired(message: "Token expired"));
+                  emit(AddCheckInOutFailedUserExpired(message: "Presensi Gagal!"));
                 } else {
                   emit(AddCheckInOutFailed(message: res.errorResponse));
                 }
