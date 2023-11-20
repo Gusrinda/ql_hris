@@ -118,7 +118,7 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV2> {
                           width: size.width * 1 / 4,
                           height: size.width * 1 / 4,
                           imageFile!,
-                          fit: BoxFit.fitWidth,
+                          fit: BoxFit.cover,
                         ),
                       ),
                 Positioned(

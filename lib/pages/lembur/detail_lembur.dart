@@ -80,28 +80,34 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                       children: [
                         Row(
                           children: [
-                            Text(
-                              "${widget.nomorFromList}",
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
+                            Expanded(
+                              flex: 3,
+                              child: Text(
+                                "${widget.nomorFromList}",
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
                             const Spacer(),
-                            Container(
-                              padding: EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color:
-                                    MyColorsConst.primaryColor.withOpacity(0.1),
-                              ),
-                              child: Text(
-                                '${widget.tipeLemburValue}',
-                                style: const TextStyle(
-                                  color: MyColorsConst.primaryColor,
-                                  fontSize: 9,
-                                  fontWeight: FontWeight.w500,
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                padding: EdgeInsets.all(5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: MyColorsConst.primaryColor
+                                      .withOpacity(0.1),
+                                ),
+                                child: Text(
+                                  '${widget.tipeLemburValue}',
+                                  style: const TextStyle(
+                                    color: MyColorsConst.primaryColor,
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                             ),

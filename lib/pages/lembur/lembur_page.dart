@@ -305,6 +305,7 @@ class CardListView extends StatelessWidget {
                   child: Stack(
                     children: [
                       Container(
+                        margin: EdgeInsets.only(right: 3),
                         height: 110,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(6),
@@ -313,7 +314,8 @@ class CardListView extends StatelessWidget {
                       ),
                       Container(
                         height: 110,
-                        margin: const EdgeInsets.only(bottom: 7, left: 5),
+                        margin:
+                            const EdgeInsets.only(bottom: 7, left: 5, right: 3),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(6),
                           boxShadow: [
