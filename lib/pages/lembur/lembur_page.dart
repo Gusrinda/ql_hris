@@ -385,9 +385,6 @@ class CardListView extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              height: 4,
-                            ),
                             Row(
                               children: [
                                 const Icon(
