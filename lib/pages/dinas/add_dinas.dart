@@ -230,7 +230,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
     var selectZonaAsal = context.read<AddDinasBloc>().dataZona;
     var selectZonaTujuan = context.read<AddDinasBloc>().dataZona;
     var selectLokasiTujuan = context.read<AddDinasBloc>().dataLokasiTujuan;
-    var selectPic = context.read<AddDinasBloc>().dataPic;
+    // var selectPic = context.read<AddDinasBloc>().dataPic;
     // var selectPic = context.read<AddDinasBloc>().dataPic ?? [];
 
     void _showDivisi(BuildContext context) async {
@@ -502,73 +502,20 @@ class _AddDinasPageState extends State<AddDinasPage> {
       }
     }
 
-    // void _showPic(BuildContext context) async {
-    //   // Cek apakah sudah ada data PIC di dalam blok
-    //   if (context.read<AddDinasBloc>().dataPic.isEmpty) {
-    //     // Jika belum ada, panggil OnSelectPic dengan page 1
-    //     context.read<AddDinasBloc>().add(OnSelectPic(page: 1));
-    //   }
-
-    //   // Tunggu hingga data PIC selesai dimuat
-    //   await Future.delayed(
-    //       Duration(milliseconds: 500)); // Atur waktu delay sesuai kebutuhan
-
-    //   // Ambil data PIC dari blok setelah dimuat
-    //   selectPic = context.read<AddDinasBloc>().dataPic;
-
-    //   // Lanjutkan dengan menampilkan pencarian jika ada data PIC
-    //   if (selectPic.isNotEmpty) {
-    //     final selectedPicValue = await showSearch<DataPic?>(
-    //       context: context,
-    //       delegate: PicSearchDelegate(
-    //         picData: selectPic,
-    //         filteredData: selectPic,
-    //       ),
-    //     );
-
-    //     if (selectedPicValue != null) {
-    //       widget.valuePicController.text =
-    //           selectedPicValue.name?.toString() ?? '';
-    //       widget.idPicController.text = selectedPicValue.id?.toString() ?? '';
-
-    //       setState(() {
-    //         this.selectedPicValue = selectedPicValue.name;
-    //       });
-    //     }
-    //   } else {
-    //     print("Tidak ada item dalam selectPic");
-    //     print("Jumlah data dalam selectPic: ${selectPic.length}");
-    //   }
-    // }
-
     void _showPic(BuildContext context) async {
-      if (selectPic.isEmpty) {
-        context.read<AddDinasBloc>().add(OnSelectPic(page: 1));
+      final selectedPicValue = await showSearch<DataPic?>(
+        context: context,
+        delegate: PicSearchDelegate(),
+      );
 
-        selectPic = context.read<AddDinasBloc>().dataPic;
-      }
+      if (selectedPicValue != null) {
+        widget.valuePicController.text =
+            selectedPicValue.name?.toString() ?? '';
+        widget.idPicController.text = selectedPicValue.id?.toString() ?? '';
 
-      if (selectPic.isNotEmpty) {
-        final selectedPicValue = await showSearch<DataPic?>(
-          context: context,
-          delegate: PicSearchDelegate(
-            picData: selectPic,
-            filteredData: selectPic,
-          ),
-        );
-
-        if (selectedPicValue != null) {
-          widget.valuePicController.text =
-              selectedPicValue.name?.toString() ?? '';
-          widget.idPicController.text = selectedPicValue.id?.toString() ?? '';
-
-          setState(() {
-            this.selectedPicValue = selectedPicValue.name;
-          });
-        }
-      } else {
-        print("Tidak ada item dalam selectPic");
-        print("Jumlah data dalam selectPic: ${selectPic.length}");
+        setState(() {
+          this.selectedPicValue = selectedPicValue.name;
+        });
       }
     }
 

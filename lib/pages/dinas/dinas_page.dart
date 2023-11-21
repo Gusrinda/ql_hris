@@ -340,7 +340,7 @@ class _DinasPageState extends State<DinasPage> {
                     ..add(OnSelectJenisSpd())
                     ..add(OnSelectZona())
                     ..add(OnSelectLokasiTujuan())
-                    ..add(OnSelectPic(page: 1)),
+                    ..add(OnSelectPic(page: 1, search: '')),
                   child: AddDinasPage(
                     reloadDataCallback: loadData,
                   ),

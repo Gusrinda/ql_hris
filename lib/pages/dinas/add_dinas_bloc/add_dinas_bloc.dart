@@ -355,18 +355,22 @@ class AddDinasBloc extends Bloc<AddDinasEvent, AddDinasState> {
 
           if (resToken is ServicesSuccess) {
             int page = 1;
+            String search = event.search;
+            String searchField = 'username, email, name';
             List<DataPic> allData = [];
 
             while (true) {
-              var res =
-                  await DinasServices.getPic(resToken.response["token"], page);
-              print("API Response: $res");
+              var res = await DinasServices.getPic(
+                  resToken.response["token"], page, search, searchField);
 
               if (res is ServicesSuccess) {
                 if (res.response is Map<String, dynamic>) {
                   GetPicModel dataResponse = GetPicModel.fromJson(res.response);
 
                   dataPic = dataResponse.data ?? [];
+
+                  print("LISTEN DATA PIC BLOC ${page} ? ${dataPic.length}");
+                  print("LISTEN DATA PIC ALL DATA ${allData.length}");
 
                   if (dataPic.isNotEmpty) {
                     allData.addAll(dataPic);
@@ -394,7 +398,7 @@ class AddDinasBloc extends Bloc<AddDinasEvent, AddDinasState> {
 
             emit(
               SelectPicSuccessInBackground(
-                dataPic: allData,
+                dataPic: List.from(allData),
                 currentPage: page,
                 hasNextPage: dataPic.isNotEmpty,
               ),

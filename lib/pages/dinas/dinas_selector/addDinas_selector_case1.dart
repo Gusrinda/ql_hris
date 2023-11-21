@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sj_presensi_mobile/pages/dinas/add_dinas_bloc/add_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_departemen_model.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_direktorat_model.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_divisi_model.dart';
@@ -659,13 +661,7 @@ class _DirektoratSearchDelegate extends SearchDelegate<DataDirektorat?> {
 
 // Pic Selector
 class PicSearchDelegate extends SearchDelegate<DataPic?> {
-  final List<DataPic> picData;
-  final List<DataPic> filteredData;
-
-  PicSearchDelegate({
-    required this.picData,
-    required this.filteredData,
-  });
+  PicSearchDelegate();
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -673,7 +669,7 @@ class PicSearchDelegate extends SearchDelegate<DataPic?> {
       IconButton(
         icon: Icon(Icons.clear),
         onPressed: () {
-          query = '';
+          query = query;
         },
         color: MyColorsConst.primaryColor,
       ),
@@ -693,91 +689,49 @@ class PicSearchDelegate extends SearchDelegate<DataPic?> {
 
   @override
   Widget buildResults(BuildContext context) {
-    final searchResults = picData
-        .where((pic) =>
-            pic.name!.toLowerCase().contains(query.toLowerCase()))
-        .toList();
+    return BlocProvider(
+      create: (context) =>
+          AddDinasBloc()..add(OnSelectPic(page: 1, search: query)),
+      child: BlocListener<AddDinasBloc, AddDinasState>(
+        listener: (context, state) {},
+        child: BlocBuilder<AddDinasBloc, AddDinasState>(
+          builder: (context, state) {
+            if (state is AddDinasLoading) {
+              return Center(child: CircularProgressIndicator());
+            }
 
-    return ListView.builder(
-      itemCount: searchResults.length,
-      itemBuilder: (context, index) {
-        return Column(
-          children: [
-            ListTile(
-              title: Text(
-                searchResults[index].name ?? '-',
-                style: TextStyle(
-                  fontSize: 14,
-                ),
-              ),
-              onTap: () {
-                close(context, searchResults[index]);
-              },
-            ),
-            const Divider(
-              height: 10,
-              thickness: 0.5,
-              color: MyColorsConst.lightDarkColor,
-            ),
-          ],
-        );
-      },
-    );
-  }
+            if (state is SelectPicSuccessInBackground) {
+              return ListView.builder(
+                itemCount: state.dataPic.length,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      ListTile(
+                        title: Text(
+                          state.dataPic[index].name ?? '-',
+                          style: TextStyle(
+                            fontSize: 14,
+                          ),
+                        ),
+                        onTap: () {
+                          close(context, state.dataPic[index]);
+                        },
+                      ),
+                      const Divider(
+                        height: 10,
+                        thickness: 0.5,
+                        color: MyColorsConst.lightDarkColor,
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
 
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    return buildResults(context);
-  }
-}
-
-class _PicSearchDelegate extends SearchDelegate<DataPic?> {
-  final List<DataPic> picData;
-  final List<DataPic> filteredData;
-
-  _PicSearchDelegate({
-    required this.picData,
-  }) : filteredData = List.from(picData);
-
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-        icon: Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-        },
-      ),
-    ];
-  }
-
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.arrow_back),
-      onPressed: () {
-        close(context, null);
-      },
-    );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    final searchResults = picData
-        .where((pic) =>
-            pic.name!.toLowerCase().contains(query.toLowerCase()))
-        .toList();
-
-    return ListView.builder(
-      itemCount: searchResults.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(searchResults[index].name ?? '-'),
-          onTap: () {
-            close(context, searchResults[index]);
+            return CircularProgressIndicator();
           },
-        );
-      },
+        ),
+      ),
     );
   }
 
@@ -786,6 +740,62 @@ class _PicSearchDelegate extends SearchDelegate<DataPic?> {
     return buildResults(context);
   }
 }
+
+// class _PicSearchDelegate extends SearchDelegate<DataPic?> {
+//   final List<DataPic> picData;
+//   final List<DataPic> filteredData;
+
+//   _PicSearchDelegate({
+//     required this.picData,
+//   }) : filteredData = List.from(picData);
+
+//   @override
+//   List<Widget> buildActions(BuildContext context) {
+//     return [
+//       IconButton(
+//         icon: Icon(Icons.clear),
+//         onPressed: () {
+//           query = '';
+//         },
+//       ),
+//     ];
+//   }
+
+//   @override
+//   Widget buildLeading(BuildContext context) {
+//     return IconButton(
+//       icon: Icon(Icons.arrow_back),
+//       onPressed: () {
+//         close(context, null);
+//       },
+//     );
+//   }
+
+//   @override
+//   Widget buildResults(BuildContext context) {
+//     final searchResults = picData
+//         .where((pic) =>
+//             pic.name!.toLowerCase().contains(query.toLowerCase()))
+//         .toList();
+
+//     return ListView.builder(
+//       itemCount: searchResults.length,
+//       itemBuilder: (context, index) {
+//         return ListTile(
+//           title: Text(searchResults[index].name ?? '-'),
+//           onTap: () {
+//             close(context, searchResults[index]);
+//           },
+//         );
+//       },
+//     );
+//   }
+
+//   @override
+//   Widget buildSuggestions(BuildContext context) {
+//     return buildResults(context);
+//   }
+// }
 
 // class PicSearchDelegate extends SearchDelegate<DataPic?> {
 //   final List<DataPic> picData;

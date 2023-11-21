@@ -131,9 +131,11 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getPic(String token, int page) async {
+  static Future<Object> getPic(
+      String token, int page, String? search, String? searchField) async {
     var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/default_users?page=$page");
+        "${MyGeneralConst.API_URL}/operation/default_users?page=$page&search=$search&searchfield=$searchField");
+    print("URL SEARCH ? ${url}");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,

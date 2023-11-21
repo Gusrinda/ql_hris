@@ -106,11 +106,12 @@ class OnSelectLokasiTujuan extends AddDinasEvent {
 
 class OnSelectPic extends AddDinasEvent {
   int page;
+  String search;
 
-  OnSelectPic({required this.page});
+  OnSelectPic({required this.page, required this.search});
 
   @override
-  List<Object> get props => [page];
+  List<Object> get props => [page, search];
 }
 
 // class OnLoadMoreData extends AddDinasEvent {
