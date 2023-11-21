@@ -326,23 +326,21 @@ class _DinasPageState extends State<DinasPage> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
+          onPressed: () async {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) {
-                final addCutiBloc = AddDinasBloc()
-                  ..add(OnSelectDivisi())
-                  ..add(OnSelectDepartemen())
-                  ..add(OnSelectPosisi())
-                  ..add(OnSelectTemplateSpd())
-                  ..add(OnSelectDirektorat())
-                  ..add(OnSelectJenisSpd())
-                  ..add(OnSelectZona())
-                  ..add(OnSelectLokasiTujuan())
-                  ..add(OnSelectPic());
-
-                return BlocProvider.value(
-                  value: addCutiBloc,
+                return BlocProvider(
+                  create: (context) => AddDinasBloc()
+                    ..add(OnSelectDivisi())
+                    ..add(OnSelectDepartemen())
+                    ..add(OnSelectPosisi())
+                    ..add(OnSelectTemplateSpd())
+                    ..add(OnSelectDirektorat())
+                    ..add(OnSelectJenisSpd())
+                    ..add(OnSelectZona())
+                    ..add(OnSelectLokasiTujuan())
+                    ..add(OnSelectPic(page: 1)),
                   child: AddDinasPage(
                     reloadDataCallback: loadData,
                   ),

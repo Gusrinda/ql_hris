@@ -105,7 +105,25 @@ class OnSelectLokasiTujuan extends AddDinasEvent {
 }
 
 class OnSelectPic extends AddDinasEvent {
-  OnSelectPic();
+  int page;
+
+  OnSelectPic({required this.page});
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [page];
 }
+
+// class OnLoadMoreData extends AddDinasEvent {
+//   int currentPage;
+
+//   OnLoadMoreData({required this.currentPage});
+
+//   @override
+//   List<Object> get props => [currentPage];
+// }
+
+// class OnSelectPic extends AddDinasEvent {
+//   OnSelectPic();
+//   @override
+//   List<Object> get props => [];
+// }

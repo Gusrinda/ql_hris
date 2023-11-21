@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_pic_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
 
@@ -58,8 +59,7 @@ class DinasServices {
   }
 
   static Future<Object> getDivisi(String token) async {
-    var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_divisi");
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_divisi");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -68,8 +68,7 @@ class DinasServices {
   }
 
   static Future<Object> getDepartemen(String token) async {
-    var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_dept");
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_dept");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -78,8 +77,7 @@ class DinasServices {
   }
 
   static Future<Object> getPosisi(String token) async {
-    var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_posisi");
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_posisi");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -88,8 +86,7 @@ class DinasServices {
   }
 
   static Future<Object> getTemplateSpd(String token) async {
-    var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_spd");
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_spd");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -98,8 +95,7 @@ class DinasServices {
   }
 
   static Future<Object> getDirektorat(String token) async {
-    var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_dir");
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_dir");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -118,8 +114,7 @@ class DinasServices {
   }
 
   static Future<Object> getZona(String token) async {
-    var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_zona");
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_zona");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -128,8 +123,7 @@ class DinasServices {
   }
 
   static Future<Object> getLokasiTujuan(String token) async {
-    var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_lokasi");
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_lokasi");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -137,13 +131,50 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getPic(String token) async {
+  static Future<Object> getPic(String token, int page) async {
     var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/default_users");
+        "${MyGeneralConst.API_URL}/operation/default_users?page=$page");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
       headers: GeneralServices.addToken2Headers(token),
     );
   }
+
+// static Future<List<DataPic>> getAllPics(String token) async {
+//   List<DataPic> allPics = [];
+//   int currentPage = 1;
+
+//   while (true) {
+//     var response = await getPic(token, currentPage);
+
+//     if (response is ServicesSuccess && response.response is Map<String, dynamic>) {
+//       var picData = response.response["data"] as List<dynamic>;
+//       List<DataPic> currentPagePics = picData.map((data) => DataPic.fromJson(data)).toList();
+
+//       allPics.addAll(currentPagePics);
+//       currentPage++;
+
+//       // Cek apakah masih ada halaman berikutnya
+//       var hasNextPage = response.response["has_next"] ?? false;
+//       if (!hasNextPage) {
+//         break;
+//       }
+//     } else {
+//       // Handle kesalahan
+//       break;
+//     }
+//   }
+
+//   return allPics;
+// }
+
+// static Future<Object> getPic(String token, int page) async {
+//   var url = Uri.parse("${MyGeneralConst.API_URL}/operation/default_users?page=$page");
+//   return await GeneralServices.baseService(
+//     url: url,
+//     method: GeneralServicesMethod.get,
+//     headers: GeneralServices.addToken2Headers(token),
+//   );
+// }
 }

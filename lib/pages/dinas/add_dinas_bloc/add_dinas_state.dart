@@ -2,7 +2,7 @@ part of 'add_dinas_bloc.dart';
 
 abstract class AddDinasState extends Equatable {
   const AddDinasState();
-   @override
+  @override
   List<Object> get props => [];
 }
 
@@ -136,12 +136,15 @@ class SelectLokasiSuccessInBackground extends AddDinasState {
 
 class SelectPicSuccessInBackground extends AddDinasState {
   List<DataPic> dataPic;
+  int currentPage;
+  bool hasNextPage;
 
   SelectPicSuccessInBackground({
     required this.dataPic,
+    required this.currentPage,
+    required this.hasNextPage,
   });
 
   @override
-  List<Object> get props => [dataPic];
+  List<Object> get props => [dataPic, currentPage, hasNextPage];
 }
-

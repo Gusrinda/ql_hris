@@ -786,3 +786,104 @@ class _PicSearchDelegate extends SearchDelegate<DataPic?> {
     return buildResults(context);
   }
 }
+
+// class PicSearchDelegate extends SearchDelegate<DataPic?> {
+//   final List<DataPic> picData;
+//   final List<DataPic> filteredData;
+
+//   PicSearchDelegate({
+//     required this.picData,
+//     required this.filteredData,
+//   });
+
+//   int _currentPage = 1;
+//   int _itemsPerPage = 10;
+
+//   @override
+//   List<Widget> buildActions(BuildContext context) {
+//     return [
+//       IconButton(
+//         icon: Icon(Icons.clear),
+//         onPressed: () {
+//           query = '';
+//         },
+//         color: MyColorsConst.primaryColor,
+//       ),
+//     ];
+//   }
+
+//   @override
+//   Widget buildLeading(BuildContext context) {
+//     return IconButton(
+//       icon: Icon(Icons.arrow_back),
+//       onPressed: () {
+//         close(context, null);
+//       },
+//       color: MyColorsConst.primaryColor,
+//     );
+//   }
+
+//   @override
+//   Widget buildResults(BuildContext context) {
+//     final searchResults = _getSearchResults();
+
+//     return ListView.builder(
+//       itemCount: _calculateItemCount(searchResults),
+//       itemBuilder: (context, index) {
+//         if (index == searchResults.length) {
+//           _loadMoreData(context);
+//           return Center(
+//             child: CircularProgressIndicator(),
+//           );
+//         }
+
+//         return Column(
+//           children: [
+//             ListTile(
+//               title: Text(
+//                 searchResults[index].name ?? '-',
+//                 style: TextStyle(
+//                   fontSize: 14,
+//                 ),
+//               ),
+//               onTap: () {
+//                 close(context, searchResults[index]);
+//               },
+//             ),
+//             const Divider(
+//               height: 10,
+//               thickness: 0.5,
+//               color: MyColorsConst.lightDarkColor,
+//             ),
+//           ],
+//         );
+//       },
+//     );
+//   }
+
+//   @override
+//   Widget buildSuggestions(BuildContext context) {
+//     return buildResults(context);
+//   }
+
+//   List<DataPic> _getSearchResults() {
+//     return picData
+//         .where((pic) => pic.name!.toLowerCase().contains(query.toLowerCase()))
+//         .toList();
+//   }
+
+//   int _calculateItemCount(List<DataPic> searchResults) {
+//     return searchResults.length + (_hasNextPage() ? 1 : 0);
+//   }
+
+//   void _loadMoreData(BuildContext context) {
+//     if (_hasNextPage()) {
+//       _currentPage++;
+//       showResults(context);
+//     }
+//   }
+
+//   bool _hasNextPage() {
+//     return (_currentPage + 1) * _itemsPerPage <= picData.length;
+//   }
+// }
