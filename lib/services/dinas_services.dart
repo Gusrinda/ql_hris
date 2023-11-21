@@ -67,8 +67,11 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getDepartemen(String token, int page, String search, String searchField) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_dept?page=$page&search=$search&searchfield=$searchField");
+  static Future<Object> getDepartemen(
+      String token, int page, String? search, String? searchField) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_dept?page=$page&search=$search&searchfield=$searchField");
+    // print("URL SEARCH ? ${url}");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,

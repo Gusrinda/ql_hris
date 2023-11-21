@@ -65,12 +65,14 @@ class OnSelectDivisi extends AddDinasEvent {
 class OnSelectDepartemen extends AddDinasEvent {
   int page;
   String search;
+
   OnSelectDepartemen({
     required this.page,
     required this.search,
   });
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [page, search];
 }
 
 class OnSelectPosisi extends AddDinasEvent {

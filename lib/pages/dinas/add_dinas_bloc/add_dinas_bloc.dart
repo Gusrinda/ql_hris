@@ -103,11 +103,13 @@ class AddDinasBloc extends Bloc<AddDinasEvent, AddDinasState> {
     on<OnSelectDepartemen>((event, emit) async {
       try {
         emit(AddDinasLoading());
+
         var resToken = await GeneralSharedPreferences.getUserToken();
+
         if (resToken is ServicesSuccess) {
           int page = 1;
           String search = event.search;
-          String searchField = 'username, email, name';
+          String searchField = 'nama, desc';
           List<DataDepartemen> allData = [];
 
           while (true) {
