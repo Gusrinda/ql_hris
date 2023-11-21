@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:sj_presensi_mobile/services/dinas_services.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_departemen_model.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_direktorat_model.dart';
@@ -101,41 +100,68 @@ class AddDinasBloc extends Bloc<AddDinasEvent, AddDinasState> {
       },
     );
 
-    on<OnSelectDepartemen>(
-      (event, emit) async {
+    on<OnSelectDepartemen>((event, emit) async {
+      try {
         emit(AddDinasLoading());
         var resToken = await GeneralSharedPreferences.getUserToken();
         if (resToken is ServicesSuccess) {
-          var res =
-              await DinasServices.getDepartemen(resToken.response["token"]);
-          if (res is ServicesSuccess) {
-            if (res.response is Map<String, dynamic>) {
-              GetDepartemenModel dataResponse =
-                  GetDepartemenModel.fromJson(res.response);
+          int page = 1;
+          String search = event.search;
+          String searchField = 'username, email, name';
+          List<DataDepartemen> allData = [];
 
-              dataDepartemen = dataResponse.data ?? [];
+          while (true) {
+            var res = await DinasServices.getDepartemen(
+                resToken.response["token"], page, search, searchField);
 
-              emit(
-                SelectDepartemenSuccessInBackground(
-                    dataDepartemen: dataDepartemen),
-              );
-            } else {
-              emit(AddDinasFailedInBackground(
-                  message: 'Response format is invalid'));
-            }
-          } else if (res is ServicesFailure) {
-            if (res.errorResponse == null) {
-              await GeneralSharedPreferences.removeUserToken();
-              emit(AddDinasFailedUserExpired(message: "Token expired"));
-            } else {
-              emit(AddDinasFailed(message: res.errorResponse));
+            if (res is ServicesSuccess) {
+              if (res.response is Map<String, dynamic>) {
+                GetDepartemenModel dataResponse =
+                    GetDepartemenModel.fromJson(res.response);
+
+                dataDepartemen = dataResponse.data ?? [];
+
+                if (dataDepartemen.isNotEmpty) {
+                  allData.addAll(dataDepartemen);
+                  page++;
+                } else {
+                  break;
+                }
+              } else {
+                emit(
+                  AddDinasFailedInBackground(
+                    message: 'Format respons tidak valid',
+                  ),
+                );
+                return;
+              }
+            } else if (res is ServicesFailure) {
+              if (res.errorResponse == null) {
+                await GeneralSharedPreferences.removeUserToken();
+                emit(AddDinasFailedUserExpired(message: "Token kedaluwarsa"));
+              } else {
+                emit(AddDinasFailed(message: res.errorResponse));
+              }
             }
           }
+          emit(
+            SelectDepartemenSuccessInBackground(
+              dataDepartemen: List.from(allData),
+              currentPage: page,
+              hasNextPage: dataDepartemen.isNotEmpty,
+            ),
+          );
         } else if (resToken is ServicesFailure) {
-          emit(AddDinasFailedInBackground(message: 'Response invalid'));
+          emit(AddDinasFailedInBackground(
+            message: 'Respons tidak valid',
+          ));
         }
-      },
-    );
+      } catch (e) {
+        emit(AddDinasFailedInBackground(
+          message: 'Terjadi kesalahan: $e',
+        ));
+      }
+    });
 
     on<OnSelectPosisi>(
       (event, emit) async {
@@ -355,11 +381,13 @@ class AddDinasBloc extends Bloc<AddDinasEvent, AddDinasState> {
 
           if (resToken is ServicesSuccess) {
             int page = 1;
+            String search = event.search;
+            String searchField = 'username, email, name';
             List<DataPic> allData = [];
 
             while (true) {
-              var res =
-                  await DinasServices.getPic(resToken.response["token"], page);
+              var res = await DinasServices.getPic(
+                  resToken.response["token"], page, search, searchField);
               print("API Response: $res");
 
               if (res is ServicesSuccess) {
@@ -367,6 +395,9 @@ class AddDinasBloc extends Bloc<AddDinasEvent, AddDinasState> {
                   GetPicModel dataResponse = GetPicModel.fromJson(res.response);
 
                   dataPic = dataResponse.data ?? [];
+
+                  print("LISTEN DATA PIC BLOC $page ? ${dataPic.length}");
+                  print("LISTEN DATA PIC ALL DATA ${allData.length}");
 
                   if (dataPic.isNotEmpty) {
                     allData.addAll(dataPic);
@@ -394,7 +425,7 @@ class AddDinasBloc extends Bloc<AddDinasEvent, AddDinasState> {
 
             emit(
               SelectPicSuccessInBackground(
-                dataPic: allData,
+                dataPic: List.from(allData),
                 currentPage: page,
                 hasNextPage: dataPic.isNotEmpty,
               ),
@@ -411,92 +442,5 @@ class AddDinasBloc extends Bloc<AddDinasEvent, AddDinasState> {
         }
       },
     );
-
-    // on<OnLoadMoreData>(
-    //   (event, emit) async {
-    //     try {
-    //       emit(AddDinasLoading());
-
-    //       var resToken = await GeneralSharedPreferences.getUserToken();
-
-    //       if (resToken is ServicesSuccess) {
-    //         var res = await DinasServices.getPic(
-    //             resToken.response["token"], event.currentPage);
-
-    //         if (res is ServicesSuccess) {
-    //           if (res.response is Map<String, dynamic>) {
-    //             GetPicModel dataResponse = GetPicModel.fromJson(res.response);
-
-    //             dataPic.addAll(dataResponse.data ?? []);
-
-    //             emit(
-    //               SelectPicSuccessInBackground(
-    //                 dataPic: dataPic,
-    //                 currentPage: dataResponse.currentPage ?? 1,
-    //                 // hasNextPage: dataResponse.hasNext ?? false,
-    //                 hasNextPage: true,
-    //               ),
-    //             );
-    //           } else {
-    //             emit(
-    //               AddDinasFailedInBackground(
-    //                 message: 'Response format is invalid',
-    //               ),
-    //             );
-    //           }
-    //         } else if (res is ServicesFailure) {
-    //           if (res.errorResponse == null) {
-    //             await GeneralSharedPreferences.removeUserToken();
-    //             emit(AddDinasFailedUserExpired(message: "Token expired"));
-    //           } else {
-    //             emit(AddDinasFailed(message: res.errorResponse));
-    //           }
-    //         }
-    //       } else if (resToken is ServicesFailure) {
-    //         emit(AddDinasFailedInBackground(
-    //           message: 'Response invalid',
-    //         ));
-    //       }
-    //     } catch (e) {
-    //       emit(AddDinasFailedInBackground(
-    //         message: 'An error occurred: $e',
-    //       ));
-    //     }
-    //   },
-    // );
-
-    // on<OnSelectPic>(
-    //   (event, emit) async {
-    //     emit(AddDinasLoading());
-    //     var resToken = await GeneralSharedPreferences.getUserToken();
-    //     if (resToken is ServicesSuccess) {
-    //       var res = await DinasServices.getPic(
-    //           resToken.response["token"], event.page);
-    //       if (res is ServicesSuccess) {
-    // if (res.response is Map<String, dynamic>) {
-    //   GetPicModel dataResponse = GetPicModel.fromJson(res.response);
-
-    //           dataPic = dataResponse.data ?? [];
-
-    //           emit(
-    //             SelectPicSuccessInBackground(dataPic: dataPic),
-    //           );
-    //         } else {
-    //           emit(AddDinasFailedInBackground(
-    //               message: 'Response format is invalid'));
-    //         }
-    //       } else if (res is ServicesFailure) {
-    //         if (res.errorResponse == null) {
-    //           await GeneralSharedPreferences.removeUserToken();
-    //           emit(AddDinasFailedUserExpired(message: "Token expired"));
-    //         } else {
-    //           emit(AddDinasFailed(message: res.errorResponse));
-    //         }
-    //       }
-    //     } else if (resToken is ServicesFailure) {
-    //       emit(AddDinasFailedInBackground(message: 'Response invalid'));
-    //     }
-    //   },
-    // );
   }
 }

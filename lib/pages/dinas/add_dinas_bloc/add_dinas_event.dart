@@ -63,7 +63,12 @@ class OnSelectDivisi extends AddDinasEvent {
 }
 
 class OnSelectDepartemen extends AddDinasEvent {
-  OnSelectDepartemen();
+  int page;
+  String search;
+  OnSelectDepartemen({
+    required this.page,
+    required this.search,
+  });
   @override
   List<Object> get props => [];
 }
@@ -106,24 +111,10 @@ class OnSelectLokasiTujuan extends AddDinasEvent {
 
 class OnSelectPic extends AddDinasEvent {
   int page;
+  String search;
 
-  OnSelectPic({required this.page});
+  OnSelectPic({required this.page, required this.search});
 
   @override
-  List<Object> get props => [page];
+  List<Object> get props => [page, search];
 }
-
-// class OnLoadMoreData extends AddDinasEvent {
-//   int currentPage;
-
-//   OnLoadMoreData({required this.currentPage});
-
-//   @override
-//   List<Object> get props => [currentPage];
-// }
-
-// class OnSelectPic extends AddDinasEvent {
-//   OnSelectPic();
-//   @override
-//   List<Object> get props => [];
-// }

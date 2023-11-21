@@ -264,18 +264,9 @@ class _AddDinasPageState extends State<AddDinasPage> {
     }
 
     void _showDepartemen(BuildContext context) async {
-      if (selectDepartemen.isEmpty) {
-        context.read<AddDinasBloc>().add(OnSelectDepartemen());
-        selectDepartemen = context.read<AddDinasBloc>().dataDepartemen;
-      }
-
-      if (selectDepartemen.isNotEmpty) {
         final selectedDepartemenValue = await showSearch<DataDepartemen?>(
           context: context,
-          delegate: DepartemenSearchDelegate(
-            departemenData: selectDepartemen,
-            filteredData: selectDepartemen,
-          ),
+          delegate: DepartemenSearchDelegate(),
         );
 
         if (selectedDepartemenValue != null) {
@@ -288,9 +279,6 @@ class _AddDinasPageState extends State<AddDinasPage> {
             this.selectedDepartemenValue = selectedDepartemenValue.nama;
           });
         }
-      } else {
-        print("Tidak ada item dalam selectDepartemen");
-      }
     }
 
     void _showPosisi(BuildContext context) async {
@@ -502,59 +490,10 @@ class _AddDinasPageState extends State<AddDinasPage> {
       }
     }
 
-    // void _showPic(BuildContext context) async {
-    //   // Cek apakah sudah ada data PIC di dalam blok
-    //   if (context.read<AddDinasBloc>().dataPic.isEmpty) {
-    //     // Jika belum ada, panggil OnSelectPic dengan page 1
-    //     context.read<AddDinasBloc>().add(OnSelectPic(page: 1));
-    //   }
-
-    //   // Tunggu hingga data PIC selesai dimuat
-    //   await Future.delayed(
-    //       Duration(milliseconds: 500)); // Atur waktu delay sesuai kebutuhan
-
-    //   // Ambil data PIC dari blok setelah dimuat
-    //   selectPic = context.read<AddDinasBloc>().dataPic;
-
-    //   // Lanjutkan dengan menampilkan pencarian jika ada data PIC
-    //   if (selectPic.isNotEmpty) {
-    //     final selectedPicValue = await showSearch<DataPic?>(
-    //       context: context,
-    //       delegate: PicSearchDelegate(
-    //         picData: selectPic,
-    //         filteredData: selectPic,
-    //       ),
-    //     );
-
-    //     if (selectedPicValue != null) {
-    //       widget.valuePicController.text =
-    //           selectedPicValue.name?.toString() ?? '';
-    //       widget.idPicController.text = selectedPicValue.id?.toString() ?? '';
-
-    //       setState(() {
-    //         this.selectedPicValue = selectedPicValue.name;
-    //       });
-    //     }
-    //   } else {
-    //     print("Tidak ada item dalam selectPic");
-    //     print("Jumlah data dalam selectPic: ${selectPic.length}");
-    //   }
-    // }
-
     void _showPic(BuildContext context) async {
-      if (selectPic.isEmpty) {
-        context.read<AddDinasBloc>().add(OnSelectPic(page: 1));
-
-        selectPic = context.read<AddDinasBloc>().dataPic;
-      }
-
-      if (selectPic.isNotEmpty) {
         final selectedPicValue = await showSearch<DataPic?>(
           context: context,
-          delegate: PicSearchDelegate(
-            picData: selectPic,
-            filteredData: selectPic,
-          ),
+          delegate: PicSearchDelegate(),
         );
 
         if (selectedPicValue != null) {
@@ -566,10 +505,6 @@ class _AddDinasPageState extends State<AddDinasPage> {
             this.selectedPicValue = selectedPicValue.name;
           });
         }
-      } else {
-        print("Tidak ada item dalam selectPic");
-        print("Jumlah data dalam selectPic: ${selectPic.length}");
-      }
     }
 
     return WillPopScope(

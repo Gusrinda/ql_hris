@@ -67,8 +67,8 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getDepartemen(String token) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_dept");
+  static Future<Object> getDepartemen(String token, int page, String search, String searchField) async {
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_dept?page=$page&search=$search&searchfield=$searchField");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -131,50 +131,15 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getPic(String token, int page) async {
+   static Future<Object> getPic(
+      String token, int page, String? search, String? searchField) async {
     var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/default_users?page=$page");
+        "${MyGeneralConst.API_URL}/operation/default_users?page=$page&search=$search&searchfield=$searchField");
+    // print("URL SEARCH ? ${url}");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
       headers: GeneralServices.addToken2Headers(token),
     );
   }
-
-// static Future<List<DataPic>> getAllPics(String token) async {
-//   List<DataPic> allPics = [];
-//   int currentPage = 1;
-
-//   while (true) {
-//     var response = await getPic(token, currentPage);
-
-//     if (response is ServicesSuccess && response.response is Map<String, dynamic>) {
-//       var picData = response.response["data"] as List<dynamic>;
-//       List<DataPic> currentPagePics = picData.map((data) => DataPic.fromJson(data)).toList();
-
-//       allPics.addAll(currentPagePics);
-//       currentPage++;
-
-//       // Cek apakah masih ada halaman berikutnya
-//       var hasNextPage = response.response["has_next"] ?? false;
-//       if (!hasNextPage) {
-//         break;
-//       }
-//     } else {
-//       // Handle kesalahan
-//       break;
-//     }
-//   }
-
-//   return allPics;
-// }
-
-// static Future<Object> getPic(String token, int page) async {
-//   var url = Uri.parse("${MyGeneralConst.API_URL}/operation/default_users?page=$page");
-//   return await GeneralServices.baseService(
-//     url: url,
-//     method: GeneralServicesMethod.get,
-//     headers: GeneralServices.addToken2Headers(token),
-//   );
-// }
 }

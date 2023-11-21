@@ -333,14 +333,14 @@ class _DinasPageState extends State<DinasPage> {
                 return BlocProvider(
                   create: (context) => AddDinasBloc()
                     ..add(OnSelectDivisi())
-                    ..add(OnSelectDepartemen())
+                    ..add(OnSelectDepartemen(page: 1, search: ''))
                     ..add(OnSelectPosisi())
                     ..add(OnSelectTemplateSpd())
                     ..add(OnSelectDirektorat())
                     ..add(OnSelectJenisSpd())
                     ..add(OnSelectZona())
                     ..add(OnSelectLokasiTujuan())
-                    ..add(OnSelectPic(page: 1)),
+                    ..add(OnSelectPic(page: 1, search: '')),
                   child: AddDinasPage(
                     reloadDataCallback: loadData,
                   ),

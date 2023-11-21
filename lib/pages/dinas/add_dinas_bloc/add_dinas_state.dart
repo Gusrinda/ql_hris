@@ -59,13 +59,17 @@ class SelectDivisiSuccessInBackground extends AddDinasState {
 
 class SelectDepartemenSuccessInBackground extends AddDinasState {
   List<DataDepartemen> dataDepartemen;
+  int currentPage;
+  bool hasNextPage;
 
   SelectDepartemenSuccessInBackground({
     required this.dataDepartemen,
+    required this.currentPage,
+    required this.hasNextPage,
   });
 
   @override
-  List<Object> get props => [dataDepartemen];
+  List<Object> get props => [dataDepartemen, currentPage, hasNextPage];
 }
 
 class SelectPosisiSuccessInBackground extends AddDinasState {
