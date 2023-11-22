@@ -86,6 +86,9 @@ class AddDinasPage extends StatefulWidget {
   final TextEditingController idPicController = TextEditingController();
   final TextEditingController valuePicController = TextEditingController();
 
+  // kend Dinas
+  final TextEditingController kendDinasController = TextEditingController();
+
   @override
   State<AddDinasPage> createState() => _AddDinasPageState();
 }
@@ -105,6 +108,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
   DateTime? selectedTanggal;
   DateTime? selectedTanggalAwal;
   DateTime? selectedTanggalAkhir;
+  bool _kendDinas = false;
 
   int currentStep = 0;
   late GlobalKey<FormState> _formKeyStep1;
@@ -213,6 +217,9 @@ class _AddDinasPageState extends State<AddDinasPage> {
                         lokasiTujuan:
                             int.parse(widget.idLokasiTujuanController.text),
                         pic: int.parse(widget.idPicController.text),
+                        kendDinas:
+                            widget.kendDinasController.text.toLowerCase() ==
+                                'true',
                       ),
                     );
               } else {
@@ -750,6 +757,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       key: _formKeyStep3,
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           FormDropDown(
                             input: selectedJenisSpdValue ?? '',
@@ -835,6 +843,64 @@ class _AddDinasPageState extends State<AddDinasPage> {
                               return null;
                             },
                             errorTextStyle: TextStyle(fontSize: 8),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            'Menggunakan Kendaraan Dinas',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: MyColorsConst.darkColor,
+                            ),
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Radio(
+                                  value: true,
+                                  groupValue: _kendDinas,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      _kendDinas = value!;
+                                      widget.kendDinasController.text =
+                                          _kendDinas.toString();
+                                    });
+                                  },
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: const Text(
+                                  'Ya',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Radio(
+                                  value: false,
+                                  groupValue: _kendDinas,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      _kendDinas = value!;
+                                      widget.kendDinasController.text =
+                                          _kendDinas.toString();
+                                    });
+                                  },
+                                ),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: const Text(
+                                  'Tidak',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),

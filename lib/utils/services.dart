@@ -124,7 +124,7 @@ class GeneralServices {
               'Server Error!\n' + json.decode(response.body)['message'],
         );
       }
-      if (response.statusCode == 400 ) {
+      if (response.statusCode == 400) {
         return ServicesFailure(
           code: response.statusCode,
           errorResponse: json.decode(response.body)['message'],

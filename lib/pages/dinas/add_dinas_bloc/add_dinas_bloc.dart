@@ -46,6 +46,7 @@ class AddDinasBloc extends Bloc<AddDinasEvent, AddDinasState> {
           event.zonaTujuan,
           event.lokasiTujuan,
           event.pic,
+          event.kendDinas,
         );
 
         if (res is ServicesSuccess) {
