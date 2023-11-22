@@ -57,9 +57,15 @@ class AddDinasSubmited extends AddDinasEvent {
 }
 
 class OnSelectDivisi extends AddDinasEvent {
-  OnSelectDivisi();
+   int page;
+  String search;
+
+  OnSelectDivisi({
+    required this.page,
+    required this.search,
+  });
   @override
-  List<Object> get props => [];
+  List<Object> get props => [page, search];
 }
 
 class OnSelectDepartemen extends AddDinasEvent {
@@ -76,39 +82,75 @@ class OnSelectDepartemen extends AddDinasEvent {
 }
 
 class OnSelectPosisi extends AddDinasEvent {
-  OnSelectPosisi();
+   int page;
+  String search;
+  
+  OnSelectPosisi({
+    required this.page,
+    required this.search,
+  });
   @override
-  List<Object> get props => [];
+  List<Object> get props => [page, search];
 }
 
 class OnSelectTemplateSpd extends AddDinasEvent {
-  OnSelectTemplateSpd();
+   int page;
+  String search;
+
+  OnSelectTemplateSpd({
+    required this.page,
+    required this.search,
+  });
   @override
-  List<Object> get props => [];
+  List<Object> get props => [page, search];
 }
 
 class OnSelectDirektorat extends AddDinasEvent {
-  OnSelectDirektorat();
+   int page;
+  String search;
+
+  OnSelectDirektorat({
+    required this.page,
+    required this.search,
+  });
   @override
-  List<Object> get props => [];
+  List<Object> get props => [page, search];
 }
 
 class OnSelectJenisSpd extends AddDinasEvent {
-  OnSelectJenisSpd();
+  int page;
+  String search;
+
+  OnSelectJenisSpd({
+    required this.page,
+    required this.search
+  });
   @override
-  List<Object> get props => [];
+  List<Object> get props => [page, search];
 }
 
 class OnSelectZona extends AddDinasEvent {
-  OnSelectZona();
+   int page;
+  String search;
+  
+  OnSelectZona({
+    required this.page,
+    required this.search,
+  });
   @override
-  List<Object> get props => [];
+  List<Object> get props => [page, search];
 }
 
 class OnSelectLokasiTujuan extends AddDinasEvent {
-  OnSelectLokasiTujuan();
+   int page;
+  String search;
+
+  OnSelectLokasiTujuan({
+    required this.page,
+    required this.search,
+  });
   @override
-  List<Object> get props => [];
+  List<Object> get props => [page, search];
 }
 
 class OnSelectPic extends AddDinasEvent {

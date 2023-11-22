@@ -332,14 +332,14 @@ class _DinasPageState extends State<DinasPage> {
               MaterialPageRoute(builder: (context) {
                 return BlocProvider(
                   create: (context) => AddDinasBloc()
-                    ..add(OnSelectDivisi())
+                    ..add(OnSelectDivisi(page: 1, search: ''))
                     ..add(OnSelectDepartemen(page: 1, search: ''))
-                    ..add(OnSelectPosisi())
-                    ..add(OnSelectTemplateSpd())
-                    ..add(OnSelectDirektorat())
-                    ..add(OnSelectJenisSpd())
-                    ..add(OnSelectZona())
-                    ..add(OnSelectLokasiTujuan())
+                    ..add(OnSelectPosisi(page: 1, search: ''))
+                    ..add(OnSelectTemplateSpd(page: 1, search: ''))
+                    ..add(OnSelectDirektorat(page: 1, search: ''))
+                    ..add(OnSelectJenisSpd(page: 1, search: ''))
+                    ..add(OnSelectZona(page: 1, search: ''))
+                    ..add(OnSelectLokasiTujuan(page: 1, search: ''))
                     ..add(OnSelectPic(page: 1, search: '')),
                   child: AddDinasPage(
                     reloadDataCallback: loadData,

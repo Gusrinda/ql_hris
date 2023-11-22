@@ -10,8 +10,15 @@ import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas_bloc/add_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
-import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/addDinas_selector_case1.dart';
-import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/addDinas_selector_case2.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/SearchDivisi.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/ZonaSearch.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/jenisSpdSearch.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/direktoratSearch.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/lokasiSearch.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/picSearch.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/posisiSearch.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/searchDepartemen.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/templateSpdSearch.dart.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_departemen_model.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_direktorat_model.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_divisi_model.dart';
@@ -221,290 +228,194 @@ class _AddDinasPageState extends State<AddDinasPage> {
 
   @override
   Widget build(BuildContext context) {
-    var selectDivisi = context.read<AddDinasBloc>().dataDivisi;
-    var selectDepartemen = context.read<AddDinasBloc>().dataDepartemen;
-    var selectPosisi = context.read<AddDinasBloc>().dataPosisi;
-    var selectTemplateSpd = context.read<AddDinasBloc>().dataTemplateSpd;
-    var selectDirektorat = context.read<AddDinasBloc>().dataDirektorat;
-    var selectJenisSpd = context.read<AddDinasBloc>().dataJenisSpd;
-    var selectZonaAsal = context.read<AddDinasBloc>().dataZona;
-    var selectZonaTujuan = context.read<AddDinasBloc>().dataZona;
-    var selectLokasiTujuan = context.read<AddDinasBloc>().dataLokasiTujuan;
-    var selectPic = context.read<AddDinasBloc>().dataPic;
+    // var selectDivisi = context.read<AddDinasBloc>().dataDivisi;
+    // var selectDepartemen = context.read<AddDinasBloc>().dataDepartemen;
+    // var selectPosisi = context.read<AddDinasBloc>().dataPosisi;
+    // var selectTemplateSpd = context.read<AddDinasBloc>().dataTemplateSpd;
+    // var selectDirektorat = context.read<AddDinasBloc>().dataDirektorat;
+    // var selectJenisSpd = context.read<AddDinasBloc>().dataJenisSpd;
+    // var selectZonaAsal = context.read<AddDinasBloc>().dataZona;
+    // var selectZonaTujuan = context.read<AddDinasBloc>().dataZona;
+    // var selectLokasiTujuan = context.read<AddDinasBloc>().dataLokasiTujuan;
+    // var selectPic = context.read<AddDinasBloc>().dataPic;
     // var selectPic = context.read<AddDinasBloc>().dataPic ?? [];
 
     void _showDivisi(BuildContext context) async {
-      if (selectDivisi.isEmpty) {
-        context.read<AddDinasBloc>().add(OnSelectDivisi());
-        selectDivisi = context.read<AddDinasBloc>().dataDivisi;
-      }
+      final selectedDivisiValue = await showSearch<DataDivisi?>(
+        context: context,
+        delegate: DivisiSearchDelegate(),
+      );
 
-      if (selectDivisi.isNotEmpty) {
-        final selectedDivisiValue = await showSearch<DataDivisi?>(
-          context: context,
-          delegate: DivisiSearchDelegate(
-            divisiData: selectDivisi,
-            filteredData: selectDivisi,
-          ),
-        );
+      if (selectedDivisiValue != null) {
+        widget.valueDivisiController.text =
+            selectedDivisiValue.nama?.toString() ?? '';
+        widget.idDivisiController.text =
+            selectedDivisiValue.id?.toString() ?? '';
 
-        if (selectedDivisiValue != null) {
-          widget.valueDivisiController.text =
-              selectedDivisiValue.nama?.toString() ?? '';
-          widget.idDivisiController.text =
-              selectedDivisiValue.id?.toString() ?? '';
-
-          setState(() {
-            this.selectedDivisiValue = selectedDivisiValue.nama;
-          });
-        }
-      } else {
-        print("Tidak ada item dalam selectDivisi");
+        setState(() {
+          this.selectedDivisiValue = selectedDivisiValue.nama;
+        });
       }
     }
 
     void _showDepartemen(BuildContext context) async {
-        final selectedDepartemenValue = await showSearch<DataDepartemen?>(
-          context: context,
-          delegate: DepartemenSearchDelegate(),
-        );
+      final selectedDepartemenValue = await showSearch<DataDepartemen?>(
+        context: context,
+        delegate: DepartemenSearchDelegate(),
+      );
 
-        if (selectedDepartemenValue != null) {
-          widget.valueDepartemenController.text =
-              selectedDepartemenValue.nama?.toString() ?? '';
-          widget.idDepartemenController.text =
-              selectedDepartemenValue.id?.toString() ?? '';
+      if (selectedDepartemenValue != null) {
+        widget.valueDepartemenController.text =
+            selectedDepartemenValue.nama?.toString() ?? '';
+        widget.idDepartemenController.text =
+            selectedDepartemenValue.id?.toString() ?? '';
 
-          setState(() {
-            this.selectedDepartemenValue = selectedDepartemenValue.nama;
-          });
-        }
+        setState(() {
+          this.selectedDepartemenValue = selectedDepartemenValue.nama;
+        });
+      }
     }
 
     void _showPosisi(BuildContext context) async {
-      if (selectPosisi.isEmpty) {
-        context.read<AddDinasBloc>().add(OnSelectPosisi());
-        selectPosisi = context.read<AddDinasBloc>().dataPosisi;
-      }
+      final selectedPosisiValue = await showSearch<DataPosisi?>(
+        context: context,
+        delegate: PosisiSearchDelegate(),
+      );
 
-      if (selectPosisi.isNotEmpty) {
-        final selectedPosisiValue = await showSearch<DataPosisi?>(
-          context: context,
-          delegate: PosisiSearchDelegate(
-            posisiData: selectPosisi,
-            filteredData: selectPosisi,
-          ),
-        );
+      if (selectedPosisiValue != null) {
+        widget.valuePosisiController.text =
+            selectedPosisiValue.descKerja?.toString() ?? '';
+        widget.idPosisiController.text =
+            selectedPosisiValue.id?.toString() ?? '';
 
-        if (selectedPosisiValue != null) {
-          widget.valuePosisiController.text =
-              selectedPosisiValue.descKerja?.toString() ?? '';
-          widget.idPosisiController.text =
-              selectedPosisiValue.id?.toString() ?? '';
-
-          setState(() {
-            this.selectedPosisiValue = selectedPosisiValue.descKerja;
-          });
-        }
-      } else {
-        print("Tidak ada item dalam selectPosisi");
+        setState(() {
+          this.selectedPosisiValue = selectedPosisiValue.descKerja;
+        });
       }
     }
 
     void _showTemplateSpd(BuildContext context) async {
-      if (selectTemplateSpd.isEmpty) {
-        context.read<AddDinasBloc>().add(OnSelectTemplateSpd());
-        selectTemplateSpd = context.read<AddDinasBloc>().dataTemplateSpd;
-      }
+      final selectedTemplateSpdValue = await showSearch<DataTemplateSpd?>(
+        context: context,
+        delegate: TemplateSpdSearchDelegate(),
+      );
 
-      if (selectTemplateSpd.isNotEmpty) {
-        final selectedTemplateSpdValue = await showSearch<DataTemplateSpd?>(
-          context: context,
-          delegate: TemplateSpdSearchDelegate(
-            templateSpdData: selectTemplateSpd,
-            filteredData: selectTemplateSpd,
-          ),
-        );
+      if (selectedTemplateSpdValue != null) {
+        widget.valueTemplateSpdController.text =
+            selectedTemplateSpdValue.kode?.toString() ?? '';
+        widget.idTemplateSpdController.text =
+            selectedTemplateSpdValue.id?.toString() ?? '';
 
-        if (selectedTemplateSpdValue != null) {
-          widget.valueTemplateSpdController.text =
-              selectedTemplateSpdValue.kode?.toString() ?? '';
-          widget.idTemplateSpdController.text =
-              selectedTemplateSpdValue.id?.toString() ?? '';
-
-          setState(() {
-            this.selectedTemplateSpdValue = selectedTemplateSpdValue.kode;
-          });
-        }
-      } else {
-        print("Tidak ada item dalam selectTemplateSpd");
+        setState(() {
+          this.selectedTemplateSpdValue = selectedTemplateSpdValue.kode;
+        });
       }
     }
 
     void _showDirektorat(BuildContext context) async {
-      if (selectDirektorat.isEmpty) {
-        context.read<AddDinasBloc>().add(OnSelectDirektorat());
-        selectDirektorat = context.read<AddDinasBloc>().dataDirektorat;
-      }
+      final selectedDirektoratValue = await showSearch<DataDirektorat?>(
+        context: context,
+        delegate: DirektoratSearchDelegate(),
+      );
 
-      if (selectDirektorat.isNotEmpty) {
-        final selectedDirektoratValue = await showSearch<DataDirektorat?>(
-          context: context,
-          delegate: DirektoratSearchDelegate(
-            direktoratData: selectDirektorat,
-            filteredData: selectDirektorat,
-          ),
-        );
+      if (selectedDirektoratValue != null) {
+        widget.valueDirektoratController.text =
+            selectedDirektoratValue.nama?.toString() ?? '';
+        widget.idDirektoratController.text =
+            selectedDirektoratValue.id?.toString() ?? '';
 
-        if (selectedDirektoratValue != null) {
-          widget.valueDirektoratController.text =
-              selectedDirektoratValue.nama?.toString() ?? '';
-          widget.idDirektoratController.text =
-              selectedDirektoratValue.id?.toString() ?? '';
-
-          setState(() {
-            this.selectedDirektoratValue = selectedDirektoratValue.nama;
-          });
-        }
-      } else {
-        print("Tidak ada item dalam selectDirektorat");
+        setState(() {
+          this.selectedDirektoratValue = selectedDirektoratValue.nama;
+        });
       }
     }
 
     void _showJenisSpd(BuildContext context) async {
-      if (selectJenisSpd.isEmpty) {
-        context.read<AddDinasBloc>().add(OnSelectJenisSpd());
-        selectJenisSpd = context.read<AddDinasBloc>().dataJenisSpd;
-      }
+      final selectedJenisSpdValue = await showSearch<DataJenisSpd?>(
+        context: context,
+        delegate: JenisSpdSearchDelegate(),
+      );
+      if (selectedJenisSpdValue != null) {
+        widget.valueJenisSpdController.text =
+            selectedJenisSpdValue.value?.toString() ?? '';
+        widget.idJenisSpdController.text =
+            selectedJenisSpdValue.id?.toString() ?? '';
 
-      if (selectJenisSpd.isNotEmpty) {
-        final selectedJenisSpdValue = await showSearch<DataJenisSpd?>(
-          context: context,
-          delegate: JenisSpdSearchDelegate(
-            jenisSpdData: selectJenisSpd,
-            filteredData: selectJenisSpd,
-          ),
-        );
-        if (selectedJenisSpdValue != null) {
-          widget.valueJenisSpdController.text =
-              selectedJenisSpdValue.value?.toString() ?? '';
-          widget.idJenisSpdController.text =
-              selectedJenisSpdValue.id?.toString() ?? '';
-
-          setState(() {
-            this.selectedJenisSpdValue = selectedJenisSpdValue.value;
-          });
-        }
-      } else {
-        print("Tidak ada item dalam selectJenisSpd");
+        setState(() {
+          this.selectedJenisSpdValue = selectedJenisSpdValue.value;
+        });
       }
     }
 
     void _showZonaAsal(BuildContext context) async {
-      if (selectZonaAsal.isEmpty) {
-        context.read<AddDinasBloc>().add(OnSelectZona());
-        selectZonaAsal = context.read<AddDinasBloc>().dataZona;
-      }
+      final selectedZonaAsalValue = await showSearch<DataZona?>(
+        context: context,
+        delegate: ZonaAsalSearchDelegate(),
+      );
 
-      if (selectZonaAsal.isNotEmpty) {
-        final selectedZonaAsalValue = await showSearch<DataZona?>(
-          context: context,
-          delegate: ZonaAsalSearchDelegate(
-            zonaData: selectZonaAsal,
-            filteredData: selectZonaAsal,
-          ),
-        );
+      if (selectedZonaAsalValue != null) {
+        widget.valueZonaAsalController.text =
+            selectedZonaAsalValue.nama?.toString() ?? '';
+        widget.idZonaAsalController.text =
+            selectedZonaAsalValue.id?.toString() ?? '';
 
-        if (selectedZonaAsalValue != null) {
-          widget.valueZonaAsalController.text =
-              selectedZonaAsalValue.nama?.toString() ?? '';
-          widget.idZonaAsalController.text =
-              selectedZonaAsalValue.id?.toString() ?? '';
-
-          setState(() {
-            this.selectedZonaAsalValue = selectedZonaAsalValue.nama;
-          });
-        }
-      } else {
-        print("Tidak ada item dalam selectZonaAsal");
+        setState(() {
+          this.selectedZonaAsalValue = selectedZonaAsalValue.nama;
+        });
       }
     }
 
     void _showZonaTujuan(BuildContext context) async {
-      if (selectZonaTujuan.isEmpty) {
-        context.read<AddDinasBloc>().add(OnSelectZona());
-        selectZonaTujuan = context.read<AddDinasBloc>().dataZona;
-      }
+      final selectedZonaTujuanValue = await showSearch<DataZona?>(
+        context: context,
+        delegate: ZonaTujuanSearchDelegate(),
+      );
 
-      if (selectZonaTujuan.isNotEmpty) {
-        final selectedZonaTujuanValue = await showSearch<DataZona?>(
-          context: context,
-          delegate: ZonaTujuanSearchDelegate(
-            zonaTujuanData: selectZonaTujuan,
-            filteredData: selectZonaTujuan,
-          ),
-        );
+      if (selectedZonaTujuanValue != null) {
+        widget.valueZonaTujuanController.text =
+            selectedZonaTujuanValue.nama?.toString() ?? '';
+        widget.idZonaTujuanController.text =
+            selectedZonaTujuanValue.id?.toString() ?? '';
 
-        if (selectedZonaTujuanValue != null) {
-          widget.valueZonaTujuanController.text =
-              selectedZonaTujuanValue.nama?.toString() ?? '';
-          widget.idZonaTujuanController.text =
-              selectedZonaTujuanValue.id?.toString() ?? '';
-
-          setState(() {
-            this.selectedZonaTujuanValue = selectedZonaTujuanValue.nama;
-          });
-        }
-      } else {
-        print("Tidak ada item dalam selectZonaTujuan");
+        setState(() {
+          this.selectedZonaTujuanValue = selectedZonaTujuanValue.nama;
+        });
       }
     }
 
     void _showLokasiTujuan(BuildContext context) async {
-      if (selectLokasiTujuan.isEmpty) {
-        context.read<AddDinasBloc>().add(OnSelectLokasiTujuan());
-        selectLokasiTujuan = context.read<AddDinasBloc>().dataLokasiTujuan;
-      }
+      final selectedLokasiTujuanValue = await showSearch<DataLokasiTujuan?>(
+        context: context,
+        delegate: LokasiTujuanSearchDelegate(),
+      );
 
-      if (selectLokasiTujuan.isNotEmpty) {
-        final selectedLokasiTujuanValue = await showSearch<DataLokasiTujuan?>(
-          context: context,
-          delegate: LokasiTujuanSearchDelegate(
-            lokasiTujuanData: selectLokasiTujuan,
-            filteredData: selectLokasiTujuan,
-          ),
-        );
+      if (selectedLokasiTujuanValue != null) {
+        widget.valueLokasiTujuanController.text =
+            selectedLokasiTujuanValue.nama?.toString() ?? '';
+        widget.idLokasiTujuanController.text =
+            selectedLokasiTujuanValue.id?.toString() ?? '';
 
-        if (selectedLokasiTujuanValue != null) {
-          widget.valueLokasiTujuanController.text =
-              selectedLokasiTujuanValue.nama?.toString() ?? '';
-          widget.idLokasiTujuanController.text =
-              selectedLokasiTujuanValue.id?.toString() ?? '';
-
-          setState(() {
-            this.selectedLokasiTujuanValue = selectedLokasiTujuanValue.nama;
-          });
-        }
-      } else {
-        print("Tidak ada item dalam selectLokasiTujuan");
+        setState(() {
+          this.selectedLokasiTujuanValue = selectedLokasiTujuanValue.nama;
+        });
       }
     }
 
     void _showPic(BuildContext context) async {
-        final selectedPicValue = await showSearch<DataPic?>(
-          context: context,
-          delegate: PicSearchDelegate(),
-        );
+      final selectedPicValue = await showSearch<DataPic?>(
+        context: context,
+        delegate: PicSearchDelegate(),
+      );
 
-        if (selectedPicValue != null) {
-          widget.valuePicController.text =
-              selectedPicValue.name?.toString() ?? '';
-          widget.idPicController.text = selectedPicValue.id?.toString() ?? '';
+      if (selectedPicValue != null) {
+        widget.valuePicController.text =
+            selectedPicValue.name?.toString() ?? '';
+        widget.idPicController.text = selectedPicValue.id?.toString() ?? '';
 
-          setState(() {
-            this.selectedPicValue = selectedPicValue.name;
-          });
-        }
+        setState(() {
+          this.selectedPicValue = selectedPicValue.name;
+        });
+      }
     }
 
     return WillPopScope(

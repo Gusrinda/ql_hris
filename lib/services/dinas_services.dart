@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_pic_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
 
@@ -58,8 +57,8 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getDivisi(String token) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_divisi");
+  static Future<Object> getDivisi(String token, int page, String? search, String? searchField) async {
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_divisi?page=$page&search=$search&searchfield=$searchField");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -79,8 +78,8 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getPosisi(String token) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_posisi");
+  static Future<Object> getPosisi(String token, int page, String? search, String? searchField) async {
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_posisi?page=$page&search=$search&searchfield=$searchField");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -88,8 +87,8 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getTemplateSpd(String token) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_spd");
+  static Future<Object> getTemplateSpd(String token, int page, String? search, String? searchField) async {
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_spd?page=$page&search=$search&searchfield=$searchField");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -97,8 +96,8 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getDirektorat(String token) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_dir");
+  static Future<Object> getDirektorat(String token, int page, String? search, String? searchField) async {
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_dir?page=$page&search=$search&searchfield=$searchField");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -106,9 +105,9 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getJenisSpd(String token) async {
+  static Future<Object> getJenisSpd(String token, int page, String? search, String? searchField) async {
     var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_general?scopes=jenisSPD");
+        "${MyGeneralConst.API_URL}/operation/m_general?scopes=jenisSPD&page=$page&search=$search&searchfield=$searchField");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -116,8 +115,8 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getZona(String token) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_zona");
+  static Future<Object> getZona(String token, int page, String? search, String? searchField) async {
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_zona?page=$page&search=$search&searchfield=$searchField");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -125,8 +124,8 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getLokasiTujuan(String token) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_lokasi");
+  static Future<Object> getLokasiTujuan(String token, int page, String? search, String? searchField) async {
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_lokasi?page=$page&search=$search&searchfield=$searchField");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,

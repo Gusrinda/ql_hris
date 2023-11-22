@@ -48,13 +48,17 @@ class AddDinasFailedUserExpired extends AddDinasState {
 
 class SelectDivisiSuccessInBackground extends AddDinasState {
   List<DataDivisi> dataDivisi;
+  int currentPage;
+  bool hasNextPage;
 
   SelectDivisiSuccessInBackground({
     required this.dataDivisi,
+    required this.currentPage,
+    required this.hasNextPage,
   });
 
   @override
-  List<Object> get props => [dataDivisi];
+  List<Object> get props => [dataDivisi, currentPage, hasNextPage];
 }
 
 class SelectDepartemenSuccessInBackground extends AddDinasState {
@@ -74,68 +78,92 @@ class SelectDepartemenSuccessInBackground extends AddDinasState {
 
 class SelectPosisiSuccessInBackground extends AddDinasState {
   List<DataPosisi> dataPosisi;
+  int currentPage;
+  bool hasNextPage;
 
   SelectPosisiSuccessInBackground({
     required this.dataPosisi,
+    required this.currentPage,
+    required this.hasNextPage,
   });
 
   @override
-  List<Object> get props => [dataPosisi];
+  List<Object> get props => [dataPosisi, currentPage, hasNextPage];
 }
 
 class SelectTemplateSpdSuccessInBackground extends AddDinasState {
   List<DataTemplateSpd> dataTemplateSpd;
+  int currentPage;
+  bool hasNextPage;
 
   SelectTemplateSpdSuccessInBackground({
     required this.dataTemplateSpd,
+    required this.currentPage,
+    required this.hasNextPage,
   });
 
   @override
-  List<Object> get props => [dataTemplateSpd];
+  List<Object> get props => [dataTemplateSpd, currentPage, hasNextPage];
 }
 
 class SelectDirektoratSuccessInBackground extends AddDinasState {
   List<DataDirektorat> dataDirektorat;
+  int currentPage;
+  bool hasNextPage;
 
   SelectDirektoratSuccessInBackground({
     required this.dataDirektorat,
+    required this.currentPage,
+    required this.hasNextPage,
   });
 
   @override
-  List<Object> get props => [dataDirektorat];
+  List<Object> get props => [dataDirektorat, currentPage, hasNextPage];
 }
 
 class SelectJenisSpdSuccessInBackground extends AddDinasState {
   List<DataJenisSpd> dataJenisSpd;
+  int currentPage;
+  bool hasNextPage;
 
   SelectJenisSpdSuccessInBackground({
     required this.dataJenisSpd,
+    required this.currentPage,
+    required this.hasNextPage,
   });
 
   @override
-  List<Object> get props => [dataJenisSpd];
+  List<Object> get props => [dataJenisSpd, currentPage, hasNextPage];
 }
 
 class SelectZonaSuccessInBackground extends AddDinasState {
   List<DataZona> dataZona;
+  int currentPage;
+  bool hasNextPage;
 
   SelectZonaSuccessInBackground({
     required this.dataZona,
+    required this.currentPage,
+    required this.hasNextPage,
   });
 
   @override
-  List<Object> get props => [dataZona];
+  List<Object> get props => [dataZona, currentPage, hasNextPage];
 }
 
 class SelectLokasiSuccessInBackground extends AddDinasState {
   List<DataLokasiTujuan> dataLokasiTujuan;
+  int currentPage;
+  bool hasNextPage;
 
   SelectLokasiSuccessInBackground({
     required this.dataLokasiTujuan,
+    required this.currentPage,
+    required this.hasNextPage,
   });
 
   @override
-  List<Object> get props => [dataLokasiTujuan];
+  List<Object> get props => [dataLokasiTujuan, currentPage, hasNextPage];
 }
 
 class SelectPicSuccessInBackground extends AddDinasState {
