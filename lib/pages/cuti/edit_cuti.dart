@@ -60,6 +60,24 @@ class _EditCutiPageState extends State<EditCutiPage> {
   DateTime? selectedDateFrom;
   DateTime? selectedDateTo;
 
+  @override
+  void initState() {
+    super.initState();
+
+    widget.valueAlasanController.text = widget.alasanValue ?? '';
+    widget.idAlasanController.text = '';
+
+    widget.valueTipeCutiController.text = widget.tipeCutiValue ?? '';
+    widget.idTipeCutiController.text = '';
+
+    widget.keteranganController.text = widget.keterangan ?? '';
+    widget.dateFromController.text = widget.dateFrom ?? '';
+    widget.dateToController.text = widget.dateTo ?? '';
+
+    selectedDateFrom = parseDate(widget.dateFrom);
+    selectedDateTo = parseDate(widget.dateTo);
+  }
+
   DateTime? parseDate(String? date) {
     try {
       return date != null ? DateTime.parse(date).toLocal() : null;

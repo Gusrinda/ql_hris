@@ -135,7 +135,7 @@ class _LemburPageState extends State<LemburPage> {
           ],
         ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -234,7 +234,7 @@ class _LemburPageState extends State<LemburPage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               Expanded(
                 child: BlocBuilder<ListLemburBloc, ListLemburState>(
                   builder: (context, state) {

@@ -224,11 +224,12 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                   ),
                   if (currentStatus == "REVISED")
                     TextButtonCustomV1(
-                      height: 45,
-                      text: "Edit",
-                      backgroundColor: Colors.blue,
+                      text: "Revisi Pengajuan Cuti",
+                      textSize: 12,
+                      backgroundColor: Colors.orange,
                       textColor: MyColorsConst.whiteColor,
                       onPressed: () {
+                        print("Edit Cuti ID : ${widget.cutiId}");
                         Navigator.push(
                           context,
                           MaterialPageRoute(
