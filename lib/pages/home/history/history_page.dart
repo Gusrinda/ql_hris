@@ -11,8 +11,11 @@ import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dar
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 final Map<String, dynamic> stateDict = {
-  "WORKING": {
+  "ATTEND NO CHECKOU": {
     "name": "Hadir Tidak Check Out",
+  },
+  "WORKING": {
+    "name": "Bekerja",
   },
   "ATTEND": {
     "name": "Hadir",
@@ -52,13 +55,13 @@ class _HistoryPageState extends State<HistoryPage> {
     if (stateDict.containsKey(status)) {
       switch (status) {
         case "WORKING":
-          return Color(0XFF0068D4);
+          return const Color(0xFF0068D4);
         case "NOT ATTEND":
-          return Color(0XFFED1B24);
+          return const Color(0xFFED1B24);
         case "ATTEND NO CHECKOUT":
-          return Color(0XFF0CA356);
+          return const Color(0xFF0CA356);
         case "ATTEND":
-          return Color(0XFF0CA356);
+          return const Color(0xFF0CA356);
         default:
           return Colors.black; // warna default
       }
