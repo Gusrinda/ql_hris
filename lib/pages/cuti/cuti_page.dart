@@ -410,6 +410,7 @@ class ListViewCuti extends StatelessWidget {
                 keterangan: data.keterangan,
                 tipeCutiValue: data.tipeCutiValue,
                 nomorFromList: data.nomor,
+                cutiId: data.id,
               ),
             ),
           );

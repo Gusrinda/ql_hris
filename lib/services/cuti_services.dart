@@ -54,4 +54,28 @@ class CutiServices {
       headers: GeneralServices.addToken2Headers(token),
     );
   }
+
+  static Future<Object> editCuti(
+    String token,
+    int cutiId,
+    keterangan,
+    int alasan,
+    int tipeCuti,
+    String dateFrom,
+    String dateTo,
+  ) async {
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_cuti/$cutiId");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.put,
+      headers: GeneralServices.addToken2Headers(token),
+      body: json.encode({
+        "alasan_id": alasan,
+        "tipe_cuti_id": tipeCuti,
+        "date_from": dateFrom,
+        "date_to": dateTo,
+        "keterangan": keterangan,
+      }),
+    );
+  }
 }

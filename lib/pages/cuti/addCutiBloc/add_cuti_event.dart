@@ -43,3 +43,31 @@ class OnSelectTipeCuti extends AddCutiEvent {
   @override
   List<Object> get props => [];
 }
+
+class EditCutiSubmited extends AddCutiEvent {
+  int id;
+  int alasan;
+  int tipeCuti;
+  String keterangan;
+  String dateFrom;
+  String dateTo;
+
+  EditCutiSubmited({
+    required this.id,
+    required this.alasan,
+    required this.tipeCuti,
+    required this.keterangan,
+    required this.dateFrom,
+    required this.dateTo,
+  });
+  
+  @override
+  List<Object> get props => [
+        id,
+        alasan,
+        tipeCuti,
+        keterangan,
+        dateFrom,
+        dateTo,
+      ];
+}

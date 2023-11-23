@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
+import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
+import 'package:sj_presensi_mobile/pages/cuti/edit_cuti.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 final Map<String, dynamic> stateDict = {
@@ -32,6 +36,7 @@ class DetailCutiPage extends StatefulWidget {
     this.tipeCutiValue,
     this.nomorFromNotif,
     this.nomorFromList,
+    this.cutiId,
   });
   final dynamic? data;
   final String? dateFrom;
@@ -42,12 +47,17 @@ class DetailCutiPage extends StatefulWidget {
   final String? tipeCutiValue;
   final String? nomorFromNotif;
   final String? nomorFromList;
+  final int? cutiId;
 
   @override
   State<DetailCutiPage> createState() => _DetailCutiPageState();
 }
 
 class _DetailCutiPageState extends State<DetailCutiPage> {
+  //  void loadData() {
+  //   context.read<AddCutiBloc>().add(GetCuti(date: DateTime.now()));
+  // }
+
   String mapStatusToString(String status) {
     if (widget.status != null && stateDict.containsKey(widget.status)) {
       return stateDict[widget.status]['name'];
@@ -209,6 +219,37 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                       ],
                     ),
                   ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  if (currentStatus == "REVISED")
+                    TextButtonCustomV1(
+                      height: 45,
+                      text: "Edit",
+                      backgroundColor: Colors.blue,
+                      textColor: MyColorsConst.whiteColor,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider(
+                              create: (context) => AddCutiBloc()
+                                ..add(OnSelectAlasanCuti())
+                                ..add(OnSelectTipeCuti()),
+                              child: EditCutiPage(
+                                cutiId: widget.cutiId ?? 1,
+                                dateFrom: widget.dateFrom,
+                                dateTo: widget.dateTo,
+                                alasanValue: widget.alasanValue,
+                                status: widget.status,
+                                keterangan: widget.keterangan,
+                                tipeCutiValue: widget.tipeCutiValue,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                 ],
               ),
             ),

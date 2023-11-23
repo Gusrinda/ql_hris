@@ -132,5 +132,36 @@ class AddCutiBloc extends Bloc<AddCutiEvent, AddCutiState> {
         }
       },
     );
+
+    on<EditCutiSubmited>((event, emit) async {
+      emit(AddCutiLoading());
+       var resToken = await GeneralSharedPreferences.getUserToken();
+       if (resToken is ServicesSuccess) {
+        var res = await CutiServices.editCuti(
+          resToken.response["token"],
+          event.id,
+          event.keterangan,
+          event.alasan,
+          event.tipeCuti,
+          event.dateFrom,
+          event.dateTo,
+        );
+        if (res is ServicesSuccess) {
+          emit(
+              AddCutiSuccess(message: "Edit pengajuan cuti berhasil"));
+          print(res.response);
+        } else if (res is ServicesFailure) {
+          if (res.errorResponse == null) {
+            await GeneralSharedPreferences.removeUserToken();
+            emit(AddCutiFailedUserExpired(message: "Token expired"));
+          } else {
+            emit(AddCutiFailed(message: "Unknown error occurred"));
+            print("Response from API: ${res.errorResponse}");
+          }
+        }
+       } else if (resToken is ServicesFailure) {
+        emit(AddCutiFailedInBackground(message: 'Response format is invalid'));
+       }
+    });
   }
 }

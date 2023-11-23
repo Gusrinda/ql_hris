@@ -5,6 +5,7 @@ import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/add_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
+import 'package:sj_presensi_mobile/pages/cuti/edit_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas_bloc/add_dinas_bloc.dart';
@@ -89,11 +90,9 @@ class RouteGenerator {
           return DetailHistoryAbsensiPage(data: data.data);
         });
       case DetailLemburPage.routeName:
-      final data = settings.arguments as DetailCutiPage;
+        final data = settings.arguments as DetailCutiPage;
         return MaterialPageRoute(builder: (context) {
-          return DetailLemburPage(
-            data: data.data
-          );
+          return DetailLemburPage(data: data.data);
         });
       case DetailCutiPage.routeName:
         final data = settings.arguments as DetailCutiPage;
@@ -115,7 +114,15 @@ class RouteGenerator {
             ),
           );
         });
-
+      case EditCutiPage.routeName:
+        final arguments = settings.arguments as Map<String, dynamic>;
+        final cutiId = arguments['cutiId'] as int;
+        return MaterialPageRoute(builder: (context) {
+          return BlocProvider(
+            create: (context) => AddCutiBloc(),
+            child: EditCutiPage(cutiId: cutiId),
+          );
+        });
       case AddDinasPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(

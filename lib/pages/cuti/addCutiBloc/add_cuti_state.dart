@@ -68,3 +68,21 @@ class AddCutiFailedUserExpired extends AddCutiState {
   @override
   List<Object> get props => [message];
 }
+
+class EditCutiSuccess extends AddCutiState {
+  String message;
+
+  EditCutiSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+class EditCutiFailed extends AddCutiState {
+  String message;
+
+  EditCutiFailed({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
