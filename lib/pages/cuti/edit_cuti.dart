@@ -210,7 +210,7 @@ class _EditCutiPageState extends State<EditCutiPage> {
       },
       child: Scaffold(
         appBar: appBarCustomV1(
-          title: "Pengajuan Cuti",
+          title: "Revisi Pengajuan Cuti",
           padLeft: 8,
         ),
         body: SingleChildScrollView(
@@ -370,7 +370,7 @@ class _EditCutiPageState extends State<EditCutiPage> {
                         height: 20,
                       ),
                       TextButtonCustomV1(
-                        text: "Kirim",
+                        text: "Kirim Revisi",
                         backgroundColor: MyColorsConst.primaryColor,
                         textColor: MyColorsConst.whiteColor,
                         onPressed: state is AddCutiLoading

@@ -70,7 +70,7 @@ class DinasServices {
         "m_lokasi_tujuan_id": lokasiTujuan,
         "pic_id": pic,
         "total_biaya": 0,
-        "is_kend_dinas": true,
+        "is_kend_dinas": kendDinas,
       }),
     );
   }
@@ -175,4 +175,47 @@ class DinasServices {
       headers: GeneralServices.addToken2Headers(token),
     );
   }
+
+  static Future<Object> editDinas(
+    String token,
+    int dinasId,
+    int divisi,
+      int departemen,
+      int posisi,
+      int templateSpd,
+      int direktorat,
+      tanggal,
+      tanggalAwal,
+      tanggalAkhir,
+      int jenisSpd,
+      int zonaAsal,
+      int zonaTujuan,
+      int lokasiTujuan,
+      int pic,
+      bool kendDinas,
+  ) async {
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_spd/$dinasId");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.put,
+      headers: GeneralServices.addToken2Headers(token),
+      body: json.encode({
+         "m_divisi_id": divisi,
+        "m_dept_id": departemen,
+        "m_posisi_id": posisi,
+        "m_spd_id": templateSpd,
+        "m_dir_id": direktorat,
+        "tanggal": tanggal,
+        "tgl_acara_awal": tanggalAwal,
+        "tgl_acara_akhir": tanggalAkhir,
+        "jenis_spd_id": jenisSpd,
+        "m_zona_asal_id": zonaAsal,
+        "m_zona_tujuan_id": zonaTujuan,
+        "m_lokasi_tujuan_id": lokasiTujuan,
+        "pic_id": pic,
+        "total_biaya": 0,
+        "is_kend_dinas": kendDinas,
+      }),
+    );
+}
 }

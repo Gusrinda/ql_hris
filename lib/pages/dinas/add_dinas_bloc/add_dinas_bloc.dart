@@ -69,49 +69,54 @@ class AddDinasBloc extends Bloc<AddDinasEvent, AddDinasState> {
 
     on<OnSelectDivisi>(
       (event, emit) async {
-        try{
-        emit(AddDinasLoading());
-        var resToken = await GeneralSharedPreferences.getUserToken();
-        if (resToken is ServicesSuccess) {
-          int page = 1;
+        try {
+          emit(AddDinasLoading());
+          var resToken = await GeneralSharedPreferences.getUserToken();
+          if (resToken is ServicesSuccess) {
+            int page = 1;
             String search = event.search;
             String searchField = 'nama, desc';
             List<DataDivisi> allData = [];
 
             while (true) {
-          var res = await DinasServices.getDivisi(resToken.response["token"], page, search, searchField);
-          if (res is ServicesSuccess) {
-            if (res.response is Map<String, dynamic>) {
-              GetDivisiModel dataResponse =
-                  GetDivisiModel.fromJson(res.response);
+              var res = await DinasServices.getDivisi(
+                  resToken.response["token"], page, search, searchField);
+              if (res is ServicesSuccess) {
+                if (res.response is Map<String, dynamic>) {
+                  GetDivisiModel dataResponse =
+                      GetDivisiModel.fromJson(res.response);
 
-              dataDivisi = dataResponse.data ?? [];
+                  dataDivisi = dataResponse.data ?? [];
 
-             if (dataDivisi.isNotEmpty) {
-                  allData.addAll(dataDivisi);
-                  page++;
+                  if (dataDivisi.isNotEmpty) {
+                    allData.addAll(dataDivisi);
+                    page++;
+                  } else {
+                    break;
+                  }
                 } else {
-                  break;
-                }
-            } else {
-              emit(AddDinasFailedInBackground(
-                  message: 'Response format is invalid'),
+                  emit(
+                    AddDinasFailedInBackground(
+                        message: 'Response format is invalid'),
                   );
                   return;
+                }
+              } else if (res is ServicesFailure) {
+                if (res.errorResponse == null) {
+                  await GeneralSharedPreferences.removeUserToken();
+                  emit(AddDinasFailedUserExpired(message: "Token expired"));
+                } else {
+                  emit(AddDinasFailed(message: res.errorResponse));
+                }
+              }
             }
-          } else if (res is ServicesFailure) {
-            if (res.errorResponse == null) {
-              await GeneralSharedPreferences.removeUserToken();
-              emit(AddDinasFailedUserExpired(message: "Token expired"));
-            } else {
-              emit(AddDinasFailed(message: res.errorResponse));
-            }
+            emit(SelectDivisiSuccessInBackground(
+                dataDivisi: List.from(allData),
+                currentPage: page,
+                hasNextPage: dataDivisi.isNotEmpty));
+          } else if (resToken is ServicesFailure) {
+            emit(AddDinasFailedInBackground(message: 'Response invalid'));
           }
-            }
-            emit(SelectDivisiSuccessInBackground(dataDivisi: List.from(allData), currentPage: page, hasNextPage: dataDivisi.isNotEmpty));
-        } else if (resToken is ServicesFailure) {
-          emit(AddDinasFailedInBackground(message: 'Response invalid'));
-        }
         } catch (e) {
           emit(AddDinasFailedInBackground(
             message: 'Terjadi kesalahan: $e',
@@ -187,403 +192,403 @@ class AddDinasBloc extends Bloc<AddDinasEvent, AddDinasState> {
 
     on<OnSelectPosisi>(
       (event, emit) async {
-       try {
-        emit(AddDinasLoading());
+        try {
+          emit(AddDinasLoading());
 
-        var resToken = await GeneralSharedPreferences.getUserToken();
+          var resToken = await GeneralSharedPreferences.getUserToken();
 
-        if (resToken is ServicesSuccess) {
-          int page = 1;
-          String search = event.search;
-          String searchField = 'descKerja';
-          List<DataPosisi> allData = [];
+          if (resToken is ServicesSuccess) {
+            int page = 1;
+            String search = event.search;
+            String searchField = 'descKerja';
+            List<DataPosisi> allData = [];
 
-          while (true) {
-            var res = await DinasServices.getPosisi(
-                resToken.response["token"], page, search, searchField);
+            while (true) {
+              var res = await DinasServices.getPosisi(
+                  resToken.response["token"], page, search, searchField);
 
-            if (res is ServicesSuccess) {
-              if (res.response is Map<String, dynamic>) {
-                GetPosisiModel dataResponse =
-                    GetPosisiModel.fromJson(res.response);
+              if (res is ServicesSuccess) {
+                if (res.response is Map<String, dynamic>) {
+                  GetPosisiModel dataResponse =
+                      GetPosisiModel.fromJson(res.response);
 
-                dataPosisi = dataResponse.data ?? [];
+                  dataPosisi = dataResponse.data ?? [];
 
-                if (dataPosisi.isNotEmpty) {
-                  allData.addAll(dataPosisi);
-                  page++;
+                  if (dataPosisi.isNotEmpty) {
+                    allData.addAll(dataPosisi);
+                    page++;
+                  } else {
+                    break;
+                  }
                 } else {
-                  break;
+                  emit(
+                    AddDinasFailedInBackground(
+                      message: 'Format respons tidak valid',
+                    ),
+                  );
+                  return;
                 }
-              } else {
-                emit(
-                  AddDinasFailedInBackground(
-                    message: 'Format respons tidak valid',
-                  ),
-                );
-                return;
-              }
-            } else if (res is ServicesFailure) {
-              if (res.errorResponse == null) {
-                await GeneralSharedPreferences.removeUserToken();
-                emit(AddDinasFailedUserExpired(message: "Token kedaluwarsa"));
-              } else {
-                emit(AddDinasFailed(message: res.errorResponse));
+              } else if (res is ServicesFailure) {
+                if (res.errorResponse == null) {
+                  await GeneralSharedPreferences.removeUserToken();
+                  emit(AddDinasFailedUserExpired(message: "Token kedaluwarsa"));
+                } else {
+                  emit(AddDinasFailed(message: res.errorResponse));
+                }
               }
             }
+            emit(
+              SelectPosisiSuccessInBackground(
+                dataPosisi: List.from(allData),
+                currentPage: page,
+                hasNextPage: dataPosisi.isNotEmpty,
+              ),
+            );
+          } else if (resToken is ServicesFailure) {
+            emit(AddDinasFailedInBackground(
+              message: 'Respons tidak valid',
+            ));
           }
-          emit(
-            SelectPosisiSuccessInBackground(
-              dataPosisi: List.from(allData),
-              currentPage: page,
-              hasNextPage: dataPosisi.isNotEmpty,
-            ),
-          );
-        } else if (resToken is ServicesFailure) {
+        } catch (e) {
           emit(AddDinasFailedInBackground(
-            message: 'Respons tidak valid',
+            message: 'Terjadi kesalahan: $e',
           ));
         }
-      } catch (e) {
-        emit(AddDinasFailedInBackground(
-          message: 'Terjadi kesalahan: $e',
-        ));
-      }
       },
     );
 
     on<OnSelectTemplateSpd>(
       (event, emit) async {
         try {
-        emit(AddDinasLoading());
+          emit(AddDinasLoading());
 
-        var resToken = await GeneralSharedPreferences.getUserToken();
+          var resToken = await GeneralSharedPreferences.getUserToken();
 
-        if (resToken is ServicesSuccess) {
-          int page = 1;
-          String search = event.search;
-          String searchField = 'kode';
-          List<DataTemplateSpd> allData = [];
+          if (resToken is ServicesSuccess) {
+            int page = 1;
+            String search = event.search;
+            String searchField = 'kode';
+            List<DataTemplateSpd> allData = [];
 
-          while (true) {
-            var res = await DinasServices.getTemplateSpd(
-                resToken.response["token"], page, search, searchField);
+            while (true) {
+              var res = await DinasServices.getTemplateSpd(
+                  resToken.response["token"], page, search, searchField);
 
-            if (res is ServicesSuccess) {
-              if (res.response is Map<String, dynamic>) {
-                GetTemplateSpdModel dataResponse =
-                    GetTemplateSpdModel.fromJson(res.response);
+              if (res is ServicesSuccess) {
+                if (res.response is Map<String, dynamic>) {
+                  GetTemplateSpdModel dataResponse =
+                      GetTemplateSpdModel.fromJson(res.response);
 
-                dataTemplateSpd = dataResponse.data ?? [];
+                  dataTemplateSpd = dataResponse.data ?? [];
 
-                if (dataTemplateSpd.isNotEmpty) {
-                  allData.addAll(dataTemplateSpd);
-                  page++;
+                  if (dataTemplateSpd.isNotEmpty) {
+                    allData.addAll(dataTemplateSpd);
+                    page++;
+                  } else {
+                    break;
+                  }
                 } else {
-                  break;
+                  emit(
+                    AddDinasFailedInBackground(
+                      message: 'Format respons tidak valid',
+                    ),
+                  );
+                  return;
                 }
-              } else {
-                emit(
-                  AddDinasFailedInBackground(
-                    message: 'Format respons tidak valid',
-                  ),
-                );
-                return;
-              }
-            } else if (res is ServicesFailure) {
-              if (res.errorResponse == null) {
-                await GeneralSharedPreferences.removeUserToken();
-                emit(AddDinasFailedUserExpired(message: "Token kedaluwarsa"));
-              } else {
-                emit(AddDinasFailed(message: res.errorResponse));
+              } else if (res is ServicesFailure) {
+                if (res.errorResponse == null) {
+                  await GeneralSharedPreferences.removeUserToken();
+                  emit(AddDinasFailedUserExpired(message: "Token kedaluwarsa"));
+                } else {
+                  emit(AddDinasFailed(message: res.errorResponse));
+                }
               }
             }
+            emit(
+              SelectTemplateSpdSuccessInBackground(
+                dataTemplateSpd: List.from(allData),
+                currentPage: page,
+                hasNextPage: dataTemplateSpd.isNotEmpty,
+              ),
+            );
+          } else if (resToken is ServicesFailure) {
+            emit(AddDinasFailedInBackground(
+              message: 'Respons tidak valid',
+            ));
           }
-          emit(
-            SelectTemplateSpdSuccessInBackground(
-              dataTemplateSpd: List.from(allData),
-              currentPage: page,
-              hasNextPage: dataTemplateSpd.isNotEmpty,
-            ),
-          );
-        } else if (resToken is ServicesFailure) {
+        } catch (e) {
           emit(AddDinasFailedInBackground(
-            message: 'Respons tidak valid',
+            message: 'Terjadi kesalahan: $e',
           ));
         }
-      } catch (e) {
-        emit(AddDinasFailedInBackground(
-          message: 'Terjadi kesalahan: $e',
-        ));
-      }
       },
     );
 
     on<OnSelectDirektorat>(
       (event, emit) async {
         try {
-        emit(AddDinasLoading());
+          emit(AddDinasLoading());
 
-        var resToken = await GeneralSharedPreferences.getUserToken();
+          var resToken = await GeneralSharedPreferences.getUserToken();
 
-        if (resToken is ServicesSuccess) {
-          int page = 1;
-          String search = event.search;
-          String searchField = 'nama, desc';
-          List<DataDirektorat> allData = [];
+          if (resToken is ServicesSuccess) {
+            int page = 1;
+            String search = event.search;
+            String searchField = 'nama, desc';
+            List<DataDirektorat> allData = [];
 
-          while (true) {
-            var res = await DinasServices.getDirektorat(
-                resToken.response["token"], page, search, searchField);
+            while (true) {
+              var res = await DinasServices.getDirektorat(
+                  resToken.response["token"], page, search, searchField);
 
-            if (res is ServicesSuccess) {
-              if (res.response is Map<String, dynamic>) {
-                GetDirektoratModel dataResponse =
-                    GetDirektoratModel.fromJson(res.response);
+              if (res is ServicesSuccess) {
+                if (res.response is Map<String, dynamic>) {
+                  GetDirektoratModel dataResponse =
+                      GetDirektoratModel.fromJson(res.response);
 
-                dataDirektorat = dataResponse.data ?? [];
+                  dataDirektorat = dataResponse.data ?? [];
 
-                if (dataDirektorat.isNotEmpty) {
-                  allData.addAll(dataDirektorat);
-                  page++;
+                  if (dataDirektorat.isNotEmpty) {
+                    allData.addAll(dataDirektorat);
+                    page++;
+                  } else {
+                    break;
+                  }
                 } else {
-                  break;
+                  emit(
+                    AddDinasFailedInBackground(
+                      message: 'Format respons tidak valid',
+                    ),
+                  );
+                  return;
                 }
-              } else {
-                emit(
-                  AddDinasFailedInBackground(
-                    message: 'Format respons tidak valid',
-                  ),
-                );
-                return;
-              }
-            } else if (res is ServicesFailure) {
-              if (res.errorResponse == null) {
-                await GeneralSharedPreferences.removeUserToken();
-                emit(AddDinasFailedUserExpired(message: "Token kedaluwarsa"));
-              } else {
-                emit(AddDinasFailed(message: res.errorResponse));
+              } else if (res is ServicesFailure) {
+                if (res.errorResponse == null) {
+                  await GeneralSharedPreferences.removeUserToken();
+                  emit(AddDinasFailedUserExpired(message: "Token kedaluwarsa"));
+                } else {
+                  emit(AddDinasFailed(message: res.errorResponse));
+                }
               }
             }
+            emit(
+              SelectDirektoratSuccessInBackground(
+                dataDirektorat: List.from(allData),
+                currentPage: page,
+                hasNextPage: dataDirektorat.isNotEmpty,
+              ),
+            );
+          } else if (resToken is ServicesFailure) {
+            emit(AddDinasFailedInBackground(
+              message: 'Respons tidak valid',
+            ));
           }
-          emit(
-            SelectDirektoratSuccessInBackground(
-              dataDirektorat: List.from(allData),
-              currentPage: page,
-              hasNextPage: dataDirektorat.isNotEmpty,
-            ),
-          );
-        } else if (resToken is ServicesFailure) {
+        } catch (e) {
           emit(AddDinasFailedInBackground(
-            message: 'Respons tidak valid',
+            message: 'Terjadi kesalahan: $e',
           ));
         }
-      } catch (e) {
-        emit(AddDinasFailedInBackground(
-          message: 'Terjadi kesalahan: $e',
-        ));
-      }
       },
     );
 
     on<OnSelectJenisSpd>(
       (event, emit) async {
         try {
-        emit(AddDinasLoading());
+          emit(AddDinasLoading());
 
-        var resToken = await GeneralSharedPreferences.getUserToken();
+          var resToken = await GeneralSharedPreferences.getUserToken();
 
-        if (resToken is ServicesSuccess) {
-          int page = 1;
-          String search = event.search;
-          String searchField = 'code, value';
-          List<DataJenisSpd> allData = [];
+          if (resToken is ServicesSuccess) {
+            int page = 1;
+            String search = event.search;
+            String searchField = 'code, value';
+            List<DataJenisSpd> allData = [];
 
-          while (true) {
-            var res = await DinasServices.getJenisSpd(
-                resToken.response["token"], page, search, searchField);
+            while (true) {
+              var res = await DinasServices.getJenisSpd(
+                  resToken.response["token"], page, search, searchField);
 
-            if (res is ServicesSuccess) {
-              if (res.response is Map<String, dynamic>) {
-                GetJenisSpdModel dataResponse =
-                    GetJenisSpdModel.fromJson(res.response);
+              if (res is ServicesSuccess) {
+                if (res.response is Map<String, dynamic>) {
+                  GetJenisSpdModel dataResponse =
+                      GetJenisSpdModel.fromJson(res.response);
 
-                dataJenisSpd = dataResponse.data ?? [];
+                  dataJenisSpd = dataResponse.data ?? [];
 
-                if (dataJenisSpd.isNotEmpty) {
-                  allData.addAll(dataJenisSpd);
-                  page++;
+                  if (dataJenisSpd.isNotEmpty) {
+                    allData.addAll(dataJenisSpd);
+                    page++;
+                  } else {
+                    break;
+                  }
                 } else {
-                  break;
+                  emit(
+                    AddDinasFailedInBackground(
+                      message: 'Format respons tidak valid',
+                    ),
+                  );
+                  return;
                 }
-              } else {
-                emit(
-                  AddDinasFailedInBackground(
-                    message: 'Format respons tidak valid',
-                  ),
-                );
-                return;
-              }
-            } else if (res is ServicesFailure) {
-              if (res.errorResponse == null) {
-                await GeneralSharedPreferences.removeUserToken();
-                emit(AddDinasFailedUserExpired(message: "Token kedaluwarsa"));
-              } else {
-                emit(AddDinasFailed(message: res.errorResponse));
+              } else if (res is ServicesFailure) {
+                if (res.errorResponse == null) {
+                  await GeneralSharedPreferences.removeUserToken();
+                  emit(AddDinasFailedUserExpired(message: "Token kedaluwarsa"));
+                } else {
+                  emit(AddDinasFailed(message: res.errorResponse));
+                }
               }
             }
+            emit(
+              SelectJenisSpdSuccessInBackground(
+                dataJenisSpd: List.from(allData),
+                currentPage: page,
+                hasNextPage: dataJenisSpd.isNotEmpty,
+              ),
+            );
+          } else if (resToken is ServicesFailure) {
+            emit(AddDinasFailedInBackground(
+              message: 'Respons tidak valid',
+            ));
           }
-          emit(
-            SelectJenisSpdSuccessInBackground(
-              dataJenisSpd: List.from(allData),
-              currentPage: page,
-              hasNextPage: dataJenisSpd.isNotEmpty,
-            ),
-          );
-        } else if (resToken is ServicesFailure) {
+        } catch (e) {
           emit(AddDinasFailedInBackground(
-            message: 'Respons tidak valid',
+            message: 'Terjadi kesalahan: $e',
           ));
         }
-      } catch (e) {
-        emit(AddDinasFailedInBackground(
-          message: 'Terjadi kesalahan: $e',
-        ));
-      }
       },
     );
 
     on<OnSelectZona>(
       (event, emit) async {
-       try {
-        emit(AddDinasLoading());
+        try {
+          emit(AddDinasLoading());
 
-        var resToken = await GeneralSharedPreferences.getUserToken();
+          var resToken = await GeneralSharedPreferences.getUserToken();
 
-        if (resToken is ServicesSuccess) {
-          int page = 1;
-          String search = event.search;
-          String searchField = 'kode, nama';
-          List<DataZona> allData = [];
+          if (resToken is ServicesSuccess) {
+            int page = 1;
+            String search = event.search;
+            String searchField = 'kode, nama';
+            List<DataZona> allData = [];
 
-          while (true) {
-            var res = await DinasServices.getZona(
-                resToken.response["token"], page, search, searchField);
+            while (true) {
+              var res = await DinasServices.getZona(
+                  resToken.response["token"], page, search, searchField);
 
-            if (res is ServicesSuccess) {
-              if (res.response is Map<String, dynamic>) {
-                GetZonaModel dataResponse =
-                    GetZonaModel.fromJson(res.response);
+              if (res is ServicesSuccess) {
+                if (res.response is Map<String, dynamic>) {
+                  GetZonaModel dataResponse =
+                      GetZonaModel.fromJson(res.response);
 
-                dataZona = dataResponse.data ?? [];
+                  dataZona = dataResponse.data ?? [];
 
-                if (dataZona.isNotEmpty) {
-                  allData.addAll(dataZona);
-                  page++;
+                  if (dataZona.isNotEmpty) {
+                    allData.addAll(dataZona);
+                    page++;
+                  } else {
+                    break;
+                  }
                 } else {
-                  break;
+                  emit(
+                    AddDinasFailedInBackground(
+                      message: 'Format respons tidak valid',
+                    ),
+                  );
+                  return;
                 }
-              } else {
-                emit(
-                  AddDinasFailedInBackground(
-                    message: 'Format respons tidak valid',
-                  ),
-                );
-                return;
-              }
-            } else if (res is ServicesFailure) {
-              if (res.errorResponse == null) {
-                await GeneralSharedPreferences.removeUserToken();
-                emit(AddDinasFailedUserExpired(message: "Token kedaluwarsa"));
-              } else {
-                emit(AddDinasFailed(message: res.errorResponse));
+              } else if (res is ServicesFailure) {
+                if (res.errorResponse == null) {
+                  await GeneralSharedPreferences.removeUserToken();
+                  emit(AddDinasFailedUserExpired(message: "Token kedaluwarsa"));
+                } else {
+                  emit(AddDinasFailed(message: res.errorResponse));
+                }
               }
             }
+            emit(
+              SelectZonaSuccessInBackground(
+                dataZona: List.from(allData),
+                currentPage: page,
+                hasNextPage: dataZona.isNotEmpty,
+              ),
+            );
+          } else if (resToken is ServicesFailure) {
+            emit(AddDinasFailedInBackground(
+              message: 'Respons tidak valid',
+            ));
           }
-          emit(
-            SelectZonaSuccessInBackground(
-              dataZona: List.from(allData),
-              currentPage: page,
-              hasNextPage: dataZona.isNotEmpty,
-            ),
-          );
-        } else if (resToken is ServicesFailure) {
+        } catch (e) {
           emit(AddDinasFailedInBackground(
-            message: 'Respons tidak valid',
+            message: 'Terjadi kesalahan: $e',
           ));
         }
-      } catch (e) {
-        emit(AddDinasFailedInBackground(
-          message: 'Terjadi kesalahan: $e',
-        ));
-      }
       },
     );
 
     on<OnSelectLokasiTujuan>(
       (event, emit) async {
-       try {
-        emit(AddDinasLoading());
+        try {
+          emit(AddDinasLoading());
 
-        var resToken = await GeneralSharedPreferences.getUserToken();
+          var resToken = await GeneralSharedPreferences.getUserToken();
 
-        if (resToken is ServicesSuccess) {
-          int page = 1;
-          String search = event.search;
-          String searchField = 'kode, nama';
-          List<DataLokasiTujuan> allData = [];
+          if (resToken is ServicesSuccess) {
+            int page = 1;
+            String search = event.search;
+            String searchField = 'kode, nama';
+            List<DataLokasiTujuan> allData = [];
 
-          while (true) {
-            var res = await DinasServices.getLokasiTujuan(
-                resToken.response["token"], page, search, searchField);
+            while (true) {
+              var res = await DinasServices.getLokasiTujuan(
+                  resToken.response["token"], page, search, searchField);
 
-            if (res is ServicesSuccess) {
-              if (res.response is Map<String, dynamic>) {
-                GetLokasiTujuanModel dataResponse =
-                    GetLokasiTujuanModel.fromJson(res.response);
+              if (res is ServicesSuccess) {
+                if (res.response is Map<String, dynamic>) {
+                  GetLokasiTujuanModel dataResponse =
+                      GetLokasiTujuanModel.fromJson(res.response);
 
-                dataLokasiTujuan = dataResponse.data ?? [];
+                  dataLokasiTujuan = dataResponse.data ?? [];
 
-                if (dataLokasiTujuan.isNotEmpty) {
-                  allData.addAll(dataLokasiTujuan);
-                  page++;
+                  if (dataLokasiTujuan.isNotEmpty) {
+                    allData.addAll(dataLokasiTujuan);
+                    page++;
+                  } else {
+                    break;
+                  }
                 } else {
-                  break;
+                  emit(
+                    AddDinasFailedInBackground(
+                      message: 'Format respons tidak valid',
+                    ),
+                  );
+                  return;
                 }
-              } else {
-                emit(
-                  AddDinasFailedInBackground(
-                    message: 'Format respons tidak valid',
-                  ),
-                );
-                return;
-              }
-            } else if (res is ServicesFailure) {
-              if (res.errorResponse == null) {
-                await GeneralSharedPreferences.removeUserToken();
-                emit(AddDinasFailedUserExpired(message: "Token kedaluwarsa"));
-              } else {
-                emit(AddDinasFailed(message: res.errorResponse));
+              } else if (res is ServicesFailure) {
+                if (res.errorResponse == null) {
+                  await GeneralSharedPreferences.removeUserToken();
+                  emit(AddDinasFailedUserExpired(message: "Token kedaluwarsa"));
+                } else {
+                  emit(AddDinasFailed(message: res.errorResponse));
+                }
               }
             }
+            emit(
+              SelectLokasiSuccessInBackground(
+                dataLokasiTujuan: List.from(allData),
+                currentPage: page,
+                hasNextPage: dataLokasiTujuan.isNotEmpty,
+              ),
+            );
+          } else if (resToken is ServicesFailure) {
+            emit(AddDinasFailedInBackground(
+              message: 'Respons tidak valid',
+            ));
           }
-          emit(
-            SelectLokasiSuccessInBackground(
-              dataLokasiTujuan: List.from(allData),
-              currentPage: page,
-              hasNextPage: dataLokasiTujuan.isNotEmpty,
-            ),
-          );
-        } else if (resToken is ServicesFailure) {
+        } catch (e) {
           emit(AddDinasFailedInBackground(
-            message: 'Respons tidak valid',
+            message: 'Terjadi kesalahan: $e',
           ));
         }
-      } catch (e) {
-        emit(AddDinasFailedInBackground(
-          message: 'Terjadi kesalahan: $e',
-        ));
-      }
       },
     );
 
@@ -657,5 +662,44 @@ class AddDinasBloc extends Bloc<AddDinasEvent, AddDinasState> {
         }
       },
     );
+
+    on<EditDinasSubmited>((event, emit) async {
+      emit(AddDinasLoading());
+      var resToken = await GeneralSharedPreferences.getUserToken();
+      if (resToken is ServicesSuccess) {
+        var res = await DinasServices.editDinas(
+          resToken.response["token"],
+          event.id,
+          event.divisi,
+          event.departemen,
+          event.posisi,
+          event.templateSpd,
+          event.direktorat,
+          event.tanggal,
+          event.tanggalAwal,
+          event.tanggalAkhir,
+          event.jenisSpd,
+          event.zonaAsal,
+          event.zonaTujuan,
+          event.lokasiTujuan,
+          event.pic,
+          event.kendDinas,
+        );
+        if (res is ServicesSuccess) {
+          emit(AddDinasSuccess(message: "Edit perjalanan dinas berhasil"));
+          print(res.response);
+        } else if (res is ServicesFailure) {
+          if (res.errorResponse == null) {
+            await GeneralSharedPreferences.removeUserToken();
+            emit(AddDinasFailedUserExpired(message: "Token expired"));
+          } else {
+            emit(AddDinasFailed(message: "Unknown error occurred"));
+            print("Response from API: ${res.errorResponse}");
+          }
+        }
+      } else if (resToken is ServicesFailure) {
+        emit(AddDinasFailedInBackground(message: 'Response format is invalid'));
+      }
+    });
   }
 }

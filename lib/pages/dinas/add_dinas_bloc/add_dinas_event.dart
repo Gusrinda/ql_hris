@@ -60,7 +60,7 @@ class AddDinasSubmited extends AddDinasEvent {
 }
 
 class OnSelectDivisi extends AddDinasEvent {
-   int page;
+  int page;
   String search;
 
   OnSelectDivisi({
@@ -85,9 +85,9 @@ class OnSelectDepartemen extends AddDinasEvent {
 }
 
 class OnSelectPosisi extends AddDinasEvent {
-   int page;
+  int page;
   String search;
-  
+
   OnSelectPosisi({
     required this.page,
     required this.search,
@@ -97,7 +97,7 @@ class OnSelectPosisi extends AddDinasEvent {
 }
 
 class OnSelectTemplateSpd extends AddDinasEvent {
-   int page;
+  int page;
   String search;
 
   OnSelectTemplateSpd({
@@ -109,7 +109,7 @@ class OnSelectTemplateSpd extends AddDinasEvent {
 }
 
 class OnSelectDirektorat extends AddDinasEvent {
-   int page;
+  int page;
   String search;
 
   OnSelectDirektorat({
@@ -124,18 +124,15 @@ class OnSelectJenisSpd extends AddDinasEvent {
   int page;
   String search;
 
-  OnSelectJenisSpd({
-    required this.page,
-    required this.search
-  });
+  OnSelectJenisSpd({required this.page, required this.search});
   @override
   List<Object> get props => [page, search];
 }
 
 class OnSelectZona extends AddDinasEvent {
-   int page;
+  int page;
   String search;
-  
+
   OnSelectZona({
     required this.page,
     required this.search,
@@ -145,7 +142,7 @@ class OnSelectZona extends AddDinasEvent {
 }
 
 class OnSelectLokasiTujuan extends AddDinasEvent {
-   int page;
+  int page;
   String search;
 
   OnSelectLokasiTujuan({
@@ -164,4 +161,59 @@ class OnSelectPic extends AddDinasEvent {
 
   @override
   List<Object> get props => [page, search];
+}
+
+class EditDinasSubmited extends AddDinasEvent {
+  int id;
+  int divisi;
+  int departemen;
+  int posisi;
+  int templateSpd;
+  int direktorat;
+  String tanggal;
+  String tanggalAwal;
+  String tanggalAkhir;
+  int jenisSpd;
+  int zonaAsal;
+  int zonaTujuan;
+  int lokasiTujuan;
+  int pic;
+  bool kendDinas;
+
+  EditDinasSubmited({
+    required this.id,
+    required this.divisi,
+    required this.departemen,
+    required this.posisi,
+    required this.templateSpd,
+    required this.direktorat,
+    required this.tanggal,
+    required this.tanggalAwal,
+    required this.tanggalAkhir,
+    required this.jenisSpd,
+    required this.zonaAsal,
+    required this.zonaTujuan,
+    required this.lokasiTujuan,
+    required this.pic,
+    required this.kendDinas,
+  });
+
+  @override
+  List<Object> get props => [
+        id,
+        divisi,
+        departemen,
+        posisi,
+        templateSpd,
+        direktorat,
+        tanggal,
+        tanggalAwal,
+        tanggalAkhir,
+        jenisSpd,
+        zonaAsal,
+        zonaTujuan,
+        lokasiTujuan,
+        pic,
+        kendDinas,
+      ];
 }

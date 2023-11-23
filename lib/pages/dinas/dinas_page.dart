@@ -8,6 +8,7 @@ import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas_bloc/add_dinas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/dinas/detail_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
@@ -412,124 +413,146 @@ class ListViewDinas extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      subtitle: Stack(
-        children: [
-          Container(
-            margin: EdgeInsets.only(right: 3),
-            height: 105,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-              color: currentColor,
+      subtitle: GestureDetector(
+        // onTap: () {
+        //   Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => DetailDinasPage(
+        //         data: data,
+        //         dinasId: data.id,
+        //         status: data.status,
+        //         createdAt: data.createdAt,
+        //         jenisSpd: data.jenisSpdValue,
+        //         zonaAwal: data.mZonaAsalNama,
+        //         zonaTujuan: data.mZonaTujuanNama,
+        //         lokasiTujuan: data.mLokasiTujuanNama,
+        //         templateSpd: data.mSpdKode,
+        //         tanggalAwal: data.tglAcaraAwal,
+        //         tanggalAkhir: data.tglAcaraAkhir,
+        //       ),
+        //     ),
+        //   );
+        // },
+        child: Stack(
+          children: [
+            Container(
+              margin: EdgeInsets.only(right: 3),
+              height: 105,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                color: currentColor,
+              ),
             ),
-          ),
-          Container(
-            height: 105,
-            margin: const EdgeInsets.only(bottom: 7, left: 5, right: 3),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-              // border: Border.all(color: const Color(0xFFDDDDDD)),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    offset: Offset(0, 0),
-                    blurRadius: 5)
-              ],
-              color: MyColorsConst.whiteColor,
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    const Text(
-                      "Surat Perjalanan Dinas",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const Spacer(),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 6, vertical: 3),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: currentColor.withOpacity(0.1),
-                      ),
-                      child: Text(
-                        mapStatusToString(currentStatus),
+            Container(
+              height: 105,
+              margin: const EdgeInsets.only(bottom: 7, left: 5, right: 3),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                // border: Border.all(color: const Color(0xFFDDDDDD)),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      offset: Offset(0, 0),
+                      blurRadius: 5)
+                ],
+                color: MyColorsConst.whiteColor,
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      const Text(
+                        "Surat Perjalanan Dinas",
                         style: TextStyle(
-                          color: currentColor,
-                          fontSize: 10,
+                          color: Colors.black,
+                          fontSize: 12,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 4,
-                ),
-                RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: "${data.mDivisiNama}",
-                        style: const TextStyle(
-                          color: MyColorsConst.darkColor,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
+                      const Spacer(),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6, vertical: 3),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: currentColor.withOpacity(0.1),
                         ),
-                      ),
-                      const TextSpan(
-                        text: " | ",
-                        style: TextStyle(
-                          color: Color(
-                              0XFF0068D4), // Set the color of the pipe to blue
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      TextSpan(
-                        text: "${data.mDeptNama}",
-                        style: const TextStyle(
-                          color: MyColorsConst.darkColor,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
+                        child: Text(
+                          mapStatusToString(currentStatus),
+                          style: TextStyle(
+                            color: currentColor,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ],
                   ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.access_time_filled,
-                      color: MyColorsConst.lightDarkColor,
-                      size: 10,
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "${data.mDivisiNama}",
+                          style: const TextStyle(
+                            color: MyColorsConst.darkColor,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const TextSpan(
+                          text: " | ",
+                          style: TextStyle(
+                            color: Color(
+                                0XFF0068D4), // Set the color of the pipe to blue
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "${data.mDeptNama}",
+                          style: const TextStyle(
+                            color: MyColorsConst.darkColor,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 5),
-                    Text(
-                      "Dibuat Tanggal ${formatDate(data.createdAt)}",
-                      style: const TextStyle(
-                          color: Color(0XFF8F8F8F),
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ],
-                ),
-              ],
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.access_time_filled,
+                        color: MyColorsConst.lightDarkColor,
+                        size: 10,
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        "Dibuat Tanggal ${formatDate(data.createdAt)}",
+                        style: const TextStyle(
+                            color: Color(0XFF8F8F8F),
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

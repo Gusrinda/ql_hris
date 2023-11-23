@@ -30,11 +30,15 @@ import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_templat
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_zona_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
-class AddDinasPage extends StatefulWidget {
-  static const routeName = '/AddDinasPage';
-  AddDinasPage({super.key, required this.reloadDataCallback, });
-  final VoidCallback reloadDataCallback;
-
+class EditDinasPage extends StatefulWidget {
+  static const routeName = '/EditDinasPage';
+  EditDinasPage({
+    super.key,
+    required this.dinasId,
+    // required this.reloadDataCallback,
+  });
+  // final VoidCallback reloadDataCallback;
+  final int? dinasId;
 
   // Divisi Controller
   final TextEditingController idDivisiController = TextEditingController();
@@ -91,10 +95,10 @@ class AddDinasPage extends StatefulWidget {
   final TextEditingController kendDinasController = TextEditingController();
 
   @override
-  State<AddDinasPage> createState() => _AddDinasPageState();
+  State<EditDinasPage> createState() => _EditDinasPageState();
 }
 
-class _AddDinasPageState extends State<AddDinasPage> {
+class _EditDinasPageState extends State<EditDinasPage> {
   String? selectedDivisiValue;
   String? selectedDepartemenValue;
   String? selectedPosisiValue;
@@ -199,7 +203,8 @@ class _AddDinasPageState extends State<AddDinasPage> {
             onPressed: () {
               if (currentStep == 2) {
                 context.read<AddDinasBloc>().add(
-                      AddDinasSubmited(
+                      EditDinasSubmited(
+                        id: widget.dinasId ?? 1,
                         divisi: int.parse(widget.idDivisiController.text),
                         departemen:
                             int.parse(widget.idDepartemenController.text),
@@ -236,7 +241,6 @@ class _AddDinasPageState extends State<AddDinasPage> {
 
   @override
   Widget build(BuildContext context) {
-
     void _showDivisi(BuildContext context) async {
       final selectedDivisiValue = await showSearch<DataDivisi?>(
         context: context,
@@ -439,7 +443,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
               ),
             );
             Navigator.of(context).pop();
-            widget.reloadDataCallback();
+            // widget.reloadDataCallback();
           } else if (state is AddDinasFailed) {
             LoadingDialog.dismissDialog(context);
             await showDialog(

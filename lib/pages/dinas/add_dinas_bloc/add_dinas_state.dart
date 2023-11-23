@@ -180,3 +180,21 @@ class SelectPicSuccessInBackground extends AddDinasState {
   @override
   List<Object> get props => [dataPic, currentPage, hasNextPage];
 }
+
+class EditDinasSuccess extends AddDinasState {
+  String message;
+
+  EditDinasSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+class EditDinasFailed extends AddDinasState {
+  String message;
+
+  EditDinasFailed({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
