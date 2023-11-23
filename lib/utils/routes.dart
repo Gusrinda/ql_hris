@@ -9,6 +9,7 @@ import 'package:sj_presensi_mobile/pages/cuti/edit_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas_bloc/add_dinas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/dinas/detail_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/add_check_in_out_bloc.dart';
@@ -90,7 +91,7 @@ class RouteGenerator {
           return DetailHistoryAbsensiPage(data: data.data);
         });
       case DetailLemburPage.routeName:
-        final data = settings.arguments as DetailCutiPage;
+        final data = settings.arguments as DetailLemburPage;
         return MaterialPageRoute(builder: (context) {
           return DetailLemburPage(data: data.data);
         });
@@ -143,6 +144,11 @@ class RouteGenerator {
               },
             ),
           );
+        });
+      case DetailDinasPage.routeName:
+        final data = settings.arguments as DetailDinasPage;
+        return MaterialPageRoute(builder: (context) {
+          return DetailDinasPage(data: data.data);
         });
       case AddCheckInOutPage.routeName:
         return MaterialPageRoute(builder: (context) {

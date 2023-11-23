@@ -70,8 +70,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
           context: context,
           delegate: TipeCutiSearchDelegate(
             tipeCutiData: selectTipeCuti,
-            filteredData:
-                selectTipeCuti,
+            filteredData: selectTipeCuti,
           ),
         );
 
@@ -101,8 +100,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
           context: context,
           delegate: AlasanCutiSearchDelegate(
             alasanCutiData: selectAlasanCuti,
-            filteredData:
-                selectAlasanCuti, 
+            filteredData: selectAlasanCuti,
           ),
         );
 
@@ -165,7 +163,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
       },
       child: Scaffold(
         appBar: appBarCustomV1(
-          title: "Pengajuan Cuti",
+          title: "Revisi Pengajuan Cuti",
           padLeft: 8,
         ),
         body: SingleChildScrollView(
@@ -325,7 +323,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                         height: 20,
                       ),
                       TextButtonCustomV1(
-                        text: "Kirim",
+                        text: "Kirim Revisi",
                         backgroundColor: MyColorsConst.primaryColor,
                         textColor: MyColorsConst.whiteColor,
                         onPressed: state is AddCutiLoading
