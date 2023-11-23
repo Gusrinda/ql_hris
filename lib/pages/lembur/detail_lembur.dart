@@ -83,7 +83,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                             Expanded(
                               flex: 3,
                               child: Text(
-                                "${widget.nomorFromList}",
+                                "${widget.nomorFromList ?? '-'}",
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 14,
@@ -102,7 +102,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                       .withOpacity(0.1),
                                 ),
                                 child: Text(
-                                  '${widget.tipeLemburValue}',
+                                  '${widget.tipeLemburValue ?? '-'}',
                                   style: const TextStyle(
                                     color: MyColorsConst.primaryColor,
                                     fontSize: 9,
@@ -125,7 +125,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                             ),
                             const SizedBox(width: 5),
                             Text(
-                              '${formatDate(widget.tanggal)}',
+                              '${formatDate(widget.tanggal ?? '-')}',
                               style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 10,
@@ -146,7 +146,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                             ),
                             SizedBox(width: 5),
                             Text(
-                              "${extractTime(widget.jamMulai)} - ${extractTime(widget.jamSelesai)}",
+                              "${extractTime(widget.jamMulai ?? '-')} - ${extractTime(widget.jamSelesai ?? '-')}",
                               style: const TextStyle(
                                 color: Colors.grey,
                                 fontSize: 10,
@@ -171,7 +171,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                           ),
                         ),
                         Text(
-                          '${widget.alasanValue}',
+                          '${widget.alasanValue ?? '-'}',
                           style: const TextStyle(
                             fontSize: 10,
                             color: Colors.black,

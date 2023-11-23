@@ -11,14 +11,11 @@ import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dar
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 final Map<String, dynamic> stateDict = {
-  "ATTEND NO CHECKOUT": {
+  "WORKING": {
     "name": "Hadir Tidak Check Out",
   },
   "ATTEND": {
     "name": "Hadir",
-  },
-  "WORKING": {
-    "name": "Bekerja",
   },
   "NOT ATTEND": {
     "name": "Tidak Hadir",

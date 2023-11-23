@@ -7,14 +7,14 @@ final Map<String, dynamic> stateDict = {
   "IN APPROVAL": {
     "name": "Menunggu Disetujui",
   },
-  "DRAFT": {
-    "name": "Menunggu Disetujui",
-  },
-  "Aktif": {
+  "APPROVED": {
     "name": "Disetujui",
   },
   "REJECTED": {
     "name": "Ditolak",
+  },
+  "REVISED": {
+    "name": "Revisi",
   },
 };
 
@@ -60,13 +60,13 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
     if (stateDict.containsKey(status)) {
       switch (status) {
         case "IN APPROVAL":
-          return Colors.blue;
-        case "DRAFT":
-          return Colors.blue;
+          return const Color(0xFF0068D4);
+        case "REVISED":
+          return Colors.orange;
         case "REJECTED":
-          return Colors.red;
-        case "Aktif":
-          return Colors.green;
+          return const Color(0xFFED1B24);
+        case "APPROVED":
+          return const Color(0xFF0CA356);
         default:
           return Colors.grey; // warna default
       }
@@ -153,7 +153,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                             const SizedBox(
                                 width: 5), // Atur jarak sesuai kebutuhan
                             Text(
-                              '${formatDate(widget.dateFrom ?? '-' )} - ${formatDate(widget.dateTo ?? '-')}',
+                              '${formatDate(widget.dateFrom ?? '-')} - ${formatDate(widget.dateTo ?? '-')}',
                               style: const TextStyle(
                                   color: Colors.grey,
                                   fontSize: 10,

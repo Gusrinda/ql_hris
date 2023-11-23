@@ -24,8 +24,8 @@ final Map<String, dynamic> stateDict = {
   "REJECTED": {
     "name": "Ditolak",
   },
-  "DRAFT": {
-    "name": "Menunggu Disetujui",
+  "REVISED": {
+    "name": "Revisi",
   },
 };
 
@@ -51,8 +51,8 @@ Color getColorFromStatus(String status) {
     switch (status) {
       case "IN APPROVAL":
         return const Color(0xFF0068D4);
-      case "DRAFT":
-        return const Color(0xFF0068D4);
+      case "REVISED":
+        return Colors.orange;
       case "REJECTED":
         return const Color(0xFFED1B24);
       case "APPROVED":
