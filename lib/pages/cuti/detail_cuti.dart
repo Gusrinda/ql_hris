@@ -37,7 +37,10 @@ class DetailCutiPage extends StatefulWidget {
     this.tipeCutiValue,
     this.nomorFromNotif,
     this.nomorFromList,
-    this.cutiId, required this.reloadDataCallback,
+    this.cutiId,
+    this.alasanID,
+    this.tipeCutiID,
+    required this.reloadDataCallback,
   });
   final dynamic? data;
   final String? dateFrom;
@@ -49,6 +52,8 @@ class DetailCutiPage extends StatefulWidget {
   final String? nomorFromNotif;
   final String? nomorFromList;
   final int? cutiId;
+  final int? alasanID;
+  final int? tipeCutiID;
   final VoidCallback reloadDataCallback;
 
   @override
@@ -56,7 +61,6 @@ class DetailCutiPage extends StatefulWidget {
 }
 
 class _DetailCutiPageState extends State<DetailCutiPage> {
-
   String mapStatusToString(String status) {
     if (widget.status != null && stateDict.containsKey(widget.status)) {
       return stateDict[widget.status]['name'];
@@ -241,9 +245,11 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                                 dateFrom: widget.dateFrom,
                                 dateTo: widget.dateTo,
                                 alasanValue: widget.alasanValue,
+                                alasanID: widget.alasanID,
                                 status: widget.status,
                                 keterangan: widget.keterangan,
                                 tipeCutiValue: widget.tipeCutiValue,
+                                tipeCutiID: widget.tipeCutiID,
                                 reloadDataCallback: widget.reloadDataCallback,
                               ),
                             ),

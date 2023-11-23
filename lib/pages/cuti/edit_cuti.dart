@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -11,7 +13,6 @@ import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/cuti_selector.dart';
-import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/getDataCuti/get_alasan_cuti_model.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/getDataCuti/get_tipe_cuti_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -27,6 +28,8 @@ class EditCutiPage extends StatefulWidget {
     this.keterangan,
     this.tipeCutiValue,
     this.dateFrom,
+    this.alasanID,
+    this.tipeCutiID,
     required this.reloadDataCallback,
   });
   final int? cutiId;
@@ -36,6 +39,8 @@ class EditCutiPage extends StatefulWidget {
   final String? keterangan;
   final String? tipeCutiValue;
   final String? dateFrom;
+  final int? alasanID;
+  final int? tipeCutiID;
   final VoidCallback reloadDataCallback;
 
   final TextEditingController idAlasanController = TextEditingController();
@@ -67,26 +72,32 @@ class _EditCutiPageState extends State<EditCutiPage> {
     super.initState();
 
     widget.valueAlasanController.text = widget.alasanValue ?? '';
-    widget.idAlasanController.text = '';
+    widget.idAlasanController.text = widget.alasanID.toString();
 
     widget.valueTipeCutiController.text = widget.tipeCutiValue ?? '';
-    widget.idTipeCutiController.text = '';
+    widget.idTipeCutiController.text = widget.tipeCutiID.toString();
 
     widget.keteranganController.text = widget.keterangan ?? '';
     widget.dateFromController.text = widget.dateFrom ?? '';
     widget.dateToController.text = widget.dateTo ?? '';
 
-    selectedDateFrom = parseDate(widget.dateFrom);
-    selectedDateTo = parseDate(widget.dateTo);
+    selectedDateFrom = parseDateString(widget.dateFrom);
+    selectedDateTo = parseDateString(widget.dateTo);
   }
 
-  DateTime? parseDate(String? date) {
+  DateTime? parseDateString(String? date) {
     try {
-      return date != null ? DateTime.parse(date).toLocal() : null;
+      if (date != null) {
+        final List<String> dateParts = date.split('/');
+        final day = int.parse(dateParts[0]);
+        final month = int.parse(dateParts[1]);
+        final year = int.parse(dateParts[2]);
+        return DateTime(year, month, day);
+      }
     } catch (e) {
-      print("Error parsing date: $e");
-      return null;
+      print("Error parsing date string: $e");
     }
+    return null;
   }
 
   @override

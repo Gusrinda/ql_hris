@@ -227,6 +227,9 @@ class FormCatatanCuti extends StatelessWidget {
                     border: Border.all(color: Color(0xFFDDDDDD)),
                   ),
                   child: TextFormField(
+                    style: TextStyle(
+                        fontSize: 13, color: MyColorsConst.darkColor
+                      ),
                     maxLines: 5,
                     readOnly: false,
                     decoration: InputDecoration(
