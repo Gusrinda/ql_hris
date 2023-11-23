@@ -8,9 +8,8 @@ import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/add_cuti.dart';
-import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
-import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/list_cuti_model.dart';
@@ -20,7 +19,7 @@ final Map<String, dynamic> stateDict = {
   "IN APPROVAL": {
     "name": "Menunggu Disetujui",
   },
-  "Aktif": {
+  "APPROVED": {
     "name": "Disetujui",
   },
   "REJECTED": {
@@ -56,7 +55,7 @@ Color getColorFromStatus(String status) {
         return const Color(0xFF0068D4);
       case "REJECTED":
         return const Color(0xFFED1B24);
-      case "Aktif":
+      case "APPROVED":
         return const Color(0xFF0CA356);
       default:
         return Colors.grey; // warna default

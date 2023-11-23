@@ -195,7 +195,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                   ),
                                 ),
                                 Text(
-                                  '${widget.noDoc}',
+                                  '${widget.noDoc ?? '-'}',
                                   style: const TextStyle(
                                     fontSize: 10,
                                     color: Colors.black,
