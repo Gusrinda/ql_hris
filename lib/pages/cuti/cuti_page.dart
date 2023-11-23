@@ -312,7 +312,7 @@ class _CutiPageState extends State<CutiPage> {
                                       ),
                                     ),
                                   ),
-                                  ListViewByDate(dataList: dataList),
+                                  ListViewByDate(dataList: dataList, reloadDataCallback: loadData,),
                                 ],
                               );
                             },
@@ -355,9 +355,10 @@ class _CutiPageState extends State<CutiPage> {
 }
 
 class ListViewByDate extends StatelessWidget {
-  const ListViewByDate({Key? key, required this.dataList}) : super(key: key);
+  const ListViewByDate({Key? key, required this.dataList, required this.reloadDataCallback}) : super(key: key);
 
   final List<Datum> dataList;
+  final VoidCallback reloadDataCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -373,7 +374,7 @@ class ListViewByDate extends StatelessWidget {
         return ListViewCuti(
           data: data,
           currentStatus: currentStatus,
-          currentColor: currentColor,
+          currentColor: currentColor, reloadDataCallback: reloadDataCallback,
         );
       },
     );
@@ -385,12 +386,13 @@ class ListViewCuti extends StatelessWidget {
     Key? key,
     required this.data,
     required this.currentStatus,
-    required this.currentColor,
+    required this.currentColor, required this.reloadDataCallback,
   }) : super(key: key);
 
   final Datum data;
   final String currentStatus;
   final Color currentColor;
+  final VoidCallback reloadDataCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -411,6 +413,7 @@ class ListViewCuti extends StatelessWidget {
                 tipeCutiValue: data.tipeCutiValue,
                 nomorFromList: data.nomor,
                 cutiId: data.id,
+                reloadDataCallback: reloadDataCallback,
               ),
             ),
           );

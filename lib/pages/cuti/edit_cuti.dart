@@ -27,6 +27,7 @@ class EditCutiPage extends StatefulWidget {
     this.keterangan,
     this.tipeCutiValue,
     this.dateFrom,
+    required this.reloadDataCallback,
   });
   final int? cutiId;
   final String? dateTo;
@@ -35,6 +36,7 @@ class EditCutiPage extends StatefulWidget {
   final String? keterangan;
   final String? tipeCutiValue;
   final String? dateFrom;
+  final VoidCallback reloadDataCallback;
 
   final TextEditingController idAlasanController = TextEditingController();
   final TextEditingController valueAlasanController = TextEditingController();
@@ -147,8 +149,8 @@ class _EditCutiPageState extends State<EditCutiPage> {
               message: state.message,
             ),
           );
-          Navigator.of(context).pop();
-          // widget.reloadDataCallback();
+          Navigator.of(context).popUntil((route) => route.isFirst);
+          widget.reloadDataCallback();
         } else if (state is AddCutiFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(

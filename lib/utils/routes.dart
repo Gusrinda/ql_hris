@@ -98,6 +98,7 @@ class RouteGenerator {
         final data = settings.arguments as DetailCutiPage;
         return MaterialPageRoute(builder: (context) {
           return DetailCutiPage(
+            reloadDataCallback: () {},
             data: data.data,
           );
         });
@@ -120,7 +121,14 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
             create: (context) => AddCutiBloc(),
-            child: EditCutiPage(cutiId: cutiId),
+            child: EditCutiPage(
+              cutiId: cutiId,
+              reloadDataCallback: () {
+                context
+                    .read<ListCutiBloc>()
+                    .add(GetListCuti(date: DateTime.now()));
+              },
+            ),
           );
         });
       case AddDinasPage.routeName:

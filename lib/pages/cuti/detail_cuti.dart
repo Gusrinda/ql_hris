@@ -5,6 +5,7 @@ import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/edit_cuti.dart';
+import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 final Map<String, dynamic> stateDict = {
@@ -36,7 +37,7 @@ class DetailCutiPage extends StatefulWidget {
     this.tipeCutiValue,
     this.nomorFromNotif,
     this.nomorFromList,
-    this.cutiId,
+    this.cutiId, required this.reloadDataCallback,
   });
   final dynamic? data;
   final String? dateFrom;
@@ -48,15 +49,13 @@ class DetailCutiPage extends StatefulWidget {
   final String? nomorFromNotif;
   final String? nomorFromList;
   final int? cutiId;
+  final VoidCallback reloadDataCallback;
 
   @override
   State<DetailCutiPage> createState() => _DetailCutiPageState();
 }
 
 class _DetailCutiPageState extends State<DetailCutiPage> {
-  //  void loadData() {
-  //   context.read<AddCutiBloc>().add(GetCuti(date: DateTime.now()));
-  // }
 
   String mapStatusToString(String status) {
     if (widget.status != null && stateDict.containsKey(widget.status)) {
@@ -244,6 +243,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                                 status: widget.status,
                                 keterangan: widget.keterangan,
                                 tipeCutiValue: widget.tipeCutiValue,
+                                reloadDataCallback: widget.reloadDataCallback,
                               ),
                             ),
                           ),

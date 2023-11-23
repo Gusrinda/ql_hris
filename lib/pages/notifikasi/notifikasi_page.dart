@@ -182,7 +182,7 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
         }
       },
       child: Scaffold(
-        appBar: appBarCustomV1( 
+        appBar: appBarCustomV1(
           title: "Notifikasi",
           // centerTitle: true,
           padLeft: 8,
@@ -317,6 +317,7 @@ class CardListNotifikasi extends StatelessWidget {
               keterangan: matchingDataCuti?.keterangan,
               tipeCutiValue: matchingDataCuti?.tipeCutiValue,
               nomorFromList: matchingDataCuti?.nomor,
+              reloadDataCallback: () {},
             ),
           ),
         );
