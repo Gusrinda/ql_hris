@@ -8,7 +8,7 @@ part 'list_dinas_model.g.dart';
 class ListDinasModel with _$ListDinasModel {
     const factory ListDinasModel({
         @JsonKey(name: "data")
-        List<Datum>? data,
+        List<DataDinas>? data,
         @JsonKey(name: "total")
         int? total,
         @JsonKey(name: "current_page")
@@ -35,8 +35,8 @@ class ListDinasModel with _$ListDinasModel {
 }
 
 @freezed
-class Datum with _$Datum {
-    const factory Datum({
+class DataDinas with _$DataDinas {
+    const factory DataDinas({
         @JsonKey(name: "meta_read")
         bool? metaRead,
         @JsonKey(name: "meta_delete")
@@ -619,7 +619,7 @@ class Datum with _$Datum {
         dynamic lastEditorTelp,
         @JsonKey(name: "last_editor.m_kary_id")
         dynamic lastEditorMKaryId,
-    }) = _Datum;
+    }) = _DataDinas;
 
-    factory Datum.fromJson(Map<String, dynamic> json) => _$DatumFromJson(json);
+    factory DataDinas.fromJson(Map<String, dynamic> json) => _$DataDinasFromJson(json);
 }

@@ -35,10 +35,54 @@ class EditDinasPage extends StatefulWidget {
   EditDinasPage({
     super.key,
     required this.dinasId,
+    this.jenisSpd,
+    this.jenisSpdId,
+    this.zonaAwal,
+    this.zonaAwalId,
+    this.zonaTujuan,
+    this.zonaTujuanId,
+    this.lokasiTujuan,
+    this.lokasiTujuanId,
+    this.templateSpd,
+    this.templateSpdId,
+    this.tanggalAwal,
+    this.tanggalAkhir,
+    this.posisi,
+    this.posisiId,
+    this.divisiId,
+    this.divisiValue,
+    this.deptId,
+    this.deptValue,
+    this.direktoratId,
+    this.direktoratValue,
+    this.tanggal,
+    required this.reloadDataCallback,
     // required this.reloadDataCallback,
   });
   // final VoidCallback reloadDataCallback;
   final int? dinasId;
+  final String? jenisSpd;
+  final int? jenisSpdId;
+  final String? zonaAwal;
+  final int? zonaAwalId;
+  final String? zonaTujuan;
+  final int? zonaTujuanId;
+  final String? lokasiTujuan;
+  final int? lokasiTujuanId;
+  final String? templateSpd;
+  final int? templateSpdId;
+  final String? tanggalAwal;
+  final String? tanggalAkhir;
+  final String? posisi;
+  final int? posisiId;
+  final int? divisiId;
+  final String? divisiValue;
+  final int? deptId;
+  final String? deptValue;
+  final int? direktoratId;
+  final String? direktoratValue;
+  final String? tanggal;
+  final VoidCallback reloadDataCallback;
 
   // Divisi Controller
   final TextEditingController idDivisiController = TextEditingController();
@@ -113,7 +157,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
   DateTime? selectedTanggal;
   DateTime? selectedTanggalAwal;
   DateTime? selectedTanggalAkhir;
-  bool _kendDinas = false;
+  int? _kendDinas;
 
   int currentStep = 0;
   late GlobalKey<FormState> _formKeyStep1;
@@ -126,10 +170,61 @@ class _EditDinasPageState extends State<EditDinasPage> {
     _formKeyStep2 = GlobalKey<FormState>();
     _formKeyStep3 = GlobalKey<FormState>();
 
-    // context.read<AddDinasBloc>().add(OnSelectPic(page: 1));
+    widget.idDivisiController.text = widget.divisiId.toString();
+    widget.valueDivisiController.text = widget.divisiValue.toString();
+
+    widget.idDepartemenController.text = widget.deptId.toString();
+    widget.valueDepartemenController.text = widget.deptValue ?? '';
+
+    widget.idPosisiController.text = widget.posisiId.toString();
+    widget.valuePosisiController.text = widget.posisi ?? '';
+
+    widget.idTemplateSpdController.text = widget.templateSpdId.toString();
+    widget.valueTemplateSpdController.text = widget.templateSpd ?? '';
+
+    widget.idDirektoratController.text = widget.direktoratId.toString();
+    widget.valueDirektoratController.text = widget.direktoratValue ?? '';
+
+    widget.idJenisSpdController.text = widget.jenisSpdId.toString();
+    widget.valueJenisSpdController.text = widget.jenisSpd ?? '';
+
+    widget.idZonaAsalController.text = widget.zonaAwalId.toString();
+    widget.valueZonaAsalController.text = widget.zonaTujuan ?? '';
+
+    widget.idZonaTujuanController.text = widget.zonaTujuanId.toString();
+    widget.valueZonaTujuanController.text = widget.zonaTujuan ?? '';
+
+    widget.idLokasiTujuanController.text = widget.lokasiTujuanId.toString();
+    widget.valueLokasiTujuanController.text = widget.lokasiTujuan ?? '';
+
+    // widget.idPicController.text = widget.dateTo ?? '';
+    // widget.valuePicController.text = widget.dateFrom ?? '';
+
+    widget.tanggalController.text = widget.tanggal ?? '';
+    widget.tanggalAwalController.text = widget.tanggalAwal ?? '';
+    widget.tanggalAkhirController.text = widget.tanggalAkhir ?? '';
+
+    selectedTanggal = parseDateString(widget.tanggal);
+    selectedTanggalAwal = parseDateString(widget.tanggalAwal);
+    selectedTanggalAkhir = parseDateString(widget.tanggalAkhir);
   }
 
-  List<String> buttonTexts = ['Selanjutnya', 'Selanjutnya', 'Kirim'];
+  DateTime? parseDateString(String? date) {
+    try {
+      if (date != null) {
+        final List<String> dateParts = date.split('/');
+        final day = int.parse(dateParts[0]);
+        final month = int.parse(dateParts[1]);
+        final year = int.parse(dateParts[2]);
+        return DateTime(year, month, day);
+      }
+    } catch (e) {
+      print("Error parsing date string: $e");
+    }
+    return null;
+  }
+
+  List<String> buttonTexts = ['Selanjutnya', 'Selanjutnya', 'Kirim Revisi'];
   late AddDinasBloc addDinasBloc;
 
   continueStep() {
@@ -223,9 +318,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                         lokasiTujuan:
                             int.parse(widget.idLokasiTujuanController.text),
                         pic: int.parse(widget.idPicController.text),
-                        kendDinas:
-                            widget.kendDinasController.text.toLowerCase() ==
-                                'true',
+                        kendDinas: int.parse(widget.kendDinasController.text),
                       ),
                     );
               } else {
@@ -442,8 +535,8 @@ class _EditDinasPageState extends State<EditDinasPage> {
                 message: state.message,
               ),
             );
-            Navigator.of(context).pop();
-            // widget.reloadDataCallback();
+            Navigator.of(context).popUntil((route) => route.isFirst);
+            widget.reloadDataCallback();
           } else if (state is AddDinasFailed) {
             LoadingDialog.dismissDialog(context);
             await showDialog(
@@ -474,7 +567,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
         },
         child: Scaffold(
           appBar: appBarCustomV1(
-            title: "Perjalanan Dinas",
+            title: "Revisi Perjalanan Dinas",
             padLeft: 8,
           ),
           body: BlocBuilder<AddDinasBloc, AddDinasState>(
@@ -852,9 +945,9 @@ class _EditDinasPageState extends State<EditDinasPage> {
                             children: <Widget>[
                               Expanded(
                                 child: Radio(
-                                  value: true,
+                                  value: 1,
                                   groupValue: _kendDinas,
-                                  onChanged: (bool? value) {
+                                  onChanged: (int? value) {
                                     setState(() {
                                       _kendDinas = value!;
                                       widget.kendDinasController.text =
@@ -874,9 +967,9 @@ class _EditDinasPageState extends State<EditDinasPage> {
                               ),
                               Expanded(
                                 child: Radio(
-                                  value: false,
+                                  value: 0,
                                   groupValue: _kendDinas,
-                                  onChanged: (bool? value) {
+                                  onChanged: (int? value) {
                                     setState(() {
                                       _kendDinas = value!;
                                       widget.kendDinasController.text =

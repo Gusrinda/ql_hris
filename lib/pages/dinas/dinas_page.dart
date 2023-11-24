@@ -83,8 +83,8 @@ String extractTime(String? timeString) {
   }
 }
 
-Map<String, List<Datum>> groupByDate(List<Datum> data) {
-  Map<String, List<Datum>> groupedData = {};
+Map<String, List<DataDinas>> groupByDate(List<DataDinas> data) {
+  Map<String, List<DataDinas>> groupedData = {};
   data.forEach((item) {
     String date = formatDate(item.createdAt);
     if (groupedData[date] == null) {
@@ -322,7 +322,7 @@ class _DinasPageState extends State<DinasPage> {
                                       ),
                                     ),
                                   ),
-                                  ListViewByDate(dataList: dataList)
+                                  ListViewByDate(dataList: dataList, reloadDataCallback: loadData,)
                                 ],
                               );
                             },
@@ -373,9 +373,10 @@ class _DinasPageState extends State<DinasPage> {
 class ListViewByDate extends StatelessWidget {
   const ListViewByDate({
     super.key,
-    required this.dataList,
+    required this.dataList, required this.reloadDataCallback,
   });
-  final List<Datum> dataList;
+  final List<DataDinas> dataList;
+  final VoidCallback reloadDataCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -392,6 +393,7 @@ class ListViewByDate extends StatelessWidget {
           data: data,
           currentStatus: currentStatus,
           currentColor: currentColor,
+          reloadDataCallback: reloadDataCallback,
         );
       }),
     );
@@ -403,37 +405,54 @@ class ListViewDinas extends StatelessWidget {
     super.key,
     required this.data,
     required this.currentStatus,
-    required this.currentColor,
+    required this.currentColor, required this.reloadDataCallback,
   });
-  final Datum data;
+  final DataDinas data;
   final String currentStatus;
   final Color currentColor;
+  final VoidCallback reloadDataCallback;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       subtitle: GestureDetector(
-        // onTap: () {
-        //   Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) => DetailDinasPage(
-        //         data: data,
-        //         dinasId: data.id,
-        //         status: data.status,
-        //         createdAt: data.createdAt,
-        //         jenisSpd: data.jenisSpdValue,
-        //         zonaAwal: data.mZonaAsalNama,
-        //         zonaTujuan: data.mZonaTujuanNama,
-        //         lokasiTujuan: data.mLokasiTujuanNama,
-        //         templateSpd: data.mSpdKode,
-        //         tanggalAwal: data.tglAcaraAwal,
-        //         tanggalAkhir: data.tglAcaraAkhir,
-        //       ),
-        //     ),
-        //   );
-        // },
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DetailDinasPage(
+                data: data,
+                dinasId: data.id,
+                status: data.status,
+                createdAt: data.createdAt,
+                jenisSpd: data.jenisSpdValue,
+                jenisSpdId: data.jenisSpdId,
+                zonaAwal: data.mZonaAsalNama,
+                zonaAwalId: data.mZonaAsalId,
+                zonaTujuan: data.mZonaTujuanNama,
+                zonaTujuanId: data.mZonaTujuanId,
+                lokasiTujuan: data.mLokasiTujuanNama,
+                lokasiTujuanId: data.mLokasiTujuanId,
+                templateSpd: data.mSpdKode,
+                templateSpdId: data.mSpdId,
+                tanggalAwal: data.tglAcaraAwal,
+                tanggalAkhir: data.tglAcaraAkhir,
+                posisiId: data.mPosisiId,
+                posisi: data.mPosisiDescKerja,
+                divisiId: data.mDivisiId,
+                divisiValue: data.mDivisiNama,
+                deptId: data.mDeptId,
+                deptValue: data.mDeptNama,
+                direktoratId: data.mDirId,
+                direktoratValue: data.mDirNama,
+                tanggal: data.tanggal,
+                reloadDataCallback: reloadDataCallback,
+                nomorFromList: data.nomor,
+              ),
+            ),
+          );
+        },
         child: Stack(
           children: [
             Container(

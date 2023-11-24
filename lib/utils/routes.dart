@@ -149,7 +149,7 @@ class RouteGenerator {
       case DetailDinasPage.routeName:
         final data = settings.arguments as DetailDinasPage;
         return MaterialPageRoute(builder: (context) {
-          return DetailDinasPage(data: data.data);
+          return DetailDinasPage(data: data.data, reloadDataCallback: () {},);
         });
       case EditDinasPage.routeName:
         final arguments = settings.arguments as Map<String, dynamic>;
@@ -159,11 +159,11 @@ class RouteGenerator {
             create: (context) => AddCutiBloc(),
             child: EditDinasPage(
               dinasId: dinasId,
-              // reloadDataCallback: () {
-              //   context
-              //       .read<ListCutiBloc>()
-              //       .add(GetListCuti(date: DateTime.now()));
-              // },
+               reloadDataCallback: () {
+                context
+                    .read<ListDinasBloc>()
+                    .add(GetListDinas(date: DateTime.now()));
+              },
             ),
           );
         });

@@ -32,9 +32,11 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 
 class AddDinasPage extends StatefulWidget {
   static const routeName = '/AddDinasPage';
-  AddDinasPage({super.key, required this.reloadDataCallback, });
+  AddDinasPage({
+    super.key,
+    required this.reloadDataCallback,
+  });
   final VoidCallback reloadDataCallback;
-
 
   // Divisi Controller
   final TextEditingController idDivisiController = TextEditingController();
@@ -109,7 +111,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
   DateTime? selectedTanggal;
   DateTime? selectedTanggalAwal;
   DateTime? selectedTanggalAkhir;
-  bool _kendDinas = false;
+  int? _kendDinas;
 
   int currentStep = 0;
   late GlobalKey<FormState> _formKeyStep1;
@@ -218,9 +220,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
                         lokasiTujuan:
                             int.parse(widget.idLokasiTujuanController.text),
                         pic: int.parse(widget.idPicController.text),
-                        kendDinas:
-                            widget.kendDinasController.text.toLowerCase() ==
-                                'true',
+                        kendDinas: int.parse(widget.kendDinasController.text),
                       ),
                     );
               } else {
@@ -236,7 +236,6 @@ class _AddDinasPageState extends State<AddDinasPage> {
 
   @override
   Widget build(BuildContext context) {
-
     void _showDivisi(BuildContext context) async {
       final selectedDivisiValue = await showSearch<DataDivisi?>(
         context: context,
@@ -848,9 +847,9 @@ class _AddDinasPageState extends State<AddDinasPage> {
                             children: <Widget>[
                               Expanded(
                                 child: Radio(
-                                  value: true,
+                                  value: 1,
                                   groupValue: _kendDinas,
-                                  onChanged: (bool? value) {
+                                  onChanged: (int? value) {
                                     setState(() {
                                       _kendDinas = value!;
                                       widget.kendDinasController.text =
@@ -870,9 +869,9 @@ class _AddDinasPageState extends State<AddDinasPage> {
                               ),
                               Expanded(
                                 child: Radio(
-                                  value: false,
+                                  value: 0,
                                   groupValue: _kendDinas,
-                                  onChanged: (bool? value) {
+                                  onChanged: (int? value) {
                                     setState(() {
                                       _kendDinas = value!;
                                       widget.kendDinasController.text =

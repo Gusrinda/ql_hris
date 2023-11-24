@@ -21,7 +21,7 @@ class AddDinasSubmited extends AddDinasEvent {
   int zonaTujuan;
   int lokasiTujuan;
   int pic;
-  bool kendDinas;
+  int kendDinas;
 
   AddDinasSubmited({
     required this.divisi,
@@ -178,7 +178,7 @@ class EditDinasSubmited extends AddDinasEvent {
   int zonaTujuan;
   int lokasiTujuan;
   int pic;
-  bool kendDinas;
+  int kendDinas;
 
   EditDinasSubmited({
     required this.id,

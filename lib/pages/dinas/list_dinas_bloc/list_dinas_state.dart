@@ -12,7 +12,7 @@ class ListDinasInitial extends ListDinasState {}
 class ListDinasLoading extends ListDinasState {}
 
 class ListDinasSuccessInBackground extends ListDinasState {
-  List<Datum> dataDinas;
+  List<DataDinas> dataDinas;
   String username;
 
   ListDinasSuccessInBackground({

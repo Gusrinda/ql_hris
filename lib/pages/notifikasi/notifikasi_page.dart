@@ -6,12 +6,14 @@ import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
+import 'package:sj_presensi_mobile/pages/dinas/detail_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/lembur/detail_lembur.dart';
 import 'package:sj_presensi_mobile/pages/lembur/lembur_page.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/list_cuti_model.dart';
+import 'package:sj_presensi_mobile/services/model/dinas/list_dinas_model.dart';
 import 'package:sj_presensi_mobile/services/model/lembur/lembur_model.dart';
 import 'package:sj_presensi_mobile/services/model/notifikasi_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -192,6 +194,7 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
             var listNotifikasi = context.read<NotifikasiBloc>().listNotifikasi;
             var listCuti = context.read<NotifikasiBloc>().listcuti;
             var listLembur = context.read<NotifikasiBloc>().listlembur;
+            var listDinas = context.read<NotifikasiBloc>().listdinas;
             return Stack(
               children: [
                 if (listNotifikasi.isNotEmpty)
@@ -205,6 +208,7 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
                         var data = listNotifikasi;
                         var dataCuti = listCuti;
                         var dataLembur = listLembur;
+                        var dataDinas = listDinas;
                         if (data[index].trxName != null &&
                             data[index].actionType != null) {
                           getIconAndColor(
@@ -217,6 +221,7 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
                             data: data[index],
                             dataCuti: dataCuti,
                             dataLembur: dataLembur,
+                            dataDinas: dataDinas,
                           );
                         } else {
                           return SizedBox.shrink();
@@ -265,6 +270,7 @@ class CardListNotifikasi extends StatelessWidget {
     required this.data,
     required this.dataCuti,
     required this.dataLembur,
+    required this.dataDinas,
   }) : super(key: key);
 
   final String tipeNotifikasi;
@@ -274,6 +280,7 @@ class CardListNotifikasi extends StatelessWidget {
   final DataNotif data;
   final List<Datum> dataCuti;
   final List<DataLembur> dataLembur;
+  final List<DataDinas> dataDinas;
 
   String mapStatusToString(String status) {
     switch (status) {
@@ -325,20 +332,52 @@ class CardListNotifikasi extends StatelessWidget {
         print("No matching data found in the list.");
       }
     } else if (tipeNotifikasi == "Pengajuan Surat Perjalanan Dinas") {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => ListDinasBloc()
-              ..add(
-                GetListDinas(
-                  date: DateTime.now(),
-                ),
-              ),
-            child: DinasPage(),
+      DataDinas? matchDataDinas;
+
+      for (DataDinas dinas in dataDinas) {
+        if (dinas.nomor == data.trxNomor) {
+          matchDataDinas = dinas;
+          break;
+        }
+      }
+
+      if (matchDataDinas != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailDinasPage(
+              data: matchDataDinas,
+              status: matchDataDinas?.status,
+              createdAt: matchDataDinas?.createdAt,
+              jenisSpd: matchDataDinas?.jenisSpdValue,
+              jenisSpdId: matchDataDinas?.jenisSpdId,
+              zonaAwal: matchDataDinas?.mZonaAsalNama,
+              zonaAwalId: matchDataDinas?.mZonaAsalId,
+              zonaTujuan: matchDataDinas?.mZonaTujuanNama,
+              zonaTujuanId: matchDataDinas?.mZonaTujuanId,
+              lokasiTujuan: matchDataDinas?.mLokasiTujuanNama,
+              lokasiTujuanId: matchDataDinas?.mLokasiTujuanId,
+              templateSpd: matchDataDinas?.mSpdKode,
+              templateSpdId: matchDataDinas?.mSpdId,
+              tanggalAwal: matchDataDinas?.tglAcaraAwal,
+              tanggalAkhir: matchDataDinas?.tglAcaraAkhir,
+              posisiId: matchDataDinas?.mPosisiId,
+              posisi: matchDataDinas?.mPosisiDescKerja,
+              divisiId: matchDataDinas?.mDivisiId,
+              divisiValue: matchDataDinas?.mDivisiNama,
+              deptId: matchDataDinas?.mDeptId,
+              deptValue: matchDataDinas?.mDeptNama,
+              direktoratId: matchDataDinas?.mDirId,
+              direktoratValue: matchDataDinas?.mDirNama,
+              tanggal: matchDataDinas?.tanggal,
+              nomorFromList: matchDataDinas?.nomor,
+              reloadDataCallback: () {},
+            ),
           ),
-        ),
-      );
+        );
+      } else {
+        print("No matching data found in the list.");
+      }
     } else if (tipeNotifikasi == "Pengajuan Lembur" && data != null) {
       DataLembur? matchDataLembur;
 
@@ -369,12 +408,6 @@ class CardListNotifikasi extends StatelessWidget {
         );
       } else {
         print("No matching data found in the list.");
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DetailLemburPage(),
-          ),
-        );
       }
     }
   }

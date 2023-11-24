@@ -33,7 +33,7 @@ class DinasServices {
       int zonaTujuan,
       int lokasiTujuan,
       int pic,
-      bool kendDinas) async {
+      int kendDinas) async {
     print('Token: $token');
     print('ini divisi: $divisi');
     print('ini departemen: $departemen');
@@ -180,27 +180,41 @@ class DinasServices {
     String token,
     int dinasId,
     int divisi,
-      int departemen,
-      int posisi,
-      int templateSpd,
-      int direktorat,
-      tanggal,
-      tanggalAwal,
-      tanggalAkhir,
-      int jenisSpd,
-      int zonaAsal,
-      int zonaTujuan,
-      int lokasiTujuan,
-      int pic,
-      bool kendDinas,
+    int departemen,
+    int posisi,
+    int templateSpd,
+    int direktorat,
+    tanggal,
+    tanggalAwal,
+    tanggalAkhir,
+    int jenisSpd,
+    int zonaAsal,
+    int zonaTujuan,
+    int lokasiTujuan,
+    int pic,
+    int kendDinas,
   ) async {
+    print('ini divisi: $divisi');
+    print('ini departemen: $departemen');
+    print('ini posisi: $posisi');
+    print('ini template spd: $templateSpd');
+    print('ini direktorat: $direktorat');
+    print('ini tanggal: $tanggal');
+    print('ini tanggal awal: $tanggalAwal');
+    print('ini tanggal akhir: $tanggalAkhir');
+    print('ini jenis spd: $jenisSpd');
+    print('ini zona asal: $zonaAsal');
+    print('ini zona tujuan: $zonaTujuan');
+    print('ini lokasi tujuan: $lokasiTujuan');
+    print('ini pic: $pic');
+    print('ini kenddinas: $kendDinas');
     var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_spd/$dinasId");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.put,
       headers: GeneralServices.addToken2Headers(token),
       body: json.encode({
-         "m_divisi_id": divisi,
+        "m_divisi_id": divisi,
         "m_dept_id": departemen,
         "m_posisi_id": posisi,
         "m_spd_id": templateSpd,
@@ -217,5 +231,5 @@ class DinasServices {
         "is_kend_dinas": kendDinas,
       }),
     );
-}
+  }
 }

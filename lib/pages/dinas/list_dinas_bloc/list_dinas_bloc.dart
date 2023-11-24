@@ -11,7 +11,7 @@ part 'list_dinas_event.dart';
 part 'list_dinas_state.dart';
 
 class ListDinasBloc extends Bloc<ListDinasEvent, ListDinasState> {
-  List<Datum> listdinas = [];
+  List<DataDinas> listdinas = [];
   // ProfileModel? profileModel;
   ListDinasBloc() : super(ListDinasInitial()) {
     on<GetListDinas>((event, emit) async {

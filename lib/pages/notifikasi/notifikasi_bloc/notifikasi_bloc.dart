@@ -3,8 +3,10 @@ import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:sj_presensi_mobile/services/cuti_services.dart';
+import 'package:sj_presensi_mobile/services/dinas_services.dart';
 import 'package:sj_presensi_mobile/services/lembur_services.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/list_cuti_model.dart';
+import 'package:sj_presensi_mobile/services/model/dinas/list_dinas_model.dart';
 // import 'package:sj_presensi_mobile/services/model/lembur/detail_lembur_model.dart';
 import 'package:sj_presensi_mobile/services/model/lembur/lembur_model.dart';
 import 'package:sj_presensi_mobile/services/model/notifikasi_model.dart';
@@ -19,6 +21,7 @@ class NotifikasiBloc extends Bloc<NotifikasiEvent, NotifikasiState> {
   List<DataNotif> listNotifikasi = [];
   List<Datum> listcuti = [];
   List<DataLembur> listlembur = [];
+  List<DataDinas> listdinas = [];
   NotifikasiBloc() : super(ListNotifikasiInitial()) {
     on<GetListNotifikasi>((event, emit) async {
       emit(ListNotifikasiLoading());
@@ -32,9 +35,12 @@ class NotifikasiBloc extends Bloc<NotifikasiEvent, NotifikasiState> {
             await CutiServices.getListCuti(resToken.response["token"], date);
         var resLembur = await LemburServices.getListLembur(
             resToken.response["token"], date);
+        var resDinas =
+            await DinasServices.getListDinas(resToken.response["token"], date);
         if (res is ServicesSuccess &&
             resCuti is ServicesSuccess &&
-            resLembur is ServicesSuccess) {
+            resLembur is ServicesSuccess &&
+            resDinas is ServicesSuccess) {
           if (res.response is Map<String, dynamic>) {
             print(res.response);
             NotifikasiModel dataResponse =
@@ -51,11 +57,16 @@ class NotifikasiBloc extends Bloc<NotifikasiEvent, NotifikasiState> {
                 LemburModel.fromJson(resLembur.response);
             listlembur = dataResponseLembur.data ?? [];
 
+            ListDinasModel dataResponseDinas =
+                ListDinasModel.fromJson(resDinas.response);
+            listdinas = dataResponseDinas.data ?? [];
+
             emit(
               ListNotifikasiSuccessInBackground(
                 listNotifikasi: listNotifikasi,
                 listCuti: listcuti,
                 listlembur: listlembur,
+                listdinas: listdinas,
               ),
             );
           } else {
