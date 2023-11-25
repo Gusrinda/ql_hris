@@ -12,7 +12,7 @@ final Map<String, dynamic> stateDict = {
     "name": "Hadir",
   },
   "WORKING": {
-    "name": "Bekerja",
+    "name": "Hadir Belum Check-Out",
   },
   "NOT ATTEND": {
     "name": "Tidak Hadir",

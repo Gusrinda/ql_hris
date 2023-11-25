@@ -28,7 +28,7 @@ dependencies:
   geocoding: ^2.0.5
   geolocator: ^10.1.0
   image_picker: ^1.0.4
-  permission_handler: ^11.0.0
+  permission_handler: ^11.0.1
   month_picker_dialog: ^2.0.2
   google_fonts: ^5.1.0
   url_launcher: ^6.2.1

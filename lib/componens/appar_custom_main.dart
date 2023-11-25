@@ -12,11 +12,12 @@ AppBar appBarCustomMain({
       child: Text(
         title,
         style: const TextStyle(
-          
           color: Colors.black,
           fontSize: 12,
           fontWeight: FontWeight.bold,
         ),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
       ),
     ),
     // elevation: 1,

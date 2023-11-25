@@ -12,10 +12,10 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 
 final Map<String, dynamic> stateDict = {
   "ATTEND NO CHECKOU": {
-    "name": "Hadir Tidak Check Out",
+    "name": "Hadir Tidak Check-Out",
   },
   "WORKING": {
-    "name": "Bekerja",
+    "name": "Hadir Belum Check-Out",
   },
   "ATTEND": {
     "name": "Hadir",

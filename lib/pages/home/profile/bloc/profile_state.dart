@@ -44,12 +44,14 @@ class GetDataProfileSuccess extends ProfileState {
   String? imagePath;
   String? username;
   int? employeeId;
+  String? name;
   String? email;
   String? phoneNumber;
 
   GetDataProfileSuccess({
     required this.imagePath,
     required this.username,
+    required this.name,
     this.employeeId,
     required this.email,
     this.phoneNumber,
@@ -58,6 +60,7 @@ class GetDataProfileSuccess extends ProfileState {
   @override
   List<Object> get props => [
         imagePath ?? "",
+        name ?? "",
         username ?? "",
         employeeId ?? "",
         email ?? "",

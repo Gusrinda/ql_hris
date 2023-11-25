@@ -23,7 +23,7 @@ class ListLemburBloc extends Bloc<ListLemburEvent, ListLemburState> {
             resToken.response["token"], resToken.response["id"]);
         print(res);
         if (res is ServicesSuccess && resUser is ServicesSuccess) {
-          final username = resUser.response["data"]["username"] ?? 'Pegawai SJ';
+          final username = resUser.response["data"]["name"] ?? 'Pegawai SJ';
           debugPrint(res.response.toString());
           if (res.response is Map<String, dynamic>) {
             //Mengubah hasil response api ke model kelas

@@ -28,6 +28,9 @@ final Map<String, dynamic> stateDict = {
   "REVISED": {
     "name": "Revisi",
   },
+  "DRAFT": {
+    "name": "Draft",
+  },
 };
 
 class DinasPage extends StatefulWidget {
@@ -322,7 +325,10 @@ class _DinasPageState extends State<DinasPage> {
                                       ),
                                     ),
                                   ),
-                                  ListViewByDate(dataList: dataList, reloadDataCallback: loadData,)
+                                  ListViewByDate(
+                                    dataList: dataList,
+                                    reloadDataCallback: loadData,
+                                  )
                                 ],
                               );
                             },
@@ -373,7 +379,8 @@ class _DinasPageState extends State<DinasPage> {
 class ListViewByDate extends StatelessWidget {
   const ListViewByDate({
     super.key,
-    required this.dataList, required this.reloadDataCallback,
+    required this.dataList,
+    required this.reloadDataCallback,
   });
   final List<DataDinas> dataList;
   final VoidCallback reloadDataCallback;
@@ -405,7 +412,8 @@ class ListViewDinas extends StatelessWidget {
     super.key,
     required this.data,
     required this.currentStatus,
-    required this.currentColor, required this.reloadDataCallback,
+    required this.currentColor,
+    required this.reloadDataCallback,
   });
   final DataDinas data;
   final String currentStatus;

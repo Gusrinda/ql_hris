@@ -20,6 +20,9 @@ final Map<String, dynamic> stateDict = {
   "REVISED": {
     "name": "Revisi",
   },
+  "DRAFT": {
+    "name": "Draft",
+  },
 };
 
 class DetailDinasPage extends StatefulWidget {

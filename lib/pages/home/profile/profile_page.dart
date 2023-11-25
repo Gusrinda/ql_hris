@@ -46,7 +46,7 @@ class _ProfilePageState extends State<ProfilePage> {
             data = state;
           });
           // print('apa didalam ${data}');
-          idController.text = state.employeeId.toString() ?? "";
+          idController.text = state.username ?? "";
           emailController.text = state.email ?? "";
           phoneController.text = state.phoneNumber ?? "";
           LoadingDialog.dismissDialog(context);
@@ -94,7 +94,7 @@ class _ProfilePageState extends State<ProfilePage> {
       },
       child: Scaffold(
         appBar: appBarCustomMain(
-          title: "Selamat Datang, ${data?.username ?? "-"}!",
+          title: "Selamat Datang, ${data?.name ?? "-"}!",
           padLeft: 8,
           actions: [
             Container(
@@ -164,7 +164,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         const SizedBox(height: 25),
                         Text(
-                          data?.username ?? "-",
+                          data?.name ?? "-",
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,

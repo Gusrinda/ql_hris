@@ -21,7 +21,7 @@ class ListCutiBloc extends Bloc<ListCutiEvent, ListCutiState> {
         var resUser = await ProfileServices.getDataProfilel(
             resToken.response["token"], resToken.response["id"]);
         if (res is ServicesSuccess && resUser is ServicesSuccess) {
-          final username = resUser.response["data"]["username"] ?? 'Pegawai SJ';
+          final username = resUser.response["data"]["name"] ?? 'Pegawai SJ';
           debugPrint(res.response.toString());
           if (res.response is Map<String, dynamic>) {
             print(res.response);

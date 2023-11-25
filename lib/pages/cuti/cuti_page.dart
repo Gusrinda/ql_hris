@@ -28,6 +28,9 @@ final Map<String, dynamic> stateDict = {
   "REVISED": {
     "name": "Revisi",
   },
+  "DRAFT": {
+    "name": "Draft",
+  },
 };
 
 class CutiPage extends StatefulWidget {
@@ -323,7 +326,10 @@ class _CutiPageState extends State<CutiPage> {
                                       ),
                                     ),
                                   ),
-                                  ListViewByDate(dataList: dataList, reloadDataCallback: loadData,),
+                                  ListViewByDate(
+                                    dataList: dataList,
+                                    reloadDataCallback: loadData,
+                                  ),
                                 ],
                               );
                             },
@@ -366,7 +372,9 @@ class _CutiPageState extends State<CutiPage> {
 }
 
 class ListViewByDate extends StatelessWidget {
-  const ListViewByDate({Key? key, required this.dataList, required this.reloadDataCallback}) : super(key: key);
+  const ListViewByDate(
+      {Key? key, required this.dataList, required this.reloadDataCallback})
+      : super(key: key);
 
   final List<Datum> dataList;
   final VoidCallback reloadDataCallback;
@@ -385,7 +393,8 @@ class ListViewByDate extends StatelessWidget {
         return ListViewCuti(
           data: data,
           currentStatus: currentStatus,
-          currentColor: currentColor, reloadDataCallback: reloadDataCallback,
+          currentColor: currentColor,
+          reloadDataCallback: reloadDataCallback,
         );
       },
     );
@@ -397,7 +406,8 @@ class ListViewCuti extends StatelessWidget {
     Key? key,
     required this.data,
     required this.currentStatus,
-    required this.currentColor, required this.reloadDataCallback,
+    required this.currentColor,
+    required this.reloadDataCallback,
   }) : super(key: key);
 
   final Datum data;
@@ -423,7 +433,7 @@ class ListViewCuti extends StatelessWidget {
                 status: data.status,
                 keterangan: data.keterangan,
                 tipeCutiValue: data.tipeCutiValue,
-                tipeCutiID:data.tipeCutiId,
+                tipeCutiID: data.tipeCutiId,
                 nomorFromList: data.nomor,
                 cutiId: data.id,
                 reloadDataCallback: reloadDataCallback,

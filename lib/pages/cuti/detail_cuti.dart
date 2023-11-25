@@ -21,6 +21,9 @@ final Map<String, dynamic> stateDict = {
   "REVISED": {
     "name": "Revisi",
   },
+  "DRAFT": {
+    "name": "Draft",
+  },
 };
 
 class DetailCutiPage extends StatefulWidget {

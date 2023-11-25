@@ -24,7 +24,7 @@ class ListDinasBloc extends Bloc<ListDinasEvent, ListDinasState> {
             resToken.response["token"], resToken.response["id"]);
         print(res);
         if (res is ServicesSuccess && resUser is ServicesSuccess) {
-          final username = resUser.response["data"]["username"] ?? 'Pegawai SJ';
+          final username = resUser.response["data"]["name"] ?? 'Pegawai SJ';
           debugPrint(res.response.toString());
           if (res.response is Map<String, dynamic>) {
 

@@ -3,12 +3,14 @@ class ProfileModel {
   String? email;
   int? employeeId;
   String? username;
+  String? name;
   String? phoneNumber;
   String? password;
   ProfileModel({
     this.imagePath,
     this.email,
     this.employeeId,
+    this.name,
     this.username,
     this.phoneNumber,
     this.password,
@@ -18,6 +20,7 @@ class ProfileModel {
         imagePath: json["profil_image"],
         email: json["email"],
         employeeId: json["id"],
+        name: json["name"],
         username: json["username"],
         phoneNumber: json["telp"],
         password: json["password"],

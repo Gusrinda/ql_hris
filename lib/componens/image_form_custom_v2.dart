@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sj_presensi_mobile/sentry/my_sentry.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -28,17 +27,144 @@ class ImageFormCustomV2 extends StatefulWidget {
 class _ImageFormCustomV1State extends State<ImageFormCustomV2> {
   File? imageFile;
 
+  Future<XFile?> testCompressAndGetFile(File file, String targetPath) async {
+    var result = await FlutterImageCompress.compressAndGetFile(
+      file.absolute.path,
+      targetPath,
+      quality: 60,
+    );
+
+    return result;
+  }
+
+  _addStringComp(String currPath, String fileName) {
+    final ext = fileName.split('.')[1];
+    final subsIdx = currPath.indexOf(fileName.split('.')[1]) - 1;
+    var res = currPath.substring(0, subsIdx);
+    return "$res-compress.$ext";
+  }
+
+  Future _pickImage(ImageSource source) async {
+    try {
+      var status = await Permission.camera.request();
+      if (status.isGranted) {
+        final image = await ImagePicker().pickImage(
+          source: source,
+          preferredCameraDevice: CameraDevice.front,
+        );
+
+        if (image != null) {
+          final imageComp = await testCompressAndGetFile(
+            File(image.path),
+            _addStringComp(image.path, image.name),
+          );
+
+          setState(() {
+            imageFile = File(imageComp!.path);
+            widget.onImageSelected(imageFile?.path);
+          });
+
+          print("ImageFile: ${imageFile}");
+        } else {
+          setState(() {
+            // widget.onImageSelectedError("Tidak ada gambar yang diambil!");
+          });
+        }
+      } else {
+        setState(() {
+          widget.onImageSelectedError("Camera permission rejected!");
+        });
+      }
+    } catch (e, st) {
+      setState(() {
+        imageFile = null;
+        widget.onImageSelectedError(e.toString());
+      });
+      setState(() {});
+    }
+  }
+
+  Future _pickImageFromGallery() async {
+    print("Galerry Image Picker \nStep 1");
+    try {
+      print("Step 2");
+      final image = await ImagePicker().pickImage(
+        source: ImageSource.gallery,
+      );
+
+      if (image != null) {
+        print("Step 3");
+
+        // Check if the selected file has a valid extension
+        if (image.path.toLowerCase().endsWith('.jpg') ||
+            image.path.toLowerCase().endsWith('.jpeg')) {
+          final imageComp = await testCompressAndGetFile(
+            File(image.path),
+            _addStringComp(image.path, image.name),
+          );
+
+          setState(() {
+            imageFile = File(imageComp!.path);
+            widget.onImageSelected(imageFile?.path);
+          });
+
+          print("ImageFile: ${imageFile}");
+        } else {
+          setState(() {
+            widget.onImageSelectedError("Pilih gambar format JPG atau JPEG");
+          });
+        }
+      } else {
+        setState(() {
+          // widget.onImageSelectedError("Tidak ada gambar yang diambil!");
+        });
+      }
+    } catch (e) {
+      setState(() {
+        imageFile = null;
+        widget.onImageSelectedError(e.toString());
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return InkWell(
       splashColor: Colors.transparent,
-      onTap: () => _pickImage(ImageSource.camera),
-      onLongPress: () {
-        setState(() {
-          widget.onImageSelected(null);
-          imageFile = null;
-        });
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (BuildContext context) {
+            return Container(
+              height: 120.0,
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: Icon(Icons.camera),
+                    title: Text(
+                      'Ambil Foto dari Kamera',
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+                      _pickImage(ImageSource.camera);
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.image),
+                    title: Text('Pilih dari Galeri Foto',
+                        style: TextStyle(fontSize: 14)),
+                    onTap: () {
+                      Navigator.pop(context);
+                      _pickImageFromGallery();
+                    },
+                  ),
+                ],
+              ),
+            );
+          },
+        );
       },
       child: Container(
         width: size.width * 1 / 4 + 10,
@@ -146,59 +272,5 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV2> {
         ),
       ),
     );
-  }
-
-  Future<XFile?> testCompressAndGetFile(File file, String targetPath) async {
-    var result = await FlutterImageCompress.compressAndGetFile(
-      file.absolute.path,
-      targetPath,
-      quality: 60,
-    );
-
-    // print(file.lengthSync());
-    // print(result?.lengthSync());
-
-    return result;
-  }
-
-  _addStringComp(String currPath, String fileName) {
-    final ext = fileName.split('.')[1];
-    final subsIdx = currPath.indexOf(fileName.split('.')[1]) - 1;
-    var res = currPath.substring(0, subsIdx);
-    return "$res-compress.$ext";
-  }
-
-  Future _pickImage(ImageSource source) async {
-    try {
-      var status = await Permission.camera.request();
-      if (status.isGranted) {
-        final image = await ImagePicker().pickImage(
-            source: source, preferredCameraDevice: CameraDevice.front);
-        if (image != null) {
-          final imageComp = await testCompressAndGetFile(
-              File(image.path), _addStringComp(image.path, image.name));
-          setState(() {
-            imageFile = File(imageComp!.path);
-            widget.onImageSelected(imageFile?.path);
-          });
-          print("ImageFile: ${imageFile}");
-        } else {
-          setState(() {
-            widget.onImageSelectedError("Failed to take a picture!");
-          });
-        }
-      } else {
-        setState(() {
-          widget.onImageSelectedError("Camera permission rejected!");
-        });
-      }
-    } catch (e, st) {
-      setState(() {
-        imageFile = null;
-        widget.onImageSelectedError(e.toString());
-      });
-      setState(() {});
-      await MySentry.sendReport(e, st);
-    }
   }
 }
