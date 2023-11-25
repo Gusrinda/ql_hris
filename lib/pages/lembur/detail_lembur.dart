@@ -81,7 +81,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                         Row(
                           children: [
                             Expanded(
-                              flex: 3,
+                              flex: 7,
                               child: Text(
                                 "${widget.nomorFromList ?? '-'}",
                                 style: const TextStyle(
@@ -93,7 +93,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                             ),
                             const Spacer(),
                             Expanded(
-                              flex: 1,
+                              flex: 3,
                               child: Container(
                                 padding: EdgeInsets.all(5),
                                 decoration: BoxDecoration(

@@ -335,7 +335,7 @@ class CardListView extends StatelessWidget {
                             Row(
                               children: [
                                 Expanded(
-                                  flex: 3,
+                                  flex: 7,
                                   child: Text(
                                     "${data[index].nomor ?? 0}",
                                     style: const TextStyle(
@@ -347,7 +347,7 @@ class CardListView extends StatelessWidget {
                                 ),
                                 const Spacer(),
                                 Expanded(
-                                  flex: 1,
+                                  flex: 3,
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 6, vertical: 3),
