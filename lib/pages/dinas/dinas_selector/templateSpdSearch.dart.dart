@@ -53,11 +53,104 @@ class TemplateSpdSearchDelegate extends SearchDelegate<DataTemplateSpd?> {
                   return Column(
                     children: [
                       ListTile(
-                        title: Text(
-                          state.dataTemplateSpd[index].kode ?? '-',
-                          style: TextStyle(
-                            fontSize: 14,
-                          ),
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              state.dataTemplateSpd[index].kode ?? '-',
+                              style: TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: 'Direktorat: ',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: MyColorsConst.lightDarkColor,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text:
+                                        state.dataTemplateSpd[index].mDirNama ??
+                                            '-',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: 'Divisi: ',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: MyColorsConst.lightDarkColor,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: state.dataTemplateSpd[index]
+                                            .mDivisiNama ??
+                                        '-',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: 'Departemen: ',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: MyColorsConst.lightDarkColor,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: state
+                                            .dataTemplateSpd[index].mDeptNama ??
+                                        '-',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: 'Posisi: ',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: MyColorsConst.lightDarkColor,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: state.dataTemplateSpd[index]
+                                            .mPosisiDescKerja ??
+                                        '-',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                         onTap: () {
                           close(context, state.dataTemplateSpd[index]);

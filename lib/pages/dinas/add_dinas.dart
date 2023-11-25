@@ -302,6 +302,31 @@ class _AddDinasPageState extends State<AddDinasPage> {
         widget.idTemplateSpdController.text =
             selectedTemplateSpdValue.id?.toString() ?? '';
 
+        widget.valueDivisiController.text =
+            selectedTemplateSpdValue.mDivisiNama?.toString() ?? '';
+        widget.idDivisiController.text =
+            selectedTemplateSpdValue.mDivisiId?.toString() ?? '';
+
+        widget.valueDepartemenController.text =
+            selectedTemplateSpdValue.mDeptNama?.toString() ?? '';
+        widget.idDepartemenController.text =
+            selectedTemplateSpdValue.mDeptId?.toString() ?? '';
+
+        widget.valuePosisiController.text =
+            selectedTemplateSpdValue.mPosisiDescKerja?.toString() ?? '';
+        widget.idPosisiController.text =
+            selectedTemplateSpdValue.mPosisiId?.toString() ?? '';
+
+        widget.valueDirektoratController.text =
+            selectedTemplateSpdValue.mDirNama?.toString() ?? '';
+        widget.idDirektoratController.text =
+            selectedTemplateSpdValue.mDirId?.toString() ?? '';
+
+        // widget.valuePicController.text =
+        // selectedTemplateSpdValue.?.toString() ?? '';
+        //  widget.idPicController.text =
+        // selectedTemplateSpdValue.?.toString() ?? '';
+
         setState(() {
           this.selectedTemplateSpdValue = selectedTemplateSpdValue.kode;
         });
