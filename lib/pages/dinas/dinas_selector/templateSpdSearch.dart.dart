@@ -150,6 +150,27 @@ class TemplateSpdSearchDelegate extends SearchDelegate<DataTemplateSpd?> {
                                 ],
                               ),
                             ),
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: 'Deskripsi: ',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: MyColorsConst.lightDarkColor,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: state.dataTemplateSpd[index].desc ??
+                                        '-',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                         onTap: () {
