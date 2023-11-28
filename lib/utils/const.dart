@@ -8,9 +8,12 @@ class MyGeneralConst {
 
   static const CODE_PROCESS_SUCCESS = 200;
   static const CODE_BAD_REQUEST = 400;
-  static const CODE_NO_INTERNET_CONECCTION = 401;
   static const CODE_INVALID_FORMAT = 402;
   static const CODE_UNKWON_ERROR = 403;
+  static const CODE_ERROR_VALIDATION = 422;
+
+  //kick Auth When Error CODE
+  static const CODE_NO_INTERNET_CONNECTION = 401;
   static const CODE_INTERNAL_SERVER_ERROR = 500;
 }
 

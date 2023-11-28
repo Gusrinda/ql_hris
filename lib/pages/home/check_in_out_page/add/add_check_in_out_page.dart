@@ -262,18 +262,21 @@ class AddCheckInOutPage extends StatelessWidget {
                                   .read<AddCheckInOutBloc>()
                                   .add(AddCheckInOutSubmited());
                             } else {
-                              showDialog(
-                                context: context,
-                                builder: (_) => DialogCustom(
-                                  state: DialogCustomItem.warning,
-                                  message:
-                                      "Anda sedang berada di luar area kantor! \nPresensi akan gagal apabila dilanjutkan.",
-                                  durationInSec: 5,
-                                  onContinue: () => context
-                                      .read<AddCheckInOutBloc>()
-                                      .add(AddCheckInOutSubmited()),
-                                ),
-                              );
+                              context
+                                  .read<AddCheckInOutBloc>()
+                                  .add(AddCheckInOutSubmited());
+                              // showDialog(
+                              //   context: context,
+                              //   builder: (_) => DialogCustom(
+                              //     state: DialogCustomItem.warning,
+                              //     message:
+                              //         "Anda sedang berada di luar area kantor! \nPresensi akan gagal apabila dilanjutkan.",
+                              //     durationInSec: 5,
+                              //     onContinue: () => context
+                              //         .read<AddCheckInOutBloc>()
+                              //         .add(AddCheckInOutSubmited()),
+                              //   ),
+                              // );
                             }
                           }
                         : null,

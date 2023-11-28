@@ -45,10 +45,15 @@ class AddCheckInOutBloc extends Bloc<AddCheckInOutEvent, AddCheckInOutState> {
                 formDataSubmited.longitude,
               );
               if (res is ServicesSuccess) {
-                emit(
-                    AddCheckInOutSuccess(message: "Check-In Berhasil!"));
+                emit(AddCheckInOutSuccess(message: "Check-In Berhasil!"));
               } else if (res is ServicesFailure) {
-                if (res.errorResponse == null) {
+                if (res.code == 500) {
+                  emit(AddCheckInOutFailed(message: res.errorResponse));
+                  await GeneralSharedPreferences.removeUserToken();
+                  emit(
+                      AddCheckInOutFailedUserExpired(message: "Token expired"));
+                } else if (res.code == 401) {
+                  emit(AddCheckInOutFailed(message: res.errorResponse));
                   await GeneralSharedPreferences.removeUserToken();
                   emit(
                       AddCheckInOutFailedUserExpired(message: "Token expired"));
@@ -66,11 +71,11 @@ class AddCheckInOutBloc extends Bloc<AddCheckInOutEvent, AddCheckInOutState> {
                 formDataSubmited.longitude,
               );
               if (res is ServicesSuccess) {
-                emit(
-                    AddCheckInOutSuccess(message: "Check-Out Berhasil!"));
+                emit(AddCheckInOutSuccess(message: "Check-Out Berhasil!"));
               } else if (res is ServicesFailure) {
                 if (res.errorResponse == null) {
-                  emit(AddCheckInOutFailedUserExpired(message: "Presensi Gagal!"));
+                  emit(AddCheckInOutFailedUserExpired(
+                      message: "Presensi Gagal!"));
                 } else {
                   emit(AddCheckInOutFailed(message: res.errorResponse));
                 }
@@ -82,7 +87,7 @@ class AddCheckInOutBloc extends Bloc<AddCheckInOutEvent, AddCheckInOutState> {
         }
       }
     });
-    
+
     on<AddCheckInOutFormDataAdded>((event, emit) async {
       formDataSubmited = formDataSubmited.copyWith(
         imagePath: event.formData.imagePath,
@@ -96,7 +101,5 @@ class AddCheckInOutBloc extends Bloc<AddCheckInOutEvent, AddCheckInOutState> {
         emit(AddCheckInOutButtonActivate(isOnSite: formDataSubmited.isOnSite!));
       }
     });
-
-    
   }
 }

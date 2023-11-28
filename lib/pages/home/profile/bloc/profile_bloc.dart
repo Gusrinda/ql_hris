@@ -34,7 +34,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           ));
         } else if (res is ServicesFailure) {
           if (res.errorResponse == null) {
-            await GeneralSharedPreferences.removeUserToken();
+            // await GeneralSharedPreferences.removeUserToken();
             emit(ProfileFailedUserExpired(message: "Token expired"));
           } else {
             emit(ProfileFailed(message: res.errorResponse));
@@ -56,7 +56,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           await GeneralSharedPreferences.removeUserToken();
         } else if (res is ServicesFailure) {
           if (res.errorResponse == null) {
-            await GeneralSharedPreferences.removeUserToken();
             emit(ProfileFailedUserExpired(message: "Token Expired"));
           } else {
             emit(ProfileFailed(message: res.errorResponse));
@@ -84,7 +83,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
             emit(ProfileSuccessInBackground());
           } else if (res is ServicesFailure) {
             if (res.errorResponse == null) {
-              await GeneralSharedPreferences.removeUserToken();
+              // await GeneralSharedPreferences.removeUserToken();
               emit(ProfileFailedUserExpired(message: "Token expired"));
             } else {
               emit(ProfileFailed(message: res.errorResponse));

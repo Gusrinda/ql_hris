@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:http/http.dart' as http;
+import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
 import 'const.dart';
 
@@ -124,7 +125,7 @@ class GeneralServices {
               'Server Error!\n' + json.decode(response.body)['message'],
         );
       }
-      if (response.statusCode == 400) {
+      if (response.statusCode == MyGeneralConst.CODE_BAD_REQUEST) {
         return ServicesFailure(
           code: response.statusCode,
           errorResponse: json.decode(response.body)['message'],
@@ -136,7 +137,7 @@ class GeneralServices {
       );
     } on HttpException {
       return ServicesFailure(
-          code: MyGeneralConst.CODE_NO_INTERNET_CONECCTION,
+          code: MyGeneralConst.CODE_NO_INTERNET_CONNECTION,
           errorResponse: "No Internet Connection");
     } on FormatException {
       return ServicesFailure(
