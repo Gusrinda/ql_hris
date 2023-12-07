@@ -82,10 +82,12 @@ class _AddCutiPageState extends State<AddCutiPage> {
 
           setState(() {
             this.selectedTipeValue = selectedTipeValue.value;
+            print(selectedTipeValue.value);
+            print("Selected ID Tipe Cuti: ${selectedTipeValue.id}");
           });
         }
       } else {
-        print("Tidak ada item dalam selectTemplateSpd");
+        print("Tidak ada item dalam selectTipeCuti");
       }
     }
 
@@ -111,10 +113,12 @@ class _AddCutiPageState extends State<AddCutiPage> {
 
           setState(() {
             this.selectedValue = selectedValue.value;
+            print(selectedValue.value);
+            print("Selected ID Alasan Cuti: ${selectedValue.id}");
           });
         }
       } else {
-        print("Tidak ada item dalam selectTemplateSpd");
+        print("Tidak ada item dalam selectAlasanCuti");
       }
     }
 

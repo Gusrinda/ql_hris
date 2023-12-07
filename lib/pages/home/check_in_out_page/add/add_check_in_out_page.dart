@@ -207,6 +207,7 @@ class AddCheckInOutPage extends StatelessWidget {
                               ),
                             ));
                         return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             buildDetailCard(
                               title: "Lokasi",
@@ -233,6 +234,27 @@ class AddCheckInOutPage extends StatelessWidget {
                                       : MyColorsConst.redColor
                                   : MyColorsConst.darkColor,
                             ),
+                            SizedBox(height: 10,),
+                            // Padding(
+                            //   padding: const EdgeInsets.symmetric(horizontal: 9),
+                            //   child: Text("Alasan lokasi Out Scope", style: TextStyle(
+                            //     fontSize: 12, fontWeight: FontWeight.w700, color: MyColorsConst.darkColor
+                            //   ),),
+                            // ),
+                            if (data != null && !data.isOnSite)
+                              Padding(
+                                padding:const EdgeInsets.symmetric(vertical: 10, horizontal: 9),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    focusColor: MyColorsConst.primaryColor,
+                                    contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                                    labelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                                    labelText: 'Alasan Presensi Out Scope',
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  style: TextStyle(fontSize: 13),
+                                ),
+                              ),
                           ],
                         );
                       },

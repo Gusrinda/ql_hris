@@ -21,8 +21,12 @@ class AddCutiBloc extends Bloc<AddCutiEvent, AddCutiState> {
       emit(AddCutiLoading());
       var resToken = await GeneralSharedPreferences.getUserToken();
       if (resToken is ServicesSuccess) {
+        print("ini res Token : ${resToken.response}");
         var res = await CutiServices.addCuti(
           resToken.response["token"],
+          resToken.response["m_comp_id"] ?? 1,
+          resToken.response["m_dir_id"] ?? 1,
+          resToken.response["m_kary_id"] ?? 1,
           event.keterangan,
           event.alasan,
           event.tipeCuti,
@@ -135,8 +139,8 @@ class AddCutiBloc extends Bloc<AddCutiEvent, AddCutiState> {
 
     on<EditCutiSubmited>((event, emit) async {
       emit(AddCutiLoading());
-       var resToken = await GeneralSharedPreferences.getUserToken();
-       if (resToken is ServicesSuccess) {
+      var resToken = await GeneralSharedPreferences.getUserToken();
+      if (resToken is ServicesSuccess) {
         var res = await CutiServices.editCuti(
           resToken.response["token"],
           event.id,
@@ -147,8 +151,7 @@ class AddCutiBloc extends Bloc<AddCutiEvent, AddCutiState> {
           event.dateTo,
         );
         if (res is ServicesSuccess) {
-          emit(
-              AddCutiSuccess(message: "Edit pengajuan cuti berhasil"));
+          emit(AddCutiSuccess(message: "Edit pengajuan cuti berhasil"));
           print(res.response);
         } else if (res is ServicesFailure) {
           if (res.errorResponse == null) {
@@ -159,9 +162,9 @@ class AddCutiBloc extends Bloc<AddCutiEvent, AddCutiState> {
             print("Response from API: ${res.errorResponse}");
           }
         }
-       } else if (resToken is ServicesFailure) {
+      } else if (resToken is ServicesFailure) {
         emit(AddCutiFailedInBackground(message: 'Response format is invalid'));
-       }
+      }
     });
   }
 }

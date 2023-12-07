@@ -19,7 +19,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           var res = await AuthServices.login(event.username, event.password);
           if (res is ServicesSuccess) {
             try {
-              await GeneralSharedPreferences.saveUserToken(res.response["token"].toString(), res.response['data']['id']);
+              await GeneralSharedPreferences.saveUserToken(
+                res.response["token"].toString(),
+                res.response['data']['id'],
+                res.response['data']['m_comp_id'] ?? 1,
+                res.response['data']['m_dir_id'] ?? 9,
+                res.response['data']['m_kary_id'] ?? 1,
+              );
+              print("Token: ${res.response['data']['m_comp_id']}");
+              print("Token: ${res.response['data']['m_dir_id']}");
+              print("Token: ${res.response['data']['m_kary_id']}");
               print("Token: ${res.response["token"]}");
               // print("Res: ${res.response}");
             } catch (e) {

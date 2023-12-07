@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:sj_presensi_mobile/utils/const.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
+import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
 class CutiServices {
   static Future<Object> getListCuti(String token, DateTime date) async {
@@ -18,14 +19,35 @@ class CutiServices {
     );
   }
 
-  static Future<Object> addCuti(String token, keterangan, int alasan,
-      int tipeCuti, String dateFrom, String dateTo) async {
+  static Future<Object> addCuti(
+      String token,
+      int mCompID,
+      int mDirID,
+      int mKaryID,
+      String keterangan,
+      int alasan,
+      int tipeCuti,
+      String dateFrom,
+      String dateTo) async {
     var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_cuti");
+    print("Ini yang dikirim saat POST Cuti :");
+    print("alasan_id : ${alasan}");
+    print("tipe_cuti_id : ${tipeCuti}");
+    print("date_from : ${dateFrom}");
+    print("date_to : ${dateTo}");
+    print("keterangan : ${keterangan}");
+    print("Ini mCompID : ${mCompID}");
+    print("Ini mDirID : ${mDirID}");
+    print("Ini mKaryID : ${mKaryID}");
+
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.post,
       headers: GeneralServices.addToken2Headers(token),
       body: json.encode({
+        "m_comp_id": mCompID,
+        "m_dir_id": mDirID,
+        "m_kary_id": mKaryID,
         "alasan_id": alasan,
         "tipe_cuti_id": tipeCuti,
         "date_from": dateFrom,

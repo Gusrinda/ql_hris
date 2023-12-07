@@ -6,15 +6,23 @@ import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GeneralSharedPreferences {
-  static final Future<SharedPreferences> _pref = SharedPreferences.getInstance();
+  static final Future<SharedPreferences> _pref =
+      SharedPreferences.getInstance();
 
-  static Future<Object> saveUserToken(String token, int id) async {
+  static Future<Object> saveUserToken(
+      String token, int id, int mCompId, int mDirId, int mKaryId) async {
     var pref = await _pref;
     return await pref
         .setString(
       MyGeneralConst.PREF_USER_TOKEN,
       json.encode(
-        {"token": token, "id" : id},
+        {
+          "token": token,
+          "id": id,
+          "m_comp_id": mCompId,
+          "m_dir_id": mDirId,
+          "m_kary_id": mKaryId
+        },
       ),
     )
         .then(

@@ -131,6 +131,12 @@ class GeneralServices {
           errorResponse: json.decode(response.body)['message'],
         );
       }
+      if (response.statusCode == MyGeneralConst.CODE_ERROR_VALIDATION) {
+        return ServicesFailure(
+          code: response.statusCode,
+          errorResponse: json.decode(response.body)['message'],
+        );
+      }
       return ServicesFailure(
         code: response.statusCode,
         errorResponse: json.decode(response.body)['message'],
