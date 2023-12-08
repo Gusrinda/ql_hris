@@ -96,232 +96,231 @@ class _ProfilePageState extends State<ProfilePage> {
           LoadingDialog.dismissDialog(context);
         }
       },
-      child: SafeArea(
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: SingleChildScrollView(
-            child: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Color(0xFF5EB5EE),
-                    Color(0xFF6F7BF7),
-                    // Color(0xFF00CCFF),
-                  ],
-                  stops: [0.0, 0.1],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: SingleChildScrollView(
+          child: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xFF5EB5EE),
+                  Color(0xFF6F7BF7),
+                  // Color(0xFF00CCFF),
+                ],
+                stops: [0.0, 0.1],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
               ),
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    alignment: Alignment.center,
-                    child: const Text(
-                      "Profile",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
+            ),
+            child: Column(
+              children: [
+                const SizedBox(height: 30),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  alignment: Alignment.center,
+                  child: const Text(
+                    "Profile",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
                       color: Colors.white,
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          BlocBuilder<ProfileBloc, ProfileState>(
-                            builder: (context, state) {
-                              data =
-                                  state is GetDataProfileSuccess ? state : null;
-                              return Row(
-                                children: [
-                                  ImageFormCustomV2(
-                                    imagePath: data?.imagePath,
-                                    onImageSelected: (filePath) {
-                                      context.read<ProfileBloc>().add(
-                                          EditImageProfile(
-                                              imagePath: filePath));
-                                    },
-                                    onImageSelectedError: (message) async {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (_) => DialogCustom(
-                                          state: DialogCustomItem.error,
-                                          message: message,
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                  const SizedBox(width: 25),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        data?.name ?? "-",
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                  ),
+                ),
+                Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
+                    color: Colors.white,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        BlocBuilder<ProfileBloc, ProfileState>(
+                          builder: (context, state) {
+                            data =
+                                state is GetDataProfileSuccess ? state : null;
+                            return Row(
+                              children: [
+                                ImageFormCustomV2(
+                                  imagePath: data?.imagePath,
+                                  onImageSelected: (filePath) {
+                                    context.read<ProfileBloc>().add(
+                                        EditImageProfile(
+                                            imagePath: filePath));
+                                  },
+                                  onImageSelectedError: (message) async {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (_) => DialogCustom(
+                                        state: DialogCustomItem.error,
+                                        message: message,
                                       ),
-                                      Text(
-                                        data?.name ?? "-",
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                    );
+                                  },
+                                ),
+                                const SizedBox(width: 25),
+                                Column(
+                                  children: [
+                                    Text(
+                                      data?.name ?? "-",
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                    ],
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
+                                    ),
+                                    Text(
+                                      data?.name ?? "-",
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          },
+                        ),
 
-                          const SizedBox(height: 25),
-                          const Text(
-                            'Data Profil',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: MyColorsConst.lightDarkColor,
-                            ),
+                        const SizedBox(height: 25),
+                        const Text(
+                          'Data Profil',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: MyColorsConst.lightDarkColor,
                           ),
-                          const Divider(
-                            color: Color(0xFFDDDDDD),
-                            thickness: 1,
+                        ),
+                        const Divider(
+                          color: Color(0xFFDDDDDD),
+                          thickness: 1,
+                        ),
+                        TextFormCustomV2(
+                          labelText: "Data Diri",
+                          color: MyColorsConst.whiteColor,
+                          icon: Icons.person,
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(DataDiriPage.routeName);
+                          },
+                        ),
+                        TextFormCustomV2(
+                          labelText: "Data Pendidikan",
+                          color: MyColorsConst.whiteColor,
+                          icon: Icons.school,
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(DataPendidikanPage.routeName);
+                          },
+                        ),
+                        TextFormCustomV2(
+                          labelText: "Data Keluarga",
+                          color: MyColorsConst.whiteColor,
+                          icon: Icons.groups,
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(DataKeluargaPage.routeName);
+                          },
+                        ),
+                        TextFormCustomV2(
+                          labelText: "Data Pelatihan",
+                          color: MyColorsConst.whiteColor,
+                          icon: Icons.article,
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(DataPelatihanPage.routeName);
+                          },
+                        ),
+                        TextFormCustomV2(
+                          labelText: "Data Prestasi",
+                          color: MyColorsConst.whiteColor,
+                          icon: Icons.workspace_premium_outlined,
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(DataPrestasiPage.routeName);
+                          },
+                        ),
+                        TextFormCustomV2(
+                          labelText: "Data Organisasi",
+                          color: MyColorsConst.whiteColor,
+                          icon: Icons.language,
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(DataOrganisasiPage.routeName);
+                          },
+                        ),
+                        TextFormCustomV2(
+                          labelText: "Data Bahasa",
+                          color: MyColorsConst.whiteColor,
+                          icon: Icons.abc,
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(DataBahasaPage.routeName);
+                          },
+                        ),
+                        TextFormCustomV2(
+                          labelText: "Data Pengalaman Kerja",
+                          color: MyColorsConst.whiteColor,
+                          icon: Icons.data_exploration_rounded,
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(DataPengalamanKerjaPage.routeName);
+                          },
+                        ),
+                        const SizedBox(height: 25),
+                        const Text(
+                          'Akun',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: MyColorsConst.lightDarkColor,
                           ),
-                          TextFormCustomV2(
-                            labelText: "Data Diri",
-                            color: MyColorsConst.whiteColor,
-                            icon: Icons.person,
-                            onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed(DataDiriPage.routeName);
-                            },
-                          ),
-                          TextFormCustomV2(
-                            labelText: "Data Pendidikan",
-                            color: MyColorsConst.whiteColor,
-                            icon: Icons.school,
-                            onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed(DataPendidikanPage.routeName);
-                            },
-                          ),
-                          TextFormCustomV2(
-                            labelText: "Data Keluarga",
-                            color: MyColorsConst.whiteColor,
-                            icon: Icons.groups,
-                            onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed(DataKeluargaPage.routeName);
-                            },
-                          ),
-                          TextFormCustomV2(
-                            labelText: "Data Pelatihan",
-                            color: MyColorsConst.whiteColor,
-                            icon: Icons.article,
-                            onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed(DataPelatihanPage.routeName);
-                            },
-                          ),
-                          TextFormCustomV2(
-                            labelText: "Data Prestasi",
-                            color: MyColorsConst.whiteColor,
-                            icon: Icons.workspace_premium_outlined,
-                            onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed(DataPrestasiPage.routeName);
-                            },
-                          ),
-                          TextFormCustomV2(
-                            labelText: "Data Organisasi",
-                            color: MyColorsConst.whiteColor,
-                            icon: Icons.language,
-                            onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed(DataOrganisasiPage.routeName);
-                            },
-                          ),
-                          TextFormCustomV2(
-                            labelText: "Data Bahasa",
-                            color: MyColorsConst.whiteColor,
-                            icon: Icons.abc,
-                            onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed(DataBahasaPage.routeName);
-                            },
-                          ),
-                          TextFormCustomV2(
-                            labelText: "Data Pengalaman Kerja",
-                            color: MyColorsConst.whiteColor,
-                            icon: Icons.data_exploration_rounded,
-                            onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed(DataPengalamanKerjaPage.routeName);
-                            },
-                          ),
-                          const SizedBox(height: 25),
-                          const Text(
-                            'Akun',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: MyColorsConst.lightDarkColor,
-                            ),
-                          ),
-                          const Divider(
-                            color: Color(0xFFDDDDDD),
-                            thickness: 1,
-                          ),
-                          TextFormCustomV2(
-                            labelText: "Ganti Kata Sandi",
-                            color: MyColorsConst.whiteColor,
-                            icon: Icons.lock,
-                            editable: true,
-                            onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed(ChangePasswordPage.routeName);
-                            },
-                          ),
-                          TextFormCustomV2(
-                            labelText: "Logout",
-                            color: MyColorsConst.whiteColor,
-                            icon: Icons.logout_outlined,
-                            onTap: () {
-                              context.read<ProfileBloc>().add(LogoutProfile(
-                                    username: usernameController.text,
-                                    password: passwordController.text,
-                                  ));
-                            },
-                          ),
-                          // TextButtonCustomV1(
-                          //   height: 45,
-                          //   text: "Logout",
-                          //   backgroundColor: Color.fromARGB(255, 236, 48, 35),
-                          //   textColor: MyColorsConst.whiteColor,
-                          //   onPressed: () {
-                          //     context.read<ProfileBloc>().add(LogoutProfile(
-                          //           username: usernameController.text,
-                          //           password: passwordController.text,
-                          //         ));
-                          //   },
-                          // ),
-                        ],
-                      ),
+                        ),
+                        const Divider(
+                          color: Color(0xFFDDDDDD),
+                          thickness: 1,
+                        ),
+                        TextFormCustomV2(
+                          labelText: "Ganti Kata Sandi",
+                          color: MyColorsConst.whiteColor,
+                          icon: Icons.lock,
+                          editable: true,
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(ChangePasswordPage.routeName);
+                          },
+                        ),
+                        TextFormCustomV2(
+                          labelText: "Logout",
+                          color: MyColorsConst.whiteColor,
+                          icon: Icons.logout_outlined,
+                          onTap: () {
+                            context.read<ProfileBloc>().add(LogoutProfile(
+                                  username: usernameController.text,
+                                  password: passwordController.text,
+                                ));
+                          },
+                        ),
+                        // TextButtonCustomV1(
+                        //   height: 45,
+                        //   text: "Logout",
+                        //   backgroundColor: Color.fromARGB(255, 236, 48, 35),
+                        //   textColor: MyColorsConst.whiteColor,
+                        //   onPressed: () {
+                        //     context.read<ProfileBloc>().add(LogoutProfile(
+                        //           username: usernameController.text,
+                        //           password: passwordController.text,
+                        //         ));
+                        //   },
+                        // ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

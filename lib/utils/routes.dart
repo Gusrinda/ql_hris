@@ -19,6 +19,7 @@ import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/time_ac
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/location.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/time.dart';
 import 'package:sj_presensi_mobile/pages/home/cubit/home_cubit.dart';
+import 'package:sj_presensi_mobile/pages/home/dashboard.view.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dart';
 import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
@@ -63,13 +64,17 @@ class RouteGenerator {
             child: LoginPage(),
           );
         });
-      case HomePage.routeName:
+      case DashboardView.routeName:
         return MaterialPageRoute(builder: (context) {
-          return BlocProvider<HomeNavigationCubit>(
-            create: (context) => HomeNavigationCubit(HomeNavBarItem.home),
-            child: const HomePage(),
-          );
+          return DashboardView();
         });
+      // case HomePage.routeName:
+      //   return MaterialPageRoute(builder: (context) {
+      //     return BlocProvider<HomeNavigationCubit>(
+      //       create: (context) => HomeNavigationCubit(HomeNavBarItem.home),
+      //       child: const HomePage(),
+      //     );
+      //   });
       case ChangePasswordPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(

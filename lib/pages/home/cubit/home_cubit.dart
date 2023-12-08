@@ -20,12 +20,6 @@ class HomeNavigationCubit extends Cubit<HomeNavigationState> {
           index: 0,
         ));
         break;
-      // case HomeNavBarItem.absensi:
-      //   emit(HomeNavigationState(
-      //     navbarItem: HomeNavBarItem.absensi,
-      //     index: 0,
-      //   ));
-      //   break;
       case HomeNavBarItem.lembur:
         emit(HomeNavigationState(
           navbarItem: HomeNavBarItem.lembur,

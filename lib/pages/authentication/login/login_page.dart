@@ -7,7 +7,7 @@ import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/text_form_custom_HRIS1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/authentication_layout.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/bloc/login_bloc.dart';
-import 'package:sj_presensi_mobile/pages/home/home_page.dart';
+import 'package:sj_presensi_mobile/pages/home/dashboard.view.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class LoginPage extends StatelessWidget {
@@ -32,7 +32,7 @@ class LoginPage extends StatelessWidget {
                 state: DialogCustomItem.success, message: state.message),
           );
           Navigator.of(context).pushNamedAndRemoveUntil(
-              HomePage.routeName, (Route<dynamic> route) => false);
+              DashboardView.routeName, (Route<dynamic> route) => false);
         } else if (state is LoginFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(

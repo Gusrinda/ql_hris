@@ -6,6 +6,7 @@ import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/home/dashboard.view.dart';
 import 'package:sj_presensi_mobile/pages/lembur/detail_lembur.dart';
 import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/list_lembur_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
@@ -92,6 +93,26 @@ class _LemburPageState extends State<LemburPage> {
         }
       },
       child: Scaffold(
+        floatingActionButton: FloatingActionButton.large(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DashboardView()),
+            );
+          },
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          child: const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.airplanemode_active_sharp),
+              // Text(
+              //   "New UI",
+              //   style: TextStyle(),
+              // )
+            ],
+          ),
+        ),
         appBar: appBarCustomMain(
           title: "Selamat Datang, ${username ?? '-'}!",
           padLeft: 8,

@@ -14,7 +14,7 @@ import 'package:sj_presensi_mobile/pages/lembur/lembur_page.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class HomePage extends StatelessWidget {
-  static const routeName = 'HomePage';
+  // static const routeName = 'HomePage';
 
   const HomePage({Key? key}) : super(key: key);
 
@@ -78,7 +78,6 @@ class HomePage extends StatelessWidget {
               switch (index) {
                 case 0:
                   provider.getNavBarItem(HomeNavBarItem.home);
-                  // provider.getNavBarItem(HomeNavBarItem.absensi);
                   break;
                 case 1:
                   provider.getNavBarItem(HomeNavBarItem.lembur);
@@ -106,17 +105,6 @@ class HomePage extends StatelessWidget {
               child: const HomeCheckInOutPage(),
             );
           }
-          //  else if (state.navbarItem == HomeNavBarItem.lembur) {
-          //   return BlocProvider(
-          //     create: (context) => HistoryBloc()
-          //       ..add(
-          //         GetAttendancesHistory(
-          //           date: DateTime.now(),
-          //         ),
-          //       ),
-          //     child: const LemburPage(),
-          //   );
-          // }
           else if (state.navbarItem == HomeNavBarItem.lembur) {
             return BlocProvider(
               create: (context) => ListLemburBloc()
