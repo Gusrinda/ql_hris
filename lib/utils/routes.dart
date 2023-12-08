@@ -24,6 +24,14 @@ import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dar
 import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
 import 'package:sj_presensi_mobile/pages/home/home_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/data_bahasa_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_diri/data_diri_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/data_keluarga_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/data_organisasi_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/data_pelatihan_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/data_pendidikan.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/data_pengalaman_kerja_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/data_prestasi.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/password_change.dart';
 import 'package:sj_presensi_mobile/pages/home/report/add/add_report_page.dart';
 import 'package:sj_presensi_mobile/pages/home/report/add/bloc/add_report_bloc.dart';
@@ -32,6 +40,7 @@ import 'package:sj_presensi_mobile/pages/lembur/detail_lembur.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
+import 'package:sj_presensi_mobile/services/model/dinas/list_dinas_model.dart';
 import 'package:sj_presensi_mobile/services/model/report_detail_page_model.dart';
 
 class RouteGenerator {
@@ -149,7 +158,10 @@ class RouteGenerator {
       case DetailDinasPage.routeName:
         final data = settings.arguments as DetailDinasPage;
         return MaterialPageRoute(builder: (context) {
-          return DetailDinasPage(data: data.data, reloadDataCallback: () {},);
+          return DetailDinasPage(
+            data: data.data,
+            reloadDataCallback: () {},
+          );
         });
       case EditDinasPage.routeName:
         final arguments = settings.arguments as Map<String, dynamic>;
@@ -159,7 +171,7 @@ class RouteGenerator {
             create: (context) => AddCutiBloc(),
             child: EditDinasPage(
               dinasId: dinasId,
-               reloadDataCallback: () {
+              reloadDataCallback: () {
                 context
                     .read<ListDinasBloc>()
                     .add(GetListDinas(date: DateTime.now()));
@@ -186,6 +198,38 @@ class RouteGenerator {
             child: AddCheckInOutPage(
                 formState: args as ProcessCheckInOutPageState),
           );
+        });
+      case DataDiriPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return DataDiriPage();
+        });
+      case DataBahasaPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return DataBahasaPage();
+        });
+      case DataKeluargaPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return DataKeluargaPage();
+        });
+      case DataOrganisasiPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return DataOrganisasiPage();
+        });
+      case DataPelatihanPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return DataPelatihanPage();
+        });
+      case DataPendidikanPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return DataPendidikanPage();
+        });
+      case DataPengalamanKerjaPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return DataPengalamanKerjaPage();
+        });
+      case DataPrestasiPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return DataPrestasiPage();
         });
       case ReportDetailPage.routeName:
         final args = settings.arguments as ReportDetailPageModel;

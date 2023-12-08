@@ -167,8 +167,8 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV2> {
         );
       },
       child: Container(
-        width: size.width * 1 / 4 + 10,
-        height: size.width * 1 / 4 + 10,
+        width: size.width * 1 / 4,
+        height: size.width * 1 / 4,
         padding: const EdgeInsets.all(3.0),
         decoration: const BoxDecoration(
           color: MyColorsConst.primaryColor,
