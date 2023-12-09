@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
+import 'package:sj_presensi_mobile/pages/cuti/dashboard_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dashboard_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
@@ -293,7 +295,7 @@ class HomePage extends StatelessWidget {
                                   builder: (context) => BlocProvider(
                                     create: (context) => ListDinasBloc()
                                       ..add(GetListDinas(date: DateTime.now())),
-                                    child: DinasPage(),
+                                    child: DashboardDinasPage(),
                                   ),
                                 ),
                               );
@@ -326,7 +328,7 @@ class HomePage extends StatelessWidget {
                                   builder: (context) => BlocProvider(
                                     create: (context) => ListCutiBloc()
                                       ..add(GetListCuti(date: DateTime.now())),
-                                    child: CutiPage(),
+                                    child: DashboardCutiPage(),
                                   ),
                                 ),
                               );

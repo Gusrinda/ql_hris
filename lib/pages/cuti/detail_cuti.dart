@@ -107,160 +107,216 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
     Color currentColor = getColorFromStatus(currentStatus);
 
     return Scaffold(
-      appBar: appBarCustomV1(
-        title: "Detail Pengajuan Cuti",
-        padLeft: 8,
-      ),
-      body: SingleChildScrollView(
+      // appBar: appBarCustomV1(
+      //   title: "Detail Pengajuan Cuti",
+      //   padLeft: 8,
+      // ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF5EB5EE),
+              Color(0xFF6F7BF7),
+            ],
+            stops: [0.0, 0.1],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
+            const SizedBox(height: 30),
+            Container(
+              padding: EdgeInsets.only(left: 8.0),
+              child: Row(
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(16.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(color: Color(0xFFDDDDDD)),
-                      color: MyColorsConst.whiteColor,
+                  IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios_rounded,
+                      size: 18,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              "${widget.tipeCutiValue ?? '-'}",
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const Spacer(),
-                            Container(
-                              padding: EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: currentColor.withOpacity(0.1),
-                              ),
-                              child: Text(
-                                mapStatusToString(widget.status as String),
-                                style: TextStyle(
-                                  color: currentColor,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.calendar_month_rounded,
-                              color: MyColorsConst.lightDarkColor,
-                              size: 10,
-                            ),
-                            const SizedBox(
-                                width: 5), // Atur jarak sesuai kebutuhan
-                            Text(
-                              '${formatDate(widget.dateFrom ?? '-')} - ${formatDate(widget.dateTo ?? '-')}',
-                              style: const TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        const Divider(
-                          color: Color(0xFFDDDDDD),
-                          thickness: 1,
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        const Text(
-                          'Alasan',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Text(
-                          '${widget.alasanValue ?? '-'}',
-                          style: const TextStyle(
-                            fontSize: 10,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                          'Catatan',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Text(
-                          '${widget.keterangan ?? '-'}',
-                          style: const TextStyle(
-                            fontSize: 10,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ],
-                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    color: Colors.white,
                   ),
                   SizedBox(
-                    height: 30,
+                    width: size.width * 1 / 4,
                   ),
-                  if (currentStatus == "REVISED")
-                    TextButtonCustomV1(
-                      text: "Revisi Pengajuan Cuti",
-                      textSize: 12,
-                      backgroundColor: Colors.orange,
-                      textColor: MyColorsConst.whiteColor,
-                      onPressed: () {
-                        print("Edit Cuti ID : ${widget.cutiId}");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BlocProvider(
-                              create: (context) => AddCutiBloc()
-                                ..add(OnSelectAlasanCuti())
-                                ..add(OnSelectTipeCuti()),
-                              child: EditCutiPage(
-                                cutiId: widget.cutiId ?? 1,
-                                dateFrom: widget.dateFrom,
-                                dateTo: widget.dateTo,
-                                alasanValue: widget.alasanValue,
-                                alasanID: widget.alasanID,
-                                status: widget.status,
-                                keterangan: widget.keterangan,
-                                tipeCutiValue: widget.tipeCutiValue,
-                                tipeCutiID: widget.tipeCutiID,
-                                reloadDataCallback: widget.reloadDataCallback,
+                  Expanded(
+                    child: Text(
+                      "Detail Cuti",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                  color: Colors.white,
+                ),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 20),
+                      Container(
+                        padding: const EdgeInsets.all(16.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          border: Border.all(color: Color(0xFFDDDDDD)),
+                          color: MyColorsConst.whiteColor,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  "${widget.tipeCutiValue ?? '-'}",
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                const Spacer(),
+                                Container(
+                                  padding: EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: currentColor.withOpacity(0.1),
+                                  ),
+                                  child: Text(
+                                    mapStatusToString(widget.status as String),
+                                    style: TextStyle(
+                                      color: currentColor,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.calendar_month_rounded,
+                                  color: MyColorsConst.lightDarkColor,
+                                  size: 10,
+                                ),
+                                const SizedBox(
+                                    width: 5), // Atur jarak sesuai kebutuhan
+                                Text(
+                                  '${formatDate(widget.dateFrom ?? '-')} - ${formatDate(widget.dateTo ?? '-')}',
+                                  style: const TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            const Divider(
+                              color: Color(0xFFDDDDDD),
+                              thickness: 1,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const Text(
+                              'Alasan',
+                              style: TextStyle(
+                                fontSize: 10,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
-                          ),
-                        );
-                      },
-                    ),
-                ],
+                            Text(
+                              '${widget.alasanValue ?? '-'}',
+                              style: const TextStyle(
+                                fontSize: 10,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const Text(
+                              'Catatan',
+                              style: TextStyle(
+                                fontSize: 10,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(
+                              '${widget.keterangan ?? '-'}',
+                              style: const TextStyle(
+                                fontSize: 10,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      if (currentStatus == "REVISED")
+                        TextButtonCustomV1(
+                          text: "Revisi Pengajuan Cuti",
+                          textSize: 12,
+                          backgroundColor: Colors.orange,
+                          textColor: MyColorsConst.whiteColor,
+                          onPressed: () {
+                            print("Edit Cuti ID : ${widget.cutiId}");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BlocProvider(
+                                  create: (context) => AddCutiBloc()
+                                    ..add(OnSelectAlasanCuti())
+                                    ..add(OnSelectTipeCuti()),
+                                  child: EditCutiPage(
+                                    cutiId: widget.cutiId ?? 1,
+                                    dateFrom: widget.dateFrom,
+                                    dateTo: widget.dateTo,
+                                    alasanValue: widget.alasanValue,
+                                    alasanID: widget.alasanID,
+                                    status: widget.status,
+                                    keterangan: widget.keterangan,
+                                    tipeCutiValue: widget.tipeCutiValue,
+                                    tipeCutiID: widget.tipeCutiID,
+                                    reloadDataCallback:
+                                        widget.reloadDataCallback,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ],
