@@ -18,21 +18,33 @@ import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/locatio
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/time_acio_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/location.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/time.dart';
-import 'package:sj_presensi_mobile/pages/home/cubit/home_cubit.dart';
 import 'package:sj_presensi_mobile/pages/home/dashboard.view.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dart';
 import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
-import 'package:sj_presensi_mobile/pages/home/home_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/add_bahasa.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/data_bahasa_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/view_edit_bahasa.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/data_diri_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/add_keluarga.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/data_keluarga_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/view_edit_keluarga.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/add_organisasi.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/data_organisasi_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/view_edit_organisasi.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/add_pelatihan.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/data_pelatihan_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/view_edit_pelatihan.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/add_pendidikan.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/data_pendidikan.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/data_pengalaman_kerja_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/view_edit-pendidikan.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/add_pengalaman.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/data_pengalaman_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/view_edit_pengalaman.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/add_prestasi.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/data_prestasi.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/view_edit_prestasi.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/password_change.dart';
 import 'package:sj_presensi_mobile/pages/home/report/add/add_report_page.dart';
 import 'package:sj_presensi_mobile/pages/home/report/add/bloc/add_report_bloc.dart';
@@ -41,7 +53,6 @@ import 'package:sj_presensi_mobile/pages/lembur/detail_lembur.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
-import 'package:sj_presensi_mobile/services/model/dinas/list_dinas_model.dart';
 import 'package:sj_presensi_mobile/services/model/report_detail_page_model.dart';
 
 class RouteGenerator {
@@ -212,29 +223,85 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) {
           return DataBahasaPage();
         });
+      case ViewEditBahasaPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return ViewEditBahasaPage();
+        });
+      case AddBahasaPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return AddBahasaPage();
+        });
       case DataKeluargaPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return DataKeluargaPage();
+        });
+      case ViewEditKeluargaPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return ViewEditKeluargaPage();
+        });
+      case AddKeluargaPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return AddKeluargaPage();
         });
       case DataOrganisasiPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return DataOrganisasiPage();
         });
+      case ViewEditOrganisasiPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return ViewEditOrganisasiPage();
+        });
+      case AddOrganisasiPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return AddOrganisasiPage();
+        });
       case DataPelatihanPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return DataPelatihanPage();
+        });
+      case ViewEditPelatihanPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return ViewEditPelatihanPage();
+        });
+      case AddPelatihanPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return AddPelatihanPage();
         });
       case DataPendidikanPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return DataPendidikanPage();
         });
+      case AddPendidikanPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return AddPendidikanPage();
+        });
+      case ViewEditPendidikanPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return ViewEditPendidikanPage();
+        });
       case DataPengalamanKerjaPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return DataPengalamanKerjaPage();
         });
+      case ViewEditPengalamanPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return ViewEditPengalamanPage();
+        });
+      case AddPengalamanPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return AddPengalamanPage();
+        });
       case DataPrestasiPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return DataPrestasiPage();
+        });
+      case ViewEditPrestasiPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return ViewEditPrestasiPage();
+        });
+      case AddPrestasiPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return AddPrestasiPage();
         });
       case ReportDetailPage.routeName:
         final args = settings.arguments as ReportDetailPageModel;

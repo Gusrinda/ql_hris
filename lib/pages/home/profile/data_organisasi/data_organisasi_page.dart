@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/add_organisasi.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/view_edit_organisasi.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class DataOrganisasiPage extends StatefulWidget {
@@ -16,71 +18,76 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color(0xFF5EB5EE),
-                Color(0xFF6F7BF7),
-              ],
-              stops: [0.0, 0.1],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF5EB5EE),
+              Color(0xFF6F7BF7),
+            ],
+            stops: [0.0, 0.1],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.all(5.0),
-                child: Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.arrow_back_ios_rounded,
-                        size: 18,
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      color: Colors.white,
+        ),
+        child: Column(
+          children: [
+            const SizedBox(height: 30),
+            Container(
+              padding: EdgeInsets.all(5.0),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios_rounded,
+                      size: 18,
                     ),
-                    SizedBox(
-                      width: size.width * 1 / 4.5,
-                    ),
-                    Expanded(
-                      child: Text(
-                        "Data Organisasi",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
-                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     color: Colors.white,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: 2,
-                            itemBuilder: (context, index) {
-                              return ListTile(
+                  SizedBox(
+                    width: size.width * 1 / 4.5,
+                  ),
+                  Expanded(
+                    child: Text(
+                      "Data Organisasi",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                  color: Colors.white,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: 2,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushNamed(
+                                    ViewEditOrganisasiPage.routeName);
+                              },
+                              child: ListTile(
                                 contentPadding: EdgeInsets.zero,
                                 subtitle: Container(
                                   margin: const EdgeInsets.only(bottom: 10),
@@ -220,24 +227,28 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
                                     ],
                                   ),
                                 ),
-                              );
-                            },
-                          ),
+                              ),
+                            );
+                          },
                         ),
-                        TextButtonCustomV1(
-                          text: "Tambah Data",
-                          backgroundColor:
-                              MyColorsConst.primaryColor.withOpacity(0.1),
-                          textColor: MyColorsConst.primaryColor,
-                          onPressed: () {},
-                        )
-                      ],
-                    ),
+                      ),
+                      TextButtonCustomV1(
+                        text: "Tambah Data",
+                        height: 50,
+                        backgroundColor:
+                            MyColorsConst.primaryColor.withOpacity(0.1),
+                        textColor: MyColorsConst.primaryColor,
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(AddOrganisasiPage.routeName);
+                        },
+                      )
+                    ],
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -13,7 +13,7 @@ import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/data_keluarg
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/data_organisasi_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/data_pelatihan_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/data_pendidikan.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/data_pengalaman_kerja_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/data_pengalaman_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/data_prestasi.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/password_change.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
