@@ -93,26 +93,26 @@ class _LemburPageState extends State<LemburPage> {
         }
       },
       child: Scaffold(
-        floatingActionButton: FloatingActionButton.large(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => DashboardView()),
-            );
-          },
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          child: const Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.airplanemode_active_sharp),
-              // Text(
-              //   "New UI",
-              //   style: TextStyle(),
-              // )
-            ],
-          ),
-        ),
+        // floatingActionButton: FloatingActionButton.large(
+        //   onPressed: () {
+        //     Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) => DashboardView()),
+        //     );
+        //   },
+        //   shape:
+        //       RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        //   child: const Column(
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     children: [
+        //       Icon(Icons.airplanemode_active_sharp),
+        //       // Text(
+        //       //   "New UI",
+        //       //   style: TextStyle(),
+        //       // )
+        //     ],
+        //   ),
+        // ),
         appBar: appBarCustomMain(
           title: "Selamat Datang, ${username ?? '-'}!",
           padLeft: 8,

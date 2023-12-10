@@ -458,7 +458,7 @@ class CardListNotifikasi extends StatelessWidget {
                                     .format(data.trxDate!.toLocal())
                                 : '',
                             style: TextStyle(
-                              color: MyColorsConst.semidarkColor2,
+                              color: MyColorsConst.semiDarkColor2,
                               fontSize: 10,
                             ),
                           ),

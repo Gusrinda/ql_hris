@@ -23,8 +23,8 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF5EB5EE),
-              Color(0xFF6F7BF7),
+              MyColorsConst.primaryDarkColor,
+              MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.1],
             begin: Alignment.topCenter,
@@ -86,8 +86,8 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
                               contentPadding: EdgeInsets.zero,
                               subtitle: GestureDetector(
                                 onTap: () {
-                                  Navigator.of(context)
-                              .pushNamed(ViewEditPendidikanPage.routeName);
+                                  Navigator.of(context).pushNamed(
+                                      ViewEditPendidikanPage.routeName);
                                 },
                                 child: Container(
                                   margin: const EdgeInsets.only(bottom: 10),
@@ -109,11 +109,11 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text(
+                                              const Text(
                                                 'SMA Success Jaya',
                                                 style: TextStyle(
                                                   fontSize: 16,
-                                                  fontWeight: FontWeight.w500,
+                                                  fontWeight: FontWeight.w600,
                                                   color: MyColorsConst
                                                       .primaryColor,
                                                 ),
@@ -147,7 +147,8 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
                                                     Text(
                                                       '2015 - 2018',
                                                       style: TextStyle(
-                                                        fontSize: 10,
+                                                        fontSize: 12,
+                                                        fontWeight: FontWeight.w600,
                                                         color: MyColorsConst
                                                             .darkColor,
                                                       ),
@@ -171,7 +172,8 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
                                                     Text(
                                                       'Surabaya',
                                                       style: TextStyle(
-                                                        fontSize: 10,
+                                                        fontSize: 12,
+                                                        fontWeight: FontWeight.w600,
                                                         color: MyColorsConst
                                                             .darkColor,
                                                       ),

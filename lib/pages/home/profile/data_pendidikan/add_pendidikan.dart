@@ -39,8 +39,8 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color(0xFF5EB5EE),
-                Color(0xFF6F7BF7),
+                MyColorsConst.primaryDarkColor,
+                MyColorsConst.primaryColor,
               ],
               stops: [0.0, 0.1],
               begin: Alignment.topCenter,
@@ -49,9 +49,9 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
           ),
           child: Column(
             children: [
-              const SizedBox(height: 30),
+              const SizedBox(height: 40),
               Container(
-                padding: EdgeInsets.only(left: 8.0),
+                padding: EdgeInsets.only(left: 10.0),
                 child: Row(
                   children: [
                     IconButton(
@@ -67,7 +67,7 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                     SizedBox(
                       width: size.width * 1 / 7,
                     ),
-                    Expanded(
+                    const Expanded(
                       child: Text(
                         "Tambah Data Pendidikan",
                         style: TextStyle(
@@ -174,12 +174,13 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                           Text(
                             'Pendidikan terakhir',
                             style: TextStyle(
-                              fontSize: 12,
-                              color: MyColorsConst.darkColor,
+                              fontSize: 13,
+                              color: MyColorsConst.semiDarkColor,
+                              fontWeight: FontWeight.w600
                             ),
                           ),
                           Text(
-                            '*',
+                            ' *',
                             style: TextStyle(color: Colors.red),
                           ),
                         ],
@@ -204,7 +205,7 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                             child: Text(
                               'Iya',
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 13,
                               ),
                             ),
                           ),
@@ -226,7 +227,7 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                             child: Text(
                               'Tidak',
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 13,
                               ),
                             ),
                           ),

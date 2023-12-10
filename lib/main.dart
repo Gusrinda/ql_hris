@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
 
@@ -32,29 +33,43 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'SJ Absensi Express',
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        brightness: Brightness.light,
-        primaryColor: MyColorsConst.primaryColor,
-        primarySwatch: themeAppColor,
-        dividerColor: Colors.transparent,
-        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+    // print("LEBAR LAYAR: ${MediaQuery.of(context).size.width}");
+    // print("TINGGI LAYAR: ${MediaQuery.of(context).size.height}");
+
+    return ScreenUtilInit(
+      designSize: const Size(360, 800),
+      useInheritedMediaQuery: true,
+      minTextAdapt: true,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'SJ Absensi Express',
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+          brightness: Brightness.light,
+          primaryColor: MyColorsConst.primaryColor,
+          primarySwatch: themeAppColor,
+          dividerColor: Colors.transparent,
+          fontFamily: GoogleFonts.poppins().fontFamily,
+          textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+        ),
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        onGenerateRoute: RouteGenerator.generateRoute,
+        initialRoute: SplashPage.routeName,
       ),
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      onGenerateRoute: RouteGenerator.generateRoute,
-      initialRoute: SplashPage.routeName,
     );
   }
 }

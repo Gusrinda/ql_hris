@@ -45,7 +45,7 @@ class DropDownDataProfile extends StatelessWidget {
                 label: labelForm,
                 labelColor: MyColorsConst.darkColor,
               ),
-              const SizedBox(width: 5),
+              const SizedBox(width: 2),
               const Text(
                 '*',
                 style: TextStyle(color: Colors.red),
@@ -61,10 +61,8 @@ class DropDownDataProfile extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: Container(
-              constraints: BoxConstraints(
-                maxWidth: 100,
-                maxHeight: 40,
-              ),
+              alignment: Alignment.center,
+              height: 56,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Color(0xFFDDDDDD)),
@@ -74,11 +72,11 @@ class DropDownDataProfile extends StatelessWidget {
                 onTap: onTap,
                 controller: valueController, // Menggunakan valueController
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 13,
                 ),
                 validator: validator,
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.only(left: 10, top: 5),
+                  contentPadding: EdgeInsets.all(18),
                   border: InputBorder.none,
                   suffixIcon: Padding(
                     padding: EdgeInsets.all(8),
@@ -89,9 +87,10 @@ class DropDownDataProfile extends StatelessWidget {
                   ),
                   hintText: hintText,
                   hintStyle: TextStyle(
-                    fontSize: 12,
-                    fontStyle: FontStyle.italic,
-                  ),
+                      fontSize: 13,
+                      color: MyColorsConst.disableColor,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w400),
                   errorStyle: errorTextStyle,
                 ),
               ),
@@ -146,7 +145,7 @@ class FormDataProfile extends StatelessWidget {
                 labelColor: MyColorsConst.darkColor,
               ),
               if (showRedStar) // Tampilkan bintang merah sesuai showRedStar
-                const SizedBox(width: 5),
+                const SizedBox(width: 2),
               if (showRedStar)
                 const Text(
                   '*',
@@ -167,10 +166,7 @@ class FormDataProfile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
-                  constraints: BoxConstraints(
-                    maxWidth: 100,
-                    maxHeight: 40,
-                  ),
+                  height: 56,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Color(0xFFDDDDDD)),
@@ -179,17 +175,19 @@ class FormDataProfile extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 13,
                       color: MyColorsConst.darkColor,
+                      fontWeight: FontWeight.w500
                     ),
                     maxLines: 5,
                     readOnly: false,
                     decoration: InputDecoration(
                       hintText: hintText,
                       hintStyle: TextStyle(
-                        fontSize: 12,
-                        fontStyle: FontStyle.italic,
-                      ),
+                          fontSize: 13,
+                          color: MyColorsConst.disableColor,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w400),
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: 10, top: 5),
+                      contentPadding: EdgeInsets.all(18),
                       errorStyle: errorTextStyle,
                     ),
                     onTap: onTap,

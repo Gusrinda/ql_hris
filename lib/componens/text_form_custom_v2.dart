@@ -116,6 +116,7 @@ class _TextFormCustomV2State extends State<TextFormCustomV2> {
                 child: Center(
                   child: Icon(
                     Icons.arrow_forward_ios_rounded,
+                    weight: 5,
                     size: 12,
                     color: MyColorsConst.primaryColor,
                   ),

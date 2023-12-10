@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/image_form_custom_v2.dart';
@@ -103,9 +104,8 @@ class _ProfilePageState extends State<ProfilePage> {
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color(0xFF5EB5EE),
-                  Color(0xFF6F7BF7),
-                  // Color(0xFF00CCFF),
+                  MyColorsConst.primaryDarkColor,
+                  MyColorsConst.primaryColor,
                 ],
                 stops: [0.0, 0.1],
                 begin: Alignment.topCenter,
@@ -114,7 +114,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             child: Column(
               children: [
-                const SizedBox(height: 30),
+                SizedBox(height: 40.sp),
                 Container(
                   padding: const EdgeInsets.all(16),
                   alignment: Alignment.center,
@@ -150,8 +150,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   imagePath: data?.imagePath,
                                   onImageSelected: (filePath) {
                                     context.read<ProfileBloc>().add(
-                                        EditImageProfile(
-                                            imagePath: filePath));
+                                        EditImageProfile(imagePath: filePath));
                                   },
                                   onImageSelectedError: (message) async {
                                     await showDialog(

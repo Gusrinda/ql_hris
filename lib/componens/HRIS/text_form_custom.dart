@@ -21,11 +21,17 @@ class FormTextLabel extends StatelessWidget {
         TextSpan(
           text: label,
           children: const [
-            TextSpan(text: '*', style: TextStyle(color: Colors.red)),
+            TextSpan(
+                text: '*',
+                style: TextStyle(
+                  color: Colors.red,
+                  fontWeight: FontWeight.w600,
+                )),
           ],
         ),
         style: TextStyle(
-          fontSize: 12,
+          fontWeight: FontWeight.w600,
+          fontSize: 14,
           color: labelColor ?? Theme.of(context).primaryColor,
         ),
       );
@@ -34,8 +40,8 @@ class FormTextLabel extends StatelessWidget {
     return Text(
       label,
       style: TextStyle(
-        fontWeight: FontWeight.w500,
-        fontSize: 12,
+        fontWeight: FontWeight.w600,
+        fontSize: 13,
         color: labelColor ?? Theme.of(context).primaryColor,
       ),
     );
