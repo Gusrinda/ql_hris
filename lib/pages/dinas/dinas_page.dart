@@ -116,6 +116,7 @@ class _DinasPageState extends State<DinasPage> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return BlocListener<ListDinasBloc, ListDinasState>(
       listener: (context, state) async {
         if (state is ListDinasLoading) {
@@ -155,222 +156,280 @@ class _DinasPageState extends State<DinasPage> {
         }
       },
       child: Scaffold(
-        appBar: appBarCustomMain(
-          title: "Selamat Datang, ${username ?? '-'}!",
-          padLeft: 8,
-          actions: [
-            Container(
-              margin: const EdgeInsets.only(right: 10),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: Offset.zero,
-                  ),
-                ],
-              ),
-              height: MediaQuery.of(context).size.width * 0.1,
-              width: MediaQuery.of(context).size.width * 0.1,
-              child: IconButton(
-                splashRadius: 25,
-                iconSize: 20,
-                icon: const Icon(Icons.notifications_active),
-                onPressed: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BlocProvider(
-                        create: (context) => NotifikasiBloc()
-                          ..add(
-                            GetListNotifikasi(),
-                          ),
-                        child: NotifikasiPage(),
+        // appBar: appBarCustomMain(
+        //   title: "Selamat Datang, ${username ?? '-'}!",
+        //   padLeft: 8,
+        //   actions: [
+        //     Container(
+        //       margin: const EdgeInsets.only(right: 10),
+        //       decoration: BoxDecoration(
+        //         shape: BoxShape.circle,
+        //         color: Colors.white,
+        //         boxShadow: [
+        //           BoxShadow(
+        //             color: Colors.grey.withOpacity(0.1),
+        //             spreadRadius: 2,
+        //             blurRadius: 5,
+        //             offset: Offset.zero,
+        //           ),
+        //         ],
+        //       ),
+        //       height: MediaQuery.of(context).size.width * 0.1,
+        //       width: MediaQuery.of(context).size.width * 0.1,
+        //       child: IconButton(
+        //         splashRadius: 25,
+        //         iconSize: 20,
+        //         icon: const Icon(Icons.notifications_active),
+        //         onPressed: () async {
+        //           await Navigator.push(
+        //             context,
+        //             MaterialPageRoute(
+        //               builder: (context) => BlocProvider(
+        //                 create: (context) => NotifikasiBloc()
+        //                   ..add(
+        //                     GetListNotifikasi(),
+        //                   ),
+        //                 child: NotifikasiPage(),
+        //               ),
+        //             ),
+        //           );
+        //         },
+        //       ),
+        //     ),
+        //   ],
+        // ),
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFF5EB5EE),
+                Color(0xFF6F7BF7),
+              ],
+              stops: [0.0, 0.1],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: Column(
+            children: [
+              const SizedBox(height: 30),
+              Container(
+                padding: EdgeInsets.all(5.0),
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_back_ios_rounded,
+                        size: 18,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      width: size.width * 1 / 7,
+                    ),
+                    Expanded(
+                      child: Text(
+                        "History Perjalanan Dinas",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Daftar Surat Perjalanan Dinas",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: MyColorsConst.darkColor,
+                  ],
                 ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Bulan",
-                        style: TextStyle(
-                          color: MyColorsConst.darkColor,
-                          fontSize: 10,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                      MonthPicker(
-                        onTap: (DateTime? months, DateTime? years) {
-                          if (months != null) {
-                            setState(() {
-                              selectedMonth = months;
-                            });
-                            print(
-                                "ini bulan terpilih ${selectedMonth} ${selectedYear}");
-                            DateTime newDate;
-                            if (selectedYear != null) {
-                              newDate = DateTime(selectedYear!.year,
-                                  selectedMonth!.month, DateTime.now().day);
-                            } else {
-                              newDate = DateTime(DateTime.now().year,
-                                  selectedMonth!.month, DateTime.now().day);
-                            }
-
-                            context.read<ListDinasBloc>().add(
-                                  GetListDinas(
-                                    date: newDate,
-                                  ),
-                                );
-                          }
-                        },
-                        selectedYear: selectedYear,
-                      )
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Tahun",
-                        style: TextStyle(
-                          color: MyColorsConst.darkColor,
-                          fontSize: 10,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                      YearPickerCustom(
-                        onTap: (DateTime? years, DateTime? months) {
-                          if (years != null) {
-                            setState(() {
-                              selectedYear = years;
-                            });
-                            print(
-                                "ini tahun yang dipilih ${selectedYear} ${selectedMonth}");
-
-                            DateTime newDate;
-                            if (selectedMonth != null) {
-                              newDate = DateTime(
-                                  selectedYear!.year, selectedMonth!.month);
-                            } else {
-                              newDate = DateTime(
-                                  selectedYear!.year, DateTime.now().month);
-                            }
-
-                            context.read<ListDinasBloc>().add(
-                                  GetListDinas(
-                                    date: newDate,
-                                  ),
-                                );
-                          }
-                        },
-                        selectedMonth: selectedMonth,
-                      )
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(height: 15),
               Expanded(
-                child: BlocBuilder<ListDinasBloc, ListDinasState>(
-                  builder: (context, state) {
-                    var listdinas = context.read<ListDinasBloc>().listdinas;
-                    var groupedData = groupByDate(listdinas);
-
-                    return listdinas.isNotEmpty
-                        ? ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: groupedData.length,
-                            itemBuilder: (context, index) {
-                              var date = groupedData.keys.toList()[index];
-                              var dataList = groupedData[date]!;
-
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 10),
-                                    child: Text(
-                                      date,
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
+                    color: Colors.white,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Bulan",
+                                  style: TextStyle(
+                                    color: MyColorsConst.darkColor,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.normal,
                                   ),
-                                  ListViewByDate(
-                                    dataList: dataList,
-                                    reloadDataCallback: loadData,
-                                  )
-                                ],
-                              );
+                                ),
+                                MonthPicker(
+                                  onTap: (DateTime? months, DateTime? years) {
+                                    if (months != null) {
+                                      setState(() {
+                                        selectedMonth = months;
+                                      });
+                                      print(
+                                          "ini bulan terpilih ${selectedMonth} ${selectedYear}");
+                                      DateTime newDate;
+                                      if (selectedYear != null) {
+                                        newDate = DateTime(
+                                            selectedYear!.year,
+                                            selectedMonth!.month,
+                                            DateTime.now().day);
+                                      } else {
+                                        newDate = DateTime(
+                                            DateTime.now().year,
+                                            selectedMonth!.month,
+                                            DateTime.now().day);
+                                      }
+
+                                      context.read<ListDinasBloc>().add(
+                                            GetListDinas(
+                                              date: newDate,
+                                            ),
+                                          );
+                                    }
+                                  },
+                                  selectedYear: selectedYear,
+                                )
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Tahun",
+                                  style: TextStyle(
+                                    color: MyColorsConst.darkColor,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                                YearPickerCustom(
+                                  onTap: (DateTime? years, DateTime? months) {
+                                    if (years != null) {
+                                      setState(() {
+                                        selectedYear = years;
+                                      });
+                                      print(
+                                          "ini tahun yang dipilih ${selectedYear} ${selectedMonth}");
+
+                                      DateTime newDate;
+                                      if (selectedMonth != null) {
+                                        newDate = DateTime(selectedYear!.year,
+                                            selectedMonth!.month);
+                                      } else {
+                                        newDate = DateTime(selectedYear!.year,
+                                            DateTime.now().month);
+                                      }
+
+                                      context.read<ListDinasBloc>().add(
+                                            GetListDinas(
+                                              date: newDate,
+                                            ),
+                                          );
+                                    }
+                                  },
+                                  selectedMonth: selectedMonth,
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        Expanded(
+                          child: BlocBuilder<ListDinasBloc, ListDinasState>(
+                            builder: (context, state) {
+                              var listdinas =
+                                  context.read<ListDinasBloc>().listdinas;
+                              var groupedData = groupByDate(listdinas);
+
+                              return listdinas.isNotEmpty
+                                  ? ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: groupedData.length,
+                                      itemBuilder: (context, index) {
+                                        var date =
+                                            groupedData.keys.toList()[index];
+                                        var dataList = groupedData[date]!;
+
+                                        return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10),
+                                              child: Text(
+                                                date,
+                                                style: const TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ),
+                                            ListViewByDate(
+                                              dataList: dataList,
+                                              reloadDataCallback: loadData,
+                                            )
+                                          ],
+                                        );
+                                      },
+                                    )
+                                  : Center(
+                                      child: EmptyStateBuilder(),
+                                    );
                             },
-                          )
-                        : Center(
-                            child: EmptyStateBuilder(),
-                          );
-                  },
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) {
-                return BlocProvider(
-                  create: (context) => AddDinasBloc()
-                    ..add(OnSelectDivisi(page: 1, search: ''))
-                    ..add(OnSelectDepartemen(page: 1, search: ''))
-                    ..add(OnSelectPosisi(page: 1, search: ''))
-                    ..add(OnSelectTemplateSpd(page: 1, search: ''))
-                    ..add(OnSelectDirektorat(page: 1, search: ''))
-                    ..add(OnSelectJenisSpd(page: 1, search: ''))
-                    ..add(OnSelectZona(page: 1, search: ''))
-                    ..add(OnSelectLokasiTujuan(page: 1, search: ''))
-                    ..add(OnSelectPic(page: 1, search: '')),
-                  child: AddDinasPage(
-                    reloadDataCallback: loadData,
-                  ),
-                );
-              }),
-            );
-          },
-          backgroundColor: MyColorsConst.primaryLightColor,
-          child: const Icon(
-            Icons.add,
-            size: 32,
-          ),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () async {
+        //     Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) {
+        //         return BlocProvider(
+        //           create: (context) => AddDinasBloc()
+        //             ..add(OnSelectDivisi(page: 1, search: ''))
+        //             ..add(OnSelectDepartemen(page: 1, search: ''))
+        //             ..add(OnSelectPosisi(page: 1, search: ''))
+        //             ..add(OnSelectTemplateSpd(page: 1, search: ''))
+        //             ..add(OnSelectDirektorat(page: 1, search: ''))
+        //             ..add(OnSelectJenisSpd(page: 1, search: ''))
+        //             ..add(OnSelectZona(page: 1, search: ''))
+        //             ..add(OnSelectLokasiTujuan(page: 1, search: ''))
+        //             ..add(OnSelectPic(page: 1, search: '')),
+        //           child: AddDinasPage(
+        //             reloadDataCallback: loadData,
+        //           ),
+        //         );
+        //       }),
+        //     );
+        //   },
+        //   backgroundColor: MyColorsConst.primaryLightColor,
+        //   child: const Icon(
+        //     Icons.add,
+        //     size: 32,
+        //   ),
+        // ),
       ),
     );
   }

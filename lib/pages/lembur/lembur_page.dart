@@ -93,182 +93,183 @@ class _LemburPageState extends State<LemburPage> {
         }
       },
       child: Scaffold(
-        // floatingActionButton: FloatingActionButton.large(
-        //   onPressed: () {
-        //     Navigator.push(
-        //       context,
-        //       MaterialPageRoute(builder: (context) => DashboardView()),
-        //     );
-        //   },
-        //   shape:
-        //       RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        //   child: const Column(
-        //     mainAxisAlignment: MainAxisAlignment.center,
-        //     children: [
-        //       Icon(Icons.airplanemode_active_sharp),
-        //       // Text(
-        //       //   "New UI",
-        //       //   style: TextStyle(),
-        //       // )
-        //     ],
-        //   ),
-        // ),
-        appBar: appBarCustomMain(
-          title: "Selamat Datang, ${username ?? '-'}!",
-          padLeft: 8,
-          actions: [
-            Container(
-              margin: const EdgeInsets.only(right: 10),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: Offset.zero,
-                  ),
-                ],
-              ),
-              height: MediaQuery.of(context).size.width * 0.1,
-              width: MediaQuery.of(context).size.width * 0.1,
-              child: IconButton(
-                splashRadius: 25,
-                iconSize: 20,
-                icon: const Icon(Icons.notifications_active),
-                onPressed: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BlocProvider(
-                        create: (context) => NotifikasiBloc()
-                          ..add(
-                            GetListNotifikasi(),
-                          ),
-                        child: NotifikasiPage(),
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFF5EB5EE),
+                Color(0xFF6F7BF7),
+              ],
+              stops: [0.0, 0.1],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: Column(
+            children: [
+              const SizedBox(height: 30),
+              Container(
+                padding: EdgeInsets.all(5.0),
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_back_ios_rounded,
+                        size: 18,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      width: size.width * 1 / 4.8,
+                    ),
+                    Expanded(
+                      child: Text(
+                        "History Lembur",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.only(right: 20, left: 20, top: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "Daftar Lembur",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: MyColorsConst.darkColor,
+                  ],
                 ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Bulan",
-                        style: TextStyle(
-                          color: MyColorsConst.darkColor,
-                          fontSize: 10,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                      MonthPicker(
-                        onTap: (DateTime? months, DateTime? years) {
-                          if (months != null) {
-                            setState(() {
-                              selectedMonth = months;
-                            });
-                            print(
-                                "ini bulan terpilih ${selectedMonth} ${selectedYear}");
-                            DateTime newDate;
-                            if (selectedYear != null) {
-                              newDate = DateTime(selectedYear!.year,
-                                  selectedMonth!.month, DateTime.now().day);
-                            } else {
-                              newDate = DateTime(DateTime.now().year,
-                                  selectedMonth!.month, DateTime.now().day);
-                            }
-
-                            context.read<ListLemburBloc>().add(
-                                  GetListLembur(
-                                    date: newDate,
-                                  ),
-                                );
-                          }
-                        },
-                        selectedYear: selectedYear,
-                      )
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Tahun",
-                        style: TextStyle(
-                          color: MyColorsConst.darkColor,
-                          fontSize: 10,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                      YearPickerCustom(
-                        onTap: (DateTime? years, DateTime? months) {
-                          if (years != null) {
-                            setState(() {
-                              selectedYear = years;
-                            });
-                            print(
-                                "ini tahun yang dipilih ${selectedYear} ${selectedMonth}");
-
-                            DateTime newDate;
-                            if (selectedMonth != null) {
-                              newDate = DateTime(
-                                  selectedYear!.year, selectedMonth!.month);
-                            } else {
-                              newDate = DateTime(
-                                  selectedYear!.year, DateTime.now().month);
-                            }
-
-                            context.read<ListLemburBloc>().add(
-                                  GetListLembur(
-                                    date: newDate,
-                                  ),
-                                );
-                          }
-                        },
-                        selectedMonth: selectedMonth,
-                      )
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
               Expanded(
-                child: BlocBuilder<ListLemburBloc, ListLemburState>(
-                  builder: (context, state) {
-                    var listlembur = context.read<ListLemburBloc>().listlembur;
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
+                    color: Colors.white,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Daftar Lembur",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: MyColorsConst.darkColor,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Bulan",
+                                  style: TextStyle(
+                                    color: MyColorsConst.darkColor,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                                MonthPicker(
+                                  onTap: (DateTime? months, DateTime? years) {
+                                    if (months != null) {
+                                      setState(() {
+                                        selectedMonth = months;
+                                      });
+                                      print(
+                                          "ini bulan terpilih ${selectedMonth} ${selectedYear}");
+                                      DateTime newDate;
+                                      if (selectedYear != null) {
+                                        newDate = DateTime(
+                                            selectedYear!.year,
+                                            selectedMonth!.month,
+                                            DateTime.now().day);
+                                      } else {
+                                        newDate = DateTime(
+                                            DateTime.now().year,
+                                            selectedMonth!.month,
+                                            DateTime.now().day);
+                                      }
 
-                    debugPrint("LIST LEMBUR ? ${listlembur}");
+                                      context.read<ListLemburBloc>().add(
+                                            GetListLembur(
+                                              date: newDate,
+                                            ),
+                                          );
+                                    }
+                                  },
+                                  selectedYear: selectedYear,
+                                )
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Tahun",
+                                  style: TextStyle(
+                                    color: MyColorsConst.darkColor,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                                YearPickerCustom(
+                                  onTap: (DateTime? years, DateTime? months) {
+                                    if (years != null) {
+                                      setState(() {
+                                        selectedYear = years;
+                                      });
+                                      print(
+                                          "ini tahun yang dipilih ${selectedYear} ${selectedMonth}");
 
-                    return CardListView(
-                      listlembur: listlembur,
-                      formatDate: formatDate,
-                      extractTime: extractTime,
-                    );
-                  },
+                                      DateTime newDate;
+                                      if (selectedMonth != null) {
+                                        newDate = DateTime(selectedYear!.year,
+                                            selectedMonth!.month);
+                                      } else {
+                                        newDate = DateTime(selectedYear!.year,
+                                            DateTime.now().month);
+                                      }
+
+                                      context.read<ListLemburBloc>().add(
+                                            GetListLembur(
+                                              date: newDate,
+                                            ),
+                                          );
+                                    }
+                                  },
+                                  selectedMonth: selectedMonth,
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        Expanded(
+                          child: BlocBuilder<ListLemburBloc, ListLemburState>(
+                            builder: (context, state) {
+                              var listlembur =
+                                  context.read<ListLemburBloc>().listlembur;
+
+                              debugPrint("LIST LEMBUR ? ${listlembur}");
+
+                              return CardListView(
+                                listlembur: listlembur,
+                                formatDate: formatDate,
+                                extractTime: extractTime,
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ],

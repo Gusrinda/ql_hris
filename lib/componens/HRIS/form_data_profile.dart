@@ -70,7 +70,7 @@ class DropDownDataProfile extends StatelessWidget {
               child: TextFormField(
                 readOnly: true,
                 onTap: onTap,
-                controller: valueController, // Menggunakan valueController
+                controller: valueController, 
                 style: TextStyle(
                   fontSize: 13,
                 ),

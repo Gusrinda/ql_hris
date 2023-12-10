@@ -102,6 +102,7 @@ class _EditCutiPageState extends State<EditCutiPage> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     var selectAlasanCuti = context.read<AddCutiBloc>().dataAlasanCuti;
     var selectTipeCuti = context.read<AddCutiBloc>().dataTipeCuti;
     String selectedTipeCutiDisplay = "";
@@ -209,194 +210,287 @@ class _EditCutiPageState extends State<EditCutiPage> {
         }
       },
       child: Scaffold(
-        appBar: appBarCustomV1(
-          title: "Revisi Pengajuan Cuti",
-          padLeft: 8,
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-            child: BlocBuilder<AddCutiBloc, AddCutiState>(
-              builder: (context, state) {
-                return Form(
-                  key: _formKey,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      const SizedBox(
-                        height: 8,
+        // appBar: appBarCustomV1(
+        //   title: "Revisi Pengajuan Cuti",
+        //   padLeft: 8,
+        // ),
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFF5EB5EE),
+                Color(0xFF6F7BF7),
+              ],
+              stops: [0.0, 0.1],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: Column(
+            children: [
+              const SizedBox(height: 30),
+              Container(
+                padding: EdgeInsets.only(left: 8.0),
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_back_ios_rounded,
+                        size: 18,
                       ),
-                      FormDropDown(
-                        input: selectedTipeCutiDisplay,
-                        onTap: () {
-                          _showTipeMenu(context);
-                        },
-                        idController: widget.idTipeCutiController,
-                        valueController: widget.valueTipeCutiController,
-                        hintText: 'Pilih Tipe Cuti',
-                        labelTag: 'Label-TipeCuti',
-                        formTag: 'Form-TipeCuti',
-                        labelForm: 'Tipe Cuti',
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Pilih Tipe Cuti';
-                          }
-                          return null;
-                        },
-                        errorTextStyle: TextStyle(fontSize: 8),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      FormDropDown(
-                        input: selectedValue ?? "",
-                        onTap: () {
-                          _showAlasanMenu(context);
-                        },
-                        idController: widget.idAlasanController,
-                        valueController: widget.valueAlasanController,
-                        labelForm: 'Alasan Cuti',
-                        hintText: 'Pilih Alasan Cuti',
-                        labelTag: 'Label-AlasanCuti',
-                        formTag: 'Form-AlasanCuti',
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Pilih Alasan';
-                          }
-                          return null;
-                        },
-                        errorTextStyle: TextStyle(fontSize: 8),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Hero(
-                        tag: 'Label-RowJamVisiting',
-                        flightShuttleBuilder: flightShuttleBuilder,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: FormTextLabel(
-                                label: "Tanggal Mulai",
-                                labelColor: MyColorsConst.darkColor,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: FormTextLabel(
-                                label: "Tanggal Berakhir",
-                                labelColor: MyColorsConst.darkColor,
-                              ),
-                            ),
-                          ],
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      width: size.width * 0.5 / 3,
+                    ),
+                    Expanded(
+                      child: Text(
+                        "Revisi Pengajuan Cuti",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
                         ),
                       ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: _buildDateTextField(
-                              "Masukkan Tanggal",
-                              widget.dateFromController,
-                              selectedDateFrom,
-                              (selectedDate) {
-                                setState(() {
-                                  selectedDateFrom = selectedDate;
-                                });
-                                print("Selected Date From: $selectedDateFrom");
-                              },
-                              (value) {
-                                if (value == null) {
-                                  return 'Pilih Tanggal';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: _buildDateTextField(
-                              "Masukkan Tanggal",
-                              widget.dateToController,
-                              selectedDateTo,
-                              (selectedDate) {
-                                setState(() {
-                                  selectedDateTo = selectedDate;
-                                });
-                                print("Selected Date To: $selectedDateTo");
-                              },
-                              (value) {
-                                if (value == null) {
-                                  return 'Pilih Tanggal';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      FormCatatanCuti(
-                        input: widget.keteranganController.text,
-                        onTap: () {},
-                        controller: widget.keteranganController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Pilih Tipe Cuti';
-                          }
-                          return null;
-                        },
-                        errorTextStyle: TextStyle(fontSize: 8),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextButtonCustomV1(
-                        text: "Kirim Revisi",
-                        backgroundColor: MyColorsConst.primaryColor,
-                        textColor: MyColorsConst.whiteColor,
-                        onPressed: state is AddCutiLoading
-                            ? null
-                            : () {
-                                context.read<AddCutiBloc>().add(
-                                      EditCutiSubmited(
-                                        id: widget.cutiId ?? 1,
-                                        alasan: int.parse(
-                                            widget.idAlasanController.text),
-                                        tipeCuti: int.parse(
-                                            widget.idTipeCutiController.text),
-                                        keterangan:
-                                            widget.keteranganController.text,
-                                        dateFrom:
-                                            widget.dateFromController.text,
-                                        dateTo: widget.dateToController.text,
-                                      ),
-                                    );
-                              },
-                      ),
-                    ],
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
+                    color: Colors.white,
                   ),
-                );
-              },
-            ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 16),
+                    child: BlocBuilder<AddCutiBloc, AddCutiState>(
+                      builder: (context, state) {
+                        return Column(
+                          children: [
+                            Expanded(
+                              child: Form(
+                                key: _formKey,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                child: ListView(
+                                  children: [
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        FormDropDown(
+                                          input: selectedTipeCutiDisplay,
+                                          onTap: () {
+                                            _showTipeMenu(context);
+                                          },
+                                          idController:
+                                              widget.idTipeCutiController,
+                                          valueController:
+                                              widget.valueTipeCutiController,
+                                          hintText: 'Pilih Tipe Cuti',
+                                          labelTag: 'Label-TipeCuti',
+                                          formTag: 'Form-TipeCuti',
+                                          labelForm: 'Tipe Cuti',
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'Pilih Tipe Cuti';
+                                            }
+                                            return null;
+                                          },
+                                          errorTextStyle:
+                                              TextStyle(fontSize: 8),
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        FormDropDown(
+                                          input: selectedValue ?? "",
+                                          onTap: () {
+                                            _showAlasanMenu(context);
+                                          },
+                                          idController:
+                                              widget.idAlasanController,
+                                          valueController:
+                                              widget.valueAlasanController,
+                                          labelForm: 'Alasan Cuti',
+                                          hintText: 'Pilih Alasan Cuti',
+                                          labelTag: 'Label-AlasanCuti',
+                                          formTag: 'Form-AlasanCuti',
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'Pilih Alasan';
+                                            }
+                                            return null;
+                                          },
+                                          errorTextStyle:
+                                              TextStyle(fontSize: 8),
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        const Hero(
+                                          tag: 'Label-RowJamVisiting',
+                                          flightShuttleBuilder:
+                                              flightShuttleBuilder,
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                flex: 1,
+                                                child: FormTextLabel(
+                                                  label: "Tanggal Mulai",
+                                                  labelColor:
+                                                      MyColorsConst.darkColor,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: FormTextLabel(
+                                                  label: "Tanggal Berakhir",
+                                                  labelColor:
+                                                      MyColorsConst.darkColor,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 4,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              flex: 1,
+                                              child: _buildDateTextField(
+                                                "Masukkan Tanggal",
+                                                widget.dateFromController,
+                                                selectedDateFrom,
+                                                (selectedDate) {
+                                                  setState(() {
+                                                    selectedDateFrom =
+                                                        selectedDate;
+                                                  });
+                                                  print(
+                                                      "Selected Date From: $selectedDateFrom");
+                                                },
+                                                (value) {
+                                                  if (value == null) {
+                                                    return 'Pilih Tanggal';
+                                                  }
+                                                  return null;
+                                                },
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 20,
+                                            ),
+                                            Expanded(
+                                              flex: 1,
+                                              child: _buildDateTextField(
+                                                "Masukkan Tanggal",
+                                                widget.dateToController,
+                                                selectedDateTo,
+                                                (selectedDate) {
+                                                  setState(() {
+                                                    selectedDateTo =
+                                                        selectedDate;
+                                                  });
+                                                  print(
+                                                      "Selected Date To: $selectedDateTo");
+                                                },
+                                                (value) {
+                                                  if (value == null) {
+                                                    return 'Pilih Tanggal';
+                                                  }
+                                                  return null;
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        FormCatatanCuti(
+                                          input:
+                                              widget.keteranganController.text,
+                                          onTap: () {},
+                                          controller:
+                                              widget.keteranganController,
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'Pilih Tipe Cuti';
+                                            }
+                                            return null;
+                                          },
+                                          errorTextStyle:
+                                              TextStyle(fontSize: 8),
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            TextButtonCustomV1(
+                              text: "Kirim Revisi",
+                              height: 50,
+                              backgroundColor:
+                                  MyColorsConst.primaryColor.withOpacity(0.1),
+                              textColor: MyColorsConst.primaryColor,
+                              onPressed: state is AddCutiLoading
+                                  ? null
+                                  : () {
+                                      context.read<AddCutiBloc>().add(
+                                            EditCutiSubmited(
+                                              id: widget.cutiId ?? 1,
+                                              alasan: int.parse(widget
+                                                  .idAlasanController.text),
+                                              tipeCuti: int.parse(widget
+                                                  .idTipeCutiController.text),
+                                              keterangan: widget
+                                                  .keteranganController.text,
+                                              dateFrom: widget
+                                                  .dateFromController.text,
+                                              dateTo:
+                                                  widget.dateToController.text,
+                                            ),
+                                          );
+                                    },
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

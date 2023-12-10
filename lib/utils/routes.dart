@@ -4,11 +4,13 @@ import 'package:sj_presensi_mobile/pages/authentication/login/bloc/login_bloc.da
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/add_cuti.dart';
+import 'package:sj_presensi_mobile/pages/cuti/dashboard_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/edit_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas_bloc/add_dinas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dashboard_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/detail_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/edit_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
@@ -121,6 +123,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) {
           return DetailLemburPage(data: data.data);
         });
+      case DashboardCutiPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return DashboardCutiPage();
+        });
       case DetailCutiPage.routeName:
         final data = settings.arguments as DetailCutiPage;
         return MaterialPageRoute(builder: (context) {
@@ -157,6 +163,10 @@ class RouteGenerator {
               },
             ),
           );
+        });
+      case DashboardDinasPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return const DashboardDinasPage();
         });
       case AddDinasPage.routeName:
         return MaterialPageRoute(builder: (context) {

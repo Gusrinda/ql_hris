@@ -198,6 +198,9 @@ class _AddDinasPageState extends State<AddDinasPage> {
       child: Column(
         children: [
           TextButtonCustomV1(
+            height: 50,
+            backgroundColor: MyColorsConst.primaryColor.withOpacity(0.1),
+            textColor: MyColorsConst.primaryColor,
             onPressed: () {
               if (currentStep == 2) {
                 context.read<AddDinasBloc>().add(
@@ -236,6 +239,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     void _showDivisi(BuildContext context) async {
       final selectedDivisiValue = await showSearch<DataDivisi?>(
         context: context,
@@ -493,440 +497,529 @@ class _AddDinasPageState extends State<AddDinasPage> {
           }
         },
         child: Scaffold(
-          appBar: appBarCustomV1(
-            title: "Perjalanan Dinas",
-            padLeft: 8,
-          ),
-          body: BlocBuilder<AddDinasBloc, AddDinasState>(
-            builder: (context, state) {
-              return Stepper(
-                elevation: 0,
-                controlsBuilder: (context, details) =>
-                    controlBuilders(context, details),
-                type: StepperType.horizontal,
-                onStepTapped: onStepTapped,
-                onStepContinue: continueStep,
-                onStepCancel: cancelStep,
-                currentStep: currentStep,
-                steps: [
-                  Step(
-                    label: Text(
-                      'Jabatan',
-                      style: TextStyle(fontSize: 10),
-                    ),
-                    title: SizedBox.shrink(),
-                    content: Form(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      key: _formKeyStep1,
-                      child: Column(
-                        children: [
-                          FormTemplateSpd(
-                            input: selectedTemplateSpdValue ?? '',
-                            onTap: () {
-                              _showTemplateSpd(context);
-                            },
-                            idController: widget.idTemplateSpdController,
-                            valueController: widget.valueTemplateSpdController,
-                            labelForm: 'Template SPD',
-                            hintText: 'Cari Template SPD',
-                            labelTag: 'Label-TemplateSPd',
-                            formTag: 'Form-TemplateSpd',
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Pilih Template SPD';
-                              }
-                              return null;
-                            },
-                            errorTextStyle: TextStyle(
-                              fontSize: 8,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          FormDropDown(
-                            input: selectedDirektoratValue ?? '',
-                            onTap: () {
-                              _showDirektorat(context);
-                            },
-                            idController: widget.idDirektoratController,
-                            valueController: widget.valueDirektoratController,
-                            labelForm: 'Direktorat',
-                            hintText: 'Pilih Direktorat',
-                            labelTag: 'Label-Direktorat',
-                            formTag: 'Form-Direktorat',
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Pilih Direktorat';
-                              }
-                              return null;
-                            },
-                            errorTextStyle: TextStyle(fontSize: 8),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          FormDropDown(
-                            input: selectedDivisiValue ?? '',
-                            onTap: () {
-                              _showDivisi(context);
-                            },
-                            idController: widget.idDivisiController,
-                            valueController: widget.valueDivisiController,
-                            labelForm: 'Divisi',
-                            hintText: 'Pilih Divisi',
-                            labelTag: 'Label-Divisi',
-                            formTag: 'Form-Divisi',
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Pilih Divisi';
-                              }
-                              return null;
-                            },
-                            errorTextStyle: TextStyle(fontSize: 8),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          FormDropDown(
-                            input: selectedDepartemenValue ?? '',
-                            onTap: () {
-                              _showDepartemen(context);
-                            },
-                            idController: widget.idDepartemenController,
-                            valueController: widget.valueDepartemenController,
-                            labelForm: 'Departemen',
-                            hintText: 'Pilih Departemen',
-                            labelTag: 'Label-Departemen',
-                            formTag: 'Form-Departemen',
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Pilih Departemen';
-                              }
-                              return null;
-                            },
-                            errorTextStyle: TextStyle(fontSize: 8),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          FormDropDown(
-                            input: selectedPosisiValue ?? '',
-                            onTap: () {
-                              _showPosisi(context);
-                            },
-                            idController: widget.idPosisiController,
-                            valueController: widget.valuePosisiController,
-                            labelForm: 'Posisi',
-                            hintText: 'Pilih Posisi',
-                            labelTag: 'Label-Posisi',
-                            formTag: 'Form-Posisi',
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Pilih Posisi';
-                              }
-                              return null;
-                            },
-                            errorTextStyle: TextStyle(fontSize: 8),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          FormDropDown(
-                            input: selectedPicValue ?? '',
-                            onTap: () {
-                              _showPic(context);
-                            },
-                            idController: widget.idPicController,
-                            valueController: widget.valuePicController,
-                            labelForm: 'Pic',
-                            hintText: 'Pilih Pic',
-                            labelTag: 'Label-Pic',
-                            formTag: 'Form-Pic',
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Pilih Pic';
-                              }
-                              return null;
-                            },
-                            errorTextStyle: TextStyle(fontSize: 8),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                        ],
-                      ),
-                    ),
-                    isActive: currentStep >= 0,
-                    state: currentStep >= 0
-                        ? StepState.complete
-                        : StepState.disabled,
-                  ),
-                  Step(
-                    label: Text(
-                      'Tanggal',
-                      style: TextStyle(fontSize: 10),
-                    ),
-                    title: SizedBox.shrink(),
-                    content: Form(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      key: _formKeyStep2,
-                      child: Column(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              FormTextLabel(
-                                label: "Tanggal",
-                                labelColor: MyColorsConst.darkColor,
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              _buildDateTextField(
-                                "Pilih Tanggal",
-                                widget.tanggalController,
-                                selectedTanggal,
-                                (selectedDate) {
-                                  setState(() {
-                                    selectedTanggal = selectedDate;
-                                  });
-                                },
-                                (value) {
-                                  if (value == null) {
-                                    return 'Pilih Tanggal';
-                                  }
-                                  return null;
-                                },
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              FormTextLabel(
-                                label: "Tanggal Acara Awal",
-                                labelColor: MyColorsConst.darkColor,
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              _buildDateTextField(
-                                "Pilih Tanggal Acara Awal",
-                                widget.tanggalAwalController,
-                                selectedTanggalAwal,
-                                (selectedDate) {
-                                  setState(() {
-                                    selectedTanggalAwal = selectedDate;
-                                  });
-                                },
-                                (value) {
-                                  if (value == null) {
-                                    return 'Pilih Tanggal Acara Awal';
-                                  }
-                                  return null;
-                                },
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              FormTextLabel(
-                                label: "Pilih Tanggal Acara Akhir",
-                                labelColor: MyColorsConst.darkColor,
-                              ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              _buildDateTextField(
-                                "Pilih Tanggal Acara Awal",
-                                widget.tanggalAkhirController,
-                                selectedTanggalAkhir,
-                                (selectedDate) {
-                                  setState(() {
-                                    selectedTanggalAkhir = selectedDate;
-                                  });
-                                },
-                                (value) {
-                                  if (value == null) {
-                                    return 'Pilih Tanggal Acara Akhir';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    isActive: currentStep >= 1,
-                    state: currentStep >= 1
-                        ? StepState.complete
-                        : StepState.disabled,
-                  ),
-                  Step(
-                    label: Text(
-                      'Lokasi',
-                      style: TextStyle(fontSize: 10),
-                    ),
-                    title: SizedBox.shrink(),
-                    content: Form(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      key: _formKeyStep3,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          FormDropDown(
-                            input: selectedJenisSpdValue ?? '',
-                            onTap: () {
-                              _showJenisSpd(context);
-                            },
-                            idController: widget.idJenisSpdController,
-                            valueController: widget.valueJenisSpdController,
-                            labelForm: 'Jenis SPD',
-                            hintText: 'Pilih Jenis Surat Perjalanan Dinas',
-                            labelTag: 'Label-JenisSpd',
-                            formTag: 'Form-JenisSpd',
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Pilih Jenis Surat Perjalanan Dinas';
-                              }
-                              return null;
-                            },
-                            errorTextStyle: TextStyle(fontSize: 8),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          FormDropDown(
-                            input: selectedZonaAsalValue ?? '',
-                            onTap: () {
-                              _showZonaAsal(context);
-                            },
-                            idController: widget.idZonaAsalController,
-                            valueController: widget.valueZonaAsalController,
-                            labelForm: 'Zona Awal',
-                            hintText: 'Pilih Zona Awal',
-                            labelTag: 'Label-ZonaAsal',
-                            formTag: 'Form-ZonaAsal',
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Pilih Zona Awal';
-                              }
-                              return null;
-                            },
-                            errorTextStyle: TextStyle(fontSize: 8),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          FormDropDown(
-                            input: selectedZonaTujuanValue ?? '',
-                            onTap: () {
-                              _showZonaTujuan(context);
-                            },
-                            idController: widget.idZonaTujuanController,
-                            valueController: widget.valueZonaTujuanController,
-                            labelForm: 'Zona Tujuan',
-                            hintText: 'Pilih Zona Tujuan',
-                            labelTag: 'Label-ZonaTujuan',
-                            formTag: 'Form-ZonaTujuan',
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Pilih Zona Tujuan';
-                              }
-                              return null;
-                            },
-                            errorTextStyle: TextStyle(fontSize: 8),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          FormDropDown(
-                            input: selectedLokasiTujuanValue ?? '',
-                            onTap: () {
-                              _showLokasiTujuan(context);
-                            },
-                            idController: widget.idLokasiTujuanController,
-                            valueController: widget.valueLokasiTujuanController,
-                            labelForm: 'Lokasi Tujuan',
-                            hintText: 'Pilih Lokasi Tujuan',
-                            labelTag: 'Label-LokasiTujuan',
-                            formTag: 'Form-LokasiTujuan',
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Pilih Lokasi Tujuan';
-                              }
-                              return null;
-                            },
-                            errorTextStyle: TextStyle(fontSize: 8),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            'Menggunakan Kendaraan Dinas',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: MyColorsConst.darkColor,
-                            ),
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: Radio(
-                                  value: 1,
-                                  groupValue: _kendDinas,
-                                  onChanged: (int? value) {
-                                    setState(() {
-                                      _kendDinas = value!;
-                                      widget.kendDinasController.text =
-                                          _kendDinas.toString();
-                                    });
-                                  },
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: const Text(
-                                  'Ya',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Radio(
-                                  value: 0,
-                                  groupValue: _kendDinas,
-                                  onChanged: (int? value) {
-                                    setState(() {
-                                      _kendDinas = value!;
-                                      widget.kendDinasController.text =
-                                          _kendDinas.toString();
-                                    });
-                                  },
-                                ),
-                              ),
-                              Expanded(
-                                flex: 3,
-                                child: const Text(
-                                  'Tidak',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    isActive: currentStep >= 2,
-                    state: currentStep >= 2
-                        ? StepState.complete
-                        : StepState.disabled,
-                  )
+          // appBar: appBarCustomV1(
+          //   title: "Perjalanan Dinas",
+          //   padLeft: 8,
+          // ),
+          body: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color(0xFF5EB5EE),
+                  Color(0xFF6F7BF7),
                 ],
-              );
-            },
+                stops: [0.0, 0.1],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+            child: Column(
+              children: [
+                const SizedBox(height: 30),
+                Container(
+                  padding: EdgeInsets.all(5.0),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          Icons.arrow_back_ios_rounded,
+                          size: 18,
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        width: size.width * 0.5 / 5,
+                      ),
+                      Expanded(
+                        child: Text(
+                          "Pengajuan Perjalanan Dinas",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
+                      color: Colors.white,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: BlocBuilder<AddDinasBloc, AddDinasState>(
+                        builder: (context, state) {
+                          return Stepper(
+                            elevation: 0,
+                            controlsBuilder: (context, details) =>
+                                controlBuilders(context, details),
+                            type: StepperType.horizontal,
+                            onStepTapped: onStepTapped,
+                            onStepContinue: continueStep,
+                            onStepCancel: cancelStep,
+                            currentStep: currentStep,
+                            steps: [
+                              Step(
+                                label: Text(
+                                  'Jabatan',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                                title: SizedBox.shrink(),
+                                content: Form(
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  key: _formKeyStep1,
+                                  child: Column(
+                                    children: [
+                                      FormTemplateSpd(
+                                        input: selectedTemplateSpdValue ?? '',
+                                        onTap: () {
+                                          _showTemplateSpd(context);
+                                        },
+                                        idController:
+                                            widget.idTemplateSpdController,
+                                        valueController:
+                                            widget.valueTemplateSpdController,
+                                        labelForm: 'Template SPD',
+                                        hintText: 'Cari Template SPD',
+                                        labelTag: 'Label-TemplateSPd',
+                                        formTag: 'Form-TemplateSpd',
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Pilih Template SPD';
+                                          }
+                                          return null;
+                                        },
+                                        errorTextStyle: TextStyle(
+                                          fontSize: 8,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      FormDropDown(
+                                        input: selectedDirektoratValue ?? '',
+                                        onTap: () {
+                                          _showDirektorat(context);
+                                        },
+                                        idController:
+                                            widget.idDirektoratController,
+                                        valueController:
+                                            widget.valueDirektoratController,
+                                        labelForm: 'Direktorat',
+                                        hintText: 'Pilih Direktorat',
+                                        labelTag: 'Label-Direktorat',
+                                        formTag: 'Form-Direktorat',
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Pilih Direktorat';
+                                          }
+                                          return null;
+                                        },
+                                        errorTextStyle: TextStyle(fontSize: 8),
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      FormDropDown(
+                                        input: selectedDivisiValue ?? '',
+                                        onTap: () {
+                                          _showDivisi(context);
+                                        },
+                                        idController: widget.idDivisiController,
+                                        valueController:
+                                            widget.valueDivisiController,
+                                        labelForm: 'Divisi',
+                                        hintText: 'Pilih Divisi',
+                                        labelTag: 'Label-Divisi',
+                                        formTag: 'Form-Divisi',
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Pilih Divisi';
+                                          }
+                                          return null;
+                                        },
+                                        errorTextStyle: TextStyle(fontSize: 8),
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      FormDropDown(
+                                        input: selectedDepartemenValue ?? '',
+                                        onTap: () {
+                                          _showDepartemen(context);
+                                        },
+                                        idController:
+                                            widget.idDepartemenController,
+                                        valueController:
+                                            widget.valueDepartemenController,
+                                        labelForm: 'Departemen',
+                                        hintText: 'Pilih Departemen',
+                                        labelTag: 'Label-Departemen',
+                                        formTag: 'Form-Departemen',
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Pilih Departemen';
+                                          }
+                                          return null;
+                                        },
+                                        errorTextStyle: TextStyle(fontSize: 8),
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      FormDropDown(
+                                        input: selectedPosisiValue ?? '',
+                                        onTap: () {
+                                          _showPosisi(context);
+                                        },
+                                        idController: widget.idPosisiController,
+                                        valueController:
+                                            widget.valuePosisiController,
+                                        labelForm: 'Posisi',
+                                        hintText: 'Pilih Posisi',
+                                        labelTag: 'Label-Posisi',
+                                        formTag: 'Form-Posisi',
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Pilih Posisi';
+                                          }
+                                          return null;
+                                        },
+                                        errorTextStyle: TextStyle(fontSize: 8),
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      FormDropDown(
+                                        input: selectedPicValue ?? '',
+                                        onTap: () {
+                                          _showPic(context);
+                                        },
+                                        idController: widget.idPicController,
+                                        valueController:
+                                            widget.valuePicController,
+                                        labelForm: 'Pic',
+                                        hintText: 'Pilih Pic',
+                                        labelTag: 'Label-Pic',
+                                        formTag: 'Form-Pic',
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Pilih Pic';
+                                          }
+                                          return null;
+                                        },
+                                        errorTextStyle: TextStyle(fontSize: 8),
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                isActive: currentStep >= 0,
+                                state: currentStep >= 0
+                                    ? StepState.complete
+                                    : StepState.disabled,
+                              ),
+                              Step(
+                                label: Text(
+                                  'Tanggal',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                                title: SizedBox.shrink(),
+                                content: Form(
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  key: _formKeyStep2,
+                                  child: Column(
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          FormTextLabel(
+                                            label: "Tanggal",
+                                            labelColor: MyColorsConst.darkColor,
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          _buildDateTextField(
+                                            "Pilih Tanggal",
+                                            widget.tanggalController,
+                                            selectedTanggal,
+                                            (selectedDate) {
+                                              setState(() {
+                                                selectedTanggal = selectedDate;
+                                              });
+                                            },
+                                            (value) {
+                                              if (value == null) {
+                                                return 'Pilih Tanggal';
+                                              }
+                                              return null;
+                                            },
+                                          ),
+                                          const SizedBox(
+                                            height: 30,
+                                          ),
+                                          FormTextLabel(
+                                            label: "Tanggal Acara Awal",
+                                            labelColor: MyColorsConst.darkColor,
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          _buildDateTextField(
+                                            "Pilih Tanggal Acara Awal",
+                                            widget.tanggalAwalController,
+                                            selectedTanggalAwal,
+                                            (selectedDate) {
+                                              setState(() {
+                                                selectedTanggalAwal =
+                                                    selectedDate;
+                                              });
+                                            },
+                                            (value) {
+                                              if (value == null) {
+                                                return 'Pilih Tanggal Acara Awal';
+                                              }
+                                              return null;
+                                            },
+                                          ),
+                                          const SizedBox(
+                                            height: 30,
+                                          ),
+                                          FormTextLabel(
+                                            label: "Pilih Tanggal Acara Akhir",
+                                            labelColor: MyColorsConst.darkColor,
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          _buildDateTextField(
+                                            "Pilih Tanggal Acara Awal",
+                                            widget.tanggalAkhirController,
+                                            selectedTanggalAkhir,
+                                            (selectedDate) {
+                                              setState(() {
+                                                selectedTanggalAkhir =
+                                                    selectedDate;
+                                              });
+                                            },
+                                            (value) {
+                                              if (value == null) {
+                                                return 'Pilih Tanggal Acara Akhir';
+                                              }
+                                              return null;
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                isActive: currentStep >= 1,
+                                state: currentStep >= 1
+                                    ? StepState.complete
+                                    : StepState.disabled,
+                              ),
+                              Step(
+                                label: Text(
+                                  'Lokasi',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                                title: SizedBox.shrink(),
+                                content: Form(
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  key: _formKeyStep3,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      FormDropDown(
+                                        input: selectedJenisSpdValue ?? '',
+                                        onTap: () {
+                                          _showJenisSpd(context);
+                                        },
+                                        idController:
+                                            widget.idJenisSpdController,
+                                        valueController:
+                                            widget.valueJenisSpdController,
+                                        labelForm: 'Jenis SPD',
+                                        hintText:
+                                            'Pilih Jenis Surat Perjalanan Dinas',
+                                        labelTag: 'Label-JenisSpd',
+                                        formTag: 'Form-JenisSpd',
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Pilih Jenis Surat Perjalanan Dinas';
+                                          }
+                                          return null;
+                                        },
+                                        errorTextStyle: TextStyle(fontSize: 8),
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      FormDropDown(
+                                        input: selectedZonaAsalValue ?? '',
+                                        onTap: () {
+                                          _showZonaAsal(context);
+                                        },
+                                        idController:
+                                            widget.idZonaAsalController,
+                                        valueController:
+                                            widget.valueZonaAsalController,
+                                        labelForm: 'Zona Awal',
+                                        hintText: 'Pilih Zona Awal',
+                                        labelTag: 'Label-ZonaAsal',
+                                        formTag: 'Form-ZonaAsal',
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Pilih Zona Awal';
+                                          }
+                                          return null;
+                                        },
+                                        errorTextStyle: TextStyle(fontSize: 8),
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      FormDropDown(
+                                        input: selectedZonaTujuanValue ?? '',
+                                        onTap: () {
+                                          _showZonaTujuan(context);
+                                        },
+                                        idController:
+                                            widget.idZonaTujuanController,
+                                        valueController:
+                                            widget.valueZonaTujuanController,
+                                        labelForm: 'Zona Tujuan',
+                                        hintText: 'Pilih Zona Tujuan',
+                                        labelTag: 'Label-ZonaTujuan',
+                                        formTag: 'Form-ZonaTujuan',
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Pilih Zona Tujuan';
+                                          }
+                                          return null;
+                                        },
+                                        errorTextStyle: TextStyle(fontSize: 8),
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      FormDropDown(
+                                        input: selectedLokasiTujuanValue ?? '',
+                                        onTap: () {
+                                          _showLokasiTujuan(context);
+                                        },
+                                        idController:
+                                            widget.idLokasiTujuanController,
+                                        valueController:
+                                            widget.valueLokasiTujuanController,
+                                        labelForm: 'Lokasi Tujuan',
+                                        hintText: 'Pilih Lokasi Tujuan',
+                                        labelTag: 'Label-LokasiTujuan',
+                                        formTag: 'Form-LokasiTujuan',
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Pilih Lokasi Tujuan';
+                                          }
+                                          return null;
+                                        },
+                                        errorTextStyle: TextStyle(fontSize: 8),
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      Text(
+                                        'Menggunakan Kendaraan Dinas',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: MyColorsConst.darkColor,
+                                        ),
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                            child: Radio(
+                                              value: 1,
+                                              groupValue: _kendDinas,
+                                              onChanged: (int? value) {
+                                                setState(() {
+                                                  _kendDinas = value!;
+                                                  widget.kendDinasController
+                                                          .text =
+                                                      _kendDinas.toString();
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: const Text(
+                                              'Ya',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Radio(
+                                              value: 0,
+                                              groupValue: _kendDinas,
+                                              onChanged: (int? value) {
+                                                setState(() {
+                                                  _kendDinas = value!;
+                                                  widget.kendDinasController
+                                                          .text =
+                                                      _kendDinas.toString();
+                                                });
+                                              },
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 3,
+                                            child: const Text(
+                                              'Tidak',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                isActive: currentStep >= 2,
+                                state: currentStep >= 2
+                                    ? StepState.complete
+                                    : StepState.disabled,
+                              )
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
