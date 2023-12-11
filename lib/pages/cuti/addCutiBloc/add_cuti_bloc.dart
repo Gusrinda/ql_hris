@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:sj_presensi_mobile/services/cuti_services.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/getDataCuti/get_alasan_cuti_model.dart';
@@ -22,6 +23,11 @@ class AddCutiBloc extends Bloc<AddCutiEvent, AddCutiState> {
       var resToken = await GeneralSharedPreferences.getUserToken();
       if (resToken is ServicesSuccess) {
         print("ini res Token : ${resToken.response}");
+        print("GET DATA: ");
+        print("Ini M_COMP_ID : ${resToken.response["m_comp_id"]}");
+        print("Ini M_DIR_ID : ${resToken.response["m_dir_id"]}");
+        print("Ini M_KARY_ID : ${resToken.response["m_kari_id"]}");
+
         var res = await CutiServices.addCuti(
           resToken.response["token"],
           resToken.response["m_comp_id"] ?? 1,

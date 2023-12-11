@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas_bloc/add_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_direktorat_model.dart';
@@ -53,7 +54,7 @@ class DirektoratSearchDelegate extends SearchDelegate<DataDirektorat?> {
                     ListTile(
                       title: Text(
                         state.dataDirektorat[index].nama ?? '-',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 14,
                         ),
                       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/add_pelatihan.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/view_edit_pelatihan.dart';
@@ -23,8 +24,8 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF5EB5EE),
-              Color(0xFF6F7BF7),
+              MyColorsConst.primaryDarkColor,
+              MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.1],
             begin: Alignment.topCenter,
@@ -54,7 +55,7 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                   Expanded(
                     child: Text(
                       "Data Pelatihan",
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
@@ -68,8 +69,8 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
               child: Container(
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
                   color: Colors.white,
                 ),
@@ -111,7 +112,7 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                                             children: [
                                               Text(
                                                 'Pelatihan Frontend',
-                                                style: TextStyle(
+                                                style: GoogleFonts.poppins(
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w500,
                                                   color: MyColorsConst
@@ -129,7 +130,7 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                                               ),
                                             ],
                                           ),
-                                          const Row(
+                                          Row(
                                             children: [
                                               Expanded(
                                                 child: Column(
@@ -138,7 +139,7 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                                                   children: [
                                                     Text(
                                                       'Lembaga',
-                                                      style: TextStyle(
+                                                      style: GoogleFonts.poppins(
                                                         fontSize: 10,
                                                         color: MyColorsConst
                                                             .lightDarkColor,
@@ -146,7 +147,7 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                                                     ),
                                                     Text(
                                                       'Quantum Leap',
-                                                      style: TextStyle(
+                                                      style: GoogleFonts.poppins(
                                                         fontSize: 10,
                                                         color: MyColorsConst
                                                             .darkColor,
@@ -162,7 +163,7 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                                                   children: [
                                                     Text(
                                                       'Tahun',
-                                                      style: TextStyle(
+                                                      style: GoogleFonts.poppins(
                                                         fontSize: 10,
                                                         color: MyColorsConst
                                                             .lightDarkColor,
@@ -170,7 +171,7 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                                                     ),
                                                     Text(
                                                       '2020',
-                                                      style: TextStyle(
+                                                      style: GoogleFonts.poppins(
                                                         fontSize: 10,
                                                         color: MyColorsConst
                                                             .darkColor,
@@ -213,7 +214,7 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                                                 ),
                                                 child: Text(
                                                   'Hapus',
-                                                  style: TextStyle(
+                                                  style: GoogleFonts.poppins(
                                                     fontSize: 12,
                                                     color:
                                                         MyColorsConst.darkColor,

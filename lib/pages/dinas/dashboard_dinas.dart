@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas_bloc/add_dinas_bloc.dart';
@@ -23,8 +24,8 @@ class _DashboardDinasPageState extends State<DashboardDinasPage> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF5EB5EE),
-              Color(0xFF6F7BF7),
+              MyColorsConst.primaryDarkColor,
+                  MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.12],
             begin: Alignment.topCenter,
@@ -54,7 +55,7 @@ class _DashboardDinasPageState extends State<DashboardDinasPage> {
                   Expanded(
                     child: Text(
                       "Perjalanan Dinas",
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
@@ -68,18 +69,18 @@ class _DashboardDinasPageState extends State<DashboardDinasPage> {
               child: Container(
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
                   color: Colors.white,
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(18.0),
+                  padding: EdgeInsets.all(20),
                   child: Column(
                     children: [
                       DashboardItem(
                         label: 'History Perjalanan Dinas',
-                        image: 'assets/images/jatah_cuti.png',
+                        image: 'assets/images/history_spd.png',
                         onTap: () {
                           Navigator.push(
                             context,
@@ -167,18 +168,18 @@ class DashboardItem extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              flex: 3,
+              flex: 10,
               child: Row(
                 children: [
                   CircleAvatar(
                     radius: 30,
-                    backgroundColor: Color(0xFF6F7BF7).withOpacity(0.7),
+                    backgroundColor: Color(0xFF6F7BF7).withOpacity(0.0),
                     child: Image.asset(image),
                   ),
                   const SizedBox(width: 15),
                   Text(
                     label,
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
                     ),

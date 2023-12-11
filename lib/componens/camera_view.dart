@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:camera/camera.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -58,10 +60,9 @@ class _CameraCapturePageState extends State<CameraCapturePage> {
             toolbarHeight: 70,
             title: Text(
                       "Posisikan wajah pada lingkaran",
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                           color: Colors.white,
-                          fontSize: 16,
-                          fontFamily: 'Poppins'),
+                          fontSize: 16,),
                     ),
           ),
           body: Stack(
@@ -119,7 +120,7 @@ class _CameraCapturePageState extends State<CameraCapturePage> {
               //     children: [
               //       Text(
               //         "Posisikan wajah pada lingkaran",
-              //         style: TextStyle(
+              //         style: GoogleFonts.poppins(
               //             color: Colors.white,
               //             fontSize: 14,
               //             fontFamily: 'Poppins'),

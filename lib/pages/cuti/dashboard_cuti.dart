@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/add_cuti.dart';
@@ -24,8 +26,8 @@ class _DashboardCutiPageState extends State<DashboardCutiPage> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF5EB5EE),
-              Color(0xFF6F7BF7),
+              MyColorsConst.primaryDarkColor,
+              MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.12],
             begin: Alignment.topCenter,
@@ -55,7 +57,7 @@ class _DashboardCutiPageState extends State<DashboardCutiPage> {
                   Expanded(
                     child: Text(
                       "Cuti",
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
@@ -69,13 +71,13 @@ class _DashboardCutiPageState extends State<DashboardCutiPage> {
               child: Container(
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
                   color: Colors.white,
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(18.0),
+                  padding: const EdgeInsets.all(20),
                   child: Column(
                     children: [
                       DashboardItem(
@@ -168,20 +170,21 @@ class DashboardItem extends StatelessWidget {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              flex: 3,
+              flex: 10,
               child: Row(
                 children: [
                   CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Color(0xFF6F7BF7).withOpacity(0.7),
+                    radius: 30.sp,
+                    backgroundColor: Color(0xFF6F7BF7).withOpacity(0.0),
                     child: Image.asset(image),
                   ),
                   const SizedBox(width: 15),
                   Text(
                     label,
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
                     ),
@@ -193,6 +196,7 @@ class DashboardItem extends StatelessWidget {
               flex: 1,
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 10),
+                alignment: Alignment.centerRight,
                 child: Center(
                   child: Icon(
                     Icons.arrow_forward_ios_rounded,

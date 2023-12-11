@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class TextFormCustomV2 extends StatefulWidget {
@@ -52,7 +54,7 @@ class _TextFormCustomV2State extends State<TextFormCustomV2> {
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
-              color: Color(0xFFDDDDDD),
+              color: MyColorsConst.primaryColor.withOpacity(0.1),
             ),
           ),
           color: MyColorsConst.whiteColor,
@@ -65,11 +67,11 @@ class _TextFormCustomV2State extends State<TextFormCustomV2> {
             Expanded(
               flex: 1,
               child: CircleAvatar(
-                radius: 20,
+                radius: 20.sp,
                 backgroundColor: circleAvatarColor,
                 child: Icon(
                   widget.icon,
-                  size: 20,
+                  size: 20.sp,
                   color: iconColor,
                 ),
               ),
@@ -81,8 +83,8 @@ class _TextFormCustomV2State extends State<TextFormCustomV2> {
                 child: TextFormField(
                   controller: widget.controller,
                   readOnly: true,
-                  style: const TextStyle(
-                    fontSize: 12,
+                  style: GoogleFonts.poppins(
+                    fontSize: 12.sp,
                     color: MyColorsConst.darkColor,
                     fontWeight: FontWeight.w500,
                   ),
@@ -91,14 +93,14 @@ class _TextFormCustomV2State extends State<TextFormCustomV2> {
                   validator: widget.validator,
                   decoration: InputDecoration(
                     labelText: widget.labelText,
-                    labelStyle: const TextStyle(
-                      fontSize: 12,
+                    labelStyle: GoogleFonts.poppins(
+                      fontSize: 12.sp,
                       color: MyColorsConst.darkColor,
                       fontWeight: FontWeight.w500,
                     ),
                     isDense: true,
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 12,
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 12.sp,
                       vertical: 13.5,
                     ),
                     border: InputBorder.none,

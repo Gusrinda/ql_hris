@@ -340,7 +340,7 @@ class RouteGenerator {
     return MaterialPageRoute(builder: (_) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Route Error'),
+          title: Text('Route Error'),
         ),
         body: const Center(
           child: Text('Route Error'),

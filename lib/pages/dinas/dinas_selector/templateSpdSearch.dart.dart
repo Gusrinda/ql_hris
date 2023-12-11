@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas_bloc/add_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_templatespd_model.dart';
@@ -58,7 +59,7 @@ class TemplateSpdSearchDelegate extends SearchDelegate<DataTemplateSpd?> {
                           children: [
                             Text(
                               state.dataTemplateSpd[index].kode ?? '-',
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                 fontSize: 14,
                               ),
                             ),
@@ -67,7 +68,7 @@ class TemplateSpdSearchDelegate extends SearchDelegate<DataTemplateSpd?> {
                                 children: [
                                   TextSpan(
                                     text: 'Direktorat: ',
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       fontSize: 10,
                                       color: MyColorsConst.lightDarkColor,
                                     ),
@@ -76,7 +77,7 @@ class TemplateSpdSearchDelegate extends SearchDelegate<DataTemplateSpd?> {
                                     text:
                                         state.dataTemplateSpd[index].mDirNama ??
                                             '-',
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       fontSize: 10,
                                       color: Colors.black,
                                     ),
@@ -89,7 +90,7 @@ class TemplateSpdSearchDelegate extends SearchDelegate<DataTemplateSpd?> {
                                 children: [
                                   TextSpan(
                                     text: 'Divisi: ',
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       fontSize: 10,
                                       color: MyColorsConst.lightDarkColor,
                                     ),
@@ -98,7 +99,7 @@ class TemplateSpdSearchDelegate extends SearchDelegate<DataTemplateSpd?> {
                                     text: state.dataTemplateSpd[index]
                                             .mDivisiNama ??
                                         '-',
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       fontSize: 10,
                                       color: Colors.black,
                                     ),
@@ -111,7 +112,7 @@ class TemplateSpdSearchDelegate extends SearchDelegate<DataTemplateSpd?> {
                                 children: [
                                   TextSpan(
                                     text: 'Departemen: ',
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       fontSize: 10,
                                       color: MyColorsConst.lightDarkColor,
                                     ),
@@ -120,7 +121,7 @@ class TemplateSpdSearchDelegate extends SearchDelegate<DataTemplateSpd?> {
                                     text: state
                                             .dataTemplateSpd[index].mDeptNama ??
                                         '-',
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       fontSize: 10,
                                       color: Colors.black,
                                     ),
@@ -133,7 +134,7 @@ class TemplateSpdSearchDelegate extends SearchDelegate<DataTemplateSpd?> {
                                 children: [
                                   TextSpan(
                                     text: 'Posisi: ',
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       fontSize: 10,
                                       color: MyColorsConst.lightDarkColor,
                                     ),
@@ -142,7 +143,7 @@ class TemplateSpdSearchDelegate extends SearchDelegate<DataTemplateSpd?> {
                                     text: state.dataTemplateSpd[index]
                                             .mPosisiDescKerja ??
                                         '-',
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       fontSize: 10,
                                       color: Colors.black,
                                     ),
@@ -155,7 +156,7 @@ class TemplateSpdSearchDelegate extends SearchDelegate<DataTemplateSpd?> {
                                 children: [
                                   TextSpan(
                                     text: 'Deskripsi: ',
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       fontSize: 10,
                                       color: MyColorsConst.lightDarkColor,
                                     ),
@@ -163,7 +164,7 @@ class TemplateSpdSearchDelegate extends SearchDelegate<DataTemplateSpd?> {
                                   TextSpan(
                                     text: state.dataTemplateSpd[index].desc ??
                                         '-',
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       fontSize: 10,
                                       color: Colors.black,
                                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
@@ -240,9 +241,9 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
                           height: size.width * 1 / 2,
                         ),
                         const SizedBox(height: 8),
-                        const Text(
+                        Text(
                           "Tidak ada data yang ditampilkan!",
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             color: MyColorsConst.darkColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -446,7 +447,7 @@ class CardListNotifikasi extends StatelessWidget {
                             mapStatusToString(tipeNotifikasi),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
-                            style: TextStyle(
+                            style: GoogleFonts.poppins(
                               color: Colors.black,
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
@@ -457,7 +458,7 @@ class CardListNotifikasi extends StatelessWidget {
                                 ? DateFormat('dd MMM')
                                     .format(data.trxDate!.toLocal())
                                 : '',
-                            style: TextStyle(
+                            style: GoogleFonts.poppins(
                               color: MyColorsConst.semiDarkColor2,
                               fontSize: 10,
                             ),
@@ -469,7 +470,7 @@ class CardListNotifikasi extends StatelessWidget {
                       ),
                       Text(
                         data.text ?? '',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           color: MyColorsConst.semiDarkColor,
                           fontSize: 10,
                         ),

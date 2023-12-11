@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/text_form_custom.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/getDataCuti/get_alasan_cuti_model.dart';
 
@@ -62,7 +63,7 @@ class FormDropDown extends StatelessWidget {
                 readOnly: true,
                 onTap: onTap,
                 controller: valueController, // Menggunakan valueController
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   fontSize: 12,
                 ),
                 validator: validator,
@@ -77,7 +78,7 @@ class FormDropDown extends StatelessWidget {
                     ),
                   ),
                   hintText: hintText,
-                  hintStyle: TextStyle(
+                  hintStyle: GoogleFonts.poppins(
                     fontSize: 12,
                     fontStyle: FontStyle.italic,
                   ),
@@ -149,7 +150,7 @@ class FormTemplateSpd extends StatelessWidget {
                 readOnly: true,
                 onTap: onTap,
                 controller: valueController, // Menggunakan valueController
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   fontSize: 12,
                 ),
                 validator: validator,
@@ -164,7 +165,7 @@ class FormTemplateSpd extends StatelessWidget {
                     ),
                   ),
                   hintText: hintText,
-                  hintStyle: TextStyle(
+                  hintStyle: GoogleFonts.poppins(
                     fontSize: 12,
                     fontStyle: FontStyle.italic,
                   ),
@@ -227,14 +228,14 @@ class FormCatatanCuti extends StatelessWidget {
                     border: Border.all(color: Color(0xFFDDDDDD)),
                   ),
                   child: TextFormField(
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                         fontSize: 13, color: MyColorsConst.darkColor
                       ),
                     maxLines: 5,
                     readOnly: false,
                     decoration: InputDecoration(
                       hintText: "Tuliskan Catatan",
-                      hintStyle: TextStyle(
+                      hintStyle: GoogleFonts.poppins(
                         fontSize: 12,
                         fontStyle: FontStyle.italic,
                       ),

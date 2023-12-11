@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -39,8 +40,8 @@ class _ViewEditPendidikanPageState extends State<ViewEditPendidikanPage> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color(0xFF5EB5EE),
-                Color(0xFF6F7BF7),
+MyColorsConst.primaryDarkColor,
+                  MyColorsConst.primaryColor,
               ],
               stops: [0.0, 0.1],
               begin: Alignment.topCenter,
@@ -70,7 +71,7 @@ class _ViewEditPendidikanPageState extends State<ViewEditPendidikanPage> {
                     Expanded(
                       child: Text(
                         "Data Pendidikan",
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
@@ -83,8 +84,8 @@ class _ViewEditPendidikanPageState extends State<ViewEditPendidikanPage> {
               Container(
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
                   color: Colors.white,
                 ),
@@ -169,18 +170,18 @@ class _ViewEditPendidikanPageState extends State<ViewEditPendidikanPage> {
                         controller: widget.nilaiController,
                         validator: (value) {},
                       ),
-                      const Row(
+                      Row(
                         children: [
                           Text(
                             'Pendidikan terakhir',
-                            style: TextStyle(
+                            style: GoogleFonts.poppins(
                               fontSize: 12,
                               color: MyColorsConst.darkColor,
                             ),
                           ),
                           Text(
                             '*',
-                            style: TextStyle(color: Colors.red),
+                            style: GoogleFonts.poppins(color: Colors.red),
                           ),
                         ],
                       ),
@@ -199,11 +200,11 @@ class _ViewEditPendidikanPageState extends State<ViewEditPendidikanPage> {
                               },
                             ),
                           ),
-                          const Expanded(
+                          Expanded(
                             flex: 1,
                             child: Text(
                               'Iya',
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                 fontSize: 12,
                               ),
                             ),
@@ -221,11 +222,11 @@ class _ViewEditPendidikanPageState extends State<ViewEditPendidikanPage> {
                               },
                             ),
                           ),
-                          const Expanded(
+                          Expanded(
                             flex: 3,
                             child: Text(
                               'Tidak',
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                 fontSize: 12,
                               ),
                             ),

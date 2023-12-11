@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:http/http.dart' as http;
-import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
 import 'const.dart';
 

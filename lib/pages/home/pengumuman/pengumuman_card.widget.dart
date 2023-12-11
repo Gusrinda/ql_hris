@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -13,6 +15,7 @@ class PengumumanCard extends StatelessWidget {
       padding: EdgeInsets.all(10.sp),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(7),
+        color: Colors.white,
         border: Border.all(width: 1.sp, color: Colors.grey.shade300),
       ),
       child: Column(
@@ -32,30 +35,35 @@ class PengumumanCard extends StatelessWidget {
           SizedBox(height: 5.sp),
           Row(
             children: [
-              const Icon(
-                Icons.calendar_today_rounded,
-                size: 12,
+              Icon(
+                Icons.calendar_month_outlined,
+                size: 12.sp,
                 color: Colors.grey,
               ),
+              SizedBox(width: 3.sp,),
               Text(
                 "07 Desember 2023",
-                style: TextStyle(fontSize: 8.sp, color: Colors.grey),
+                style: GoogleFonts.poppins(fontSize: 8.sp, color: Colors.grey),
               ),
             ],
           ),
           SizedBox(height: 5.sp),
           Text(
             "Kebijakan Cuti Tahun 2024",
-            style: TextStyle(
+            style: GoogleFonts.poppins(
                 fontSize: 12.sp,
                 fontWeight: FontWeight.w600,
                 color: MyColorsConst.darkColor),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
           SizedBox(height: 3.sp),
           Text(
             "Kami berharap bahwa pesan ini menemukan Anda dalam keadaan baik dan bersemangat. Sejalan dengan komitmen kami",
             maxLines: 3,
-            style: TextStyle(fontSize: 10.sp, color: Color(0XFF565656)),
+            overflow: TextOverflow.ellipsis,
+            style:
+                GoogleFonts.poppins(fontSize: 10.sp, color: Colors.grey),
           ),
           SizedBox(height: 5.sp),
           InkWell(
@@ -69,7 +77,7 @@ class PengumumanCard extends StatelessWidget {
                   child: Text(
                     "Baca Selengkapnya",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                         fontSize: 10.sp,
                         fontWeight: FontWeight.w600,
                         color: MyColorsConst.primaryColor),

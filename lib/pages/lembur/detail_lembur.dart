@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -62,8 +63,8 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF5EB5EE),
-              Color(0xFF6F7BF7),
+              MyColorsConst.primaryDarkColor,
+                  MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.1],
             begin: Alignment.topCenter,
@@ -93,7 +94,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                   Expanded(
                     child: Text(
                       "Detail Lembur",
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
@@ -107,8 +108,8 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
               child: Container(
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
                   color: Colors.white,
                 ),
@@ -134,7 +135,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                   flex: 7,
                                   child: Text(
                                     "${widget.nomorFromList ?? '-'}",
-                                    style: const TextStyle(
+                                    style: GoogleFonts.poppins(
                                       color: Colors.black,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500,
@@ -153,7 +154,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                     ),
                                     child: Text(
                                       '${widget.tipeLemburValue ?? '-'}',
-                                      style: const TextStyle(
+                                      style: GoogleFonts.poppins(
                                         color: MyColorsConst.primaryColor,
                                         fontSize: 9,
                                         fontWeight: FontWeight.w500,
@@ -176,7 +177,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                 const SizedBox(width: 5),
                                 Text(
                                   '${formatDate(widget.tanggal ?? '-')}',
-                                  style: const TextStyle(
+                                  style: GoogleFonts.poppins(
                                     color: Colors.grey,
                                     fontSize: 10,
                                     fontWeight: FontWeight.w400,
@@ -197,7 +198,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                 SizedBox(width: 5),
                                 Text(
                                   "${extractTime(widget.jamMulai ?? '-')} - ${extractTime(widget.jamSelesai ?? '-')}",
-                                  style: const TextStyle(
+                                  style: GoogleFonts.poppins(
                                     color: Colors.grey,
                                     fontSize: 10,
                                     fontWeight: FontWeight.w400,
@@ -212,9 +213,9 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                             const SizedBox(
                               height: 5,
                             ),
-                            const Text(
+                            Text(
                               'Alasan',
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                 fontSize: 10,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w600,
@@ -222,7 +223,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                             ),
                             Text(
                               '${widget.alasanValue ?? '-'}',
-                              style: const TextStyle(
+                              style: GoogleFonts.poppins(
                                 fontSize: 10,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w400,
@@ -236,9 +237,9 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
+                                    Text(
                                       'No Dokumen',
-                                      style: TextStyle(
+                                      style: GoogleFonts.poppins(
                                         fontSize: 10,
                                         color: Colors.black,
                                         fontWeight: FontWeight.w600,
@@ -246,7 +247,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                     ),
                                     Text(
                                       '${widget.noDoc ?? '-'}',
-                                      style: const TextStyle(
+                                      style: GoogleFonts.poppins(
                                         fontSize: 10,
                                         color: Colors.black,
                                         fontWeight: FontWeight.w400,
@@ -263,9 +264,9 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                         CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      const Text(
+                                      Text(
                                         'File Ref.',
-                                        style: TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w600,
@@ -284,7 +285,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                               onTap: followLink,
                                               child: Text(
                                                 "file.pdf",
-                                                style: const TextStyle(
+                                                style: GoogleFonts.poppins(
                                                   fontSize: 10,
                                                   color: MyColorsConst
                                                       .primaryColor,
@@ -303,9 +304,9 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                             const SizedBox(
                               height: 10,
                             ),
-                            const Text(
+                            Text(
                               'Keterangan',
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                 fontSize: 10,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w600,
@@ -315,7 +316,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                               widget.keterangan != null
                                   ? '${widget.keterangan}'
                                   : '-',
-                              style: const TextStyle(
+                              style: GoogleFonts.poppins(
                                 fontSize: 10,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w400,

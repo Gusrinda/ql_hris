@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
@@ -144,8 +145,8 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF5EB5EE),
-              Color(0xFF6F7BF7),
+              MyColorsConst.primaryDarkColor,
+                  MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.1],
             begin: Alignment.topCenter,
@@ -175,7 +176,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                   Expanded(
                     child: Text(
                       "Detail Perjalanan Dinas",
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
@@ -189,8 +190,8 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
               child: Container(
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
                   color: Colors.white,
                 ),
@@ -214,7 +215,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                               children: [
                                 Text(
                                   "Surat Perjalanan Dinas",
-                                  style: const TextStyle(
+                                  style: GoogleFonts.poppins(
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
@@ -229,7 +230,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                   ),
                                   child: Text(
                                     mapStatusToString(widget.status as String),
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       color: currentColor,
                                       fontSize: 10,
                                       fontWeight: FontWeight.w500,
@@ -246,15 +247,15 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                 children: [
                                   TextSpan(
                                     text: "${widget.divisiValue}",
-                                    style: const TextStyle(
+                                    style: GoogleFonts.poppins(
                                       color: MyColorsConst.darkColor,
                                       fontSize: 10,
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
-                                  const TextSpan(
+                                  TextSpan(
                                     text: " | ",
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       color: Color(
                                           0XFF0068D4), // Set the color of the pipe to blue
                                       fontSize: 10,
@@ -263,7 +264,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                   ),
                                   TextSpan(
                                     text: "${widget.deptValue}",
-                                    style: const TextStyle(
+                                    style: GoogleFonts.poppins(
                                       color: MyColorsConst.darkColor,
                                       fontSize: 10,
                                       fontWeight: FontWeight.w400,
@@ -288,7 +289,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                     width: 5), // Atur jarak sesuai kebutuhan
                                 Text(
                                   "Dibuat Tanggal ${formatDate(widget.createdAt)}",
-                                  style: const TextStyle(
+                                  style: GoogleFonts.poppins(
                                       color: Colors.grey,
                                       fontSize: 10,
                                       fontWeight: FontWeight.w400),
@@ -313,9 +314,9 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Text(
+                                      Text(
                                         'Template Spd',
-                                        style: TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w600,
@@ -323,7 +324,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                       ),
                                       Text(
                                         '${widget.templateSpd}',
-                                        style: const TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w400,
@@ -332,9 +333,9 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                       const SizedBox(
                                         height: 10,
                                       ),
-                                      const Text(
+                                      Text(
                                         'Posisi',
-                                        style: TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w600,
@@ -342,7 +343,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                       ),
                                       Text(
                                         '${widget.posisi}',
-                                        style: const TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w400,
@@ -351,9 +352,9 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                       const SizedBox(
                                         height: 5,
                                       ),
-                                      const Text(
+                                      Text(
                                         'Direktorat',
-                                        style: TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w600,
@@ -361,7 +362,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                       ),
                                       Text(
                                         '${widget.direktoratValue}',
-                                        style: const TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w400,
@@ -370,9 +371,9 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                       const SizedBox(
                                         height: 5,
                                       ),
-                                      const Text(
+                                      Text(
                                         'Tanggal',
-                                        style: TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w600,
@@ -380,7 +381,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                       ),
                                       Text(
                                         '${formatDate(widget.tanggal)}',
-                                        style: const TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w400,
@@ -389,9 +390,9 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                       const SizedBox(
                                         height: 5,
                                       ),
-                                      const Text(
+                                      Text(
                                         'Jenis Spd',
-                                        style: TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w600,
@@ -399,7 +400,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                       ),
                                       Text(
                                         '${widget.jenisSpd}',
-                                        style: const TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w400,
@@ -414,9 +415,9 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Text(
+                                      Text(
                                         'Tanggal Acara Awal',
-                                        style: TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w600,
@@ -424,7 +425,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                       ),
                                       Text(
                                         '${formatDate(widget.tanggalAwal)}',
-                                        style: const TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w400,
@@ -433,9 +434,9 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                       const SizedBox(
                                         height: 5,
                                       ),
-                                      const Text(
+                                      Text(
                                         'Tanggal Acara Akhir',
-                                        style: TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w600,
@@ -443,7 +444,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                       ),
                                       Text(
                                         '${formatDate(widget.tanggalAkhir)}',
-                                        style: const TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w400,
@@ -452,9 +453,9 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                       const SizedBox(
                                         height: 10,
                                       ),
-                                      const Text(
+                                      Text(
                                         'Zona Awal',
-                                        style: TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w600,
@@ -462,7 +463,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                       ),
                                       Text(
                                         '${widget.zonaAwal}',
-                                        style: const TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w400,
@@ -471,9 +472,9 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                       const SizedBox(
                                         height: 5,
                                       ),
-                                      const Text(
+                                      Text(
                                         'Zona Tujuan',
-                                        style: TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w600,
@@ -481,7 +482,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                       ),
                                       Text(
                                         '${widget.zonaTujuan}',
-                                        style: const TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w400,
@@ -490,9 +491,9 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                       const SizedBox(
                                         height: 5,
                                       ),
-                                      const Text(
+                                      Text(
                                         'Lokasi Tujuan',
-                                        style: TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w600,
@@ -500,7 +501,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                       ),
                                       Text(
                                         '${widget.lokasiTujuan}',
-                                        style: const TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 10,
                                           color: Colors.black,
                                           fontWeight: FontWeight.w400,

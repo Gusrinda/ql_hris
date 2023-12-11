@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoadingDialog {
   static bool _isLoadingDialogShow = false;
@@ -12,7 +13,7 @@ class LoadingDialog {
             const CircularProgressIndicator(),
             Container(
               margin: const EdgeInsets.only(top: 10),
-              child: const Text('Harap tunggu...'),
+              child: Text('Harap tunggu...'),
             )
           ],
         ),

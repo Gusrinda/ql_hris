@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_add_data.dart';
@@ -175,8 +176,8 @@ class _AddCutiPageState extends State<AddCutiPage> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color(0xFF5EB5EE),
-                Color(0xFF6F7BF7),
+MyColorsConst.primaryDarkColor,
+                  MyColorsConst.primaryColor,
               ],
               stops: [0.0, 0.1],
               begin: Alignment.topCenter,
@@ -206,7 +207,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                     Expanded(
                       child: Text(
                         "Pengajuan Cuti",
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
@@ -220,8 +221,8 @@ class _AddCutiPageState extends State<AddCutiPage> {
                 child: Container(
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
                     ),
                     color: Colors.white,
                   ),
@@ -270,7 +271,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                             return null;
                                           },
                                           errorTextStyle:
-                                              TextStyle(fontSize: 8),
+                                              GoogleFonts.poppins(fontSize: 8),
                                         ),
                                         const SizedBox(
                                           height: 20,
@@ -296,7 +297,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                             return null;
                                           },
                                           errorTextStyle:
-                                              TextStyle(fontSize: 8),
+                                              GoogleFonts.poppins(fontSize: 8),
                                         ),
                                         const SizedBox(
                                           height: 20,
@@ -403,7 +404,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                             return null;
                                           },
                                           errorTextStyle:
-                                              TextStyle(fontSize: 8),
+                                              GoogleFonts.poppins(fontSize: 8),
                                         ),
                                         const SizedBox(
                                           height: 20,
@@ -501,7 +502,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
               selectedDate != null
                   ? DateFormat('yyyy-MM-dd').format(selectedDate)
                   : hintText,
-              style: const TextStyle(
+              style: GoogleFonts.poppins(
                 fontSize: 10,
               ),
             ),

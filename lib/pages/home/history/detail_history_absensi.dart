@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -136,7 +137,7 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                           children: [
                             Text(
                               "${getDayFromDate("${widget.tanggal}")}, ${widget.tanggal}",
-                              style: const TextStyle(
+                              style: GoogleFonts.poppins(
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
@@ -150,7 +151,7 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                               ),
                               child: Text(
                                 mapStatusToString(widget.status as String),
-                                style: TextStyle(
+                                style: GoogleFonts.poppins(
                                   color: currentColor,
                                   fontSize: 10,
                                   fontWeight: FontWeight.w500,
@@ -167,7 +168,7 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                             Text.rich(
                               TextSpan(
                                 text: 'in ',
-                                style: const TextStyle(
+                                style: GoogleFonts.poppins(
                                   fontSize: 12,
                                   color: Color(0XFF8F8F8F),
                                   fontWeight: FontWeight.w400,
@@ -177,7 +178,7 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                                     text: widget.checkinTime != null
                                         ? "${widget.checkinTime}"
                                         : "-",
-                                    style: const TextStyle(
+                                    style: GoogleFonts.poppins(
                                       fontSize: 12,
                                       color: Color(0XFF8F8F8F),
                                       fontWeight: FontWeight.w700,
@@ -190,7 +191,7 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                             Text.rich(
                               TextSpan(
                                 text: 'out ',
-                                style: const TextStyle(
+                                style: GoogleFonts.poppins(
                                   fontSize: 12,
                                   color: Color(0XFF8F8F8F),
                                   fontWeight: FontWeight.w400,
@@ -200,7 +201,7 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                                     text: widget.checkoutTime != null
                                         ? "${widget.checkoutTime}"
                                         : "-",
-                                    style: const TextStyle(
+                                    style: GoogleFonts.poppins(
                                       fontSize: 12,
                                       color: Color(0XFF8F8F8F),
                                       fontWeight: FontWeight.w700,
@@ -255,7 +256,7 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
   //       children: [
   //         Text(
   //           checkIn ? "In " : "Out ",
-  //           style: const TextStyle(
+  //           style: GoogleFonts.poppins(
   //             fontSize: 12,
   //             fontWeight: FontWeight.w400,
   //             color: MyColorsConst.lightDarkColor,
@@ -263,7 +264,7 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
   //         ),
   //         Text(
   //           datetime != null ? "" : "-",
-  //           style: const TextStyle(
+  //           style: GoogleFonts.poppins(
   //             fontSize: 12,
   //             fontWeight: FontWeight.w600,
   //             color: Color(0xFF969696),
@@ -304,7 +305,7 @@ Padding buildCardImage({
       children: [
         Text(
           checkIn ? "Check In" : "Check Out",
-          style: TextStyle(
+          style: GoogleFonts.poppins(
             fontSize: 12,
             color: checkIn ? Colors.green : Colors.red,
             fontWeight: FontWeight.w600,
@@ -353,9 +354,9 @@ Padding buildCardImage({
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     "Lokasi",
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 10,
                       color: MyColorsConst.darkColor,
                       fontWeight: FontWeight.w600,
@@ -363,7 +364,7 @@ Padding buildCardImage({
                   ),
                   Text(
                     address ?? "-",
-                    style: const TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 10,
                       color: MyColorsConst.darkColor,
                       fontWeight: FontWeight.w400,
@@ -372,9 +373,9 @@ Padding buildCardImage({
                   const SizedBox(
                     height: 15,
                   ),
-                  const Text(
+                  Text(
                     "Keterangan",
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 10,
                       color: MyColorsConst.darkColor,
                       fontWeight: FontWeight.w600,
@@ -386,7 +387,7 @@ Padding buildCardImage({
                         : (onSite != null && onSite.toLowerCase() == 'false')
                             ? "Out Scope"
                             : "-",
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 10,
                       color: (onSite != null && onSite.toLowerCase() == 'true')
                           ? Colors.green

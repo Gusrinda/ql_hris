@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/monthYearPicker_custom.dart';
@@ -130,9 +131,9 @@ class _HistoryPageState extends State<HistoryPage> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           "Bulan",
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             color: MyColorsConst.darkColor,
                             fontSize: 10,
                             fontWeight: FontWeight.normal,
@@ -169,9 +170,9 @@ class _HistoryPageState extends State<HistoryPage> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           "Tahun",
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             color: MyColorsConst.darkColor,
                             fontSize: 10,
                             fontWeight: FontWeight.normal,
@@ -255,7 +256,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                               children: [
                                                 Text(
                                                   "${getDayFromDate("${data[index].tanggal}")}, ${data[index].tanggal}",
-                                                  style: const TextStyle(
+                                                  style: GoogleFonts.poppins(
                                                       color: MyColorsConst
                                                           .darkColor,
                                                       fontSize: 14,
@@ -279,7 +280,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                                     mapStatusToString(
                                                         data[index].status
                                                             as String),
-                                                    style: TextStyle(
+                                                    style: GoogleFonts.poppins(
                                                       color: currentColor,
                                                       fontSize: 10,
                                                       fontWeight:
@@ -297,7 +298,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                                 Text.rich(
                                                   TextSpan(
                                                     text: 'in ',
-                                                    style: const TextStyle(
+                                                    style: GoogleFonts.poppins(
                                                       fontSize: 12,
                                                       color: Color(0XFF8F8F8F),
                                                       fontWeight:
@@ -310,7 +311,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                                                 null
                                                             ? "${data[index].checkinTime}"
                                                             : "-",
-                                                        style: const TextStyle(
+                                                        style: GoogleFonts.poppins(
                                                           fontSize: 12,
                                                           color:
                                                               Color(0XFF8F8F8F),
@@ -325,7 +326,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                                 Text.rich(
                                                   TextSpan(
                                                     text: 'out ',
-                                                    style: const TextStyle(
+                                                    style: GoogleFonts.poppins(
                                                       fontSize: 12,
                                                       color: Color(0XFF8F8F8F),
                                                       fontWeight:
@@ -338,7 +339,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                                                 null
                                                             ? "${data[index].checkoutTime}"
                                                             : "-",
-                                                        style: const TextStyle(
+                                                        style: GoogleFonts.poppins(
                                                           fontSize: 12,
                                                           color:
                                                               Color(0XFF8F8F8F),
@@ -395,9 +396,9 @@ class _HistoryPageState extends State<HistoryPage> {
                                     height: size.width * 1 / 2,
                                   ),
                                   const SizedBox(height: 8),
-                                  const Text(
+                                  Text(
                                     "Tidak ada data yang ditampilkan!",
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       color: MyColorsConst.darkColor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,

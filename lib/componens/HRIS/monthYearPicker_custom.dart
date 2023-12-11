@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -59,7 +60,7 @@ class _MonthPickerState extends State<MonthPicker> {
                 alignment: Alignment.center,
                 child: Text(
                   _selectedMonth ?? '',
-                  style: const TextStyle(
+                  style: GoogleFonts.poppins(
                     fontSize: 11,
                     color: Colors.black,
                   ),
@@ -109,7 +110,7 @@ class _MonthPickerState extends State<MonthPicker> {
                     return Center(
                       child: Text(
                         month,
-                        style: const TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 16,
                         ),
                       ),
@@ -120,9 +121,9 @@ class _MonthPickerState extends State<MonthPicker> {
               Row(
                 children: [
                   CupertinoButton(
-                    child: const Text(
+                    child: Text(
                       'Batal',
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         color: Colors.blue,
                         fontWeight: FontWeight.w500,
                       ),
@@ -133,9 +134,9 @@ class _MonthPickerState extends State<MonthPicker> {
                   ),
                   const Spacer(),
                   CupertinoButton(
-                    child: const Text(
+                    child: Text(
                       'Pilih',
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         color: Colors.blue,
                         fontWeight: FontWeight.w500,
                       ),
@@ -209,7 +210,7 @@ class _YearPickerCustomState extends State<YearPickerCustom> {
                 alignment: Alignment.center,
                 child: Text(
                   _selectedYear != null ? _selectedYear.toString() : '',
-                  style: const TextStyle(
+                  style: GoogleFonts.poppins(
                     fontSize: 11,
                     color: Colors.black,
                   ),
@@ -259,7 +260,7 @@ class _YearPickerCustomState extends State<YearPickerCustom> {
                     return Center(
                       child: Text(
                         year.toString(),
-                        style: const TextStyle(fontSize: 16),
+                        style: GoogleFonts.poppins(fontSize: 16),
                       ),
                     );
                   }).toList(),
@@ -268,9 +269,9 @@ class _YearPickerCustomState extends State<YearPickerCustom> {
               Row(
                 children: [
                   CupertinoButton(
-                    child: const Text(
+                    child: Text(
                       'Batal',
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         color: Colors.blue,
                         fontWeight: FontWeight.w500,
                       ),
@@ -281,9 +282,9 @@ class _YearPickerCustomState extends State<YearPickerCustom> {
                   ),
                   const Spacer(),
                   CupertinoButton(
-                    child: const Text(
+                    child: Text(
                       'Pilih',
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         color: Colors.blue,
                         fontWeight: FontWeight.w500,
                       ),

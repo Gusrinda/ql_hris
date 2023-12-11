@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 AppBar appBarCustomMain({
@@ -11,7 +13,7 @@ AppBar appBarCustomMain({
       padding: EdgeInsets.only(left: padLeft),
       child: Text(
         title,
-        style: const TextStyle(
+        style: GoogleFonts.poppins(
           color: Colors.black,
           fontSize: 12,
           fontWeight: FontWeight.bold,

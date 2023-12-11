@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -20,18 +22,18 @@ class FormTextLabel extends StatelessWidget {
       return Text.rich(
         TextSpan(
           text: label,
-          children: const [
+          children: [
             TextSpan(
                 text: '*',
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   color: Colors.red,
                   fontWeight: FontWeight.w600,
                 )),
           ],
         ),
-        style: TextStyle(
+        style: GoogleFonts.poppins(
           fontWeight: FontWeight.w600,
-          fontSize: 14,
+          fontSize: 13.sp,
           color: labelColor ?? Theme.of(context).primaryColor,
         ),
       );
@@ -39,9 +41,9 @@ class FormTextLabel extends StatelessWidget {
 
     return Text(
       label,
-      style: TextStyle(
+      style: GoogleFonts.poppins(
         fontWeight: FontWeight.w600,
-        fontSize: 13,
+        fontSize: 13.sp,
         color: labelColor ?? Theme.of(context).primaryColor,
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/monthYearPicker_custom.dart';
@@ -97,8 +98,8 @@ class _LemburPageState extends State<LemburPage> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color(0xFF5EB5EE),
-                Color(0xFF6F7BF7),
+MyColorsConst.primaryDarkColor,
+                  MyColorsConst.primaryColor,
               ],
               stops: [0.0, 0.1],
               begin: Alignment.topCenter,
@@ -128,7 +129,7 @@ class _LemburPageState extends State<LemburPage> {
                     Expanded(
                       child: Text(
                         "History Lembur",
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
@@ -142,8 +143,8 @@ class _LemburPageState extends State<LemburPage> {
                 child: Container(
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
                     ),
                     color: Colors.white,
                   ),
@@ -152,9 +153,9 @@ class _LemburPageState extends State<LemburPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           "Daftar Lembur",
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: MyColorsConst.darkColor,
@@ -169,9 +170,9 @@ class _LemburPageState extends State<LemburPage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   "Bulan",
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                     color: MyColorsConst.darkColor,
                                     fontSize: 10,
                                     fontWeight: FontWeight.normal,
@@ -212,9 +213,9 @@ class _LemburPageState extends State<LemburPage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   "Tahun",
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                     color: MyColorsConst.darkColor,
                                     fontSize: 10,
                                     fontWeight: FontWeight.normal,
@@ -360,7 +361,7 @@ class CardListView extends StatelessWidget {
                                   flex: 7,
                                   child: Text(
                                     "${data[index].nomor ?? 0}",
-                                    style: const TextStyle(
+                                    style: GoogleFonts.poppins(
                                       color: Colors.black,
                                       fontSize: 13,
                                       fontWeight: FontWeight.w500,
@@ -379,7 +380,7 @@ class CardListView extends StatelessWidget {
                                     ),
                                     child: Text(
                                       '${data[index].tipeLemburValue}',
-                                      style: const TextStyle(
+                                      style: GoogleFonts.poppins(
                                         color: Color(0XFF0068D4),
                                         fontSize: 8,
                                         fontWeight: FontWeight.w500,
@@ -402,7 +403,7 @@ class CardListView extends StatelessWidget {
                                 const SizedBox(width: 5),
                                 Text(
                                   '${formatDate(data[index].tanggal)}',
-                                  style: const TextStyle(
+                                  style: GoogleFonts.poppins(
                                       color: Colors.grey,
                                       fontSize: 10,
                                       fontWeight: FontWeight.w400),
@@ -419,7 +420,7 @@ class CardListView extends StatelessWidget {
                                 const SizedBox(width: 5),
                                 Text(
                                   "${extractTime(data[index].jamMulai)} - ${extractTime(data[index].jamSelesai)}",
-                                  style: const TextStyle(
+                                  style: GoogleFonts.poppins(
                                       color: Colors.grey,
                                       fontSize: 10,
                                       fontWeight: FontWeight.w400),
@@ -445,9 +446,9 @@ class CardListView extends StatelessWidget {
                   height: size.width * 1 / 2,
                 ),
                 const SizedBox(height: 8),
-                const Text(
+                Text(
                   "Tidak ada data yang ditampilkan!",
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                     color: MyColorsConst.darkColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 16,

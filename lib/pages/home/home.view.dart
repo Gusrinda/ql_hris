@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
 import 'package:sj_presensi_mobile/pages/cuti/dashboard_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
@@ -47,7 +49,7 @@ class HomePage extends StatelessWidget {
                           children: [
                             Text(
                               'Selamat Datang,',
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                 color: Colors.white,
                                 fontSize: 10.sp,
                                 fontWeight: FontWeight.w500,
@@ -55,10 +57,10 @@ class HomePage extends StatelessWidget {
                             ),
                             Text(
                               'Ari Kurniawan!',
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                 color: Colors.white,
                                 fontSize: 14.sp,
-                                fontWeight: FontWeight.w700,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ],
@@ -109,15 +111,15 @@ class HomePage extends StatelessWidget {
                                 const SizedBox(height: 7),
                                 Text(
                                   "36 Hari",
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                       fontSize: 14.sp,
-                                      fontWeight: FontWeight.w700),
+                                      fontWeight: FontWeight.w600),
                                 ),
                                 Text(
                                   "Cuti Masa Kerja",
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                       fontSize: 8.sp,
-                                      fontWeight: FontWeight.w700,
+                                      fontWeight: FontWeight.w500,
                                       color: MyColorsConst.disableColor),
                                 )
                               ],
@@ -142,15 +144,15 @@ class HomePage extends StatelessWidget {
                                 const SizedBox(height: 7),
                                 Text(
                                   "20 Hari",
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                       fontSize: 14.sp,
-                                      fontWeight: FontWeight.w700),
+                                      fontWeight: FontWeight.w600),
                                 ),
                                 Text(
                                   "Cuti Tahunan",
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                       fontSize: 8.sp,
-                                      fontWeight: FontWeight.w700,
+                                      fontWeight: FontWeight.w500,
                                       color: MyColorsConst.disableColor),
                                 )
                               ],
@@ -175,15 +177,15 @@ class HomePage extends StatelessWidget {
                                 const SizedBox(height: 7),
                                 Text(
                                   "120 Menit",
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                       fontSize: 14.sp,
-                                      fontWeight: FontWeight.w700),
+                                      fontWeight: FontWeight.w600),
                                 ),
                                 Text(
                                   "P24",
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                       fontSize: 8.sp,
-                                      fontWeight: FontWeight.w700,
+                                      fontWeight: FontWeight.w500,
                                       color: MyColorsConst.disableColor),
                                 )
                               ],
@@ -198,9 +200,9 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   "Menu",
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                       fontSize: 14.sp,
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w600,
                       color: Colors.white),
                 ),
               ),
@@ -249,7 +251,7 @@ class HomePage extends StatelessWidget {
                               const SizedBox(height: 5),
                               Text(
                                 "Presensi",
-                                style: TextStyle(
+                                style: GoogleFonts.poppins(
                                   fontSize: 10.sp,
                                   fontWeight: FontWeight.w500,
                                   color: MyColorsConst.darkColor,
@@ -284,7 +286,7 @@ class HomePage extends StatelessWidget {
                                 const SizedBox(height: 5),
                                 Text(
                                   "Lembur",
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                       fontSize: 10.sp,
                                       fontWeight: FontWeight.w500,
                                       color: MyColorsConst.darkColor),
@@ -317,7 +319,7 @@ class HomePage extends StatelessWidget {
                                 Text(
                                   "Perjalanan Dinas",
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                       fontSize: 10.sp,
                                       fontWeight: FontWeight.w500,
                                       color: MyColorsConst.darkColor),
@@ -344,12 +346,12 @@ class HomePage extends StatelessWidget {
                               children: [
                                 Image.asset(
                                   'assets/images/cuti_menu.png',
-                                  width: 50,
+                                  width: 50.sp,
                                 ),
                                 const SizedBox(height: 5),
                                 Text(
                                   "Cuti",
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                       fontSize: 10.sp,
                                       fontWeight: FontWeight.w500,
                                       color: MyColorsConst.darkColor),
@@ -366,15 +368,15 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   "Pengumuman",
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                       fontSize: 14.sp,
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w600,
                       color: MyColorsConst.darkColor),
                 ),
               ),
               const SizedBox(height: 5),
               Container(
-                height: 260.sp,
+                constraints: BoxConstraints(maxHeight: 280.sp),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
@@ -411,7 +413,8 @@ class BackgroundPainter extends CustomPainter {
 
     // Create a Shader from the gradient
     final Shader shader = gradient.createShader(Rect.fromCircle(
-      center: Offset(size.width / 2, -20), //Atur Tinggi Gradient Disini
+      center:
+          Offset(size.width.sp / 2.sp, -20.sp), //Atur Tinggi Gradient Disini
       radius: size.width,
     ));
 
@@ -423,7 +426,7 @@ class BackgroundPainter extends CustomPainter {
     // Draw half ellipse shape
     canvas.drawArc(
       Rect.fromCircle(
-        center: Offset(size.width / 2, -20),
+        center: Offset(size.width.sp / 2.sp, -20.sp),
         radius: size.width,
       ),
       0,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
@@ -94,10 +95,10 @@ class ChangePasswordPage extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text(
+                  Text(
                     'Password barumu harus berbeda dari password yang digunakan sebelumnya',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 12,
                       color: MyColorsConst.darkColor,
                     ),

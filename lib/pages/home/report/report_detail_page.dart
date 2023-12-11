@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
@@ -52,7 +53,7 @@ class ReportDetailPage extends StatelessWidget {
                         ? DateFormat('EEEE, dd-MM-yyyy', 'id_ID')
                             .format(reportModel.date!)
                         : "-",
-                    style: const TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.italic,
@@ -141,7 +142,7 @@ class ReportDetailPage extends StatelessWidget {
                     const SizedBox(width: 24),
                     Text(
                       cardItem[isMorningReport]!["title"] as String,
-                      style: const TextStyle(
+                      style: GoogleFonts.poppins(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -167,7 +168,7 @@ class ReportDetailPage extends StatelessWidget {
                         const SizedBox(width: 6),
                         Text(
                           "Submit at ${time != null ? DateFormat('HH:mm').format(time) : '-'}",
-                          style: const TextStyle(
+                          style: GoogleFonts.poppins(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.italic,
@@ -190,7 +191,7 @@ class ReportDetailPage extends StatelessWidget {
                           Text(
                             (cardItem[isMorningReport]!["subTitles"]!
                                 as List)[index] as String,
-                            style: const TextStyle(
+                            style: GoogleFonts.poppins(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                               fontStyle: FontStyle.italic,
@@ -224,7 +225,7 @@ class ReportDetailPage extends StatelessWidget {
                                         content[index].trim(),
                                       ),
                                       content[index].trim(),
-                                      style: const TextStyle(
+                                      style: GoogleFonts.poppins(
                                         fontSize: 12,
                                         color: MyColorsConst.semiDarkColor,
                                       ),

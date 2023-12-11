@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/getDataCuti/get_alasan_cuti_model.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/getDataCuti/get_tipe_cuti_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -51,7 +52,7 @@ class TipeCutiSearchDelegate extends SearchDelegate<DataTipeCuti?> {
             ListTile(
               title: Text(
                 searchResults[index].value ?? '-',
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   fontSize: 14,
                 ),
               ),
@@ -181,7 +182,7 @@ class AlasanCutiSearchDelegate extends SearchDelegate<Datum?> {
             ListTile(
               title: Text(
                 searchResults[index].value ?? '-',
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   fontSize: 14,
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/pengumuman.view.dart';
@@ -69,7 +70,8 @@ class _DashboardViewState extends State<DashboardView> {
               child: Text(
                 "PRESENSI MASUK",
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: GoogleFonts.poppins(
+                    color: Colors.white,
                     fontSize: 9.sp,
                     fontWeight: FontWeight.w600,
                     height: 1.2.sp),
@@ -80,7 +82,7 @@ class _DashboardViewState extends State<DashboardView> {
       ),
       bottomNavigationBar: BottomAppBar(
         notchMargin: 6,
-        height: 60,
+        height: 60.sp,
         elevation: 10,
         shape: const CircularNotchedRectangle(),
         color: MyColorsConst.whiteColor,
@@ -96,7 +98,7 @@ class _DashboardViewState extends State<DashboardView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
-                        width: 70,
+                        width: 70.sp,
                         child: InkWell(
                           onTap: () {
                             _pageController.animateToPage(0,
@@ -107,18 +109,18 @@ class _DashboardViewState extends State<DashboardView> {
                             children: [
                               Icon(
                                 CupertinoIcons.square_grid_2x2_fill,
-                                size: 20,
+                                size: 20.sp,
                                 color: _currentIndex == 0
                                     ? MyColorsConst.primaryColor
                                     : MyColorsConst.disableColor,
                               ),
                               if (_currentIndex ==
                                   0) // Show text only when Home is active
-                                const Text(
+                                Text(
                                   'Dashboard',
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                       color: MyColorsConst.primaryColor,
-                                      fontSize: 8,
+                                      fontSize: 8.sp,
                                       fontWeight: FontWeight.w600),
                                 ),
                             ],
@@ -159,11 +161,11 @@ class _DashboardViewState extends State<DashboardView> {
                               ),
                               if (_currentIndex ==
                                   1) // Show text only when Profile is active
-                                const Text(
+                                Text(
                                   'Profile',
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                       color: MyColorsConst.primaryColor,
-                                      fontSize: 8,
+                                      fontSize: 8.sp,
                                       fontWeight: FontWeight.w600),
                                 ),
                             ],

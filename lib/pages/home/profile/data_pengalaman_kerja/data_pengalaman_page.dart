@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/add_pengalaman.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/view_edit_pengalaman.dart';
@@ -24,8 +25,8 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF5EB5EE),
-              Color(0xFF6F7BF7),
+              MyColorsConst.primaryDarkColor,
+                  MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.1],
             begin: Alignment.topCenter,
@@ -55,7 +56,7 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
                   Expanded(
                     child: Text(
                       "Data Pengalaman Kerja",
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
@@ -69,8 +70,8 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
               child: Container(
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
                   color: Colors.white,
                 ),
@@ -112,7 +113,7 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
                                             children: [
                                               Text(
                                                 'Quantum Leap',
-                                                style: TextStyle(
+                                                style: GoogleFonts.poppins(
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w500,
                                                   color: MyColorsConst
@@ -130,7 +131,7 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
                                               ),
                                             ],
                                           ),
-                                          const Row(
+                                          Row(
                                             children: [
                                               Expanded(
                                                 child: Column(
@@ -139,7 +140,7 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
                                                   children: [
                                                     Text(
                                                       'Posisi',
-                                                      style: TextStyle(
+                                                      style: GoogleFonts.poppins(
                                                         fontSize: 10,
                                                         color: MyColorsConst
                                                             .lightDarkColor,
@@ -147,7 +148,7 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
                                                     ),
                                                     Text(
                                                       'Full-Stack Developer',
-                                                      style: TextStyle(
+                                                      style: GoogleFonts.poppins(
                                                         fontSize: 10,
                                                         color: MyColorsConst
                                                             .darkColor,
@@ -163,7 +164,7 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
                                                   children: [
                                                     Text(
                                                       'Tahun',
-                                                      style: TextStyle(
+                                                      style: GoogleFonts.poppins(
                                                         fontSize: 10,
                                                         color: MyColorsConst
                                                             .lightDarkColor,
@@ -171,7 +172,7 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
                                                     ),
                                                     Text(
                                                       '2020',
-                                                      style: TextStyle(
+                                                      style: GoogleFonts.poppins(
                                                         fontSize: 10,
                                                         color: MyColorsConst
                                                             .darkColor,
@@ -214,7 +215,7 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
                                                 ),
                                                 child: Text(
                                                   'Hapus',
-                                                  style: TextStyle(
+                                                  style: GoogleFonts.poppins(
                                                     fontSize: 12,
                                                     color:
                                                         MyColorsConst.darkColor,
