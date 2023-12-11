@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class TextButtonCustomV1 extends StatelessWidget {
@@ -45,8 +46,7 @@ class TextButtonCustomV1 extends StatelessWidget {
           children: [
             Text(
               text,
-              style: TextStyle(
-                fontFamily: 'Poppins',
+              style: GoogleFonts.poppins(
                 color: textColor,
                 fontWeight: FontWeight.bold,
                 fontSize: textSize,

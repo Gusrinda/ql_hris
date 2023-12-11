@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
@@ -144,7 +145,7 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV2> {
                     leading: Icon(Icons.camera),
                     title: Text(
                       'Ambil Foto dari Kamera',
-                      style: TextStyle(fontSize: 14),
+                      style: GoogleFonts.poppins(fontSize: 14),
                     ),
                     onTap: () {
                       Navigator.pop(context);
@@ -154,7 +155,7 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV2> {
                   ListTile(
                     leading: Icon(Icons.image),
                     title: Text('Pilih dari Galeri Foto',
-                        style: TextStyle(fontSize: 14)),
+                        style: GoogleFonts.poppins(fontSize: 14)),
                     onTap: () {
                       Navigator.pop(context);
                       _pickImageFromGallery();
@@ -254,7 +255,7 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV2> {
                     backgroundColor: MyColorsConst.whiteColor,
                     radius: 14,
                     child: CircleAvatar(
-                      backgroundColor: MyColorsConst.greenColor,
+                      backgroundColor: Colors.green.shade700,
                       radius: 12,
                       child: Icon(
                         imageFile == null && widget.imagePath == null

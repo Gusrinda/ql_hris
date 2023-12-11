@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
@@ -115,8 +116,8 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF5EB5EE),
-              Color(0xFF6F7BF7),
+              MyColorsConst.primaryDarkColor,
+                  MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.1],
             begin: Alignment.topCenter,
@@ -146,7 +147,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                   Expanded(
                     child: Text(
                       "Detail Cuti",
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
@@ -160,8 +161,8 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
               child: Container(
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
                   color: Colors.white,
                 ),
@@ -185,7 +186,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                               children: [
                                 Text(
                                   "${widget.tipeCutiValue ?? '-'}",
-                                  style: const TextStyle(
+                                  style: GoogleFonts.poppins(
                                     color: Colors.black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
@@ -200,7 +201,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                                   ),
                                   child: Text(
                                     mapStatusToString(widget.status as String),
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       color: currentColor,
                                       fontSize: 10,
                                       fontWeight: FontWeight.w500,
@@ -223,7 +224,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                                     width: 5), // Atur jarak sesuai kebutuhan
                                 Text(
                                   '${formatDate(widget.dateFrom ?? '-')} - ${formatDate(widget.dateTo ?? '-')}',
-                                  style: const TextStyle(
+                                  style: GoogleFonts.poppins(
                                       color: Colors.grey,
                                       fontSize: 10,
                                       fontWeight: FontWeight.w400),
@@ -240,9 +241,9 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                             const SizedBox(
                               height: 5,
                             ),
-                            const Text(
+                            Text(
                               'Alasan',
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                 fontSize: 10,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w600,
@@ -250,7 +251,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                             ),
                             Text(
                               '${widget.alasanValue ?? '-'}',
-                              style: const TextStyle(
+                              style: GoogleFonts.poppins(
                                 fontSize: 10,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w400,
@@ -259,9 +260,9 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                             const SizedBox(
                               height: 10,
                             ),
-                            const Text(
+                            Text(
                               'Catatan',
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                 fontSize: 10,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w600,
@@ -269,7 +270,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                             ),
                             Text(
                               '${widget.keterangan ?? '-'}',
-                              style: const TextStyle(
+                              style: GoogleFonts.poppins(
                                 fontSize: 10,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w400,

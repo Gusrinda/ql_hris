@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class TextFormCustomV3 extends StatelessWidget {
@@ -52,7 +53,7 @@ class TextFormCustomV3 extends StatelessWidget {
         children: [
           Text(
             titleText,
-            style: const TextStyle(
+            style: GoogleFonts.poppins(
               fontSize: 12,
               fontWeight: FontWeight.bold,
               color: MyColorsConst.primaryColor,
@@ -76,7 +77,7 @@ class TextFormCustomV3 extends StatelessWidget {
               controller: controller,
               enabled: enable,
               keyboardType: TextInputType.multiline,
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                 fontSize: textSize,
                 color: enable!
                     ? MyColorsConst.darkColor
@@ -86,7 +87,7 @@ class TextFormCustomV3 extends StatelessWidget {
               maxLines: 5,
               decoration: InputDecoration(
                 hintText: hintText,
-                hintStyle: TextStyle(
+                hintStyle: GoogleFonts.poppins(
                   fontSize: textSize,
                   color: MyColorsConst.lightDarkColor,
                   fontWeight: FontWeight.w300,

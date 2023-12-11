@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_add_data.dart';
@@ -629,7 +630,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                       Expanded(
                         child: Text(
                           "Revisi Pengajuan Perjalanan Dinas",
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: Colors.white,
@@ -643,8 +644,8 @@ class _EditDinasPageState extends State<EditDinasPage> {
                   child: Container(
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
                       ),
                       color: Colors.white,
                     ),
@@ -665,7 +666,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                               Step(
                                 label: Text(
                                   'Jabatan',
-                                  style: TextStyle(fontSize: 10),
+                                  style: GoogleFonts.poppins(fontSize: 10),
                                 ),
                                 title: SizedBox.shrink(),
                                 content: Form(
@@ -693,7 +694,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           }
                                           return null;
                                         },
-                                        errorTextStyle: TextStyle(
+                                        errorTextStyle: GoogleFonts.poppins(
                                           fontSize: 8,
                                         ),
                                       ),
@@ -719,7 +720,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           }
                                           return null;
                                         },
-                                        errorTextStyle: TextStyle(fontSize: 8),
+                                        errorTextStyle: GoogleFonts.poppins(fontSize: 8),
                                       ),
                                       const SizedBox(
                                         height: 20,
@@ -742,7 +743,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           }
                                           return null;
                                         },
-                                        errorTextStyle: TextStyle(fontSize: 8),
+                                        errorTextStyle: GoogleFonts.poppins(fontSize: 8),
                                       ),
                                       const SizedBox(
                                         height: 20,
@@ -766,7 +767,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           }
                                           return null;
                                         },
-                                        errorTextStyle: TextStyle(fontSize: 8),
+                                        errorTextStyle: GoogleFonts.poppins(fontSize: 8),
                                       ),
                                       const SizedBox(
                                         height: 20,
@@ -789,7 +790,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           }
                                           return null;
                                         },
-                                        errorTextStyle: TextStyle(fontSize: 8),
+                                        errorTextStyle: GoogleFonts.poppins(fontSize: 8),
                                       ),
                                       const SizedBox(
                                         height: 20,
@@ -812,7 +813,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           }
                                           return null;
                                         },
-                                        errorTextStyle: TextStyle(fontSize: 8),
+                                        errorTextStyle: GoogleFonts.poppins(fontSize: 8),
                                       ),
                                       const SizedBox(
                                         height: 20,
@@ -828,7 +829,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                               Step(
                                 label: Text(
                                   'Tanggal',
-                                  style: TextStyle(fontSize: 10),
+                                  style: GoogleFonts.poppins(fontSize: 10),
                                 ),
                                 title: SizedBox.shrink(),
                                 content: Form(
@@ -931,7 +932,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                               Step(
                                 label: Text(
                                   'Lokasi',
-                                  style: TextStyle(fontSize: 10),
+                                  style: GoogleFonts.poppins(fontSize: 10),
                                 ),
                                 title: SizedBox.shrink(),
                                 content: Form(
@@ -962,7 +963,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           }
                                           return null;
                                         },
-                                        errorTextStyle: TextStyle(fontSize: 8),
+                                        errorTextStyle: GoogleFonts.poppins(fontSize: 8),
                                       ),
                                       const SizedBox(
                                         height: 20,
@@ -986,7 +987,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           }
                                           return null;
                                         },
-                                        errorTextStyle: TextStyle(fontSize: 8),
+                                        errorTextStyle: GoogleFonts.poppins(fontSize: 8),
                                       ),
                                       const SizedBox(
                                         height: 20,
@@ -1010,7 +1011,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           }
                                           return null;
                                         },
-                                        errorTextStyle: TextStyle(fontSize: 8),
+                                        errorTextStyle: GoogleFonts.poppins(fontSize: 8),
                                       ),
                                       const SizedBox(
                                         height: 20,
@@ -1034,14 +1035,14 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           }
                                           return null;
                                         },
-                                        errorTextStyle: TextStyle(fontSize: 8),
+                                        errorTextStyle: GoogleFonts.poppins(fontSize: 8),
                                       ),
                                       const SizedBox(
                                         height: 20,
                                       ),
                                       Text(
                                         'Menggunakan Kendaraan Dinas',
-                                        style: TextStyle(
+                                        style: GoogleFonts.poppins(
                                           fontSize: 12,
                                           color: MyColorsConst.darkColor,
                                         ),
@@ -1064,9 +1065,9 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           ),
                                           Expanded(
                                             flex: 1,
-                                            child: const Text(
+                                            child: Text(
                                               'Ya',
-                                              style: TextStyle(
+                                              style: GoogleFonts.poppins(
                                                 fontSize: 12,
                                               ),
                                             ),
@@ -1087,9 +1088,9 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           ),
                                           Expanded(
                                             flex: 3,
-                                            child: const Text(
+                                            child: Text(
                                               'Tidak',
-                                              style: TextStyle(
+                                              style: GoogleFonts.poppins(
                                                 fontSize: 12,
                                               ),
                                             ),
@@ -1177,7 +1178,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                   selectedDate != null
                       ? DateFormat('yyyy-MM-dd').format(selectedDate)
                       : hintText,
-                  style: const TextStyle(
+                  style: GoogleFonts.poppins(
                     fontSize: 10,
                   ),
                 ),
@@ -1194,7 +1195,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
               (controller.text.isEmpty || validator(selectedDate) != null))
             Text(
               validator(selectedDate) ?? '',
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                 color: MyColorsConst.redColor,
                 fontSize: 8,
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/monthYearPicker_custom.dart';
@@ -200,8 +201,8 @@ class _CutiPageState extends State<CutiPage> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color(0xFF5EB5EE),
-                Color(0xFF6F7BF7),
+MyColorsConst.primaryDarkColor,
+                  MyColorsConst.primaryColor,
               ],
               stops: [0.0, 0.1],
               begin: Alignment.topCenter,
@@ -232,7 +233,7 @@ class _CutiPageState extends State<CutiPage> {
                     Expanded(
                       child: Text(
                         "History Cuti",
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
@@ -246,8 +247,8 @@ class _CutiPageState extends State<CutiPage> {
                 child: Container(
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
                     ),
                     color: Colors.white,
                   ),
@@ -256,9 +257,9 @@ class _CutiPageState extends State<CutiPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           "Daftar Pengajuan Cuti",
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                             color: MyColorsConst.darkColor,
@@ -273,9 +274,9 @@ class _CutiPageState extends State<CutiPage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   "Bulan",
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                     color: MyColorsConst.darkColor,
                                     fontSize: 10,
                                     fontWeight: FontWeight.normal,
@@ -316,9 +317,9 @@ class _CutiPageState extends State<CutiPage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   "Tahun",
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                     color: MyColorsConst.darkColor,
                                     fontSize: 10,
                                     fontWeight: FontWeight.normal,
@@ -383,7 +384,7 @@ class _CutiPageState extends State<CutiPage> {
                                                       vertical: 10),
                                               child: Text(
                                                 date,
-                                                style: const TextStyle(
+                                                style: GoogleFonts.poppins(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w500,
                                                 ),
@@ -542,7 +543,7 @@ class ListViewCuti extends StatelessWidget {
                     children: [
                       Text(
                         "${data.tipeCutiValue}",
-                        style: const TextStyle(
+                        style: GoogleFonts.poppins(
                           color: Colors.black,
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -558,7 +559,7 @@ class ListViewCuti extends StatelessWidget {
                         ),
                         child: Text(
                           mapStatusToString(currentStatus),
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             color: currentColor,
                             fontSize: 10,
                             fontWeight: FontWeight.w500,
@@ -580,7 +581,7 @@ class ListViewCuti extends StatelessWidget {
                       const SizedBox(width: 5),
                       Text(
                         '${formatDate(data.dateFrom)} - ${formatDate(data.dateTo)}',
-                        style: const TextStyle(
+                        style: GoogleFonts.poppins(
                           color: Colors.grey,
                           fontSize: 10,
                           fontWeight: FontWeight.w400,
@@ -613,9 +614,9 @@ class EmptyStateBuilder extends StatelessWidget {
           height: size.width * 1 / 2,
         ),
         const SizedBox(height: 8),
-        const Text(
+        Text(
           "Tidak ada data yang ditampilkan!",
-          style: TextStyle(
+          style: GoogleFonts.poppins(
             color: MyColorsConst.darkColor,
             fontWeight: FontWeight.bold,
             fontSize: 16,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -18,8 +19,8 @@ class _JatahCutiPageState extends State<JatahCutiPage> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF5EB5EE),
-              Color(0xFF6F7BF7),
+              MyColorsConst.primaryDarkColor,
+                  MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.1],
             begin: Alignment.topCenter,
@@ -49,7 +50,7 @@ class _JatahCutiPageState extends State<JatahCutiPage> {
                   Expanded(
                     child: Text(
                       "Jatah Cuti",
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
@@ -63,8 +64,8 @@ class _JatahCutiPageState extends State<JatahCutiPage> {
               child: Container(
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
                   color: Colors.white,
                 ),
@@ -93,7 +94,7 @@ class _JatahCutiPageState extends State<JatahCutiPage> {
                               children: [
                                 RichText(
                                   text: TextSpan(
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       fontSize: 10,
                                       fontWeight: FontWeight.w600,
                                       color: MyColorsConst.darkColor,
@@ -101,7 +102,7 @@ class _JatahCutiPageState extends State<JatahCutiPage> {
                                     children: [
                                       TextSpan(
                                         text: 'Perhatian!\n',
-                                        style: TextStyle(
+                                        style: GoogleFonts.poppins(
                                           color: MyColorsConst.redColor,
                                         ),
                                       ),
@@ -129,13 +130,13 @@ class _JatahCutiPageState extends State<JatahCutiPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Expanded(
+                            Expanded(
                               flex: 2,
                               child: Column(
                                 children: [
                                   Text(
                                     'Cuti Terpakai',
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500,
                                         color: MyColorsConst.lightDarkColor),
@@ -143,7 +144,7 @@ class _JatahCutiPageState extends State<JatahCutiPage> {
                                   SizedBox(height: 5),
                                   Text(
                                     '7 hari',
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       fontSize: 17,
                                       fontWeight: FontWeight.w700,
                                     ),
@@ -158,13 +159,13 @@ class _JatahCutiPageState extends State<JatahCutiPage> {
                               margin:
                                   const EdgeInsets.symmetric(horizontal: 10),
                             ),
-                            const Expanded(
+                            Expanded(
                               flex: 2,
                               child: Column(
                                 children: [
                                   Text(
                                     'Sisa Jatah Cuti',
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w500,
                                       color: MyColorsConst.lightDarkColor,
@@ -173,7 +174,7 @@ class _JatahCutiPageState extends State<JatahCutiPage> {
                                   SizedBox(height: 5),
                                   Text(
                                     '5 hari',
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       fontSize: 17,
                                       fontWeight: FontWeight.w700,
                                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas_bloc/add_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_pic_model.dart';
@@ -54,7 +55,7 @@ class PicSearchDelegate extends SearchDelegate<DataPic?> {
                       ListTile(
                         title: Text(
                           state.dataPic[index].name ?? '-',
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             fontSize: 14,
                           ),
                         ),

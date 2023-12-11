@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/monthYearPicker_custom.dart';
@@ -202,8 +203,8 @@ class _DinasPageState extends State<DinasPage> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color(0xFF5EB5EE),
-                Color(0xFF6F7BF7),
+MyColorsConst.primaryDarkColor,
+                  MyColorsConst.primaryColor,
               ],
               stops: [0.0, 0.1],
               begin: Alignment.topCenter,
@@ -233,7 +234,7 @@ class _DinasPageState extends State<DinasPage> {
                     Expanded(
                       child: Text(
                         "History Perjalanan Dinas",
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
@@ -247,8 +248,8 @@ class _DinasPageState extends State<DinasPage> {
                 child: Container(
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
                     ),
                     color: Colors.white,
                   ),
@@ -266,9 +267,9 @@ class _DinasPageState extends State<DinasPage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   "Bulan",
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                     color: MyColorsConst.darkColor,
                                     fontSize: 10,
                                     fontWeight: FontWeight.normal,
@@ -309,9 +310,9 @@ class _DinasPageState extends State<DinasPage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   "Tahun",
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                     color: MyColorsConst.darkColor,
                                     fontSize: 10,
                                     fontWeight: FontWeight.normal,
@@ -373,7 +374,7 @@ class _DinasPageState extends State<DinasPage> {
                                                   top: 10),
                                               child: Text(
                                                 date,
-                                                style: const TextStyle(
+                                                style: GoogleFonts.poppins(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w500,
                                                 ),
@@ -551,9 +552,9 @@ class ListViewDinas extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Text(
+                      Text(
                         "Surat Perjalanan Dinas",
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           color: Colors.black,
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -569,7 +570,7 @@ class ListViewDinas extends StatelessWidget {
                         ),
                         child: Text(
                           mapStatusToString(currentStatus),
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             color: currentColor,
                             fontSize: 10,
                             fontWeight: FontWeight.w500,
@@ -586,15 +587,15 @@ class ListViewDinas extends StatelessWidget {
                       children: [
                         TextSpan(
                           text: "${data.mDivisiNama}",
-                          style: const TextStyle(
+                          style: GoogleFonts.poppins(
                             color: MyColorsConst.darkColor,
                             fontSize: 10,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
-                        const TextSpan(
+                        TextSpan(
                           text: " | ",
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             color: Color(
                                 0XFF0068D4), // Set the color of the pipe to blue
                             fontSize: 10,
@@ -603,7 +604,7 @@ class ListViewDinas extends StatelessWidget {
                         ),
                         TextSpan(
                           text: "${data.mDeptNama}",
-                          style: const TextStyle(
+                          style: GoogleFonts.poppins(
                             color: MyColorsConst.darkColor,
                             fontSize: 10,
                             fontWeight: FontWeight.w400,
@@ -627,7 +628,7 @@ class ListViewDinas extends StatelessWidget {
                       const SizedBox(width: 5),
                       Text(
                         "Dibuat Tanggal ${formatDate(data.createdAt)}",
-                        style: const TextStyle(
+                        style: GoogleFonts.poppins(
                             color: Color(0XFF8F8F8F),
                             fontSize: 10,
                             fontWeight: FontWeight.w400),
@@ -659,9 +660,9 @@ class EmptyStateBuilder extends StatelessWidget {
           height: size.width * 1 / 2,
         ),
         const SizedBox(height: 8),
-        const Text(
+        Text(
           "Tidak ada data yang ditampilkan!",
-          style: TextStyle(
+          style: GoogleFonts.poppins(
             color: MyColorsConst.darkColor,
             fontWeight: FontWeight.bold,
             fontSize: 16,

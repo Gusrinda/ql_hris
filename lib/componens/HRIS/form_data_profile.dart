@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/hero_widget.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/text_form_custom.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -45,26 +47,24 @@ class DropDownDataProfile extends StatelessWidget {
                 label: labelForm,
                 labelColor: MyColorsConst.darkColor,
               ),
-              const SizedBox(width: 5),
-              const Text(
+              SizedBox(width: 2.sp),
+              Text(
                 '*',
-                style: TextStyle(color: Colors.red),
+                style: GoogleFonts.poppins(color: Colors.red),
               ),
             ],
           ),
         ),
-        const SizedBox(
-          height: 5,
+        SizedBox(
+          height: 5.sp,
         ),
         Hero(
           tag: formTag,
           child: Material(
             color: Colors.transparent,
             child: Container(
-              constraints: BoxConstraints(
-                maxWidth: 100,
-                maxHeight: 40,
-              ),
+              alignment: Alignment.center,
+              height: 56.sp,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Color(0xFFDDDDDD)),
@@ -73,32 +73,32 @@ class DropDownDataProfile extends StatelessWidget {
                 readOnly: true,
                 onTap: onTap,
                 controller: valueController, 
-                style: TextStyle(
-                  fontSize: 12,
+                style: GoogleFonts.poppins(
+                  fontSize: 13.sp,
                 ),
                 validator: validator,
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.only(left: 10, top: 5),
+                  contentPadding: EdgeInsets.all(18.sp),
                   border: InputBorder.none,
                   suffixIcon: Padding(
-                    padding: EdgeInsets.all(8),
+                    padding: EdgeInsets.all(8.sp),
                     child: Icon(
                       Icons.keyboard_arrow_down,
                       color: MyColorsConst.darkColor,
                     ),
                   ),
                   hintText: hintText,
-                  hintStyle: TextStyle(
-                    fontSize: 12,
-                    fontStyle: FontStyle.italic,
-                  ),
+                  hintStyle: GoogleFonts.poppins(
+                      fontSize: 13.sp,
+                      color: MyColorsConst.disableColor,
+                      fontWeight: FontWeight.w500),
                   errorStyle: errorTextStyle,
                 ),
               ),
             ),
           ),
         ),
-        const SizedBox(height: 20),
+        SizedBox(height: 20.sp),
       ],
     );
   }
@@ -145,18 +145,18 @@ class FormDataProfile extends StatelessWidget {
                 label: labelForm,
                 labelColor: MyColorsConst.darkColor,
               ),
+              if (showRedStar) // Tampilkan bintang merah sesuai showRedStar
+                SizedBox(width: 2.sp),
               if (showRedStar)
-                const SizedBox(width: 5),
-              if (showRedStar)
-                const Text(
+                Text(
                   '*',
-                  style: TextStyle(color: Colors.red),
+                  style: GoogleFonts.poppins(color: Colors.red),
                 ),
             ],
           ),
         ),
-        const SizedBox(
-          height: 5,
+        SizedBox(
+          height: 5.sp,
         ),
         Hero(
           tag: formTag,
@@ -167,29 +167,27 @@ class FormDataProfile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
-                  constraints: BoxConstraints(
-                    maxWidth: 100,
-                    maxHeight: 40,
-                  ),
+                  height: 50.sp,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Color(0xFFDDDDDD)),
                   ),
                   child: TextFormField(
-                    style: TextStyle(
-                      fontSize: 13,
+                    style: GoogleFonts.poppins(
+                      fontSize: 13.sp,
                       color: MyColorsConst.darkColor,
+                      fontWeight: FontWeight.w500
                     ),
                     maxLines: 5,
                     readOnly: false,
                     decoration: InputDecoration(
                       hintText: hintText,
-                      hintStyle: TextStyle(
-                        fontSize: 12,
-                        fontStyle: FontStyle.italic,
-                      ),
+                      hintStyle: GoogleFonts.poppins(
+                          fontSize: 13,
+                          color: MyColorsConst.disableColor,
+                          fontWeight: FontWeight.w500),
                       border: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: 10, top: 5),
+                      contentPadding: EdgeInsets.all(15.sp),
                       errorStyle: errorTextStyle,
                     ),
                     onTap: onTap,
@@ -198,7 +196,7 @@ class FormDataProfile extends StatelessWidget {
                     validator: validator,
                   ),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20.sp),
               ],
             ),
           ),

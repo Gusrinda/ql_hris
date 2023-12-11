@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -71,7 +72,7 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV1> {
                           fit: BoxFit.fitWidth,
                         ),
                       )
-                    : const Column(
+                    : Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -83,7 +84,7 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV1> {
                           SizedBox(height: 6),
                           Text(
                             "Ketuk untuk ambil gambar",
-                            style: TextStyle(
+                            style: GoogleFonts.poppins(
                               color: MyColorsConst.darkColor,
                               fontSize: 12,
                             ),
@@ -106,7 +107,7 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV1> {
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
-                        children: const [
+                        children: [
                           Icon(
                             Icons.replay,
                             size: 15,
@@ -115,7 +116,7 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV1> {
                           SizedBox(width: 6),
                           Text(
                             "Ambil Ulang",
-                            style: TextStyle(
+                            style: GoogleFonts.poppins(
                               color: MyColorsConst.whiteColor,
                               fontSize: 12,
                             ),

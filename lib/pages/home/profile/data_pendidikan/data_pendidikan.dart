@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/add_pendidikan.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/view_edit-pendidikan.dart';
@@ -23,8 +24,8 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF5EB5EE),
-              Color(0xFF6F7BF7),
+              MyColorsConst.primaryDarkColor,
+              MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.1],
             begin: Alignment.topCenter,
@@ -54,7 +55,7 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
                   Expanded(
                     child: Text(
                       "Data Pendidikan",
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
@@ -68,8 +69,8 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
               child: Container(
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
                   color: Colors.white,
                 ),
@@ -86,8 +87,8 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
                               contentPadding: EdgeInsets.zero,
                               subtitle: GestureDetector(
                                 onTap: () {
-                                  Navigator.of(context)
-                              .pushNamed(ViewEditPendidikanPage.routeName);
+                                  Navigator.of(context).pushNamed(
+                                      ViewEditPendidikanPage.routeName);
                                 },
                                 child: Container(
                                   margin: const EdgeInsets.only(bottom: 10),
@@ -111,9 +112,9 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
                                             children: [
                                               Text(
                                                 'SMA Success Jaya',
-                                                style: TextStyle(
+                                                style: GoogleFonts.poppins(
                                                   fontSize: 16,
-                                                  fontWeight: FontWeight.w500,
+                                                  fontWeight: FontWeight.w600,
                                                   color: MyColorsConst
                                                       .primaryColor,
                                                 ),
@@ -129,7 +130,7 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
                                               ),
                                             ],
                                           ),
-                                          const Row(
+                                          Row(
                                             children: [
                                               Expanded(
                                                 child: Column(
@@ -138,7 +139,7 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
                                                   children: [
                                                     Text(
                                                       'Tahun',
-                                                      style: TextStyle(
+                                                      style: GoogleFonts.poppins(
                                                         fontSize: 10,
                                                         color: MyColorsConst
                                                             .lightDarkColor,
@@ -146,8 +147,9 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
                                                     ),
                                                     Text(
                                                       '2015 - 2018',
-                                                      style: TextStyle(
-                                                        fontSize: 10,
+                                                      style: GoogleFonts.poppins(
+                                                        fontSize: 12,
+                                                        fontWeight: FontWeight.w600,
                                                         color: MyColorsConst
                                                             .darkColor,
                                                       ),
@@ -162,7 +164,7 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
                                                   children: [
                                                     Text(
                                                       'Kota',
-                                                      style: TextStyle(
+                                                      style: GoogleFonts.poppins(
                                                         fontSize: 10,
                                                         color: MyColorsConst
                                                             .lightDarkColor,
@@ -170,8 +172,9 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
                                                     ),
                                                     Text(
                                                       'Surabaya',
-                                                      style: TextStyle(
-                                                        fontSize: 10,
+                                                      style: GoogleFonts.poppins(
+                                                        fontSize: 12,
+                                                        fontWeight: FontWeight.w600,
                                                         color: MyColorsConst
                                                             .darkColor,
                                                       ),
@@ -213,7 +216,7 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
                                                 ),
                                                 child: Text(
                                                   'Hapus',
-                                                  style: TextStyle(
+                                                  style: GoogleFonts.poppins(
                                                     fontSize: 12,
                                                     color:
                                                         MyColorsConst.darkColor,

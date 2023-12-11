@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 enum AuthenticationLayoutState {
@@ -47,13 +49,13 @@ class AuthenticationLayout extends StatelessWidget {
             ),
       body: SingleChildScrollView(
         child: Container(
-          height: size.height,
+          height: size.height.sp,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                height: 200,
+                height: 200.sp,
                 child: Image.asset(
                   fit: BoxFit.fill,
                   width: MediaQuery.of(context).size.width,
@@ -70,20 +72,20 @@ class AuthenticationLayout extends StatelessWidget {
                       width: size.width * 1 / 3,
                       layoutData[layoutState.index]["image2"] as String,
                     ),
-                    SizedBox(height: 30,),
+                    SizedBox(height: 30.sp),
                     Text(
                       layoutData[layoutState.index]["title"] as String,
-                      style: const TextStyle(
-                        fontSize: 20,
+                      style: GoogleFonts.poppins(
+                        fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: 10.sp),
                     Text(
                       layoutData[layoutState.index]["subTitle"] as String,
-                      style: const TextStyle(
+                      style: GoogleFonts.poppins(
                         color: MyColorsConst.lightDarkColor,
-                        fontSize: 12,
+                        fontSize: 12.sp,
                       ),
                     ),
                   ],
@@ -102,11 +104,13 @@ class AuthenticationLayout extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: Image.asset(
-                  layoutData[layoutState.index]["imageBottom"] as String,
-                  // fit: BoxFit.fitHeight,
+              Expanded(
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Image.asset(
+                    layoutData[layoutState.index]["imageBottom"] as String,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ],

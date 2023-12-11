@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
@@ -150,7 +151,7 @@ class HomeCheckInOutPage extends StatelessWidget {
                       ),
                       Text(
                         "Yuk isi absensimu!",
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w600, fontSize: 14),
                       ),
                       BlocBuilder<CheckInOutBloc, CheckInOutState>(
@@ -259,7 +260,7 @@ class HomeCheckInOutPage extends StatelessWidget {
                 Text(
                   title,
                   // textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                     color: enable ? MyColorsConst.darkColor : Colors.grey,
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
@@ -280,7 +281,7 @@ class HomeCheckInOutPage extends StatelessWidget {
 //             onPressed: onPress,
 //             child: Text(
 //               title,
-//               style: const TextStyle(
+//               style: GoogleFonts.poppins(
 //                 color: MyColorsConst.whiteColor,
 //                 fontWeight: FontWeight.bold,
 //                 fontSize: 16,
@@ -297,7 +298,7 @@ class HomeCheckInOutPage extends StatelessWidget {
 //             ),
 //             child: Text(
 //               title,
-//               style: const TextStyle(
+//               style: GoogleFonts.poppins(
 //                 color: MyColorsConst.whiteColor,
 //                 fontWeight: FontWeight.bold,
 //                 fontSize: 16,

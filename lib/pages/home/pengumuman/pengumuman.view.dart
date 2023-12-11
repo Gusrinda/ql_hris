@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PengumumanPage extends StatelessWidget {
   @override
@@ -8,7 +9,7 @@ class PengumumanPage extends StatelessWidget {
         child: Center(
           child: Text(
             'Pengumuman Page',
-            style: TextStyle(color: Colors.blueAccent),
+            style: GoogleFonts.poppins(color: Colors.blueAccent),
           ),
         ),
       ),

@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/image_form_custom_v2.dart';
@@ -103,9 +106,8 @@ class _ProfilePageState extends State<ProfilePage> {
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color(0xFF5EB5EE),
-                  Color(0xFF6F7BF7),
-                  // Color(0xFF00CCFF),
+                  MyColorsConst.primaryDarkColor,
+                  MyColorsConst.primaryColor,
                 ],
                 stops: [0.0, 0.1],
                 begin: Alignment.topCenter,
@@ -114,13 +116,13 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             child: Column(
               children: [
-                const SizedBox(height: 30),
+                SizedBox(height: 40.sp),
                 Container(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(15),
                   alignment: Alignment.center,
-                  child: const Text(
+                  child: Text(
                     "Profile",
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
@@ -130,8 +132,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 Container(
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
                     ),
                     color: Colors.white,
                   ),
@@ -150,8 +152,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   imagePath: data?.imagePath,
                                   onImageSelected: (filePath) {
                                     context.read<ProfileBloc>().add(
-                                        EditImageProfile(
-                                            imagePath: filePath));
+                                        EditImageProfile(imagePath: filePath));
                                   },
                                   onImageSelectedError: (message) async {
                                     await showDialog(
@@ -168,14 +169,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                   children: [
                                     Text(
                                       data?.name ?? "-",
-                                      style: const TextStyle(
+                                      style: GoogleFonts.poppins(
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     Text(
                                       data?.name ?? "-",
-                                      style: const TextStyle(
+                                      style: GoogleFonts.poppins(
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -188,21 +189,21 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
 
                         const SizedBox(height: 25),
-                        const Text(
+                        Text(
                           'Data Profil',
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             fontSize: 12,
                             color: MyColorsConst.lightDarkColor,
                           ),
                         ),
-                        const Divider(
-                          color: Color(0xFFDDDDDD),
+                        Divider(
+                          color: MyColorsConst.primaryColor.withOpacity(0.1),
                           thickness: 1,
                         ),
                         TextFormCustomV2(
                           labelText: "Data Diri",
                           color: MyColorsConst.whiteColor,
-                          icon: Icons.person,
+                          icon: CupertinoIcons.person_fill,
                           onTap: () {
                             Navigator.of(context)
                                 .pushNamed(DataDiriPage.routeName);
@@ -211,7 +212,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         TextFormCustomV2(
                           labelText: "Data Pendidikan",
                           color: MyColorsConst.whiteColor,
-                          icon: Icons.school,
+                          icon: Icons.school_rounded,
                           onTap: () {
                             Navigator.of(context)
                                 .pushNamed(DataPendidikanPage.routeName);
@@ -220,7 +221,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         TextFormCustomV2(
                           labelText: "Data Keluarga",
                           color: MyColorsConst.whiteColor,
-                          icon: Icons.groups,
+                          icon: Icons.groups_rounded,
                           onTap: () {
                             Navigator.of(context)
                                 .pushNamed(DataKeluargaPage.routeName);
@@ -229,7 +230,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         TextFormCustomV2(
                           labelText: "Data Pelatihan",
                           color: MyColorsConst.whiteColor,
-                          icon: Icons.article,
+                          icon: Icons.article_rounded,
                           onTap: () {
                             Navigator.of(context)
                                 .pushNamed(DataPelatihanPage.routeName);
@@ -238,7 +239,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         TextFormCustomV2(
                           labelText: "Data Prestasi",
                           color: MyColorsConst.whiteColor,
-                          icon: Icons.workspace_premium_outlined,
+                          icon: Icons.workspace_premium_rounded,
                           onTap: () {
                             Navigator.of(context)
                                 .pushNamed(DataPrestasiPage.routeName);
@@ -256,7 +257,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         TextFormCustomV2(
                           labelText: "Data Bahasa",
                           color: MyColorsConst.whiteColor,
-                          icon: Icons.abc,
+                          icon: Icons.translate_rounded,
                           onTap: () {
                             Navigator.of(context)
                                 .pushNamed(DataBahasaPage.routeName);
@@ -272,15 +273,15 @@ class _ProfilePageState extends State<ProfilePage> {
                           },
                         ),
                         const SizedBox(height: 25),
-                        const Text(
+                        Text(
                           'Akun',
-                          style: TextStyle(
+                          style: GoogleFonts.poppins(
                             fontSize: 12,
                             color: MyColorsConst.lightDarkColor,
                           ),
                         ),
-                        const Divider(
-                          color: Color(0xFFDDDDDD),
+                        Divider(
+                          color: MyColorsConst.primaryColor.withOpacity(0.1),
                           thickness: 1,
                         ),
                         TextFormCustomV2(
@@ -304,6 +305,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ));
                           },
                         ),
+                        SizedBox(height: 100.sp)
                         // TextButtonCustomV1(
                         //   height: 45,
                         //   text: "Logout",

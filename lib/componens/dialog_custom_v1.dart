@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -89,7 +90,7 @@ class _DialogCustomState extends State<DialogCustom> {
             const SizedBox(height: 10),
             Text(
               dataLottie[widget.state.index]["text"] as String,
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: MyColorsConst.darkColor,
@@ -99,7 +100,7 @@ class _DialogCustomState extends State<DialogCustom> {
             Text(
               widget.message,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 12),
+              style: GoogleFonts.poppins(fontSize: 12),
             ),
             const SizedBox(height: 20),
             widget.state != DialogCustomItem.warning
@@ -156,7 +157,7 @@ class _DialogCustomState extends State<DialogCustom> {
       ),
       child: Text(
         text,
-        style: TextStyle(
+        style: GoogleFonts.poppins(
           color: color,
           fontSize: 12,
         ),
@@ -193,7 +194,7 @@ class _DialogCustomState extends State<DialogCustom> {
 //             Text(
 //               message,
 //               textAlign: TextAlign.center,
-//               style: const TextStyle(fontSize: 12),
+//               style: GoogleFonts.poppins(fontSize: 12),
 //             ),
 //             const SizedBox(height: 10),
 //             ElevatedButton(
@@ -205,7 +206,7 @@ class _DialogCustomState extends State<DialogCustom> {
 //                   backgroundColor: dataLottie[state.index]["color"] as Color,
 //                   shape: RoundedRectangleBorder(
 //                       borderRadius: BorderRadius.circular(10))),
-//               child: const Text('Tutup'),
+//               child: Text('Tutup'),
 //             )
 //           ],
 //         ),

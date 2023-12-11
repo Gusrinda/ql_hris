@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_diri.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -22,8 +23,8 @@ class _DataDiriPageState extends State<DataDiriPage> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color(0xFF5EB5EE),
-                Color(0xFF6F7BF7),
+MyColorsConst.primaryDarkColor,
+                  MyColorsConst.primaryColor,
               ],
               stops: [0.0, 0.05],
               begin: Alignment.topCenter,
@@ -53,7 +54,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                     Expanded(
                       child: Text(
                         "Data Diri",
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
@@ -66,8 +67,8 @@ class _DataDiriPageState extends State<DataDiriPage> {
               Container(
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
                   color: Colors.white,
                 ),
@@ -77,9 +78,9 @@ class _DataDiriPageState extends State<DataDiriPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 10),
-                      const Text(
+                      Text(
                         'Informasi',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                           color: MyColorsConst.primaryColor,
@@ -114,9 +115,9 @@ class _DataDiriPageState extends State<DataDiriPage> {
                         ],
                       ),
                       const SizedBox(height: 20),
-                      const Text(
+                      Text(
                         'Data Diri',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                           color: MyColorsConst.primaryColor,
@@ -165,9 +166,9 @@ class _DataDiriPageState extends State<DataDiriPage> {
                         ],
                       ),
                       const SizedBox(height: 20),
-                      const Text(
+                      Text(
                         'Info Lain',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                           color: MyColorsConst.primaryColor,
@@ -200,9 +201,9 @@ class _DataDiriPageState extends State<DataDiriPage> {
                         ],
                       ),
                       const SizedBox(height: 20),
-                      const Text(
+                      Text(
                         'Berkas',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                           color: MyColorsConst.primaryColor,
@@ -245,9 +246,9 @@ class _DataDiriPageState extends State<DataDiriPage> {
                         ],
                       ),
                       const SizedBox(height: 20),
-                      const Text(
+                      Text(
                         'Ukuran',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                           color: MyColorsConst.primaryColor,
@@ -276,9 +277,9 @@ class _DataDiriPageState extends State<DataDiriPage> {
                         ],
                       ),
                       const SizedBox(height: 20),
-                      const Text(
+                      Text(
                         'Pembayaran',
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                           color: MyColorsConst.primaryColor,
@@ -337,14 +338,14 @@ class _DataDiriPageState extends State<DataDiriPage> {
       children: [
         Text(
           label,
-          style: const TextStyle(
+          style: GoogleFonts.poppins(
             fontSize: 12,
             color: MyColorsConst.lightDarkColor,
           ),
         ),
         Text(
           value,
-          style: const TextStyle(
+          style: GoogleFonts.poppins(
             fontSize: 12,
             fontWeight: FontWeight.w500,
             color: MyColorsConst.darkColor,

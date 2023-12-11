@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/services/dinas_services.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/list_dinas_model.dart';
 import 'package:sj_presensi_mobile/services/profile_services.dart';

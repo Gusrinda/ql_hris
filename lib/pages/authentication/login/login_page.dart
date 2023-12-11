@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
@@ -58,7 +60,7 @@ class LoginPage extends StatelessWidget {
               // EmailValidator(errorText: "Email not Valid!")
             ]),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.sp),
           TextFormCustomHRIS1(
             labelText: "Password",
             isPassword: true,
@@ -68,12 +70,12 @@ class LoginPage extends StatelessWidget {
               RequiredValidator(errorText: "Masukkan Password"),
             ]),
           ),
-          const SizedBox(height: 40),
+          SizedBox(height: 40.sp),
           TextButtonCustomV1(
             width: MediaQuery.of(context).size.width,
-            height: 40,
+            height: 40.sp,
             text: "Login",
-            textSize: 12,
+            textSize: 12.sp,
             backgroundColor: MyColorsConst.primaryColor,
             textColor: MyColorsConst.whiteColor,
             onPressed: () {
@@ -86,7 +88,7 @@ class LoginPage extends StatelessWidget {
                   );
             },
           ),
-          const SizedBox(height: 40),
+          SizedBox(height: 40.sp),
         ],
       ),
     );

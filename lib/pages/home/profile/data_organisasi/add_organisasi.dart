@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -35,8 +36,8 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF5EB5EE),
-              Color(0xFF6F7BF7),
+              MyColorsConst.primaryDarkColor,
+                  MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.1],
             begin: Alignment.topCenter,
@@ -66,7 +67,7 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
                   Expanded(
                     child: Text(
                       "Tambah Data Organisasi",
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
@@ -80,8 +81,8 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
               child: Container(
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
                   color: Colors.white,
                 ),

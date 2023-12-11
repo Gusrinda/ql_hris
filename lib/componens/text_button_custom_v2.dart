@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../utils/const.dart';
 
@@ -66,7 +67,7 @@ class TextButtonCustomV2 extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
                 child: Text(
                   text,
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                     color: color,
                     fontSize: 14,
                     fontWeight: FontWeight.bold,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
@@ -151,7 +152,7 @@ class AddCheckInOutPage extends StatelessWidget {
                                     width: 5), // Atur jarak sesuai kebutuhan
                                 Text(
                                   '${data != null ? DateFormat('EEEE, dd-MM-yyyy', 'id_ID').format(data.dateTime) : "-"}',
-                                  style: TextStyle(
+                                  style: GoogleFonts.poppins(
                                       // fontFamily: 'Poppins',
                                       fontSize: 12,
                                       fontWeight: FontWeight.w500),
@@ -171,7 +172,7 @@ class AddCheckInOutPage extends StatelessWidget {
                                   const SizedBox(width: 5),
                                   Text(
                                     '${data != null ? DateFormat('HH:mm:ss').format(data.dateTime) : "-"}',
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                         // fontFamily: 'Poppins',
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500),
@@ -237,7 +238,7 @@ class AddCheckInOutPage extends StatelessWidget {
                             SizedBox(height: 10,),
                             // Padding(
                             //   padding: const EdgeInsets.symmetric(horizontal: 9),
-                            //   child: Text("Alasan lokasi Out Scope", style: TextStyle(
+                            //   child: Text("Alasan lokasi Out Scope", style: GoogleFonts.poppins(
                             //     fontSize: 12, fontWeight: FontWeight.w700, color: MyColorsConst.darkColor
                             //   ),),
                             // ),
@@ -248,11 +249,11 @@ class AddCheckInOutPage extends StatelessWidget {
                                   decoration: InputDecoration(
                                     focusColor: MyColorsConst.primaryColor,
                                     contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                                    labelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                                    labelStyle: GoogleFonts.poppins(fontSize: 12, fontWeight: FontWeight.w600),
                                     labelText: 'Alasan Presensi Out Scope',
                                     border: OutlineInputBorder(),
                                   ),
-                                  style: TextStyle(fontSize: 13),
+                                  style: GoogleFonts.poppins(fontSize: 13),
                                 ),
                               ),
                           ],
@@ -325,7 +326,7 @@ class AddCheckInOutPage extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child: Text(
             title,
-            style: const TextStyle(
+            style: GoogleFonts.poppins(
               color: MyColorsConst.darkColor,
               fontWeight: FontWeight.bold,
               fontSize: 12,
@@ -344,7 +345,7 @@ class AddCheckInOutPage extends StatelessWidget {
           ),
           child: Text(
             text,
-            style: TextStyle(
+            style: GoogleFonts.poppins(
               color: color,
               fontSize: textSize,
               fontWeight: textBold,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class TextFormCustomHRIS1 extends StatefulWidget {
@@ -53,7 +54,7 @@ class _TextFormCustomHRIS1State extends State<TextFormCustomHRIS1> {
             enabled: widget.enable,
             keyboardType: widget.keyboardType,
             obscureText: _isPasswordShowed,
-            style: TextStyle(
+            style: GoogleFonts.poppins(
               fontSize: widget.textSize,
               color: widget.enable!
                   ? MyColorsConst.darkColor
@@ -62,12 +63,12 @@ class _TextFormCustomHRIS1State extends State<TextFormCustomHRIS1> {
             validator: widget.validator,
             decoration: InputDecoration(
               labelText: widget.labelText,
-              labelStyle: TextStyle(
+              labelStyle: GoogleFonts.poppins(
                 // fontFamily: "Poppins",
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
               ),
-              floatingLabelStyle: TextStyle(
+              floatingLabelStyle: GoogleFonts.poppins(
                 // fontFamily: "Poppins",
                 fontSize: 14,
                 fontWeight: FontWeight.w500

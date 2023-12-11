@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
@@ -32,11 +33,11 @@ class HomePage extends StatelessWidget {
             showUnselectedLabels: true,
             selectedItemColor: MyColorsConst.primaryColor,
             unselectedItemColor: MyColorsConst.lightDarkColor,
-            selectedLabelStyle: const TextStyle(
+            selectedLabelStyle: GoogleFonts.poppins(
               fontWeight: FontWeight.w500,
               fontSize: 7,
             ),
-            unselectedLabelStyle: const TextStyle(
+            unselectedLabelStyle: GoogleFonts.poppins(
               fontWeight: FontWeight.w500,
               fontSize: 7,
             ),
