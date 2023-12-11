@@ -34,9 +34,9 @@ class _DataDiriPageState extends State<DataDiriPage> {
           ),
           child: Column(
             children: [
-              const SizedBox(height: 30),
+              SizedBox(height: 30.sp),
               Container(
-                padding: EdgeInsets.all(5.0),
+                padding: EdgeInsets.all(5.0.sp),
                 child: Row(
                   children: [
                     IconButton(
@@ -74,11 +74,11 @@ class _DataDiriPageState extends State<DataDiriPage> {
                   color: Colors.white,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(18.0),
+                  padding: EdgeInsets.all(20.sp),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10.sp),
                       Text(
                         'Informasi',
                         style: GoogleFonts.poppins(
@@ -87,10 +87,11 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           color: MyColorsConst.primaryColor,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Row(
                         children: [
                           Expanded(
+                            flex: 3,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -104,6 +105,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           ),
                           SizedBox(width: 5),
                           Expanded(
+                            flex: 2,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -116,7 +118,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Text(
                         'Data Diri',
                         style: GoogleFonts.poppins(
@@ -125,10 +127,11 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           color: MyColorsConst.primaryColor,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Row(
                         children: [
                           Expanded(
+                            flex: 3,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -149,6 +152,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           ),
                           SizedBox(width: 5),
                           Expanded(
+                            flex: 2,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -168,7 +172,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Text(
                         'Info Lain',
                         style: GoogleFonts.poppins(
@@ -177,10 +181,11 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           color: MyColorsConst.primaryColor,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Row(
                         children: [
                           Expanded(
+                            flex: 3,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -193,6 +198,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           ),
                           SizedBox(width: 5),
                           Expanded(
+                            flex: 2,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -204,7 +210,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Text(
                         'Berkas',
                         style: GoogleFonts.poppins(
@@ -213,10 +219,11 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           color: MyColorsConst.primaryColor,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Row(
                         children: [
                           Expanded(
+                            flex: 3,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -233,6 +240,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           ),
                           const SizedBox(width: 5),
                           Expanded(
+                            flex: 2,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -250,7 +258,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Text(
                         'Ukuran',
                         style: GoogleFonts.poppins(
@@ -259,10 +267,11 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           color: MyColorsConst.primaryColor,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Row(
                         children: [
                           Expanded(
+                            flex: 3,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -273,6 +282,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           ),
                           const SizedBox(width: 5),
                           Expanded(
+                            flex: 2,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -282,7 +292,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Text(
                         'Pembayaran',
                         style: GoogleFonts.poppins(
@@ -291,10 +301,11 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           color: MyColorsConst.primaryColor,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Row(
                         children: [
                           Expanded(
+                            flex: 3,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -306,6 +317,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           ),
                           const SizedBox(width: 5),
                           Expanded(
+                            flex: 2,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -317,9 +329,10 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       TextButtonCustomV1(
                         text: "Edit Data Diri",
+                        height: 50.sp,
                         backgroundColor:
                             MyColorsConst.primaryColor.withOpacity(0.1),
                         textColor: MyColorsConst.primaryColor,
@@ -359,7 +372,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
             color: MyColorsConst.darkColor,
           ),
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: 15.sp),
       ],
     );
   }

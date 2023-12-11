@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/add_bahasa.dart';
@@ -25,7 +26,7 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
           gradient: LinearGradient(
             colors: [
               MyColorsConst.primaryDarkColor,
-                  MyColorsConst.primaryColor,
+              MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.12],
             begin: Alignment.topCenter,
@@ -34,9 +35,9 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
         ),
         child: Column(
           children: [
-            const SizedBox(height: 30),
+            SizedBox(height: 30.sp),
             Container(
-              padding: EdgeInsets.all(5.0),
+              padding: EdgeInsets.all(5.0.sp),
               child: Row(
                 children: [
                   IconButton(
@@ -75,7 +76,7 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                   color: Colors.white,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(18.0),
+                  padding: EdgeInsets.all(20.sp),
                   child: Column(
                     children: [
                       Expanded(
@@ -91,16 +92,16 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                                       .pushNamed(ViewEditBahasaPage.routeName);
                                 },
                                 child: Container(
-                                  margin: const EdgeInsets.only(bottom: 10),
+                                  margin: EdgeInsets.only(bottom: 10.sp),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     border:
                                         Border.all(color: Color(0xFFDDDDDD)),
                                     color: MyColorsConst.whiteColor,
                                   ),
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 12,
-                                    vertical: 10,
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 12.sp,
+                                    vertical: 10.sp,
                                   ),
                                   child: Stack(
                                     children: [
@@ -113,7 +114,7 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                                               Text(
                                                 'Bahasa Indonesia',
                                                 style: GoogleFonts.poppins(
-                                                  fontSize: 16,
+                                                  fontSize: 16.sp,
                                                   fontWeight: FontWeight.w500,
                                                   color: MyColorsConst
                                                       .primaryColor,
@@ -139,16 +140,18 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                                                   children: [
                                                     Text(
                                                       'Nilai Lisan',
-                                                      style: GoogleFonts.poppins(
-                                                        fontSize: 10,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 10.sp,
                                                         color: MyColorsConst
                                                             .lightDarkColor,
                                                       ),
                                                     ),
                                                     Text(
                                                       '90',
-                                                      style: GoogleFonts.poppins(
-                                                        fontSize: 10,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 10.sp,
                                                         color: MyColorsConst
                                                             .darkColor,
                                                       ),
@@ -163,16 +166,18 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                                                   children: [
                                                     Text(
                                                       'Nilai Tertulis',
-                                                      style: GoogleFonts.poppins(
-                                                        fontSize: 10,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 10.sp,
                                                         color: MyColorsConst
                                                             .lightDarkColor,
                                                       ),
                                                     ),
                                                     Text(
                                                       '90',
-                                                      style: GoogleFonts.poppins(
-                                                        fontSize: 10,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 10.sp,
                                                         color: MyColorsConst
                                                             .darkColor,
                                                       ),
@@ -183,7 +188,7 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                                             ],
                                           ),
                                           SizedBox(
-                                            height: 5,
+                                            height: 5.sp,
                                           ),
                                         ],
                                       ),
@@ -199,10 +204,9 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                                             child: InkWell(
                                               onTap: () {},
                                               child: Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  horizontal: 8,
-                                                  vertical: 4,
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 8.sp,
+                                                  vertical: 4.sp,
                                                 ),
                                                 decoration: BoxDecoration(
                                                   borderRadius:
@@ -215,7 +219,7 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                                                 child: Text(
                                                   'Hapus',
                                                   style: GoogleFonts.poppins(
-                                                    fontSize: 12,
+                                                    fontSize: 12.sp,
                                                     color:
                                                         MyColorsConst.darkColor,
                                                   ),
@@ -235,12 +239,14 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                       ),
                       TextButtonCustomV1(
                         text: "Tambah Data",
-                        height: 50,
+                        height: 50.sp,
                         backgroundColor:
                             MyColorsConst.primaryColor.withOpacity(0.1),
                         textColor: MyColorsConst.primaryColor,
-                        onPressed: () {Navigator.of(context)
-                                      .pushNamed(AddBahasaPage.routeName);},
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(AddBahasaPage.routeName);
+                        },
                       )
                     ],
                   ),

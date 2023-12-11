@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_add_data.dart';
+import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/text_form_custom.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
@@ -599,8 +601,8 @@ class _EditDinasPageState extends State<EditDinasPage> {
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color(0xFF5EB5EE),
-                  Color(0xFF6F7BF7),
+                  MyColorsConst.primaryDarkColor,
+                  MyColorsConst.primaryColor,
                 ],
                 stops: [0.0, 0.1],
                 begin: Alignment.topCenter,
@@ -698,10 +700,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           fontSize: 8,
                                         ),
                                       ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      FormDropDown(
+                                      FormDropDownData(
                                         input: selectedDirektoratValue ?? '',
                                         onTap: () {
                                           _showDirektorat(context);
@@ -720,12 +719,10 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           }
                                           return null;
                                         },
-                                        errorTextStyle: GoogleFonts.poppins(fontSize: 8),
+                                        errorTextStyle:
+                                            GoogleFonts.poppins(fontSize: 8),
                                       ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      FormDropDown(
+                                      FormDropDownData(
                                         input: selectedDivisiValue ?? '',
                                         onTap: () {
                                           _showDivisi(context);
@@ -743,12 +740,10 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           }
                                           return null;
                                         },
-                                        errorTextStyle: GoogleFonts.poppins(fontSize: 8),
+                                        errorTextStyle:
+                                            GoogleFonts.poppins(fontSize: 8),
                                       ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      FormDropDown(
+                                      FormDropDownData(
                                         input: selectedDepartemenValue ?? '',
                                         onTap: () {
                                           _showDepartemen(context);
@@ -767,12 +762,10 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           }
                                           return null;
                                         },
-                                        errorTextStyle: GoogleFonts.poppins(fontSize: 8),
+                                        errorTextStyle:
+                                            GoogleFonts.poppins(fontSize: 8),
                                       ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      FormDropDown(
+                                      FormDropDownData(
                                         input: selectedPosisiValue ?? '',
                                         onTap: () {
                                           _showPosisi(context);
@@ -790,12 +783,10 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           }
                                           return null;
                                         },
-                                        errorTextStyle: GoogleFonts.poppins(fontSize: 8),
+                                        errorTextStyle:
+                                            GoogleFonts.poppins(fontSize: 8),
                                       ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      FormDropDown(
+                                      FormDropDownData(
                                         input: selectedPicValue ?? '',
                                         onTap: () {
                                           _showPic(context);
@@ -813,10 +804,8 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           }
                                           return null;
                                         },
-                                        errorTextStyle: GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      const SizedBox(
-                                        height: 20,
+                                        errorTextStyle:
+                                            GoogleFonts.poppins(fontSize: 8),
                                       ),
                                     ],
                                   ),
@@ -842,9 +831,20 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.stretch,
                                         children: [
-                                          FormTextLabel(
-                                            label: "Tanggal",
-                                            labelColor: MyColorsConst.darkColor,
+                                          Row(
+                                            children: [
+                                              FormTextLabel(
+                                                label: "Tanggal",
+                                                labelColor:
+                                                    MyColorsConst.darkColor,
+                                              ),
+                                              SizedBox(width: 2.sp),
+                                              Text(
+                                                '*',
+                                                style: GoogleFonts.poppins(
+                                                    color: Colors.red),
+                                              ),
+                                            ],
                                           ),
                                           SizedBox(
                                             height: 5,
@@ -868,9 +868,20 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           const SizedBox(
                                             height: 30,
                                           ),
-                                          FormTextLabel(
-                                            label: "Tanggal Acara Awal",
-                                            labelColor: MyColorsConst.darkColor,
+                                          Row(
+                                            children: [
+                                              FormTextLabel(
+                                                label: "Tanggal Acara Awal",
+                                                labelColor:
+                                                    MyColorsConst.darkColor,
+                                              ),
+                                              SizedBox(width: 2.sp),
+                                              Text(
+                                                '*',
+                                                style: GoogleFonts.poppins(
+                                                    color: Colors.red),
+                                              ),
+                                            ],
                                           ),
                                           SizedBox(
                                             height: 5,
@@ -895,15 +906,26 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           const SizedBox(
                                             height: 30,
                                           ),
-                                          FormTextLabel(
-                                            label: "Pilih Tanggal Acara Akhir",
-                                            labelColor: MyColorsConst.darkColor,
+                                          Row(
+                                            children: [
+                                              FormTextLabel(
+                                                label: "Tanggal Acara Akhir",
+                                                labelColor:
+                                                    MyColorsConst.darkColor,
+                                              ),
+                                              SizedBox(width: 2.sp),
+                                              Text(
+                                                '*',
+                                                style: GoogleFonts.poppins(
+                                                    color: Colors.red),
+                                              ),
+                                            ],
                                           ),
                                           SizedBox(
                                             height: 8,
                                           ),
                                           _buildDateTextField(
-                                            "Pilih Tanggal Acara Awal",
+                                            "Pilih Tanggal Acara Akhir",
                                             widget.tanggalAkhirController,
                                             selectedTanggalAkhir,
                                             (selectedDate) {
@@ -943,7 +965,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      FormDropDown(
+                                      FormDropDownData(
                                         input: selectedJenisSpdValue ?? '',
                                         onTap: () {
                                           _showJenisSpd(context);
@@ -963,12 +985,10 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           }
                                           return null;
                                         },
-                                        errorTextStyle: GoogleFonts.poppins(fontSize: 8),
+                                        errorTextStyle:
+                                            GoogleFonts.poppins(fontSize: 8),
                                       ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      FormDropDown(
+                                      FormDropDownData(
                                         input: selectedZonaAsalValue ?? '',
                                         onTap: () {
                                           _showZonaAsal(context);
@@ -987,12 +1007,10 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           }
                                           return null;
                                         },
-                                        errorTextStyle: GoogleFonts.poppins(fontSize: 8),
+                                        errorTextStyle:
+                                            GoogleFonts.poppins(fontSize: 8),
                                       ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      FormDropDown(
+                                      FormDropDownData(
                                         input: selectedZonaTujuanValue ?? '',
                                         onTap: () {
                                           _showZonaTujuan(context);
@@ -1011,12 +1029,10 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           }
                                           return null;
                                         },
-                                        errorTextStyle: GoogleFonts.poppins(fontSize: 8),
+                                        errorTextStyle:
+                                            GoogleFonts.poppins(fontSize: 8),
                                       ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      FormDropDown(
+                                      FormDropDownData(
                                         input: selectedLokasiTujuanValue ?? '',
                                         onTap: () {
                                           _showLokasiTujuan(context);
@@ -1035,17 +1051,23 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           }
                                           return null;
                                         },
-                                        errorTextStyle: GoogleFonts.poppins(fontSize: 8),
+                                        errorTextStyle:
+                                            GoogleFonts.poppins(fontSize: 8),
                                       ),
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        'Menggunakan Kendaraan Dinas',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 12,
-                                          color: MyColorsConst.darkColor,
-                                        ),
+                                      Row(
+                                        children: [
+                                          FormTextLabel(
+                                            label:
+                                                'Menggunakan Kendaraan Dinas',
+                                            labelColor: MyColorsConst.darkColor,
+                                          ),
+                                          SizedBox(width: 2.sp),
+                                          Text(
+                                            '*',
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.red),
+                                          ),
+                                        ],
                                       ),
                                       Row(
                                         children: <Widget>[
@@ -1068,7 +1090,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                             child: Text(
                                               'Ya',
                                               style: GoogleFonts.poppins(
-                                                fontSize: 12,
+                                                fontSize: 13.sp,
                                               ),
                                             ),
                                           ),
@@ -1091,7 +1113,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                             child: Text(
                                               'Tidak',
                                               style: GoogleFonts.poppins(
-                                                fontSize: 12,
+                                                fontSize: 13.sp,
                                               ),
                                             ),
                                           ),
@@ -1179,7 +1201,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                       ? DateFormat('yyyy-MM-dd').format(selectedDate)
                       : hintText,
                   style: GoogleFonts.poppins(
-                    fontSize: 10,
+                    fontSize: 13.sp,
                   ),
                 ),
                 // const SizedBox(width: 8),

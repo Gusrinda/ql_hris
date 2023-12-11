@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/add_keluarga.dart';
@@ -25,7 +26,7 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
           gradient: LinearGradient(
             colors: [
               MyColorsConst.primaryDarkColor,
-                  MyColorsConst.primaryColor,
+              MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.1],
             begin: Alignment.topCenter,
@@ -34,9 +35,9 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
         ),
         child: Column(
           children: [
-            const SizedBox(height: 30),
+            SizedBox(height: 30.sp),
             Container(
-              padding: EdgeInsets.all(5.0),
+              padding: EdgeInsets.all(5.0.sp),
               child: Row(
                 children: [
                   IconButton(
@@ -50,7 +51,7 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                     color: Colors.white,
                   ),
                   SizedBox(
-                    width: size.width * 1 / 4.2,
+                    width: size.width * 1 / 4.5,
                   ),
                   Expanded(
                     child: Text(
@@ -75,7 +76,7 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                   color: Colors.white,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(18.0),
+                  padding: EdgeInsets.all(20.sp),
                   child: Column(
                     children: [
                       Expanded(
@@ -91,16 +92,16 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                                       ViewEditKeluargaPage.routeName);
                                 },
                                 child: Container(
-                                  margin: const EdgeInsets.only(bottom: 10),
+                                  margin: EdgeInsets.only(bottom: 10.sp),
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(10.sp),
                                     border:
                                         Border.all(color: Color(0xFFDDDDDD)),
                                     color: MyColorsConst.whiteColor,
                                   ),
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 12,
-                                    vertical: 10,
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 12.sp,
+                                    vertical: 10.sp,
                                   ),
                                   child: Stack(
                                     children: [
@@ -113,7 +114,7 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                                               Text(
                                                 'Triyono Rifan',
                                                 style: GoogleFonts.poppins(
-                                                  fontSize: 16,
+                                                  fontSize: 16.sp,
                                                   fontWeight: FontWeight.w500,
                                                   color: MyColorsConst
                                                       .primaryColor,
@@ -139,16 +140,18 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                                                   children: [
                                                     Text(
                                                       'Keluarga',
-                                                      style: GoogleFonts.poppins(
-                                                        fontSize: 10,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 10.sp,
                                                         color: MyColorsConst
                                                             .lightDarkColor,
                                                       ),
                                                     ),
                                                     Text(
                                                       'Kakak',
-                                                      style: GoogleFonts.poppins(
-                                                        fontSize: 10,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 10.sp,
                                                         color: MyColorsConst
                                                             .darkColor,
                                                       ),
@@ -163,16 +166,18 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                                                   children: [
                                                     Text(
                                                       'Umur',
-                                                      style: GoogleFonts.poppins(
-                                                        fontSize: 10,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 10.sp,
                                                         color: MyColorsConst
                                                             .lightDarkColor,
                                                       ),
                                                     ),
                                                     Text(
                                                       '30 Tahun',
-                                                      style: GoogleFonts.poppins(
-                                                        fontSize: 10,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 10.sp,
                                                         color: MyColorsConst
                                                             .darkColor,
                                                       ),
@@ -183,7 +188,7 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                                             ],
                                           ),
                                           SizedBox(
-                                            height: 5,
+                                            height: 5.sp,
                                           ),
                                         ],
                                       ),
@@ -199,14 +204,14 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                                             child: InkWell(
                                               onTap: () {},
                                               child: Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  horizontal: 8,
-                                                  vertical: 4,
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 8.sp,
+                                                  vertical: 4.sp,
                                                 ),
                                                 decoration: BoxDecoration(
                                                   borderRadius:
-                                                      BorderRadius.circular(6),
+                                                      BorderRadius.circular(
+                                                          6.sp),
                                                   border: Border.all(
                                                       color: Color(0xFFDDDDDD)),
                                                   color:
@@ -215,7 +220,7 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                                                 child: Text(
                                                   'Hapus',
                                                   style: GoogleFonts.poppins(
-                                                    fontSize: 12,
+                                                    fontSize: 12.sp,
                                                     color:
                                                         MyColorsConst.darkColor,
                                                   ),
@@ -235,7 +240,7 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                       ),
                       TextButtonCustomV1(
                         text: "Tambah Data",
-                        height: 50,
+                        height: 50.sp,
                         backgroundColor:
                             MyColorsConst.primaryColor.withOpacity(0.1),
                         textColor: MyColorsConst.primaryColor,

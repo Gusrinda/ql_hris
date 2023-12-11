@@ -5,8 +5,8 @@ import 'package:sj_presensi_mobile/componens/HRIS/hero_widget.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/text_form_custom.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
-class DropDownDataProfile extends StatelessWidget {
-  const DropDownDataProfile({
+class FormDropDownData extends StatelessWidget {
+  const FormDropDownData({
     Key? key,
     this.enabled = true,
     this.input = "",
@@ -104,8 +104,8 @@ class DropDownDataProfile extends StatelessWidget {
   }
 }
 
-class FormDataProfile extends StatelessWidget {
-  const FormDataProfile({
+class FormCatatanData extends StatelessWidget {
+  const FormCatatanData({
     Key? key,
     this.enabled = true,
     this.input = "",
@@ -192,6 +192,110 @@ class FormDataProfile extends StatelessWidget {
                     onTap: onTap,
                     controller: controller,
                     textInputAction: TextInputAction.next,
+                    validator: validator,
+                  ),
+                ),
+                SizedBox(height: 20.sp),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class FormTemplateSpd extends StatelessWidget {
+  const FormTemplateSpd({
+    Key? key,
+    this.enabled = true,
+    this.input = "",
+    this.onTap,
+    required this.hintText,
+    required this.labelForm,
+    required this.labelTag,
+    required this.formTag,
+    required this.valueController,
+    required this.idController,
+    this.validator,
+    this.errorTextStyle,
+  }) : super(key: key);
+
+  final bool enabled;
+  final String input;
+  final String labelForm;
+  final String hintText;
+  final String labelTag;
+  final String formTag;
+  final TextEditingController valueController;
+  final TextEditingController idController;
+  final VoidCallback? onTap;
+  final String? Function(String?)? validator;
+  final TextStyle? errorTextStyle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Hero(
+          tag: labelTag,
+          flightShuttleBuilder: flightShuttleBuilder,
+          child: Row(
+            children: [
+              FormTextLabel(
+                label: labelForm,
+                labelColor: MyColorsConst.darkColor,
+              ),
+              SizedBox(width: 2.sp),
+              Text(
+                '*',
+                style: GoogleFonts.poppins(color: Colors.red),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 5.sp,
+        ),
+        Hero(
+          tag: formTag,
+          flightShuttleBuilder: flightShuttleBuilder,
+          child: Material(
+            color: Colors.transparent,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  height: 50.sp,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Color(0xFFDDDDDD)),
+                  ),
+                  child: TextFormField(
+                    readOnly: true,
+                    onTap: onTap,
+                    controller: valueController,
+                    style: GoogleFonts.poppins(
+                        fontSize: 13.sp, fontWeight: FontWeight.w500),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(12.sp),
+                      border: InputBorder.none,
+                      suffixIcon: Padding(
+                        padding: EdgeInsets.all(12.0.sp),
+                        child: Icon(
+                          Icons.search,
+                          color: MyColorsConst.primaryColor,
+                        ),
+                      ),
+                      hintText: hintText,
+                      hintStyle: GoogleFonts.poppins(
+                          fontSize: 13.sp,
+                          color: MyColorsConst.disableColor,
+                          fontWeight: FontWeight.w500),
+                      errorStyle: errorTextStyle,
+                    ),
                     validator: validator,
                   ),
                 ),

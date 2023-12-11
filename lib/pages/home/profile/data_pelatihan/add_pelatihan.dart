@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
@@ -8,14 +9,12 @@ class AddPelatihanPage extends StatefulWidget {
   static const routeName = '/AddPelatihanPage';
   AddPelatihanPage({super.key});
 
-  final TextEditingController namaPelatihanController =
-      TextEditingController();
+  final TextEditingController namaPelatihanController = TextEditingController();
   final TextEditingController lembagaPelatihanController =
       TextEditingController();
   final TextEditingController tahunPelatihanController =
       TextEditingController();
-  final TextEditingController kotapelatihanController =
-      TextEditingController();
+  final TextEditingController kotapelatihanController = TextEditingController();
   final TextEditingController posisiaOrganisasiController =
       TextEditingController();
 
@@ -33,7 +32,7 @@ class _AddPelatihanPageState extends State<AddPelatihanPage> {
           gradient: LinearGradient(
             colors: [
               MyColorsConst.primaryDarkColor,
-                  MyColorsConst.primaryColor,
+              MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.1],
             begin: Alignment.topCenter,
@@ -42,9 +41,9 @@ class _AddPelatihanPageState extends State<AddPelatihanPage> {
         ),
         child: Column(
           children: [
-            const SizedBox(height: 30),
+            SizedBox(height: 30.sp),
             Container(
-              padding: EdgeInsets.only(left: 8.0),
+              padding: EdgeInsets.only(left: 5.0.sp),
               child: Row(
                 children: [
                   IconButton(
@@ -84,14 +83,14 @@ class _AddPelatihanPageState extends State<AddPelatihanPage> {
                 ),
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                      EdgeInsets.symmetric(horizontal: 24.sp, vertical: 16.sp),
                   child: Column(
                     children: [
                       Expanded(
                         child: Column(
                           children: [
-                            const SizedBox(height: 16),
-                            FormDataProfile(
+                            SizedBox(height: 16.sp),
+                            FormCatatanData(
                               labelTag: 'label-addnamaPelatihan',
                               labelForm: 'Nama Pelatihan',
                               formTag: 'form-addnamapelatihan',
@@ -100,7 +99,7 @@ class _AddPelatihanPageState extends State<AddPelatihanPage> {
                               controller: widget.namaPelatihanController,
                               validator: (value) {},
                             ),
-                            FormDataProfile(
+                            FormCatatanData(
                               input: widget.lembagaPelatihanController.text,
                               labelTag: 'label-addnamalembaga',
                               labelForm: 'Nama Lembaga',
@@ -110,7 +109,7 @@ class _AddPelatihanPageState extends State<AddPelatihanPage> {
                               controller: widget.lembagaPelatihanController,
                               validator: (value) {},
                             ),
-                            DropDownDataProfile(
+                            FormDropDownData(
                               input: '',
                               onTap: () {},
                               idController: widget.tahunPelatihanController,
@@ -121,7 +120,7 @@ class _AddPelatihanPageState extends State<AddPelatihanPage> {
                               hintText: 'Pilih Tahun',
                               validator: (value) {},
                             ),
-                            DropDownDataProfile(
+                            FormDropDownData(
                               input: '',
                               onTap: () {},
                               idController: widget.kotapelatihanController,
@@ -137,7 +136,7 @@ class _AddPelatihanPageState extends State<AddPelatihanPage> {
                       ),
                       TextButtonCustomV1(
                         text: "Simpan",
-                        height: 50,
+                        height: 50.sp,
                         backgroundColor:
                             MyColorsConst.primaryColor.withOpacity(0.1),
                         textColor: MyColorsConst.primaryColor,

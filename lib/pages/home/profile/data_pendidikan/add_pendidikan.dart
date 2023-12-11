@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
@@ -50,9 +51,9 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
           ),
           child: Column(
             children: [
-              const SizedBox(height: 40),
+              SizedBox(height: 30.sp),
               Container(
-                padding: EdgeInsets.only(left: 10.0),
+                padding: EdgeInsets.only(left: 5.0.sp),
                 child: Row(
                   children: [
                     IconButton(
@@ -66,7 +67,7 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                       color: Colors.white,
                     ),
                     SizedBox(
-                      width: size.width * 1 / 7,
+                      width: size.width * 0.5 / 4,
                     ),
                     Expanded(
                       child: Text(
@@ -91,12 +92,12 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                 ),
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                      EdgeInsets.symmetric(horizontal: 24.sp, vertical: 16.sp),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 16),
-                      DropDownDataProfile(
+                      SizedBox(height: 16.sp),
+                      FormDropDownData(
                         input: '',
                         onTap: () {},
                         idController: widget.idTingkatController,
@@ -107,7 +108,7 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                         hintText: 'Pilih Tingkat',
                         validator: (value) {},
                       ),
-                      FormDataProfile(
+                      FormCatatanData(
                         input: widget.namaSekolahController.text,
                         labelTag: 'label-addnamasekolah',
                         labelForm: 'Nama Sekolah',
@@ -117,7 +118,7 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                         controller: widget.namaSekolahController,
                         validator: (value) {},
                       ),
-                      DropDownDataProfile(
+                      FormDropDownData(
                         input: '',
                         onTap: () {},
                         idController: widget.idKotaController,
@@ -128,7 +129,7 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                         hintText: 'Pilih Kota',
                         validator: (value) {},
                       ),
-                      FormDataProfile(
+                      FormCatatanData(
                         input: widget.jurusanController.text,
                         labelTag: 'label-addjurusan',
                         labelForm: 'Jurusan',
@@ -138,7 +139,7 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                         controller: widget.jurusanController,
                         validator: (value) {},
                       ),
-                      DropDownDataProfile(
+                      FormDropDownData(
                         input: '',
                         onTap: () {},
                         idController: widget.tahuunMasukController,
@@ -149,7 +150,7 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                         hintText: 'Pilih Tahun',
                         validator: (value) {},
                       ),
-                      DropDownDataProfile(
+                      FormDropDownData(
                         input: '',
                         onTap: () {},
                         idController: widget.tahunLulusController,
@@ -160,7 +161,7 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                         hintText: 'Pilih Tahun',
                         validator: (value) {},
                       ),
-                      FormDataProfile(
+                      FormCatatanData(
                         input: widget.nilaiController.text,
                         labelTag: 'label-addnilai',
                         labelForm: 'Nilai',
@@ -175,10 +176,9 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                           Text(
                             'Pendidikan terakhir',
                             style: GoogleFonts.poppins(
-                              fontSize: 13,
-                              color: MyColorsConst.semiDarkColor,
-                              fontWeight: FontWeight.w600
-                            ),
+                                fontSize: 13.sp,
+                                color: MyColorsConst.darkColor,
+                                fontWeight: FontWeight.w600),
                           ),
                           Text(
                             ' *',
@@ -206,7 +206,7 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                             child: Text(
                               'Iya',
                               style: GoogleFonts.poppins(
-                                fontSize: 13,
+                                fontSize: 13.sp,
                               ),
                             ),
                           ),
@@ -228,14 +228,14 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                             child: Text(
                               'Tidak',
                               style: GoogleFonts.poppins(
-                                fontSize: 13,
+                                fontSize: 13.sp,
                               ),
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 15),
-                      FormDataProfile(
+                      SizedBox(height: 15.sp),
+                      FormCatatanData(
                         input: widget.ijazahController.text,
                         labelTag: 'label-addijazah',
                         labelForm: 'Ijazah Terakhir',
@@ -245,7 +245,7 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                         controller: widget.ijazahController,
                         validator: (value) {},
                       ),
-                      FormDataProfile(
+                      FormCatatanData(
                         input: widget.catatanController.text,
                         labelTag: 'label-addcatatanpendidikan',
                         labelForm: 'Catatan',
@@ -256,10 +256,10 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                         controller: widget.catatanController,
                         validator: (value) {},
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       TextButtonCustomV1(
                         text: "Simpan",
-                        height: 50,
+                        height: 50.sp,
                         backgroundColor:
                             MyColorsConst.primaryColor.withOpacity(0.1),
                         textColor: MyColorsConst.primaryColor,

@@ -138,7 +138,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     color: Colors.white,
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: EdgeInsets.all(16.0.sp),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -306,18 +306,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           },
                         ),
                         SizedBox(height: 100.sp)
-                        // TextButtonCustomV1(
-                        //   height: 45,
-                        //   text: "Logout",
-                        //   backgroundColor: Color.fromARGB(255, 236, 48, 35),
-                        //   textColor: MyColorsConst.whiteColor,
-                        //   onPressed: () {
-                        //     context.read<ProfileBloc>().add(LogoutProfile(
-                        //           username: usernameController.text,
-                        //           password: passwordController.text,
-                        //         ));
-                        //   },
-                        // ),
                       ],
                     ),
                   ),

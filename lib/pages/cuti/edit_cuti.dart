@@ -1,10 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_add_data.dart';
+import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/hero_widget.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/text_form_custom.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
@@ -219,8 +221,8 @@ class _EditCutiPageState extends State<EditCutiPage> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-MyColorsConst.primaryDarkColor,
-                  MyColorsConst.primaryColor,
+                MyColorsConst.primaryDarkColor,
+                MyColorsConst.primaryColor,
               ],
               stops: [0.0, 0.1],
               begin: Alignment.topCenter,
@@ -229,9 +231,9 @@ MyColorsConst.primaryDarkColor,
           ),
           child: Column(
             children: [
-              const SizedBox(height: 30),
+              SizedBox(height: 30.sp),
               Container(
-                padding: EdgeInsets.only(left: 8.0),
+                padding: EdgeInsets.only(left: 5.0.sp),
                 child: Row(
                   children: [
                     IconButton(
@@ -290,10 +292,10 @@ MyColorsConst.primaryDarkColor,
                                           CrossAxisAlignment.start,
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        const SizedBox(
-                                          height: 8,
+                                        SizedBox(
+                                          height: 8.sp,
                                         ),
-                                        FormDropDown(
+                                        FormDropDownData(
                                           input: selectedTipeCutiDisplay,
                                           onTap: () {
                                             _showTipeMenu(context);
@@ -316,10 +318,7 @@ MyColorsConst.primaryDarkColor,
                                           errorTextStyle:
                                               GoogleFonts.poppins(fontSize: 8),
                                         ),
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        FormDropDown(
+                                        FormDropDownData(
                                           input: selectedValue ?? "",
                                           onTap: () {
                                             _showAlasanMenu(context);
@@ -342,13 +341,7 @@ MyColorsConst.primaryDarkColor,
                                           errorTextStyle:
                                               GoogleFonts.poppins(fontSize: 8),
                                         ),
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        const Hero(
+                                        Hero(
                                           tag: 'Label-RowJamVisiting',
                                           flightShuttleBuilder:
                                               flightShuttleBuilder,
@@ -356,28 +349,52 @@ MyColorsConst.primaryDarkColor,
                                             children: [
                                               Expanded(
                                                 flex: 1,
-                                                child: FormTextLabel(
-                                                  label: "Tanggal Mulai",
-                                                  labelColor:
-                                                      MyColorsConst.darkColor,
+                                                child: Row(
+                                                  children: [
+                                                    FormTextLabel(
+                                                      label: "Tanggal Mulai",
+                                                      labelColor: MyColorsConst
+                                                          .darkColor,
+                                                    ),
+                                                    SizedBox(width: 2.sp),
+                                                    Text(
+                                                      '*',
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              color:
+                                                                  Colors.red),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                               SizedBox(
-                                                width: 20,
+                                                width: 20.sp,
                                               ),
                                               Expanded(
                                                 flex: 1,
-                                                child: FormTextLabel(
-                                                  label: "Tanggal Berakhir",
-                                                  labelColor:
-                                                      MyColorsConst.darkColor,
+                                                child: Row(
+                                                  children: [
+                                                    FormTextLabel(
+                                                      label: "Tanggal Berakhir",
+                                                      labelColor: MyColorsConst
+                                                          .darkColor,
+                                                    ),
+                                                    SizedBox(width: 2.sp),
+                                                    Text(
+                                                      '*',
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              color:
+                                                                  Colors.red),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ],
                                           ),
                                         ),
-                                        const SizedBox(
-                                          height: 4,
+                                        SizedBox(
+                                          height: 4.sp,
                                         ),
                                         Row(
                                           children: [
@@ -403,8 +420,8 @@ MyColorsConst.primaryDarkColor,
                                                 },
                                               ),
                                             ),
-                                            const SizedBox(
-                                              width: 20,
+                                            SizedBox(
+                                              width: 20.sp,
                                             ),
                                             Expanded(
                                               flex: 1,
@@ -430,10 +447,14 @@ MyColorsConst.primaryDarkColor,
                                             ),
                                           ],
                                         ),
-                                        const SizedBox(
-                                          height: 20,
+                                        SizedBox(
+                                          height: 20.sp,
                                         ),
-                                        FormCatatanCuti(
+                                        FormCatatanData(
+                                          hintText: 'Keterangan',
+                                          labelForm: 'Keterangan Cuti',
+                                          labelTag: 'Label-KeteranganCuti',
+                                          formTag: 'Form-KeteranganCuti',
                                           input:
                                               widget.keteranganController.text,
                                           onTap: () {},
@@ -449,8 +470,8 @@ MyColorsConst.primaryDarkColor,
                                           errorTextStyle:
                                               GoogleFonts.poppins(fontSize: 8),
                                         ),
-                                        const SizedBox(
-                                          height: 20,
+                                        SizedBox(
+                                          height: 20.sp,
                                         ),
                                       ],
                                     ),

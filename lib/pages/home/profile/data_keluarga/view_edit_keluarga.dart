@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
@@ -45,8 +46,8 @@ class _ViewEditKeluargaPageState extends State<ViewEditKeluargaPage> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-MyColorsConst.primaryDarkColor,
-                  MyColorsConst.primaryColor,
+                MyColorsConst.primaryDarkColor,
+                MyColorsConst.primaryColor,
               ],
               stops: [0.0, 0.1],
               begin: Alignment.topCenter,
@@ -55,9 +56,9 @@ MyColorsConst.primaryDarkColor,
           ),
           child: Column(
             children: [
-              const SizedBox(height: 30),
+              SizedBox(height: 30.sp),
               Container(
-                padding: EdgeInsets.only(left: 8.0),
+                padding: EdgeInsets.only(left: 5.0.sp),
                 child: Row(
                   children: [
                     IconButton(
@@ -96,11 +97,11 @@ MyColorsConst.primaryDarkColor,
                 ),
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                      EdgeInsets.symmetric(horizontal: 24.sp, vertical: 16.sp),
                   child: Column(
                     children: [
-                      const SizedBox(height: 16),
-                      DropDownDataProfile(
+                      SizedBox(height: 16.sp),
+                      FormDropDownData(
                         input: '',
                         onTap: () {},
                         idController: widget.idkeluargaController,
@@ -111,7 +112,7 @@ MyColorsConst.primaryDarkColor,
                         hintText: 'Pilih Keluargai',
                         validator: (value) {},
                       ),
-                      FormDataProfile(
+                      FormCatatanData(
                         input: widget.nameController.text,
                         labelTag: 'label-name',
                         labelForm: 'Nama',
@@ -121,7 +122,7 @@ MyColorsConst.primaryDarkColor,
                         controller: widget.nameController,
                         validator: (value) {},
                       ),
-                      DropDownDataProfile(
+                      FormDropDownData(
                         input: '',
                         onTap: () {},
                         idController: widget.idPendidikanTerakhirController,
@@ -133,7 +134,7 @@ MyColorsConst.primaryDarkColor,
                         hintText: 'Pilih Pendidikan Terakhir',
                         validator: (value) {},
                       ),
-                      DropDownDataProfile(
+                      FormDropDownData(
                         input: '',
                         onTap: () {},
                         idController: widget.idPekerjaanController,
@@ -144,7 +145,7 @@ MyColorsConst.primaryDarkColor,
                         hintText: 'Pilih Pekerjaan',
                         validator: (value) {},
                       ),
-                      DropDownDataProfile(
+                      FormDropDownData(
                         input: '',
                         onTap: () {},
                         idController: widget.idJenisKelaminController,
@@ -155,7 +156,7 @@ MyColorsConst.primaryDarkColor,
                         hintText: 'Pilih Jenis Kelamin',
                         validator: (value) {},
                       ),
-                      FormDataProfile(
+                      FormCatatanData(
                         input: widget.usiaController.text,
                         labelTag: 'label-usia',
                         labelForm: 'Usia',
@@ -165,7 +166,7 @@ MyColorsConst.primaryDarkColor,
                         controller: widget.usiaController,
                         validator: (value) {},
                       ),
-                      FormDataProfile(
+                      FormCatatanData(
                         input: widget.catatanController.text,
                         labelTag: 'label-catatankeluarga',
                         labelForm: 'Catatan',
@@ -176,10 +177,10 @@ MyColorsConst.primaryDarkColor,
                         controller: widget.nameController,
                         validator: (value) {},
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       TextButtonCustomV1(
                         text: "Simpan Perubahan",
-                        height: 50,
+                        height: 50.sp,
                         backgroundColor:
                             MyColorsConst.primaryColor.withOpacity(0.1),
                         textColor: MyColorsConst.primaryColor,

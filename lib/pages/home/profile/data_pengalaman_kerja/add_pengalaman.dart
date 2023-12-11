@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
@@ -35,8 +36,8 @@ class _AddPengalamanPageState extends State<AddPengalamanPage> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-MyColorsConst.primaryDarkColor,
-                  MyColorsConst.primaryColor,
+                MyColorsConst.primaryDarkColor,
+                MyColorsConst.primaryColor,
               ],
               stops: [0.0, 0.1],
               begin: Alignment.topCenter,
@@ -45,9 +46,9 @@ MyColorsConst.primaryDarkColor,
           ),
           child: Column(
             children: [
-              const SizedBox(height: 30),
+              SizedBox(height: 30.sp),
               Container(
-                padding: EdgeInsets.only(left: 8.0),
+                padding: EdgeInsets.only(left: 5.0.sp),
                 child: Row(
                   children: [
                     IconButton(
@@ -86,11 +87,11 @@ MyColorsConst.primaryDarkColor,
                 ),
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                      EdgeInsets.symmetric(horizontal: 24.sp, vertical: 16.sp),
                   child: Column(
                     children: [
-                      const SizedBox(height: 16),
-                      FormDataProfile(
+                      SizedBox(height: 16.sp),
+                      FormCatatanData(
                         labelTag: 'label-addnamaperusahaan',
                         labelForm: 'Nama Perusahaan',
                         formTag: 'form-addnamaperusahaan',
@@ -99,7 +100,7 @@ MyColorsConst.primaryDarkColor,
                         controller: widget.namaPerusahaanController,
                         validator: (value) {},
                       ),
-                      FormDataProfile(
+                      FormCatatanData(
                         input: widget.bidangUsahaController.text,
                         labelTag: 'label-addbidangusaha',
                         labelForm: 'Bidang Usaha',
@@ -109,7 +110,7 @@ MyColorsConst.primaryDarkColor,
                         controller: widget.bidangUsahaController,
                         validator: (value) {},
                       ),
-                      FormDataProfile(
+                      FormCatatanData(
                         input: widget.noTelpController.text,
                         labelTag: 'label-addnotelp',
                         labelForm: 'No Telp',
@@ -119,7 +120,7 @@ MyColorsConst.primaryDarkColor,
                         controller: widget.noTelpController,
                         validator: (value) {},
                       ),
-                      FormDataProfile(
+                      FormCatatanData(
                         input: widget.posisiController.text,
                         labelTag: 'label-addposisipengalaman',
                         labelForm: 'Posisi',
@@ -129,7 +130,7 @@ MyColorsConst.primaryDarkColor,
                         controller: widget.posisiController,
                         validator: (value) {},
                       ),
-                      DropDownDataProfile(
+                      FormDropDownData(
                         input: '',
                         onTap: () {},
                         idController: widget.tahunMasukController,
@@ -140,7 +141,7 @@ MyColorsConst.primaryDarkColor,
                         hintText: 'Pilih Tahun',
                         validator: (value) {},
                       ),
-                      DropDownDataProfile(
+                      FormDropDownData(
                         input: '',
                         onTap: () {},
                         idController: widget.tahunKeluarController,
@@ -151,7 +152,7 @@ MyColorsConst.primaryDarkColor,
                         hintText: 'Pilih Tahun',
                         validator: (value) {},
                       ),
-                      FormDataProfile(
+                      FormCatatanData(
                         input: widget.alamatKantorController.text,
                         labelTag: 'label-addalamatkantor',
                         labelForm: 'Alamat Kantor',
@@ -161,7 +162,7 @@ MyColorsConst.primaryDarkColor,
                         controller: widget.alamatKantorController,
                         validator: (value) {},
                       ),
-                      DropDownDataProfile(
+                      FormDropDownData(
                         input: '',
                         onTap: () {},
                         idController: widget.idKotaController,
@@ -172,7 +173,7 @@ MyColorsConst.primaryDarkColor,
                         hintText: 'Pilih Kota',
                         validator: (value) {},
                       ),
-                      FormDataProfile(
+                      FormCatatanData(
                         input: widget.suratReferensiController.text,
                         labelTag: 'label-addsuratreferensi',
                         labelForm: 'Surat Referensi',
@@ -184,7 +185,7 @@ MyColorsConst.primaryDarkColor,
                       ),
                       TextButtonCustomV1(
                         text: "Simpan",
-                        height: 50,
+                        height: 50.sp,
                         backgroundColor:
                             MyColorsConst.primaryColor.withOpacity(0.1),
                         textColor: MyColorsConst.primaryColor,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
@@ -31,7 +32,7 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
           gradient: LinearGradient(
             colors: [
               MyColorsConst.primaryDarkColor,
-                  MyColorsConst.primaryColor,
+              MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.1],
             begin: Alignment.topCenter,
@@ -40,9 +41,9 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
         ),
         child: Column(
           children: [
-            const SizedBox(height: 30),
+            SizedBox(height: 30.sp),
             Container(
-              padding: EdgeInsets.only(left: 8.0),
+              padding: EdgeInsets.only(left: 5.0.sp),
               child: Row(
                 children: [
                   IconButton(
@@ -82,14 +83,14 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
                 ),
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                 EdgeInsets.symmetric(horizontal: 24.sp, vertical: 16.sp),
                   child: Column(
                     children: [
                       Expanded(
                         child: Column(
                           children: [
-                            const SizedBox(height: 16),
-                            FormDataProfile(
+                         SizedBox(height: 16.sp),
+                            FormCatatanData(
                               labelTag: 'label-namaPelatihan',
                               labelForm: 'Nama Pelatihan',
                               formTag: 'form-namapelatihan',
@@ -98,7 +99,7 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
                               controller: widget.namaPelatihanController,
                               validator: (value) {},
                             ),
-                            FormDataProfile(
+                            FormCatatanData(
                               input: widget.lembagaPelatihanController.text,
                               labelTag: 'label-namalembaga',
                               labelForm: 'Nama Lembaga',
@@ -108,7 +109,7 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
                               controller: widget.lembagaPelatihanController,
                               validator: (value) {},
                             ),
-                            DropDownDataProfile(
+                            FormDropDownData(
                               input: '',
                               onTap: () {},
                               idController: widget.tahunPelatihanController,
@@ -119,7 +120,7 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
                               hintText: 'Pilih Tahun',
                               validator: (value) {},
                             ),
-                            DropDownDataProfile(
+                            FormDropDownData(
                               input: '',
                               onTap: () {},
                               idController: widget.kotapelatihanController,
@@ -135,7 +136,7 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
                       ),
                       TextButtonCustomV1(
                         text: "Simpan Perubahan",
-                        height: 50,
+                        height: 50.sp,
                         backgroundColor:
                             MyColorsConst.primaryColor.withOpacity(0.1),
                         textColor: MyColorsConst.primaryColor,

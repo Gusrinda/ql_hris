@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class TextButtonCustomV1 extends StatelessWidget {
   final String text;
-  
+
   final double? width;
   final double? height;
   final EdgeInsetsGeometry? margin;
@@ -36,7 +37,7 @@ class TextButtonCustomV1 extends StatelessWidget {
           elevation: 0,
           backgroundColor:
               onPressed != null ? backgroundColor : MyColorsConst.disableColor,
-          padding: const EdgeInsets.symmetric(vertical: 15),
+          padding: EdgeInsets.symmetric(vertical: 12.sp),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(7),
             side: BorderSide.none,

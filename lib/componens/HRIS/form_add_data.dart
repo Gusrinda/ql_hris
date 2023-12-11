@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/text_form_custom.dart';
-import 'package:sj_presensi_mobile/services/model/cuti/getDataCuti/get_alasan_cuti_model.dart';
 
 import '../../utils/const.dart';
 import '../HRIS/hero_widget.dart';
@@ -57,7 +55,7 @@ class FormDropDown extends StatelessWidget {
             color: Colors.transparent,
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(6),
                 border: Border.all(color: Color(0xFFDDDDDD)),
               ),
               child: TextFormField(
@@ -65,14 +63,14 @@ class FormDropDown extends StatelessWidget {
                 onTap: onTap,
                 controller: valueController, // Menggunakan valueController
                 style: GoogleFonts.poppins(
-                  fontSize: 13.sp,
+                  fontSize: 12,
                 ),
                 validator: validator,
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(18.sp),
+                  contentPadding: EdgeInsets.all(12),
                   border: InputBorder.none,
                   suffixIcon: Padding(
-                    padding: EdgeInsets.all(10.0),
+                    padding: EdgeInsets.all(12.0),
                     child: Icon(
                       Icons.keyboard_arrow_down,
                       color: MyColorsConst.primaryColor,
@@ -80,8 +78,8 @@ class FormDropDown extends StatelessWidget {
                   ),
                   hintText: hintText,
                   hintStyle: GoogleFonts.poppins(
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.w400
+                    fontSize: 12,
+                    fontStyle: FontStyle.italic,
                   ),
                   errorStyle: errorTextStyle,
                 ),
@@ -94,91 +92,6 @@ class FormDropDown extends StatelessWidget {
   }
 }
 
-class FormTemplateSpd extends StatelessWidget {
-  const FormTemplateSpd({
-    Key? key,
-    this.enabled = true,
-    this.input = "",
-    this.onTap,
-    required this.hintText,
-    required this.labelForm,
-    required this.labelTag,
-    required this.formTag,
-    required this.valueController,
-    required this.idController,
-    this.validator,
-    this.errorTextStyle,
-  }) : super(key: key);
-
-  final bool enabled;
-  final String input;
-  final String labelForm;
-  final String hintText;
-  final String labelTag;
-  final String formTag;
-  final TextEditingController valueController;
-  final TextEditingController idController;
-  final VoidCallback? onTap;
-  final String? Function(String?)? validator;
-  final TextStyle? errorTextStyle;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Hero(
-          tag: labelTag,
-          flightShuttleBuilder: flightShuttleBuilder,
-          child: FormTextLabel(
-            label: labelForm,
-            labelColor: MyColorsConst.darkColor,
-          ),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Hero(
-          tag: formTag,
-          child: Material(
-            color: Colors.transparent,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Color(0xFFDDDDDD)),
-              ),
-              child: TextFormField(
-                readOnly: true,
-                onTap: onTap,
-                controller: valueController, // Menggunakan valueController
-                style: GoogleFonts.poppins(
-                  fontSize: 13.sp,
-                ),
-                validator: validator,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(18),
-                  border: InputBorder.none,
-                  suffixIcon: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Icon(
-                      Icons.search,
-                      color: MyColorsConst.primaryColor,
-                    ),
-                  ),
-                  hintText: hintText,
-                  hintStyle: GoogleFonts.poppins(
-                    fontSize: 13.sp,
-                  ),
-                  errorStyle: errorTextStyle,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
 
 class FormCatatanCuti extends StatelessWidget {
   const FormCatatanCuti({
@@ -229,7 +142,8 @@ class FormCatatanCuti extends StatelessWidget {
                   ),
                   child: TextFormField(
                     style: GoogleFonts.poppins(
-                        fontSize: 13, color: MyColorsConst.darkColor),
+                        fontSize: 13, color: MyColorsConst.darkColor
+                      ),
                     maxLines: 5,
                     readOnly: false,
                     decoration: InputDecoration(
