@@ -33,6 +33,7 @@ dependencies:
   google_fonts: ^6.1.0
   url_launcher: ^6.2.1
   http: ^1.1.0
+  easy_stepper: ^0.8.2
   # image_picker:
   #   git:
   #     url: https://github.com/Gusrinda/image_picker_custom

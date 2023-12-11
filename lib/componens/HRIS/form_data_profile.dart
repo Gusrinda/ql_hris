@@ -72,7 +72,7 @@ class DropDownDataProfile extends StatelessWidget {
               child: TextFormField(
                 readOnly: true,
                 onTap: onTap,
-                controller: valueController, 
+                controller: valueController,
                 style: GoogleFonts.poppins(
                   fontSize: 13.sp,
                 ),
@@ -174,16 +174,15 @@ class FormDataProfile extends StatelessWidget {
                   ),
                   child: TextFormField(
                     style: GoogleFonts.poppins(
-                      fontSize: 13.sp,
-                      color: MyColorsConst.darkColor,
-                      fontWeight: FontWeight.w500
-                    ),
+                        fontSize: 13.sp,
+                        color: MyColorsConst.darkColor,
+                        fontWeight: FontWeight.w500),
                     maxLines: 5,
                     readOnly: false,
                     decoration: InputDecoration(
                       hintText: hintText,
                       hintStyle: GoogleFonts.poppins(
-                          fontSize: 13,
+                          fontSize: 13.sp,
                           color: MyColorsConst.disableColor,
                           fontWeight: FontWeight.w500),
                       border: InputBorder.none,
