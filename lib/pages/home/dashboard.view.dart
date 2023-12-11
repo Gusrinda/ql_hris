@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/pengumuman.view.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/profile_page.dart';
@@ -42,7 +43,11 @@ class _DashboardViewState extends State<DashboardView> {
                 });
               },
               children: [
-                HomePage(),
+                BlocProvider(
+                  create: (context) =>
+                      CheckInOutBloc()..add(AttendanceStateChecked()),
+                  child: HomePage(),
+                ),
                 BlocProvider(
                   create: (context) => ProfileBloc()..add(GetDataProfile()),
                   child: ProfilePage(),

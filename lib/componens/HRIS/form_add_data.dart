@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/text_form_custom.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/getDataCuti/get_alasan_cuti_model.dart';
@@ -56,7 +57,7 @@ class FormDropDown extends StatelessWidget {
             color: Colors.transparent,
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Color(0xFFDDDDDD)),
               ),
               child: TextFormField(
@@ -64,14 +65,14 @@ class FormDropDown extends StatelessWidget {
                 onTap: onTap,
                 controller: valueController, // Menggunakan valueController
                 style: GoogleFonts.poppins(
-                  fontSize: 12,
+                  fontSize: 13.sp,
                 ),
                 validator: validator,
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(12),
+                  contentPadding: EdgeInsets.all(18.sp),
                   border: InputBorder.none,
                   suffixIcon: Padding(
-                    padding: EdgeInsets.all(12.0),
+                    padding: EdgeInsets.all(10.0),
                     child: Icon(
                       Icons.keyboard_arrow_down,
                       color: MyColorsConst.primaryColor,
@@ -79,8 +80,8 @@ class FormDropDown extends StatelessWidget {
                   ),
                   hintText: hintText,
                   hintStyle: GoogleFonts.poppins(
-                    fontSize: 12,
-                    fontStyle: FontStyle.italic,
+                    fontSize: 13.sp,
+                    fontWeight: FontWeight.w400
                   ),
                   errorStyle: errorTextStyle,
                 ),
@@ -143,7 +144,7 @@ class FormTemplateSpd extends StatelessWidget {
             color: Colors.transparent,
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Color(0xFFDDDDDD)),
               ),
               child: TextFormField(
@@ -151,14 +152,14 @@ class FormTemplateSpd extends StatelessWidget {
                 onTap: onTap,
                 controller: valueController, // Menggunakan valueController
                 style: GoogleFonts.poppins(
-                  fontSize: 12,
+                  fontSize: 13.sp,
                 ),
                 validator: validator,
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(12),
+                  contentPadding: EdgeInsets.all(18),
                   border: InputBorder.none,
                   suffixIcon: Padding(
-                    padding: EdgeInsets.all(12.0),
+                    padding: EdgeInsets.all(10.0),
                     child: Icon(
                       Icons.search,
                       color: MyColorsConst.primaryColor,
@@ -166,8 +167,7 @@ class FormTemplateSpd extends StatelessWidget {
                   ),
                   hintText: hintText,
                   hintStyle: GoogleFonts.poppins(
-                    fontSize: 12,
-                    fontStyle: FontStyle.italic,
+                    fontSize: 13.sp,
                   ),
                   errorStyle: errorTextStyle,
                 ),
@@ -229,8 +229,7 @@ class FormCatatanCuti extends StatelessWidget {
                   ),
                   child: TextFormField(
                     style: GoogleFonts.poppins(
-                        fontSize: 13, color: MyColorsConst.darkColor
-                      ),
+                        fontSize: 13, color: MyColorsConst.darkColor),
                     maxLines: 5,
                     readOnly: false,
                     decoration: InputDecoration(

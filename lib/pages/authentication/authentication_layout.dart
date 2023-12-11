@@ -23,7 +23,7 @@ class AuthenticationLayout extends StatelessWidget {
 
   final layoutData = [
     {
-      "hideAppBar": true,
+      // "hideAppBar": true,
       "title": "Selamat Datang!",
       "subTitle": "Masukan data login anda",
       // "paddingTop": 80.0,
@@ -38,24 +38,24 @@ class AuthenticationLayout extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       // resizeToAvoidBottomInset: false,
-      appBar: layoutData[layoutState.index]["hideAppBar"] as bool
-          ? null
-          : AppBar(
-              backgroundColor: MyColorsConst.whiteColor,
-              elevation: 0,
-              iconTheme: const IconThemeData(
-                color: MyColorsConst.primaryColor, //change your color here
-              ),
-            ),
+      // appBar: layoutData[layoutState.index]["hideAppBar"] as bool
+      //     ? null
+      //     : AppBar(
+      //         backgroundColor: MyColorsConst.whiteColor,
+      //         elevation: 0,
+      //         iconTheme: const IconThemeData(
+      //           color: MyColorsConst.primaryColor,
+      //         ),
+      //       ),
       body: SingleChildScrollView(
         child: Container(
-          height: size.height.sp,
+          // height: size.height.sp,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                height: 200.sp,
+                height: 180.sp,
                 child: Image.asset(
                   fit: BoxFit.fill,
                   width: MediaQuery.of(context).size.width,
@@ -63,35 +63,39 @@ class AuthenticationLayout extends StatelessWidget {
                   // fit: BoxFit.fitWidth,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      width: size.width * 1 / 3,
-                      layoutData[layoutState.index]["image2"] as String,
-                    ),
-                    SizedBox(height: 30.sp),
-                    Text(
-                      layoutData[layoutState.index]["title"] as String,
-                      style: GoogleFonts.poppins(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold,
+              SizedBox(
+                height: 180.sp,
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image.asset(
+                        width: size.width * 1 / 3,
+                        layoutData[layoutState.index]["image2"] as String,
                       ),
-                    ),
-                    SizedBox(height: 10.sp),
-                    Text(
-                      layoutData[layoutState.index]["subTitle"] as String,
-                      style: GoogleFonts.poppins(
-                        color: MyColorsConst.lightDarkColor,
-                        fontSize: 12.sp,
+                      SizedBox(height: 30.sp),
+                      Text(
+                        layoutData[layoutState.index]["title"] as String,
+                        style: GoogleFonts.poppins(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ],
+                      SizedBox(height: 10.sp),
+                      Text(
+                        layoutData[layoutState.index]["subTitle"] as String,
+                        style: GoogleFonts.poppins(
+                          color: MyColorsConst.lightDarkColor,
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
+                height: 320.sp,
                 child: Form(
                   key: formKey,
                   autovalidateMode: autovalidateMode,
@@ -104,13 +108,12 @@ class AuthenticationLayout extends StatelessWidget {
                   ),
                 ),
               ),
-              Expanded(
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Image.asset(
-                    layoutData[layoutState.index]["imageBottom"] as String,
-                    fit: BoxFit.cover,
-                  ),
+              Container(
+                alignment: Alignment.bottomCenter,
+                width: MediaQuery.of(context).size.width,
+                child: Image.asset(
+                  layoutData[layoutState.index]["imageBottom"] as String,
+                  fit: BoxFit.fitWidth,
                 ),
               ),
             ],

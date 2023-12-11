@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_diri.dart';
@@ -23,8 +24,8 @@ class _DataDiriPageState extends State<DataDiriPage> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-MyColorsConst.primaryDarkColor,
-                  MyColorsConst.primaryColor,
+                MyColorsConst.primaryDarkColor,
+                MyColorsConst.primaryColor,
               ],
               stops: [0.0, 0.05],
               begin: Alignment.topCenter,
@@ -101,6 +102,7 @@ MyColorsConst.primaryDarkColor,
                               ],
                             ),
                           ),
+                          SizedBox(width: 5),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,6 +147,7 @@ MyColorsConst.primaryDarkColor,
                               ],
                             ),
                           ),
+                          SizedBox(width: 5),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,6 +191,7 @@ MyColorsConst.primaryDarkColor,
                               ],
                             ),
                           ),
+                          SizedBox(width: 5),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -227,6 +231,7 @@ MyColorsConst.primaryDarkColor,
                               ],
                             ),
                           ),
+                          const SizedBox(width: 5),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -266,6 +271,7 @@ MyColorsConst.primaryDarkColor,
                               ],
                             ),
                           ),
+                          const SizedBox(width: 5),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -298,6 +304,7 @@ MyColorsConst.primaryDarkColor,
                               ],
                             ),
                           ),
+                          const SizedBox(width: 5),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -317,7 +324,7 @@ MyColorsConst.primaryDarkColor,
                             MyColorsConst.primaryColor.withOpacity(0.1),
                         textColor: MyColorsConst.primaryColor,
                         onPressed: () {
-                           Navigator.of(context)
+                          Navigator.of(context)
                               .pushNamed(EditDataDiriPage.routeName);
                         },
                       )
@@ -339,15 +346,16 @@ MyColorsConst.primaryDarkColor,
         Text(
           label,
           style: GoogleFonts.poppins(
-            fontSize: 12,
+            fontSize: 12.sp,
             color: MyColorsConst.lightDarkColor,
           ),
         ),
+        // SizedBox(height: 2),
         Text(
           value,
           style: GoogleFonts.poppins(
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
+            fontSize: 13.sp,
+            fontWeight: FontWeight.w600,
             color: MyColorsConst.darkColor,
           ),
         ),

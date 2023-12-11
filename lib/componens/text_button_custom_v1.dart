@@ -32,12 +32,13 @@ class TextButtonCustomV1 extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
+          foregroundColor: MyColorsConst.primaryColor,
           elevation: 0,
           backgroundColor:
               onPressed != null ? backgroundColor : MyColorsConst.disableColor,
-          padding: const EdgeInsets.symmetric(vertical: 12),
+          padding: const EdgeInsets.symmetric(vertical: 15),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
+            borderRadius: BorderRadius.circular(7),
             side: BorderSide.none,
           ),
         ),
