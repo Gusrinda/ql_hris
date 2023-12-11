@@ -106,74 +106,118 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 50.sp), // Spacer for status bar
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
+                  BlocBuilder<CheckInOutBloc, CheckInOutState>(
+                    builder: (context, state) {
+                      String? name;
+                      String? fotoProfil;
+                      if (state is InfoCheckInOutSuccessInBackground) {
+                        name = state.name;
+                        fotoProfil = state.fotoProfil;
+                      } else if (state is CheckInOutSuccessInBackground) {
+                        name = state.name;
+                        fotoProfil = state.fotoProfil;
+                      }
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            CircleAvatar(
-                              minRadius: 25.sp,
-                              maxRadius: 25.sp,
-                              backgroundColor: Colors.black54,
-                            ),
-                            const SizedBox(width: 10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            Row(
                               children: [
-                                Text(
-                                  'Selamat Datang,',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontSize: 10.sp,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                CircleAvatar(
+                                  minRadius: 25.sp,
+                                  maxRadius: 25.sp,
+                                  backgroundColor: Colors.black54,
+                                  child: fotoProfil != null
+                                      ? ClipOval(
+                                          child: Image.network(
+                                            fotoProfil,
+                                            fit: BoxFit.cover,
+                                            width: 50.sp,
+                                            height: 50.sp,
+                                          ),
+                                        )
+                                      : Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.no_photography,
+                                              size: 15.sp,
+                                              color: Colors.white,
+                                            ),
+                                            SizedBox(
+                                              width: 27.sp,
+                                              child: Text(
+                                                "Tidak Ada Foto",
+                                                textAlign: TextAlign.center,
+                                                style: GoogleFonts.poppins(
+                                                    fontSize: 5.sp,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Colors.white),
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                 ),
-                                Text(
-                                  'Ari Kurniawan!',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                const SizedBox(width: 10),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Selamat Datang,',
+                                      style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontSize: 10.sp,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    Text(
+                                      name ?? 'Karyawan SJ',
+                                      style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                        InkWell(
-                          onTap: () async {
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BlocProvider(
-                                  create: (context) => NotifikasiBloc()
-                                    ..add(
-                                      GetListNotifikasi(),
+                            InkWell(
+                              onTap: () async {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BlocProvider(
+                                      create: (context) => NotifikasiBloc()
+                                        ..add(
+                                          GetListNotifikasi(),
+                                        ),
+                                      child: NotifikasiPage(),
                                     ),
-                                  child: NotifikasiPage(),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                height: 40.sp,
+                                width: 40.sp,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(7)),
+                                alignment: Alignment.center,
+                                child: Icon(
+                                  CupertinoIcons.bell_fill,
+                                  size: 20.sp,
+                                  color: MyColorsConst.primaryColor,
                                 ),
                               ),
-                            );
-                          },
-                          child: Container(
-                            height: 40.sp,
-                            width: 40.sp,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(7)),
-                            alignment: Alignment.center,
-                            child: Icon(
-                              CupertinoIcons.bell_fill,
-                              size: 20.sp,
-                              color: MyColorsConst.primaryColor,
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
                   const SizedBox(height: 20.0),
                   Padding(

@@ -20,21 +20,25 @@ class CheckInOutBloc extends Bloc<CheckInOutEvent, CheckInOutState> {
           var resUser = await ProfileServices.getDataProfilel(
               resToken.response["token"], resToken.response["id"]);
           if (res is ServicesSuccess && resUser is ServicesSuccess) {
-            final name = resUser.response["data"]["name"] ?? 'Pegawai SJ';
+            final name = resUser.response["data"]["name"] ?? 'Karyawan SJ';
+            final fotoProfil = resUser.response["data"]["profil_image"] ?? '';
             final jsonData = res.response["data"];
             final status = jsonData["status"];
 
             if (status == "ATTEND") {
               emit(InfoCheckInOutSuccessInBackground(
+                fotoProfil: fotoProfil,
                 name: name,
               ));
             } else if (status == "NOT ATTEND") {
               emit(CheckInOutSuccessInBackground(
+                fotoProfil: fotoProfil,
                 name: name,
                 isCheckin: true,
               ));
             } else if (status == "WORKING") {
               emit(CheckInOutSuccessInBackground(
+                fotoProfil: fotoProfil,
                 name: name,
                 isCheckin: false,
               ));
