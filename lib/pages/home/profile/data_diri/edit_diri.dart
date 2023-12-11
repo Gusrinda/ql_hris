@@ -303,7 +303,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                           title: SizedBox.shrink(),
                           content: Column(
                             children: [
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Divisi',
                                 labelForm: 'Divisi',
@@ -312,8 +312,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 valueController: widget.valueDivisiController,
                                 idController: widget.idDivisiController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Departemen',
                                 labelForm: 'Departemen',
@@ -323,8 +322,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     widget.valueDepartemenController,
                                 idController: widget.idDepartemenController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Posisi',
                                 labelForm: 'Posisi',
@@ -333,8 +331,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 valueController: widget.valuePosisiController,
                                 idController: widget.idPosisiController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Zona',
                                 labelForm: 'Zona',
@@ -343,8 +340,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 valueController: widget.valueZonaController,
                                 idController: widget.idZonaController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Standard Gaji',
                                 labelForm: 'Standard Gaji',
@@ -354,8 +350,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     widget.valueStandardGajiController,
                                 idController: widget.idStandardGajiController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Costcentre',
                                 labelForm: 'Costcentre',
@@ -365,7 +360,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     widget.valueCostcentreController,
                                 idController: widget.idCostcentreController,
                               ),
-                              const SizedBox(height: 20),
                               FormTemplateSpd(
                                 onTap: () {},
                                 hintText: 'Pilih Kode Presisi',
@@ -376,8 +370,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     widget.valueKodePresisiController,
                                 idController: widget.idKodePresisiController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Status',
                                 labelForm: 'Status',
@@ -386,7 +379,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 valueController: widget.valueStatusController,
                                 idController: widget.idStatusController,
                               ),
-                              const SizedBox(height: 20),
                             ],
                           ),
                           isActive: currentStep >= 0,
@@ -402,7 +394,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                           title: SizedBox.shrink(),
                           content: Column(
                             children: [
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan NIK',
                                 labelForm: 'NIK',
                                 labelTag: 'Label-NIK',
@@ -410,8 +402,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.nikController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan Nama',
                                 labelForm: 'Nama',
                                 labelTag: 'Label-NamaDiri',
@@ -419,8 +410,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.namaController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan Nama Panggilan',
                                 labelForm: 'Nama Panggilan',
                                 labelTag: 'Label-NamaPanggilan',
@@ -428,8 +418,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.namaPanggilanController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Jenis Kelamin',
                                 labelForm: 'Jenis Kelamin',
@@ -438,8 +427,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 valueController: widget.jenisKelaminController,
                                 idController: widget.jenisKelaminController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Tempat Lahir',
                                 labelForm: 'Tempat Lahir',
@@ -449,8 +437,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     widget.valueTempatLahirController,
                                 idController: widget.idTempatLahirController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Tanggal Lahir',
                                 labelForm: 'Tanggal Lahir',
@@ -459,8 +446,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 valueController: widget.tanggalLahirController,
                                 idController: widget.tanggalLahirController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan Alamat Tinggal',
                                 labelForm: 'Alamat Tinggal',
                                 labelTag: 'Label-AlamatTinggal',
@@ -468,7 +454,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.alamatTinggalController,
                                 validator: (value) {},
                               ),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Provinsi',
                                 labelForm: 'Provinsi',
@@ -477,8 +463,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 valueController: widget.valueProvinsiController,
                                 idController: widget.idProvinsiController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Kota',
                                 labelForm: 'Kota',
@@ -487,8 +472,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 valueController: widget.valueKotaController,
                                 idController: widget.idKotaController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Kecamatan',
                                 labelForm: 'Kecamatan',
@@ -498,8 +482,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     widget.valueKecamatanController,
                                 idController: widget.idKecamatanController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan Kode Pos',
                                 labelForm: 'Kode Pos',
                                 labelTag: 'Label-KodePos',
@@ -507,8 +490,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.kodePosController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan No. Telepon',
                                 labelForm: 'No. Telepon',
                                 labelTag: 'Label-NoTelepon',
@@ -516,8 +498,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.noTelpController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan No. Telepon Lainnya',
                                 labelForm: 'No. Telepon Lainnya',
                                 labelTag: 'Label-NoTelpLainnya',
@@ -525,8 +506,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.noTelpLainnyaController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan Nama Kontak Darurat',
                                 labelForm: 'Nama Kontak Darurat',
                                 labelTag: 'Label-KontakDarurat',
@@ -534,8 +514,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.namaKontakDaruratController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan Hubungan Dengan Karyawan',
                                 labelForm: 'Hubungan Dengan Karyawan',
                                 labelTag: 'Label-HubunganKaryawan',
@@ -543,8 +522,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.hubkaryawanController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Agama',
                                 labelForm: 'Agama',
@@ -553,8 +531,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 valueController: widget.valueAgamaController,
                                 idController: widget.idAgamaController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Golongan Darah',
                                 labelForm: 'Golongan Darah',
@@ -563,8 +540,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 valueController: widget.valueGolDarahController,
                                 idController: widget.idGolDarahController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Status Pernikahan',
                                 labelForm: 'Status Pernikahan',
@@ -575,8 +551,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 idController:
                                     widget.idStatusPernikahanController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Jumlah Tanggungan',
                                 labelForm: 'Jumlah Tanggungan',
@@ -603,7 +578,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                           title: SizedBox.shrink(),
                           content: Column(
                             children: [
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Jatah Cuti Reguler',
                                 labelForm: 'Jatah Cuti Reguler',
                                 labelTag: 'Label-JatahCutiReguler',
@@ -611,8 +586,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.jatahCutiRegController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Sisa Cuti Reguler',
                                 labelForm: 'Sisa Cuti Reguler',
                                 labelTag: 'Label-SisaCutiReguler',
@@ -620,8 +594,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.sisaCutiRegController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Jatah Cuti Masa Kerja',
                                 labelForm: 'Jatah Cuti Masa Kerja',
                                 labelTag: 'Label-JatahCutiMasaKerja',
@@ -629,8 +602,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.jatahCutiKerjaController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Sisa Cuti Masa Kerja',
                                 labelForm: 'Sisa Cuti Masa Kerja',
                                 labelTag: 'Label-SisaCutiMasaKerja',
@@ -638,8 +610,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.sisaCutiKerjaController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Tanggal',
                                 labelForm: 'Tanggal Masuk Kerja',
@@ -648,8 +619,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 valueController: widget.tanggalMasukController,
                                 idController: widget.tanggalMasukController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Tanggal',
                                 labelForm: 'Tanggal Berhenti Kerja',
@@ -659,7 +629,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     widget.tanggalBerhentiController,
                                 idController: widget.tanggalBerhentiController,
                               ),
-                              const SizedBox(height: 20),
                             ],
                           ),
                           isActive: currentStep >= 2,
@@ -675,7 +644,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                           title: SizedBox.shrink(),
                           content: Column(
                             children: [
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Foto Karyawan',
                                 labelForm: 'Foto Karyawan',
                                 labelTag: 'Label-FotoKaryawan',
@@ -683,8 +652,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.fotoKaryawanController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Foto KTP',
                                 labelForm: 'Foto KTP',
                                 labelTag: 'Label-FotoKTP',
@@ -692,8 +660,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.fotoKtpController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan No. KTP',
                                 labelForm: 'No. KTP',
                                 labelTag: 'Label-NoKtp',
@@ -701,8 +668,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.noKtpController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan Alamat Sesuai KTP',
                                 labelForm: 'Alamat Sesuai KTP',
                                 labelTag: 'Label-SisaCutiMasaKerja',
@@ -710,7 +676,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.alamatKtpController,
                                 validator: (value) {},
                               ),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Foto Kartu Keluarga',
                                 labelForm: 'Foto Kartu Keluarga',
                                 labelTag: 'Label-FotoKK',
@@ -718,8 +684,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.fotoKkController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan No. Kartu Keluarga',
                                 labelForm: 'No. Kartu Keluarga',
                                 labelTag: 'Label-NoKk',
@@ -727,8 +692,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.noKkController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Foto NPWP',
                                 labelForm: 'Foto NPWP',
                                 labelTag: 'Label-FotoNpwp',
@@ -736,8 +700,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.fotoNpwpController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan No. NPWP',
                                 labelForm: 'No. NPWP',
                                 labelTag: 'Label-NoNpwp',
@@ -745,7 +708,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.noNpwpController,
                                 validator: (value) {},
                               ),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Tanggal',
                                 labelForm: 'Tanggal Berlaku NPWP',
@@ -754,8 +717,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 valueController: widget.tanggalNpwpController,
                                 idController: widget.tanggalNpwpController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Foto BPJS',
                                 labelForm: 'Foto BPJS',
                                 labelTag: 'Label-FotoBpjs',
@@ -763,8 +725,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.fotoBpjsController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan No. BPJS',
                                 labelForm: 'No. BPJS',
                                 labelTag: 'Label-NoBpjs',
@@ -772,7 +733,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.noBpjsController,
                                 validator: (value) {},
                               ),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Tipe BPJS',
                                 labelForm: 'tipe BPJS',
@@ -781,8 +742,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 valueController: widget.valueTipeBpjsController,
                                 idController: widget.idTipeBpjsController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Berkas Pendukung Lainnya',
                                 labelForm: 'Berkas Pendukung Lainnya',
                                 labelTag: 'Label-BerkasPendukung',
@@ -790,8 +750,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.berkasLainnyaController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan Keterangan',
                                 labelForm: 'Keterangan',
                                 labelTag: 'Label-KeteranganDiri',
@@ -799,7 +758,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.keteranganController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
                             ],
                           ),
                           isActive: currentStep >= 3,
@@ -815,7 +773,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                           title: SizedBox.shrink(),
                           content: Column(
                             children: [
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan Ukuran Baju',
                                 labelForm: 'Ukuran Baju',
                                 labelTag: 'Label-UkBaju',
@@ -823,8 +781,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.ukBajuController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan Ukuran Celana',
                                 labelForm: 'Ukuran Celana',
                                 labelTag: 'Label-UkCelana',
@@ -832,8 +789,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.ukCelanaController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan Ukuran Sepatu',
                                 labelForm: 'Ukuran Sepatu',
                                 labelTag: 'Label-UkSepatu',
@@ -841,7 +797,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.ukSepatuontroller,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
                             ],
                           ),
                           isActive: currentStep >= 4,
@@ -857,7 +812,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                           title: SizedBox.shrink(),
                           content: Column(
                             children: [
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Periode Gaji',
                                 labelForm: 'Periode Gaji',
@@ -867,8 +822,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     widget.valuePeriodeGajiController,
                                 idController: widget.idPeriodeGajiController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Tipe Pembayaran',
                                 labelForm: 'Tipe Pembayaran',
@@ -878,8 +832,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     widget.valueTipePembayaranController,
                                 idController: widget.idTipePembayaranController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Metode Pembayaran',
                                 labelForm: 'Metode Pembayaran',
@@ -890,8 +843,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 idController:
                                     widget.idMetodePembayaranController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDropDown(
+                              FormDropDownData(
                                 onTap: () {},
                                 hintText: 'Pilih Bank',
                                 labelForm: 'Nama Bank',
@@ -900,8 +852,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 valueController: widget.valueNamaBankController,
                                 idController: widget.idNamaBankController,
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan Nomor Rekening',
                                 labelForm: 'Nomor Rekening',
                                 labelTag: 'Label-NoRek',
@@ -909,8 +860,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.noRekController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
-                              FormDataProfile(
+                              FormCatatanData(
                                 hintText: 'Tuliskan Atas Nama Pemilik Rekening',
                                 labelForm: 'Atas Nama',
                                 labelTag: 'Label-AtasNama',
@@ -918,7 +868,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 controller: widget.atasNamaController,
                                 validator: (value) {},
                               ),
-                              const SizedBox(height: 20),
                             ],
                           ),
                           isActive: currentStep >= 5,

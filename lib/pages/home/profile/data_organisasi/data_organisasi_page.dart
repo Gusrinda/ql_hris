@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/add_organisasi.dart';
@@ -34,9 +35,9 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
         ),
         child: Column(
           children: [
-            const SizedBox(height: 30),
+            SizedBox(height: 30.sp),
             Container(
-              padding: EdgeInsets.all(5.0),
+              padding: EdgeInsets.all(5.0.sp),
               child: Row(
                 children: [
                   IconButton(
@@ -75,7 +76,7 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
                   color: Colors.white,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(18.0),
+                  padding: EdgeInsets.all(20.sp),
                   child: Column(
                     children: [
                       Expanded(
@@ -91,16 +92,16 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
                               child: ListTile(
                                 contentPadding: EdgeInsets.zero,
                                 subtitle: Container(
-                                  margin: const EdgeInsets.only(bottom: 10),
+                                  margin: EdgeInsets.only(bottom: 10.sp),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     border:
                                         Border.all(color: Color(0xFFDDDDDD)),
                                     color: MyColorsConst.whiteColor,
                                   ),
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 12,
-                                    vertical: 10,
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 12.sp,
+                                    vertical: 10.sp,
                                   ),
                                   child: Stack(
                                     children: [
@@ -113,7 +114,7 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
                                               Text(
                                                 'Organisasi',
                                                 style: GoogleFonts.poppins(
-                                                  fontSize: 16,
+                                                  fontSize: 16.sp,
                                                   fontWeight: FontWeight.w500,
                                                   color: MyColorsConst
                                                       .primaryColor,
@@ -140,7 +141,7 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
                                                     Text(
                                                       'Posisi',
                                                       style: GoogleFonts.poppins(
-                                                        fontSize: 10,
+                                                        fontSize: 10.sp,
                                                         color: MyColorsConst
                                                             .lightDarkColor,
                                                       ),
@@ -148,7 +149,7 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
                                                     Text(
                                                       'Ketus',
                                                       style: GoogleFonts.poppins(
-                                                        fontSize: 10,
+                                                        fontSize: 10.sp,
                                                         color: MyColorsConst
                                                             .darkColor,
                                                       ),
@@ -164,7 +165,7 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
                                                     Text(
                                                       'Tahun',
                                                       style: GoogleFonts.poppins(
-                                                        fontSize: 10,
+                                                        fontSize: 10.sp,
                                                         color: MyColorsConst
                                                             .lightDarkColor,
                                                       ),
@@ -172,7 +173,7 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
                                                     Text(
                                                       '2020',
                                                       style: GoogleFonts.poppins(
-                                                        fontSize: 10,
+                                                        fontSize: 10.sp,
                                                         color: MyColorsConst
                                                             .darkColor,
                                                       ),
@@ -183,7 +184,7 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
                                             ],
                                           ),
                                           SizedBox(
-                                            height: 5,
+                                            height: 5.sp,
                                           ),
                                         ],
                                       ),
@@ -200,9 +201,9 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
                                               onTap: () {},
                                               child: Container(
                                                 padding:
-                                                    const EdgeInsets.symmetric(
-                                                  horizontal: 8,
-                                                  vertical: 4,
+                                                    EdgeInsets.symmetric(
+                                                  horizontal: 8.sp,
+                                                  vertical: 4.sp,
                                                 ),
                                                 decoration: BoxDecoration(
                                                   borderRadius:
@@ -215,7 +216,7 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
                                                 child: Text(
                                                   'Hapus',
                                                   style: GoogleFonts.poppins(
-                                                    fontSize: 12,
+                                                    fontSize: 12.sp,
                                                     color:
                                                         MyColorsConst.darkColor,
                                                   ),
@@ -235,7 +236,7 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
                       ),
                       TextButtonCustomV1(
                         text: "Tambah Data",
-                        height: 50,
+                        height: 50.sp,
                         backgroundColor:
                             MyColorsConst.primaryColor.withOpacity(0.1),
                         textColor: MyColorsConst.primaryColor,

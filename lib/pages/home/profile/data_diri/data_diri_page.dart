@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_diri.dart';
@@ -23,8 +24,8 @@ class _DataDiriPageState extends State<DataDiriPage> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-MyColorsConst.primaryDarkColor,
-                  MyColorsConst.primaryColor,
+                MyColorsConst.primaryDarkColor,
+                MyColorsConst.primaryColor,
               ],
               stops: [0.0, 0.05],
               begin: Alignment.topCenter,
@@ -33,9 +34,9 @@ MyColorsConst.primaryDarkColor,
           ),
           child: Column(
             children: [
-              const SizedBox(height: 30),
+              SizedBox(height: 30.sp),
               Container(
-                padding: EdgeInsets.all(5.0),
+                padding: EdgeInsets.all(5.0.sp),
                 child: Row(
                   children: [
                     IconButton(
@@ -73,11 +74,11 @@ MyColorsConst.primaryDarkColor,
                   color: Colors.white,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(18.0),
+                  padding: EdgeInsets.all(20.sp),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10.sp),
                       Text(
                         'Informasi',
                         style: GoogleFonts.poppins(
@@ -86,10 +87,11 @@ MyColorsConst.primaryDarkColor,
                           color: MyColorsConst.primaryColor,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Row(
                         children: [
                           Expanded(
+                            flex: 3,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -102,6 +104,7 @@ MyColorsConst.primaryDarkColor,
                             ),
                           ),
                           Expanded(
+                            flex: 2,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -114,7 +117,7 @@ MyColorsConst.primaryDarkColor,
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Text(
                         'Data Diri',
                         style: GoogleFonts.poppins(
@@ -123,10 +126,11 @@ MyColorsConst.primaryDarkColor,
                           color: MyColorsConst.primaryColor,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Row(
                         children: [
                           Expanded(
+                            flex: 3,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -146,6 +150,7 @@ MyColorsConst.primaryDarkColor,
                             ),
                           ),
                           Expanded(
+                            flex: 2,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -165,7 +170,7 @@ MyColorsConst.primaryDarkColor,
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Text(
                         'Info Lain',
                         style: GoogleFonts.poppins(
@@ -174,10 +179,11 @@ MyColorsConst.primaryDarkColor,
                           color: MyColorsConst.primaryColor,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Row(
                         children: [
                           Expanded(
+                            flex: 3,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -189,6 +195,7 @@ MyColorsConst.primaryDarkColor,
                             ),
                           ),
                           Expanded(
+                            flex: 2,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -200,7 +207,7 @@ MyColorsConst.primaryDarkColor,
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Text(
                         'Berkas',
                         style: GoogleFonts.poppins(
@@ -209,10 +216,11 @@ MyColorsConst.primaryDarkColor,
                           color: MyColorsConst.primaryColor,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Row(
                         children: [
                           Expanded(
+                            flex: 3,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -228,6 +236,7 @@ MyColorsConst.primaryDarkColor,
                             ),
                           ),
                           Expanded(
+                            flex: 2,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -245,7 +254,7 @@ MyColorsConst.primaryDarkColor,
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Text(
                         'Ukuran',
                         style: GoogleFonts.poppins(
@@ -254,10 +263,11 @@ MyColorsConst.primaryDarkColor,
                           color: MyColorsConst.primaryColor,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Row(
                         children: [
                           Expanded(
+                            flex: 3,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -267,6 +277,7 @@ MyColorsConst.primaryDarkColor,
                             ),
                           ),
                           Expanded(
+                            flex: 2,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -276,7 +287,7 @@ MyColorsConst.primaryDarkColor,
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Text(
                         'Pembayaran',
                         style: GoogleFonts.poppins(
@@ -285,10 +296,11 @@ MyColorsConst.primaryDarkColor,
                           color: MyColorsConst.primaryColor,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Row(
                         children: [
                           Expanded(
+                            flex: 3,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -299,6 +311,7 @@ MyColorsConst.primaryDarkColor,
                             ),
                           ),
                           Expanded(
+                            flex: 2,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -310,14 +323,15 @@ MyColorsConst.primaryDarkColor,
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       TextButtonCustomV1(
                         text: "Edit Data Diri",
+                        height: 50.sp,
                         backgroundColor:
                             MyColorsConst.primaryColor.withOpacity(0.1),
                         textColor: MyColorsConst.primaryColor,
                         onPressed: () {
-                           Navigator.of(context)
+                          Navigator.of(context)
                               .pushNamed(EditDataDiriPage.routeName);
                         },
                       )
@@ -339,19 +353,19 @@ MyColorsConst.primaryDarkColor,
         Text(
           label,
           style: GoogleFonts.poppins(
-            fontSize: 12,
+            fontSize: 12.sp,
             color: MyColorsConst.lightDarkColor,
           ),
         ),
         Text(
           value,
           style: GoogleFonts.poppins(
-            fontSize: 12,
+            fontSize: 12.sp,
             fontWeight: FontWeight.w500,
             color: MyColorsConst.darkColor,
           ),
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: 15.sp),
       ],
     );
   }

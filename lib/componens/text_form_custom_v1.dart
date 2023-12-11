@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -53,12 +54,12 @@ class _TextFormCustomV1State extends State<TextFormCustomV1> {
           Text(
             widget.titleText!,
             style: GoogleFonts.poppins(
-              fontSize: 12,
+              fontSize: 13.sp,
               fontWeight: FontWeight.w600,
               color: MyColorsConst.darkColor,
             ),
           ),
-          const SizedBox(height: 6),
+          SizedBox(height: 6.sp),
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6),
@@ -94,7 +95,7 @@ class _TextFormCustomV1State extends State<TextFormCustomV1> {
                           });
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          padding: EdgeInsets.symmetric(horizontal: 8.sp),
                           child: Icon(
                             _isPasswordShowed
                                 ? Icons.visibility
@@ -109,7 +110,7 @@ class _TextFormCustomV1State extends State<TextFormCustomV1> {
                     ? const BoxConstraints(minWidth: 0, minHeight: 0)
                     : null,
                 contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                    EdgeInsets.symmetric(horizontal: 12.sp, vertical: 15.sp),
                 border: InputBorder.none,
                 filled: true,
                 fillColor: widget.enable! ? Colors.transparent : Colors.black12,

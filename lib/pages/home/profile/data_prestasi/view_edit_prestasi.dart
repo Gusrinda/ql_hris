@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
@@ -30,7 +31,7 @@ class _ViewEditPrestasiPageState extends State<ViewEditPrestasiPage> {
           gradient: LinearGradient(
             colors: [
               MyColorsConst.primaryDarkColor,
-                  MyColorsConst.primaryColor,
+              MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.1],
             begin: Alignment.topCenter,
@@ -39,9 +40,9 @@ class _ViewEditPrestasiPageState extends State<ViewEditPrestasiPage> {
         ),
         child: Column(
           children: [
-            const SizedBox(height: 30),
+            SizedBox(height: 30.sp),
             Container(
-              padding: EdgeInsets.only(left: 8.0),
+              padding: EdgeInsets.only(left: 5.0.sp),
               child: Row(
                 children: [
                   IconButton(
@@ -81,14 +82,14 @@ class _ViewEditPrestasiPageState extends State<ViewEditPrestasiPage> {
                 ),
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                      EdgeInsets.symmetric(horizontal: 24.sp, vertical: 16.sp),
                   child: Column(
                     children: [
                       Expanded(
                         child: Column(
                           children: [
-                            const SizedBox(height: 16),
-                            FormDataProfile(
+                            SizedBox(height: 16.sp),
+                            FormCatatanData(
                               input: widget.namaPrestasiController.text,
                               labelTag: 'label-namaprestasi',
                               labelForm: 'Nama Prestasi',
@@ -98,7 +99,7 @@ class _ViewEditPrestasiPageState extends State<ViewEditPrestasiPage> {
                               controller: widget.namaPrestasiController,
                               validator: (value) {},
                             ),
-                            DropDownDataProfile(
+                            FormDropDownData(
                               input: '',
                               onTap: () {},
                               idController: widget.idTingkatPrestasiController,
@@ -110,7 +111,7 @@ class _ViewEditPrestasiPageState extends State<ViewEditPrestasiPage> {
                               hintText: 'Pilih Tingkat',
                               validator: (value) {},
                             ),
-                            DropDownDataProfile(
+                            FormDropDownData(
                               input: '',
                               onTap: () {},
                               idController: widget.tahunController,
@@ -126,7 +127,7 @@ class _ViewEditPrestasiPageState extends State<ViewEditPrestasiPage> {
                       ),
                       TextButtonCustomV1(
                         text: "Simpan Perubahan",
-                        height: 50,
+                        height: 50.sp,
                         backgroundColor:
                             MyColorsConst.primaryColor.withOpacity(0.1),
                         textColor: MyColorsConst.primaryColor,

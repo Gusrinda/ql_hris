@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
@@ -37,7 +38,7 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
           gradient: LinearGradient(
             colors: [
               MyColorsConst.primaryDarkColor,
-                  MyColorsConst.primaryColor,
+              MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.1],
             begin: Alignment.topCenter,
@@ -46,9 +47,9 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
         ),
         child: Column(
           children: [
-            const SizedBox(height: 30),
+            SizedBox(height: 30.sp),
             Container(
-              padding: EdgeInsets.only(left: 8.0),
+              padding: EdgeInsets.only(left: 5.0.sp),
               child: Row(
                 children: [
                   IconButton(
@@ -88,14 +89,14 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
                 ),
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                      EdgeInsets.symmetric(horizontal: 24.sp, vertical: 16.sp),
                   child: Column(
                     children: [
                       Expanded(
                         child: Column(
                           children: [
-                            const SizedBox(height: 16),
-                            FormDataProfile(
+                            SizedBox(height: 16.sp),
+                            FormCatatanData(
                               input: widget.namaOrganisasiController.text,
                               labelTag: 'label-addorganisasi',
                               labelForm: 'Nama Organisasi',
@@ -105,7 +106,7 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
                               controller: widget.namaOrganisasiController,
                               validator: (value) {},
                             ),
-                            DropDownDataProfile(
+                            FormDropDownData(
                               input: '',
                               onTap: () {},
                               idController: widget.tahunOrganisasiController,
@@ -116,7 +117,7 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
                               hintText: 'Pilih Tahun',
                               validator: (value) {},
                             ),
-                            DropDownDataProfile(
+                            FormDropDownData(
                               input: '',
                               onTap: () {},
                               idController: widget.idJenisOrganisasiController,
@@ -128,7 +129,7 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
                               hintText: 'Pilih Jenis Organisasi',
                               validator: (value) {},
                             ),
-                            DropDownDataProfile(
+                            FormDropDownData(
                               input: '',
                               onTap: () {},
                               idController: widget.idKotaOrganisasiController,
@@ -140,7 +141,7 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
                               hintText: 'Pilih Kots',
                               validator: (value) {},
                             ),
-                            FormDataProfile(
+                            FormCatatanData(
                               input: widget.posisiaOrganisasiController.text,
                               labelTag: 'label-addposisiorganisasi',
                               labelForm: 'Posisi',
@@ -155,7 +156,7 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
                       ),
                       TextButtonCustomV1(
                         text: "Simpan",
-                        height: 50,
+                        height: 50.sp,
                         backgroundColor:
                             MyColorsConst.primaryColor.withOpacity(0.1),
                         textColor: MyColorsConst.primaryColor,

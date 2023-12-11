@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
@@ -26,7 +27,7 @@ class _AddBahasaPageState extends State<AddBahasaPage> {
           gradient: LinearGradient(
             colors: [
               MyColorsConst.primaryDarkColor,
-                  MyColorsConst.primaryColor,
+              MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.1],
             begin: Alignment.topCenter,
@@ -35,9 +36,9 @@ class _AddBahasaPageState extends State<AddBahasaPage> {
         ),
         child: Column(
           children: [
-            const SizedBox(height: 30),
+            SizedBox(height: 30.sp),
             Container(
-              padding: EdgeInsets.only(left: 8.0),
+              padding: EdgeInsets.only(left: 5.0.sp),
               child: Row(
                 children: [
                   IconButton(
@@ -51,7 +52,7 @@ class _AddBahasaPageState extends State<AddBahasaPage> {
                     color: Colors.white,
                   ),
                   SizedBox(
-                    width: size.width * 1 / 6,
+                    width: size.width * 1 / 6.5,
                   ),
                   Expanded(
                     child: Text(
@@ -77,14 +78,14 @@ class _AddBahasaPageState extends State<AddBahasaPage> {
                 ),
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                      EdgeInsets.symmetric(horizontal: 24.sp, vertical: 16.sp),
                   child: Column(
                     children: [
                       Expanded(
                         child: Column(
                           children: [
-                            const SizedBox(height: 16),
-                            FormDataProfile(
+                            SizedBox(height: 16.sp),
+                            FormCatatanData(
                               input: widget.bahasaController.text,
                               labelTag: 'label-addbahasa',
                               labelForm: 'Bahasa Yang Dikuasai',
@@ -94,7 +95,7 @@ class _AddBahasaPageState extends State<AddBahasaPage> {
                               controller: widget.bahasaController,
                               validator: (value) {},
                             ),
-                            FormDataProfile(
+                            FormCatatanData(
                               input: widget.lisanController.text,
                               labelTag: 'label-addlisan',
                               labelForm: 'Nilai Lisan',
@@ -104,7 +105,7 @@ class _AddBahasaPageState extends State<AddBahasaPage> {
                               controller: widget.lisanController,
                               validator: (value) {},
                             ),
-                            FormDataProfile(
+                            FormCatatanData(
                               input: widget.tertulisController.text,
                               labelTag: 'label-addtertulis',
                               labelForm: 'Nilai Tertulis',
@@ -119,7 +120,7 @@ class _AddBahasaPageState extends State<AddBahasaPage> {
                       ),
                       TextButtonCustomV1(
                         text: "Simpan",
-                        height: 50,
+                        height: 50.sp,
                         backgroundColor:
                             MyColorsConst.primaryColor.withOpacity(0.1),
                         textColor: MyColorsConst.primaryColor,
