@@ -476,12 +476,15 @@ class _HomePageState extends State<HomePage> {
                             Text(
                               "Lihat Semua",
                               style: GoogleFonts.poppins(
-                                  fontSize: 13.sp,
+                                  fontSize: 12.sp,
                                   fontWeight: FontWeight.w500,
                                   color: MyColorsConst.primaryColor),
                             ),
-                            Icon(Icons.keyboard_arrow_right_rounded,
-                                color: MyColorsConst.primaryColor)
+                            Icon(
+                              Icons.keyboard_arrow_right_rounded,
+                              color: MyColorsConst.primaryColor,
+                              size: 20.sp,
+                            )
                           ],
                         ),
                       ],

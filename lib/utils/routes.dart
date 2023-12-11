@@ -20,6 +20,7 @@ import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/locatio
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/time_acio_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/location.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/time.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/dashboard.view.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dart';
@@ -80,7 +81,11 @@ class RouteGenerator {
         });
       case DashboardView.routeName:
         return MaterialPageRoute(builder: (context) {
-          return DashboardView();
+          return BlocProvider(
+            create: (context) =>
+                CheckInOutBloc()..add(AttendanceStateChecked()),
+            child: DashboardView(),
+          );
         });
       // case HomePage.routeName:
       //   return MaterialPageRoute(builder: (context) {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/pengumuman.view.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
@@ -58,32 +59,74 @@ class _DashboardViewState extends State<DashboardView> {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton.large(
-        heroTag: "FloatButton-Presensi",
-        backgroundColor: Colors.green.shade800,
-        onPressed: () {},
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              CupertinoIcons.square_arrow_right_fill,
-              size: 34.sp,
+      floatingActionButton: BlocBuilder<CheckInOutBloc, CheckInOutState>(
+        builder: (context, state) {
+          bool isButtonEnabled =
+              false; // Tentukan kondisi apakah tombol dapat diaktifkan
+
+          if (state is CheckInOutSuccessInBackground) {
+            isButtonEnabled =
+                state.isCheckin; // Atur kondisi sesuai dengan logika Anda
+          }
+
+          return FloatingActionButton.large(
+            heroTag: "FloatButton-CheckInOut",
+            backgroundColor: state is CheckInOutSuccessInBackground
+                ? state.isCheckin
+                    ? Colors.green.shade800
+                    : Colors.red.shade800
+                : Colors.grey, // Sesuaikan warna berdasarkan kondisi tombol
+            onPressed: isButtonEnabled
+                ? () async {
+                    ProcessCheckInOutPageState checkInOutPageState =
+                        state is CheckInOutSuccessInBackground
+                            ? state.isCheckin
+                                ? ProcessCheckInOutPageState.checkin
+                                : ProcessCheckInOutPageState.checkout
+                            : ProcessCheckInOutPageState.checkin;
+
+                    await Navigator.of(context).pushNamed(
+                      AddCheckInOutPage.routeName,
+                      arguments: checkInOutPageState,
+                    );
+                    context
+                        .read<CheckInOutBloc>()
+                        .add(AttendanceStateChecked());
+                  }
+                : null, // Atur nilai onPressed menjadi null jika tombol dinonaktifkan
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  state is CheckInOutSuccessInBackground
+                      ? state.isCheckin
+                          ? CupertinoIcons.square_arrow_right_fill
+                          : CupertinoIcons.square_arrow_left_fill
+                      : CupertinoIcons.checkmark_rectangle_fill,
+                  size: 34.sp,
+                ),
+                SizedBox(height: 5.sp),
+                SizedBox(
+                  width: 70,
+                  child: Text(
+                    state is CheckInOutSuccessInBackground
+                        ? state.isCheckin
+                            ? "PRESENSI MASUK"
+                            : "PRESENSI KELUAR"
+                        : "PRESENSI SELESAI",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 9.sp,
+                      fontWeight: FontWeight.w600,
+                      height: 1.2.sp,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 5.sp),
-            SizedBox(
-              width: 70,
-              child: Text(
-                "PRESENSI MASUK",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.poppins(
-                    color: Colors.white,
-                    fontSize: 9.sp,
-                    fontWeight: FontWeight.w600,
-                    height: 1.2.sp),
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
       bottomNavigationBar: BottomAppBar(
         notchMargin: 6,
