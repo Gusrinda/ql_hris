@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_diri.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class DataDiriPage extends StatefulWidget {
@@ -314,7 +315,10 @@ class _DataDiriPageState extends State<DataDiriPage> {
                         backgroundColor:
                             MyColorsConst.primaryColor.withOpacity(0.1),
                         textColor: MyColorsConst.primaryColor,
-                        onPressed: () {},
+                        onPressed: () {
+                           Navigator.of(context)
+                              .pushNamed(EditDataDiriPage.routeName);
+                        },
                       )
                     ],
                   ),

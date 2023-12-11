@@ -29,6 +29,7 @@ import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/add_bahasa.dar
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/data_bahasa_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/view_edit_bahasa.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/data_diri_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_diri.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/add_keluarga.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/data_keluarga_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/view_edit_keluarga.dart';
@@ -228,6 +229,10 @@ class RouteGenerator {
       case DataDiriPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return DataDiriPage();
+        });
+      case EditDataDiriPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return EditDataDiriPage();
         });
       case DataBahasaPage.routeName:
         return MaterialPageRoute(builder: (context) {

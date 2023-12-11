@@ -86,8 +86,8 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                               contentPadding: EdgeInsets.zero,
                               subtitle: GestureDetector(
                                 onTap: () {
-                                  Navigator.of(context)
-                                      .pushNamed(ViewEditKeluargaPage.routeName);
+                                  Navigator.of(context).pushNamed(
+                                      ViewEditKeluargaPage.routeName);
                                 },
                                 child: Container(
                                   margin: const EdgeInsets.only(bottom: 10),
@@ -238,8 +238,10 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                         backgroundColor:
                             MyColorsConst.primaryColor.withOpacity(0.1),
                         textColor: MyColorsConst.primaryColor,
-                        onPressed: () {Navigator.of(context)
-                                      .pushNamed(AddKeluargaPage.routeName);},
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(AddKeluargaPage.routeName);
+                        },
                       )
                     ],
                   ),

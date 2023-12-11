@@ -145,7 +145,7 @@ class FormDataProfile extends StatelessWidget {
                 label: labelForm,
                 labelColor: MyColorsConst.darkColor,
               ),
-              if (showRedStar) // Tampilkan bintang merah sesuai showRedStar
+              if (showRedStar)
                 const SizedBox(width: 5),
               if (showRedStar)
                 const Text(
