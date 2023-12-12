@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -146,7 +147,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
           gradient: LinearGradient(
             colors: [
               MyColorsConst.primaryDarkColor,
-                  MyColorsConst.primaryColor,
+              MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.1],
             begin: Alignment.topCenter,
@@ -157,7 +158,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
           children: [
             const SizedBox(height: 30),
             Container(
-              padding: EdgeInsets.only(left: 8.0),
+              padding: EdgeInsets.only(left: 5.0),
               child: Row(
                 children: [
                   IconButton(
@@ -171,7 +172,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                     color: Colors.white,
                   ),
                   SizedBox(
-                    width: size.width * 1 / 7,
+                    width: size.width * 0.5 / 3.5,
                   ),
                   Expanded(
                     child: Text(
@@ -201,322 +202,62 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                   child: Column(
                     children: [
                       const SizedBox(height: 20),
-                      Container(
-                        padding: const EdgeInsets.all(16.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          border: Border.all(color: Color(0xFFDDDDDD)),
-                          color: MyColorsConst.whiteColor,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                _buildText(
+                                    'Template Spd', widget.templateSpd ?? '-'),
+                                _buildText('Direktorat',
+                                    widget.direktoratValue ?? '-'),
+                                _buildText('Divisi', widget.divisiValue ?? '-'),
+                                _buildText(
+                                    'Departemen', widget.deptValue ?? '-'),
+                                _buildText('Posisi', widget.posisi ?? '-'),
+                                _buildText('Jenis Spd', widget.jenisSpd ?? '-'),
                                 Text(
-                                  "Surat Perjalanan Dinas",
+                                  'Satus',
                                   style: GoogleFonts.poppins(
+                                    fontSize: 10,
                                     color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                                const Spacer(),
-                                Container(
-                                  padding: EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: currentColor.withOpacity(0.1),
-                                  ),
-                                  child: Text(
-                                    mapStatusToString(widget.status as String),
-                                    style: GoogleFonts.poppins(
-                                      color: currentColor,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: "${widget.divisiValue}",
-                                    style: GoogleFonts.poppins(
-                                      color: MyColorsConst.darkColor,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: " | ",
-                                    style: GoogleFonts.poppins(
-                                      color: Color(
-                                          0XFF0068D4), // Set the color of the pipe to blue
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: "${widget.deptValue}",
-                                    style: GoogleFonts.poppins(
-                                      color: MyColorsConst.darkColor,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.access_time_filled,
-                                  color: MyColorsConst.lightDarkColor,
-                                  size: 10,
-                                ),
-                                const SizedBox(
-                                    width: 5), // Atur jarak sesuai kebutuhan
                                 Text(
-                                  "Dibuat Tanggal ${formatDate(widget.createdAt)}",
+                                  mapStatusToString(widget.status as String),
                                   style: GoogleFonts.poppins(
-                                      color: Colors.grey,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w400),
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                    color: currentColor,
+                                  ),
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            const Divider(
-                              color: Color(0xFFDDDDDD),
-                              thickness: 1,
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Template Spd',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        '${widget.templateSpd}',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        'Posisi',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        '${widget.posisi}',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        'Direktorat',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        '${widget.direktoratValue}',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        'Tanggal',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        '${formatDate(widget.tanggal)}',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        'Jenis Spd',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        '${widget.jenisSpd}',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Tanggal Acara Awal',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        '${formatDate(widget.tanggalAwal)}',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        'Tanggal Acara Akhir',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        '${formatDate(widget.tanggalAkhir)}',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        'Zona Awal',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        '${widget.zonaAwal}',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        'Zona Tujuan',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        '${widget.zonaTujuan}',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        'Lokasi Tujuan',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        '${widget.lokasiTujuan}',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                _buildText('Tanggal', widget.tanggal ?? '-'),
+                                _buildText('Tanggal Acara Awal',
+                                    widget.tanggalAwal ?? '-'),
+                                _buildText('Tanggal Acara Akhir',
+                                    widget.tanggalAkhir ?? '-'),
+                                _buildText('Zona Awal', widget.zonaAwal ?? '-'),
+                                _buildText(
+                                    'Zona Tujuan', widget.zonaTujuan ?? '-'),
+                                _buildText('Lokasi Tujuan',
+                                    widget.lokasiTujuan ?? '-'),
                               ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                       SizedBox(
-                        height: 30,
+                        height: 30.sp,
                       ),
                       if (currentStatus == "REVISED")
                         TextButtonCustomV1(
@@ -582,6 +323,31 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildText(String title, String value) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: GoogleFonts.poppins(
+            fontSize: 10.sp,
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        Text(
+          value,
+          style: GoogleFonts.poppins(
+            fontSize: 12.sp,
+            color: Colors.black,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        SizedBox(height: 15.sp),
+      ],
     );
   }
 }

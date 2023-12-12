@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -112,306 +113,441 @@ class _HistoryPageState extends State<HistoryPage> {
           LoadingDialog.dismissDialog(context);
         }
       },
-      child: SafeArea(
-        child: Scaffold(
-          appBar: appBarCustomV1(
-            title: "History Presensi",
-            padLeft: 8,
+      child: Scaffold(
+        // appBar: appBarCustomV1(
+        //   title: "History Presensi",
+        //   padLeft: 8,
+        // ),
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                MyColorsConst.primaryDarkColor,
+                MyColorsConst.primaryColor,
+              ],
+              stops: [0.0, 0.1],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(
+            children: [
+              const SizedBox(height: 30),
+              Container(
+                padding: EdgeInsets.only(left: 5.0),
+                child: Row(
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Bulan",
-                          style: GoogleFonts.poppins(
-                            color: MyColorsConst.darkColor,
-                            fontSize: 10,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                        MonthPicker(
-                          onTap: (DateTime? months, DateTime? years) {
-                            if (months != null) {
-                              setState(() {
-                                selectedMonth = months;
-                              });
-                              print(
-                                  "ini bulan terpilih ${selectedMonth} ${selectedYear}");
-                              DateTime newDate;
-                              if (selectedYear != null) {
-                                newDate = DateTime(selectedYear!.year,
-                                    selectedMonth!.month, DateTime.now().day);
-                              } else {
-                                newDate = DateTime(DateTime.now().year,
-                                    selectedMonth!.month, DateTime.now().day);
-                              }
-
-                              context.read<HistoryAttendanceBloc>().add(
-                                    GetAttendancesHistory(
-                                      date: newDate,
-                                    ),
-                                  );
-                            }
-                          },
-                          selectedYear: selectedYear,
-                        ),
-                      ],
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_back_ios_rounded,
+                        size: 18,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      color: Colors.white,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Tahun",
-                          style: GoogleFonts.poppins(
-                            color: MyColorsConst.darkColor,
-                            fontSize: 10,
-                            fontWeight: FontWeight.normal,
-                          ),
+                    SizedBox(
+                      width: size.width * 1 / 5,
+                    ),
+                    Expanded(
+                      child: Text(
+                        "History Presensi",
+                        style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
                         ),
-                        YearPickerCustom(
-                          onTap: (DateTime? years, DateTime? months) {
-                            if (years != null) {
-                              setState(() {
-                                selectedYear = years;
-                              });
-                              print(
-                                  "ini tahun yang dipilih ${selectedYear} ${selectedMonth}");
-
-                              DateTime newDate;
-                              if (selectedMonth != null) {
-                                newDate = DateTime(
-                                    selectedYear!.year, selectedMonth!.month);
-                              } else {
-                                newDate = DateTime(
-                                    selectedYear!.year, DateTime.now().month);
-                              }
-
-                              context.read<HistoryAttendanceBloc>().add(
-                                    GetAttendancesHistory(
-                                      date: newDate,
-                                    ),
-                                  );
-                            }
-                          },
-                          selectedMonth: selectedMonth,
-                        ),
-                      ],
+                      ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
-                Expanded(
-                  child: BlocBuilder<HistoryAttendanceBloc,
-                      HistoryAttendanceState>(
-                    builder: (context, state) {
-                      // Aku butuh data attendance
-                      // Data attendace didapat dari BLOC historyAttendance
-                      var attendances =
-                          context.read<HistoryAttendanceBloc>().attendances;
+              ),
+              Expanded(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                    color: Colors.white,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Bulan",
+                                  style: GoogleFonts.poppins(
+                                    color: MyColorsConst.darkColor,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                                MonthPicker(
+                                  onTap: (DateTime? months, DateTime? years) {
+                                    if (months != null) {
+                                      setState(() {
+                                        selectedMonth = months;
+                                      });
+                                      print(
+                                          "ini bulan terpilih ${selectedMonth} ${selectedYear}");
+                                      DateTime newDate;
+                                      if (selectedYear != null) {
+                                        newDate = DateTime(
+                                            selectedYear!.year,
+                                            selectedMonth!.month,
+                                            DateTime.now().day);
+                                      } else {
+                                        newDate = DateTime(
+                                            DateTime.now().year,
+                                            selectedMonth!.month,
+                                            DateTime.now().day);
+                                      }
 
-                      debugPrint("ATTENDANCE ? ${attendances}");
+                                      context.read<HistoryAttendanceBloc>().add(
+                                            GetAttendancesHistory(
+                                              date: newDate,
+                                            ),
+                                          );
+                                    }
+                                  },
+                                  selectedYear: selectedYear,
+                                ),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Tahun",
+                                  style: GoogleFonts.poppins(
+                                    color: MyColorsConst.darkColor,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                                YearPickerCustom(
+                                  onTap: (DateTime? years, DateTime? months) {
+                                    if (years != null) {
+                                      setState(() {
+                                        selectedYear = years;
+                                      });
+                                      print(
+                                          "ini tahun yang dipilih ${selectedYear} ${selectedMonth}");
 
-                      return attendances.isNotEmpty
-                          ? ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: attendances.length,
-                              itemBuilder: (context, index) {
-                                var data = attendances;
-                                String currentStatus =
-                                    data[index].status as String;
-                                Color currentColor =
-                                    getColorFromStatus(currentStatus);
+                                      DateTime newDate;
+                                      if (selectedMonth != null) {
+                                        newDate = DateTime(selectedYear!.year,
+                                            selectedMonth!.month);
+                                      } else {
+                                        newDate = DateTime(selectedYear!.year,
+                                            DateTime.now().month);
+                                      }
 
-                                return ListTile(
-                                    contentPadding: EdgeInsets.zero,
-                                    subtitle: GestureDetector(
-                                      child: Container(
-                                        margin:
-                                            const EdgeInsets.only(bottom: 7),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                          border: Border.all(
-                                              color: Color(0xFFDDDDDD)),
-                                          color: MyColorsConst.whiteColor,
-                                        ),
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 12, vertical: 10),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
+                                      context.read<HistoryAttendanceBloc>().add(
+                                            GetAttendancesHistory(
+                                              date: newDate,
+                                            ),
+                                          );
+                                    }
+                                  },
+                                  selectedMonth: selectedMonth,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Expanded(
+                          child: BlocBuilder<HistoryAttendanceBloc,
+                              HistoryAttendanceState>(
+                            builder: (context, state) {
+                              // Aku butuh data attendance
+                              // Data attendace didapat dari BLOC historyAttendance
+                              var attendances = context
+                                  .read<HistoryAttendanceBloc>()
+                                  .attendances;
+
+                              debugPrint("ATTENDANCE ? ${attendances}");
+
+                              return attendances.isNotEmpty
+                                  ? ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: attendances.length,
+                                      itemBuilder: (context, index) {
+                                        var data = attendances;
+                                        String currentStatus =
+                                            data[index].status as String;
+                                        Color currentColor =
+                                            getColorFromStatus(currentStatus);
+
+                                        return ListTile(
+                                          contentPadding: EdgeInsets.zero,
+                                          subtitle: GestureDetector(
+                                            child: Stack(
                                               children: [
-                                                Text(
-                                                  "${getDayFromDate("${data[index].tanggal}")}, ${data[index].tanggal}",
-                                                  style: GoogleFonts.poppins(
-                                                      color: MyColorsConst
-                                                          .darkColor,
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                                const Spacer(),
                                                 Container(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 6,
-                                                      vertical: 3),
+                                                  margin: const EdgeInsets.only(
+                                                      bottom: 7),
                                                   decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            5),
-                                                    color: currentColor
-                                                        .withOpacity(0.1),
+                                                            6),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black
+                                                            .withOpacity(0.1),
+                                                        offset: Offset(0, 0),
+                                                        blurRadius: 5,
+                                                      ),
+                                                    ],
+                                                    color: MyColorsConst
+                                                        .whiteColor,
                                                   ),
-                                                  child: Text(
-                                                    mapStatusToString(
-                                                        data[index].status
-                                                            as String),
-                                                    style: GoogleFonts.poppins(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 12.sp,
+                                                      vertical: 10.sp),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        "${getDayFromDate("${data[index].tanggal}")}, ${data[index].tanggal}",
+                                                        style: GoogleFonts.poppins(
+                                                            color: MyColorsConst
+                                                                .primaryColor,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10.sp,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Expanded(
+                                                            flex: 1,
+                                                            child: Text(
+                                                              'In ',
+                                                              style: GoogleFonts
+                                                                  .poppins(
+                                                                fontSize: 12,
+                                                                color:
+                                                                    Colors.grey,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            flex: 3,
+                                                            child: Text(
+                                                              data[index]
+                                                                      .checkinTime ??
+                                                                  "-",
+                                                              style: GoogleFonts
+                                                                  .poppins(
+                                                                fontSize: 12,
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Expanded(
+                                                            flex: 1,
+                                                            child: Text(
+                                                              'Out',
+                                                              style: GoogleFonts
+                                                                  .poppins(
+                                                                fontSize: 10,
+                                                                color:
+                                                                    Colors.grey,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            flex: 3,
+                                                            child: Text(
+                                                              data[index]
+                                                                      .checkoutTime ??
+                                                                  "-",
+                                                              style: GoogleFonts
+                                                                  .poppins(
+                                                                fontSize: 12,
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      // Text.rich(
+                                                      //   TextSpan(
+                                                      //     text: 'out ',
+                                                      //     style: GoogleFonts
+                                                      //         .poppins(
+                                                      //       fontSize: 12,
+                                                      //       color: Color(
+                                                      //           0XFF8F8F8F),
+                                                      //       fontWeight:
+                                                      //           FontWeight.w400,
+                                                      //     ),
+                                                      //     children: <TextSpan>[
+                                                      //       TextSpan(
+                                                      //         text: data[index]
+                                                      //                     .checkoutTime !=
+                                                      //                 null
+                                                      //             ? "${data[index].checkoutTime}"
+                                                      //             : "-",
+                                                      //         style: GoogleFonts
+                                                      //             .poppins(
+                                                      //           fontSize: 12,
+                                                      //           color: Color(
+                                                      //               0XFF8F8F8F),
+                                                      //           fontWeight:
+                                                      //               FontWeight
+                                                      //                   .w700,
+                                                      //         ),
+                                                      //       ),
+                                                      //     ],
+                                                      //   ),
+                                                      // ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  top: 0,
+                                                  right: 0,
+                                                  child: Container(
+                                                    height: 30,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 6.sp,
+                                                            vertical: 3.sp),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topRight:
+                                                            Radius.circular(
+                                                                10.sp),
+                                                        bottomLeft:
+                                                            Radius.circular(
+                                                                10.sp),
+                                                      ),
                                                       color: currentColor,
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.w500,
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        mapStatusToString(
+                                                            currentStatus),
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          color: Colors.white,
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
                                               ],
                                             ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            Row(
-                                              children: [
-                                                Text.rich(
-                                                  TextSpan(
-                                                    text: 'in ',
-                                                    style: GoogleFonts.poppins(
-                                                      fontSize: 12,
-                                                      color: Color(0XFF8F8F8F),
-                                                      fontWeight:
-                                                          FontWeight.w400,
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        DetailHistoryAbsensiPage(
+                                                      data: data,
+                                                      status:
+                                                          data[index].status,
+                                                      checkinFoto: data[index]
+                                                          .checkinFoto,
+                                                      checkoutFoto: data[index]
+                                                          .checkoutFoto,
+                                                      checkinTime: data[index]
+                                                          .checkinTime,
+                                                      checkoutTime: data[index]
+                                                          .checkoutTime,
+                                                      tanggal:
+                                                          data[index].tanggal,
+                                                      checkoutAddress:
+                                                          data[index]
+                                                              .checkoutAddress,
+                                                      checkinAddress:
+                                                          data[index]
+                                                              .checkinAddress,
+                                                      checkinOnScope:
+                                                          data[index]
+                                                              .checkinOnScope,
+                                                      checkoutOnScope:
+                                                          data[index]
+                                                              .checkoutOnScope,
                                                     ),
-                                                    children: <TextSpan>[
-                                                      TextSpan(
-                                                        text: data[index]
-                                                                    .checkinTime !=
-                                                                null
-                                                            ? "${data[index].checkinTime}"
-                                                            : "-",
-                                                        style: GoogleFonts.poppins(
-                                                          fontSize: 12,
-                                                          color:
-                                                              Color(0XFF8F8F8F),
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                const Spacer(),
-                                                Text.rich(
-                                                  TextSpan(
-                                                    text: 'out ',
-                                                    style: GoogleFonts.poppins(
-                                                      fontSize: 12,
-                                                      color: Color(0XFF8F8F8F),
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                    ),
-                                                    children: <TextSpan>[
-                                                      TextSpan(
-                                                        text: data[index]
-                                                                    .checkoutTime !=
-                                                                null
-                                                            ? "${data[index].checkoutTime}"
-                                                            : "-",
-                                                        style: GoogleFonts.poppins(
-                                                          fontSize: 12,
-                                                          color:
-                                                              Color(0XFF8F8F8F),
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetailHistoryAbsensiPage(
-                                                data: data,
-                                                status: data[index].status,
-                                                checkinFoto:
-                                                    data[index].checkinFoto,
-                                                checkoutFoto:
-                                                    data[index].checkoutFoto,
-                                                checkinTime:
-                                                    data[index].checkinTime,
-                                                checkoutTime:
-                                                    data[index].checkoutTime,
-                                                tanggal: data[index].tanggal,
-                                                checkoutAddress:
-                                                    data[index].checkoutAddress,
-                                                checkinAddress:
-                                                    data[index].checkinAddress,
-                                                checkinOnScope:
-                                                    data[index].checkinOnScope,
-                                                checkoutOnScope:
-                                                    data[index].checkoutOnScope,
-                                              ),
-                                            ));
+                                                  ));
+                                            },
+                                          ),
+                                        );
                                       },
-                                    ));
-                              },
-                            )
-                          : Center(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "assets/images/box_nodata.png",
-                                    height: size.width * 1 / 2,
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    "Tidak ada data yang ditampilkan!",
-                                    style: GoogleFonts.poppins(
-                                      color: MyColorsConst.darkColor,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                    },
+                                    )
+                                  : Center(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            "assets/images/box_nodata.png",
+                                            height: size.width * 1 / 2,
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Text(
+                                            "Tidak ada data yang ditampilkan!",
+                                            style: GoogleFonts.poppins(
+                                              color: MyColorsConst.darkColor,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

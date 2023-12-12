@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -201,8 +202,8 @@ class _CutiPageState extends State<CutiPage> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-MyColorsConst.primaryDarkColor,
-                  MyColorsConst.primaryColor,
+                MyColorsConst.primaryDarkColor,
+                MyColorsConst.primaryColor,
               ],
               stops: [0.0, 0.1],
               begin: Alignment.topCenter,
@@ -212,7 +213,7 @@ MyColorsConst.primaryDarkColor,
           // margin: EdgeInsets.only(top: 20, left: 20, right: 20),
           child: Column(
             children: [
-              const SizedBox(height: 30),
+              SizedBox(height: 30.sp),
               Container(
                 padding: EdgeInsets.all(5.0),
                 child: Row(
@@ -257,16 +258,75 @@ MyColorsConst.primaryDarkColor,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Daftar Pengajuan Cuti",
-                          style: GoogleFonts.poppins(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: MyColorsConst.darkColor,
-                          ),
-                        ),
+                        // Container(
+                        //   padding: const EdgeInsets.symmetric(
+                        //       horizontal: 12, vertical: 15),
+                        //   margin: const EdgeInsets.only(bottom: 20),
+                        //   decoration: BoxDecoration(
+                        //     borderRadius: BorderRadius.circular(5),
+                        //     border: Border.all(color: Color(0xFFDDDDDD)),
+                        //     color: MyColorsConst.whiteColor,
+                        //   ),
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.center,
+                        //     children: [
+                        //       Expanded(
+                        //         flex: 2,
+                        //         child: Column(
+                        //           children: [
+                        //             Text(
+                        //               'Cuti Terpakai',
+                        //               style: GoogleFonts.poppins(
+                        //                   fontSize: 12,
+                        //                   fontWeight: FontWeight.w500,
+                        //                   color: MyColorsConst.lightDarkColor),
+                        //             ),
+                        //             SizedBox(height: 5),
+                        //             Text(
+                        //               '7 hari',
+                        //               style: GoogleFonts.poppins(
+                        //                 fontSize: 17,
+                        //                 fontWeight: FontWeight.w700,
+                        //               ),
+                        //             ),
+                        //           ],
+                        //         ),
+                        //       ),
+                        //       Container(
+                        //         height: 80,
+                        //         width: 2,
+                        //         color: Color(0xFFDDDDDD),
+                        //         margin:
+                        //             const EdgeInsets.symmetric(horizontal: 10),
+                        //       ),
+                        //       Expanded(
+                        //         flex: 2,
+                        //         child: Column(
+                        //           children: [
+                        //             Text(
+                        //               'Sisa Jatah Cuti',
+                        //               style: GoogleFonts.poppins(
+                        //                 fontSize: 12,
+                        //                 fontWeight: FontWeight.w500,
+                        //                 color: MyColorsConst.lightDarkColor,
+                        //               ),
+                        //             ),
+                        //             SizedBox(height: 5),
+                        //             Text(
+                        //               '5 hari',
+                        //               style: GoogleFonts.poppins(
+                        //                 fontSize: 17,
+                        //                 fontWeight: FontWeight.w700,
+                        //               ),
+                        //             ),
+                        //           ],
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
                         const SizedBox(
-                          height: 15,
+                          height: 30,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -412,29 +472,29 @@ MyColorsConst.primaryDarkColor,
             ],
           ),
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () {
-        //     Navigator.push(
-        //       context,
-        //       MaterialPageRoute(
-        //         builder: (context) => BlocProvider(
-        //           create: (context) => AddCutiBloc()
-        //             ..add(OnSelectAlasanCuti())
-        //             ..add(OnSelectTipeCuti()),
-        //           child: AddCutiPage(
-        //             // Teruskan callback ke AddCutiPage
-        //             reloadDataCallback: loadData,
-        //           ),
-        //         ),
-        //       ),
-        //     );
-        //   },
-        //   backgroundColor: MyColorsConst.primaryLightColor,
-        //   child: const Icon(
-        //     Icons.add,
-        //     size: 32,
-        //   ),
-        // ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BlocProvider(
+                  create: (context) => AddCutiBloc()
+                    ..add(OnSelectAlasanCuti())
+                    ..add(OnSelectTipeCuti()),
+                  child: AddCutiPage(
+                    // Teruskan callback ke AddCutiPage
+                    reloadDataCallback: loadData,
+                  ),
+                ),
+              ),
+            );
+          },
+          backgroundColor: MyColorsConst.primaryLightColor,
+          child: const Icon(
+            Icons.add,
+            size: 32,
+          ),
+        ),
       ),
     );
   }
@@ -513,24 +573,15 @@ class ListViewCuti extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              margin: EdgeInsets.only(right: 3),
-              height: 90,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
-                color: currentColor,
-              ),
-            ),
-            Container(
-              height: 90,
               margin: const EdgeInsets.only(bottom: 7, left: 5, right: 3),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
-                // border: Border.all(color: const Color(0xFFDDDDDD)),
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      offset: Offset(0, 0),
-                      blurRadius: 5)
+                    color: Colors.black.withOpacity(0.1),
+                    offset: Offset(0, 0),
+                    blurRadius: 5,
+                  ),
                 ],
                 color: MyColorsConst.whiteColor,
               ),
@@ -539,57 +590,98 @@ class ListViewCuti extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Text(
+                    "${data.tipeCutiValue}",
+                    style: GoogleFonts.poppins(
+                      color: MyColorsConst.primaryColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.sp,
+                  ),
                   Row(
                     children: [
-                      Text(
-                        "${data.tipeCutiValue}",
-                        style: GoogleFonts.poppins(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          'Alasan',
+                          style: GoogleFonts.poppins(
+                            color: Colors.grey,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
-                      const Spacer(),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 6, vertical: 3),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: currentColor.withOpacity(0.1),
-                        ),
+                      Expanded(
+                        flex: 3,
                         child: Text(
-                          mapStatusToString(currentStatus),
+                          '${data.alasanValue}',
                           style: GoogleFonts.poppins(
-                            color: currentColor,
-                            fontSize: 10,
-                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 15,
+                  SizedBox(
+                    height: 10.sp,
                   ),
                   Row(
                     children: [
-                      const Icon(
-                        Icons.calendar_month_rounded,
-                        color: MyColorsConst.lightDarkColor,
-                        size: 10,
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          'Tanggal',
+                          style: GoogleFonts.poppins(
+                            color: Colors.grey,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                       ),
-                      const SizedBox(width: 5),
-                      Text(
-                        '${formatDate(data.dateFrom)} - ${formatDate(data.dateTo)}',
-                        style: GoogleFonts.poppins(
-                          color: Colors.grey,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
+                      Expanded(
+                        flex: 3,
+                        child: Text(
+                          '${data.dateFrom} - ${data.dateTo}',
+                          style: GoogleFonts.poppins(
+                            color: Colors.black,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ],
+              ),
+            ),
+            Positioned(
+              top: 0,
+              right: 0,
+              child: Container(
+                height: 30,
+                padding: EdgeInsets.symmetric(horizontal: 6.sp, vertical: 3.sp),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(10.sp),
+                    bottomLeft: Radius.circular(10.sp),
+                  ),
+                  color: currentColor,
+                ),
+                child: Center(
+                  child: Text(
+                    mapStatusToString(currentStatus),
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
               ),
             ),
           ],

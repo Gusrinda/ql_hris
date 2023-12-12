@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -203,8 +204,8 @@ class _DinasPageState extends State<DinasPage> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-MyColorsConst.primaryDarkColor,
-                  MyColorsConst.primaryColor,
+                MyColorsConst.primaryDarkColor,
+                MyColorsConst.primaryColor,
               ],
               stops: [0.0, 0.1],
               begin: Alignment.topCenter,
@@ -402,35 +403,35 @@ MyColorsConst.primaryDarkColor,
             ],
           ),
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () async {
-        //     Navigator.push(
-        //       context,
-        //       MaterialPageRoute(builder: (context) {
-        //         return BlocProvider(
-        //           create: (context) => AddDinasBloc()
-        //             ..add(OnSelectDivisi(page: 1, search: ''))
-        //             ..add(OnSelectDepartemen(page: 1, search: ''))
-        //             ..add(OnSelectPosisi(page: 1, search: ''))
-        //             ..add(OnSelectTemplateSpd(page: 1, search: ''))
-        //             ..add(OnSelectDirektorat(page: 1, search: ''))
-        //             ..add(OnSelectJenisSpd(page: 1, search: ''))
-        //             ..add(OnSelectZona(page: 1, search: ''))
-        //             ..add(OnSelectLokasiTujuan(page: 1, search: ''))
-        //             ..add(OnSelectPic(page: 1, search: '')),
-        //           child: AddDinasPage(
-        //             reloadDataCallback: loadData,
-        //           ),
-        //         );
-        //       }),
-        //     );
-        //   },
-        //   backgroundColor: MyColorsConst.primaryLightColor,
-        //   child: const Icon(
-        //     Icons.add,
-        //     size: 32,
-        //   ),
-        // ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) {
+                return BlocProvider(
+                  create: (context) => AddDinasBloc()
+                    ..add(OnSelectDivisi(page: 1, search: ''))
+                    ..add(OnSelectDepartemen(page: 1, search: ''))
+                    ..add(OnSelectPosisi(page: 1, search: ''))
+                    ..add(OnSelectTemplateSpd(page: 1, search: ''))
+                    ..add(OnSelectDirektorat(page: 1, search: ''))
+                    ..add(OnSelectJenisSpd(page: 1, search: ''))
+                    ..add(OnSelectZona(page: 1, search: ''))
+                    ..add(OnSelectLokasiTujuan(page: 1, search: ''))
+                    ..add(OnSelectPic(page: 1, search: '')),
+                  child: AddDinasPage(
+                    reloadDataCallback: loadData,
+                  ),
+                );
+              }),
+            );
+          },
+          backgroundColor: MyColorsConst.primaryLightColor,
+          child: const Icon(
+            Icons.add,
+            size: 32,
+          ),
+        ),
       ),
     );
   }
@@ -524,15 +525,7 @@ class ListViewDinas extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              margin: EdgeInsets.only(right: 3),
-              height: 105,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
-                color: currentColor,
-              ),
-            ),
-            Container(
-              height: 105,
+              // height: 105,
               margin: const EdgeInsets.only(bottom: 7, left: 5, right: 3),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
@@ -555,87 +548,129 @@ class ListViewDinas extends StatelessWidget {
                       Text(
                         "Surat Perjalanan Dinas",
                         style: GoogleFonts.poppins(
-                          color: Colors.black,
-                          fontSize: 12,
+                          color: MyColorsConst.primaryColor,
+                          fontSize: 14,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const Spacer(),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 6, vertical: 3),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: currentColor.withOpacity(0.1),
-                        ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10.sp,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
                         child: Text(
-                          mapStatusToString(currentStatus),
+                          'Tujuan',
                           style: GoogleFonts.poppins(
-                            color: currentColor,
+                            color: Colors.grey,
                             fontSize: 10,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Text(
+                          '${data.mLokasiTujuanNama}',
+                          style: GoogleFonts.poppins(
+                            color: Colors.black,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: "${data.mDivisiNama}",
-                          style: GoogleFonts.poppins(
-                            color: MyColorsConst.darkColor,
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        TextSpan(
-                          text: " | ",
-                          style: GoogleFonts.poppins(
-                            color: Color(
-                                0XFF0068D4), // Set the color of the pipe to blue
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        TextSpan(
-                          text: "${data.mDeptNama}",
-                          style: GoogleFonts.poppins(
-                            color: MyColorsConst.darkColor,
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ],
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(
-                    height: 8,
+                  // RichText(
+                  //   text: TextSpan(
+                  //     children: [
+                  //       TextSpan(
+                  //         text: "${data.mDivisiNama}",
+                  //         style: GoogleFonts.poppins(
+                  //           color: MyColorsConst.darkColor,
+                  //           fontSize: 10,
+                  //           fontWeight: FontWeight.w400,
+                  //         ),
+                  //       ),
+                  //       TextSpan(
+                  //         text: " | ",
+                  //         style: GoogleFonts.poppins(
+                  //           color: Color(
+                  //               0XFF0068D4), // Set the color of the pipe to blue
+                  //           fontSize: 10,
+                  //           fontWeight: FontWeight.w400,
+                  //         ),
+                  //       ),
+                  //       TextSpan(
+                  //         text: "${data.mDeptNama}",
+                  //         style: GoogleFonts.poppins(
+                  //           color: MyColorsConst.darkColor,
+                  //           fontSize: 10,
+                  //           fontWeight: FontWeight.w400,
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  //   maxLines: 2,
+                  //   overflow: TextOverflow.ellipsis,
+                  // ),
+                  SizedBox(
+                    height: 10.sp,
                   ),
                   Row(
                     children: [
-                      const Icon(
-                        Icons.access_time_filled,
-                        color: MyColorsConst.lightDarkColor,
-                        size: 10,
-                      ),
-                      const SizedBox(width: 5),
-                      Text(
-                        "Dibuat Tanggal ${formatDate(data.createdAt)}",
-                        style: GoogleFonts.poppins(
-                            color: Color(0XFF8F8F8F),
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          'Tanggal',
+                          style: GoogleFonts.poppins(
+                            color: Colors.grey,
                             fontSize: 10,
-                            fontWeight: FontWeight.w400),
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: Text(
+                          "${data.tglAcaraAwal} - ${data.tglAcaraAkhir}",
+                          style: GoogleFonts.poppins(
+                              color: MyColorsConst.darkColor,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400),
+                        ),
                       ),
                     ],
                   ),
                 ],
+              ),
+            ),
+            Positioned(
+              top: 0,
+              right: 0,
+              child: Container(
+                height: 30,
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(10.sp),
+                    bottomLeft: Radius.circular(10.sp),
+                  ),
+                  color: currentColor,
+                ),
+                child: Center(
+                  child: Text(
+                    mapStatusToString(currentStatus),
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
               ),
             ),
           ],

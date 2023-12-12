@@ -442,7 +442,7 @@ class _HomePageState extends State<HomePage> {
                                         create: (context) => ListDinasBloc()
                                           ..add(GetListDinas(
                                               date: DateTime.now())),
-                                        child: DashboardDinasPage(),
+                                        child: DinasPage(),
                                       ),
                                     ),
                                   );
@@ -476,7 +476,7 @@ class _HomePageState extends State<HomePage> {
                                         create: (context) => ListCutiBloc()
                                           ..add(GetListCuti(
                                               date: DateTime.now())),
-                                        child: DashboardCutiPage(),
+                                        child: CutiPage(),
                                       ),
                                     ),
                                   );

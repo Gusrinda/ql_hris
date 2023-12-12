@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -185,76 +186,137 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
         }
       },
       child: Scaffold(
-        appBar: appBarCustomV1(
-          title: "Notifikasi",
-          // centerTitle: true,
-          padLeft: 8,
-        ),
-        body: BlocBuilder<NotifikasiBloc, NotifikasiState>(
-          builder: (context, state) {
-            var listNotifikasi = context.read<NotifikasiBloc>().listNotifikasi;
-            var listCuti = context.read<NotifikasiBloc>().listcuti;
-            var listLembur = context.read<NotifikasiBloc>().listlembur;
-            var listDinas = context.read<NotifikasiBloc>().listdinas;
-            return Stack(
-              children: [
-                if (listNotifikasi.isNotEmpty)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: listNotifikasi.length,
-                      itemBuilder: (context, index) {
-                        var data = listNotifikasi;
-                        var dataCuti = listCuti;
-                        var dataLembur = listLembur;
-                        var dataDinas = listDinas;
-                        if (data[index].trxName != null &&
-                            data[index].actionType != null) {
-                          getIconAndColor(
-                              data[index].trxName!, data[index].actionType!);
-                          return CardListNotifikasi(
-                            tipeNotifikasi: data[index].trxName!,
-                            status: data[index].actionType!,
-                            iconNotifikasi: iconNotifikasi,
-                            warnaStatus: warnaStatus,
-                            data: data[index],
-                            dataCuti: dataCuti,
-                            dataLembur: dataLembur,
-                            dataDinas: dataDinas,
-                          );
-                        } else {
-                          return SizedBox.shrink();
-                        }
-                      },
-                    ),
-                  ),
-                if (listNotifikasi.isEmpty)
-                  Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          "assets/images/box_nodata.png",
-                          height: size.width * 1 / 2,
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          "Tidak ada data yang ditampilkan!",
-                          style: GoogleFonts.poppins(
-                            color: MyColorsConst.darkColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+        // appBar: appBarCustomV1(
+        //   title: "Notifikasi",
+        //   // centerTitle: true,
+        //   padLeft: 8,
+        // ),
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                MyColorsConst.primaryDarkColor,
+                MyColorsConst.primaryColor,
               ],
-            );
-          },
+              stops: [0.0, 0.1],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: Column(
+            children: [
+              SizedBox(height: 30.sp),
+              Container(
+                padding: EdgeInsets.all(5.0),
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_back_ios_rounded,
+                        size: 18,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      width: size.width * 1 / 4,
+                    ),
+                    Expanded(
+                      child: Text(
+                        "Notifikasi",
+                        style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                    color: Colors.white,
+                  ),
+                  child: BlocBuilder<NotifikasiBloc, NotifikasiState>(
+                    builder: (context, state) {
+                      var listNotifikasi =
+                          context.read<NotifikasiBloc>().listNotifikasi;
+                      var listCuti = context.read<NotifikasiBloc>().listcuti;
+                      var listLembur =
+                          context.read<NotifikasiBloc>().listlembur;
+                      var listDinas = context.read<NotifikasiBloc>().listdinas;
+                      return Stack(
+                        children: [
+                          if (listNotifikasi.isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 20),
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: listNotifikasi.length,
+                                itemBuilder: (context, index) {
+                                  var data = listNotifikasi;
+                                  var dataCuti = listCuti;
+                                  var dataLembur = listLembur;
+                                  var dataDinas = listDinas;
+                                  if (data[index].trxName != null &&
+                                      data[index].actionType != null) {
+                                    getIconAndColor(data[index].trxName!,
+                                        data[index].actionType!);
+                                    return CardListNotifikasi(
+                                      tipeNotifikasi: data[index].trxName!,
+                                      status: data[index].actionType!,
+                                      iconNotifikasi: iconNotifikasi,
+                                      warnaStatus: warnaStatus,
+                                      data: data[index],
+                                      dataCuti: dataCuti,
+                                      dataLembur: dataLembur,
+                                      dataDinas: dataDinas,
+                                    );
+                                  } else {
+                                    return SizedBox.shrink();
+                                  }
+                                },
+                              ),
+                            ),
+                          if (listNotifikasi.isEmpty)
+                            Center(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    "assets/images/box_nodata.png",
+                                    height: size.width * 1 / 2,
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    "Tidak ada data yang ditampilkan!",
+                                    style: GoogleFonts.poppins(
+                                      color: MyColorsConst.darkColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -420,21 +482,21 @@ class CardListNotifikasi extends StatelessWidget {
         _redirectToDetailPage(context);
       },
       child: Container(
-        margin: const EdgeInsets.only(bottom: 12),
+        margin: EdgeInsets.only(bottom: 12.sp),
         child: Column(
           children: [
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: EdgeInsets.all(8.sp),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: warnaStatus?.withOpacity(0.4) ?? Colors.transparent,
                   ),
                   child: iconNotifikasi,
                 ),
-                const SizedBox(
-                  width: 10,
+                SizedBox(
+                  width: 10.sp,
                 ),
                 Expanded(
                   child: Column(
@@ -449,7 +511,7 @@ class CardListNotifikasi extends StatelessWidget {
                             maxLines: 1,
                             style: GoogleFonts.poppins(
                               color: Colors.black,
-                              fontSize: 12,
+                              fontSize: 12.sp,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -460,13 +522,13 @@ class CardListNotifikasi extends StatelessWidget {
                                 : '',
                             style: GoogleFonts.poppins(
                               color: MyColorsConst.semiDarkColor2,
-                              fontSize: 10,
+                              fontSize: 10.sp,
                             ),
                           ),
                         ],
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 5.sp,
                       ),
                       Text(
                         data.text ?? '',
@@ -481,7 +543,7 @@ class CardListNotifikasi extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: 8,
+              height: 8.sp,
             ),
             Divider(
               color: Colors.grey,

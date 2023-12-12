@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -94,204 +95,189 @@ class _LemburPageState extends State<LemburPage> {
           LoadingDialog.dismissDialog(context);
         }
       },
-      child: BlocBuilder<CheckInOutBloc, CheckInOutState>(
-        builder: (context, state) {
-          String? name;
-          if (state is InfoCheckInOutSuccessInBackground) {
-            name = state.name;
-          } else if (state is CheckInOutSuccessInBackground) {
-            name = state.name;
-          }
-          return Scaffold(
-            body: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    MyColorsConst.primaryDarkColor,
-                    MyColorsConst.primaryColor,
-                  ],
-                  stops: [0.0, 0.1],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
-              child: Column(
-                children: [
-                  const SizedBox(height: 30),
-                  Container(
-                    padding: EdgeInsets.all(5.0),
-                    child: Row(
-                      children: [
-                        IconButton(
-                          icon: Icon(
-                            Icons.arrow_back_ios_rounded,
-                            size: 18,
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
+      child: Scaffold(
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                MyColorsConst.primaryDarkColor,
+                MyColorsConst.primaryColor,
+              ],
+              stops: [0.0, 0.1],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: Column(
+            children: [
+              const SizedBox(height: 30),
+              Container(
+                padding: EdgeInsets.all(5.0),
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_back_ios_rounded,
+                        size: 18,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      width: size.width * 1 / 4.8,
+                    ),
+                    Expanded(
+                      child: Text(
+                        "History Lembur",
+                        style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
                           color: Colors.white,
                         ),
-                        SizedBox(
-                          width: size.width * 1 / 4.8,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                    color: Colors.white,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Daftar Lembur",
+                          style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: MyColorsConst.darkColor,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Bulan",
+                                  style: GoogleFonts.poppins(
+                                    color: MyColorsConst.darkColor,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                                MonthPicker(
+                                  onTap: (DateTime? months, DateTime? years) {
+                                    if (months != null) {
+                                      setState(() {
+                                        selectedMonth = months;
+                                      });
+                                      print(
+                                          "ini bulan terpilih ${selectedMonth} ${selectedYear}");
+                                      DateTime newDate;
+                                      if (selectedYear != null) {
+                                        newDate = DateTime(
+                                            selectedYear!.year,
+                                            selectedMonth!.month,
+                                            DateTime.now().day);
+                                      } else {
+                                        newDate = DateTime(
+                                            DateTime.now().year,
+                                            selectedMonth!.month,
+                                            DateTime.now().day);
+                                      }
+
+                                      context.read<ListLemburBloc>().add(
+                                            GetListLembur(
+                                              date: newDate,
+                                            ),
+                                          );
+                                    }
+                                  },
+                                  selectedYear: selectedYear,
+                                )
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Tahun",
+                                  style: GoogleFonts.poppins(
+                                    color: MyColorsConst.darkColor,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                                YearPickerCustom(
+                                  onTap: (DateTime? years, DateTime? months) {
+                                    if (years != null) {
+                                      setState(() {
+                                        selectedYear = years;
+                                      });
+                                      print(
+                                          "ini tahun yang dipilih ${selectedYear} ${selectedMonth}");
+
+                                      DateTime newDate;
+                                      if (selectedMonth != null) {
+                                        newDate = DateTime(selectedYear!.year,
+                                            selectedMonth!.month);
+                                      } else {
+                                        newDate = DateTime(selectedYear!.year,
+                                            DateTime.now().month);
+                                      }
+
+                                      context.read<ListLemburBloc>().add(
+                                            GetListLembur(
+                                              date: newDate,
+                                            ),
+                                          );
+                                    }
+                                  },
+                                  selectedMonth: selectedMonth,
+                                )
+                              ],
+                            ),
+                          ],
                         ),
                         Expanded(
-                          child: Text(
-                            "History Lembur",
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                            ),
+                          child: BlocBuilder<ListLemburBloc, ListLemburState>(
+                            builder: (context, state) {
+                              var listlembur =
+                                  context.read<ListLemburBloc>().listlembur;
+
+                              debugPrint("LIST LEMBUR ? ${listlembur}");
+
+                              return CardListView(
+                                listlembur: listlembur,
+                                formatDate: formatDate,
+                                extractTime: extractTime,
+                              );
+                            },
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                        ),
-                        color: Colors.white,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Daftar Lembur",
-                              style: GoogleFonts.poppins(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                color: MyColorsConst.darkColor,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Bulan",
-                                      style: GoogleFonts.poppins(
-                                        color: MyColorsConst.darkColor,
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                    MonthPicker(
-                                      onTap:
-                                          (DateTime? months, DateTime? years) {
-                                        if (months != null) {
-                                          setState(() {
-                                            selectedMonth = months;
-                                          });
-                                          print(
-                                              "ini bulan terpilih ${selectedMonth} ${selectedYear}");
-                                          DateTime newDate;
-                                          if (selectedYear != null) {
-                                            newDate = DateTime(
-                                                selectedYear!.year,
-                                                selectedMonth!.month,
-                                                DateTime.now().day);
-                                          } else {
-                                            newDate = DateTime(
-                                                DateTime.now().year,
-                                                selectedMonth!.month,
-                                                DateTime.now().day);
-                                          }
-
-                                          context.read<ListLemburBloc>().add(
-                                                GetListLembur(
-                                                  date: newDate,
-                                                ),
-                                              );
-                                        }
-                                      },
-                                      selectedYear: selectedYear,
-                                    )
-                                  ],
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Tahun",
-                                      style: GoogleFonts.poppins(
-                                        color: MyColorsConst.darkColor,
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                    YearPickerCustom(
-                                      onTap:
-                                          (DateTime? years, DateTime? months) {
-                                        if (years != null) {
-                                          setState(() {
-                                            selectedYear = years;
-                                          });
-                                          print(
-                                              "ini tahun yang dipilih ${selectedYear} ${selectedMonth}");
-
-                                          DateTime newDate;
-                                          if (selectedMonth != null) {
-                                            newDate = DateTime(
-                                                selectedYear!.year,
-                                                selectedMonth!.month);
-                                          } else {
-                                            newDate = DateTime(
-                                                selectedYear!.year,
-                                                DateTime.now().month);
-                                          }
-
-                                          context.read<ListLemburBloc>().add(
-                                                GetListLembur(
-                                                  date: newDate,
-                                                ),
-                                              );
-                                        }
-                                      },
-                                      selectedMonth: selectedMonth,
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Expanded(
-                              child:
-                                  BlocBuilder<ListLemburBloc, ListLemburState>(
-                                builder: (context, state) {
-                                  var listlembur =
-                                      context.read<ListLemburBloc>().listlembur;
-
-                                  debugPrint("LIST LEMBUR ? ${listlembur}");
-
-                                  return CardListView(
-                                    listlembur: listlembur,
-                                    formatDate: formatDate,
-                                    extractTime: extractTime,
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
-          );
-        },
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -343,16 +329,16 @@ class CardListView extends StatelessWidget {
                   },
                   child: Stack(
                     children: [
+                      // Container(
+                      //   margin: EdgeInsets.only(right: 3),
+                      //   height: 110,
+                      //   decoration: BoxDecoration(
+                      //     borderRadius: BorderRadius.circular(6),
+                      //     color: Color(0XFF0068D4),
+                      //   ),
+                      // ),
                       Container(
-                        margin: EdgeInsets.only(right: 3),
-                        height: 110,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          color: Color(0XFF0068D4),
-                        ),
-                      ),
-                      Container(
-                        height: 110,
+                        // height: 110,
                         margin:
                             const EdgeInsets.only(bottom: 7, left: 5, right: 3),
                         decoration: BoxDecoration(
@@ -371,6 +357,9 @@ class CardListView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            SizedBox(
+                              height: 20.sp,
+                            ),
                             Row(
                               children: [
                                 Expanded(
@@ -378,72 +367,117 @@ class CardListView extends StatelessWidget {
                                   child: Text(
                                     "${data[index].nomor ?? 0}",
                                     style: GoogleFonts.poppins(
-                                      color: Colors.black,
-                                      fontSize: 13,
+                                      color: MyColorsConst.primaryColor,
+                                      fontSize: 14,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                 ),
-                                const Spacer(),
+                                // const Spacer(),
+                                // Expanded(
+                                //   flex: 3,
+                                //   child: Container(
+                                //     padding: const EdgeInsets.symmetric(
+                                //         horizontal: 6, vertical: 3),
+                                //     decoration: BoxDecoration(
+                                //       borderRadius: BorderRadius.circular(4),
+                                //       color: Colors.blue.withOpacity(0.1),
+                                //     ),
+                                //     child: Text(
+                                //       '${data[index].tipeLemburValue}',
+                                //       style: GoogleFonts.poppins(
+                                //         color: Color(0XFF0068D4),
+                                //         fontSize: 8,
+                                //         fontWeight: FontWeight.w500,
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10.sp,
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    'Tanggal',
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.grey,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
                                 Expanded(
                                   flex: 3,
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 6, vertical: 3),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4),
-                                      color: Colors.blue.withOpacity(0.1),
-                                    ),
-                                    child: Text(
-                                      '${data[index].tipeLemburValue}',
-                                      style: GoogleFonts.poppins(
-                                        color: Color(0XFF0068D4),
-                                        fontSize: 8,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
+                                  child: Text(
+                                    '${data[index].tanggal}',
+                                    style: GoogleFonts.poppins(
+                                        color: Colors.black,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400),
                                   ),
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              height: 4,
+                            SizedBox(
+                              height: 10.sp,
                             ),
                             Row(
                               children: [
-                                const Icon(
-                                  Icons.calendar_month_rounded,
-                                  color: MyColorsConst.lightDarkColor,
-                                  size: 10,
-                                ),
-                                const SizedBox(width: 5),
-                                Text(
-                                  '${formatDate(data[index].tanggal)}',
-                                  style: GoogleFonts.poppins(
+                                Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    'Jam',
+                                    style: GoogleFonts.poppins(
                                       color: Colors.grey,
                                       fontSize: 10,
-                                      fontWeight: FontWeight.w400),
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
                                 ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.access_time_filled,
-                                  color: MyColorsConst.lightDarkColor,
-                                  size: 10,
-                                ),
-                                const SizedBox(width: 5),
-                                Text(
-                                  "${extractTime(data[index].jamMulai)} - ${extractTime(data[index].jamSelesai)}",
-                                  style: GoogleFonts.poppins(
-                                      color: Colors.grey,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w400),
+                                Expanded(
+                                  flex: 3,
+                                  child: Text(
+                                    "${extractTime(data[index].jamMulai)} - ${extractTime(data[index].jamSelesai)}",
+                                    style: GoogleFonts.poppins(
+                                        color: Colors.black,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400),
+                                  ),
                                 ),
                               ],
                             ),
                           ],
+                        ),
+                      ),
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: Container(
+                          height: 30,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 6.sp, vertical: 3.sp),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(10.sp),
+                              bottomLeft: Radius.circular(10.sp),
+                            ),
+                            color: Color(0XFF0068D4),
+                          ),
+                          child: Center(
+                            child: Text(
+                              '${data[index].tipeLemburValue}',
+                              style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ],

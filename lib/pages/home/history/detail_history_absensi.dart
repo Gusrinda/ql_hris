@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
@@ -109,134 +110,210 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
     String currentStatus = widget.status as String;
     Color currentColor = getColorFromStatus(currentStatus);
     return Scaffold(
-      appBar: appBarCustomV1(
-        title: "Detail Absensi",
-        padLeft: 8,
-      ),
-      body: SingleChildScrollView(
+      // appBar: appBarCustomV1(
+      //   title: "Detail Absensi",
+      //   padLeft: 8,
+      // ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              MyColorsConst.primaryDarkColor,
+              MyColorsConst.primaryColor,
+            ],
+            stops: [0.0, 0.1],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
+            SizedBox(height: 30.sp),
+            Container(
+              padding: EdgeInsets.all(5.0),
+              child: Row(
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(16.0),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(color: const Color(0xFFDDDDDD)),
-                      color: MyColorsConst.whiteColor,
+                  IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios_rounded,
+                      size: 18,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "${getDayFromDate("${widget.tanggal}")}, ${widget.tanggal}",
-                              style: GoogleFonts.poppins(
-                                color: Colors.black,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: currentColor.withOpacity(0.1),
-                              ),
-                              child: Text(
-                                mapStatusToString(widget.status as String),
-                                style: GoogleFonts.poppins(
-                                  color: currentColor,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Row(
-                          children: [
-                            Text.rich(
-                              TextSpan(
-                                text: 'in ',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 12,
-                                  color: Color(0XFF8F8F8F),
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: widget.checkinTime != null
-                                        ? "${widget.checkinTime}"
-                                        : "-",
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      color: Color(0XFF8F8F8F),
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const Spacer(),
-                            Text.rich(
-                              TextSpan(
-                                text: 'out ',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 12,
-                                  color: Color(0XFF8F8F8F),
-                                  fontWeight: FontWeight.w400,
-                                ),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: widget.checkoutTime != null
-                                        ? "${widget.checkoutTime}"
-                                        : "-",
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      color: Color(0XFF8F8F8F),
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: size.width * 1 / 4,
+                  ),
+                  Expanded(
+                    child: Text(
+                      "Detail Absensi",
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  buildCardImage(
-                    checkIn: true,
-                    url: "${widget.checkinFoto}",
-                    address: "${widget.checkinAddress}",
-                    onSite: "${widget.checkinOnScope}",
+            Expanded(
+              child: Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
-                  buildCardImage(
-                    checkIn: false,
-                    url: "${widget.checkoutFoto}",
-                    address: "${widget.checkoutAddress}",
-                    onSite: "${widget.checkoutOnScope}",
+                  color: Colors.white,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Column(
+                    children: [
+                      Stack(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 7),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  offset: Offset(0, 0),
+                                  blurRadius: 5,
+                                ),
+                              ],
+                              color: MyColorsConst.whiteColor,
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 12.sp, vertical: 10.sp),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${getDayFromDate("${widget.tanggal}")}, ${widget.tanggal}",
+                                  style: GoogleFonts.poppins(
+                                      color: MyColorsConst.primaryColor,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(
+                                  height: 10.sp,
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Text(
+                                        'In ',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 12,
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 3,
+                                      child: Text(
+                                        widget.checkinTime ?? "-",
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 12,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Text(
+                                        'Out',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 10,
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 3,
+                                      child: Text(
+                                        widget.checkoutTime ?? "-",
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 12,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Positioned(
+                            top: 0,
+                            right: 0,
+                            child: Container(
+                              height: 30,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 6.sp, vertical: 3.sp),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(10.sp),
+                                  bottomLeft: Radius.circular(10.sp),
+                                ),
+                                color: currentColor,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  mapStatusToString(currentStatus),
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsets.zero,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            buildCardImage(
+                              checkIn: true,
+                              url: "${widget.checkinFoto}",
+                              address: "${widget.checkinAddress}",
+                              onSite: "${widget.checkinOnScope}",
+                            ),
+                            Divider(
+                              color: MyColorsConst.lightDarkColor,
+                            ),
+                            buildCardImage(
+                              checkIn: false,
+                              url: "${widget.checkoutFoto}",
+                              address: "${widget.checkoutAddress}",
+                              onSite: "${widget.checkoutOnScope}",
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ],
