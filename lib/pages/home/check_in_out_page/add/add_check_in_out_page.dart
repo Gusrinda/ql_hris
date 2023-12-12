@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -26,12 +27,12 @@ class AddCheckInOutPage extends StatelessWidget {
   final dataLayout = [
     {
       "title": "Masuk",
-      "btnColor": MyColorsConst.greenColor,
+      "btnColor": Colors.green.shade800,
       "btnText": "Check In",
     },
     {
       "title": "Pulang",
-      "btnColor": MyColorsConst.redColor,
+      "btnColor": Colors.red.shade800,
       "btnText": "Check Out",
     }
   ];
@@ -151,10 +152,10 @@ class AddCheckInOutPage extends StatelessWidget {
                                 const SizedBox(
                                     width: 5), // Atur jarak sesuai kebutuhan
                                 Text(
-                                  '${data != null ? DateFormat('EEEE, dd-MM-yyyy', 'id_ID').format(data.dateTime) : "-"}',
+                                  '${data != null ? DateFormat('EEEE, dd MMMM yyyy', 'id_ID').format(data.dateTime) : "-"}',
                                   style: GoogleFonts.poppins(
-                                      // fontFamily: 'Poppins',
-                                      fontSize: 12,
+                                      fontSize: 12.sp,
+                                      color: MyColorsConst.darkColor,
                                       fontWeight: FontWeight.w500),
                                 ),
                               ],

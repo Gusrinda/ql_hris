@@ -37,7 +37,7 @@ class TextButtonCustomV1 extends StatelessWidget {
           elevation: 0,
           backgroundColor:
               onPressed != null ? backgroundColor : MyColorsConst.disableColor,
-          padding: EdgeInsets.symmetric(vertical: 12.sp),
+          padding: EdgeInsets.symmetric(vertical: 13.sp),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(7),
             side: BorderSide.none,

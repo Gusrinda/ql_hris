@@ -11,6 +11,7 @@ import 'package:sj_presensi_mobile/componens/text_form_custom_v2.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/data_bahasa_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_diri/bloc/biodata_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/data_diri_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/data_keluarga_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/data_organisasi_page.dart';
@@ -52,10 +53,6 @@ class _ProfilePageState extends State<ProfilePage> {
           setState(() {
             data = state;
           });
-          // print('apa didalam ${data}');
-          // idController.text = state.username ?? "";
-          // emailController.text = state.email ?? "";
-          // phoneController.text = state.phoneNumber ?? "";
           LoadingDialog.dismissDialog(context);
         } else if (state is ProfileSuccessInBackground) {
           LoadingDialog.dismissDialog(context);
@@ -187,7 +184,6 @@ class _ProfilePageState extends State<ProfilePage> {
                             );
                           },
                         ),
-
                         const SizedBox(height: 25),
                         Text(
                           'Data Profil',
@@ -201,10 +197,11 @@ class _ProfilePageState extends State<ProfilePage> {
                           thickness: 1,
                         ),
                         TextFormCustomV2(
-                          labelText: "Data Diri",
+                          labelText: "Biodata",
                           color: MyColorsConst.whiteColor,
                           icon: CupertinoIcons.person_fill,
                           onTap: () {
+                            context.read<BiodataBloc>().add(GetBiodata());
                             Navigator.of(context)
                                 .pushNamed(DataDiriPage.routeName);
                           },

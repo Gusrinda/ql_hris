@@ -96,6 +96,7 @@ class _HomePageState extends State<HomePage> {
         }
       },
       child: RefreshIndicator(
+        displacement: 50,
         key: _refreshIndicatorKey,
         onRefresh: _onRefresh,
         child: Scaffold(

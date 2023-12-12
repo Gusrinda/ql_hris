@@ -3,11 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_diri.dart';
+import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_biodata_karyawan.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class DataDiriPage extends StatefulWidget {
   static const routeName = '/DataDiriPage';
-  const DataDiriPage({super.key});
+
+  const DataDiriPage({Key? key}) : super(key: key);
 
   @override
   State<DataDiriPage> createState() => _DataDiriPageState();
@@ -54,7 +56,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                     ),
                     Expanded(
                       child: Text(
-                        "Data Diri",
+                        "Biodata",
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,

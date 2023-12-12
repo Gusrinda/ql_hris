@@ -7,6 +7,7 @@ import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/pengumuman.view.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_diri/bloc/biodata_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/profile_page.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 import 'home.view.dart';
@@ -49,8 +50,15 @@ class _DashboardViewState extends State<DashboardView> {
                       CheckInOutBloc()..add(AttendanceStateChecked()),
                   child: HomePage(),
                 ),
-                BlocProvider(
-                  create: (context) => ProfileBloc()..add(GetDataProfile()),
+                MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => ProfileBloc()..add(GetDataProfile()),
+                    ),
+                    BlocProvider(
+                      create: (context) => BiodataBloc(),
+                    ),
+                  ],
                   child: ProfilePage(),
                 ),
               ],
