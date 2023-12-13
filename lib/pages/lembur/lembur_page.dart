@@ -115,9 +115,9 @@ class _LemburPageState extends State<LemburPage> {
           ),
           child: Column(
             children: [
-              const SizedBox(height: 30),
+              SizedBox(height: 40.sp),
               Container(
-                padding: EdgeInsets.all(5.0),
+                padding: EdgeInsets.all(5.0.sp),
                 child: Row(
                   children: [
                     IconButton(
@@ -131,7 +131,7 @@ class _LemburPageState extends State<LemburPage> {
                       color: Colors.white,
                     ),
                     SizedBox(
-                      width: size.width * 1 / 4.8,
+                      width: size.width * 1 / 5,
                     ),
                     Expanded(
                       child: Text(
@@ -258,6 +258,9 @@ class _LemburPageState extends State<LemburPage> {
                               ],
                             ),
                           ],
+                        ),
+                        SizedBox(
+                          height: 15.sp,
                         ),
                         Expanded(
                           child: BlocBuilder<ListLemburBloc, ListLemburState>(

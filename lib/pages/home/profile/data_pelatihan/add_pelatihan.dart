@@ -41,7 +41,7 @@ class _AddPelatihanPageState extends State<AddPelatihanPage> {
         ),
         child: Column(
           children: [
-            SizedBox(height: 30.sp),
+            SizedBox(height: 40.sp),
             Container(
               padding: EdgeInsets.only(left: 5.0.sp),
               child: Row(
@@ -57,7 +57,7 @@ class _AddPelatihanPageState extends State<AddPelatihanPage> {
                     color: Colors.white,
                   ),
                   SizedBox(
-                    width: size.width * 1 / 7.5,
+                    width: size.width * 0.5 / 4,
                   ),
                   Expanded(
                     child: Text(
@@ -84,65 +84,62 @@ class _AddPelatihanPageState extends State<AddPelatihanPage> {
                 child: Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 24.sp, vertical: 16.sp),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            SizedBox(height: 16.sp),
-                            FormCatatanData(
-                              labelTag: 'label-addnamaPelatihan',
-                              labelForm: 'Nama Pelatihan',
-                              formTag: 'form-addnamapelatihan',
-                              hintText: 'Nama Pelatihan',
-                              onTap: () {},
-                              controller: widget.namaPelatihanController,
-                              validator: (value) {},
-                            ),
-                            FormCatatanData(
-                              input: widget.lembagaPelatihanController.text,
-                              labelTag: 'label-addnamalembaga',
-                              labelForm: 'Nama Lembaga',
-                              formTag: 'form-addnamalembaga',
-                              hintText: 'Nama Lembaga',
-                              onTap: () {},
-                              controller: widget.lembagaPelatihanController,
-                              validator: (value) {},
-                            ),
-                            FormDropDownData(
-                              input: '',
-                              onTap: () {},
-                              idController: widget.tahunPelatihanController,
-                              valueController: widget.tahunPelatihanController,
-                              labelTag: 'Label-addtahunpelatihan',
-                              labelForm: 'Tahun',
-                              formTag: 'Form-addtahunpelatihan',
-                              hintText: 'Pilih Tahun',
-                              validator: (value) {},
-                            ),
-                            FormDropDownData(
-                              input: '',
-                              onTap: () {},
-                              idController: widget.kotapelatihanController,
-                              valueController: widget.kotapelatihanController,
-                              labelTag: 'Label-addkotapelatihan',
-                              labelForm: 'Kota',
-                              formTag: 'Form-addkotapelatihan',
-                              hintText: 'Pilih Kota',
-                              validator: (value) {},
-                            ),
-                          ],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 16.sp),
+                        FormInputData(
+                          labelTag: 'label-addnamaPelatihan',
+                          labelForm: 'Nama Pelatihan',
+                          formTag: 'form-addnamapelatihan',
+                          hintText: 'Nama Pelatihan',
+                          onTap: () {},
+                          controller: widget.namaPelatihanController,
+                          validator: (value) {},
                         ),
-                      ),
-                      TextButtonCustomV1(
-                        text: "Simpan",
-                        height: 50.sp,
-                        backgroundColor:
-                            MyColorsConst.primaryColor.withOpacity(0.1),
-                        textColor: MyColorsConst.primaryColor,
-                        onPressed: () {},
-                      ),
-                    ],
+                        FormInputData(
+                          input: widget.lembagaPelatihanController.text,
+                          labelTag: 'label-addnamalembaga',
+                          labelForm: 'Nama Lembaga',
+                          formTag: 'form-addnamalembaga',
+                          hintText: 'Nama Lembaga',
+                          onTap: () {},
+                          controller: widget.lembagaPelatihanController,
+                          validator: (value) {},
+                        ),
+                        FormDropDownData(
+                          input: '',
+                          onTap: () {},
+                          idController: widget.tahunPelatihanController,
+                          valueController: widget.tahunPelatihanController,
+                          labelTag: 'Label-addtahunpelatihan',
+                          labelForm: 'Tahun',
+                          formTag: 'Form-addtahunpelatihan',
+                          hintText: 'Pilih Tahun',
+                          validator: (value) {},
+                        ),
+                        FormDropDownData(
+                          input: '',
+                          onTap: () {},
+                          idController: widget.kotapelatihanController,
+                          valueController: widget.kotapelatihanController,
+                          labelTag: 'Label-addkotapelatihan',
+                          labelForm: 'Kota',
+                          formTag: 'Form-addkotapelatihan',
+                          hintText: 'Pilih Kota',
+                          validator: (value) {},
+                        ),
+                        SizedBox(height: 30.sp),
+                        TextButtonCustomV1(
+                          text: "Simpan",
+                          height: 50.sp,
+                          backgroundColor:
+                              MyColorsConst.primaryColor.withOpacity(0.1),
+                          textColor: MyColorsConst.primaryColor,
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

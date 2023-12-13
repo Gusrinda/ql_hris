@@ -126,194 +126,201 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
           children: [
-            SizedBox(height: 30.sp),
-            Container(
-              padding: EdgeInsets.all(5.0),
-              child: Row(
-                children: [
-                  IconButton(
-                    icon: Icon(
-                      Icons.arrow_back_ios_rounded,
-                      size: 18,
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: size.width * 1 / 4,
-                  ),
-                  Expanded(
-                    child: Text(
-                      "Detail Absensi",
-                      style: GoogleFonts.poppins(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 40.sp),
+                Container(
+                  padding: EdgeInsets.all(5.0.sp),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          Icons.arrow_back_ios_rounded,
+                          size: 18,
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                         color: Colors.white,
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
-                  color: Colors.white,
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(18.0),
-                  child: Column(
-                    children: [
-                      Stack(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(bottom: 7),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  offset: Offset(0, 0),
-                                  blurRadius: 5,
-                                ),
-                              ],
-                              color: MyColorsConst.whiteColor,
-                            ),
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12.sp, vertical: 10.sp),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "${getDayFromDate("${widget.tanggal}")}, ${widget.tanggal}",
-                                  style: GoogleFonts.poppins(
-                                      color: MyColorsConst.primaryColor,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                SizedBox(
-                                  height: 10.sp,
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 1,
-                                      child: Text(
-                                        'In ',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 12,
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 3,
-                                      child: Text(
-                                        widget.checkinTime ?? "-",
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 12,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 1,
-                                      child: Text(
-                                        'Out',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.grey,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 3,
-                                      child: Text(
-                                        widget.checkoutTime ?? "-",
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 12,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          Positioned(
-                            top: 0,
-                            right: 0,
-                            child: Container(
-                              height: 30,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 6.sp, vertical: 3.sp),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(10.sp),
-                                  bottomLeft: Radius.circular(10.sp),
-                                ),
-                                color: currentColor,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  mapStatusToString(currentStatus),
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                      SizedBox(
+                        width: size.width * 1 / 4.5,
                       ),
-                      Padding(
-                        padding: EdgeInsets.zero,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            buildCardImage(
-                              checkIn: true,
-                              url: "${widget.checkinFoto}",
-                              address: "${widget.checkinAddress}",
-                              onSite: "${widget.checkinOnScope}",
-                            ),
-                            Divider(
-                              color: MyColorsConst.lightDarkColor,
-                            ),
-                            buildCardImage(
-                              checkIn: false,
-                              url: "${widget.checkoutFoto}",
-                              address: "${widget.checkoutAddress}",
-                              onSite: "${widget.checkoutOnScope}",
-                            ),
-                          ],
+                      Expanded(
+                        child: Text(
+                          "Detail Absensi",
+                          style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: 50.sp,
+                ),
+                Expanded(
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                      color: Colors.white,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(18.0.sp),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 20.sp,
+                          ),
+                          buildCardImage(
+                            checkIn: true,
+                            url: "${widget.checkinFoto}",
+                            address: "${widget.checkinAddress}",
+                            onSite: "${widget.checkinOnScope}",
+                          ),
+                          Divider(
+                            color: Color(0xFFDDDDDD),
+                            thickness: 1,
+                          ),
+                          buildCardImage(
+                            checkIn: false,
+                            url: "${widget.checkoutFoto}",
+                            address: "${widget.checkoutAddress}",
+                            onSite: "${widget.checkoutOnScope}",
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              top: 100,
+              left: 20,
+              right: 20,
+              child: Stack(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(bottom: 7.sp),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          offset: Offset(0, 0),
+                          blurRadius: 5,
+                        ),
+                      ],
+                      color: MyColorsConst.whiteColor,
+                    ),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 12.sp, vertical: 10.sp),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${getDayFromDate("${widget.tanggal}")}, ${widget.tanggal}",
+                          style: GoogleFonts.poppins(
+                              color: MyColorsConst.primaryColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(
+                          height: 10.sp,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Text(
+                                'In ',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child: Text(
+                                widget.checkinTime ?? "-",
+                                style: GoogleFonts.poppins(
+                                  fontSize: 12,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Text(
+                                'Out',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 10,
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child: Text(
+                                widget.checkoutTime ?? "-",
+                                style: GoogleFonts.poppins(
+                                  fontSize: 12,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: Container(
+                      height: 30,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 6.sp, vertical: 3.sp),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(10.sp),
+                          bottomLeft: Radius.circular(10.sp),
+                        ),
+                        color: currentColor,
+                      ),
+                      child: Center(
+                        child: Text(
+                          mapStatusToString(currentStatus),
+                          style: GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -376,7 +383,7 @@ Padding buildCardImage({
     );
   });
   return Padding(
-    padding: const EdgeInsets.all(16.0),
+    padding: EdgeInsets.all(16.0.sp),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -388,8 +395,8 @@ Padding buildCardImage({
             fontWeight: FontWeight.w600,
           ),
         ),
-        const SizedBox(
-          height: 6,
+        SizedBox(
+          height: 6.sp,
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -447,8 +454,8 @@ Padding buildCardImage({
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  const SizedBox(
-                    height: 15,
+                  SizedBox(
+                    height: 15.sp,
                   ),
                   Text(
                     "Keterangan",

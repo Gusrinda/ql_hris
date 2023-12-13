@@ -132,9 +132,9 @@ class _HistoryPageState extends State<HistoryPage> {
           ),
           child: Column(
             children: [
-              const SizedBox(height: 30),
+              SizedBox(height: 40.sp),
               Container(
-                padding: EdgeInsets.only(left: 5.0),
+                padding: EdgeInsets.only(left: 5.0.sp),
                 child: Row(
                   children: [
                     IconButton(
@@ -173,7 +173,7 @@ class _HistoryPageState extends State<HistoryPage> {
                     color: Colors.white,
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(18.0),
+                    padding: EdgeInsets.all(18.0.sp),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -265,6 +265,9 @@ class _HistoryPageState extends State<HistoryPage> {
                             ),
                           ],
                         ),
+                        SizedBox(
+                          height: 15.sp,
+                        ),
                         Expanded(
                           child: BlocBuilder<HistoryAttendanceBloc,
                               HistoryAttendanceState>(
@@ -299,7 +302,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                                   decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            6),
+                                                            10),
                                                     boxShadow: [
                                                       BoxShadow(
                                                         color: Colors.black

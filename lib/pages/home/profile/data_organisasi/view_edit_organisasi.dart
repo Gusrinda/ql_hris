@@ -47,7 +47,7 @@ class _ViewEditOrganisasiPageState extends State<ViewEditOrganisasiPage> {
         ),
         child: Column(
           children: [
-           SizedBox(height: 30.sp),
+            SizedBox(height: 40.sp),
             Container(
               padding: EdgeInsets.only(left: 5.0.sp),
               child: Row(
@@ -90,79 +90,76 @@ class _ViewEditOrganisasiPageState extends State<ViewEditOrganisasiPage> {
                 child: Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 24.sp, vertical: 16.sp),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            SizedBox(height: 16.sp),
-                            FormCatatanData(
-                              input: widget.namaOrganisasiController.text,
-                              labelTag: 'label-organisasi',
-                              labelForm: 'Nama Organisasi',
-                              formTag: 'form-organisasi',
-                              hintText: 'Organisasi',
-                              onTap: () {},
-                              controller: widget.namaOrganisasiController,
-                              validator: (value) {},
-                            ),
-                            FormDropDownData(
-                              input: '',
-                              onTap: () {},
-                              idController: widget.tahunOrganisasiController,
-                              valueController: widget.tahunOrganisasiController,
-                              labelTag: 'Label-tahunorganisasi',
-                              labelForm: 'Tahun',
-                              formTag: 'Form-tahunorganisasi',
-                              hintText: 'Pilih Tahun',
-                              validator: (value) {},
-                            ),
-                            FormDropDownData(
-                              input: '',
-                              onTap: () {},
-                              idController: widget.idJenisOrganisasiController,
-                              valueController:
-                                  widget.valueJenisOrganisasiController,
-                              labelTag: 'Label-jenisorganisasi',
-                              labelForm: 'Jenis Organisasi',
-                              formTag: 'Form-jenisorganisasi',
-                              hintText: 'Pilih Jenis Organisasi',
-                              validator: (value) {},
-                            ),
-                            FormDropDownData(
-                              input: '',
-                              onTap: () {},
-                              idController: widget.idKotaOrganisasiController,
-                              valueController:
-                                  widget.valueKotaOrganisasiController,
-                              labelTag: 'Label-kota',
-                              labelForm: 'Kota',
-                              formTag: 'Form-kota',
-                              hintText: 'Pilih Kots',
-                              validator: (value) {},
-                            ),
-                            FormCatatanData(
-                              input: widget.posisiaOrganisasiController.text,
-                              labelTag: 'label-posisiorganisasi',
-                              labelForm: 'Posisi',
-                              formTag: 'form-posisiorganisasi',
-                              hintText: 'Posisi',
-                              onTap: () {},
-                              controller: widget.posisiaOrganisasiController,
-                              validator: (value) {},
-                            ),
-                          ],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 16.sp),
+                        FormInputData(
+                          input: widget.namaOrganisasiController.text,
+                          labelTag: 'label-organisasi',
+                          labelForm: 'Nama Organisasi',
+                          formTag: 'form-organisasi',
+                          hintText: 'Organisasi',
+                          onTap: () {},
+                          controller: widget.namaOrganisasiController,
+                          validator: (value) {},
                         ),
-                      ),
-                      TextButtonCustomV1(
-                        text: "Simpan Perubahan",
-                        height: 50.sp,
-                        backgroundColor:
-                            MyColorsConst.primaryColor.withOpacity(0.1),
-                        textColor: MyColorsConst.primaryColor,
-                        onPressed: () {},
-                      ),
-                    ],
+                        FormDropDownData(
+                          input: '',
+                          onTap: () {},
+                          idController: widget.tahunOrganisasiController,
+                          valueController: widget.tahunOrganisasiController,
+                          labelTag: 'Label-tahunorganisasi',
+                          labelForm: 'Tahun',
+                          formTag: 'Form-tahunorganisasi',
+                          hintText: 'Pilih Tahun',
+                          validator: (value) {},
+                        ),
+                        FormDropDownData(
+                          input: '',
+                          onTap: () {},
+                          idController: widget.idJenisOrganisasiController,
+                          valueController:
+                              widget.valueJenisOrganisasiController,
+                          labelTag: 'Label-jenisorganisasi',
+                          labelForm: 'Jenis Organisasi',
+                          formTag: 'Form-jenisorganisasi',
+                          hintText: 'Pilih Jenis Organisasi',
+                          validator: (value) {},
+                        ),
+                        FormDropDownData(
+                          input: '',
+                          onTap: () {},
+                          idController: widget.idKotaOrganisasiController,
+                          valueController:
+                              widget.valueKotaOrganisasiController,
+                          labelTag: 'Label-kota',
+                          labelForm: 'Kota',
+                          formTag: 'Form-kota',
+                          hintText: 'Pilih Kots',
+                          validator: (value) {},
+                        ),
+                        FormInputData(
+                          input: widget.posisiaOrganisasiController.text,
+                          labelTag: 'label-posisiorganisasi',
+                          labelForm: 'Posisi',
+                          formTag: 'form-posisiorganisasi',
+                          hintText: 'Posisi',
+                          onTap: () {},
+                          controller: widget.posisiaOrganisasiController,
+                          validator: (value) {},
+                        ),
+                        SizedBox(height: 30.sp),
+                        TextButtonCustomV1(
+                          text: "Simpan Perubahan",
+                          height: 50.sp,
+                          backgroundColor:
+                              MyColorsConst.primaryColor.withOpacity(0.1),
+                          textColor: MyColorsConst.primaryColor,
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -41,53 +41,53 @@ class _ViewEditKeluargaPageState extends State<ViewEditKeluargaPage> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                MyColorsConst.primaryDarkColor,
-                MyColorsConst.primaryColor,
-              ],
-              stops: [0.0, 0.1],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              MyColorsConst.primaryDarkColor,
+              MyColorsConst.primaryColor,
+            ],
+            stops: [0.0, 0.1],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
-          child: Column(
-            children: [
-              SizedBox(height: 30.sp),
-              Container(
-                padding: EdgeInsets.only(left: 5.0.sp),
-                child: Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.arrow_back_ios_rounded,
-                        size: 18,
+        ),
+        child: Column(
+          children: [
+            SizedBox(height: 40.sp),
+            Container(
+              padding: EdgeInsets.only(left: 5.0.sp),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios_rounded,
+                      size: 18,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: size.width * 1 / 4.2,
+                  ),
+                  Expanded(
+                    child: Text(
+                      "Data Keluarga",
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
                       ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      color: Colors.white,
                     ),
-                    SizedBox(
-                      width: size.width * 1 / 4.2,
-                    ),
-                    Expanded(
-                      child: Text(
-                        "Data Keluarga",
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Container(
+            ),
+            Expanded(
+              child: Container(
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
@@ -98,100 +98,102 @@ class _ViewEditKeluargaPageState extends State<ViewEditKeluargaPage> {
                 child: Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 24.sp, vertical: 16.sp),
-                  child: Column(
-                    children: [
-                      SizedBox(height: 16.sp),
-                      FormDropDownData(
-                        input: '',
-                        onTap: () {},
-                        idController: widget.idkeluargaController,
-                        valueController: widget.valuekeluargaController,
-                        labelTag: 'Label-keluarga',
-                        labelForm: 'Keluarga',
-                        formTag: 'Form-keluarga',
-                        hintText: 'Pilih Keluargai',
-                        validator: (value) {},
-                      ),
-                      FormCatatanData(
-                        input: widget.nameController.text,
-                        labelTag: 'label-name',
-                        labelForm: 'Nama',
-                        formTag: 'form-name',
-                        hintText: 'Nama',
-                        onTap: () {},
-                        controller: widget.nameController,
-                        validator: (value) {},
-                      ),
-                      FormDropDownData(
-                        input: '',
-                        onTap: () {},
-                        idController: widget.idPendidikanTerakhirController,
-                        valueController:
-                            widget.valuePendidikanTerakhirController,
-                        labelTag: 'Label-pendidikanterakhir',
-                        labelForm: 'Pendidikan Terakhir',
-                        formTag: 'Form-pendidikanterakhir',
-                        hintText: 'Pilih Pendidikan Terakhir',
-                        validator: (value) {},
-                      ),
-                      FormDropDownData(
-                        input: '',
-                        onTap: () {},
-                        idController: widget.idPekerjaanController,
-                        valueController: widget.valuePekerjaanController,
-                        labelTag: 'Label-pekerjaan',
-                        labelForm: 'Pekerjaan',
-                        formTag: 'Form-pekerjaan',
-                        hintText: 'Pilih Pekerjaan',
-                        validator: (value) {},
-                      ),
-                      FormDropDownData(
-                        input: '',
-                        onTap: () {},
-                        idController: widget.idJenisKelaminController,
-                        valueController: widget.valueJenisKelaminController,
-                        labelTag: 'Label-jeniskelamin',
-                        labelForm: 'Jenis Kelamin',
-                        formTag: 'Form-jeniskelamin',
-                        hintText: 'Pilih Jenis Kelamin',
-                        validator: (value) {},
-                      ),
-                      FormCatatanData(
-                        input: widget.usiaController.text,
-                        labelTag: 'label-usia',
-                        labelForm: 'Usia',
-                        formTag: 'form-usia',
-                        hintText: 'Usia',
-                        onTap: () {},
-                        controller: widget.usiaController,
-                        validator: (value) {},
-                      ),
-                      FormCatatanData(
-                        input: widget.catatanController.text,
-                        labelTag: 'label-catatankeluarga',
-                        labelForm: 'Catatan',
-                        formTag: 'form-catatankeluarga',
-                        hintText: 'Catatan',
-                        showRedStar: false,
-                        onTap: () {},
-                        controller: widget.nameController,
-                        validator: (value) {},
-                      ),
-                      SizedBox(height: 20.sp),
-                      TextButtonCustomV1(
-                        text: "Simpan Perubahan",
-                        height: 50.sp,
-                        backgroundColor:
-                            MyColorsConst.primaryColor.withOpacity(0.1),
-                        textColor: MyColorsConst.primaryColor,
-                        onPressed: () {},
-                      ),
-                    ],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 16.sp),
+                        FormDropDownData(
+                          input: '',
+                          onTap: () {},
+                          idController: widget.idkeluargaController,
+                          valueController: widget.valuekeluargaController,
+                          labelTag: 'Label-keluarga',
+                          labelForm: 'Keluarga',
+                          formTag: 'Form-keluarga',
+                          hintText: 'Pilih Keluargai',
+                          validator: (value) {},
+                        ),
+                        FormInputData(
+                          input: widget.nameController.text,
+                          labelTag: 'label-name',
+                          labelForm: 'Nama',
+                          formTag: 'form-name',
+                          hintText: 'Nama',
+                          onTap: () {},
+                          controller: widget.nameController,
+                          validator: (value) {},
+                        ),
+                        FormDropDownData(
+                          input: '',
+                          onTap: () {},
+                          idController: widget.idPendidikanTerakhirController,
+                          valueController:
+                              widget.valuePendidikanTerakhirController,
+                          labelTag: 'Label-pendidikanterakhir',
+                          labelForm: 'Pendidikan Terakhir',
+                          formTag: 'Form-pendidikanterakhir',
+                          hintText: 'Pilih Pendidikan Terakhir',
+                          validator: (value) {},
+                        ),
+                        FormDropDownData(
+                          input: '',
+                          onTap: () {},
+                          idController: widget.idPekerjaanController,
+                          valueController: widget.valuePekerjaanController,
+                          labelTag: 'Label-pekerjaan',
+                          labelForm: 'Pekerjaan',
+                          formTag: 'Form-pekerjaan',
+                          hintText: 'Pilih Pekerjaan',
+                          validator: (value) {},
+                        ),
+                        FormDropDownData(
+                          input: '',
+                          onTap: () {},
+                          idController: widget.idJenisKelaminController,
+                          valueController: widget.valueJenisKelaminController,
+                          labelTag: 'Label-jeniskelamin',
+                          labelForm: 'Jenis Kelamin',
+                          formTag: 'Form-jeniskelamin',
+                          hintText: 'Pilih Jenis Kelamin',
+                          validator: (value) {},
+                        ),
+                        FormInputData(
+                          input: widget.usiaController.text,
+                          labelTag: 'label-usia',
+                          labelForm: 'Usia',
+                          formTag: 'form-usia',
+                          hintText: 'Usia',
+                          onTap: () {},
+                          controller: widget.usiaController,
+                          validator: (value) {},
+                        ),
+                        FormInputData(
+                          input: widget.catatanController.text,
+                          labelTag: 'label-catatankeluarga',
+                          labelForm: 'Catatan',
+                          formTag: 'form-catatankeluarga',
+                          hintText: 'Catatan',
+                          showRedStar: false,
+                          onTap: () {},
+                          controller: widget.nameController,
+                          validator: (value) {},
+                        ),
+                        SizedBox(height: 20.sp),
+                        TextButtonCustomV1(
+                          text: "Simpan Perubahan",
+                          height: 50.sp,
+                          backgroundColor:
+                              MyColorsConst.primaryColor.withOpacity(0.1),
+                          textColor: MyColorsConst.primaryColor,
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

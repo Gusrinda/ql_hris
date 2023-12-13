@@ -198,10 +198,10 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                 ),
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                      EdgeInsets.symmetric(horizontal: 24.sp, vertical: 16.sp),
                   child: Column(
                     children: [
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.sp),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

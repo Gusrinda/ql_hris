@@ -35,9 +35,9 @@ class _DataPrestasiPageState extends State<DataPrestasiPage> {
         ),
         child: Column(
           children: [
-            SizedBox(height: 30.sp),
+            SizedBox(height: 40.sp),
             Container(
-              padding: EdgeInsets.all(5.0.sp),
+              padding: EdgeInsets.only(left: 5.0.sp),
               child: Row(
                 children: [
                   IconButton(

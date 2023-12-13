@@ -36,9 +36,9 @@ class _ViewEditBahasaPageState extends State<ViewEditBahasaPage> {
         ),
         child: Column(
           children: [
-            SizedBox(height: 30.sp),
+            SizedBox(height: 40.sp),
             Container(
-              padding: EdgeInsets.only(left: 5.0),
+              padding: EdgeInsets.only(left: 5.0.sp),
               child: Row(
                 children: [
                   IconButton(
@@ -79,13 +79,13 @@ class _ViewEditBahasaPageState extends State<ViewEditBahasaPage> {
                 child: Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 24.sp, vertical: 16.sp),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Column(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Column(
                           children: [
                             SizedBox(height: 16.sp),
-                            FormCatatanData(
+                            FormInputData(
                               input: widget.bahasaController.text,
                               labelTag: 'label-bahasa',
                               labelForm: 'Bahasa Yang Dikuasai',
@@ -95,7 +95,7 @@ class _ViewEditBahasaPageState extends State<ViewEditBahasaPage> {
                               controller: widget.bahasaController,
                               validator: (value) {},
                             ),
-                            FormCatatanData(
+                            FormInputData(
                               input: widget.lisanController.text,
                               labelTag: 'label-lisan',
                               labelForm: 'Nilai Lisan',
@@ -105,7 +105,7 @@ class _ViewEditBahasaPageState extends State<ViewEditBahasaPage> {
                               controller: widget.lisanController,
                               validator: (value) {},
                             ),
-                            FormCatatanData(
+                            FormInputData(
                               input: widget.tertulisController.text,
                               labelTag: 'label-tertulis',
                               labelForm: 'Nilai Tertulis',
@@ -117,16 +117,17 @@ class _ViewEditBahasaPageState extends State<ViewEditBahasaPage> {
                             ),
                           ],
                         ),
-                      ),
-                      TextButtonCustomV1(
-                        text: "Simpan Perubahan",
-                        height: 50.sp,
-                        backgroundColor:
-                            MyColorsConst.primaryColor.withOpacity(0.1),
-                        textColor: MyColorsConst.primaryColor,
-                        onPressed: () {},
-                      ),
-                    ],
+                        SizedBox(height: 30.sp),
+                        TextButtonCustomV1(
+                          text: "Simpan Perubahan",
+                          height: 50.sp,
+                          backgroundColor:
+                              MyColorsConst.primaryColor.withOpacity(0.1),
+                          textColor: MyColorsConst.primaryColor,
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

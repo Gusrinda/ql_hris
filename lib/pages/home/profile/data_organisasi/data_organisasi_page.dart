@@ -35,7 +35,7 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
         ),
         child: Column(
           children: [
-            SizedBox(height: 30.sp),
+            SizedBox(height: 40.sp),
             Container(
               padding: EdgeInsets.all(5.0.sp),
               child: Row(

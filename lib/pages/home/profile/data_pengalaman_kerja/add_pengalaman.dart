@@ -31,53 +31,53 @@ class _AddPengalamanPageState extends State<AddPengalamanPage> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                MyColorsConst.primaryDarkColor,
-                MyColorsConst.primaryColor,
-              ],
-              stops: [0.0, 0.1],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              MyColorsConst.primaryDarkColor,
+              MyColorsConst.primaryColor,
+            ],
+            stops: [0.0, 0.1],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
-          child: Column(
-            children: [
-              SizedBox(height: 30.sp),
-              Container(
-                padding: EdgeInsets.only(left: 5.0.sp),
-                child: Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.arrow_back_ios_rounded,
-                        size: 18,
+        ),
+        child: Column(
+          children: [
+            SizedBox(height: 40.sp),
+            Container(
+              padding: EdgeInsets.only(left: 5.0.sp),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios_rounded,
+                      size: 18,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: size.width * 0.5 / 8,
+                  ),
+                  Expanded(
+                    child: Text(
+                      "Tambah Data Pengalaman Kerja",
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
                       ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      color: Colors.white,
                     ),
-                    SizedBox(
-                      width: size.width * 0.5 / 8,
-                    ),
-                    Expanded(
-                      child: Text(
-                        "Tambah Data Pengalaman Kerja",
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Container(
+            ),
+            Expanded(
+              child: Container(
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
@@ -88,115 +88,118 @@ class _AddPengalamanPageState extends State<AddPengalamanPage> {
                 child: Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 24.sp, vertical: 16.sp),
-                  child: Column(
-                    children: [
-                      SizedBox(height: 16.sp),
-                      FormCatatanData(
-                        labelTag: 'label-addnamaperusahaan',
-                        labelForm: 'Nama Perusahaan',
-                        formTag: 'form-addnamaperusahaan',
-                        hintText: 'Nama Perusahaan',
-                        onTap: () {},
-                        controller: widget.namaPerusahaanController,
-                        validator: (value) {},
-                      ),
-                      FormCatatanData(
-                        input: widget.bidangUsahaController.text,
-                        labelTag: 'label-addbidangusaha',
-                        labelForm: 'Bidang Usaha',
-                        formTag: 'form-addbidangusaha',
-                        hintText: 'Bidang Usaha',
-                        onTap: () {},
-                        controller: widget.bidangUsahaController,
-                        validator: (value) {},
-                      ),
-                      FormCatatanData(
-                        input: widget.noTelpController.text,
-                        labelTag: 'label-addnotelp',
-                        labelForm: 'No Telp',
-                        formTag: 'form-addnotelp',
-                        hintText: 'No Telp',
-                        onTap: () {},
-                        controller: widget.noTelpController,
-                        validator: (value) {},
-                      ),
-                      FormCatatanData(
-                        input: widget.posisiController.text,
-                        labelTag: 'label-addposisipengalaman',
-                        labelForm: 'Posisi',
-                        formTag: 'form-addposisipengalaman',
-                        hintText: 'Posisi',
-                        onTap: () {},
-                        controller: widget.posisiController,
-                        validator: (value) {},
-                      ),
-                      FormDropDownData(
-                        input: '',
-                        onTap: () {},
-                        idController: widget.tahunMasukController,
-                        valueController: widget.tahunMasukController,
-                        labelTag: 'Label-addtahunmasuk',
-                        labelForm: 'Tahun Masuk',
-                        formTag: 'Form-addtahunmasuk',
-                        hintText: 'Pilih Tahun',
-                        validator: (value) {},
-                      ),
-                      FormDropDownData(
-                        input: '',
-                        onTap: () {},
-                        idController: widget.tahunKeluarController,
-                        valueController: widget.tahunKeluarController,
-                        labelTag: 'Label-addtahunkeluar',
-                        labelForm: 'Tahun Keluar',
-                        formTag: 'Form-addtahunkeluar',
-                        hintText: 'Pilih Tahun',
-                        validator: (value) {},
-                      ),
-                      FormCatatanData(
-                        input: widget.alamatKantorController.text,
-                        labelTag: 'label-addalamatkantor',
-                        labelForm: 'Alamat Kantor',
-                        formTag: 'form-addalamatkantor',
-                        hintText: 'Alamat Kantor',
-                        onTap: () {},
-                        controller: widget.alamatKantorController,
-                        validator: (value) {},
-                      ),
-                      FormDropDownData(
-                        input: '',
-                        onTap: () {},
-                        idController: widget.idKotaController,
-                        valueController: widget.valueKotaController,
-                        labelTag: 'Label-addkotapengalaman',
-                        labelForm: 'Kota',
-                        formTag: 'Form-addkotapengalaman',
-                        hintText: 'Pilih Kota',
-                        validator: (value) {},
-                      ),
-                      FormCatatanData(
-                        input: widget.suratReferensiController.text,
-                        labelTag: 'label-addsuratreferensi',
-                        labelForm: 'Surat Referensi',
-                        formTag: 'form-addsuratreferensi',
-                        hintText: 'Surat Referensi',
-                        onTap: () {},
-                        controller: widget.suratReferensiController,
-                        validator: (value) {},
-                      ),
-                      TextButtonCustomV1(
-                        text: "Simpan",
-                        height: 50.sp,
-                        backgroundColor:
-                            MyColorsConst.primaryColor.withOpacity(0.1),
-                        textColor: MyColorsConst.primaryColor,
-                        onPressed: () {},
-                      ),
-                    ],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 16.sp),
+                        FormInputData(
+                          labelTag: 'label-addnamaperusahaan',
+                          labelForm: 'Nama Perusahaan',
+                          formTag: 'form-addnamaperusahaan',
+                          hintText: 'Nama Perusahaan',
+                          onTap: () {},
+                          controller: widget.namaPerusahaanController,
+                          validator: (value) {},
+                        ),
+                        FormInputData(
+                          input: widget.bidangUsahaController.text,
+                          labelTag: 'label-addbidangusaha',
+                          labelForm: 'Bidang Usaha',
+                          formTag: 'form-addbidangusaha',
+                          hintText: 'Bidang Usaha',
+                          onTap: () {},
+                          controller: widget.bidangUsahaController,
+                          validator: (value) {},
+                        ),
+                        FormInputData(
+                          input: widget.noTelpController.text,
+                          labelTag: 'label-addnotelp',
+                          labelForm: 'No Telp',
+                          formTag: 'form-addnotelp',
+                          hintText: 'No Telp',
+                          onTap: () {},
+                          controller: widget.noTelpController,
+                          validator: (value) {},
+                        ),
+                        FormInputData(
+                          input: widget.posisiController.text,
+                          labelTag: 'label-addposisipengalaman',
+                          labelForm: 'Posisi',
+                          formTag: 'form-addposisipengalaman',
+                          hintText: 'Posisi',
+                          onTap: () {},
+                          controller: widget.posisiController,
+                          validator: (value) {},
+                        ),
+                        FormDropDownData(
+                          input: '',
+                          onTap: () {},
+                          idController: widget.tahunMasukController,
+                          valueController: widget.tahunMasukController,
+                          labelTag: 'Label-addtahunmasuk',
+                          labelForm: 'Tahun Masuk',
+                          formTag: 'Form-addtahunmasuk',
+                          hintText: 'Pilih Tahun',
+                          validator: (value) {},
+                        ),
+                        FormDropDownData(
+                          input: '',
+                          onTap: () {},
+                          idController: widget.tahunKeluarController,
+                          valueController: widget.tahunKeluarController,
+                          labelTag: 'Label-addtahunkeluar',
+                          labelForm: 'Tahun Keluar',
+                          formTag: 'Form-addtahunkeluar',
+                          hintText: 'Pilih Tahun',
+                          validator: (value) {},
+                        ),
+                        FormInputData(
+                          input: widget.alamatKantorController.text,
+                          labelTag: 'label-addalamatkantor',
+                          labelForm: 'Alamat Kantor',
+                          formTag: 'form-addalamatkantor',
+                          hintText: 'Alamat Kantor',
+                          onTap: () {},
+                          controller: widget.alamatKantorController,
+                          validator: (value) {},
+                        ),
+                        FormDropDownData(
+                          input: '',
+                          onTap: () {},
+                          idController: widget.idKotaController,
+                          valueController: widget.valueKotaController,
+                          labelTag: 'Label-addkotapengalaman',
+                          labelForm: 'Kota',
+                          formTag: 'Form-addkotapengalaman',
+                          hintText: 'Pilih Kota',
+                          validator: (value) {},
+                        ),
+                        FormInputData(
+                          input: widget.suratReferensiController.text,
+                          labelTag: 'label-addsuratreferensi',
+                          labelForm: 'Surat Referensi',
+                          formTag: 'form-addsuratreferensi',
+                          hintText: 'Surat Referensi',
+                          onTap: () {},
+                          controller: widget.suratReferensiController,
+                          validator: (value) {},
+                        ),
+                        SizedBox(height: 30.sp),
+                        TextButtonCustomV1(
+                          text: "Simpan",
+                          height: 50.sp,
+                          backgroundColor:
+                              MyColorsConst.primaryColor.withOpacity(0.1),
+                          textColor: MyColorsConst.primaryColor,
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

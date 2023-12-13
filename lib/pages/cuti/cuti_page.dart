@@ -217,7 +217,7 @@ class _CutiPageState extends State<CutiPage> {
                 children: [
                   SizedBox(height: 40.sp),
                   Container(
-                    padding: EdgeInsets.all(5.0),
+                    padding: EdgeInsets.all(5.0.sp),
                     child: Row(
                       children: [
                         IconButton(
@@ -259,7 +259,7 @@ class _CutiPageState extends State<CutiPage> {
                         color: Colors.white,
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(18.0),
+                        padding: EdgeInsets.all(18.0.sp),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

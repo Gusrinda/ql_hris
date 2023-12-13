@@ -40,7 +40,7 @@ class _ViewEditPrestasiPageState extends State<ViewEditPrestasiPage> {
         ),
         child: Column(
           children: [
-            SizedBox(height: 30.sp),
+            SizedBox(height: 40.sp),
             Container(
               padding: EdgeInsets.only(left: 5.0.sp),
               child: Row(
@@ -83,57 +83,54 @@ class _ViewEditPrestasiPageState extends State<ViewEditPrestasiPage> {
                 child: Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 24.sp, vertical: 16.sp),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            SizedBox(height: 16.sp),
-                            FormCatatanData(
-                              input: widget.namaPrestasiController.text,
-                              labelTag: 'label-namaprestasi',
-                              labelForm: 'Nama Prestasi',
-                              formTag: 'form-namaprestasi',
-                              hintText: 'Nama Prestasi',
-                              onTap: () {},
-                              controller: widget.namaPrestasiController,
-                              validator: (value) {},
-                            ),
-                            FormDropDownData(
-                              input: '',
-                              onTap: () {},
-                              idController: widget.idTingkatPrestasiController,
-                              valueController:
-                                  widget.valueTingkatPrestasiController,
-                              labelTag: 'Label-tingkatprestasi',
-                              labelForm: 'Tingkat',
-                              formTag: 'Form-tingkatprestasi',
-                              hintText: 'Pilih Tingkat',
-                              validator: (value) {},
-                            ),
-                            FormDropDownData(
-                              input: '',
-                              onTap: () {},
-                              idController: widget.tahunController,
-                              valueController: widget.tahunController,
-                              labelTag: 'Label-tahunprestasi',
-                              labelForm: 'Tahun',
-                              formTag: 'Form-tahunprestasi',
-                              hintText: 'Pilih Tahun',
-                              validator: (value) {},
-                            ),
-                          ],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 16.sp),
+                        FormInputData(
+                          input: widget.namaPrestasiController.text,
+                          labelTag: 'label-namaprestasi',
+                          labelForm: 'Nama Prestasi',
+                          formTag: 'form-namaprestasi',
+                          hintText: 'Nama Prestasi',
+                          onTap: () {},
+                          controller: widget.namaPrestasiController,
+                          validator: (value) {},
                         ),
-                      ),
-                      TextButtonCustomV1(
-                        text: "Simpan Perubahan",
-                        height: 50.sp,
-                        backgroundColor:
-                            MyColorsConst.primaryColor.withOpacity(0.1),
-                        textColor: MyColorsConst.primaryColor,
-                        onPressed: () {},
-                      ),
-                    ],
+                        FormDropDownData(
+                          input: '',
+                          onTap: () {},
+                          idController: widget.idTingkatPrestasiController,
+                          valueController:
+                              widget.valueTingkatPrestasiController,
+                          labelTag: 'Label-tingkatprestasi',
+                          labelForm: 'Tingkat',
+                          formTag: 'Form-tingkatprestasi',
+                          hintText: 'Pilih Tingkat',
+                          validator: (value) {},
+                        ),
+                        FormDropDownData(
+                          input: '',
+                          onTap: () {},
+                          idController: widget.tahunController,
+                          valueController: widget.tahunController,
+                          labelTag: 'Label-tahunprestasi',
+                          labelForm: 'Tahun',
+                          formTag: 'Form-tahunprestasi',
+                          hintText: 'Pilih Tahun',
+                          validator: (value) {},
+                        ),
+                        SizedBox(height: 30.sp),
+                        TextButtonCustomV1(
+                          text: "Simpan Perubahan",
+                          height: 50.sp,
+                          backgroundColor:
+                              MyColorsConst.primaryColor.withOpacity(0.1),
+                          textColor: MyColorsConst.primaryColor,
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

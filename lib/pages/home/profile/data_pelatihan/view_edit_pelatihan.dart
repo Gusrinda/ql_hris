@@ -41,7 +41,7 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
         ),
         child: Column(
           children: [
-            SizedBox(height: 30.sp),
+            SizedBox(height: 40.sp),
             Container(
               padding: EdgeInsets.only(left: 5.0.sp),
               child: Row(
@@ -83,66 +83,63 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
                 ),
                 child: Padding(
                   padding:
-                 EdgeInsets.symmetric(horizontal: 24.sp, vertical: 16.sp),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                         SizedBox(height: 16.sp),
-                            FormCatatanData(
-                              labelTag: 'label-namaPelatihan',
-                              labelForm: 'Nama Pelatihan',
-                              formTag: 'form-namapelatihan',
-                              hintText: 'Nama Pelatihan',
-                              onTap: () {},
-                              controller: widget.namaPelatihanController,
-                              validator: (value) {},
-                            ),
-                            FormCatatanData(
-                              input: widget.lembagaPelatihanController.text,
-                              labelTag: 'label-namalembaga',
-                              labelForm: 'Nama Lembaga',
-                              formTag: 'form-namalembaga',
-                              hintText: 'Nama Lembaga',
-                              onTap: () {},
-                              controller: widget.lembagaPelatihanController,
-                              validator: (value) {},
-                            ),
-                            FormDropDownData(
-                              input: '',
-                              onTap: () {},
-                              idController: widget.tahunPelatihanController,
-                              valueController: widget.tahunPelatihanController,
-                              labelTag: 'Label-tahunpelatihan',
-                              labelForm: 'Tahun',
-                              formTag: 'Form-tahunpelatihan',
-                              hintText: 'Pilih Tahun',
-                              validator: (value) {},
-                            ),
-                            FormDropDownData(
-                              input: '',
-                              onTap: () {},
-                              idController: widget.kotapelatihanController,
-                              valueController: widget.kotapelatihanController,
-                              labelTag: 'Label-kotapelatihan',
-                              labelForm: 'Kota',
-                              formTag: 'Form-kotapelatihan',
-                              hintText: 'Pilih Kota',
-                              validator: (value) {},
-                            ),
-                          ],
+                      EdgeInsets.symmetric(horizontal: 24.sp, vertical: 16.sp),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 16.sp),
+                        FormInputData(
+                          labelTag: 'label-namaPelatihan',
+                          labelForm: 'Nama Pelatihan',
+                          formTag: 'form-namapelatihan',
+                          hintText: 'Nama Pelatihan',
+                          onTap: () {},
+                          controller: widget.namaPelatihanController,
+                          validator: (value) {},
                         ),
-                      ),
-                      TextButtonCustomV1(
-                        text: "Simpan Perubahan",
-                        height: 50.sp,
-                        backgroundColor:
-                            MyColorsConst.primaryColor.withOpacity(0.1),
-                        textColor: MyColorsConst.primaryColor,
-                        onPressed: () {},
-                      ),
-                    ],
+                        FormInputData(
+                          input: widget.lembagaPelatihanController.text,
+                          labelTag: 'label-namalembaga',
+                          labelForm: 'Nama Lembaga',
+                          formTag: 'form-namalembaga',
+                          hintText: 'Nama Lembaga',
+                          onTap: () {},
+                          controller: widget.lembagaPelatihanController,
+                          validator: (value) {},
+                        ),
+                        FormDropDownData(
+                          input: '',
+                          onTap: () {},
+                          idController: widget.tahunPelatihanController,
+                          valueController: widget.tahunPelatihanController,
+                          labelTag: 'Label-tahunpelatihan',
+                          labelForm: 'Tahun',
+                          formTag: 'Form-tahunpelatihan',
+                          hintText: 'Pilih Tahun',
+                          validator: (value) {},
+                        ),
+                        FormDropDownData(
+                          input: '',
+                          onTap: () {},
+                          idController: widget.kotapelatihanController,
+                          valueController: widget.kotapelatihanController,
+                          labelTag: 'Label-kotapelatihan',
+                          labelForm: 'Kota',
+                          formTag: 'Form-kotapelatihan',
+                          hintText: 'Pilih Kota',
+                          validator: (value) {},
+                        ),
+                        SizedBox(height: 30.sp),
+                        TextButtonCustomV1(
+                          text: "Simpan Perubahan",
+                          height: 50.sp,
+                          backgroundColor:
+                              MyColorsConst.primaryColor.withOpacity(0.1),
+                          textColor: MyColorsConst.primaryColor,
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
