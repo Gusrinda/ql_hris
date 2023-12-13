@@ -41,6 +41,7 @@ import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/view_edit_
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/add_pelatihan.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/data_pelatihan_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/view_edit_pelatihan.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/add_pendidikan.bloc/add_data_pendidikan_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/add_pendidikan.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/data_pendidikan.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/view_edit-pendidikan.dart';
@@ -239,7 +240,7 @@ class RouteGenerator {
           return DataDiriPage(bioData: bioData);
         });
       case EditDataDiriPage.routeName:
-      final bioData = settings.arguments as Biodata;
+        final bioData = settings.arguments as Biodata;
         return MaterialPageRoute(builder: (context) {
           return EditDataDiriPage(bioData: bioData);
         });
@@ -297,7 +298,10 @@ class RouteGenerator {
         });
       case AddPendidikanPage.routeName:
         return MaterialPageRoute(builder: (context) {
-          return AddPendidikanPage();
+          return BlocProvider(
+            create: (context) => AddDataPendidikanBloc(),
+            child: AddPendidikanPage(),
+          );
         });
       case ViewEditPendidikanPage.routeName:
         return MaterialPageRoute(builder: (context) {

@@ -371,6 +371,10 @@ mixin _$Biodata {
   int? get periodeGajiId => throw _privateConstructorUsedError;
   @JsonKey(name: "ref_id")
   dynamic get refId => throw _privateConstructorUsedError;
+  @JsonKey(name: "presensi_lokasi_default_id")
+  dynamic get presensiLokasiDefaultId => throw _privateConstructorUsedError;
+  @JsonKey(name: "exp_date_cuti")
+  DateTime? get expDateCuti => throw _privateConstructorUsedError;
   @JsonKey(name: "dir")
   String? get dir => throw _privateConstructorUsedError;
   @JsonKey(name: "div")
@@ -399,6 +403,36 @@ mixin _$Biodata {
   String? get golDarah => throw _privateConstructorUsedError;
   @JsonKey(name: "tanggungan")
   String? get tanggungan => throw _privateConstructorUsedError;
+  @JsonKey(name: "costcontre")
+  String? get costcontre => throw _privateConstructorUsedError;
+  @JsonKey(name: "status_nikah")
+  String? get statusNikah => throw _privateConstructorUsedError;
+  @JsonKey(name: "ktp_no")
+  String? get ktpNo => throw _privateConstructorUsedError;
+  @JsonKey(name: "ktp_foto")
+  String? get ktpFoto => throw _privateConstructorUsedError;
+  @JsonKey(name: "pas_foto")
+  String? get pasFoto => throw _privateConstructorUsedError;
+  @JsonKey(name: "kk_no")
+  String? get kkNo => throw _privateConstructorUsedError;
+  @JsonKey(name: "kk_foto")
+  String? get kkFoto => throw _privateConstructorUsedError;
+  @JsonKey(name: "npwp_no")
+  String? get npwpNo => throw _privateConstructorUsedError;
+  @JsonKey(name: "npwp_foto")
+  String? get npwpFoto => throw _privateConstructorUsedError;
+  @JsonKey(name: "npwp_tgl_berlaku")
+  DateTime? get npwpTglBerlaku => throw _privateConstructorUsedError;
+  @JsonKey(name: "bpjs_tipe_id")
+  int? get bpjsTipeId => throw _privateConstructorUsedError;
+  @JsonKey(name: "bpjs_no")
+  String? get bpjsNo => throw _privateConstructorUsedError;
+  @JsonKey(name: "bpjs_foto")
+  String? get bpjsFoto => throw _privateConstructorUsedError;
+  @JsonKey(name: "berkas_lain")
+  String? get berkasLain => throw _privateConstructorUsedError;
+  @JsonKey(name: "desc_file")
+  dynamic get descFile => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -468,6 +502,9 @@ abstract class $BiodataCopyWith<$Res> {
       @JsonKey(name: "m_standart_gaji_id") int? mStandartGajiId,
       @JsonKey(name: "periode_gaji_id") int? periodeGajiId,
       @JsonKey(name: "ref_id") dynamic refId,
+      @JsonKey(name: "presensi_lokasi_default_id")
+      dynamic presensiLokasiDefaultId,
+      @JsonKey(name: "exp_date_cuti") DateTime? expDateCuti,
       @JsonKey(name: "dir") String? dir,
       @JsonKey(name: "div") String? div,
       @JsonKey(name: "dept") String? dept,
@@ -481,7 +518,22 @@ abstract class $BiodataCopyWith<$Res> {
       @JsonKey(name: "kecamatan") String? kecamatan,
       @JsonKey(name: "agama") String? agama,
       @JsonKey(name: "gol_darah") String? golDarah,
-      @JsonKey(name: "tanggungan") String? tanggungan});
+      @JsonKey(name: "tanggungan") String? tanggungan,
+      @JsonKey(name: "costcontre") String? costcontre,
+      @JsonKey(name: "status_nikah") String? statusNikah,
+      @JsonKey(name: "ktp_no") String? ktpNo,
+      @JsonKey(name: "ktp_foto") String? ktpFoto,
+      @JsonKey(name: "pas_foto") String? pasFoto,
+      @JsonKey(name: "kk_no") String? kkNo,
+      @JsonKey(name: "kk_foto") String? kkFoto,
+      @JsonKey(name: "npwp_no") String? npwpNo,
+      @JsonKey(name: "npwp_foto") String? npwpFoto,
+      @JsonKey(name: "npwp_tgl_berlaku") DateTime? npwpTglBerlaku,
+      @JsonKey(name: "bpjs_tipe_id") int? bpjsTipeId,
+      @JsonKey(name: "bpjs_no") String? bpjsNo,
+      @JsonKey(name: "bpjs_foto") String? bpjsFoto,
+      @JsonKey(name: "berkas_lain") String? berkasLain,
+      @JsonKey(name: "desc_file") dynamic descFile});
 }
 
 /// @nodoc
@@ -554,6 +606,8 @@ class _$BiodataCopyWithImpl<$Res, $Val extends Biodata>
     Object? mStandartGajiId = freezed,
     Object? periodeGajiId = freezed,
     Object? refId = freezed,
+    Object? presensiLokasiDefaultId = freezed,
+    Object? expDateCuti = freezed,
     Object? dir = freezed,
     Object? div = freezed,
     Object? dept = freezed,
@@ -568,6 +622,21 @@ class _$BiodataCopyWithImpl<$Res, $Val extends Biodata>
     Object? agama = freezed,
     Object? golDarah = freezed,
     Object? tanggungan = freezed,
+    Object? costcontre = freezed,
+    Object? statusNikah = freezed,
+    Object? ktpNo = freezed,
+    Object? ktpFoto = freezed,
+    Object? pasFoto = freezed,
+    Object? kkNo = freezed,
+    Object? kkFoto = freezed,
+    Object? npwpNo = freezed,
+    Object? npwpFoto = freezed,
+    Object? npwpTglBerlaku = freezed,
+    Object? bpjsTipeId = freezed,
+    Object? bpjsNo = freezed,
+    Object? bpjsFoto = freezed,
+    Object? berkasLain = freezed,
+    Object? descFile = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -798,6 +867,14 @@ class _$BiodataCopyWithImpl<$Res, $Val extends Biodata>
           ? _value.refId
           : refId // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      presensiLokasiDefaultId: freezed == presensiLokasiDefaultId
+          ? _value.presensiLokasiDefaultId
+          : presensiLokasiDefaultId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      expDateCuti: freezed == expDateCuti
+          ? _value.expDateCuti
+          : expDateCuti // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       dir: freezed == dir
           ? _value.dir
           : dir // ignore: cast_nullable_to_non_nullable
@@ -854,6 +931,66 @@ class _$BiodataCopyWithImpl<$Res, $Val extends Biodata>
           ? _value.tanggungan
           : tanggungan // ignore: cast_nullable_to_non_nullable
               as String?,
+      costcontre: freezed == costcontre
+          ? _value.costcontre
+          : costcontre // ignore: cast_nullable_to_non_nullable
+              as String?,
+      statusNikah: freezed == statusNikah
+          ? _value.statusNikah
+          : statusNikah // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ktpNo: freezed == ktpNo
+          ? _value.ktpNo
+          : ktpNo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ktpFoto: freezed == ktpFoto
+          ? _value.ktpFoto
+          : ktpFoto // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pasFoto: freezed == pasFoto
+          ? _value.pasFoto
+          : pasFoto // ignore: cast_nullable_to_non_nullable
+              as String?,
+      kkNo: freezed == kkNo
+          ? _value.kkNo
+          : kkNo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      kkFoto: freezed == kkFoto
+          ? _value.kkFoto
+          : kkFoto // ignore: cast_nullable_to_non_nullable
+              as String?,
+      npwpNo: freezed == npwpNo
+          ? _value.npwpNo
+          : npwpNo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      npwpFoto: freezed == npwpFoto
+          ? _value.npwpFoto
+          : npwpFoto // ignore: cast_nullable_to_non_nullable
+              as String?,
+      npwpTglBerlaku: freezed == npwpTglBerlaku
+          ? _value.npwpTglBerlaku
+          : npwpTglBerlaku // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      bpjsTipeId: freezed == bpjsTipeId
+          ? _value.bpjsTipeId
+          : bpjsTipeId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      bpjsNo: freezed == bpjsNo
+          ? _value.bpjsNo
+          : bpjsNo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bpjsFoto: freezed == bpjsFoto
+          ? _value.bpjsFoto
+          : bpjsFoto // ignore: cast_nullable_to_non_nullable
+              as String?,
+      berkasLain: freezed == berkasLain
+          ? _value.berkasLain
+          : berkasLain // ignore: cast_nullable_to_non_nullable
+              as String?,
+      descFile: freezed == descFile
+          ? _value.descFile
+          : descFile // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ) as $Val);
   }
 }
@@ -923,6 +1060,9 @@ abstract class _$$BiodataImplCopyWith<$Res> implements $BiodataCopyWith<$Res> {
       @JsonKey(name: "m_standart_gaji_id") int? mStandartGajiId,
       @JsonKey(name: "periode_gaji_id") int? periodeGajiId,
       @JsonKey(name: "ref_id") dynamic refId,
+      @JsonKey(name: "presensi_lokasi_default_id")
+      dynamic presensiLokasiDefaultId,
+      @JsonKey(name: "exp_date_cuti") DateTime? expDateCuti,
       @JsonKey(name: "dir") String? dir,
       @JsonKey(name: "div") String? div,
       @JsonKey(name: "dept") String? dept,
@@ -936,7 +1076,22 @@ abstract class _$$BiodataImplCopyWith<$Res> implements $BiodataCopyWith<$Res> {
       @JsonKey(name: "kecamatan") String? kecamatan,
       @JsonKey(name: "agama") String? agama,
       @JsonKey(name: "gol_darah") String? golDarah,
-      @JsonKey(name: "tanggungan") String? tanggungan});
+      @JsonKey(name: "tanggungan") String? tanggungan,
+      @JsonKey(name: "costcontre") String? costcontre,
+      @JsonKey(name: "status_nikah") String? statusNikah,
+      @JsonKey(name: "ktp_no") String? ktpNo,
+      @JsonKey(name: "ktp_foto") String? ktpFoto,
+      @JsonKey(name: "pas_foto") String? pasFoto,
+      @JsonKey(name: "kk_no") String? kkNo,
+      @JsonKey(name: "kk_foto") String? kkFoto,
+      @JsonKey(name: "npwp_no") String? npwpNo,
+      @JsonKey(name: "npwp_foto") String? npwpFoto,
+      @JsonKey(name: "npwp_tgl_berlaku") DateTime? npwpTglBerlaku,
+      @JsonKey(name: "bpjs_tipe_id") int? bpjsTipeId,
+      @JsonKey(name: "bpjs_no") String? bpjsNo,
+      @JsonKey(name: "bpjs_foto") String? bpjsFoto,
+      @JsonKey(name: "berkas_lain") String? berkasLain,
+      @JsonKey(name: "desc_file") dynamic descFile});
 }
 
 /// @nodoc
@@ -1007,6 +1162,8 @@ class __$$BiodataImplCopyWithImpl<$Res>
     Object? mStandartGajiId = freezed,
     Object? periodeGajiId = freezed,
     Object? refId = freezed,
+    Object? presensiLokasiDefaultId = freezed,
+    Object? expDateCuti = freezed,
     Object? dir = freezed,
     Object? div = freezed,
     Object? dept = freezed,
@@ -1021,6 +1178,21 @@ class __$$BiodataImplCopyWithImpl<$Res>
     Object? agama = freezed,
     Object? golDarah = freezed,
     Object? tanggungan = freezed,
+    Object? costcontre = freezed,
+    Object? statusNikah = freezed,
+    Object? ktpNo = freezed,
+    Object? ktpFoto = freezed,
+    Object? pasFoto = freezed,
+    Object? kkNo = freezed,
+    Object? kkFoto = freezed,
+    Object? npwpNo = freezed,
+    Object? npwpFoto = freezed,
+    Object? npwpTglBerlaku = freezed,
+    Object? bpjsTipeId = freezed,
+    Object? bpjsNo = freezed,
+    Object? bpjsFoto = freezed,
+    Object? berkasLain = freezed,
+    Object? descFile = freezed,
   }) {
     return _then(_$BiodataImpl(
       id: freezed == id
@@ -1251,6 +1423,14 @@ class __$$BiodataImplCopyWithImpl<$Res>
           ? _value.refId
           : refId // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      presensiLokasiDefaultId: freezed == presensiLokasiDefaultId
+          ? _value.presensiLokasiDefaultId
+          : presensiLokasiDefaultId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      expDateCuti: freezed == expDateCuti
+          ? _value.expDateCuti
+          : expDateCuti // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       dir: freezed == dir
           ? _value.dir
           : dir // ignore: cast_nullable_to_non_nullable
@@ -1307,6 +1487,66 @@ class __$$BiodataImplCopyWithImpl<$Res>
           ? _value.tanggungan
           : tanggungan // ignore: cast_nullable_to_non_nullable
               as String?,
+      costcontre: freezed == costcontre
+          ? _value.costcontre
+          : costcontre // ignore: cast_nullable_to_non_nullable
+              as String?,
+      statusNikah: freezed == statusNikah
+          ? _value.statusNikah
+          : statusNikah // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ktpNo: freezed == ktpNo
+          ? _value.ktpNo
+          : ktpNo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ktpFoto: freezed == ktpFoto
+          ? _value.ktpFoto
+          : ktpFoto // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pasFoto: freezed == pasFoto
+          ? _value.pasFoto
+          : pasFoto // ignore: cast_nullable_to_non_nullable
+              as String?,
+      kkNo: freezed == kkNo
+          ? _value.kkNo
+          : kkNo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      kkFoto: freezed == kkFoto
+          ? _value.kkFoto
+          : kkFoto // ignore: cast_nullable_to_non_nullable
+              as String?,
+      npwpNo: freezed == npwpNo
+          ? _value.npwpNo
+          : npwpNo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      npwpFoto: freezed == npwpFoto
+          ? _value.npwpFoto
+          : npwpFoto // ignore: cast_nullable_to_non_nullable
+              as String?,
+      npwpTglBerlaku: freezed == npwpTglBerlaku
+          ? _value.npwpTglBerlaku
+          : npwpTglBerlaku // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      bpjsTipeId: freezed == bpjsTipeId
+          ? _value.bpjsTipeId
+          : bpjsTipeId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      bpjsNo: freezed == bpjsNo
+          ? _value.bpjsNo
+          : bpjsNo // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bpjsFoto: freezed == bpjsFoto
+          ? _value.bpjsFoto
+          : bpjsFoto // ignore: cast_nullable_to_non_nullable
+              as String?,
+      berkasLain: freezed == berkasLain
+          ? _value.berkasLain
+          : berkasLain // ignore: cast_nullable_to_non_nullable
+              as String?,
+      descFile: freezed == descFile
+          ? _value.descFile
+          : descFile // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
@@ -1372,6 +1612,8 @@ class _$BiodataImpl implements _Biodata {
       @JsonKey(name: "m_standart_gaji_id") this.mStandartGajiId,
       @JsonKey(name: "periode_gaji_id") this.periodeGajiId,
       @JsonKey(name: "ref_id") this.refId,
+      @JsonKey(name: "presensi_lokasi_default_id") this.presensiLokasiDefaultId,
+      @JsonKey(name: "exp_date_cuti") this.expDateCuti,
       @JsonKey(name: "dir") this.dir,
       @JsonKey(name: "div") this.div,
       @JsonKey(name: "dept") this.dept,
@@ -1385,7 +1627,22 @@ class _$BiodataImpl implements _Biodata {
       @JsonKey(name: "kecamatan") this.kecamatan,
       @JsonKey(name: "agama") this.agama,
       @JsonKey(name: "gol_darah") this.golDarah,
-      @JsonKey(name: "tanggungan") this.tanggungan});
+      @JsonKey(name: "tanggungan") this.tanggungan,
+      @JsonKey(name: "costcontre") this.costcontre,
+      @JsonKey(name: "status_nikah") this.statusNikah,
+      @JsonKey(name: "ktp_no") this.ktpNo,
+      @JsonKey(name: "ktp_foto") this.ktpFoto,
+      @JsonKey(name: "pas_foto") this.pasFoto,
+      @JsonKey(name: "kk_no") this.kkNo,
+      @JsonKey(name: "kk_foto") this.kkFoto,
+      @JsonKey(name: "npwp_no") this.npwpNo,
+      @JsonKey(name: "npwp_foto") this.npwpFoto,
+      @JsonKey(name: "npwp_tgl_berlaku") this.npwpTglBerlaku,
+      @JsonKey(name: "bpjs_tipe_id") this.bpjsTipeId,
+      @JsonKey(name: "bpjs_no") this.bpjsNo,
+      @JsonKey(name: "bpjs_foto") this.bpjsFoto,
+      @JsonKey(name: "berkas_lain") this.berkasLain,
+      @JsonKey(name: "desc_file") this.descFile});
 
   factory _$BiodataImpl.fromJson(Map<String, dynamic> json) =>
       _$$BiodataImplFromJson(json);
@@ -1562,6 +1819,12 @@ class _$BiodataImpl implements _Biodata {
   @JsonKey(name: "ref_id")
   final dynamic refId;
   @override
+  @JsonKey(name: "presensi_lokasi_default_id")
+  final dynamic presensiLokasiDefaultId;
+  @override
+  @JsonKey(name: "exp_date_cuti")
+  final DateTime? expDateCuti;
+  @override
   @JsonKey(name: "dir")
   final String? dir;
   @override
@@ -1603,10 +1866,55 @@ class _$BiodataImpl implements _Biodata {
   @override
   @JsonKey(name: "tanggungan")
   final String? tanggungan;
+  @override
+  @JsonKey(name: "costcontre")
+  final String? costcontre;
+  @override
+  @JsonKey(name: "status_nikah")
+  final String? statusNikah;
+  @override
+  @JsonKey(name: "ktp_no")
+  final String? ktpNo;
+  @override
+  @JsonKey(name: "ktp_foto")
+  final String? ktpFoto;
+  @override
+  @JsonKey(name: "pas_foto")
+  final String? pasFoto;
+  @override
+  @JsonKey(name: "kk_no")
+  final String? kkNo;
+  @override
+  @JsonKey(name: "kk_foto")
+  final String? kkFoto;
+  @override
+  @JsonKey(name: "npwp_no")
+  final String? npwpNo;
+  @override
+  @JsonKey(name: "npwp_foto")
+  final String? npwpFoto;
+  @override
+  @JsonKey(name: "npwp_tgl_berlaku")
+  final DateTime? npwpTglBerlaku;
+  @override
+  @JsonKey(name: "bpjs_tipe_id")
+  final int? bpjsTipeId;
+  @override
+  @JsonKey(name: "bpjs_no")
+  final String? bpjsNo;
+  @override
+  @JsonKey(name: "bpjs_foto")
+  final String? bpjsFoto;
+  @override
+  @JsonKey(name: "berkas_lain")
+  final String? berkasLain;
+  @override
+  @JsonKey(name: "desc_file")
+  final dynamic descFile;
 
   @override
   String toString() {
-    return 'Biodata(id: $id, mCompId: $mCompId, mDirId: $mDirId, mDivisiId: $mDivisiId, mDeptId: $mDeptId, mZonaId: $mZonaId, gradingId: $gradingId, costcontreId: $costcontreId, kode: $kode, mPosisiId: $mPosisiId, mJamKerjaId: $mJamKerjaId, kodePresensi: $kodePresensi, nik: $nik, namaDepan: $namaDepan, namaBelakang: $namaBelakang, namaLengkap: $namaLengkap, namaPanggilan: $namaPanggilan, jkId: $jkId, tempatLahir: $tempatLahir, tglLahir: $tglLahir, provinsiId: $provinsiId, kotaId: $kotaId, kecamatanId: $kecamatanId, kodePos: $kodePos, alamatAsli: $alamatAsli, alamatDomisili: $alamatDomisili, noTlp: $noTlp, noTlpLainnya: $noTlpLainnya, noDarurat: $noDarurat, namaKontakDarurat: $namaKontakDarurat, agamaId: $agamaId, golDarahId: $golDarahId, statusNikahId: $statusNikahId, tanggunganId: $tanggunganId, hubDgnKaryawan: $hubDgnKaryawan, cutiJatahReguler: $cutiJatahReguler, cutiSisaReguler: $cutiSisaReguler, cutiPanjang: $cutiPanjang, cutiSisaPanjang: $cutiSisaPanjang, statusKaryId: $statusKaryId, lamaKontrakAwal: $lamaKontrakAwal, lamaKontrakAkhir: $lamaKontrakAkhir, tglMasuk: $tglMasuk, tglBerhenti: $tglBerhenti, alasanBerhenti: $alasanBerhenti, ukBaju: $ukBaju, ukCelana: $ukCelana, ukSepatu: $ukSepatu, desc: $desc, isActive: $isActive, creatorId: $creatorId, lastEditorId: $lastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, mStandartGajiId: $mStandartGajiId, periodeGajiId: $periodeGajiId, refId: $refId, dir: $dir, div: $div, dept: $dept, zona: $zona, grading: $grading, posisi: $posisi, jamKerja: $jamKerja, jk: $jk, provinsi: $provinsi, kota: $kota, kecamatan: $kecamatan, agama: $agama, golDarah: $golDarah, tanggungan: $tanggungan)';
+    return 'Biodata(id: $id, mCompId: $mCompId, mDirId: $mDirId, mDivisiId: $mDivisiId, mDeptId: $mDeptId, mZonaId: $mZonaId, gradingId: $gradingId, costcontreId: $costcontreId, kode: $kode, mPosisiId: $mPosisiId, mJamKerjaId: $mJamKerjaId, kodePresensi: $kodePresensi, nik: $nik, namaDepan: $namaDepan, namaBelakang: $namaBelakang, namaLengkap: $namaLengkap, namaPanggilan: $namaPanggilan, jkId: $jkId, tempatLahir: $tempatLahir, tglLahir: $tglLahir, provinsiId: $provinsiId, kotaId: $kotaId, kecamatanId: $kecamatanId, kodePos: $kodePos, alamatAsli: $alamatAsli, alamatDomisili: $alamatDomisili, noTlp: $noTlp, noTlpLainnya: $noTlpLainnya, noDarurat: $noDarurat, namaKontakDarurat: $namaKontakDarurat, agamaId: $agamaId, golDarahId: $golDarahId, statusNikahId: $statusNikahId, tanggunganId: $tanggunganId, hubDgnKaryawan: $hubDgnKaryawan, cutiJatahReguler: $cutiJatahReguler, cutiSisaReguler: $cutiSisaReguler, cutiPanjang: $cutiPanjang, cutiSisaPanjang: $cutiSisaPanjang, statusKaryId: $statusKaryId, lamaKontrakAwal: $lamaKontrakAwal, lamaKontrakAkhir: $lamaKontrakAkhir, tglMasuk: $tglMasuk, tglBerhenti: $tglBerhenti, alasanBerhenti: $alasanBerhenti, ukBaju: $ukBaju, ukCelana: $ukCelana, ukSepatu: $ukSepatu, desc: $desc, isActive: $isActive, creatorId: $creatorId, lastEditorId: $lastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, mStandartGajiId: $mStandartGajiId, periodeGajiId: $periodeGajiId, refId: $refId, presensiLokasiDefaultId: $presensiLokasiDefaultId, expDateCuti: $expDateCuti, dir: $dir, div: $div, dept: $dept, zona: $zona, grading: $grading, posisi: $posisi, jamKerja: $jamKerja, jk: $jk, provinsi: $provinsi, kota: $kota, kecamatan: $kecamatan, agama: $agama, golDarah: $golDarah, tanggungan: $tanggungan, costcontre: $costcontre, statusNikah: $statusNikah, ktpNo: $ktpNo, ktpFoto: $ktpFoto, pasFoto: $pasFoto, kkNo: $kkNo, kkFoto: $kkFoto, npwpNo: $npwpNo, npwpFoto: $npwpFoto, npwpTglBerlaku: $npwpTglBerlaku, bpjsTipeId: $bpjsTipeId, bpjsNo: $bpjsNo, bpjsFoto: $bpjsFoto, berkasLain: $berkasLain, descFile: $descFile)';
   }
 
   @override
@@ -1712,22 +2020,38 @@ class _$BiodataImpl implements _Biodata {
             (identical(other.periodeGajiId, periodeGajiId) ||
                 other.periodeGajiId == periodeGajiId) &&
             const DeepCollectionEquality().equals(other.refId, refId) &&
+            const DeepCollectionEquality().equals(
+                other.presensiLokasiDefaultId, presensiLokasiDefaultId) &&
+            (identical(other.expDateCuti, expDateCuti) || other.expDateCuti == expDateCuti) &&
             (identical(other.dir, dir) || other.dir == dir) &&
             (identical(other.div, div) || other.div == div) &&
             (identical(other.dept, dept) || other.dept == dept) &&
             (identical(other.zona, zona) || other.zona == zona) &&
             const DeepCollectionEquality().equals(other.grading, grading) &&
             (identical(other.posisi, posisi) || other.posisi == posisi) &&
-            (identical(other.jamKerja, jamKerja) ||
-                other.jamKerja == jamKerja) &&
+            (identical(other.jamKerja, jamKerja) || other.jamKerja == jamKerja) &&
             (identical(other.jk, jk) || other.jk == jk) &&
-            (identical(other.provinsi, provinsi) ||
-                other.provinsi == provinsi) &&
+            (identical(other.provinsi, provinsi) || other.provinsi == provinsi) &&
             (identical(other.kota, kota) || other.kota == kota) &&
             (identical(other.kecamatan, kecamatan) || other.kecamatan == kecamatan) &&
             (identical(other.agama, agama) || other.agama == agama) &&
             (identical(other.golDarah, golDarah) || other.golDarah == golDarah) &&
-            (identical(other.tanggungan, tanggungan) || other.tanggungan == tanggungan));
+            (identical(other.tanggungan, tanggungan) || other.tanggungan == tanggungan) &&
+            (identical(other.costcontre, costcontre) || other.costcontre == costcontre) &&
+            (identical(other.statusNikah, statusNikah) || other.statusNikah == statusNikah) &&
+            (identical(other.ktpNo, ktpNo) || other.ktpNo == ktpNo) &&
+            (identical(other.ktpFoto, ktpFoto) || other.ktpFoto == ktpFoto) &&
+            (identical(other.pasFoto, pasFoto) || other.pasFoto == pasFoto) &&
+            (identical(other.kkNo, kkNo) || other.kkNo == kkNo) &&
+            (identical(other.kkFoto, kkFoto) || other.kkFoto == kkFoto) &&
+            (identical(other.npwpNo, npwpNo) || other.npwpNo == npwpNo) &&
+            (identical(other.npwpFoto, npwpFoto) || other.npwpFoto == npwpFoto) &&
+            (identical(other.npwpTglBerlaku, npwpTglBerlaku) || other.npwpTglBerlaku == npwpTglBerlaku) &&
+            (identical(other.bpjsTipeId, bpjsTipeId) || other.bpjsTipeId == bpjsTipeId) &&
+            (identical(other.bpjsNo, bpjsNo) || other.bpjsNo == bpjsNo) &&
+            (identical(other.bpjsFoto, bpjsFoto) || other.bpjsFoto == bpjsFoto) &&
+            (identical(other.berkasLain, berkasLain) || other.berkasLain == berkasLain) &&
+            const DeepCollectionEquality().equals(other.descFile, descFile));
   }
 
   @JsonKey(ignore: true)
@@ -1791,6 +2115,8 @@ class _$BiodataImpl implements _Biodata {
         mStandartGajiId,
         periodeGajiId,
         const DeepCollectionEquality().hash(refId),
+        const DeepCollectionEquality().hash(presensiLokasiDefaultId),
+        expDateCuti,
         dir,
         div,
         dept,
@@ -1804,7 +2130,22 @@ class _$BiodataImpl implements _Biodata {
         kecamatan,
         agama,
         golDarah,
-        tanggungan
+        tanggungan,
+        costcontre,
+        statusNikah,
+        ktpNo,
+        ktpFoto,
+        pasFoto,
+        kkNo,
+        kkFoto,
+        npwpNo,
+        npwpFoto,
+        npwpTglBerlaku,
+        bpjsTipeId,
+        bpjsNo,
+        bpjsFoto,
+        berkasLain,
+        const DeepCollectionEquality().hash(descFile)
       ]);
 
   @JsonKey(ignore: true)
@@ -1880,6 +2221,9 @@ abstract class _Biodata implements Biodata {
       @JsonKey(name: "m_standart_gaji_id") final int? mStandartGajiId,
       @JsonKey(name: "periode_gaji_id") final int? periodeGajiId,
       @JsonKey(name: "ref_id") final dynamic refId,
+      @JsonKey(name: "presensi_lokasi_default_id")
+      final dynamic presensiLokasiDefaultId,
+      @JsonKey(name: "exp_date_cuti") final DateTime? expDateCuti,
       @JsonKey(name: "dir") final String? dir,
       @JsonKey(name: "div") final String? div,
       @JsonKey(name: "dept") final String? dept,
@@ -1893,7 +2237,22 @@ abstract class _Biodata implements Biodata {
       @JsonKey(name: "kecamatan") final String? kecamatan,
       @JsonKey(name: "agama") final String? agama,
       @JsonKey(name: "gol_darah") final String? golDarah,
-      @JsonKey(name: "tanggungan") final String? tanggungan}) = _$BiodataImpl;
+      @JsonKey(name: "tanggungan") final String? tanggungan,
+      @JsonKey(name: "costcontre") final String? costcontre,
+      @JsonKey(name: "status_nikah") final String? statusNikah,
+      @JsonKey(name: "ktp_no") final String? ktpNo,
+      @JsonKey(name: "ktp_foto") final String? ktpFoto,
+      @JsonKey(name: "pas_foto") final String? pasFoto,
+      @JsonKey(name: "kk_no") final String? kkNo,
+      @JsonKey(name: "kk_foto") final String? kkFoto,
+      @JsonKey(name: "npwp_no") final String? npwpNo,
+      @JsonKey(name: "npwp_foto") final String? npwpFoto,
+      @JsonKey(name: "npwp_tgl_berlaku") final DateTime? npwpTglBerlaku,
+      @JsonKey(name: "bpjs_tipe_id") final int? bpjsTipeId,
+      @JsonKey(name: "bpjs_no") final String? bpjsNo,
+      @JsonKey(name: "bpjs_foto") final String? bpjsFoto,
+      @JsonKey(name: "berkas_lain") final String? berkasLain,
+      @JsonKey(name: "desc_file") final dynamic descFile}) = _$BiodataImpl;
 
   factory _Biodata.fromJson(Map<String, dynamic> json) = _$BiodataImpl.fromJson;
 
@@ -2069,6 +2428,12 @@ abstract class _Biodata implements Biodata {
   @JsonKey(name: "ref_id")
   dynamic get refId;
   @override
+  @JsonKey(name: "presensi_lokasi_default_id")
+  dynamic get presensiLokasiDefaultId;
+  @override
+  @JsonKey(name: "exp_date_cuti")
+  DateTime? get expDateCuti;
+  @override
   @JsonKey(name: "dir")
   String? get dir;
   @override
@@ -2110,6 +2475,51 @@ abstract class _Biodata implements Biodata {
   @override
   @JsonKey(name: "tanggungan")
   String? get tanggungan;
+  @override
+  @JsonKey(name: "costcontre")
+  String? get costcontre;
+  @override
+  @JsonKey(name: "status_nikah")
+  String? get statusNikah;
+  @override
+  @JsonKey(name: "ktp_no")
+  String? get ktpNo;
+  @override
+  @JsonKey(name: "ktp_foto")
+  String? get ktpFoto;
+  @override
+  @JsonKey(name: "pas_foto")
+  String? get pasFoto;
+  @override
+  @JsonKey(name: "kk_no")
+  String? get kkNo;
+  @override
+  @JsonKey(name: "kk_foto")
+  String? get kkFoto;
+  @override
+  @JsonKey(name: "npwp_no")
+  String? get npwpNo;
+  @override
+  @JsonKey(name: "npwp_foto")
+  String? get npwpFoto;
+  @override
+  @JsonKey(name: "npwp_tgl_berlaku")
+  DateTime? get npwpTglBerlaku;
+  @override
+  @JsonKey(name: "bpjs_tipe_id")
+  int? get bpjsTipeId;
+  @override
+  @JsonKey(name: "bpjs_no")
+  String? get bpjsNo;
+  @override
+  @JsonKey(name: "bpjs_foto")
+  String? get bpjsFoto;
+  @override
+  @JsonKey(name: "berkas_lain")
+  String? get berkasLain;
+  @override
+  @JsonKey(name: "desc_file")
+  dynamic get descFile;
   @override
   @JsonKey(ignore: true)
   _$$BiodataImplCopyWith<_$BiodataImpl> get copyWith =>

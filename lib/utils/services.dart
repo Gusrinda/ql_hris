@@ -108,8 +108,6 @@ class GeneralServices {
         );
       }
 
-      // debugPrint(response.body.toString());
-
       if (response.statusCode == 200) {
         final responseBody = json.decode(response.body);
         return ServicesSuccess(

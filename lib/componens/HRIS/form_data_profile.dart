@@ -104,7 +104,7 @@ class FormDropDownData extends StatelessWidget {
                   suffixIcon: Padding(
                     padding: EdgeInsets.all(8.sp),
                     child: Icon(
-                      Icons.keyboard_arrow_down,
+                      Icons.search_rounded,
                       color: MyColorsConst.darkColor,
                     ),
                   ),
@@ -245,7 +245,6 @@ class FormCatatanData extends StatelessWidget {
   }
 }
 
-
 class FormInputData extends StatelessWidget {
   const FormInputData({
     Key? key,
@@ -355,6 +354,118 @@ class FormInputData extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20.sp),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class FormUploadFile extends StatelessWidget {
+  const FormUploadFile({
+    Key? key,
+    this.enabled = true,
+    this.input = "",
+    this.onTap,
+    required this.controller,
+    required this.validator,
+    this.errorTextStyle,
+    required this.labelForm,
+    required this.labelTag,
+    required this.formTag,
+    required this.hintText,
+    this.showRedStar = true,
+  }) : super(key: key);
+
+  final bool enabled;
+  final String input;
+  final String labelForm;
+  final String labelTag;
+  final String formTag;
+  final String hintText;
+  final VoidCallback? onTap;
+  final TextEditingController controller;
+  final String? Function(String?) validator;
+  final TextStyle? errorTextStyle;
+  final bool showRedStar;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Hero(
+          tag: labelTag,
+          child: Row(
+            children: [
+              FormTextLabel(
+                label: labelForm,
+                labelColor: MyColorsConst.darkColor,
+              ),
+              if (showRedStar) // Tampilkan bintang merah sesuai showRedStar
+                SizedBox(width: 2),
+              if (showRedStar)
+                Text(
+                  '*',
+                  style: GoogleFonts.poppins(color: Colors.red),
+                ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Hero(
+          tag: formTag,
+          flightShuttleBuilder: (BuildContext flightContext,
+                  Animation<double> animation,
+                  HeroFlightDirection flightDirection,
+                  BuildContext fromHeroContext,
+                  BuildContext toHeroContext) =>
+              Material(child: toHeroContext.widget),
+          child: Material(
+            color: Colors.transparent,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                InkWell(
+                  onTap: onTap, // Handle pemilihan gambar dari galeri
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: MyColorsConst.formBorderColor,
+                        width: 1.5,
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              // Menampilkan nama file terpilih atau pesan kosong
+                              controller.text.isNotEmpty
+                                  ? controller.text
+                                  : hintText,
+                              style: GoogleFonts.poppins(
+                                fontSize: 13,
+                                color: controller.text.isNotEmpty
+                                    ? MyColorsConst.darkColor
+                                    : MyColorsConst.disableColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Icon(Icons.image),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
               ],
             ),
           ),

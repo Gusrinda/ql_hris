@@ -137,6 +137,10 @@ class Biodata with _$Biodata {
         int? periodeGajiId,
         @JsonKey(name: "ref_id")
         dynamic refId,
+        @JsonKey(name: "presensi_lokasi_default_id")
+        dynamic presensiLokasiDefaultId,
+        @JsonKey(name: "exp_date_cuti")
+        DateTime? expDateCuti,
         @JsonKey(name: "dir")
         String? dir,
         @JsonKey(name: "div")
@@ -165,6 +169,36 @@ class Biodata with _$Biodata {
         String? golDarah,
         @JsonKey(name: "tanggungan")
         String? tanggungan,
+        @JsonKey(name: "costcontre")
+        String? costcontre,
+        @JsonKey(name: "status_nikah")
+        String? statusNikah,
+        @JsonKey(name: "ktp_no")
+        String? ktpNo,
+        @JsonKey(name: "ktp_foto")
+        String? ktpFoto,
+        @JsonKey(name: "pas_foto")
+        String? pasFoto,
+        @JsonKey(name: "kk_no")
+        String? kkNo,
+        @JsonKey(name: "kk_foto")
+        String? kkFoto,
+        @JsonKey(name: "npwp_no")
+        String? npwpNo,
+        @JsonKey(name: "npwp_foto")
+        String? npwpFoto,
+        @JsonKey(name: "npwp_tgl_berlaku")
+        DateTime? npwpTglBerlaku,
+        @JsonKey(name: "bpjs_tipe_id")
+        int? bpjsTipeId,
+        @JsonKey(name: "bpjs_no")
+        String? bpjsNo,
+        @JsonKey(name: "bpjs_foto")
+        String? bpjsFoto,
+        @JsonKey(name: "berkas_lain")
+        String? berkasLain,
+        @JsonKey(name: "desc_file")
+        dynamic descFile,
     }) = _Biodata;
 
     factory Biodata.fromJson(Map<String, dynamic> json) => _$BiodataFromJson(json);

@@ -327,7 +327,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                                 flex: 1,
                                                 child: Row(
                                                   children: [
-                                                    FormTextLabel(
+                                                    const FormTextLabel(
                                                       label: "Tanggal Berakhir",
                                                       labelColor: MyColorsConst
                                                           .darkColor,
