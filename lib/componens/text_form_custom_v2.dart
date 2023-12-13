@@ -94,7 +94,7 @@ class _TextFormCustomV2State extends State<TextFormCustomV2> {
                   decoration: InputDecoration(
                     labelText: widget.labelText,
                     labelStyle: GoogleFonts.poppins(
-                      fontSize: 12.sp,
+                      fontSize: 13.sp,
                       color: MyColorsConst.darkColor,
                       fontWeight: FontWeight.w500,
                     ),
@@ -119,7 +119,7 @@ class _TextFormCustomV2State extends State<TextFormCustomV2> {
                   child: Icon(
                     Icons.arrow_forward_ios_rounded,
                     weight: 5,
-                    size: 12,
+                    size: 12.sp,
                     color: MyColorsConst.primaryColor,
                   ),
                 ),

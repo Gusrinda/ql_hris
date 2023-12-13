@@ -17,10 +17,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<GetDataProfile>((event, emit) async {
       emit(ProfileLoading());
       var resToken = await GeneralSharedPreferences.getUserToken();
+      print(resToken);
       if (resToken is ServicesSuccess) {
         var res = await ProfileServices.getDataProfilel(
             resToken.response["token"], resToken.response["id"] ?? 1);
-        // print(res); //print apakah rervice berhasil
+        // print(res); //print apakah res berhasil
         if (res is ServicesSuccess) {
           print(res.response);
           profileModel = ProfileModel.fromMap(res.response["data"]);

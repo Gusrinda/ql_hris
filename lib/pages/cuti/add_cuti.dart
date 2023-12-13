@@ -1,13 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:sj_presensi_mobile/componens/HRIS/form_add_data.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/hero_widget.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/text_form_custom.dart';
-import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
@@ -188,9 +187,9 @@ class _AddCutiPageState extends State<AddCutiPage> {
           ),
           child: Column(
             children: [
-              SizedBox(height: 30.sp),
+              SizedBox(height: 40.sp),
               Container(
-                padding: EdgeInsets.only(left: 8.0),
+                padding: EdgeInsets.only(left: 8),
                 child: Row(
                   children: [
                     IconButton(
@@ -210,7 +209,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                       child: Text(
                         "Pengajuan Cuti",
                         style: GoogleFonts.poppins(
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
                         ),
@@ -230,7 +229,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 16),
+                        horizontal: 20, vertical: 20),
                     child: BlocBuilder<AddCutiBloc, AddCutiState>(
                       builder: (context, state) {
                         return Column(
@@ -249,9 +248,6 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                           CrossAxisAlignment.start,
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        const SizedBox(
-                                          height: 8,
-                                        ),
                                         FormDropDownData(
                                           input: selectedTipeCutiDisplay,
                                           onTap: () {
@@ -291,12 +287,12 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                           validator: (value) {
                                             if (value == null ||
                                                 value.isEmpty) {
-                                              return 'Pilih Alasan';
+                                              return 'Pilih Alasan Cuti';
                                             }
                                             return null;
                                           },
-                                          errorTextStyle:
-                                              GoogleFonts.poppins(fontSize: 8),
+                                          errorTextStyle: GoogleFonts.poppins(
+                                              fontSize: 10.sp),
                                         ),
                                         Hero(
                                           tag: 'Label-RowJamVisiting',
@@ -511,10 +507,10 @@ class _AddCutiPageState extends State<AddCutiPage> {
         }
       },
       child: Container(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(18.0),
         decoration: BoxDecoration(
           border: Border.all(color: Color(0xFFDDDDDD)),
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -524,14 +520,19 @@ class _AddCutiPageState extends State<AddCutiPage> {
                   ? DateFormat('yyyy-MM-dd').format(selectedDate)
                   : hintText,
               style: GoogleFonts.poppins(
-                fontSize: 10,
+                fontSize: selectedDate != null ? 12.sp : 9.sp,
+                fontWeight: selectedDate != null
+                    ? FontWeight.w500
+                    : FontWeight.w400, // Different fontWeight for hintText
+                color: selectedDate != null
+                    ? MyColorsConst.darkColor
+                    : MyColorsConst.disableColor, // Different color for hintText
               ),
             ),
-            // const SizedBox(width: 8),
             Icon(
-              Icons.calendar_month_rounded,
+              CupertinoIcons.calendar_today,
               color: MyColorsConst.primaryColor,
-              size: 20,
+              size: 20.sp,
             ),
           ],
         ),

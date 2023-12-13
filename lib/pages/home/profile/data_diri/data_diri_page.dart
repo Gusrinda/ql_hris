@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_diri.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_diri/coba_coba/add_data_diri.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_data_diri.dart';
 import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_biodata_karyawan.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
-class DataDiriPage extends StatefulWidget {
+class DataDiriPage extends StatelessWidget {
   static const routeName = '/DataDiriPage';
 
-  const DataDiriPage({Key? key}) : super(key: key);
+  final Biodata bioData;
 
-  @override
-  State<DataDiriPage> createState() => _DataDiriPageState();
-}
+  const DataDiriPage({super.key, required this.bioData});
 
-class _DataDiriPageState extends State<DataDiriPage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SingleChildScrollView(
@@ -89,32 +90,39 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           color: MyColorsConst.primaryColor,
                         ),
                       ),
-                      SizedBox(height: 20.sp),
+                      SizedBox(height: 10.sp),
                       Row(
                         children: [
                           Expanded(
-                            flex: 3,
+                            flex: 1,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                buildInfoText('Divisi', 'PPC'),
-                                buildInfoText('Posisi', 'Senior IT'),
-                                buildInfoText('Standard Gaji', 'SG-091201392'),
-                                buildInfoText(
-                                    'Kode Presensi', 'Pre-112424235345'),
+                                buildInfoText('Divisi', bioData.div ?? '-'),
+                                buildInfoText('Posisi', bioData.posisi ?? '-'),
+                                buildInfoText('Standard Gaji',
+                                    bioData.mStandartGajiId?.toString() ?? '-'),
+                                buildInfoText('Kode Presensi',
+                                    bioData.kodePresensi ?? '-'),
                               ],
                             ),
                           ),
-                          SizedBox(width: 5),
+                          SizedBox(width: 20.sp),
                           Expanded(
-                            flex: 2,
+                            flex: 1,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                buildInfoText('Departemen', 'PGA'),
-                                buildInfoText('Zona', 'Zona A'),
-                                buildInfoText('Constcentre', 'Constcentre 1'),
-                                buildInfoText('Status', 'Active'),
+                                buildInfoText(
+                                    'Departemen', bioData.dept ?? '-'),
+                                buildInfoText('Zona', bioData.zona ?? '-'),
+                                buildInfoText('Constcentre',
+                                    bioData.costcontreId?.toString() ?? '-'),
+                                buildInfoText(
+                                    'Status',
+                                    bioData.isActive == true
+                                        ? "Active"
+                                        : "Non-Active"),
                               ],
                             ),
                           ),
@@ -129,46 +137,66 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           color: MyColorsConst.primaryColor,
                         ),
                       ),
-                      SizedBox(height: 20.sp),
+                      SizedBox(height: 10.sp),
                       Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                            flex: 3,
+                            flex: 1,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                buildInfoText('NIK', '1234567899876'),
-                                buildInfoText('Nama Panggilan', 'Sepuh Ucup'),
-                                buildInfoText('Tempat Lahir', 'Surabaya'),
-                                buildInfoText('Alamat Tinggal',
-                                    'Jl. Rungkut Asri Timur No.12'),
-                                buildInfoText('Kota', 'Surabaya'),
-                                buildInfoText('Kode Pos', '23523'),
-                                buildInfoText('No. Telepon Lainnya', '-'),
-                                buildInfoText('Nama Kontak Darurat', 'Rian'),
-                                buildInfoText('Agama', 'Islam'),
+                                buildInfoText('NIK', bioData.nik ?? '-'),
+                                buildInfoText('Nama Panggilan',
+                                    bioData.namaPanggilan ?? '-'),
                                 buildInfoText(
-                                    'Status Pernikahan', 'Belum Kawin'),
+                                    'Tempat Lahir', bioData.tempatLahir ?? '-'),
+                                buildInfoText('Alamat Tinggal',
+                                    bioData.alamatAsli ?? '-'),
+                                buildInfoText('Kota', bioData.kota ?? '-'),
+                                buildInfoText(
+                                    'Kode Pos', bioData.kodePos ?? '-'),
+                                buildInfoText('No. Telepon Lainnya',
+                                    bioData.noTlpLainnya ?? '-'),
+                                buildInfoText('Nama Kontak Darurat',
+                                    bioData.namaKontakDarurat ?? '-'),
+                                buildInfoText('Agama', bioData.agama ?? '-'),
+                                buildInfoText('Status Pernikahan',
+                                    bioData.statusNikahId.toString() ?? '-'),
                               ],
                             ),
                           ),
-                          SizedBox(width: 5),
+                          SizedBox(width: 20.sp),
                           Expanded(
-                            flex: 2,
+                            flex: 1,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                buildInfoText('Nama', 'Sepuh Ucup'),
-                                buildInfoText('Jenis Kelamin', 'Laki-laki'),
-                                buildInfoText('Tanggal Lahir', '18/10/1999'),
-                                buildInfoText('Provinsi', 'Jawa Timur'),
-                                buildInfoText('Kecamatan', 'Rungkut'),
-                                buildInfoText('No Telepon', '08123456789'),
                                 buildInfoText(
-                                    'No. Telepon Darurat', '089744448765'),
-                                buildInfoText('Nama Kontak Darurat', 'Kakak'),
-                                buildInfoText('Golongan Darah', 'O'),
-                                buildInfoText('Jumlah Tanggungan', 'K/I/2'),
+                                    'Nama', bioData.namaLengkap ?? '-'),
+                                buildInfoText(
+                                    'Jenis Kelamin', bioData.jk ?? '-'),
+                                buildInfoText(
+                                  'Tanggal Lahir',
+                                  bioData.tglLahir != null
+                                      ? DateFormat('dd MMMM yyyy')
+                                          .format(bioData.tglLahir!)
+                                      : '-',
+                                ),
+                                buildInfoText(
+                                    'Provinsi', bioData.provinsi ?? '-'),
+                                buildInfoText(
+                                    'Kecamatan', bioData.kecamatan ?? '-'),
+                                buildInfoText(
+                                    'No Telepon', bioData.noTlp ?? '-'),
+                                buildInfoText('No. Telepon Darurat',
+                                    bioData.noDarurat ?? '-'),
+                                buildInfoText('Hubungan Dengan Kerabat',
+                                    bioData.hubDgnKaryawan ?? '-'),
+                                buildInfoText(
+                                    'Golongan Darah', bioData.golDarah ?? '-'),
+                                buildInfoText('Jumlah Tanggungan',
+                                    bioData.tanggungan ?? '-'),
                               ],
                             ),
                           ),
@@ -183,30 +211,45 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           color: MyColorsConst.primaryColor,
                         ),
                       ),
-                      SizedBox(height: 20.sp),
+                      SizedBox(height: 10.sp),
                       Row(
                         children: [
                           Expanded(
-                            flex: 3,
+                            flex: 1,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                buildInfoText('Jatah Cuti Reguler', '12'),
-                                buildInfoText('Jatah Cuti Masa Kerja', '20'),
                                 buildInfoText(
-                                    'Tanggal Masuk Kerja', '22/10/2020'),
+                                    'Jatah Cuti Reguler',
+                                    bioData.cutiJatahReguler?.toString() ??
+                                        '-'),
+                                buildInfoText('Jatah Cuti Masa Kerja',
+                                    bioData.cutiPanjang?.toString() ?? '-'),
+                                buildInfoText(
+                                    'Tanggal Masuk Kerja',
+                                    bioData.tglMasuk != null
+                                        ? DateFormat('dd MMMM yyyy')
+                                            .format(bioData.tglMasuk!)
+                                        : '-'),
                               ],
                             ),
                           ),
-                          SizedBox(width: 5),
+                          SizedBox(width: 20),
                           Expanded(
-                            flex: 2,
+                            flex: 1,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                buildInfoText('Sisa Cuti Reguler', '12'),
-                                buildInfoText('Sisa Cuti Masa Kerja', '20'),
-                                buildInfoText('Tanggal Berhenti Kerja', '-'),
+                                buildInfoText('Sisa Cuti Reguler',
+                                    bioData.cutiSisaReguler?.toString() ?? '-'),
+                                buildInfoText('Sisa Cuti Masa Kerja',
+                                    bioData.cutiSisaPanjang?.toString() ?? '-'),
+                                buildInfoText(
+                                    'Tanggal Berhenti Kerja',
+                                    bioData.tglBerhenti != null
+                                        ? DateFormat('dd MMMM yyyy')
+                                            .format(bioData.tglBerhenti!)
+                                        : '-'),
                               ],
                             ),
                           ),
@@ -221,7 +264,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           color: MyColorsConst.primaryColor,
                         ),
                       ),
-                      SizedBox(height: 20.sp),
+                      SizedBox(height: 10.sp),
                       Row(
                         children: [
                           Expanded(
@@ -240,7 +283,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                               ],
                             ),
                           ),
-                          const SizedBox(width: 5),
+                          SizedBox(width: 20.sp),
                           Expanded(
                             flex: 2,
                             child: Column(
@@ -331,7 +374,23 @@ class _DataDiriPageState extends State<DataDiriPage> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 20.sp),
+                      // SizedBox(height: 20.sp),
+                      // TextButtonCustomV1(
+                      //   text: "Test Scroll Stepper",
+                      //   height: 50.sp,
+                      //   backgroundColor:
+                      //       MyColorsConst.primaryColor.withOpacity(0.1),
+                      //   textColor: MyColorsConst.primaryColor,
+                      //   onPressed: () {
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //         builder: (context) => StepperPage(),
+                      //       ),
+                      //     );
+                      //   },
+                      // ),
+                      SizedBox(height: 30.sp),
                       TextButtonCustomV1(
                         text: "Edit Data Diri",
                         height: 50.sp,
@@ -339,10 +398,13 @@ class _DataDiriPageState extends State<DataDiriPage> {
                             MyColorsConst.primaryColor.withOpacity(0.1),
                         textColor: MyColorsConst.primaryColor,
                         onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed(EditDataDiriPage.routeName);
+                          Navigator.of(context).pushNamed(
+                            EditDataDiriPage.routeName,
+                            arguments: bioData,
+                          );
                         },
-                      )
+                      ),
+                      SizedBox(height: 10.sp),
                     ],
                   ),
                 ),
@@ -361,7 +423,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
         Text(
           label,
           style: GoogleFonts.poppins(
-            fontSize: 12.sp,
+            fontSize: 10.sp,
             color: MyColorsConst.lightDarkColor,
           ),
         ),
@@ -369,7 +431,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
         Text(
           value,
           style: GoogleFonts.poppins(
-            fontSize: 13.sp,
+            fontSize: 12.sp,
             fontWeight: FontWeight.w600,
             color: MyColorsConst.darkColor,
           ),

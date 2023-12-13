@@ -29,8 +29,9 @@ import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/add_bahasa.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/data_bahasa_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/view_edit_bahasa.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_diri/bloc/biodata_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/data_diri_page.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_diri.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_data_diri.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/add_keluarga.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/data_keluarga_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/view_edit_keluarga.dart';
@@ -58,6 +59,7 @@ import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_b
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
 import 'package:sj_presensi_mobile/services/model/report_detail_page_model.dart';
+import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_biodata_karyawan.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -232,12 +234,14 @@ class RouteGenerator {
           );
         });
       case DataDiriPage.routeName:
+        final bioData = settings.arguments as Biodata;
         return MaterialPageRoute(builder: (context) {
-          return DataDiriPage();
+          return DataDiriPage(bioData: bioData);
         });
       case EditDataDiriPage.routeName:
+      final bioData = settings.arguments as Biodata;
         return MaterialPageRoute(builder: (context) {
-          return EditDataDiriPage();
+          return EditDataDiriPage(bioData: bioData);
         });
       case DataBahasaPage.routeName:
         return MaterialPageRoute(builder: (context) {

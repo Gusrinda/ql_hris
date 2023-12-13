@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -558,7 +559,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
                       color: Colors.white,
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(18.0),
+                      padding: const EdgeInsets.all(0),
                       child: BlocBuilder<AddDinasBloc, AddDinasState>(
                         builder: (context, state) {
                           return Stepper(
@@ -771,8 +772,8 @@ class _AddDinasPageState extends State<AddDinasPage> {
                                               return null;
                                             },
                                           ),
-                                          const SizedBox(
-                                            height: 30,
+                                          SizedBox(
+                                            height: 30.sp,
                                           ),
                                           Row(
                                             children: [
@@ -809,8 +810,8 @@ class _AddDinasPageState extends State<AddDinasPage> {
                                               return null;
                                             },
                                           ),
-                                          const SizedBox(
-                                            height: 30,
+                                          SizedBox(
+                                            height: 30.sp,
                                           ),
                                           Row(
                                             children: [
@@ -997,6 +998,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
                                               'Ya',
                                               style: GoogleFonts.poppins(
                                                 fontSize: 13.sp,
+                                                fontWeight: FontWeight.w500 
                                               ),
                                             ),
                                           ),
@@ -1020,6 +1022,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
                                               'Tidak',
                                               style: GoogleFonts.poppins(
                                                 fontSize: 13.sp,
+                                                fontWeight: FontWeight.w500 
                                               ),
                                             ),
                                           ),
@@ -1094,10 +1097,10 @@ class _AddDinasPageState extends State<AddDinasPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(18.0),
             decoration: BoxDecoration(
               border: Border.all(color: Color(0xFFDDDDDD)),
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1107,25 +1110,34 @@ class _AddDinasPageState extends State<AddDinasPage> {
                       ? DateFormat('yyyy-MM-dd').format(selectedDate)
                       : hintText,
                   style: GoogleFonts.poppins(
-                    fontSize: 13.sp,
+                    fontSize: selectedDate != null ? 12.sp : 12.sp,
+                    fontWeight: selectedDate != null
+                        ? FontWeight.w500
+                        : FontWeight.w400, // Different fontWeight for hintText
+                    color: selectedDate != null
+                        ? MyColorsConst.darkColor
+                        : MyColorsConst
+                            .disableColor, // Different color for hintText
                   ),
                 ),
-                // const SizedBox(width: 8),
                 Icon(
-                  Icons.calendar_month_rounded,
+                  CupertinoIcons.calendar_today,
                   color: MyColorsConst.primaryColor,
-                  size: 20,
+                  size: 20.sp,
                 ),
               ],
             ),
           ),
           if (validator != null &&
               (controller.text.isEmpty || validator(selectedDate) != null))
-            Text(
-              validator(selectedDate) ?? '',
-              style: GoogleFonts.poppins(
-                color: MyColorsConst.redColor,
-                fontSize: 8,
+            Padding(
+              padding: const EdgeInsets.only(left: 18, top: 5),
+              child: Text(
+                validator(selectedDate) ?? '',
+                style: GoogleFonts.poppins(
+                  color: MyColorsConst.redColor,
+                  fontSize: 10.sp,
+                ),
               ),
             ),
         ],

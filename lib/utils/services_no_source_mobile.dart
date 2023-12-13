@@ -6,19 +6,19 @@ import 'package:http/http.dart' as http;
 
 import 'const.dart';
 
-class ServicesSuccess {
+class ServicesSuccessNoMobile {
   int code;
   dynamic response;
-  ServicesSuccess({
+  ServicesSuccessNoMobile({
     required this.code,
     required this.response,
   });
 }
 
-class ServicesFailure {
+class ServicesFailureNoMobile {
   int code;
   dynamic errorResponse;
-  ServicesFailure({
+  ServicesFailureNoMobile({
     required this.code,
     this.errorResponse,
   });
@@ -113,44 +113,44 @@ class GeneralServicesNoMobile {
 
       if (response.statusCode == 200) {
         final responseBody = json.decode(response.body);
-        return ServicesSuccess(
+        return ServicesSuccessNoMobile(
           code: response.statusCode,
           response: responseBody,
         );
       }
       if (response.statusCode == MyGeneralConst.CODE_INTERNAL_SERVER_ERROR) {
-        return ServicesFailure(
+        return ServicesFailureNoMobile(
           code: response.statusCode,
           errorResponse:
               'Server Error!\n' + json.decode(response.body)['message'],
         );
       }
       if (response.statusCode == MyGeneralConst.CODE_BAD_REQUEST) {
-        return ServicesFailure(
+        return ServicesFailureNoMobile(
           code: response.statusCode,
           errorResponse: json.decode(response.body)['message'],
         );
       }
       if (response.statusCode == MyGeneralConst.CODE_ERROR_VALIDATION) {
-        return ServicesFailure(
+        return ServicesFailureNoMobile(
           code: response.statusCode,
           errorResponse: json.decode(response.body)['message'],
         );
       }
-      return ServicesFailure(
+      return ServicesFailureNoMobile(
         code: response.statusCode,
         errorResponse: json.decode(response.body)['message'],
       );
     } on HttpException {
-      return ServicesFailure(
+      return ServicesFailureNoMobile(
           code: MyGeneralConst.CODE_NO_INTERNET_CONNECTION,
           errorResponse: "No Internet Connection");
     } on FormatException {
-      return ServicesFailure(
+      return ServicesFailureNoMobile(
           code: MyGeneralConst.CODE_INVALID_FORMAT,
           errorResponse: "Invalid Format");
     } catch (e) {
-      return ServicesFailure(
+      return ServicesFailureNoMobile(
           code: MyGeneralConst.CODE_UNKWON_ERROR,
           errorResponse: "Unknwon Error!\nPlease try again!");
     }

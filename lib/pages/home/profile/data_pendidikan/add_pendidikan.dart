@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
+import 'package:sj_presensi_mobile/componens/HRIS/form_input_file.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -24,6 +27,7 @@ class AddPendidikanPage extends StatefulWidget {
   final TextEditingController pendidikanTerakhirController =
       TextEditingController();
   final TextEditingController ijazahController = TextEditingController();
+
   final TextEditingController catatanController = TextEditingController();
 
   @override
@@ -32,13 +36,15 @@ class AddPendidikanPage extends StatefulWidget {
 
 class _AddPendidikanPageState extends State<AddPendidikanPage> {
   int? pendidikanTerakhir;
+  File? _pickedFile;
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
                 MyColorsConst.primaryDarkColor,
@@ -235,16 +241,22 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                         ],
                       ),
                       SizedBox(height: 15.sp),
-                      FormCatatanData(
-                        input: widget.ijazahController.text,
-                        labelTag: 'label-addijazah',
-                        labelForm: 'Ijazah Terakhir',
-                        formTag: 'form-addijazah',
-                        hintText: 'Ijazah Terakhir',
-                        onTap: () {},
-                        controller: widget.ijazahController,
-                        validator: (value) {},
+                      // FormCatatanData(
+                      //   input: widget.ijazahController.text,
+                      //   labelTag: 'label-addijazah',
+                      //   labelForm: 'Ijazah Terakhir',
+                      //   formTag: 'form-addijazah',
+                      //   hintText: 'Ijazah Terakhir',
+                      //   onTap: () {},
+                      //   controller: widget.ijazahController,
+                      //   validator: (value) {},
+                      // ),
+                      FilePickerForm(
+                        onFilePicked: (file) {
+                          // ApiService.uploadFile(file);
+                        },
                       ),
+                      SizedBox(height: 15.sp),
                       FormCatatanData(
                         input: widget.catatanController.text,
                         labelTag: 'label-addcatatanpendidikan',

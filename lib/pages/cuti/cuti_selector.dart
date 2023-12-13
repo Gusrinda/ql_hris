@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/getDataCuti/get_alasan_cuti_model.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/getDataCuti/get_tipe_cuti_model.dart';
@@ -53,7 +54,8 @@ class TipeCutiSearchDelegate extends SearchDelegate<DataTipeCuti?> {
               title: Text(
                 searchResults[index].value ?? '-',
                 style: GoogleFonts.poppins(
-                  fontSize: 14,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500
                 ),
               ),
               onTap: () {
