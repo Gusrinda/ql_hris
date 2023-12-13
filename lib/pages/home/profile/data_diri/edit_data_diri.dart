@@ -11,9 +11,9 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 
 class EditDataDiriPage extends StatefulWidget {
   static const routeName = '/EditDataDiriPage';
-  final Biodata bioData;
+  final Biodata? bioData;
 
-  EditDataDiriPage({super.key, required this.bioData});
+  EditDataDiriPage({super.key, this.bioData});
 
   @override
   State<EditDataDiriPage> createState() => _EditDataDiriPageState();
@@ -25,7 +25,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
   @override
   void initState() {
     super.initState();
-    controllers = DataDiriControllers(bioData: widget.bioData);
+     controllers = DataDiriControllers(bioData: widget.bioData!);
   }
 
   List<String> buttonTexts = [
@@ -239,7 +239,8 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               formTag: 'Form-KodePresensi',
                               valueController:
                                   controllers.valueKodePresensiController,
-                              idController: controllers.idKodePresensiController,
+                              idController:
+                                  controllers.idKodePresensiController,
                             ),
                             FormDropDownData(
                               onTap: () {},
@@ -302,7 +303,8 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               formTag: 'Form-JenisKelamin',
                               valueController:
                                   controllers.valueJenisKelaminController,
-                              idController: controllers.valueJenisKelaminController,
+                              idController:
+                                  controllers.valueJenisKelaminController,
                             ),
                             FormDropDownData(
                               onTap: () {},
@@ -730,7 +732,8 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               formTag: 'Form-TipeBayar',
                               valueController:
                                   controllers.valueTipePembayaranController,
-                              idController: controllers.idTipePembayaranController,
+                              idController:
+                                  controllers.idTipePembayaranController,
                             ),
                             FormDropDownData(
                               onTap: () {},
@@ -740,7 +743,8 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               formTag: 'Form-MetodeBayar',
                               valueController:
                                   controllers.valueMetodePembayaranController,
-                              idController: controllers.idMetodePembayaranController,
+                              idController:
+                                  controllers.idMetodePembayaranController,
                             ),
                             FormInputData(
                               hintText: 'Tuliskan Nomor Rekening',

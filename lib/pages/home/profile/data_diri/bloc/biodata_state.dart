@@ -13,43 +13,14 @@ class BiodataLoading extends BiodataState {}
 
 class BiodataSuccessInBackground extends BiodataState {}
 
-// class GetDataBiodataSuccess extends BiodataState {
-//   String? imagePath;
-//   String? username;
-//   int? employeeId;
-//   String? name;
-//   String? email;
-//   String? phoneNumber;
-
-//   GetDataBiodataSuccess({
-//     required this.imagePath,
-//     required this.username,
-//     required this.name,
-//     this.employeeId,
-//     required this.email,
-//     this.phoneNumber,
-//   });
-
-//   @override
-//   List<Object> get props => [
-//         imagePath ?? "",
-//         name ?? "",
-//         username ?? "",
-//         employeeId ?? "",
-//         email ?? "",
-//         phoneNumber ?? "",
-//       ];
-// }
-
 class GetBiodataSuccess extends BiodataState {
-  Biodata bioData;
+  Biodata? bioData;
 
-  GetBiodataSuccess({required this.bioData});
+  GetBiodataSuccess({this.bioData});
 
   @override
-  List<Object> get props => [bioData];
+  List<Object> get props => [bioData!];
 }
-
 
 class BiodataFailedInBackground extends BiodataState {}
 

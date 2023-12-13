@@ -10,8 +10,8 @@ part 'profile_event.dart';
 part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  ProfileModel? profileModel;
-  ProfileModel formDataSubmited = ProfileModel();
+  DataProfile? profileModel;
+  DataProfile formDataSubmited = DataProfile();
 
   ProfileBloc() : super(ProfileInitial()) {
     on<GetDataProfile>((event, emit) async {
@@ -21,17 +21,17 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       if (resToken is ServicesSuccess) {
         var res = await ProfileServices.getDataProfilel(
             resToken.response["token"], resToken.response["id"] ?? 1);
-        // print(res); //print apakah res berhasil
         if (res is ServicesSuccess) {
           print(res.response);
-          profileModel = ProfileModel.fromMap(res.response["data"]);
+          profileModel = DataProfile.fromJson(res.response["data"]);
           emit(GetDataProfileSuccess(
-            imagePath: profileModel?.imagePath,
-            username: profileModel?.username,
-            name: profileModel?.name,
-            employeeId: profileModel?.employeeId,
-            email: profileModel?.email,
-            phoneNumber: profileModel?.phoneNumber,
+            imagePath: profileModel!.profilImage ?? '',
+            username: profileModel!.username ?? '',
+            name: profileModel!.name ?? '',
+            employeeId: profileModel!.id ?? 1,
+            email: profileModel!.email ?? '',
+            phoneNumber: profileModel!.telp ?? '',
+            dataProfile: profileModel
           ));
         } else if (res is ServicesFailure) {
           if (res.errorResponse == null) {

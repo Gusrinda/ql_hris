@@ -164,19 +164,61 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 const SizedBox(width: 25),
                                 Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       data?.name ?? "-",
                                       style: GoogleFonts.poppins(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.w700,
                                       ),
                                     ),
-                                    Text(
-                                      data?.name ?? "-",
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
+                                    SizedBox(height: 5),
+                                    RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: 'Username: ',
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 10.sp,
+                                              color:
+                                                  MyColorsConst.lightDarkColor,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text: data?.dataProfile?.username,
+                                            style: GoogleFonts.poppins(
+                                              fontStyle: FontStyle.italic,
+                                              fontSize: 12.sp,
+                                              color: MyColorsConst.darkColor,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: 'Atasan: ',
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 10.sp,
+                                              color:
+                                                  MyColorsConst.lightDarkColor,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text: data?.dataProfile?.atasan,
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 10.sp,
+                                              color: MyColorsConst.darkColor,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
@@ -202,25 +244,15 @@ class _ProfilePageState extends State<ProfilePage> {
                           labelText: "Biodata",
                           color: MyColorsConst.whiteColor,
                           icon: CupertinoIcons.person_fill,
-                          onTap: () async {
-                            ///Loading Start
-                            LoadingDialog.showLoadingDialog(context);
-
-                            // Mendapatkan biodata dari BiodataBloc
-                            BiodataBloc bloc = context.read<BiodataBloc>();
-                            bloc.add(GetBiodata());
-                            await Future.delayed(const Duration(
-                                seconds: 1)); // Menunggu pembaruan blok
-                            Biodata bioData =
-                                (bloc.state as GetBiodataSuccess).bioData;
-
-                            /// Loading Close
-                            LoadingDialog.dismissDialog(context);
-
-                            // Navigasi ke DataDiriPage dengan menyertakan argumen
-                            Navigator.of(context).pushNamed(
-                              DataDiriPage.routeName,
-                              arguments: bioData,
+                          onTap: () {
+                            // Navigasi ke DataDiriPage
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => BlocProvider(
+                                  create: (context) => BiodataBloc(),
+                                  child: DataDiriPage(),
+                                ),
+                              ),
                             );
                           },
                         ),

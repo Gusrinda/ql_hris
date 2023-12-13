@@ -22,6 +22,10 @@ class CheckInOutBloc extends Bloc<CheckInOutEvent, CheckInOutState> {
           if (res is ServicesSuccess && resUser is ServicesSuccess) {
             final name = resUser.response["data"]["name"] ?? 'Karyawan SJ';
             final fotoProfil = resUser.response["data"]["profil_image"] ?? '';
+            final cutiMasaKerja = resUser.response["data"]["m_kary.cuti_sisa_reguler"].toString() ?? '';
+            final cutiTahunan = resUser.response["data"]["m_kary.cuti_sisa_reguler"].toString()  ?? '';
+            final p24 = resUser.response["data"]["m_kary.cuti_sisa_reguler"].toString()  ?? '';
+
             final jsonData = res.response["data"];
             final status = jsonData["status"];
 
@@ -29,18 +33,27 @@ class CheckInOutBloc extends Bloc<CheckInOutEvent, CheckInOutState> {
               emit(InfoCheckInOutSuccessInBackground(
                 fotoProfil: fotoProfil,
                 name: name,
+                cutiMasaKerja: cutiMasaKerja,
+                cutiTahunan: cutiTahunan,
+                p24: p24
               ));
             } else if (status == "NOT ATTEND") {
               emit(CheckInOutSuccessInBackground(
                 fotoProfil: fotoProfil,
                 name: name,
                 isCheckin: true,
+                cutiMasaKerja: cutiMasaKerja,
+                cutiTahunan: cutiTahunan,
+                p24: p24
               ));
             } else if (status == "WORKING") {
               emit(CheckInOutSuccessInBackground(
                 fotoProfil: fotoProfil,
                 name: name,
                 isCheckin: false,
+                cutiMasaKerja: cutiMasaKerja,
+                cutiTahunan: cutiTahunan,
+                p24: p24
               ));
             }
           } else if (res is ServicesFailure) {

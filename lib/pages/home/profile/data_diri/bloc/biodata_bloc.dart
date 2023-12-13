@@ -21,7 +21,7 @@ class BiodataBloc extends Bloc<BiodataEvent, BiodataState> {
         var res = await BiodataKaryawanService.getBiodataKaryawan(
             resToken.response["token"]);
         if (res is ServicesSuccessNoMobile) {
-          Biodata bioData = Biodata.fromJson(res.response['data']);
+          Biodata? bioData = Biodata.fromJson(res.response['data']);
           print("GET BIODATA: $bioData}");
           emit(GetBiodataSuccess(bioData: bioData));
         } else if (res is ServicesFailureNoMobile) {

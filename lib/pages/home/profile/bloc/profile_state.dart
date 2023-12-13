@@ -47,12 +47,14 @@ class GetDataProfileSuccess extends ProfileState {
   String? name;
   String? email;
   String? phoneNumber;
+  DataProfile? dataProfile;
 
   GetDataProfileSuccess({
     required this.imagePath,
     required this.username,
     required this.name,
     this.employeeId,
+    this.dataProfile,
     required this.email,
     this.phoneNumber,
   });
@@ -65,6 +67,7 @@ class GetDataProfileSuccess extends ProfileState {
         employeeId ?? "",
         email ?? "",
         phoneNumber ?? "",
+        dataProfile ?? []
       ];
 }
 

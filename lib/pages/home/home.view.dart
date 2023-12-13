@@ -57,22 +57,31 @@ class _HomePageState extends State<HomePage> {
         body: SingleChildScrollView(
           child: CustomPaint(
             painter: BackgroundPainter(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 50.sp), // Spacer for status bar
-                BlocBuilder<CheckInOutBloc, CheckInOutState>(
-                  builder: (context, state) {
-                    String? name;
-                    String? fotoProfil;
-                    if (state is InfoCheckInOutSuccessInBackground) {
-                      name = state.name;
-                      fotoProfil = state.fotoProfil;
-                    } else if (state is CheckInOutSuccessInBackground) {
-                      name = state.name;
-                      fotoProfil = state.fotoProfil;
-                    }
-                    return Padding(
+            child: BlocBuilder<CheckInOutBloc, CheckInOutState>(
+              builder: (context, state) {
+                String? name;
+                String? fotoProfil;
+                String? cutiMasaKerja;
+                String? cutiTahunan;
+                String? p24;
+                if (state is InfoCheckInOutSuccessInBackground) {
+                  name = state.name;
+                  fotoProfil = state.fotoProfil;
+                  cutiMasaKerja = state.cutiMasaKerja;
+                  cutiTahunan = state.cutiTahunan;
+                  p24 = state.p24;
+                } else if (state is CheckInOutSuccessInBackground) {
+                  name = state.name;
+                  fotoProfil = state.fotoProfil;
+                  cutiMasaKerja = state.cutiMasaKerja;
+                  cutiTahunan = state.cutiTahunan;
+                  p24 = state.p24;
+                }
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 50.sp), // Spacer for status bar
+                    Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -171,338 +180,343 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                       ),
-                    );
-                  },
-                ),
-                const SizedBox(height: 20.0),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(7),
-                        color: Colors.white),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                            flex: 1,
-                            child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 15),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Icon(
-                                    CupertinoIcons.bag_badge_minus,
-                                    color: MyColorsConst.primaryColor,
-                                  ),
-                                  const SizedBox(height: 7),
-                                  Text(
-                                    "36 Hari",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  Text(
-                                    "Cuti Masa Kerja",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 8.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: MyColorsConst.disableColor),
-                                  )
-                                ],
-                              ),
-                            )),
-                        Container(
-                          width: 1,
-                          height: 60.sp,
-                          color: MyColorsConst.disableColor,
-                        ),
-                        Expanded(
-                            flex: 1,
-                            child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 15),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Icon(
-                                    CupertinoIcons.calendar_badge_minus,
-                                    color: MyColorsConst.primaryColor,
-                                  ),
-                                  const SizedBox(height: 7),
-                                  Text(
-                                    "20 Hari",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  Text(
-                                    "Cuti Tahunan",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 8.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: MyColorsConst.disableColor),
-                                  )
-                                ],
-                              ),
-                            )),
-                        Container(
-                          width: 1,
-                          height: 60,
-                          color: MyColorsConst.disableColor,
-                        ),
-                        Expanded(
-                            flex: 1,
-                            child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 15),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Icon(
-                                    CupertinoIcons.timer,
-                                    color: MyColorsConst.primaryColor,
-                                  ),
-                                  const SizedBox(height: 7),
-                                  Text(
-                                    "120 Menit",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  Text(
-                                    "P24",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 8.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: MyColorsConst.disableColor),
-                                  )
-                                ],
-                              ),
-                            ))
-                      ],
                     ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Text(
-                    "Menu",
-                    style: GoogleFonts.poppins(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white),
-                  ),
-                ),
-                const SizedBox(height: 5),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(7),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                              blurRadius: 20,
-                              offset: Offset(0, 2),
-                              color:
-                                  MyColorsConst.primaryColor.withOpacity(0.1))
-                        ]),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => BlocProvider(
-                                    create: (context) => HistoryAttendanceBloc()
-                                      ..add(
-                                        GetAttendancesHistory(
-                                          date: DateTime.now(),
-                                        ),
+                    const SizedBox(height: 20.0),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(7),
+                            color: Colors.white),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                                flex: 1,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 15),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Icon(
+                                        CupertinoIcons.bag_badge_minus,
+                                        color: MyColorsConst.primaryColor,
                                       ),
-                                    child: const HistoryPage(),
+                                      const SizedBox(height: 7),
+                                      Text(
+                                        "${cutiMasaKerja ?? '-'} Hari",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      Text(
+                                        "Cuti Masa Kerja",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 8.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: MyColorsConst.disableColor),
+                                      )
+                                    ],
                                   ),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              children: [
-                                Image.asset(
-                                  'assets/images/presensi_menu.png',
-                                  width: 50.sp,
-                                ),
-                                const SizedBox(height: 5),
-                                Text(
-                                  "Presensi",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 10.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: MyColorsConst.darkColor,
-                                  ),
-                                ),
-                              ],
+                                )),
+                            Container(
+                              width: 1,
+                              height: 60.sp,
+                              color: MyColorsConst.disableColor,
                             ),
-                          ),
+                            Expanded(
+                                flex: 1,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 15),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Icon(
+                                        CupertinoIcons.calendar_badge_minus,
+                                        color: MyColorsConst.primaryColor,
+                                      ),
+                                      const SizedBox(height: 7),
+                                      Text(
+                                        "${cutiTahunan ?? '-'} Hari",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      Text(
+                                        "Cuti Tahunan",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 8.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: MyColorsConst.disableColor),
+                                      )
+                                    ],
+                                  ),
+                                )),
+                            Container(
+                              width: 1,
+                              height: 60,
+                              color: MyColorsConst.disableColor,
+                            ),
+                            Expanded(
+                                flex: 1,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 15),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Icon(
+                                        CupertinoIcons.timer,
+                                        color: MyColorsConst.primaryColor,
+                                      ),
+                                      const SizedBox(height: 7),
+                                      Text(
+                                        "${p24 ?? '-'} Hari",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      Text(
+                                        "P24",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 8.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: MyColorsConst.disableColor),
+                                      )
+                                    ],
+                                  ),
+                                ))
+                          ],
                         ),
-                        Expanded(
-                            flex: 1,
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => BlocProvider(
-                                      create: (context) => ListLemburBloc()
-                                        ..add(GetListLembur(
-                                            date: DateTime.now())),
-                                      child: const LemburPage(),
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    'assets/images/lembur_menu.png',
-                                    width: 50.sp,
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Text(
-                                    "Lembur",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 10.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: MyColorsConst.darkColor),
-                                  )
-                                ],
-                              ),
-                            )),
-                        Expanded(
-                            flex: 1,
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => BlocProvider(
-                                      create: (context) => ListDinasBloc()
-                                        ..add(
-                                            GetListDinas(date: DateTime.now())),
-                                      child: DinasPage(),
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    'assets/images/spd_menu.png',
-                                    width: 50.sp,
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Text(
-                                    "Perjalanan Dinas",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 10.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: MyColorsConst.darkColor),
-                                  )
-                                ],
-                              ),
-                            )),
-                        Expanded(
-                            flex: 1,
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => BlocProvider(
-                                      create: (context) => ListCutiBloc()
-                                        ..add(
-                                            GetListCuti(date: DateTime.now())),
-                                      child: CutiPage(),
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    'assets/images/cuti_menu.png',
-                                    width: 50.sp,
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Text(
-                                    "Cuti",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 10.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: MyColorsConst.darkColor),
-                                  )
-                                ],
-                              ),
-                            ))
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-                const SizedBox(height: 30),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Pengumuman",
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
+                        "Menu",
                         style: GoogleFonts.poppins(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w600,
-                            color: MyColorsConst.darkColor),
+                            color: Colors.white),
                       ),
-                      Row(
+                    ),
+                    const SizedBox(height: 5),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(7),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                  blurRadius: 20,
+                                  offset: Offset(0, 2),
+                                  color: MyColorsConst.primaryColor
+                                      .withOpacity(0.1))
+                            ]),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => BlocProvider(
+                                        create: (context) =>
+                                            HistoryAttendanceBloc()
+                                              ..add(
+                                                GetAttendancesHistory(
+                                                  date: DateTime.now(),
+                                                ),
+                                              ),
+                                        child: const HistoryPage(),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/presensi_menu.png',
+                                      width: 50.sp,
+                                    ),
+                                    const SizedBox(height: 5),
+                                    Text(
+                                      "Presensi",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 10.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: MyColorsConst.darkColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                                flex: 1,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => BlocProvider(
+                                          create: (context) => ListLemburBloc()
+                                            ..add(GetListLembur(
+                                                date: DateTime.now())),
+                                          child: const LemburPage(),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/lembur_menu.png',
+                                        width: 50.sp,
+                                      ),
+                                      const SizedBox(height: 5),
+                                      Text(
+                                        "Lembur",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 10.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: MyColorsConst.darkColor),
+                                      )
+                                    ],
+                                  ),
+                                )),
+                            Expanded(
+                                flex: 1,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => BlocProvider(
+                                          create: (context) => ListDinasBloc()
+                                            ..add(GetListDinas(
+                                                date: DateTime.now())),
+                                          child: DinasPage(),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/spd_menu.png',
+                                        width: 50.sp,
+                                      ),
+                                      const SizedBox(height: 5),
+                                      Text(
+                                        "Perjalanan Dinas",
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 10.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: MyColorsConst.darkColor),
+                                      )
+                                    ],
+                                  ),
+                                )),
+                            Expanded(
+                                flex: 1,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => BlocProvider(
+                                          create: (context) => ListCutiBloc()
+                                            ..add(GetListCuti(
+                                                date: DateTime.now())),
+                                          child: CutiPage(),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/cuti_menu.png',
+                                        width: 50.sp,
+                                      ),
+                                      const SizedBox(height: 5),
+                                      Text(
+                                        "Cuti",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 10.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: MyColorsConst.darkColor),
+                                      )
+                                    ],
+                                  ),
+                                ))
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Lihat Semua",
+                            "Pengumuman",
                             style: GoogleFonts.poppins(
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w500,
-                                color: MyColorsConst.primaryColor),
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w600,
+                                color: MyColorsConst.darkColor),
                           ),
-                          Icon(
-                            Icons.keyboard_arrow_right_rounded,
-                            color: MyColorsConst.primaryColor,
-                            size: 20.sp,
-                          )
+                          Row(
+                            children: [
+                              Text(
+                                "Lihat Semua",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: MyColorsConst.primaryColor),
+                              ),
+                              Icon(
+                                Icons.keyboard_arrow_right_rounded,
+                                color: MyColorsConst.primaryColor,
+                                size: 20.sp,
+                              )
+                            ],
+                          ),
                         ],
                       ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 5),
-                Container(
-                  constraints: BoxConstraints(maxHeight: 280.sp),
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    children: [
-                      SizedBox(width: 20),
-                      PengumumanCard(),
-                      PengumumanCard(),
-                      PengumumanCard(),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 100)
-              ],
+                    ),
+                    const SizedBox(height: 5),
+                    Container(
+                      constraints: BoxConstraints(maxHeight: 280.sp),
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        children: [
+                          SizedBox(width: 20),
+                          PengumumanCard(),
+                          PengumumanCard(),
+                          PengumumanCard(),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 100)
+                  ],
+                );
+              },
             ),
           ),
         ),
