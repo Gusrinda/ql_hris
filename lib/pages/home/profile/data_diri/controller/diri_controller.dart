@@ -53,9 +53,10 @@ class DataDiriControllers {
     //Tempat Lahir
     idTempatLahirController.text = bioData.tempatLahir.toString() ?? '';
     valueTempatLahirController.text = bioData.tempatLahir ?? '';
+    
     //alamat Tinggal
     alamatTinggalController.text = bioData.alamatAsli ?? '';
-    //alamat DOmisili
+    //alamat Domisili
 
     //provinsi
     idProvinsiController.text = bioData.provinsiId.toString() ?? '';

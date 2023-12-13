@@ -4,6 +4,7 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 import 'package:sj_presensi_mobile/utils/services_no_source_mobile.dart';
 
 class BiodataKaryawanService {
+  
   static Future<Object> getBiodataKaryawan(String token) async {
     var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/data_diri");
     return await GeneralServicesNoMobile.baseService(

@@ -89,6 +89,10 @@ _$BiodataImpl _$$BiodataImplFromJson(Map<String, dynamic> json) =>
       mStandartGajiId: json['m_standart_gaji_id'] as int?,
       periodeGajiId: json['periode_gaji_id'] as int?,
       refId: json['ref_id'],
+      presensiLokasiDefaultId: json['presensi_lokasi_default_id'],
+      expDateCuti: json['exp_date_cuti'] == null
+          ? null
+          : DateTime.parse(json['exp_date_cuti'] as String),
       dir: json['dir'] as String?,
       div: json['div'] as String?,
       dept: json['dept'] as String?,
@@ -103,6 +107,23 @@ _$BiodataImpl _$$BiodataImplFromJson(Map<String, dynamic> json) =>
       agama: json['agama'] as String?,
       golDarah: json['gol_darah'] as String?,
       tanggungan: json['tanggungan'] as String?,
+      costcontre: json['costcontre'] as String?,
+      statusNikah: json['status_nikah'] as String?,
+      ktpNo: json['ktp_no'] as String?,
+      ktpFoto: json['ktp_foto'] as String?,
+      pasFoto: json['pas_foto'] as String?,
+      kkNo: json['kk_no'] as String?,
+      kkFoto: json['kk_foto'] as String?,
+      npwpNo: json['npwp_no'] as String?,
+      npwpFoto: json['npwp_foto'] as String?,
+      npwpTglBerlaku: json['npwp_tgl_berlaku'] == null
+          ? null
+          : DateTime.parse(json['npwp_tgl_berlaku'] as String),
+      bpjsTipeId: json['bpjs_tipe_id'] as int?,
+      bpjsNo: json['bpjs_no'] as String?,
+      bpjsFoto: json['bpjs_foto'] as String?,
+      berkasLain: json['berkas_lain'] as String?,
+      descFile: json['desc_file'],
     );
 
 Map<String, dynamic> _$$BiodataImplToJson(_$BiodataImpl instance) =>
@@ -164,6 +185,8 @@ Map<String, dynamic> _$$BiodataImplToJson(_$BiodataImpl instance) =>
       'm_standart_gaji_id': instance.mStandartGajiId,
       'periode_gaji_id': instance.periodeGajiId,
       'ref_id': instance.refId,
+      'presensi_lokasi_default_id': instance.presensiLokasiDefaultId,
+      'exp_date_cuti': instance.expDateCuti?.toIso8601String(),
       'dir': instance.dir,
       'div': instance.div,
       'dept': instance.dept,
@@ -178,4 +201,19 @@ Map<String, dynamic> _$$BiodataImplToJson(_$BiodataImpl instance) =>
       'agama': instance.agama,
       'gol_darah': instance.golDarah,
       'tanggungan': instance.tanggungan,
+      'costcontre': instance.costcontre,
+      'status_nikah': instance.statusNikah,
+      'ktp_no': instance.ktpNo,
+      'ktp_foto': instance.ktpFoto,
+      'pas_foto': instance.pasFoto,
+      'kk_no': instance.kkNo,
+      'kk_foto': instance.kkFoto,
+      'npwp_no': instance.npwpNo,
+      'npwp_foto': instance.npwpFoto,
+      'npwp_tgl_berlaku': instance.npwpTglBerlaku?.toIso8601String(),
+      'bpjs_tipe_id': instance.bpjsTipeId,
+      'bpjs_no': instance.bpjsNo,
+      'bpjs_foto': instance.bpjsFoto,
+      'berkas_lain': instance.berkasLain,
+      'desc_file': instance.descFile,
     };
