@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
 
 import 'utils/const.dart';
@@ -49,25 +51,29 @@ class _MyAppState extends State<MyApp> {
       designSize: const Size(360, 800),
       useInheritedMediaQuery: true,
       minTextAdapt: true,
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'SJ Absensi Express',
-        theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-          brightness: Brightness.light,
-          primaryColor: MyColorsConst.primaryColor,
-          primarySwatch: themeAppColor,
-          dividerColor: Colors.transparent,
-          fontFamily: GoogleFonts.poppins().fontFamily,
-          textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+      child: BlocProvider(
+        create: (context) => CheckInOutBloc(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'SJ Absensi Express',
+          theme: ThemeData(
+            scaffoldBackgroundColor: Colors.white,
+            brightness: Brightness.light,
+            primaryColor: MyColorsConst.primaryColor,
+            primarySwatch: themeAppColor,
+            dividerColor: Colors.transparent,
+            fontFamily: GoogleFonts.poppins().fontFamily,
+            textTheme:
+                GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+          ),
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          onGenerateRoute: RouteGenerator.generateRoute,
+          initialRoute: SplashPage.routeName,
         ),
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        onGenerateRoute: RouteGenerator.generateRoute,
-        initialRoute: SplashPage.routeName,
       ),
     );
   }

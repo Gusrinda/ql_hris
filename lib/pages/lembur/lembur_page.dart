@@ -32,6 +32,11 @@ class _LemburPageState extends State<LemburPage> {
   DateTime? selectedMonth;
   DateTime? selectedYear;
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   String formatTime(DateTime time) {
     return DateFormat.Hm().format(time);
   }

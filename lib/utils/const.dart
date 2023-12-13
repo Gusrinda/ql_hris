@@ -47,6 +47,7 @@ class MyColorsConst {
   static const yellowColor = Color.fromARGB(255, 255, 187, 0);
 
   static const shadowColor = Color.fromARGB(255, 209, 209, 209);
+  static const formBorderColor = Color(0XFFE0E0E0);
   static const lightDarkColor = Color(0xFF8F8F8F);
   static const darkColor = Color(0XFF333333);
   static const semiDarkColor = Color.fromARGB(255, 104, 104, 104);

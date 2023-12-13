@@ -11,6 +11,7 @@ import 'package:sj_presensi_mobile/componens/text_form_custom_v2.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/data_bahasa_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_diri/bloc/biodata_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/data_diri_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/data_keluarga_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/data_organisasi_page.dart';
@@ -19,6 +20,7 @@ import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/data_pendi
 import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/data_pengalaman_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/data_prestasi.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/password_change.dart';
+import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_biodata_karyawan.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -52,10 +54,6 @@ class _ProfilePageState extends State<ProfilePage> {
           setState(() {
             data = state;
           });
-          // print('apa didalam ${data}');
-          // idController.text = state.username ?? "";
-          // emailController.text = state.email ?? "";
-          // phoneController.text = state.phoneNumber ?? "";
           LoadingDialog.dismissDialog(context);
         } else if (state is ProfileSuccessInBackground) {
           LoadingDialog.dismissDialog(context);
@@ -187,12 +185,12 @@ class _ProfilePageState extends State<ProfilePage> {
                             );
                           },
                         ),
-
                         const SizedBox(height: 25),
                         Text(
                           'Data Profil',
                           style: GoogleFonts.poppins(
-                            fontSize: 12,
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w500,
                             color: MyColorsConst.lightDarkColor,
                           ),
                         ),
@@ -201,12 +199,29 @@ class _ProfilePageState extends State<ProfilePage> {
                           thickness: 1,
                         ),
                         TextFormCustomV2(
-                          labelText: "Data Diri",
+                          labelText: "Biodata",
                           color: MyColorsConst.whiteColor,
                           icon: CupertinoIcons.person_fill,
-                          onTap: () {
-                            Navigator.of(context)
-                                .pushNamed(DataDiriPage.routeName);
+                          onTap: () async {
+                            ///Loading Start
+                            LoadingDialog.showLoadingDialog(context);
+
+                            // Mendapatkan biodata dari BiodataBloc
+                            BiodataBloc bloc = context.read<BiodataBloc>();
+                            bloc.add(GetBiodata());
+                            await Future.delayed(const Duration(
+                                seconds: 1)); // Menunggu pembaruan blok
+                            Biodata bioData =
+                                (bloc.state as GetBiodataSuccess).bioData;
+
+                            /// Loading Close
+                            LoadingDialog.dismissDialog(context);
+
+                            // Navigasi ke DataDiriPage dengan menyertakan argumen
+                            Navigator.of(context).pushNamed(
+                              DataDiriPage.routeName,
+                              arguments: bioData,
+                            );
                           },
                         ),
                         TextFormCustomV2(
@@ -266,7 +281,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         TextFormCustomV2(
                           labelText: "Data Pengalaman Kerja",
                           color: MyColorsConst.whiteColor,
-                          icon: Icons.data_exploration_rounded,
+                          icon: CupertinoIcons.graph_square_fill,
                           onTap: () {
                             Navigator.of(context)
                                 .pushNamed(DataPengalamanKerjaPage.routeName);
@@ -276,7 +291,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         Text(
                           'Akun',
                           style: GoogleFonts.poppins(
-                            fontSize: 12,
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w500,
                             color: MyColorsConst.lightDarkColor,
                           ),
                         ),

@@ -64,22 +64,43 @@ class FormDropDownData extends StatelessWidget {
             color: Colors.transparent,
             child: Container(
               alignment: Alignment.center,
-              height: 56.sp,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Color(0xFFDDDDDD)),
-              ),
+              // height: 56.sp,
+              // decoration: BoxDecoration(
+              //   borderRadius: BorderRadius.circular(10),
+
+              // ),
               child: TextFormField(
                 readOnly: true,
                 onTap: onTap,
                 controller: valueController,
                 style: GoogleFonts.poppins(
-                  fontSize: 13.sp,
-                ),
+                    fontSize: 13.sp,
+                    fontWeight: FontWeight.w500,
+                    color: MyColorsConst.darkColor),
                 validator: validator,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.all(18.sp),
-                  border: InputBorder.none,
+                  fillColor: Colors.transparent,
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1.5, color: MyColorsConst.formBorderColor),
+                      borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1.5, color: MyColorsConst.formBorderColor),
+                      borderRadius: BorderRadius.circular(10)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1.5, color: MyColorsConst.primaryColor),
+                      borderRadius: BorderRadius.circular(10)),
+                  focusedErrorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1.5, color: Color(0XFF0b00020)),
+                      borderRadius: BorderRadius.circular(10)),
+                  errorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1.5, color: Color(0XFF0b00020)),
+                      borderRadius: BorderRadius.circular(10)),
                   suffixIcon: Padding(
                     padding: EdgeInsets.all(8.sp),
                     child: Icon(
@@ -92,7 +113,9 @@ class FormDropDownData extends StatelessWidget {
                       fontSize: 13.sp,
                       color: MyColorsConst.disableColor,
                       fontWeight: FontWeight.w500),
-                  errorStyle: errorTextStyle,
+                  errorStyle: GoogleFonts.poppins(
+                    fontSize: 10.sp,
+                  ),
                 ),
               ),
             ),
@@ -167,10 +190,8 @@ class FormCatatanData extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
-                  height: 50.sp,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Color(0xFFDDDDDD)),
                   ),
                   child: TextFormField(
                     style: GoogleFonts.poppins(
@@ -185,9 +206,147 @@ class FormCatatanData extends StatelessWidget {
                           fontSize: 13.sp,
                           color: MyColorsConst.disableColor,
                           fontWeight: FontWeight.w500),
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.all(15.sp),
-                      errorStyle: errorTextStyle,
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1.5, color: MyColorsConst.formBorderColor),
+                          borderRadius: BorderRadius.circular(10)),
+                      border: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1.5, color: MyColorsConst.formBorderColor),
+                          borderRadius: BorderRadius.circular(10)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1.5, color: MyColorsConst.primaryColor),
+                          borderRadius: BorderRadius.circular(10)),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1.5, color: Color(0XFF0b00020)),
+                          borderRadius: BorderRadius.circular(10)),
+                      errorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1.5, color: Color(0XFF0b00020)),
+                          borderRadius: BorderRadius.circular(10)),
+                      contentPadding: EdgeInsets.all(18.sp),
+                      errorStyle: GoogleFonts.poppins(fontSize: 10.sp),
+                    ),
+                    onTap: onTap,
+                    controller: controller,
+                    textInputAction: TextInputAction.next,
+                    validator: validator,
+                  ),
+                ),
+                SizedBox(height: 20.sp),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+
+class FormInputData extends StatelessWidget {
+  const FormInputData({
+    Key? key,
+    this.enabled = true,
+    this.input = "",
+    this.onTap,
+    required this.controller,
+    required this.validator,
+    this.errorTextStyle,
+    required this.labelForm,
+    required this.labelTag,
+    required this.formTag,
+    required this.hintText,
+    this.showRedStar = true,
+  }) : super(key: key);
+
+  final bool enabled;
+  final String input;
+  final String labelForm;
+  final String labelTag;
+  final String formTag;
+  final String hintText;
+  final VoidCallback? onTap;
+  final TextEditingController controller;
+  final String? Function(String?) validator;
+  final TextStyle? errorTextStyle;
+  final bool showRedStar;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Hero(
+          tag: labelTag,
+          child: Row(
+            children: [
+              FormTextLabel(
+                label: labelForm,
+                labelColor: MyColorsConst.darkColor,
+              ),
+              if (showRedStar) // Tampilkan bintang merah sesuai showRedStar
+                SizedBox(width: 2.sp),
+              if (showRedStar)
+                Text(
+                  '*',
+                  style: GoogleFonts.poppins(color: Colors.red),
+                ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 5.sp,
+        ),
+        Hero(
+          tag: formTag,
+          flightShuttleBuilder: flightShuttleBuilder,
+          child: Material(
+            color: Colors.transparent,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: TextFormField(
+                    style: GoogleFonts.poppins(
+                        fontSize: 13.sp,
+                        color: MyColorsConst.darkColor,
+                        fontWeight: FontWeight.w500),
+                    maxLines: 1,
+                    readOnly: false,
+                    decoration: InputDecoration(
+                      hintText: hintText,
+                      hintStyle: GoogleFonts.poppins(
+                          fontSize: 13.sp,
+                          color: MyColorsConst.disableColor,
+                          fontWeight: FontWeight.w500),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1.5, color: MyColorsConst.formBorderColor),
+                          borderRadius: BorderRadius.circular(10)),
+                      border: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1.5, color: MyColorsConst.formBorderColor),
+                          borderRadius: BorderRadius.circular(10)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1.5, color: MyColorsConst.primaryColor),
+                          borderRadius: BorderRadius.circular(10)),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1.5, color: Color(0XFF0b00020)),
+                          borderRadius: BorderRadius.circular(10)),
+                      errorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1.5, color: Color(0XFF0b00020)),
+                          borderRadius: BorderRadius.circular(10)),
+                      contentPadding: EdgeInsets.all(18.sp),
+                      errorStyle: GoogleFonts.poppins(fontSize: 10.sp),
                     ),
                     onTap: onTap,
                     controller: controller,
@@ -268,10 +427,8 @@ class FormTemplateSpd extends StatelessWidget {
               children: [
                 Container(
                   alignment: Alignment.center,
-                  height: 50.sp,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Color(0xFFDDDDDD)),
                   ),
                   child: TextFormField(
                     readOnly: true,
@@ -280,8 +437,27 @@ class FormTemplateSpd extends StatelessWidget {
                     style: GoogleFonts.poppins(
                         fontSize: 13.sp, fontWeight: FontWeight.w500),
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(12.sp),
-                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.all(18.sp),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1.5, color: MyColorsConst.formBorderColor),
+                          borderRadius: BorderRadius.circular(10)),
+                      border: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1.5, color: MyColorsConst.formBorderColor),
+                          borderRadius: BorderRadius.circular(10)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1.5, color: MyColorsConst.primaryColor),
+                          borderRadius: BorderRadius.circular(10)),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1.5, color: Color(0XFF0b00020)),
+                          borderRadius: BorderRadius.circular(10)),
+                      errorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1.5, color: Color(0XFF0b00020)),
+                          borderRadius: BorderRadius.circular(10)),
                       suffixIcon: Padding(
                         padding: EdgeInsets.all(12.0.sp),
                         child: Icon(
@@ -294,7 +470,7 @@ class FormTemplateSpd extends StatelessWidget {
                           fontSize: 13.sp,
                           color: MyColorsConst.disableColor,
                           fontWeight: FontWeight.w500),
-                      errorStyle: errorTextStyle,
+                      errorStyle: GoogleFonts.poppins(fontSize: 10.sp),
                     ),
                     validator: validator,
                   ),
