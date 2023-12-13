@@ -214,9 +214,9 @@ class _DinasPageState extends State<DinasPage> {
           ),
           child: Column(
             children: [
-              const SizedBox(height: 30),
+              SizedBox(height: 40.sp),
               Container(
-                padding: EdgeInsets.all(5.0),
+                padding: EdgeInsets.all(5.0.sp),
                 child: Row(
                   children: [
                     IconButton(
@@ -350,6 +350,9 @@ class _DinasPageState extends State<DinasPage> {
                             ),
                           ],
                         ),
+                        SizedBox(
+                          height: 15.sp,
+                        ),
                         Expanded(
                           child: BlocBuilder<ListDinasBloc, ListDinasState>(
                             builder: (context, state) {
@@ -370,15 +373,11 @@ class _DinasPageState extends State<DinasPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 10),
-                                              child: Text(
-                                                date,
-                                                style: GoogleFonts.poppins(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
+                                            Text(
+                                              date,
+                                              style: GoogleFonts.poppins(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w500,
                                               ),
                                             ),
                                             ListViewByDate(

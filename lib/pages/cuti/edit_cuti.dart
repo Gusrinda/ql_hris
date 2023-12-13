@@ -231,7 +231,7 @@ class _EditCutiPageState extends State<EditCutiPage> {
           ),
           child: Column(
             children: [
-              SizedBox(height: 30.sp),
+              SizedBox(height: 40.sp),
               Container(
                 padding: EdgeInsets.only(left: 5.0.sp),
                 child: Row(

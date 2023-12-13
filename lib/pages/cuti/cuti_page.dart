@@ -211,261 +211,283 @@ class _CutiPageState extends State<CutiPage> {
             ),
           ),
           // margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-          child: Column(
+          child: Stack(
             children: [
-              SizedBox(height: 30.sp),
-              Container(
-                padding: EdgeInsets.all(5.0),
-                child: Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.arrow_back_ios_rounded,
-                        size: 18,
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: size.width * 1 / 4,
-                    ),
-                    Expanded(
-                      child: Text(
-                        "History Cuti",
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
+              Column(
+                children: [
+                  SizedBox(height: 40.sp),
+                  Container(
+                    padding: EdgeInsets.all(5.0),
+                    child: Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.arrow_back_ios_rounded,
+                            size: 18,
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                           color: Colors.white,
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                    color: Colors.white,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Container(
-                        //   padding: const EdgeInsets.symmetric(
-                        //       horizontal: 12, vertical: 15),
-                        //   margin: const EdgeInsets.only(bottom: 20),
-                        //   decoration: BoxDecoration(
-                        //     borderRadius: BorderRadius.circular(5),
-                        //     border: Border.all(color: Color(0xFFDDDDDD)),
-                        //     color: MyColorsConst.whiteColor,
-                        //   ),
-                        //   child: Row(
-                        //     mainAxisAlignment: MainAxisAlignment.center,
-                        //     children: [
-                        //       Expanded(
-                        //         flex: 2,
-                        //         child: Column(
-                        //           children: [
-                        //             Text(
-                        //               'Cuti Terpakai',
-                        //               style: GoogleFonts.poppins(
-                        //                   fontSize: 12,
-                        //                   fontWeight: FontWeight.w500,
-                        //                   color: MyColorsConst.lightDarkColor),
-                        //             ),
-                        //             SizedBox(height: 5),
-                        //             Text(
-                        //               '7 hari',
-                        //               style: GoogleFonts.poppins(
-                        //                 fontSize: 17,
-                        //                 fontWeight: FontWeight.w700,
-                        //               ),
-                        //             ),
-                        //           ],
-                        //         ),
-                        //       ),
-                        //       Container(
-                        //         height: 80,
-                        //         width: 2,
-                        //         color: Color(0xFFDDDDDD),
-                        //         margin:
-                        //             const EdgeInsets.symmetric(horizontal: 10),
-                        //       ),
-                        //       Expanded(
-                        //         flex: 2,
-                        //         child: Column(
-                        //           children: [
-                        //             Text(
-                        //               'Sisa Jatah Cuti',
-                        //               style: GoogleFonts.poppins(
-                        //                 fontSize: 12,
-                        //                 fontWeight: FontWeight.w500,
-                        //                 color: MyColorsConst.lightDarkColor,
-                        //               ),
-                        //             ),
-                        //             SizedBox(height: 5),
-                        //             Text(
-                        //               '5 hari',
-                        //               style: GoogleFonts.poppins(
-                        //                 fontSize: 17,
-                        //                 fontWeight: FontWeight.w700,
-                        //               ),
-                        //             ),
-                        //           ],
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Bulan",
-                                  style: GoogleFonts.poppins(
-                                    color: MyColorsConst.darkColor,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ),
-                                MonthPicker(
-                                  onTap: (DateTime? months, DateTime? years) {
-                                    if (months != null) {
-                                      setState(() {
-                                        selectedMonth = months;
-                                      });
-                                      print(
-                                          "ini bulan dipilih ${selectedMonth} ${selectedYear}");
-                                      DateTime newDate;
-                                      if (selectedYear != null) {
-                                        newDate = DateTime(
-                                            selectedYear!.year,
-                                            selectedMonth!.month,
-                                            DateTime.now().day);
-                                      } else {
-                                        newDate = DateTime(
-                                            DateTime.now().year,
-                                            selectedMonth!.month,
-                                            DateTime.now().day);
-                                      }
-
-                                      context.read<ListCutiBloc>().add(
-                                            GetListCuti(
-                                              date: newDate,
-                                            ),
-                                          );
-                                    }
-                                  },
-                                  selectedYear: selectedYear,
-                                )
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Tahun",
-                                  style: GoogleFonts.poppins(
-                                    color: MyColorsConst.darkColor,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ),
-                                YearPickerCustom(
-                                  onTap: (DateTime? years, DateTime? months) {
-                                    if (years != null) {
-                                      setState(() {
-                                        selectedYear = years;
-                                      });
-                                      print(
-                                          "ini tahun yang dipilih ${selectedYear} ${selectedMonth}");
-
-                                      DateTime newDate;
-                                      if (selectedMonth != null) {
-                                        newDate = DateTime(selectedYear!.year,
-                                            selectedMonth!.month);
-                                      } else {
-                                        newDate = DateTime(selectedYear!.year,
-                                            DateTime.now().month);
-                                      }
-
-                                      context.read<ListCutiBloc>().add(
-                                            GetListCuti(
-                                              date: newDate,
-                                            ),
-                                          );
-                                    }
-                                  },
-                                  selectedMonth: selectedMonth,
-                                )
-                              ],
-                            ),
-                          ],
+                        SizedBox(
+                          width: size.width * 1 / 4,
                         ),
                         Expanded(
-                          child: BlocBuilder<ListCutiBloc, ListCutiState>(
-                            builder: (context, state) {
-                              var listcuti =
-                                  context.read<ListCutiBloc>().listcuti;
-                              var groupedData = groupByDate(listcuti);
-
-                              // debugPrint("LIST CUTI ? ${listcuti}");
-
-                              return listcuti.isNotEmpty
-                                  ? ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: groupedData.length,
-                                      itemBuilder: (context, index) {
-                                        var date =
-                                            groupedData.keys.toList()[index];
-                                        var dataList = groupedData[date]!;
-
-                                        return Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 10),
-                                              child: Text(
-                                                date,
-                                                style: GoogleFonts.poppins(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ),
-                                            ListViewByDate(
-                                              dataList: dataList,
-                                              reloadDataCallback: loadData,
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    )
-                                  : Center(
-                                      child: EmptyStateBuilder(),
-                                    );
-                            },
+                          child: Text(
+                            "History Cuti",
+                            style: GoogleFonts.poppins(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ],
                     ),
+                  ),
+                  SizedBox(
+                    height: 50.sp,
+                  ),
+                  Expanded(
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                        ),
+                        color: Colors.white,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 50.sp,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Bulan",
+                                      style: GoogleFonts.poppins(
+                                        color: MyColorsConst.darkColor,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                    MonthPicker(
+                                      onTap:
+                                          (DateTime? months, DateTime? years) {
+                                        if (months != null) {
+                                          setState(() {
+                                            selectedMonth = months;
+                                          });
+                                          print(
+                                              "ini bulan dipilih ${selectedMonth} ${selectedYear}");
+                                          DateTime newDate;
+                                          if (selectedYear != null) {
+                                            newDate = DateTime(
+                                                selectedYear!.year,
+                                                selectedMonth!.month,
+                                                DateTime.now().day);
+                                          } else {
+                                            newDate = DateTime(
+                                                DateTime.now().year,
+                                                selectedMonth!.month,
+                                                DateTime.now().day);
+                                          }
+
+                                          context.read<ListCutiBloc>().add(
+                                                GetListCuti(
+                                                  date: newDate,
+                                                ),
+                                              );
+                                        }
+                                      },
+                                      selectedYear: selectedYear,
+                                    )
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Tahun",
+                                      style: GoogleFonts.poppins(
+                                        color: MyColorsConst.darkColor,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                    YearPickerCustom(
+                                      onTap:
+                                          (DateTime? years, DateTime? months) {
+                                        if (years != null) {
+                                          setState(() {
+                                            selectedYear = years;
+                                          });
+                                          print(
+                                              "ini tahun yang dipilih ${selectedYear} ${selectedMonth}");
+
+                                          DateTime newDate;
+                                          if (selectedMonth != null) {
+                                            newDate = DateTime(
+                                                selectedYear!.year,
+                                                selectedMonth!.month);
+                                          } else {
+                                            newDate = DateTime(
+                                                selectedYear!.year,
+                                                DateTime.now().month);
+                                          }
+
+                                          context.read<ListCutiBloc>().add(
+                                                GetListCuti(
+                                                  date: newDate,
+                                                ),
+                                              );
+                                        }
+                                      },
+                                      selectedMonth: selectedMonth,
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 15.sp,
+                            ),
+                            Expanded(
+                              child: BlocBuilder<ListCutiBloc, ListCutiState>(
+                                builder: (context, state) {
+                                  var listcuti =
+                                      context.read<ListCutiBloc>().listcuti;
+                                  var groupedData = groupByDate(listcuti);
+
+                                  // debugPrint("LIST CUTI ? ${listcuti}");
+
+                                  return listcuti.isNotEmpty
+                                      ? ListView.builder(
+                                          shrinkWrap: true,
+                                          itemCount: groupedData.length,
+                                          itemBuilder: (context, index) {
+                                            var date = groupedData.keys
+                                                .toList()[index];
+                                            var dataList = groupedData[date]!;
+
+                                            return Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  date,
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                                ListViewByDate(
+                                                  dataList: dataList,
+                                                  reloadDataCallback: loadData,
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        )
+                                      : Center(
+                                          child: EmptyStateBuilder(),
+                                        );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Positioned(
+                top: 100,
+                left: 20,
+                right: 20,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  margin: const EdgeInsets.only(bottom: 20),
+                  height: 90,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Color(0xFFDDDDDD)),
+                    color: MyColorsConst.whiteColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        offset: Offset(0, 0),
+                        blurRadius: 5,
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          children: [
+                            Text(
+                              'Cuti Terpakai',
+                              style: GoogleFonts.poppins(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
+                                  color: MyColorsConst.lightDarkColor),
+                            ),
+                            SizedBox(height: 5.sp),
+                            Text(
+                              '7 hari',
+                              style: GoogleFonts.poppins(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 80,
+                        width: 2,
+                        color: Color(0xFFDDDDDD),
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          children: [
+                            Text(
+                              'Sisa Jatah Cuti',
+                              style: GoogleFonts.poppins(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                color: MyColorsConst.lightDarkColor,
+                              ),
+                            ),
+                            SizedBox(height: 5.sp),
+                            Text(
+                              '5 hari',
+                              style: GoogleFonts.poppins(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

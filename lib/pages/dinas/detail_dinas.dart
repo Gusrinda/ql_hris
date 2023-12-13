@@ -156,9 +156,9 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
         ),
         child: Column(
           children: [
-            const SizedBox(height: 30),
+            SizedBox(height: 40.sp),
             Container(
-              padding: EdgeInsets.only(left: 5.0),
+              padding: EdgeInsets.only(left: 5.0.sp),
               child: Row(
                 children: [
                   IconButton(
@@ -259,62 +259,60 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                       SizedBox(
                         height: 30.sp,
                       ),
-                      if (currentStatus == "REVISED")
-                        TextButtonCustomV1(
-                          text: "Revisi Perjalanan Dinas",
-                          textSize: 12,
-                          backgroundColor: Colors.orange,
-                          textColor: MyColorsConst.whiteColor,
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BlocProvider(
-                                  create: (context) => AddDinasBloc()
-                                    ..add(OnSelectDivisi(page: 1, search: ''))
-                                    ..add(
-                                        OnSelectDepartemen(page: 1, search: ''))
-                                    ..add(OnSelectPosisi(page: 1, search: ''))
-                                    ..add(OnSelectTemplateSpd(
-                                        page: 1, search: ''))
-                                    ..add(
-                                        OnSelectDirektorat(page: 1, search: ''))
-                                    ..add(OnSelectJenisSpd(page: 1, search: ''))
-                                    ..add(OnSelectZona(page: 1, search: ''))
-                                    ..add(OnSelectLokasiTujuan(
-                                        page: 1, search: ''))
-                                    ..add(OnSelectPic(page: 1, search: '')),
-                                  child: EditDinasPage(
-                                    dinasId: widget.dinasId ?? 1,
-                                    jenisSpd: widget.jenisSpd,
-                                    jenisSpdId: widget.jenisSpdId,
-                                    zonaAwal: widget.zonaAwal,
-                                    zonaAwalId: widget.zonaAwalId,
-                                    zonaTujuan: widget.zonaTujuan,
-                                    zonaTujuanId: widget.zonaTujuanId,
-                                    lokasiTujuan: widget.lokasiTujuan,
-                                    lokasiTujuanId: widget.lokasiTujuanId,
-                                    templateSpd: widget.templateSpd,
-                                    templateSpdId: widget.templateSpdId,
-                                    tanggalAwal: widget.tanggalAwal,
-                                    tanggalAkhir: widget.tanggalAkhir,
-                                    posisiId: widget.posisiId,
-                                    posisi: widget.posisi,
-                                    divisiId: widget.divisiId,
-                                    divisiValue: widget.divisiValue,
-                                    deptId: widget.deptId,
-                                    deptValue: widget.deptValue,
-                                    direktoratId: widget.direktoratId,
-                                    direktoratValue: widget.direktoratValue,
-                                    tanggal: widget.tanggal,
-                                    reloadDataCallback:
-                                        widget.reloadDataCallback,
-                                  ),
+                      // if (currentStatus == "REVISED")
+                      TextButtonCustomV1(
+                        text: "Revisi Perjalanan Dinas",
+                        height: 50,
+                        textSize: 12,
+                        backgroundColor: Colors.orange.withOpacity(0.1),
+                        textColor: Colors.orange,
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BlocProvider(
+                                create: (context) => AddDinasBloc()
+                                  ..add(OnSelectDivisi(page: 1, search: ''))
+                                  ..add(OnSelectDepartemen(page: 1, search: ''))
+                                  ..add(OnSelectPosisi(page: 1, search: ''))
+                                  ..add(
+                                      OnSelectTemplateSpd(page: 1, search: ''))
+                                  ..add(OnSelectDirektorat(page: 1, search: ''))
+                                  ..add(OnSelectJenisSpd(page: 1, search: ''))
+                                  ..add(OnSelectZona(page: 1, search: ''))
+                                  ..add(
+                                      OnSelectLokasiTujuan(page: 1, search: ''))
+                                  ..add(OnSelectPic(page: 1, search: '')),
+                                child: EditDinasPage(
+                                  dinasId: widget.dinasId ?? 1,
+                                  jenisSpd: widget.jenisSpd,
+                                  jenisSpdId: widget.jenisSpdId,
+                                  zonaAwal: widget.zonaAwal,
+                                  zonaAwalId: widget.zonaAwalId,
+                                  zonaTujuan: widget.zonaTujuan,
+                                  zonaTujuanId: widget.zonaTujuanId,
+                                  lokasiTujuan: widget.lokasiTujuan,
+                                  lokasiTujuanId: widget.lokasiTujuanId,
+                                  templateSpd: widget.templateSpd,
+                                  templateSpdId: widget.templateSpdId,
+                                  tanggalAwal: widget.tanggalAwal,
+                                  tanggalAkhir: widget.tanggalAkhir,
+                                  posisiId: widget.posisiId,
+                                  posisi: widget.posisi,
+                                  divisiId: widget.divisiId,
+                                  divisiValue: widget.divisiValue,
+                                  deptId: widget.deptId,
+                                  deptValue: widget.deptValue,
+                                  direktoratId: widget.direktoratId,
+                                  direktoratValue: widget.direktoratValue,
+                                  tanggal: widget.tanggal,
+                                  reloadDataCallback: widget.reloadDataCallback,
                                 ),
                               ),
-                            );
-                          },
-                        ),
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),

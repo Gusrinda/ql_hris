@@ -188,9 +188,9 @@ class _AddCutiPageState extends State<AddCutiPage> {
           ),
           child: Column(
             children: [
-              SizedBox(height: 30.sp),
+              SizedBox(height: 40.sp),
               Container(
-                padding: EdgeInsets.only(left: 8.0),
+                padding: EdgeInsets.only(left: 5.0.sp),
                 child: Row(
                   children: [
                     IconButton(
