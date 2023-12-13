@@ -104,7 +104,7 @@ class FormDropDownData extends StatelessWidget {
                   suffixIcon: Padding(
                     padding: EdgeInsets.all(8.sp),
                     child: Icon(
-                      Icons.keyboard_arrow_down,
+                      Icons.search_rounded,
                       color: MyColorsConst.darkColor,
                     ),
                   ),

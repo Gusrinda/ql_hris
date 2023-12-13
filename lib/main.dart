@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/add_pendidikan.bloc/add_data_pendidikan_bloc.dart';
 import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
 
 import 'utils/const.dart';
@@ -51,8 +52,15 @@ class _MyAppState extends State<MyApp> {
       designSize: const Size(360, 800),
       useInheritedMediaQuery: true,
       minTextAdapt: true,
-      child: BlocProvider(
-        create: (context) => CheckInOutBloc(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => CheckInOutBloc(),
+          ),
+          // BlocProvider(
+          //   create: (context) => AddDataPendidikanBloc(),
+          // ),
+        ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'SJ Absensi Express',

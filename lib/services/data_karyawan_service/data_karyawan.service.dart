@@ -6,6 +6,7 @@ import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:http/http.dart' as http;
 
 class DataKaryawanService {
+
   static Future<Object> createDataPendidikan(
     String token,
     int tingkatID,
@@ -79,4 +80,5 @@ class DataKaryawanService {
       );
     }
   }
+  
 }
