@@ -283,7 +283,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               labelForm: 'Nama',
                               labelTag: 'Label-NamaDiri',
                               formTag: 'Form-NamaDiri',
-                              controller: controllers.namaController,
+                              controller: controllers.namaLengkapController,
                               validator: (value) {},
                             ),
                             FormInputData(
@@ -301,8 +301,8 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               labelTag: 'Label-JenisKelamin',
                               formTag: 'Form-JenisKelamin',
                               valueController:
-                                  controllers.jenisKelaminController,
-                              idController: controllers.jenisKelaminController,
+                                  controllers.valueJenisKelaminController,
+                              idController: controllers.valueJenisKelaminController,
                             ),
                             FormDropDownData(
                               onTap: () {},
