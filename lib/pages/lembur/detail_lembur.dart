@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
@@ -64,7 +65,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
           gradient: LinearGradient(
             colors: [
               MyColorsConst.primaryDarkColor,
-                  MyColorsConst.primaryColor,
+              MyColorsConst.primaryColor,
             ],
             stops: [0.0, 0.1],
             begin: Alignment.topCenter,
@@ -75,7 +76,7 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
           children: [
             const SizedBox(height: 30),
             Container(
-              padding: EdgeInsets.only(left: 8.0),
+              padding: EdgeInsets.only(left: 5),
               child: Row(
                 children: [
                   IconButton(
@@ -115,130 +116,42 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                 ),
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                  child: Column(
+                      EdgeInsets.symmetric(horizontal: 24.sp, vertical: 16.sp),
+                  child: ListView(
                     children: [
                       const SizedBox(height: 20),
-                      Container(
-                        padding: const EdgeInsets.all(16.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          border: Border.all(color: Color(0xFFDDDDDD)),
-                          color: MyColorsConst.whiteColor,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 7,
-                                  child: Text(
-                                    "${widget.nomorFromList ?? '-'}",
-                                    style: GoogleFonts.poppins(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ),
-                                const Spacer(),
-                                Expanded(
-                                  flex: 3,
-                                  child: Container(
-                                    padding: EdgeInsets.all(5),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: MyColorsConst.primaryColor
-                                          .withOpacity(0.1),
-                                    ),
-                                    child: Text(
-                                      '${widget.tipeLemburValue ?? '-'}',
-                                      style: GoogleFonts.poppins(
-                                        color: MyColorsConst.primaryColor,
-                                        fontSize: 9,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.calendar_month_rounded,
-                                  color: MyColorsConst.lightDarkColor,
-                                  size: 10,
-                                ),
-                                const SizedBox(width: 5),
-                                Text(
-                                  '${formatDate(widget.tanggal ?? '-')}',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.grey,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.access_time_filled,
-                                  color: MyColorsConst.lightDarkColor,
-                                  size: 10,
-                                ),
-                                SizedBox(width: 5),
-                                Text(
-                                  "${extractTime(widget.jamMulai ?? '-')} - ${extractTime(widget.jamSelesai ?? '-')}",
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.grey,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const Divider(
-                              color: Color(0xFFDDDDDD),
-                              thickness: 1,
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Text(
-                              'Alasan',
-                              style: GoogleFonts.poppins(
-                                fontSize: 10,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Text(
-                              '${widget.alasanValue ?? '-'}',
-                              style: GoogleFonts.poppins(
-                                fontSize: 10,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                Column(
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    _buildText(
+                                      'Nomor',
+                                      "${widget.nomorFromList ?? '-'}",
+                                    ),
+                                    _buildText(
+                                      'No. Dokumen',
+                                      "${widget.noDoc ?? '-'}",
+                                    ),
+                                    _buildText(
+                                      'Jam Mulai',
+                                      "${widget.jamMulai ?? '-'}",
+                                    ),
+                                    _buildText(
+                                      'Keterangan',
+                                      "${widget.keterangan ?? '-'}",
+                                    ),
+                                    // _buildText(
+                                    //   'Tipe Lembur',
+                                    //   "${widget.tipeLemburValue ?? '-'}",
+                                    // ),
                                     Text(
-                                      'No Dokumen',
+                                      'Tipe Lembur.',
                                       style: GoogleFonts.poppins(
                                         fontSize: 10,
                                         color: Colors.black,
@@ -246,84 +159,65 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                       ),
                                     ),
                                     Text(
-                                      '${widget.noDoc ?? '-'}',
+                                      "${widget.tipeLemburValue ?? '-'}",
                                       style: GoogleFonts.poppins(
-                                        fontSize: 10,
-                                        color: Colors.black,
+                                        fontSize: 12,
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
                                   ],
                                 ),
-                                // const SizedBox(
-                                //   width: 50,
-                                // ),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'File Ref.',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 10,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600,
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    _buildText(
+                                      'Tanggal Lembur',
+                                      "${widget.tanggal ?? '-'}",
+                                    ),
+                                    _buildText(
+                                      'Alasan',
+                                      "${widget.alasanValue ?? '-'}",
+                                    ),
+                                    _buildText(
+                                      'Jam Selesai',
+                                      "${widget.jamSelesai ?? '-'}",
+                                    ),
+                                    Text(
+                                      'File Ref.',
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 10,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Link(
+                                      target: LinkTarget.self,
+                                      uri: Uri.parse('${widget.doc}'),
+                                      builder: (context, followLink) =>
+                                          GestureDetector(
+                                        onTap: followLink,
+                                        child: Text(
+                                          "Doc.pdf",
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 12,
+                                            color: MyColorsConst.primaryColor,
+                                            fontWeight: FontWeight.w400,
+                                          ),
                                         ),
                                       ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Column(
-                                        children: [
-                                          Link(
-                                            target: LinkTarget.self,
-                                            uri: Uri.parse('${widget.doc}'),
-                                            builder: (context, followLink) =>
-                                                GestureDetector(
-                                              onTap: followLink,
-                                              child: Text(
-                                                "file.pdf",
-                                                style: GoogleFonts.poppins(
-                                                  fontSize: 10,
-                                                  color: MyColorsConst
-                                                      .primaryColor,
-                                                  fontWeight: FontWeight.w400,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              'Keterangan',
-                              style: GoogleFonts.poppins(
-                                fontSize: 10,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w600,
                               ),
-                            ),
-                            Text(
-                              widget.keterangan != null
-                                  ? '${widget.keterangan}'
-                                  : '-',
-                              style: GoogleFonts.poppins(
-                                fontSize: 10,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          )
+                        ],
                       )
                     ],
                   ),
@@ -333,6 +227,31 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildText(String title, String value) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: GoogleFonts.poppins(
+            fontSize: 10.sp,
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        Text(
+          value,
+          style: GoogleFonts.poppins(
+            fontSize: 12.sp,
+            color: Colors.black,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        SizedBox(height: 15.sp),
+      ],
     );
   }
 }
