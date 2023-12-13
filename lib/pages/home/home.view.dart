@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
 import 'package:sj_presensi_mobile/pages/cuti/dashboard_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dashboard_dinas.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
@@ -297,8 +299,7 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Container(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(7),
                         color: Colors.white,
@@ -320,13 +321,12 @@ class _HomePageState extends State<HomePage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => BlocProvider(
-                                    create: (context) =>
-                                        HistoryAttendanceBloc()
-                                          ..add(
-                                            GetAttendancesHistory(
-                                              date: DateTime.now(),
-                                            ),
-                                          ),
+                                    create: (context) => HistoryAttendanceBloc()
+                                      ..add(
+                                        GetAttendancesHistory(
+                                          date: DateTime.now(),
+                                        ),
+                                      ),
                                     child: const HistoryPage(),
                                   ),
                                 ),
@@ -393,9 +393,9 @@ class _HomePageState extends State<HomePage> {
                                   MaterialPageRoute(
                                     builder: (context) => BlocProvider(
                                       create: (context) => ListDinasBloc()
-                                        ..add(GetListDinas(
-                                            date: DateTime.now())),
-                                      child: DashboardDinasPage(),
+                                        ..add(
+                                            GetListDinas(date: DateTime.now())),
+                                      child: DinasPage(),
                                     ),
                                   ),
                                 );
@@ -427,9 +427,9 @@ class _HomePageState extends State<HomePage> {
                                   MaterialPageRoute(
                                     builder: (context) => BlocProvider(
                                       create: (context) => ListCutiBloc()
-                                        ..add(GetListCuti(
-                                            date: DateTime.now())),
-                                      child: DashboardCutiPage(),
+                                        ..add(
+                                            GetListCuti(date: DateTime.now())),
+                                      child: CutiPage(),
                                     ),
                                   ),
                                 );

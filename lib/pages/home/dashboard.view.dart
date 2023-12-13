@@ -104,7 +104,7 @@ class _DashboardViewState extends State<DashboardView> {
                   ? state.isCheckin
                       ? Colors.green.shade800
                       : Colors.red.shade800
-                  : Colors.grey, // Sesuaikan warna berdasarkan kondisi tombol
+                  : Colors.grey, 
               onPressed: isButtonEnabled
                   ? () async {
                       ProcessCheckInOutPageState checkInOutPageState =
