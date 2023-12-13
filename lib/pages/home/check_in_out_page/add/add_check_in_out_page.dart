@@ -105,209 +105,344 @@ class AddCheckInOutPage extends StatelessWidget {
         ),
       ],
       child: Scaffold(
-        appBar: appBarCustomV1(
-          title: "Presensi ${dataLayout[formState!.index]["title"] as String}",
-          padLeft: 8,
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                ImageFormCustomV1(
-                  onImageSelected: (filePath) {
-                    context.read<AddCheckInOutBloc>().add(
-                          AddCheckInOutFormDataAdded(
-                            formData: AddCheckInOutModel(imagePath: filePath),
-                          ),
-                        );
-                  },
-                  onImageSelectedError: (message) async {
-                    await showDialog(
-                      context: context,
-                      builder: (_) => DialogCustom(
-                        state: DialogCustomItem.error,
-                        message: message,
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(height: 24),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        // appBar: appBarCustomV1(
+        //   title: "Presensi ${dataLayout[formState!.index]["title"] as String}",
+        //   padLeft: 8,
+        // ),
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                MyColorsConst.primaryDarkColor,
+                MyColorsConst.primaryColor,
+              ],
+              stops: [0.0, 0.1],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: Column(
+            children: [
+              SizedBox(height: 40.sp),
+              Container(
+                padding: EdgeInsets.only(left: 5.0.sp),
+                child: Row(
                   children: [
-                    BlocBuilder<TimeAcioBloc, TimeAcioState>(
-                      builder: (context, state) {
-                        var data = state is TimeAcioLoadSuccess ? state : null;
-                        return Row(
-                          children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.calendar_month_rounded,
-                                  color: MyColorsConst.primaryColor,
-                                  size: 20,
-                                ),
-                                const SizedBox(
-                                    width: 5), // Atur jarak sesuai kebutuhan
-                                Text(
-                                  '${data != null ? DateFormat('EEEE, dd MMMM yyyy', 'id_ID').format(data.dateTime) : "-"}',
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 12.sp,
-                                      color: MyColorsConst.darkColor,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(width: 20),
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  const Spacer(),
-                                  Icon(
-                                    Icons.access_time_filled,
-                                    color: MyColorsConst.primaryColor,
-                                    size: 20,
-                                  ),
-                                  const SizedBox(width: 5),
-                                  Text(
-                                    '${data != null ? DateFormat('HH:mm:ss').format(data.dateTime) : "-"}',
-                                    style: GoogleFonts.poppins(
-                                        // fontFamily: 'Poppins',
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        );
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_back_ios_rounded,
+                        size: 18,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
                       },
+                      color: Colors.white,
                     ),
-                    const SizedBox(height: 5),
-                    Divider(
-                      thickness: 1.5,
-                      color: Colors.grey.shade300,
+                    SizedBox(
+                      width: size.width * 0.5 / 2.4,
                     ),
-                    BlocBuilder<LocationAcioBloc, LocationAcioState>(
-                      builder: (context, state) {
-                        var isLoading = true;
-                        if (state is! LocationAcioLoading) isLoading = false;
-                        var data =
-                            state is LocationAcioLoadSuccess ? state : null;
-                        print("LATITUDE: ${data?.latitude}");
-                        print("LONGITUDE: ${data?.longitude}");
-                        context
-                            .read<AddCheckInOutBloc>()
-                            .add(AddCheckInOutFormDataAdded(
-                              formData: AddCheckInOutModel(
-                                address: data?.location,
-                                isOnSite: data?.isOnSite,
-                                latitude: data?.latitude,
-                                longitude: data?.longitude,
-                              ),
-                            ));
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            buildDetailCard(
-                              title: "Lokasi",
-                              text: isLoading
-                                  ? "Loading..."
-                                  : data != null
-                                      ? data.location
-                                      : "-",
-                              textSize: 12,
-                              textBold: FontWeight.normal,
-                            ),
-                            buildDetailCard(
-                              title: "Keterangan",
-                              text: isLoading
-                                  ? "Loading..."
-                                  : data != null
-                                      ? data.isOnSite
-                                          ? 'On Scope'
-                                          : 'Out Scope'
-                                      : "-",
-                              color: data != null
-                                  ? data.isOnSite
-                                      ? MyColorsConst.greenColor
-                                      : MyColorsConst.redColor
-                                  : MyColorsConst.darkColor,
-                            ),
-                            SizedBox(height: 10,),
-                            // Padding(
-                            //   padding: const EdgeInsets.symmetric(horizontal: 9),
-                            //   child: Text("Alasan lokasi Out Scope", style: GoogleFonts.poppins(
-                            //     fontSize: 12, fontWeight: FontWeight.w700, color: MyColorsConst.darkColor
-                            //   ),),
-                            // ),
-                            if (data != null && !data.isOnSite)
-                              Padding(
-                                padding:const EdgeInsets.symmetric(vertical: 10, horizontal: 9),
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                    focusColor: MyColorsConst.primaryColor,
-                                    contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                                    labelStyle: GoogleFonts.poppins(fontSize: 12, fontWeight: FontWeight.w600),
-                                    labelText: 'Alasan Presensi Out Scope',
-                                    border: OutlineInputBorder(),
-                                  ),
-                                  style: GoogleFonts.poppins(fontSize: 13),
-                                ),
-                              ),
-                          ],
-                        );
-                      },
+                    Expanded(
+                      child: Text(
+                        "Presensi ${dataLayout[formState!.index]["title"] as String}",
+                        style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 40),
-              ],
-            ),
+              ),
+              Expanded(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                    color: Colors.white,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 16),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                ImageFormCustomV1(
+                                  onImageSelected: (filePath) {
+                                    context.read<AddCheckInOutBloc>().add(
+                                          AddCheckInOutFormDataAdded(
+                                            formData: AddCheckInOutModel(
+                                                imagePath: filePath),
+                                          ),
+                                        );
+                                  },
+                                  onImageSelectedError: (message) async {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (_) => DialogCustom(
+                                        state: DialogCustomItem.error,
+                                        message: message,
+                                      ),
+                                    );
+                                  },
+                                ),
+                                const SizedBox(height: 24),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    BlocBuilder<TimeAcioBloc, TimeAcioState>(
+                                      builder: (context, state) {
+                                        var data = state is TimeAcioLoadSuccess
+                                            ? state
+                                            : null;
+                                        return Row(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.calendar_month_rounded,
+                                                  color: MyColorsConst
+                                                      .primaryColor,
+                                                  size: 20,
+                                                ),
+                                                const SizedBox(
+                                                    width:
+                                                        5), // Atur jarak sesuai kebutuhan
+                                                Text(
+                                                  '${data != null ? DateFormat('EEEE, dd MMMM yyyy', 'id_ID').format(data.dateTime) : "-"}',
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 12.sp,
+                                                      color: MyColorsConst
+                                                          .darkColor,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(width: 20),
+                                            Expanded(
+                                              child: Row(
+                                                children: [
+                                                  const Spacer(),
+                                                  Icon(
+                                                    Icons.access_time_filled,
+                                                    color: MyColorsConst
+                                                        .primaryColor,
+                                                    size: 20,
+                                                  ),
+                                                  const SizedBox(width: 5),
+                                                  Text(
+                                                    '${data != null ? DateFormat('HH:mm:ss').format(data.dateTime) : "-"}',
+                                                    style: GoogleFonts.poppins(
+                                                        // fontFamily: 'Poppins',
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                    const SizedBox(height: 5),
+                                    Divider(
+                                      thickness: 1.5,
+                                      color: Colors.grey.shade300,
+                                    ),
+                                    BlocBuilder<LocationAcioBloc,
+                                        LocationAcioState>(
+                                      builder: (context, state) {
+                                        var isLoading = true;
+                                        if (state is! LocationAcioLoading)
+                                          isLoading = false;
+                                        var data =
+                                            state is LocationAcioLoadSuccess
+                                                ? state
+                                                : null;
+                                        print("LATITUDE: ${data?.latitude}");
+                                        print("LONGITUDE: ${data?.longitude}");
+                                        context
+                                            .read<AddCheckInOutBloc>()
+                                            .add(AddCheckInOutFormDataAdded(
+                                              formData: AddCheckInOutModel(
+                                                address: data?.location,
+                                                isOnSite: data?.isOnSite,
+                                                latitude: data?.latitude,
+                                                longitude: data?.longitude,
+                                              ),
+                                            ));
+                                        return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            buildDetailCard(
+                                              title: "Lokasi",
+                                              text: isLoading
+                                                  ? "Loading..."
+                                                  : data != null
+                                                      ? data.location
+                                                      : "-",
+                                              textSize: 12,
+                                              textBold: FontWeight.normal,
+                                            ),
+                                            buildDetailCard(
+                                              title: "Keterangan",
+                                              text: isLoading
+                                                  ? "Loading..."
+                                                  : data != null
+                                                      ? data.isOnSite
+                                                          ? 'On Scope'
+                                                          : 'Out Scope'
+                                                      : "-",
+                                              color: data != null
+                                                  ? data.isOnSite
+                                                      ? MyColorsConst.greenColor
+                                                      : MyColorsConst.redColor
+                                                  : MyColorsConst.darkColor,
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            // Padding(
+                                            //   padding: const EdgeInsets.symmetric(horizontal: 9),
+                                            //   child: Text("Alasan lokasi Out Scope", style: GoogleFonts.poppins(
+                                            //     fontSize: 12, fontWeight: FontWeight.w700, color: MyColorsConst.darkColor
+                                            //   ),),
+                                            // ),
+                                            if (data != null && !data.isOnSite)
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 10,
+                                                        horizontal: 9),
+                                                child: TextFormField(
+                                                  decoration: InputDecoration(
+                                                    focusColor: MyColorsConst
+                                                        .primaryColor,
+                                                    contentPadding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 10,
+                                                            horizontal: 15),
+                                                    labelStyle:
+                                                        GoogleFonts.poppins(
+                                                            fontSize: 12,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                    labelText:
+                                                        'Alasan Presensi Out Scope',
+                                                    border:
+                                                        OutlineInputBorder(),
+                                                  ),
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 13),
+                                                ),
+                                              ),
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 40),
+                              ],
+                            ),
+                          ),
+                        ),
+                        BlocBuilder<AddCheckInOutBloc, AddCheckInOutState>(
+                          builder: (context, state) {
+                            return TextButtonCustomV1(
+                              text: dataLayout[formState!.index]["btnText"]
+                                  as String,
+                              backgroundColor: dataLayout[formState!.index]
+                                  ["btnColor"] as Color,
+                              textColor: MyColorsConst.whiteColor,
+                              onPressed: state is AddCheckInOutLoading
+                                  ? null
+                                  : state is AddCheckInOutButtonActivate
+                                      ? () async {
+                                          if (state.isOnSite) {
+                                            context
+                                                .read<AddCheckInOutBloc>()
+                                                .add(AddCheckInOutSubmited());
+                                          } else {
+                                            context
+                                                .read<AddCheckInOutBloc>()
+                                                .add(AddCheckInOutSubmited());
+                                            // showDialog(
+                                            //   context: context,
+                                            //   builder: (_) => DialogCustom(
+                                            //     state: DialogCustomItem.warning,
+                                            //     message:
+                                            //         "Anda sedang berada di luar area kantor! \nPresensi akan gagal apabila dilanjutkan.",
+                                            //     durationInSec: 5,
+                                            //     onContinue: () => context
+                                            //         .read<AddCheckInOutBloc>()
+                                            //         .add(AddCheckInOutSubmited()),
+                                            //   ),
+                                            // );
+                                          }
+                                        }
+                                      : null,
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          child: BlocBuilder<AddCheckInOutBloc, AddCheckInOutState>(
-            builder: (context, state) {
-              return TextButtonCustomV1(
-                text: dataLayout[formState!.index]["btnText"] as String,
-                backgroundColor:
-                    dataLayout[formState!.index]["btnColor"] as Color,
-                textColor: MyColorsConst.whiteColor,
-                onPressed: state is AddCheckInOutLoading
-                    ? null
-                    : state is AddCheckInOutButtonActivate
-                        ? () async {
-                            if (state.isOnSite) {
-                              context
-                                  .read<AddCheckInOutBloc>()
-                                  .add(AddCheckInOutSubmited());
-                            } else {
-                              context
-                                  .read<AddCheckInOutBloc>()
-                                  .add(AddCheckInOutSubmited());
-                              // showDialog(
-                              //   context: context,
-                              //   builder: (_) => DialogCustom(
-                              //     state: DialogCustomItem.warning,
-                              //     message:
-                              //         "Anda sedang berada di luar area kantor! \nPresensi akan gagal apabila dilanjutkan.",
-                              //     durationInSec: 5,
-                              //     onContinue: () => context
-                              //         .read<AddCheckInOutBloc>()
-                              //         .add(AddCheckInOutSubmited()),
-                              //   ),
-                              // );
-                            }
-                          }
-                        : null,
-              );
-            },
-          ),
-        ),
+        // bottomNavigationBar: Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        //   child: BlocBuilder<AddCheckInOutBloc, AddCheckInOutState>(
+        //     builder: (context, state) {
+        //       return TextButtonCustomV1(
+        //         text: dataLayout[formState!.index]["btnText"] as String,
+        //         backgroundColor:
+        //             dataLayout[formState!.index]["btnColor"] as Color,
+        //         textColor: MyColorsConst.whiteColor,
+        //         onPressed: state is AddCheckInOutLoading
+        //             ? null
+        //             : state is AddCheckInOutButtonActivate
+        //                 ? () async {
+        //                     if (state.isOnSite) {
+        //                       context
+        //                           .read<AddCheckInOutBloc>()
+        //                           .add(AddCheckInOutSubmited());
+        //                     } else {
+        //                       context
+        //                           .read<AddCheckInOutBloc>()
+        //                           .add(AddCheckInOutSubmited());
+        //                       // showDialog(
+        //                       //   context: context,
+        //                       //   builder: (_) => DialogCustom(
+        //                       //     state: DialogCustomItem.warning,
+        //                       //     message:
+        //                       //         "Anda sedang berada di luar area kantor! \nPresensi akan gagal apabila dilanjutkan.",
+        //                       //     durationInSec: 5,
+        //                       //     onContinue: () => context
+        //                       //         .read<AddCheckInOutBloc>()
+        //                       //         .add(AddCheckInOutSubmited()),
+        //                       //   ),
+        //                       // );
+        //                     }
+        //                   }
+        //                 : null,
+        //       );
+        //     },
+        //   ),
+        // ),
       ),
     );
   }

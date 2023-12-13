@@ -213,7 +213,7 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                   Container(
                     margin: EdgeInsets.only(bottom: 7.sp),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.1),
