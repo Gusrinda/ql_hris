@@ -182,7 +182,8 @@ class _EditCutiPageState extends State<EditCutiPage> {
               message: state.message,
             ),
           );
-          Navigator.of(context).popUntil((route) => route.isFirst);
+          Navigator.of(context).pop();
+          Navigator.of(context).pop();
           widget.reloadDataCallback();
         } else if (state is AddCutiFailed) {
           LoadingDialog.dismissDialog(context);

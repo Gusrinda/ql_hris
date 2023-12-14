@@ -7,6 +7,7 @@ import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/add_pengalaman.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/add_pengalaman_bloc/add_pengalaman_kerja_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/list_pengalaman_bloc/list_pengalaman_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/view_edit_pengalaman.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -24,9 +25,14 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
   @override
   void initState() {
     super.initState();
+    loadData();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ListPengalamanBloc>().add(GetListPengalaman());
     });
+  }
+
+  void loadData() {
+    context.read<ListPengalamanBloc>().add(GetListPengalaman());
   }
 
   bool showDeleteButton = false;
@@ -310,8 +316,16 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
                                   MyColorsConst.primaryColor.withOpacity(0.1),
                               textColor: MyColorsConst.primaryColor,
                               onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(AddPengalamanPage.routeName);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BlocProvider(
+                                      create: (context) => AddPengalamanKerjaBloc(),
+                                      child: AddPengalamanPage(
+                                          reloadDataCallback: loadData),
+                                    ),
+                                  ),
+                                );
                               },
                             )
                           ],

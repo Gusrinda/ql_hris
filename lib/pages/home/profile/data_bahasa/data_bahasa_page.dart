@@ -7,6 +7,7 @@ import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/add_bahasa.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/add_bahasa_bloc/add_bahasa_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/list_bahasa_bloc/list_bahasa_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/view_edit_bahasa.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -25,9 +26,14 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
   @override
   void initState() {
     super.initState();
+    loadData();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ListBahasaBloc>().add(GetListBahasa());
     });
+  }
+
+  void loadData() {
+    context.read<ListBahasaBloc>().add(GetListBahasa());
   }
 
   @override
@@ -308,8 +314,16 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                                   MyColorsConst.primaryColor.withOpacity(0.1),
                               textColor: MyColorsConst.primaryColor,
                               onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(AddBahasaPage.routeName);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BlocProvider(
+                                      create: (context) => AddBahasaBloc(),
+                                      child: AddBahasaPage(
+                                          reloadDataCallback: loadData),
+                                    ),
+                                  ),
+                                );
                               },
                             )
                           ],

@@ -18,7 +18,8 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 
 class AddKeluargaPage extends StatefulWidget {
   static const routeName = '/AddKeluargaPage';
-  AddKeluargaPage({super.key});
+  AddKeluargaPage({super.key, required this.reloadDataCallback});
+  final VoidCallback reloadDataCallback;
 
   final TextEditingController idkeluargaController = TextEditingController();
   final TextEditingController valuekeluargaController = TextEditingController();
@@ -216,6 +217,7 @@ class _AddKeluargaPageState extends State<AddKeluargaPage> {
             ),
           );
           Navigator.of(context).pop();
+          widget.reloadDataCallback();
         } else if (state is AddDataKeluargaFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(

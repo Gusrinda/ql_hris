@@ -7,6 +7,7 @@ import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/add_keluarga.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/add_keluarga_bloc/add_keluarga_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/list_keluarga_bloc/list_keluarga_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/view_edit_keluarga.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -23,9 +24,14 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
   @override
   void initState() {
     super.initState();
+    loadData();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ListKeluargaBloc>().add(GetListKeluarga());
     });
+  }
+
+  void loadData() {
+    context.read<ListKeluargaBloc>().add(GetListKeluarga());
   }
 
   bool showDeleteButton = false;
@@ -309,8 +315,16 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                                   MyColorsConst.primaryColor.withOpacity(0.1),
                               textColor: MyColorsConst.primaryColor,
                               onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(AddKeluargaPage.routeName);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BlocProvider(
+                                      create: (context) => AddKeluargaBloc(),
+                                      child: AddKeluargaPage(
+                                          reloadDataCallback: loadData),
+                                    ),
+                                  ),
+                                );
                               },
                             )
                           ],

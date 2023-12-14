@@ -16,7 +16,8 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 
 class AddOrganisasiPage extends StatefulWidget {
   static const routeName = '/AddOrganisasiPage';
-  AddOrganisasiPage({super.key});
+  AddOrganisasiPage({super.key, required this.reloadDataCallback});
+  final VoidCallback reloadDataCallback;
 
   final TextEditingController namaOrganisasiController =
       TextEditingController();
@@ -182,6 +183,7 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
             ),
           );
           Navigator.of(context).pop();
+          widget.reloadDataCallback();
         } else if (state is AddDataOrganisasiFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(

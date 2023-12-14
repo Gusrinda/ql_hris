@@ -20,7 +20,8 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 
 class AddPengalamanPage extends StatefulWidget {
   static const routeName = '/AddPengalamanPage';
-  AddPengalamanPage({super.key});
+  AddPengalamanPage({super.key, required this.reloadDataCallback});
+  final VoidCallback reloadDataCallback;
 
   final TextEditingController namaPerusahaanController =
       TextEditingController();
@@ -207,7 +208,7 @@ class _AddPengalamanPageState extends State<AddPengalamanPage> {
             ),
           );
           Navigator.of(context).pop();
-          // widget.reloadDataCallback();
+          widget.reloadDataCallback();
         } else if (state is AddDataPengalamanKerjaFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(

@@ -14,7 +14,8 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 
 class AddPelatihanPage extends StatefulWidget {
   static const routeName = '/AddPelatihanPage';
-  AddPelatihanPage({super.key});
+  AddPelatihanPage({super.key, required this.reloadDataCallback});
+  final VoidCallback reloadDataCallback;
 
   final TextEditingController namaPelatihanController = TextEditingController();
   final TextEditingController lembagaPelatihanController =
@@ -138,6 +139,7 @@ class _AddPelatihanPageState extends State<AddPelatihanPage> {
             ),
           );
           Navigator.of(context).pop();
+          widget.reloadDataCallback();
         } else if (state is AddDataPelatihanFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(

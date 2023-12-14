@@ -276,7 +276,11 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
             create: (context) => AddBahasaBloc(),
-            child: AddBahasaPage(),
+            child: AddBahasaPage(
+              reloadDataCallback: () {
+                context.read<ListBahasaBloc>().add(GetListBahasa());
+              },
+            ),
           );
         });
       case DataKeluargaPage.routeName:
@@ -294,7 +298,11 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
             create: (context) => AddKeluargaBloc(),
-            child: AddKeluargaPage(),
+            child: AddKeluargaPage(
+              reloadDataCallback: () {
+                context.read<ListKeluargaBloc>().add(GetListKeluarga());
+              },
+            ),
           );
         });
       case DataOrganisasiPage.routeName:
@@ -312,7 +320,11 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
             create: (context) => AddOrganisasiBloc(),
-            child: AddOrganisasiPage(),
+            child: AddOrganisasiPage(
+              reloadDataCallback: () {
+                context.read<ListOrganisasiBloc>().add(GetListOrganisasi());
+              },
+            ),
           );
         });
       case DataPelatihanPage.routeName:
@@ -330,7 +342,11 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
             create: (context) => AddPelatihanBloc(),
-            child: AddPelatihanPage(),
+            child: AddPelatihanPage(
+              reloadDataCallback: () {
+                context.read<ListPelatihanBloc>().add(GetListPelatihan());
+              },
+            ),
           );
         });
       case DataPendidikanPage.routeName:
@@ -363,7 +379,11 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
             create: (context) => AddPengalamanKerjaBloc(),
-            child: AddPengalamanPage(),
+            child: AddPengalamanPage(
+              reloadDataCallback: () {
+                context.read<ListPengalamanBloc>().add(GetListPengalaman());
+              },
+            ),
           );
         });
       case DataPrestasiPage.routeName:
@@ -381,7 +401,11 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
             create: (context) => AddPrestasiBloc(),
-            child: AddPrestasiPage(),
+            child: AddPrestasiPage(
+              reloadDataCallback: () {
+                context.read<ListPrestasiBloc>().add(GetListPrestasi());
+              },
+            ),
           );
         });
       case ReportDetailPage.routeName:

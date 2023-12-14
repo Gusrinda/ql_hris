@@ -7,6 +7,7 @@ import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/add_pelatihan.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/add_pelatihan_bloc/add_pelatihan_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/list_pelatihan_bloc/list_pelatihan_bloc.dart';
 import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_pelatihan_karyawan.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -29,10 +30,14 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
   @override
   void initState() {
     super.initState();
+    loadData();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ListPelatihanBloc>().add(GetListPelatihan());
     });
-    // BlocProvider.of<ListPelatihanBloc>(context).add(GetListPelatihan());
+  }
+
+  void loadData() {
+    context.read<ListPelatihanBloc>().add(GetListPelatihan());
   }
 
   @override
@@ -333,8 +338,16 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                                   MyColorsConst.primaryColor.withOpacity(0.1),
                               textColor: MyColorsConst.primaryColor,
                               onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(AddPelatihanPage.routeName);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BlocProvider(
+                                      create: (context) => AddPelatihanBloc(),
+                                      child: AddPelatihanPage(
+                                          reloadDataCallback: loadData),
+                                    ),
+                                  ),
+                                );
                               },
                             )
                           ],

@@ -7,6 +7,7 @@ import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/add_prestasi.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/add_prestasi_bloc/add_prestasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/list_prestasi_bloc/list_prestasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/view_edit_prestasi.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -23,9 +24,14 @@ class _DataPrestasiPageState extends State<DataPrestasiPage> {
   @override
   void initState() {
     super.initState();
+    loadData();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ListPrestasiBloc>().add(GetListPrestasi());
     });
+  }
+
+  void loadData() {
+    context.read<ListPrestasiBloc>().add(GetListPrestasi());
   }
 
   bool showDeleteButton = false;
@@ -309,8 +315,16 @@ class _DataPrestasiPageState extends State<DataPrestasiPage> {
                                   MyColorsConst.primaryColor.withOpacity(0.1),
                               textColor: MyColorsConst.primaryColor,
                               onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(AddPrestasiPage.routeName);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BlocProvider(
+                                      create: (context) => AddPrestasiBloc(),
+                                      child: AddPrestasiPage(
+                                          reloadDataCallback: loadData),
+                                    ),
+                                  ),
+                                );
                               },
                             )
                           ],

@@ -12,7 +12,8 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 
 class AddBahasaPage extends StatefulWidget {
   static const routeName = '/AddBahasaPage';
-  AddBahasaPage({super.key});
+  AddBahasaPage({super.key, required this.reloadDataCallback});
+  final VoidCallback reloadDataCallback;
 
   final TextEditingController bahasaController = TextEditingController();
   final TextEditingController lisanController = TextEditingController();
@@ -40,6 +41,7 @@ class _AddBahasaPageState extends State<AddBahasaPage> {
             ),
           );
           Navigator.of(context).pop();
+          widget.reloadDataCallback();
         } else if (state is AddDatabahasaFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(

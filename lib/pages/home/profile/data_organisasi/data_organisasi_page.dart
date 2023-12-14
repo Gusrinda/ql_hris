@@ -7,6 +7,7 @@ import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/add_organisasi.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/add_organisasi_bloc/add_organisasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/list_organisas_bloc/list_organisasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/view_edit_organisasi.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -23,9 +24,14 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
   @override
   void initState() {
     super.initState();
+    loadData();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ListOrganisasiBloc>().add(GetListOrganisasi());
     });
+  }
+
+  void loadData() {
+    context.read<ListOrganisasiBloc>().add(GetListOrganisasi());
   }
 
   bool showDeleteButton = false;
@@ -116,7 +122,8 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
               Expanded(
                 child: BlocBuilder<ListOrganisasiBloc, ListOrganisasiState>(
                   builder: (context, state) {
-                    var listOrganisasi = context.read<ListOrganisasiBloc>().listorganisasi;
+                    var listOrganisasi =
+                        context.read<ListOrganisasiBloc>().listorganisasi;
                     return Container(
                       decoration: const BoxDecoration(
                         borderRadius: BorderRadius.only(
@@ -308,8 +315,16 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
                                   MyColorsConst.primaryColor.withOpacity(0.1),
                               textColor: MyColorsConst.primaryColor,
                               onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(AddOrganisasiPage.routeName);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BlocProvider(
+                                      create: (context) => AddOrganisasiBloc(),
+                                      child: AddOrganisasiPage(
+                                          reloadDataCallback: loadData),
+                                    ),
+                                  ),
+                                );
                               },
                             )
                           ],

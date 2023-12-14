@@ -44,4 +44,19 @@ class DataBahasaServices {
       }),
     );
   }
+
+  static Future<Object> deleteBahasa(
+    String token,
+    int bahasaId,
+  ) async {
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/bahasa_delete?$bahasaId");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.put,
+      headers: GeneralServices.addToken2Headers(token),
+      body: json.encode({
+        "id": bahasaId,
+      }),
+    );
+  }
 }
