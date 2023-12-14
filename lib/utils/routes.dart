@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sj_presensi_mobile/pages/approval/approval.view.dart';
+import 'package:sj_presensi_mobile/pages/approval/bloc/approval_bloc.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/bloc/login_bloc.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
@@ -113,6 +115,13 @@ class RouteGenerator {
           return BlocProvider(
             create: (context) => NotifikasiBloc(),
             child: const NotifikasiPage(),
+          );
+        });
+      case ApprovalPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return BlocProvider(
+            create: (context) => ApprovalBloc(),
+            child: const ApprovalPage(),
           );
         });
       case HistoryPage.routeName:
