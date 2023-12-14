@@ -15,7 +15,7 @@ class ApprovalServices {
     );
   }
 
-  static Future<Object> getDetailApproval(String token, int approvalID) async {
+  static Future<Object> getDetailApproval(String token, String approvalID) async {
     var url = Uri.parse(
         "${MyGeneralConst.API_URL}/operation/generate_approval/outstandingDetail?id=$approvalID");
     return await GeneralServicesNoMobile.baseService(
@@ -25,7 +25,7 @@ class ApprovalServices {
     );
   }
 
-  static Future<Object> postApproval(String token, int approvalID,  String typeApproval,  String note) async {
+  static Future<Object> postApproval(String token, String approvalID,  String typeApproval,  String note) async {
     var url = Uri.parse(
         "${MyGeneralConst.API_URL}/operation/generate_approval/outstandingDetail?id=$approvalID");
     return await GeneralServices.baseService(

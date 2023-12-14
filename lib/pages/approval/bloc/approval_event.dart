@@ -12,3 +12,11 @@ class GetListApproval extends ApprovalEvent {
   @override
   List<Object> get props => [];
 }
+
+class GetDetailApproval extends ApprovalEvent {
+  String approvalID;
+
+  GetDetailApproval({required this.approvalID});
+  @override
+  List<Object> get props => [approvalID];
+}

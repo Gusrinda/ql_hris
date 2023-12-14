@@ -35,7 +35,10 @@ class _DashboardViewState extends State<DashboardView> {
   Future<void> _onRefresh() async {
     try {
       // Dispatch the CheckInOutEvent to refresh the data
-      context.read<CheckInOutBloc>().add(AttendanceStateChecked());
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.read<CheckInOutBloc>().add(AttendanceStateChecked());
+      });
+
       // Add any additional refreshing logic here if needed
       await Future.delayed(Duration(seconds: 1));
     } catch (error) {

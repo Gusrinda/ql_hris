@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sj_presensi_mobile/pages/approval/approval.view.dart';
 import 'package:sj_presensi_mobile/pages/approval/bloc/approval_bloc.dart';
+import 'package:sj_presensi_mobile/pages/approval/detail_approval.view.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/bloc/login_bloc.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
@@ -66,6 +67,7 @@ import 'package:sj_presensi_mobile/pages/lembur/detail_lembur.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
+import 'package:sj_presensi_mobile/services/model/list_approval/response_list_approval.dart';
 import 'package:sj_presensi_mobile/services/model/report_detail_page_model.dart';
 import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_biodata_karyawan.dart';
 import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_pelatihan_karyawan.dart';
@@ -123,6 +125,7 @@ class RouteGenerator {
             child: const NotifikasiPage(),
           );
         });
+
       case ApprovalPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
@@ -130,6 +133,16 @@ class RouteGenerator {
             child: const ApprovalPage(),
           );
         });
+
+      case DetailApproval.routeName:
+        final dataApproval = settings.arguments as DataApproval;
+        return MaterialPageRoute(builder: (context) {
+          return BlocProvider(
+            create: (context) => ApprovalBloc(),
+            child: DetailApproval(dataApproval: dataApproval),
+          );
+        });
+
       case HistoryPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(

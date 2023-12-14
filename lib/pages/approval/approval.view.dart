@@ -4,22 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/approval/bloc/approval_bloc.dart';
+import 'package:sj_presensi_mobile/pages/approval/detail_approval.view.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
-import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
-import 'package:sj_presensi_mobile/pages/dinas/detail_dinas.dart';
-import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
-import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
-import 'package:sj_presensi_mobile/pages/lembur/detail_lembur.dart';
-import 'package:sj_presensi_mobile/pages/lembur/lembur_page.dart';
-import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
-import 'package:sj_presensi_mobile/services/model/cuti/list_cuti_model.dart';
-import 'package:sj_presensi_mobile/services/model/dinas/list_dinas_model.dart';
-import 'package:sj_presensi_mobile/services/model/lembur/lembur_model.dart';
-import 'package:sj_presensi_mobile/services/model/notifikasi_model.dart';
+import 'package:sj_presensi_mobile/services/model/list_approval/response_detail_approval.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class ApprovalPage extends StatefulWidget {
@@ -33,109 +23,6 @@ class ApprovalPage extends StatefulWidget {
 }
 
 class _ApprovalPageState extends State<ApprovalPage> {
-  Icon? iconApproval;
-  Color? warnaStatus;
-
-  // void getIconAndColor(String trxName, String actionType) {
-  //   switch (trxName) {
-  //     case "Pengajuan Cuti":
-  //       if (actionType == "DITERIMA") {
-  //         iconApproval = const Icon(
-  //           Icons.article_outlined,
-  //           color: Colors.green,
-  //           size: 30,
-  //         );
-  //       } else if (actionType == "MENGAJUKAN") {
-  //         iconApproval = const Icon(
-  //           Icons.article_outlined,
-  //           color: Colors.blue,
-  //           size: 30,
-  //         );
-  //       } else if (actionType == "Ditolak") {
-  //         iconApproval = const Icon(
-  //           Icons.article_outlined,
-  //           color: Colors.red,
-  //           size: 30,
-  //         );
-  //       }
-  //       break;
-  //     case "Pengajuan Surat Perjalanan Dinas":
-  //       if (actionType == "DITERIMA") {
-  //         iconApproval = const Icon(
-  //           Icons.article_outlined,
-  //           color: Colors.green,
-  //           size: 30,
-  //         );
-  //       } else if (actionType == "MENGAJUKAN") {
-  //         iconApproval = const Icon(
-  //           Icons.directions_car,
-  //           color: Colors.blue,
-  //           size: 30,
-  //         );
-  //       } else if (actionType == "Ditolak") {
-  //         iconApproval = const Icon(
-  //           Icons.article_outlined,
-  //           color: Colors.red,
-  //           size: 30,
-  //         );
-  //       }
-  //       break;
-  //     case "Pengajuan Lembur":
-  //       iconApproval = const Icon(
-  //         Icons.access_time,
-  //         color: Colors.red,
-  //         size: 30,
-  //       );
-  //       break;
-  //     case "Event":
-  //       iconApproval = const Icon(
-  //         Icons.calendar_month_outlined,
-  //         color: Colors.blue,
-  //         size: 30,
-  //       );
-  //       break;
-  //     default:
-  //       iconApproval = const Icon(
-  //         Icons.notifications,
-  //         color: Colors.yellow,
-  //         size: 30,
-  //       );
-  //   }
-
-  //   switch (actionType) {
-  //     case "DITERIMA":
-  //       if (trxName == "Pengajuan Cuti" ||
-  //           trxName == "Pengajuan Surat Perjalanan Dinas") {
-  //         warnaStatus = Colors.green;
-  //       } else if (trxName == "Pengajuan Lembur") {
-  //         warnaStatus = Colors.red;
-  //       } else if (trxName == "Event") {
-  //         warnaStatus = Colors.blue;
-  //       }
-  //       break;
-  //     case "MENGAJUKAN":
-  //       if (trxName == "Pengajuan Cuti" ||
-  //           trxName == "Pengajuan Surat Perjalanan Dinas") {
-  //         warnaStatus = Colors.blue;
-  //       } else if (trxName == "Pengajuan Lembur") {
-  //         warnaStatus = Colors.red;
-  //       } else if (trxName == "Event") {
-  //         warnaStatus = Colors.blue;
-  //       }
-  //       break;
-  //     case "Ditolak":
-  //       if (trxName == "Cuti" || trxName == "Dinas") {
-  //         warnaStatus = Colors.red;
-  //       } else if (trxName == "Pengajuan Lembur") {
-  //         warnaStatus = Colors.red;
-  //       } else if (trxName == "Event") {
-  //         warnaStatus = Colors.blue;
-  //       }
-  //       break;
-  //     default:
-  //       warnaStatus = Colors.grey;
-  //   }
-  // }
 
   Color _getColorByTrxTable(String category) {
     switch (category) {
@@ -146,7 +33,20 @@ class _ApprovalPageState extends State<ApprovalPage> {
       case 't_lembur':
         return Colors.blue.shade700;
       default:
-        return Colors.grey; // Atur warna default sesuai kebutuhan
+        return Colors.grey;
+    }
+  }
+
+  IconData getIconByTrxTable(String category) {
+    switch (category) {
+      case 't_spd':
+        return Icons.drive_eta_rounded;
+      case 't_cuti':
+        return CupertinoIcons.doc_person_fill;
+      case 't_lembur':
+        return CupertinoIcons.timer_fill;
+      default:
+        return CupertinoIcons.arrow_2_circlepath;
     }
   }
 
@@ -225,11 +125,11 @@ class _ApprovalPageState extends State<ApprovalPage> {
                       color: Colors.white,
                     ),
                     SizedBox(
-                      width: size.width * 1 / 4,
+                      width: size.width.sp * 1 / 6,
                     ),
                     Expanded(
                       child: Text(
-                        "Approval",
+                        "Antrian Approval",
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -264,7 +164,13 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                       horizontal: 20),
                                   child: InkWell(
                                     splashColor: MyColorsConst.primaryColor,
-                                    onTap: () {},
+                                    onTap: () async {
+                                      await Navigator.pushNamed(
+                                        context,
+                                        DetailApproval.routeName,
+                                        arguments: listApproval[index],
+                                      );
+                                    },
                                     child: Container(
                                       margin: EdgeInsets.only(bottom: 10),
                                       padding: EdgeInsets.all(10),
@@ -287,13 +193,15 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                     .withOpacity(0.2),
                                                 shape: BoxShape.circle),
                                             child: Icon(
-                                              CupertinoIcons.doc_checkmark_fill,
+                                              getIconByTrxTable(
+                                                  listApproval[index]
+                                                      .trxTable!),
                                               color: _getColorByTrxTable(
                                                   listApproval[index]
                                                       .trxTable!),
                                             ),
                                           ),
-                                          SizedBox(width: 10),
+                                          const SizedBox(width: 10),
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -349,8 +257,8 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                     "Tidak ada data yang ditampilkan!",
                                     style: GoogleFonts.poppins(
                                       color: MyColorsConst.darkColor,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14.sp,
                                     ),
                                   ),
                                 ],

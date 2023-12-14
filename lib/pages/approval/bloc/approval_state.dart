@@ -44,3 +44,43 @@ class ListApprovalFailedUserExpired extends ApprovalState {
   @override
   List<Object> get props => [message];
 }
+
+
+class DetailApprovalInitial extends ApprovalState {}
+
+class DetailApprovalLoading extends ApprovalState {}
+
+class DetailApprovalSuccessInBackground extends ApprovalState {
+  Trx detailApproval;
+
+  DetailApprovalSuccessInBackground({
+    required this.detailApproval,
+    
+  });
+
+  @override
+  List<Object> get props => [detailApproval];
+}
+
+
+class DetailApprovalFailedInBackground extends ApprovalState {
+  String message;
+  DetailApprovalFailedInBackground({required this.message});
+}
+
+class DetailApprovalFailed extends ApprovalState {
+  String message;
+  DetailApprovalFailed({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+class DetailApprovalFailedUserExpired extends ApprovalState {
+  String message;
+
+  DetailApprovalFailedUserExpired({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}

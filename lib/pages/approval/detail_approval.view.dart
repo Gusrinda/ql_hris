@@ -1,10 +1,385 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/pages/approval/bloc/approval_bloc.dart';
+import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/services/model/list_approval/response_detail_approval.dart';
+import 'package:sj_presensi_mobile/services/model/list_approval/response_list_approval.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
-class DetailApproval extends StatelessWidget {
-  const DetailApproval({super.key});
+class DetailApproval extends StatefulWidget {
+  static const routeName = '/DetailApprovalPage';
+
+  const DetailApproval({super.key, required this.dataApproval});
+
+  final DataApproval dataApproval;
+
+  @override
+  State<DetailApproval> createState() => _DetailApprovalState();
+}
+
+class _DetailApprovalState extends State<DetailApproval> {
+  Trx? dataTRX;
+
+  @override
+  void initState() {
+    print("INI APPROVAL ID: ${widget.dataApproval.id}");
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<ApprovalBloc>().add(
+          GetDetailApproval(approvalID: widget.dataApproval.id.toString()));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final size = MediaQuery.of(context).size;
+
+    Color _getColorByTrxTable(String category) {
+      switch (category) {
+        case 't_spd':
+          return Colors.green.shade700;
+        case 't_cuti':
+          return Colors.red.shade700;
+        case 't_lembur':
+          return Colors.blue.shade700;
+        default:
+          return Colors.grey;
+      }
+    }
+
+    IconData getIconByTrxTable(String category) {
+      switch (category) {
+        case 't_spd':
+          return Icons.drive_eta_rounded;
+        case 't_cuti':
+          return CupertinoIcons.doc_person_fill;
+        case 't_lembur':
+          return CupertinoIcons.timer_fill;
+        default:
+          return CupertinoIcons.arrow_2_circlepath;
+      }
+    }
+
+    String _formatDate(String date) {
+      if (date != null && date.isNotEmpty) {
+        final parsedDate = DateTime.parse(date);
+        final formattedDate = DateFormat.yMMMMEEEEd('id_ID').format(parsedDate);
+        return formattedDate;
+      }
+      return '';
+    }
+
+    return BlocListener<ApprovalBloc, ApprovalState>(
+      listener: (context, state) async {
+        if (state is DetailApprovalLoading) {
+          LoadingDialog.showLoadingDialog(context);
+        } else if (state is DetailApprovalSuccessInBackground) {
+          dataTRX = state.detailApproval;
+          print("ini adalah dataTRX : ${dataTRX}");
+          LoadingDialog.dismissDialog(context);
+        } else if (state is DetailApprovalFailed) {
+          LoadingDialog.dismissDialog(context);
+          await showDialog(
+            context: context,
+            builder: (_) => DialogCustom(
+              state: DialogCustomItem.error,
+              message: state.message,
+            ),
+          );
+        } else if (state is DetailApprovalFailedUserExpired) {
+          LoadingDialog.dismissDialog(context);
+          await showDialog(
+            context: context,
+            builder: (_) => DialogCustom(
+              state: DialogCustomItem.error,
+              message: state.message,
+            ),
+          );
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil(LoginPage.routeName, (route) => false);
+        } else if (state is DetailApprovalFailedInBackground) {
+          LoadingDialog.dismissDialog(context);
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil(LoginPage.routeName, (route) => false);
+        } else {
+          LoadingDialog.dismissDialog(context);
+        }
+      },
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  MyColorsConst.primaryDarkColor,
+                  MyColorsConst.primaryColor,
+                ],
+                stops: [0.0, 0.1],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+            child: BlocBuilder<ApprovalBloc, ApprovalState>(
+              builder: (context, state) {
+                return Column(
+                  children: [
+                    SizedBox(height: 40.sp),
+                    Container(
+                      padding: EdgeInsets.only(left: 5.0.sp),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.arrow_back_ios_rounded,
+                              size: 18,
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: size.width.sp * 1 / 4,
+                          ),
+                          Expanded(
+                            child: Text(
+                              "Approval",
+                              style: GoogleFonts.poppins(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                        width: size.width,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                          ),
+                          color: Colors.white,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(bottom: 10),
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: MyColorsConst.formBorderColor),
+                                    borderRadius: BorderRadius.circular(10)),
+                                height: 90.sp,
+                                width: size.width,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                          color: _getColorByTrxTable(widget
+                                                      .dataApproval.trxTable ??
+                                                  '')
+                                              .withOpacity(0.2),
+                                          shape: BoxShape.circle),
+                                      child: Icon(
+                                        getIconByTrxTable(
+                                            widget.dataApproval.trxTable!),
+                                        color: _getColorByTrxTable(
+                                            widget.dataApproval.trxTable!),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "${widget.dataApproval.trxNomor ?? ''}",
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        Text(
+                                          "${widget.dataApproval.trxName ?? ''}",
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w500,
+                                              color: _getColorByTrxTable(widget
+                                                  .dataApproval.trxTable!)),
+                                        ),
+                                        SizedBox(height: 5.sp),
+                                        Text(
+                                          "${_formatDate(widget.dataApproval.trxDate.toString())}",
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 10.sp,
+                                              fontWeight: FontWeight.w400,
+                                              color:
+                                                  MyColorsConst.lightDarkColor),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 10.sp),
+                              Text(
+                                "Detail Dokumen",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: MyColorsConst.primaryColor),
+                              ),
+                              SizedBox(height: 5.sp),
+                              Container(
+                                // height: 500.sp,
+                                constraints: BoxConstraints(),
+                                width: size.width,
+                                padding: EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(
+                                        color: MyColorsConst.formBorderColor),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    if (dataTRX?.nomor != null)
+                                      buildInfoText('Nomor Pengajuan',
+                                          dataTRX!.nomor.toString()),
+
+                                    if (dataTRX?.tanggal != null)
+                                      buildInfoText(
+                                          'Tanggal',
+                                          _formatDate(
+                                              dataTRX!.tanggal.toString())),
+
+                                    // SPD
+                                    if (dataTRX?.tglAcaraAwal != null)
+                                      buildInfoText('Tanggal Acara Awal',
+                                          _formatDate(dataTRX!.tglAcaraAwal.toString())),
+
+                                    if (dataTRX?.tglAcaraAkhir != null)
+                                      buildInfoText('Hari, Tanggal Acara Akhir',
+                                          _formatDate(dataTRX!.tglAcaraAkhir.toString())),
+
+                                    if (dataTRX?.jenisSpdId != null)
+                                      buildInfoText('Jenis SPD',
+                                          dataTRX!.jenisSpdId.toString()),
+
+                                    if (dataTRX?.mZonaAsalId != null)
+                                      buildInfoText('Zona Asal',
+                                          dataTRX!.mZonaAsalId.toString()),
+
+                                    if (dataTRX?.mZonaTujuanId != null)
+                                      buildInfoText('Zona Tujuan',
+                                          dataTRX!.mZonaTujuanId.toString()),
+
+                                    if (dataTRX?.mLokasiTujuanId != null)
+                                      buildInfoText('Lokasi Tujuan',
+                                          dataTRX!.mLokasiTujuanId.toString()),
+
+                                    if (dataTRX?.mKaryId != null)
+                                      buildInfoText('Nama Karyawan',
+                                          dataTRX!.mKaryId.toString()),
+
+                                    if (dataTRX?.picId != null)
+                                      buildInfoText('Nama PIC',
+                                          dataTRX!.picId.toString()),
+
+                                    if (dataTRX?.kegiatan != null)
+                                      buildInfoText('Kegiatan',
+                                          dataTRX!.kegiatan.toString()),
+
+                                    // Lembur
+                                    if (dataTRX?.jamMulai != null)
+                                      buildInfoText('Jam Mulai',
+                                          dataTRX!.jamMulai.toString()),
+
+                                    if (dataTRX?.jamSelesai != null)
+                                      buildInfoText('Jam Selesai',
+                                          dataTRX!.jamSelesai.toString()),
+
+                                    if (dataTRX?.noDoc != null)
+                                      buildInfoText('Nomor Dokumen',
+                                          dataTRX!.noDoc.toString()),
+
+                                    // Cuti
+                                    if (dataTRX?.tipeCutiId != null)
+                                      buildInfoText('Tipe Cuti Cuti',
+                                          dataTRX!.tipeCutiId.toString()),
+
+                                    if (dataTRX?.alasanId != null)
+                                      buildInfoText('Alasan Cuti',
+                                          dataTRX!.alasanId.toString()),
+
+                                    if (dataTRX?.dateFrom != null)
+                                      buildInfoText('Mulai Hari, Tanggal Cuti',
+                                          _formatDate(dataTRX!.dateFrom.toString())),
+
+                                    if (dataTRX?.dateTo != null)
+                                      buildInfoText('Selesai Hari, Tanggal Cuti',
+                                          _formatDate(dataTRX!.dateTo.toString())),
+
+                                    // All
+                                    if (dataTRX?.keterangan != null)
+                                      buildInfoText('Keterangan',
+                                          dataTRX!.keterangan.toString()),
+
+                                    if (dataTRX?.status != null)
+                                      buildInfoText(
+                                          'Status', dataTRX!.status.toString()),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )),
+                  ],
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildInfoText(String label, String value) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: GoogleFonts.poppins(
+            fontSize: 11.sp,
+            color: MyColorsConst.lightDarkColor,
+          ),
+        ),
+        // SizedBox(height: 2),
+        Text(
+          value,
+          style: GoogleFonts.poppins(
+            fontSize: 13.sp,
+            fontWeight: FontWeight.w600,
+            color: MyColorsConst.darkColor,
+          ),
+        ),
+        SizedBox(height: 15.sp),
+      ],
+    );
   }
 }

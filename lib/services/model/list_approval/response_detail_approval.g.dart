@@ -14,7 +14,7 @@ _$ResponseDetailApprovalImpl _$$ResponseDetailApprovalImplFromJson(
       message: json['message'] as String?,
       data: json['data'] == null
           ? null
-          : DataApprovalDetail.fromJson(json['data'] as Map<String, dynamic>),
+          : DataDetailApproval.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$ResponseDetailApprovalImplToJson(
@@ -26,9 +26,7 @@ Map<String, dynamic> _$$ResponseDetailApprovalImplToJson(
       'data': instance.data,
     };
 
-_$DataApprovalDetailImpl _$$DataApprovalDetailImplFromJson(
-        Map<String, dynamic> json) =>
-    _$DataApprovalDetailImpl(
+_$DataImpl _$$DataImplFromJson(Map<String, dynamic> json) => _$DataImpl(
       approval: json['approval'] == null
           ? null
           : Approval.fromJson(json['approval'] as Map<String, dynamic>),
@@ -40,8 +38,7 @@ _$DataApprovalDetailImpl _$$DataApprovalDetailImplFromJson(
           : Trx.fromJson(json['trx'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$DataApprovalDetailImplToJson(
-        _$DataApprovalDetailImpl instance) =>
+Map<String, dynamic> _$$DataImplToJson(_$DataImpl instance) =>
     <String, dynamic>{
       'approval': instance.approval,
       'approval_log': instance.approvalLog,
@@ -107,7 +104,7 @@ _$ApprovalLogImpl _$$ApprovalLogImplFromJson(Map<String, dynamic> json) =>
       mDirId: json['m_dir_id'],
       nomor: json['nomor'] as String?,
       generateApprovalId: json['generate_approval_id'] as int?,
-      generateApprovalDetId: json['generate_approval_det_id'],
+      generateApprovalDetId: json['generate_approval_det_id'] as int?,
       trxTable: json['trx_table'] as String?,
       trxId: json['trx_id'] as int?,
       trxName: json['trx_name'] as String?,
@@ -154,7 +151,62 @@ Map<String, dynamic> _$$ApprovalLogImplToJson(_$ApprovalLogImpl instance) =>
       'action_user': instance.actionUser,
     };
 
-_$TrxImpl _$$TrxImplFromJson(Map<String, dynamic> json) => _$TrxImpl();
+_$TrxImpl _$$TrxImplFromJson(Map<String, dynamic> json) => _$TrxImpl(
+      nomor: json['nomor'] as String?,
+      tanggal: json['tanggal'] == null
+          ? null
+          : DateTime.parse(json['tanggal'] as String),
+      tglAcaraAwal: json['tgl_acara_awal'] == null
+          ? null
+          : DateTime.parse(json['tgl_acara_awal'] as String),
+      tglAcaraAkhir: json['tgl_acara_akhir'] == null
+          ? null
+          : DateTime.parse(json['tgl_acara_akhir'] as String),
+      jenisSpdId: json['jenis_spd_id'] as int?,
+      mZonaAsalId: json['m_zona_asal_id'] as int?,
+      mZonaTujuanId: json['m_zona_tujuan_id'] as int?,
+      mLokasiTujuanId: json['m_lokasi_tujuan_id'] as int?,
+      mKaryId: json['m_kary_id'] as int?,
+      picId: json['pic_id'] as int?,
+      totalBiaya: json['total_biaya'] as String?,
+      kegiatan: json['kegiatan'] as String?,
+      keterangan: json['keterangan'] as String?,
+      status: json['status'] as String?,
+      jamMulai: json['jam_mulai'] as String?,
+      jamSelesai: json['jam_selesai'] as String?,
+      noDoc: json['no_doc'] as String?,
+      doc: json['doc'],
+      alasanId: json['alasan_id'] as int?,
+      tipeCutiId: json['tipe_cuti_id'] as int?,
+      dateFrom: json['date_from'] == null
+          ? null
+          : DateTime.parse(json['date_from'] as String),
+      dateTo: json['date_to'] == null
+          ? null
+          : DateTime.parse(json['date_to'] as String),
+    );
 
-Map<String, dynamic> _$$TrxImplToJson(_$TrxImpl instance) =>
-    <String, dynamic>{};
+Map<String, dynamic> _$$TrxImplToJson(_$TrxImpl instance) => <String, dynamic>{
+      'nomor': instance.nomor,
+      'tanggal': instance.tanggal?.toIso8601String(),
+      'tgl_acara_awal': instance.tglAcaraAwal?.toIso8601String(),
+      'tgl_acara_akhir': instance.tglAcaraAkhir?.toIso8601String(),
+      'jenis_spd_id': instance.jenisSpdId,
+      'm_zona_asal_id': instance.mZonaAsalId,
+      'm_zona_tujuan_id': instance.mZonaTujuanId,
+      'm_lokasi_tujuan_id': instance.mLokasiTujuanId,
+      'm_kary_id': instance.mKaryId,
+      'pic_id': instance.picId,
+      'total_biaya': instance.totalBiaya,
+      'kegiatan': instance.kegiatan,
+      'keterangan': instance.keterangan,
+      'status': instance.status,
+      'jam_mulai': instance.jamMulai,
+      'jam_selesai': instance.jamSelesai,
+      'no_doc': instance.noDoc,
+      'doc': instance.doc,
+      'alasan_id': instance.alasanId,
+      'tipe_cuti_id': instance.tipeCutiId,
+      'date_from': instance.dateFrom?.toIso8601String(),
+      'date_to': instance.dateTo?.toIso8601String(),
+    };
