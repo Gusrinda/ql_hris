@@ -88,7 +88,7 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
       FilePickerResult? pickedFileNonCamera =
           await FilePicker.platform.pickFiles(
         type: FileType.custom,
-        allowedExtensions: ['jpeg', 'jpg', 'png'],
+        allowedExtensions: ['pdf', 'jpeg', 'jpg', 'png'],
       );
 
       if (pickedFileNonCamera != null) {

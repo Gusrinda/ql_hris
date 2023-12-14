@@ -240,14 +240,14 @@ class RouteGenerator {
           );
         });
       case DataDiriPage.routeName:
-        final bioData = settings.arguments as Biodata;
+        final bioData = settings.arguments as Biodata?;
         return MaterialPageRoute(builder: (context) {
-          return DataDiriPage(bioData: bioData);
+          return DataDiriPage(bioData: bioData!);
         });
       case EditDataDiriPage.routeName:
-        final bioData = settings.arguments as Biodata;
+        final bioData = settings.arguments as Biodata?;
         return MaterialPageRoute(builder: (context) {
-          return EditDataDiriPage(bioData: bioData);
+          return EditDataDiriPage(bioData: bioData!);
         });
       case DataBahasaPage.routeName:
         return MaterialPageRoute(builder: (context) {
