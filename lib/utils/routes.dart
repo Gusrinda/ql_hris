@@ -43,6 +43,7 @@ import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/view_edit_
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/add_pelatihan.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/add_pelatihan_bloc/add_pelatihan_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/data_pelatihan_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/list_pelatihan_bloc/list_pelatihan_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/view_edit_pelatihan.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/add_pendidikan.bloc/add_data_pendidikan_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/add_pendidikan.dart';
@@ -293,7 +294,10 @@ class RouteGenerator {
         });
       case DataPelatihanPage.routeName:
         return MaterialPageRoute(builder: (context) {
-          return DataPelatihanPage();
+          return BlocProvider(
+            create: (context) => ListPelatihanBloc(),
+            child: DataPelatihanPage(),
+          );
         });
       case ViewEditPelatihanPage.routeName:
         return MaterialPageRoute(builder: (context) {

@@ -16,6 +16,7 @@ class ListPelatihanBloc extends Bloc<ListPelatihanEvent, ListPelatihanState> {
     on<GetListPelatihan>((event, emit) async {
       emit(ListPelatihanLoading());
       var resToken = await GeneralSharedPreferences.getUserToken();
+      print(resToken);
       if (resToken is ServicesSuccess) {
         var res = await DataPelatihanServices.getListPelatihan(
             resToken.response["token"]);
@@ -25,6 +26,7 @@ class ListPelatihanBloc extends Bloc<ListPelatihanEvent, ListPelatihanState> {
             ResponsePelatihanKaryawan dataResponse =
                 ResponsePelatihanKaryawan.fromJson(res.response);
             listpelatihan = dataResponse.data ?? [];
+            print("GET Pelatihan: $listpelatihan}");
             emit(
                 ListPelatihanSuccessInBackground(dataPelatihan: listpelatihan));
           } else {

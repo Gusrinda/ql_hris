@@ -113,8 +113,6 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
               Expanded(
                 child: BlocBuilder<ListPelatihanBloc, ListPelatihanState>(
                   builder: (context, state) {
-                    var listpelatihan =
-                        context.read<ListPelatihanBloc>().listpelatihan;
                     return Container(
                       decoration: const BoxDecoration(
                         borderRadius: BorderRadius.only(

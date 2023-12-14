@@ -280,20 +280,29 @@ class _ProfilePageState extends State<ProfilePage> {
                           labelText: "Data Pelatihan",
                           color: MyColorsConst.whiteColor,
                           icon: Icons.article_rounded,
-                          onTap: () async {
-                            LoadingDialog.showLoadingDialog(context);
-                            ListPelatihanBloc bloc =
-                                context.read<ListPelatihanBloc>();
-                            bloc.add(GetListPelatihan());
-                            await Future.delayed(const Duration(seconds: 1));
-                            List<DataPelatihan> dataPelatihan =
-                                (bloc.state as ListPelatihanSuccessInBackground)
-                                    .dataPelatihan;
+                          onTap: () {
+                            // LoadingDialog.showLoadingDialog(context);
+                            // ListPelatihanBloc bloc =
+                            //     context.read<ListPelatihanBloc>();
+                            // bloc.add(GetListPelatihan());
+                            // await Future.delayed(const Duration(seconds: 1));
+                            // List<DataPelatihan> dataPelatihan =
+                            //     (bloc.state as ListPelatihanSuccessInBackground)
+                            //         .dataPelatihan;
 
-                            LoadingDialog.dismissDialog(context);
+                            // LoadingDialog.dismissDialog(context);
 
-                            Navigator.of(context)
-                                .pushNamed(DataPelatihanPage.routeName, arguments: dataPelatihan);
+                            // Navigator.of(context)
+                            //     .pushNamed(DataPelatihanPage.routeName);
+
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => BlocProvider(
+                                  create: (context) => ListPelatihanBloc(),
+                                  child: DataPelatihanPage(),
+                                ),
+                              ),
+                            );
                           },
                         ),
                         TextFormCustomV2(
