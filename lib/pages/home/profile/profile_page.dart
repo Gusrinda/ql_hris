@@ -15,12 +15,14 @@ import 'package:sj_presensi_mobile/pages/home/profile/data_diri/bloc/biodata_blo
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/data_diri_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/data_keluarga_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/data_organisasi_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/list_pelatihan_bloc/list_pelatihan_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/data_pelatihan_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/data_pendidikan.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/data_pengalaman_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/data_prestasi.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/password_change.dart';
 import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_biodata_karyawan.dart';
+import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_pelatihan_karyawan.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -246,9 +248,20 @@ class _ProfilePageState extends State<ProfilePage> {
                           labelText: "Data Pelatihan",
                           color: MyColorsConst.whiteColor,
                           icon: Icons.article_rounded,
-                          onTap: () {
+                          onTap: () async {
+                            LoadingDialog.showLoadingDialog(context);
+                            ListPelatihanBloc bloc =
+                                context.read<ListPelatihanBloc>();
+                            bloc.add(GetListPelatihan());
+                            await Future.delayed(const Duration(seconds: 1));
+                            List<DataPelatihan> dataPelatihan =
+                                (bloc.state as ListPelatihanSuccessInBackground)
+                                    .dataPelatihan;
+
+                            LoadingDialog.dismissDialog(context);
+
                             Navigator.of(context)
-                                .pushNamed(DataPelatihanPage.routeName);
+                                .pushNamed(DataPelatihanPage.routeName, arguments: dataPelatihan);
                           },
                         ),
                         TextFormCustomV2(

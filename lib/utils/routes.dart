@@ -27,6 +27,7 @@ import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dar
 import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/add_bahasa.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/add_bahasa_bloc/add_bahasa_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/data_bahasa_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/view_edit_bahasa.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/bloc/biodata_bloc.dart';
@@ -36,9 +37,11 @@ import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/add_keluarga
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/data_keluarga_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/view_edit_keluarga.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/add_organisasi.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/add_organisasi_bloc/add_organisasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/data_organisasi_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/view_edit_organisasi.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/add_pelatihan.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/add_pelatihan_bloc/add_pelatihan_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/data_pelatihan_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/view_edit_pelatihan.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/add_pendidikan.bloc/add_data_pendidikan_bloc.dart';
@@ -49,6 +52,7 @@ import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/add_
 import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/data_pengalaman_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/view_edit_pengalaman.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/add_prestasi.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/add_prestasi_bloc/add_prestasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/data_prestasi.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/view_edit_prestasi.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/password_change.dart';
@@ -61,6 +65,7 @@ import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
 import 'package:sj_presensi_mobile/services/model/report_detail_page_model.dart';
 import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_biodata_karyawan.dart';
+import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_pelatihan_karyawan.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -254,7 +259,10 @@ class RouteGenerator {
         });
       case AddBahasaPage.routeName:
         return MaterialPageRoute(builder: (context) {
-          return AddBahasaPage();
+          return BlocProvider(
+            create: (context) => AddBahasaBloc(),
+            child: AddBahasaPage(),
+          );
         });
       case DataKeluargaPage.routeName:
         return MaterialPageRoute(builder: (context) {
@@ -278,7 +286,10 @@ class RouteGenerator {
         });
       case AddOrganisasiPage.routeName:
         return MaterialPageRoute(builder: (context) {
-          return AddOrganisasiPage();
+          return BlocProvider(
+            create: (context) => AddOrganisasiBloc(),
+            child: AddOrganisasiPage(),
+          );
         });
       case DataPelatihanPage.routeName:
         return MaterialPageRoute(builder: (context) {
@@ -290,7 +301,10 @@ class RouteGenerator {
         });
       case AddPelatihanPage.routeName:
         return MaterialPageRoute(builder: (context) {
-          return AddPelatihanPage();
+          return BlocProvider(
+            create: (context) => AddPelatihanBloc(),
+            child: AddPelatihanPage(),
+          );
         });
       case DataPendidikanPage.routeName:
         return MaterialPageRoute(builder: (context) {
@@ -329,7 +343,10 @@ class RouteGenerator {
         });
       case AddPrestasiPage.routeName:
         return MaterialPageRoute(builder: (context) {
-          return AddPrestasiPage();
+          return BlocProvider(
+            create: (context) => AddPrestasiBloc(),
+            child: AddPrestasiPage(),
+          );
         });
       case ReportDetailPage.routeName:
         final args = settings.arguments as ReportDetailPageModel;
