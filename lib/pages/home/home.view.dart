@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sj_presensi_mobile/pages/approval/approval.view.dart';
+import 'package:sj_presensi_mobile/pages/approval/bloc/approval_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
 import 'package:sj_presensi_mobile/pages/cuti/dashboard_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
@@ -155,11 +157,11 @@ class _HomePageState extends State<HomePage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => BlocProvider(
-                                    create: (context) => NotifikasiBloc()
+                                    create: (context) => ApprovalBloc()
                                       ..add(
-                                        GetListNotifikasi(),
+                                        GetListApproval(),
                                       ),
-                                    child: NotifikasiPage(),
+                                    child: ApprovalPage(),
                                   ),
                                 ),
                               );
@@ -275,7 +277,8 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       const SizedBox(height: 7),
                                       Text(
-                                        "${p24 ?? '-'} Hari",
+                                        "${p24 ?? '-'} Jam",
+                                        // "2 Jam",
                                         style: GoogleFonts.poppins(
                                             fontSize: 14.sp,
                                             fontWeight: FontWeight.w600),
@@ -480,22 +483,22 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.w600,
                                 color: MyColorsConst.darkColor),
                           ),
-                          Row(
-                            children: [
-                              Text(
-                                "Lihat Semua",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: MyColorsConst.primaryColor),
-                              ),
-                              Icon(
-                                Icons.keyboard_arrow_right_rounded,
-                                color: MyColorsConst.primaryColor,
-                                size: 20.sp,
-                              )
-                            ],
-                          ),
+                          // Row(
+                          //   children: [
+                          //     Text(
+                          //       "Lihat Semua",
+                          //       style: GoogleFonts.poppins(
+                          //           fontSize: 12.sp,
+                          //           fontWeight: FontWeight.w500,
+                          //           color: MyColorsConst.primaryColor),
+                          //     ),
+                          //     Icon(
+                          //       Icons.keyboard_arrow_right_rounded,
+                          //       color: MyColorsConst.primaryColor,
+                          //       size: 20.sp,
+                          //     )
+                          //   ],
+                          // ),
                         ],
                       ),
                     ),
@@ -505,11 +508,31 @@ class _HomePageState extends State<HomePage> {
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
-                        children: [
+                        children: const [
                           SizedBox(width: 20),
-                          PengumumanCard(),
-                          PengumumanCard(),
-                          PengumumanCard(),
+                          PengumumanCard(
+                            imageUrl: 'assets/images/cuti_bersama.jpg',
+                            judul: "Kebijakan Cuti Tahun 2024",
+                            tanggal: "17 Desember 2023",
+                            detail:
+                                "Kami berharap bahwa pesan ini menemukan Anda dalam keadaan baik dan bersemangat. Sejalan dengan komitmen kami",
+                          ),
+                          PengumumanCard(
+                            imageUrl: 'assets/images/uu-ciptakerja.jpg',
+                            judul:
+                                "Poin Penting untuk Pekerja dalam UU Cipta Kerja",
+                            tanggal: "2 Desember 2023",
+                            detail:
+                                "DPR resmi menyetujui Rancangan Undang-Undang (RUU) Cipta Kerja untuk disahkan menjadi UU yang salah satunya mengatur tentang klaster ketenagakerjaan.",
+                          ),
+                          PengumumanCard(
+                            imageUrl: 'assets/images/k3.jpeg',
+                            judul:
+                                "Mengenal Pentingnya K3 Dalam Lingkungan Kerja",
+                            tanggal: "17 Desember 2023",
+                            detail:
+                                "Kesehatan dan Keselamatan Kerja (K3) merupakan hal yang sangat signifikan dalam sektor industri dan lingkungan kerja. Pada bahasan kali ini, kita akan mmembahas semua tentang K3, termasuk pengertian, tujuan, ruang lingkup, dan jenis-jenis bahaya yang perlu diperhatikan. Mungkin masih ada di antara kita yang belum sepenuhnya familiar dengan istilah K3, namun seringkali kita menjumpainya di berbagai institusi, perusahaan, dan tempat kerja. K3 bukan sekadar sebuah ilmu pengetahuan, tetapi juga merupakan upaya konkret untuk mencegah terjadinya kecelakaan dan memastikan kesehatan serta keselamatan bagi mereka yang bekerja di berbagai sektor. ",
+                          ),
                         ],
                       ),
                     ),
