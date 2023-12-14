@@ -24,7 +24,7 @@ class CheckInOutBloc extends Bloc<CheckInOutEvent, CheckInOutState> {
             final fotoProfil = resUser.response["data"]["profil_image"] ?? '';
             final cutiMasaKerja = resUser.response["data"]["m_kary.cuti_sisa_reguler"].toString() ?? '';
             final cutiTahunan = resUser.response["data"]["m_kary.cuti_sisa_panjang"].toString()  ?? '';
-            final p24 = resUser.response["data"]["m_kary.cuti_sisa_reguler"].toString()  ?? '';
+            final p24 = resUser.response["data"]["m_kary.cuti_sisa_p24"].toString()  ?? '';
 
             final jsonData = res.response["data"];
             final status = jsonData["status"];

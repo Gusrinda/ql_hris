@@ -28,6 +28,15 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
   bool showDeleteButton = false;
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<ListPelatihanBloc>().add(GetListPelatihan());
+    });
+    // BlocProvider.of<ListPelatihanBloc>(context).add(GetListPelatihan());
+  }  
+
+  @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return BlocListener<ListPelatihanBloc, ListPelatihanState>(
@@ -113,6 +122,9 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
               Expanded(
                 child: BlocBuilder<ListPelatihanBloc, ListPelatihanState>(
                   builder: (context, state) {
+
+                  List<DataPelatihan> listPelatihan =  context.read<ListPelatihanBloc>().listpelatihan;
+
                     return Container(
                       decoration: const BoxDecoration(
                         borderRadius: BorderRadius.only(
@@ -128,7 +140,7 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                             Expanded(
                               child: ListView.builder(
                                 shrinkWrap: true,
-                                itemCount: 2,
+                                itemCount: listPelatihan.length,
                                 itemBuilder: (context, index) {
                                   return ListTile(
                                     contentPadding: EdgeInsets.zero,
@@ -160,7 +172,7 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                                                           .spaceBetween,
                                                   children: [
                                                     Text(
-                                                      'Pelatihan Frontend',
+                                                      "${listPelatihan[index].namaPel}",
                                                       style:
                                                           GoogleFonts.poppins(
                                                         fontSize: 16.sp,

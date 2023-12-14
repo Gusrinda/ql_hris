@@ -14,6 +14,7 @@ part 'approval_state.dart';
 
 class ApprovalBloc extends Bloc<ApprovalEvent, ApprovalState> {
   List<DataApproval> listApproval = [];
+  
   ApprovalBloc() : super(ListApprovalInitial()) {
     on<GetListApproval>((event, emit) async {
       emit(ListApprovalLoading());

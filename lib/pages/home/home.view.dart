@@ -277,8 +277,8 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                       const SizedBox(height: 7),
                                       Text(
-                                        // "${p24 ?? '-'} Jam",
-                                        "2 Jam",
+                                        "${p24 ?? '-'} Jam",
+                                        // "2 Jam",
                                         style: GoogleFonts.poppins(
                                             fontSize: 14.sp,
                                             fontWeight: FontWeight.w600),

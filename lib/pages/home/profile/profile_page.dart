@@ -247,7 +247,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: MyColorsConst.whiteColor,
                           icon: CupertinoIcons.person_fill,
                           onTap: () {
-                            // Navigasi ke DataDiriPage
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => BlocProvider(
@@ -281,20 +280,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: MyColorsConst.whiteColor,
                           icon: Icons.article_rounded,
                           onTap: () {
-                            // LoadingDialog.showLoadingDialog(context);
-                            // ListPelatihanBloc bloc =
-                            //     context.read<ListPelatihanBloc>();
-                            // bloc.add(GetListPelatihan());
-                            // await Future.delayed(const Duration(seconds: 1));
-                            // List<DataPelatihan> dataPelatihan =
-                            //     (bloc.state as ListPelatihanSuccessInBackground)
-                            //         .dataPelatihan;
-
-                            // LoadingDialog.dismissDialog(context);
-
-                            // Navigator.of(context)
-                            //     .pushNamed(DataPelatihanPage.routeName);
-
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => BlocProvider(
