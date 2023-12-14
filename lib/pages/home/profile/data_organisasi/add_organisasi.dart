@@ -8,7 +8,9 @@ import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/add_organisasi_bloc/add_organisasi_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/selector/jenis_organisasi_selector.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/selector/kota_selector.dart';
+import 'package:sj_presensi_mobile/services/model/list_general/response_general.dart';
 import 'package:sj_presensi_mobile/services/model/list_general/response_kota.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -37,10 +39,13 @@ class AddOrganisasiPage extends StatefulWidget {
 
 class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
   String? selectedKota;
+  String? selectedJenisOrganisasi;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var dataKota = context.read<AddOrganisasiBloc>().dataKota;
+    var dataJenisOrganisasi =
+        context.read<AddOrganisasiBloc>().dataJenisOrganisasi;
 
     void showTahunMenu(BuildContext context, TextEditingController controller) {
       List<String> _generateYears() {
@@ -112,6 +117,39 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
             this.selectedKota = selectedKota.value;
             print(selectedKota.value);
             print("Selected ID Kota: ${selectedKota.id}");
+          });
+        }
+      } else {
+        print("Tidak Ada Item");
+      }
+    }
+
+    void showJenisOrganisasi(BuildContext context) async {
+      if (dataJenisOrganisasi.isEmpty) {
+        context.read<AddOrganisasiBloc>().add(OnSelectJenisOrganisasi());
+        dataJenisOrganisasi =
+            context.read<AddOrganisasiBloc>().dataJenisOrganisasi;
+      }
+
+      if (dataJenisOrganisasi.isNotEmpty) {
+        final selectedJenisOrganisasi = await showSearch<DataGeneral?>(
+          context: context,
+          delegate: JenisOrgSearchDelegate(
+            dataJenisOrganisasi: dataJenisOrganisasi,
+            filteredData: dataJenisOrganisasi,
+          ),
+        );
+
+        if (selectedJenisOrganisasi != null) {
+          widget.idJenisOrganisasiController.text =
+              selectedJenisOrganisasi.id?.toString() ?? '';
+          widget.valueJenisOrganisasiController.text =
+              selectedJenisOrganisasi.value?.toString() ?? '';
+
+          setState(() {
+            this.selectedJenisOrganisasi = selectedJenisOrganisasi.value;
+            print(selectedJenisOrganisasi.value);
+            print("Selected ID Kota: ${selectedJenisOrganisasi.id}");
           });
         }
       } else {
@@ -253,7 +291,9 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
                               ),
                               FormDropDownData(
                                 input: '',
-                                onTap: () {},
+                                onTap: () {
+                                  showJenisOrganisasi(context);
+                                },
                                 idController:
                                     widget.idJenisOrganisasiController,
                                 valueController:
@@ -306,7 +346,9 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
                                                 tahun: widget
                                                     .tahunOrganisasiController
                                                     .text,
-                                                jenisOrgId: 1,
+                                                jenisOrgId: int.parse(widget
+                                                    .idJenisOrganisasiController
+                                                    .text),
                                                 kotaId: int.parse(widget
                                                     .idKotaOrganisasiController
                                                     .text),
