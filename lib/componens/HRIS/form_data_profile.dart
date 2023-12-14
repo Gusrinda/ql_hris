@@ -259,6 +259,7 @@ class FormInputData extends StatelessWidget {
     required this.formTag,
     required this.hintText,
     this.showRedStar = true,
+    this.inputType = TextInputType.text,
   }) : super(key: key);
 
   final bool enabled;
@@ -272,6 +273,7 @@ class FormInputData extends StatelessWidget {
   final String? Function(String?) validator;
   final TextStyle? errorTextStyle;
   final bool showRedStar;
+  final TextInputType inputType;
 
   @override
   Widget build(BuildContext context) {
@@ -351,6 +353,7 @@ class FormInputData extends StatelessWidget {
                     controller: controller,
                     textInputAction: TextInputAction.next,
                     validator: validator,
+                    keyboardType: inputType,
                   ),
                 ),
                 SizedBox(height: 20.sp),

@@ -13,7 +13,7 @@ class DataPelatihanServices {
     );
   }
 
-  static Future<Object> createDataPendidikan(
+  static Future<Object> createDataPelatihan(
     String token,
     int compId,
     int dirId,
@@ -35,6 +35,34 @@ class DataPelatihanServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.post,
+      headers: GeneralServices.addToken2Headers(token),
+      body: json.encode({
+        "m_comp_id": compId,
+        "m_dir_id": dirId,
+        "nama_pel": namaPel,
+        "tahun": tahun,
+        "nama_lem": namaLem,
+        "kota_id": kotaId,
+      }),
+    );
+  }
+
+  static Future<Object> editDataPelatihan(
+    String token,
+    // int pelatihanId,
+    int compId,
+    int dirId,
+    String namaPel,
+    int tahun,
+    String namaLem,
+    int kotaId,
+  ) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_kary/pelatihan_create");
+
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.put,
       headers: GeneralServices.addToken2Headers(token),
       body: json.encode({
         "m_comp_id": compId,

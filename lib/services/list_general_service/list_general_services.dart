@@ -52,5 +52,14 @@ class ListGeneralService {
     );
   }
 
+  static Future<Object> getHubKeluarga(String token) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_general?where=this.group='HUBUNGAN KELUARGA'&paginate=100");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token),
+    );
+  }
   
 }

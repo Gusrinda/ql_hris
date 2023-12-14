@@ -57,3 +57,21 @@ class AddDataPelatihanFailedUserExpired extends AddPelatihanState {
   @override
   List<Object> get props => [message];
 }
+
+class EditPelatihanSuccess extends AddPelatihanState {
+  String message;
+
+  EditPelatihanSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+class EditPelatihanFailed extends AddPelatihanState {
+  String message;
+
+  EditPelatihanFailed({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}

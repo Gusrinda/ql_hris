@@ -14,7 +14,8 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 
 class AddPrestasiPage extends StatefulWidget {
   static const routeName = '/AddPrestasiPage';
-  AddPrestasiPage({super.key});
+  AddPrestasiPage({super.key, required this.reloadDataCallback});
+  final VoidCallback reloadDataCallback;
 
   final TextEditingController namaPrestasiController = TextEditingController();
 
@@ -29,6 +30,14 @@ class AddPrestasiPage extends StatefulWidget {
 }
 
 class _AddPrestasiPageState extends State<AddPrestasiPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<AddPrestasiBloc>().add(OnSelectTingkatPrestasi());
+    });
+  }
+
   String? selectedTingkat;
   @override
   Widget build(BuildContext context) {
@@ -118,6 +127,15 @@ class _AddPrestasiPageState extends State<AddPrestasiPage> {
           LoadingDialog.showLoadingDialog(context);
         } else if (state is AddDataPrestasiSuccess) {
           LoadingDialog.dismissDialog(context);
+          await showDialog(
+            context: context,
+            builder: (_) => DialogCustom(
+              state: DialogCustomItem.success,
+              message: state.message,
+            ),
+          );
+          Navigator.of(context).pop();
+          widget.reloadDataCallback();
         } else if (state is AddDataPrestasiFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
@@ -127,7 +145,6 @@ class _AddPrestasiPageState extends State<AddPrestasiPage> {
               message: state.message,
             ),
           );
-          Navigator.of(context).pop();
         } else if (state is AddDataPrestasiFailedUserExpired) {
           LoadingDialog.dismissDialog(context);
           await showDialog(

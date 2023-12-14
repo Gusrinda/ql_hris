@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/image_form_custom_v2.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
@@ -11,18 +11,21 @@ import 'package:sj_presensi_mobile/componens/text_form_custom_v2.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/data_bahasa_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/list_bahasa_bloc/list_bahasa_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/bloc/biodata_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/data_diri_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/data_keluarga_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/list_keluarga_bloc/list_keluarga_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/data_organisasi_page.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/list_pelatihan_bloc/list_pelatihan_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/list_organisas_bloc/list_organisasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/data_pelatihan_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/list_pelatihan_bloc/list_pelatihan_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/data_pendidikan.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/data_pengalaman_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/list_pengalaman_bloc/list_pengalaman_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/data_prestasi.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/list_prestasi_bloc/list_prestasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/password_change.dart';
-import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_biodata_karyawan.dart';
-import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_pelatihan_karyawan.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -271,8 +274,14 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: MyColorsConst.whiteColor,
                           icon: Icons.groups_rounded,
                           onTap: () {
-                            Navigator.of(context)
-                                .pushNamed(DataKeluargaPage.routeName);
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => BlocProvider(
+                                  create: (context) => ListKeluargaBloc(),
+                                  child: DataKeluargaPage(),
+                                ),
+                              ),
+                            );
                           },
                         ),
                         TextFormCustomV2(
@@ -295,8 +304,14 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: MyColorsConst.whiteColor,
                           icon: Icons.workspace_premium_rounded,
                           onTap: () {
-                            Navigator.of(context)
-                                .pushNamed(DataPrestasiPage.routeName);
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => BlocProvider(
+                                  create: (context) => ListPrestasiBloc(),
+                                  child: DataPrestasiPage(),
+                                ),
+                              ),
+                            );
                           },
                         ),
                         TextFormCustomV2(
@@ -304,8 +319,14 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: MyColorsConst.whiteColor,
                           icon: Icons.language,
                           onTap: () {
-                            Navigator.of(context)
-                                .pushNamed(DataOrganisasiPage.routeName);
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => BlocProvider(
+                                  create: (context) => ListOrganisasiBloc(),
+                                  child: DataOrganisasiPage(),
+                                ),
+                              ),
+                            );
                           },
                         ),
                         TextFormCustomV2(
@@ -313,8 +334,14 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: MyColorsConst.whiteColor,
                           icon: Icons.translate_rounded,
                           onTap: () {
-                            Navigator.of(context)
-                                .pushNamed(DataBahasaPage.routeName);
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => BlocProvider(
+                                  create: (context) => ListBahasaBloc(),
+                                  child: DataBahasaPage(),
+                                ),
+                              ),
+                            );
                           },
                         ),
                         TextFormCustomV2(
@@ -322,8 +349,14 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: MyColorsConst.whiteColor,
                           icon: CupertinoIcons.graph_square_fill,
                           onTap: () {
-                            Navigator.of(context)
-                                .pushNamed(DataPengalamanKerjaPage.routeName);
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => BlocProvider(
+                                  create: (context) => ListPengalamanBloc(),
+                                  child: DataPengalamanKerjaPage(),
+                                ),
+                              ),
+                            );
                           },
                         ),
                         const SizedBox(height: 25),

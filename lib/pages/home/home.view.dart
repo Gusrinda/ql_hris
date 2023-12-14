@@ -1,14 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/pages/approval/approval.view.dart';
 import 'package:sj_presensi_mobile/pages/approval/bloc/approval_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
-import 'package:sj_presensi_mobile/pages/cuti/dashboard_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
-import 'package:sj_presensi_mobile/pages/dinas/dashboard_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
@@ -17,8 +15,6 @@ import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/pengumuman_card.widget.dart';
 import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/list_lembur_bloc.dart';
 import 'package:sj_presensi_mobile/pages/lembur/lembur_page.dart';
-import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
-import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class HomePage extends StatefulWidget {

@@ -7,8 +7,8 @@ import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/add_pelatihan.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/add_pelatihan_bloc/add_pelatihan_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/list_pelatihan_bloc/list_pelatihan_bloc.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/view_edit_pelatihan.dart';
 import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_pelatihan_karyawan.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -30,11 +30,15 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
   @override
   void initState() {
     super.initState();
+    loadData();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ListPelatihanBloc>().add(GetListPelatihan());
     });
-    // BlocProvider.of<ListPelatihanBloc>(context).add(GetListPelatihan());
-  }  
+  }
+
+  void loadData() {
+    context.read<ListPelatihanBloc>().add(GetListPelatihan());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -122,8 +126,8 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
               Expanded(
                 child: BlocBuilder<ListPelatihanBloc, ListPelatihanState>(
                   builder: (context, state) {
-
-                  List<DataPelatihan> listPelatihan =  context.read<ListPelatihanBloc>().listpelatihan;
+                    List<DataPelatihan> listPelatihan =
+                        context.read<ListPelatihanBloc>().listpelatihan;
 
                     return Container(
                       decoration: const BoxDecoration(
@@ -142,12 +146,31 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                                 shrinkWrap: true,
                                 itemCount: listPelatihan.length,
                                 itemBuilder: (context, index) {
+                                  var dataPelatihan = listPelatihan[index];
                                   return ListTile(
                                     contentPadding: EdgeInsets.zero,
                                     subtitle: GestureDetector(
                                       onTap: () {
-                                        Navigator.of(context).pushNamed(
-                                            ViewEditPelatihanPage.routeName);
+                                        // Navigator.push(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //     builder: (context) => BlocProvider(
+                                        //       create: (context) =>
+                                        //           AddPelatihanBloc()..add(OnSelectKota()),
+                                        //       child: ViewEditPelatihanPage(
+                                        //           dataPelatihan: dataPelatihan,
+                                        //           idPelatihan: dataPelatihan.id,
+                                        //           namaPelatihan:
+                                        //               dataPelatihan.namaPel,
+                                        //           namaLembaga:
+                                        //               dataPelatihan.namaLem,
+                                        //           tahun: dataPelatihan.tahun,
+                                        //           idKota: dataPelatihan.kotaId,
+                                        //           valueKota:
+                                        //               dataPelatihan.kota),
+                                        //     ),
+                                        //   ),
+                                        // );
                                       },
                                       child: Container(
                                         margin: EdgeInsets.only(bottom: 10.sp),
@@ -172,7 +195,7 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                                                           .spaceBetween,
                                                   children: [
                                                     Text(
-                                                      "${listPelatihan[index].namaPel}",
+                                                      "${dataPelatihan.namaPel}",
                                                       style:
                                                           GoogleFonts.poppins(
                                                         fontSize: 16.sp,
@@ -212,7 +235,7 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                                                             ),
                                                           ),
                                                           Text(
-                                                            'Quantum Leap',
+                                                            "${dataPelatihan.namaLem}",
                                                             style: GoogleFonts
                                                                 .poppins(
                                                               fontSize: 10.sp,
@@ -240,7 +263,7 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                                                             ),
                                                           ),
                                                           Text(
-                                                            '2020',
+                                                            "${dataPelatihan.tahun}",
                                                             style: GoogleFonts
                                                                 .poppins(
                                                               fontSize: 10.sp,
@@ -315,8 +338,16 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                                   MyColorsConst.primaryColor.withOpacity(0.1),
                               textColor: MyColorsConst.primaryColor,
                               onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(AddPelatihanPage.routeName);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BlocProvider(
+                                      create: (context) => AddPelatihanBloc(),
+                                      child: AddPelatihanPage(
+                                          reloadDataCallback: loadData),
+                                    ),
+                                  ),
+                                );
                               },
                             )
                           ],

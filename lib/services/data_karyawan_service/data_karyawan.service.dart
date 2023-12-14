@@ -6,6 +6,14 @@ import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:http/http.dart' as http;
 
 class DataKaryawanService {
+  static Future<Object> getListPendidikan(String token) async {
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/pendidikan");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token),
+    );
+  }
 
   static Future<Object> createDataPendidikan(
     String token,
