@@ -7,6 +7,7 @@ import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/bloc/biodata_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/list_pelatihan_bloc/list_pelatihan_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/profile_page.dart';
 import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/list_lembur_bloc.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -82,6 +83,10 @@ class _DashboardViewState extends State<DashboardView> {
                       BlocProvider(
                         create: (context) => BiodataBloc()..add(GetBiodata()),
                       ),
+                      BlocProvider(
+                        create: (context) =>
+                            ListPelatihanBloc()..add(GetListPelatihan()),
+                      ),
                     ],
                     child: ProfilePage(),
                   ),
@@ -104,7 +109,7 @@ class _DashboardViewState extends State<DashboardView> {
                   ? state.isCheckin
                       ? Colors.green.shade800
                       : Colors.red.shade800
-                  : Colors.grey, 
+                  : Colors.grey,
               onPressed: isButtonEnabled
                   ? () async {
                       ProcessCheckInOutPageState checkInOutPageState =

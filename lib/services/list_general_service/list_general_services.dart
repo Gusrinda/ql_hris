@@ -21,4 +21,36 @@ class ListGeneralService {
       headers: GeneralServices.addToken2Headers(token),
     );
   }
+
+  static Future<Object> getJenisOrganisasi(String token) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_general?where=this.group='JENIS ORGANISASI'&paginate=100");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token),
+    );
+  }
+
+  static Future<Object> getJenisKelamin(String token) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_general?where=this.group='JENIS KELAMIN'&paginate=100");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token),
+    );
+  }
+
+  static Future<Object> getPekerjaan(String token) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_general?where=this.group='PEKERJAAN'&paginate=100");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token),
+    );
+  }
+
+  
 }
