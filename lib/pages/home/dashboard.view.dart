@@ -6,8 +6,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/list_bahasa_bloc/list_bahasa_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/bloc/biodata_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/list_keluarga_bloc/list_keluarga_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/list_organisas_bloc/list_organisasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/list_pelatihan_bloc/list_pelatihan_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/list_pengalaman_bloc/list_pengalaman_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/list_prestasi_bloc/list_prestasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/profile_page.dart';
 import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/list_lembur_bloc.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -85,7 +90,27 @@ class _DashboardViewState extends State<DashboardView> {
                       ),
                       BlocProvider(
                         create: (context) =>
+                            ListKeluargaBloc()..add(GetListKeluarga()),
+                      ),
+                      BlocProvider(
+                        create: (context) =>
                             ListPelatihanBloc()..add(GetListPelatihan()),
+                      ),
+                       BlocProvider(
+                        create: (context) =>
+                            ListPrestasiBloc()..add(GetListPrestasi()),
+                      ),
+                      BlocProvider(
+                        create: (context) =>
+                            ListOrganisasiBloc()..add(GetListOrganisasi()),
+                      ),
+                      BlocProvider(
+                        create: (context) =>
+                            ListBahasaBloc()..add(GetListBahasa()),
+                      ),
+                       BlocProvider(
+                        create: (context) =>
+                            ListPengalamanBloc()..add(GetListPengalaman()),
                       ),
                     ],
                     child: ProfilePage(),

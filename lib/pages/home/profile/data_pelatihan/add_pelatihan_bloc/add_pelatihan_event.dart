@@ -33,3 +33,28 @@ class OnSelectKota extends AddPelatihanEvent {
   @override
   List<Object> get props => [];
 }
+
+class EditDataPelatihanSubmited extends AddPelatihanEvent {
+  // int pelatihanId;
+  String namaPel;
+  int tahun;
+  String namaLem;
+  int kotaId;
+
+  EditDataPelatihanSubmited({
+    // required this.pelatihanId,
+    required this.namaPel,
+    required this.tahun,
+    required this.namaLem,
+    required this.kotaId,
+  });
+
+  @override
+  List<Object> get props => [
+        // pelatihanId,
+        namaPel,
+        tahun,
+        namaLem,
+        kotaId,
+      ];
+}

@@ -105,6 +105,7 @@ class GeneralServices {
         response = await http.delete(
           url,
           headers: headers,
+          body: body,
         );
       }
 

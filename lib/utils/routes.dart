@@ -6,7 +6,6 @@ import 'package:sj_presensi_mobile/pages/authentication/login/bloc/login_bloc.da
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/add_cuti.dart';
-import 'package:sj_presensi_mobile/pages/cuti/dashboard_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/edit_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
@@ -30,17 +29,21 @@ import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/add_bahasa.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/add_bahasa_bloc/add_bahasa_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/list_bahasa_bloc/list_bahasa_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/data_bahasa_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/view_edit_bahasa.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/bloc/biodata_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/data_diri_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_data_diri.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/add_keluarga.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/add_keluarga_bloc/add_keluarga_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/list_keluarga_bloc/list_keluarga_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/data_keluarga_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/view_edit_keluarga.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/add_organisasi.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/add_organisasi_bloc/add_organisasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/data_organisasi_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/list_organisas_bloc/list_organisasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/view_edit_organisasi.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/add_pelatihan.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/add_pelatihan_bloc/add_pelatihan_bloc.dart';
@@ -52,11 +55,14 @@ import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/add_pendid
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/data_pendidikan.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/view_edit-pendidikan.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/add_pengalaman.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/add_pengalaman_bloc/add_pengalaman_kerja_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/data_pengalaman_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/list_pengalaman_bloc/list_pengalaman_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/view_edit_pengalaman.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/add_prestasi.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/add_prestasi_bloc/add_prestasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/data_prestasi.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/list_prestasi_bloc/list_prestasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/view_edit_prestasi.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/password_change.dart';
 import 'package:sj_presensi_mobile/pages/home/report/add/add_report_page.dart';
@@ -146,10 +152,6 @@ class RouteGenerator {
         final data = settings.arguments as DetailLemburPage;
         return MaterialPageRoute(builder: (context) {
           return DetailLemburPage(data: data.data);
-        });
-      case DashboardCutiPage.routeName:
-        return MaterialPageRoute(builder: (context) {
-          return DashboardCutiPage();
         });
       case DetailCutiPage.routeName:
         final data = settings.arguments as DetailCutiPage;
@@ -261,7 +263,10 @@ class RouteGenerator {
         });
       case DataBahasaPage.routeName:
         return MaterialPageRoute(builder: (context) {
-          return DataBahasaPage();
+          return BlocProvider(
+            create: (context) => ListBahasaBloc(),
+            child: DataBahasaPage(),
+          );
         });
       case ViewEditBahasaPage.routeName:
         return MaterialPageRoute(builder: (context) {
@@ -276,7 +281,10 @@ class RouteGenerator {
         });
       case DataKeluargaPage.routeName:
         return MaterialPageRoute(builder: (context) {
-          return DataKeluargaPage();
+          return BlocProvider(
+            create: (context) => ListKeluargaBloc(),
+            child: DataKeluargaPage(),
+          );
         });
       case ViewEditKeluargaPage.routeName:
         return MaterialPageRoute(builder: (context) {
@@ -284,11 +292,17 @@ class RouteGenerator {
         });
       case AddKeluargaPage.routeName:
         return MaterialPageRoute(builder: (context) {
-          return AddKeluargaPage();
+          return BlocProvider(
+            create: (context) => AddKeluargaBloc(),
+            child: AddKeluargaPage(),
+          );
         });
       case DataOrganisasiPage.routeName:
         return MaterialPageRoute(builder: (context) {
-          return DataOrganisasiPage();
+          return BlocProvider(
+            create: (context) => ListOrganisasiBloc(),
+            child: DataOrganisasiPage(),
+          );
         });
       case ViewEditOrganisasiPage.routeName:
         return MaterialPageRoute(builder: (context) {
@@ -336,7 +350,10 @@ class RouteGenerator {
         });
       case DataPengalamanKerjaPage.routeName:
         return MaterialPageRoute(builder: (context) {
-          return DataPengalamanKerjaPage();
+          return BlocProvider(
+            create: (context) => ListPengalamanBloc(),
+            child: DataPengalamanKerjaPage(),
+          );
         });
       case ViewEditPengalamanPage.routeName:
         return MaterialPageRoute(builder: (context) {
@@ -344,11 +361,17 @@ class RouteGenerator {
         });
       case AddPengalamanPage.routeName:
         return MaterialPageRoute(builder: (context) {
-          return AddPengalamanPage();
+          return BlocProvider(
+            create: (context) => AddPengalamanKerjaBloc(),
+            child: AddPengalamanPage(),
+          );
         });
       case DataPrestasiPage.routeName:
         return MaterialPageRoute(builder: (context) {
-          return DataPrestasiPage();
+          return BlocProvider(
+            create: (context) => ListPrestasiBloc(),
+            child: DataPrestasiPage(),
+          );
         });
       case ViewEditPrestasiPage.routeName:
         return MaterialPageRoute(builder: (context) {

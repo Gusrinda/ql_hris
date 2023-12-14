@@ -29,6 +29,13 @@ class AddPrestasiPage extends StatefulWidget {
 }
 
 class _AddPrestasiPageState extends State<AddPrestasiPage> {
+   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<AddPrestasiBloc>().add(OnSelectTingkatPrestasi());
+    });
+  }
   String? selectedTingkat;
   @override
   Widget build(BuildContext context) {

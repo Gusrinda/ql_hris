@@ -4,7 +4,7 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
 
 class DataBahasaServices {
-  static Future<Object> getListOrganisasi(String token) async {
+  static Future<Object> getListBahasa(String token) async {
     var url =
         Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/bahasa");
     return await GeneralServices.baseService(

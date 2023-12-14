@@ -33,6 +33,14 @@ class AddPelatihanPage extends StatefulWidget {
 }
 
 class _AddPelatihanPageState extends State<AddPelatihanPage> {
+   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<AddPelatihanBloc>().add(OnSelectKota());
+    });
+  }
+  
   String? selectedKota;
   @override
   Widget build(BuildContext context) {

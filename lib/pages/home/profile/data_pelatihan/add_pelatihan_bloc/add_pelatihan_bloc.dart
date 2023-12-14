@@ -16,7 +16,7 @@ class AddPelatihanBloc extends Bloc<AddPelatihanEvent, AddPelatihanState> {
       emit(AddDataPelatihanLoading());
       var resToken = await GeneralSharedPreferences.getUserToken();
       if (resToken is ServicesSuccess) {
-        var res = await DataPelatihanServices.createDataPendidikan(
+        var res = await DataPelatihanServices.createDataPelatihan(
           resToken.response["token"],
           resToken.response["m_comp_id"] ?? 1,
            resToken.response["m_dir_id"] ?? 1,
@@ -81,5 +81,37 @@ class AddPelatihanBloc extends Bloc<AddPelatihanEvent, AddPelatihanState> {
         }
       },
     );
+
+    on<EditDataPelatihanSubmited>((event, emit) async {
+      emit(AddDataPelatihanLoading());
+      var resToken = await GeneralSharedPreferences.getUserToken();
+      if (resToken is ServicesSuccess) {
+        var res = await DataPelatihanServices.editDataPelatihan(
+          resToken.response["token"],
+          resToken.response["m_comp_id"] ?? 1,
+           resToken.response["m_dir_id"] ?? 1,
+          //  event.pelatihanId,
+          event.namaPel,
+          event.tahun,
+          event.namaLem,
+          event.kotaId,
+        );
+        if (res is ServicesSuccess) {
+          emit(AddDataPelatihanSuccess(message: "Edit Data Pelatihan Berhasil"));
+          print(res.response);
+        } else if (res is ServicesFailure) {
+          if (res.errorResponse == null) {
+            await GeneralSharedPreferences.removeUserToken();
+            emit(AddDataPelatihanFailedUserExpired(message: "Token Expired"));
+          } else {
+            emit(AddDataPelatihanFailed(message: "Unknown error occured"));
+            print("Response from API: ${res.errorResponse}");
+          }
+        }
+      }
+      else if (resToken is ServicesFailure) {
+        emit(AddDataPelatihanFailedInBackground(message: "Response format is invalid"));
+      }
+    });
   }
 }

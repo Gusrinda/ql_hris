@@ -38,6 +38,17 @@ class AddOrganisasiPage extends StatefulWidget {
 }
 
 class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final organisasiBloc = context.read<AddOrganisasiBloc>();
+
+      organisasiBloc.add(OnSelectJenisOrganisasi());
+      organisasiBloc.add(OnSelectKota());
+    });
+  }
+
   String? selectedKota;
   String? selectedJenisOrganisasi;
   @override

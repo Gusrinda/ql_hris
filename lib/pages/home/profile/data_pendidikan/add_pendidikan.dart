@@ -168,7 +168,7 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
         dataKota = context.read<AddDataPendidikanBloc>().dataKota;
       }
 
-      if (tingkatPendidikan.isNotEmpty) {
+      if (dataKota.isNotEmpty) {
         final selectedKota = await showSearch<DataKota?>(
           context: context,
           delegate: KotaSearchDelegate(
