@@ -48,7 +48,7 @@ class ListDataPendidikan with _$ListDataPendidikan {
         @JsonKey(name: "kota_id")
         int? kotaId,
         @JsonKey(name: "nilai")
-        int? nilai,
+        double? nilai,
         @JsonKey(name: "jurusan")
         String? jurusan,
         @JsonKey(name: "is_pend_terakhir")

@@ -7,7 +7,6 @@ abstract class ListPrestasiEvent extends Equatable {
   List<Object> get props => [];
 }
 class GetListPrestasi extends ListPrestasiEvent {
-
   GetListPrestasi();
 
   @override

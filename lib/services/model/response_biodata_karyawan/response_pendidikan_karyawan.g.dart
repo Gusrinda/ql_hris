@@ -41,7 +41,7 @@ _$ListDataPendidikanImpl _$$ListDataPendidikanImplFromJson(
       thnMasuk: json['thn_masuk'] as int?,
       thnLulus: json['thn_lulus'] as int?,
       kotaId: json['kota_id'] as int?,
-      nilai: json['nilai'] as int?,
+      nilai: (json['nilai'] as num?)?.toDouble(),
       jurusan: json['jurusan'] as String?,
       isPendTerakhir: json['is_pend_terakhir'] as bool?,
       ijazahNo: json['ijazah_no'] as String?,

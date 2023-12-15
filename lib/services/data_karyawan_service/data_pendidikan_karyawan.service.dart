@@ -22,7 +22,7 @@ class DataKaryawanService {
         "${MyGeneralConst.API_URL}/operation/m_kary/pendidikan_delete");
     return await GeneralServices.baseService(
       url: url,
-      method: GeneralServicesMethod.delete,
+      method: GeneralServicesMethod.post,
       headers: GeneralServices.addToken2Headers(token),
       body: json.encode({
         "id": dataID,

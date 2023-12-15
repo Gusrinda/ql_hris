@@ -277,7 +277,7 @@ mixin _$ListDataPendidikan {
   @JsonKey(name: "kota_id")
   int? get kotaId => throw _privateConstructorUsedError;
   @JsonKey(name: "nilai")
-  int? get nilai => throw _privateConstructorUsedError;
+  double? get nilai => throw _privateConstructorUsedError;
   @JsonKey(name: "jurusan")
   String? get jurusan => throw _privateConstructorUsedError;
   @JsonKey(name: "is_pend_terakhir")
@@ -322,7 +322,7 @@ abstract class $ListDataPendidikanCopyWith<$Res> {
       @JsonKey(name: "thn_masuk") int? thnMasuk,
       @JsonKey(name: "thn_lulus") int? thnLulus,
       @JsonKey(name: "kota_id") int? kotaId,
-      @JsonKey(name: "nilai") int? nilai,
+      @JsonKey(name: "nilai") double? nilai,
       @JsonKey(name: "jurusan") String? jurusan,
       @JsonKey(name: "is_pend_terakhir") bool? isPendTerakhir,
       @JsonKey(name: "ijazah_no") String? ijazahNo,
@@ -422,7 +422,7 @@ class _$ListDataPendidikanCopyWithImpl<$Res, $Val extends ListDataPendidikan>
       nilai: freezed == nilai
           ? _value.nilai
           : nilai // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       jurusan: freezed == jurusan
           ? _value.jurusan
           : jurusan // ignore: cast_nullable_to_non_nullable
@@ -484,7 +484,7 @@ abstract class _$$ListDataPendidikanImplCopyWith<$Res>
       @JsonKey(name: "thn_masuk") int? thnMasuk,
       @JsonKey(name: "thn_lulus") int? thnLulus,
       @JsonKey(name: "kota_id") int? kotaId,
-      @JsonKey(name: "nilai") int? nilai,
+      @JsonKey(name: "nilai") double? nilai,
       @JsonKey(name: "jurusan") String? jurusan,
       @JsonKey(name: "is_pend_terakhir") bool? isPendTerakhir,
       @JsonKey(name: "ijazah_no") String? ijazahNo,
@@ -582,7 +582,7 @@ class __$$ListDataPendidikanImplCopyWithImpl<$Res>
       nilai: freezed == nilai
           ? _value.nilai
           : nilai // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       jurusan: freezed == jurusan
           ? _value.jurusan
           : jurusan // ignore: cast_nullable_to_non_nullable
@@ -691,7 +691,7 @@ class _$ListDataPendidikanImpl implements _ListDataPendidikan {
   final int? kotaId;
   @override
   @JsonKey(name: "nilai")
-  final int? nilai;
+  final double? nilai;
   @override
   @JsonKey(name: "jurusan")
   final String? jurusan;
@@ -823,7 +823,7 @@ abstract class _ListDataPendidikan implements ListDataPendidikan {
           @JsonKey(name: "thn_masuk") final int? thnMasuk,
           @JsonKey(name: "thn_lulus") final int? thnLulus,
           @JsonKey(name: "kota_id") final int? kotaId,
-          @JsonKey(name: "nilai") final int? nilai,
+          @JsonKey(name: "nilai") final double? nilai,
           @JsonKey(name: "jurusan") final String? jurusan,
           @JsonKey(name: "is_pend_terakhir") final bool? isPendTerakhir,
           @JsonKey(name: "ijazah_no") final String? ijazahNo,
@@ -876,7 +876,7 @@ abstract class _ListDataPendidikan implements ListDataPendidikan {
   int? get kotaId;
   @override
   @JsonKey(name: "nilai")
-  int? get nilai;
+  double? get nilai;
   @override
   @JsonKey(name: "jurusan")
   String? get jurusan;

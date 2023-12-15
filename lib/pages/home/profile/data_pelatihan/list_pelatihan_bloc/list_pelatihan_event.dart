@@ -1,6 +1,5 @@
 part of 'list_pelatihan_bloc.dart';
 
-@freezed
 abstract class ListPelatihanEvent extends Equatable {
   const ListPelatihanEvent();
 
