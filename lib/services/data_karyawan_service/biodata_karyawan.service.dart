@@ -64,7 +64,7 @@ class BiodataKaryawanService {
         "${MyGeneralConst.API_URL}/path/to/your/api/endpoint/$userId");
     return await GeneralServicesNoMobile.baseService(
       url: url,
-      method: GeneralServicesMethodNoMobile.put,
+      method: GeneralServicesMethodNoMobile.post,
       headers: GeneralServicesNoMobile.addToken2Headers(token),
       body: json.encode({
         "m_dir_id": dirId,

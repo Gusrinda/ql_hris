@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/monthYearPicker_custom.dart';
-import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
@@ -12,8 +11,6 @@ import 'package:sj_presensi_mobile/pages/dinas/add_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas_bloc/add_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/detail_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
-import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
-import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/list_dinas_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -409,15 +406,15 @@ class _DinasPageState extends State<DinasPage> {
               MaterialPageRoute(builder: (context) {
                 return BlocProvider(
                   create: (context) => AddDinasBloc()
-                    ..add(OnSelectDivisi(page: 1, search: ''))
-                    ..add(OnSelectDepartemen(page: 1, search: ''))
-                    ..add(OnSelectPosisi(page: 1, search: ''))
-                    ..add(OnSelectTemplateSpd(page: 1, search: ''))
-                    ..add(OnSelectDirektorat(page: 1, search: ''))
-                    ..add(OnSelectJenisSpd(page: 1, search: ''))
-                    ..add(OnSelectZona(page: 1, search: ''))
-                    ..add(OnSelectLokasiTujuan(page: 1, search: ''))
-                    ..add(OnSelectPic(page: 1, search: '')),
+                    ..add(OnSelectDivisi())
+                    ..add(OnSelectDepartemen())
+                    ..add(OnSelectPosisi())
+                    ..add(OnSelectTemplateSpd())
+                    ..add(OnSelectDirektorat())
+                    ..add(OnSelectJenisSpd())
+                    ..add(OnSelectZona())
+                    ..add(OnSelectLokasiTujuan())
+                    ..add(OnSelectPic()),
                   child: AddDinasPage(
                     reloadDataCallback: loadData,
                   ),

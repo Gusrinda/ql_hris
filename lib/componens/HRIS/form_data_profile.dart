@@ -319,7 +319,7 @@ class FormInputData extends StatelessWidget {
                         color: MyColorsConst.darkColor,
                         fontWeight: FontWeight.w500),
                     maxLines: 1,
-                    readOnly: false,
+                    readOnly: !enabled,
                     decoration: InputDecoration(
                       hintText: hintText,
                       hintStyle: GoogleFonts.poppins(

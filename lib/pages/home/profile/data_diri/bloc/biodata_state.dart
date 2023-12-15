@@ -41,3 +41,6 @@ class BiodataFailedUserExpired extends BiodataState {
   @override
   List<Object> get props => [message];
 }
+
+
+

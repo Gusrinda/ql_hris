@@ -272,17 +272,17 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                             MaterialPageRoute(
                               builder: (context) => BlocProvider(
                                 create: (context) => AddDinasBloc()
-                                  ..add(OnSelectDivisi(page: 1, search: ''))
-                                  ..add(OnSelectDepartemen(page: 1, search: ''))
-                                  ..add(OnSelectPosisi(page: 1, search: ''))
+                                  ..add(OnSelectDivisi())
+                                  ..add(OnSelectDepartemen())
+                                  ..add(OnSelectPosisi())
                                   ..add(
-                                      OnSelectTemplateSpd(page: 1, search: ''))
-                                  ..add(OnSelectDirektorat(page: 1, search: ''))
-                                  ..add(OnSelectJenisSpd(page: 1, search: ''))
-                                  ..add(OnSelectZona(page: 1, search: ''))
+                                      OnSelectTemplateSpd())
+                                  ..add(OnSelectDirektorat())
+                                  ..add(OnSelectJenisSpd())
+                                  ..add(OnSelectZona())
                                   ..add(
-                                      OnSelectLokasiTujuan(page: 1, search: ''))
-                                  ..add(OnSelectPic(page: 1, search: '')),
+                                      OnSelectLokasiTujuan())
+                                  ..add(OnSelectPic()),
                                 child: EditDinasPage(
                                   dinasId: widget.dinasId ?? 1,
                                   jenisSpd: widget.jenisSpd,
