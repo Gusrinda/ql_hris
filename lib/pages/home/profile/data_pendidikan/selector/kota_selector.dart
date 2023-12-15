@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/services/model/list_general/response_kota.dart';
-import 'package:sj_presensi_mobile/services/model/list_general/response_tingkat_pendidikan.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class KotaSearchDelegate extends SearchDelegate<DataKota?> {

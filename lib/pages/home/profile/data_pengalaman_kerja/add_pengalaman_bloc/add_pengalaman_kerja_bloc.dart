@@ -60,7 +60,7 @@ class AddPengalamanKerjaBloc
         var resToken = await GeneralSharedPreferences.getUserToken();
         if (resToken is ServicesSuccess) {
           var res =
-              await ListGeneralService.getKota(resToken.response["token"]);
+              await ListGeneralService.getKotaAll(resToken.response["token"]);
 
           if (res is ServicesSuccess) {
             if (res.response is Map<String, dynamic>) {

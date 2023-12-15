@@ -12,7 +12,6 @@ import 'package:sj_presensi_mobile/pages/cuti/edit_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas_bloc/add_dinas_bloc.dart';
-import 'package:sj_presensi_mobile/pages/dinas/dashboard_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/detail_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/edit_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
@@ -30,16 +29,17 @@ import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/add_bahasa.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/add_bahasa_bloc/add_bahasa_bloc.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/list_bahasa_bloc/list_bahasa_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/data_bahasa_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/list_bahasa_bloc/list_bahasa_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/view_edit_bahasa.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/bloc/biodata_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/data_diri_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_biodata_bloc/edit_biodata_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_data_diri.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/add_keluarga.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/add_keluarga_bloc/add_keluarga_bloc.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/list_keluarga_bloc/list_keluarga_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/data_keluarga_page.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/list_keluarga_bloc/list_keluarga_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/view_edit_keluarga.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/add_organisasi.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/add_organisasi_bloc/add_organisasi_bloc.dart';
@@ -77,7 +77,6 @@ import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
 import 'package:sj_presensi_mobile/services/model/list_approval/response_list_approval.dart';
 import 'package:sj_presensi_mobile/services/model/report_detail_page_model.dart';
 import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_biodata_karyawan.dart';
-import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_pelatihan_karyawan.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -209,10 +208,10 @@ class RouteGenerator {
             ),
           );
         });
-      case DashboardDinasPage.routeName:
-        return MaterialPageRoute(builder: (context) {
-          return const DashboardDinasPage();
-        });
+      // case DashboardDinasPage.routeName:
+      //   return MaterialPageRoute(builder: (context) {
+      //     return const DashboardDinasPage();
+      //   });
       case AddDinasPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
@@ -278,7 +277,10 @@ class RouteGenerator {
       case EditDataDiriPage.routeName:
         final bioData = settings.arguments as Biodata?;
         return MaterialPageRoute(builder: (context) {
-          return EditDataDiriPage(bioData: bioData!);
+          return BlocProvider(
+            create: (context) => EditBiodataBloc(),
+            child: EditDataDiriPage(bioData: bioData!),
+          );
         });
       case DataBahasaPage.routeName:
         return MaterialPageRoute(builder: (context) {
