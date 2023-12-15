@@ -5,12 +5,24 @@ import 'package:sj_presensi_mobile/utils/services.dart';
 
 class DataKeluargaServices {
   static Future<Object> getListKeluarga(String token) async {
-    var url =
-        Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/keluarga");
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/keluarga");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
       headers: GeneralServices.addToken2Headers(token),
+    );
+  }
+
+  static Future<Object> deleteDataKeluarga(String token, String dataID) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_kary/keluarga_delete");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.delete,
+      headers: GeneralServices.addToken2Headers(token),
+      body: json.encode({
+        "id": dataID,
+      }),
     );
   }
 
@@ -26,8 +38,8 @@ class DataKeluargaServices {
     int usia,
     String desc,
   ) async {
-    var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_kary/keluarga_create");
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/keluarga_create");
     print("Ini yang dikirim saat POST Organisasi :");
     print("ini compId : ${compId}");
     print("ini dirId : ${dirId}");

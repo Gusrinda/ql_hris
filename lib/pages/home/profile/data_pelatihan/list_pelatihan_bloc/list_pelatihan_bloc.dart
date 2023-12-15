@@ -11,7 +11,7 @@ part 'list_pelatihan_state.dart';
 
 class ListPelatihanBloc extends Bloc<ListPelatihanEvent, ListPelatihanState> {
   List<DataPelatihan> listpelatihan = [];
-  
+
   ListPelatihanBloc() : super(ListPelatihanInitial()) {
     on<GetListPelatihan>((event, emit) async {
       emit(ListPelatihanLoading());
@@ -34,6 +34,35 @@ class ListPelatihanBloc extends Bloc<ListPelatihanEvent, ListPelatihanState> {
                 message: 'Response format is invalid'));
           }
         } else if (res is ServicesFailure) {
+          if (res.errorResponse == null) {
+            await GeneralSharedPreferences.removeUserToken();
+            emit(ListPelatihanFailedUserExpired(message: "Token expired"));
+          } else {
+            emit(ListPelatihanFailed(message: res.errorResponse));
+          }
+        }
+      } else if (resToken is ServicesFailure) {
+        emit(ListPelatihanFailedInBackground(message: 'Response invalid'));
+      }
+    });
+
+    on<DeleteListPelatihan>((event, emit) async {
+      emit(ListPelatihanLoading());
+      var resToken = await GeneralSharedPreferences.getUserToken();
+      print(resToken);
+      if (resToken is ServicesSuccess) {
+
+        ///Disini menjalankan state Deletenya dengan mengirimkan ID ke Service
+        final res = await DataPelatihanServices.deleteDataPelatihan(
+            resToken.response["token"], event.dataID);
+
+        ///Ketika Respon Berhasil
+        if (res is ServicesSuccess) {
+          emit(DeletePelatihanSuccess(message: "Berhasil Menghapus Data"));
+          print(res.response);
+          
+        ///Ketika Respon Gagal
+        } else if (res is ServicesFailure) { 
           if (res.errorResponse == null) {
             await GeneralSharedPreferences.removeUserToken();
             emit(ListPelatihanFailedUserExpired(message: "Token expired"));

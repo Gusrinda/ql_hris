@@ -15,6 +15,20 @@ class DataPengalamanKerjaService {
     );
   }
 
+  static Future<Object> deleteDataPengalaman(
+      String token, String dataID) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_kary/pk_delete");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.delete,
+      headers: GeneralServices.addToken2Headers(token),
+      body: json.encode({
+        "id": dataID,
+      }),
+    );
+  }
+
   static Future<Object> createDataPengalamanKerja(
     String token,
     int compId,

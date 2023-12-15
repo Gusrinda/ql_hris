@@ -23,6 +23,10 @@ class ListPrestasiSuccess extends ListPrestasiState {
   List<Object> get props => [dataPrestasi];
 }
 
+class DeleteListPrestasiSuccess extends ListPrestasiState {
+  String message;
+  DeleteListPrestasiSuccess({required this.message});
+}
 
 class ListPrestasiFailedInBackground extends ListPrestasiState {
   String message;

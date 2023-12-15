@@ -13,6 +13,19 @@ class DataPelatihanServices {
     );
   }
 
+  static Future<Object> deleteDataPelatihan(String token, String dataID) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_kary/pelatihan_delete");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.delete,
+      headers: GeneralServices.addToken2Headers(token),
+      body: json.encode({
+        "id": dataID,
+      }),
+    );
+  }
+
   static Future<Object> createDataPelatihan(
     String token,
     int compId,

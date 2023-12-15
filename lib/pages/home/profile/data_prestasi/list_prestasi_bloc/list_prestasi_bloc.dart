@@ -10,7 +10,7 @@ part 'list_prestasi_event.dart';
 part 'list_prestasi_state.dart';
 
 class ListPrestasiBloc extends Bloc<ListPrestasiEvent, ListPrestasiState> {
-   List<DataPrestasi> listPrestasi = [];
+  List<DataPrestasi> listPrestasi = [];
   ListPrestasiBloc() : super(ListPrestasiInitial()) {
     on<GetListPrestasi>((event, emit) async {
       emit(ListPrestasiLoading());
@@ -26,12 +26,40 @@ class ListPrestasiBloc extends Bloc<ListPrestasiEvent, ListPrestasiState> {
                 ResponsePrestasiKaryawan.fromJson(res.response);
             listPrestasi = dataResponse.data ?? [];
             print("GET Prestasi: $listPrestasi}");
-            emit(
-                ListPrestasiSuccess(dataPrestasi: listPrestasi));
+            emit(ListPrestasiSuccess(dataPrestasi: listPrestasi));
           } else {
             emit(ListPrestasiFailedInBackground(
                 message: 'Response format is invalid'));
           }
+        } else if (res is ServicesFailure) {
+          if (res.errorResponse == null) {
+            await GeneralSharedPreferences.removeUserToken();
+            emit(ListPrestasiFailedUserExpired(message: "Token expired"));
+          } else {
+            emit(ListPrestasiFailed(message: res.errorResponse));
+          }
+        }
+      } else if (resToken is ServicesFailure) {
+        emit(ListPrestasiFailedInBackground(message: 'Response invalid'));
+      }
+    });
+
+    on<DeleteListPrestasi>((event, emit) async {
+      emit(ListPrestasiLoading());
+      var resToken = await GeneralSharedPreferences.getUserToken();
+      print(resToken);
+      if (resToken is ServicesSuccess) {
+
+        ///Disini menjalankan state Deletenya dengan mengirimkan ID ke Service
+        final res = await DataPrestasiServices.deleteDataPrestasi(
+            resToken.response["token"], event.dataID);
+
+        ///Ketika Respon Berhasil
+        if (res is ServicesSuccess) {
+          emit(DeleteListPrestasiSuccess(message: "Berhasil Menghapus Data"));
+          print(res.response);
+
+          ///Ketika Respon Gagal
         } else if (res is ServicesFailure) {
           if (res.errorResponse == null) {
             await GeneralSharedPreferences.removeUserToken();

@@ -14,6 +14,20 @@ class DataOrganisasiServices {
     );
   }
 
+  static Future<Object> deleteDataOrganisasi(
+      String token, String dataID) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_kary/organisasi_delete");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.delete,
+      headers: GeneralServices.addToken2Headers(token),
+      body: json.encode({
+        "id": dataID,
+      }),
+    );
+  }
+
   static Future<Object> createDataOrganisasi(
     String token,
     int compId,

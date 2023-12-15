@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:sj_presensi_mobile/services/cuti_services.dart';
-import 'package:sj_presensi_mobile/services/data_karyawan_service/data_karyawan.service.dart';
+import 'package:sj_presensi_mobile/services/data_karyawan_service/data_pendidikan_karyawan.service.dart';
 import 'package:sj_presensi_mobile/services/list_general_service/list_general_services.dart';
 import 'package:sj_presensi_mobile/services/model/list_general/response_kota.dart';
 import 'package:sj_presensi_mobile/services/model/list_general/response_tingkat_pendidikan.dart';

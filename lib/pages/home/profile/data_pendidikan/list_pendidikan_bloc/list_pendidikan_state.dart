@@ -22,6 +22,10 @@ class ListPendidikanSuccess extends ListPendidikanState {
   List<Object> get props => [dataPendidikan];
 }
 
+class DeleteListPendidikanSuccess extends ListPendidikanState {
+  String message;
+  DeleteListPendidikanSuccess({required this.message});
+}
 
 class ListPendidikanFailedInBackground extends ListPendidikanState {
   String message;

@@ -15,3 +15,12 @@ class GetListKeluarga extends ListKeluargaEvent {
   @override
   List<Object> get props => [];
 }
+
+class DeleteListKeluarga extends ListKeluargaEvent {
+  String dataID;
+
+  DeleteListKeluarga({required this.dataID});
+
+  @override
+  List<Object> get props => [dataID];
+}

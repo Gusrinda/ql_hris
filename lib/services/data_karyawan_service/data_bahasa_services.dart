@@ -5,12 +5,24 @@ import 'package:sj_presensi_mobile/utils/services.dart';
 
 class DataBahasaServices {
   static Future<Object> getListBahasa(String token) async {
-    var url =
-        Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/bahasa");
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/bahasa");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
       headers: GeneralServices.addToken2Headers(token),
+    );
+  }
+
+  static Future<Object> deleteDataPrestasi(String token, String dataID) async {
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/bahasa_delete");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.delete,
+      headers: GeneralServices.addToken2Headers(token),
+      body: json.encode({
+        "id": dataID,
+      }),
     );
   }
 
@@ -22,8 +34,8 @@ class DataBahasaServices {
     int nilaiLisan,
     int nilaiTetulis,
   ) async {
-    var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_kary/bahasa_create");
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/bahasa_create");
     print("Ini yang dikirim saat POST Organisasi :");
     print("ini compId : ${compId}");
     print("ini dirId : ${dirId}");
@@ -49,7 +61,8 @@ class DataBahasaServices {
     String token,
     int bahasaId,
   ) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/bahasa_delete?$bahasaId");
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_kary/bahasa_delete?$bahasaId");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.put,

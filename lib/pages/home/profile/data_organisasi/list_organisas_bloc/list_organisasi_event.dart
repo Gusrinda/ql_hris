@@ -15,3 +15,12 @@ class GetListOrganisasi extends ListOrganisasiEvent {
   @override
   List<Object> get props => [];
 }
+
+class DeleteListOrganisai extends ListOrganisasiEvent {
+  String dataID;
+
+  DeleteListOrganisai({required this.dataID});
+
+  @override
+  List<Object> get props => [dataID];
+}

@@ -7,11 +7,26 @@ import 'package:http/http.dart' as http;
 
 class DataKaryawanService {
   static Future<Object> getListPendidikan(String token) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/pendidikan");
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/pendidikan");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
       headers: GeneralServices.addToken2Headers(token),
+    );
+  }
+
+  static Future<Object> deleteDataPendidikan(
+      String token, String dataID) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_kary/pendidikan_delete");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.delete,
+      headers: GeneralServices.addToken2Headers(token),
+      body: json.encode({
+        "id": dataID,
+      }),
     );
   }
 
@@ -30,7 +45,8 @@ class DataKaryawanService {
     String desc,
   ) async {
     try {
-      var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/pendidikan_create");
+      var url = Uri.parse(
+          "${MyGeneralConst.API_URL}/operation/m_kary/pendidikan_create");
 
       print("Ini yang dikirim saat POST Pendidikan :");
       print("tingkat_id : ${tingkatID}");
@@ -88,5 +104,4 @@ class DataKaryawanService {
       );
     }
   }
-  
 }

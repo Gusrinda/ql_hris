@@ -9,7 +9,8 @@ import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 part 'list_organisasi_event.dart';
 part 'list_organisasi_state.dart';
 
-class ListOrganisasiBloc extends Bloc<ListOrganisasiEvent, ListOrganisasiState> {
+class ListOrganisasiBloc
+    extends Bloc<ListOrganisasiEvent, ListOrganisasiState> {
   List<DataOrganisasi> listorganisasi = [];
   ListOrganisasiBloc() : super(ListOrganisasiInitial()) {
     on<GetListOrganisasi>((event, emit) async {
@@ -26,12 +27,39 @@ class ListOrganisasiBloc extends Bloc<ListOrganisasiEvent, ListOrganisasiState> 
                 ResponseOrganisasiKaryawan.fromJson(res.response);
             listorganisasi = dataResponse.data ?? [];
             print("GET Organisasi: $listorganisasi}");
-            emit(
-                ListOrganisasiSuccess(dataOrganisasi: listorganisasi));
+            emit(ListOrganisasiSuccess(dataOrganisasi: listorganisasi));
           } else {
             emit(ListOrganisasiFailedInBackground(
                 message: 'Response format is invalid'));
           }
+        } else if (res is ServicesFailure) {
+          if (res.errorResponse == null) {
+            await GeneralSharedPreferences.removeUserToken();
+            emit(ListOrganisasiFailedUserExpired(message: "Token expired"));
+          } else {
+            emit(ListOrganisasiFailed(message: res.errorResponse));
+          }
+        }
+      } else if (resToken is ServicesFailure) {
+        emit(ListOrganisasiFailedInBackground(message: 'Response invalid'));
+      }
+    });
+
+    on<DeleteListOrganisai>((event, emit) async {
+      emit(ListOrganisasiLoading());
+      var resToken = await GeneralSharedPreferences.getUserToken();
+      print(resToken);
+      if (resToken is ServicesSuccess) {
+        ///Disini menjalankan state Deletenya dengan mengirimkan ID ke Service
+        final res = await DataOrganisasiServices.deleteDataOrganisasi(
+            resToken.response["token"], event.dataID);
+
+        ///Ketika Respon Berhasil
+        if (res is ServicesSuccess) {
+          emit(DeleteListOrganisaiSuccess(message: "Berhasil Menghapus Data"));
+          print(res.response);
+
+          ///Ketika Respon Gagal
         } else if (res is ServicesFailure) {
           if (res.errorResponse == null) {
             await GeneralSharedPreferences.removeUserToken();

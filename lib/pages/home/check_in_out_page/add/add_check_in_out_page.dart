@@ -42,26 +42,6 @@ class AddCheckInOutPage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return MultiBlocListener(
       listeners: [
-        // BlocListener<LocationAcioBloc, LocationAcioState>(
-        //   listener: (context, state) async {
-        //     // if (state is LocationAcioLoading) {
-        //     //   LoadingDialog.showLoadingDialog(context);
-        //     // } else if (state is LocationAcioLoadSuccess) {
-        //     //   LoadingDialog.dismissDialog(context);
-        //     // } else
-        //     if (state is LocationAcioLoadFailed) {
-        //       // LoadingDialog.dismissDialog(context);
-        //       await showDialog(
-        //         context: context,
-        //         builder: (_) => DialogCustom(
-        //           state: DialogCustomItem.error,
-        //           message: state.message,
-        //         ),
-        //       );
-        //       Navigator.of(context).popUntil((route) => route.isFirst);
-        //     }
-        //   },
-        // ),
         BlocListener<AddCheckInOutBloc, AddCheckInOutState>(
           listener: (context, state) async {
             if (state is AddCheckInOutLoading) {
@@ -403,46 +383,6 @@ class AddCheckInOutPage extends StatelessWidget {
             ],
           ),
         ),
-        // bottomNavigationBar: Padding(
-        //   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-        //   child: BlocBuilder<AddCheckInOutBloc, AddCheckInOutState>(
-        //     builder: (context, state) {
-        //       return TextButtonCustomV1(
-        //         text: dataLayout[formState!.index]["btnText"] as String,
-        //         backgroundColor:
-        //             dataLayout[formState!.index]["btnColor"] as Color,
-        //         textColor: MyColorsConst.whiteColor,
-        //         onPressed: state is AddCheckInOutLoading
-        //             ? null
-        //             : state is AddCheckInOutButtonActivate
-        //                 ? () async {
-        //                     if (state.isOnSite) {
-        //                       context
-        //                           .read<AddCheckInOutBloc>()
-        //                           .add(AddCheckInOutSubmited());
-        //                     } else {
-        //                       context
-        //                           .read<AddCheckInOutBloc>()
-        //                           .add(AddCheckInOutSubmited());
-        //                       // showDialog(
-        //                       //   context: context,
-        //                       //   builder: (_) => DialogCustom(
-        //                       //     state: DialogCustomItem.warning,
-        //                       //     message:
-        //                       //         "Anda sedang berada di luar area kantor! \nPresensi akan gagal apabila dilanjutkan.",
-        //                       //     durationInSec: 5,
-        //                       //     onContinue: () => context
-        //                       //         .read<AddCheckInOutBloc>()
-        //                       //         .add(AddCheckInOutSubmited()),
-        //                       //   ),
-        //                       // );
-        //                     }
-        //                   }
-        //                 : null,
-        //       );
-        //     },
-        //   ),
-        // ),
       ),
     );
   }

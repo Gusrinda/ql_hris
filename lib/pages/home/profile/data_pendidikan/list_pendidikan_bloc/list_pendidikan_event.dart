@@ -13,3 +13,12 @@ class GetListPendidikan extends ListPendidikanEvent {
   @override
   List<Object> get props => [];
 }
+
+class DeleteListPendidikan extends ListPendidikanEvent {
+  String dataID;
+
+  DeleteListPendidikan({required this.dataID});
+
+  @override
+  List<Object> get props => [dataID];
+}

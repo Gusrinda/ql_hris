@@ -1,6 +1,5 @@
 part of 'list_organisasi_bloc.dart';
 
-
 abstract class ListOrganisasiState extends Equatable {
   const ListOrganisasiState();
 
@@ -23,6 +22,10 @@ class ListOrganisasiSuccess extends ListOrganisasiState {
   List<Object> get props => [dataOrganisasi];
 }
 
+class DeleteListOrganisaiSuccess extends ListOrganisasiState {
+  String message;
+  DeleteListOrganisaiSuccess({required this.message});
+}
 
 class ListOrganisasiFailedInBackground extends ListOrganisasiState {
   String message;

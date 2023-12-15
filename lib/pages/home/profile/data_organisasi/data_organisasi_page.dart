@@ -34,7 +34,19 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
     context.read<ListOrganisasiBloc>().add(GetListOrganisasi());
   }
 
+  int? deleteIndex;
   bool showDeleteButton = false;
+
+  Future<void> _onRefresh() async {
+    try {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.read<ListOrganisasiBloc>().add(GetListOrganisasi());
+      });
+      await Future.delayed(Duration(seconds: 1));
+    } catch (error) {
+      print('Refresh Error: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +57,19 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
           LoadingDialog.showLoadingDialog(context);
         } else if (state is ListOrganisasiSuccess) {
           LoadingDialog.dismissDialog(context);
+        } else if (state is DeleteListOrganisaiSuccess) {
+          LoadingDialog.dismissDialog(context);
+          await showDialog(
+            context: context,
+            builder: (_) => DialogCustom(
+              state: DialogCustomItem.success,
+              message: state.message,
+            ),
+          );
+          deleteIndex = null;
+          showDeleteButton = false;
+          Navigator.of(context).pop();
+          _onRefresh();
         } else if (state is ListOrganisasiFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
@@ -183,12 +208,25 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
                                                       ),
                                                     ),
                                                     IconButton(
+                                                      splashColor: MyColorsConst
+                                                          .redColor,
                                                       icon: Icon(
                                                           Icons.more_horiz),
                                                       onPressed: () {
                                                         setState(() {
-                                                          showDeleteButton =
-                                                              !showDeleteButton;
+                                                          // Ini buat munculkan tombol di index data itu saja
+                                                          if (deleteIndex ==
+                                                              index) {
+                                                            // Ini buat nutup tombol
+                                                            deleteIndex = null;
+                                                            showDeleteButton =
+                                                                false;
+                                                          } else {
+                                                            // handle buat kalau ga klik apa apa
+                                                            deleteIndex = index;
+                                                            showDeleteButton =
+                                                                true;
+                                                          }
                                                         });
                                                       },
                                                     ),
@@ -263,13 +301,38 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
                                               top: 30,
                                               right: 15,
                                               child: Visibility(
-                                                visible: showDeleteButton,
+                                                visible: showDeleteButton &&
+                                                    deleteIndex == index,
                                                 child: Material(
                                                   elevation: 4,
                                                   borderRadius:
                                                       BorderRadius.circular(4),
                                                   child: InkWell(
-                                                    onTap: () {},
+                                                    onTap: state
+                                                            is ListOrganisasiLoading
+                                                        ? null
+                                                        : () {
+                                                            showDialog(
+                                                              context: context,
+                                                              builder: (_) =>
+                                                                  DialogCustom(
+                                                                state:
+                                                                    DialogCustomItem
+                                                                        .confirm,
+                                                                message:
+                                                                    "Apakah Yakin Menghapus Data Ini?",
+                                                                durationInSec:
+                                                                    5,
+                                                                onContinue: () => context
+                                                                    .read<
+                                                                        ListOrganisasiBloc>()
+                                                                    .add(DeleteListOrganisai(
+                                                                        dataID: dataOrganisasi
+                                                                            .id
+                                                                            .toString())),
+                                                              ),
+                                                            );
+                                                          },
                                                     child: Container(
                                                       padding:
                                                           EdgeInsets.symmetric(

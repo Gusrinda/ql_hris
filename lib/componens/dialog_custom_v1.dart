@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -8,6 +9,7 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 enum DialogCustomItem {
   success,
   warning,
+  confirm,
   error,
   info,
 }
@@ -62,6 +64,11 @@ class _DialogCustomState extends State<DialogCustom> {
       "text": 'WARNING!',
     },
     {
+      "asset": 'assets/lotties/json/lottie_info.json',
+      "color": MyColorsConst.primaryColor,
+      "text": 'KONFIRMASI!',
+    },
+    {
       "asset": 'assets/lotties/json/error.json',
       "color": Colors.red,
       "text": 'ERROR!',
@@ -76,9 +83,9 @@ class _DialogCustomState extends State<DialogCustom> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -91,7 +98,7 @@ class _DialogCustomState extends State<DialogCustom> {
             Text(
               dataLottie[widget.state.index]["text"] as String,
               style: GoogleFonts.poppins(
-                fontSize: 16,
+                fontSize: 16.sp,
                 fontWeight: FontWeight.bold,
                 color: MyColorsConst.darkColor,
               ),
@@ -100,10 +107,11 @@ class _DialogCustomState extends State<DialogCustom> {
             Text(
               widget.message,
               textAlign: TextAlign.center,
-              style: GoogleFonts.poppins(fontSize: 12),
+              style: GoogleFonts.poppins(fontSize: 12.sp),
             ),
             const SizedBox(height: 20),
-            widget.state != DialogCustomItem.warning
+            widget.state != DialogCustomItem.warning &&
+                    widget.state != DialogCustomItem.confirm
                 ? dialogButton(
                     context,
                     text: 'Tutup',
@@ -114,7 +122,7 @@ class _DialogCustomState extends State<DialogCustom> {
                   )
                 : Row(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       dialogButton(
                         context,
@@ -132,7 +140,7 @@ class _DialogCustomState extends State<DialogCustom> {
                       )
                     ],
                   ),
-            const SizedBox(height: 20),
+            SizedBox(height: 10.sp),
           ],
         ),
       ),
@@ -148,9 +156,10 @@ class _DialogCustomState extends State<DialogCustom> {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        fixedSize: const Size(100, 30),
+        elevation: 1,
+        fixedSize: const Size(100, 40),
         backgroundColor: Colors.white,
-        side: BorderSide(color: color),
+        side: BorderSide(color: color, width: 1.2),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -159,7 +168,8 @@ class _DialogCustomState extends State<DialogCustom> {
         text,
         style: GoogleFonts.poppins(
           color: color,
-          fontSize: 12,
+          fontSize: 12.sp,
+          fontWeight: FontWeight.w600
         ),
       ),
     );

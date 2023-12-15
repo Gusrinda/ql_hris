@@ -13,3 +13,12 @@ class GetListPrestasi extends ListPrestasiEvent {
   @override
   List<Object> get props => [];
 }
+
+class DeleteListPrestasi extends ListPrestasiEvent {
+  String dataID;
+
+  DeleteListPrestasi({required this.dataID});
+
+  @override
+  List<Object> get props => [dataID];
+}

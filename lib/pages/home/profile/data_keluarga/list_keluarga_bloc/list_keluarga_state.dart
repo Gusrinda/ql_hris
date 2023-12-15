@@ -6,6 +6,7 @@ abstract class ListKeluargaState extends Equatable {
   @override
   List<Object> get props => [];
 }
+
 class ListKeluargaInitial extends ListKeluargaState {}
 
 class ListKeluargaLoading extends ListKeluargaState {}
@@ -21,6 +22,13 @@ class ListKeluargaSuccess extends ListKeluargaState {
   List<Object> get props => [dataKeluarga];
 }
 
+class DeleteKeluargaSuccess extends ListKeluargaState {
+  String message;
+  DeleteKeluargaSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
 
 class ListKeluargaFailedInBackground extends ListKeluargaState {
   String message;

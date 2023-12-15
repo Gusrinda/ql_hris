@@ -34,7 +34,19 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
     context.read<ListKeluargaBloc>().add(GetListKeluarga());
   }
 
+  int? deleteIndex;
   bool showDeleteButton = false;
+
+  Future<void> _onRefresh() async {
+    try {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.read<ListKeluargaBloc>().add(GetListKeluarga());
+      });
+      await Future.delayed(Duration(seconds: 1));
+    } catch (error) {
+      print('Refresh Error: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +57,19 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
           LoadingDialog.showLoadingDialog(context);
         } else if (state is ListKeluargaSuccess) {
           LoadingDialog.dismissDialog(context);
+        } else if (state is DeleteKeluargaSuccess) {
+          LoadingDialog.dismissDialog(context);
+          await showDialog(
+            context: context,
+            builder: (_) => DialogCustom(
+              state: DialogCustomItem.success,
+              message: state.message,
+            ),
+          );
+          deleteIndex = null;
+          showDeleteButton = false;
+          Navigator.of(context).pop();
+          _onRefresh();
         } else if (state is ListKeluargaFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
@@ -183,12 +208,25 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                                                       ),
                                                     ),
                                                     IconButton(
+                                                      splashColor: MyColorsConst
+                                                          .redColor,
                                                       icon: Icon(
                                                           Icons.more_horiz),
                                                       onPressed: () {
                                                         setState(() {
-                                                          showDeleteButton =
-                                                              !showDeleteButton;
+                                                          // Ini buat munculkan tombol di index data itu saja
+                                                          if (deleteIndex ==
+                                                              index) {
+                                                            // Ini buat nutup tombol
+                                                            deleteIndex = null;
+                                                            showDeleteButton =
+                                                                false;
+                                                          } else {
+                                                            // handle buat kalau ga klik apa apa
+                                                            deleteIndex = index;
+                                                            showDeleteButton =
+                                                                true;
+                                                          }
                                                         });
                                                       },
                                                     ),
@@ -263,13 +301,38 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                                               top: 30,
                                               right: 15,
                                               child: Visibility(
-                                                visible: showDeleteButton,
+                                                visible: showDeleteButton &&
+                                                    deleteIndex == index,
                                                 child: Material(
                                                   elevation: 4,
                                                   borderRadius:
                                                       BorderRadius.circular(4),
                                                   child: InkWell(
-                                                    onTap: () {},
+                                                    onTap: state
+                                                            is ListKeluargaLoading
+                                                        ? null
+                                                        : () {
+                                                            showDialog(
+                                                              context: context,
+                                                              builder: (_) =>
+                                                                  DialogCustom(
+                                                                state:
+                                                                    DialogCustomItem
+                                                                        .confirm,
+                                                                message:
+                                                                    "Apakah Yakin Menghapus Data Ini?",
+                                                                durationInSec:
+                                                                    5,
+                                                                onContinue: () => context
+                                                                    .read<
+                                                                        ListKeluargaBloc>()
+                                                                    .add(DeleteListKeluarga(
+                                                                        dataID: dataKeluarga
+                                                                            .id
+                                                                            .toString())),
+                                                              ),
+                                                            );
+                                                          },
                                                     child: Container(
                                                       padding:
                                                           EdgeInsets.symmetric(

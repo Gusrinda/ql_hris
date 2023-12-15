@@ -20,3 +20,17 @@ class GetDetailApproval extends ApprovalEvent {
   @override
   List<Object> get props => [approvalID];
 }
+
+class SendApproval extends ApprovalEvent {
+  String approvalID;
+  String typeApproval;
+  String note;
+
+  SendApproval(
+      {required this.approvalID,
+      required this.typeApproval,
+      required this.note});
+
+  @override
+  List<Object> get props => [approvalID, typeApproval, note];
+}

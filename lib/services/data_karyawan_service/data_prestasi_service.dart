@@ -13,6 +13,19 @@ class DataPrestasiServices {
     );
   }
 
+  static Future<Object> deleteDataPrestasi(
+      String token, String dataID) async {
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/prestasi_delete");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.delete,
+      headers: GeneralServices.addToken2Headers(token),
+      body: json.encode({
+        "id": dataID,
+      }),
+    );
+  }
+
   static Future<Object> createDataPrestasi(
     String token,
     int compId,
@@ -22,8 +35,8 @@ class DataPrestasiServices {
     int tingkatPresId,
     // int desc,
   ) async {
-    var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_kary/prestasi_create");
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/prestasi_create");
     print("Ini yang dikirim saat POST Pelatihan :");
     print("ini compId : ${compId}");
     print("ini dirId : ${dirId}");

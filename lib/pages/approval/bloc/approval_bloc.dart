@@ -80,26 +80,57 @@ class ApprovalBloc extends Bloc<ApprovalEvent, ApprovalState> {
                   ),
                 );
               } else {
-                emit(ListApprovalFailedInBackground(
+                emit(DetailApprovalFailedInBackground(
                     message: 'No TRX data found'));
               }
             } else {
-              emit(ListApprovalFailedInBackground(
+              emit(DetailApprovalFailedInBackground(
                   message: 'Failed to retrieve data'));
             }
           } else if (response is ServicesFailureNoMobile) {
             if (response.errorResponse == null) {
               await GeneralSharedPreferences.removeUserToken();
-              emit(ListApprovalFailedUserExpired(message: 'Token expired'));
+              emit(DetailApprovalFailedUserExpired(message: 'Token expired'));
             } else {
-              emit(ListApprovalFailed(message: response.errorResponse));
+              emit(DetailApprovalFailed(message: response.errorResponse));
             }
           }
         } catch (error) {
-          emit(ListApprovalFailedInBackground(message: 'Error: $error'));
+          emit(DetailApprovalFailedInBackground(message: 'Error: $error'));
         }
       } else if (userToken is ServicesFailure) {
-        emit(ListApprovalFailedInBackground(message: 'Invalid response'));
+        emit(DetailApprovalFailedInBackground(message: 'Invalid response'));
+      }
+    });
+
+    on<SendApproval>((event, emit) async {
+      emit(DetailApprovalLoading());
+      final userToken = await GeneralSharedPreferences.getUserToken();
+      if (userToken is ServicesSuccess) {
+        try {
+          final response = await ApprovalServices.sendApproval(
+              userToken.response["token"],
+              event.approvalID,
+              event.typeApproval,
+              event.note);
+
+          if (response is ServicesSuccess) {
+            emit(SendApprovalSuccess(message: "Berhasil Mengirim Approval"));
+            print(response.response);
+          } else if (response is ServicesFailure) {
+            if (response.errorResponse == null) {
+              await GeneralSharedPreferences.removeUserToken();
+              emit(DetailApprovalFailedUserExpired(message: 'Token expired'));
+            } else {
+              emit(DetailApprovalFailed(message: response.errorResponse));
+              print(response.errorResponse);
+            }
+          }
+        } catch (error) {
+          emit(DetailApprovalFailedInBackground(message: 'Error: $error'));
+        }
+      } else if (userToken is ServicesFailure) {
+        emit(DetailApprovalFailedInBackground(message: 'Invalid response'));
       }
     });
   }

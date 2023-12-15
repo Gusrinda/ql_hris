@@ -16,7 +16,6 @@ class ListApprovalSuccessInBackground extends ApprovalState {
 
   ListApprovalSuccessInBackground({
     this.listApproval,
-    
   });
 
   @override
@@ -45,6 +44,14 @@ class ListApprovalFailedUserExpired extends ApprovalState {
   List<Object> get props => [message];
 }
 
+class SendApprovalSuccess extends ApprovalState {
+  String message;
+
+  SendApprovalSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
 
 class DetailApprovalInitial extends ApprovalState {}
 
@@ -55,13 +62,11 @@ class DetailApprovalSuccessInBackground extends ApprovalState {
 
   DetailApprovalSuccessInBackground({
     required this.detailApproval,
-    
   });
 
   @override
   List<Object> get props => [detailApproval];
 }
-
 
 class DetailApprovalFailedInBackground extends ApprovalState {
   String message;

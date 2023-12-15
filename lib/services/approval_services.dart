@@ -25,15 +25,16 @@ class ApprovalServices {
     );
   }
 
-  static Future<Object> postApproval(String token, String approvalID,  String typeApproval,  String note) async {
+  static Future<Object> sendApproval(String token, String approvalID,  String typeApproval,  String note) async {
     var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/generate_approval/outstandingDetail?id=$approvalID");
+        "${MyGeneralConst.API_URL}/operation/generate_approval/progressing");
+    int intID = int.parse(approvalID);
     return await GeneralServices.baseService(
       url: url,
-      method: GeneralServicesMethod.get,
+      method: GeneralServicesMethod.post,
       headers: GeneralServices.addToken2Headers(token),
       body: json.encode({
-        "id": approvalID,
+        "id": intID,
         "type": typeApproval,
         "note": note,
       }),

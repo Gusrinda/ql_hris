@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/approval/bloc/approval_bloc.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/services/model/list_approval/response_detail_approval.dart';
@@ -15,7 +17,11 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 class DetailApproval extends StatefulWidget {
   static const routeName = '/DetailApprovalPage';
 
-  const DetailApproval({super.key, required this.dataApproval});
+  const DetailApproval(
+      {super.key,
+      required this.dataApproval,
+      required this.reloadDataCallback});
+  final VoidCallback reloadDataCallback;
 
   final DataApproval dataApproval;
 
@@ -24,6 +30,8 @@ class DetailApproval extends StatefulWidget {
 }
 
 class _DetailApprovalState extends State<DetailApproval> {
+  final TextEditingController catatanController = TextEditingController();
+
   Trx? dataTRX;
 
   @override
@@ -83,6 +91,18 @@ class _DetailApprovalState extends State<DetailApproval> {
           dataTRX = state.detailApproval;
           print("ini adalah dataTRX : ${dataTRX}");
           LoadingDialog.dismissDialog(context);
+        } else if (state is SendApprovalSuccess) {
+          LoadingDialog.dismissDialog(context);
+          await showDialog(
+            context: context,
+            builder: (_) => DialogCustom(
+              state: DialogCustomItem.success,
+              message: state.message,
+            ),
+          );
+          Navigator.of(context).pop();
+          Navigator.pop(context);
+          widget.reloadDataCallback();
         } else if (state is DetailApprovalFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
@@ -92,6 +112,7 @@ class _DetailApprovalState extends State<DetailApproval> {
               message: state.message,
             ),
           );
+          Navigator.pop(context);
         } else if (state is DetailApprovalFailedUserExpired) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
@@ -263,18 +284,22 @@ class _DetailApprovalState extends State<DetailApproval> {
 
                                     if (dataTRX?.tanggal != null)
                                       buildInfoText(
-                                          'Tanggal',
+                                          'Hari, Tanggal',
                                           _formatDate(
                                               dataTRX!.tanggal.toString())),
 
                                     // SPD
                                     if (dataTRX?.tglAcaraAwal != null)
-                                      buildInfoText('Tanggal Acara Awal',
-                                          _formatDate(dataTRX!.tglAcaraAwal.toString())),
+                                      buildInfoText(
+                                          'Tanggal Acara Awal',
+                                          _formatDate(dataTRX!.tglAcaraAwal
+                                              .toString())),
 
                                     if (dataTRX?.tglAcaraAkhir != null)
-                                      buildInfoText('Hari, Tanggal Acara Akhir',
-                                          _formatDate(dataTRX!.tglAcaraAkhir.toString())),
+                                      buildInfoText(
+                                          'Hari, Tanggal Acara Akhir',
+                                          _formatDate(dataTRX!.tglAcaraAkhir
+                                              .toString())),
 
                                     if (dataTRX?.jenisSpdId != null)
                                       buildInfoText('Jenis SPD',
@@ -327,12 +352,16 @@ class _DetailApprovalState extends State<DetailApproval> {
                                           dataTRX!.alasanId.toString()),
 
                                     if (dataTRX?.dateFrom != null)
-                                      buildInfoText('Mulai Hari, Tanggal Cuti',
-                                          _formatDate(dataTRX!.dateFrom.toString())),
+                                      buildInfoText(
+                                          'Mulai Hari, Tanggal Cuti',
+                                          _formatDate(
+                                              dataTRX!.dateFrom.toString())),
 
                                     if (dataTRX?.dateTo != null)
-                                      buildInfoText('Selesai Hari, Tanggal Cuti',
-                                          _formatDate(dataTRX!.dateTo.toString())),
+                                      buildInfoText(
+                                          'Selesai Hari, Tanggal Cuti',
+                                          _formatDate(
+                                              dataTRX!.dateTo.toString())),
 
                                     // All
                                     if (dataTRX?.keterangan != null)
@@ -344,7 +373,112 @@ class _DetailApprovalState extends State<DetailApproval> {
                                           'Status', dataTRX!.status.toString()),
                                   ],
                                 ),
-                              )
+                              ),
+                              SizedBox(height: 10.sp),
+                              FormCatatanData(
+                                hintText: 'Tuliskan Catatan Approval',
+                                labelForm: 'Catatan Approval',
+                                labelTag: 'Label-CatatanApprove',
+                                formTag: 'Form-CatatanApprove',
+                                input: catatanController.text,
+                                onTap: () {},
+                                controller: catatanController,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Tuliskan Catatan';
+                                  }
+                                  return null;
+                                },
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              SizedBox(height: 10.sp),
+                              TextButtonCustomV1(
+                                  textSize: 13.sp,
+                                  text: "APPROVE",
+                                  height: 50.sp,
+                                  backgroundColor: Colors.green.shade700,
+                                  textColor: Colors.white,
+                                  onPressed: state is DetailApprovalLoading
+                                      ? null
+                                      : () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (_) => DialogCustom(
+                                              state: DialogCustomItem.confirm,
+                                              message:
+                                                  "Apakah Benar Anda Menyetujui Pengajuan Ini?",
+                                              durationInSec: 5,
+                                              onContinue: () => context
+                                                  .read<ApprovalBloc>()
+                                                  .add(SendApproval(
+                                                      approvalID: widget
+                                                          .dataApproval.id
+                                                          .toString(),
+                                                      typeApproval: "APPROVED",
+                                                      note: catatanController
+                                                          .text)),
+                                            ),
+                                          );
+                                        }),
+                              SizedBox(height: 10.sp),
+                              TextButtonCustomV1(
+                                  textSize: 13.sp,
+                                  text: "REVISE",
+                                  height: 50.sp,
+                                  backgroundColor: Colors.orange.shade800,
+                                  textColor: Colors.white,
+                                  onPressed: state is DetailApprovalLoading
+                                      ? null
+                                      : () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (_) => DialogCustom(
+                                              state: DialogCustomItem.confirm,
+                                              message:
+                                                  "Apakah Benar Anda Merevisi Pengajuan Ini?",
+                                              durationInSec: 5,
+                                              onContinue: () => context
+                                                  .read<ApprovalBloc>()
+                                                  .add(SendApproval(
+                                                      approvalID: widget
+                                                          .dataApproval.id
+                                                          .toString(),
+                                                      typeApproval: "REVISED",
+                                                      note: catatanController
+                                                          .text)),
+                                            ),
+                                          );
+                                        }),
+                              SizedBox(height: 10.sp),
+                              TextButtonCustomV1(
+                                  textSize: 13.sp,
+                                  text: "REJECT",
+                                  height: 50.sp,
+                                  backgroundColor: Colors.red.shade700,
+                                  textColor: Colors.white,
+                                  onPressed: state is DetailApprovalLoading
+                                      ? null
+                                      : () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (_) => DialogCustom(
+                                              state: DialogCustomItem.confirm,
+                                              message:
+                                                  "Apakah Benar Anda Menolak Pengajuan Ini?",
+                                              durationInSec: 5,
+                                              onContinue: () => context
+                                                  .read<ApprovalBloc>()
+                                                  .add(SendApproval(
+                                                      approvalID: widget
+                                                          .dataApproval.id
+                                                          .toString(),
+                                                      typeApproval: "REJECTED",
+                                                      note: catatanController
+                                                          .text)),
+                                            ),
+                                          );
+                                        }),
                             ],
                           ),
                         )),

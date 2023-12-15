@@ -54,6 +54,7 @@ import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/view_edit_p
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/add_pendidikan.bloc/add_data_pendidikan_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/add_pendidikan.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/data_pendidikan.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/list_pendidikan_bloc/list_pendidikan_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/view_edit-pendidikan.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/add_pengalaman.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/add_pengalaman_bloc/add_pengalaman_kerja_bloc.dart';
@@ -145,7 +146,12 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
             create: (context) => ApprovalBloc(),
-            child: DetailApproval(dataApproval: dataApproval),
+            child: DetailApproval(
+              dataApproval: dataApproval,
+              reloadDataCallback: () {
+                context.read<ApprovalBloc>().add(GetListApproval());
+              },
+            ),
           );
         });
 
@@ -364,7 +370,10 @@ class RouteGenerator {
         });
       case DataPendidikanPage.routeName:
         return MaterialPageRoute(builder: (context) {
-          return DataPendidikanPage();
+          return BlocProvider(
+            create: (context) => ListPendidikanBloc(),
+            child: DataPendidikanPage(),
+          );
         });
       case AddPendidikanPage.routeName:
         return MaterialPageRoute(builder: (context) {

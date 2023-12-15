@@ -29,6 +29,14 @@ class ListPelatihanFailedInBackground extends ListPelatihanState {
   ListPelatihanFailedInBackground({required this.message});
 }
 
+class DeletePelatihanSuccess extends ListPelatihanState {
+  String message;
+  DeletePelatihanSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
 class ListPelatihanFailed extends ListPelatihanState {
   String message;
   ListPelatihanFailed({required this.message});

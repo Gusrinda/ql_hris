@@ -38,8 +38,8 @@ class _HomePageState extends State<HomePage> {
     try {
       // Dispatch the CheckInOutEvent to refresh the data
       WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<CheckInOutBloc>().add(AttendanceStateChecked());
-    });
+        context.read<CheckInOutBloc>().add(AttendanceStateChecked());
+      });
       // Add any additional refreshing logic here if needed
       await Future.delayed(Duration(seconds: 1));
     } catch (error) {
@@ -274,13 +274,21 @@ class _HomePageState extends State<HomePage> {
                                         color: MyColorsConst.primaryColor,
                                       ),
                                       const SizedBox(height: 7),
-                                      Text(
-                                        "${p24 ?? '-'} Jam",
-                                        // "2 Jam",
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w600),
-                                      ),
+                                      p24 != null
+                                          ? Text(
+                                              "- Jam",
+                                              style: GoogleFonts.poppins(
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            )
+                                          : Text(
+                                              "${p24} Jam",
+                                              style: GoogleFonts.poppins(
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
                                       Text(
                                         "P24",
                                         style: GoogleFonts.poppins(

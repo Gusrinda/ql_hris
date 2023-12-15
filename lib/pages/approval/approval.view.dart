@@ -23,6 +23,34 @@ class ApprovalPage extends StatefulWidget {
 }
 
 class _ApprovalPageState extends State<ApprovalPage> {
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<ApprovalBloc>().add(GetListApproval());
+    });
+  }
+  
+  void loadData() {
+    context.read<ApprovalBloc>().add(GetListApproval());
+  }
+
+  Future<void> _onRefresh() async {
+    try {
+      // Dispatch the CheckInOutEvent to refresh the data
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.read<ApprovalBloc>().add(GetListApproval());
+      });
+      // Add any additional refreshing logic here if needed
+      await Future.delayed(Duration(seconds: 1));
+    } catch (error) {
+      print('Refresh Error: $error');
+    }
+  }
 
   Color _getColorByTrxTable(String category) {
     switch (category) {
@@ -94,183 +122,190 @@ class _ApprovalPageState extends State<ApprovalPage> {
           LoadingDialog.dismissDialog(context);
         }
       },
-      child: Scaffold(
-        body: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                MyColorsConst.primaryDarkColor,
-                MyColorsConst.primaryColor,
-              ],
-              stops: [0.0, 0.1],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
+      child: RefreshIndicator(
+        displacement: 50,
+        key: _refreshIndicatorKey,
+        onRefresh: _onRefresh,
+        child: Scaffold(
+          body: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  MyColorsConst.primaryDarkColor,
+                  MyColorsConst.primaryColor,
+                ],
+                stops: [0.0, 0.1],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
             ),
-          ),
-          child: Column(
-            children: [
-              SizedBox(height: 40.sp),
-              Container(
-                padding: EdgeInsets.only(left: 5.0.sp),
-                child: Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.arrow_back_ios_rounded,
-                        size: 18,
+            child: Column(
+              children: [
+                SizedBox(height: 40.sp),
+                Container(
+                  padding: EdgeInsets.only(left: 5.0.sp),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          Icons.arrow_back_ios_rounded,
+                          size: 18,
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        color: Colors.white,
                       ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      width: size.width.sp * 1 / 6,
-                    ),
-                    Expanded(
-                      child: Text(
-                        "Antrian Approval",
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
+                      SizedBox(
+                        width: size.width.sp * 1 / 6,
+                      ),
+                      Expanded(
+                        child: Text(
+                          "Antrian Approval",
+                          style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                    color: Colors.white,
+                    ],
                   ),
-                  child: BlocBuilder<ApprovalBloc, ApprovalState>(
-                    builder: (context, state) {
-                      var listApproval =
-                          context.read<ApprovalBloc>().listApproval;
-                      return Stack(
-                        children: [
-                          if (listApproval.isNotEmpty)
-                            ListView.builder(
-                              itemCount: listApproval.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  child: InkWell(
-                                    splashColor: MyColorsConst.primaryColor,
-                                    onTap: () async {
-                                      await Navigator.pushNamed(
-                                        context,
-                                        DetailApproval.routeName,
-                                        arguments: listApproval[index],
-                                      );
-                                    },
-                                    child: Container(
-                                      margin: EdgeInsets.only(bottom: 10),
-                                      padding: EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: MyColorsConst
-                                                  .formBorderColor),
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      height: 90.sp,
-                                      width: size.width,
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.all(10),
-                                            decoration: BoxDecoration(
+                ),
+                Expanded(
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                      color: Colors.white,
+                    ),
+                    child: BlocBuilder<ApprovalBloc, ApprovalState>(
+                      builder: (context, state) {
+                        var listApproval =
+                            context.read<ApprovalBloc>().listApproval;
+                        return Stack(
+                          children: [
+                            if (listApproval.isNotEmpty)
+                              ListView.builder(
+                                itemCount: listApproval.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20),
+                                    child: InkWell(
+                                      splashColor: MyColorsConst.primaryColor,
+                                      onTap: () async {
+                                        await Navigator.pushNamed(
+                                            context, DetailApproval.routeName,
+                                            arguments: listApproval[index]);
+                                      },
+                                      child: Container(
+                                        margin: EdgeInsets.only(bottom: 10),
+                                        padding: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: MyColorsConst
+                                                    .formBorderColor),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        height: 90.sp,
+                                        width: size.width,
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                              padding: EdgeInsets.all(10),
+                                              decoration: BoxDecoration(
+                                                  color: _getColorByTrxTable(
+                                                          listApproval[index]
+                                                              .trxTable!)
+                                                      .withOpacity(0.2),
+                                                  shape: BoxShape.circle),
+                                              child: Icon(
+                                                getIconByTrxTable(
+                                                    listApproval[index]
+                                                        .trxTable!),
                                                 color: _getColorByTrxTable(
-                                                        listApproval[index]
-                                                            .trxTable!)
-                                                    .withOpacity(0.2),
-                                                shape: BoxShape.circle),
-                                            child: Icon(
-                                              getIconByTrxTable(
-                                                  listApproval[index]
-                                                      .trxTable!),
-                                              color: _getColorByTrxTable(
-                                                  listApproval[index]
-                                                      .trxTable!),
+                                                    listApproval[index]
+                                                        .trxTable!),
+                                              ),
                                             ),
-                                          ),
-                                          const SizedBox(width: 10),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                "${listApproval[index].trxNomor ?? ''}",
-                                                style: GoogleFonts.poppins(
-                                                    fontSize: 14.sp,
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                              ),
-                                              Text(
-                                                "${listApproval[index].trxName ?? ''}",
-                                                style: GoogleFonts.poppins(
-                                                    fontSize: 12.sp,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: _getColorByTrxTable(
-                                                        listApproval[index]
-                                                            .trxTable!)),
-                                              ),
-                                              SizedBox(height: 5.sp),
-                                              Text(
-                                                "${_formatDate(listApproval[index].trxDate.toString())}",
-                                                style: GoogleFonts.poppins(
-                                                    fontSize: 10.sp,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: MyColorsConst
-                                                        .lightDarkColor),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                            const SizedBox(width: 10),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  "${listApproval[index].trxNomor ?? ''}",
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 14.sp,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
+                                                Text(
+                                                  "${listApproval[index].trxName ?? ''}",
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color:
+                                                          _getColorByTrxTable(
+                                                              listApproval[
+                                                                      index]
+                                                                  .trxTable!)),
+                                                ),
+                                                SizedBox(height: 5.sp),
+                                                Text(
+                                                  "${_formatDate(listApproval[index].trxDate.toString())}",
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 10.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: MyColorsConst
+                                                          .lightDarkColor),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                );
-                              },
-                            ),
-                          if (listApproval.isEmpty)
-                            Center(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "assets/images/box_nodata.png",
-                                    height: size.width * 1 / 2,
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    "Tidak ada data yang ditampilkan!",
-                                    style: GoogleFonts.poppins(
-                                      color: MyColorsConst.darkColor,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 14.sp,
-                                    ),
-                                  ),
-                                ],
+                                  );
+                                },
                               ),
-                            ),
-                        ],
-                      );
-                    },
+                            if (listApproval.isEmpty)
+                              Center(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      "assets/images/box_nodata.png",
+                                      height: size.width * 1 / 2,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      "Tidak ada data yang ditampilkan!",
+                                      style: GoogleFonts.poppins(
+                                        color: MyColorsConst.darkColor,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 14.sp,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                          ],
+                        );
+                      },
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

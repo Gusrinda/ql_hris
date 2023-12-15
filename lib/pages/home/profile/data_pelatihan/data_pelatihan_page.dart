@@ -14,19 +14,13 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 
 class DataPelatihanPage extends StatefulWidget {
   static const routeName = '/DataPelatihanPage';
-  // final DataPelatihan dataPelatihan;
-  const DataPelatihanPage({
-    super.key,
-    // required this.dataPelatihan,
-  });
+  const DataPelatihanPage({super.key});
 
   @override
   State<DataPelatihanPage> createState() => _DataPelatihanPageState();
 }
 
 class _DataPelatihanPageState extends State<DataPelatihanPage> {
-  bool showDeleteButton = false;
-
   @override
   void initState() {
     super.initState();
@@ -34,6 +28,20 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ListPelatihanBloc>().add(GetListPelatihan());
     });
+  }
+
+  int? deleteIndex;
+  bool showDeleteButton = false;
+
+  Future<void> _onRefresh() async {
+    try {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.read<ListPelatihanBloc>().add(GetListPelatihan());
+      });
+      await Future.delayed(Duration(seconds: 1));
+    } catch (error) {
+      print('Refresh Error: $error');
+    }
   }
 
   void loadData() {
@@ -49,6 +57,19 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
           LoadingDialog.showLoadingDialog(context);
         } else if (state is ListPelatihanSuccessInBackground) {
           LoadingDialog.dismissDialog(context);
+        } else if (state is DeletePelatihanSuccess) {
+          LoadingDialog.dismissDialog(context);
+          await showDialog(
+            context: context,
+            builder: (_) => DialogCustom(
+              state: DialogCustomItem.success,
+              message: state.message,
+            ),
+          );
+          deleteIndex = null;
+          showDeleteButton = false;
+          Navigator.of(context).pop();
+          _onRefresh();
         } else if (state is ListPelatihanFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
@@ -178,16 +199,21 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           border: Border.all(
+                                              width: 1.5.sp,
                                               color: Color(0xFFDDDDDD)),
                                           color: MyColorsConst.whiteColor,
                                         ),
                                         padding: EdgeInsets.symmetric(
-                                          horizontal: 12.sp,
+                                          horizontal: 20.sp,
                                           vertical: 10.sp,
                                         ),
                                         child: Stack(
                                           children: [
                                             Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
                                               children: [
                                                 Row(
                                                   mainAxisAlignment:
@@ -206,12 +232,25 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                                                       ),
                                                     ),
                                                     IconButton(
+                                                      splashColor: MyColorsConst
+                                                          .redColor,
                                                       icon: Icon(
                                                           Icons.more_horiz),
                                                       onPressed: () {
                                                         setState(() {
-                                                          showDeleteButton =
-                                                              !showDeleteButton;
+                                                          // Ini buat munculkan tombol di index data itu saja
+                                                          if (deleteIndex ==
+                                                              index) {
+                                                            // Ini buat nutup tombol
+                                                            deleteIndex = null;
+                                                            showDeleteButton =
+                                                                false;
+                                                          } else {
+                                                            // handle buat kalau ga klik apa apa
+                                                            deleteIndex = index;
+                                                            showDeleteButton =
+                                                                true;
+                                                          }
                                                         });
                                                       },
                                                     ),
@@ -286,37 +325,65 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                                               top: 30,
                                               right: 15,
                                               child: Visibility(
-                                                visible: showDeleteButton,
+                                                visible: showDeleteButton &&
+                                                    deleteIndex == index,
                                                 child: Material(
-                                                  elevation: 4,
+                                                  elevation: 5,
                                                   borderRadius:
                                                       BorderRadius.circular(4),
                                                   child: InkWell(
-                                                    onTap: () {},
+                                                    onTap: state
+                                                            is ListPelatihanLoading
+                                                        ? null
+                                                        : () {
+                                                            showDialog(
+                                                              context: context,
+                                                              builder: (_) =>
+                                                                  DialogCustom(
+                                                                state:
+                                                                    DialogCustomItem
+                                                                        .confirm,
+                                                                message:
+                                                                    "Apakah Yakin Menghapus Data Ini?",
+                                                                durationInSec:
+                                                                    5,
+                                                                onContinue: () => context
+                                                                    .read<
+                                                                        ListPelatihanBloc>()
+                                                                    .add(DeleteListPelatihan(
+                                                                        dataID: dataPelatihan
+                                                                            .id
+                                                                            .toString())),
+                                                              ),
+                                                            );
+                                                          },
                                                     child: Container(
                                                       padding:
                                                           EdgeInsets.symmetric(
-                                                        horizontal: 8.sp,
-                                                        vertical: 4.sp,
+                                                        horizontal: 15.sp,
+                                                        vertical: 7.sp,
                                                       ),
                                                       decoration: BoxDecoration(
                                                         borderRadius:
                                                             BorderRadius
-                                                                .circular(6),
+                                                                .circular(7),
                                                         border: Border.all(
                                                             color: Color(
                                                                 0xFFDDDDDD)),
-                                                        color: MyColorsConst
-                                                            .whiteColor,
+                                                        color: Colors.red
+                                                            .withOpacity(0.2),
                                                       ),
                                                       child: Text(
                                                         'Hapus',
                                                         style:
                                                             GoogleFonts.poppins(
-                                                          fontSize: 12.sp,
-                                                          color: MyColorsConst
-                                                              .darkColor,
-                                                        ),
+                                                                fontSize: 12.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                color: Colors
+                                                                    .red
+                                                                    .shade900),
                                                       ),
                                                     ),
                                                   ),

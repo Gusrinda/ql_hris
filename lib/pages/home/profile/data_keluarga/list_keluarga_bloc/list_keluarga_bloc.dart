@@ -26,12 +26,39 @@ class ListKeluargaBloc extends Bloc<ListKeluargaEvent, ListKeluargaState> {
                 ResponseKeluargaKaryawan.fromJson(res.response);
             listkeluarga = dataResponse.data ?? [];
             print("GET Pelatihan: $listkeluarga}");
-            emit(
-                ListKeluargaSuccess(dataKeluarga: listkeluarga));
+            emit(ListKeluargaSuccess(dataKeluarga: listkeluarga));
           } else {
             emit(ListKeluargaFailedInBackground(
                 message: 'Response format is invalid'));
           }
+        } else if (res is ServicesFailure) {
+          if (res.errorResponse == null) {
+            await GeneralSharedPreferences.removeUserToken();
+            emit(ListKeluargaFailedUserExpired(message: "Token expired"));
+          } else {
+            emit(ListKeluargaFailed(message: res.errorResponse));
+          }
+        }
+      } else if (resToken is ServicesFailure) {
+        emit(ListKeluargaFailedInBackground(message: 'Response invalid'));
+      }
+    });
+
+    on<DeleteListKeluarga>((event, emit) async {
+      emit(ListKeluargaLoading());
+      var resToken = await GeneralSharedPreferences.getUserToken();
+      print(resToken);
+      if (resToken is ServicesSuccess) {
+        ///Disini menjalankan state Deletenya dengan mengirimkan ID ke Service
+        final res = await DataKeluargaServices.deleteDataKeluarga(
+            resToken.response["token"], event.dataID);
+
+        ///Ketika Respon Berhasil
+        if (res is ServicesSuccess) {
+          emit(DeleteKeluargaSuccess(message: "Berhasil Menghapus Data"));
+          print(res.response);
+
+          ///Ketika Respon Gagal
         } else if (res is ServicesFailure) {
           if (res.errorResponse == null) {
             await GeneralSharedPreferences.removeUserToken();
