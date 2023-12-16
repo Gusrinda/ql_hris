@@ -274,7 +274,7 @@ class _HomePageState extends State<HomePage> {
                                         color: MyColorsConst.primaryColor,
                                       ),
                                       const SizedBox(height: 7),
-                                      p24 != null
+                                      p24 == null
                                           ? Text(
                                               "- Jam",
                                               style: GoogleFonts.poppins(

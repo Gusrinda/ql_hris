@@ -45,6 +45,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
   DateTime? selectedDate;
   DateTime? selectedDateFrom;
   DateTime? selectedDateTo;
+  int weekdaysCount = 0;
 
   DateTime? parseDate(String? date) {
     try {
@@ -403,6 +404,37 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                         SizedBox(
                                           height: 20.sp,
                                         ),
+                                        Text.rich(
+                                          TextSpan(
+                                            text: 'Cuti selama : ',
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 13.sp,
+                                              color: MyColorsConst.darkColor,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                            children: [
+                                              TextSpan(
+                                                text: weekdaysCount.toString(),
+                                                style: GoogleFonts.poppins(
+                                                  fontSize: 18.sp,
+                                                  color: Colors.red.shade600,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text: ' hari',
+                                                style: GoogleFonts.poppins(
+                                                  fontSize: 13.sp,
+                                                  color: Colors.red.shade600,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 20.sp,
+                                        ),
                                         FormCatatanData(
                                           hintText: 'Keterangan',
                                           labelForm: 'Keterangan Cuti',
@@ -471,6 +503,31 @@ class _AddCutiPageState extends State<AddCutiPage> {
     );
   }
 
+  int calculateWeekdays(DateTime startDate, DateTime endDate) {
+    int weekdaysCount = 0;
+    DateTime currentDate = startDate;
+
+    while (currentDate.isBefore(endDate) ||
+        currentDate.isAtSameMomentAs(endDate)) {
+      if (currentDate.weekday != 7) {
+        weekdaysCount++;
+      }
+
+      currentDate = currentDate.add(Duration(days: 1));
+    }
+
+    return weekdaysCount;
+  }
+
+  void _calculateWeekdays() {
+    if (selectedDateFrom != null && selectedDateTo != null) {
+      weekdaysCount = calculateWeekdays(selectedDateFrom!, selectedDateTo!);
+      print("Jumlah hari kerja: $weekdaysCount");
+    } else {
+      print("Pilih tanggal mulai dan tanggal berakhir terlebih dahulu.");
+    }
+  }
+
   Widget _buildDateTextField(
     String hintText,
     TextEditingController controller,
@@ -496,6 +553,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
               selectedDateFrom = pickedDate;
             });
             print("Selected Date From: $selectedDateFrom");
+            _calculateWeekdays();
           } else if (controller == widget.dateToController) {
             widget.dateToController.text =
                 DateFormat('yyyy-MM-dd').format(pickedDate);
@@ -503,6 +561,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
               selectedDateTo = pickedDate;
             });
             print("Selected Date To: $selectedDateTo");
+            _calculateWeekdays();
           }
         }
       },
@@ -521,12 +580,11 @@ class _AddCutiPageState extends State<AddCutiPage> {
                   : hintText,
               style: GoogleFonts.poppins(
                 fontSize: selectedDate != null ? 12.sp : 9.sp,
-                fontWeight: selectedDate != null
-                    ? FontWeight.w500
-                    : FontWeight.w400, // Different fontWeight for hintText
+                fontWeight:
+                    selectedDate != null ? FontWeight.w500 : FontWeight.w400,
                 color: selectedDate != null
                     ? MyColorsConst.darkColor
-                    : MyColorsConst.disableColor, // Different color for hintText
+                    : MyColorsConst.disableColor,
               ),
             ),
             Icon(

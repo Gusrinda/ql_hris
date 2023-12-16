@@ -18,11 +18,27 @@ class ListCutiBloc extends Bloc<ListCutiEvent, ListCutiState> {
       emit(ListCutiLoading());
       var resToken = await GeneralSharedPreferences.getUserToken();
       if (resToken is ServicesSuccess) {
-        var res = await CutiServices.getListCuti(resToken.response["token"], event.date);
+        var res = await CutiServices.getListCuti(
+            resToken.response["token"], event.date);
         var resUser = await ProfileServices.getDataProfilel(
             resToken.response["token"], resToken.response["id"]);
         if (res is ServicesSuccess && resUser is ServicesSuccess) {
           final username = resUser.response["data"]["name"] ?? 'Pegawai SJ';
+          final sisaCutiMasaKerja =
+              resUser.response["data"]["m_kary.cuti_sisa_reguler"] ?? 0;
+              print(sisaCutiMasaKerja);
+          final sisaCutiTahunan =
+              resUser.response["data"]["m_kary.cuti_sisa_panjang"] ?? 0;
+          final totalSisaCuti =
+              (sisaCutiTahunan + sisaCutiMasaKerja).toString();
+
+          final usedCutiMasaKerja =
+              resUser.response["data"]["m_kary.cuti_jatah_reguler"] ?? 0;
+          final usedCutiTahunan =
+              resUser.response["data"]["m_kary.cuti_panjang"] ?? 0;
+          final totalCutiTerpakai =
+              (usedCutiTahunan + usedCutiMasaKerja).toString();
+
           debugPrint(res.response.toString());
           if (res.response is Map<String, dynamic>) {
             print(res.response);
@@ -34,7 +50,12 @@ class ListCutiBloc extends Bloc<ListCutiEvent, ListCutiState> {
             listcuti = dataResponse.data ?? [];
 
             emit(
-              ListCutiSuccessInBackground(dataCuti: listcuti, username: username,),
+              ListCutiSuccessInBackground(
+                dataCuti: listcuti,
+                username: username,
+                totalSisaCuti: totalSisaCuti,
+                totalCutiTerpakai: totalCutiTerpakai,
+              ),
             );
           } else {
             emit(ListCutiFailedInBackground(

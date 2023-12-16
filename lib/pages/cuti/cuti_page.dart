@@ -102,6 +102,9 @@ DateTime? selectedYear;
 
 class _CutiPageState extends State<CutiPage> {
   String? username;
+  String? totalCutiTerpakai;
+  String? totalSisaCuti;
+
   void initState() {
     super.initState();
     loadData();
@@ -123,6 +126,8 @@ class _CutiPageState extends State<CutiPage> {
 
           setState(() {
             username = state.username;
+            totalCutiTerpakai = state.totalCutiTerpakai;
+            totalSisaCuti = state.totalSisaCuti;
           });
         } else if (state is ListCutiFailed) {
           LoadingDialog.dismissDialog(context);
@@ -446,7 +451,7 @@ class _CutiPageState extends State<CutiPage> {
                             ),
                             SizedBox(height: 5.sp),
                             Text(
-                              '7 hari',
+                              totalCutiTerpakai ?? '0',
                               style: GoogleFonts.poppins(
                                 fontSize: 17,
                                 fontWeight: FontWeight.w700,
@@ -475,7 +480,7 @@ class _CutiPageState extends State<CutiPage> {
                             ),
                             SizedBox(height: 5.sp),
                             Text(
-                              '5 hari',
+                              totalSisaCuti ?? "0",
                               style: GoogleFonts.poppins(
                                 fontSize: 17,
                                 fontWeight: FontWeight.w700,

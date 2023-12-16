@@ -14,14 +14,19 @@ class ListCutiLoading extends ListCutiState {}
 class ListCutiSuccessInBackground extends ListCutiState {
   List<Datum> dataCuti;
   String username;
+  String totalSisaCuti;
+  String totalCutiTerpakai;
 
   ListCutiSuccessInBackground({
     required this.dataCuti,
     required this.username,
+    required this.totalSisaCuti,
+    required this.totalCutiTerpakai,
+
   });
 
   @override
-  List<Object> get props => [dataCuti, username];
+  List<Object> get props => [dataCuti, username, totalSisaCuti, totalCutiTerpakai];
 }
 
 class ListCutiFailedInBackground extends ListCutiState {
