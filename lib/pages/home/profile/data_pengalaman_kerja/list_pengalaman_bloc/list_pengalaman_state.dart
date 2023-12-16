@@ -45,3 +45,11 @@ class ListPengalamanFailedUserExpired extends ListPengalamanState {
   @override
   List<Object> get props => [message];
 }
+
+class DeletePengalamanSuccess extends ListPengalamanState {
+  String message;
+  DeletePengalamanSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}

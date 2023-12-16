@@ -15,3 +15,12 @@ class GetListBahasa extends ListBahasaEvent {
   @override
   List<Object> get props => [];
 }
+
+class DeleteListBahasa extends ListBahasaEvent {
+  String dataID;
+
+  DeleteListBahasa({required this.dataID});
+
+  @override
+  List<Object> get props => [dataID];
+}

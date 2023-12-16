@@ -43,6 +43,31 @@ class ListPengalamanBloc extends Bloc<ListPengalamanEvent, ListPengalamanState> 
         emit(ListPengalamanFailedInBackground(message: 'Response invalid'));
       }
     });
+
+    on<DeleteListPengalaman>(
+      (event, emit) async {
+        emit(ListPengalamanLoading());
+        var resToken = await GeneralSharedPreferences.getUserToken();
+        print(resToken);
+        if (resToken is ServicesSuccess) {
+          final res = await DataPengalamanKerjaService.deleteDataPengalaman(
+              resToken.response["token"], event.dataID);
+          if (res is ServicesSuccess) {
+            emit(DeletePengalamanSuccess(message: "Berhasil Menghapus Data"));
+            print(res.response);
+          } else if (res is ServicesFailure) {
+            if (res.errorResponse == null) {
+              await GeneralSharedPreferences.removeUserToken();
+              emit(ListPengalamanFailedUserExpired(message: "Token Expired"));
+            } else {
+              emit(ListPengalamanFailed(message: res.errorResponse));
+            }
+          }
+        } else if (resToken is ServicesFailure) {
+          emit(ListPengalamanFailedInBackground(message: "Response invalid"));
+        }
+      },
+    );
   }
 }
 

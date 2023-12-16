@@ -31,11 +31,23 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
     });
   }
 
+  Future<void> _onRefresh() async {
+    try {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        context.read<ListPengalamanBloc>().add(GetListPengalaman());
+      });
+      await Future.delayed(Duration(seconds: 1));
+    } catch (e) {
+      print('Resfresh Error: $e');
+    }
+  }
+
   void loadData() {
     context.read<ListPengalamanBloc>().add(GetListPengalaman());
   }
 
   bool showDeleteButton = false;
+  int? deleteIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +58,19 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
           LoadingDialog.showLoadingDialog(context);
         } else if (state is ListPengalamanSuccess) {
           LoadingDialog.dismissDialog(context);
+        } else if (state is DeletePengalamanSuccess) {
+          LoadingDialog.dismissDialog(context);
+          await showDialog(
+            context: context,
+            builder: (_) => DialogCustom(
+              state: DialogCustomItem.success,
+              message: state.message,
+            ),
+          );
+          deleteIndex = null;
+          showDeleteButton = false;
+          Navigator.of(context).pop();
+          _onRefresh();
         } else if (state is ListPengalamanFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
@@ -184,12 +209,22 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
                                                       ),
                                                     ),
                                                     IconButton(
+                                                      splashColor: MyColorsConst
+                                                          .redColor,
                                                       icon: Icon(
                                                           Icons.more_horiz),
                                                       onPressed: () {
                                                         setState(() {
-                                                          showDeleteButton =
-                                                              !showDeleteButton;
+                                                          if (deleteIndex ==
+                                                              index) {
+                                                            deleteIndex = null;
+                                                            showDeleteButton =
+                                                                false;
+                                                          } else {
+                                                            deleteIndex = index;
+                                                            showDeleteButton =
+                                                                true;
+                                                          }
                                                         });
                                                       },
                                                     ),
@@ -264,13 +299,40 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
                                               top: 30,
                                               right: 15,
                                               child: Visibility(
-                                                visible: showDeleteButton,
+                                                visible: showDeleteButton &&
+                                                    deleteIndex == index,
                                                 child: Material(
-                                                  elevation: 4,
+                                                  elevation: 5,
                                                   borderRadius:
                                                       BorderRadius.circular(4),
                                                   child: InkWell(
-                                                    onTap: () {},
+                                                    onTap: state
+                                                            is ListPengalamanLoading
+                                                        ? null
+                                                        : () {
+                                                            showDialog(
+                                                              context: context,
+                                                              builder: (_) =>
+                                                                  DialogCustom(
+                                                                state:
+                                                                    DialogCustomItem
+                                                                        .confirm,
+                                                                message:
+                                                                    "Apakah yakin Menghapus Data ini?",
+                                                                durationInSec:
+                                                                    5,
+                                                                onContinue: () => context
+                                                                    .read<
+                                                                        ListPengalamanBloc>()
+                                                                    .add(
+                                                                        DeleteListPengalaman(
+                                                                      dataID: dataPengalaman
+                                                                          .id
+                                                                          .toString(),
+                                                                    )),
+                                                              ),
+                                                            );
+                                                          },
                                                     child: Container(
                                                       padding:
                                                           EdgeInsets.symmetric(
@@ -284,16 +346,16 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
                                                         border: Border.all(
                                                             color: Color(
                                                                 0xFFDDDDDD)),
-                                                        color: MyColorsConst
-                                                            .whiteColor,
+                                                        color: Colors.red
+                                                            .withOpacity(0.2),
                                                       ),
                                                       child: Text(
                                                         'Hapus',
                                                         style:
                                                             GoogleFonts.poppins(
                                                           fontSize: 12.sp,
-                                                          color: MyColorsConst
-                                                              .darkColor,
+                                                          color: Colors
+                                                              .red.shade900,
                                                         ),
                                                       ),
                                                     ),
@@ -320,7 +382,8 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => BlocProvider(
-                                      create: (context) => AddPengalamanKerjaBloc(),
+                                      create: (context) =>
+                                          AddPengalamanKerjaBloc(),
                                       child: AddPengalamanPage(
                                           reloadDataCallback: loadData),
                                     ),

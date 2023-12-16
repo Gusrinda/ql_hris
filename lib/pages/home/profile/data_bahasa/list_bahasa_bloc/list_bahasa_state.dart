@@ -45,3 +45,11 @@ class ListBahasaFailedUserExpired extends ListBahasaState {
   @override
   List<Object> get props => [message];
 }
+
+class DeleteBahasaSuccess extends ListBahasaState {
+  String message;
+  DeleteBahasaSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}

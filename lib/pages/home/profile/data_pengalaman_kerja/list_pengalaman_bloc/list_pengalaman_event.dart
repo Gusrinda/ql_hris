@@ -14,3 +14,12 @@ class GetListPengalaman extends ListPengalamanEvent {
   @override
   List<Object> get props => [];
 }
+
+class DeleteListPengalaman extends ListPengalamanEvent {
+  String dataID;
+
+  DeleteListPengalaman({required this.dataID});
+
+  @override
+  List<Object> get props => [dataID];
+}
