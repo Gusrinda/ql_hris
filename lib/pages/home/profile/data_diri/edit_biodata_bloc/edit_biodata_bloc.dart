@@ -30,6 +30,9 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
   List<DataGeneral> dataGolDarah = [];
   List<DataGeneral> dataStatusNikah = [];
   List<DataGeneral> dataTanggungan = [];
+  List<DataGeneral> dataProvinsi = [];
+  List<DataGeneral> dataKotabyProvinsi = [];
+  List<DataGeneral> dataKecamatan = [];
 
   EditBiodataBloc() : super(EditBiodataInitial()) {
     on<EditDataBiodataSubmited>((event, emit) async {
@@ -489,6 +492,123 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               emit(
                 SelectTanggunganSuccessInBackground(
                     dataTanggungan: dataTanggungan),
+              );
+            } else {
+              emit(EditBiodataFailedInBackground(
+                  message: 'Response format is invalid'));
+            }
+          } else if (res is ServicesFailure) {
+            if (res.errorResponse == null) {
+              await GeneralSharedPreferences.removeUserToken();
+              emit(EditBiodataFailedUserExpired(message: "Token expired"));
+            } else {
+              emit(EditBiodataFailed(message: res.errorResponse));
+            }
+          }
+        } else if (resToken is ServicesFailure) {
+          emit(EditBiodataFailedInBackground(message: 'Response invalid'));
+        }
+      },
+    );
+
+     on<OnSelectProvinsi>(
+      (event, emit) async {
+        emit(EditBiodataLoading());
+        var resToken = await GeneralSharedPreferences.getUserToken();
+        if (resToken is ServicesSuccess) {
+          var res = await ListGeneralService.getProvinsi(
+              resToken.response["token"]);
+
+          if (res is ServicesSuccess) {
+            if (res.response is Map<String, dynamic>) {
+              //Mengubah hasil response api ke model kelas
+              ResponseGeneral dataResponse =
+                  ResponseGeneral.fromJson(res.response);
+
+              //Masukkan data dari model ke kebutuhan
+              dataProvinsi = dataResponse.data ?? [];
+
+              emit(
+                SelectProvinsiSuccessInBackground(
+                    dataProvinsi: dataProvinsi),
+              );
+            } else {
+              emit(EditBiodataFailedInBackground(
+                  message: 'Response format is invalid'));
+            }
+          } else if (res is ServicesFailure) {
+            if (res.errorResponse == null) {
+              await GeneralSharedPreferences.removeUserToken();
+              emit(EditBiodataFailedUserExpired(message: "Token expired"));
+            } else {
+              emit(EditBiodataFailed(message: res.errorResponse));
+            }
+          }
+        } else if (resToken is ServicesFailure) {
+          emit(EditBiodataFailedInBackground(message: 'Response invalid'));
+        }
+      },
+    );
+
+    on<OnSelectKotabyProvinsi>(
+      (event, emit) async {
+        emit(EditBiodataLoading());
+        var resToken = await GeneralSharedPreferences.getUserToken();
+        if (resToken is ServicesSuccess) {
+          var res = await ListGeneralService.getKotabyProvinsi(
+              resToken.response["token"], event.idProvinsi);
+
+          if (res is ServicesSuccess) {
+            if (res.response is Map<String, dynamic>) {
+              //Mengubah hasil response api ke model kelas
+              ResponseGeneral dataResponse =
+                  ResponseGeneral.fromJson(res.response);
+
+              //Masukkan data dari model ke kebutuhan
+              dataKotabyProvinsi = dataResponse.data ?? [];
+
+              emit(
+                SelectKotabyProvinsiSuccessInBackground(
+                    dataKotabyProvinsi: dataKotabyProvinsi),
+              );
+            } else {
+              emit(EditBiodataFailedInBackground(
+                  message: 'Response format is invalid'));
+            }
+          } else if (res is ServicesFailure) {
+            if (res.errorResponse == null) {
+              await GeneralSharedPreferences.removeUserToken();
+              emit(EditBiodataFailedUserExpired(message: "Token expired"));
+            } else {
+              emit(EditBiodataFailed(message: res.errorResponse));
+            }
+          }
+        } else if (resToken is ServicesFailure) {
+          emit(EditBiodataFailedInBackground(message: 'Response invalid'));
+        }
+      },
+    );
+
+    on<OnSelectKecamatan>(
+      (event, emit) async {
+        emit(EditBiodataLoading());
+        var resToken = await GeneralSharedPreferences.getUserToken();
+        if (resToken is ServicesSuccess) {
+          var res = await ListGeneralService.getKecamatan(
+              resToken.response["token"], event.idKota);
+
+          if (res is ServicesSuccess) {
+            if (res.response is Map<String, dynamic>) {
+              //Mengubah hasil response api ke model kelas
+              ResponseGeneral dataResponse =
+                  ResponseGeneral.fromJson(res.response);
+
+              //Masukkan data dari model ke kebutuhan
+              dataKecamatan = dataResponse.data ?? [];
+
+              emit(
+                SelectKecamatanSuccessInBackground(
+                    dataKecamatan: dataKecamatan),
               );
             } else {
               emit(EditBiodataFailedInBackground(

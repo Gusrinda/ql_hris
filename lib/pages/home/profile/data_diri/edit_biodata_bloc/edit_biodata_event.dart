@@ -217,3 +217,27 @@ class OnSelectTanggungan extends EditBiodataEvent {
   @override
   List<Object> get props => [];
 }
+
+class OnSelectProvinsi extends EditBiodataEvent {
+  const OnSelectProvinsi();
+  @override
+  List<Object> get props => [];
+}
+
+class OnSelectKotabyProvinsi extends EditBiodataEvent {
+  int idProvinsi;
+  OnSelectKotabyProvinsi({
+    required this.idProvinsi,
+  });
+  @override
+  List<Object> get props => [idProvinsi];
+}
+
+class OnSelectKecamatan extends EditBiodataEvent {
+  int idKota;
+  OnSelectKecamatan({
+    required this.idKota,
+  });
+  @override
+  List<Object> get props => [idKota];
+}

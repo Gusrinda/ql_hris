@@ -1,12 +1,9 @@
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
@@ -19,13 +16,9 @@ import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/search_divisi.dart
 import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/zona_search.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/controller/diri_controller.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_biodata_bloc/edit_biodata_bloc.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_biodata_bloc/selector/agama_selector.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_biodata_bloc/selector/goldarah_selector.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_biodata_bloc/selector/kode_presensi_selector.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_biodata_bloc/selector/status_nikah_selector.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_biodata_bloc/selector/tanggungan_selector.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/select_image.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/selector/jeniskelamin_selector.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_diri/selector/general_selector.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_diri/selector/kode_presensi_selector.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/selector/kota_selector.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_departemen_model.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_divisi_model.dart';
@@ -61,6 +54,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
   String? selectedGolDarah;
   String? selectedStatusNikah;
   String? selectedTanggungan;
+  String? selectedProvinsi;
+  String? selectedKotabyProvinsi;
+  String? selectedKecamatan;
   File? fotoKaryawan;
   File? ktp;
   File? kartukeluarga;
@@ -126,6 +122,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
       keluargaBloc.add(OnSelectGolDarah());
       keluargaBloc.add(OnSelectStatusNikah());
       keluargaBloc.add(OnSelectTanggungan());
+      keluargaBloc.add(OnSelectProvinsi());
+      // keluargaBloc.add(OnSelectKotabyProvinsi(
+      //     idProvinsi: int.parse(controllers.idProvinsiController.text)));
     });
   }
 
@@ -197,6 +196,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
     var dataGolDarah = context.read<EditBiodataBloc>().dataGolDarah;
     var dataStatusNikah = context.read<EditBiodataBloc>().dataStatusNikah;
     var dataTanggungan = context.read<EditBiodataBloc>().dataTanggungan;
+    var dataProvinsi = context.read<EditBiodataBloc>().dataProvinsi;
 
     void onFotoKaryawanSelected(File? file) {
       setState(() {
@@ -401,8 +401,8 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
       if (jenisKelamin.isNotEmpty) {
         final selectedJenisKelamin = await showSearch<DataGeneral?>(
           context: context,
-          delegate: JenisKelaminSearchDelegate(
-            jenisKelamin: jenisKelamin,
+          delegate: GeneralSearchDelegate(
+            dataList: jenisKelamin,
             filteredData: jenisKelamin,
           ),
         );
@@ -467,8 +467,8 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
       if (dataAgama.isNotEmpty) {
         final selectedAgama = await showSearch<DataGeneral?>(
           context: context,
-          delegate: AgamaSearchDelegate(
-            dataAgama: dataAgama,
+          delegate: GeneralSearchDelegate(
+            dataList: dataAgama,
             filteredData: dataAgama,
           ),
         );
@@ -499,8 +499,8 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
       if (dataStatusNikah.isNotEmpty) {
         final selectedStatusNikah = await showSearch<DataGeneral?>(
           context: context,
-          delegate: StatusNikahSearchDelegate(
-            dataStatusNikah: dataStatusNikah,
+          delegate: GeneralSearchDelegate(
+            dataList: dataStatusNikah,
             filteredData: dataStatusNikah,
           ),
         );
@@ -532,8 +532,8 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
       if (dataGolDarah.isNotEmpty) {
         final selectedGolDarah = await showSearch<DataGeneral?>(
           context: context,
-          delegate: GolDarahSearchDelegate(
-            dataGolDarah: dataGolDarah,
+          delegate: GeneralSearchDelegate(
+            dataList: dataGolDarah,
             filteredData: dataGolDarah,
           ),
         );
@@ -564,8 +564,8 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
       if (dataTanggungan.isNotEmpty) {
         final selectedTanggungan = await showSearch<DataGeneral?>(
           context: context,
-          delegate: TanggunganSearchDelegate(
-            dataTanggungan: dataTanggungan,
+          delegate: GeneralSearchDelegate(
+            dataList: dataTanggungan,
             filteredData: dataTanggungan,
           ),
         );
@@ -573,7 +573,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         if (selectedTanggungan != null) {
           controllers.idKodePresensiController.text =
               selectedTanggungan.id?.toString() ?? '';
-          controllers.valueJenisKelaminController.text =
+          controllers.valueKodePresensiController.text =
               selectedTanggungan.value?.toString() ?? '';
 
           setState(() {
@@ -585,6 +585,132 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
       } else {
         print("Tidak Ada Item");
       }
+    }
+
+    void showProvinsiMenu(BuildContext context) async {
+      if (dataProvinsi.isEmpty) {
+        context.read<EditBiodataBloc>().add(OnSelectProvinsi());
+        dataProvinsi = context.read<EditBiodataBloc>().dataProvinsi;
+      }
+
+      if (dataProvinsi.isNotEmpty) {
+        final selectedProvinsi = await showSearch<DataGeneral?>(
+          context: context,
+          delegate: GeneralSearchDelegate(
+            dataList: dataProvinsi,
+            filteredData: dataProvinsi,
+          ),
+        );
+
+        if (selectedProvinsi != null) {
+          controllers.idProvinsiController.text =
+              selectedProvinsi.id?.toString() ?? '';
+          controllers.valueProvinsiController.text =
+              selectedProvinsi.value?.toString() ?? '';
+
+          setState(() {
+            this.selectedProvinsi = selectedProvinsi.value;
+            context.read<EditBiodataBloc>().add(OnSelectKotabyProvinsi(
+                idProvinsi: int.parse(controllers.idProvinsiController.text)));
+
+            print(selectedProvinsi.value);
+            print("Selected ID Provinsi Terakhir: ${selectedProvinsi.id}");
+          });
+        }
+      } else {
+        print("Tidak Ada Item");
+      }
+    }
+
+    void showKotabyProvinsiMenu(BuildContext context) {
+      if (controllers.idProvinsiController.text.isEmpty) {
+        CircularProgressIndicator();
+      }
+
+      // Dapatkan ID provinsi yang dipilih
+      int selectedProvinsiId = int.parse(controllers.idProvinsiController.text);
+
+      // Panggil fungsi untuk mendapatkan list kota berdasarkan provinsi
+      context
+          .read<EditBiodataBloc>()
+          .add(OnSelectKotabyProvinsi(idProvinsi: selectedProvinsiId));
+
+      // Ambil data kota berdasarkan provinsi
+      List<DataGeneral> dataKotabyProvinsi =
+          context.read<EditBiodataBloc>().dataKotabyProvinsi;
+
+      if (dataKotabyProvinsi.isEmpty) {
+        print("Tidak Ada Kota untuk Provinsi yang Dipilih");
+        return;
+      }
+
+      // Tampilkan pencarian kota berdasarkan provinsi
+      showSearch<DataGeneral?>(
+        context: context,
+        delegate: GeneralSearchDelegate(
+          dataList: dataKotabyProvinsi,
+          filteredData: dataKotabyProvinsi,
+        ),
+      ).then((selectedKota) {
+        if (selectedKota != null) {
+          controllers.idKotaController.text = selectedKota.id?.toString() ?? '';
+          controllers.valueKotaController.text =
+              selectedKota.value?.toString() ?? '';
+
+          setState(() {
+            this.selectedKotabyProvinsi = selectedKota.value;
+            context.read<EditBiodataBloc>().add(OnSelectKecamatan(
+                idKota: int.parse(controllers.idKotaController.text)));
+            print(selectedKota.value);
+            print("Selected ID Kota Terakhir: ${selectedKota.id}");
+          });
+        }
+      });
+    }
+
+    void showKecamatanMenu(BuildContext context) {
+      if (controllers.idKotaController.text.isEmpty) {
+        CircularProgressIndicator();
+      }
+
+      // Dapatkan ID provinsi yang dipilih
+      int selectedKotaId = int.parse(controllers.idKotaController.text);
+
+      // Panggil fungsi untuk mendapatkan list kota berdasarkan provinsi
+      context
+          .read<EditBiodataBloc>()
+          .add(OnSelectKecamatan(idKota: selectedKotaId));
+
+      // Ambil data kota berdasarkan provinsi
+      List<DataGeneral> dataKecamatan =
+          context.read<EditBiodataBloc>().dataKecamatan;
+
+      if (dataKecamatan.isEmpty) {
+        print("Tidak Ada Kecamatan untuk Kota yang Dipilih");
+        return;
+      }
+
+      // Tampilkan pencarian kota berdasarkan provinsi
+      showSearch<DataGeneral?>(
+        context: context,
+        delegate: GeneralSearchDelegate(
+          dataList: dataKecamatan,
+          filteredData: dataKecamatan,
+        ),
+      ).then((selectedKecamatan) {
+        if (selectedKecamatan != null) {
+          controllers.idKecamatanController.text =
+              selectedKecamatan.id?.toString() ?? '';
+          controllers.valueKecamatanController.text =
+              selectedKecamatan.value?.toString() ?? '';
+
+          setState(() {
+            this.selectedKecamatan = selectedKecamatan.value;
+            print(selectedKecamatan.value);
+            print("Selected ID Kota Terakhir: ${selectedKecamatan.id}");
+          });
+        }
+      });
     }
 
     return WillPopScope(
@@ -910,7 +1036,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     validator: (value) {},
                                   ),
                                   FormDropDownData(
-                                    onTap: () {},
+                                    onTap: () {
+                                      showProvinsiMenu(context);
+                                    },
                                     hintText: 'Pilih Provinsi',
                                     labelForm: 'Provinsi',
                                     labelTag: 'Label-Provinsi',
@@ -921,7 +1049,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                         controllers.idProvinsiController,
                                   ),
                                   FormDropDownData(
-                                    onTap: () {},
+                                    onTap: () {
+                                      showKotabyProvinsiMenu(context);
+                                    },
                                     hintText: 'Pilih Kota',
                                     labelForm: 'Kota',
                                     labelTag: 'Label-Kota',
@@ -931,7 +1061,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     idController: controllers.idKotaController,
                                   ),
                                   FormDropDownData(
-                                    onTap: () {},
+                                    onTap: () {
+                                      showKecamatanMenu(context);
+                                    },
                                     hintText: 'Pilih Kecamatan',
                                     labelForm: 'Kecamatan',
                                     labelTag: 'Label-Kecamatan',

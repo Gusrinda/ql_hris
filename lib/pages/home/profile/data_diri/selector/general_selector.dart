@@ -4,12 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/services/model/list_general/response_general.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
-class StatusNikahSearchDelegate extends SearchDelegate<DataGeneral?> {
-  final List<DataGeneral> dataStatusNikah;
+class GeneralSearchDelegate extends SearchDelegate<DataGeneral?> {
+  final List<DataGeneral> dataList;
   final List<DataGeneral> filteredData;
 
-  StatusNikahSearchDelegate({
-    required this.dataStatusNikah,
+  GeneralSearchDelegate({
+    required this.dataList,
     required this.filteredData,
   });
 
@@ -39,7 +39,7 @@ class StatusNikahSearchDelegate extends SearchDelegate<DataGeneral?> {
 
   @override
   Widget buildResults(BuildContext context) {
-    final searchResults = dataStatusNikah
+    final searchResults = dataList
         .where((element) =>
             element.value!.toLowerCase().contains(query.toLowerCase()))
         .toList();

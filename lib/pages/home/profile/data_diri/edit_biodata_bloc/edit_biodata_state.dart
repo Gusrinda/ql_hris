@@ -168,3 +168,36 @@ class SelectTanggunganSuccessInBackground extends EditBiodataState {
   @override
   List<Object> get props => [dataTanggungan];
 }
+
+class SelectProvinsiSuccessInBackground extends EditBiodataState {
+  List<DataGeneral> dataProvinsi;
+
+  SelectProvinsiSuccessInBackground({
+    required this.dataProvinsi,
+  });
+
+  @override
+  List<Object> get props => [dataProvinsi];
+}
+
+class SelectKotabyProvinsiSuccessInBackground extends EditBiodataState {
+  List<DataGeneral> dataKotabyProvinsi;
+
+  SelectKotabyProvinsiSuccessInBackground({
+    required this.dataKotabyProvinsi,
+  });
+
+  @override
+  List<Object> get props => [dataKotabyProvinsi];
+}
+
+class SelectKecamatanSuccessInBackground extends EditBiodataState {
+  List<DataGeneral> dataKecamatan;
+
+  SelectKecamatanSuccessInBackground({
+    required this.dataKecamatan,
+  });
+
+  @override
+  List<Object> get props => [dataKecamatan];
+}

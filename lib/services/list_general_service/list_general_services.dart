@@ -12,9 +12,29 @@ class ListGeneralService {
     );
   }
 
-  static Future<Object> getKota(String token) async {
+  // static Future<Object> getKota(String token) async {
+  //   var url = Uri.parse(
+  //       "${MyGeneralConst.API_URL}/operation/m_general?scopes=genKota&provinsi_id=101&paginate=100");
+  //   return await GeneralServices.baseService(
+  //     url: url,
+  //     method: GeneralServicesMethod.get,
+  //     headers: GeneralServices.addToken2Headers(token),
+  //   );
+  // }
+
+  static Future<Object> getKotabyProvinsi(String token, int idProvinsi) async {
     var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_general?scopes=genKota&provinsi_id=101&paginate=100");
+        "${MyGeneralConst.API_URL}/operation/m_general?scopes=genKota&provinsi_id=$idProvinsi&paginate=100");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token),
+    );
+  }
+
+  static Future<Object> getKecamatan(String token, int idKota) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_general?scopes=genKecamatan&kota_id=$idKota&paginate=100");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -133,7 +153,7 @@ class ListGeneralService {
 
   static Future<Object> getTanggungan(String token) async {
     var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_general?scopes=tanggungan");
+        "${MyGeneralConst.API_URL}/operation/m_general?scopes=tanggungan&paginate=100");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
