@@ -34,14 +34,14 @@ class AddPelatihanPage extends StatefulWidget {
 }
 
 class _AddPelatihanPageState extends State<AddPelatihanPage> {
-   @override
+  @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<AddPelatihanBloc>().add(OnSelectKota());
     });
   }
-  
+
   String? selectedKota;
   @override
   Widget build(BuildContext context) {
@@ -256,20 +256,18 @@ class _AddPelatihanPageState extends State<AddPelatihanPage> {
                                         widget.lembagaPelatihanController,
                                     validator: (value) {},
                                   ),
-                                  FormDropDownData(
+                                  FormInputData(
                                     input: '',
                                     onTap: () {
                                       showTahunMenu(context,
                                           widget.tahunPelatihanController);
                                     },
-                                    idController:
-                                        widget.tahunPelatihanController,
-                                    valueController:
-                                        widget.tahunPelatihanController,
+                                    controller: widget.tahunPelatihanController,
                                     labelTag: 'Label-addtahunpelatihan',
                                     labelForm: 'Tahun',
                                     formTag: 'Form-addtahunpelatihan',
                                     hintText: 'Pilih Tahun',
+                                    inputType: TextInputType.number,
                                     validator: (value) {},
                                   ),
                                   FormDropDownData(

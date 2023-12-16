@@ -99,7 +99,7 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
         }
       },
       child: GestureDetector(
-         onTap: () {
+        onTap: () {
           // Sembunyikan tombol saat area di luar tombol ditekan
           if (showDeleteButton) {
             setState(() {
@@ -181,11 +181,14 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                                       contentPadding: EdgeInsets.zero,
                                       subtitle: GestureDetector(
                                         onTap: () {
-                                          // Navigator.of(context).pushNamed(
-                                          //     ViewEditKeluargaPage.routeName);
+                                          setState(() {
+                                            showDeleteButton = false;
+                                            deleteIndex = null;
+                                          });
                                         },
                                         child: Container(
-                                          margin: EdgeInsets.only(bottom: 10.sp),
+                                          margin:
+                                              EdgeInsets.only(bottom: 10.sp),
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10.sp),
@@ -212,30 +215,32 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                                                             GoogleFonts.poppins(
                                                           fontSize: 16.sp,
                                                           fontWeight:
-                                                              FontWeight.w500,
+                                                              FontWeight.w600,
                                                           color: MyColorsConst
                                                               .primaryColor,
                                                         ),
                                                       ),
                                                       IconButton(
-                                                        splashColor: MyColorsConst
-                                                            .redColor,
+                                                        splashColor:
+                                                            MyColorsConst
+                                                                .redColor,
                                                         icon: Icon(
                                                             Icons.more_horiz),
                                                         onPressed: () {
                                                           setState(() {
-                                                            // Ini buat munculkan tombol di index data itu saja
                                                             if (deleteIndex ==
                                                                 index) {
-                                                              // Ini buat nutup tombol
-                                                              deleteIndex = null;
+                                                              // Menutup tombol hapus jika sudah terbuka
                                                               showDeleteButton =
                                                                   false;
+                                                              deleteIndex =
+                                                                  null;
                                                             } else {
-                                                              // handle buat kalau ga klik apa apa
-                                                              deleteIndex = index;
+                                                              // Membuka tombol hapus jika belum terbuka
                                                               showDeleteButton =
                                                                   true;
+                                                              deleteIndex =
+                                                                  index;
                                                             }
                                                           });
                                                         },
@@ -263,10 +268,12 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                                                               '${dataKeluarga.keluarga ?? '-'}',
                                                               style: GoogleFonts
                                                                   .poppins(
-                                                                fontSize: 10.sp,
-                                                                color:
-                                                                    MyColorsConst
-                                                                        .darkColor,
+                                                                fontSize: 12.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color: MyColorsConst
+                                                                    .darkColor,
                                                               ),
                                                             ),
                                                           ],
@@ -291,10 +298,12 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                                                               '${dataKeluarga.usia ?? '-'} Tahun',
                                                               style: GoogleFonts
                                                                   .poppins(
-                                                                fontSize: 10.sp,
-                                                                color:
-                                                                    MyColorsConst
-                                                                        .darkColor,
+                                                                fontSize: 12.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color: MyColorsConst
+                                                                    .darkColor,
                                                               ),
                                                             ),
                                                           ],
@@ -316,19 +325,20 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                                                   child: Material(
                                                     elevation: 4,
                                                     borderRadius:
-                                                        BorderRadius.circular(4),
+                                                        BorderRadius.circular(
+                                                            4),
                                                     child: InkWell(
                                                       onTap: state
                                                               is ListKeluargaLoading
                                                           ? null
                                                           : () {
                                                               showDialog(
-                                                                context: context,
+                                                                context:
+                                                                    context,
                                                                 builder: (_) =>
                                                                     DialogCustom(
-                                                                  state:
-                                                                      DialogCustomItem
-                                                                          .confirm,
+                                                                  state: DialogCustomItem
+                                                                      .confirm,
                                                                   message:
                                                                       "Apakah Yakin Menghapus Data Ini?",
                                                                   durationInSec:
@@ -344,28 +354,30 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                                                               );
                                                             },
                                                       child: Container(
-                                                        padding:
-                                                            EdgeInsets.symmetric(
+                                                        padding: EdgeInsets
+                                                            .symmetric(
                                                           horizontal: 8.sp,
                                                           vertical: 4.sp,
                                                         ),
-                                                        decoration: BoxDecoration(
+                                                        decoration:
+                                                            BoxDecoration(
                                                           borderRadius:
                                                               BorderRadius
-                                                                  .circular(6.sp),
+                                                                  .circular(
+                                                                      6.sp),
                                                           border: Border.all(
                                                               color: Color(
                                                                   0xFFDDDDDD)),
-                                                          color: MyColorsConst
-                                                              .whiteColor,
+                                                          color: Colors.red
+                                                              .withOpacity(0.2),
                                                         ),
                                                         child: Text(
                                                           'Hapus',
-                                                          style:
-                                                              GoogleFonts.poppins(
+                                                          style: GoogleFonts
+                                                              .poppins(
                                                             fontSize: 12.sp,
-                                                            color: MyColorsConst
-                                                                .darkColor,
+                                                            color: Colors
+                                                                .red.shade900,
                                                           ),
                                                         ),
                                                       ),

@@ -287,19 +287,18 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
                                 controller: widget.namaOrganisasiController,
                                 validator: (value) {},
                               ),
-                              FormDropDownData(
+                              FormInputData(
                                 input: '',
                                 onTap: () {
                                   showTahunMenu(context,
                                       widget.tahunOrganisasiController);
                                 },
-                                idController: widget.tahunOrganisasiController,
-                                valueController:
-                                    widget.tahunOrganisasiController,
+                                controller: widget.tahunOrganisasiController,
                                 labelTag: 'Label-addtahunorganisasi',
                                 labelForm: 'Tahun',
                                 formTag: 'Form-addtahunorganisasi',
                                 hintText: 'Pilih Tahun',
+                                inputType: TextInputType.number,
                                 validator: (value) {},
                               ),
                               FormDropDownData(

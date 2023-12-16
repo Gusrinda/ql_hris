@@ -27,7 +27,9 @@ class AddPendidikanPage extends StatefulWidget {
 
   AddPendidikanPage({
     super.key,
+    required this.reloadDataCallback,
   });
+  final VoidCallback reloadDataCallback;
   final TextEditingController idTingkatController = TextEditingController();
   final TextEditingController valueTingkatController = TextEditingController();
 
@@ -52,6 +54,17 @@ class AddPendidikanPage extends StatefulWidget {
 }
 
 class _AddPendidikanPageState extends State<AddPendidikanPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final pendidikanBloc = context.read<AddDataPendidikanBloc>();
+
+      pendidikanBloc.add(OnSelectTingkatPendidikan());
+      pendidikanBloc.add(OnSelectKota());
+    });
+  }
+
   final _picker = ImagePicker();
   String? selectedTingkat;
   String? selectedKota;
@@ -129,6 +142,51 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
   Widget build(BuildContext context) {
     var tingkatPendidikan = context.read<AddDataPendidikanBloc>().dataTingkat;
     var dataKota = context.read<AddDataPendidikanBloc>().dataKota;
+
+    void showTahunMenu(BuildContext context, TextEditingController controller) {
+      List<String> _generateYears() {
+        List<String> years = [];
+        int currentYear = DateTime.now().year;
+
+        for (int year = currentYear - 20; year <= currentYear; year++) {
+          years.add(year.toString());
+        }
+
+        return years;
+      }
+
+      showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
+        ),
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            height: 300,
+            child: ListView.builder(
+              itemCount: _generateYears().length,
+              itemBuilder: (context, index) {
+                final year = _generateYears()[index];
+                return ListTile(
+                  title: Center(
+                    child: Text(
+                      year,
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                  onTap: () {
+                    controller.text = year;
+                    Navigator.pop(context);
+                  },
+                );
+              },
+            ),
+          );
+        },
+      );
+    }
 
     void showTingkatPendidikanMenu(BuildContext context) async {
       if (tingkatPendidikan.isEmpty) {
@@ -208,7 +266,7 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
             ),
           );
           Navigator.of(context).pop();
-          // widget.reloadDataCallback();
+          widget.reloadDataCallback();
         } else if (state is AddDataPendidikanFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
@@ -351,24 +409,32 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                               ),
                               FormInputData(
                                 input: '',
-                                onTap: () {},
+                                onTap: () {
+                                  showTahunMenu(
+                                      context, widget.tahuunMasukController);
+                                },
                                 // idController: widget.tahuunMasukController,
                                 controller: widget.tahuunMasukController,
                                 labelTag: 'Label-addtahunmasukpendidikan',
                                 labelForm: 'Tahun Masuk',
                                 formTag: 'Form-addtahunmasukpendidikan',
                                 hintText: 'Pilih Tahun',
+                                inputType: TextInputType.number,
                                 validator: (value) {},
                               ),
                               FormInputData(
                                 input: '',
-                                onTap: () {},
+                                onTap: () {
+                                  showTahunMenu(
+                                      context, widget.tahunLulusController);
+                                },
                                 // idController: widget.tahunLulusController,
                                 controller: widget.tahunLulusController,
                                 labelTag: 'Label-addtahunluluspendidikan',
                                 labelForm: 'Tahun Lulus',
                                 formTag: 'Form-addtahunluluspendidikan',
                                 hintText: 'Pilih Tahun',
+                                inputType: TextInputType.number,
                                 validator: (value) {},
                               ),
                               FormInputData(
@@ -379,6 +445,7 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                                 hintText: 'Nilai',
                                 onTap: () {},
                                 controller: widget.nilaiController,
+                                inputType: TextInputType.number,
                                 validator: (value) {},
                               ),
                               FormInputData(
@@ -389,6 +456,7 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                                 hintText: 'Tuliskan Nomor Ijazah',
                                 onTap: () {},
                                 controller: widget.ijazahNoController,
+                                // inputType: TextInputType.number,
                                 validator: (value) {},
                               ),
                               Row(

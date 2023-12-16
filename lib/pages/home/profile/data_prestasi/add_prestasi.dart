@@ -253,18 +253,18 @@ class _AddPrestasiPageState extends State<AddPrestasiPage> {
                                 hintText: 'Pilih Tingkat',
                                 validator: (value) {},
                               ),
-                              FormDropDownData(
+                              FormInputData(
                                 input: '',
                                 onTap: () {
                                   showTahunMenu(
                                       context, widget.tahunController);
                                 },
-                                idController: widget.tahunController,
-                                valueController: widget.tahunController,
+                                controller: widget.tahunController,
                                 labelTag: 'Label-addtahunprestasi',
                                 labelForm: 'Tahun',
                                 formTag: 'Form-addtahunprestasi',
                                 hintText: 'Pilih Tahun',
+                                inputType: TextInputType.number,
                                 validator: (value) {},
                               ),
                               SizedBox(height: 30.sp),

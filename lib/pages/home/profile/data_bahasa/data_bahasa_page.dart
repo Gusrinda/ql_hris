@@ -216,7 +216,7 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                                                             GoogleFonts.poppins(
                                                           fontSize: 16.sp,
                                                           fontWeight:
-                                                              FontWeight.w500,
+                                                              FontWeight.w600,
                                                           color: MyColorsConst
                                                               .primaryColor,
                                                         ),
@@ -269,7 +269,10 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                                                               '${dataBahasa.nilaiLisan ?? '-'}',
                                                               style: GoogleFonts
                                                                   .poppins(
-                                                                fontSize: 10.sp,
+                                                                fontSize: 12.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
                                                                 color: MyColorsConst
                                                                     .darkColor,
                                                               ),
@@ -296,7 +299,10 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                                                               '${dataBahasa.nilaiTertulis ?? '-'}',
                                                               style: GoogleFonts
                                                                   .poppins(
-                                                                fontSize: 10.sp,
+                                                                fontSize: 12.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
                                                                 color: MyColorsConst
                                                                     .darkColor,
                                                               ),

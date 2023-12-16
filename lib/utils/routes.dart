@@ -381,7 +381,11 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
             create: (context) => AddDataPendidikanBloc(),
-            child: AddPendidikanPage(),
+            child: AddPendidikanPage(
+              reloadDataCallback: () {
+                context.read<ListPendidikanBloc>().add(GetListPendidikan());
+              },
+            ),
           );
         });
       case ViewEditPendidikanPage.routeName:

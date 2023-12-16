@@ -342,32 +342,32 @@ class _AddPengalamanPageState extends State<AddPengalamanPage> {
                                 controller: widget.posisiController,
                                 validator: (value) {},
                               ),
-                              FormDropDownData(
+                              FormInputData(
                                 input: '',
                                 onTap: () {
                                   showTahunMenu(
                                       context, widget.tahunMasukController);
                                 },
-                                idController: widget.tahunMasukController,
-                                valueController: widget.tahunMasukController,
+                                controller: widget.tahunMasukController,
                                 labelTag: 'Label-addtahunmasuk',
                                 labelForm: 'Tahun Masuk',
                                 formTag: 'Form-addtahunmasuk',
                                 hintText: 'Pilih Tahun',
+                                inputType: TextInputType.number,
                                 validator: (value) {},
                               ),
-                              FormDropDownData(
+                              FormInputData(
                                 input: '',
                                 onTap: () {
                                   showTahunMenu(
                                       context, widget.tahunKeluarController);
                                 },
-                                idController: widget.tahunKeluarController,
-                                valueController: widget.tahunKeluarController,
+                                controller: widget.tahunKeluarController,
                                 labelTag: 'Label-addtahunkeluar',
                                 labelForm: 'Tahun Keluar',
                                 formTag: 'Form-addtahunkeluar',
                                 hintText: 'Pilih Tahun',
+                                inputType: TextInputType.number,
                                 validator: (value) {},
                               ),
                               FormInputData(
