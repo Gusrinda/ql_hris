@@ -243,14 +243,14 @@ class _AddDinasPageState extends State<AddDinasPage> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var dataDivisi = context.read<AddDinasBloc>().dataDivisi;
-    var dataDepartemen =context.read<AddDinasBloc>().dataDepartemen;
-    var dataPosisi =context.read<AddDinasBloc>().dataPosisi;
-    var dataTemplateSpd =context.read<AddDinasBloc>().dataTemplateSpd;
-    var dataDirektorat =context.read<AddDinasBloc>().dataDirektorat;
-    var dataJenisSpd =context.read<AddDinasBloc>().dataJenisSpd;
-    var dataZona =context.read<AddDinasBloc>().dataZona;
-    var dataLokasi =context.read<AddDinasBloc>().dataLokasiTujuan;
-    var dataPic =context.read<AddDinasBloc>().dataPic;
+    var dataDepartemen = context.read<AddDinasBloc>().dataDepartemen;
+    var dataPosisi = context.read<AddDinasBloc>().dataPosisi;
+    var dataTemplateSpd = context.read<AddDinasBloc>().dataTemplateSpd;
+    var dataDirektorat = context.read<AddDinasBloc>().dataDirektorat;
+    var dataJenisSpd = context.read<AddDinasBloc>().dataJenisSpd;
+    var dataZona = context.read<AddDinasBloc>().dataZona;
+    var dataLokasi = context.read<AddDinasBloc>().dataLokasiTujuan;
+    var dataPic = context.read<AddDinasBloc>().dataPic;
 
     void _showDivisi(BuildContext context) async {
       if (dataDivisi.isEmpty) {
@@ -299,7 +299,8 @@ class _AddDinasPageState extends State<AddDinasPage> {
         );
 
         if (selectedDepartemen != null) {
-          widget.idDepartemenController.text = selectedDepartemen.id?.toString() ?? '';
+          widget.idDepartemenController.text =
+              selectedDepartemen.id?.toString() ?? '';
           widget.valueDepartemenController.text =
               selectedDepartemen.nama?.toString() ?? '';
 
@@ -360,43 +361,42 @@ class _AddDinasPageState extends State<AddDinasPage> {
           ),
         );
 
-      if (selectedTemplateSpdValue != null) {
-        widget.valueTemplateSpdController.text =
-            selectedTemplateSpdValue.kode?.toString() ?? '';
-        widget.idTemplateSpdController.text =
-            selectedTemplateSpdValue.id?.toString() ?? '';
+        if (selectedTemplateSpdValue != null) {
+          widget.valueTemplateSpdController.text =
+              selectedTemplateSpdValue.kode?.toString() ?? '';
+          widget.idTemplateSpdController.text =
+              selectedTemplateSpdValue.id?.toString() ?? '';
 
-        widget.valueDivisiController.text =
-            selectedTemplateSpdValue.mDivisiNama?.toString() ?? '';
-        widget.idDivisiController.text =
-            selectedTemplateSpdValue.mDivisiId?.toString() ?? '';
+          widget.valueDivisiController.text =
+              selectedTemplateSpdValue.mDivisiNama?.toString() ?? '';
+          widget.idDivisiController.text =
+              selectedTemplateSpdValue.mDivisiId?.toString() ?? '';
 
-        widget.valueDepartemenController.text =
-            selectedTemplateSpdValue.mDeptNama?.toString() ?? '';
-        widget.idDepartemenController.text =
-            selectedTemplateSpdValue.mDeptId?.toString() ?? '';
+          widget.valueDepartemenController.text =
+              selectedTemplateSpdValue.mDeptNama?.toString() ?? '';
+          widget.idDepartemenController.text =
+              selectedTemplateSpdValue.mDeptId?.toString() ?? '';
 
-        widget.valuePosisiController.text =
-            selectedTemplateSpdValue.mPosisiDescKerja?.toString() ?? '';
-        widget.idPosisiController.text =
-            selectedTemplateSpdValue.mPosisiId?.toString() ?? '';
+          widget.valuePosisiController.text =
+              selectedTemplateSpdValue.mPosisiDescKerja?.toString() ?? '';
+          widget.idPosisiController.text =
+              selectedTemplateSpdValue.mPosisiId?.toString() ?? '';
 
-        widget.valueDirektoratController.text =
-            selectedTemplateSpdValue.mDirNama?.toString() ?? '';
-        widget.idDirektoratController.text =
-            selectedTemplateSpdValue.mDirId?.toString() ?? '';
+          widget.valueDirektoratController.text =
+              selectedTemplateSpdValue.mDirNama?.toString() ?? '';
+          widget.idDirektoratController.text =
+              selectedTemplateSpdValue.mDirId?.toString() ?? '';
 
-        // widget.valuePicController.text =
-        // selectedTemplateSpdValue.?.toString() ?? '';
-        //  widget.idPicController.text =
-        // selectedTemplateSpdValue.?.toString() ?? '';
+          // widget.valuePicController.text =
+          // selectedTemplateSpdValue.?.toString() ?? '';
+          //  widget.idPicController.text =
+          // selectedTemplateSpdValue.?.toString() ?? '';
 
-        setState(() {
-          this.selectedTemplateSpd = selectedTemplateSpdValue.kode;
-        });
-      }
-      } 
-      else {
+          setState(() {
+            this.selectedTemplateSpd = selectedTemplateSpdValue.kode;
+          });
+        }
+      } else {
         print("Tidak Ada Item");
       }
     }
@@ -405,6 +405,11 @@ class _AddDinasPageState extends State<AddDinasPage> {
       if (dataDirektorat.isEmpty) {
         context.read<AddDinasBloc>().add(OnSelectDirektorat());
         dataDirektorat = context.read<AddDinasBloc>().dataDirektorat;
+
+        // setState(() {
+        //   widget.idDirektoratController.text = "9";
+        //   widget.valueDirektoratController.text = "9";
+        // });
       }
 
       if (dataDirektorat.isNotEmpty) {
@@ -417,9 +422,13 @@ class _AddDinasPageState extends State<AddDinasPage> {
         );
 
         if (selectedDirektorat != null) {
-          widget.idDirektoratController.text = selectedDirektorat.id?.toString() ?? '';
+          widget.idDirektoratController.text =
+              selectedDirektorat.id?.toString() ?? '';
+          // widget.valueDirektoratController.text =
+          //     selectedDirektorat.nama?.toString() ?? '';
+
           widget.valueDirektoratController.text =
-              selectedDirektorat.nama?.toString() ?? '';
+              selectedDirektorat.id?.toString() ?? '';
 
           setState(() {
             this.selectedDirektorat = selectedDirektorat.nama;
@@ -448,7 +457,8 @@ class _AddDinasPageState extends State<AddDinasPage> {
         );
 
         if (selectedJenisSpd != null) {
-          widget.idJenisSpdController.text = selectedJenisSpd.id?.toString() ?? '';
+          widget.idJenisSpdController.text =
+              selectedJenisSpd.id?.toString() ?? '';
           widget.valueJenisSpdController.text =
               selectedJenisSpd.value?.toString() ?? '';
 
@@ -479,7 +489,8 @@ class _AddDinasPageState extends State<AddDinasPage> {
         );
 
         if (selectedZonaAsal != null) {
-          widget.idZonaAsalController.text = selectedZonaAsal.id?.toString() ?? '';
+          widget.idZonaAsalController.text =
+              selectedZonaAsal.id?.toString() ?? '';
           widget.valueZonaAsalController.text =
               selectedZonaAsal.nama?.toString() ?? '';
 
@@ -495,7 +506,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
     }
 
     void _showZonaTujuan(BuildContext context) async {
-     if (dataZona.isEmpty) {
+      if (dataZona.isEmpty) {
         context.read<AddDinasBloc>().add(OnSelectZona());
         dataZona = context.read<AddDinasBloc>().dataZona;
       }
@@ -510,7 +521,8 @@ class _AddDinasPageState extends State<AddDinasPage> {
         );
 
         if (selectedZonaTujuan != null) {
-          widget.idZonaTujuanController.text = selectedZonaTujuan.id?.toString() ?? '';
+          widget.idZonaTujuanController.text =
+              selectedZonaTujuan.id?.toString() ?? '';
           widget.valueZonaTujuanController.text =
               selectedZonaTujuan.nama?.toString() ?? '';
 
@@ -541,7 +553,8 @@ class _AddDinasPageState extends State<AddDinasPage> {
         );
 
         if (selectedLokasiTujuan != null) {
-          widget.idLokasiTujuanController.text = selectedLokasiTujuan.id?.toString() ?? '';
+          widget.idLokasiTujuanController.text =
+              selectedLokasiTujuan.id?.toString() ?? '';
           widget.valueLokasiTujuanController.text =
               selectedLokasiTujuan.nama?.toString() ?? '';
 
@@ -573,8 +586,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
 
         if (selectedPic != null) {
           widget.idPicController.text = selectedPic.id?.toString() ?? '';
-          widget.valuePicController.text =
-              selectedPic.name?.toString() ?? '';
+          widget.valuePicController.text = selectedPic.name?.toString() ?? '';
 
           setState(() {
             this.selectedPic = selectedPic.name;
@@ -749,6 +761,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
                                         ),
                                       ),
                                       FormDropDownData(
+                                        showRedStar: false,
                                         input: selectedDirektorat ?? '',
                                         onTap: () {
                                           _showDirektorat(context);
@@ -761,12 +774,12 @@ class _AddDinasPageState extends State<AddDinasPage> {
                                         hintText: 'Pilih Direktorat',
                                         labelTag: 'Label-Direktorat',
                                         formTag: 'Form-Direktorat',
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return 'Pilih Direktorat';
-                                          }
-                                          return null;
-                                        },
+                                        // validator: (value) {
+                                        //   if (value == null || value.isEmpty) {
+                                        //     return 'Pilih Direktorat';
+                                        //   }
+                                        //   return null;
+                                        // },
                                         errorTextStyle:
                                             GoogleFonts.poppins(fontSize: 8),
                                       ),

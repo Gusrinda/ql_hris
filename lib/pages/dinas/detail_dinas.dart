@@ -219,7 +219,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                 _buildText('Posisi', widget.posisi ?? '-'),
                                 _buildText('Jenis Spd', widget.jenisSpd ?? '-'),
                                 Text(
-                                  'Satus',
+                                  'Status',
                                   style: GoogleFonts.poppins(
                                     fontSize: 10,
                                     color: Colors.black,
@@ -230,7 +230,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                   mapStatusToString(widget.status as String),
                                   style: GoogleFonts.poppins(
                                     fontSize: 12,
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w600,
                                     color: currentColor,
                                   ),
                                 ),

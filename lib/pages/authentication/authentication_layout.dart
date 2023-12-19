@@ -82,6 +82,14 @@ class AuthenticationLayout extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                      Text(
+                        "#SJGWARRIOR",
+                        style: GoogleFonts.poppins(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                          fontStyle: FontStyle.italic
+                        ),
+                      ),
                       SizedBox(height: 10.sp),
                       Text(
                         layoutData[layoutState.index]["subTitle"] as String,

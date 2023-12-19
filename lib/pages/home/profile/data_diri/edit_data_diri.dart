@@ -454,6 +454,11 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
           });
         }
       } else {
+        showDialog(
+          context: context,
+          builder: (_) => const DialogCustom(
+              state: DialogCustomItem.error, message: "Tidak Ada Item"),
+        );
         print("Tidak Ada Item");
       }
     }
