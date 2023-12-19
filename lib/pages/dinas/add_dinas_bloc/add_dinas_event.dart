@@ -12,7 +12,7 @@ class AddDinasSubmited extends AddDinasEvent {
   int departemen;
   int posisi;
   int templateSpd;
-  int direktorat;
+  int? direktorat;
   String tanggal;
   String tanggalAwal;
   String tanggalAkhir;
@@ -46,7 +46,7 @@ class AddDinasSubmited extends AddDinasEvent {
         departemen,
         posisi,
         templateSpd,
-        direktorat,
+        direktorat!,
         tanggal,
         tanggalAwal,
         tanggalAkhir,

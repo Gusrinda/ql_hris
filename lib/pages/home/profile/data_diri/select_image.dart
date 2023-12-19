@@ -193,6 +193,7 @@ class _FileUploadWidgetState extends State<FileUploadWidget> {
               ),
             ],
           ),
+        SizedBox(height: 20.sp),
       ],
     );
   }

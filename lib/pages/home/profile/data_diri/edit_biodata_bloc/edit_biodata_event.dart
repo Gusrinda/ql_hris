@@ -7,7 +7,6 @@ abstract class EditBiodataEvent extends Equatable {
   List<Object> get props => [];
 }
 
-
 class EditDataBiodataSubmited extends EditBiodataEvent {
   int userId;
   int dirId;
@@ -148,14 +147,12 @@ class EditDataBiodataSubmited extends EditBiodataEvent {
 }
 
 class OnSelectDivisi extends EditBiodataEvent {
-
   OnSelectDivisi();
   @override
   List<Object> get props => [];
 }
 
 class OnSelectDepartemen extends EditBiodataEvent {
-
   OnSelectDepartemen();
 
   @override
@@ -163,15 +160,31 @@ class OnSelectDepartemen extends EditBiodataEvent {
 }
 
 class OnSelectPosisi extends EditBiodataEvent {
-
   OnSelectPosisi();
   @override
   List<Object> get props => [];
 }
 
 class OnSelectZona extends EditBiodataEvent {
-
   OnSelectZona();
+  @override
+  List<Object> get props => [];
+}
+
+class OnSelectCostcentre extends EditBiodataEvent {
+  OnSelectCostcentre();
+  @override
+  List<Object> get props => [];
+}
+
+class OnSelectStandartGaji extends EditBiodataEvent {
+  OnSelectStandartGaji();
+  @override
+  List<Object> get props => [];
+}
+
+class OnSelectKodePresensi extends EditBiodataEvent {
+  const OnSelectKodePresensi();
   @override
   List<Object> get props => [];
 }
@@ -184,12 +197,6 @@ class OnSelectKota extends EditBiodataEvent {
 
 class OnSelectJenisKelamin extends EditBiodataEvent {
   const OnSelectJenisKelamin();
-  @override
-  List<Object> get props => [];
-}
-
-class OnSelectKodePresensi extends EditBiodataEvent {
-  const OnSelectKodePresensi();
   @override
   List<Object> get props => [];
 }

@@ -202,7 +202,7 @@ class _DetailApprovalState extends State<DetailApproval> {
                                     border: Border.all(
                                         color: MyColorsConst.formBorderColor),
                                     borderRadius: BorderRadius.circular(10)),
-                                height: 90.sp,
+                                height: 100.sp,
                                 width: size.width,
                                 child: Row(
                                   children: [
@@ -233,6 +233,13 @@ class _DetailApprovalState extends State<DetailApproval> {
                                           style: GoogleFonts.poppins(
                                               fontSize: 14.sp,
                                               fontWeight: FontWeight.w600),
+                                        ),
+                                        Text(
+                                          "${widget.dataApproval.creator ?? ''}",
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w500,
+                                              color: MyColorsConst.darkColor),
                                         ),
                                         Text(
                                           "${widget.dataApproval.trxName ?? ''}",
@@ -281,6 +288,10 @@ class _DetailApprovalState extends State<DetailApproval> {
                                     if (dataTRX?.nomor != null)
                                       buildInfoText('Nomor Pengajuan',
                                           dataTRX!.nomor.toString()),
+
+                                    if (widget.dataApproval.creator != null)
+                                      buildInfoText('Nama Karyawan',
+                                          widget.dataApproval.creator ?? '-'),
 
                                     if (dataTRX?.tanggal != null)
                                       buildInfoText(

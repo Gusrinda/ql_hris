@@ -27,17 +27,17 @@ class DataDiriControllers {
 
     //Standard Gaji
     idStandardGajiController.text = bioData.mStandartGajiId.toString();
-    valueStandardGajiController.text = bioData.mStandartGajiId.toString() ?? '';
+    valueStandardGajiController.text = bioData.mStandartGajiId?.toString() ?? '';
 
     // Costcentre
     idCostcentreController.text = bioData.costcontreId.toString();
-    valueCostcentreController.text = bioData.costcontreId.toString() ?? '';
+    valueCostcentreController.text = bioData.costcontreId?.toString() ?? '';
 
     //Kode Presensi
-    valueKodePresensiController.text = bioData.kodePresensi.toString() ?? '';
+    valueKodePresensiController.text = bioData.kodePresensi?.toString() ?? '';
 
     // Status
-    valueStatusController.text = bioData.isActive.toString() ?? '';
+    valueStatusController.text = bioData.isActive?.toString() ?? '';
 
     //NIK
     nikController.text = bioData.nik ?? '';
@@ -47,11 +47,11 @@ class DataDiriControllers {
     namaPanggilanController.text = bioData.namaPanggilan ?? '';
 
     //Jenis Kelamin
-    idJenisKelaminController.text = bioData.jkId.toString() ?? '';
+    idJenisKelaminController.text = bioData.jkId?.toString() ?? '';
     valueJenisKelaminController.text = bioData.jk ?? '';
 
     //Tempat Lahir
-    idTempatLahirController.text = bioData.tempatLahir.toString() ?? '';
+    idTempatLahirController.text = bioData.tempatLahir?.toString() ?? '';
     valueTempatLahirController.text = bioData.tempatLahir ?? '';
     
     //alamat Tinggal
@@ -59,13 +59,13 @@ class DataDiriControllers {
     //alamat Domisili
 
     //provinsi
-    idProvinsiController.text = bioData.provinsiId.toString() ?? '';
+    idProvinsiController.text = bioData.provinsiId?.toString() ?? '';
     valueProvinsiController.text = bioData.provinsi ?? '';
     //kota
-    idKotaController.text = bioData.kotaId.toString() ?? '';
+    idKotaController.text = bioData.kotaId?.toString() ?? '';
     valueKotaController.text = bioData.kota ?? '';
     //kecamatan
-    idKecamatanController.text = bioData.kecamatanId.toString() ?? '';
+    idKecamatanController.text = bioData.kecamatanId?.toString() ?? '';
     valueKecamatanController.text = bioData.kecamatan ?? '';
     //kodepos
     kodePosController.text = bioData.kodePos ?? '';
@@ -76,13 +76,13 @@ class DataDiriControllers {
     //hubungan Dengan Karyawan
     hubkaryawanController.text = bioData.hubDgnKaryawan ?? '';
     //agama
-    idAgamaController.text = bioData.agamaId.toString() ?? '';
+    idAgamaController.text = bioData.agamaId?.toString() ?? '';
     valueAgamaController.text = bioData.agama ?? '';
     //golongan darah
-    idGolDarahController.text = bioData.golDarahId.toString() ?? '';
+    idGolDarahController.text = bioData.golDarahId?.toString() ?? '';
     valueGolDarahController.text = bioData.golDarah ?? '';
     //jumlah tanggungan
-    idJumlahTanggunganController.text = bioData.tanggunganId.toString() ?? '';
+    idJumlahTanggunganController.text = bioData.tanggunganId?.toString() ?? '';
     valueJumlahTanggunganController.text = bioData.tanggungan ?? '';
 
     // BERKAS

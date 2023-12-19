@@ -37,7 +37,7 @@ class AddDinasBloc extends Bloc<AddDinasEvent, AddDinasState> {
           event.departemen,
           event.posisi,
           event.templateSpd,
-          event.direktorat,
+          event.direktorat ?? 9,
           event.tanggal,
           event.tanggalAwal,
           event.tanggalAkhir,

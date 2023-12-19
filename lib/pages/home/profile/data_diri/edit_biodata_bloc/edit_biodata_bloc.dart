@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/material.dart';
 import 'package:sj_presensi_mobile/services/data_karyawan_service/biodata_karyawan.service.dart';
 import 'package:sj_presensi_mobile/services/dinas_services.dart';
 import 'package:sj_presensi_mobile/services/list_general_service/list_general_services.dart';
@@ -209,6 +209,40 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
     );
 
     on<OnSelectZona>(
+      (event, emit) async {
+        emit(EditBiodataLoading());
+        var resToken = await GeneralSharedPreferences.getUserToken();
+        if (resToken is ServicesSuccess) {
+          var res = await DinasServices.getZona(resToken.response["token"]);
+          if (res is ServicesSuccess) {
+            if (res.response is Map<String, dynamic>) {
+              GetZonaModel dataResponse = GetZonaModel.fromJson(res.response);
+
+              dataZona = dataResponse.data ?? [];
+              emit(
+                SelectZonaSuccessInBackground(dataZona: dataZona),
+              );
+            } else {
+              emit(
+                EditBiodataFailedInBackground(
+                    message: 'Response format is invalid'),
+              );
+            }
+          } else if (res is ServicesFailure) {
+            if (res.errorResponse == null) {
+              await GeneralSharedPreferences.removeUserToken();
+              emit(EditBiodataFailedUserExpired(message: "Token expired"));
+            } else {
+              emit(EditBiodataFailed(message: res.errorResponse));
+            }
+          }
+        } else if (resToken is ServicesFailure) {
+          emit(EditBiodataFailedInBackground(message: 'Response invalid'));
+        }
+      },
+    );
+
+    on<OnSelectCostcentre>(
       (event, emit) async {
         emit(EditBiodataLoading());
         var resToken = await GeneralSharedPreferences.getUserToken();
@@ -511,13 +545,13 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
       },
     );
 
-     on<OnSelectProvinsi>(
+    on<OnSelectProvinsi>(
       (event, emit) async {
         emit(EditBiodataLoading());
         var resToken = await GeneralSharedPreferences.getUserToken();
         if (resToken is ServicesSuccess) {
-          var res = await ListGeneralService.getProvinsi(
-              resToken.response["token"]);
+          var res =
+              await ListGeneralService.getProvinsi(resToken.response["token"]);
 
           if (res is ServicesSuccess) {
             if (res.response is Map<String, dynamic>) {
@@ -529,8 +563,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               dataProvinsi = dataResponse.data ?? [];
 
               emit(
-                SelectProvinsiSuccessInBackground(
-                    dataProvinsi: dataProvinsi),
+                SelectProvinsiSuccessInBackground(dataProvinsi: dataProvinsi),
               );
             } else {
               emit(EditBiodataFailedInBackground(

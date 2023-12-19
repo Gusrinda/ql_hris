@@ -34,7 +34,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
       context.read<ApprovalBloc>().add(GetListApproval());
     });
   }
-  
+
   void loadData() {
     context.read<ApprovalBloc>().add(GetListApproval());
   }
@@ -210,7 +210,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                     .formBorderColor),
                                             borderRadius:
                                                 BorderRadius.circular(10)),
-                                        height: 90.sp,
+                                        height: 100.sp,
                                         width: size.width,
                                         child: Row(
                                           children: [
@@ -244,6 +244,15 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                       fontSize: 14.sp,
                                                       fontWeight:
                                                           FontWeight.w600),
+                                                ),
+                                                Text(
+                                                  "${listApproval[index].creator ?? ''}",
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: MyColorsConst
+                                                          .darkColor),
                                                 ),
                                                 Text(
                                                   "${listApproval[index].trxName ?? ''}",

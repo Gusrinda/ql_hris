@@ -9,6 +9,7 @@ class FormDropDownData extends StatelessWidget {
   const FormDropDownData({
     Key? key,
     this.enabled = true,
+    this.showRedStar = true,
     this.input = "",
     this.onTap,
     required this.hintText,
@@ -22,6 +23,7 @@ class FormDropDownData extends StatelessWidget {
   }) : super(key: key);
 
   final bool enabled;
+  final bool showRedStar;
   final String input;
   final String labelForm;
   final String hintText;
@@ -48,6 +50,7 @@ class FormDropDownData extends StatelessWidget {
                 labelColor: MyColorsConst.darkColor,
               ),
               SizedBox(width: 2.sp),
+              if (showRedStar == true)
               Text(
                 '*',
                 style: GoogleFonts.poppins(color: Colors.red),

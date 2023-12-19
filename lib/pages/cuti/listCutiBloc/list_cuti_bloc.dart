@@ -26,18 +26,21 @@ class ListCutiBloc extends Bloc<ListCutiEvent, ListCutiState> {
           final username = resUser.response["data"]["name"] ?? 'Pegawai SJ';
           final sisaCutiMasaKerja =
               resUser.response["data"]["m_kary.cuti_sisa_reguler"] ?? 0;
-              print(sisaCutiMasaKerja);
+          print(sisaCutiMasaKerja);
           final sisaCutiTahunan =
               resUser.response["data"]["m_kary.cuti_sisa_panjang"] ?? 0;
           final totalSisaCuti =
               (sisaCutiTahunan + sisaCutiMasaKerja).toString();
 
-          final usedCutiMasaKerja =
+          final jatahCutiMasaKerja =
               resUser.response["data"]["m_kary.cuti_jatah_reguler"] ?? 0;
-          final usedCutiTahunan =
+          final jatahCutiTahunan =
               resUser.response["data"]["m_kary.cuti_panjang"] ?? 0;
+
+          final totalJatahCuti = jatahCutiMasaKerja + jatahCutiTahunan;
+
           final totalCutiTerpakai =
-              (usedCutiTahunan + usedCutiMasaKerja).toString();
+              (totalJatahCuti - int.parse(totalSisaCuti)).toString();
 
           debugPrint(res.response.toString());
           if (res.response is Map<String, dynamic>) {

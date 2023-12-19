@@ -113,7 +113,7 @@ class ListGeneralService {
 
   static Future<Object> getProvinsi(String token) async {
     var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_general?scopes=genProvinsi");
+        "${MyGeneralConst.API_URL}/operation/m_general?scopes=genProvinsi&paginate=100");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -154,6 +154,86 @@ class ListGeneralService {
   static Future<Object> getTanggungan(String token) async {
     var url = Uri.parse(
         "${MyGeneralConst.API_URL}/operation/m_general?scopes=tanggungan&paginate=100");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token),
+    );
+  }
+
+  static Future<Object> getCostcentre(String token) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_general?simplest=true&where=this.group%3D%27COSENTRE%27&paginate=300");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token),
+    );
+  }
+
+  static Future<Object> getStandartGaji(String token) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_standart_gaji?paginate=1000");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token),
+    );
+  }
+
+  static Future<Object> getKodePresensi(String token) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_jam_kerja?paginate=100");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token),
+    );
+  }
+
+  static Future<Object> getTipeBPJS(String token) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_general?simplest=true&transform=false&where=this.group%3D%27TIPE+BPJS%27+AND+this.is_active%3D%27true%27&paginate=100");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token),
+    );
+  }
+
+  static Future<Object> getPeriodeGaji(String token) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_general?where=this.group%3D%27PERIODE+GAJI%27+AND+this.is_active%3D%27true%27&paginate=100");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token),
+    );
+  }
+
+  static Future<Object> getTipePembayaran(String token) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_general?simplest=true&transform=false&join=true&where=this.group%3D%27TIPE+PEMBAYARAN%27+AND+this.is_active%3D%27true%27&paginate=100");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token),
+    );
+  }
+
+  static Future<Object> getMetodePembayaran(String token) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_general?simplest=true&transform=false&join=true&where=this.group%3D%27METODE+PEMBAYARAN%27+AND+this.is_active&paginate=100");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token),
+    );
+  }
+
+  static Future<Object> getNamaBank(String token) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_general?simplest=true&transform=false&join=true&where=this.group%3D%27BANK%27+AND+this.is_active&paginate=100");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
