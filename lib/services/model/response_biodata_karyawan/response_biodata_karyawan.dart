@@ -40,13 +40,13 @@ class Biodata with _$Biodata {
         @JsonKey(name: "costcontre_id")
         int? costcontreId,
         @JsonKey(name: "kode")
-        String? kode,
+        dynamic kode,
         @JsonKey(name: "m_posisi_id")
         int? mPosisiId,
         @JsonKey(name: "m_jam_kerja_id")
         int? mJamKerjaId,
         @JsonKey(name: "kode_presensi")
-        String? kodePresensi,
+        dynamic kodePresensi,
         @JsonKey(name: "nik")
         String? nik,
         @JsonKey(name: "nama_depan")
@@ -54,7 +54,7 @@ class Biodata with _$Biodata {
         @JsonKey(name: "nama_belakang")
         String? namaBelakang,
         @JsonKey(name: "nama_lengkap")
-        String? namaLengkap,
+        dynamic namaLengkap,
         @JsonKey(name: "nama_panggilan")
         String? namaPanggilan,
         @JsonKey(name: "jk_id")
@@ -124,25 +124,33 @@ class Biodata with _$Biodata {
         @JsonKey(name: "is_active")
         bool? isActive,
         @JsonKey(name: "creator_id")
-        int? creatorId,
+        dynamic creatorId,
         @JsonKey(name: "last_editor_id")
-        int? lastEditorId,
+        dynamic lastEditorId,
         @JsonKey(name: "created_at")
         String? createdAt,
         @JsonKey(name: "updated_at")
         String? updatedAt,
         @JsonKey(name: "m_standart_gaji_id")
-        int? mStandartGajiId,
+        dynamic mStandartGajiId,
         @JsonKey(name: "periode_gaji_id")
-        int? periodeGajiId,
+        dynamic periodeGajiId,
         @JsonKey(name: "ref_id")
         dynamic refId,
         @JsonKey(name: "presensi_lokasi_default_id")
         dynamic presensiLokasiDefaultId,
         @JsonKey(name: "exp_date_cuti")
-        DateTime? expDateCuti,
+        dynamic expDateCuti,
+        @JsonKey(name: "limit_potong")
+        int? limitPotong,
+        @JsonKey(name: "atasan_id")
+        int? atasanId,
+        @JsonKey(name: "cuti_p24")
+        dynamic cutiP24,
+        @JsonKey(name: "cuti_sisa_p24")
+        dynamic cutiSisaP24,
         @JsonKey(name: "dir")
-        String? dir,
+        dynamic dir,
         @JsonKey(name: "div")
         String? div,
         @JsonKey(name: "dept")
@@ -173,32 +181,6 @@ class Biodata with _$Biodata {
         String? costcontre,
         @JsonKey(name: "status_nikah")
         String? statusNikah,
-        @JsonKey(name: "ktp_no")
-        String? ktpNo,
-        @JsonKey(name: "ktp_foto")
-        String? ktpFoto,
-        @JsonKey(name: "pas_foto")
-        String? pasFoto,
-        @JsonKey(name: "kk_no")
-        String? kkNo,
-        @JsonKey(name: "kk_foto")
-        String? kkFoto,
-        @JsonKey(name: "npwp_no")
-        String? npwpNo,
-        @JsonKey(name: "npwp_foto")
-        String? npwpFoto,
-        @JsonKey(name: "npwp_tgl_berlaku")
-        DateTime? npwpTglBerlaku,
-        @JsonKey(name: "bpjs_tipe_id")
-        int? bpjsTipeId,
-        @JsonKey(name: "bpjs_no")
-        String? bpjsNo,
-        @JsonKey(name: "bpjs_foto")
-        String? bpjsFoto,
-        @JsonKey(name: "berkas_lain")
-        String? berkasLain,
-        @JsonKey(name: "desc_file")
-        dynamic descFile,
     }) = _Biodata;
 
     factory Biodata.fromJson(Map<String, dynamic> json) => _$BiodataFromJson(json);

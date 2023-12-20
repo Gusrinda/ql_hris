@@ -103,7 +103,7 @@ class ListGeneralService {
   }
 
   static Future<Object> getKodePre(String token) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_jam_kerja");
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_jam_kerja?paginate=1000");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,

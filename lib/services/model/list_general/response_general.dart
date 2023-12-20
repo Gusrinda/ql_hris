@@ -14,7 +14,7 @@ class ResponseGeneral with _$ResponseGeneral {
         @JsonKey(name: "current_page")
         int? currentPage,
         @JsonKey(name: "per_page")
-        int? perPage,
+        dynamic perPage,
         @JsonKey(name: "from")
         int? from,
         @JsonKey(name: "to")

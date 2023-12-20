@@ -14,7 +14,7 @@ _$ResponseGeneralImpl _$$ResponseGeneralImplFromJson(
           .toList(),
       total: json['total'] as int?,
       currentPage: json['current_page'] as int?,
-      perPage: json['per_page'] as int?,
+      perPage: json['per_page'],
       from: json['from'] as int?,
       to: json['to'] as int?,
       lastPage: json['last_page'] as int?,

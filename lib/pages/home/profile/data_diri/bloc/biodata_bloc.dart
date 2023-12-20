@@ -12,7 +12,6 @@ part 'biodata_state.dart';
 
 class BiodataBloc extends Bloc<BiodataEvent, BiodataState> {
   ResponseBiodataKaryawan? biodataKaryawan;
-  
 
   BiodataBloc() : super(BiodataInitial()) {
     on<GetBiodata>((event, emit) async {
@@ -36,9 +35,5 @@ class BiodataBloc extends Bloc<BiodataEvent, BiodataState> {
         emit(BiodataFailedInBackground());
       }
     });
-
-    
-
-    
   }
 }
