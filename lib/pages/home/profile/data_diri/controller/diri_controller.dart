@@ -27,11 +27,12 @@ class DataDiriControllers {
 
     //Standard Gaji
     idStandardGajiController.text = bioData.mStandartGajiId.toString();
-    valueStandardGajiController.text = bioData.mStandartGajiId?.toString() ?? '';
+    valueStandardGajiController.text =
+        bioData.mStandartGajiId?.toString() ?? '';
 
     // Costcentre
-    idCostcentreController.text = bioData.costcontreId.toString();
-    valueCostcentreController.text = bioData.costcontreId?.toString() ?? '';
+    idCostCentreController.text = bioData.costcontreId.toString();
+    valueCostCentreController.text = bioData.costcontre?.toString() ?? '';
 
     //Kode Presensi
     valueKodePresensiController.text = bioData.kodePresensi?.toString() ?? '';
@@ -44,6 +45,8 @@ class DataDiriControllers {
 
     //Nama
     namaLengkapController.text = bioData.namaLengkap ?? '';
+    namaDepanController.text = bioData.namaDepan ?? '';
+    namaBelakangController.text = bioData.namaBelakang ?? '';
     namaPanggilanController.text = bioData.namaPanggilan ?? '';
 
     //Jenis Kelamin
@@ -53,10 +56,11 @@ class DataDiriControllers {
     //Tempat Lahir
     idTempatLahirController.text = bioData.tempatLahir?.toString() ?? '';
     valueTempatLahirController.text = bioData.tempatLahir ?? '';
-    
+
     //alamat Tinggal
-    alamatTinggalController.text = bioData.alamatAsli ?? '';
-    //alamat Domisili
+    alamatDomisiliTinggalController.text = bioData.alamatDomisili ?? '';
+    alamatKtpController.text = bioData.alamatAsli ?? '';
+
 
     //provinsi
     idProvinsiController.text = bioData.provinsiId?.toString() ?? '';
@@ -71,6 +75,8 @@ class DataDiriControllers {
     kodePosController.text = bioData.kodePos ?? '';
     //noTelpon
     noTelpController.text = bioData.noTlp ?? '';
+    //noTelponDarurat
+    noTelpDaruratController.text = bioData.noTlpLainnya ?? '';
     //nama kontak darurat
     namaKontakDaruratController.text = bioData.namaKontakDarurat ?? '';
     //hubungan Dengan Karyawan
@@ -87,15 +93,12 @@ class DataDiriControllers {
 
     // BERKAS
 
-
     //UKURAN
     ukBajuController.text = bioData.ukBaju ?? ' ';
     ukCelanaController.text = bioData.ukCelana ?? '';
     ukSepatuontroller.text = bioData.ukSepatu ?? '';
 
-
     //PEMBAYARAN
-
   }
 
   // Divisi Controller
@@ -122,8 +125,8 @@ class DataDiriControllers {
       TextEditingController();
 
   // Costcentre Controller
-  final TextEditingController idCostcentreController = TextEditingController();
-  final TextEditingController valueCostcentreController =
+  final TextEditingController idCostCentreController = TextEditingController();
+  final TextEditingController valueCostCentreController =
       TextEditingController();
 
   // Kode Presensi Controller
@@ -139,6 +142,8 @@ class DataDiriControllers {
   // Nama Controller
   final TextEditingController nikController = TextEditingController();
   final TextEditingController namaLengkapController = TextEditingController();
+  final TextEditingController namaDepanController = TextEditingController();
+  final TextEditingController namaBelakangController = TextEditingController();
   final TextEditingController namaPanggilanController = TextEditingController();
 
   // Jenis Kelamin Controller
@@ -155,8 +160,8 @@ class DataDiriControllers {
   // Tanggal Lahir Controller
   final TextEditingController tanggalLahirController = TextEditingController();
 
-  // Alamat Tinggal Cotroller
-  final TextEditingController alamatTinggalController = TextEditingController();
+  // Alamat Domisili Tinggal Cotroller
+  final TextEditingController alamatDomisiliTinggalController = TextEditingController();
 
   // Provinsi Controller
   final TextEditingController idProvinsiController = TextEditingController();
@@ -174,7 +179,7 @@ class DataDiriControllers {
   // Kode Pos dan telepon Controller
   final TextEditingController kodePosController = TextEditingController();
   final TextEditingController noTelpController = TextEditingController();
-  final TextEditingController noTelpLainnyaController = TextEditingController();
+  final TextEditingController noTelpDaruratController = TextEditingController();
   final TextEditingController namaKontakDaruratController =
       TextEditingController();
   final TextEditingController hubkaryawanController = TextEditingController();
@@ -221,8 +226,8 @@ class DataDiriControllers {
   final TextEditingController tanggalNpwpController = TextEditingController();
   final TextEditingController fotoBpjsController = TextEditingController();
   final TextEditingController noBpjsController = TextEditingController();
-  final TextEditingController idTipeBpjsController = TextEditingController();
-  final TextEditingController valueTipeBpjsController = TextEditingController();
+  final TextEditingController idTipeBPJSController = TextEditingController();
+  final TextEditingController valueTipeBPJSController = TextEditingController();
   final TextEditingController berkasLainnyaController = TextEditingController();
   final TextEditingController keteranganController = TextEditingController();
 

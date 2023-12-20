@@ -59,7 +59,7 @@ class AddDinasPage extends StatefulWidget {
       TextEditingController();
 
   // Direktorat Controller
-  final TextEditingController idDirektoratController = TextEditingController();
+  final TextEditingController? idDirektoratController = TextEditingController();
   final TextEditingController valueDirektoratController =
       TextEditingController();
 
@@ -213,8 +213,8 @@ class _AddDinasPageState extends State<AddDinasPage> {
                         posisi: int.parse(widget.idPosisiController.text),
                         templateSpd:
                             int.parse(widget.idTemplateSpdController.text),
-                        direktorat:
-                            int.parse(widget.idDirektoratController.text),
+                        // direktorat:
+                        //     int.parse(widget.idDirektoratController!.text),
                         tanggal: widget.tanggalController.text,
                         tanggalAwal: widget.tanggalAwalController.text,
                         tanggalAkhir: widget.tanggalAkhirController.text,
@@ -384,7 +384,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
 
           widget.valueDirektoratController.text =
               selectedTemplateSpdValue.mDirNama?.toString() ?? '';
-          widget.idDirektoratController.text =
+          widget.idDirektoratController!.text =
               selectedTemplateSpdValue.mDirId?.toString() ?? '';
 
           // widget.valuePicController.text =
@@ -405,11 +405,6 @@ class _AddDinasPageState extends State<AddDinasPage> {
       if (dataDirektorat.isEmpty) {
         context.read<AddDinasBloc>().add(OnSelectDirektorat());
         dataDirektorat = context.read<AddDinasBloc>().dataDirektorat;
-
-        // setState(() {
-        //   widget.idDirektoratController.text = "9";
-        //   widget.valueDirektoratController.text = "9";
-        // });
       }
 
       if (dataDirektorat.isNotEmpty) {
@@ -422,13 +417,13 @@ class _AddDinasPageState extends State<AddDinasPage> {
         );
 
         if (selectedDirektorat != null) {
-          widget.idDirektoratController.text =
+          widget.idDirektoratController!.text =
               selectedDirektorat.id?.toString() ?? '';
-          // widget.valueDirektoratController.text =
-          //     selectedDirektorat.nama?.toString() ?? '';
-
           widget.valueDirektoratController.text =
-              selectedDirektorat.id?.toString() ?? '';
+              selectedDirektorat.nama?.toString() ?? '';
+
+          // widget.valueDirektoratController.text =
+          //     selectedDirektorat.id?.toString() ?? '';
 
           setState(() {
             this.selectedDirektorat = selectedDirektorat.nama;
@@ -437,6 +432,11 @@ class _AddDinasPageState extends State<AddDinasPage> {
           });
         }
       } else {
+        showDialog(
+          context: context,
+          builder: (_) => const DialogCustom(
+              state: DialogCustomItem.error, message: "Tidak Ada Item"),
+        );
         print("Tidak Ada Item");
       }
     }
@@ -767,7 +767,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
                                           _showDirektorat(context);
                                         },
                                         idController:
-                                            widget.idDirektoratController,
+                                            widget.idDirektoratController!,
                                         valueController:
                                             widget.valueDirektoratController,
                                         labelForm: 'Direktorat',

@@ -19,6 +19,7 @@ import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_biodata_blo
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/select_image.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/selector/general_selector.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/selector/kode_presensi_selector.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_diri/selector/standar_gaji_selector.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/selector/kota_selector.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_departemen_model.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_divisi_model.dart';
@@ -27,6 +28,7 @@ import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_zona_mo
 import 'package:sj_presensi_mobile/services/model/list_general/response_general.dart';
 import 'package:sj_presensi_mobile/services/model/list_general/response_kode_presensi.dart';
 import 'package:sj_presensi_mobile/services/model/list_general/response_kota.dart';
+import 'package:sj_presensi_mobile/services/model/list_general/response_standar_gaji.dart';
 import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_biodata_karyawan.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -50,6 +52,13 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
   String? selectedHubKeluarga;
   String? selectedKota;
   String? selectedKodePresensi;
+  String? selectedStandarGaji;
+  String? selectedCostCentre;
+  String? selectedTipeBPJS;
+  String? selectedPeriodeGaji;
+  String? selectedTipePembayaran;
+  String? selectedMetodePembayaran;
+  String? selectedNamaBank;
   String? selectedAgama;
   String? selectedGolDarah;
   String? selectedStatusNikah;
@@ -63,67 +72,50 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
   File? npwp;
   File? bpjs;
   File? berkaspendukung;
-  // final _picker = ImagePicker();
-  // File? uploadedFile;
-  // String fileName = "";
-  // String fileUrl = "";
 
-  // Future<FilePickerResult?> uploadFile(BuildContext context) async {
-  //   try {
-  //     FilePickerResult? pickedFileNonCamera =
-  //         await FilePicker.platform.pickFiles(
-  //       type: FileType.custom,
-  //       allowedExtensions: ['pdf', 'jpeg', 'jpg', 'png'],
-  //     );
-
-  //     if (pickedFileNonCamera != null) {
-  //       PlatformFile file = pickedFileNonCamera.files.first;
-  //       setState(() {
-  //         uploadedFile = File(file.path ?? '');
-  //         fileName = file.name;
-  //         fileUrl = file.path ?? '';
-  //       });
-  //       print('Path: ${file.path}');
-  //       print('File Name: $fileName');
-  //       print('Size: ${file.size}');
-  //     } else {
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         const SnackBar(
-  //           duration: Duration(seconds: 2),
-  //           content: Text('Gagal Mengambil File!'),
-  //           backgroundColor: MyColorsConst.redColor,
-  //         ),
-  //       );
-  //       return null;
-  //     }
-  //     return pickedFileNonCamera;
-  //   } on PlatformException catch (e) {
-  //     print('Failed to upload file: $e');
-  //     return null;
-  //   }
-  // }
+  int currentStep = 0;
+  // late GlobalKey<FormState> _formKeyStep1;
+  // late GlobalKey<FormState> _formKeyStep2;
+  // late GlobalKey<FormState> _formKeyStep3;
+  // late GlobalKey<FormState> _formKeyStep4;
+  // late GlobalKey<FormState> _formKeyStep5;
+  // late GlobalKey<FormState> _formKeyStep6;
 
   @override
   void initState() {
     super.initState();
+    // _formKeyStep1 = GlobalKey<FormState>();
+    // _formKeyStep2 = GlobalKey<FormState>();
+    // _formKeyStep3 = GlobalKey<FormState>();
+    // _formKeyStep4 = GlobalKey<FormState>();
+    // _formKeyStep5 = GlobalKey<FormState>();
+    // _formKeyStep6 = GlobalKey<FormState>();
+
     controllers = DataDiriControllers(bioData: widget.bioData!);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final keluargaBloc = context.read<EditBiodataBloc>();
+      final biodataBloc = context.read<EditBiodataBloc>();
 
-      keluargaBloc.add(OnSelectDivisi());
-      keluargaBloc.add(OnSelectDepartemen());
-      keluargaBloc.add(OnSelectPosisi());
-      keluargaBloc.add(OnSelectZona());
-      keluargaBloc.add(OnSelectKota());
-      keluargaBloc.add(OnSelectJenisKelamin());
-      keluargaBloc.add(OnSelectKodePresensi());
-      keluargaBloc.add(OnSelectAgama());
-      keluargaBloc.add(OnSelectGolDarah());
-      keluargaBloc.add(OnSelectStatusNikah());
-      keluargaBloc.add(OnSelectTanggungan());
-      keluargaBloc.add(OnSelectProvinsi());
-      // keluargaBloc.add(OnSelectKotabyProvinsi(
+      biodataBloc.add(OnSelectDivisi());
+      biodataBloc.add(OnSelectDepartemen());
+      biodataBloc.add(OnSelectPosisi());
+      biodataBloc.add(OnSelectZona());
+      biodataBloc.add(OnSelectKota());
+      biodataBloc.add(OnSelectJenisKelamin());
+      biodataBloc.add(OnSelectCostcentre());
+      biodataBloc.add(OnSelectStandarGaji());
+      biodataBloc.add(OnSelectKodePresensi());
+      biodataBloc.add(OnSelectTipeBJPS());
+      biodataBloc.add(OnSelectPeriodeGaji());
+      biodataBloc.add(OnSelectTipePembayaran());
+      biodataBloc.add(OnSelectMetodePembayaran());
+      biodataBloc.add(OnSelectNamaBank());
+      biodataBloc.add(OnSelectAgama());
+      biodataBloc.add(OnSelectGolDarah());
+      biodataBloc.add(OnSelectStatusNikah());
+      biodataBloc.add(OnSelectTanggungan());
+      biodataBloc.add(OnSelectProvinsi());
+      // biodataBloc.add(OnSelectKotabyProvinsi(
       //     idProvinsi: int.parse(controllers.idProvinsiController.text)));
     });
   }
@@ -136,7 +128,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
     'Selanjutnya',
     'Kirim'
   ];
-  int currentStep = 0;
 
   continueStep() {
     if (currentStep < 5) {
@@ -165,18 +156,36 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
     });
   }
 
-  Widget controlBuilders(context, details) {
+  Widget controlBuilders(BuildContext context, dynamic details) {
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: Column(
         children: [
-          TextButtonCustomV1(
-            text: buttonTexts[currentStep],
-            height: 50,
-            backgroundColor: MyColorsConst.primaryColor.withOpacity(0.1),
-            textColor: MyColorsConst.primaryColor,
-            onPressed: details.onStepContinue,
-          ),
+          if (currentStep < 5) ...{
+            TextButtonCustomV1(
+              text: buttonTexts[currentStep],
+              height: 50,
+              backgroundColor: MyColorsConst.primaryColor.withOpacity(0.1),
+              textColor: MyColorsConst.primaryColor,
+              onPressed: details.onStepContinue,
+            ),
+          } else ...{
+            TextButtonCustomV1(
+              text: buttonTexts[currentStep],
+              height: 50,
+              backgroundColor: MyColorsConst.primaryColor.withOpacity(0.1),
+              textColor: MyColorsConst.primaryColor,
+              onPressed: () {
+                print("Ini Klik Submit Edit Biodata");
+                context.read<EditBiodataBloc>().add(EditDataBiodataSubmited(
+                    namaDepan: controllers.namaDepanController.text,
+                    namaBelakang: controllers.namaBelakangController.text,
+                    namaLengkap:
+                        '${controllers.namaDepanController.text} ${controllers.namaBelakangController.text}',
+                    namaPanggilan: controllers.namaPanggilanController.text));
+              },
+            ),
+          },
         ],
       ),
     );
@@ -192,6 +201,14 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
     var dataPosisi = context.read<EditBiodataBloc>().dataPosisi;
     var dataZona = context.read<EditBiodataBloc>().dataZona;
     var dataKodePresensi = context.read<EditBiodataBloc>().dataKodePresensi;
+    var dataStandarGaji = context.read<EditBiodataBloc>().dataStandarGaji;
+    var dataCostCentre = context.read<EditBiodataBloc>().dataCostCentre;
+    var dataTipeBPJS = context.read<EditBiodataBloc>().dataTipeBPJS;
+    var dataPeriodeGaji = context.read<EditBiodataBloc>().dataPeriodeGaji;
+    var dataTipePembayaran = context.read<EditBiodataBloc>().dataTipePembayaran;
+    var dataMetodePembayaran =
+        context.read<EditBiodataBloc>().dataMetodePembayaran;
+    var dataNamaBank = context.read<EditBiodataBloc>().dataNamaBank;
     var dataAgama = context.read<EditBiodataBloc>().dataAgama;
     var dataGolDarah = context.read<EditBiodataBloc>().dataGolDarah;
     var dataStatusNikah = context.read<EditBiodataBloc>().dataStatusNikah;
@@ -361,6 +378,39 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
       }
     }
 
+    void showCostCentre(BuildContext context) async {
+      if (dataCostCentre.isEmpty) {
+        context.read<EditBiodataBloc>().add(OnSelectCostcentre());
+        dataCostCentre = context.read<EditBiodataBloc>().dataCostCentre;
+      }
+
+      if (dataCostCentre.isNotEmpty) {
+        final selectedCostCentre = await showSearch<DataGeneral?>(
+          context: context,
+          delegate: GeneralSearchDelegate(
+            dataList: dataCostCentre,
+            filteredData: dataCostCentre,
+          ),
+        );
+
+        if (selectedCostCentre != null) {
+          controllers.idCostCentreController.text =
+              selectedCostCentre.id?.toString() ?? '';
+          controllers.valueCostCentreController.text =
+              selectedCostCentre.value?.toString() ?? '';
+
+          setState(() {
+            this.selectedCostCentre = selectedCostCentre.value;
+            print(selectedCostCentre.value);
+            print(
+                "Selected ID jenis kelamin Terakhir: ${selectedCostCentre?.id}");
+          });
+        }
+      } else {
+        print("Tidak Ada Item");
+      }
+    }
+
     void showKotaMenu(BuildContext context) async {
       if (dataKota.isEmpty) {
         context.read<EditBiodataBloc>().add(OnSelectKota());
@@ -425,7 +475,49 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
       }
     }
 
+    void showStandarGajiMenu(BuildContext context) async {
+      print(selectedStandarGaji);
+
+      if (dataStandarGaji.isEmpty) {
+        context.read<EditBiodataBloc>().add(OnSelectStandarGaji());
+        dataStandarGaji = context.read<EditBiodataBloc>().dataStandarGaji;
+      }
+
+      if (dataStandarGaji.isNotEmpty) {
+        final selectedStandarGaji = await showSearch<DataStandarGaji?>(
+          context: context,
+          delegate: StandarGajiSearchDelegate(
+            dataStandarGajiList: dataStandarGaji,
+            filteredData: dataStandarGaji,
+          ),
+        );
+
+        if (selectedStandarGaji != null) {
+          controllers.idStandardGajiController.text =
+              selectedStandarGaji.id?.toString() ?? '';
+          controllers.valueStandardGajiController.text =
+              selectedStandarGaji.kode?.toString() ?? '';
+
+          setState(() {
+            this.selectedStandarGaji = selectedStandarGaji.kode;
+            print(selectedStandarGaji.kode);
+            print(
+                "Selected ID Standar Gaji Terakhir: ${selectedStandarGaji.id}");
+          });
+        }
+      } else {
+        showDialog(
+          context: context,
+          builder: (_) => const DialogCustom(
+              state: DialogCustomItem.error, message: "Tidak Ada Item"),
+        );
+        print("Tidak Ada Item");
+      }
+    }
+
     void showKodePresensiMenu(BuildContext context) async {
+      print(selectedKodePresensi);
+
       if (dataKodePresensi.isEmpty) {
         context.read<EditBiodataBloc>().add(OnSelectKodePresensi());
         dataKodePresensi = context.read<EditBiodataBloc>().dataKodePresensi;
@@ -718,6 +810,172 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
       });
     }
 
+    void showTipeBPJS(BuildContext context) async {
+      if (dataTipeBPJS.isEmpty) {
+        context.read<EditBiodataBloc>().add(OnSelectCostcentre());
+        dataTipeBPJS = context.read<EditBiodataBloc>().dataTipeBPJS;
+      }
+
+      if (dataTipeBPJS.isNotEmpty) {
+        final selectedTipeBPJS = await showSearch<DataGeneral?>(
+          context: context,
+          delegate: GeneralSearchDelegate(
+            dataList: dataTipeBPJS,
+            filteredData: dataTipeBPJS,
+          ),
+        );
+
+        if (selectedTipeBPJS != null) {
+          controllers.idTipeBPJSController.text =
+              selectedTipeBPJS.id?.toString() ?? '';
+          controllers.valueTipeBPJSController.text =
+              selectedTipeBPJS.value?.toString() ?? '';
+
+          setState(() {
+            this.selectedTipeBPJS = selectedTipeBPJS.value;
+            print(selectedTipeBPJS.value);
+            print(
+                "Selected ID jenis kelamin Terakhir: ${selectedTipeBPJS.id!}");
+          });
+        }
+      } else {
+        print("Tidak Ada Item");
+      }
+    }
+
+    void showPeriodeGaji(BuildContext context) async {
+      if (dataPeriodeGaji.isEmpty) {
+        context.read<EditBiodataBloc>().add(OnSelectCostcentre());
+        dataPeriodeGaji = context.read<EditBiodataBloc>().dataPeriodeGaji;
+      }
+
+      if (dataPeriodeGaji.isNotEmpty) {
+        final selectedPeriodeGaji = await showSearch<DataGeneral?>(
+          context: context,
+          delegate: GeneralSearchDelegate(
+            dataList: dataPeriodeGaji,
+            filteredData: dataPeriodeGaji,
+          ),
+        );
+
+        if (selectedPeriodeGaji != null) {
+          controllers.idPeriodeGajiController.text =
+              selectedPeriodeGaji.id?.toString() ?? '';
+          controllers.valuePeriodeGajiController.text =
+              selectedPeriodeGaji.value?.toString() ?? '';
+
+          setState(() {
+            this.selectedPeriodeGaji = selectedPeriodeGaji.value;
+            print(selectedPeriodeGaji.value);
+            print(
+                "Selected ID jenis kelamin Terakhir: ${selectedPeriodeGaji.id!}");
+          });
+        }
+      } else {
+        print("Tidak Ada Item");
+      }
+    }
+
+    void showTipePembayaran(BuildContext context) async {
+      if (dataTipePembayaran.isEmpty) {
+        context.read<EditBiodataBloc>().add(OnSelectCostcentre());
+        dataTipePembayaran = context.read<EditBiodataBloc>().dataTipePembayaran;
+      }
+
+      if (dataTipePembayaran.isNotEmpty) {
+        final selectedTipePembayaran = await showSearch<DataGeneral?>(
+          context: context,
+          delegate: GeneralSearchDelegate(
+            dataList: dataTipePembayaran,
+            filteredData: dataTipePembayaran,
+          ),
+        );
+
+        if (selectedTipePembayaran != null) {
+          controllers.idTipePembayaranController.text =
+              selectedTipePembayaran.id?.toString() ?? '';
+          controllers.valueTipePembayaranController.text =
+              selectedTipePembayaran.value?.toString() ?? '';
+
+          setState(() {
+            this.selectedTipePembayaran = selectedTipePembayaran.value;
+            print(selectedTipePembayaran.value);
+            print(
+                "Selected ID jenis kelamin Terakhir: ${selectedTipePembayaran.id!}");
+          });
+        }
+      } else {
+        print("Tidak Ada Item");
+      }
+    }
+
+    void showMetodePembayaran(BuildContext context) async {
+      if (dataMetodePembayaran.isEmpty) {
+        context.read<EditBiodataBloc>().add(OnSelectCostcentre());
+        dataMetodePembayaran =
+            context.read<EditBiodataBloc>().dataMetodePembayaran;
+      }
+
+      if (dataMetodePembayaran.isNotEmpty) {
+        final selectedMetodePembayaran = await showSearch<DataGeneral?>(
+          context: context,
+          delegate: GeneralSearchDelegate(
+            dataList: dataMetodePembayaran,
+            filteredData: dataMetodePembayaran,
+          ),
+        );
+
+        if (selectedMetodePembayaran != null) {
+          controllers.idMetodePembayaranController.text =
+              selectedMetodePembayaran.id?.toString() ?? '';
+          controllers.valueMetodePembayaranController.text =
+              selectedMetodePembayaran.value?.toString() ?? '';
+
+          setState(() {
+            this.selectedMetodePembayaran = selectedMetodePembayaran.value;
+            print(selectedMetodePembayaran.value);
+            print(
+                "Selected ID jenis kelamin Terakhir: ${selectedMetodePembayaran.id!}");
+          });
+        }
+      } else {
+        print("Tidak Ada Item");
+      }
+    }
+
+    void showNamaBank(BuildContext context) async {
+      if (dataNamaBank.isEmpty) {
+        context.read<EditBiodataBloc>().add(OnSelectCostcentre());
+        dataNamaBank = context.read<EditBiodataBloc>().dataNamaBank;
+      }
+
+      if (dataNamaBank.isNotEmpty) {
+        final selectedNamaBank = await showSearch<DataGeneral?>(
+          context: context,
+          delegate: GeneralSearchDelegate(
+            dataList: dataNamaBank,
+            filteredData: dataNamaBank,
+          ),
+        );
+
+        if (selectedNamaBank != null) {
+          controllers.idNamaBankController.text =
+              selectedNamaBank.id?.toString() ?? '';
+          controllers.valueNamaBankController.text =
+              selectedNamaBank.value?.toString() ?? '';
+
+          setState(() {
+            this.selectedNamaBank = selectedNamaBank.value;
+            print(selectedNamaBank.value);
+            print(
+                "Selected ID jenis kelamin Terakhir: ${selectedNamaBank.id!}");
+          });
+        }
+      } else {
+        print("Tidak Ada Item");
+      }
+    }
+
     return WillPopScope(
       onWillPop: () async {
         if (currentStep > 0) {
@@ -901,7 +1159,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     idController: controllers.idZonaController,
                                   ),
                                   FormDropDownData(
-                                    onTap: () {},
+                                    onTap: () {
+                                      showStandarGajiMenu(context);
+                                    },
                                     hintText: 'Pilih Standard Gaji',
                                     labelForm: 'Standard Gaji',
                                     labelTag: 'Label-StandardGaji',
@@ -912,17 +1172,19 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                         controllers.idStandardGajiController,
                                   ),
                                   FormDropDownData(
-                                    onTap: () {},
+                                    onTap: () {
+                                      showCostCentre(context);
+                                    },
                                     hintText: 'Pilih Costcentre',
                                     labelForm: 'Costcentre',
                                     labelTag: 'Label-Costcentre',
                                     formTag: 'Form-Costcentre',
                                     valueController:
-                                        controllers.valueCostcentreController,
+                                        controllers.valueCostCentreController,
                                     idController:
-                                        controllers.idCostcentreController,
+                                        controllers.idCostCentreController,
                                   ),
-                                  FormTemplateSpd(
+                                  FormDropDownData(
                                     onTap: () {
                                       showKodePresensiMenu(context);
                                     },
@@ -935,17 +1197,17 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     idController:
                                         controllers.idKodePresensiController,
                                   ),
-                                  FormDropDownData(
-                                    onTap: () {},
-                                    hintText: 'Pilih Status',
-                                    labelForm: 'Status',
-                                    labelTag: 'Label-StatusDiri',
-                                    formTag: 'Form-StatusDiri',
-                                    valueController:
-                                        controllers.valueStatusController,
-                                    idController:
-                                        controllers.idStatusController,
-                                  ),
+                                  // FormDropDownData(
+                                  //   onTap: () {},
+                                  //   hintText: 'Pilih Status',
+                                  //   labelForm: 'Status',
+                                  //   labelTag: 'Label-StatusDiri',
+                                  //   formTag: 'Form-StatusDiri',
+                                  //   valueController:
+                                  //       controllers.valueStatusController,
+                                  //   idController:
+                                  //       controllers.idStatusController,
+                                  // ),
                                 ],
                               ),
                               isActive: currentStep >= 0,
@@ -974,16 +1236,24 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     validator: (value) {},
                                   ),
                                   FormInputData(
-                                    hintText: 'Tuliskan Nama',
-                                    labelForm: 'Nama',
-                                    labelTag: 'Label-NamaDiri',
-                                    formTag: 'Form-NamaDiri',
-                                    controller:
-                                        controllers.namaLengkapController,
+                                    hintText: 'Tuliskan Nama Depan Anda',
+                                    labelForm: 'Nama Depan',
+                                    labelTag: 'Label-NamaDepanDiri',
+                                    formTag: 'Form-NamaDepanDiri',
+                                    controller: controllers.namaDepanController,
                                     validator: (value) {},
                                   ),
                                   FormInputData(
-                                    hintText: 'Tuliskan Nama Panggilan',
+                                    hintText: 'Tuliskan Nama Belakang Anda',
+                                    labelForm: 'Nama Belakang',
+                                    labelTag: 'Label-NamaBelakangDiri',
+                                    formTag: 'Form-NamaBelakangDiri',
+                                    controller:
+                                        controllers.namaBelakangController,
+                                    validator: (value) {},
+                                  ),
+                                  FormInputData(
+                                    hintText: 'Tuliskan Nama Panggilan Anda',
                                     labelForm: 'Nama Panggilan',
                                     labelTag: 'Label-NamaPanggilan',
                                     formTag: 'Form-NamaPanggilan',
@@ -995,7 +1265,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     onTap: () {
                                       showGenderMenu(context);
                                     },
-                                    hintText: 'Pilih Jenis Kelamin',
+                                    hintText: 'Laki-laki / Perempuan',
                                     labelForm: 'Jenis Kelamin',
                                     labelTag: 'Label-JenisKelamin',
                                     formTag: 'Form-JenisKelamin',
@@ -1030,15 +1300,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                         controllers.tanggalLahirController,
                                     idController:
                                         controllers.tanggalLahirController,
-                                  ),
-                                  FormInputData(
-                                    hintText: 'Tuliskan Alamat Tinggal',
-                                    labelForm: 'Alamat Tinggal',
-                                    labelTag: 'Label-AlamatTinggal',
-                                    formTag: 'Form-AlamatTinggal',
-                                    controller:
-                                        controllers.alamatTinggalController,
-                                    validator: (value) {},
                                   ),
                                   FormDropDownData(
                                     onTap: () {
@@ -1087,6 +1348,16 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     validator: (value) {},
                                   ),
                                   FormInputData(
+                                    hintText:
+                                        'Tuliskan Alamat Domisili Tinggal',
+                                    labelForm: 'Alamat Tinggal',
+                                    labelTag: 'Label-AlamatTinggal',
+                                    formTag: 'Form-AlamatTinggal',
+                                    controller: controllers
+                                        .alamatDomisiliTinggalController,
+                                    validator: (value) {},
+                                  ),
+                                  FormInputData(
                                     hintText: 'Tuliskan No. Telepon',
                                     labelForm: 'No. Telepon',
                                     labelTag: 'Label-NoTelepon',
@@ -1095,12 +1366,12 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     validator: (value) {},
                                   ),
                                   FormInputData(
-                                    hintText: 'Tuliskan No. Telepon Lainnya',
-                                    labelForm: 'No. Telepon Lainnya',
-                                    labelTag: 'Label-NoTelpLainnya',
-                                    formTag: 'Form-NoTelpLainnya',
+                                    hintText: 'Tuliskan No. Telepon Darurat',
+                                    labelForm: 'No. Telepon Darurat',
+                                    labelTag: 'Label-NoTelpDarurat',
+                                    formTag: 'Form-NoTelpDarurat',
                                     controller:
-                                        controllers.noTelpLainnyaController,
+                                        controllers.noTelpDaruratController,
                                     validator: (value) {},
                                   ),
                                   FormInputData(
@@ -1113,8 +1384,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     validator: (value) {},
                                   ),
                                   FormInputData(
-                                    hintText:
-                                        'Tuliskan Hubungan Dengan Karyawan',
+                                    hintText: 'Contoh: Adik Kandung',
                                     labelForm: 'Hubungan Dengan Karyawan',
                                     labelTag: 'Label-HubunganKaryawan',
                                     formTag: 'Form-HubunganKaryawan',
@@ -1245,20 +1515,20 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     idController:
                                         controllers.tanggalMasukController,
                                   ),
-                                  FormDropDownData(
-                                    onTap: () {
-                                      showTahunMenu(context,
-                                          controllers.tanggalLahirController);
-                                    },
-                                    hintText: 'Pilih Tanggal',
-                                    labelForm: 'Tanggal Berhenti Kerja',
-                                    labelTag: 'Label-TanggalBerhenti',
-                                    formTag: 'Form-TanggalBerhenti',
-                                    valueController:
-                                        controllers.tanggalBerhentiController,
-                                    idController:
-                                        controllers.tanggalBerhentiController,
-                                  ),
+                                  // FormDropDownData(
+                                  //   onTap: () {
+                                  //     showTahunMenu(context,
+                                  //         controllers.tanggalLahirController);
+                                  //   },
+                                  //   hintText: 'Pilih Tanggal',
+                                  //   labelForm: 'Tanggal Berhenti Kerja',
+                                  //   labelTag: 'Label-TanggalBerhenti',
+                                  //   formTag: 'Form-TanggalBerhenti',
+                                  //   valueController:
+                                  //       controllers.tanggalBerhentiController,
+                                  //   idController:
+                                  //       controllers.tanggalBerhentiController,
+                                  // ),
                                 ],
                               ),
                               isActive: currentStep >= 2,
@@ -1314,7 +1584,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                   ),
                                   FormInputData(
                                     hintText: 'Tuliskan Alamat Sesuai KTP',
-                                    labelForm: 'Alamat Sesuai KTP',
+                                    labelForm: 'Alamat Asli Sesuai KTP',
                                     labelTag: 'Label-AlamatKTP',
                                     formTag: 'Form-AlamatKTP',
                                     controller: controllers.alamatKtpController,
@@ -1391,15 +1661,17 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     validator: (value) {},
                                   ),
                                   FormDropDownData(
-                                    onTap: () {},
+                                    onTap: () {
+                                      showTipeBPJS(context);
+                                    },
                                     hintText: 'Pilih Tipe BPJS',
                                     labelForm: 'Tipe BPJS',
                                     labelTag: 'Label-TipeBpjs',
                                     formTag: 'Form-TipeBpjs',
                                     valueController:
-                                        controllers.valueTipeBpjsController,
+                                        controllers.valueTipeBPJSController,
                                     idController:
-                                        controllers.idTipeBpjsController,
+                                        controllers.idTipeBPJSController,
                                   ),
                                   FileUploadWidget(
                                     label: 'Foto KTP',
@@ -1443,7 +1715,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               content: Column(
                                 children: [
                                   FormInputData(
-                                    hintText: 'Tuliskan Ukuran Baju',
+                                    hintText: 'S / M / L / XL / XXL',
                                     labelForm: 'Ukuran Baju',
                                     labelTag: 'Label-UkBaju',
                                     formTag: 'Form-UkBaju',
@@ -1451,7 +1723,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     validator: (value) {},
                                   ),
                                   FormInputData(
-                                    hintText: 'Tuliskan Ukuran Celana',
+                                    hintText: 'Contoh: 32',
                                     labelForm: 'Ukuran Celana',
                                     labelTag: 'Label-UkCelana',
                                     formTag: 'Form-UkCelana',
@@ -1459,7 +1731,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     validator: (value) {},
                                   ),
                                   FormInputData(
-                                    hintText: 'Tuliskan Ukuran Sepatu',
+                                    hintText: 'Contoh: 43',
                                     labelForm: 'Ukuran Sepatu',
                                     labelTag: 'Label-UkSepatu',
                                     formTag: 'Form-UkSepatu',
@@ -1486,7 +1758,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               content: Column(
                                 children: [
                                   FormDropDownData(
-                                    onTap: () {},
+                                    onTap: () {
+                                      showPeriodeGaji(context);
+                                    },
                                     hintText: 'Pilih Periode Gaji',
                                     labelForm: 'Periode Gaji',
                                     labelTag: 'Label-PerioGaji',
@@ -1497,7 +1771,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                         controllers.idPeriodeGajiController,
                                   ),
                                   FormDropDownData(
-                                    onTap: () {},
+                                    onTap: () {
+                                      showTipePembayaran(context);
+                                    },
                                     hintText: 'Pilih Tipe Pembayaran',
                                     labelForm: 'Pilih Tipe Pembayaran',
                                     labelTag: 'Label-TipeBayar',
@@ -1508,7 +1784,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                         controllers.idTipePembayaranController,
                                   ),
                                   FormDropDownData(
-                                    onTap: () {},
+                                    onTap: () {
+                                      showMetodePembayaran(context);
+                                    },
                                     hintText: 'Pilih Metode Pembayaran',
                                     labelForm: 'Metode Pembayaran',
                                     labelTag: 'Label-MetodeBayar',
@@ -1517,6 +1795,19 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                         .valueMetodePembayaranController,
                                     idController: controllers
                                         .idMetodePembayaranController,
+                                  ),
+                                  FormDropDownData(
+                                    onTap: () {
+                                      showNamaBank(context);
+                                    },
+                                    hintText: 'Pilih Nama Bank',
+                                    labelForm: 'Nama Bank',
+                                    labelTag: 'Label-NamaBank',
+                                    formTag: 'Form-NamaBank',
+                                    valueController:
+                                        controllers.valueNamaBankController,
+                                    idController:
+                                        controllers.idNamaBankController,
                                   ),
                                   FormInputData(
                                     hintText: 'Tuliskan Nomor Rekening',

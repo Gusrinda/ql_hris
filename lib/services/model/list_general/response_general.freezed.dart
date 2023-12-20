@@ -27,7 +27,7 @@ mixin _$ResponseGeneral {
   @JsonKey(name: "current_page")
   int? get currentPage => throw _privateConstructorUsedError;
   @JsonKey(name: "per_page")
-  int? get perPage => throw _privateConstructorUsedError;
+  dynamic get perPage => throw _privateConstructorUsedError;
   @JsonKey(name: "from")
   int? get from => throw _privateConstructorUsedError;
   @JsonKey(name: "to")
@@ -59,7 +59,7 @@ abstract class $ResponseGeneralCopyWith<$Res> {
       {@JsonKey(name: "data") List<DataGeneral>? data,
       @JsonKey(name: "total") int? total,
       @JsonKey(name: "current_page") int? currentPage,
-      @JsonKey(name: "per_page") int? perPage,
+      @JsonKey(name: "per_page") dynamic perPage,
       @JsonKey(name: "from") int? from,
       @JsonKey(name: "to") int? to,
       @JsonKey(name: "last_page") int? lastPage,
@@ -110,7 +110,7 @@ class _$ResponseGeneralCopyWithImpl<$Res, $Val extends ResponseGeneral>
       perPage: freezed == perPage
           ? _value.perPage
           : perPage // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       from: freezed == from
           ? _value.from
           : from // ignore: cast_nullable_to_non_nullable
@@ -155,7 +155,7 @@ abstract class _$$ResponseGeneralImplCopyWith<$Res>
       {@JsonKey(name: "data") List<DataGeneral>? data,
       @JsonKey(name: "total") int? total,
       @JsonKey(name: "current_page") int? currentPage,
-      @JsonKey(name: "per_page") int? perPage,
+      @JsonKey(name: "per_page") dynamic perPage,
       @JsonKey(name: "from") int? from,
       @JsonKey(name: "to") int? to,
       @JsonKey(name: "last_page") int? lastPage,
@@ -204,7 +204,7 @@ class __$$ResponseGeneralImplCopyWithImpl<$Res>
       perPage: freezed == perPage
           ? _value.perPage
           : perPage // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       from: freezed == from
           ? _value.from
           : from // ignore: cast_nullable_to_non_nullable
@@ -276,7 +276,7 @@ class _$ResponseGeneralImpl implements _ResponseGeneral {
   final int? currentPage;
   @override
   @JsonKey(name: "per_page")
-  final int? perPage;
+  final dynamic perPage;
   @override
   @JsonKey(name: "from")
   final int? from;
@@ -313,7 +313,7 @@ class _$ResponseGeneralImpl implements _ResponseGeneral {
             (identical(other.total, total) || other.total == total) &&
             (identical(other.currentPage, currentPage) ||
                 other.currentPage == currentPage) &&
-            (identical(other.perPage, perPage) || other.perPage == perPage) &&
+            const DeepCollectionEquality().equals(other.perPage, perPage) &&
             (identical(other.from, from) || other.from == from) &&
             (identical(other.to, to) || other.to == to) &&
             (identical(other.lastPage, lastPage) ||
@@ -332,7 +332,7 @@ class _$ResponseGeneralImpl implements _ResponseGeneral {
       const DeepCollectionEquality().hash(_data),
       total,
       currentPage,
-      perPage,
+      const DeepCollectionEquality().hash(perPage),
       from,
       to,
       lastPage,
@@ -361,7 +361,7 @@ abstract class _ResponseGeneral implements ResponseGeneral {
           {@JsonKey(name: "data") final List<DataGeneral>? data,
           @JsonKey(name: "total") final int? total,
           @JsonKey(name: "current_page") final int? currentPage,
-          @JsonKey(name: "per_page") final int? perPage,
+          @JsonKey(name: "per_page") final dynamic perPage,
           @JsonKey(name: "from") final int? from,
           @JsonKey(name: "to") final int? to,
           @JsonKey(name: "last_page") final int? lastPage,
@@ -385,7 +385,7 @@ abstract class _ResponseGeneral implements ResponseGeneral {
   int? get currentPage;
   @override
   @JsonKey(name: "per_page")
-  int? get perPage;
+  dynamic get perPage;
   @override
   @JsonKey(name: "from")
   int? get from;

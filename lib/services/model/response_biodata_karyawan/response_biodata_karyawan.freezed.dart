@@ -274,13 +274,13 @@ mixin _$Biodata {
   @JsonKey(name: "costcontre_id")
   int? get costcontreId => throw _privateConstructorUsedError;
   @JsonKey(name: "kode")
-  String? get kode => throw _privateConstructorUsedError;
+  dynamic get kode => throw _privateConstructorUsedError;
   @JsonKey(name: "m_posisi_id")
   int? get mPosisiId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_jam_kerja_id")
   int? get mJamKerjaId => throw _privateConstructorUsedError;
   @JsonKey(name: "kode_presensi")
-  String? get kodePresensi => throw _privateConstructorUsedError;
+  dynamic get kodePresensi => throw _privateConstructorUsedError;
   @JsonKey(name: "nik")
   String? get nik => throw _privateConstructorUsedError;
   @JsonKey(name: "nama_depan")
@@ -288,7 +288,7 @@ mixin _$Biodata {
   @JsonKey(name: "nama_belakang")
   String? get namaBelakang => throw _privateConstructorUsedError;
   @JsonKey(name: "nama_lengkap")
-  String? get namaLengkap => throw _privateConstructorUsedError;
+  dynamic get namaLengkap => throw _privateConstructorUsedError;
   @JsonKey(name: "nama_panggilan")
   String? get namaPanggilan => throw _privateConstructorUsedError;
   @JsonKey(name: "jk_id")
@@ -358,25 +358,33 @@ mixin _$Biodata {
   @JsonKey(name: "is_active")
   bool? get isActive => throw _privateConstructorUsedError;
   @JsonKey(name: "creator_id")
-  int? get creatorId => throw _privateConstructorUsedError;
+  dynamic get creatorId => throw _privateConstructorUsedError;
   @JsonKey(name: "last_editor_id")
-  int? get lastEditorId => throw _privateConstructorUsedError;
+  dynamic get lastEditorId => throw _privateConstructorUsedError;
   @JsonKey(name: "created_at")
   String? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: "updated_at")
   String? get updatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "m_standart_gaji_id")
-  int? get mStandartGajiId => throw _privateConstructorUsedError;
+  dynamic get mStandartGajiId => throw _privateConstructorUsedError;
   @JsonKey(name: "periode_gaji_id")
-  int? get periodeGajiId => throw _privateConstructorUsedError;
+  dynamic get periodeGajiId => throw _privateConstructorUsedError;
   @JsonKey(name: "ref_id")
   dynamic get refId => throw _privateConstructorUsedError;
   @JsonKey(name: "presensi_lokasi_default_id")
   dynamic get presensiLokasiDefaultId => throw _privateConstructorUsedError;
   @JsonKey(name: "exp_date_cuti")
-  DateTime? get expDateCuti => throw _privateConstructorUsedError;
+  dynamic get expDateCuti => throw _privateConstructorUsedError;
+  @JsonKey(name: "limit_potong")
+  int? get limitPotong => throw _privateConstructorUsedError;
+  @JsonKey(name: "atasan_id")
+  int? get atasanId => throw _privateConstructorUsedError;
+  @JsonKey(name: "cuti_p24")
+  dynamic get cutiP24 => throw _privateConstructorUsedError;
+  @JsonKey(name: "cuti_sisa_p24")
+  dynamic get cutiSisaP24 => throw _privateConstructorUsedError;
   @JsonKey(name: "dir")
-  String? get dir => throw _privateConstructorUsedError;
+  dynamic get dir => throw _privateConstructorUsedError;
   @JsonKey(name: "div")
   String? get div => throw _privateConstructorUsedError;
   @JsonKey(name: "dept")
@@ -407,32 +415,6 @@ mixin _$Biodata {
   String? get costcontre => throw _privateConstructorUsedError;
   @JsonKey(name: "status_nikah")
   String? get statusNikah => throw _privateConstructorUsedError;
-  @JsonKey(name: "ktp_no")
-  String? get ktpNo => throw _privateConstructorUsedError;
-  @JsonKey(name: "ktp_foto")
-  String? get ktpFoto => throw _privateConstructorUsedError;
-  @JsonKey(name: "pas_foto")
-  String? get pasFoto => throw _privateConstructorUsedError;
-  @JsonKey(name: "kk_no")
-  String? get kkNo => throw _privateConstructorUsedError;
-  @JsonKey(name: "kk_foto")
-  String? get kkFoto => throw _privateConstructorUsedError;
-  @JsonKey(name: "npwp_no")
-  String? get npwpNo => throw _privateConstructorUsedError;
-  @JsonKey(name: "npwp_foto")
-  String? get npwpFoto => throw _privateConstructorUsedError;
-  @JsonKey(name: "npwp_tgl_berlaku")
-  DateTime? get npwpTglBerlaku => throw _privateConstructorUsedError;
-  @JsonKey(name: "bpjs_tipe_id")
-  int? get bpjsTipeId => throw _privateConstructorUsedError;
-  @JsonKey(name: "bpjs_no")
-  String? get bpjsNo => throw _privateConstructorUsedError;
-  @JsonKey(name: "bpjs_foto")
-  String? get bpjsFoto => throw _privateConstructorUsedError;
-  @JsonKey(name: "berkas_lain")
-  String? get berkasLain => throw _privateConstructorUsedError;
-  @JsonKey(name: "desc_file")
-  dynamic get descFile => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -453,14 +435,14 @@ abstract class $BiodataCopyWith<$Res> {
       @JsonKey(name: "m_zona_id") int? mZonaId,
       @JsonKey(name: "grading_id") dynamic gradingId,
       @JsonKey(name: "costcontre_id") int? costcontreId,
-      @JsonKey(name: "kode") String? kode,
+      @JsonKey(name: "kode") dynamic kode,
       @JsonKey(name: "m_posisi_id") int? mPosisiId,
       @JsonKey(name: "m_jam_kerja_id") int? mJamKerjaId,
-      @JsonKey(name: "kode_presensi") String? kodePresensi,
+      @JsonKey(name: "kode_presensi") dynamic kodePresensi,
       @JsonKey(name: "nik") String? nik,
       @JsonKey(name: "nama_depan") String? namaDepan,
       @JsonKey(name: "nama_belakang") String? namaBelakang,
-      @JsonKey(name: "nama_lengkap") String? namaLengkap,
+      @JsonKey(name: "nama_lengkap") dynamic namaLengkap,
       @JsonKey(name: "nama_panggilan") String? namaPanggilan,
       @JsonKey(name: "jk_id") int? jkId,
       @JsonKey(name: "tempat_lahir") String? tempatLahir,
@@ -495,17 +477,21 @@ abstract class $BiodataCopyWith<$Res> {
       @JsonKey(name: "uk_sepatu") String? ukSepatu,
       @JsonKey(name: "desc") dynamic desc,
       @JsonKey(name: "is_active") bool? isActive,
-      @JsonKey(name: "creator_id") int? creatorId,
-      @JsonKey(name: "last_editor_id") int? lastEditorId,
+      @JsonKey(name: "creator_id") dynamic creatorId,
+      @JsonKey(name: "last_editor_id") dynamic lastEditorId,
       @JsonKey(name: "created_at") String? createdAt,
       @JsonKey(name: "updated_at") String? updatedAt,
-      @JsonKey(name: "m_standart_gaji_id") int? mStandartGajiId,
-      @JsonKey(name: "periode_gaji_id") int? periodeGajiId,
+      @JsonKey(name: "m_standart_gaji_id") dynamic mStandartGajiId,
+      @JsonKey(name: "periode_gaji_id") dynamic periodeGajiId,
       @JsonKey(name: "ref_id") dynamic refId,
       @JsonKey(name: "presensi_lokasi_default_id")
       dynamic presensiLokasiDefaultId,
-      @JsonKey(name: "exp_date_cuti") DateTime? expDateCuti,
-      @JsonKey(name: "dir") String? dir,
+      @JsonKey(name: "exp_date_cuti") dynamic expDateCuti,
+      @JsonKey(name: "limit_potong") int? limitPotong,
+      @JsonKey(name: "atasan_id") int? atasanId,
+      @JsonKey(name: "cuti_p24") dynamic cutiP24,
+      @JsonKey(name: "cuti_sisa_p24") dynamic cutiSisaP24,
+      @JsonKey(name: "dir") dynamic dir,
       @JsonKey(name: "div") String? div,
       @JsonKey(name: "dept") String? dept,
       @JsonKey(name: "zona") String? zona,
@@ -520,20 +506,7 @@ abstract class $BiodataCopyWith<$Res> {
       @JsonKey(name: "gol_darah") String? golDarah,
       @JsonKey(name: "tanggungan") String? tanggungan,
       @JsonKey(name: "costcontre") String? costcontre,
-      @JsonKey(name: "status_nikah") String? statusNikah,
-      @JsonKey(name: "ktp_no") String? ktpNo,
-      @JsonKey(name: "ktp_foto") String? ktpFoto,
-      @JsonKey(name: "pas_foto") String? pasFoto,
-      @JsonKey(name: "kk_no") String? kkNo,
-      @JsonKey(name: "kk_foto") String? kkFoto,
-      @JsonKey(name: "npwp_no") String? npwpNo,
-      @JsonKey(name: "npwp_foto") String? npwpFoto,
-      @JsonKey(name: "npwp_tgl_berlaku") DateTime? npwpTglBerlaku,
-      @JsonKey(name: "bpjs_tipe_id") int? bpjsTipeId,
-      @JsonKey(name: "bpjs_no") String? bpjsNo,
-      @JsonKey(name: "bpjs_foto") String? bpjsFoto,
-      @JsonKey(name: "berkas_lain") String? berkasLain,
-      @JsonKey(name: "desc_file") dynamic descFile});
+      @JsonKey(name: "status_nikah") String? statusNikah});
 }
 
 /// @nodoc
@@ -608,6 +581,10 @@ class _$BiodataCopyWithImpl<$Res, $Val extends Biodata>
     Object? refId = freezed,
     Object? presensiLokasiDefaultId = freezed,
     Object? expDateCuti = freezed,
+    Object? limitPotong = freezed,
+    Object? atasanId = freezed,
+    Object? cutiP24 = freezed,
+    Object? cutiSisaP24 = freezed,
     Object? dir = freezed,
     Object? div = freezed,
     Object? dept = freezed,
@@ -624,19 +601,6 @@ class _$BiodataCopyWithImpl<$Res, $Val extends Biodata>
     Object? tanggungan = freezed,
     Object? costcontre = freezed,
     Object? statusNikah = freezed,
-    Object? ktpNo = freezed,
-    Object? ktpFoto = freezed,
-    Object? pasFoto = freezed,
-    Object? kkNo = freezed,
-    Object? kkFoto = freezed,
-    Object? npwpNo = freezed,
-    Object? npwpFoto = freezed,
-    Object? npwpTglBerlaku = freezed,
-    Object? bpjsTipeId = freezed,
-    Object? bpjsNo = freezed,
-    Object? bpjsFoto = freezed,
-    Object? berkasLain = freezed,
-    Object? descFile = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -674,7 +638,7 @@ class _$BiodataCopyWithImpl<$Res, $Val extends Biodata>
       kode: freezed == kode
           ? _value.kode
           : kode // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mPosisiId: freezed == mPosisiId
           ? _value.mPosisiId
           : mPosisiId // ignore: cast_nullable_to_non_nullable
@@ -686,7 +650,7 @@ class _$BiodataCopyWithImpl<$Res, $Val extends Biodata>
       kodePresensi: freezed == kodePresensi
           ? _value.kodePresensi
           : kodePresensi // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       nik: freezed == nik
           ? _value.nik
           : nik // ignore: cast_nullable_to_non_nullable
@@ -702,7 +666,7 @@ class _$BiodataCopyWithImpl<$Res, $Val extends Biodata>
       namaLengkap: freezed == namaLengkap
           ? _value.namaLengkap
           : namaLengkap // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       namaPanggilan: freezed == namaPanggilan
           ? _value.namaPanggilan
           : namaPanggilan // ignore: cast_nullable_to_non_nullable
@@ -842,11 +806,11 @@ class _$BiodataCopyWithImpl<$Res, $Val extends Biodata>
       creatorId: freezed == creatorId
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       lastEditorId: freezed == lastEditorId
           ? _value.lastEditorId
           : lastEditorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -858,11 +822,11 @@ class _$BiodataCopyWithImpl<$Res, $Val extends Biodata>
       mStandartGajiId: freezed == mStandartGajiId
           ? _value.mStandartGajiId
           : mStandartGajiId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       periodeGajiId: freezed == periodeGajiId
           ? _value.periodeGajiId
           : periodeGajiId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       refId: freezed == refId
           ? _value.refId
           : refId // ignore: cast_nullable_to_non_nullable
@@ -874,11 +838,27 @@ class _$BiodataCopyWithImpl<$Res, $Val extends Biodata>
       expDateCuti: freezed == expDateCuti
           ? _value.expDateCuti
           : expDateCuti // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as dynamic,
+      limitPotong: freezed == limitPotong
+          ? _value.limitPotong
+          : limitPotong // ignore: cast_nullable_to_non_nullable
+              as int?,
+      atasanId: freezed == atasanId
+          ? _value.atasanId
+          : atasanId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiP24: freezed == cutiP24
+          ? _value.cutiP24
+          : cutiP24 // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      cutiSisaP24: freezed == cutiSisaP24
+          ? _value.cutiSisaP24
+          : cutiSisaP24 // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       dir: freezed == dir
           ? _value.dir
           : dir // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       div: freezed == div
           ? _value.div
           : div // ignore: cast_nullable_to_non_nullable
@@ -939,58 +919,6 @@ class _$BiodataCopyWithImpl<$Res, $Val extends Biodata>
           ? _value.statusNikah
           : statusNikah // ignore: cast_nullable_to_non_nullable
               as String?,
-      ktpNo: freezed == ktpNo
-          ? _value.ktpNo
-          : ktpNo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      ktpFoto: freezed == ktpFoto
-          ? _value.ktpFoto
-          : ktpFoto // ignore: cast_nullable_to_non_nullable
-              as String?,
-      pasFoto: freezed == pasFoto
-          ? _value.pasFoto
-          : pasFoto // ignore: cast_nullable_to_non_nullable
-              as String?,
-      kkNo: freezed == kkNo
-          ? _value.kkNo
-          : kkNo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      kkFoto: freezed == kkFoto
-          ? _value.kkFoto
-          : kkFoto // ignore: cast_nullable_to_non_nullable
-              as String?,
-      npwpNo: freezed == npwpNo
-          ? _value.npwpNo
-          : npwpNo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      npwpFoto: freezed == npwpFoto
-          ? _value.npwpFoto
-          : npwpFoto // ignore: cast_nullable_to_non_nullable
-              as String?,
-      npwpTglBerlaku: freezed == npwpTglBerlaku
-          ? _value.npwpTglBerlaku
-          : npwpTglBerlaku // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      bpjsTipeId: freezed == bpjsTipeId
-          ? _value.bpjsTipeId
-          : bpjsTipeId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      bpjsNo: freezed == bpjsNo
-          ? _value.bpjsNo
-          : bpjsNo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      bpjsFoto: freezed == bpjsFoto
-          ? _value.bpjsFoto
-          : bpjsFoto // ignore: cast_nullable_to_non_nullable
-              as String?,
-      berkasLain: freezed == berkasLain
-          ? _value.berkasLain
-          : berkasLain // ignore: cast_nullable_to_non_nullable
-              as String?,
-      descFile: freezed == descFile
-          ? _value.descFile
-          : descFile // ignore: cast_nullable_to_non_nullable
-              as dynamic,
     ) as $Val);
   }
 }
@@ -1011,14 +939,14 @@ abstract class _$$BiodataImplCopyWith<$Res> implements $BiodataCopyWith<$Res> {
       @JsonKey(name: "m_zona_id") int? mZonaId,
       @JsonKey(name: "grading_id") dynamic gradingId,
       @JsonKey(name: "costcontre_id") int? costcontreId,
-      @JsonKey(name: "kode") String? kode,
+      @JsonKey(name: "kode") dynamic kode,
       @JsonKey(name: "m_posisi_id") int? mPosisiId,
       @JsonKey(name: "m_jam_kerja_id") int? mJamKerjaId,
-      @JsonKey(name: "kode_presensi") String? kodePresensi,
+      @JsonKey(name: "kode_presensi") dynamic kodePresensi,
       @JsonKey(name: "nik") String? nik,
       @JsonKey(name: "nama_depan") String? namaDepan,
       @JsonKey(name: "nama_belakang") String? namaBelakang,
-      @JsonKey(name: "nama_lengkap") String? namaLengkap,
+      @JsonKey(name: "nama_lengkap") dynamic namaLengkap,
       @JsonKey(name: "nama_panggilan") String? namaPanggilan,
       @JsonKey(name: "jk_id") int? jkId,
       @JsonKey(name: "tempat_lahir") String? tempatLahir,
@@ -1053,17 +981,21 @@ abstract class _$$BiodataImplCopyWith<$Res> implements $BiodataCopyWith<$Res> {
       @JsonKey(name: "uk_sepatu") String? ukSepatu,
       @JsonKey(name: "desc") dynamic desc,
       @JsonKey(name: "is_active") bool? isActive,
-      @JsonKey(name: "creator_id") int? creatorId,
-      @JsonKey(name: "last_editor_id") int? lastEditorId,
+      @JsonKey(name: "creator_id") dynamic creatorId,
+      @JsonKey(name: "last_editor_id") dynamic lastEditorId,
       @JsonKey(name: "created_at") String? createdAt,
       @JsonKey(name: "updated_at") String? updatedAt,
-      @JsonKey(name: "m_standart_gaji_id") int? mStandartGajiId,
-      @JsonKey(name: "periode_gaji_id") int? periodeGajiId,
+      @JsonKey(name: "m_standart_gaji_id") dynamic mStandartGajiId,
+      @JsonKey(name: "periode_gaji_id") dynamic periodeGajiId,
       @JsonKey(name: "ref_id") dynamic refId,
       @JsonKey(name: "presensi_lokasi_default_id")
       dynamic presensiLokasiDefaultId,
-      @JsonKey(name: "exp_date_cuti") DateTime? expDateCuti,
-      @JsonKey(name: "dir") String? dir,
+      @JsonKey(name: "exp_date_cuti") dynamic expDateCuti,
+      @JsonKey(name: "limit_potong") int? limitPotong,
+      @JsonKey(name: "atasan_id") int? atasanId,
+      @JsonKey(name: "cuti_p24") dynamic cutiP24,
+      @JsonKey(name: "cuti_sisa_p24") dynamic cutiSisaP24,
+      @JsonKey(name: "dir") dynamic dir,
       @JsonKey(name: "div") String? div,
       @JsonKey(name: "dept") String? dept,
       @JsonKey(name: "zona") String? zona,
@@ -1078,20 +1010,7 @@ abstract class _$$BiodataImplCopyWith<$Res> implements $BiodataCopyWith<$Res> {
       @JsonKey(name: "gol_darah") String? golDarah,
       @JsonKey(name: "tanggungan") String? tanggungan,
       @JsonKey(name: "costcontre") String? costcontre,
-      @JsonKey(name: "status_nikah") String? statusNikah,
-      @JsonKey(name: "ktp_no") String? ktpNo,
-      @JsonKey(name: "ktp_foto") String? ktpFoto,
-      @JsonKey(name: "pas_foto") String? pasFoto,
-      @JsonKey(name: "kk_no") String? kkNo,
-      @JsonKey(name: "kk_foto") String? kkFoto,
-      @JsonKey(name: "npwp_no") String? npwpNo,
-      @JsonKey(name: "npwp_foto") String? npwpFoto,
-      @JsonKey(name: "npwp_tgl_berlaku") DateTime? npwpTglBerlaku,
-      @JsonKey(name: "bpjs_tipe_id") int? bpjsTipeId,
-      @JsonKey(name: "bpjs_no") String? bpjsNo,
-      @JsonKey(name: "bpjs_foto") String? bpjsFoto,
-      @JsonKey(name: "berkas_lain") String? berkasLain,
-      @JsonKey(name: "desc_file") dynamic descFile});
+      @JsonKey(name: "status_nikah") String? statusNikah});
 }
 
 /// @nodoc
@@ -1164,6 +1083,10 @@ class __$$BiodataImplCopyWithImpl<$Res>
     Object? refId = freezed,
     Object? presensiLokasiDefaultId = freezed,
     Object? expDateCuti = freezed,
+    Object? limitPotong = freezed,
+    Object? atasanId = freezed,
+    Object? cutiP24 = freezed,
+    Object? cutiSisaP24 = freezed,
     Object? dir = freezed,
     Object? div = freezed,
     Object? dept = freezed,
@@ -1180,19 +1103,6 @@ class __$$BiodataImplCopyWithImpl<$Res>
     Object? tanggungan = freezed,
     Object? costcontre = freezed,
     Object? statusNikah = freezed,
-    Object? ktpNo = freezed,
-    Object? ktpFoto = freezed,
-    Object? pasFoto = freezed,
-    Object? kkNo = freezed,
-    Object? kkFoto = freezed,
-    Object? npwpNo = freezed,
-    Object? npwpFoto = freezed,
-    Object? npwpTglBerlaku = freezed,
-    Object? bpjsTipeId = freezed,
-    Object? bpjsNo = freezed,
-    Object? bpjsFoto = freezed,
-    Object? berkasLain = freezed,
-    Object? descFile = freezed,
   }) {
     return _then(_$BiodataImpl(
       id: freezed == id
@@ -1230,7 +1140,7 @@ class __$$BiodataImplCopyWithImpl<$Res>
       kode: freezed == kode
           ? _value.kode
           : kode // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mPosisiId: freezed == mPosisiId
           ? _value.mPosisiId
           : mPosisiId // ignore: cast_nullable_to_non_nullable
@@ -1242,7 +1152,7 @@ class __$$BiodataImplCopyWithImpl<$Res>
       kodePresensi: freezed == kodePresensi
           ? _value.kodePresensi
           : kodePresensi // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       nik: freezed == nik
           ? _value.nik
           : nik // ignore: cast_nullable_to_non_nullable
@@ -1258,7 +1168,7 @@ class __$$BiodataImplCopyWithImpl<$Res>
       namaLengkap: freezed == namaLengkap
           ? _value.namaLengkap
           : namaLengkap // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       namaPanggilan: freezed == namaPanggilan
           ? _value.namaPanggilan
           : namaPanggilan // ignore: cast_nullable_to_non_nullable
@@ -1398,11 +1308,11 @@ class __$$BiodataImplCopyWithImpl<$Res>
       creatorId: freezed == creatorId
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       lastEditorId: freezed == lastEditorId
           ? _value.lastEditorId
           : lastEditorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -1414,11 +1324,11 @@ class __$$BiodataImplCopyWithImpl<$Res>
       mStandartGajiId: freezed == mStandartGajiId
           ? _value.mStandartGajiId
           : mStandartGajiId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       periodeGajiId: freezed == periodeGajiId
           ? _value.periodeGajiId
           : periodeGajiId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       refId: freezed == refId
           ? _value.refId
           : refId // ignore: cast_nullable_to_non_nullable
@@ -1430,11 +1340,27 @@ class __$$BiodataImplCopyWithImpl<$Res>
       expDateCuti: freezed == expDateCuti
           ? _value.expDateCuti
           : expDateCuti // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as dynamic,
+      limitPotong: freezed == limitPotong
+          ? _value.limitPotong
+          : limitPotong // ignore: cast_nullable_to_non_nullable
+              as int?,
+      atasanId: freezed == atasanId
+          ? _value.atasanId
+          : atasanId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiP24: freezed == cutiP24
+          ? _value.cutiP24
+          : cutiP24 // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      cutiSisaP24: freezed == cutiSisaP24
+          ? _value.cutiSisaP24
+          : cutiSisaP24 // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       dir: freezed == dir
           ? _value.dir
           : dir // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       div: freezed == div
           ? _value.div
           : div // ignore: cast_nullable_to_non_nullable
@@ -1495,58 +1421,6 @@ class __$$BiodataImplCopyWithImpl<$Res>
           ? _value.statusNikah
           : statusNikah // ignore: cast_nullable_to_non_nullable
               as String?,
-      ktpNo: freezed == ktpNo
-          ? _value.ktpNo
-          : ktpNo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      ktpFoto: freezed == ktpFoto
-          ? _value.ktpFoto
-          : ktpFoto // ignore: cast_nullable_to_non_nullable
-              as String?,
-      pasFoto: freezed == pasFoto
-          ? _value.pasFoto
-          : pasFoto // ignore: cast_nullable_to_non_nullable
-              as String?,
-      kkNo: freezed == kkNo
-          ? _value.kkNo
-          : kkNo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      kkFoto: freezed == kkFoto
-          ? _value.kkFoto
-          : kkFoto // ignore: cast_nullable_to_non_nullable
-              as String?,
-      npwpNo: freezed == npwpNo
-          ? _value.npwpNo
-          : npwpNo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      npwpFoto: freezed == npwpFoto
-          ? _value.npwpFoto
-          : npwpFoto // ignore: cast_nullable_to_non_nullable
-              as String?,
-      npwpTglBerlaku: freezed == npwpTglBerlaku
-          ? _value.npwpTglBerlaku
-          : npwpTglBerlaku // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      bpjsTipeId: freezed == bpjsTipeId
-          ? _value.bpjsTipeId
-          : bpjsTipeId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      bpjsNo: freezed == bpjsNo
-          ? _value.bpjsNo
-          : bpjsNo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      bpjsFoto: freezed == bpjsFoto
-          ? _value.bpjsFoto
-          : bpjsFoto // ignore: cast_nullable_to_non_nullable
-              as String?,
-      berkasLain: freezed == berkasLain
-          ? _value.berkasLain
-          : berkasLain // ignore: cast_nullable_to_non_nullable
-              as String?,
-      descFile: freezed == descFile
-          ? _value.descFile
-          : descFile // ignore: cast_nullable_to_non_nullable
-              as dynamic,
     ));
   }
 }
@@ -1614,6 +1488,10 @@ class _$BiodataImpl implements _Biodata {
       @JsonKey(name: "ref_id") this.refId,
       @JsonKey(name: "presensi_lokasi_default_id") this.presensiLokasiDefaultId,
       @JsonKey(name: "exp_date_cuti") this.expDateCuti,
+      @JsonKey(name: "limit_potong") this.limitPotong,
+      @JsonKey(name: "atasan_id") this.atasanId,
+      @JsonKey(name: "cuti_p24") this.cutiP24,
+      @JsonKey(name: "cuti_sisa_p24") this.cutiSisaP24,
       @JsonKey(name: "dir") this.dir,
       @JsonKey(name: "div") this.div,
       @JsonKey(name: "dept") this.dept,
@@ -1629,20 +1507,7 @@ class _$BiodataImpl implements _Biodata {
       @JsonKey(name: "gol_darah") this.golDarah,
       @JsonKey(name: "tanggungan") this.tanggungan,
       @JsonKey(name: "costcontre") this.costcontre,
-      @JsonKey(name: "status_nikah") this.statusNikah,
-      @JsonKey(name: "ktp_no") this.ktpNo,
-      @JsonKey(name: "ktp_foto") this.ktpFoto,
-      @JsonKey(name: "pas_foto") this.pasFoto,
-      @JsonKey(name: "kk_no") this.kkNo,
-      @JsonKey(name: "kk_foto") this.kkFoto,
-      @JsonKey(name: "npwp_no") this.npwpNo,
-      @JsonKey(name: "npwp_foto") this.npwpFoto,
-      @JsonKey(name: "npwp_tgl_berlaku") this.npwpTglBerlaku,
-      @JsonKey(name: "bpjs_tipe_id") this.bpjsTipeId,
-      @JsonKey(name: "bpjs_no") this.bpjsNo,
-      @JsonKey(name: "bpjs_foto") this.bpjsFoto,
-      @JsonKey(name: "berkas_lain") this.berkasLain,
-      @JsonKey(name: "desc_file") this.descFile});
+      @JsonKey(name: "status_nikah") this.statusNikah});
 
   factory _$BiodataImpl.fromJson(Map<String, dynamic> json) =>
       _$$BiodataImplFromJson(json);
@@ -1673,7 +1538,7 @@ class _$BiodataImpl implements _Biodata {
   final int? costcontreId;
   @override
   @JsonKey(name: "kode")
-  final String? kode;
+  final dynamic kode;
   @override
   @JsonKey(name: "m_posisi_id")
   final int? mPosisiId;
@@ -1682,7 +1547,7 @@ class _$BiodataImpl implements _Biodata {
   final int? mJamKerjaId;
   @override
   @JsonKey(name: "kode_presensi")
-  final String? kodePresensi;
+  final dynamic kodePresensi;
   @override
   @JsonKey(name: "nik")
   final String? nik;
@@ -1694,7 +1559,7 @@ class _$BiodataImpl implements _Biodata {
   final String? namaBelakang;
   @override
   @JsonKey(name: "nama_lengkap")
-  final String? namaLengkap;
+  final dynamic namaLengkap;
   @override
   @JsonKey(name: "nama_panggilan")
   final String? namaPanggilan;
@@ -1799,10 +1664,10 @@ class _$BiodataImpl implements _Biodata {
   final bool? isActive;
   @override
   @JsonKey(name: "creator_id")
-  final int? creatorId;
+  final dynamic creatorId;
   @override
   @JsonKey(name: "last_editor_id")
-  final int? lastEditorId;
+  final dynamic lastEditorId;
   @override
   @JsonKey(name: "created_at")
   final String? createdAt;
@@ -1811,10 +1676,10 @@ class _$BiodataImpl implements _Biodata {
   final String? updatedAt;
   @override
   @JsonKey(name: "m_standart_gaji_id")
-  final int? mStandartGajiId;
+  final dynamic mStandartGajiId;
   @override
   @JsonKey(name: "periode_gaji_id")
-  final int? periodeGajiId;
+  final dynamic periodeGajiId;
   @override
   @JsonKey(name: "ref_id")
   final dynamic refId;
@@ -1823,10 +1688,22 @@ class _$BiodataImpl implements _Biodata {
   final dynamic presensiLokasiDefaultId;
   @override
   @JsonKey(name: "exp_date_cuti")
-  final DateTime? expDateCuti;
+  final dynamic expDateCuti;
+  @override
+  @JsonKey(name: "limit_potong")
+  final int? limitPotong;
+  @override
+  @JsonKey(name: "atasan_id")
+  final int? atasanId;
+  @override
+  @JsonKey(name: "cuti_p24")
+  final dynamic cutiP24;
+  @override
+  @JsonKey(name: "cuti_sisa_p24")
+  final dynamic cutiSisaP24;
   @override
   @JsonKey(name: "dir")
-  final String? dir;
+  final dynamic dir;
   @override
   @JsonKey(name: "div")
   final String? div;
@@ -1872,49 +1749,10 @@ class _$BiodataImpl implements _Biodata {
   @override
   @JsonKey(name: "status_nikah")
   final String? statusNikah;
-  @override
-  @JsonKey(name: "ktp_no")
-  final String? ktpNo;
-  @override
-  @JsonKey(name: "ktp_foto")
-  final String? ktpFoto;
-  @override
-  @JsonKey(name: "pas_foto")
-  final String? pasFoto;
-  @override
-  @JsonKey(name: "kk_no")
-  final String? kkNo;
-  @override
-  @JsonKey(name: "kk_foto")
-  final String? kkFoto;
-  @override
-  @JsonKey(name: "npwp_no")
-  final String? npwpNo;
-  @override
-  @JsonKey(name: "npwp_foto")
-  final String? npwpFoto;
-  @override
-  @JsonKey(name: "npwp_tgl_berlaku")
-  final DateTime? npwpTglBerlaku;
-  @override
-  @JsonKey(name: "bpjs_tipe_id")
-  final int? bpjsTipeId;
-  @override
-  @JsonKey(name: "bpjs_no")
-  final String? bpjsNo;
-  @override
-  @JsonKey(name: "bpjs_foto")
-  final String? bpjsFoto;
-  @override
-  @JsonKey(name: "berkas_lain")
-  final String? berkasLain;
-  @override
-  @JsonKey(name: "desc_file")
-  final dynamic descFile;
 
   @override
   String toString() {
-    return 'Biodata(id: $id, mCompId: $mCompId, mDirId: $mDirId, mDivisiId: $mDivisiId, mDeptId: $mDeptId, mZonaId: $mZonaId, gradingId: $gradingId, costcontreId: $costcontreId, kode: $kode, mPosisiId: $mPosisiId, mJamKerjaId: $mJamKerjaId, kodePresensi: $kodePresensi, nik: $nik, namaDepan: $namaDepan, namaBelakang: $namaBelakang, namaLengkap: $namaLengkap, namaPanggilan: $namaPanggilan, jkId: $jkId, tempatLahir: $tempatLahir, tglLahir: $tglLahir, provinsiId: $provinsiId, kotaId: $kotaId, kecamatanId: $kecamatanId, kodePos: $kodePos, alamatAsli: $alamatAsli, alamatDomisili: $alamatDomisili, noTlp: $noTlp, noTlpLainnya: $noTlpLainnya, noDarurat: $noDarurat, namaKontakDarurat: $namaKontakDarurat, agamaId: $agamaId, golDarahId: $golDarahId, statusNikahId: $statusNikahId, tanggunganId: $tanggunganId, hubDgnKaryawan: $hubDgnKaryawan, cutiJatahReguler: $cutiJatahReguler, cutiSisaReguler: $cutiSisaReguler, cutiPanjang: $cutiPanjang, cutiSisaPanjang: $cutiSisaPanjang, statusKaryId: $statusKaryId, lamaKontrakAwal: $lamaKontrakAwal, lamaKontrakAkhir: $lamaKontrakAkhir, tglMasuk: $tglMasuk, tglBerhenti: $tglBerhenti, alasanBerhenti: $alasanBerhenti, ukBaju: $ukBaju, ukCelana: $ukCelana, ukSepatu: $ukSepatu, desc: $desc, isActive: $isActive, creatorId: $creatorId, lastEditorId: $lastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, mStandartGajiId: $mStandartGajiId, periodeGajiId: $periodeGajiId, refId: $refId, presensiLokasiDefaultId: $presensiLokasiDefaultId, expDateCuti: $expDateCuti, dir: $dir, div: $div, dept: $dept, zona: $zona, grading: $grading, posisi: $posisi, jamKerja: $jamKerja, jk: $jk, provinsi: $provinsi, kota: $kota, kecamatan: $kecamatan, agama: $agama, golDarah: $golDarah, tanggungan: $tanggungan, costcontre: $costcontre, statusNikah: $statusNikah, ktpNo: $ktpNo, ktpFoto: $ktpFoto, pasFoto: $pasFoto, kkNo: $kkNo, kkFoto: $kkFoto, npwpNo: $npwpNo, npwpFoto: $npwpFoto, npwpTglBerlaku: $npwpTglBerlaku, bpjsTipeId: $bpjsTipeId, bpjsNo: $bpjsNo, bpjsFoto: $bpjsFoto, berkasLain: $berkasLain, descFile: $descFile)';
+    return 'Biodata(id: $id, mCompId: $mCompId, mDirId: $mDirId, mDivisiId: $mDivisiId, mDeptId: $mDeptId, mZonaId: $mZonaId, gradingId: $gradingId, costcontreId: $costcontreId, kode: $kode, mPosisiId: $mPosisiId, mJamKerjaId: $mJamKerjaId, kodePresensi: $kodePresensi, nik: $nik, namaDepan: $namaDepan, namaBelakang: $namaBelakang, namaLengkap: $namaLengkap, namaPanggilan: $namaPanggilan, jkId: $jkId, tempatLahir: $tempatLahir, tglLahir: $tglLahir, provinsiId: $provinsiId, kotaId: $kotaId, kecamatanId: $kecamatanId, kodePos: $kodePos, alamatAsli: $alamatAsli, alamatDomisili: $alamatDomisili, noTlp: $noTlp, noTlpLainnya: $noTlpLainnya, noDarurat: $noDarurat, namaKontakDarurat: $namaKontakDarurat, agamaId: $agamaId, golDarahId: $golDarahId, statusNikahId: $statusNikahId, tanggunganId: $tanggunganId, hubDgnKaryawan: $hubDgnKaryawan, cutiJatahReguler: $cutiJatahReguler, cutiSisaReguler: $cutiSisaReguler, cutiPanjang: $cutiPanjang, cutiSisaPanjang: $cutiSisaPanjang, statusKaryId: $statusKaryId, lamaKontrakAwal: $lamaKontrakAwal, lamaKontrakAkhir: $lamaKontrakAkhir, tglMasuk: $tglMasuk, tglBerhenti: $tglBerhenti, alasanBerhenti: $alasanBerhenti, ukBaju: $ukBaju, ukCelana: $ukCelana, ukSepatu: $ukSepatu, desc: $desc, isActive: $isActive, creatorId: $creatorId, lastEditorId: $lastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, mStandartGajiId: $mStandartGajiId, periodeGajiId: $periodeGajiId, refId: $refId, presensiLokasiDefaultId: $presensiLokasiDefaultId, expDateCuti: $expDateCuti, limitPotong: $limitPotong, atasanId: $atasanId, cutiP24: $cutiP24, cutiSisaP24: $cutiSisaP24, dir: $dir, div: $div, dept: $dept, zona: $zona, grading: $grading, posisi: $posisi, jamKerja: $jamKerja, jk: $jk, provinsi: $provinsi, kota: $kota, kecamatan: $kecamatan, agama: $agama, golDarah: $golDarah, tanggungan: $tanggungan, costcontre: $costcontre, statusNikah: $statusNikah)';
   }
 
   @override
@@ -1932,20 +1770,20 @@ class _$BiodataImpl implements _Biodata {
             const DeepCollectionEquality().equals(other.gradingId, gradingId) &&
             (identical(other.costcontreId, costcontreId) ||
                 other.costcontreId == costcontreId) &&
-            (identical(other.kode, kode) || other.kode == kode) &&
+            const DeepCollectionEquality().equals(other.kode, kode) &&
             (identical(other.mPosisiId, mPosisiId) ||
                 other.mPosisiId == mPosisiId) &&
             (identical(other.mJamKerjaId, mJamKerjaId) ||
                 other.mJamKerjaId == mJamKerjaId) &&
-            (identical(other.kodePresensi, kodePresensi) ||
-                other.kodePresensi == kodePresensi) &&
+            const DeepCollectionEquality()
+                .equals(other.kodePresensi, kodePresensi) &&
             (identical(other.nik, nik) || other.nik == nik) &&
             (identical(other.namaDepan, namaDepan) ||
                 other.namaDepan == namaDepan) &&
             (identical(other.namaBelakang, namaBelakang) ||
                 other.namaBelakang == namaBelakang) &&
-            (identical(other.namaLengkap, namaLengkap) ||
-                other.namaLengkap == namaLengkap) &&
+            const DeepCollectionEquality()
+                .equals(other.namaLengkap, namaLengkap) &&
             (identical(other.namaPanggilan, namaPanggilan) ||
                 other.namaPanggilan == namaPanggilan) &&
             (identical(other.jkId, jkId) || other.jkId == jkId) &&
@@ -2007,23 +1845,27 @@ class _$BiodataImpl implements _Biodata {
             const DeepCollectionEquality().equals(other.desc, desc) &&
             (identical(other.isActive, isActive) ||
                 other.isActive == isActive) &&
-            (identical(other.creatorId, creatorId) ||
-                other.creatorId == creatorId) &&
-            (identical(other.lastEditorId, lastEditorId) ||
-                other.lastEditorId == lastEditorId) &&
+            const DeepCollectionEquality().equals(other.creatorId, creatorId) &&
+            const DeepCollectionEquality()
+                .equals(other.lastEditorId, lastEditorId) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            (identical(other.mStandartGajiId, mStandartGajiId) ||
-                other.mStandartGajiId == mStandartGajiId) &&
-            (identical(other.periodeGajiId, periodeGajiId) ||
-                other.periodeGajiId == periodeGajiId) &&
+            const DeepCollectionEquality()
+                .equals(other.mStandartGajiId, mStandartGajiId) &&
+            const DeepCollectionEquality()
+                .equals(other.periodeGajiId, periodeGajiId) &&
             const DeepCollectionEquality().equals(other.refId, refId) &&
             const DeepCollectionEquality().equals(
                 other.presensiLokasiDefaultId, presensiLokasiDefaultId) &&
-            (identical(other.expDateCuti, expDateCuti) || other.expDateCuti == expDateCuti) &&
-            (identical(other.dir, dir) || other.dir == dir) &&
+            const DeepCollectionEquality()
+                .equals(other.expDateCuti, expDateCuti) &&
+            (identical(other.limitPotong, limitPotong) || other.limitPotong == limitPotong) &&
+            (identical(other.atasanId, atasanId) || other.atasanId == atasanId) &&
+            const DeepCollectionEquality().equals(other.cutiP24, cutiP24) &&
+            const DeepCollectionEquality().equals(other.cutiSisaP24, cutiSisaP24) &&
+            const DeepCollectionEquality().equals(other.dir, dir) &&
             (identical(other.div, div) || other.div == div) &&
             (identical(other.dept, dept) || other.dept == dept) &&
             (identical(other.zona, zona) || other.zona == zona) &&
@@ -2038,20 +1880,7 @@ class _$BiodataImpl implements _Biodata {
             (identical(other.golDarah, golDarah) || other.golDarah == golDarah) &&
             (identical(other.tanggungan, tanggungan) || other.tanggungan == tanggungan) &&
             (identical(other.costcontre, costcontre) || other.costcontre == costcontre) &&
-            (identical(other.statusNikah, statusNikah) || other.statusNikah == statusNikah) &&
-            (identical(other.ktpNo, ktpNo) || other.ktpNo == ktpNo) &&
-            (identical(other.ktpFoto, ktpFoto) || other.ktpFoto == ktpFoto) &&
-            (identical(other.pasFoto, pasFoto) || other.pasFoto == pasFoto) &&
-            (identical(other.kkNo, kkNo) || other.kkNo == kkNo) &&
-            (identical(other.kkFoto, kkFoto) || other.kkFoto == kkFoto) &&
-            (identical(other.npwpNo, npwpNo) || other.npwpNo == npwpNo) &&
-            (identical(other.npwpFoto, npwpFoto) || other.npwpFoto == npwpFoto) &&
-            (identical(other.npwpTglBerlaku, npwpTglBerlaku) || other.npwpTglBerlaku == npwpTglBerlaku) &&
-            (identical(other.bpjsTipeId, bpjsTipeId) || other.bpjsTipeId == bpjsTipeId) &&
-            (identical(other.bpjsNo, bpjsNo) || other.bpjsNo == bpjsNo) &&
-            (identical(other.bpjsFoto, bpjsFoto) || other.bpjsFoto == bpjsFoto) &&
-            (identical(other.berkasLain, berkasLain) || other.berkasLain == berkasLain) &&
-            const DeepCollectionEquality().equals(other.descFile, descFile));
+            (identical(other.statusNikah, statusNikah) || other.statusNikah == statusNikah));
   }
 
   @JsonKey(ignore: true)
@@ -2066,14 +1895,14 @@ class _$BiodataImpl implements _Biodata {
         mZonaId,
         const DeepCollectionEquality().hash(gradingId),
         costcontreId,
-        kode,
+        const DeepCollectionEquality().hash(kode),
         mPosisiId,
         mJamKerjaId,
-        kodePresensi,
+        const DeepCollectionEquality().hash(kodePresensi),
         nik,
         namaDepan,
         namaBelakang,
-        namaLengkap,
+        const DeepCollectionEquality().hash(namaLengkap),
         namaPanggilan,
         jkId,
         tempatLahir,
@@ -2108,16 +1937,20 @@ class _$BiodataImpl implements _Biodata {
         ukSepatu,
         const DeepCollectionEquality().hash(desc),
         isActive,
-        creatorId,
-        lastEditorId,
+        const DeepCollectionEquality().hash(creatorId),
+        const DeepCollectionEquality().hash(lastEditorId),
         createdAt,
         updatedAt,
-        mStandartGajiId,
-        periodeGajiId,
+        const DeepCollectionEquality().hash(mStandartGajiId),
+        const DeepCollectionEquality().hash(periodeGajiId),
         const DeepCollectionEquality().hash(refId),
         const DeepCollectionEquality().hash(presensiLokasiDefaultId),
-        expDateCuti,
-        dir,
+        const DeepCollectionEquality().hash(expDateCuti),
+        limitPotong,
+        atasanId,
+        const DeepCollectionEquality().hash(cutiP24),
+        const DeepCollectionEquality().hash(cutiSisaP24),
+        const DeepCollectionEquality().hash(dir),
         div,
         dept,
         zona,
@@ -2132,20 +1965,7 @@ class _$BiodataImpl implements _Biodata {
         golDarah,
         tanggungan,
         costcontre,
-        statusNikah,
-        ktpNo,
-        ktpFoto,
-        pasFoto,
-        kkNo,
-        kkFoto,
-        npwpNo,
-        npwpFoto,
-        npwpTglBerlaku,
-        bpjsTipeId,
-        bpjsNo,
-        bpjsFoto,
-        berkasLain,
-        const DeepCollectionEquality().hash(descFile)
+        statusNikah
       ]);
 
   @JsonKey(ignore: true)
@@ -2164,95 +1984,87 @@ class _$BiodataImpl implements _Biodata {
 
 abstract class _Biodata implements Biodata {
   const factory _Biodata(
-      {@JsonKey(name: "id") final int? id,
-      @JsonKey(name: "m_comp_id") final int? mCompId,
-      @JsonKey(name: "m_dir_id") final int? mDirId,
-      @JsonKey(name: "m_divisi_id") final int? mDivisiId,
-      @JsonKey(name: "m_dept_id") final int? mDeptId,
-      @JsonKey(name: "m_zona_id") final int? mZonaId,
-      @JsonKey(name: "grading_id") final dynamic gradingId,
-      @JsonKey(name: "costcontre_id") final int? costcontreId,
-      @JsonKey(name: "kode") final String? kode,
-      @JsonKey(name: "m_posisi_id") final int? mPosisiId,
-      @JsonKey(name: "m_jam_kerja_id") final int? mJamKerjaId,
-      @JsonKey(name: "kode_presensi") final String? kodePresensi,
-      @JsonKey(name: "nik") final String? nik,
-      @JsonKey(name: "nama_depan") final String? namaDepan,
-      @JsonKey(name: "nama_belakang") final String? namaBelakang,
-      @JsonKey(name: "nama_lengkap") final String? namaLengkap,
-      @JsonKey(name: "nama_panggilan") final String? namaPanggilan,
-      @JsonKey(name: "jk_id") final int? jkId,
-      @JsonKey(name: "tempat_lahir") final String? tempatLahir,
-      @JsonKey(name: "tgl_lahir") final DateTime? tglLahir,
-      @JsonKey(name: "provinsi_id") final int? provinsiId,
-      @JsonKey(name: "kota_id") final int? kotaId,
-      @JsonKey(name: "kecamatan_id") final int? kecamatanId,
-      @JsonKey(name: "kode_pos") final String? kodePos,
-      @JsonKey(name: "alamat_asli") final String? alamatAsli,
-      @JsonKey(name: "alamat_domisili") final String? alamatDomisili,
-      @JsonKey(name: "no_tlp") final String? noTlp,
-      @JsonKey(name: "no_tlp_lainnya") final String? noTlpLainnya,
-      @JsonKey(name: "no_darurat") final String? noDarurat,
-      @JsonKey(name: "nama_kontak_darurat") final String? namaKontakDarurat,
-      @JsonKey(name: "agama_id") final int? agamaId,
-      @JsonKey(name: "gol_darah_id") final int? golDarahId,
-      @JsonKey(name: "status_nikah_id") final int? statusNikahId,
-      @JsonKey(name: "tanggungan_id") final int? tanggunganId,
-      @JsonKey(name: "hub_dgn_karyawan") final String? hubDgnKaryawan,
-      @JsonKey(name: "cuti_jatah_reguler") final int? cutiJatahReguler,
-      @JsonKey(name: "cuti_sisa_reguler") final int? cutiSisaReguler,
-      @JsonKey(name: "cuti_panjang") final int? cutiPanjang,
-      @JsonKey(name: "cuti_sisa_panjang") final int? cutiSisaPanjang,
-      @JsonKey(name: "status_kary_id") final dynamic statusKaryId,
-      @JsonKey(name: "lama_kontrak_awal") final dynamic lamaKontrakAwal,
-      @JsonKey(name: "lama_kontrak_akhir") final dynamic lamaKontrakAkhir,
-      @JsonKey(name: "tgl_masuk") final DateTime? tglMasuk,
-      @JsonKey(name: "tgl_berhenti") final dynamic tglBerhenti,
-      @JsonKey(name: "alasan_berhenti") final dynamic alasanBerhenti,
-      @JsonKey(name: "uk_baju") final String? ukBaju,
-      @JsonKey(name: "uk_celana") final String? ukCelana,
-      @JsonKey(name: "uk_sepatu") final String? ukSepatu,
-      @JsonKey(name: "desc") final dynamic desc,
-      @JsonKey(name: "is_active") final bool? isActive,
-      @JsonKey(name: "creator_id") final int? creatorId,
-      @JsonKey(name: "last_editor_id") final int? lastEditorId,
-      @JsonKey(name: "created_at") final String? createdAt,
-      @JsonKey(name: "updated_at") final String? updatedAt,
-      @JsonKey(name: "m_standart_gaji_id") final int? mStandartGajiId,
-      @JsonKey(name: "periode_gaji_id") final int? periodeGajiId,
-      @JsonKey(name: "ref_id") final dynamic refId,
-      @JsonKey(name: "presensi_lokasi_default_id")
-      final dynamic presensiLokasiDefaultId,
-      @JsonKey(name: "exp_date_cuti") final DateTime? expDateCuti,
-      @JsonKey(name: "dir") final String? dir,
-      @JsonKey(name: "div") final String? div,
-      @JsonKey(name: "dept") final String? dept,
-      @JsonKey(name: "zona") final String? zona,
-      @JsonKey(name: "grading") final dynamic grading,
-      @JsonKey(name: "posisi") final String? posisi,
-      @JsonKey(name: "jam_kerja") final String? jamKerja,
-      @JsonKey(name: "jk") final String? jk,
-      @JsonKey(name: "provinsi") final String? provinsi,
-      @JsonKey(name: "kota") final String? kota,
-      @JsonKey(name: "kecamatan") final String? kecamatan,
-      @JsonKey(name: "agama") final String? agama,
-      @JsonKey(name: "gol_darah") final String? golDarah,
-      @JsonKey(name: "tanggungan") final String? tanggungan,
-      @JsonKey(name: "costcontre") final String? costcontre,
-      @JsonKey(name: "status_nikah") final String? statusNikah,
-      @JsonKey(name: "ktp_no") final String? ktpNo,
-      @JsonKey(name: "ktp_foto") final String? ktpFoto,
-      @JsonKey(name: "pas_foto") final String? pasFoto,
-      @JsonKey(name: "kk_no") final String? kkNo,
-      @JsonKey(name: "kk_foto") final String? kkFoto,
-      @JsonKey(name: "npwp_no") final String? npwpNo,
-      @JsonKey(name: "npwp_foto") final String? npwpFoto,
-      @JsonKey(name: "npwp_tgl_berlaku") final DateTime? npwpTglBerlaku,
-      @JsonKey(name: "bpjs_tipe_id") final int? bpjsTipeId,
-      @JsonKey(name: "bpjs_no") final String? bpjsNo,
-      @JsonKey(name: "bpjs_foto") final String? bpjsFoto,
-      @JsonKey(name: "berkas_lain") final String? berkasLain,
-      @JsonKey(name: "desc_file") final dynamic descFile}) = _$BiodataImpl;
+          {@JsonKey(name: "id") final int? id,
+          @JsonKey(name: "m_comp_id") final int? mCompId,
+          @JsonKey(name: "m_dir_id") final int? mDirId,
+          @JsonKey(name: "m_divisi_id") final int? mDivisiId,
+          @JsonKey(name: "m_dept_id") final int? mDeptId,
+          @JsonKey(name: "m_zona_id") final int? mZonaId,
+          @JsonKey(name: "grading_id") final dynamic gradingId,
+          @JsonKey(name: "costcontre_id") final int? costcontreId,
+          @JsonKey(name: "kode") final dynamic kode,
+          @JsonKey(name: "m_posisi_id") final int? mPosisiId,
+          @JsonKey(name: "m_jam_kerja_id") final int? mJamKerjaId,
+          @JsonKey(name: "kode_presensi") final dynamic kodePresensi,
+          @JsonKey(name: "nik") final String? nik,
+          @JsonKey(name: "nama_depan") final String? namaDepan,
+          @JsonKey(name: "nama_belakang") final String? namaBelakang,
+          @JsonKey(name: "nama_lengkap") final dynamic namaLengkap,
+          @JsonKey(name: "nama_panggilan") final String? namaPanggilan,
+          @JsonKey(name: "jk_id") final int? jkId,
+          @JsonKey(name: "tempat_lahir") final String? tempatLahir,
+          @JsonKey(name: "tgl_lahir") final DateTime? tglLahir,
+          @JsonKey(name: "provinsi_id") final int? provinsiId,
+          @JsonKey(name: "kota_id") final int? kotaId,
+          @JsonKey(name: "kecamatan_id") final int? kecamatanId,
+          @JsonKey(name: "kode_pos") final String? kodePos,
+          @JsonKey(name: "alamat_asli") final String? alamatAsli,
+          @JsonKey(name: "alamat_domisili") final String? alamatDomisili,
+          @JsonKey(name: "no_tlp") final String? noTlp,
+          @JsonKey(name: "no_tlp_lainnya") final String? noTlpLainnya,
+          @JsonKey(name: "no_darurat") final String? noDarurat,
+          @JsonKey(name: "nama_kontak_darurat") final String? namaKontakDarurat,
+          @JsonKey(name: "agama_id") final int? agamaId,
+          @JsonKey(name: "gol_darah_id") final int? golDarahId,
+          @JsonKey(name: "status_nikah_id") final int? statusNikahId,
+          @JsonKey(name: "tanggungan_id") final int? tanggunganId,
+          @JsonKey(name: "hub_dgn_karyawan") final String? hubDgnKaryawan,
+          @JsonKey(name: "cuti_jatah_reguler") final int? cutiJatahReguler,
+          @JsonKey(name: "cuti_sisa_reguler") final int? cutiSisaReguler,
+          @JsonKey(name: "cuti_panjang") final int? cutiPanjang,
+          @JsonKey(name: "cuti_sisa_panjang") final int? cutiSisaPanjang,
+          @JsonKey(name: "status_kary_id") final dynamic statusKaryId,
+          @JsonKey(name: "lama_kontrak_awal") final dynamic lamaKontrakAwal,
+          @JsonKey(name: "lama_kontrak_akhir") final dynamic lamaKontrakAkhir,
+          @JsonKey(name: "tgl_masuk") final DateTime? tglMasuk,
+          @JsonKey(name: "tgl_berhenti") final dynamic tglBerhenti,
+          @JsonKey(name: "alasan_berhenti") final dynamic alasanBerhenti,
+          @JsonKey(name: "uk_baju") final String? ukBaju,
+          @JsonKey(name: "uk_celana") final String? ukCelana,
+          @JsonKey(name: "uk_sepatu") final String? ukSepatu,
+          @JsonKey(name: "desc") final dynamic desc,
+          @JsonKey(name: "is_active") final bool? isActive,
+          @JsonKey(name: "creator_id") final dynamic creatorId,
+          @JsonKey(name: "last_editor_id") final dynamic lastEditorId,
+          @JsonKey(name: "created_at") final String? createdAt,
+          @JsonKey(name: "updated_at") final String? updatedAt,
+          @JsonKey(name: "m_standart_gaji_id") final dynamic mStandartGajiId,
+          @JsonKey(name: "periode_gaji_id") final dynamic periodeGajiId,
+          @JsonKey(name: "ref_id") final dynamic refId,
+          @JsonKey(name: "presensi_lokasi_default_id")
+          final dynamic presensiLokasiDefaultId,
+          @JsonKey(name: "exp_date_cuti") final dynamic expDateCuti,
+          @JsonKey(name: "limit_potong") final int? limitPotong,
+          @JsonKey(name: "atasan_id") final int? atasanId,
+          @JsonKey(name: "cuti_p24") final dynamic cutiP24,
+          @JsonKey(name: "cuti_sisa_p24") final dynamic cutiSisaP24,
+          @JsonKey(name: "dir") final dynamic dir,
+          @JsonKey(name: "div") final String? div,
+          @JsonKey(name: "dept") final String? dept,
+          @JsonKey(name: "zona") final String? zona,
+          @JsonKey(name: "grading") final dynamic grading,
+          @JsonKey(name: "posisi") final String? posisi,
+          @JsonKey(name: "jam_kerja") final String? jamKerja,
+          @JsonKey(name: "jk") final String? jk,
+          @JsonKey(name: "provinsi") final String? provinsi,
+          @JsonKey(name: "kota") final String? kota,
+          @JsonKey(name: "kecamatan") final String? kecamatan,
+          @JsonKey(name: "agama") final String? agama,
+          @JsonKey(name: "gol_darah") final String? golDarah,
+          @JsonKey(name: "tanggungan") final String? tanggungan,
+          @JsonKey(name: "costcontre") final String? costcontre,
+          @JsonKey(name: "status_nikah") final String? statusNikah}) =
+      _$BiodataImpl;
 
   factory _Biodata.fromJson(Map<String, dynamic> json) = _$BiodataImpl.fromJson;
 
@@ -2282,7 +2094,7 @@ abstract class _Biodata implements Biodata {
   int? get costcontreId;
   @override
   @JsonKey(name: "kode")
-  String? get kode;
+  dynamic get kode;
   @override
   @JsonKey(name: "m_posisi_id")
   int? get mPosisiId;
@@ -2291,7 +2103,7 @@ abstract class _Biodata implements Biodata {
   int? get mJamKerjaId;
   @override
   @JsonKey(name: "kode_presensi")
-  String? get kodePresensi;
+  dynamic get kodePresensi;
   @override
   @JsonKey(name: "nik")
   String? get nik;
@@ -2303,7 +2115,7 @@ abstract class _Biodata implements Biodata {
   String? get namaBelakang;
   @override
   @JsonKey(name: "nama_lengkap")
-  String? get namaLengkap;
+  dynamic get namaLengkap;
   @override
   @JsonKey(name: "nama_panggilan")
   String? get namaPanggilan;
@@ -2408,10 +2220,10 @@ abstract class _Biodata implements Biodata {
   bool? get isActive;
   @override
   @JsonKey(name: "creator_id")
-  int? get creatorId;
+  dynamic get creatorId;
   @override
   @JsonKey(name: "last_editor_id")
-  int? get lastEditorId;
+  dynamic get lastEditorId;
   @override
   @JsonKey(name: "created_at")
   String? get createdAt;
@@ -2420,10 +2232,10 @@ abstract class _Biodata implements Biodata {
   String? get updatedAt;
   @override
   @JsonKey(name: "m_standart_gaji_id")
-  int? get mStandartGajiId;
+  dynamic get mStandartGajiId;
   @override
   @JsonKey(name: "periode_gaji_id")
-  int? get periodeGajiId;
+  dynamic get periodeGajiId;
   @override
   @JsonKey(name: "ref_id")
   dynamic get refId;
@@ -2432,10 +2244,22 @@ abstract class _Biodata implements Biodata {
   dynamic get presensiLokasiDefaultId;
   @override
   @JsonKey(name: "exp_date_cuti")
-  DateTime? get expDateCuti;
+  dynamic get expDateCuti;
+  @override
+  @JsonKey(name: "limit_potong")
+  int? get limitPotong;
+  @override
+  @JsonKey(name: "atasan_id")
+  int? get atasanId;
+  @override
+  @JsonKey(name: "cuti_p24")
+  dynamic get cutiP24;
+  @override
+  @JsonKey(name: "cuti_sisa_p24")
+  dynamic get cutiSisaP24;
   @override
   @JsonKey(name: "dir")
-  String? get dir;
+  dynamic get dir;
   @override
   @JsonKey(name: "div")
   String? get div;
@@ -2481,45 +2305,6 @@ abstract class _Biodata implements Biodata {
   @override
   @JsonKey(name: "status_nikah")
   String? get statusNikah;
-  @override
-  @JsonKey(name: "ktp_no")
-  String? get ktpNo;
-  @override
-  @JsonKey(name: "ktp_foto")
-  String? get ktpFoto;
-  @override
-  @JsonKey(name: "pas_foto")
-  String? get pasFoto;
-  @override
-  @JsonKey(name: "kk_no")
-  String? get kkNo;
-  @override
-  @JsonKey(name: "kk_foto")
-  String? get kkFoto;
-  @override
-  @JsonKey(name: "npwp_no")
-  String? get npwpNo;
-  @override
-  @JsonKey(name: "npwp_foto")
-  String? get npwpFoto;
-  @override
-  @JsonKey(name: "npwp_tgl_berlaku")
-  DateTime? get npwpTglBerlaku;
-  @override
-  @JsonKey(name: "bpjs_tipe_id")
-  int? get bpjsTipeId;
-  @override
-  @JsonKey(name: "bpjs_no")
-  String? get bpjsNo;
-  @override
-  @JsonKey(name: "bpjs_foto")
-  String? get bpjsFoto;
-  @override
-  @JsonKey(name: "berkas_lain")
-  String? get berkasLain;
-  @override
-  @JsonKey(name: "desc_file")
-  dynamic get descFile;
   @override
   @JsonKey(ignore: true)
   _$$BiodataImplCopyWith<_$BiodataImpl> get copyWith =>

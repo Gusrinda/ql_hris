@@ -28,7 +28,7 @@ class AddDinasSubmited extends AddDinasEvent {
     required this.departemen,
     required this.posisi,
     required this.templateSpd,
-    required this.direktorat,
+    this.direktorat,
     required this.tanggal,
     required this.tanggalAwal,
     required this.tanggalAkhir,

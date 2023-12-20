@@ -1,7 +1,6 @@
 part of 'edit_biodata_bloc.dart';
 
-
-abstract class EditBiodataState extends Equatable  {
+abstract class EditBiodataState extends Equatable {
   const EditBiodataState();
 
   @override
@@ -33,7 +32,7 @@ class EditBiodataFailed extends EditBiodataState {
 class EditBiodataFailedInBackground extends EditBiodataState {
   String message;
 
- EditBiodataFailedInBackground({required this.message});
+  EditBiodataFailedInBackground({required this.message});
 
   @override
   List<Object> get props => [message];
@@ -92,6 +91,94 @@ class SelectZonaSuccessInBackground extends EditBiodataState {
   List<Object> get props => [dataZona];
 }
 
+class SelectCostCentreSuccessInBackground extends EditBiodataState {
+  List<DataGeneral> dataCostCentre;
+
+  SelectCostCentreSuccessInBackground({
+    required this.dataCostCentre,
+  });
+
+  @override
+  List<Object> get props => [dataCostCentre];
+}
+
+class SelectStandarGajiSuccessInBackground extends EditBiodataState {
+  List<DataStandarGaji> dataStandarGaji;
+
+  SelectStandarGajiSuccessInBackground({
+    required this.dataStandarGaji,
+  });
+
+  @override
+  List<Object> get props => [dataStandarGaji];
+}
+
+class SelectKodePresensiSuccessInBackground extends EditBiodataState {
+  List<DataKodePresensi> dataKodePresensi;
+
+  SelectKodePresensiSuccessInBackground({
+    required this.dataKodePresensi,
+  });
+
+  @override
+  List<Object> get props => [dataKodePresensi];
+}
+
+class SelectTipeBPJSSuccessInBackground extends EditBiodataState {
+  List<DataGeneral> dataTipeBPJS;
+
+  SelectTipeBPJSSuccessInBackground({
+    required this.dataTipeBPJS,
+  });
+
+  @override
+  List<Object> get props => [dataTipeBPJS];
+}
+
+class SelectPeriodeGajiSuccessInBackground extends EditBiodataState {
+  List<DataGeneral> dataPeriodeGaji;
+
+  SelectPeriodeGajiSuccessInBackground({
+    required this.dataPeriodeGaji,
+  });
+
+  @override
+  List<Object> get props => [dataPeriodeGaji];
+}
+
+class SelectTipePembayaranSuccessInBackground extends EditBiodataState {
+  List<DataGeneral> dataTipePembayaran;
+
+  SelectTipePembayaranSuccessInBackground({
+    required this.dataTipePembayaran,
+  });
+
+  @override
+  List<Object> get props => [dataTipePembayaran];
+}
+
+class SelectMetodePembayaranSuccessInBackground extends EditBiodataState {
+  List<DataGeneral> dataMetodePembayaran;
+
+  SelectMetodePembayaranSuccessInBackground({
+    required this.dataMetodePembayaran,
+  });
+
+  @override
+  List<Object> get props => [dataMetodePembayaran];
+}
+
+class SelectNamaBankSuccessInBackground extends EditBiodataState {
+  List<DataGeneral> dataNamaBank;
+
+  SelectNamaBankSuccessInBackground({
+    required this.dataNamaBank,
+  });
+
+  @override
+  List<Object> get props => [dataNamaBank];
+}
+
 class SelectJenisKelaminSuccessInBackground extends EditBiodataState {
   List<DataGeneral> dataJenisKelamin;
 
@@ -112,17 +199,6 @@ class SelectKotaSuccessInBackground extends EditBiodataState {
 
   @override
   List<Object> get props => [dataKota];
-}
-
-class SelectKodePresensiSuccessInBackground extends EditBiodataState {
-  List<DataKodePresensi> dataKodePresensi;
-
-  SelectKodePresensiSuccessInBackground({
-    required this.dataKodePresensi,
-  });
-
-  @override
-  List<Object> get props => [dataKodePresensi];
 }
 
 class SelectAgamaSuccessInBackground extends EditBiodataState {
