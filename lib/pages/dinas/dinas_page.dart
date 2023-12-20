@@ -252,12 +252,12 @@ class _DinasPageState extends State<DinasPage> {
                     color: Colors.white,
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(18.0),
+                    padding: EdgeInsets.all(18.0.sp),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(
-                          height: 15,
+                        SizedBox(
+                          height: 15.sp,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

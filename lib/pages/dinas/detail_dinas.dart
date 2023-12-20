@@ -259,7 +259,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                       SizedBox(
                         height: 30.sp,
                       ),
-                      // if (currentStatus == "REVISED")
+                      if (currentStatus == "REVISED")
                       TextButtonCustomV1(
                         text: "Revisi Perjalanan Dinas",
                         height: 50,

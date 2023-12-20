@@ -6,6 +6,7 @@ import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/add_organisasi.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/add_organisasi_bloc/add_organisasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/list_organisas_bloc/list_organisasi_bloc.dart';
@@ -169,226 +170,243 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
                           child: Column(
                             children: [
                               Expanded(
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: listOrganisasi.length,
-                                  itemBuilder: (context, index) {
-                                    var dataOrganisasi = listOrganisasi[index];
-                                    return GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          showDeleteButton = false;
-                                          deleteIndex = null;
-                                        });
-                                      },
-                                      child: ListTile(
-                                        contentPadding: EdgeInsets.zero,
-                                        subtitle: Container(
-                                          margin:
-                                              EdgeInsets.only(bottom: 10.sp),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            border: Border.all(
-                                                color: Color(0xFFDDDDDD)),
-                                            color: MyColorsConst.whiteColor,
-                                          ),
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: 12.sp,
-                                            vertical: 10.sp,
-                                          ),
-                                          child: Stack(
-                                            children: [
-                                              Column(
-                                                children: [
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        '${dataOrganisasi.nama ?? '-'}',
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                          fontSize: 16.sp,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: MyColorsConst
-                                                              .primaryColor,
-                                                        ),
-                                                      ),
-                                                      IconButton(
-                                                        splashColor:
-                                                            MyColorsConst
-                                                                .redColor,
-                                                        icon: Icon(
-                                                            Icons.more_horiz),
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            // Ini buat munculkan tombol di index data itu saja
-                                                            if (deleteIndex ==
-                                                                index) {
-                                                              // Ini buat nutup tombol
-                                                              deleteIndex =
-                                                                  null;
-                                                              showDeleteButton =
-                                                                  false;
-                                                            } else {
-                                                              // handle buat kalau ga klik apa apa
-                                                              deleteIndex =
-                                                                  index;
-                                                              showDeleteButton =
-                                                                  true;
-                                                            }
-                                                          });
-                                                        },
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
+                                child: listOrganisasi.isNotEmpty
+                                    ? ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: listOrganisasi.length,
+                                        itemBuilder: (context, index) {
+                                          var dataOrganisasi =
+                                              listOrganisasi[index];
+                                          return GestureDetector(
+                                            onTap: () {
+                                              setState(() {
+                                                showDeleteButton = false;
+                                                deleteIndex = null;
+                                              });
+                                            },
+                                            child: ListTile(
+                                              contentPadding: EdgeInsets.zero,
+                                              subtitle: Container(
+                                                margin: EdgeInsets.only(
+                                                    bottom: 10.sp),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                      color: Color(0xFFDDDDDD)),
+                                                  color:
+                                                      MyColorsConst.whiteColor,
+                                                ),
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 12.sp,
+                                                  vertical: 10.sp,
+                                                ),
+                                                child: Stack(
+                                                  children: [
+                                                    Column(
+                                                      children: [
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
                                                           children: [
                                                             Text(
-                                                              'Posisi',
+                                                              '${dataOrganisasi.nama ?? '-'}',
                                                               style: GoogleFonts
                                                                   .poppins(
-                                                                fontSize: 10.sp,
-                                                                color: MyColorsConst
-                                                                    .lightDarkColor,
-                                                              ),
-                                                            ),
-                                                            Text(
-                                                              '${dataOrganisasi.posisi ?? '-'}',
-                                                              style: GoogleFonts
-                                                                  .poppins(
-                                                                fontSize: 12.sp,
+                                                                fontSize: 16.sp,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w600,
                                                                 color: MyColorsConst
-                                                                    .darkColor,
+                                                                    .primaryColor,
                                                               ),
+                                                            ),
+                                                            IconButton(
+                                                              splashColor:
+                                                                  MyColorsConst
+                                                                      .redColor,
+                                                              icon: Icon(Icons
+                                                                  .more_horiz),
+                                                              onPressed: () {
+                                                                setState(() {
+                                                                  // Ini buat munculkan tombol di index data itu saja
+                                                                  if (deleteIndex ==
+                                                                      index) {
+                                                                    // Ini buat nutup tombol
+                                                                    deleteIndex =
+                                                                        null;
+                                                                    showDeleteButton =
+                                                                        false;
+                                                                  } else {
+                                                                    // handle buat kalau ga klik apa apa
+                                                                    deleteIndex =
+                                                                        index;
+                                                                    showDeleteButton =
+                                                                        true;
+                                                                  }
+                                                                });
+                                                              },
                                                             ),
                                                           ],
                                                         ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
+                                                        Row(
                                                           children: [
-                                                            Text(
-                                                              'Tahun',
-                                                              style: GoogleFonts
-                                                                  .poppins(
-                                                                fontSize: 10.sp,
-                                                                color: MyColorsConst
-                                                                    .lightDarkColor,
+                                                            Expanded(
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    'Posisi',
+                                                                    style: GoogleFonts
+                                                                        .poppins(
+                                                                      fontSize:
+                                                                          10.sp,
+                                                                      color: MyColorsConst
+                                                                          .lightDarkColor,
+                                                                    ),
+                                                                  ),
+                                                                  Text(
+                                                                    '${dataOrganisasi.posisi ?? '-'}',
+                                                                    style: GoogleFonts
+                                                                        .poppins(
+                                                                      fontSize:
+                                                                          12.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      color: MyColorsConst
+                                                                          .darkColor,
+                                                                    ),
+                                                                  ),
+                                                                ],
                                                               ),
                                                             ),
-                                                            Text(
-                                                              '${dataOrganisasi.tahun ?? '-'}',
-                                                              style: GoogleFonts
-                                                                  .poppins(
-                                                                fontSize: 12.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                color: MyColorsConst
-                                                                    .darkColor,
+                                                            Expanded(
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    'Tahun',
+                                                                    style: GoogleFonts
+                                                                        .poppins(
+                                                                      fontSize:
+                                                                          10.sp,
+                                                                      color: MyColorsConst
+                                                                          .lightDarkColor,
+                                                                    ),
+                                                                  ),
+                                                                  Text(
+                                                                    '${dataOrganisasi.tahun ?? '-'}',
+                                                                    style: GoogleFonts
+                                                                        .poppins(
+                                                                      fontSize:
+                                                                          12.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      color: MyColorsConst
+                                                                          .darkColor,
+                                                                    ),
+                                                                  ),
+                                                                ],
                                                               ),
                                                             ),
                                                           ],
                                                         ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    height: 5.sp,
-                                                  ),
-                                                ],
-                                              ),
-                                              Positioned(
-                                                top: 30,
-                                                right: 15,
-                                                child: Visibility(
-                                                  visible: showDeleteButton &&
-                                                      deleteIndex == index,
-                                                  child: Material(
-                                                    elevation: 4,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4),
-                                                    child: InkWell(
-                                                      onTap: state
-                                                              is ListOrganisasiLoading
-                                                          ? null
-                                                          : () {
-                                                              showDialog(
-                                                                context:
-                                                                    context,
-                                                                builder: (_) =>
-                                                                    DialogCustom(
-                                                                  state: DialogCustomItem
-                                                                      .confirm,
-                                                                  message:
-                                                                      "Apakah Yakin Menghapus Data Ini?",
-                                                                  durationInSec:
-                                                                      5,
-                                                                  onContinue: () => context
-                                                                      .read<
-                                                                          ListOrganisasiBloc>()
-                                                                      .add(DeleteListOrganisai(
-                                                                          dataID: dataOrganisasi
-                                                                              .id
-                                                                              .toString())),
-                                                                ),
-                                                              );
-                                                            },
-                                                      child: Container(
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                          horizontal: 8.sp,
-                                                          vertical: 4.sp,
+                                                        SizedBox(
+                                                          height: 5.sp,
                                                         ),
-                                                        decoration:
-                                                            BoxDecoration(
+                                                      ],
+                                                    ),
+                                                    Positioned(
+                                                      top: 30,
+                                                      right: 15,
+                                                      child: Visibility(
+                                                        visible:
+                                                            showDeleteButton &&
+                                                                deleteIndex ==
+                                                                    index,
+                                                        child: Material(
+                                                          elevation: 4,
                                                           borderRadius:
                                                               BorderRadius
-                                                                  .circular(6),
-                                                          border: Border.all(
-                                                              color: Color(
-                                                                  0xFFDDDDDD)),
-                                                          color: Colors.red
-                                                              .withOpacity(0.2),
-                                                        ),
-                                                        child: Text(
-                                                          'Hapus',
-                                                          style: GoogleFonts
-                                                              .poppins(
-                                                            fontSize: 12.sp,
-                                                            color: Colors
-                                                                .red.shade900,
+                                                                  .circular(4),
+                                                          child: InkWell(
+                                                            onTap: state
+                                                                    is ListOrganisasiLoading
+                                                                ? null
+                                                                : () {
+                                                                    showDialog(
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (_) =>
+                                                                              DialogCustom(
+                                                                        state: DialogCustomItem
+                                                                            .confirm,
+                                                                        message:
+                                                                            "Apakah Yakin Menghapus Data Ini?",
+                                                                        durationInSec:
+                                                                            5,
+                                                                        onContinue: () => context
+                                                                            .read<ListOrganisasiBloc>()
+                                                                            .add(DeleteListOrganisai(dataID: dataOrganisasi.id.toString())),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                            child: Container(
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                horizontal:
+                                                                    8.sp,
+                                                                vertical: 4.sp,
+                                                              ),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            6),
+                                                                border: Border.all(
+                                                                    color: Color(
+                                                                        0xFFDDDDDD)),
+                                                                color: Colors
+                                                                    .red
+                                                                    .withOpacity(
+                                                                        0.2),
+                                                              ),
+                                                              child: Text(
+                                                                'Hapus',
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .poppins(
+                                                                  fontSize:
+                                                                      12.sp,
+                                                                  color: Colors
+                                                                      .red
+                                                                      .shade900,
+                                                                ),
+                                                              ),
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
+                                                  ],
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                        ),
+                                            ),
+                                          );
+                                        },
+                                      )
+                                    : Center(
+                                        child: EmptyStateBuilder(),
                                       ),
-                                    );
-                                  },
-                                ),
                               ),
                               TextButtonCustomV1(
                                 text: "Tambah Data",

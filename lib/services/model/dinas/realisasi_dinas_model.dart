@@ -1,0 +1,213 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'dart:convert';
+
+part 'realisasi_dinas_model.freezed.dart';
+part 'realisasi_dinas_model.g.dart';
+
+@freezed
+class RealisasiDinasModel with _$RealisasiDinasModel {
+    const factory RealisasiDinasModel({
+        @JsonKey(name: "data")
+        List<DataRealisasiDinas>? data,
+        @JsonKey(name: "total")
+        int? total,
+        @JsonKey(name: "current_page")
+        int? currentPage,
+        @JsonKey(name: "per_page")
+        int? perPage,
+        @JsonKey(name: "from")
+        int? from,
+        @JsonKey(name: "to")
+        int? to,
+        @JsonKey(name: "last_page")
+        int? lastPage,
+        @JsonKey(name: "has_next")
+        bool? hasNext,
+        @JsonKey(name: "prev")
+        dynamic prev,
+        @JsonKey(name: "next")
+        dynamic next,
+        @JsonKey(name: "processed_time")
+        double? processedTime,
+    }) = _RealisasiDinasModel;
+
+    factory RealisasiDinasModel.fromJson(Map<String, dynamic> json) => _$RealisasiDinasModelFromJson(json);
+}
+
+@freezed
+class DataRealisasiDinas with _$DataRealisasiDinas {
+    const factory DataRealisasiDinas({
+        @JsonKey(name: "meta_read")
+        bool? metaRead,
+        @JsonKey(name: "meta_delete")
+        bool? metaDelete,
+        @JsonKey(name: "meta_update")
+        bool? metaUpdate,
+        @JsonKey(name: "meta_create")
+        bool? metaCreate,
+        @JsonKey(name: "id")
+        int? id,
+        @JsonKey(name: "nomor")
+        String? nomor,
+        @JsonKey(name: "m_comp_id")
+        int? datumMCompId,
+        @JsonKey(name: "t_spd_id")
+        int? datumTSpdId,
+        @JsonKey(name: "total_biaya_spd")
+        int? totalBiayaSpd,
+        @JsonKey(name: "total_biaya_selisih")
+        int? totalBiayaSelisih,
+        @JsonKey(name: "pengambilan_spd")
+        int? pengambilanSpd,
+        @JsonKey(name: "keterangan")
+        String? keterangan,
+        @JsonKey(name: "status")
+        String? status,
+        @JsonKey(name: "creator_id")
+        int? datumCreatorId,
+        @JsonKey(name: "last_editor_id")
+        int? datumLastEditorId,
+        @JsonKey(name: "created_at")
+        String? createdAt,
+        @JsonKey(name: "updated_at")
+        String? updatedAt,
+        @JsonKey(name: "m_comp.id")
+        int? mCompId,
+        @JsonKey(name: "m_comp.nama")
+        String? mCompNama,
+        @JsonKey(name: "m_comp.is_active")
+        bool? mCompIsActive,
+        @JsonKey(name: "m_comp.desc")
+        dynamic mCompDesc,
+        @JsonKey(name: "m_comp.creator_id")
+        dynamic mCompCreatorId,
+        @JsonKey(name: "m_comp.last_editor_id")
+        dynamic mCompLastEditorId,
+        @JsonKey(name: "m_comp.created_at")
+        dynamic mCompCreatedAt,
+        @JsonKey(name: "m_comp.updated_at")
+        dynamic mCompUpdatedAt,
+        @JsonKey(name: "t_spd.id")
+        int? tSpdId,
+        @JsonKey(name: "t_spd.nomor")
+        String? tSpdNomor,
+        @JsonKey(name: "t_spd.m_comp_id")
+        int? tSpdMCompId,
+        @JsonKey(name: "t_spd.m_spd_id")
+        int? tSpdMSpdId,
+        @JsonKey(name: "t_spd.m_dir_id")
+        int? tSpdMDirId,
+        @JsonKey(name: "t_spd.m_divisi_id")
+        int? tSpdMDivisiId,
+        @JsonKey(name: "t_spd.m_dept_id")
+        int? tSpdMDeptId,
+        @JsonKey(name: "t_spd.m_posisi_id")
+        int? tSpdMPosisiId,
+        @JsonKey(name: "t_spd.tanggal")
+        String? tSpdTanggal,
+        @JsonKey(name: "t_spd.tgl_acara_awal")
+        String? tSpdTglAcaraAwal,
+        @JsonKey(name: "t_spd.tgl_acara_akhir")
+        String? tSpdTglAcaraAkhir,
+        @JsonKey(name: "t_spd.jenis_spd_id")
+        int? tSpdJenisSpdId,
+        @JsonKey(name: "t_spd.m_zona_asal_id")
+        int? tSpdMZonaAsalId,
+        @JsonKey(name: "t_spd.m_zona_tujuan_id")
+        int? tSpdMZonaTujuanId,
+        @JsonKey(name: "t_spd.m_lokasi_tujuan_id")
+        int? tSpdMLokasiTujuanId,
+        @JsonKey(name: "t_spd.m_kary_id")
+        int? tSpdMKaryId,
+        @JsonKey(name: "t_spd.pic_id")
+        int? tSpdPicId,
+        @JsonKey(name: "t_spd.total_biaya")
+        String? tSpdTotalBiaya,
+        @JsonKey(name: "t_spd.kegiatan")
+        String? tSpdKegiatan,
+        @JsonKey(name: "t_spd.keterangan")
+        String? tSpdKeterangan,
+        @JsonKey(name: "t_spd.status")
+        String? tSpdStatus,
+        @JsonKey(name: "t_spd.creator_id")
+        int? tSpdCreatorId,
+        @JsonKey(name: "t_spd.last_editor_id")
+        dynamic tSpdLastEditorId,
+        @JsonKey(name: "t_spd.created_at")
+        String? tSpdCreatedAt,
+        @JsonKey(name: "t_spd.updated_at")
+        String? tSpdUpdatedAt,
+        @JsonKey(name: "t_spd.is_kend_dinas")
+        bool? tSpdIsKendDinas,
+        @JsonKey(name: "creator.id")
+        int? creatorId,
+        @JsonKey(name: "creator.name")
+        String? creatorName,
+        @JsonKey(name: "creator.email")
+        String? creatorEmail,
+        @JsonKey(name: "creator.username")
+        String? creatorUsername,
+        @JsonKey(name: "creator.email_verified_at")
+        dynamic creatorEmailVerifiedAt,
+        @JsonKey(name: "creator.password")
+        String? creatorPassword,
+        @JsonKey(name: "creator.m_comp_id")
+        int? creatorMCompId,
+        @JsonKey(name: "creator.m_dir_id")
+        int? creatorMDirId,
+        @JsonKey(name: "creator.is_active")
+        bool? creatorIsActive,
+        @JsonKey(name: "creator.creator_id")
+        int? creatorCreatorId,
+        @JsonKey(name: "creator.last_editor_id")
+        int? creatorLastEditorId,
+        @JsonKey(name: "creator.remember_token")
+        dynamic creatorRememberToken,
+        @JsonKey(name: "creator.created_at")
+        String? creatorCreatedAt,
+        @JsonKey(name: "creator.updated_at")
+        String? creatorUpdatedAt,
+        @JsonKey(name: "creator.profil_image")
+        String? creatorProfilImage,
+        @JsonKey(name: "creator.telp")
+        dynamic creatorTelp,
+        @JsonKey(name: "creator.m_kary_id")
+        int? creatorMKaryId,
+        @JsonKey(name: "last_editor.id")
+        int? lastEditorId,
+        @JsonKey(name: "last_editor.name")
+        String? lastEditorName,
+        @JsonKey(name: "last_editor.email")
+        String? lastEditorEmail,
+        @JsonKey(name: "last_editor.username")
+        String? lastEditorUsername,
+        @JsonKey(name: "last_editor.email_verified_at")
+        dynamic lastEditorEmailVerifiedAt,
+        @JsonKey(name: "last_editor.password")
+        String? lastEditorPassword,
+        @JsonKey(name: "last_editor.m_comp_id")
+        int? lastEditorMCompId,
+        @JsonKey(name: "last_editor.m_dir_id")
+        int? lastEditorMDirId,
+        @JsonKey(name: "last_editor.is_active")
+        bool? lastEditorIsActive,
+        @JsonKey(name: "last_editor.creator_id")
+        int? lastEditorCreatorId,
+        @JsonKey(name: "last_editor.last_editor_id")
+        int? lastEditorLastEditorId,
+        @JsonKey(name: "last_editor.remember_token")
+        dynamic lastEditorRememberToken,
+        @JsonKey(name: "last_editor.created_at")
+        String? lastEditorCreatedAt,
+        @JsonKey(name: "last_editor.updated_at")
+        String? lastEditorUpdatedAt,
+        @JsonKey(name: "last_editor.profil_image")
+        String? lastEditorProfilImage,
+        @JsonKey(name: "last_editor.telp")
+        dynamic lastEditorTelp,
+        @JsonKey(name: "last_editor.m_kary_id")
+        int? lastEditorMKaryId,
+    }) = _DataRealisasiDinas;
+
+    factory DataRealisasiDinas.fromJson(Map<String, dynamic> json) => _$DataRealisasiDinasFromJson(json);
+}

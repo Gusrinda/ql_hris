@@ -95,6 +95,8 @@ class DataDinas with _$DataDinas {
         String? createdAt,
         @JsonKey(name: "updated_at")
         String? updatedAt,
+        @JsonKey(name: "is_kend_dinas")
+        bool? isKendDinas,
         @JsonKey(name: "m_comp.id")
         int? mCompId,
         @JsonKey(name: "m_comp.nama")

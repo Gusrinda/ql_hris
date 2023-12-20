@@ -12,9 +12,16 @@ import 'package:sj_presensi_mobile/pages/cuti/edit_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_dinas_bloc/add_dinas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/dinas/add_realisasi_dinas.dart';
+import 'package:sj_presensi_mobile/pages/dinas/add_realisasi_dinas_bloc/add_realisasi_dinas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dashboard_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/detail_dinas.dart';
+import 'package:sj_presensi_mobile/pages/dinas/detail_realisasi_dinas.dart';
+import 'package:sj_presensi_mobile/pages/dinas/detail_realisasi_dinas_bloc/detail_realisasi_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/edit_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/dinas/list_realisasi_dinas_bloc/list_realisasi_dinas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/dinas/realisasi_dinas.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/add_check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/location_acio_bloc.dart';
@@ -74,6 +81,7 @@ import 'package:sj_presensi_mobile/pages/lembur/detail_lembur.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
+import 'package:sj_presensi_mobile/services/model/dinas/realisasi_dinas_model.dart';
 import 'package:sj_presensi_mobile/services/model/list_approval/response_list_approval.dart';
 import 'package:sj_presensi_mobile/services/model/report_detail_page_model.dart';
 import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_biodata_karyawan.dart';
@@ -208,10 +216,10 @@ class RouteGenerator {
             ),
           );
         });
-      // case DashboardDinasPage.routeName:
-      //   return MaterialPageRoute(builder: (context) {
-      //     return const DashboardDinasPage();
-      //   });
+      case DashboardDinasPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return const DashboardDinasPage();
+        });
       case AddDinasPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
@@ -245,6 +253,33 @@ class RouteGenerator {
                 context
                     .read<ListDinasBloc>()
                     .add(GetListDinas(date: DateTime.now()));
+              },
+            ),
+          );
+        });
+      case RealisasiDinasPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return BlocProvider(
+            create: (context) => ListRealisasiDinasBloc(),
+            child: const RealisasiDinasPage(),
+          );
+        });
+      case DetailRealisasiDinas.routeName:
+        final dataRealisasi = settings.arguments as DataRealisasiDinas?;
+        return MaterialPageRoute(builder: (context) {
+          return DetailRealisasiDinas(
+            dataRealisasi: dataRealisasi!,
+          );
+        });
+      case AddRealisasiDinasPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return BlocProvider(
+            create: (context) => AddRealisasiDinasBloc(),
+            child: AddRealisasiDinasPage(
+              reloadDataCallback: () {
+                context
+                    .read<ListRealisasiDinasBloc>()
+                    .add(GetListRealisasiDinas());
               },
             ),
           );

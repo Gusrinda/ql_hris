@@ -7,6 +7,7 @@ import 'package:sj_presensi_mobile/pages/approval/approval.view.dart';
 import 'package:sj_presensi_mobile/pages/approval/bloc/approval_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dashboard_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
@@ -142,11 +143,10 @@ class _HomePageState extends State<HomePage> {
                                     Text(
                                       '#SJGWarrior',
                                       style: GoogleFonts.poppins(
-                                        color: Colors.white,
-                                        fontSize: 10.sp,
-                                        fontWeight: FontWeight.w700,
-                                        fontStyle: FontStyle.italic
-                                      ),
+                                          color: Colors.white,
+                                          fontSize: 10.sp,
+                                          fontWeight: FontWeight.w700,
+                                          fontStyle: FontStyle.italic),
                                     ),
                                     Text(
                                       name ?? 'Karyawan SJ',
@@ -426,12 +426,8 @@ class _HomePageState extends State<HomePage> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => BlocProvider(
-                                          create: (context) => ListDinasBloc()
-                                            ..add(GetListDinas(
-                                                date: DateTime.now())),
-                                          child: DinasPage(),
-                                        ),
+                                        builder: (context) =>
+                                            DashboardDinasPage(),
                                       ),
                                     );
                                   },
