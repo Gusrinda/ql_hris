@@ -75,10 +75,9 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getDivisi(
-      String token) async {
-    var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_divisi?paginate=1000");
+  static Future<Object> getDivisi(String token) async {
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_divisi?paginate=1000");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -86,10 +85,9 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getDepartemen(
-      String token) async {
-    var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_dept?paginate=1000");
+  static Future<Object> getDepartemen(String token) async {
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_dept?paginate=1000");
     // print("URL SEARCH ? ${url}");
     return await GeneralServices.baseService(
       url: url,
@@ -98,10 +96,9 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getPosisi(
-      String token) async {
-    var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_posisi?paginate=1000");
+  static Future<Object> getPosisi(String token) async {
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_posisi?paginate=1000");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -109,10 +106,9 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getTemplateSpd(
-      String token) async {
-    var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_spd?paginate=1000");
+  static Future<Object> getTemplateSpd(String token) async {
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_spd?paginate=1000");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -120,10 +116,9 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getDirektorat(
-      String token) async {
-    var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_dir?paginate=1000");
+  static Future<Object> getDirektorat(String token) async {
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_dir?paginate=1000");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -131,8 +126,7 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getJenisSpd(
-      String token) async {
+  static Future<Object> getJenisSpd(String token) async {
     var url = Uri.parse(
         "${MyGeneralConst.API_URL}/operation/m_general?paginate=1000");
     return await GeneralServices.baseService(
@@ -142,10 +136,9 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getZona(
-      String token) async {
-    var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_zona?paginate=1000");
+  static Future<Object> getZona(String token) async {
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_zona?paginate=1000");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -153,10 +146,9 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getLokasiTujuan(
-      String token) async {
-    var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_lokasi?paginate=1000");
+  static Future<Object> getLokasiTujuan(String token) async {
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_lokasi?paginate=1000");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -164,8 +156,7 @@ class DinasServices {
     );
   }
 
-  static Future<Object> getPic(
-      String token) async {
+  static Future<Object> getPic(String token) async {
     var url = Uri.parse(
         "${MyGeneralConst.API_URL}/operation/default_users?paginate=1000");
     // print("URL SEARCH ? ${url}");

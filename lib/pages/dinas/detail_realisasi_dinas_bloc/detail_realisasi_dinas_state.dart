@@ -23,6 +23,18 @@ class DetailRealisasiDinasSuccess extends DetailRealisasiDinasState {
   List<Object> get props => [dataDetailrealisasiDinas!];
 }
 
+
+class DetailSPDSuceess extends DetailRealisasiDinasState {
+  DataDetailDinas dataDetailSPD;
+
+  DetailSPDSuceess({
+    required this.dataDetailSPD,
+  });
+
+  @override
+  List<Object> get props => [dataDetailSPD];
+}
+
 class DetailRealisasiDinasFailedInBackground extends DetailRealisasiDinasState {
   String message;
   DetailRealisasiDinasFailedInBackground({required this.message});

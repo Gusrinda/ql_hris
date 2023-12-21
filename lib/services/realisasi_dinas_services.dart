@@ -5,9 +5,9 @@ import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:sj_presensi_mobile/utils/services_no_source_mobile.dart';
 
 class RealisasiDinasServices {
-  static Future<Object> getListDinas(String token) async {
+  static Future<Object> getListDinasApprove(String token) async {
     var url =
-        Uri.parse("${MyGeneralConst.API_URL}/operation/t_spd?paginate=10000");
+        Uri.parse("${MyGeneralConst.API_URL}/operation/t_spd?paginate=1000&filter_status=APPROVED");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -83,10 +83,10 @@ class RealisasiDinasServices {
     int tSpdId,
     double totalBiayaSelisih,
     String keterangan,
-    // List<Map<String, dynamic>> tRpdDetList,
+    List<Map<String, dynamic>> tRpdDetList,
   ) async {
     // Mendefinisikan URL untuk permintaan POST
-    var url = Uri.parse("${MyGeneralConst.API_URL}/your-endpoint-here");
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_rpd");
 
     // Melakukan permintaan POST menggunakan metode baseService
     return await GeneralServices.baseService(
@@ -97,18 +97,22 @@ class RealisasiDinasServices {
         "t_spd_id": tSpdId,
         "total_biaya_selisih": totalBiayaSelisih,
         "keterangan": keterangan,
-        // "t_rpd_det": [
-        //   for (var tRpdDet in tRpdDetList)
-        //     {
-        //       "tipe_spd_id": tRpdDet["tipe_spd_id"],
-        //       "biaya_realisasi": tRpdDet["biaya_realisasi"],
-        //       "detail_transport": tRpdDet["detail_transport"],
-        //       "catatan_realisasi": tRpdDet["catatan_realisasi"],
-        //     },
-        // ],
+        "t_rpd_det": tRpdDetList
       }),
     );
   }
+
+  
+  static Future<Object> getDetailSPD(String token, int spdID) async {
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/t_spd/${spdID}");
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token),
+    );
+  }
+
 
   static Future<Object> getDetailRealisasiDinas(String token, int id) async {
     var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_rpd/$id");

@@ -107,10 +107,10 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
     }
   }
 
-  String formatTime(String rawTime) {
-    DateTime parsedTime = DateFormat.Hms().parse(rawTime);
-    return DateFormat('HH:mm').format(parsedTime);
-  }
+  // String formatTime(String rawTime) {
+  //   DateTime parsedTime = DateFormat.Hms().parse(rawTime);
+  //   return DateFormat('HH:mm').format(parsedTime);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -199,9 +199,8 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                                     formatDate(widget.dateFrom ?? '-')),
                                 _buildText(
                                     'Waktu Awal',
-                                    formatTime(
-                                        widget.data?.timeFrom?.toString() ??
-                                            '00:00')),
+                                    widget.data?.timeFrom?.toString() ??
+                                        '00:00'),
                                 Text(
                                   'Status',
                                   style: GoogleFonts.poppins(
@@ -232,11 +231,8 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                                     'Keterangan', widget.keterangan ?? '-'),
                                 _buildText('Tanggal Berakhir',
                                     formatDate(widget.dateTo ?? '-')),
-                                _buildText(
-                                    'Waktu Berakhir',
-                                    formatTime(
-                                        widget.data?.timeTo?.toString() ??
-                                            '00:00')),
+                                _buildText('Waktu Berakhir',
+                                    widget.data?.timeTo?.toString() ?? '00:00'),
                                 // _buildText('Catatan Approval',
                                 //     widget.data?.keterangan?.toString() ?? '-'),
                               ],

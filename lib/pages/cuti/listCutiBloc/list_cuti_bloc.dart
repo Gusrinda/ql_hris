@@ -47,7 +47,7 @@ class ListCutiBloc extends Bloc<ListCutiEvent, ListCutiState> {
           debugPrint(res.response.toString());
           if (res.response is Map<String, dynamic>) {
             print(res.response);
-
+            
             //Mengubah hasil response api ke model kelas
             ListCutiModel dataResponse = ListCutiModel.fromJson(res.response);
 

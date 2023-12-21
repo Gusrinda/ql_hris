@@ -24,7 +24,7 @@ class AddRealisasiDinasBloc
           event.tSpdId,
           event.totalBiayaSelisih,
           event.keterangan,
-          // event.tRpdDetList!,
+          event.tRpdDetList ?? [],
         );
         if (res is ServicesSuccess) {
           emit(AddRealisasiDinasSuccess(
@@ -48,13 +48,15 @@ class AddRealisasiDinasBloc
       emit(AddRealisasiDinasLoading());
       var resToken = await GeneralSharedPreferences.getUserToken();
       if (resToken is ServicesSuccess) {
-        var res = await RealisasiDinasServices.getListDinas(
+        var res = await RealisasiDinasServices.getListDinasApprove(
             resToken.response["token"]);
         if (res is ServicesSuccess) {
           if (res.response is Map<String, dynamic>) {
             ListDinasModel dataResponse = ListDinasModel.fromJson(res.response);
 
             listDinasApproved = dataResponse.data ?? [];
+
+            print("INI LIST DINAS YANG APPROVED ${dataResponse.data}");
             emit(
               SelectDinasApprovedSuccessInBackground(
                   dataDinasApproved: listDinasApproved),
