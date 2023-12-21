@@ -8,173 +8,351 @@ abstract class EditBiodataEvent extends Equatable {
 }
 
 class EditDataBiodataSubmited extends EditBiodataEvent {
-  int? userId;
-  int? dirId;
-  int? divisiId;
-  int? deptId;
-  int? zonaId;
-  int? gradingId;
-  int? costcentreId;
-  int? posisiId;
-  int? jamKerjaId;
-  String? nik;
-  String? namaDepan;
-  String? namaBelakang;
-  String? namaLengkap;
-  String? namaPanggilan;
-  int? jkId;
-  String? tempatLahir;
-  String? tglLahir;
-  int? provinsiId;
-  int? kotaId;
-  int? kecamatanId;
-  String? kodePos;
-  String? alamatAsli;
-  String? alamatDomisili;
-  String? noTlp;
-  String? noTlpLainnya;
-  String? noDarurat;
-  String? namaKontakDarurat;
-  int? agamaId;
-  int? golDarahId;
-  int? statusNikahId;
-  int? tanggunganId;
-  String? hubDgnKaryawan;
-  int? cutiJatahReguler;
-  int? cutiSisaReguler;
-  int? cutiPanjang;
-  int? cutiSisaPanjang;
-  int? statusKaryId;
-  String? tglMasuk;
-  String? tglBerhenti;
-  String? alasanBerhenti;
-  String? ukBaju;
-  String? ukCelana;
-  String? ukSepatu;
-  File? ktpFoto;
-  File? pasFoto;
-  File? bpjsFoto;
-  String? ktpNo;
-  String? kkNo;
-  String? npwpNo;
-  String? npwpTglBerlaku;
-  int? bpjsTipeId;
-  String? bpjsNo;
-  String? berkasLain;
+  // int dirId;
+  int divisiId;
+  int deptId;
+  int zonaId;
+  int posisiId;
+  String kodePresensi;
+  String namaDepan;
+  String namaBelakang;
+  String namaLengkap;
+  String namaPanggilan;
+  int jkId;
+  String tempatLahir;
+  String tglLahir;
+  int provinsiId;
+  int kotaId;
+  int kecamatanId;
+  String kodePos;
+  String alamatAsli;
+  String alamatDomisili;
+  String noTlp;
+  String noTlpLainnya;
+  String noDarurat;
+  String namaKontakDarurat;
+  int agamaId;
+  int golDarahId;
+  int statusNikahId;
+  int tanggunganId;
+  String hubDgnKaryawan;
+  String tglMasuk;
+  String ukBaju;
+  String ukCelana;
+  String ukSepatu;
+  File ktpFoto;
+  File pasFoto;
+  File bpjsFoto;
+  String ktpNo;
+  String kkNo;
+  File kkFoto;
+  String npwpNo;
+  File npwpFoto;
+  String npwpTglBerlaku;
+  int bpjsTipeId;
+  String bpjsNo;
+  // File berkasLain;
+  String desc;
+  int bankId;
+  String noRek;
+  String atasNamaRek;
 
   EditDataBiodataSubmited({
-    this.userId,
-    this.dirId,
-    this.divisiId,
-    this.deptId,
-    this.zonaId,
-    this.gradingId,
-    this.costcentreId,
-    this.posisiId,
-    this.jamKerjaId,
-    this.nik,
-    this.namaDepan,
-    this.namaBelakang,
-    this.namaLengkap,
-    this.namaPanggilan,
-    this.jkId,
-    this.tempatLahir,
-    this.tglLahir,
-    this.provinsiId,
-    this.kotaId,
-    this.kecamatanId,
-    this.kodePos,
-    this.alamatAsli,
-    this.alamatDomisili,
-    this.noTlp,
-    this.noTlpLainnya,
-    this.noDarurat,
-    this.namaKontakDarurat,
-    this.agamaId,
-    this.golDarahId,
-    this.statusNikahId,
-    this.tanggunganId,
-    this.hubDgnKaryawan,
-    this.cutiJatahReguler,
-    this.cutiSisaReguler,
-    this.cutiPanjang,
-    this.cutiSisaPanjang,
-    this.statusKaryId,
-    this.tglMasuk,
-    this.tglBerhenti,
-    this.alasanBerhenti,
-    this.ukBaju,
-    this.ukCelana,
-    this.ukSepatu,
-    this.ktpFoto,
-    this.pasFoto,
-    this.bpjsFoto,
-    this.ktpNo,
-    this.kkNo,
-    this.npwpNo,
-    this.npwpTglBerlaku,
-    this.bpjsTipeId,
-    this.bpjsNo,
-    this.berkasLain,
+    // required this.dirId,
+    required this.divisiId,
+    required this.deptId,
+    required this.zonaId,
+    required this.posisiId,
+    required this.kodePresensi,
+    required this.namaDepan,
+    required this.namaBelakang,
+    required this.namaLengkap,
+    required this.namaPanggilan,
+    required this.jkId,
+    required this.tempatLahir,
+    required this.tglLahir,
+    required this.provinsiId,
+    required this.kotaId,
+    required this.kecamatanId,
+    required this.kodePos,
+    required this.alamatAsli,
+    required this.alamatDomisili,
+    required this.noTlp,
+    required this.noTlpLainnya,
+    required this.noDarurat,
+    required this.namaKontakDarurat,
+    required this.agamaId,
+    required this.golDarahId,
+    required this.statusNikahId,
+    required this.tanggunganId,
+    required this.hubDgnKaryawan,
+    required this.tglMasuk,
+    required this.ukBaju,
+    required this.ukCelana,
+    required this.ukSepatu,
+    required this.ktpFoto,
+    required this.pasFoto,
+    required this.bpjsFoto,
+    required this.ktpNo,
+    required this.kkNo,
+    required this.kkFoto,
+    required this.npwpNo,
+    required this.npwpFoto,
+    required this.npwpTglBerlaku,
+    required this.bpjsTipeId,
+    required this.bpjsNo,
+    // required this.berkasLain,
+    required this.desc,
+    required this.bankId,
+    required this.noRek,
+    required this.atasNamaRek,
   });
 
   @override
   List<Object> get props => [
-        userId!,
-        dirId!,
-        divisiId!,
-        deptId!,
-        zonaId!,
-        gradingId!,
-        costcentreId!,
-        posisiId!,
-        jamKerjaId!,
-        nik!,
-        namaDepan!,
-        namaBelakang!,
-        namaLengkap!,
-        namaPanggilan!,
-        jkId!,
-        tempatLahir!,
-        tglLahir!,
-        provinsiId!,
-        kotaId!,
-        kecamatanId!,
-        kodePos!,
-        alamatAsli!,
-        alamatDomisili!,
-        noTlp!,
-        noTlpLainnya!,
-        noDarurat!,
-        namaKontakDarurat!,
-        agamaId!,
-        golDarahId!,
-        statusNikahId!,
-        tanggunganId!,
-        hubDgnKaryawan!,
-        cutiJatahReguler!,
-        cutiSisaReguler!,
-        cutiPanjang!,
-        cutiSisaPanjang!,
-        statusKaryId!,
-        tglMasuk!,
-        tglBerhenti!,
-        alasanBerhenti!,
-        ukBaju!,
-        ukCelana!,
-        ukSepatu!,
-        ktpFoto!,
-        pasFoto!,
-        bpjsFoto!,
-        ktpNo!,
-        kkNo!,
-        npwpNo!,
-        npwpTglBerlaku!,
-        bpjsTipeId!,
-        bpjsNo!,
-        berkasLain!,
+        // dirId,
+        divisiId,
+        deptId,
+        zonaId,
+        posisiId,
+        kodePresensi,
+        namaDepan,
+        namaBelakang,
+        namaLengkap,
+        namaPanggilan,
+        jkId,
+        tempatLahir,
+        tglLahir,
+        provinsiId,
+        kotaId,
+        kecamatanId,
+        kodePos,
+        alamatAsli,
+        alamatDomisili,
+        noTlp,
+        noTlpLainnya,
+        noDarurat,
+        namaKontakDarurat,
+        agamaId,
+        golDarahId,
+        statusNikahId,
+        tanggunganId,
+        hubDgnKaryawan,
+        tglMasuk,
+        ukBaju,
+        ukCelana,
+        ukSepatu,
+        ktpFoto,
+        pasFoto,
+        bpjsFoto,
+        ktpNo,
+        kkNo,
+        kkFoto,
+        npwpNo,
+        npwpFoto,
+        npwpTglBerlaku,
+        bpjsTipeId,
+        bpjsNo,
+        // berkasLain,
+        desc,
+        bankId,
+        noRek,
+        atasNamaRek,
       ];
 }
+
+// class EditDataBiodataSubmited extends EditBiodataEvent {
+//   int? userId;
+//   int? dirId;
+//   int? divisiId;
+//   int? deptId;
+//   int? zonaId;
+//   int? standarGaji;
+//   int? gradingId;
+//   int? costcentreId;
+//   int? posisiId;
+//   String? kodePresensi;
+//   bool? isActive;
+//   String? nik;
+//   String? namaDepan;
+//   String? namaBelakang;
+//   String? namaLengkap;
+//   String? namaPanggilan;
+//   int? jkId;
+//   String? tempatLahir;
+//   String? tglLahir;
+//   int? provinsiId;
+//   int? kotaId;
+//   int? kecamatanId;
+//   String? kodePos;
+//   String? alamatAsli;
+//   String? alamatDomisili;
+//   String? noTlp;
+//   String? noTlpLainnya;
+//   String? noDarurat;
+//   String? namaKontakDarurat;
+//   int? agamaId;
+//   int? golDarahId;
+//   int? statusNikahId;
+//   int? tanggunganId;
+//   String? hubDgnKaryawan;
+//   int? cutiJatahReguler;
+//   int? cutiSisaReguler;
+//   int? cutiPanjang;
+//   int? cutiSisaPanjang;
+//   int? statusKaryId;
+//   String? tglMasuk;
+//   String? tglBerhenti;
+//   String? alasanBerhenti;
+//   String? ukBaju;
+//   String? ukCelana;
+//   String? ukSepatu;
+//   File? ktpFoto;
+//   File? pasFoto;
+//   File? bpjsFoto;
+//   String? ktpNo;
+//   String? kkNo;
+//   File? kkFoto;
+//   String? npwpNo;
+//   File? npwpFoto;
+//   String? npwpTglBerlaku;
+//   int? bpjsTipeId;
+//   String? bpjsNo;
+//   File? berkasLain;
+//   String? desc;
+//   int? bankId;
+//   String? noRek;
+//   String? atasNamaRek;
+
+//   EditDataBiodataSubmited({
+//     this.userId,
+//     this.dirId,
+//     this.divisiId,
+//     this.deptId,
+//     this.zonaId,
+//     this.standarGaji,
+//     this.gradingId,
+//     this.costcentreId,
+//     this.posisiId,
+//     this.kodePresensi,
+//     this.isActive,
+//     this.nik,
+//     this.namaDepan,
+//     this.namaBelakang,
+//     this.namaLengkap,
+//     this.namaPanggilan,
+//     this.jkId,
+//     this.tempatLahir,
+//     this.tglLahir,
+//     this.provinsiId,
+//     this.kotaId,
+//     this.kecamatanId,
+//     this.kodePos,
+//     this.alamatAsli,
+//     this.alamatDomisili,
+//     this.noTlp,
+//     this.noTlpLainnya,
+//     this.noDarurat,
+//     this.namaKontakDarurat,
+//     this.agamaId,
+//     this.golDarahId,
+//     this.statusNikahId,
+//     this.tanggunganId,
+//     this.hubDgnKaryawan,
+//     this.cutiJatahReguler,
+//     this.cutiSisaReguler,
+//     this.cutiPanjang,
+//     this.cutiSisaPanjang,
+//     this.statusKaryId,
+//     this.tglMasuk,
+//     this.tglBerhenti,
+//     this.alasanBerhenti,
+//     this.ukBaju,
+//     this.ukCelana,
+//     this.ukSepatu,
+//     this.ktpFoto,
+//     this.pasFoto,
+//     this.bpjsFoto,
+//     this.ktpNo,
+//     this.kkNo,
+//     this.kkFoto,
+//     this.npwpNo,
+//     this.npwpFoto,
+//     this.npwpTglBerlaku,
+//     this.bpjsTipeId,
+//     this.bpjsNo,
+//     this.berkasLain,
+//     this.desc,
+//     this.bankId,
+//     this.noRek,
+//     this.atasNamaRek,
+//   });
+
+//   @override
+//   List<Object> get props => [
+//         userId!,
+//         dirId!,
+//         divisiId!,
+//         deptId!,
+//         zonaId!,
+//         standarGaji!,
+//         gradingId!,
+//         costcentreId!,
+//         posisiId!,
+//         kodePresensi!,
+//         isActive!,
+//         nik!,
+//         namaDepan!,
+//         namaBelakang!,
+//         namaLengkap!,
+//         namaPanggilan!,
+//         jkId!,
+//         tempatLahir!,
+//         tglLahir!,
+//         provinsiId!,
+//         kotaId!,
+//         kecamatanId!,
+//         kodePos!,
+//         alamatAsli!,
+//         alamatDomisili!,
+//         noTlp!,
+//         noTlpLainnya!,
+//         noDarurat!,
+//         namaKontakDarurat!,
+//         agamaId!,
+//         golDarahId!,
+//         statusNikahId!,
+//         tanggunganId!,
+//         hubDgnKaryawan!,
+//         cutiJatahReguler!,
+//         cutiSisaReguler!,
+//         cutiPanjang!,
+//         cutiSisaPanjang!,
+//         statusKaryId!,
+//         tglMasuk!,
+//         tglBerhenti!,
+//         alasanBerhenti!,
+//         ukBaju!,
+//         ukCelana!,
+//         ukSepatu!,
+//         ktpFoto!,
+//         pasFoto!,
+//         bpjsFoto!,
+//         ktpNo!,
+//         kkNo!,
+//         kkFoto!,
+//         npwpNo!,
+//         npwpFoto!,
+//         npwpTglBerlaku!,
+//         bpjsTipeId!,
+//         bpjsNo!,
+//         berkasLain!,
+//         desc!,
+//         bankId!,
+//         noRek!,
+//         atasNamaRek!,
+//       ];
+// }
 
 class OnSelectDivisi extends EditBiodataEvent {
   OnSelectDivisi();

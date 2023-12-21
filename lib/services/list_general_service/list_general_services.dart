@@ -1,5 +1,6 @@
 import 'package:sj_presensi_mobile/utils/const.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
+import 'package:sj_presensi_mobile/utils/services_no_source_mobile.dart';
 
 class ListGeneralService {
   static Future<Object> getTingkatPendidikan(String token) async {
@@ -103,11 +104,12 @@ class ListGeneralService {
   }
 
   static Future<Object> getKodePre(String token) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_jam_kerja?paginate=1000");
-    return await GeneralServices.baseService(
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_jam_kerja?paginate=1000");
+    return await GeneralServicesNoMobile.baseService(
       url: url,
-      method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      method: GeneralServicesMethodNoMobile.get,
+      headers: GeneralServicesNoMobile.addToken2Headers(token),
     );
   }
 
@@ -174,22 +176,22 @@ class ListGeneralService {
   static Future<Object> getStandartGaji(String token) async {
     var url = Uri.parse(
         "${MyGeneralConst.API_URL}/operation/m_standart_gaji?paginate=1000");
-    return await GeneralServices.baseService(
+    return await GeneralServicesNoMobile.baseService(
       url: url,
-      method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      method: GeneralServicesMethodNoMobile.get,
+      headers: GeneralServicesNoMobile.addToken2Headers(token),
     );
   }
 
-  static Future<Object> getKodePresensi(String token) async {
-    var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_jam_kerja?paginate=100");
-    return await GeneralServices.baseService(
-      url: url,
-      method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
-    );
-  }
+  // static Future<Object> getKodePresensi(String token) async {
+  //   var url = Uri.parse(
+  //       "${MyGeneralConst.API_URL}/operation/m_jam_kerja?paginate=100");
+  //   return await GeneralServicesNoMobile.baseService(
+  //     url: url,
+  //     method: GeneralServicesMethodNoMobile.get,
+  //     headers: GeneralServicesNoMobile.addToken2Headers(token),
+  //   );
+  // }
 
   static Future<Object> getTipeBPJS(String token) async {
     var url = Uri.parse(

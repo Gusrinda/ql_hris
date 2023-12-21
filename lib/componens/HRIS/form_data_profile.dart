@@ -51,10 +51,10 @@ class FormDropDownData extends StatelessWidget {
               ),
               SizedBox(width: 2.sp),
               if (showRedStar == true)
-              Text(
-                '*',
-                style: GoogleFonts.poppins(color: Colors.red),
-              ),
+                Text(
+                  '*',
+                  style: GoogleFonts.poppins(color: Colors.red),
+                ),
             ],
           ),
         ),
@@ -315,6 +315,9 @@ class FormInputData extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
+                    color: !enabled
+                        ? MyColorsConst.disableColor.withOpacity(0.3)
+                        : Colors.transparent,
                   ),
                   child: TextFormField(
                     style: GoogleFonts.poppins(

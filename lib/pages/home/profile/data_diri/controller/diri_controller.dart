@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_biodata_karyawan.dart';
 
 class DataDiriControllers {
@@ -57,10 +58,13 @@ class DataDiriControllers {
     idTempatLahirController.text = bioData.tempatLahir?.toString() ?? '';
     valueTempatLahirController.text = bioData.tempatLahir ?? '';
 
+    tanggalLahirController.text = bioData.tglLahir != null
+        ? DateFormat('yyyy-MM-dd').format(bioData.tglLahir!)
+        : '';
+
     //alamat Tinggal
     alamatDomisiliTinggalController.text = bioData.alamatDomisili ?? '';
     alamatKtpController.text = bioData.alamatAsli ?? '';
-
 
     //provinsi
     idProvinsiController.text = bioData.provinsiId?.toString() ?? '';
@@ -75,8 +79,10 @@ class DataDiriControllers {
     kodePosController.text = bioData.kodePos ?? '';
     //noTelpon
     noTelpController.text = bioData.noTlp ?? '';
+    //noTelponLainnya
+    noTelpLainnyaController.text = bioData.noTlpLainnya ?? '';
     //noTelponDarurat
-    noTelpDaruratController.text = bioData.noTlpLainnya ?? '';
+    noTelpDaruratController.text = bioData.noDarurat ?? '';
     //nama kontak darurat
     namaKontakDaruratController.text = bioData.namaKontakDarurat ?? '';
     //hubungan Dengan Karyawan
@@ -87,11 +93,31 @@ class DataDiriControllers {
     //golongan darah
     idGolDarahController.text = bioData.golDarahId?.toString() ?? '';
     valueGolDarahController.text = bioData.golDarah ?? '';
+    //status nikah
+    idStatusPernikahanController.text = bioData.statusNikahId?.toString() ?? '';
+    valueStatusPernikahanController.text = bioData.statusNikah ?? '';
     //jumlah tanggungan
     idJumlahTanggunganController.text = bioData.tanggunganId?.toString() ?? '';
     valueJumlahTanggunganController.text = bioData.tanggungan ?? '';
 
+    tanggalMasukController.text = bioData.tglLahir != null
+        ? DateFormat('yyyy-MM-dd').format(bioData.tglLahir!)
+        : '';
+
     // BERKAS
+    noKtpController.text = bioData.ktpNo ?? '';
+    noKkController.text = bioData.kkNo ?? '';
+    noNpwpController.text = bioData.npwpNo ?? '';
+    noBpjsController.text = bioData.bpjsNo ?? '';
+    keteranganController.text = bioData.desc ?? '';
+
+    //Tipe Bpjs
+    idTipeBPJSController.text = bioData.bpjsTipeId?.toString() ?? '';
+    valueTipeBPJSController.text = bioData.bpjsTipeId?.toString() ?? '';
+
+    tanggalNpwpController.text = bioData.npwpTglBerlaku != null
+        ? DateFormat('yyyy-MM-dd').format(bioData.npwpTglBerlaku!)
+        : '';
 
     //UKURAN
     ukBajuController.text = bioData.ukBaju ?? ' ';
@@ -99,6 +125,10 @@ class DataDiriControllers {
     ukSepatuontroller.text = bioData.ukSepatu ?? '';
 
     //PEMBAYARAN
+    idNamaBankController.text = bioData.bankId?.toString() ?? '';
+    valueNamaBankController.text = bioData.bank ?? '';
+    noRekController.text = bioData.noRek ?? '';
+    atasNamaController.text = bioData.atasNamaRek ?? '';
   }
 
   // Divisi Controller
@@ -161,7 +191,8 @@ class DataDiriControllers {
   final TextEditingController tanggalLahirController = TextEditingController();
 
   // Alamat Domisili Tinggal Cotroller
-  final TextEditingController alamatDomisiliTinggalController = TextEditingController();
+  final TextEditingController alamatDomisiliTinggalController =
+      TextEditingController();
 
   // Provinsi Controller
   final TextEditingController idProvinsiController = TextEditingController();
@@ -179,6 +210,7 @@ class DataDiriControllers {
   // Kode Pos dan telepon Controller
   final TextEditingController kodePosController = TextEditingController();
   final TextEditingController noTelpController = TextEditingController();
+  final TextEditingController noTelpLainnyaController = TextEditingController();
   final TextEditingController noTelpDaruratController = TextEditingController();
   final TextEditingController namaKontakDaruratController =
       TextEditingController();

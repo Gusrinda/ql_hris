@@ -6,6 +6,7 @@ import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/add_pengalaman.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/add_pengalaman_bloc/add_pengalaman_kerja_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pengalaman_kerja/list_pengalaman_bloc/list_pengalaman_bloc.dart';
@@ -170,7 +171,8 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
                           child: Column(
                             children: [
                               Expanded(
-                                child: ListView.builder(
+                                child: listPengalaman.isNotEmpty
+                                ? ListView.builder(
                                   shrinkWrap: true,
                                   itemCount: listPengalaman.length,
                                   itemBuilder: (context, index) {
@@ -388,7 +390,10 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
                                       ),
                                     );
                                   },
-                                ),
+                                )
+                                : Center(
+                                        child: EmptyStateBuilder(),
+                                      ),
                               ),
                               TextButtonCustomV1(
                                 text: "Tambah Data",

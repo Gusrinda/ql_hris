@@ -6,6 +6,7 @@ import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/add_pendidikan.bloc/add_data_pendidikan_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/add_pendidikan.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/list_pendidikan_bloc/list_pendidikan_bloc.dart';
@@ -173,7 +174,8 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
                           child: Column(
                             children: [
                               Expanded(
-                                child: ListView.builder(
+                                child: listPendidikan.isNotEmpty
+                                ? ListView.builder(
                                   shrinkWrap: true,
                                   itemCount: listPendidikan.length,
                                   itemBuilder: (context, index) {
@@ -394,7 +396,10 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
                                       ),
                                     );
                                   },
-                                ),
+                                )
+                                : Center(
+                                        child: EmptyStateBuilder(),
+                                      ),
                               ),
                               TextButtonCustomV1(
                                 text: "Tambah Data",

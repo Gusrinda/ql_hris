@@ -6,6 +6,7 @@ import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/add_prestasi.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/add_prestasi_bloc/add_prestasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_prestasi/list_prestasi_bloc/list_prestasi_bloc.dart';
@@ -172,7 +173,8 @@ class _DataPrestasiPageState extends State<DataPrestasiPage> {
                           child: Column(
                             children: [
                               Expanded(
-                                child: ListView.builder(
+                                child: listPrestasi.isNotEmpty
+                                ? ListView.builder(
                                   shrinkWrap: true,
                                   itemCount: listPrestasi.length,
                                   itemBuilder: (context, index) {
@@ -388,7 +390,10 @@ class _DataPrestasiPageState extends State<DataPrestasiPage> {
                                       ),
                                     );
                                   },
-                                ),
+                                )
+                                : Center(
+                                        child: EmptyStateBuilder(),
+                                      ),
                               ),
                               TextButtonCustomV1(
                                 text: "Tambah Data",

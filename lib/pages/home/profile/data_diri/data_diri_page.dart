@@ -7,12 +7,11 @@ import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/bloc/biodata_bloc.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/data_diri/coba_coba/add_data_diri.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_data_diri.dart';
 import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_biodata_karyawan.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
+import 'package:url_launcher/link.dart';
 
 class DataDiriPage extends StatefulWidget {
   static const routeName = '/DataDiriPage';
@@ -219,7 +218,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                                   buildInfoText('Tempat Lahir',
                                       biodata?.bioData?.tempatLahir ?? '-'),
                                   buildInfoText('Alamat Tinggal',
-                                      biodata?.bioData?.alamatAsli ?? '-'),
+                                      biodata?.bioData?.alamatDomisili ?? '-'),
                                   buildInfoText(
                                       'Kota', biodata?.bioData?.kota ?? '-'),
                                   buildInfoText('Kode Pos',
@@ -312,7 +311,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                                 ],
                               ),
                             ),
-                            SizedBox(width: 20),
+                            SizedBox(width: 20.sp),
                             Expanded(
                               flex: 1,
                               child: Column(
@@ -356,16 +355,136 @@ class _DataDiriPageState extends State<DataDiriPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  buildInfoText('Foto Karyawan', 'foto.pdf'),
-                                  buildInfoText('No. KTP', '2090927401'),
+                                  Text(
+                                    'Foto Karyawan',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 10.sp,
+                                      color: MyColorsConst.lightDarkColor,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5.sp),
+                                  Link(
+                                    target: LinkTarget.self,
+                                    uri: Uri.parse(
+                                        '${biodata?.bioData?.pasFoto ?? '-'}'),
+                                    builder: (context, followLink) =>
+                                        GestureDetector(
+                                      onTap: followLink,
+                                      child: Text(
+                                        "foto.pdf",
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 12,
+                                          color: MyColorsConst.primaryColor,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 15.sp),
                                   buildInfoText(
-                                      'Foto Kartu Keluarga', 'KK.pdf'),
-                                  buildInfoText('Foto NPWP', 'NPWP.pdf'),
+                                      'No. KTP',
+                                      biodata?.bioData?.ktpNo?.toString() ??
+                                          '-'),
+                                  Text(
+                                    'Foto Kartu Keluarga',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 10.sp,
+                                      color: MyColorsConst.lightDarkColor,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5.sp),
+                                  Link(
+                                    target: LinkTarget.self,
+                                    uri: Uri.parse(
+                                        '${biodata?.bioData?.ktpFoto ?? '-'}'),
+                                    builder: (context, followLink) =>
+                                        GestureDetector(
+                                      onTap: followLink,
+                                      child: Text(
+                                        "KK.pdf",
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 12,
+                                          color: MyColorsConst.primaryColor,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 15.sp),
+                                  Text(
+                                    'Foto NPWP',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 10.sp,
+                                      color: MyColorsConst.lightDarkColor,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5.sp),
+                                  Link(
+                                    target: LinkTarget.self,
+                                    uri: Uri.parse(
+                                        '${biodata?.bioData?.npwpFoto ?? '-'}'),
+                                    builder: (context, followLink) =>
+                                        GestureDetector(
+                                      onTap: followLink,
+                                      child: Text(
+                                        "NPWP.pdf",
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 12,
+                                          color: MyColorsConst.primaryColor,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 15.sp),
                                   buildInfoText(
-                                      'Tanggal Berlaku NPWP', '25/11/2022'),
-                                  buildInfoText('No. BPJS', '9328523'),
+                                      'Tanggal Berlaku NPWP',
+                                      biodata?.bioData?.npwpTglBerlaku != null
+                                          ? DateFormat('dd MMMM yyyy').format(
+                                              biodata!.bioData!.npwpTglBerlaku!)
+                                          : '-'),
                                   buildInfoText(
-                                      'Berkas Pendukung Lainnya', '-'),
+                                      'No. BPJS',
+                                      biodata?.bioData?.bpjsNo?.toString() ??
+                                          '-'),
+                                  Text(
+                                    'Berkas Pendukung Lainnya',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 10.sp,
+                                      color: MyColorsConst.lightDarkColor,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5.sp),
+                                  if (biodata
+                                          ?.bioData?.berkasLain?.isNotEmpty ??
+                                      false)
+                                    Link(
+                                      target: LinkTarget.self,
+                                      uri: Uri.parse(
+                                          '${biodata?.bioData?.berkasLain}'),
+                                      builder: (context, followLink) =>
+                                          GestureDetector(
+                                        onTap: followLink,
+                                        child: Text(
+                                          "Doc.pdf",
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 12,
+                                            color: MyColorsConst.primaryColor,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  else
+                                    Text(
+                                      "-",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 12,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  SizedBox(height: 15.sp),
                                 ],
                               ),
                             ),
@@ -375,15 +494,80 @@ class _DataDiriPageState extends State<DataDiriPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  buildInfoText('Foto KTP', 'KTP.pdf'),
+                                  Text(
+                                    'Foto KTP',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 10.sp,
+                                      color: MyColorsConst.lightDarkColor,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5.sp),
+                                  Link(
+                                    target: LinkTarget.self,
+                                    uri: Uri.parse(
+                                        '${biodata?.bioData?.ktpFoto ?? '-'}'),
+                                    builder: (context, followLink) =>
+                                        GestureDetector(
+                                      onTap: followLink,
+                                      child: Text(
+                                        "KTP.pdf",
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 12,
+                                          color: MyColorsConst.primaryColor,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 15.sp),
                                   buildInfoText(
-                                      'Alamat Sesuai KTP', 'J;. Rungkut'),
+                                      'Alamat Sesuai KTP',
+                                      biodata?.bioData?.alamatAsli
+                                              ?.toString() ??
+                                          '-'),
                                   buildInfoText(
-                                      'No. Kartu Keluarga', '0294709274'),
-                                  buildInfoText('No. NPWP', '0192'),
-                                  buildInfoText('Foto BPJS', 'BPJS.pdf'),
-                                  buildInfoText('Tipe BPJS', 'Kelas 2'),
-                                  buildInfoText('Keterangan', '-'),
+                                      'No. Kartu Keluarga',
+                                      biodata?.bioData?.kkNo?.toString() ??
+                                          '-'),
+                                  buildInfoText(
+                                      'No. NPWP',
+                                      biodata?.bioData?.npwpNo?.toString() ??
+                                          '-'),
+                                  Text(
+                                    'Foto BPJS',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 10.sp,
+                                      color: MyColorsConst.lightDarkColor,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5.sp),
+                                  Link(
+                                    target: LinkTarget.self,
+                                    uri: Uri.parse(
+                                        '${biodata?.bioData?.bpjsFoto ?? '-'}'),
+                                    builder: (context, followLink) =>
+                                        GestureDetector(
+                                      onTap: followLink,
+                                      child: Text(
+                                        "BPJS.pdf",
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 12,
+                                          color: MyColorsConst.primaryColor,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 15.sp),
+                                  buildInfoText(
+                                      'Tipe BPJS',
+                                      biodata?.bioData?.bpjsTipeId
+                                              ?.toString() ??
+                                          '-'),
+                                  buildInfoText(
+                                      'Keterangan',
+                                      biodata?.bioData?.descFile?.toString() ??
+                                          '-'),
                                 ],
                               ),
                             ),
@@ -406,8 +590,14 @@ class _DataDiriPageState extends State<DataDiriPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  buildInfoText('Ukuran Baju', 'XL'),
-                                  buildInfoText('Ukuran Sepatu', '42'),
+                                  buildInfoText(
+                                      'Ukuran Baju',
+                                      biodata?.bioData?.ukBaju?.toString() ??
+                                          '-'),
+                                  buildInfoText(
+                                      'Ukuran Sepatu',
+                                      biodata?.bioData?.ukSepatu?.toString() ??
+                                          '-'),
                                 ],
                               ),
                             ),
@@ -417,7 +607,10 @@ class _DataDiriPageState extends State<DataDiriPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  buildInfoText('Ukuran Celana', '150'),
+                                  buildInfoText(
+                                      'Ukuran Celana',
+                                      biodata?.bioData?.ukCelana?.toString() ??
+                                          '-'),
                                 ],
                               ),
                             ),
@@ -440,9 +633,19 @@ class _DataDiriPageState extends State<DataDiriPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  buildInfoText('Periode Gaji', 'Bulanan'),
-                                  buildInfoText('Metode Pembayaran', 'Bulanan'),
-                                  buildInfoText('Nomor Rekening', '123456'),
+                                  buildInfoText(
+                                      'Periode Gaji',
+                                      biodata?.bioData?.periodeGaji
+                                              ?.toString() ??
+                                          '-'),
+                                  buildInfoText(
+                                      'Metode Pembayaran',
+                                      biodata?.bioData?.metode?.toString() ??
+                                          '-'),
+                                  buildInfoText(
+                                      'Nomor Rekening',
+                                      biodata?.bioData?.noRek?.toString() ??
+                                          '-'),
                                 ],
                               ),
                             ),
@@ -452,9 +655,19 @@ class _DataDiriPageState extends State<DataDiriPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  buildInfoText('Tipe Pembayaran', '150'),
-                                  buildInfoText('Nama Bank', 'BRI'),
-                                  buildInfoText('Atas Nama', 'Sepuh Ucup'),
+                                  buildInfoText(
+                                      'Tipe Pembayaran',
+                                      biodata?.bioData?.tipe?.toString() ??
+                                          '-'),
+                                  buildInfoText(
+                                      'Nama Bank',
+                                      biodata?.bioData?.bank?.toString() ??
+                                          '-'),
+                                  buildInfoText(
+                                      'Atas Nama',
+                                      biodata?.bioData?.atasNamaRek
+                                              ?.toString() ??
+                                          '-'),
                                 ],
                               ),
                             ),

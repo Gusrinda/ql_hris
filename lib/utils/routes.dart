@@ -22,6 +22,7 @@ import 'package:sj_presensi_mobile/pages/dinas/edit_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_realisasi_dinas_bloc/list_realisasi_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/realisasi_dinas.dart';
+import 'package:sj_presensi_mobile/pages/download_berkas/download_berkas_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/add_check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/location_acio_bloc.dart';
@@ -303,6 +304,10 @@ class RouteGenerator {
             child: AddCheckInOutPage(
                 formState: args as ProcessCheckInOutPageState),
           );
+        });
+      case DownloadBerkasPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return const DownloadBerkasPage();
         });
       case DataDiriPage.routeName:
         final bioData = settings.arguments as Biodata?;

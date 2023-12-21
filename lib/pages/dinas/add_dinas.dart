@@ -213,8 +213,8 @@ class _AddDinasPageState extends State<AddDinasPage> {
                         posisi: int.parse(widget.idPosisiController.text),
                         templateSpd:
                             int.parse(widget.idTemplateSpdController.text),
-                        // direktorat:
-                        //     int.parse(widget.idDirektoratController!.text),
+                        direktorat: 9,
+                            // int.parse(widget.idDirektoratController!.text),
                         tanggal: widget.tanggalController.text,
                         tanggalAwal: widget.tanggalAwalController.text,
                         tanggalAkhir: widget.tanggalAkhirController.text,

@@ -10,6 +10,7 @@ import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dashboard_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/download_berkas/download_berkas_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
@@ -468,7 +469,7 @@ class _HomePageState extends State<HomePage> {
                                   child: Column(
                                     children: [
                                       Image.asset(
-                                        'assets/images/cuti_menu.png',
+                                        'assets/images/new_cuti.png',
                                         width: 50.sp,
                                       ),
                                       const SizedBox(height: 5),
@@ -481,7 +482,37 @@ class _HomePageState extends State<HomePage> {
                                       )
                                     ],
                                   ),
-                                ))
+                                )),
+                            Expanded(
+                                flex: 1,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            DownloadBerkasPage(),
+                                      ),
+                                    );
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/doc.png',
+                                        width: 50.sp,
+                                      ),
+                                      const SizedBox(height: 5),
+                                      Text(
+                                        "Download Berkas",
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 10.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: MyColorsConst.darkColor),
+                                      )
+                                    ],
+                                  ),
+                                )),
                           ],
                         ),
                       ),

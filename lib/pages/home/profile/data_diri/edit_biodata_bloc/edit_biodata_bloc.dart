@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
@@ -14,8 +15,11 @@ import 'package:sj_presensi_mobile/services/model/list_general/response_general.
 import 'package:sj_presensi_mobile/services/model/list_general/response_kode_presensi.dart';
 import 'package:sj_presensi_mobile/services/model/list_general/response_kota.dart';
 import 'package:sj_presensi_mobile/services/model/list_general/response_standar_gaji.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
+import 'package:sj_presensi_mobile/utils/services_no_source_mobile.dart';
 import 'package:sj_presensi_mobile/utils/shared_pref.dart';
+import 'package:http/http.dart' as http;
 
 part 'edit_biodata_event.dart';
 part 'edit_biodata_state.dart';
@@ -47,70 +51,174 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
   List<DataGeneral> dataKecamatan = [];
 
   EditBiodataBloc() : super(EditBiodataInitial()) {
+    // on<EditDataBiodataSubmited>((event, emit) async {
+    //   emit(EditBiodataLoading());
+    //   var resToken = await GeneralSharedPreferences.getUserToken();
+    //   if (resToken is ServicesSuccess) {
+    //     Map<String, dynamic> biodataFields = {
+    //       "m_divisi_id": event.divisiId,
+    //       "m_dept_id": event.deptId,
+    //       "m_posisi_id": event.posisiId,
+    //       "m_zona_id": event.zonaId,
+    //       "m_standart_gaji_id": event.standarGaji,
+    //       "costcontre_id": event.costcentreId,
+    //       "kode_presensi": event.kodePresensi,
+    //       // "is_active": event.isActive,
+    //       // "grading_id": event.gradingId,
+    //       // "nik": event.nik,
+    //       "nama_depan": event.namaDepan,
+    //       "nama_belakang": event.namaBelakang,
+    //       "nama_lengkap": event.namaLengkap,
+    //       "nama_panggilan": event.namaPanggilan,
+    //       "jk_id": event.jkId,
+    //       "tempat_lahir": event.tempatLahir,
+    //       "tgl_lahir": event.tglLahir,
+    //       "provinsi_id": event.provinsiId,
+    //       "kota_id": event.kotaId,
+    //       "kecamatan_id": event.kecamatanId,
+    //       "kode_pos": event.kodePos,
+    //       "alamat_domisili": event.alamatDomisili,
+    //       "alamat_asli": event.alamatAsli,
+    //       "no_tlp": event.noTlp,
+    //       "no_tlp_lainnya": event.noTlpLainnya,
+    //       "no_darurat": event.noDarurat,
+    //       "nama_kontak_darurat": event.namaKontakDarurat,
+    //       "agama_id": event.agamaId,
+    //       "gol_darah_id": event.golDarahId,
+    //       "status_nikah_id": event.statusNikahId,
+    //       "tanggungan_id": event.tanggunganId,
+    //       "hub_dgn_karyawan": event.hubDgnKaryawan,
+    //       // "cuti_jatah_reguler": event.cutiJatahReguler,
+    //       // "cuti_sisa_reguler": event.cutiSisaReguler,
+    //       // "cuti_panjang": event.cutiPanjang,
+    //       // "cuti_sisa_panjang": event.cutiSisaPanjang,
+    //       // // "status_kary_id": event.statusKaryId,
+    //       "tgl_masuk": event.tglMasuk,
+    //       // "tgl_berhenti": event.tglBerhenti,
+    //       // "alasan_berhenti": event.alasanBerhenti,
+    //       "uk_baju": event.ukBaju,
+    //       "uk_celana": event.ukCelana,
+    //       "uk_sepatu": event.ukSepatu,
+          // "ktp_no": event.ktpNo,
+          // "ktp_foto": event.ktpFoto,
+          // "pas_foto": event.pasFoto,
+          // "kk_no": event.kkNo,
+          // // "kk_foto": event.kkFoto,
+          // "npwp_no": event.npwpNo,
+          // // "npwp_foto": event.npwpFoto,
+          // "npwp_tgl_berlaku": event.npwpTglBerlaku,
+          // "bpjs_tipe_id": event.bpjsTipeId,
+          // "bpjs_no": event.bpjsNo,
+          // // "bpjs_foto": event.bpjsFoto,
+          // // "berkas_lain": event.berkasLain,
+          // "desc": event.desc,
+          // "bank_id": event.bankId,
+          // "no_rek": event.noRek,
+          // "atas_nama_rek": event.atasNamaRek,
+    //     };
+
+    //     // Mencetak nilai setiap field di biodataFields
+    //     // Pastikan variabel fotoKaryawan diinisialisasi
+    //     File?
+    //         fotoKaryawan; // Gantilah ini dengan variabel fotoKaryawan yang sesuai
+
+    //     try {
+    //       var request = http.MultipartRequest(
+    //         'POST',
+    //         Uri.parse(
+    //             "${MyGeneralConst.API_URL}/operation/m_kary/data_diri_update"),
+    //       );
+    //       request.headers.addAll(
+    //           GeneralServices.addToken2Headers(resToken.response["token"]));
+
+    //       // Menambahkan field ke FormData
+    //       biodataFields.forEach((key, value) {
+    //         request.fields[key] = value.toString();
+    //       });
+
+    //       // Menambahkan file fotoKaryawan ke FormData
+    //       if (fotoKaryawan != null) {
+    //         request.files.add(
+    //           await http.MultipartFile.fromPath(
+    //               'foto_karyawan', fotoKaryawan.path),
+    //         );
+    //       }
+
+    //       // Kirim request
+    //       var response = await request.send();
+    //       var responseBody = await response.stream.bytesToString();
+
+    //       if (response.statusCode == 200) {
+    //         emit(EditBiodataSuccess(message: "Data diri berhasil diupdate"));
+    //       } else {
+    //         emit(EditBiodataFailed(
+    //             message: json.decode(responseBody)['message']));
+    //       }
+    //     } catch (e) {
+    //       print("Exception: $e");
+    //       emit(EditBiodataFailedInBackground(
+    //           message: "Terjadi kesalahan. Silakan coba lagi nanti."));
+    //     }
+    //   } else if (resToken is ServicesFailure) {
+    //     emit(EditBiodataFailedInBackground(message: 'Response invalid'));
+    //   }
+    // });
+
     on<EditDataBiodataSubmited>((event, emit) async {
       emit(EditBiodataLoading());
       var resToken = await GeneralSharedPreferences.getUserToken();
       if (resToken is ServicesSuccess) {
-        Map<String, dynamic> biodataFields = {
-          "m_divisi_id": event.divisiId,
-          "m_dept_id": event.deptId,
-          "m_zona_id": event.zonaId,
-          "grading_id": event.gradingId,
-          "costcontre_id": event.costcentreId,
-          "m_posisi_id": event.posisiId,
-          "m_jam_kerja_id": event.jamKerjaId,
-          "nik": event.nik,
-          "nama_depan": event.namaDepan,
-          "nama_belakang": event.namaBelakang,
-          "nama_lengkap": event.namaLengkap,
-          "nama_panggilan": event.namaPanggilan,
-          "jk_id": event.jkId,
-          "tempat_lahir": event.tempatLahir,
-          "tgl_lahir": event.tglLahir,
-          "provinsi_id": event.provinsiId,
-          "kota_id": event.kotaId,
-          "kecamatan_id": event.kecamatanId,
-          "kode_pos": event.kodePos,
-          "alamat_domisili": event.alamatDomisili,
-          "alamat_asli": event.alamatAsli,
-          "no_tlp": event.noTlp,
-          "no_tlp_lainnya": event.noTlpLainnya,
-          "no_darurat": event.noDarurat,
-          "nama_kontak_darurat": event.namaKontakDarurat,
-          "agama_id": event.agamaId,
-          "gol_darah_id": event.golDarahId,
-          "status_nikah_id": event.statusNikahId,
-          "tanggungan_id": event.tanggunganId,
-          "hub_dgn_karyawan": event.hubDgnKaryawan,
-          "cuti_jatah_reguler": event.cutiJatahReguler,
-          "cuti_sisa_reguler": event.cutiSisaReguler,
-          "cuti_panjang": event.cutiPanjang,
-          "cuti_sisa_panjang": event.cutiSisaPanjang,
-          // "status_kary_id": event.statusKaryId,
-          "tgl_masuk": event.tglMasuk,
-          "tgl_berhenti": event.tglBerhenti,
-          "alasan_berhenti": event.alasanBerhenti,
-          "uk_baju": event.ukBaju,
-          "uk_celana": event.ukCelana,
-          "uk_sepatu": event.ukSepatu,
-          "ktp_no": event.ktpNo,
-          "ktp_foto": event.ktpFoto,
-          "pas_foto": event.pasFoto,
-          "kk_no": event.kkNo,
-          "npwp_no": event.npwpNo,
-          "npwp_tgl_berlaku": event.npwpTglBerlaku,
-          "bpjs_tipe_id": event.bpjsTipeId,
-          "bpjs_no": event.bpjsNo,
-          "bpjs_foto": event.bpjsFoto,
-          "berkas_lain": event.berkasLain,
-        };
-
         var res = await BiodataKaryawanService.editDataDiri(
           resToken.response["token"],
           resToken.response["id"] ?? 1,
-          biodataFields,
+          event.divisiId,
+          event.deptId,
+          event.zonaId,
+          event.posisiId,
+          event.kodePresensi,
+          event.namaDepan,
+          event.namaBelakang,
+          event.namaLengkap,
+          event.namaPanggilan,
+          event.jkId,
+          event.tempatLahir,
+          event.tglLahir,
+          event.provinsiId,
+          event.kotaId,
+          event.kecamatanId,
+          event.kodePos,
+          event.alamatAsli,
+          event.alamatDomisili,
+          event.noTlp,
+          event.noTlpLainnya,
+          event.noDarurat,
+          event.namaKontakDarurat,
+          event.agamaId,
+          event.golDarahId,
+          event.statusNikahId,
+          event.tanggunganId,
+          event.hubDgnKaryawan,
+          event.tglMasuk,
+          event.ukBaju,
+          event.ukCelana,
+          event.ukSepatu,
+          event.ktpFoto,
+          event.pasFoto,
+          event.bpjsFoto,
+          event.ktpNo,
+          event.kkNo,
+          event.kkFoto,
+          event.npwpNo,
+          event.npwpFoto,
+          event.npwpTglBerlaku,
+          event.bpjsTipeId,
+          event.bpjsNo,
+          // event.berkasLain,
+          event.desc,
+          event.bankId,
+          event.noRek,
+          event.atasNamaRek,
         );
-
         if (res is ServicesSuccess) {
           emit(EditBiodataSuccess(message: "Data diri berhasil diupdate"));
         } else if (res is ServicesFailure) {
@@ -126,72 +234,6 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
         emit(EditBiodataFailedInBackground(message: 'Response invalid'));
       }
     });
-
-    // on<EditDataBiodataSubmited>((event, emit) async {
-    //   emit(EditBiodataLoading());
-    //   var resToken = await GeneralSharedPreferences.getUserToken();
-    //   if (resToken is ServicesSuccess) {
-    //     var res = await BiodataKaryawanService.editDataDiri(
-    //       resToken.response["token"],
-    //       resToken.response["id"] ?? 1,
-    //       event.dirId!,
-    //       event.divisiId!,
-    //       event.deptId!,
-    //       event.zonaId!,
-    //       event.gradingId!,
-    //       event.costcentreId!,
-    //       event.posisiId!,
-    //       event.jamKerjaId!,
-    //       event.nik!,
-    //       event.namaDepan!,
-    //       event.namaBelakang!,
-    //       event.namaLengkap!,
-    //       event.namaPanggilan!,
-    //       event.jkId!,
-    //       event.tempatLahir!,
-    //       event.tglLahir!,
-    //       event.provinsiId!,
-    //       event.kotaId!,
-    //       event.kecamatanId!,
-    //       event.kodePos!,
-    //       event.alamatAsli!,
-    //       event.alamatDomisili!,
-    //       event.noTlp!,
-    //       event.noTlpLainnya!,
-    //       event.noDarurat!,
-    //       event.namaKontakDarurat!,
-    //       event.agamaId!,
-    //       event.golDarahId!,
-    //       event.statusNikahId!,
-    //       event.tanggunganId!,
-    //       event.hubDgnKaryawan!,
-    //       event.cutiJatahReguler!,
-    //       event.cutiSisaReguler!,
-    //       event.cutiPanjang!,
-    //       event.cutiSisaPanjang!,
-    //       event.statusKaryId!,
-    //       event.tglMasuk!,
-    //       event.tglBerhenti!,
-    //       event.alasanBerhenti!,
-    //       event.ukBaju!,
-    //       event.ukCelana!,
-    //       event.ukSepatu!,
-    //     );
-    //     if (res is ServicesSuccess) {
-    //       emit(EditBiodataSuccess(message: "Data diri berhasil diupdate"));
-    //     } else if (res is ServicesFailure) {
-    //       if (res.errorResponse == null) {
-    //         await GeneralSharedPreferences.removeUserToken();
-    //         emit(EditBiodataFailedInBackground(message: "Token expired"));
-    //         print('error apa ${res.errorResponse}');
-    //       } else {
-    //         emit(EditBiodataFailed(message: res.errorResponse));
-    //       }
-    //     }
-    //   } else if (resToken is ServicesFailure) {
-    //     emit(EditBiodataFailedInBackground(message: 'Response invalid'));
-    //   }
-    // });
 
     on<OnSelectDivisi>(
       (event, emit) async {
@@ -381,7 +423,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
           var res = await ListGeneralService.getStandartGaji(
               resToken.response["token"]);
 
-          if (res is ServicesSuccess) {
+          if (res is ServicesSuccessNoMobile) {
             if (res.response is Map<String, dynamic>) {
               print(res.response);
 
@@ -400,7 +442,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               emit(EditBiodataFailedInBackground(
                   message: 'Response format is invalid'));
             }
-          } else if (res is ServicesFailure) {
+          } else if (res is ServicesFailureNoMobile) {
             if (res.errorResponse == null) {
               await GeneralSharedPreferences.removeUserToken();
               emit(EditBiodataFailedUserExpired(message: "Token expired"));
@@ -691,7 +733,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
           // print("Ini Token: ${resToken.response}");
           var res =
               await ListGeneralService.getKodePre(resToken.response["token"]);
-          if (res is ServicesSuccess) {
+          if (res is ServicesSuccessNoMobile) {
             if (res.response is Map<String, dynamic>) {
               print(res.response);
               //Mengubah hasil response api ke model kelas
@@ -709,7 +751,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               emit(EditBiodataFailedInBackground(
                   message: 'Response format is invalid'));
             }
-          } else if (res is ServicesFailure) {
+          } else if (res is ServicesFailureNoMobile) {
             if (res.errorResponse == null) {
               await GeneralSharedPreferences.removeUserToken();
               emit(EditBiodataFailedUserExpired(message: "Token expired"));

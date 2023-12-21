@@ -1,9 +1,14 @@
 import 'dart:io';
 
+import 'package:camera/camera.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
@@ -66,12 +71,25 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
   String? selectedProvinsi;
   String? selectedKotabyProvinsi;
   String? selectedKecamatan;
+  final _picker = ImagePicker();
   File? fotoKaryawan;
+  String fileNameFotoKaryawan = "";
+  String fileUrlFotoKaryawan = "";
   File? ktp;
+  String fileNameKtp = "";
+  String fileUrlKtp = "";
   File? kartukeluarga;
+  String fileNameKk = "";
+  String fileUrlKk = "";
   File? npwp;
+  String fileNameNpwp = "";
+  String fileUrlNpwp = "";
   File? bpjs;
+  String fileNameBpjs = "";
+  String fileUrlBpjs = "";
   File? berkaspendukung;
+  String fileNameBerkasPendukunga = "";
+  String fileUrlBerkasPendukunga = "";
 
   int currentStep = 0;
   // late GlobalKey<FormState> _formKeyStep1;
@@ -79,8 +97,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
   // late GlobalKey<FormState> _formKeyStep3;
   // late GlobalKey<FormState> _formKeyStep4;
   // late GlobalKey<FormState> _formKeyStep5;
-  // late GlobalKey<FormState> _formKeyStep6;
-
+  // late GlobalKey<FormState> _formKeyStep6
   @override
   void initState() {
     super.initState();
@@ -115,8 +132,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
       biodataBloc.add(OnSelectStatusNikah());
       biodataBloc.add(OnSelectTanggungan());
       biodataBloc.add(OnSelectProvinsi());
-      // biodataBloc.add(OnSelectKotabyProvinsi(
-      //     idProvinsi: int.parse(controllers.idProvinsiController.text)));
     });
   }
 
@@ -177,12 +192,71 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
               textColor: MyColorsConst.primaryColor,
               onPressed: () {
                 print("Ini Klik Submit Edit Biodata");
+                print(
+                    "status nikah ${controllers.idStatusPernikahanController.text}");
+
                 context.read<EditBiodataBloc>().add(EditDataBiodataSubmited(
-                    namaDepan: controllers.namaDepanController.text,
-                    namaBelakang: controllers.namaBelakangController.text,
-                    namaLengkap:
-                        '${controllers.namaDepanController.text} ${controllers.namaBelakangController.text}',
-                    namaPanggilan: controllers.namaPanggilanController.text));
+                      divisiId: int.parse(controllers.idDivisiController.text),
+                      deptId:
+                          int.parse(controllers.idDepartemenController.text),
+                      posisiId: int.parse(controllers.idPosisiController.text),
+                      zonaId: int.parse(controllers.idZonaController.text),
+                      kodePresensi:
+                          controllers.valueKodePresensiController.text,
+                      namaDepan: controllers.namaDepanController.text,
+                      namaBelakang: controllers.namaBelakangController.text,
+                      namaLengkap:
+                          '${controllers.namaDepanController.text} ${controllers.namaBelakangController.text}',
+                      namaPanggilan: controllers.namaPanggilanController.text,
+                      jkId:
+                          int.parse(controllers.idJenisKelaminController.text),
+                      tempatLahir: controllers.idTempatLahirController.text,
+                      tglLahir: controllers.tanggalLahirController.text,
+                      provinsiId:
+                          int.parse(controllers.idProvinsiController.text),
+                      kotaId: int.parse(controllers.idKotaController.text),
+                      kecamatanId:
+                          int.parse(controllers.idKecamatanController.text),
+                      kodePos: controllers.kodePosController.text,
+                      alamatAsli: controllers.alamatKtpController.text,
+                      alamatDomisili:
+                          controllers.alamatDomisiliTinggalController.text,
+                      noTlp: controllers.noTelpController.text,
+                      noTlpLainnya: controllers.noTelpLainnyaController.text,
+                      noDarurat: controllers.noTelpDaruratController.text,
+                      namaKontakDarurat:
+                          controllers.namaKontakDaruratController.text,
+                      hubDgnKaryawan: controllers.hubkaryawanController.text,
+                      agamaId: int.parse(controllers.idAgamaController.text),
+                      golDarahId:
+                          int.parse(controllers.idGolDarahController.text),
+                      statusNikahId: int.parse(
+                              controllers.idStatusPernikahanController.text) ??
+                          0, // Jika null, diatur ke 0 atau sesuai dengan nilai default
+                      tanggunganId: int.parse(
+                          controllers.idJumlahTanggunganController.text),
+                      tglMasuk: controllers.tanggalMasukController.text,
+                      ktpFoto: File(ktp?.path ?? ''),
+                      pasFoto: File(fotoKaryawan?.path ?? ''),
+                      bpjsFoto: File(bpjs?.path ?? ''),
+                      ktpNo: controllers.noKtpController.text,
+                      kkNo: controllers.noKkController.text,
+                      kkFoto: File(kartukeluarga?.path ?? ''),
+                      npwpFoto: File(npwp?.path ?? ''),
+                      npwpNo: controllers.noNpwpController.text,
+                      // berkasLain: File(berkaspendukung?.path ?? ''),
+                      npwpTglBerlaku: controllers.tanggalNpwpController.text,
+                      bpjsTipeId:
+                          int.parse(controllers.idTipeBPJSController.text),
+                      bpjsNo: controllers.noBpjsController.text,
+                      desc: controllers.keteranganController.text,
+                      ukBaju: controllers.ukBajuController.text,
+                      ukCelana: controllers.ukCelanaController.text,
+                      ukSepatu: controllers.ukSepatuontroller.text,
+                      bankId: int.parse(controllers.idNamaBankController.text),
+                      noRek: controllers.noRekController.text,
+                      atasNamaRek: controllers.atasNamaController.text,
+                    ));
               },
             ),
           },
@@ -214,42 +288,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
     var dataStatusNikah = context.read<EditBiodataBloc>().dataStatusNikah;
     var dataTanggungan = context.read<EditBiodataBloc>().dataTanggungan;
     var dataProvinsi = context.read<EditBiodataBloc>().dataProvinsi;
-
-    void onFotoKaryawanSelected(File? file) {
-      setState(() {
-        fotoKaryawan = file;
-      });
-    }
-
-    void onKtpSelected(File? file) {
-      setState(() {
-        ktp = file;
-      });
-    }
-
-    void onKartuKeluargaSelected(File? file) {
-      setState(() {
-        kartukeluarga = file;
-      });
-    }
-
-    void onNpwpSelected(File? file) {
-      setState(() {
-        ktp = file;
-      });
-    }
-
-    void onBpjsSelected(File? file) {
-      setState(() {
-        ktp = file;
-      });
-    }
-
-    void onBerkasPendukungSelected(File? file) {
-      setState(() {
-        ktp = file;
-      });
-    }
 
     void _showDivisi(BuildContext context) async {
       if (dataDivisi.isEmpty) {
@@ -533,9 +571,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedKodePresensi != null) {
-          controllers.idKodePresensiController.text =
+          controllers.valueKodePresensiController.text =
               selectedKodePresensi.id?.toString() ?? '';
-          controllers.valueJenisKelaminController.text =
+          controllers.valueKodePresensiController.text =
               selectedKodePresensi.kode?.toString() ?? '';
 
           setState(() {
@@ -668,9 +706,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedTanggungan != null) {
-          controllers.idKodePresensiController.text =
+          controllers.idJumlahTanggunganController.text =
               selectedTanggungan.id?.toString() ?? '';
-          controllers.valueKodePresensiController.text =
+          controllers.valueJumlahTanggunganController.text =
               selectedTanggungan.value?.toString() ?? '';
 
           setState(() {
@@ -1160,32 +1198,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                   ),
                                   FormDropDownData(
                                     onTap: () {
-                                      showStandarGajiMenu(context);
-                                    },
-                                    hintText: 'Pilih Standard Gaji',
-                                    labelForm: 'Standard Gaji',
-                                    labelTag: 'Label-StandardGaji',
-                                    formTag: 'Form-StandardGaji',
-                                    valueController:
-                                        controllers.valueStandardGajiController,
-                                    idController:
-                                        controllers.idStandardGajiController,
-                                  ),
-                                  FormDropDownData(
-                                    onTap: () {
-                                      showCostCentre(context);
-                                    },
-                                    hintText: 'Pilih Costcentre',
-                                    labelForm: 'Costcentre',
-                                    labelTag: 'Label-Costcentre',
-                                    formTag: 'Form-Costcentre',
-                                    valueController:
-                                        controllers.valueCostCentreController,
-                                    idController:
-                                        controllers.idCostCentreController,
-                                  ),
-                                  FormDropDownData(
-                                    onTap: () {
                                       showKodePresensiMenu(context);
                                     },
                                     hintText: 'Pilih Kode Presensi',
@@ -1197,17 +1209,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     idController:
                                         controllers.idKodePresensiController,
                                   ),
-                                  // FormDropDownData(
-                                  //   onTap: () {},
-                                  //   hintText: 'Pilih Status',
-                                  //   labelForm: 'Status',
-                                  //   labelTag: 'Label-StatusDiri',
-                                  //   formTag: 'Form-StatusDiri',
-                                  //   valueController:
-                                  //       controllers.valueStatusController,
-                                  //   idController:
-                                  //       controllers.idStatusController,
-                                  // ),
                                 ],
                               ),
                               isActive: currentStep >= 0,
@@ -1233,6 +1234,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     labelTag: 'Label-NIK',
                                     formTag: 'Form-NIK',
                                     controller: controllers.nikController,
+                                    enabled: false,
                                     validator: (value) {},
                                   ),
                                   FormInputData(
@@ -1366,6 +1368,15 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     validator: (value) {},
                                   ),
                                   FormInputData(
+                                    hintText: 'Tuliskan No. Telepon Lainnya',
+                                    labelForm: 'No. Telepon Lainnya',
+                                    labelTag: 'Label-NoTeleponLainnya',
+                                    formTag: 'Form-NoTeleponLainnya',
+                                    controller:
+                                        controllers.noTelpLainnyaController,
+                                    validator: (value) {},
+                                  ),
+                                  FormInputData(
                                     hintText: 'Tuliskan No. Telepon Darurat',
                                     labelForm: 'No. Telepon Darurat',
                                     labelTag: 'Label-NoTelpDarurat',
@@ -1462,45 +1473,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               title: SizedBox.shrink(),
                               content: Column(
                                 children: [
-                                  FormInputData(
-                                    hintText: 'Jatah Cuti Reguler',
-                                    labelForm: 'Jatah Cuti Reguler',
-                                    labelTag: 'Label-JatahCutiReguler',
-                                    formTag: 'Form-JatahCutiReguler',
-                                    enabled: false,
-                                    controller:
-                                        controllers.jatahCutiRegController,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    hintText: 'Sisa Cuti Reguler',
-                                    labelForm: 'Sisa Cuti Reguler',
-                                    labelTag: 'Label-SisaCutiReguler',
-                                    formTag: 'Form-SisaCutiReguler',
-                                    enabled: false,
-                                    controller:
-                                        controllers.sisaCutiRegController,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    hintText: 'Jatah Cuti Masa Kerja',
-                                    labelForm: 'Jatah Cuti Masa Kerja',
-                                    labelTag: 'Label-JatahCutiMasaKerja',
-                                    formTag: 'Form-JatahCutiMasaKerja',
-                                    controller:
-                                        controllers.jatahCutiKerjaController,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    hintText: 'Sisa Cuti Masa Kerja',
-                                    labelForm: 'Sisa Cuti Masa Kerja',
-                                    labelTag: 'Label-SisaCutiMasaKerja',
-                                    formTag: 'Form-SisaCutiMasaKerja',
-                                    enabled: false,
-                                    controller:
-                                        controllers.sisaCutiKerjaController,
-                                    validator: (value) {},
-                                  ),
                                   FormDropDownData(
                                     onTap: () {
                                       showTahunMenu(context,
@@ -1515,20 +1487,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     idController:
                                         controllers.tanggalMasukController,
                                   ),
-                                  // FormDropDownData(
-                                  //   onTap: () {
-                                  //     showTahunMenu(context,
-                                  //         controllers.tanggalLahirController);
-                                  //   },
-                                  //   hintText: 'Pilih Tanggal',
-                                  //   labelForm: 'Tanggal Berhenti Kerja',
-                                  //   labelTag: 'Label-TanggalBerhenti',
-                                  //   formTag: 'Form-TanggalBerhenti',
-                                  //   valueController:
-                                  //       controllers.tanggalBerhentiController,
-                                  //   idController:
-                                  //       controllers.tanggalBerhentiController,
-                                  // ),
                                 ],
                               ),
                               isActive: currentStep >= 2,
@@ -1548,32 +1506,46 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               // title: SizedBox.shrink(),
                               content: Column(
                                 children: [
-                                  FileUploadWidget(
-                                    label: 'Foto Karyawan',
-                                    onFileSelected: onFotoKaryawanSelected,
+                                  FileSelectionWidget(
+                                    onFileSelected: (file, fileUrl) {
+                                      setState(() {
+                                        fotoKaryawan = file;
+                                        fileNameFotoKaryawan =
+                                            file.path.split('/').last;
+                                      });
+                                    },
+                                    title: 'Foto Karyawan',
+                                    fileName: fileNameFotoKaryawan,
+                                    selectedFile: fotoKaryawan,
                                   ),
-
-                                  // FormInputData(
-                                  //   hintText: 'Foto Karyawan',
-                                  //   labelForm: 'Foto Karyawan',
-                                  //   labelTag: 'Label-FotoKaryawan',
-                                  //   formTag: 'Form-FotoKaryawan',
-                                  //   controller:
-                                  //       controllers.fotoKaryawanController,
-                                  //   validator: (value) {},
+                                  // FilePickerWidget(
+                                  //   onFileSelected: (File? file) {
+                                  //     setState(() {
+                                  //       fotoKaryawan = file;
+                                  //       // Dapatkan nama file dari path
+                                  //       fileNameFotoKaryawan = fotoKaryawan !=
+                                  //               null
+                                  //           ? fotoKaryawan!.path.split('/').last
+                                  //           : "";
+                                  //       print(
+                                  //           'Selected file: $fileNameFotoKaryawan');
+                                  //     });
+                                  //   },
+                                  //   title: 'Foto Karyawan',
+                                  //   fileName: fileNameFotoKaryawan,
+                                  //   selectedFile: fotoKaryawan,
                                   // ),
-                                  FileUploadWidget(
-                                    label: 'Foto KTP',
-                                    onFileSelected: onKtpSelected,
+                                  FileSelectionWidget(
+                                    onFileSelected: (file, fileUrl) {
+                                      setState(() {
+                                        ktp = file;
+                                        fileNameKtp = file.path.split('/').last;
+                                      });
+                                    },
+                                    title: 'Foto KTP',
+                                    fileName: fileNameKtp,
+                                    selectedFile: ktp,
                                   ),
-                                  // FormInputData(
-                                  //   hintText: 'Foto KTP',
-                                  //   labelForm: 'Foto KTP',
-                                  //   labelTag: 'Label-FotoKTP',
-                                  //   formTag: 'Form-FotoKTP',
-                                  //   controller: controllers.fotoKtpController,
-                                  //   validator: (value) {},
-                                  // ),
                                   FormInputData(
                                     hintText: 'Tuliskan No. KTP',
                                     labelForm: 'No. KTP',
@@ -1590,18 +1562,17 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     controller: controllers.alamatKtpController,
                                     validator: (value) {},
                                   ),
-                                  FileUploadWidget(
-                                    label: 'Foto Kartu Keluarga',
-                                    onFileSelected: onKartuKeluargaSelected,
+                                  FileSelectionWidget(
+                                    onFileSelected: (file, fileUrl) {
+                                      setState(() {
+                                        kartukeluarga = file;
+                                        fileNameKk = file.path.split('/').last;
+                                      });
+                                    },
+                                    title: 'Foto Kartu Keluarga',
+                                    fileName: fileNameKk,
+                                    selectedFile: kartukeluarga,
                                   ),
-                                  // FormInputData(
-                                  //   hintText: 'Foto Kartu Keluarga',
-                                  //   labelForm: 'Foto Kartu Keluarga',
-                                  //   labelTag: 'Label-FotoKK',
-                                  //   formTag: 'Form-FotoKK',
-                                  //   controller: controllers.fotoKkController,
-                                  //   validator: (value) {},
-                                  // ),
                                   FormInputData(
                                     hintText: 'Tuliskan No. Kartu Keluarga',
                                     labelForm: 'No. Kartu Keluarga',
@@ -1610,18 +1581,18 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     controller: controllers.noKkController,
                                     validator: (value) {},
                                   ),
-                                  FileUploadWidget(
-                                    label: 'Foto NPWP',
-                                    onFileSelected: onNpwpSelected,
+                                  FileSelectionWidget(
+                                    onFileSelected: (file, fileUrl) {
+                                      setState(() {
+                                        npwp = file;
+                                        fileNameNpwp =
+                                            file.path.split('/').last;
+                                      });
+                                    },
+                                    title: 'Foto NPWP',
+                                    fileName: fileNameNpwp,
+                                    selectedFile: npwp,
                                   ),
-                                  // FormInputData(
-                                  //   hintText: 'Foto NPWP',
-                                  //   labelForm: 'Foto NPWP',
-                                  //   labelTag: 'Label-FotoNpwp',
-                                  //   formTag: 'Form-FotoNpwp',
-                                  //   controller: controllers.fotoNpwpController,
-                                  //   validator: (value) {},
-                                  // ),
                                   FormInputData(
                                     hintText: 'Tuliskan No. NPWP',
                                     labelForm: 'No. NPWP',
@@ -1633,7 +1604,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                   FormDropDownData(
                                     onTap: () {
                                       showTahunMenu(context,
-                                          controllers.tanggalLahirController);
+                                          controllers.tanggalNpwpController);
                                     },
                                     hintText: 'Pilih Tanggal',
                                     labelForm: 'Tanggal Berlaku NPWP',
@@ -1644,13 +1615,17 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     idController:
                                         controllers.tanggalNpwpController,
                                   ),
-                                  FormInputData(
-                                    hintText: 'Foto BPJS',
-                                    labelForm: 'Foto BPJS',
-                                    labelTag: 'Label-FotoBpjs',
-                                    formTag: 'Form-FotoBpjs',
-                                    controller: controllers.fotoBpjsController,
-                                    validator: (value) {},
+                                  FileSelectionWidget(
+                                    onFileSelected: (file, fileUrl) {
+                                      setState(() {
+                                        bpjs = file;
+                                        fileNameBpjs =
+                                            file.path.split('/').last;
+                                      });
+                                    },
+                                    title: 'Foto BPJS',
+                                    fileName: fileNameBpjs,
+                                    selectedFile: bpjs,
                                   ),
                                   FormInputData(
                                     hintText: 'Tuliskan No. BPJS',
@@ -1673,18 +1648,17 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     idController:
                                         controllers.idTipeBPJSController,
                                   ),
-                                  FileUploadWidget(
-                                    label: 'Foto KTP',
-                                    onFileSelected: onBerkasPendukungSelected,
-                                  ),
-                                  // FormInputData(
-                                  //   hintText: 'Berkas Pendukung Lainnya',
-                                  //   labelForm: 'Berkas Pendukung Lainnya',
-                                  //   labelTag: 'Label-BerkasPendukung',
-                                  //   formTag: 'Form-BerkasPendukung',
-                                  //   controller:
-                                  //       controllers.berkasLainnyaController,
-                                  //   validator: (value) {},
+                                  // FileSelectionWidget(
+                                  //   onFileSelected: (file, fileUrl) {
+                                  //     setState(() {
+                                  //       berkaspendukung = file;
+                                  //       fileNameBerkasPendukunga =
+                                  //           file.path.split('/').last;
+                                  //     });
+                                  //   },
+                                  //   title: 'Berkas Pendukung Lainnya',
+                                  //   fileName: fileNameBerkasPendukunga,
+                                  //   selectedFile: berkaspendukung,
                                   // ),
                                   FormInputData(
                                     hintText: 'Tuliskan Keterangan',
@@ -1759,45 +1733,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                 children: [
                                   FormDropDownData(
                                     onTap: () {
-                                      showPeriodeGaji(context);
-                                    },
-                                    hintText: 'Pilih Periode Gaji',
-                                    labelForm: 'Periode Gaji',
-                                    labelTag: 'Label-PerioGaji',
-                                    formTag: 'Form-PerioGaji',
-                                    valueController:
-                                        controllers.valuePeriodeGajiController,
-                                    idController:
-                                        controllers.idPeriodeGajiController,
-                                  ),
-                                  FormDropDownData(
-                                    onTap: () {
-                                      showTipePembayaran(context);
-                                    },
-                                    hintText: 'Pilih Tipe Pembayaran',
-                                    labelForm: 'Pilih Tipe Pembayaran',
-                                    labelTag: 'Label-TipeBayar',
-                                    formTag: 'Form-TipeBayar',
-                                    valueController: controllers
-                                        .valueTipePembayaranController,
-                                    idController:
-                                        controllers.idTipePembayaranController,
-                                  ),
-                                  FormDropDownData(
-                                    onTap: () {
-                                      showMetodePembayaran(context);
-                                    },
-                                    hintText: 'Pilih Metode Pembayaran',
-                                    labelForm: 'Metode Pembayaran',
-                                    labelTag: 'Label-MetodeBayar',
-                                    formTag: 'Form-MetodeBayar',
-                                    valueController: controllers
-                                        .valueMetodePembayaranController,
-                                    idController: controllers
-                                        .idMetodePembayaranController,
-                                  ),
-                                  FormDropDownData(
-                                    onTap: () {
                                       showNamaBank(context);
                                     },
                                     hintText: 'Pilih Nama Bank',
@@ -1868,7 +1803,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
     );
 
     if (selectedDate != null && selectedDate != currentDate) {
-      String formattedDate = DateFormat('dd-MM-yyyy').format(selectedDate);
+      String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
 
       controller.text = formattedDate;
     }

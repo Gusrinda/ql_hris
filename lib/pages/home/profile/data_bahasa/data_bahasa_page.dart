@@ -6,6 +6,7 @@ import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/add_bahasa.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/add_bahasa_bloc/add_bahasa_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/list_bahasa_bloc/list_bahasa_bloc.dart';
@@ -173,7 +174,8 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                           child: Column(
                             children: [
                               Expanded(
-                                child: ListView.builder(
+                                child: listBahasa.isNotEmpty
+                                ? ListView.builder(
                                   shrinkWrap: true,
                                   itemCount: listBahasa.length,
                                   itemBuilder: (context, index) {
@@ -388,7 +390,10 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                                       ),
                                     );
                                   },
-                                ),
+                                ) 
+                                : Center(
+                                        child: EmptyStateBuilder(),
+                                      ),
                               ),
                               TextButtonCustomV1(
                                 text: "Tambah Data",
