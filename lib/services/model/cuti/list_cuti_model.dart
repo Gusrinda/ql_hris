@@ -8,7 +8,7 @@ part 'list_cuti_model.g.dart';
 class ListCutiModel with _$ListCutiModel {
     const factory ListCutiModel({
         @JsonKey(name: "data")
-        List<Datum>? data,
+        List<DataListCuti>? data,
         @JsonKey(name: "total")
         int? total,
         @JsonKey(name: "current_page")
@@ -35,8 +35,8 @@ class ListCutiModel with _$ListCutiModel {
 }
 
 @freezed
-class Datum with _$Datum {
-    const factory Datum({
+class DataListCuti with _$DataListCuti {
+    const factory DataListCuti({
         @JsonKey(name: "meta_read")
         bool? metaRead,
         @JsonKey(name: "meta_delete")
@@ -54,7 +54,7 @@ class Datum with _$Datum {
         @JsonKey(name: "m_dir_id")
         int? datumMDirId,
         @JsonKey(name: "m_kary_id")
-        dynamic datumMKaryId,
+        int? datumMKaryId,
         @JsonKey(name: "alasan_id")
         int? datumAlasanId,
         @JsonKey(name: "tipe_cuti_id")
@@ -64,9 +64,9 @@ class Datum with _$Datum {
         @JsonKey(name: "date_to")
         String? dateTo,
         @JsonKey(name: "time_from")
-        String? timeFrom,
+        dynamic timeFrom,
         @JsonKey(name: "time_to")
-        String? timeTo,
+        dynamic timeTo,
         @JsonKey(name: "keterangan")
         String? keterangan,
         @JsonKey(name: "status")
@@ -79,6 +79,10 @@ class Datum with _$Datum {
         String? createdAt,
         @JsonKey(name: "updated_at")
         String? updatedAt,
+        @JsonKey(name: "attachment")
+        dynamic attachment,
+        @JsonKey(name: "interval")
+        int? interval,
         @JsonKey(name: "m_comp.id")
         int? mCompId,
         @JsonKey(name: "m_comp.nama")
@@ -96,15 +100,15 @@ class Datum with _$Datum {
         @JsonKey(name: "m_comp.updated_at")
         dynamic mCompUpdatedAt,
         @JsonKey(name: "m_dir.id")
-        int? mDirId,
+        dynamic mDirId,
         @JsonKey(name: "m_dir.m_comp_id")
-        int? mDirMCompId,
+        dynamic mDirMCompId,
         @JsonKey(name: "m_dir.nama")
-        String? mDirNama,
+        dynamic mDirNama,
         @JsonKey(name: "m_dir.desc")
         dynamic mDirDesc,
         @JsonKey(name: "m_dir.is_active")
-        bool? mDirIsActive,
+        dynamic mDirIsActive,
         @JsonKey(name: "m_dir.creator_id")
         dynamic mDirCreatorId,
         @JsonKey(name: "m_dir.last_editor_id")
@@ -114,83 +118,83 @@ class Datum with _$Datum {
         @JsonKey(name: "m_dir.updated_at")
         dynamic mDirUpdatedAt,
         @JsonKey(name: "m_kary.id")
-        dynamic mKaryId,
+        int? mKaryId,
         @JsonKey(name: "m_kary.m_comp_id")
-        dynamic mKaryMCompId,
+        int? mKaryMCompId,
         @JsonKey(name: "m_kary.m_dir_id")
-        dynamic mKaryMDirId,
+        int? mKaryMDirId,
         @JsonKey(name: "m_kary.m_divisi_id")
-        dynamic mKaryMDivisiId,
+        int? mKaryMDivisiId,
         @JsonKey(name: "m_kary.m_dept_id")
-        dynamic mKaryMDeptId,
+        int? mKaryMDeptId,
         @JsonKey(name: "m_kary.m_zona_id")
-        dynamic mKaryMZonaId,
+        int? mKaryMZonaId,
         @JsonKey(name: "m_kary.grading_id")
         dynamic mKaryGradingId,
         @JsonKey(name: "m_kary.costcontre_id")
-        dynamic mKaryCostcontreId,
+        int? mKaryCostcontreId,
         @JsonKey(name: "m_kary.kode")
-        dynamic mKaryKode,
+        String? mKaryKode,
         @JsonKey(name: "m_kary.m_posisi_id")
-        dynamic mKaryMPosisiId,
+        int? mKaryMPosisiId,
         @JsonKey(name: "m_kary.m_jam_kerja_id")
-        dynamic mKaryMJamKerjaId,
+        int? mKaryMJamKerjaId,
         @JsonKey(name: "m_kary.kode_presensi")
-        dynamic mKaryKodePresensi,
+        String? mKaryKodePresensi,
         @JsonKey(name: "m_kary.nik")
-        dynamic mKaryNik,
+        String? mKaryNik,
         @JsonKey(name: "m_kary.nama_depan")
-        dynamic mKaryNamaDepan,
+        String? mKaryNamaDepan,
         @JsonKey(name: "m_kary.nama_belakang")
-        dynamic mKaryNamaBelakang,
+        String? mKaryNamaBelakang,
         @JsonKey(name: "m_kary.nama_lengkap")
-        dynamic mKaryNamaLengkap,
+        String? mKaryNamaLengkap,
         @JsonKey(name: "m_kary.nama_panggilan")
-        dynamic mKaryNamaPanggilan,
+        String? mKaryNamaPanggilan,
         @JsonKey(name: "m_kary.jk_id")
-        dynamic mKaryJkId,
+        int? mKaryJkId,
         @JsonKey(name: "m_kary.tempat_lahir")
-        dynamic mKaryTempatLahir,
+        String? mKaryTempatLahir,
         @JsonKey(name: "m_kary.tgl_lahir")
-        dynamic mKaryTglLahir,
+        String? mKaryTglLahir,
         @JsonKey(name: "m_kary.provinsi_id")
-        dynamic mKaryProvinsiId,
+        int? mKaryProvinsiId,
         @JsonKey(name: "m_kary.kota_id")
-        dynamic mKaryKotaId,
+        int? mKaryKotaId,
         @JsonKey(name: "m_kary.kecamatan_id")
-        dynamic mKaryKecamatanId,
+        int? mKaryKecamatanId,
         @JsonKey(name: "m_kary.kode_pos")
-        dynamic mKaryKodePos,
+        String? mKaryKodePos,
         @JsonKey(name: "m_kary.alamat_asli")
-        dynamic mKaryAlamatAsli,
+        String? mKaryAlamatAsli,
         @JsonKey(name: "m_kary.alamat_domisili")
-        dynamic mKaryAlamatDomisili,
+        String? mKaryAlamatDomisili,
         @JsonKey(name: "m_kary.no_tlp")
-        dynamic mKaryNoTlp,
+        String? mKaryNoTlp,
         @JsonKey(name: "m_kary.no_tlp_lainnya")
-        dynamic mKaryNoTlpLainnya,
+        String? mKaryNoTlpLainnya,
         @JsonKey(name: "m_kary.no_darurat")
-        dynamic mKaryNoDarurat,
+        String? mKaryNoDarurat,
         @JsonKey(name: "m_kary.nama_kontak_darurat")
-        dynamic mKaryNamaKontakDarurat,
+        String? mKaryNamaKontakDarurat,
         @JsonKey(name: "m_kary.agama_id")
-        dynamic mKaryAgamaId,
+        int? mKaryAgamaId,
         @JsonKey(name: "m_kary.gol_darah_id")
-        dynamic mKaryGolDarahId,
+        int? mKaryGolDarahId,
         @JsonKey(name: "m_kary.status_nikah_id")
-        dynamic mKaryStatusNikahId,
-        @JsonKey(name: "m_kary.jml_tanggungan")
-        dynamic mKaryJmlTanggungan,
+        int? mKaryStatusNikahId,
+        @JsonKey(name: "m_kary.tanggungan_id")
+        int? mKaryTanggunganId,
         @JsonKey(name: "m_kary.hub_dgn_karyawan")
-        dynamic mKaryHubDgnKaryawan,
+        String? mKaryHubDgnKaryawan,
         @JsonKey(name: "m_kary.cuti_jatah_reguler")
-        dynamic mKaryCutiJatahReguler,
+        int? mKaryCutiJatahReguler,
         @JsonKey(name: "m_kary.cuti_sisa_reguler")
-        dynamic mKaryCutiSisaReguler,
+        int? mKaryCutiSisaReguler,
         @JsonKey(name: "m_kary.cuti_panjang")
-        dynamic mKaryCutiPanjang,
+        int? mKaryCutiPanjang,
         @JsonKey(name: "m_kary.cuti_sisa_panjang")
-        dynamic mKaryCutiSisaPanjang,
+        int? mKaryCutiSisaPanjang,
         @JsonKey(name: "m_kary.status_kary_id")
         dynamic mKaryStatusKaryId,
         @JsonKey(name: "m_kary.lama_kontrak_awal")
@@ -198,29 +202,47 @@ class Datum with _$Datum {
         @JsonKey(name: "m_kary.lama_kontrak_akhir")
         dynamic mKaryLamaKontrakAkhir,
         @JsonKey(name: "m_kary.tgl_masuk")
-        dynamic mKaryTglMasuk,
+        String? mKaryTglMasuk,
         @JsonKey(name: "m_kary.tgl_berhenti")
         dynamic mKaryTglBerhenti,
         @JsonKey(name: "m_kary.alasan_berhenti")
         dynamic mKaryAlasanBerhenti,
         @JsonKey(name: "m_kary.uk_baju")
-        dynamic mKaryUkBaju,
+        String? mKaryUkBaju,
         @JsonKey(name: "m_kary.uk_celana")
-        dynamic mKaryUkCelana,
+        String? mKaryUkCelana,
         @JsonKey(name: "m_kary.uk_sepatu")
-        dynamic mKaryUkSepatu,
+        String? mKaryUkSepatu,
         @JsonKey(name: "m_kary.desc")
-        dynamic mKaryDesc,
+        String? mKaryDesc,
         @JsonKey(name: "m_kary.is_active")
-        dynamic mKaryIsActive,
+        bool? mKaryIsActive,
         @JsonKey(name: "m_kary.creator_id")
         dynamic mKaryCreatorId,
         @JsonKey(name: "m_kary.last_editor_id")
-        dynamic mKaryLastEditorId,
+        int? mKaryLastEditorId,
         @JsonKey(name: "m_kary.created_at")
-        dynamic mKaryCreatedAt,
+        String? mKaryCreatedAt,
         @JsonKey(name: "m_kary.updated_at")
-        dynamic mKaryUpdatedAt,
+        String? mKaryUpdatedAt,
+        @JsonKey(name: "m_kary.m_standart_gaji_id")
+        int? mKaryMStandartGajiId,
+        @JsonKey(name: "m_kary.periode_gaji_id")
+        int? mKaryPeriodeGajiId,
+        @JsonKey(name: "m_kary.ref_id")
+        dynamic mKaryRefId,
+        @JsonKey(name: "m_kary.presensi_lokasi_default_id")
+        dynamic mKaryPresensiLokasiDefaultId,
+        @JsonKey(name: "m_kary.exp_date_cuti")
+        dynamic mKaryExpDateCuti,
+        @JsonKey(name: "m_kary.limit_potong")
+        int? mKaryLimitPotong,
+        @JsonKey(name: "m_kary.atasan_id")
+        int? mKaryAtasanId,
+        @JsonKey(name: "m_kary.cuti_p24")
+        dynamic mKaryCutiP24,
+        @JsonKey(name: "m_kary.cuti_sisa_p24")
+        dynamic mKaryCutiSisaP24,
         @JsonKey(name: "alasan.id")
         int? alasanId,
         @JsonKey(name: "alasan.m_comp_id")
@@ -242,15 +264,19 @@ class Datum with _$Datum {
         @JsonKey(name: "alasan.last_editor_id")
         dynamic alasanLastEditorId,
         @JsonKey(name: "alasan.created_at")
-        String? alasanCreatedAt,
+        dynamic alasanCreatedAt,
         @JsonKey(name: "alasan.updated_at")
-        String? alasanUpdatedAt,
+        dynamic alasanUpdatedAt,
+        @JsonKey(name: "alasan.value_2")
+        dynamic alasanValue2,
+        @JsonKey(name: "alasan.value_3")
+        dynamic alasanValue3,
         @JsonKey(name: "tipe_cuti.id")
         int? tipeCutiId,
         @JsonKey(name: "tipe_cuti.m_comp_id")
         int? tipeCutiMCompId,
         @JsonKey(name: "tipe_cuti.m_dir_id")
-        dynamic tipeCutiMDirId,
+        int? tipeCutiMDirId,
         @JsonKey(name: "tipe_cuti.group")
         String? tipeCutiGroup,
         @JsonKey(name: "tipe_cuti.key")
@@ -266,9 +292,13 @@ class Datum with _$Datum {
         @JsonKey(name: "tipe_cuti.last_editor_id")
         dynamic tipeCutiLastEditorId,
         @JsonKey(name: "tipe_cuti.created_at")
-        String? tipeCutiCreatedAt,
+        dynamic tipeCutiCreatedAt,
         @JsonKey(name: "tipe_cuti.updated_at")
         String? tipeCutiUpdatedAt,
+        @JsonKey(name: "tipe_cuti.value_2")
+        dynamic tipeCutiValue2,
+        @JsonKey(name: "tipe_cuti.value_3")
+        dynamic tipeCutiValue3,
         @JsonKey(name: "creator.id")
         int? creatorId,
         @JsonKey(name: "creator.name")
@@ -290,19 +320,19 @@ class Datum with _$Datum {
         @JsonKey(name: "creator.creator_id")
         dynamic creatorCreatorId,
         @JsonKey(name: "creator.last_editor_id")
-        dynamic creatorLastEditorId,
+        int? creatorLastEditorId,
         @JsonKey(name: "creator.remember_token")
         dynamic creatorRememberToken,
         @JsonKey(name: "creator.created_at")
         dynamic creatorCreatedAt,
         @JsonKey(name: "creator.updated_at")
-        dynamic creatorUpdatedAt,
+        String? creatorUpdatedAt,
         @JsonKey(name: "creator.profil_image")
-        dynamic creatorProfilImage,
+        String? creatorProfilImage,
         @JsonKey(name: "creator.telp")
-        dynamic creatorTelp,
+        String? creatorTelp,
         @JsonKey(name: "creator.m_kary_id")
-        dynamic creatorMKaryId,
+        int? creatorMKaryId,
         @JsonKey(name: "last_editor.id")
         dynamic lastEditorId,
         @JsonKey(name: "last_editor.name")
@@ -337,7 +367,7 @@ class Datum with _$Datum {
         dynamic lastEditorTelp,
         @JsonKey(name: "last_editor.m_kary_id")
         dynamic lastEditorMKaryId,
-    }) = _Datum;
+    }) = _DataListCuti;
 
-    factory Datum.fromJson(Map<String, dynamic> json) => _$DatumFromJson(json);
+    factory DataListCuti.fromJson(Map<String, dynamic> json) => _$DataListCutiFromJson(json);
 }

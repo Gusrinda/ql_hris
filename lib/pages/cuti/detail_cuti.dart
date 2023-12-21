@@ -8,6 +8,7 @@ import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/edit_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
+import 'package:sj_presensi_mobile/services/model/cuti/list_cuti_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 final Map<String, dynamic> stateDict = {
@@ -36,6 +37,8 @@ class DetailCutiPage extends StatefulWidget {
     this.data,
     this.dateFrom,
     this.dateTo,
+    this.timeFrom,
+    this.timeTo,
     this.alasanValue,
     this.status,
     this.keterangan,
@@ -47,9 +50,11 @@ class DetailCutiPage extends StatefulWidget {
     this.tipeCutiID,
     required this.reloadDataCallback,
   });
-  final dynamic? data;
+  final DataListCuti? data;
   final String? dateFrom;
   final String? dateTo;
+  final String? timeFrom;
+  final String? timeTo;
   final String? alasanValue;
   final String? status;
   final String? keterangan;
@@ -100,6 +105,11 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
     } else {
       return 'Tanggal tidak tersedia';
     }
+  }
+
+  String formatTime(String rawTime) {
+    DateTime parsedTime = DateFormat.Hms().parse(rawTime);
+    return DateFormat('HH:mm').format(parsedTime);
   }
 
   @override
@@ -187,8 +197,13 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                                     'Tipe Cuti', widget.tipeCutiValue ?? '-'),
                                 _buildText('Tanggal Awal',
                                     formatDate(widget.dateFrom ?? '-')),
+                                _buildText(
+                                    'Waktu Awal',
+                                    formatTime(
+                                        widget.data?.timeFrom?.toString() ??
+                                            '00:00')),
                                 Text(
-                                  'Satus',
+                                  'Status',
                                   style: GoogleFonts.poppins(
                                     fontSize: 10,
                                     color: Colors.black,
@@ -215,8 +230,15 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                                 _buildText('Alasan', widget.alasanValue ?? '-'),
                                 _buildText(
                                     'Keterangan', widget.keterangan ?? '-'),
-                                _buildText('Tanggal Akhir',
+                                _buildText('Tanggal Berakhir',
                                     formatDate(widget.dateTo ?? '-')),
+                                _buildText(
+                                    'Waktu Berakhir',
+                                    formatTime(
+                                        widget.data?.timeTo?.toString() ??
+                                            '00:00')),
+                                // _buildText('Catatan Approval',
+                                //     widget.data?.keterangan?.toString() ?? '-'),
                               ],
                             ),
                           ),
@@ -226,38 +248,39 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                         height: 30.sp,
                       ),
                       if (currentStatus == "REVISED")
-                      TextButtonCustomV1(
-                        text: "Revisi Pengajuan Cuti",
-                        height: 50.sp,
-                        textSize: 12,
-                        backgroundColor: Colors.orange.withOpacity(0.1),
-                        textColor: Colors.orange,
-                        onPressed: () {
-                          print("Edit Cuti ID : ${widget.cutiId}");
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BlocProvider(
-                                create: (context) => AddCutiBloc()
-                                  ..add(OnSelectAlasanCuti())
-                                  ..add(OnSelectTipeCuti()),
-                                child: EditCutiPage(
-                                  cutiId: widget.cutiId ?? 1,
-                                  dateFrom: widget.dateFrom,
-                                  dateTo: widget.dateTo,
-                                  alasanValue: widget.alasanValue,
-                                  alasanID: widget.alasanID,
-                                  status: widget.status,
-                                  keterangan: widget.keterangan,
-                                  tipeCutiValue: widget.tipeCutiValue,
-                                  tipeCutiID: widget.tipeCutiID,
-                                  reloadDataCallback: widget.reloadDataCallback,
+                        TextButtonCustomV1(
+                          text: "Revisi Pengajuan Cuti",
+                          height: 50.sp,
+                          textSize: 12,
+                          backgroundColor: Colors.orange.withOpacity(0.1),
+                          textColor: Colors.orange,
+                          onPressed: () {
+                            print("Edit Cuti ID : ${widget.cutiId}");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BlocProvider(
+                                  create: (context) => AddCutiBloc()
+                                    ..add(OnSelectAlasanCuti())
+                                    ..add(OnSelectTipeCuti()),
+                                  child: EditCutiPage(
+                                    cutiId: widget.cutiId ?? 1,
+                                    dateFrom: widget.dateFrom,
+                                    dateTo: widget.dateTo,
+                                    alasanValue: widget.alasanValue,
+                                    alasanID: widget.alasanID,
+                                    status: widget.status,
+                                    keterangan: widget.keterangan,
+                                    tipeCutiValue: widget.tipeCutiValue,
+                                    tipeCutiID: widget.tipeCutiID,
+                                    reloadDataCallback:
+                                        widget.reloadDataCallback,
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                      ),
+                            );
+                          },
+                        ),
                     ],
                   ),
                 ),

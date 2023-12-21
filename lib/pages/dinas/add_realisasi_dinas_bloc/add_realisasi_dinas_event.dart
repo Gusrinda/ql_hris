@@ -8,45 +8,24 @@ abstract class AddRealisasiDinasEvent extends Equatable {
 }
 
 class AddRealisasiDinasSubmited extends AddRealisasiDinasEvent {
-  String nomor;
-  int mCompId;
   int tSpdId;
-  int totalBiayaSpd;
-  int totalBiayaSelisih;
-  int pengambilanSpd;
+  double totalBiayaSelisih;
   String keterangan;
-  String status;
-  int creatorId;
-  int lastEditorId;
-  final List<Map<String, dynamic>> tRpdDetList;
+  final List<Map<String, dynamic>>? tRpdDetList;
 
   AddRealisasiDinasSubmited({
-    required this.nomor,
-    required this.mCompId,
     required this.tSpdId,
-    required this.totalBiayaSpd,
     required this.totalBiayaSelisih,
-    required this.pengambilanSpd,
     required this.keterangan,
-    required this.status,
-    required this.creatorId,
-    required this.lastEditorId,
-    required this.tRpdDetList,
+    this.tRpdDetList,
   });
 
   @override
   List<Object> get props => [
-        nomor,
-        mCompId,
         tSpdId,
-        totalBiayaSpd,
         totalBiayaSelisih,
-        pengambilanSpd,
         keterangan,
-        status,
-        creatorId,
-        lastEditorId,
-        tRpdDetList,
+        tRpdDetList!,
       ];
 }
 

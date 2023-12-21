@@ -1800,24 +1800,50 @@ mixin _$Trx {
   DateTime? get tglAcaraAkhir => throw _privateConstructorUsedError;
   @JsonKey(name: "jenis_spd_id")
   int? get jenisSpdId => throw _privateConstructorUsedError;
+  @JsonKey(name: "jenis_spd")
+  String? get jenisSpd => throw _privateConstructorUsedError;
   @JsonKey(name: "m_zona_asal_id")
   int? get mZonaAsalId => throw _privateConstructorUsedError;
+  @JsonKey(name: "zona_asal")
+  String? get zonaAsal => throw _privateConstructorUsedError;
   @JsonKey(name: "m_zona_tujuan_id")
   int? get mZonaTujuanId => throw _privateConstructorUsedError;
+  @JsonKey(name: "zona_tujuan")
+  String? get zonaTujuan => throw _privateConstructorUsedError;
   @JsonKey(name: "m_lokasi_tujuan_id")
   int? get mLokasiTujuanId => throw _privateConstructorUsedError;
+  @JsonKey(name: "lokasi")
+  String? get lokasi => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary_id")
   int? get mKaryId => throw _privateConstructorUsedError;
+  @JsonKey(name: "nama_kary")
+  dynamic get namaKary => throw _privateConstructorUsedError;
   @JsonKey(name: "pic_id")
   int? get picId => throw _privateConstructorUsedError;
+  @JsonKey(name: "nama_pic")
+  dynamic get namaPic => throw _privateConstructorUsedError;
   @JsonKey(name: "total_biaya")
   String? get totalBiaya => throw _privateConstructorUsedError;
+  @JsonKey(name: "tipe_cuti")
+  String? get tipeCuti => throw _privateConstructorUsedError;
+  @JsonKey(name: "alasan_cuti")
+  String? get alasanCuti => throw _privateConstructorUsedError;
   @JsonKey(name: "kegiatan")
   String? get kegiatan => throw _privateConstructorUsedError;
   @JsonKey(name: "keterangan")
   String? get keterangan => throw _privateConstructorUsedError;
   @JsonKey(name: "status")
   String? get status => throw _privateConstructorUsedError;
+  @JsonKey(name: "alasan_id")
+  int? get alasanId => throw _privateConstructorUsedError;
+  @JsonKey(name: "alasan")
+  String? get alasan => throw _privateConstructorUsedError;
+  @JsonKey(name: "tipe_cuti_id")
+  int? get tipeCutiId => throw _privateConstructorUsedError;
+  @JsonKey(name: "date_from")
+  DateTime? get dateFrom => throw _privateConstructorUsedError;
+  @JsonKey(name: "date_to")
+  DateTime? get dateTo => throw _privateConstructorUsedError;
   @JsonKey(name: "jam_mulai")
   String? get jamMulai => throw _privateConstructorUsedError;
   @JsonKey(name: "jam_selesai")
@@ -1826,14 +1852,6 @@ mixin _$Trx {
   String? get noDoc => throw _privateConstructorUsedError;
   @JsonKey(name: "doc")
   dynamic get doc => throw _privateConstructorUsedError;
-  @JsonKey(name: "alasan_id")
-  int? get alasanId => throw _privateConstructorUsedError;
-  @JsonKey(name: "tipe_cuti_id")
-  int? get tipeCutiId => throw _privateConstructorUsedError;
-  @JsonKey(name: "date_from")
-  DateTime? get dateFrom => throw _privateConstructorUsedError;
-  @JsonKey(name: "date_to")
-  DateTime? get dateTo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1851,23 +1869,32 @@ abstract class $TrxCopyWith<$Res> {
       @JsonKey(name: "tgl_acara_awal") DateTime? tglAcaraAwal,
       @JsonKey(name: "tgl_acara_akhir") DateTime? tglAcaraAkhir,
       @JsonKey(name: "jenis_spd_id") int? jenisSpdId,
+      @JsonKey(name: "jenis_spd") String? jenisSpd,
       @JsonKey(name: "m_zona_asal_id") int? mZonaAsalId,
+      @JsonKey(name: "zona_asal") String? zonaAsal,
       @JsonKey(name: "m_zona_tujuan_id") int? mZonaTujuanId,
+      @JsonKey(name: "zona_tujuan") String? zonaTujuan,
       @JsonKey(name: "m_lokasi_tujuan_id") int? mLokasiTujuanId,
+      @JsonKey(name: "lokasi") String? lokasi,
       @JsonKey(name: "m_kary_id") int? mKaryId,
+      @JsonKey(name: "nama_kary") dynamic namaKary,
       @JsonKey(name: "pic_id") int? picId,
+      @JsonKey(name: "nama_pic") dynamic namaPic,
       @JsonKey(name: "total_biaya") String? totalBiaya,
+      @JsonKey(name: "tipe_cuti") String? tipeCuti,
+      @JsonKey(name: "alasan_cuti") String? alasanCuti,
       @JsonKey(name: "kegiatan") String? kegiatan,
       @JsonKey(name: "keterangan") String? keterangan,
       @JsonKey(name: "status") String? status,
+      @JsonKey(name: "alasan_id") int? alasanId,
+      @JsonKey(name: "alasan") String? alasan,
+      @JsonKey(name: "tipe_cuti_id") int? tipeCutiId,
+      @JsonKey(name: "date_from") DateTime? dateFrom,
+      @JsonKey(name: "date_to") DateTime? dateTo,
       @JsonKey(name: "jam_mulai") String? jamMulai,
       @JsonKey(name: "jam_selesai") String? jamSelesai,
       @JsonKey(name: "no_doc") String? noDoc,
-      @JsonKey(name: "doc") dynamic doc,
-      @JsonKey(name: "alasan_id") int? alasanId,
-      @JsonKey(name: "tipe_cuti_id") int? tipeCutiId,
-      @JsonKey(name: "date_from") DateTime? dateFrom,
-      @JsonKey(name: "date_to") DateTime? dateTo});
+      @JsonKey(name: "doc") dynamic doc});
 }
 
 /// @nodoc
@@ -1887,23 +1914,32 @@ class _$TrxCopyWithImpl<$Res, $Val extends Trx> implements $TrxCopyWith<$Res> {
     Object? tglAcaraAwal = freezed,
     Object? tglAcaraAkhir = freezed,
     Object? jenisSpdId = freezed,
+    Object? jenisSpd = freezed,
     Object? mZonaAsalId = freezed,
+    Object? zonaAsal = freezed,
     Object? mZonaTujuanId = freezed,
+    Object? zonaTujuan = freezed,
     Object? mLokasiTujuanId = freezed,
+    Object? lokasi = freezed,
     Object? mKaryId = freezed,
+    Object? namaKary = freezed,
     Object? picId = freezed,
+    Object? namaPic = freezed,
     Object? totalBiaya = freezed,
+    Object? tipeCuti = freezed,
+    Object? alasanCuti = freezed,
     Object? kegiatan = freezed,
     Object? keterangan = freezed,
     Object? status = freezed,
+    Object? alasanId = freezed,
+    Object? alasan = freezed,
+    Object? tipeCutiId = freezed,
+    Object? dateFrom = freezed,
+    Object? dateTo = freezed,
     Object? jamMulai = freezed,
     Object? jamSelesai = freezed,
     Object? noDoc = freezed,
     Object? doc = freezed,
-    Object? alasanId = freezed,
-    Object? tipeCutiId = freezed,
-    Object? dateFrom = freezed,
-    Object? dateTo = freezed,
   }) {
     return _then(_value.copyWith(
       nomor: freezed == nomor
@@ -1926,29 +1962,61 @@ class _$TrxCopyWithImpl<$Res, $Val extends Trx> implements $TrxCopyWith<$Res> {
           ? _value.jenisSpdId
           : jenisSpdId // ignore: cast_nullable_to_non_nullable
               as int?,
+      jenisSpd: freezed == jenisSpd
+          ? _value.jenisSpd
+          : jenisSpd // ignore: cast_nullable_to_non_nullable
+              as String?,
       mZonaAsalId: freezed == mZonaAsalId
           ? _value.mZonaAsalId
           : mZonaAsalId // ignore: cast_nullable_to_non_nullable
               as int?,
+      zonaAsal: freezed == zonaAsal
+          ? _value.zonaAsal
+          : zonaAsal // ignore: cast_nullable_to_non_nullable
+              as String?,
       mZonaTujuanId: freezed == mZonaTujuanId
           ? _value.mZonaTujuanId
           : mZonaTujuanId // ignore: cast_nullable_to_non_nullable
               as int?,
+      zonaTujuan: freezed == zonaTujuan
+          ? _value.zonaTujuan
+          : zonaTujuan // ignore: cast_nullable_to_non_nullable
+              as String?,
       mLokasiTujuanId: freezed == mLokasiTujuanId
           ? _value.mLokasiTujuanId
           : mLokasiTujuanId // ignore: cast_nullable_to_non_nullable
               as int?,
+      lokasi: freezed == lokasi
+          ? _value.lokasi
+          : lokasi // ignore: cast_nullable_to_non_nullable
+              as String?,
       mKaryId: freezed == mKaryId
           ? _value.mKaryId
           : mKaryId // ignore: cast_nullable_to_non_nullable
               as int?,
+      namaKary: freezed == namaKary
+          ? _value.namaKary
+          : namaKary // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       picId: freezed == picId
           ? _value.picId
           : picId // ignore: cast_nullable_to_non_nullable
               as int?,
+      namaPic: freezed == namaPic
+          ? _value.namaPic
+          : namaPic // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       totalBiaya: freezed == totalBiaya
           ? _value.totalBiaya
           : totalBiaya // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tipeCuti: freezed == tipeCuti
+          ? _value.tipeCuti
+          : tipeCuti // ignore: cast_nullable_to_non_nullable
+              as String?,
+      alasanCuti: freezed == alasanCuti
+          ? _value.alasanCuti
+          : alasanCuti // ignore: cast_nullable_to_non_nullable
               as String?,
       kegiatan: freezed == kegiatan
           ? _value.kegiatan
@@ -1962,6 +2030,26 @@ class _$TrxCopyWithImpl<$Res, $Val extends Trx> implements $TrxCopyWith<$Res> {
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
+      alasanId: freezed == alasanId
+          ? _value.alasanId
+          : alasanId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      alasan: freezed == alasan
+          ? _value.alasan
+          : alasan // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tipeCutiId: freezed == tipeCutiId
+          ? _value.tipeCutiId
+          : tipeCutiId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      dateFrom: freezed == dateFrom
+          ? _value.dateFrom
+          : dateFrom // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      dateTo: freezed == dateTo
+          ? _value.dateTo
+          : dateTo // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       jamMulai: freezed == jamMulai
           ? _value.jamMulai
           : jamMulai // ignore: cast_nullable_to_non_nullable
@@ -1978,22 +2066,6 @@ class _$TrxCopyWithImpl<$Res, $Val extends Trx> implements $TrxCopyWith<$Res> {
           ? _value.doc
           : doc // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      alasanId: freezed == alasanId
-          ? _value.alasanId
-          : alasanId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      tipeCutiId: freezed == tipeCutiId
-          ? _value.tipeCutiId
-          : tipeCutiId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      dateFrom: freezed == dateFrom
-          ? _value.dateFrom
-          : dateFrom // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      dateTo: freezed == dateTo
-          ? _value.dateTo
-          : dateTo // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ) as $Val);
   }
 }
@@ -2010,23 +2082,32 @@ abstract class _$$TrxImplCopyWith<$Res> implements $TrxCopyWith<$Res> {
       @JsonKey(name: "tgl_acara_awal") DateTime? tglAcaraAwal,
       @JsonKey(name: "tgl_acara_akhir") DateTime? tglAcaraAkhir,
       @JsonKey(name: "jenis_spd_id") int? jenisSpdId,
+      @JsonKey(name: "jenis_spd") String? jenisSpd,
       @JsonKey(name: "m_zona_asal_id") int? mZonaAsalId,
+      @JsonKey(name: "zona_asal") String? zonaAsal,
       @JsonKey(name: "m_zona_tujuan_id") int? mZonaTujuanId,
+      @JsonKey(name: "zona_tujuan") String? zonaTujuan,
       @JsonKey(name: "m_lokasi_tujuan_id") int? mLokasiTujuanId,
+      @JsonKey(name: "lokasi") String? lokasi,
       @JsonKey(name: "m_kary_id") int? mKaryId,
+      @JsonKey(name: "nama_kary") dynamic namaKary,
       @JsonKey(name: "pic_id") int? picId,
+      @JsonKey(name: "nama_pic") dynamic namaPic,
       @JsonKey(name: "total_biaya") String? totalBiaya,
+      @JsonKey(name: "tipe_cuti") String? tipeCuti,
+      @JsonKey(name: "alasan_cuti") String? alasanCuti,
       @JsonKey(name: "kegiatan") String? kegiatan,
       @JsonKey(name: "keterangan") String? keterangan,
       @JsonKey(name: "status") String? status,
+      @JsonKey(name: "alasan_id") int? alasanId,
+      @JsonKey(name: "alasan") String? alasan,
+      @JsonKey(name: "tipe_cuti_id") int? tipeCutiId,
+      @JsonKey(name: "date_from") DateTime? dateFrom,
+      @JsonKey(name: "date_to") DateTime? dateTo,
       @JsonKey(name: "jam_mulai") String? jamMulai,
       @JsonKey(name: "jam_selesai") String? jamSelesai,
       @JsonKey(name: "no_doc") String? noDoc,
-      @JsonKey(name: "doc") dynamic doc,
-      @JsonKey(name: "alasan_id") int? alasanId,
-      @JsonKey(name: "tipe_cuti_id") int? tipeCutiId,
-      @JsonKey(name: "date_from") DateTime? dateFrom,
-      @JsonKey(name: "date_to") DateTime? dateTo});
+      @JsonKey(name: "doc") dynamic doc});
 }
 
 /// @nodoc
@@ -2043,23 +2124,32 @@ class __$$TrxImplCopyWithImpl<$Res> extends _$TrxCopyWithImpl<$Res, _$TrxImpl>
     Object? tglAcaraAwal = freezed,
     Object? tglAcaraAkhir = freezed,
     Object? jenisSpdId = freezed,
+    Object? jenisSpd = freezed,
     Object? mZonaAsalId = freezed,
+    Object? zonaAsal = freezed,
     Object? mZonaTujuanId = freezed,
+    Object? zonaTujuan = freezed,
     Object? mLokasiTujuanId = freezed,
+    Object? lokasi = freezed,
     Object? mKaryId = freezed,
+    Object? namaKary = freezed,
     Object? picId = freezed,
+    Object? namaPic = freezed,
     Object? totalBiaya = freezed,
+    Object? tipeCuti = freezed,
+    Object? alasanCuti = freezed,
     Object? kegiatan = freezed,
     Object? keterangan = freezed,
     Object? status = freezed,
+    Object? alasanId = freezed,
+    Object? alasan = freezed,
+    Object? tipeCutiId = freezed,
+    Object? dateFrom = freezed,
+    Object? dateTo = freezed,
     Object? jamMulai = freezed,
     Object? jamSelesai = freezed,
     Object? noDoc = freezed,
     Object? doc = freezed,
-    Object? alasanId = freezed,
-    Object? tipeCutiId = freezed,
-    Object? dateFrom = freezed,
-    Object? dateTo = freezed,
   }) {
     return _then(_$TrxImpl(
       nomor: freezed == nomor
@@ -2082,29 +2172,61 @@ class __$$TrxImplCopyWithImpl<$Res> extends _$TrxCopyWithImpl<$Res, _$TrxImpl>
           ? _value.jenisSpdId
           : jenisSpdId // ignore: cast_nullable_to_non_nullable
               as int?,
+      jenisSpd: freezed == jenisSpd
+          ? _value.jenisSpd
+          : jenisSpd // ignore: cast_nullable_to_non_nullable
+              as String?,
       mZonaAsalId: freezed == mZonaAsalId
           ? _value.mZonaAsalId
           : mZonaAsalId // ignore: cast_nullable_to_non_nullable
               as int?,
+      zonaAsal: freezed == zonaAsal
+          ? _value.zonaAsal
+          : zonaAsal // ignore: cast_nullable_to_non_nullable
+              as String?,
       mZonaTujuanId: freezed == mZonaTujuanId
           ? _value.mZonaTujuanId
           : mZonaTujuanId // ignore: cast_nullable_to_non_nullable
               as int?,
+      zonaTujuan: freezed == zonaTujuan
+          ? _value.zonaTujuan
+          : zonaTujuan // ignore: cast_nullable_to_non_nullable
+              as String?,
       mLokasiTujuanId: freezed == mLokasiTujuanId
           ? _value.mLokasiTujuanId
           : mLokasiTujuanId // ignore: cast_nullable_to_non_nullable
               as int?,
+      lokasi: freezed == lokasi
+          ? _value.lokasi
+          : lokasi // ignore: cast_nullable_to_non_nullable
+              as String?,
       mKaryId: freezed == mKaryId
           ? _value.mKaryId
           : mKaryId // ignore: cast_nullable_to_non_nullable
               as int?,
+      namaKary: freezed == namaKary
+          ? _value.namaKary
+          : namaKary // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       picId: freezed == picId
           ? _value.picId
           : picId // ignore: cast_nullable_to_non_nullable
               as int?,
+      namaPic: freezed == namaPic
+          ? _value.namaPic
+          : namaPic // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       totalBiaya: freezed == totalBiaya
           ? _value.totalBiaya
           : totalBiaya // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tipeCuti: freezed == tipeCuti
+          ? _value.tipeCuti
+          : tipeCuti // ignore: cast_nullable_to_non_nullable
+              as String?,
+      alasanCuti: freezed == alasanCuti
+          ? _value.alasanCuti
+          : alasanCuti // ignore: cast_nullable_to_non_nullable
               as String?,
       kegiatan: freezed == kegiatan
           ? _value.kegiatan
@@ -2118,6 +2240,26 @@ class __$$TrxImplCopyWithImpl<$Res> extends _$TrxCopyWithImpl<$Res, _$TrxImpl>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as String?,
+      alasanId: freezed == alasanId
+          ? _value.alasanId
+          : alasanId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      alasan: freezed == alasan
+          ? _value.alasan
+          : alasan // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tipeCutiId: freezed == tipeCutiId
+          ? _value.tipeCutiId
+          : tipeCutiId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      dateFrom: freezed == dateFrom
+          ? _value.dateFrom
+          : dateFrom // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      dateTo: freezed == dateTo
+          ? _value.dateTo
+          : dateTo // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       jamMulai: freezed == jamMulai
           ? _value.jamMulai
           : jamMulai // ignore: cast_nullable_to_non_nullable
@@ -2134,22 +2276,6 @@ class __$$TrxImplCopyWithImpl<$Res> extends _$TrxCopyWithImpl<$Res, _$TrxImpl>
           ? _value.doc
           : doc // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      alasanId: freezed == alasanId
-          ? _value.alasanId
-          : alasanId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      tipeCutiId: freezed == tipeCutiId
-          ? _value.tipeCutiId
-          : tipeCutiId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      dateFrom: freezed == dateFrom
-          ? _value.dateFrom
-          : dateFrom // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      dateTo: freezed == dateTo
-          ? _value.dateTo
-          : dateTo // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
     ));
   }
 }
@@ -2163,23 +2289,32 @@ class _$TrxImpl implements _Trx {
       @JsonKey(name: "tgl_acara_awal") this.tglAcaraAwal,
       @JsonKey(name: "tgl_acara_akhir") this.tglAcaraAkhir,
       @JsonKey(name: "jenis_spd_id") this.jenisSpdId,
+      @JsonKey(name: "jenis_spd") this.jenisSpd,
       @JsonKey(name: "m_zona_asal_id") this.mZonaAsalId,
+      @JsonKey(name: "zona_asal") this.zonaAsal,
       @JsonKey(name: "m_zona_tujuan_id") this.mZonaTujuanId,
+      @JsonKey(name: "zona_tujuan") this.zonaTujuan,
       @JsonKey(name: "m_lokasi_tujuan_id") this.mLokasiTujuanId,
+      @JsonKey(name: "lokasi") this.lokasi,
       @JsonKey(name: "m_kary_id") this.mKaryId,
+      @JsonKey(name: "nama_kary") this.namaKary,
       @JsonKey(name: "pic_id") this.picId,
+      @JsonKey(name: "nama_pic") this.namaPic,
       @JsonKey(name: "total_biaya") this.totalBiaya,
+      @JsonKey(name: "tipe_cuti") this.tipeCuti,
+      @JsonKey(name: "alasan_cuti") this.alasanCuti,
       @JsonKey(name: "kegiatan") this.kegiatan,
       @JsonKey(name: "keterangan") this.keterangan,
       @JsonKey(name: "status") this.status,
+      @JsonKey(name: "alasan_id") this.alasanId,
+      @JsonKey(name: "alasan") this.alasan,
+      @JsonKey(name: "tipe_cuti_id") this.tipeCutiId,
+      @JsonKey(name: "date_from") this.dateFrom,
+      @JsonKey(name: "date_to") this.dateTo,
       @JsonKey(name: "jam_mulai") this.jamMulai,
       @JsonKey(name: "jam_selesai") this.jamSelesai,
       @JsonKey(name: "no_doc") this.noDoc,
-      @JsonKey(name: "doc") this.doc,
-      @JsonKey(name: "alasan_id") this.alasanId,
-      @JsonKey(name: "tipe_cuti_id") this.tipeCutiId,
-      @JsonKey(name: "date_from") this.dateFrom,
-      @JsonKey(name: "date_to") this.dateTo});
+      @JsonKey(name: "doc") this.doc});
 
   factory _$TrxImpl.fromJson(Map<String, dynamic> json) =>
       _$$TrxImplFromJson(json);
@@ -2200,23 +2335,47 @@ class _$TrxImpl implements _Trx {
   @JsonKey(name: "jenis_spd_id")
   final int? jenisSpdId;
   @override
+  @JsonKey(name: "jenis_spd")
+  final String? jenisSpd;
+  @override
   @JsonKey(name: "m_zona_asal_id")
   final int? mZonaAsalId;
+  @override
+  @JsonKey(name: "zona_asal")
+  final String? zonaAsal;
   @override
   @JsonKey(name: "m_zona_tujuan_id")
   final int? mZonaTujuanId;
   @override
+  @JsonKey(name: "zona_tujuan")
+  final String? zonaTujuan;
+  @override
   @JsonKey(name: "m_lokasi_tujuan_id")
   final int? mLokasiTujuanId;
+  @override
+  @JsonKey(name: "lokasi")
+  final String? lokasi;
   @override
   @JsonKey(name: "m_kary_id")
   final int? mKaryId;
   @override
+  @JsonKey(name: "nama_kary")
+  final dynamic namaKary;
+  @override
   @JsonKey(name: "pic_id")
   final int? picId;
   @override
+  @JsonKey(name: "nama_pic")
+  final dynamic namaPic;
+  @override
   @JsonKey(name: "total_biaya")
   final String? totalBiaya;
+  @override
+  @JsonKey(name: "tipe_cuti")
+  final String? tipeCuti;
+  @override
+  @JsonKey(name: "alasan_cuti")
+  final String? alasanCuti;
   @override
   @JsonKey(name: "kegiatan")
   final String? kegiatan;
@@ -2226,6 +2385,21 @@ class _$TrxImpl implements _Trx {
   @override
   @JsonKey(name: "status")
   final String? status;
+  @override
+  @JsonKey(name: "alasan_id")
+  final int? alasanId;
+  @override
+  @JsonKey(name: "alasan")
+  final String? alasan;
+  @override
+  @JsonKey(name: "tipe_cuti_id")
+  final int? tipeCutiId;
+  @override
+  @JsonKey(name: "date_from")
+  final DateTime? dateFrom;
+  @override
+  @JsonKey(name: "date_to")
+  final DateTime? dateTo;
   @override
   @JsonKey(name: "jam_mulai")
   final String? jamMulai;
@@ -2238,22 +2412,10 @@ class _$TrxImpl implements _Trx {
   @override
   @JsonKey(name: "doc")
   final dynamic doc;
-  @override
-  @JsonKey(name: "alasan_id")
-  final int? alasanId;
-  @override
-  @JsonKey(name: "tipe_cuti_id")
-  final int? tipeCutiId;
-  @override
-  @JsonKey(name: "date_from")
-  final DateTime? dateFrom;
-  @override
-  @JsonKey(name: "date_to")
-  final DateTime? dateTo;
 
   @override
   String toString() {
-    return 'Trx(nomor: $nomor, tanggal: $tanggal, tglAcaraAwal: $tglAcaraAwal, tglAcaraAkhir: $tglAcaraAkhir, jenisSpdId: $jenisSpdId, mZonaAsalId: $mZonaAsalId, mZonaTujuanId: $mZonaTujuanId, mLokasiTujuanId: $mLokasiTujuanId, mKaryId: $mKaryId, picId: $picId, totalBiaya: $totalBiaya, kegiatan: $kegiatan, keterangan: $keterangan, status: $status, jamMulai: $jamMulai, jamSelesai: $jamSelesai, noDoc: $noDoc, doc: $doc, alasanId: $alasanId, tipeCutiId: $tipeCutiId, dateFrom: $dateFrom, dateTo: $dateTo)';
+    return 'Trx(nomor: $nomor, tanggal: $tanggal, tglAcaraAwal: $tglAcaraAwal, tglAcaraAkhir: $tglAcaraAkhir, jenisSpdId: $jenisSpdId, jenisSpd: $jenisSpd, mZonaAsalId: $mZonaAsalId, zonaAsal: $zonaAsal, mZonaTujuanId: $mZonaTujuanId, zonaTujuan: $zonaTujuan, mLokasiTujuanId: $mLokasiTujuanId, lokasi: $lokasi, mKaryId: $mKaryId, namaKary: $namaKary, picId: $picId, namaPic: $namaPic, totalBiaya: $totalBiaya, tipeCuti: $tipeCuti, alasanCuti: $alasanCuti, kegiatan: $kegiatan, keterangan: $keterangan, status: $status, alasanId: $alasanId, alasan: $alasan, tipeCutiId: $tipeCutiId, dateFrom: $dateFrom, dateTo: $dateTo, jamMulai: $jamMulai, jamSelesai: $jamSelesai, noDoc: $noDoc, doc: $doc)';
   }
 
   @override
@@ -2269,34 +2431,48 @@ class _$TrxImpl implements _Trx {
                 other.tglAcaraAkhir == tglAcaraAkhir) &&
             (identical(other.jenisSpdId, jenisSpdId) ||
                 other.jenisSpdId == jenisSpdId) &&
+            (identical(other.jenisSpd, jenisSpd) ||
+                other.jenisSpd == jenisSpd) &&
             (identical(other.mZonaAsalId, mZonaAsalId) ||
                 other.mZonaAsalId == mZonaAsalId) &&
+            (identical(other.zonaAsal, zonaAsal) ||
+                other.zonaAsal == zonaAsal) &&
             (identical(other.mZonaTujuanId, mZonaTujuanId) ||
                 other.mZonaTujuanId == mZonaTujuanId) &&
+            (identical(other.zonaTujuan, zonaTujuan) ||
+                other.zonaTujuan == zonaTujuan) &&
             (identical(other.mLokasiTujuanId, mLokasiTujuanId) ||
                 other.mLokasiTujuanId == mLokasiTujuanId) &&
+            (identical(other.lokasi, lokasi) || other.lokasi == lokasi) &&
             (identical(other.mKaryId, mKaryId) || other.mKaryId == mKaryId) &&
+            const DeepCollectionEquality().equals(other.namaKary, namaKary) &&
             (identical(other.picId, picId) || other.picId == picId) &&
+            const DeepCollectionEquality().equals(other.namaPic, namaPic) &&
             (identical(other.totalBiaya, totalBiaya) ||
                 other.totalBiaya == totalBiaya) &&
+            (identical(other.tipeCuti, tipeCuti) ||
+                other.tipeCuti == tipeCuti) &&
+            (identical(other.alasanCuti, alasanCuti) ||
+                other.alasanCuti == alasanCuti) &&
             (identical(other.kegiatan, kegiatan) ||
                 other.kegiatan == kegiatan) &&
             (identical(other.keterangan, keterangan) ||
                 other.keterangan == keterangan) &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.alasanId, alasanId) ||
+                other.alasanId == alasanId) &&
+            (identical(other.alasan, alasan) || other.alasan == alasan) &&
+            (identical(other.tipeCutiId, tipeCutiId) ||
+                other.tipeCutiId == tipeCutiId) &&
+            (identical(other.dateFrom, dateFrom) ||
+                other.dateFrom == dateFrom) &&
+            (identical(other.dateTo, dateTo) || other.dateTo == dateTo) &&
             (identical(other.jamMulai, jamMulai) ||
                 other.jamMulai == jamMulai) &&
             (identical(other.jamSelesai, jamSelesai) ||
                 other.jamSelesai == jamSelesai) &&
             (identical(other.noDoc, noDoc) || other.noDoc == noDoc) &&
-            const DeepCollectionEquality().equals(other.doc, doc) &&
-            (identical(other.alasanId, alasanId) ||
-                other.alasanId == alasanId) &&
-            (identical(other.tipeCutiId, tipeCutiId) ||
-                other.tipeCutiId == tipeCutiId) &&
-            (identical(other.dateFrom, dateFrom) ||
-                other.dateFrom == dateFrom) &&
-            (identical(other.dateTo, dateTo) || other.dateTo == dateTo));
+            const DeepCollectionEquality().equals(other.doc, doc));
   }
 
   @JsonKey(ignore: true)
@@ -2308,23 +2484,32 @@ class _$TrxImpl implements _Trx {
         tglAcaraAwal,
         tglAcaraAkhir,
         jenisSpdId,
+        jenisSpd,
         mZonaAsalId,
+        zonaAsal,
         mZonaTujuanId,
+        zonaTujuan,
         mLokasiTujuanId,
+        lokasi,
         mKaryId,
+        const DeepCollectionEquality().hash(namaKary),
         picId,
+        const DeepCollectionEquality().hash(namaPic),
         totalBiaya,
+        tipeCuti,
+        alasanCuti,
         kegiatan,
         keterangan,
         status,
+        alasanId,
+        alasan,
+        tipeCutiId,
+        dateFrom,
+        dateTo,
         jamMulai,
         jamSelesai,
         noDoc,
-        const DeepCollectionEquality().hash(doc),
-        alasanId,
-        tipeCutiId,
-        dateFrom,
-        dateTo
+        const DeepCollectionEquality().hash(doc)
       ]);
 
   @JsonKey(ignore: true)
@@ -2348,23 +2533,32 @@ abstract class _Trx implements Trx {
       @JsonKey(name: "tgl_acara_awal") final DateTime? tglAcaraAwal,
       @JsonKey(name: "tgl_acara_akhir") final DateTime? tglAcaraAkhir,
       @JsonKey(name: "jenis_spd_id") final int? jenisSpdId,
+      @JsonKey(name: "jenis_spd") final String? jenisSpd,
       @JsonKey(name: "m_zona_asal_id") final int? mZonaAsalId,
+      @JsonKey(name: "zona_asal") final String? zonaAsal,
       @JsonKey(name: "m_zona_tujuan_id") final int? mZonaTujuanId,
+      @JsonKey(name: "zona_tujuan") final String? zonaTujuan,
       @JsonKey(name: "m_lokasi_tujuan_id") final int? mLokasiTujuanId,
+      @JsonKey(name: "lokasi") final String? lokasi,
       @JsonKey(name: "m_kary_id") final int? mKaryId,
+      @JsonKey(name: "nama_kary") final dynamic namaKary,
       @JsonKey(name: "pic_id") final int? picId,
+      @JsonKey(name: "nama_pic") final dynamic namaPic,
       @JsonKey(name: "total_biaya") final String? totalBiaya,
+      @JsonKey(name: "tipe_cuti") final String? tipeCuti,
+      @JsonKey(name: "alasan_cuti") final String? alasanCuti,
       @JsonKey(name: "kegiatan") final String? kegiatan,
       @JsonKey(name: "keterangan") final String? keterangan,
       @JsonKey(name: "status") final String? status,
+      @JsonKey(name: "alasan_id") final int? alasanId,
+      @JsonKey(name: "alasan") final String? alasan,
+      @JsonKey(name: "tipe_cuti_id") final int? tipeCutiId,
+      @JsonKey(name: "date_from") final DateTime? dateFrom,
+      @JsonKey(name: "date_to") final DateTime? dateTo,
       @JsonKey(name: "jam_mulai") final String? jamMulai,
       @JsonKey(name: "jam_selesai") final String? jamSelesai,
       @JsonKey(name: "no_doc") final String? noDoc,
-      @JsonKey(name: "doc") final dynamic doc,
-      @JsonKey(name: "alasan_id") final int? alasanId,
-      @JsonKey(name: "tipe_cuti_id") final int? tipeCutiId,
-      @JsonKey(name: "date_from") final DateTime? dateFrom,
-      @JsonKey(name: "date_to") final DateTime? dateTo}) = _$TrxImpl;
+      @JsonKey(name: "doc") final dynamic doc}) = _$TrxImpl;
 
   factory _Trx.fromJson(Map<String, dynamic> json) = _$TrxImpl.fromJson;
 
@@ -2384,23 +2578,47 @@ abstract class _Trx implements Trx {
   @JsonKey(name: "jenis_spd_id")
   int? get jenisSpdId;
   @override
+  @JsonKey(name: "jenis_spd")
+  String? get jenisSpd;
+  @override
   @JsonKey(name: "m_zona_asal_id")
   int? get mZonaAsalId;
+  @override
+  @JsonKey(name: "zona_asal")
+  String? get zonaAsal;
   @override
   @JsonKey(name: "m_zona_tujuan_id")
   int? get mZonaTujuanId;
   @override
+  @JsonKey(name: "zona_tujuan")
+  String? get zonaTujuan;
+  @override
   @JsonKey(name: "m_lokasi_tujuan_id")
   int? get mLokasiTujuanId;
+  @override
+  @JsonKey(name: "lokasi")
+  String? get lokasi;
   @override
   @JsonKey(name: "m_kary_id")
   int? get mKaryId;
   @override
+  @JsonKey(name: "nama_kary")
+  dynamic get namaKary;
+  @override
   @JsonKey(name: "pic_id")
   int? get picId;
   @override
+  @JsonKey(name: "nama_pic")
+  dynamic get namaPic;
+  @override
   @JsonKey(name: "total_biaya")
   String? get totalBiaya;
+  @override
+  @JsonKey(name: "tipe_cuti")
+  String? get tipeCuti;
+  @override
+  @JsonKey(name: "alasan_cuti")
+  String? get alasanCuti;
   @override
   @JsonKey(name: "kegiatan")
   String? get kegiatan;
@@ -2410,6 +2628,21 @@ abstract class _Trx implements Trx {
   @override
   @JsonKey(name: "status")
   String? get status;
+  @override
+  @JsonKey(name: "alasan_id")
+  int? get alasanId;
+  @override
+  @JsonKey(name: "alasan")
+  String? get alasan;
+  @override
+  @JsonKey(name: "tipe_cuti_id")
+  int? get tipeCutiId;
+  @override
+  @JsonKey(name: "date_from")
+  DateTime? get dateFrom;
+  @override
+  @JsonKey(name: "date_to")
+  DateTime? get dateTo;
   @override
   @JsonKey(name: "jam_mulai")
   String? get jamMulai;
@@ -2422,18 +2655,6 @@ abstract class _Trx implements Trx {
   @override
   @JsonKey(name: "doc")
   dynamic get doc;
-  @override
-  @JsonKey(name: "alasan_id")
-  int? get alasanId;
-  @override
-  @JsonKey(name: "tipe_cuti_id")
-  int? get tipeCutiId;
-  @override
-  @JsonKey(name: "date_from")
-  DateTime? get dateFrom;
-  @override
-  @JsonKey(name: "date_to")
-  DateTime? get dateTo;
   @override
   @JsonKey(ignore: true)
   _$$TrxImplCopyWith<_$TrxImpl> get copyWith =>

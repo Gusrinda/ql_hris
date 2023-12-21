@@ -14,23 +14,17 @@ class AddRealisasiDinasBloc
   List<DataDinas> listDinasApproved = [];
   List<DataGeneral> listTipe = [];
   AddRealisasiDinasBloc() : super(AddRealisasiDinasInitial()) {
+    
     on<AddRealisasiDinasSubmited>((event, emit) async {
       emit(AddRealisasiDinasLoading());
       var resToken = await GeneralSharedPreferences.getUserToken();
       if (resToken is ServicesSuccess) {
         var res = await RealisasiDinasServices.addRealisasiDinas(
           resToken.response["token"],
-          event.nomor,
-          event.mCompId,
           event.tSpdId,
-          event.totalBiayaSpd,
           event.totalBiayaSelisih,
-          event.pengambilanSpd,
           event.keterangan,
-          event.status,
-          event.creatorId,
-          event.lastEditorId,
-          event.tRpdDetList,
+          // event.tRpdDetList!,
         );
         if (res is ServicesSuccess) {
           emit(AddRealisasiDinasSuccess(

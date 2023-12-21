@@ -182,7 +182,8 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                     namaBelakang: controllers.namaBelakangController.text,
                     namaLengkap:
                         '${controllers.namaDepanController.text} ${controllers.namaBelakangController.text}',
-                    namaPanggilan: controllers.namaPanggilanController.text));
+                    namaPanggilan: controllers.namaPanggilanController.text,
+                    ));
               },
             ),
           },

@@ -6,6 +6,7 @@ import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/text_form_custom.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_realisasi_dinas_bloc/add_realisasi_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/dinas_selector.dart';
@@ -90,6 +91,7 @@ class AddRealisasiDinasPage extends StatefulWidget {
 class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
   String? selectedNomorSpd;
   String? selectedTipe;
+
   @override
   void initState() {
     super.initState();
@@ -566,6 +568,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                             GoogleFonts.poppins(fontSize: 8),
                                       ),
                                       FormInputData(
+                                        inputType: TextInputType.number,
                                         input: '',
                                         onTap: () {},
                                         controller: widget
@@ -678,36 +681,113 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                       Text(
                                         'Rincian Biaya',
                                         style: GoogleFonts.poppins(
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16.sp,
+                                          color: MyColorsConst.primaryColor,
+                                          fontWeight: FontWeight.w700,
                                         ),
                                       ),
-                                      // ListView.builder(
-                                      //   shrinkWrap: true,
-                                      //   physics: NeverScrollableScrollPhysics(),
-                                      //   itemCount: expenseDetails.length,
-                                      //   itemBuilder: (context, index) {
-                                      //     return ExpenseDetailWidget(
-                                      //       expenseDetail:
-                                      //           expenseDetails[index],
-                                      //       onDelete: () {
-                                      //         setState(() {
-                                      //           expenseDetails.removeAt(index);
-                                      //         });
-                                      //       },
-                                      //     );
-                                      //   },
-                                      // ),
-                                      // SizedBox(height: 10),
-                                      // ElevatedButton(
-                                      //   onPressed: () {
-                                      //     // Tambah rincian biaya baru
-                                      //     setState(() {
-                                      //       expenseDetails.add(ExpenseDetail());
-                                      //     });
-                                      //   },
-                                      //   child: Text('Tambah Rincian Biaya'),
-                                      // ),
+                                      SizedBox(height: 10.sp),
+                                      FormDropDownData(
+                                        input: '',
+                                        onTap: () {
+                                          showTipe(context);
+                                        },
+                                        idController: widget.idTipeController,
+                                        valueController: widget.valueTipeController,
+                                        hintText: 'Tipe',
+                                        labelTag: 'Label-Tipe',
+                                        formTag: 'Form-Tipe',
+                                        labelForm: 'Tipe',
+                                        validator: (value) {},
+                                        errorTextStyle:
+                                            GoogleFonts.poppins(fontSize: 8),
+                                      ),
+                                      FormInputData(
+                                        inputType: TextInputType.number,
+                                        input: '',
+                                        onTap: () {},
+                                        controller: widget.biayaController,
+                                        hintText: 'Biaya',
+                                        labelTag: 'Label-Biaya',
+                                        formTag: 'Form-Biaya',
+                                        labelForm: 'Biaya',
+                                        validator: (value) {},
+                                        enabled: true,
+                                        errorTextStyle:
+                                            GoogleFonts.poppins(fontSize: 8),
+                                      ),
+                                      FormInputData(
+                                        input: '',
+                                        onTap: () {},
+                                        controller: widget.keteranganController,
+                                        hintText: 'Keterangan',
+                                        labelTag: 'Label-KeteranganBiaya',
+                                        formTag: 'Form-KeteranganBiaya',
+                                        labelForm: 'Keterangan',
+                                        validator: (value) {},
+                                        enabled: true,
+                                        errorTextStyle:
+                                            GoogleFonts.poppins(fontSize: 8),
+                                      ),
+                                      FormInputData(
+                                        inputType: TextInputType.number,
+                                        input: '',
+                                        onTap: () {},
+                                        controller: widget.biayaRealisasiController,
+                                        hintText: 'Tuliskan Biaya',
+                                        labelTag: 'Label-BiayaRealisasi',
+                                        formTag: 'Form-BiayaRealisasi',
+                                        labelForm: 'Biaya Realisasi',
+                                        validator: (value) {},
+                                        enabled: true,
+                                        errorTextStyle:
+                                            GoogleFonts.poppins(fontSize: 8),
+                                      ),
+                                      FormInputData(
+                                        input: '',
+                                        onTap: () {},
+                                        controller: widget.catatanController,
+                                        hintText: 'Tuliskan Catatan',
+                                        labelTag: 'Label-CatatanRealisasi',
+                                        formTag: 'Form-CatatanRealisasi',
+                                        labelForm: 'Catatan Realisasi',
+                                        validator: (value) {},
+                                        enabled: true,
+                                        errorTextStyle:
+                                            GoogleFonts.poppins(fontSize: 8),
+                                      ),
+                                      SizedBox(height: 10.sp),
+                                      TextButtonCustomV1(
+                                        text: "Kirim",
+                                        height: 50,
+                                        backgroundColor: MyColorsConst
+                                            .primaryColor
+                                            .withOpacity(0.1),
+                                        textColor: MyColorsConst.primaryColor,
+                                        onPressed:
+                                            state is AddRealisasiDinasLoading
+                                                ? null
+                                                : () {
+                                                    context
+                                                        .read<
+                                                            AddRealisasiDinasBloc>()
+                                                        .add(
+                                                          AddRealisasiDinasSubmited(
+                                                            tSpdId: int.parse(widget
+                                                                .idNomorSpdController
+                                                                .text),
+                                                            totalBiayaSelisih:
+                                                                double.parse(widget
+                                                                    .totalBiayaRencanaSelisihController
+                                                                    .text),
+                                                            keterangan: widget
+                                                                .keteranganController
+                                                                .text,
+                                                            // tRpdDetList: [],
+                                                          ),
+                                                        );
+                                                  },
+                                      ),
                                     ],
                                   )
                                 ],
@@ -728,103 +808,111 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
   }
 }
 
-class ExpenseDetailWidget extends StatelessWidget {
-  final ExpenseDetail expenseDetail;
-  final VoidCallback onDelete;
+// class RincianBiayaModel {
+//   Map<String, dynamic> toMap() {
+//     return {
+//       'idTipe': idTipeController.text,
+//       'valueTipe': valueTipeController.text,
+//       'biaya': biayaController.text,
+//       'keterangan': keteranganController.text,
+//       'biayaRealisasi': biayaRealisasiController.text,
+//       'catatan': catatanController.text,
+//       // Add more fields if needed
+//     };
+//   }
+// }
 
-  ExpenseDetailWidget({required this.expenseDetail, required this.onDelete});
+// class DynamicFormField extends StatelessWidget {
+//   final ExpenseDetail expenseDetail;
+//   final VoidCallback onDelete;
+//   final VoidCallback showTipeCallback; // New callback
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        FormDropDownData(
-          input: '',
-          onTap: () {},
-          idController: expenseDetail.idTipeController,
-          valueController: expenseDetail.valueTipeController,
-          hintText: 'Tipe',
-          labelTag: 'Label-Tipe',
-          formTag: 'Form-Tipe',
-          labelForm: 'Tipe',
-          validator: (value) {},
-          errorTextStyle: GoogleFonts.poppins(fontSize: 8),
-        ),
-        FormInputData(
-          input: '',
-          onTap: () {},
-          controller: expenseDetail.costController,
-          hintText: 'Biaya',
-          labelTag: 'Label-Biaya',
-          formTag: 'Form-Biaya',
-          labelForm: 'Biaya',
-          validator: (value) {},
-          enabled: true, // Sesuaikan dengan kebutuhan
-          errorTextStyle: GoogleFonts.poppins(fontSize: 8),
-        ),
-        FormInputData(
-          input: '',
-          onTap: () {},
-          controller: expenseDetail.descriptionController,
-          hintText: 'Keterangan',
-          labelTag: 'Label-Keterangan',
-          formTag: 'Form-Keterangan',
-          labelForm: 'Keterangan',
-          validator: (value) {},
-          enabled: true, // Sesuaikan dengan kebutuhan
-          errorTextStyle: GoogleFonts.poppins(fontSize: 8),
-        ),
-        FormInputData(
-          input: '',
-          onTap: () {},
-          controller: expenseDetail.biayaRealisasiController,
-          hintText: 'Tuliskan Biaya',
-          labelTag: 'Label-Keterangan',
-          formTag: 'Form-Keterangan',
-          labelForm: 'Biaya Realisasi',
-          validator: (value) {},
-          enabled: true, // Sesuaikan dengan kebutuhan
-          errorTextStyle: GoogleFonts.poppins(fontSize: 8),
-        ),
-        FormInputData(
-          input: '',
-          onTap: () {},
-          controller: expenseDetail.catatanRealisasiController,
-          hintText: 'Tuliskan Catatan',
-          labelTag: 'Label-Keterangan',
-          formTag: 'Form-Keterangan',
-          labelForm: 'Catatan Realisasi',
-          validator: (value) {},
-          enabled: true, // Sesuaikan dengan kebutuhan
-          errorTextStyle: GoogleFonts.poppins(fontSize: 8),
-        ),
-        Row(
-          children: [
-            Expanded(
-              child: ElevatedButton(
-                onPressed: onDelete,
-                child: Text('Hapus Rincian Biaya'),
-              ),
-            ),
-          ],
-        ),
-        const Divider(
-          height: 10,
-          thickness: 0.5,
-          color: MyColorsConst.lightDarkColor,
-        ),
-      ],
-    );
-  }
-}
+//   const DynamicFormField({
+//     required this.expenseDetail,
+//     required this.onDelete,
+//     required this.showTipeCallback, // Pass the callback from the parent
+//   });
 
-class ExpenseDetail {
-  final TextEditingController idTipeController = TextEditingController();
-  final TextEditingController valueTipeController = TextEditingController();
-  final TextEditingController costController = TextEditingController();
-  final TextEditingController descriptionController = TextEditingController();
-  final TextEditingController biayaRealisasiController =
-      TextEditingController();
-  final TextEditingController catatanRealisasiController =
-      TextEditingController();
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         FormDropDownData(
+//           input: '',
+//           onTap: showTipeCallback,
+//           idController: expenseDetail.idTipeController,
+//           valueController: expenseDetail.valueTipeController,
+//           hintText: 'Tipe',
+//           labelTag: 'Label-Tipe',
+//           formTag: 'Form-Tipe',
+//           labelForm: 'Tipe',
+//           validator: (value) {},
+//           errorTextStyle: GoogleFonts.poppins(fontSize: 8),
+//         ),
+//         FormInputData(
+//           input: '',
+//           onTap: () {},
+//           controller: expenseDetail.costController,
+//           hintText: 'Biaya',
+//           labelTag: 'Label-Biaya',
+//           formTag: 'Form-Biaya',
+//           labelForm: 'Biaya',
+//           validator: (value) {},
+//           enabled: true, // Sesuaikan dengan kebutuhan
+//           errorTextStyle: GoogleFonts.poppins(fontSize: 8),
+//         ),
+//         FormInputData(
+//           input: '',
+//           onTap: () {},
+//           controller: expenseDetail.descriptionController,
+//           hintText: 'Keterangan',
+//           labelTag: 'Label-KeteranganBiaya',
+//           formTag: 'Form-KeteranganBiaya',
+//           labelForm: 'Keterangan',
+//           validator: (value) {},
+//           enabled: true, // Sesuaikan dengan kebutuhan
+//           errorTextStyle: GoogleFonts.poppins(fontSize: 8),
+//         ),
+//         FormInputData(
+//           input: '',
+//           onTap: () {},
+//           controller: expenseDetail.biayaRealisasiController,
+//           hintText: 'Tuliskan Biaya',
+//           labelTag: 'Label-BiayaRealisasi',
+//           formTag: 'Form-BiayaRealisasi',
+//           labelForm: 'Biaya Realisasi',
+//           validator: (value) {},
+//           enabled: true, // Sesuaikan dengan kebutuhan
+//           errorTextStyle: GoogleFonts.poppins(fontSize: 8),
+//         ),
+//         FormInputData(
+//           input: '',
+//           onTap: () {},
+//           controller: expenseDetail.catatanRealisasiController,
+//           hintText: 'Tuliskan Catatan',
+//           labelTag: 'Label-CatatanRealisasi',
+//           formTag: 'Form-CatatanRealisasi',
+//           labelForm: 'Catatan Realisasi',
+//           validator: (value) {},
+//           enabled: true, // Sesuaikan dengan kebutuhan
+//           errorTextStyle: GoogleFonts.poppins(fontSize: 8),
+//         ),
+//         Row(
+//           children: [
+//             Expanded(
+//               child: ElevatedButton(
+//                 onPressed: onDelete,
+//                 child: Text('Hapus Rincian Biaya'),
+//               ),
+//             ),
+//           ],
+//         ),
+//         const Divider(
+//           height: 10,
+//           thickness: 0.5,
+//           color: MyColorsConst.lightDarkColor,
+//         ),
+//       ],
+//     );
+//   }
+// }

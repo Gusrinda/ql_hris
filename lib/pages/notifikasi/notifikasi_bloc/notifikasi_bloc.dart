@@ -19,7 +19,7 @@ part 'notifikasi_state.dart';
 
 class NotifikasiBloc extends Bloc<NotifikasiEvent, NotifikasiState> {
   List<DataNotif> listNotifikasi = [];
-  List<Datum> listcuti = [];
+  List<DataListCuti> listcuti = [];
   List<DataLembur> listlembur = [];
   List<DataDinas> listdinas = [];
   NotifikasiBloc() : super(ListNotifikasiInitial()) {

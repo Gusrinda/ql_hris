@@ -132,7 +132,7 @@ class GeneralServices {
       if (response.statusCode == MyGeneralConst.CODE_NOT_FOUND) {
         return ServicesFailure(
           code: response.statusCode,
-          errorResponse: "Error API Data Tidak Ditemukan",
+          errorResponse: json.decode(response.body)['message'],
         );
       }
       if (response.statusCode == MyGeneralConst.CODE_ERROR_VALIDATION) {

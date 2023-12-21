@@ -81,6 +81,7 @@ import 'package:sj_presensi_mobile/pages/lembur/detail_lembur.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
+import 'package:sj_presensi_mobile/services/model/cuti/list_cuti_model.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/realisasi_dinas_model.dart';
 import 'package:sj_presensi_mobile/services/model/list_approval/response_list_approval.dart';
 import 'package:sj_presensi_mobile/services/model/report_detail_page_model.dart';
@@ -180,11 +181,11 @@ class RouteGenerator {
           return DetailLemburPage(data: data.data);
         });
       case DetailCutiPage.routeName:
-        final data = settings.arguments as DetailCutiPage;
+        final data = settings.arguments as DataListCuti;
         return MaterialPageRoute(builder: (context) {
           return DetailCutiPage(
             reloadDataCallback: () {},
-            data: data.data,
+            data: data,
           );
         });
       case AddCutiPage.routeName:
