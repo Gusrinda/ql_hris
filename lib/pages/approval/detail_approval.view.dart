@@ -314,27 +314,27 @@ class _DetailApprovalState extends State<DetailApproval> {
 
                                     if (dataTRX?.jenisSpdId != null)
                                       buildInfoText('Jenis SPD',
-                                          dataTRX!.jenisSpdId.toString()),
+                                          dataTRX!.jenisSpd.toString()),
 
                                     if (dataTRX?.mZonaAsalId != null)
                                       buildInfoText('Zona Asal',
-                                          dataTRX!.mZonaAsalId.toString()),
+                                          dataTRX!.zonaAsal.toString()),
 
                                     if (dataTRX?.mZonaTujuanId != null)
                                       buildInfoText('Zona Tujuan',
-                                          dataTRX!.mZonaTujuanId.toString()),
+                                          dataTRX!.zonaTujuan.toString()),
 
                                     if (dataTRX?.mLokasiTujuanId != null)
                                       buildInfoText('Lokasi Tujuan',
-                                          dataTRX!.mLokasiTujuanId.toString()),
+                                          dataTRX!.lokasi.toString()),
 
                                     if (dataTRX?.mKaryId != null)
                                       buildInfoText('Nama Karyawan',
-                                          dataTRX!.mKaryId.toString()),
+                                          dataTRX!.namaKary.toString()),
 
                                     if (dataTRX?.picId != null)
                                       buildInfoText('Nama PIC',
-                                          dataTRX!.picId.toString()),
+                                          dataTRX!.namaPic.toString()),
 
                                     if (dataTRX?.kegiatan != null)
                                       buildInfoText('Kegiatan',
@@ -356,11 +356,11 @@ class _DetailApprovalState extends State<DetailApproval> {
                                     // Cuti
                                     if (dataTRX?.tipeCutiId != null)
                                       buildInfoText('Tipe Cuti Cuti',
-                                          dataTRX!.tipeCutiId.toString()),
+                                          dataTRX!.tipeCuti.toString()),
 
                                     if (dataTRX?.alasanId != null)
                                       buildInfoText('Alasan Cuti',
-                                          dataTRX!.alasanId.toString()),
+                                          dataTRX!.alasan.toString()),
 
                                     if (dataTRX?.dateFrom != null)
                                       buildInfoText(
@@ -433,35 +433,35 @@ class _DetailApprovalState extends State<DetailApproval> {
                                           );
                                         }),
                               SizedBox(height: 10.sp),
-                              TextButtonCustomV1(
-                                  textSize: 13.sp,
-                                  text: "REVISE",
-                                  height: 50.sp,
-                                  backgroundColor: Colors.orange.shade800,
-                                  textColor: Colors.white,
-                                  onPressed: state is DetailApprovalLoading
-                                      ? null
-                                      : () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (_) => DialogCustom(
-                                              state: DialogCustomItem.confirm,
-                                              message:
-                                                  "Apakah Benar Anda Merevisi Pengajuan Ini?",
-                                              durationInSec: 5,
-                                              onContinue: () => context
-                                                  .read<ApprovalBloc>()
-                                                  .add(SendApproval(
-                                                      approvalID: widget
-                                                          .dataApproval.id
-                                                          .toString(),
-                                                      typeApproval: "REVISED",
-                                                      note: catatanController
-                                                          .text)),
-                                            ),
-                                          );
-                                        }),
-                              SizedBox(height: 10.sp),
+                              // TextButtonCustomV1(
+                              //     textSize: 13.sp,
+                              //     text: "REVISE",
+                              //     height: 50.sp,
+                              //     backgroundColor: Colors.orange.shade800,
+                              //     textColor: Colors.white,
+                              //     onPressed: state is DetailApprovalLoading
+                              //         ? null
+                              //         : () {
+                              //             showDialog(
+                              //               context: context,
+                              //               builder: (_) => DialogCustom(
+                              //                 state: DialogCustomItem.confirm,
+                              //                 message:
+                              //                     "Apakah Benar Anda Merevisi Pengajuan Ini?",
+                              //                 durationInSec: 5,
+                              //                 onContinue: () => context
+                              //                     .read<ApprovalBloc>()
+                              //                     .add(SendApproval(
+                              //                         approvalID: widget
+                              //                             .dataApproval.id
+                              //                             .toString(),
+                              //                         typeApproval: "REVISED",
+                              //                         note: catatanController
+                              //                             .text)),
+                              //               ),
+                              //             );
+                              //           }),
+                              // SizedBox(height: 10.sp),
                               TextButtonCustomV1(
                                   textSize: 13.sp,
                                   text: "REJECT",

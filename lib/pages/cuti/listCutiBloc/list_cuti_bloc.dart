@@ -12,7 +12,7 @@ part 'list_cuti_event.dart';
 part 'list_cuti_state.dart';
 
 class ListCutiBloc extends Bloc<ListCutiEvent, ListCutiState> {
-  List<Datum> listcuti = [];
+  List<DataListCuti> listcuti = [];
   ListCutiBloc() : super(ListCutiInitial()) {
     on<GetListCuti>((event, emit) async {
       emit(ListCutiLoading());
@@ -26,7 +26,6 @@ class ListCutiBloc extends Bloc<ListCutiEvent, ListCutiState> {
           final username = resUser.response["data"]["name"] ?? 'Pegawai SJ';
           final sisaCutiMasaKerja =
               resUser.response["data"]["m_kary.cuti_sisa_reguler"] ?? 0;
-          print(sisaCutiMasaKerja);
           final sisaCutiTahunan =
               resUser.response["data"]["m_kary.cuti_sisa_panjang"] ?? 0;
           final totalSisaCuti =
@@ -39,13 +38,16 @@ class ListCutiBloc extends Bloc<ListCutiEvent, ListCutiState> {
 
           final totalJatahCuti = jatahCutiMasaKerja + jatahCutiTahunan;
 
+          final totalCutiTerpakaiTahunan = jatahCutiTahunan - sisaCutiTahunan;
+          final totalCutiTerpakaiMasaKerja = jatahCutiMasaKerja - sisaCutiMasaKerja;
+
           final totalCutiTerpakai =
               (totalJatahCuti - int.parse(totalSisaCuti)).toString();
 
           debugPrint(res.response.toString());
           if (res.response is Map<String, dynamic>) {
             print(res.response);
-
+            
             //Mengubah hasil response api ke model kelas
             ListCutiModel dataResponse = ListCutiModel.fromJson(res.response);
 
@@ -54,6 +56,10 @@ class ListCutiBloc extends Bloc<ListCutiEvent, ListCutiState> {
 
             emit(
               ListCutiSuccessInBackground(
+                sisaCutiTahunan: sisaCutiTahunan.toString(),
+                sisaCutiMasaKerja: sisaCutiMasaKerja.toString(),
+                jatahCutiTahunan: totalCutiTerpakaiTahunan.toString(),
+                jatahCutiMasaKerja: totalCutiTerpakaiMasaKerja.toString(),
                 dataCuti: listcuti,
                 username: username,
                 totalSisaCuti: totalSisaCuti,

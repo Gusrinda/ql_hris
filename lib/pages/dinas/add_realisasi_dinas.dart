@@ -6,6 +6,7 @@ import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/text_form_custom.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_realisasi_dinas_bloc/add_realisasi_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/dinas_selector.dart';
@@ -75,8 +76,8 @@ class AddRealisasiDinasPage extends StatefulWidget {
       TextEditingController();
 
   // Rincian biaya
-  final TextEditingController idTipeController = TextEditingController();
-  final TextEditingController valueTipeController = TextEditingController();
+  // final TextEditingController idTipeController = TextEditingController();
+  // final TextEditingController valueTipeController = TextEditingController();
   final TextEditingController biayaController = TextEditingController();
   final TextEditingController keteranganController = TextEditingController();
   final TextEditingController biayaRealisasiController =
@@ -90,6 +91,8 @@ class AddRealisasiDinasPage extends StatefulWidget {
 class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
   String? selectedNomorSpd;
   String? selectedTipe;
+  List<ExpenseDetail> expenseDetails = [];
+
   @override
   void initState() {
     super.initState();
@@ -194,37 +197,11 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
           });
         }
       } else {
-        print("Tidak Ada Item");
-      }
-    }
-
-    void showTipe(BuildContext context) async {
-      if (dataTipe.isEmpty) {
-        context.read<AddRealisasiDinasBloc>().add(OnSelectTipe());
-        dataTipe = context.read<AddRealisasiDinasBloc>().listTipe;
-      }
-
-      if (dataTipe.isNotEmpty) {
-        final selectedTipe = await showSearch<DataGeneral?>(
+        showDialog(
           context: context,
-          delegate: GeneralSearchDelegate(
-            dataList: dataTipe,
-            filteredData: dataTipe,
-          ),
+          builder: (_) => const DialogCustom(
+              state: DialogCustomItem.error, message: "Tidak Ada Item"),
         );
-
-        if (selectedTipe != null) {
-          widget.idTipeController.text = selectedTipe.id?.toString() ?? '';
-          widget.valueTipeController.text =
-              selectedTipe.value?.toString() ?? '';
-
-          setState(() {
-            this.selectedTipe = selectedTipe.value;
-            print(selectedTipe.value);
-            print("Selected ID Tipe: ${selectedTipe.id}");
-          });
-        }
-      } else {
         print("Tidak Ada Item");
       }
     }
@@ -334,386 +311,516 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                     child: BlocBuilder<AddRealisasiDinasBloc,
                         AddRealisasiDinasState>(
                       builder: (context, state) {
-                        return Column(
-                          children: [
-                            Expanded(
-                              child: ListView(
+                        return SingleChildScrollView(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              FormInputData(
+                                input: '',
+                                onTap: () {},
+                                controller: widget.nomorController,
+                                hintText: 'Nomor',
+                                labelTag: 'Label-NomorRspd',
+                                formTag: 'Form-NomorRspd',
+                                labelForm: 'Nomor',
+                                validator: (value) {},
+                                enabled: false,
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              FormDropDownData(
+                                input: '',
+                                onTap: () {
+                                  _showNomoreSpd(context);
+                                },
+                                idController: widget.idNomorSpdController,
+                                valueController: widget.valueNomorSpdController,
+                                hintText: 'Cari Nomor Spd',
+                                labelTag: 'Label-TemplateRspd',
+                                formTag: 'Form-TemplateRspd',
+                                labelForm: 'Nomor SPD',
+                                validator: (value) {},
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              FormInputData(
+                                input: '',
+                                onTap: () {},
+                                controller: widget.valueDirektoratController,
+                                hintText: 'Pilih Direktorat',
+                                labelTag: 'Label-DirektoratRspd',
+                                formTag: 'Form-DirektoratRspd',
+                                labelForm: 'Direktorat',
+                                validator: (value) {},
+                                enabled: false,
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              FormInputData(
+                                input: '',
+                                onTap: () {},
+                                controller: widget.valueDivisiController,
+                                hintText: 'Pilih Divisi',
+                                labelTag: 'Label-DivisiRspd',
+                                formTag: 'Form-DivisiRspd',
+                                labelForm: 'Divisi',
+                                validator: (value) {},
+                                enabled: false,
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              FormInputData(
+                                input: '',
+                                onTap: () {},
+                                controller: widget.valueDepartemenController,
+                                hintText: 'Pilih Departemen',
+                                labelTag: 'Label-DepartemenRspd',
+                                formTag: 'Form-DepartemenRspd',
+                                labelForm: 'Departemen',
+                                validator: (value) {},
+                                enabled: false,
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              FormInputData(
+                                input: '',
+                                onTap: () {},
+                                controller: widget.valuePosisiController,
+                                hintText: 'Pilih Posisi',
+                                labelTag: 'Label-PosisiRspd',
+                                formTag: 'Form-PosisiRspd',
+                                labelForm: 'Posisi',
+                                validator: (value) {},
+                                enabled: false,
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              FormInputData(
+                                input: '',
+                                onTap: () {},
+                                controller: widget.tanggalController,
+                                hintText: 'Pilih Tanggal',
+                                labelTag: 'Label-TanggalPengajuan',
+                                formTag: 'Form-TanggalPengajuan',
+                                labelForm: 'Tanggal Pengajuan',
+                                validator: (value) {},
+                                enabled: false,
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              FormInputData(
+                                input: '',
+                                onTap: () {},
+                                controller: widget.tanggalAwalController,
+                                hintText: 'Pilih Tanggal',
+                                labelTag: 'Label-TanggalAwalRspd',
+                                formTag: 'Form-TanggalAwalRspd',
+                                labelForm: 'Tanggal Acara Awal',
+                                validator: (value) {},
+                                enabled: false,
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              FormInputData(
+                                input: '',
+                                onTap: () {},
+                                controller: widget.tanggalAwalController,
+                                hintText: 'Pilih Tanggal',
+                                labelTag: 'Label-TanggalAkhirRspd',
+                                formTag: 'Form-TanggalAkhirRspd',
+                                labelForm: 'Tanggal Acara Akhir',
+                                validator: (value) {},
+                                enabled: false,
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              FormInputData(
+                                input: '',
+                                onTap: () {},
+                                controller: widget.jumlahHariController,
+                                hintText: 'Jumlah',
+                                labelTag: 'Label-JumlahHari',
+                                formTag: 'Form-JumlahHari',
+                                labelForm: 'Jumlah Hari',
+                                validator: (value) {},
+                                enabled: false,
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              FormInputData(
+                                input: '',
+                                onTap: () {},
+                                controller: widget.valueZonaAsalController,
+                                hintText: 'Pilih Zona',
+                                labelTag: 'Label-ZonaAsalRspd',
+                                formTag: 'Form-ZonaAsalRspd',
+                                labelForm: 'Zona Asal',
+                                validator: (value) {},
+                                enabled: false,
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              FormInputData(
+                                input: '',
+                                onTap: () {},
+                                controller: widget.valueZonaTujuanController,
+                                hintText: 'Pilih Zona',
+                                labelTag: 'Label-ZonaTujuanRspd',
+                                formTag: 'Form-ZonaTujuanRspd',
+                                labelForm: 'Zona Tujuan',
+                                validator: (value) {},
+                                enabled: false,
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              FormInputData(
+                                input: '',
+                                onTap: () {},
+                                controller: widget.valueLokasiTujuanController,
+                                hintText: 'Pilih Lokasi',
+                                labelTag: 'Label-LokasiRspd',
+                                formTag: 'Form-LokasiRspd',
+                                labelForm: 'Lokasi Tujuan',
+                                validator: (value) {},
+                                enabled: false,
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              FormInputData(
+                                input: '',
+                                onTap: () {},
+                                controller: widget.nikController,
+                                hintText: 'NIK',
+                                labelTag: 'Label-NIKRspd',
+                                formTag: 'Form-NIKRspd',
+                                labelForm: 'NIK',
+                                validator: (value) {},
+                                enabled: false,
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              FormInputData(
+                                input: '',
+                                onTap: () {},
+                                controller: widget.valuePicController,
+                                hintText: 'Pic',
+                                labelTag: 'Label-PicRspd',
+                                formTag: 'Form-PicRspd',
+                                labelForm: 'PIC',
+                                validator: (value) {},
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              FormInputData(
+                                input: '',
+                                onTap: () {},
+                                controller: widget.totalBiayaController,
+                                hintText: 'Total Biaya',
+                                labelTag: 'Label-TotalBiaya',
+                                formTag: 'Form-TotalBiaya',
+                                labelForm: 'Total Biaya',
+                                validator: (value) {},
+                                enabled: false,
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              FormInputData(
+                                inputType: TextInputType.number,
+                                input: '',
+                                onTap: () {},
+                                controller:
+                                    widget.totalBiayaRencanaSelisihController,
+                                hintText: 'Total Biaya Rencana Selisih',
+                                labelTag: 'Label-TotalBRS',
+                                formTag: 'Form-TotalBRS',
+                                labelForm: 'Total Biaya Rencana Selisih',
+                                validator: (value) {},
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              FormInputData(
+                                input: '',
+                                onTap: () {},
+                                controller: widget.keteranganUtamaController,
+                                hintText: 'Tuliskan Keterangan',
+                                labelTag: 'Label-KeteranganUtama',
+                                formTag: 'Form-KeteranganUtama',
+                                labelForm: 'Keterangan',
+                                validator: (value) {},
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              FormInputData(
+                                input: '',
+                                onTap: () {},
+                                controller: widget.statusController,
+                                hintText: 'Status',
+                                labelTag: 'Label-Status',
+                                formTag: 'Form-Status',
+                                labelForm: 'Status',
+                                validator: (value) {},
+                                enabled: false,
+                                errorTextStyle:
+                                    GoogleFonts.poppins(fontSize: 8),
+                              ),
+                              Row(
                                 children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      FormInputData(
-                                        input: '',
-                                        onTap: () {},
-                                        controller: widget.nomorController,
-                                        hintText: 'Nomor',
-                                        labelTag: 'Label-NomorRspd',
-                                        formTag: 'Form-NomorRspd',
-                                        labelForm: 'Nomor',
-                                        validator: (value) {},
-                                        enabled: false,
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      FormDropDownData(
-                                        input: '',
-                                        onTap: () {
-                                          _showNomoreSpd(context);
-                                        },
-                                        idController:
-                                            widget.idNomorSpdController,
-                                        valueController:
-                                            widget.valueNomorSpdController,
-                                        hintText: 'Cari Nomor Spd',
-                                        labelTag: 'Label-TemplateRspd',
-                                        formTag: 'Form-TemplateRspd',
-                                        labelForm: 'Nomor SPD',
-                                        validator: (value) {},
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      FormInputData(
-                                        input: '',
-                                        onTap: () {},
-                                        controller:
-                                            widget.valueDirektoratController,
-                                        hintText: 'Pilih Direktorat',
-                                        labelTag: 'Label-DirektoratRspd',
-                                        formTag: 'Form-DirektoratRspd',
-                                        labelForm: 'Direktorat',
-                                        validator: (value) {},
-                                        enabled: false,
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      FormInputData(
-                                        input: '',
-                                        onTap: () {},
-                                        controller:
-                                            widget.valueDivisiController,
-                                        hintText: 'Pilih Divisi',
-                                        labelTag: 'Label-DivisiRspd',
-                                        formTag: 'Form-DivisiRspd',
-                                        labelForm: 'Divisi',
-                                        validator: (value) {},
-                                        enabled: false,
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      FormInputData(
-                                        input: '',
-                                        onTap: () {},
-                                        controller:
-                                            widget.valueDepartemenController,
-                                        hintText: 'Pilih Departemen',
-                                        labelTag: 'Label-DepartemenRspd',
-                                        formTag: 'Form-DepartemenRspd',
-                                        labelForm: 'Departemen',
-                                        validator: (value) {},
-                                        enabled: false,
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      FormInputData(
-                                        input: '',
-                                        onTap: () {},
-                                        controller:
-                                            widget.valuePosisiController,
-                                        hintText: 'Pilih Posisi',
-                                        labelTag: 'Label-PosisiRspd',
-                                        formTag: 'Form-PosisiRspd',
-                                        labelForm: 'Posisi',
-                                        validator: (value) {},
-                                        enabled: false,
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      FormInputData(
-                                        input: '',
-                                        onTap: () {},
-                                        controller: widget.tanggalController,
-                                        hintText: 'Pilih Tanggal',
-                                        labelTag: 'Label-TanggalPengajuan',
-                                        formTag: 'Form-TanggalPengajuan',
-                                        labelForm: 'Tanggal Pengajuan',
-                                        validator: (value) {},
-                                        enabled: false,
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      FormInputData(
-                                        input: '',
-                                        onTap: () {},
-                                        controller:
-                                            widget.tanggalAwalController,
-                                        hintText: 'Pilih Tanggal',
-                                        labelTag: 'Label-TanggalAwalRspd',
-                                        formTag: 'Form-TanggalAwalRspd',
-                                        labelForm: 'Tanggal Acara Awal',
-                                        validator: (value) {},
-                                        enabled: false,
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      FormInputData(
-                                        input: '',
-                                        onTap: () {},
-                                        controller:
-                                            widget.tanggalAwalController,
-                                        hintText: 'Pilih Tanggal',
-                                        labelTag: 'Label-TanggalAkhirRspd',
-                                        formTag: 'Form-TanggalAkhirRspd',
-                                        labelForm: 'Tanggal Acara Akhir',
-                                        validator: (value) {},
-                                        enabled: false,
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      FormInputData(
-                                        input: '',
-                                        onTap: () {},
-                                        controller: widget.jumlahHariController,
-                                        hintText: 'Jumlah',
-                                        labelTag: 'Label-JumlahHari',
-                                        formTag: 'Form-JumlahHari',
-                                        labelForm: 'Jumlah Hari',
-                                        validator: (value) {},
-                                        enabled: false,
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      FormInputData(
-                                        input: '',
-                                        onTap: () {},
-                                        controller:
-                                            widget.valueZonaAsalController,
-                                        hintText: 'Pilih Zona',
-                                        labelTag: 'Label-ZonaAsalRspd',
-                                        formTag: 'Form-ZonaAsalRspd',
-                                        labelForm: 'Zona Asal',
-                                        validator: (value) {},
-                                        enabled: false,
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      FormInputData(
-                                        input: '',
-                                        onTap: () {},
-                                        controller:
-                                            widget.valueZonaTujuanController,
-                                        hintText: 'Pilih Zona',
-                                        labelTag: 'Label-ZonaTujuanRspd',
-                                        formTag: 'Form-ZonaTujuanRspd',
-                                        labelForm: 'Zona Tujuan',
-                                        validator: (value) {},
-                                        enabled: false,
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      FormInputData(
-                                        input: '',
-                                        onTap: () {},
-                                        controller:
-                                            widget.valueLokasiTujuanController,
-                                        hintText: 'Pilih Lokasi',
-                                        labelTag: 'Label-LokasiRspd',
-                                        formTag: 'Form-LokasiRspd',
-                                        labelForm: 'Lokasi Tujuan',
-                                        validator: (value) {},
-                                        enabled: false,
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      FormInputData(
-                                        input: '',
-                                        onTap: () {},
-                                        controller: widget.nikController,
-                                        hintText: 'NIK',
-                                        labelTag: 'Label-NIKRspd',
-                                        formTag: 'Form-NIKRspd',
-                                        labelForm: 'NIK',
-                                        validator: (value) {},
-                                        enabled: false,
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      FormInputData(
-                                        input: '',
-                                        onTap: () {},
-                                        controller: widget.valuePicController,
-                                        hintText: 'Pic',
-                                        labelTag: 'Label-PicRspd',
-                                        formTag: 'Form-PicRspd',
-                                        labelForm: 'PIC',
-                                        validator: (value) {},
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      FormInputData(
-                                        input: '',
-                                        onTap: () {},
-                                        controller: widget.totalBiayaController,
-                                        hintText: 'Total Biaya',
-                                        labelTag: 'Label-TotalBiaya',
-                                        formTag: 'Form-TotalBiaya',
-                                        labelForm: 'Total Biaya',
-                                        validator: (value) {},
-                                        enabled: false,
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      FormInputData(
-                                        input: '',
-                                        onTap: () {},
-                                        controller: widget
-                                            .totalBiayaRencanaSelisihController,
-                                        hintText: 'Total Biaya Rencana Selisih',
-                                        labelTag: 'Label-TotalBRS',
-                                        formTag: 'Form-TotalBRS',
-                                        labelForm:
-                                            'Total Biaya Rencana Selisih',
-                                        validator: (value) {},
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      FormInputData(
-                                        input: '',
-                                        onTap: () {},
-                                        controller:
-                                            widget.keteranganUtamaController,
-                                        hintText: 'Tuliskan Keterangan',
-                                        labelTag: 'Label-KeteranganUtama',
-                                        formTag: 'Form-KeteranganUtama',
-                                        labelForm: 'Keterangan',
-                                        validator: (value) {},
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      FormInputData(
-                                        input: '',
-                                        onTap: () {},
-                                        controller: widget.statusController,
-                                        hintText: 'Status',
-                                        labelTag: 'Label-Status',
-                                        formTag: 'Form-Status',
-                                        labelForm: 'Status',
-                                        validator: (value) {},
-                                        enabled: false,
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
-                                      Row(
-                                        children: [
-                                          const FormTextLabel(
-                                            label:
-                                                'Menggunakan Kendaraan Dinas',
-                                            labelColor: MyColorsConst.darkColor,
-                                          ),
-                                          SizedBox(width: 2.sp),
-                                          Text(
-                                            '*',
-                                            style: GoogleFonts.poppins(
-                                                color: Colors.red),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: <Widget>[
-                                          Row(
-                                            children: [
-                                              Radio(
-                                                value: true,
-                                                groupValue: widget
-                                                            .kendDinasController
-                                                            .text ==
-                                                        'true'
-                                                    ? true
-                                                    : widget.kendDinasController
-                                                            .text.isEmpty
-                                                        ? null
-                                                        : false,
-                                                onChanged: (bool? value) {
-                                                  // Tidak melakukan perubahan karena radio tidak dapat diubah
-                                                },
-                                              ),
-                                              Text(
-                                                'Iya',
-                                                style: GoogleFonts.poppins(
-                                                  fontSize: 13.sp,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Radio(
-                                                value: false,
-                                                groupValue: widget
-                                                            .kendDinasController
-                                                            .text ==
-                                                        'false'
-                                                    ? false
-                                                    : widget.kendDinasController
-                                                            .text.isEmpty
-                                                        ? null
-                                                        : true,
-                                                onChanged: (bool? value) {
-                                                  // Tidak melakukan perubahan karena radio tidak dapat diubah
-                                                },
-                                              ),
-                                              Text(
-                                                'Tidak',
-                                                style: GoogleFonts.poppins(
-                                                  fontSize: 13.sp,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 30.sp),
-                                      Text(
-                                        'Rincian Biaya',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      // ListView.builder(
-                                      //   shrinkWrap: true,
-                                      //   physics: NeverScrollableScrollPhysics(),
-                                      //   itemCount: expenseDetails.length,
-                                      //   itemBuilder: (context, index) {
-                                      //     return ExpenseDetailWidget(
-                                      //       expenseDetail:
-                                      //           expenseDetails[index],
-                                      //       onDelete: () {
-                                      //         setState(() {
-                                      //           expenseDetails.removeAt(index);
-                                      //         });
-                                      //       },
-                                      //     );
-                                      //   },
-                                      // ),
-                                      // SizedBox(height: 10),
-                                      // ElevatedButton(
-                                      //   onPressed: () {
-                                      //     // Tambah rincian biaya baru
-                                      //     setState(() {
-                                      //       expenseDetails.add(ExpenseDetail());
-                                      //     });
-                                      //   },
-                                      //   child: Text('Tambah Rincian Biaya'),
-                                      // ),
-                                    ],
-                                  )
+                                  const FormTextLabel(
+                                    label: 'Menggunakan Kendaraan Dinas',
+                                    labelColor: MyColorsConst.darkColor,
+                                  ),
+                                  SizedBox(width: 2.sp),
+                                  Text(
+                                    '*',
+                                    style:
+                                        GoogleFonts.poppins(color: Colors.red),
+                                  ),
                                 ],
                               ),
-                            ),
-                          ],
+                              Row(
+                                children: <Widget>[
+                                  Row(
+                                    children: [
+                                      Radio(
+                                        value: true,
+                                        groupValue:
+                                            widget.kendDinasController.text ==
+                                                    'true'
+                                                ? true
+                                                : widget.kendDinasController
+                                                        .text.isEmpty
+                                                    ? null
+                                                    : false,
+                                        onChanged: (bool? value) {
+                                          // Tidak melakukan perubahan karena radio tidak dapat diubah
+                                        },
+                                      ),
+                                      Text(
+                                        'Iya',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 13.sp,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Radio(
+                                        value: false,
+                                        groupValue:
+                                            widget.kendDinasController.text ==
+                                                    'false'
+                                                ? false
+                                                : widget.kendDinasController
+                                                        .text.isEmpty
+                                                    ? null
+                                                    : true,
+                                        onChanged: (bool? value) {
+                                          // Tidak melakukan perubahan karena radio tidak dapat diubah
+                                        },
+                                      ),
+                                      Text(
+                                        'Tidak',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 13.sp,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 30.sp),
+                              Text(
+                                'Rincian Biaya',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 16.sp,
+                                  color: MyColorsConst.primaryColor,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              SizedBox(height: 10.sp),
+
+                              // FormDropDownData(
+                              //   input: '',
+                              //   onTap: () {
+                              //     showTipe(context);
+                              //   },
+                              //   idController: widget.idTipeController,
+                              //   valueController: widget.valueTipeController,
+                              //   hintText: 'Tipe',
+                              //   labelTag: 'Label-Tipe',
+                              //   formTag: 'Form-Tipe',
+                              //   labelForm: 'Tipe',
+                              //   validator: (value) {},
+                              //   errorTextStyle:
+                              //       GoogleFonts.poppins(fontSize: 8),
+                              // ),
+                              // FormInputData(
+                              //   inputType: TextInputType.number,
+                              //   input: '',
+                              //   onTap: () {},
+                              //   controller: widget.biayaController,
+                              //   hintText: 'Biaya',
+                              //   labelTag: 'Label-Biaya',
+                              //   formTag: 'Form-Biaya',
+                              //   labelForm: 'Biaya',
+                              //   validator: (value) {},
+                              //   enabled: true,
+                              //   errorTextStyle:
+                              //       GoogleFonts.poppins(fontSize: 8),
+                              // ),
+                              // FormInputData(
+                              //   input: '',
+                              //   onTap: () {},
+                              //   controller: widget.keteranganController,
+                              //   hintText: 'Keterangan',
+                              //   labelTag: 'Label-KeteranganBiaya',
+                              //   formTag: 'Form-KeteranganBiaya',
+                              //   labelForm: 'Keterangan',
+                              //   validator: (value) {},
+                              //   enabled: true,
+                              //   errorTextStyle:
+                              //       GoogleFonts.poppins(fontSize: 8),
+                              // ),
+                              // FormInputData(
+                              //   inputType: TextInputType.number,
+                              //   input: '',
+                              //   onTap: () {},
+                              //   controller: widget.biayaRealisasiController,
+                              //   hintText: 'Tuliskan Biaya',
+                              //   labelTag: 'Label-BiayaRealisasi',
+                              //   formTag: 'Form-BiayaRealisasi',
+                              //   labelForm: 'Biaya Realisasi',
+                              //   validator: (value) {},
+                              //   enabled: true,
+                              //   errorTextStyle:
+                              //       GoogleFonts.poppins(fontSize: 8),
+                              // ),
+                              // FormInputData(
+                              //   input: '',
+                              //   onTap: () {},
+                              //   controller: widget.catatanController,
+                              //   hintText: 'Tuliskan Catatan',
+                              //   labelTag: 'Label-CatatanRealisasi',
+                              //   formTag: 'Form-CatatanRealisasi',
+                              //   labelForm: 'Catatan Realisasi',
+                              //   validator: (value) {},
+                              //   enabled: true,
+                              //   errorTextStyle:
+                              //       GoogleFonts.poppins(fontSize: 8),
+                              // ),
+                              // SizedBox(height: 10.sp),
+                              // Column(
+                              //   children: expenseDetails
+                              //       .map((expenseDetail) =>
+                              //           DynamicFormField(
+                              //             expenseDetail: expenseDetail,
+                              //             onDelete: () {
+                              //               setState(() {
+                              //                 expenseDetails.remove(
+                              //                     expenseDetail);
+                              //               });
+                              //             },
+                              //             indexForm:
+                              //                 expenseDetails.,
+                              //           ))
+                              //       .toList(),
+                              // ),
+                              if (expenseDetails.isNotEmpty) ...{
+                                ListView.builder(
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: expenseDetails.length,
+                                  itemBuilder: (context, index) {
+                                    return DynamicFormField(
+                                      expenseDetail: expenseDetails[index],
+                                      onDelete: () {
+                                        setState(() {
+                                          expenseDetails
+                                              .remove(expenseDetails[index]);
+                                        });
+                                      },
+                                      indexForm: index,
+                                    );
+                                  },
+                                ),
+                              },
+                              ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    expenseDetails.add(ExpenseDetail());
+                                  });
+                                },
+                                child: Text('Tambah Grup Dinamis'),
+                              ),
+                              TextButtonCustomV1(
+                                text: "Kirim",
+                                height: 50,
+                                backgroundColor:
+                                    MyColorsConst.primaryColor.withOpacity(0.1),
+                                textColor: MyColorsConst.primaryColor,
+                                onPressed: state is AddRealisasiDinasLoading
+                                    ? null
+                                    : () {
+                                        print("INI DATA YANG DIKIRIM :");
+                                        print(double.parse(widget
+                                            .totalBiayaRencanaSelisihController
+                                            .value
+                                            .text));
+                                        print(int.parse(widget
+                                            .idNomorSpdController.value.text));
+                                        print(widget.keteranganUtamaController
+                                            .value.text);
+                                        context
+                                            .read<AddRealisasiDinasBloc>()
+                                            .add(
+                                              AddRealisasiDinasSubmited(
+                                                tSpdId: int.parse(widget
+                                                    .idNomorSpdController
+                                                    .value
+                                                    .text),
+                                                totalBiayaSelisih: double.parse(
+                                                    widget
+                                                        .totalBiayaRencanaSelisihController
+                                                        .value
+                                                        .text),
+                                                keterangan: widget
+                                                    .keteranganController.text,
+                                                tRpdDetList: expenseDetails
+                                                    .map((expense) {
+                                                  return {
+                                                    "tipe_spd_id": expense
+                                                        .idTipeController
+                                                        .value
+                                                        .text,
+                                                    "is_kendaraan_dinas":
+                                                        widget.kendDinasController
+                                                                    .text ==
+                                                                "false"
+                                                            ? 0
+                                                            : 1,
+                                                    "biaya_realisasi": expense
+                                                        .biayaRealisasiController
+                                                        .value
+                                                        .text,
+                                                    "detail_transport": expense
+                                                        .descriptionController
+                                                        .value
+                                                        .text,
+                                                    "catatan_realisas": expense
+                                                        .catatanRealisasiController
+                                                        .value
+                                                        .text,
+                                                  };
+                                                }).toList(),
+                                              ),
+                                            );
+                                      },
+                              ),
+                            ],
+                          ),
                         );
                       },
                     ),
@@ -728,24 +835,88 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
   }
 }
 
-class ExpenseDetailWidget extends StatelessWidget {
+class ExpenseDetail {
+  final TextEditingController idTipeController = TextEditingController();
+  final TextEditingController valueTipeController = TextEditingController();
+  final TextEditingController costController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController biayaRealisasiController =
+      TextEditingController();
+  final TextEditingController catatanRealisasiController =
+      TextEditingController();
+}
+
+class DynamicFormField extends StatefulWidget {
   final ExpenseDetail expenseDetail;
   final VoidCallback onDelete;
+  final int indexForm;
 
-  ExpenseDetailWidget({required this.expenseDetail, required this.onDelete});
+  const DynamicFormField({
+    required this.expenseDetail,
+    required this.onDelete,
+    required this.indexForm,
+  });
+
+  @override
+  State<DynamicFormField> createState() => _DynamicFormFieldState();
+}
+
+class _DynamicFormFieldState extends State<DynamicFormField> {
+  var selectedTipe;
 
   @override
   Widget build(BuildContext context) {
+    var dataTipe = context.read<AddRealisasiDinasBloc>().listTipe;
+
+    Future<DataGeneral?> showTipe(BuildContext context) async {
+      if (dataTipe.isEmpty) {
+        context.read<AddRealisasiDinasBloc>().add(OnSelectTipe());
+        dataTipe = context.read<AddRealisasiDinasBloc>().listTipe;
+      }
+
+      if (dataTipe.isNotEmpty) {
+        final selectedTipe = await showSearch<DataGeneral?>(
+          context: context,
+          delegate: GeneralSearchDelegate(
+            dataList: dataTipe,
+            filteredData: dataTipe,
+          ),
+        );
+
+        if (selectedTipe != null) {
+          widget.expenseDetail.idTipeController.text =
+              selectedTipe.id?.toString() ?? '';
+          widget.expenseDetail.valueTipeController.text =
+              selectedTipe.value?.toString() ?? '';
+
+          setState(() {
+            this.selectedTipe = selectedTipe.value;
+            print(selectedTipe.value);
+            print("Selected ID Tipe: ${selectedTipe.id}");
+          });
+
+          return selectedTipe;
+        } else {
+          return null;
+        }
+      } else {
+        print("Tidak Ada Item");
+      }
+      return null;
+    }
+
     return Column(
       children: [
         FormDropDownData(
           input: '',
-          onTap: () {},
-          idController: expenseDetail.idTipeController,
-          valueController: expenseDetail.valueTipeController,
+          onTap: () {
+            showTipe(context);
+          },
+          idController: widget.expenseDetail.idTipeController,
+          valueController: widget.expenseDetail.valueTipeController,
           hintText: 'Tipe',
-          labelTag: 'Label-Tipe',
-          formTag: 'Form-Tipe',
+          labelTag: 'Label-Tipe${widget.indexForm}',
+          formTag: 'Form-Tipe${widget.indexForm}',
           labelForm: 'Tipe',
           validator: (value) {},
           errorTextStyle: GoogleFonts.poppins(fontSize: 8),
@@ -753,10 +924,10 @@ class ExpenseDetailWidget extends StatelessWidget {
         FormInputData(
           input: '',
           onTap: () {},
-          controller: expenseDetail.costController,
+          controller: widget.expenseDetail.costController,
           hintText: 'Biaya',
-          labelTag: 'Label-Biaya',
-          formTag: 'Form-Biaya',
+          labelTag: 'Label-Biaya${widget.indexForm}',
+          formTag: 'Form-Biaya${widget.indexForm}',
           labelForm: 'Biaya',
           validator: (value) {},
           enabled: true, // Sesuaikan dengan kebutuhan
@@ -765,10 +936,10 @@ class ExpenseDetailWidget extends StatelessWidget {
         FormInputData(
           input: '',
           onTap: () {},
-          controller: expenseDetail.descriptionController,
+          controller: widget.expenseDetail.descriptionController,
           hintText: 'Keterangan',
-          labelTag: 'Label-Keterangan',
-          formTag: 'Form-Keterangan',
+          labelTag: 'Label-KeteranganBiaya${widget.indexForm}',
+          formTag: 'Form-KeteranganBiaya${widget.indexForm}',
           labelForm: 'Keterangan',
           validator: (value) {},
           enabled: true, // Sesuaikan dengan kebutuhan
@@ -777,10 +948,10 @@ class ExpenseDetailWidget extends StatelessWidget {
         FormInputData(
           input: '',
           onTap: () {},
-          controller: expenseDetail.biayaRealisasiController,
+          controller: widget.expenseDetail.biayaRealisasiController,
           hintText: 'Tuliskan Biaya',
-          labelTag: 'Label-Keterangan',
-          formTag: 'Form-Keterangan',
+          labelTag: 'Label-BiayaRealisasi${widget.indexForm}',
+          formTag: 'Form-BiayaRealisasi${widget.indexForm}',
           labelForm: 'Biaya Realisasi',
           validator: (value) {},
           enabled: true, // Sesuaikan dengan kebutuhan
@@ -789,10 +960,10 @@ class ExpenseDetailWidget extends StatelessWidget {
         FormInputData(
           input: '',
           onTap: () {},
-          controller: expenseDetail.catatanRealisasiController,
+          controller: widget.expenseDetail.catatanRealisasiController,
           hintText: 'Tuliskan Catatan',
-          labelTag: 'Label-Keterangan',
-          formTag: 'Form-Keterangan',
+          labelTag: 'Label-CatatanRealisasi${widget.indexForm}',
+          formTag: 'Form-CatatanRealisasi${widget.indexForm}',
           labelForm: 'Catatan Realisasi',
           validator: (value) {},
           enabled: true, // Sesuaikan dengan kebutuhan
@@ -802,7 +973,7 @@ class ExpenseDetailWidget extends StatelessWidget {
           children: [
             Expanded(
               child: ElevatedButton(
-                onPressed: onDelete,
+                onPressed: widget.onDelete,
                 child: Text('Hapus Rincian Biaya'),
               ),
             ),
@@ -816,15 +987,4 @@ class ExpenseDetailWidget extends StatelessWidget {
       ],
     );
   }
-}
-
-class ExpenseDetail {
-  final TextEditingController idTipeController = TextEditingController();
-  final TextEditingController valueTipeController = TextEditingController();
-  final TextEditingController costController = TextEditingController();
-  final TextEditingController descriptionController = TextEditingController();
-  final TextEditingController biayaRealisasiController =
-      TextEditingController();
-  final TextEditingController catatanRealisasiController =
-      TextEditingController();
 }

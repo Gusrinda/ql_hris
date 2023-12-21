@@ -17,3 +17,16 @@ class GetDetailRealisasiListDinas extends DetailRealisasiDinasEvent {
   @override
   List<Object> get props => [id];
 }
+
+
+class GetDetailSPD extends DetailRealisasiDinasEvent {
+  int spdID;
+
+
+  GetDetailSPD({
+    required this.spdID
+  });
+
+  @override
+  List<Object> get props => [];
+}

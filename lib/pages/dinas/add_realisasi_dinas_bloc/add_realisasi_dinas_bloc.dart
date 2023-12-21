@@ -14,23 +14,17 @@ class AddRealisasiDinasBloc
   List<DataDinas> listDinasApproved = [];
   List<DataGeneral> listTipe = [];
   AddRealisasiDinasBloc() : super(AddRealisasiDinasInitial()) {
+    
     on<AddRealisasiDinasSubmited>((event, emit) async {
       emit(AddRealisasiDinasLoading());
       var resToken = await GeneralSharedPreferences.getUserToken();
       if (resToken is ServicesSuccess) {
         var res = await RealisasiDinasServices.addRealisasiDinas(
           resToken.response["token"],
-          event.nomor,
-          event.mCompId,
           event.tSpdId,
-          event.totalBiayaSpd,
           event.totalBiayaSelisih,
-          event.pengambilanSpd,
           event.keterangan,
-          event.status,
-          event.creatorId,
-          event.lastEditorId,
-          event.tRpdDetList,
+          event.tRpdDetList ?? [],
         );
         if (res is ServicesSuccess) {
           emit(AddRealisasiDinasSuccess(
@@ -54,13 +48,15 @@ class AddRealisasiDinasBloc
       emit(AddRealisasiDinasLoading());
       var resToken = await GeneralSharedPreferences.getUserToken();
       if (resToken is ServicesSuccess) {
-        var res = await RealisasiDinasServices.getListDinas(
+        var res = await RealisasiDinasServices.getListDinasApprove(
             resToken.response["token"]);
         if (res is ServicesSuccess) {
           if (res.response is Map<String, dynamic>) {
             ListDinasModel dataResponse = ListDinasModel.fromJson(res.response);
 
             listDinasApproved = dataResponse.data ?? [];
+
+            print("INI LIST DINAS YANG APPROVED ${dataResponse.data}");
             emit(
               SelectDinasApprovedSuccessInBackground(
                   dataDinasApproved: listDinasApproved),

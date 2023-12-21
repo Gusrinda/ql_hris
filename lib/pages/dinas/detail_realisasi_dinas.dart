@@ -21,6 +21,8 @@ class DetailRealisasiDinas extends StatefulWidget {
 
 class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
   DetailRealisasiDinasSuccess? dataDetailrealisasiDinas;
+  DetailSPDSuceess? dataDetailSPD;
+
   @override
   void initState() {
     super.initState();
@@ -28,6 +30,9 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
       context
           .read<DetailRealisasiDinasBloc>()
           .add(GetDetailRealisasiListDinas(id: widget.dataRealisasi?.id ?? 1));
+      context
+          .read<DetailRealisasiDinasBloc>()
+          .add(GetDetailSPD(spdID: widget.dataRealisasi?.tSpdId ?? 1));
     });
   }
 
@@ -42,6 +47,11 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
           LoadingDialog.dismissDialog(context);
           setState(() {
             dataDetailrealisasiDinas = state;
+          });
+        } else if (state is DetailSPDSuceess) {
+          LoadingDialog.dismissDialog(context);
+          setState(() {
+            dataDetailSPD = state;
           });
         } else if (state is DetailRealisasiDinasFailed) {
           LoadingDialog.dismissDialog(context);
@@ -152,15 +162,36 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                                                     ?.dataDetailrealisasiDinas
                                                     ?.tSpdNomor ??
                                                 '-'),
-                                        _buildText('Direktorat',
-                                            'widget.direktoratValue'),
                                         _buildText(
-                                            'Divisi', 'widget.divisiValue'),
+                                            'Direktorat',
+                                            dataDetailSPD
+                                                    ?.dataDetailSPD.mDirNama ??
+                                                "-"),
                                         _buildText(
-                                            'Departemen', 'widget.deptValue'),
-                                        _buildText('Posisi', 'widget.posisi'),
+                                            'Divisi',
+                                            dataDetailSPD?.dataDetailSPD
+                                                    .mDivisiNama ??
+                                                "-"),
                                         _buildText(
-                                            'Jenis Spd', 'widget.jenisSpd'),
+                                            'Departemen',
+                                            dataDetailSPD
+                                                    ?.dataDetailSPD.mDeptNama ??
+                                                "-"),
+                                        _buildText(
+                                            'Posisi',
+                                            dataDetailSPD?.dataDetailSPD
+                                                    .mPosisiDescKerja ??
+                                                "-"),
+                                        _buildText(
+                                            'Kegiatan',
+                                            dataDetailSPD
+                                                    ?.dataDetailSPD.kegiatan ??
+                                                "-"),
+                                        _buildText(
+                                            'Keterangan',
+                                            dataDetailSPD
+                                                    ?.dataDetailSPD.keterangan ??
+                                                "-"),
                                         Text(
                                           'Status',
                                           style: GoogleFonts.poppins(
@@ -170,7 +201,10 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                                           ),
                                         ),
                                         Text(
-                                          'mapStatusToString',
+                                          dataDetailrealisasiDinas
+                                                  ?.dataDetailrealisasiDinas
+                                                  ?.status ??
+                                              '-',
                                           style: GoogleFonts.poppins(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w600,
@@ -204,11 +238,20 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                                                     ?.tSpdTglAcaraAkhir ??
                                                 '-'),
                                         _buildText(
-                                            'Zona Awal', 'widget.zonaAwal'),
+                                            'Zona Awal',
+                                            dataDetailSPD?.dataDetailSPD
+                                                    .mZonaAsalNama ??
+                                                "-"),
                                         _buildText(
-                                            'Zona Tujuan', 'widget.zonaTujuan'),
-                                        _buildText('Lokasi Tujuan',
-                                            'widget.lokasiTujuan'),
+                                            'Zona Tujuan',
+                                            dataDetailSPD?.dataDetailSPD
+                                                    .mZonaTujuanNama ??
+                                                "-"),
+                                        _buildText(
+                                            'Lokasi Tujuan',
+                                            dataDetailSPD?.dataDetailSPD
+                                                    .mLokasiTujuanNama ??
+                                                "-"),
                                       ],
                                     ),
                                   ),

@@ -23,6 +23,7 @@ class ListRealisasiDinasSuccessInBackground extends ListRealisasiDinasState {
   List<Object> get props => [dataRealisasiDinas];
 }
 
+
 class ListRealisasiDinasFailedInBackground extends ListRealisasiDinasState {
   String message;
   ListRealisasiDinasFailedInBackground({required this.message});

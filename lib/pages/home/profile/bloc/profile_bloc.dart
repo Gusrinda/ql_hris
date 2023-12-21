@@ -27,7 +27,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           emit(GetDataProfileSuccess(
             imagePath: profileModel!.profilImage ?? '',
             username: profileModel!.username ?? '',
-            name: profileModel!.name ?? '',
+            name: profileModel!.mKaryNamaLengkap ?? '',
             employeeId: profileModel!.id ?? 1,
             email: profileModel!.email ?? '',
             phoneNumber: profileModel!.telp ?? '',

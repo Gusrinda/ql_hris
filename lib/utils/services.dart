@@ -53,6 +53,7 @@ class GeneralServices {
       String? imagePath}) async {
     try {
       print("URL API: ${url}");
+      print("BODY API: ${body}");
       final connectivityResult = await (Connectivity().checkConnectivity());
       if (!(connectivityResult == ConnectivityResult.mobile ||
           connectivityResult == ConnectivityResult.wifi)) {
@@ -132,7 +133,7 @@ class GeneralServices {
       if (response.statusCode == MyGeneralConst.CODE_NOT_FOUND) {
         return ServicesFailure(
           code: response.statusCode,
-          errorResponse: "Error API Data Tidak Ditemukan",
+          errorResponse: json.decode(response.body)['message'],
         );
       }
       if (response.statusCode == MyGeneralConst.CODE_ERROR_VALIDATION) {

@@ -75,6 +75,7 @@ class _HomePageState extends State<HomePage> {
                 } else if (state is CheckInOutSuccessInBackground) {
                   name = state.name;
                   fotoProfil = state.fotoProfil;
+                  print("INI LINK FOTO PROFILE ${fotoProfil}");
                   cutiMasaKerja = state.cutiMasaKerja;
                   cutiTahunan = state.cutiTahunan;
                   p24 = state.p24;
@@ -97,10 +98,10 @@ class _HomePageState extends State<HomePage> {
                                   minRadius: 25.sp,
                                   maxRadius: 25.sp,
                                   backgroundColor: Colors.black54,
-                                  child: fotoProfil != null
+                                  child: fotoProfil != "https://server.qqltech.com:7005/"
                                       ? ClipOval(
                                           child: Image.network(
-                                            fotoProfil,
+                                            fotoProfil ?? "https://i.pinimg.com/564x/de/6e/8d/de6e8d53598eecfb6a2d86919b267791.jpg",
                                             fit: BoxFit.cover,
                                             width: 50.sp,
                                             height: 50.sp,

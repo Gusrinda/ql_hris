@@ -13,7 +13,7 @@ class ListNotifikasiLoading extends NotifikasiState {}
 
 class ListNotifikasiSuccessInBackground extends NotifikasiState {
   List<DataNotif> listNotifikasi;
-  List<Datum> listCuti;
+  List<DataListCuti> listCuti;
   List<DataLembur> listlembur;
   List<DataDinas> listdinas;
 

@@ -28,7 +28,9 @@ class CutiServices {
       int alasan,
       int tipeCuti,
       String dateFrom,
-      String dateTo) async {
+      String dateTo,
+      String? timeFrom,
+      String? timeTo) async {
     var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_cuti");
     print("Ini yang dikirim saat POST Cuti :");
     print("alasan_id : ${alasan}");
@@ -39,6 +41,8 @@ class CutiServices {
     print("Ini mCompID : ${mCompID}");
     print("Ini mDirID : ${mDirID}");
     print("Ini mKaryID : ${mKaryID}");
+    print("Ini timeFrom : ${timeFrom}");
+    print("Ini timeTo : ${timeTo}");
 
     return await GeneralServices.baseService(
       url: url,
@@ -52,6 +56,8 @@ class CutiServices {
         "tipe_cuti_id": tipeCuti,
         "date_from": dateFrom,
         "date_to": dateTo,
+        "time_from": timeFrom,
+        "time_to": timeTo,
         "keterangan": keterangan,
       }),
     );

@@ -13,6 +13,9 @@ class AddCutiSubmited extends AddCutiEvent {
   String keterangan;
   String dateFrom;
   String dateTo;
+  String? timeFrom;
+  String? timeTo;
+
 
   AddCutiSubmited({
     required this.alasan,
@@ -20,6 +23,9 @@ class AddCutiSubmited extends AddCutiEvent {
     required this.keterangan,
     required this.dateFrom,
     required this.dateTo,
+    this.timeFrom,
+    this.timeTo,
+
   });
 
   @override
@@ -29,6 +35,9 @@ class AddCutiSubmited extends AddCutiEvent {
         keterangan,
         dateFrom,
         dateTo,
+        timeFrom!,
+        timeTo!,
+
       ];
 }
 

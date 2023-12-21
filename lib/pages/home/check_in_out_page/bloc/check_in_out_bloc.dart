@@ -20,7 +20,7 @@ class CheckInOutBloc extends Bloc<CheckInOutEvent, CheckInOutState> {
           var resUser = await ProfileServices.getDataProfilel(
               resToken.response["token"], resToken.response["id"]);
           if (res is ServicesSuccess && resUser is ServicesSuccess) {
-            final name = resUser.response["data"]["name"] ?? 'Karyawan SJ';
+            final name = resUser.response["data"]["m_kary.nama_lengkap"] ?? 'Karyawan SJ';
             final fotoProfil = resUser.response["data"]["profil_image"] ?? '';
             final cutiMasaKerja = resUser.response["data"]["m_kary.cuti_sisa_reguler"].toString() ?? '0';
             final cutiTahunan = resUser.response["data"]["m_kary.cuti_sisa_panjang"].toString()  ?? '0';

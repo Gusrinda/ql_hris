@@ -341,7 +341,7 @@ class CardListNotifikasi extends StatelessWidget {
   final Icon? iconNotifikasi;
   final Color? warnaStatus;
   final DataNotif data;
-  final List<Datum> dataCuti;
+  final List<DataListCuti> dataCuti;
   final List<DataLembur> dataLembur;
   final List<DataDinas> dataDinas;
 
@@ -365,9 +365,9 @@ class CardListNotifikasi extends StatelessWidget {
     if (tipeNotifikasi == "Pengajuan Cuti" && data != null) {
       print("Data Nomor TRX: ${data.trxNomor}");
 
-      Datum? matchingDataCuti;
+      DataListCuti? matchingDataCuti;
 
-      for (Datum cuti in dataCuti) {
+      for (DataListCuti cuti in dataCuti) {
         if (cuti.nomor == data.trxNomor) {
           matchingDataCuti = cuti;
           break;

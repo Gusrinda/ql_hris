@@ -32,6 +32,8 @@ class AddCutiPage extends StatefulWidget {
   final TextEditingController keteranganController = TextEditingController();
   final TextEditingController dateFromController = TextEditingController();
   final TextEditingController dateToController = TextEditingController();
+  final TextEditingController? timeFromController = TextEditingController();
+  final TextEditingController? timeToController = TextEditingController();
 
   @override
   State<AddCutiPage> createState() => _AddCutiPageState();
@@ -45,6 +47,8 @@ class _AddCutiPageState extends State<AddCutiPage> {
   DateTime? selectedDate;
   DateTime? selectedDateFrom;
   DateTime? selectedDateTo;
+  TimeOfDay? selectedTimeFrom;
+  TimeOfDay? selectedTimeTo;
   int weekdaysCount = 0;
 
   DateTime? parseDate(String? date) {
@@ -296,7 +300,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                               fontSize: 10.sp),
                                         ),
                                         Hero(
-                                          tag: 'Label-RowJamVisiting',
+                                          tag: 'Label-RowDateVisiting',
                                           flightShuttleBuilder:
                                               flightShuttleBuilder,
                                           child: Row(
@@ -404,6 +408,103 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                         SizedBox(
                                           height: 20.sp,
                                         ),
+                                        if (selectedTipeValue == "P24") ...{
+                                          Hero(
+                                            tag: 'Label-RowJamVisiting',
+                                            flightShuttleBuilder:
+                                                flightShuttleBuilder,
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Row(
+                                                    children: [
+                                                      FormTextLabel(
+                                                        label: "Waktu Mulai",
+                                                        labelColor:
+                                                            MyColorsConst
+                                                                .darkColor,
+                                                      ),
+                                                      SizedBox(width: 2.sp),
+                                                      Text(
+                                                        '*',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                color:
+                                                                    Colors.red),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 20.sp,
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Row(
+                                                    children: [
+                                                      const FormTextLabel(
+                                                        label: "Waktu Berakhir",
+                                                        labelColor:
+                                                            MyColorsConst
+                                                                .darkColor,
+                                                      ),
+                                                      SizedBox(width: 2.sp),
+                                                      Text(
+                                                        '*',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                color:
+                                                                    Colors.red),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 4,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                flex: 1,
+                                                child: _buildTimeTextField(
+                                                  "Masukkan Waktu",
+                                                  widget.timeFromController!,
+                                                  selectedTimeFrom,
+                                                  (TimeOfDay time) {
+                                                    setState(() {
+                                                      selectedTimeFrom = time;
+                                                    });
+                                                    // Lakukan operasi lain jika diperlukan ketika waktu dipilih
+                                                  },
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 20.sp,
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: _buildTimeTextField(
+                                                  "Masukkan Waktu",
+                                                  widget.timeToController!,
+                                                  selectedTimeTo,
+                                                  (TimeOfDay time) {
+                                                    setState(() {
+                                                      selectedTimeTo = time;
+                                                    });
+                                                    // Lakukan operasi lain jika diperlukan ketika waktu dipilih
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 20.sp,
+                                          ),
+                                        },
                                         Text.rich(
                                           TextSpan(
                                             text: 'Cuti selama : ',
@@ -475,17 +576,23 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                   : () {
                                       context.read<AddCutiBloc>().add(
                                             AddCutiSubmited(
-                                              alasan: int.parse(widget
-                                                  .idAlasanController.text),
-                                              tipeCuti: int.parse(widget
-                                                  .idTipeCutiController.text),
-                                              keterangan: widget
-                                                  .keteranganController.text,
-                                              dateFrom: widget
-                                                  .dateFromController.text,
-                                              dateTo:
-                                                  widget.dateToController.text,
-                                            ),
+                                                alasan: int.parse(widget
+                                                    .idAlasanController.text),
+                                                tipeCuti: int.parse(widget
+                                                    .idTipeCutiController.text),
+                                                keterangan: widget
+                                                    .keteranganController.text,
+                                                dateFrom: widget
+                                                    .dateFromController.text,
+                                                dateTo: widget
+                                                    .dateToController.text,
+                                                timeFrom: widget
+                                                        .timeFromController
+                                                        ?.text ??
+                                                    "00:00",
+                                                timeTo: widget.timeToController
+                                                        ?.text ??
+                                                    "00:00"),
                                           );
                                     },
                             ),
@@ -589,6 +696,60 @@ class _AddCutiPageState extends State<AddCutiPage> {
             ),
             Icon(
               CupertinoIcons.calendar_today,
+              color: MyColorsConst.primaryColor,
+              size: 20.sp,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTimeTextField(
+    String hintText,
+    TextEditingController controller,
+    TimeOfDay? selectedTime,
+    Function(TimeOfDay) onTimeSelected,
+  ) {
+    return InkWell(
+      onTap: () async {
+        final TimeOfDay? pickedTime = await showTimePicker(
+          context: context,
+          initialTime: selectedTime ?? TimeOfDay.now(),
+        );
+
+        if (pickedTime != null) {
+          onTimeSelected(pickedTime);
+
+          String formattedHour = pickedTime.hour.toString().padLeft(2, '0');
+          String formattedMinute = pickedTime.minute.toString().padLeft(2, '0');
+          String formattedTime = '$formattedHour:$formattedMinute';
+
+          controller.text = formattedTime;
+        }
+      },
+      child: Container(
+        padding: const EdgeInsets.all(18.0),
+        decoration: BoxDecoration(
+          border: Border.all(color: Color(0xFFDDDDDD)),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              selectedTime != null ? selectedTime.format(context) : hintText,
+              style: GoogleFonts.poppins(
+                fontSize: selectedTime != null ? 12.sp : 9.sp,
+                fontWeight:
+                    selectedTime != null ? FontWeight.w500 : FontWeight.w400,
+                color: selectedTime != null
+                    ? MyColorsConst.darkColor
+                    : MyColorsConst.disableColor,
+              ),
+            ),
+            Icon(
+              CupertinoIcons.clock,
               color: MyColorsConst.primaryColor,
               size: 20.sp,
             ),

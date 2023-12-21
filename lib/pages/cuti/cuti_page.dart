@@ -84,8 +84,8 @@ String formatDate(String? dateString) {
   }
 }
 
-Map<String, List<Datum>> groupByDate(List<Datum> data) {
-  Map<String, List<Datum>> groupedData = {};
+Map<String, List<DataListCuti>> groupByDate(List<DataListCuti> data) {
+  Map<String, List<DataListCuti>> groupedData = {};
   data.forEach((item) {
     String date = formatDate(item.createdAt);
     if (groupedData[date] == null) {
@@ -104,6 +104,10 @@ class _CutiPageState extends State<CutiPage> {
   String? username;
   String? totalCutiTerpakai;
   String? totalSisaCuti;
+  String? sisaCutiTahunan;
+  String? sisaCutiMasaKerja;
+  String? jatahCutiTahunan;
+  String? jatahCutiMasaKerja;
 
   void initState() {
     super.initState();
@@ -128,6 +132,10 @@ class _CutiPageState extends State<CutiPage> {
             username = state.username;
             totalCutiTerpakai = state.totalCutiTerpakai;
             totalSisaCuti = state.totalSisaCuti;
+            sisaCutiTahunan = state.sisaCutiTahunan;
+            sisaCutiMasaKerja = state.sisaCutiMasaKerja;
+            jatahCutiTahunan = state.jatahCutiTahunan;
+            jatahCutiMasaKerja = state.jatahCutiMasaKerja;
           });
         } else if (state is ListCutiFailed) {
           LoadingDialog.dismissDialog(context);
@@ -419,9 +427,9 @@ class _CutiPageState extends State<CutiPage> {
                 right: 20,
                 child: Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                   margin: const EdgeInsets.only(bottom: 20),
-                  height: 90,
+                  height: 110.sp,
                   width: size.width,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -443,20 +451,63 @@ class _CutiPageState extends State<CutiPage> {
                         child: Column(
                           children: [
                             Text(
-                              'Cuti Terpakai',
+                              'Total Cuti Terpakai',
                               style: GoogleFonts.poppins(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w500,
                                   color: MyColorsConst.lightDarkColor),
                             ),
-                            SizedBox(height: 5.sp),
                             Text(
                               totalCutiTerpakai ?? '0',
                               style: GoogleFonts.poppins(
-                                fontSize: 17,
+                                fontSize: 14,
+                                color: MyColorsConst.primaryColor,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  children: [
+                                    Text(
+                                      'Tahunan',
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                        color: MyColorsConst.lightDarkColor,
+                                      ),
+                                    ),
+                                    Text(
+                                      jatahCutiTahunan ?? "0",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      'Masa Kerja',
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                        color: MyColorsConst.lightDarkColor,
+                                      ),
+                                    ),
+                                    Text(
+                                      jatahCutiMasaKerja ?? "0",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            )
                           ],
                         ),
                       ),
@@ -471,21 +522,64 @@ class _CutiPageState extends State<CutiPage> {
                         child: Column(
                           children: [
                             Text(
-                              'Sisa Jatah Cuti',
+                              'Total Sisa Jatah Cuti',
                               style: GoogleFonts.poppins(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
                                 color: MyColorsConst.lightDarkColor,
                               ),
                             ),
-                            SizedBox(height: 5.sp),
                             Text(
                               totalSisaCuti ?? "0",
                               style: GoogleFonts.poppins(
-                                fontSize: 17,
+                                color: MyColorsConst.primaryColor,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  children: [
+                                    Text(
+                                      'Tahunan',
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                        color: MyColorsConst.lightDarkColor,
+                                      ),
+                                    ),
+                                    Text(
+                                      sisaCutiTahunan ?? "0",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      'Masa Kerja',
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                        color: MyColorsConst.lightDarkColor,
+                                      ),
+                                    ),
+                                    Text(
+                                      sisaCutiMasaKerja ?? "0",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            )
                           ],
                         ),
                       ),
@@ -529,7 +623,7 @@ class ListViewByDate extends StatelessWidget {
       {Key? key, required this.dataList, required this.reloadDataCallback})
       : super(key: key);
 
-  final List<Datum> dataList;
+  final List<DataListCuti> dataList;
   final VoidCallback reloadDataCallback;
 
   @override
@@ -563,7 +657,7 @@ class ListViewCuti extends StatelessWidget {
     required this.reloadDataCallback,
   }) : super(key: key);
 
-  final Datum data;
+  final DataListCuti data;
   final String currentStatus;
   final Color currentColor;
   final VoidCallback reloadDataCallback;
@@ -579,6 +673,8 @@ class ListViewCuti extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => DetailCutiPage(
                 data: data,
+                timeFrom: data.timeFrom,
+                timeTo: data.timeTo,
                 dateFrom: data.dateFrom,
                 dateTo: data.dateTo,
                 alasanValue: data.alasanValue,
