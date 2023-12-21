@@ -98,10 +98,12 @@ class _HomePageState extends State<HomePage> {
                                   minRadius: 25.sp,
                                   maxRadius: 25.sp,
                                   backgroundColor: Colors.black54,
-                                  child: fotoProfil != "https://server.qqltech.com:7005/"
+                                  child: fotoProfil !=
+                                          "https://server.qqltech.com:7005/"
                                       ? ClipOval(
                                           child: Image.network(
-                                            fotoProfil ?? "https://i.pinimg.com/564x/de/6e/8d/de6e8d53598eecfb6a2d86919b267791.jpg",
+                                            fotoProfil ??
+                                                "https://i.pinimg.com/564x/de/6e/8d/de6e8d53598eecfb6a2d86919b267791.jpg",
                                             fit: BoxFit.cover,
                                             width: 50.sp,
                                             height: 50.sp,
@@ -470,7 +472,7 @@ class _HomePageState extends State<HomePage> {
                                   child: Column(
                                     children: [
                                       Image.asset(
-                                        'assets/images/new_cuti.png',
+                                        'assets/images/cuti_new.png',
                                         width: 50.sp,
                                       ),
                                       const SizedBox(height: 5),

@@ -77,12 +77,12 @@ class _DownloadBerkasPageState extends State<DownloadBerkasPage> {
                     children: [
                       DashboardItem(
                         label: 'Prosedur SOP Perusahaan',
-                        image: 'assets/images/academy_sj.png',
+                        image: 'assets/images/sop_sj.png',
                         onTap: () {},
                       ),
                       DashboardItem(
                         label: 'Sucess Jaya Academy',
-                        image: 'assets/images/sop_sj.png',
+                        image: 'assets/images/academy_sj.png',
                         onTap: () {},
                       ),
                     ],
@@ -156,8 +156,8 @@ class DashboardItem extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 10.sp),
                 child: Center(
                   child: Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    size: 12.sp,
+                    Icons.file_download_outlined,
+                    size: 20.sp,
                     color: MyColorsConst.primaryColor,
                   ),
                 ),
