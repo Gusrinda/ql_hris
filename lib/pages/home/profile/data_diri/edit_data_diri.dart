@@ -1,10 +1,6 @@
 import 'dart:io';
 
-import 'package:camera/camera.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -195,74 +191,199 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                 print(
                     "status nikah ${controllers.idStatusPernikahanController.text}");
 
-                context.read<EditBiodataBloc>().add(EditDataBiodataSubmited(
-                      divisiId: int.parse(controllers.idDivisiController.text),
-                      deptId:
-                          int.parse(controllers.idDepartemenController.text),
-                      posisiId: int.parse(controllers.idPosisiController.text),
-                      zonaId: int.parse(controllers.idZonaController.text),
-                      kodePresensi:
-                          controllers.valueKodePresensiController.text,
-                      namaDepan: controllers.namaDepanController.text,
-                      namaBelakang: controllers.namaBelakangController.text,
-                      namaLengkap:
-                          '${controllers.namaDepanController.text} ${controllers.namaBelakangController.text}',
-                      namaPanggilan: controllers.namaPanggilanController.text,
-                      jkId:
-                          int.parse(controllers.idJenisKelaminController.text),
-                      tempatLahir: controllers.idTempatLahirController.text,
-                      tglLahir: controllers.tanggalLahirController.text,
-                      provinsiId:
-                          int.parse(controllers.idProvinsiController.text),
-                      kotaId: int.parse(controllers.idKotaController.text),
-                      kecamatanId:
-                          int.parse(controllers.idKecamatanController.text),
-                      kodePos: controllers.kodePosController.text,
-                      alamatAsli: controllers.alamatKtpController.text,
-                      alamatDomisili:
-                          controllers.alamatDomisiliTinggalController.text,
-                      noTlp: controllers.noTelpController.text,
-                      noTlpLainnya: controllers.noTelpLainnyaController.text,
-                      noDarurat: controllers.noTelpDaruratController.text,
-                      namaKontakDarurat:
-                          controllers.namaKontakDaruratController.text,
-                      hubDgnKaryawan: controllers.hubkaryawanController.text,
-                      agamaId: int.parse(controllers.idAgamaController.text),
-                      golDarahId:
-                          int.parse(controllers.idGolDarahController.text),
-                      statusNikahId: int.parse(
-                              controllers.idStatusPernikahanController.text) ??
-                          0, // Jika null, diatur ke 0 atau sesuai dengan nilai default
-                      tanggunganId: int.parse(
-                          controllers.idJumlahTanggunganController.text),
-                      tglMasuk: controllers.tanggalMasukController.text,
-                      ktpFoto: File(ktp?.path ?? ''),
-                      pasFoto: File(fotoKaryawan?.path ?? ''),
-                      bpjsFoto: File(bpjs?.path ?? ''),
-                      ktpNo: controllers.noKtpController.text,
-                      kkNo: controllers.noKkController.text,
-                      kkFoto: File(kartukeluarga?.path ?? ''),
-                      npwpFoto: File(npwp?.path ?? ''),
-                      npwpNo: controllers.noNpwpController.text,
-                      // berkasLain: File(berkaspendukung?.path ?? ''),
-                      npwpTglBerlaku: controllers.tanggalNpwpController.text,
-                      bpjsTipeId:
-                          int.parse(controllers.idTipeBPJSController.text),
-                      bpjsNo: controllers.noBpjsController.text,
-                      desc: controllers.keteranganController.text,
-                      ukBaju: controllers.ukBajuController.text,
-                      ukCelana: controllers.ukCelanaController.text,
-                      ukSepatu: controllers.ukSepatuontroller.text,
-                      bankId: int.parse(controllers.idNamaBankController.text),
-                      noRek: controllers.noRekController.text,
-                      atasNamaRek: controllers.atasNamaController.text,
-                    ));
+                // Membangun data yang akan dikirimkan ke server
+                Map<String, dynamic> requestData = {};
+
+                // Menambahkan setiap field yang diinginkan ke dalam requestData
+                addToRequest(requestData, "divisiId",
+                    int.parse(controllers.idDivisiController.text));
+
+                addToRequest(requestData, "deptId",
+                    int.parse(controllers.idDepartemenController.text));
+                addToRequest(requestData, "posisiId",
+                    int.parse(controllers.idPosisiController.text));
+                addToRequest(requestData, "zonaId",
+                    int.parse(controllers.idZonaController.text));
+                addToRequest(requestData, "kodePresensi",
+                    controllers.valueKodePresensiController.text);
+                addToRequest(requestData, "namaDepan",
+                    controllers.namaDepanController.text);
+                addToRequest(requestData, "namaBelakang",
+                    controllers.namaBelakangController.text);
+                addToRequest(requestData, "namaLengkap",
+                    '${controllers.namaDepanController.text} ${controllers.namaBelakangController.text}');
+                addToRequest(requestData, "namaPanggilan",
+                    controllers.namaPanggilanController.text);
+                addToRequest(requestData, "jkId",
+                    int.parse(controllers.idJenisKelaminController.text));
+                addToRequest(requestData, "tempatLahir",
+                    controllers.idTempatLahirController.text);
+                addToRequest(requestData, "tglLahir",
+                    controllers.tanggalLahirController.text);
+                addToRequest(requestData, "provinsiId",
+                    int.parse(controllers.idProvinsiController.text));
+                addToRequest(requestData, "kotaId",
+                    int.parse(controllers.idKotaController.text));
+                addToRequest(requestData, "kecamatanId",
+                    int.parse(controllers.idKecamatanController.text));
+                addToRequest(
+                    requestData, "kodePos", controllers.kodePosController.text);
+                addToRequest(requestData, "alamatAsli",
+                    controllers.alamatKtpController.text);
+                addToRequest(requestData, "alamatDomisili",
+                    controllers.alamatDomisiliTinggalController.text);
+                addToRequest(
+                    requestData, "noTlp", controllers.noTelpController.text);
+                addToRequest(requestData, "noTlpLainnya",
+                    controllers.noTelpLainnyaController.text);
+                addToRequest(requestData, "noDarurat",
+                    controllers.noTelpDaruratController.text);
+                addToRequest(requestData, "namaKontakDarurat",
+                    controllers.namaKontakDaruratController.text);
+                addToRequest(requestData, "hubDgnKaryawan",
+                    controllers.hubkaryawanController.text);
+                addToRequest(requestData, "agamaId",
+                    int.parse(controllers.idAgamaController.text));
+                addToRequest(requestData, "golDarahId",
+                    int.parse(controllers.idGolDarahController.text));
+                addToRequest(requestData, "statusNikahId",
+                    int.parse(controllers.idStatusPernikahanController.text));
+                addToRequest(requestData, "tanggunganId",
+                    int.parse(controllers.idJumlahTanggunganController.text));
+                addToRequest(requestData, "tglMasuk",
+                    controllers.tanggalMasukController.text);
+                addToRequest(requestData, "ktpFoto", ktp);
+                addToRequest(requestData, "pasFoto", fotoKaryawan);
+                addToRequest(requestData, "bpjsFoto", bpjs);
+                addToRequest(
+                    requestData, "ktpNo", controllers.noKtpController.text);
+                addToRequest(
+                    requestData, "kkNo", controllers.noKkController.text);
+                addToRequest(requestData, "kkFoto", kartukeluarga);
+                addToRequest(requestData, "npwpFoto", npwp);
+                addToRequest(
+                    requestData, "npwpNo", controllers.noNpwpController.text);
+                addToRequest(requestData, "npwpTglBerlaku",
+                    controllers.tanggalNpwpController.text);
+                addToRequest(requestData, "bpjsTipeId",
+                    int.parse(controllers.idTipeBPJSController.text));
+                addToRequest(
+                    requestData, "bpjsNo", controllers.noBpjsController.text);
+                addToRequest(
+                    requestData, "desc", controllers.keteranganController.text);
+                addToRequest(
+                    requestData, "ukBaju", controllers.ukBajuController.text);
+                addToRequest(requestData, "ukCelana",
+                    controllers.ukCelanaController.text);
+                addToRequest(requestData, "ukSepatu",
+                    controllers.ukSepatuontroller.text);
+                addToRequest(requestData, "bankId",
+                    int.parse(controllers.idNamaBankController.text));
+                addToRequest(
+                    requestData, "noRek", controllers.noRekController.text);
+                addToRequest(requestData, "atasNamaRek",
+                    controllers.atasNamaController.text);
+
+                // Melakukan submit data
+                context
+                    .read<EditBiodataBloc>()
+                    .add(EditDataBiodataSubmited(requestData: requestData));
               },
             ),
+
+            // TextButtonCustomV1(
+            //   text: buttonTexts[currentStep],
+            //   height: 50,
+            //   backgroundColor: MyColorsConst.primaryColor.withOpacity(0.1),
+            //   textColor: MyColorsConst.primaryColor,
+            //   onPressed: () {
+            //     print("Ini Klik Submit Edit Biodata");
+            //     print(
+            //         "status nikah ${controllers.idStatusPernikahanController.text}");
+
+            //     context.read<EditBiodataBloc>().add(EditDataBiodataSubmited(
+            //           divisiId: int.parse(controllers.idDivisiController.text),
+            //           deptId:
+            //               int.parse(controllers.idDepartemenController.text),
+            //           posisiId: int.parse(controllers.idPosisiController.text),
+            //           zonaId: int.parse(controllers.idZonaController.text),
+            //           kodePresensi:
+            //               controllers.valueKodePresensiController.text,
+            //           namaDepan: controllers.namaDepanController.text,
+            //           namaBelakang: controllers.namaBelakangController.text,
+            //           namaLengkap:
+            //               '${controllers.namaDepanController.text} ${controllers.namaBelakangController.text}',
+            //           namaPanggilan: controllers.namaPanggilanController.text,
+            //           jkId:
+            //               int.parse(controllers.idJenisKelaminController.text),
+            //           tempatLahir: controllers.idTempatLahirController.text,
+            //           tglLahir: controllers.tanggalLahirController.text,
+            //           provinsiId:
+            //               int.parse(controllers.idProvinsiController.text),
+            //           kotaId: int.parse(controllers.idKotaController.text),
+            //           kecamatanId:
+            //               int.parse(controllers.idKecamatanController.text),
+            //           kodePos: controllers.kodePosController.text,
+            //           alamatAsli: controllers.alamatKtpController.text,
+            //           alamatDomisili:
+            //               controllers.alamatDomisiliTinggalController.text,
+            //           noTlp: controllers.noTelpController.text,
+            //           noTlpLainnya: controllers.noTelpLainnyaController.text,
+            //           noDarurat: controllers.noTelpDaruratController.text,
+            //           namaKontakDarurat:
+            //               controllers.namaKontakDaruratController.text,
+            //           hubDgnKaryawan: controllers.hubkaryawanController.text,
+            //           agamaId: int.parse(controllers.idAgamaController.text),
+            //           golDarahId:
+            //               int.parse(controllers.idGolDarahController.text),
+            //           statusNikahId: int.parse(
+            //               controllers.idStatusPernikahanController.text),
+            //           tanggunganId: int.parse(
+            //               controllers.idJumlahTanggunganController.text),
+            //           tglMasuk: controllers.tanggalMasukController.text,
+            //           ktpFoto: File(ktp?.path ?? ''),
+            //           pasFoto: File(fotoKaryawan?.path ?? ''),
+            //           bpjsFoto: File(bpjs?.path ?? ''),
+            //           ktpNo: controllers.noKtpController.text,
+            //           kkNo: controllers.noKkController.text,
+            //           kkFoto: File(kartukeluarga?.path ?? ''),
+            //           npwpFoto: File(npwp?.path ?? ''),
+            //           npwpNo: controllers.noNpwpController.text,
+            //           // berkasLain: File(berkaspendukung?.path ?? ''),
+            //           npwpTglBerlaku: controllers.tanggalNpwpController.text,
+            //           bpjsTipeId:
+            //               int.parse(controllers.idTipeBPJSController.text),
+            //           bpjsNo: controllers.noBpjsController.text,
+            //           desc: controllers.keteranganController.text,
+            //           ukBaju: controllers.ukBajuController.text,
+            //           ukCelana: controllers.ukCelanaController.text,
+            //           ukSepatu: controllers.ukSepatuontroller.text,
+            //           bankId: int.parse(controllers.idNamaBankController.text),
+            //           noRek: controllers.noRekController.text,
+            //           atasNamaRek: controllers.atasNamaController.text,
+            //         ));
+            //   },
+            // ),
           },
         ],
       ),
     );
+  }
+
+  void addToRequest(Map<String, dynamic> requestData, String fieldName,
+      dynamic controllerValue) {
+    if (controllerValue != null) {
+      if (controllerValue is String) {
+        if (controllerValue.isNotEmpty) {
+          requestData[fieldName] = controllerValue;
+        }
+      } else if (controllerValue is int) {
+        requestData[fieldName] = controllerValue;
+      } else if (controllerValue is File) {
+        // Langsung menetapkan File ke requestData
+        requestData[fieldName] = controllerValue;
+      }
+    }
   }
 
   @override
@@ -1648,18 +1769,18 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     idController:
                                         controllers.idTipeBPJSController,
                                   ),
-                                  // FileSelectionWidget(
-                                  //   onFileSelected: (file, fileUrl) {
-                                  //     setState(() {
-                                  //       berkaspendukung = file;
-                                  //       fileNameBerkasPendukunga =
-                                  //           file.path.split('/').last;
-                                  //     });
-                                  //   },
-                                  //   title: 'Berkas Pendukung Lainnya',
-                                  //   fileName: fileNameBerkasPendukunga,
-                                  //   selectedFile: berkaspendukung,
-                                  // ),
+                                  FileSelectionWidget(
+                                    onFileSelected: (file, fileUrl) {
+                                      setState(() {
+                                        berkaspendukung = file;
+                                        fileNameBerkasPendukunga =
+                                            file.path.split('/').last;
+                                      });
+                                    },
+                                    title: 'Berkas Pendukung Lainnya',
+                                    fileName: fileNameBerkasPendukunga,
+                                    selectedFile: berkaspendukung,
+                                  ),
                                   FormInputData(
                                     hintText: 'Tuliskan Keterangan',
                                     labelForm: 'Keterangan',
