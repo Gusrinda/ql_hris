@@ -6,8 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class MonthPicker extends StatefulWidget {
-  Function(DateTime? months, DateTime? years) onTap;
-  DateTime? selectedYear;
+  final Function(DateTime? months, DateTime? years) onTap;
+  final DateTime? selectedYear;
 
   MonthPicker({Key? key, required this.onTap, this.selectedYear})
       : super(key: key);
@@ -49,7 +49,7 @@ class _MonthPickerState extends State<MonthPicker> {
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 1 / 2.3,
-        height: 40.sp,
+        height: 40,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),
           border: Border.all(color: const Color(0xFFDDDDDD)),
@@ -63,8 +63,8 @@ class _MonthPickerState extends State<MonthPicker> {
                 child: Text(
                   _selectedMonth ?? '',
                   style: GoogleFonts.poppins(
-                    fontSize: 13.sp,
-                    color: MyColorsConst.darkColor,
+                    fontSize: 13,
+                    color: Colors.black,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -73,11 +73,11 @@ class _MonthPickerState extends State<MonthPicker> {
             const Spacer(),
             const Icon(
               Icons.keyboard_arrow_down_rounded,
-              color: MyColorsConst.primaryColor,
+              color: Colors.blue,
               size: 25,
             ),
             SizedBox(
-              width: 5,
+              width: 5.sp,
             ),
           ],
         ),
@@ -86,6 +86,18 @@ class _MonthPickerState extends State<MonthPicker> {
   }
 
   void _showCupertinoDialog(BuildContext context) {
+    int initialIndex = _months.indexOf(_selectedMonth ?? '');
+
+    // Jika bulan yang dipilih tidak ditemukan atau belum dipilih
+    if (initialIndex == -1) {
+      // Tetapkan nilai awal pada bulan saat ini
+      initialIndex = DateTime.now().month - 1;
+    }
+
+    setState(() {
+      _tempSelectedMonth = _months[initialIndex];
+    });
+
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) {
@@ -114,10 +126,13 @@ class _MonthPickerState extends State<MonthPicker> {
                       child: Text(
                         month,
                         style: GoogleFonts.poppins(
-                            fontSize: 16.sp, fontWeight: FontWeight.w500),
+                            fontSize: 16, fontWeight: FontWeight.w500),
                       ),
                     );
                   }).toList(),
+                  scrollController: FixedExtentScrollController(
+                    initialItem: initialIndex,
+                  ),
                 ),
               ),
               Row(
@@ -139,7 +154,7 @@ class _MonthPickerState extends State<MonthPicker> {
                     child: Text(
                       'Pilih',
                       style: GoogleFonts.poppins(
-                        color: MyColorsConst.primaryColor,
+                        color: Colors.blue,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -171,8 +186,8 @@ class _MonthPickerState extends State<MonthPicker> {
 }
 
 class YearPickerCustom extends StatefulWidget {
-  Function(DateTime? years, DateTime? months) onTap;
-  final DateTime? selectedMonth; // Tambahkan properti ini
+  final Function(DateTime? years, DateTime? months) onTap;
+  final DateTime? selectedMonth;
 
   YearPickerCustom({Key? key, required this.onTap, this.selectedMonth})
       : super(key: key);
@@ -229,7 +244,7 @@ class _YearPickerCustomState extends State<YearPickerCustom> {
               size: 25,
             ),
             SizedBox(
-              width: 5,
+              width: 5.sp,
             ),
           ],
         ),
@@ -238,6 +253,14 @@ class _YearPickerCustomState extends State<YearPickerCustom> {
   }
 
   void _showCupertinoDialog(BuildContext context) {
+    int initialIndex = _years.indexOf(_selectedYear ?? 1);
+    if (initialIndex == -1) {
+      initialIndex = DateTime.now().year - 1;
+    }
+
+    setState(() {
+      _tempSelectedYear = _years[initialIndex];
+    });
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) {
@@ -270,6 +293,9 @@ class _YearPickerCustomState extends State<YearPickerCustom> {
                       ),
                     );
                   }).toList(),
+                  scrollController: FixedExtentScrollController(
+                    initialItem: initialIndex,
+                  ),
                 ),
               ),
               Row(
