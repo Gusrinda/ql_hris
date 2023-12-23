@@ -578,7 +578,7 @@ class _HomePageState extends State<HomePage> {
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
-                              itemCount: listPengumuman.length,
+                              itemCount: 5,
                               itemBuilder: (context, index) {
                                 var pengumuman = listPengumuman[index];
                                 return PengumumanCard(
