@@ -34,6 +34,9 @@ import 'package:sj_presensi_mobile/pages/home/dashboard.view.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dart';
 import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
+import 'package:sj_presensi_mobile/pages/home/pengumuman/bloc/pengumuman_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/pengumuman/list_pengumuman.dart';
+import 'package:sj_presensi_mobile/pages/home/pengumuman/pengumuman.view.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/add_bahasa.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/add_bahasa_bloc/add_bahasa_bloc.dart';
@@ -309,6 +312,13 @@ class RouteGenerator {
       case DownloadBerkasPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return const DownloadBerkasPage();
+        });
+      case ListPengumumanPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return BlocProvider(
+            create: (context) => PengumumanBloc(),
+            child: ListPengumumanPage(),
+          );
         });
       case DataDiriPage.routeName:
         final bioData = settings.arguments as Biodata?;

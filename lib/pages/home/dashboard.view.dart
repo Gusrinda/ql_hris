@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/pengumuman/bloc/pengumuman_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/list_bahasa_bloc/list_bahasa_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/bloc/biodata_bloc.dart';
@@ -73,9 +74,10 @@ class _DashboardViewState extends State<DashboardView> {
                 children: [
                   MultiBlocProvider(
                     providers: [
-                      // BlocProvider(
-                      //   create: (context) => CheckInOutBloc(),
-                      // ),
+                      BlocProvider(
+                        create: (context) =>
+                            PengumumanBloc()..add(GetListPengumuman()),
+                      ),
                       BlocProvider(
                         create: (context) => ListLemburBloc(),
                       ),
@@ -99,7 +101,7 @@ class _DashboardViewState extends State<DashboardView> {
                         create: (context) =>
                             ListPelatihanBloc()..add(GetListPelatihan()),
                       ),
-                       BlocProvider(
+                      BlocProvider(
                         create: (context) =>
                             ListPrestasiBloc()..add(GetListPrestasi()),
                       ),
@@ -111,7 +113,7 @@ class _DashboardViewState extends State<DashboardView> {
                         create: (context) =>
                             ListBahasaBloc()..add(GetListBahasa()),
                       ),
-                       BlocProvider(
+                      BlocProvider(
                         create: (context) =>
                             ListPengalamanBloc()..add(GetListPengalaman()),
                       ),
