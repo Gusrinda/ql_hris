@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class PengumumanCard extends StatelessWidget {
@@ -37,7 +36,7 @@ class PengumumanCard extends StatelessWidget {
                   topLeft: Radius.circular(5), topRight: Radius.circular(5)),
               child: AspectRatio(
                   aspectRatio: 16 / 9.sp,
-                  child: Image.asset(
+                  child: Image.network(
                     imageUrl ?? '',
                     fit: BoxFit.cover,
                   )),
@@ -73,27 +72,35 @@ class PengumumanCard extends StatelessWidget {
             SizedBox(height: 3.sp),
             Text(
               detail ?? '',
+              textAlign: TextAlign.justify,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
-              style: GoogleFonts.poppins(fontSize: 10.sp, color: Colors.grey),
+              style: GoogleFonts.poppins(
+                  fontSize: 10.sp,
+                  color: MyColorsConst.darkColor,
+                  fontWeight: FontWeight.w400),
             ),
             SizedBox(height: 5.sp),
             InkWell(
-                onTap: () {},
-                child: Container(
-                    padding: EdgeInsets.all(10.sp),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: MyColorsConst.primaryLight2Color),
-                    child: Text(
-                      "Baca Selengkapnya",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.poppins(
-                          fontSize: 10.sp,
-                          fontWeight: FontWeight.w600,
-                          color: MyColorsConst.primaryColor),
-                    )))
+              onTap: () {
+                _showDetailSlider(context);
+              },
+              child: Container(
+                padding: EdgeInsets.all(10.sp),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: MyColorsConst.primaryLight2Color),
+                child: Text(
+                  "Baca Selengkapnya",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w600,
+                      color: MyColorsConst.primaryColor),
+                ),
+              ),
+            )
           ],
         ),
       ),
@@ -101,102 +108,199 @@ class PengumumanCard extends StatelessWidget {
   }
 
   void _showDetailSlider(BuildContext context) {
-    OverlayEntry? overlayEntry;
-
-    overlayEntry = OverlayEntry(
-      builder: (context) => Positioned(
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        child: GestureDetector(
-          onTap: () {
-            overlayEntry!.remove();
-          },
-          child: Container(
-            color: Colors.black.withOpacity(0.5),
-            child: NotificationListener<ScrollNotification>(
-              onNotification: (scrollNotification) {
-                if (scrollNotification is ScrollEndNotification &&
-                    scrollNotification.metrics.atEdge &&
-                    scrollNotification.metrics.pixels != 0) {
-                  // Scroll mencapai batas bawah
-                  overlayEntry!.remove();
-                  return true; // Menghentikan penanganan notifikasi
-                }
-                return false; // Lanjutkan penanganan notifikasi
-              },
-              child: DraggableScrollableSheet(
-                initialChildSize: 0.5,
-                minChildSize: 0.2,
-                maxChildSize: 0.9,
-                builder:
-                    (BuildContext context, ScrollController scrollController) {
-                  return Container(
-                    padding: EdgeInsets.all(16),
-                    color: Colors.white,
-                    child: ListView(
-                      controller: scrollController,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(5),
-                              topRight: Radius.circular(5)),
-                          child: AspectRatio(
-                              aspectRatio: 16 / 9.sp,
-                              child: Image.asset(
-                                imageUrl ?? '',
-                                fit: BoxFit.cover,
-                              )),
-                        ),
-                        SizedBox(height: 5.sp),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.calendar_month_outlined,
-                              size: 12.sp,
-                              color: Colors.grey,
-                            ),
-                            SizedBox(
-                              width: 3.sp,
-                            ),
-                            Text(
-                              tanggal ?? '',
-                              style: GoogleFonts.poppins(
-                                  fontSize: 8.sp, color: Colors.grey),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 5.sp),
-                        Text(
-                          judul ?? '',
-                          style: GoogleFonts.poppins(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w600,
-                              color: MyColorsConst.darkColor),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        SizedBox(height: 3.sp),
-                        Text(
-                          detail ?? '',
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.poppins(
-                              fontSize: 10.sp, color: Colors.grey),
-                        ),
-                        SizedBox(height: 5.sp),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(15.sp),
+          topRight: Radius.circular(15.sp),
         ),
       ),
+      builder: (BuildContext context) {
+        return DraggableScrollableSheet(
+          initialChildSize: 0.5,
+          minChildSize: 0.2,
+          maxChildSize: 1.0,
+          expand: false,
+          builder: (BuildContext context, ScrollController scrollController) {
+            return Container(
+              padding: EdgeInsets.all(16.sp),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15.sp),
+                  topRight: Radius.circular(15.sp),
+                ),
+              ),
+              child: ListView(
+                controller: scrollController,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5),
+                      topRight: Radius.circular(5),
+                    ),
+                    child: AspectRatio(
+                      aspectRatio: 16 / 9.sp,
+                      child: Image.network(
+                        imageUrl ?? '',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 5.sp),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.calendar_month_outlined,
+                        size: 12.sp,
+                        color: Colors.grey,
+                      ),
+                      SizedBox(
+                        width: 3.sp,
+                      ),
+                      Text(
+                        tanggal ?? '',
+                        style: GoogleFonts.poppins(
+                          fontSize: 10.sp,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5.sp),
+                  Text(
+                    judul ?? '',
+                    style: GoogleFonts.poppins(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w600,
+                      color: MyColorsConst.darkColor,
+                    ),
+                  ),
+                  SizedBox(height: 15.sp),
+                  Text(
+                    detail ?? '',
+                    textAlign: TextAlign.justify,
+                    style: GoogleFonts.poppins(
+                        fontSize: 12.sp,
+                        color: MyColorsConst.darkColor,
+                        fontWeight: FontWeight.w400),
+                  ),
+                  SizedBox(height: 5.sp),
+                ],
+              ),
+            );
+          },
+        );
+      },
     );
-
-    Overlay.of(context).insert(overlayEntry);
   }
+
+  // void _showDetailSlider(BuildContext context) {
+  //   OverlayEntry? overlayEntry;
+
+  //   overlayEntry = OverlayEntry(
+  // builder: (context) => Positioned(
+  //   top: 0,
+  //   bottom: 0,
+  //   left: 0,
+  //   right: 0,
+  //   child: GestureDetector(
+  //     onTap: () {
+  //       overlayEntry!.remove();
+  //     },
+  //     child: Container(
+  //       color: Colors.black.withOpacity(0.5),
+  //       child: NotificationListener<ScrollNotification>(
+  //         onNotification: (scrollNotification) {
+  //           if (scrollNotification is ScrollEndNotification &&
+  //               scrollNotification.metrics.atEdge &&
+  //               scrollNotification.metrics.pixels != 0) {
+  //             // Scroll mencapai batas bawah
+  //             overlayEntry!.remove();
+  //             return true; // Menghentikan penanganan notifikasi
+  //           }
+  //           return false; // Lanjutkan penanganan notifikasi
+  //         },
+  //             child: DraggableScrollableSheet(
+  //               initialChildSize: 0.5,
+  //               minChildSize: 0.2,
+  //               maxChildSize: 0.9,
+  //               expand: false,
+  //               builder:
+  //                   (BuildContext context, ScrollController scrollController) {
+  //                 return Container(
+  //                   padding: EdgeInsets.all(16),
+  //                   decoration: BoxDecoration(
+  //                     color: Colors.white,
+  //                     borderRadius: BorderRadius.only(
+  //                       topLeft: Radius.circular(15.sp),
+  //                       topRight: Radius.circular(15.sp),
+  //                     ),
+  //                   ),
+  //                   child: ListView(
+  //                     controller: scrollController,
+  //                     children: [
+  //                       ClipRRect(
+  //                         borderRadius: BorderRadius.only(
+  //                             topLeft: Radius.circular(5),
+  //                             topRight: Radius.circular(5)),
+  //                         child: AspectRatio(
+  //                             aspectRatio: 16 / 9.sp,
+  //                             child: Image.asset(
+  //                               imageUrl ?? '',
+  //                               fit: BoxFit.cover,
+  //                             )),
+  //                       ),
+  //                       SizedBox(height: 5.sp),
+  //                       Row(
+  //                         children: [
+  //                           Icon(
+  //                             Icons.calendar_month_outlined,
+  //                             size: 12.sp,
+  //                             color: Colors.grey,
+  //                           ),
+  //                           SizedBox(
+  //                             width: 3.sp,
+  //                           ),
+  //                           Text(
+  //                             tanggal ?? '',
+  //                             style: GoogleFonts.poppins(
+  //                                 fontSize: 8.sp, color: Colors.grey),
+  //                           ),
+  //                         ],
+  //                       ),
+  //                       SizedBox(height: 5.sp),
+  //                       Text(
+  //                         judul ?? '',
+  //                         style: GoogleFonts.poppins(
+  //                             fontSize: 12.sp,
+  //                             fontWeight: FontWeight.w600,
+  //                             color: MyColorsConst.darkColor),
+  //                         maxLines: 2,
+  //                         overflow: TextOverflow.ellipsis,
+  //                       ),
+  //                       SizedBox(height: 3.sp),
+  //                       Text(
+  //                         detail ?? '',
+  //                         maxLines: 3,
+  //                         overflow: TextOverflow.ellipsis,
+  //                         style: GoogleFonts.poppins(
+  //                             fontSize: 10.sp, color: Colors.grey),
+  //                       ),
+  //                       SizedBox(height: 5.sp),
+  //                     ],
+  //                   ),
+  //                 );
+  //               },
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+
+  //   Overlay.of(context).insert(overlayEntry);
+  // }
 }

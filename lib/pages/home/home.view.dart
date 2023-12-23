@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/pages/approval/approval.view.dart';
 import 'package:sj_presensi_mobile/pages/approval/bloc/approval_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
@@ -14,6 +15,8 @@ import 'package:sj_presensi_mobile/pages/download_berkas/download_berkas_page.da
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
+import 'package:sj_presensi_mobile/pages/home/pengumuman/bloc/pengumuman_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/pengumuman/list_pengumuman.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/pengumuman_card.widget.dart';
 import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/list_lembur_bloc.dart';
 import 'package:sj_presensi_mobile/pages/lembur/lembur_page.dart';
@@ -33,6 +36,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    context.read<PengumumanBloc>().add(GetListPengumuman());
     // BlocProvider.of<CheckInOutBloc>(context).add(AttendanceStateChecked());
   }
 
@@ -533,58 +537,73 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.w600,
                                 color: MyColorsConst.darkColor),
                           ),
-                          // Row(
-                          //   children: [
-                          //     Text(
-                          //       "Lihat Semua",
-                          //       style: GoogleFonts.poppins(
-                          //           fontSize: 12.sp,
-                          //           fontWeight: FontWeight.w500,
-                          //           color: MyColorsConst.primaryColor),
-                          //     ),
-                          //     Icon(
-                          //       Icons.keyboard_arrow_right_rounded,
-                          //       color: MyColorsConst.primaryColor,
-                          //       size: 20.sp,
-                          //     )
-                          //   ],
-                          // ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => BlocProvider(
+                                          create: (context) => PengumumanBloc(),
+                                          child: ListPengumumanPage(),
+                                        )),
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Lihat Semua",
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: MyColorsConst.primaryColor),
+                                ),
+                                Icon(
+                                  Icons.keyboard_arrow_right_rounded,
+                                  color: MyColorsConst.primaryColor,
+                                  size: 20.sp,
+                                )
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ),
                     const SizedBox(height: 5),
-                    Container(
-                      constraints: BoxConstraints(maxHeight: 280.sp),
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        children: const [
-                          SizedBox(width: 20),
-                          PengumumanCard(
-                            imageUrl: 'assets/images/cuti_bersama.jpg',
-                            judul: "Kebijakan Cuti Tahun 2024",
-                            tanggal: "17 Desember 2023",
-                            detail:
-                                "Kami berharap bahwa pesan ini menemukan Anda dalam keadaan baik dan bersemangat. Sejalan dengan komitmen kami",
-                          ),
-                          PengumumanCard(
-                            imageUrl: 'assets/images/uu-ciptakerja.jpg',
-                            judul:
-                                "Poin Penting untuk Pekerja dalam UU Cipta Kerja",
-                            tanggal: "2 Desember 2023",
-                            detail:
-                                "DPR resmi menyetujui Rancangan Undang-Undang (RUU) Cipta Kerja untuk disahkan menjadi UU yang salah satunya mengatur tentang klaster ketenagakerjaan.",
-                          ),
-                          PengumumanCard(
-                            imageUrl: 'assets/images/k3.jpeg',
-                            judul:
-                                "Mengenal Pentingnya K3 Dalam Lingkungan Kerja",
-                            tanggal: "17 Desember 2023",
-                            detail:
-                                "Kesehatan dan Keselamatan Kerja (K3) merupakan hal yang sangat signifikan dalam sektor industri dan lingkungan kerja. Pada bahasan kali ini, kita akan mmembahas semua tentang K3, termasuk pengertian, tujuan, ruang lingkup, dan jenis-jenis bahaya yang perlu diperhatikan. Mungkin masih ada di antara kita yang belum sepenuhnya familiar dengan istilah K3, namun seringkali kita menjumpainya di berbagai institusi, perusahaan, dan tempat kerja. K3 bukan sekadar sebuah ilmu pengetahuan, tetapi juga merupakan upaya konkret untuk mencegah terjadinya kecelakaan dan memastikan kesehatan serta keselamatan bagi mereka yang bekerja di berbagai sektor. ",
-                          ),
-                        ],
-                      ),
+                    BlocBuilder<PengumumanBloc, PengumumanState>(
+                      builder: (context, state) {
+                        if (state is ListPengumumanSuccess) {
+                          var listPengumuman = state.dataPengumuman;
+                          return Container(
+                            constraints: BoxConstraints(maxHeight: 280.sp),
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              itemCount: 5,
+                              itemBuilder: (context, index) {
+                                var pengumuman = listPengumuman[index];
+                                return PengumumanCard(
+                                  imageUrl:
+                                      'https://server.qqltech.com:7007/uploads/t_artikel/${pengumuman.foto}',
+                                  judul: pengumuman.judul,
+                                  tanggal: DateFormat('dd MMMM yyyy', 'id_ID')
+                                      .format(pengumuman.tanggal!),
+                                  detail: pengumuman.detail,
+                                );
+                              },
+                            ),
+                          );
+                        } else {
+                          return Center(
+                            child: Text(
+                              "Gagal Load Data",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          );
+                        }
+                      },
                     ),
                     const SizedBox(height: 100)
                   ],
