@@ -202,7 +202,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                                     widget.data?.timeFrom?.toString() ??
                                         '00:00'),
                                 Text(
-                                  'Status',
+                                  'Status Approval',
                                   style: GoogleFonts.poppins(
                                     fontSize: 10,
                                     color: Colors.black,
@@ -215,6 +215,23 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400,
                                     color: currentColor,
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  'Catatan Approval',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 10,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Text(
+                                   widget.data?.approvalNote ?? "-",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                    color: MyColorsConst.darkColor,
                                   ),
                                 ),
                               ],

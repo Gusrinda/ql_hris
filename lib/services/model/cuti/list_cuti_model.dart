@@ -367,6 +367,8 @@ class DataListCuti with _$DataListCuti {
         dynamic lastEditorTelp,
         @JsonKey(name: "last_editor.m_kary_id")
         dynamic lastEditorMKaryId,
+        @JsonKey(name: "approval_note")
+        String? approvalNote,
     }) = _DataListCuti;
 
     factory DataListCuti.fromJson(Map<String, dynamic> json) => _$DataListCutiFromJson(json);

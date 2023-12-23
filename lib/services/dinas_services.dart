@@ -10,7 +10,7 @@ class DinasServices {
     var formattedDate =
         "${date.year}-${date.month.toString().padLeft(2, '0')}-$lastDateStr";
     var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/t_spd?date_from=${date.year}-${date.month}-1&date_to=$formattedDate");
+        "${MyGeneralConst.API_URL}/operation/t_spd?where=tgl_acara_awal> '${date.year}-${date.month.toString().padLeft(2, '0')}-01' and tgl_acara_akhir < '$formattedDate'");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -128,7 +128,7 @@ class DinasServices {
 
   static Future<Object> getJenisSpd(String token) async {
     var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_general?paginate=1000");
+        "${MyGeneralConst.API_URL}/operation/m_general?scopes=jenisSPD&paginate=1000");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -158,8 +158,7 @@ class DinasServices {
 
   static Future<Object> getPic(String token) async {
     var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/default_users?paginate=1000");
-    // print("URL SEARCH ? ${url}");
+        "${MyGeneralConst.API_URL}/operation/default_users?paginate=100000");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,

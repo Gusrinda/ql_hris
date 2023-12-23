@@ -420,7 +420,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                                   child: Row(
                                                     children: [
                                                       FormTextLabel(
-                                                        label: "Waktu Mulai",
+                                                        label: "Jam Mulai",
                                                         labelColor:
                                                             MyColorsConst
                                                                 .darkColor,
@@ -444,7 +444,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                                   child: Row(
                                                     children: [
                                                       const FormTextLabel(
-                                                        label: "Waktu Berakhir",
+                                                        label: "Jam Berakhir",
                                                         labelColor:
                                                             MyColorsConst
                                                                 .darkColor,
@@ -471,7 +471,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                               Expanded(
                                                 flex: 1,
                                                 child: _buildTimeTextField(
-                                                  "Masukkan Waktu",
+                                                  "Jam : Menit",
                                                   widget.timeFromController!,
                                                   selectedTimeFrom,
                                                   (TimeOfDay time) {
@@ -488,7 +488,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                               Expanded(
                                                 flex: 1,
                                                 child: _buildTimeTextField(
-                                                  "Masukkan Waktu",
+                                                  "Jam : Menit",
                                                   widget.timeToController!,
                                                   selectedTimeTo,
                                                   (TimeOfDay time) {
@@ -686,7 +686,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                   ? DateFormat('yyyy-MM-dd').format(selectedDate)
                   : hintText,
               style: GoogleFonts.poppins(
-                fontSize: selectedDate != null ? 12.sp : 9.sp,
+                fontSize: selectedDate != null ? 13.sp : 9.sp,
                 fontWeight:
                     selectedDate != null ? FontWeight.w500 : FontWeight.w400,
                 color: selectedDate != null
@@ -740,7 +740,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
             Text(
               selectedTime != null ? selectedTime.format(context) : hintText,
               style: GoogleFonts.poppins(
-                fontSize: selectedTime != null ? 12.sp : 9.sp,
+                fontSize: selectedTime != null ? 13.sp : 9.sp,
                 fontWeight:
                     selectedTime != null ? FontWeight.w500 : FontWeight.w400,
                 color: selectedTime != null
@@ -749,7 +749,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
               ),
             ),
             Icon(
-              CupertinoIcons.clock,
+              CupertinoIcons.clock_fill,
               color: MyColorsConst.primaryColor,
               size: 20.sp,
             ),

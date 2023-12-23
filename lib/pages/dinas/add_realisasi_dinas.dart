@@ -97,11 +97,35 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      widget.biayaRealisasiController.addListener(_updateTotalBiaya);
+
       final organisasiBloc = context.read<AddRealisasiDinasBloc>();
 
       organisasiBloc.add(OnSelectDinasApproved());
       organisasiBloc.add(OnSelectTipe());
     });
+  }
+
+  void _updateTotalBiaya() {
+    double totalBiaya = 0.0;
+
+    // Hitung total biaya dari semua expenseDetails
+    for (ExpenseDetail expenseDetail in expenseDetails) {
+      double biayaRealisasi =
+          double.tryParse(expenseDetail.biayaRealisasiController.text) ?? 0.0;
+      totalBiaya += biayaRealisasi;
+    }
+
+    // Set nilai totalBiaya ke totalBiayaRencanaSelisihController
+    widget.totalBiayaRencanaSelisihController.text = totalBiaya.toString();
+  }
+
+  @override
+  void dispose() {
+    // Hapus listener saat widget di dispose
+    widget.biayaRealisasiController.removeListener(_updateTotalBiaya);
+
+    super.dispose();
   }
 
   @override
@@ -190,6 +214,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
 
           widget.totalBiayaController.text =
               selectedNomorSpd.totalBiaya?.toString() ?? '';
+
           widget.kendDinasController.text =
               selectedNomorSpd.isKendDinas?.toString() ?? '';
           setState(() {
@@ -325,7 +350,9 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 labelTag: 'Label-NomorRspd',
                                 formTag: 'Form-NomorRspd',
                                 labelForm: 'Nomor',
-                                validator: (value) {},
+                                validator: (value) {
+                                  return null;
+                                },
                                 enabled: false,
                                 errorTextStyle:
                                     GoogleFonts.poppins(fontSize: 8),
@@ -504,6 +531,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                               FormInputData(
                                 input: '',
                                 onTap: () {},
+                                enabled: false,
                                 controller: widget.valuePicController,
                                 hintText: 'Pic',
                                 labelTag: 'Label-PicRspd',
@@ -530,15 +558,21 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 inputType: TextInputType.number,
                                 input: '',
                                 onTap: () {},
+                                enabled: false,
                                 controller:
                                     widget.totalBiayaRencanaSelisihController,
                                 hintText: 'Total Biaya Rencana Selisih',
                                 labelTag: 'Label-TotalBRS',
                                 formTag: 'Form-TotalBRS',
                                 labelForm: 'Total Biaya Rencana Selisih',
-                                validator: (value) {},
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Pilih Alasan Cuti';
+                                  }
+                                  return null;
+                                },
                                 errorTextStyle:
-                                    GoogleFonts.poppins(fontSize: 8),
+                                    GoogleFonts.poppins(fontSize: 10.sp),
                               ),
                               FormInputData(
                                 input: '',
@@ -641,93 +675,6 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 ),
                               ),
                               SizedBox(height: 10.sp),
-
-                              // FormDropDownData(
-                              //   input: '',
-                              //   onTap: () {
-                              //     showTipe(context);
-                              //   },
-                              //   idController: widget.idTipeController,
-                              //   valueController: widget.valueTipeController,
-                              //   hintText: 'Tipe',
-                              //   labelTag: 'Label-Tipe',
-                              //   formTag: 'Form-Tipe',
-                              //   labelForm: 'Tipe',
-                              //   validator: (value) {},
-                              //   errorTextStyle:
-                              //       GoogleFonts.poppins(fontSize: 8),
-                              // ),
-                              // FormInputData(
-                              //   inputType: TextInputType.number,
-                              //   input: '',
-                              //   onTap: () {},
-                              //   controller: widget.biayaController,
-                              //   hintText: 'Biaya',
-                              //   labelTag: 'Label-Biaya',
-                              //   formTag: 'Form-Biaya',
-                              //   labelForm: 'Biaya',
-                              //   validator: (value) {},
-                              //   enabled: true,
-                              //   errorTextStyle:
-                              //       GoogleFonts.poppins(fontSize: 8),
-                              // ),
-                              // FormInputData(
-                              //   input: '',
-                              //   onTap: () {},
-                              //   controller: widget.keteranganController,
-                              //   hintText: 'Keterangan',
-                              //   labelTag: 'Label-KeteranganBiaya',
-                              //   formTag: 'Form-KeteranganBiaya',
-                              //   labelForm: 'Keterangan',
-                              //   validator: (value) {},
-                              //   enabled: true,
-                              //   errorTextStyle:
-                              //       GoogleFonts.poppins(fontSize: 8),
-                              // ),
-                              // FormInputData(
-                              //   inputType: TextInputType.number,
-                              //   input: '',
-                              //   onTap: () {},
-                              //   controller: widget.biayaRealisasiController,
-                              //   hintText: 'Tuliskan Biaya',
-                              //   labelTag: 'Label-BiayaRealisasi',
-                              //   formTag: 'Form-BiayaRealisasi',
-                              //   labelForm: 'Biaya Realisasi',
-                              //   validator: (value) {},
-                              //   enabled: true,
-                              //   errorTextStyle:
-                              //       GoogleFonts.poppins(fontSize: 8),
-                              // ),
-                              // FormInputData(
-                              //   input: '',
-                              //   onTap: () {},
-                              //   controller: widget.catatanController,
-                              //   hintText: 'Tuliskan Catatan',
-                              //   labelTag: 'Label-CatatanRealisasi',
-                              //   formTag: 'Form-CatatanRealisasi',
-                              //   labelForm: 'Catatan Realisasi',
-                              //   validator: (value) {},
-                              //   enabled: true,
-                              //   errorTextStyle:
-                              //       GoogleFonts.poppins(fontSize: 8),
-                              // ),
-                              // SizedBox(height: 10.sp),
-                              // Column(
-                              //   children: expenseDetails
-                              //       .map((expenseDetail) =>
-                              //           DynamicFormField(
-                              //             expenseDetail: expenseDetail,
-                              //             onDelete: () {
-                              //               setState(() {
-                              //                 expenseDetails.remove(
-                              //                     expenseDetail);
-                              //               });
-                              //             },
-                              //             indexForm:
-                              //                 expenseDetails.,
-                              //           ))
-                              //       .toList(),
-                              // ),
                               if (expenseDetails.isNotEmpty) ...{
                                 ListView.builder(
                                   physics: NeverScrollableScrollPhysics(),
@@ -753,8 +700,9 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                     expenseDetails.add(ExpenseDetail());
                                   });
                                 },
-                                child: Text('Tambah Grup Dinamis'),
+                                child: Text('Tambah Biaya'),
                               ),
+                              SizedBox(height: 20.sp),
                               TextButtonCustomV1(
                                 text: "Kirim",
                                 height: 50,
@@ -773,50 +721,64 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                             .idNomorSpdController.value.text));
                                         print(widget.keteranganUtamaController
                                             .value.text);
-                                        context
-                                            .read<AddRealisasiDinasBloc>()
-                                            .add(
-                                              AddRealisasiDinasSubmited(
-                                                tSpdId: int.parse(widget
-                                                    .idNomorSpdController
-                                                    .value
-                                                    .text),
-                                                totalBiayaSelisih: double.parse(
-                                                    widget
-                                                        .totalBiayaRencanaSelisihController
-                                                        .value
-                                                        .text),
-                                                keterangan: widget
-                                                    .keteranganController.text,
-                                                tRpdDetList: expenseDetails
-                                                    .map((expense) {
-                                                  return {
-                                                    "tipe_spd_id": expense
-                                                        .idTipeController
-                                                        .value
-                                                        .text,
-                                                    "is_kendaraan_dinas":
-                                                        widget.kendDinasController
-                                                                    .text ==
-                                                                "false"
-                                                            ? 0
-                                                            : 1,
-                                                    "biaya_realisasi": expense
-                                                        .biayaRealisasiController
-                                                        .value
-                                                        .text,
-                                                    "detail_transport": expense
-                                                        .descriptionController
-                                                        .value
-                                                        .text,
-                                                    "catatan_realisas": expense
-                                                        .catatanRealisasiController
-                                                        .value
-                                                        .text,
-                                                  };
-                                                }).toList(),
-                                              ),
-                                            );
+                                        showDialog(
+                                          context: context,
+                                          builder: (_) => DialogCustom(
+                                              state: DialogCustomItem.confirm,
+                                              message:
+                                                  "Pastikan Data Sudah Benar",
+                                              durationInSec: 5,
+                                              onContinue: () => context
+                                                  .read<AddRealisasiDinasBloc>()
+                                                  .add(
+                                                    AddRealisasiDinasSubmited(
+                                                      tSpdId: int.parse(widget
+                                                          .idNomorSpdController
+                                                          .value
+                                                          .text),
+                                                      totalBiayaSelisih:
+                                                          double.parse(widget
+                                                              .totalBiayaRencanaSelisihController
+                                                              .value
+                                                              .text),
+                                                      // totalBiayaSelisih:
+                                                      //     double.parse("2000000"),
+                                                      keterangan: widget
+                                                          .keteranganController
+                                                          .text,
+                                                      tRpdDetList:
+                                                          expenseDetails
+                                                              .map((expense) {
+                                                        return {
+                                                          "tipe_spd_id": expense
+                                                              .idTipeController
+                                                              .value
+                                                              .text,
+                                                          "is_kendaraan_dinas":
+                                                              widget.kendDinasController
+                                                                          .text ==
+                                                                      "false"
+                                                                  ? 0
+                                                                  : 1,
+                                                          "biaya_realisasi": expense
+                                                              .biayaRealisasiController
+                                                              .value
+                                                              .text,
+                                                          "detail_transport":
+                                                              expense
+                                                                  .descriptionController
+                                                                  .value
+                                                                  .text,
+                                                          "catatan_realisas":
+                                                              expense
+                                                                  .catatanRealisasiController
+                                                                  .value
+                                                                  .text,
+                                                        };
+                                                      }).toList(),
+                                                    ),
+                                                  )),
+                                        );
                                       },
                               ),
                             ],
@@ -974,13 +936,19 @@ class _DynamicFormFieldState extends State<DynamicFormField> {
             Expanded(
               child: ElevatedButton(
                 onPressed: widget.onDelete,
-                child: Text('Hapus Rincian Biaya'),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red.shade700),
+                child: Text(
+                  'Hapus Rincian Biaya',
+                  style: GoogleFonts.poppins(
+                      fontSize: 13.sp, fontWeight: FontWeight.w500),
+                ),
               ),
             ),
           ],
         ),
         const Divider(
-          height: 10,
+          height: 20,
           thickness: 0.5,
           color: MyColorsConst.lightDarkColor,
         ),

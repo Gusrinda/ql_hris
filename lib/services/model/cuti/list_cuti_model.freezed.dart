@@ -749,6 +749,8 @@ mixin _$DataListCuti {
   dynamic get lastEditorTelp => throw _privateConstructorUsedError;
   @JsonKey(name: "last_editor.m_kary_id")
   dynamic get lastEditorMKaryId => throw _privateConstructorUsedError;
+  @JsonKey(name: "approval_note")
+  String? get approvalNote => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -933,7 +935,8 @@ abstract class $DataListCutiCopyWith<$Res> {
       @JsonKey(name: "last_editor.updated_at") dynamic lastEditorUpdatedAt,
       @JsonKey(name: "last_editor.profil_image") dynamic lastEditorProfilImage,
       @JsonKey(name: "last_editor.telp") dynamic lastEditorTelp,
-      @JsonKey(name: "last_editor.m_kary_id") dynamic lastEditorMKaryId});
+      @JsonKey(name: "last_editor.m_kary_id") dynamic lastEditorMKaryId,
+      @JsonKey(name: "approval_note") String? approvalNote});
 }
 
 /// @nodoc
@@ -1114,6 +1117,7 @@ class _$DataListCutiCopyWithImpl<$Res, $Val extends DataListCuti>
     Object? lastEditorProfilImage = freezed,
     Object? lastEditorTelp = freezed,
     Object? lastEditorMKaryId = freezed,
+    Object? approvalNote = freezed,
   }) {
     return _then(_value.copyWith(
       metaRead: freezed == metaRead
@@ -1776,6 +1780,10 @@ class _$DataListCutiCopyWithImpl<$Res, $Val extends DataListCuti>
           ? _value.lastEditorMKaryId
           : lastEditorMKaryId // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      approvalNote: freezed == approvalNote
+          ? _value.approvalNote
+          : approvalNote // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -1959,7 +1967,8 @@ abstract class _$$DataListCutiImplCopyWith<$Res>
       @JsonKey(name: "last_editor.updated_at") dynamic lastEditorUpdatedAt,
       @JsonKey(name: "last_editor.profil_image") dynamic lastEditorProfilImage,
       @JsonKey(name: "last_editor.telp") dynamic lastEditorTelp,
-      @JsonKey(name: "last_editor.m_kary_id") dynamic lastEditorMKaryId});
+      @JsonKey(name: "last_editor.m_kary_id") dynamic lastEditorMKaryId,
+      @JsonKey(name: "approval_note") String? approvalNote});
 }
 
 /// @nodoc
@@ -2138,6 +2147,7 @@ class __$$DataListCutiImplCopyWithImpl<$Res>
     Object? lastEditorProfilImage = freezed,
     Object? lastEditorTelp = freezed,
     Object? lastEditorMKaryId = freezed,
+    Object? approvalNote = freezed,
   }) {
     return _then(_$DataListCutiImpl(
       metaRead: freezed == metaRead
@@ -2800,6 +2810,10 @@ class __$$DataListCutiImplCopyWithImpl<$Res>
           ? _value.lastEditorMKaryId
           : lastEditorMKaryId // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      approvalNote: freezed == approvalNote
+          ? _value.approvalNote
+          : approvalNote // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -2974,7 +2988,8 @@ class _$DataListCutiImpl implements _DataListCuti {
       @JsonKey(name: "last_editor.updated_at") this.lastEditorUpdatedAt,
       @JsonKey(name: "last_editor.profil_image") this.lastEditorProfilImage,
       @JsonKey(name: "last_editor.telp") this.lastEditorTelp,
-      @JsonKey(name: "last_editor.m_kary_id") this.lastEditorMKaryId});
+      @JsonKey(name: "last_editor.m_kary_id") this.lastEditorMKaryId,
+      @JsonKey(name: "approval_note") this.approvalNote});
 
   factory _$DataListCutiImpl.fromJson(Map<String, dynamic> json) =>
       _$$DataListCutiImplFromJson(json);
@@ -3474,10 +3489,13 @@ class _$DataListCutiImpl implements _DataListCuti {
   @override
   @JsonKey(name: "last_editor.m_kary_id")
   final dynamic lastEditorMKaryId;
+  @override
+  @JsonKey(name: "approval_note")
+  final String? approvalNote;
 
   @override
   String toString() {
-    return 'DataListCuti(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, nomor: $nomor, datumMCompId: $datumMCompId, datumMDirId: $datumMDirId, datumMKaryId: $datumMKaryId, datumAlasanId: $datumAlasanId, datumTipeCutiId: $datumTipeCutiId, dateFrom: $dateFrom, dateTo: $dateTo, timeFrom: $timeFrom, timeTo: $timeTo, keterangan: $keterangan, status: $status, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, attachment: $attachment, interval: $interval, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, mDirId: $mDirId, mDirMCompId: $mDirMCompId, mDirNama: $mDirNama, mDirDesc: $mDirDesc, mDirIsActive: $mDirIsActive, mDirCreatorId: $mDirCreatorId, mDirLastEditorId: $mDirLastEditorId, mDirCreatedAt: $mDirCreatedAt, mDirUpdatedAt: $mDirUpdatedAt, mKaryId: $mKaryId, mKaryMCompId: $mKaryMCompId, mKaryMDirId: $mKaryMDirId, mKaryMDivisiId: $mKaryMDivisiId, mKaryMDeptId: $mKaryMDeptId, mKaryMZonaId: $mKaryMZonaId, mKaryGradingId: $mKaryGradingId, mKaryCostcontreId: $mKaryCostcontreId, mKaryKode: $mKaryKode, mKaryMPosisiId: $mKaryMPosisiId, mKaryMJamKerjaId: $mKaryMJamKerjaId, mKaryKodePresensi: $mKaryKodePresensi, mKaryNik: $mKaryNik, mKaryNamaDepan: $mKaryNamaDepan, mKaryNamaBelakang: $mKaryNamaBelakang, mKaryNamaLengkap: $mKaryNamaLengkap, mKaryNamaPanggilan: $mKaryNamaPanggilan, mKaryJkId: $mKaryJkId, mKaryTempatLahir: $mKaryTempatLahir, mKaryTglLahir: $mKaryTglLahir, mKaryProvinsiId: $mKaryProvinsiId, mKaryKotaId: $mKaryKotaId, mKaryKecamatanId: $mKaryKecamatanId, mKaryKodePos: $mKaryKodePos, mKaryAlamatAsli: $mKaryAlamatAsli, mKaryAlamatDomisili: $mKaryAlamatDomisili, mKaryNoTlp: $mKaryNoTlp, mKaryNoTlpLainnya: $mKaryNoTlpLainnya, mKaryNoDarurat: $mKaryNoDarurat, mKaryNamaKontakDarurat: $mKaryNamaKontakDarurat, mKaryAgamaId: $mKaryAgamaId, mKaryGolDarahId: $mKaryGolDarahId, mKaryStatusNikahId: $mKaryStatusNikahId, mKaryTanggunganId: $mKaryTanggunganId, mKaryHubDgnKaryawan: $mKaryHubDgnKaryawan, mKaryCutiJatahReguler: $mKaryCutiJatahReguler, mKaryCutiSisaReguler: $mKaryCutiSisaReguler, mKaryCutiPanjang: $mKaryCutiPanjang, mKaryCutiSisaPanjang: $mKaryCutiSisaPanjang, mKaryStatusKaryId: $mKaryStatusKaryId, mKaryLamaKontrakAwal: $mKaryLamaKontrakAwal, mKaryLamaKontrakAkhir: $mKaryLamaKontrakAkhir, mKaryTglMasuk: $mKaryTglMasuk, mKaryTglBerhenti: $mKaryTglBerhenti, mKaryAlasanBerhenti: $mKaryAlasanBerhenti, mKaryUkBaju: $mKaryUkBaju, mKaryUkCelana: $mKaryUkCelana, mKaryUkSepatu: $mKaryUkSepatu, mKaryDesc: $mKaryDesc, mKaryIsActive: $mKaryIsActive, mKaryCreatorId: $mKaryCreatorId, mKaryLastEditorId: $mKaryLastEditorId, mKaryCreatedAt: $mKaryCreatedAt, mKaryUpdatedAt: $mKaryUpdatedAt, mKaryMStandartGajiId: $mKaryMStandartGajiId, mKaryPeriodeGajiId: $mKaryPeriodeGajiId, mKaryRefId: $mKaryRefId, mKaryPresensiLokasiDefaultId: $mKaryPresensiLokasiDefaultId, mKaryExpDateCuti: $mKaryExpDateCuti, mKaryLimitPotong: $mKaryLimitPotong, mKaryAtasanId: $mKaryAtasanId, mKaryCutiP24: $mKaryCutiP24, mKaryCutiSisaP24: $mKaryCutiSisaP24, alasanId: $alasanId, alasanMCompId: $alasanMCompId, alasanMDirId: $alasanMDirId, alasanGroup: $alasanGroup, alasanKey: $alasanKey, alasanCode: $alasanCode, alasanValue: $alasanValue, alasanIsActive: $alasanIsActive, alasanCreatorId: $alasanCreatorId, alasanLastEditorId: $alasanLastEditorId, alasanCreatedAt: $alasanCreatedAt, alasanUpdatedAt: $alasanUpdatedAt, alasanValue2: $alasanValue2, alasanValue3: $alasanValue3, tipeCutiId: $tipeCutiId, tipeCutiMCompId: $tipeCutiMCompId, tipeCutiMDirId: $tipeCutiMDirId, tipeCutiGroup: $tipeCutiGroup, tipeCutiKey: $tipeCutiKey, tipeCutiCode: $tipeCutiCode, tipeCutiValue: $tipeCutiValue, tipeCutiIsActive: $tipeCutiIsActive, tipeCutiCreatorId: $tipeCutiCreatorId, tipeCutiLastEditorId: $tipeCutiLastEditorId, tipeCutiCreatedAt: $tipeCutiCreatedAt, tipeCutiUpdatedAt: $tipeCutiUpdatedAt, tipeCutiValue2: $tipeCutiValue2, tipeCutiValue3: $tipeCutiValue3, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, creatorTelp: $creatorTelp, creatorMKaryId: $creatorMKaryId, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage, lastEditorTelp: $lastEditorTelp, lastEditorMKaryId: $lastEditorMKaryId)';
+    return 'DataListCuti(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, nomor: $nomor, datumMCompId: $datumMCompId, datumMDirId: $datumMDirId, datumMKaryId: $datumMKaryId, datumAlasanId: $datumAlasanId, datumTipeCutiId: $datumTipeCutiId, dateFrom: $dateFrom, dateTo: $dateTo, timeFrom: $timeFrom, timeTo: $timeTo, keterangan: $keterangan, status: $status, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, attachment: $attachment, interval: $interval, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, mDirId: $mDirId, mDirMCompId: $mDirMCompId, mDirNama: $mDirNama, mDirDesc: $mDirDesc, mDirIsActive: $mDirIsActive, mDirCreatorId: $mDirCreatorId, mDirLastEditorId: $mDirLastEditorId, mDirCreatedAt: $mDirCreatedAt, mDirUpdatedAt: $mDirUpdatedAt, mKaryId: $mKaryId, mKaryMCompId: $mKaryMCompId, mKaryMDirId: $mKaryMDirId, mKaryMDivisiId: $mKaryMDivisiId, mKaryMDeptId: $mKaryMDeptId, mKaryMZonaId: $mKaryMZonaId, mKaryGradingId: $mKaryGradingId, mKaryCostcontreId: $mKaryCostcontreId, mKaryKode: $mKaryKode, mKaryMPosisiId: $mKaryMPosisiId, mKaryMJamKerjaId: $mKaryMJamKerjaId, mKaryKodePresensi: $mKaryKodePresensi, mKaryNik: $mKaryNik, mKaryNamaDepan: $mKaryNamaDepan, mKaryNamaBelakang: $mKaryNamaBelakang, mKaryNamaLengkap: $mKaryNamaLengkap, mKaryNamaPanggilan: $mKaryNamaPanggilan, mKaryJkId: $mKaryJkId, mKaryTempatLahir: $mKaryTempatLahir, mKaryTglLahir: $mKaryTglLahir, mKaryProvinsiId: $mKaryProvinsiId, mKaryKotaId: $mKaryKotaId, mKaryKecamatanId: $mKaryKecamatanId, mKaryKodePos: $mKaryKodePos, mKaryAlamatAsli: $mKaryAlamatAsli, mKaryAlamatDomisili: $mKaryAlamatDomisili, mKaryNoTlp: $mKaryNoTlp, mKaryNoTlpLainnya: $mKaryNoTlpLainnya, mKaryNoDarurat: $mKaryNoDarurat, mKaryNamaKontakDarurat: $mKaryNamaKontakDarurat, mKaryAgamaId: $mKaryAgamaId, mKaryGolDarahId: $mKaryGolDarahId, mKaryStatusNikahId: $mKaryStatusNikahId, mKaryTanggunganId: $mKaryTanggunganId, mKaryHubDgnKaryawan: $mKaryHubDgnKaryawan, mKaryCutiJatahReguler: $mKaryCutiJatahReguler, mKaryCutiSisaReguler: $mKaryCutiSisaReguler, mKaryCutiPanjang: $mKaryCutiPanjang, mKaryCutiSisaPanjang: $mKaryCutiSisaPanjang, mKaryStatusKaryId: $mKaryStatusKaryId, mKaryLamaKontrakAwal: $mKaryLamaKontrakAwal, mKaryLamaKontrakAkhir: $mKaryLamaKontrakAkhir, mKaryTglMasuk: $mKaryTglMasuk, mKaryTglBerhenti: $mKaryTglBerhenti, mKaryAlasanBerhenti: $mKaryAlasanBerhenti, mKaryUkBaju: $mKaryUkBaju, mKaryUkCelana: $mKaryUkCelana, mKaryUkSepatu: $mKaryUkSepatu, mKaryDesc: $mKaryDesc, mKaryIsActive: $mKaryIsActive, mKaryCreatorId: $mKaryCreatorId, mKaryLastEditorId: $mKaryLastEditorId, mKaryCreatedAt: $mKaryCreatedAt, mKaryUpdatedAt: $mKaryUpdatedAt, mKaryMStandartGajiId: $mKaryMStandartGajiId, mKaryPeriodeGajiId: $mKaryPeriodeGajiId, mKaryRefId: $mKaryRefId, mKaryPresensiLokasiDefaultId: $mKaryPresensiLokasiDefaultId, mKaryExpDateCuti: $mKaryExpDateCuti, mKaryLimitPotong: $mKaryLimitPotong, mKaryAtasanId: $mKaryAtasanId, mKaryCutiP24: $mKaryCutiP24, mKaryCutiSisaP24: $mKaryCutiSisaP24, alasanId: $alasanId, alasanMCompId: $alasanMCompId, alasanMDirId: $alasanMDirId, alasanGroup: $alasanGroup, alasanKey: $alasanKey, alasanCode: $alasanCode, alasanValue: $alasanValue, alasanIsActive: $alasanIsActive, alasanCreatorId: $alasanCreatorId, alasanLastEditorId: $alasanLastEditorId, alasanCreatedAt: $alasanCreatedAt, alasanUpdatedAt: $alasanUpdatedAt, alasanValue2: $alasanValue2, alasanValue3: $alasanValue3, tipeCutiId: $tipeCutiId, tipeCutiMCompId: $tipeCutiMCompId, tipeCutiMDirId: $tipeCutiMDirId, tipeCutiGroup: $tipeCutiGroup, tipeCutiKey: $tipeCutiKey, tipeCutiCode: $tipeCutiCode, tipeCutiValue: $tipeCutiValue, tipeCutiIsActive: $tipeCutiIsActive, tipeCutiCreatorId: $tipeCutiCreatorId, tipeCutiLastEditorId: $tipeCutiLastEditorId, tipeCutiCreatedAt: $tipeCutiCreatedAt, tipeCutiUpdatedAt: $tipeCutiUpdatedAt, tipeCutiValue2: $tipeCutiValue2, tipeCutiValue3: $tipeCutiValue3, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, creatorTelp: $creatorTelp, creatorMKaryId: $creatorMKaryId, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage, lastEditorTelp: $lastEditorTelp, lastEditorMKaryId: $lastEditorMKaryId, approvalNote: $approvalNote)';
   }
 
   @override
@@ -3691,7 +3709,8 @@ class _$DataListCutiImpl implements _DataListCuti {
             const DeepCollectionEquality().equals(other.lastEditorUpdatedAt, lastEditorUpdatedAt) &&
             const DeepCollectionEquality().equals(other.lastEditorProfilImage, lastEditorProfilImage) &&
             const DeepCollectionEquality().equals(other.lastEditorTelp, lastEditorTelp) &&
-            const DeepCollectionEquality().equals(other.lastEditorMKaryId, lastEditorMKaryId));
+            const DeepCollectionEquality().equals(other.lastEditorMKaryId, lastEditorMKaryId) &&
+            (identical(other.approvalNote, approvalNote) || other.approvalNote == approvalNote));
   }
 
   @JsonKey(ignore: true)
@@ -3862,7 +3881,8 @@ class _$DataListCutiImpl implements _DataListCuti {
         const DeepCollectionEquality().hash(lastEditorUpdatedAt),
         const DeepCollectionEquality().hash(lastEditorProfilImage),
         const DeepCollectionEquality().hash(lastEditorTelp),
-        const DeepCollectionEquality().hash(lastEditorMKaryId)
+        const DeepCollectionEquality().hash(lastEditorMKaryId),
+        approvalNote
       ]);
 
   @JsonKey(ignore: true)
@@ -4066,8 +4086,9 @@ abstract class _DataListCuti implements DataListCuti {
       @JsonKey(name: "last_editor.profil_image")
       final dynamic lastEditorProfilImage,
       @JsonKey(name: "last_editor.telp") final dynamic lastEditorTelp,
-      @JsonKey(name: "last_editor.m_kary_id")
-      final dynamic lastEditorMKaryId}) = _$DataListCutiImpl;
+      @JsonKey(name: "last_editor.m_kary_id") final dynamic lastEditorMKaryId,
+      @JsonKey(name: "approval_note")
+      final String? approvalNote}) = _$DataListCutiImpl;
 
   factory _DataListCuti.fromJson(Map<String, dynamic> json) =
       _$DataListCutiImpl.fromJson;
@@ -4567,6 +4588,9 @@ abstract class _DataListCuti implements DataListCuti {
   @override
   @JsonKey(name: "last_editor.m_kary_id")
   dynamic get lastEditorMKaryId;
+  @override
+  @JsonKey(name: "approval_note")
+  String? get approvalNote;
   @override
   @JsonKey(ignore: true)
   _$$DataListCutiImplCopyWith<_$DataListCutiImpl> get copyWith =>

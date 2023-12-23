@@ -335,6 +335,7 @@ _$DataDinasImpl _$$DataDinasImplFromJson(Map<String, dynamic> json) =>
       lastEditorProfilImage: json['last_editor.profil_image'],
       lastEditorTelp: json['last_editor.telp'],
       lastEditorMKaryId: json['last_editor.m_kary_id'],
+      approvalNote: json['approval_note'] as String?,
     );
 
 Map<String, dynamic> _$$DataDinasImplToJson(_$DataDinasImpl instance) =>
@@ -631,4 +632,5 @@ Map<String, dynamic> _$$DataDinasImplToJson(_$DataDinasImpl instance) =>
       'last_editor.profil_image': instance.lastEditorProfilImage,
       'last_editor.telp': instance.lastEditorTelp,
       'last_editor.m_kary_id': instance.lastEditorMKaryId,
+      'approval_note': instance.approvalNote,
     };

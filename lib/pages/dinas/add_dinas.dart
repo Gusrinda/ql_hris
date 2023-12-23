@@ -59,7 +59,7 @@ class AddDinasPage extends StatefulWidget {
       TextEditingController();
 
   // Direktorat Controller
-  final TextEditingController? idDirektoratController = TextEditingController();
+  final TextEditingController idDirektoratController = TextEditingController();
   final TextEditingController valueDirektoratController =
       TextEditingController();
 
@@ -125,8 +125,9 @@ class _AddDinasPageState extends State<AddDinasPage> {
     _formKeyStep1 = GlobalKey<FormState>();
     _formKeyStep2 = GlobalKey<FormState>();
     _formKeyStep3 = GlobalKey<FormState>();
-
-    // context.read<AddDinasBloc>().add(OnSelectPic(page: 1));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<AddDinasBloc>().add(OnSelectPic());
+    });
   }
 
   List<String> buttonTexts = ['Selanjutnya', 'Selanjutnya', 'Kirim'];
@@ -213,8 +214,8 @@ class _AddDinasPageState extends State<AddDinasPage> {
                         posisi: int.parse(widget.idPosisiController.text),
                         templateSpd:
                             int.parse(widget.idTemplateSpdController.text),
-                        direktorat: 9,
-                            // int.parse(widget.idDirektoratController!.text),
+                        direktorat:
+                            int.parse(widget.idDirektoratController!.text),
                         tanggal: widget.tanggalController.text,
                         tanggalAwal: widget.tanggalAwalController.text,
                         tanggalAkhir: widget.tanggalAkhirController.text,
@@ -387,7 +388,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
           widget.idDirektoratController!.text =
               selectedTemplateSpdValue.mDirId?.toString() ?? '';
 
-          // widget.valuePicController.text =
+          // widget.valueJenisSpdController.text =
           // selectedTemplateSpdValue.?.toString() ?? '';
           //  widget.idPicController.text =
           // selectedTemplateSpdValue.?.toString() ?? '';
@@ -767,19 +768,19 @@ class _AddDinasPageState extends State<AddDinasPage> {
                                           _showDirektorat(context);
                                         },
                                         idController:
-                                            widget.idDirektoratController!,
+                                            widget.idDirektoratController,
                                         valueController:
                                             widget.valueDirektoratController,
                                         labelForm: 'Direktorat',
                                         hintText: 'Pilih Direktorat',
                                         labelTag: 'Label-Direktorat',
                                         formTag: 'Form-Direktorat',
-                                        // validator: (value) {
-                                        //   if (value == null || value.isEmpty) {
-                                        //     return 'Pilih Direktorat';
-                                        //   }
-                                        //   return null;
-                                        // },
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Pilih Direktorat';
+                                          }
+                                          return null;
+                                        },
                                         errorTextStyle:
                                             GoogleFonts.poppins(fontSize: 8),
                                       ),

@@ -205,6 +205,7 @@ _$DataListCutiImpl _$$DataListCutiImplFromJson(Map<String, dynamic> json) =>
       lastEditorProfilImage: json['last_editor.profil_image'],
       lastEditorTelp: json['last_editor.telp'],
       lastEditorMKaryId: json['last_editor.m_kary_id'],
+      approvalNote: json['approval_note'] as String?,
     );
 
 Map<String, dynamic> _$$DataListCutiImplToJson(_$DataListCutiImpl instance) =>
@@ -375,4 +376,5 @@ Map<String, dynamic> _$$DataListCutiImplToJson(_$DataListCutiImpl instance) =>
       'last_editor.profil_image': instance.lastEditorProfilImage,
       'last_editor.telp': instance.lastEditorTelp,
       'last_editor.m_kary_id': instance.lastEditorMKaryId,
+      'approval_note': instance.approvalNote,
     };

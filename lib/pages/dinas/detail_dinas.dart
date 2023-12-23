@@ -219,7 +219,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                 _buildText('Posisi', widget.posisi ?? '-'),
                                 _buildText('Jenis Spd', widget.jenisSpd ?? '-'),
                                 Text(
-                                  'Status',
+                                  'Status Approval',
                                   style: GoogleFonts.poppins(
                                     fontSize: 10,
                                     color: Colors.black,
@@ -232,6 +232,23 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
                                     color: currentColor,
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  'Catatan Approval',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 10,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Text(
+                                   widget.data.approvalNote ?? "-",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                    color: MyColorsConst.darkColor,
                                   ),
                                 ),
                               ],

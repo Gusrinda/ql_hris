@@ -170,11 +170,11 @@ class BiodataKaryawanService {
 
       // Mengirimkan File
       request.files.addAll([
-        await http.MultipartFile.fromPath("ktp_foto", ktpFoto.path),
-        await http.MultipartFile.fromPath("pas_foto", pasFoto.path),
-        await http.MultipartFile.fromPath("kk_foto", kkFoto.path),
-        await http.MultipartFile.fromPath("npwp_foto", npwpFoto.path),
-        await http.MultipartFile.fromPath("bpjs_foto", bpjsFoto.path),
+        // await http.MultipartFile.fromPath("ktp_foto", ktpFoto.path),
+        // await http.MultipartFile.fromPath("pas_foto", pasFoto.path),
+        // await http.MultipartFile.fromPath("kk_foto", kkFoto.path),
+        // await http.MultipartFile.fromPath("npwp_foto", npwpFoto.path),
+        // await http.MultipartFile.fromPath("bpjs_foto", bpjsFoto.path),
         // await http.MultipartFile.fromPath("berkas_lain", berkasLain.path),
       ]);
 
@@ -196,7 +196,7 @@ class BiodataKaryawanService {
       print("Exception: $e");
       return ServicesFailure(
         code: MyGeneralConst.CODE_UNKWON_ERROR,
-        errorResponse: "Unknown Error!\nPlease try again!",
+        errorResponse: "${e}",
       );
     }
   }

@@ -109,8 +109,11 @@ class _CutiPageState extends State<CutiPage> {
   String? jatahCutiTahunan;
   String? jatahCutiMasaKerja;
 
+  @override
   void initState() {
     super.initState();
+    selectedMonth = DateTime.now();
+    selectedYear = DateTime.now();
     loadData();
   }
 
@@ -274,7 +277,7 @@ class _CutiPageState extends State<CutiPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              height: 50.sp,
+                              height: 60.sp,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -286,7 +289,7 @@ class _CutiPageState extends State<CutiPage> {
                                       "Bulan",
                                       style: GoogleFonts.poppins(
                                         color: MyColorsConst.darkColor,
-                                        fontSize: 10,
+                                        fontSize: 12.sp,
                                         fontWeight: FontWeight.normal,
                                       ),
                                     ),
@@ -298,19 +301,14 @@ class _CutiPageState extends State<CutiPage> {
                                             selectedMonth = months;
                                           });
                                           print(
-                                              "ini bulan dipilih ${selectedMonth} ${selectedYear}");
-                                          DateTime newDate;
-                                          if (selectedYear != null) {
-                                            newDate = DateTime(
-                                                selectedYear!.year,
-                                                selectedMonth!.month,
-                                                DateTime.now().day);
-                                          } else {
-                                            newDate = DateTime(
+                                              "Selected month: ${selectedMonth} ${selectedYear}");
+
+                                          DateTime newDate = DateTime(
+                                            selectedYear?.year ??
                                                 DateTime.now().year,
-                                                selectedMonth!.month,
-                                                DateTime.now().day);
-                                          }
+                                            selectedMonth!.month,
+                                            DateTime.now().day,
+                                          );
 
                                           context.read<ListCutiBloc>().add(
                                                 GetListCuti(
@@ -330,7 +328,7 @@ class _CutiPageState extends State<CutiPage> {
                                       "Tahun",
                                       style: GoogleFonts.poppins(
                                         color: MyColorsConst.darkColor,
-                                        fontSize: 10,
+                                        fontSize: 12.sp,
                                         fontWeight: FontWeight.normal,
                                       ),
                                     ),

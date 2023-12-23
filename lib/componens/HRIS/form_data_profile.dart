@@ -316,8 +316,8 @@ class FormInputData extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: !enabled
-                        ? MyColorsConst.disableColor.withOpacity(0.3)
-                        : Colors.transparent,
+                        ? MyColorsConst.disableColor.withOpacity(0.2)
+                        : Colors.white,
                   ),
                   child: TextFormField(
                     style: GoogleFonts.poppins(
@@ -341,8 +341,11 @@ class FormInputData extends StatelessWidget {
                               width: 1.5, color: MyColorsConst.formBorderColor),
                           borderRadius: BorderRadius.circular(10)),
                       focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                              width: 1.5, color: MyColorsConst.primaryColor),
+                          borderSide: BorderSide(
+                              width: 1.5,
+                              color: enabled == true
+                                  ? MyColorsConst.primaryColor
+                                  : MyColorsConst.formBorderColor),
                           borderRadius: BorderRadius.circular(10)),
                       focusedErrorBorder: OutlineInputBorder(
                           borderSide: const BorderSide(

@@ -621,6 +621,8 @@ class DataDinas with _$DataDinas {
         dynamic lastEditorTelp,
         @JsonKey(name: "last_editor.m_kary_id")
         dynamic lastEditorMKaryId,
+        @JsonKey(name: "approval_note")
+        String? approvalNote,
     }) = _DataDinas;
 
     factory DataDinas.fromJson(Map<String, dynamic> json) => _$DataDinasFromJson(json);

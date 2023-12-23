@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -48,33 +49,35 @@ class _MonthPickerState extends State<MonthPicker> {
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 1 / 2.3,
-        height: 30,
+        height: 40.sp,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),
           border: Border.all(color: const Color(0xFFDDDDDD)),
         ),
         child: Row(
           children: [
-            Expanded(
+            Padding(
+              padding: const EdgeInsets.only(left: 15),
               child: Align(
-                alignment: Alignment.center,
+                alignment: Alignment.centerLeft,
                 child: Text(
                   _selectedMonth ?? '',
                   style: GoogleFonts.poppins(
-                    fontSize: 11,
-                    color: Colors.black,
+                    fontSize: 13.sp,
+                    color: MyColorsConst.darkColor,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
             ),
             const Spacer(),
             const Icon(
-              CupertinoIcons.chevron_down,
-              color: Colors.blue,
-              size: 15,
+              Icons.keyboard_arrow_down_rounded,
+              color: MyColorsConst.primaryColor,
+              size: 25,
             ),
-            const SizedBox(
-              width: 10,
+            SizedBox(
+              width: 5,
             ),
           ],
         ),
@@ -91,8 +94,8 @@ class _MonthPickerState extends State<MonthPicker> {
           decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(40.0),
-              topRight: Radius.circular(40.0),
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
             ),
           ),
           child: Column(
@@ -100,7 +103,7 @@ class _MonthPickerState extends State<MonthPicker> {
               Expanded(
                 child: CupertinoPicker(
                   backgroundColor: Colors.transparent,
-                  itemExtent: 32,
+                  itemExtent: 40,
                   onSelectedItemChanged: (int index) {
                     setState(() {
                       _tempSelectedMonth = _months[index];
@@ -111,20 +114,20 @@ class _MonthPickerState extends State<MonthPicker> {
                       child: Text(
                         month,
                         style: GoogleFonts.poppins(
-                          fontSize: 16,
-                        ),
+                            fontSize: 16.sp, fontWeight: FontWeight.w500),
                       ),
                     );
                   }).toList(),
                 ),
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   CupertinoButton(
                     child: Text(
                       'Batal',
                       style: GoogleFonts.poppins(
-                        color: Colors.blue,
+                        color: Colors.red.shade800,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -132,12 +135,11 @@ class _MonthPickerState extends State<MonthPicker> {
                       Navigator.pop(context);
                     },
                   ),
-                  const Spacer(),
                   CupertinoButton(
                     child: Text(
                       'Pilih',
                       style: GoogleFonts.poppins(
-                        color: Colors.blue,
+                        color: MyColorsConst.primaryColor,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -150,6 +152,8 @@ class _MonthPickerState extends State<MonthPicker> {
                             _months.indexOf(_selectedMonth!) + 1,
                             DateTime.now().day,
                           );
+
+                          print(_months.indexOf(_selectedMonth!) + 1);
                         });
                         widget.onTap(_selected, widget.selectedYear);
                       }
@@ -198,33 +202,34 @@ class _YearPickerCustomState extends State<YearPickerCustom> {
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 1 / 2.3,
-        height: 30,
+        height: 40.sp,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(7),
           border: Border.all(color: Color(0xFFDDDDDD)),
         ),
         child: Row(
           children: [
-            Expanded(
+            Padding(
+              padding: const EdgeInsets.only(left: 15),
               child: Align(
-                alignment: Alignment.center,
+                alignment: Alignment.centerLeft,
                 child: Text(
                   _selectedYear != null ? _selectedYear.toString() : '',
                   style: GoogleFonts.poppins(
-                    fontSize: 11,
-                    color: Colors.black,
-                  ),
+                      fontSize: 13.sp,
+                      color: MyColorsConst.darkColor,
+                      fontWeight: FontWeight.w500),
                 ),
               ),
             ),
             const Spacer(),
             const Icon(
-              CupertinoIcons.chevron_down,
+              Icons.keyboard_arrow_down_rounded,
               color: MyColorsConst.primaryColor,
-              size: 15,
+              size: 25,
             ),
             SizedBox(
-              width: 10,
+              width: 5,
             ),
           ],
         ),
@@ -240,8 +245,8 @@ class _YearPickerCustomState extends State<YearPickerCustom> {
           decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(40.0),
-              topRight: Radius.circular(40.0),
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
             ),
           ),
           height: 300,
@@ -250,7 +255,7 @@ class _YearPickerCustomState extends State<YearPickerCustom> {
               Expanded(
                 child: CupertinoPicker(
                   backgroundColor: Colors.transparent,
-                  itemExtent: 32,
+                  itemExtent: 40,
                   onSelectedItemChanged: (int index) {
                     setState(() {
                       _tempSelectedYear = _years[index];
@@ -260,19 +265,21 @@ class _YearPickerCustomState extends State<YearPickerCustom> {
                     return Center(
                       child: Text(
                         year.toString(),
-                        style: GoogleFonts.poppins(fontSize: 16),
+                        style: GoogleFonts.poppins(
+                            fontSize: 16.sp, fontWeight: FontWeight.w500),
                       ),
                     );
                   }).toList(),
                 ),
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   CupertinoButton(
                     child: Text(
                       'Batal',
                       style: GoogleFonts.poppins(
-                        color: Colors.blue,
+                        color: Colors.red.shade800,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -280,12 +287,11 @@ class _YearPickerCustomState extends State<YearPickerCustom> {
                       Navigator.pop(context);
                     },
                   ),
-                  const Spacer(),
                   CupertinoButton(
                     child: Text(
                       'Pilih',
                       style: GoogleFonts.poppins(
-                        color: Colors.blue,
+                        color: MyColorsConst.primaryColor,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -295,19 +301,21 @@ class _YearPickerCustomState extends State<YearPickerCustom> {
                           _selectedYear = _tempSelectedYear;
                           if (widget.selectedMonth != null) {
                             _selected = DateTime(
-                                _selectedYear!,
-                                widget.selectedMonth!.month + 1,
-                                DateTime.now().day);
+                              _selectedYear!,
+                              widget.selectedMonth!.month - 1,
+                              DateTime.now().day,
+                            );
                           } else {
                             _selected = DateTime(
                               _selectedYear!,
-                              DateTime.now().month + 1,
+                              DateTime.now().month - 1,
                               DateTime.now().day,
                             );
                           }
                         });
                         widget.onTap(_selected, widget.selectedMonth);
                       }
+
                       Navigator.pop(context);
                     },
                   ),
