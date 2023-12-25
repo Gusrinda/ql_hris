@@ -124,6 +124,10 @@ class Trx with _$Trx {
     @JsonKey(name: "jam_selesai") String? jamSelesai,
     @JsonKey(name: "no_doc") String? noDoc,
     @JsonKey(name: "doc") dynamic doc,
+    @JsonKey(name: "interval") int? interval,
+    @JsonKey(name: "interval_min") int? intervalMin,
+    @JsonKey(name: "time_from") dynamic timeFrom,
+    @JsonKey(name: "time_to") dynamic timeTo,
   }) = _Trx;
 
   factory Trx.fromJson(Map<String, dynamic> json) => _$TrxFromJson(json);

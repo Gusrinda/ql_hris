@@ -171,7 +171,7 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                             },
                                             child: Container(
                                               margin: EdgeInsets.only(
-                                                  bottom: 10.sp),
+                                                  bottom: 5.sp),
                                               padding: EdgeInsets.symmetric(
                                                 horizontal: 12.sp,
                                                 vertical: 10.sp,
@@ -190,15 +190,15 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                   Container(
                                                     padding: EdgeInsets.all(10),
                                                     decoration: BoxDecoration(
-                                                        color: MyColorsConst
-                                                            .redColor
+                                                        color: Colors
+                                                            .green.shade700
                                                             .withOpacity(0.2),
                                                         shape: BoxShape.circle),
                                                     child: Icon(
                                                       CupertinoIcons
-                                                          .doc_text_fill,
-                                                      color: MyColorsConst
-                                                          .redColor,
+                                                          .doc_chart_fill,
+                                                      color:
+                                                          Colors.green.shade700,
                                                     ),
                                                   ),
                                                   SizedBox(width: 10.sp),
@@ -208,7 +208,7 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                             .start,
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
-                                                            .center,
+                                                            .spaceEvenly,
                                                     children: [
                                                       Text(
                                                         "${dataRealisasiDinas.nomor ?? '-'}",
@@ -220,7 +220,7 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                                         .w600),
                                                       ),
                                                       Text(
-                                                        "${dataRealisasiDinas.totalBiayaSelisih ?? '-'}",
+                                                        "${dataRealisasiDinas.creatorName ?? '-'}",
                                                         style: GoogleFonts.poppins(
                                                             fontSize: 12.sp,
                                                             fontWeight:
@@ -228,14 +228,26 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                             color: MyColorsConst
                                                                 .darkColor),
                                                       ),
+                                                      // Text(
+                                                      //   "${dataRealisasiDinas.totalBiayaSelisih ?? '-'}",
+                                                      //   style: GoogleFonts.poppins(
+                                                      //       fontSize: 12.sp,
+                                                      //       fontWeight:
+                                                      //           FontWeight.w500,
+                                                      //       color: MyColorsConst
+                                                      //           .darkColor),
+                                                      // ),
                                                       Text(
-                                                        "${dataRealisasiDinas.tSpdTglAcaraAwal ?? '-'}",
-                                                        style: GoogleFonts.poppins(
-                                                            fontSize: 10.sp,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: MyColorsConst
-                                                                .lightDarkColor),
+                                                        "${dataRealisasiDinas.tSpdTglAcaraAwal ?? '-'} - ${dataRealisasiDinas.tSpdTglAcaraAkhir ?? '-'}",
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                fontSize: 10.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                color: Colors
+                                                                    .grey
+                                                                    .shade600),
                                                       )
                                                     ],
                                                   )
@@ -268,7 +280,9 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                 builder: (context) {
                   return BlocProvider(
                     create: (context) => AddRealisasiDinasBloc(),
-                    child: AddRealisasiDinasPage(reloadDataCallback: loadData,),
+                    child: AddRealisasiDinasPage(
+                      reloadDataCallback: loadData,
+                    ),
                   );
                 },
               ),

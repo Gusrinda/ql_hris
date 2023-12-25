@@ -193,6 +193,10 @@ _$TrxImpl _$$TrxImplFromJson(Map<String, dynamic> json) => _$TrxImpl(
       jamSelesai: json['jam_selesai'] as String?,
       noDoc: json['no_doc'] as String?,
       doc: json['doc'],
+      interval: json['interval'] as int?,
+      intervalMin: json['interval_min'] as int?,
+      timeFrom: json['time_from'],
+      timeTo: json['time_to'],
     );
 
 Map<String, dynamic> _$$TrxImplToJson(_$TrxImpl instance) => <String, dynamic>{
@@ -227,4 +231,8 @@ Map<String, dynamic> _$$TrxImplToJson(_$TrxImpl instance) => <String, dynamic>{
       'jam_selesai': instance.jamSelesai,
       'no_doc': instance.noDoc,
       'doc': instance.doc,
+      'interval': instance.interval,
+      'interval_min': instance.intervalMin,
+      'time_from': instance.timeFrom,
+      'time_to': instance.timeTo,
     };

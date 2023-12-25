@@ -505,34 +505,78 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                             height: 20.sp,
                                           ),
                                         },
-                                        Text.rich(
-                                          TextSpan(
-                                            text: 'Cuti selama : ',
-                                            style: GoogleFonts.poppins(
-                                              fontSize: 13.sp,
-                                              color: MyColorsConst.darkColor,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                            children: [
-                                              TextSpan(
-                                                text: weekdaysCount.toString(),
-                                                style: GoogleFonts.poppins(
-                                                  fontSize: 18.sp,
-                                                  color: Colors.red.shade600,
-                                                  fontWeight: FontWeight.w700,
-                                                ),
+                                        if (selectedTipeValue == "P24") ...{
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'Cuti P24 selama : ',
+                                              style: GoogleFonts.poppins(
+                                                fontSize: 13.sp,
+                                                color: MyColorsConst.darkColor,
+                                                fontWeight: FontWeight.w600,
                                               ),
-                                              TextSpan(
-                                                text: ' hari',
-                                                style: GoogleFonts.poppins(
-                                                  fontSize: 13.sp,
-                                                  color: Colors.red.shade600,
-                                                  fontWeight: FontWeight.w700,
+                                              children: [
+                                                TextSpan(
+                                                  text: _calculateMinutes()
+                                                      .toString(),
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 18.sp,
+                                                    color: Colors.red.shade600,
+                                                    fontWeight: FontWeight.w700,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text: ' Menit',
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 13.sp,
+                                                    color: Colors.red.shade600,
+                                                    fontWeight: FontWeight.w700,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        } else ...{
+                                          Row(
+                                            children: [
+                                              Text.rich(
+                                                TextSpan(
+                                                  text: 'Cuti selama : ',
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 13.sp,
+                                                    color:
+                                                        MyColorsConst.darkColor,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                  children: [
+                                                    TextSpan(
+                                                      text: weekdaysCount
+                                                          .toString(),
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 18.sp,
+                                                        color:
+                                                            Colors.red.shade600,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                      ),
+                                                    ),
+                                                    TextSpan(
+                                                      text: ' hari',
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 13.sp,
+                                                        color:
+                                                            Colors.red.shade600,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ],
                                           ),
-                                        ),
+                                        },
                                         SizedBox(
                                           height: 20.sp,
                                         ),
@@ -635,6 +679,25 @@ class _AddCutiPageState extends State<AddCutiPage> {
     }
   }
 
+  int _calculateMinutes() {
+    if (selectedTimeFrom != null && selectedTimeTo != null) {
+      int minutesDifference = calculateMinutesDifference(
+          selectedTimeFrom as TimeOfDay, selectedTimeTo! as TimeOfDay);
+      print("Selisih waktu dalam menit: $minutesDifference menit");
+      return minutesDifference;
+    } else {
+      print("Pilih waktu mulai dan waktu berakhir terlebih dahulu.");
+      return 0; // or any default value you prefer
+    }
+  }
+
+  int calculateMinutesDifference(TimeOfDay from, TimeOfDay to) {
+    int fromMinutes = from.hour * 60 + from.minute;
+    int toMinutes = to.hour * 60 + to.minute;
+
+    return toMinutes - fromMinutes;
+  }
+
   Widget _buildDateTextField(
     String hintText,
     TextEditingController controller,
@@ -669,6 +732,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
             });
             print("Selected Date To: $selectedDateTo");
             _calculateWeekdays();
+            _calculateMinutes();
           }
         }
       },
@@ -705,65 +769,63 @@ class _AddCutiPageState extends State<AddCutiPage> {
     );
   }
 
-Widget _buildTimeTextField(
-  String hintText,
-  TextEditingController controller,
-  TimeOfDay? selectedTime,
-  Function(TimeOfDay) onTimeSelected,
-) {
-  return InkWell(
-    onTap: () async {
-      final TimeOfDay? pickedTime = await showTimePicker(
-        context: context,
-        initialTime: selectedTime ?? TimeOfDay.now(),
-      );
+  Widget _buildTimeTextField(
+    String hintText,
+    TextEditingController controller,
+    TimeOfDay? selectedTime,
+    Function(TimeOfDay) onTimeSelected,
+  ) {
+    return InkWell(
+      onTap: () async {
+        final TimeOfDay? pickedTime = await showTimePicker(
+          context: context,
+          initialTime: selectedTime ?? TimeOfDay.now(),
+        );
 
-      if (pickedTime != null) {
-        onTimeSelected(pickedTime);
+        if (pickedTime != null) {
+          onTimeSelected(pickedTime);
 
-        String formattedHour = pickedTime.hour.toString().padLeft(2, '0');
-        String formattedMinute = pickedTime.minute.toString().padLeft(2, '0');
-        String formattedTime = '$formattedHour:$formattedMinute';
+          String formattedHour = pickedTime.hour.toString().padLeft(2, '0');
+          String formattedMinute = pickedTime.minute.toString().padLeft(2, '0');
+          String formattedTime = '$formattedHour:$formattedMinute';
 
-        controller.text = formattedTime;
-      }
-    },
-    child: Container(
-      padding: const EdgeInsets.all(18.0),
-      decoration: BoxDecoration(
-        border: Border.all(color: Color(0xFFDDDDDD)),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            selectedTime != null
-                ? _formatTime(selectedTime)
-                : hintText,
-            style: GoogleFonts.poppins(
-              fontSize: selectedTime != null ? 13.sp : 9.sp,
-              fontWeight:
-                  selectedTime != null ? FontWeight.w500 : FontWeight.w400,
-              color: selectedTime != null
-                  ? MyColorsConst.darkColor
-                  : MyColorsConst.disableColor,
+          controller.text = formattedTime;
+        }
+      },
+      child: Container(
+        padding: const EdgeInsets.all(18.0),
+        decoration: BoxDecoration(
+          border: Border.all(color: Color(0xFFDDDDDD)),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              selectedTime != null ? _formatTime(selectedTime) : hintText,
+              style: GoogleFonts.poppins(
+                fontSize: selectedTime != null ? 13.sp : 9.sp,
+                fontWeight:
+                    selectedTime != null ? FontWeight.w500 : FontWeight.w400,
+                color: selectedTime != null
+                    ? MyColorsConst.darkColor
+                    : MyColorsConst.disableColor,
+              ),
             ),
-          ),
-          Icon(
-            CupertinoIcons.clock_fill,
-            color: MyColorsConst.primaryColor,
-            size: 20.sp,
-          ),
-        ],
+            Icon(
+              CupertinoIcons.clock_fill,
+              color: MyColorsConst.primaryColor,
+              size: 20.sp,
+            ),
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
-String _formatTime(TimeOfDay timeOfDay) {
-  final DateTime dateTime = DateTime(2023, 1, 1, timeOfDay.hour, timeOfDay.minute);
-  return DateFormat.Hm().format(dateTime);
-}
-
+  String _formatTime(TimeOfDay timeOfDay) {
+    final DateTime dateTime =
+        DateTime(2023, 1, 1, timeOfDay.hour, timeOfDay.minute);
+    return DateFormat.Hm().format(dateTime);
+  }
 }

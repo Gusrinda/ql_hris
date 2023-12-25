@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -49,30 +51,49 @@ class AuthenticationLayout extends StatelessWidget {
       //       ),
       body: SingleChildScrollView(
         child: Container(
-          // height: size.height.sp,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.centerRight,
+              colors: [
+                MyColorsConst.primaryColor,
+                MyColorsConst.whiteColor,
+              ],
+            ),
+          ),
+          height: size.height.sp,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                height: 180.sp,
-                child: Image.asset(
-                  fit: BoxFit.fill,
-                  width: MediaQuery.of(context).size.width,
-                  layoutData[layoutState.index]["image"] as String,
-                  // fit: BoxFit.fitWidth,
-                ),
-              ),
+              // Container(
+              //   height: 180.sp,
+              //   child: Image.asset(
+              //     fit: BoxFit.fill,
+              //     width: MediaQuery.of(context).size.width,
+              //     layoutData[layoutState.index]["image"] as String,
+              //     // fit: BoxFit.fitWidth,
+              //   ),
+              // ),
+              SizedBox(),
               SizedBox(
-                height: 180.sp,
+                height: 200.sp,
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Image.asset(
-                        width: size.width * 1 / 3,
-                        layoutData[layoutState.index]["image2"] as String,
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(6)
+                        ),
+                        child: Image.asset(
+                          width: size.width * 1 / 3,
+                          layoutData[layoutState.index]["image2"] as String,
+                        ),
                       ),
                       SizedBox(height: 30.sp),
                       Text(
@@ -85,17 +106,16 @@ class AuthenticationLayout extends StatelessWidget {
                       Text(
                         "#SJGWARRIOR",
                         style: GoogleFonts.poppins(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
-                          fontStyle: FontStyle.italic
-                        ),
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.italic),
                       ),
                       SizedBox(height: 10.sp),
                       Text(
                         layoutData[layoutState.index]["subTitle"] as String,
                         style: GoogleFonts.poppins(
-                          color: MyColorsConst.lightDarkColor,
-                          fontSize: 12.sp,
+                          color: Colors.grey.shade100,
+                          fontSize: 13.sp,
                         ),
                       ),
                     ],
@@ -116,14 +136,14 @@ class AuthenticationLayout extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                width: MediaQuery.of(context).size.width,
-                child: Image.asset(
-                  layoutData[layoutState.index]["imageBottom"] as String,
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
+              // Container(
+              //   alignment: Alignment.bottomCenter,
+              //   width: MediaQuery.of(context).size.width,
+              //   child: Image.asset(
+              //     layoutData[layoutState.index]["imageBottom"] as String,
+              //     fit: BoxFit.fitWidth,
+              //   ),
+              // ),
             ],
           ),
         ),

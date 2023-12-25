@@ -1852,6 +1852,14 @@ mixin _$Trx {
   String? get noDoc => throw _privateConstructorUsedError;
   @JsonKey(name: "doc")
   dynamic get doc => throw _privateConstructorUsedError;
+  @JsonKey(name: "interval")
+  int? get interval => throw _privateConstructorUsedError;
+  @JsonKey(name: "interval_min")
+  int? get intervalMin => throw _privateConstructorUsedError;
+  @JsonKey(name: "time_from")
+  dynamic get timeFrom => throw _privateConstructorUsedError;
+  @JsonKey(name: "time_to")
+  dynamic get timeTo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1894,7 +1902,11 @@ abstract class $TrxCopyWith<$Res> {
       @JsonKey(name: "jam_mulai") String? jamMulai,
       @JsonKey(name: "jam_selesai") String? jamSelesai,
       @JsonKey(name: "no_doc") String? noDoc,
-      @JsonKey(name: "doc") dynamic doc});
+      @JsonKey(name: "doc") dynamic doc,
+      @JsonKey(name: "interval") int? interval,
+      @JsonKey(name: "interval_min") int? intervalMin,
+      @JsonKey(name: "time_from") dynamic timeFrom,
+      @JsonKey(name: "time_to") dynamic timeTo});
 }
 
 /// @nodoc
@@ -1940,6 +1952,10 @@ class _$TrxCopyWithImpl<$Res, $Val extends Trx> implements $TrxCopyWith<$Res> {
     Object? jamSelesai = freezed,
     Object? noDoc = freezed,
     Object? doc = freezed,
+    Object? interval = freezed,
+    Object? intervalMin = freezed,
+    Object? timeFrom = freezed,
+    Object? timeTo = freezed,
   }) {
     return _then(_value.copyWith(
       nomor: freezed == nomor
@@ -2066,6 +2082,22 @@ class _$TrxCopyWithImpl<$Res, $Val extends Trx> implements $TrxCopyWith<$Res> {
           ? _value.doc
           : doc // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      interval: freezed == interval
+          ? _value.interval
+          : interval // ignore: cast_nullable_to_non_nullable
+              as int?,
+      intervalMin: freezed == intervalMin
+          ? _value.intervalMin
+          : intervalMin // ignore: cast_nullable_to_non_nullable
+              as int?,
+      timeFrom: freezed == timeFrom
+          ? _value.timeFrom
+          : timeFrom // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      timeTo: freezed == timeTo
+          ? _value.timeTo
+          : timeTo // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ) as $Val);
   }
 }
@@ -2107,7 +2139,11 @@ abstract class _$$TrxImplCopyWith<$Res> implements $TrxCopyWith<$Res> {
       @JsonKey(name: "jam_mulai") String? jamMulai,
       @JsonKey(name: "jam_selesai") String? jamSelesai,
       @JsonKey(name: "no_doc") String? noDoc,
-      @JsonKey(name: "doc") dynamic doc});
+      @JsonKey(name: "doc") dynamic doc,
+      @JsonKey(name: "interval") int? interval,
+      @JsonKey(name: "interval_min") int? intervalMin,
+      @JsonKey(name: "time_from") dynamic timeFrom,
+      @JsonKey(name: "time_to") dynamic timeTo});
 }
 
 /// @nodoc
@@ -2150,6 +2186,10 @@ class __$$TrxImplCopyWithImpl<$Res> extends _$TrxCopyWithImpl<$Res, _$TrxImpl>
     Object? jamSelesai = freezed,
     Object? noDoc = freezed,
     Object? doc = freezed,
+    Object? interval = freezed,
+    Object? intervalMin = freezed,
+    Object? timeFrom = freezed,
+    Object? timeTo = freezed,
   }) {
     return _then(_$TrxImpl(
       nomor: freezed == nomor
@@ -2276,6 +2316,22 @@ class __$$TrxImplCopyWithImpl<$Res> extends _$TrxCopyWithImpl<$Res, _$TrxImpl>
           ? _value.doc
           : doc // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      interval: freezed == interval
+          ? _value.interval
+          : interval // ignore: cast_nullable_to_non_nullable
+              as int?,
+      intervalMin: freezed == intervalMin
+          ? _value.intervalMin
+          : intervalMin // ignore: cast_nullable_to_non_nullable
+              as int?,
+      timeFrom: freezed == timeFrom
+          ? _value.timeFrom
+          : timeFrom // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      timeTo: freezed == timeTo
+          ? _value.timeTo
+          : timeTo // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
@@ -2314,7 +2370,11 @@ class _$TrxImpl implements _Trx {
       @JsonKey(name: "jam_mulai") this.jamMulai,
       @JsonKey(name: "jam_selesai") this.jamSelesai,
       @JsonKey(name: "no_doc") this.noDoc,
-      @JsonKey(name: "doc") this.doc});
+      @JsonKey(name: "doc") this.doc,
+      @JsonKey(name: "interval") this.interval,
+      @JsonKey(name: "interval_min") this.intervalMin,
+      @JsonKey(name: "time_from") this.timeFrom,
+      @JsonKey(name: "time_to") this.timeTo});
 
   factory _$TrxImpl.fromJson(Map<String, dynamic> json) =>
       _$$TrxImplFromJson(json);
@@ -2412,10 +2472,22 @@ class _$TrxImpl implements _Trx {
   @override
   @JsonKey(name: "doc")
   final dynamic doc;
+  @override
+  @JsonKey(name: "interval")
+  final int? interval;
+  @override
+  @JsonKey(name: "interval_min")
+  final int? intervalMin;
+  @override
+  @JsonKey(name: "time_from")
+  final dynamic timeFrom;
+  @override
+  @JsonKey(name: "time_to")
+  final dynamic timeTo;
 
   @override
   String toString() {
-    return 'Trx(nomor: $nomor, tanggal: $tanggal, tglAcaraAwal: $tglAcaraAwal, tglAcaraAkhir: $tglAcaraAkhir, jenisSpdId: $jenisSpdId, jenisSpd: $jenisSpd, mZonaAsalId: $mZonaAsalId, zonaAsal: $zonaAsal, mZonaTujuanId: $mZonaTujuanId, zonaTujuan: $zonaTujuan, mLokasiTujuanId: $mLokasiTujuanId, lokasi: $lokasi, mKaryId: $mKaryId, namaKary: $namaKary, picId: $picId, namaPic: $namaPic, totalBiaya: $totalBiaya, tipeCuti: $tipeCuti, alasanCuti: $alasanCuti, kegiatan: $kegiatan, keterangan: $keterangan, status: $status, alasanId: $alasanId, alasan: $alasan, tipeCutiId: $tipeCutiId, dateFrom: $dateFrom, dateTo: $dateTo, jamMulai: $jamMulai, jamSelesai: $jamSelesai, noDoc: $noDoc, doc: $doc)';
+    return 'Trx(nomor: $nomor, tanggal: $tanggal, tglAcaraAwal: $tglAcaraAwal, tglAcaraAkhir: $tglAcaraAkhir, jenisSpdId: $jenisSpdId, jenisSpd: $jenisSpd, mZonaAsalId: $mZonaAsalId, zonaAsal: $zonaAsal, mZonaTujuanId: $mZonaTujuanId, zonaTujuan: $zonaTujuan, mLokasiTujuanId: $mLokasiTujuanId, lokasi: $lokasi, mKaryId: $mKaryId, namaKary: $namaKary, picId: $picId, namaPic: $namaPic, totalBiaya: $totalBiaya, tipeCuti: $tipeCuti, alasanCuti: $alasanCuti, kegiatan: $kegiatan, keterangan: $keterangan, status: $status, alasanId: $alasanId, alasan: $alasan, tipeCutiId: $tipeCutiId, dateFrom: $dateFrom, dateTo: $dateTo, jamMulai: $jamMulai, jamSelesai: $jamSelesai, noDoc: $noDoc, doc: $doc, interval: $interval, intervalMin: $intervalMin, timeFrom: $timeFrom, timeTo: $timeTo)';
   }
 
   @override
@@ -2472,7 +2544,13 @@ class _$TrxImpl implements _Trx {
             (identical(other.jamSelesai, jamSelesai) ||
                 other.jamSelesai == jamSelesai) &&
             (identical(other.noDoc, noDoc) || other.noDoc == noDoc) &&
-            const DeepCollectionEquality().equals(other.doc, doc));
+            const DeepCollectionEquality().equals(other.doc, doc) &&
+            (identical(other.interval, interval) ||
+                other.interval == interval) &&
+            (identical(other.intervalMin, intervalMin) ||
+                other.intervalMin == intervalMin) &&
+            const DeepCollectionEquality().equals(other.timeFrom, timeFrom) &&
+            const DeepCollectionEquality().equals(other.timeTo, timeTo));
   }
 
   @JsonKey(ignore: true)
@@ -2509,7 +2587,11 @@ class _$TrxImpl implements _Trx {
         jamMulai,
         jamSelesai,
         noDoc,
-        const DeepCollectionEquality().hash(doc)
+        const DeepCollectionEquality().hash(doc),
+        interval,
+        intervalMin,
+        const DeepCollectionEquality().hash(timeFrom),
+        const DeepCollectionEquality().hash(timeTo)
       ]);
 
   @JsonKey(ignore: true)
@@ -2558,7 +2640,11 @@ abstract class _Trx implements Trx {
       @JsonKey(name: "jam_mulai") final String? jamMulai,
       @JsonKey(name: "jam_selesai") final String? jamSelesai,
       @JsonKey(name: "no_doc") final String? noDoc,
-      @JsonKey(name: "doc") final dynamic doc}) = _$TrxImpl;
+      @JsonKey(name: "doc") final dynamic doc,
+      @JsonKey(name: "interval") final int? interval,
+      @JsonKey(name: "interval_min") final int? intervalMin,
+      @JsonKey(name: "time_from") final dynamic timeFrom,
+      @JsonKey(name: "time_to") final dynamic timeTo}) = _$TrxImpl;
 
   factory _Trx.fromJson(Map<String, dynamic> json) = _$TrxImpl.fromJson;
 
@@ -2655,6 +2741,18 @@ abstract class _Trx implements Trx {
   @override
   @JsonKey(name: "doc")
   dynamic get doc;
+  @override
+  @JsonKey(name: "interval")
+  int? get interval;
+  @override
+  @JsonKey(name: "interval_min")
+  int? get intervalMin;
+  @override
+  @JsonKey(name: "time_from")
+  dynamic get timeFrom;
+  @override
+  @JsonKey(name: "time_to")
+  dynamic get timeTo;
   @override
   @JsonKey(ignore: true)
   _$$TrxImplCopyWith<_$TrxImpl> get copyWith =>

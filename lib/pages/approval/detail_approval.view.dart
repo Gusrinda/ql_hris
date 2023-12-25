@@ -83,6 +83,21 @@ class _DetailApprovalState extends State<DetailApproval> {
       return '';
     }
 
+    String convertMinutesToHours(int minutes) {
+      if (minutes < 60) {
+        return "$minutes Menit";
+      } else {
+        int hours = minutes ~/ 60;
+        int remainingMinutes = minutes % 60;
+
+        if (remainingMinutes == 0) {
+          return "$hours Jam";
+        } else {
+          return "$hours Jam $remainingMinutes Menit";
+        }
+      }
+    }
+
     return BlocListener<ApprovalBloc, ApprovalState>(
       listener: (context, state) async {
         if (state is DetailApprovalLoading) {
@@ -300,17 +315,6 @@ class _DetailApprovalState extends State<DetailApproval> {
                                               dataTRX!.tanggal.toString())),
 
                                     // SPD
-                                    if (dataTRX?.tglAcaraAwal != null)
-                                      buildInfoText(
-                                          'Tanggal Acara Awal',
-                                          _formatDate(dataTRX!.tglAcaraAwal
-                                              .toString())),
-
-                                    if (dataTRX?.tglAcaraAkhir != null)
-                                      buildInfoText(
-                                          'Hari, Tanggal Acara Akhir',
-                                          _formatDate(dataTRX!.tglAcaraAkhir
-                                              .toString())),
 
                                     if (dataTRX?.jenisSpdId != null)
                                       buildInfoText('Jenis SPD',
@@ -339,6 +343,18 @@ class _DetailApprovalState extends State<DetailApproval> {
                                     if (dataTRX?.kegiatan != null)
                                       buildInfoText('Kegiatan',
                                           dataTRX!.kegiatan.toString()),
+
+                                    if (dataTRX?.tglAcaraAwal != null)
+                                      buildInfoText(
+                                          'Tanggal Acara Awal',
+                                          _formatDate(dataTRX!.tglAcaraAwal
+                                              .toString())),
+
+                                    if (dataTRX?.tglAcaraAkhir != null)
+                                      buildInfoText(
+                                          'Hari, Tanggal Acara Akhir',
+                                          _formatDate(dataTRX!.tglAcaraAkhir
+                                              .toString())),
 
                                     // Lembur
                                     if (dataTRX?.jamMulai != null)
@@ -375,6 +391,14 @@ class _DetailApprovalState extends State<DetailApproval> {
                                               dataTRX!.dateTo.toString())),
 
                                     // All
+                                    if (dataTRX?.interval != null)
+                                      buildInfoText('Durasi Hari',
+                                          "${dataTRX!.interval.toString()} Hari"),
+
+                                    if (dataTRX?.intervalMin != null)
+                                      buildInfoText('Durasi Waktu',
+                                          convertMinutesToHours(dataTRX!.intervalMin?.toInt() ?? 0)),
+
                                     if (dataTRX?.keterangan != null)
                                       buildInfoText('Keterangan',
                                           dataTRX!.keterangan.toString()),

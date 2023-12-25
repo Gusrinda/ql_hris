@@ -264,8 +264,10 @@ class FormInputData extends StatelessWidget {
     required this.hintText,
     this.showRedStar = true,
     this.inputType = TextInputType.text,
+    this.onChanged
   }) : super(key: key);
 
+  final ValueChanged<String?>? onChanged;
   final bool enabled;
   final String input;
   final String labelForm;
@@ -359,6 +361,7 @@ class FormInputData extends StatelessWidget {
                       contentPadding: EdgeInsets.all(18.sp),
                       errorStyle: GoogleFonts.poppins(fontSize: 10.sp),
                     ),
+                    onChanged: onChanged,
                     onTap: onTap,
                     controller: controller,
                     textInputAction: TextInputAction.next,

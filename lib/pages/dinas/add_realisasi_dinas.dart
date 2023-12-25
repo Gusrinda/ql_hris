@@ -245,6 +245,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
             ),
           );
           Navigator.of(context).pop();
+          Navigator.pop(context);
           widget.reloadDataCallback();
         } else if (state is AddRealisasiDinasFailed) {
           LoadingDialog.dismissDialog(context);
@@ -342,21 +343,21 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              FormInputData(
-                                input: '',
-                                onTap: () {},
-                                controller: widget.nomorController,
-                                hintText: 'Nomor',
-                                labelTag: 'Label-NomorRspd',
-                                formTag: 'Form-NomorRspd',
-                                labelForm: 'Nomor',
-                                validator: (value) {
-                                  return null;
-                                },
-                                enabled: false,
-                                errorTextStyle:
-                                    GoogleFonts.poppins(fontSize: 8),
-                              ),
+                              // FormInputData(
+                              //   input: '',
+                              //   onTap: () {},
+                              //   controller: widget.nomorController,
+                              //   hintText: 'Nomor',
+                              //   labelTag: 'Label-NomorRspd',
+                              //   formTag: 'Form-NomorRspd',
+                              //   labelForm: 'Nomor',
+                              //   validator: (value) {
+                              //     return null;
+                              //   },
+                              //   enabled: false,
+                              //   errorTextStyle:
+                              //       GoogleFonts.poppins(fontSize: 8),
+                              // ),
                               FormDropDownData(
                                 input: '',
                                 onTap: () {
@@ -554,25 +555,40 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 errorTextStyle:
                                     GoogleFonts.poppins(fontSize: 8),
                               ),
-                              FormInputData(
-                                inputType: TextInputType.number,
-                                input: '',
-                                onTap: () {},
-                                enabled: false,
-                                controller:
-                                    widget.totalBiayaRencanaSelisihController,
-                                hintText: 'Total Biaya Rencana Selisih',
-                                labelTag: 'Label-TotalBRS',
-                                formTag: 'Form-TotalBRS',
-                                labelForm: 'Total Biaya Rencana Selisih',
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Pilih Alasan Cuti';
-                                  }
-                                  return null;
-                                },
-                                errorTextStyle:
-                                    GoogleFonts.poppins(fontSize: 10.sp),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 7,
+                                    child: FormInputData(
+                                      inputType: TextInputType.number,
+                                      input: '',
+                                      onTap: () {},
+                                      enabled: false,
+                                      controller: widget
+                                          .totalBiayaRencanaSelisihController,
+                                      hintText: 'Total Biaya Rencana Selisih',
+                                      labelTag: 'Label-TotalBRS',
+                                      formTag: 'Form-TotalBRS',
+                                      labelForm: 'Total Biaya Rencana Selisih',
+                                      onChanged: (value) {
+                                        onDataChanged();
+                                      },
+                                      validator: (value) {},
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 10.sp),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: SizedBox(
+                                      child: IconButton(
+                                          onPressed: () {
+                                            onDataChanged();
+                                          },
+                                          icon: Icon(Icons.calculate)),
+                                    ),
+                                  )
+                                ],
                               ),
                               FormInputData(
                                 input: '',
@@ -582,7 +598,12 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 labelTag: 'Label-KeteranganUtama',
                                 formTag: 'Form-KeteranganUtama',
                                 labelForm: 'Keterangan',
-                                validator: (value) {},
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Belum isi keterangan';
+                                  }
+                                  return null;
+                                },
                                 errorTextStyle:
                                     GoogleFonts.poppins(fontSize: 8),
                               ),
@@ -698,6 +719,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 onPressed: () {
                                   setState(() {
                                     expenseDetails.add(ExpenseDetail());
+                                    onDataChanged();
                                   });
                                 },
                                 child: Text('Tambah Biaya'),
@@ -760,16 +782,20 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                                                       "false"
                                                                   ? 0
                                                                   : 1,
+                                                          "biaya": expense
+                                                              .costController
+                                                              .value
+                                                              .text,
                                                           "biaya_realisasi": expense
                                                               .biayaRealisasiController
                                                               .value
                                                               .text,
-                                                          "detail_transport":
+                                                          "keterangan":
                                                               expense
                                                                   .descriptionController
                                                                   .value
                                                                   .text,
-                                                          "catatan_realisas":
+                                                          "catatan_realisasi":
                                                               expense
                                                                   .catatanRealisasiController
                                                                   .value
@@ -794,6 +820,27 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
         ),
       ),
     );
+  }
+
+  double calculateTotalCost() {
+    double totalCost = 0.0;
+
+    // Iterate through each expense detail and sum up the costs
+    for (var expense in expenseDetails) {
+      double biayaRealisasi =
+          double.tryParse(expense.biayaRealisasiController.text) ?? 0.0;
+      totalCost += biayaRealisasi;
+    }
+
+    return totalCost;
+  }
+
+  void onDataChanged() {
+    // Call the function to calculate the total cost
+    double totalCost = calculateTotalCost();
+
+    // Update the totalBiayaRencanaSelisihController
+    widget.totalBiayaRencanaSelisihController.text = totalCost.toString();
   }
 }
 
@@ -891,6 +938,7 @@ class _DynamicFormFieldState extends State<DynamicFormField> {
           labelTag: 'Label-Biaya${widget.indexForm}',
           formTag: 'Form-Biaya${widget.indexForm}',
           labelForm: 'Biaya',
+          inputType: TextInputType.number,
           validator: (value) {},
           enabled: true, // Sesuaikan dengan kebutuhan
           errorTextStyle: GoogleFonts.poppins(fontSize: 8),
@@ -915,6 +963,7 @@ class _DynamicFormFieldState extends State<DynamicFormField> {
           labelTag: 'Label-BiayaRealisasi${widget.indexForm}',
           formTag: 'Form-BiayaRealisasi${widget.indexForm}',
           labelForm: 'Biaya Realisasi',
+          inputType: TextInputType.number,
           validator: (value) {},
           enabled: true, // Sesuaikan dengan kebutuhan
           errorTextStyle: GoogleFonts.poppins(fontSize: 8),

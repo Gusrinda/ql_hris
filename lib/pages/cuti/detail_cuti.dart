@@ -112,6 +112,21 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
   //   return DateFormat('HH:mm').format(parsedTime);
   // }
 
+  String convertMinutesToHours(int minutes) {
+    if (minutes < 60) {
+      return "$minutes Menit";
+    } else {
+      int hours = minutes ~/ 60;
+      int remainingMinutes = minutes % 60;
+
+      if (remainingMinutes == 0) {
+        return "$hours Jam";
+      } else {
+        return "$hours Jam $remainingMinutes Menit";
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -201,6 +216,8 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                                     'Waktu Awal',
                                     widget.data?.timeFrom?.toString() ??
                                         '00:00'),
+                                _buildText('Durasi Hari',
+                                    "${widget.data?.interval?.toString() ?? '0'} Hari"),
                                 Text(
                                   'Status Approval',
                                   style: GoogleFonts.poppins(
@@ -227,7 +244,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                                   ),
                                 ),
                                 Text(
-                                   widget.data?.approvalNote ?? "-",
+                                  widget.data?.approvalNote ?? "-",
                                   style: GoogleFonts.poppins(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400,
@@ -250,6 +267,11 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                                     formatDate(widget.dateTo ?? '-')),
                                 _buildText('Waktu Berakhir',
                                     widget.data?.timeTo?.toString() ?? '00:00'),
+                                _buildText(
+                                    'Durasi Waktu',
+                                    convertMinutesToHours(
+                                        widget.data?.intervalMin ?? 0)),
+
                                 // _buildText('Catatan Approval',
                                 //     widget.data?.keterangan?.toString() ?? '-'),
                               ],
@@ -260,40 +282,40 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                       SizedBox(
                         height: 30.sp,
                       ),
-                      if (currentStatus == "REVISED")
-                        TextButtonCustomV1(
-                          text: "Revisi Pengajuan Cuti",
-                          height: 50.sp,
-                          textSize: 12,
-                          backgroundColor: Colors.orange.withOpacity(0.1),
-                          textColor: Colors.orange,
-                          onPressed: () {
-                            print("Edit Cuti ID : ${widget.cutiId}");
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BlocProvider(
-                                  create: (context) => AddCutiBloc()
-                                    ..add(OnSelectAlasanCuti())
-                                    ..add(OnSelectTipeCuti()),
-                                  child: EditCutiPage(
-                                    cutiId: widget.cutiId ?? 1,
-                                    dateFrom: widget.dateFrom,
-                                    dateTo: widget.dateTo,
-                                    alasanValue: widget.alasanValue,
-                                    alasanID: widget.alasanID,
-                                    status: widget.status,
-                                    keterangan: widget.keterangan,
-                                    tipeCutiValue: widget.tipeCutiValue,
-                                    tipeCutiID: widget.tipeCutiID,
-                                    reloadDataCallback:
-                                        widget.reloadDataCallback,
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
+                      // if (currentStatus == "REVISED")
+                      //   TextButtonCustomV1(
+                      //     text: "Revisi Pengajuan Cuti",
+                      //     height: 50.sp,
+                      //     textSize: 12,
+                      //     backgroundColor: Colors.orange.withOpacity(0.1),
+                      //     textColor: Colors.orange,
+                      //     onPressed: () {
+                      //       print("Edit Cuti ID : ${widget.cutiId}");
+                      //       Navigator.push(
+                      //         context,
+                      //         MaterialPageRoute(
+                      //           builder: (context) => BlocProvider(
+                      //             create: (context) => AddCutiBloc()
+                      //               ..add(OnSelectAlasanCuti())
+                      //               ..add(OnSelectTipeCuti()),
+                      //             child: EditCutiPage(
+                      //               cutiId: widget.cutiId ?? 1,
+                      //               dateFrom: widget.dateFrom,
+                      //               dateTo: widget.dateTo,
+                      //               alasanValue: widget.alasanValue,
+                      //               alasanID: widget.alasanID,
+                      //               status: widget.status,
+                      //               keterangan: widget.keterangan,
+                      //               tipeCutiValue: widget.tipeCutiValue,
+                      //               tipeCutiID: widget.tipeCutiID,
+                      //               reloadDataCallback:
+                      //                   widget.reloadDataCallback,
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       );
+                      //     },
+                      //   ),
                     ],
                   ),
                 ),

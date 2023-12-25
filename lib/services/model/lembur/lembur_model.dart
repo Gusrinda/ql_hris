@@ -63,6 +63,8 @@ class DataLembur with _$DataLembur {
         String? jamSelesai,
         @JsonKey(name: "tipe_lembur_id")
         int? datumTipeLemburId,
+        @JsonKey(name: "interval_min")
+        int? intervalMin,
         @JsonKey(name: "alasan_id")
         int? datumAlasanId,
         @JsonKey(name: "no_doc")

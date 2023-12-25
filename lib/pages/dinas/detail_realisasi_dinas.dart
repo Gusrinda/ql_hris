@@ -189,8 +189,8 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                                                 "-"),
                                         _buildText(
                                             'Keterangan',
-                                            dataDetailSPD
-                                                    ?.dataDetailSPD.keterangan ??
+                                            dataDetailSPD?.dataDetailSPD
+                                                    .keterangan ??
                                                 "-"),
                                         Text(
                                           'Status',
@@ -266,11 +266,12 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                                   color: MyColorsConst.darkColor,
                                 ),
                               ),
+                              SizedBox(height: 5.sp),
                               Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      color: MyColorsConst.darkColor, width: 3),
-                                  borderRadius: BorderRadius.circular(10.0),
+                                      color: MyColorsConst.darkColor, width: 2),
+                                  borderRadius: BorderRadius.circular(7),
                                 ),
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,

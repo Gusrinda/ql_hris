@@ -180,8 +180,8 @@ class _DataDiriPageState extends State<DataDiriPage> {
                                   buildInfoText(
                                       'Zona', biodata?.bioData?.zona ?? '-'),
                                   buildInfoText(
-                                      'Constcentre',
-                                      biodata?.bioData?.costcontreId
+                                      'Cost Centre',
+                                      biodata?.bioData?.costcontre
                                               ?.toString() ??
                                           '-'),
                                   buildInfoText(
@@ -326,12 +326,12 @@ class _DataDiriPageState extends State<DataDiriPage> {
                                       biodata?.bioData?.cutiSisaPanjang
                                               ?.toString() ??
                                           '-'),
-                                  buildInfoText(
-                                      'Tanggal Berhenti Kerja',
-                                      biodata?.bioData?.tglBerhenti != null
-                                          ? DateFormat('dd MMMM yyyy').format(
-                                              biodata?.bioData?.tglBerhenti!)
-                                          : '-'),
+                                  // buildInfoText(
+                                  //     'Tanggal Berhenti Kerja',
+                                  //     biodata?.bioData?.tglBerhenti != null
+                                  //         ? DateFormat('dd MMMM yyyy').format(
+                                  //             biodata?.bioData?.tglBerhenti!)
+                                  //         : '-'),
                                 ],
                               ),
                             ),
@@ -475,47 +475,19 @@ class _DataDiriPageState extends State<DataDiriPage> {
                                   //             biodata!.bioData!.npwpTglBerlaku!)
                                   //         : '-'),
                                   buildInfoText(
-                                      'No. BPJS',
+                                      'No. BPJS Kesehatan',
                                       biodata?.bioData?.bpjsNo?.toString() ??
                                           '-'),
-                                  Text(
-                                    'Berkas Pendukung Lainnya',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 10.sp,
-                                      color: MyColorsConst.lightDarkColor,
-                                    ),
-                                  ),
-                                  SizedBox(height: 5.sp),
-                                  if (biodata
-                                          ?.bioData?.berkasLain?.isNotEmpty ??
-                                      false)
-                                    Link(
-                                      target: LinkTarget.self,
-                                      uri: Uri.parse(
-                                          '${biodata?.bioData?.berkasLain}'),
-                                      builder: (context, followLink) =>
-                                          GestureDetector(
-                                        onTap: followLink,
-                                        child: Text(
-                                          "Lihat File Pendukung",
-                                          style: GoogleFonts.poppins(
-                                            fontSize: 12,
-                                            color: MyColorsConst.primaryColor,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  else
-                                    Text(
-                                      "-",
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 12,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  SizedBox(height: 15.sp),
+                                  buildInfoText(
+                                      'No. BPJS Ketenagakerjaan',
+                                      biodata?.bioData?.bpjsNo?.toString() ??
+                                          '-'),
+
+                                  buildInfoText(
+                                      'Tipe BPJS',
+                                      biodata?.bioData?.bpjsTipeId
+                                              ?.toString() ??
+                                          '-'),
                                 ],
                               ),
                             ),
@@ -575,26 +547,64 @@ class _DataDiriPageState extends State<DataDiriPage> {
                                       'No. NPWP',
                                       biodata?.bioData?.npwpNo?.toString() ??
                                           '-'),
+                                  // Text(
+                                  //   'Foto BPJS',
+                                  //   style: GoogleFonts.poppins(
+                                  //     fontSize: 10.sp,
+                                  //     color: MyColorsConst.lightDarkColor,
+                                  //   ),
+                                  // ),
+                                  // SizedBox(height: 5.sp),
+                                  // if (biodata?.bioData?.bpjsFoto?.isNotEmpty ??
+                                  //     false)
+                                  //   Link(
+                                  //     target: LinkTarget.self,
+                                  //     uri: Uri.parse(
+                                  //       '${biodata?.bioData?.bpjsFoto}',
+                                  //     ),
+                                  //     builder: (context, followLink) =>
+                                  //         GestureDetector(
+                                  //       onTap: followLink,
+                                  //       child: Text(
+                                  //         "Lihat File BPJS",
+                                  //         style: GoogleFonts.poppins(
+                                  //           fontSize: 12,
+                                  //           color: MyColorsConst.primaryColor,
+                                  //           fontWeight: FontWeight.w500,
+                                  //         ),
+                                  //       ),
+                                  //     ),
+                                  //   )
+                                  // else
+                                  //   Text(
+                                  //     "-",
+                                  //     style: GoogleFonts.poppins(
+                                  //       fontSize: 12,
+                                  //       color: Colors.black,
+                                  //       fontWeight: FontWeight.w500,
+                                  //     ),
+                                  //   ),
+                                  // SizedBox(height: 15.sp),
                                   Text(
-                                    'Foto BPJS',
+                                    'Berkas Pendukung Lainnya',
                                     style: GoogleFonts.poppins(
                                       fontSize: 10.sp,
                                       color: MyColorsConst.lightDarkColor,
                                     ),
                                   ),
                                   SizedBox(height: 5.sp),
-                                  if (biodata?.bioData?.bpjsFoto?.isNotEmpty ??
+                                  if (biodata
+                                          ?.bioData?.berkasLain?.isNotEmpty ??
                                       false)
                                     Link(
                                       target: LinkTarget.self,
                                       uri: Uri.parse(
-                                        '${biodata?.bioData?.bpjsFoto}',
-                                      ),
+                                          '${biodata?.bioData?.berkasLain}'),
                                       builder: (context, followLink) =>
                                           GestureDetector(
                                         onTap: followLink,
                                         child: Text(
-                                          "Lihat File BPJS",
+                                          "Lihat File Pendukung",
                                           style: GoogleFonts.poppins(
                                             fontSize: 12,
                                             color: MyColorsConst.primaryColor,
@@ -614,12 +624,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                                     ),
                                   SizedBox(height: 15.sp),
                                   buildInfoText(
-                                      'Tipe BPJS',
-                                      biodata?.bioData?.bpjsTipeId
-                                              ?.toString() ??
-                                          '-'),
-                                  buildInfoText(
-                                      'Keterangan',
+                                      'Keterangan Pendukung',
                                       biodata?.bioData?.descFile?.toString() ??
                                           '-'),
                                 ],

@@ -444,6 +444,8 @@ mixin _$DataLembur {
   String? get jamSelesai => throw _privateConstructorUsedError;
   @JsonKey(name: "tipe_lembur_id")
   int? get datumTipeLemburId => throw _privateConstructorUsedError;
+  @JsonKey(name: "interval_min")
+  int? get intervalMin => throw _privateConstructorUsedError;
   @JsonKey(name: "alasan_id")
   int? get datumAlasanId => throw _privateConstructorUsedError;
   @JsonKey(name: "no_doc")
@@ -747,6 +749,7 @@ abstract class $DataLemburCopyWith<$Res> {
       @JsonKey(name: "jam_mulai") String? jamMulai,
       @JsonKey(name: "jam_selesai") String? jamSelesai,
       @JsonKey(name: "tipe_lembur_id") int? datumTipeLemburId,
+      @JsonKey(name: "interval_min") int? intervalMin,
       @JsonKey(name: "alasan_id") int? datumAlasanId,
       @JsonKey(name: "no_doc") String? noDoc,
       @JsonKey(name: "doc") String? doc,
@@ -919,6 +922,7 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
     Object? jamMulai = freezed,
     Object? jamSelesai = freezed,
     Object? datumTipeLemburId = freezed,
+    Object? intervalMin = freezed,
     Object? datumAlasanId = freezed,
     Object? noDoc = freezed,
     Object? doc = freezed,
@@ -1110,6 +1114,10 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
       datumTipeLemburId: freezed == datumTipeLemburId
           ? _value.datumTipeLemburId
           : datumTipeLemburId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      intervalMin: freezed == intervalMin
+          ? _value.intervalMin
+          : intervalMin // ignore: cast_nullable_to_non_nullable
               as int?,
       datumAlasanId: freezed == datumAlasanId
           ? _value.datumAlasanId
@@ -1689,6 +1697,7 @@ abstract class _$$DataLemburImplCopyWith<$Res>
       @JsonKey(name: "jam_mulai") String? jamMulai,
       @JsonKey(name: "jam_selesai") String? jamSelesai,
       @JsonKey(name: "tipe_lembur_id") int? datumTipeLemburId,
+      @JsonKey(name: "interval_min") int? intervalMin,
       @JsonKey(name: "alasan_id") int? datumAlasanId,
       @JsonKey(name: "no_doc") String? noDoc,
       @JsonKey(name: "doc") String? doc,
@@ -1859,6 +1868,7 @@ class __$$DataLemburImplCopyWithImpl<$Res>
     Object? jamMulai = freezed,
     Object? jamSelesai = freezed,
     Object? datumTipeLemburId = freezed,
+    Object? intervalMin = freezed,
     Object? datumAlasanId = freezed,
     Object? noDoc = freezed,
     Object? doc = freezed,
@@ -2050,6 +2060,10 @@ class __$$DataLemburImplCopyWithImpl<$Res>
       datumTipeLemburId: freezed == datumTipeLemburId
           ? _value.datumTipeLemburId
           : datumTipeLemburId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      intervalMin: freezed == intervalMin
+          ? _value.intervalMin
+          : intervalMin // ignore: cast_nullable_to_non_nullable
               as int?,
       datumAlasanId: freezed == datumAlasanId
           ? _value.datumAlasanId
@@ -2624,6 +2638,7 @@ class _$DataLemburImpl implements _DataLembur {
       @JsonKey(name: "jam_mulai") this.jamMulai,
       @JsonKey(name: "jam_selesai") this.jamSelesai,
       @JsonKey(name: "tipe_lembur_id") this.datumTipeLemburId,
+      @JsonKey(name: "interval_min") this.intervalMin,
       @JsonKey(name: "alasan_id") this.datumAlasanId,
       @JsonKey(name: "no_doc") this.noDoc,
       @JsonKey(name: "doc") this.doc,
@@ -2806,6 +2821,9 @@ class _$DataLemburImpl implements _DataLembur {
   @override
   @JsonKey(name: "tipe_lembur_id")
   final int? datumTipeLemburId;
+  @override
+  @JsonKey(name: "interval_min")
+  final int? intervalMin;
   @override
   @JsonKey(name: "alasan_id")
   final int? datumAlasanId;
@@ -3223,7 +3241,7 @@ class _$DataLemburImpl implements _DataLembur {
 
   @override
   String toString() {
-    return 'DataLembur(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, nomor: $nomor, datumMCompId: $datumMCompId, datumMDirId: $datumMDirId, datumMKaryId: $datumMKaryId, tanggal: $tanggal, jamMulai: $jamMulai, jamSelesai: $jamSelesai, datumTipeLemburId: $datumTipeLemburId, datumAlasanId: $datumAlasanId, noDoc: $noDoc, doc: $doc, keterangan: $keterangan, status: $status, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, mDirId: $mDirId, mDirMCompId: $mDirMCompId, mDirNama: $mDirNama, mDirDesc: $mDirDesc, mDirIsActive: $mDirIsActive, mDirCreatorId: $mDirCreatorId, mDirLastEditorId: $mDirLastEditorId, mDirCreatedAt: $mDirCreatedAt, mDirUpdatedAt: $mDirUpdatedAt, mKaryId: $mKaryId, mKaryMCompId: $mKaryMCompId, mKaryMDirId: $mKaryMDirId, mKaryMDivisiId: $mKaryMDivisiId, mKaryMDeptId: $mKaryMDeptId, mKaryMZonaId: $mKaryMZonaId, mKaryGradingId: $mKaryGradingId, mKaryCostcontreId: $mKaryCostcontreId, mKaryKode: $mKaryKode, mKaryMPosisiId: $mKaryMPosisiId, mKaryMJamKerjaId: $mKaryMJamKerjaId, mKaryKodePresensi: $mKaryKodePresensi, mKaryNik: $mKaryNik, mKaryNamaDepan: $mKaryNamaDepan, mKaryNamaBelakang: $mKaryNamaBelakang, mKaryNamaLengkap: $mKaryNamaLengkap, mKaryNamaPanggilan: $mKaryNamaPanggilan, mKaryJkId: $mKaryJkId, mKaryTempatLahir: $mKaryTempatLahir, mKaryTglLahir: $mKaryTglLahir, mKaryProvinsiId: $mKaryProvinsiId, mKaryKotaId: $mKaryKotaId, mKaryKecamatanId: $mKaryKecamatanId, mKaryKodePos: $mKaryKodePos, mKaryAlamatAsli: $mKaryAlamatAsli, mKaryAlamatDomisili: $mKaryAlamatDomisili, mKaryNoTlp: $mKaryNoTlp, mKaryNoTlpLainnya: $mKaryNoTlpLainnya, mKaryNoDarurat: $mKaryNoDarurat, mKaryNamaKontakDarurat: $mKaryNamaKontakDarurat, mKaryAgamaId: $mKaryAgamaId, mKaryGolDarahId: $mKaryGolDarahId, mKaryStatusNikahId: $mKaryStatusNikahId, mKaryJmlTanggungan: $mKaryJmlTanggungan, mKaryHubDgnKaryawan: $mKaryHubDgnKaryawan, mKaryCutiJatahReguler: $mKaryCutiJatahReguler, mKaryCutiSisaReguler: $mKaryCutiSisaReguler, mKaryCutiPanjang: $mKaryCutiPanjang, mKaryCutiSisaPanjang: $mKaryCutiSisaPanjang, mKaryStatusKaryId: $mKaryStatusKaryId, mKaryLamaKontrakAwal: $mKaryLamaKontrakAwal, mKaryLamaKontrakAkhir: $mKaryLamaKontrakAkhir, mKaryTglMasuk: $mKaryTglMasuk, mKaryTglBerhenti: $mKaryTglBerhenti, mKaryAlasanBerhenti: $mKaryAlasanBerhenti, mKaryUkBaju: $mKaryUkBaju, mKaryUkCelana: $mKaryUkCelana, mKaryUkSepatu: $mKaryUkSepatu, mKaryDesc: $mKaryDesc, mKaryIsActive: $mKaryIsActive, mKaryCreatorId: $mKaryCreatorId, mKaryLastEditorId: $mKaryLastEditorId, mKaryCreatedAt: $mKaryCreatedAt, mKaryUpdatedAt: $mKaryUpdatedAt, tipeLemburId: $tipeLemburId, tipeLemburMCompId: $tipeLemburMCompId, tipeLemburMDirId: $tipeLemburMDirId, tipeLemburGroup: $tipeLemburGroup, tipeLemburKey: $tipeLemburKey, tipeLemburCode: $tipeLemburCode, tipeLemburValue: $tipeLemburValue, tipeLemburIsActive: $tipeLemburIsActive, tipeLemburCreatorId: $tipeLemburCreatorId, tipeLemburLastEditorId: $tipeLemburLastEditorId, tipeLemburCreatedAt: $tipeLemburCreatedAt, tipeLemburUpdatedAt: $tipeLemburUpdatedAt, alasanId: $alasanId, alasanMCompId: $alasanMCompId, alasanMDirId: $alasanMDirId, alasanGroup: $alasanGroup, alasanKey: $alasanKey, alasanCode: $alasanCode, alasanValue: $alasanValue, alasanIsActive: $alasanIsActive, alasanCreatorId: $alasanCreatorId, alasanLastEditorId: $alasanLastEditorId, alasanCreatedAt: $alasanCreatedAt, alasanUpdatedAt: $alasanUpdatedAt, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, creatorTelp: $creatorTelp, creatorMKaryId: $creatorMKaryId, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage, lastEditorTelp: $lastEditorTelp, lastEditorMKaryId: $lastEditorMKaryId)';
+    return 'DataLembur(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, nomor: $nomor, datumMCompId: $datumMCompId, datumMDirId: $datumMDirId, datumMKaryId: $datumMKaryId, tanggal: $tanggal, jamMulai: $jamMulai, jamSelesai: $jamSelesai, datumTipeLemburId: $datumTipeLemburId, intervalMin: $intervalMin, datumAlasanId: $datumAlasanId, noDoc: $noDoc, doc: $doc, keterangan: $keterangan, status: $status, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, mDirId: $mDirId, mDirMCompId: $mDirMCompId, mDirNama: $mDirNama, mDirDesc: $mDirDesc, mDirIsActive: $mDirIsActive, mDirCreatorId: $mDirCreatorId, mDirLastEditorId: $mDirLastEditorId, mDirCreatedAt: $mDirCreatedAt, mDirUpdatedAt: $mDirUpdatedAt, mKaryId: $mKaryId, mKaryMCompId: $mKaryMCompId, mKaryMDirId: $mKaryMDirId, mKaryMDivisiId: $mKaryMDivisiId, mKaryMDeptId: $mKaryMDeptId, mKaryMZonaId: $mKaryMZonaId, mKaryGradingId: $mKaryGradingId, mKaryCostcontreId: $mKaryCostcontreId, mKaryKode: $mKaryKode, mKaryMPosisiId: $mKaryMPosisiId, mKaryMJamKerjaId: $mKaryMJamKerjaId, mKaryKodePresensi: $mKaryKodePresensi, mKaryNik: $mKaryNik, mKaryNamaDepan: $mKaryNamaDepan, mKaryNamaBelakang: $mKaryNamaBelakang, mKaryNamaLengkap: $mKaryNamaLengkap, mKaryNamaPanggilan: $mKaryNamaPanggilan, mKaryJkId: $mKaryJkId, mKaryTempatLahir: $mKaryTempatLahir, mKaryTglLahir: $mKaryTglLahir, mKaryProvinsiId: $mKaryProvinsiId, mKaryKotaId: $mKaryKotaId, mKaryKecamatanId: $mKaryKecamatanId, mKaryKodePos: $mKaryKodePos, mKaryAlamatAsli: $mKaryAlamatAsli, mKaryAlamatDomisili: $mKaryAlamatDomisili, mKaryNoTlp: $mKaryNoTlp, mKaryNoTlpLainnya: $mKaryNoTlpLainnya, mKaryNoDarurat: $mKaryNoDarurat, mKaryNamaKontakDarurat: $mKaryNamaKontakDarurat, mKaryAgamaId: $mKaryAgamaId, mKaryGolDarahId: $mKaryGolDarahId, mKaryStatusNikahId: $mKaryStatusNikahId, mKaryJmlTanggungan: $mKaryJmlTanggungan, mKaryHubDgnKaryawan: $mKaryHubDgnKaryawan, mKaryCutiJatahReguler: $mKaryCutiJatahReguler, mKaryCutiSisaReguler: $mKaryCutiSisaReguler, mKaryCutiPanjang: $mKaryCutiPanjang, mKaryCutiSisaPanjang: $mKaryCutiSisaPanjang, mKaryStatusKaryId: $mKaryStatusKaryId, mKaryLamaKontrakAwal: $mKaryLamaKontrakAwal, mKaryLamaKontrakAkhir: $mKaryLamaKontrakAkhir, mKaryTglMasuk: $mKaryTglMasuk, mKaryTglBerhenti: $mKaryTglBerhenti, mKaryAlasanBerhenti: $mKaryAlasanBerhenti, mKaryUkBaju: $mKaryUkBaju, mKaryUkCelana: $mKaryUkCelana, mKaryUkSepatu: $mKaryUkSepatu, mKaryDesc: $mKaryDesc, mKaryIsActive: $mKaryIsActive, mKaryCreatorId: $mKaryCreatorId, mKaryLastEditorId: $mKaryLastEditorId, mKaryCreatedAt: $mKaryCreatedAt, mKaryUpdatedAt: $mKaryUpdatedAt, tipeLemburId: $tipeLemburId, tipeLemburMCompId: $tipeLemburMCompId, tipeLemburMDirId: $tipeLemburMDirId, tipeLemburGroup: $tipeLemburGroup, tipeLemburKey: $tipeLemburKey, tipeLemburCode: $tipeLemburCode, tipeLemburValue: $tipeLemburValue, tipeLemburIsActive: $tipeLemburIsActive, tipeLemburCreatorId: $tipeLemburCreatorId, tipeLemburLastEditorId: $tipeLemburLastEditorId, tipeLemburCreatedAt: $tipeLemburCreatedAt, tipeLemburUpdatedAt: $tipeLemburUpdatedAt, alasanId: $alasanId, alasanMCompId: $alasanMCompId, alasanMDirId: $alasanMDirId, alasanGroup: $alasanGroup, alasanKey: $alasanKey, alasanCode: $alasanCode, alasanValue: $alasanValue, alasanIsActive: $alasanIsActive, alasanCreatorId: $alasanCreatorId, alasanLastEditorId: $alasanLastEditorId, alasanCreatedAt: $alasanCreatedAt, alasanUpdatedAt: $alasanUpdatedAt, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, creatorTelp: $creatorTelp, creatorMKaryId: $creatorMKaryId, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage, lastEditorTelp: $lastEditorTelp, lastEditorMKaryId: $lastEditorMKaryId)';
   }
 
   @override
@@ -3254,6 +3272,8 @@ class _$DataLemburImpl implements _DataLembur {
                 other.jamSelesai == jamSelesai) &&
             (identical(other.datumTipeLemburId, datumTipeLemburId) ||
                 other.datumTipeLemburId == datumTipeLemburId) &&
+            (identical(other.intervalMin, intervalMin) ||
+                other.intervalMin == intervalMin) &&
             (identical(other.datumAlasanId, datumAlasanId) ||
                 other.datumAlasanId == datumAlasanId) &&
             (identical(other.noDoc, noDoc) || other.noDoc == noDoc) &&
@@ -3326,8 +3346,7 @@ class _$DataLemburImpl implements _DataLembur {
                 other.mKaryNamaDepan == mKaryNamaDepan) &&
             (identical(other.mKaryNamaBelakang, mKaryNamaBelakang) ||
                 other.mKaryNamaBelakang == mKaryNamaBelakang) &&
-            (identical(other.mKaryNamaLengkap, mKaryNamaLengkap) ||
-                other.mKaryNamaLengkap == mKaryNamaLengkap) &&
+            (identical(other.mKaryNamaLengkap, mKaryNamaLengkap) || other.mKaryNamaLengkap == mKaryNamaLengkap) &&
             (identical(other.mKaryNamaPanggilan, mKaryNamaPanggilan) || other.mKaryNamaPanggilan == mKaryNamaPanggilan) &&
             (identical(other.mKaryJkId, mKaryJkId) || other.mKaryJkId == mKaryJkId) &&
             (identical(other.mKaryTempatLahir, mKaryTempatLahir) || other.mKaryTempatLahir == mKaryTempatLahir) &&
@@ -3443,6 +3462,7 @@ class _$DataLemburImpl implements _DataLembur {
         jamMulai,
         jamSelesai,
         datumTipeLemburId,
+        intervalMin,
         datumAlasanId,
         noDoc,
         doc,
@@ -3612,6 +3632,7 @@ abstract class _DataLembur implements DataLembur {
       @JsonKey(name: "jam_mulai") final String? jamMulai,
       @JsonKey(name: "jam_selesai") final String? jamSelesai,
       @JsonKey(name: "tipe_lembur_id") final int? datumTipeLemburId,
+      @JsonKey(name: "interval_min") final int? intervalMin,
       @JsonKey(name: "alasan_id") final int? datumAlasanId,
       @JsonKey(name: "no_doc") final String? noDoc,
       @JsonKey(name: "doc") final String? doc,
@@ -3817,6 +3838,9 @@ abstract class _DataLembur implements DataLembur {
   @override
   @JsonKey(name: "tipe_lembur_id")
   int? get datumTipeLemburId;
+  @override
+  @JsonKey(name: "interval_min")
+  int? get intervalMin;
   @override
   @JsonKey(name: "alasan_id")
   int? get datumAlasanId;

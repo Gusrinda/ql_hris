@@ -37,6 +37,9 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
+
   final TextEditingController idController = TextEditingController();
 
   final TextEditingController emailController = TextEditingController();
@@ -48,6 +51,25 @@ class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController passwordController = TextEditingController();
 
   GetDataProfileSuccess? data;
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<ProfileBloc>().add(GetDataProfile());
+  }
+
+  Future<void> _onRefresh() async {
+    try {
+      // Dispatch the CheckInOutEvent to refresh the data
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.read<ProfileBloc>().add(GetDataProfile());
+      });
+      // Add any additional refreshing logic here if needed
+      await Future.delayed(Duration(seconds: 1));
+    } catch (error) {
+      print('Refresh Error: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,303 +124,310 @@ class _ProfilePageState extends State<ProfilePage> {
           LoadingDialog.dismissDialog(context);
         }
       },
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: SingleChildScrollView(
-          child: Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  MyColorsConst.primaryDarkColor,
-                  MyColorsConst.primaryColor,
-                ],
-                stops: [0.0, 0.1],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+      child: RefreshIndicator(
+        displacement: 50,
+        key: _refreshIndicatorKey,
+        onRefresh: _onRefresh,
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: SingleChildScrollView(
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    MyColorsConst.primaryDarkColor,
+                    MyColorsConst.primaryColor,
+                  ],
+                  stops: [0.0, 0.1],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
               ),
-            ),
-            child: Column(
-              children: [
-                SizedBox(height: 40.sp),
-                Container(
-                  padding: const EdgeInsets.all(15),
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Profile",
-                    style: GoogleFonts.poppins(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
+              child: Column(
+                children: [
+                  SizedBox(height: 40.sp),
+                  Container(
+                    padding: const EdgeInsets.all(15),
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Profile",
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
                       color: Colors.white,
                     ),
-                  ),
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                    color: Colors.white,
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(16.0.sp),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        BlocBuilder<ProfileBloc, ProfileState>(
-                          builder: (context, state) {
-                            data =
-                                state is GetDataProfileSuccess ? state : null;
-                            return Row(
-                              children: [
-                                ImageFormCustomV2(
-                                  imagePath: data?.imagePath,
-                                  onImageSelected: (filePath) {
-                                    context.read<ProfileBloc>().add(
-                                        EditImageProfile(imagePath: filePath));
-                                  },
-                                  onImageSelectedError: (message) async {
-                                    await showDialog(
-                                      context: context,
-                                      builder: (_) => DialogCustom(
-                                        state: DialogCustomItem.error,
-                                        message: message,
+                    child: Padding(
+                      padding: EdgeInsets.all(16.0.sp),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          BlocBuilder<ProfileBloc, ProfileState>(
+                            builder: (context, state) {
+                              data =
+                                  state is GetDataProfileSuccess ? state : null;
+                              return Row(
+                                children: [
+                                  ImageFormCustomV2(
+                                    imagePath: data?.imagePath,
+                                    onImageSelected: (filePath) {
+                                      context.read<ProfileBloc>().add(
+                                          EditImageProfile(
+                                              imagePath: filePath));
+                                    },
+                                    onImageSelectedError: (message) async {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (_) => DialogCustom(
+                                          state: DialogCustomItem.error,
+                                          message: message,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  const SizedBox(width: 25),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        data?.name ?? "-",
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w700,
+                                        ),
                                       ),
-                                    );
-                                  },
-                                ),
-                                const SizedBox(width: 25),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      data?.name ?? "-",
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w700,
+                                      SizedBox(height: 5),
+                                      RichText(
+                                        text: TextSpan(
+                                          children: [
+                                            TextSpan(
+                                              text: 'Username: ',
+                                              style: GoogleFonts.poppins(
+                                                fontSize: 10.sp,
+                                                color: MyColorsConst
+                                                    .lightDarkColor,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                            TextSpan(
+                                              text: data?.dataProfile?.username,
+                                              style: GoogleFonts.poppins(
+                                                fontStyle: FontStyle.italic,
+                                                fontSize: 12.sp,
+                                                color: MyColorsConst.darkColor,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(height: 5),
-                                    RichText(
-                                      text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: 'Username: ',
-                                            style: GoogleFonts.poppins(
-                                              fontSize: 10.sp,
-                                              color:
-                                                  MyColorsConst.lightDarkColor,
-                                              fontWeight: FontWeight.w500,
+                                      RichText(
+                                        text: TextSpan(
+                                          children: [
+                                            TextSpan(
+                                              text: 'Atasan: ',
+                                              style: GoogleFonts.poppins(
+                                                fontSize: 10.sp,
+                                                color: MyColorsConst
+                                                    .lightDarkColor,
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                             ),
-                                          ),
-                                          TextSpan(
-                                            text: data?.dataProfile?.username,
-                                            style: GoogleFonts.poppins(
-                                              fontStyle: FontStyle.italic,
-                                              fontSize: 12.sp,
-                                              color: MyColorsConst.darkColor,
-                                              fontWeight: FontWeight.w500,
+                                            TextSpan(
+                                              text: data?.dataProfile?.atasan,
+                                              style: GoogleFonts.poppins(
+                                                fontSize: 10.sp,
+                                                color: MyColorsConst.darkColor,
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    RichText(
-                                      text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: 'Atasan: ',
-                                            style: GoogleFonts.poppins(
-                                              fontSize: 10.sp,
-                                              color:
-                                                  MyColorsConst.lightDarkColor,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                          TextSpan(
-                                            text: data?.dataProfile?.atasan,
-                                            style: GoogleFonts.poppins(
-                                              fontSize: 10.sp,
-                                              color: MyColorsConst.darkColor,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-                        const SizedBox(height: 25),
-                        Text(
-                          'Data Profil',
-                          style: GoogleFonts.poppins(
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w500,
-                            color: MyColorsConst.lightDarkColor,
+                                    ],
+                                  ),
+                                ],
+                              );
+                            },
                           ),
-                        ),
-                        Divider(
-                          color: MyColorsConst.primaryColor.withOpacity(0.1),
-                          thickness: 1,
-                        ),
-                        TextFormCustomV2(
-                          labelText: "Biodata",
-                          color: MyColorsConst.whiteColor,
-                          icon: CupertinoIcons.person_fill,
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => BlocProvider(
-                                  create: (context) => BiodataBloc(),
-                                  child: DataDiriPage(),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                        TextFormCustomV2(
-                          labelText: "Data Pendidikan",
-                          color: MyColorsConst.whiteColor,
-                          icon: Icons.school_rounded,
-                          onTap: () {
-                            Navigator.of(context)
-                                .pushNamed(DataPendidikanPage.routeName);
-                          },
-                        ),
-                        TextFormCustomV2(
-                          labelText: "Data Keluarga",
-                          color: MyColorsConst.whiteColor,
-                          icon: Icons.groups_rounded,
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => BlocProvider(
-                                  create: (context) => ListKeluargaBloc(),
-                                  child: DataKeluargaPage(),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                        TextFormCustomV2(
-                          labelText: "Data Pelatihan",
-                          color: MyColorsConst.whiteColor,
-                          icon: Icons.article_rounded,
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => BlocProvider(
-                                  create: (context) => ListPelatihanBloc(),
-                                  child: DataPelatihanPage(),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                        TextFormCustomV2(
-                          labelText: "Data Prestasi",
-                          color: MyColorsConst.whiteColor,
-                          icon: Icons.workspace_premium_rounded,
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => BlocProvider(
-                                  create: (context) => ListPrestasiBloc(),
-                                  child: DataPrestasiPage(),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                        TextFormCustomV2(
-                          labelText: "Data Organisasi",
-                          color: MyColorsConst.whiteColor,
-                          icon: Icons.language,
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => BlocProvider(
-                                  create: (context) => ListOrganisasiBloc(),
-                                  child: DataOrganisasiPage(),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                        TextFormCustomV2(
-                          labelText: "Data Bahasa",
-                          color: MyColorsConst.whiteColor,
-                          icon: Icons.translate_rounded,
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => BlocProvider(
-                                  create: (context) => ListBahasaBloc(),
-                                  child: DataBahasaPage(),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                        TextFormCustomV2(
-                          labelText: "Data Pengalaman Kerja",
-                          color: MyColorsConst.whiteColor,
-                          icon: CupertinoIcons.graph_square_fill,
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => BlocProvider(
-                                  create: (context) => ListPengalamanBloc(),
-                                  child: DataPengalamanKerjaPage(),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                        const SizedBox(height: 25),
-                        Text(
-                          'Akun',
-                          style: GoogleFonts.poppins(
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w500,
-                            color: MyColorsConst.lightDarkColor,
+                          const SizedBox(height: 25),
+                          Text(
+                            'Data Profil',
+                            style: GoogleFonts.poppins(
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w500,
+                              color: MyColorsConst.lightDarkColor,
+                            ),
                           ),
-                        ),
-                        Divider(
-                          color: MyColorsConst.primaryColor.withOpacity(0.1),
-                          thickness: 1,
-                        ),
-                        TextFormCustomV2(
-                          labelText: "Ganti Kata Sandi",
-                          color: MyColorsConst.whiteColor,
-                          icon: Icons.lock,
-                          editable: true,
-                          onTap: () {
-                            Navigator.of(context)
-                                .pushNamed(ChangePasswordPage.routeName);
-                          },
-                        ),
-                        TextFormCustomV2(
-                          labelText: "Logout",
-                          color: MyColorsConst.whiteColor,
-                          icon: Icons.logout_outlined,
-                          onTap: () {
-                            context.read<ProfileBloc>().add(LogoutProfile(
-                                  username: usernameController.text,
-                                  password: passwordController.text,
-                                ));
-                          },
-                        ),
-                        SizedBox(height: 100.sp)
-                      ],
+                          Divider(
+                            color: MyColorsConst.primaryColor.withOpacity(0.1),
+                            thickness: 1,
+                          ),
+                          TextFormCustomV2(
+                            labelText: "Biodata",
+                            color: MyColorsConst.whiteColor,
+                            icon: CupertinoIcons.person_fill,
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => BlocProvider(
+                                    create: (context) => BiodataBloc(),
+                                    child: DataDiriPage(),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          TextFormCustomV2(
+                            labelText: "Data Pendidikan",
+                            color: MyColorsConst.whiteColor,
+                            icon: Icons.school_rounded,
+                            onTap: () {
+                              Navigator.of(context)
+                                  .pushNamed(DataPendidikanPage.routeName);
+                            },
+                          ),
+                          TextFormCustomV2(
+                            labelText: "Data Keluarga",
+                            color: MyColorsConst.whiteColor,
+                            icon: Icons.groups_rounded,
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => BlocProvider(
+                                    create: (context) => ListKeluargaBloc(),
+                                    child: DataKeluargaPage(),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          TextFormCustomV2(
+                            labelText: "Data Pelatihan",
+                            color: MyColorsConst.whiteColor,
+                            icon: Icons.article_rounded,
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => BlocProvider(
+                                    create: (context) => ListPelatihanBloc(),
+                                    child: DataPelatihanPage(),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          TextFormCustomV2(
+                            labelText: "Data Prestasi",
+                            color: MyColorsConst.whiteColor,
+                            icon: Icons.workspace_premium_rounded,
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => BlocProvider(
+                                    create: (context) => ListPrestasiBloc(),
+                                    child: DataPrestasiPage(),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          TextFormCustomV2(
+                            labelText: "Data Organisasi",
+                            color: MyColorsConst.whiteColor,
+                            icon: Icons.language,
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => BlocProvider(
+                                    create: (context) => ListOrganisasiBloc(),
+                                    child: DataOrganisasiPage(),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          TextFormCustomV2(
+                            labelText: "Data Bahasa",
+                            color: MyColorsConst.whiteColor,
+                            icon: Icons.translate_rounded,
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => BlocProvider(
+                                    create: (context) => ListBahasaBloc(),
+                                    child: DataBahasaPage(),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          TextFormCustomV2(
+                            labelText: "Data Pengalaman Kerja",
+                            color: MyColorsConst.whiteColor,
+                            icon: CupertinoIcons.graph_square_fill,
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => BlocProvider(
+                                    create: (context) => ListPengalamanBloc(),
+                                    child: DataPengalamanKerjaPage(),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 25),
+                          Text(
+                            'Akun',
+                            style: GoogleFonts.poppins(
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w500,
+                              color: MyColorsConst.lightDarkColor,
+                            ),
+                          ),
+                          Divider(
+                            color: MyColorsConst.primaryColor.withOpacity(0.1),
+                            thickness: 1,
+                          ),
+                          TextFormCustomV2(
+                            labelText: "Ganti Kata Sandi",
+                            color: MyColorsConst.whiteColor,
+                            icon: Icons.lock,
+                            editable: true,
+                            onTap: () {
+                              Navigator.of(context)
+                                  .pushNamed(ChangePasswordPage.routeName);
+                            },
+                          ),
+                          TextFormCustomV2(
+                            labelText: "Logout",
+                            color: MyColorsConst.whiteColor,
+                            icon: Icons.logout_outlined,
+                            onTap: () {
+                              context.read<ProfileBloc>().add(LogoutProfile(
+                                    username: usernameController.text,
+                                    password: passwordController.text,
+                                  ));
+                            },
+                          ),
+                          SizedBox(height: 100.sp)
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

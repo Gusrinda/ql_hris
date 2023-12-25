@@ -59,24 +59,35 @@ class _DashboardViewState extends State<DashboardView> {
         context: context,
         builder: (context) => AlertDialog(
           title: Text('Konfirmasi'),
-          content: Text('Apakah anda yakin ingin keluar aplikasi?'),
+          content: Text(
+            'Apakah anda yakin ingin keluar aplikasi?',
+            style: GoogleFonts.poppins(fontSize: 13.sp),
+          ),
           actions: [
             TextButton(
+              style: TextButton.styleFrom(backgroundColor: Colors.red),
               onPressed: () => Navigator.of(context).pop(false),
-              child: Text('Tidak'),
+              child: Text(
+                'Tidak',
+                style: GoogleFonts.poppins(
+                    color: MyColorsConst.whiteColor,
+                    fontWeight: FontWeight.w500),
+              ),
             ),
             TextButton(
               style: TextButton.styleFrom(
-                backgroundColor: Colors.red
-              ),
+                  backgroundColor: Colors.white, side: BorderSide(width: 1, color: MyColorsConst.primaryColor)),
               onPressed: () => Navigator.of(context).pop(true),
-              child: Text('Ya'),
+              child: Text(
+                'Ya',
+                style: GoogleFonts.poppins(
+                    color: MyColorsConst.primaryColor,
+                    fontWeight: FontWeight.w500),
+              ),
             ),
           ],
         ),
-      ).then((value) =>
-          value ??
-          false);
+      ).then((value) => value ?? false);
     }
 
     return WillPopScope(
