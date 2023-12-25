@@ -244,7 +244,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                   ),
                                 ),
                                 Text(
-                                   widget.data.approvalNote ?? "-",
+                                  widget.data.approvalNote ?? "-",
                                   style: GoogleFonts.poppins(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400,
@@ -268,6 +268,8 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                     'Zona Tujuan', widget.zonaTujuan ?? '-'),
                                 _buildText('Lokasi Tujuan',
                                     widget.lokasiTujuan ?? '-'),
+                                _buildText('Keterangan Kendaraan',
+                                    widget.zonaTujuan ?? '-'),
                               ],
                             ),
                           ),
@@ -277,59 +279,58 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                         height: 30.sp,
                       ),
                       if (currentStatus == "REVISED")
-                      TextButtonCustomV1(
-                        text: "Revisi Perjalanan Dinas",
-                        height: 50,
-                        textSize: 12,
-                        backgroundColor: Colors.orange.withOpacity(0.1),
-                        textColor: Colors.orange,
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BlocProvider(
-                                create: (context) => AddDinasBloc()
-                                  ..add(OnSelectDivisi())
-                                  ..add(OnSelectDepartemen())
-                                  ..add(OnSelectPosisi())
-                                  ..add(
-                                      OnSelectTemplateSpd())
-                                  ..add(OnSelectDirektorat())
-                                  ..add(OnSelectJenisSpd())
-                                  ..add(OnSelectZona())
-                                  ..add(
-                                      OnSelectLokasiTujuan())
-                                  ..add(OnSelectPic()),
-                                child: EditDinasPage(
-                                  dinasId: widget.dinasId ?? 1,
-                                  jenisSpd: widget.jenisSpd,
-                                  jenisSpdId: widget.jenisSpdId,
-                                  zonaAwal: widget.zonaAwal,
-                                  zonaAwalId: widget.zonaAwalId,
-                                  zonaTujuan: widget.zonaTujuan,
-                                  zonaTujuanId: widget.zonaTujuanId,
-                                  lokasiTujuan: widget.lokasiTujuan,
-                                  lokasiTujuanId: widget.lokasiTujuanId,
-                                  templateSpd: widget.templateSpd,
-                                  templateSpdId: widget.templateSpdId,
-                                  tanggalAwal: widget.tanggalAwal,
-                                  tanggalAkhir: widget.tanggalAkhir,
-                                  posisiId: widget.posisiId,
-                                  posisi: widget.posisi,
-                                  divisiId: widget.divisiId,
-                                  divisiValue: widget.divisiValue,
-                                  deptId: widget.deptId,
-                                  deptValue: widget.deptValue,
-                                  direktoratId: widget.direktoratId,
-                                  direktoratValue: widget.direktoratValue,
-                                  tanggal: widget.tanggal,
-                                  reloadDataCallback: widget.reloadDataCallback,
+                        TextButtonCustomV1(
+                          text: "Revisi Perjalanan Dinas",
+                          height: 50,
+                          textSize: 12,
+                          backgroundColor: Colors.orange.withOpacity(0.1),
+                          textColor: Colors.orange,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BlocProvider(
+                                  create: (context) => AddDinasBloc()
+                                    ..add(OnSelectDivisi())
+                                    ..add(OnSelectDepartemen())
+                                    ..add(OnSelectPosisi())
+                                    ..add(OnSelectTemplateSpd())
+                                    ..add(OnSelectDirektorat())
+                                    ..add(OnSelectJenisSpd())
+                                    ..add(OnSelectZona())
+                                    ..add(OnSelectLokasiTujuan())
+                                    ..add(OnSelectPic()),
+                                  child: EditDinasPage(
+                                    dinasId: widget.dinasId ?? 1,
+                                    jenisSpd: widget.jenisSpd,
+                                    jenisSpdId: widget.jenisSpdId,
+                                    zonaAwal: widget.zonaAwal,
+                                    zonaAwalId: widget.zonaAwalId,
+                                    zonaTujuan: widget.zonaTujuan,
+                                    zonaTujuanId: widget.zonaTujuanId,
+                                    lokasiTujuan: widget.lokasiTujuan,
+                                    lokasiTujuanId: widget.lokasiTujuanId,
+                                    templateSpd: widget.templateSpd,
+                                    templateSpdId: widget.templateSpdId,
+                                    tanggalAwal: widget.tanggalAwal,
+                                    tanggalAkhir: widget.tanggalAkhir,
+                                    posisiId: widget.posisiId,
+                                    posisi: widget.posisi,
+                                    divisiId: widget.divisiId,
+                                    divisiValue: widget.divisiValue,
+                                    deptId: widget.deptId,
+                                    deptValue: widget.deptValue,
+                                    direktoratId: widget.direktoratId,
+                                    direktoratValue: widget.direktoratValue,
+                                    tanggal: widget.tanggal,
+                                    reloadDataCallback:
+                                        widget.reloadDataCallback,
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                      ),
+                            );
+                          },
+                        ),
                     ],
                   ),
                 ),

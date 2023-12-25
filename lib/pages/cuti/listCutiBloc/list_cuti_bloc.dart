@@ -13,6 +13,7 @@ part 'list_cuti_state.dart';
 
 class ListCutiBloc extends Bloc<ListCutiEvent, ListCutiState> {
   List<DataListCuti> listcuti = [];
+  
   ListCutiBloc() : super(ListCutiInitial()) {
     on<GetListCuti>((event, emit) async {
       emit(ListCutiLoading());

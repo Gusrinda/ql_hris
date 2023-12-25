@@ -28,6 +28,7 @@ enum GeneralServicesMethod {
   get,
   post,
   postMultiPart,
+  postMultiFiles,
   delete,
   put,
   putMultipart,
@@ -50,7 +51,8 @@ class GeneralServices {
       required GeneralServicesMethod method,
       Map<String, String>? headers = _headers,
       Object? body,
-      String? imagePath}) async {
+      String? imagePath,
+      Map<String?, File?>? files}) async {
     try {
       print("URL API: ${url}");
       print("BODY API: ${body}");
@@ -76,6 +78,30 @@ class GeneralServices {
           ..fields.addAll(bodyFormed)
           ..headers.addAll(headers!)
           ..files.add(await http.MultipartFile.fromPath('foto', imagePath!));
+        var res = await request.send();
+        response = await http.Response.fromStream(res);
+      } else if (method == GeneralServicesMethod.postMultiFiles) {
+        body = body as Map<String, dynamic>;
+        Map<String, String> bodyFormed = {};
+        for (var key in body.keys) {
+          if (body[key] != null) bodyFormed[key] = body[key].toString();
+        }
+
+        var request = http.MultipartRequest('POST', url)
+          ..headers.addAll(headers!)
+          ..fields.addAll(bodyFormed);
+
+        // Add files to the request
+        if (files != null && files.isNotEmpty) {
+          for (var entry in files.entries) {
+            String? fieldName = entry.key;
+            File? file = entry.value;
+            request.files
+                .add(await http.MultipartFile.fromPath(fieldName!, file!.path));
+          }
+        }
+
+        // Send the request
         var res = await request.send();
         response = await http.Response.fromStream(res);
       } else if (method == GeneralServicesMethod.get) {
@@ -155,15 +181,10 @@ class GeneralServices {
           code: MyGeneralConst.CODE_INVALID_FORMAT,
           errorResponse: "Invalid Format");
     } catch (e) {
+      print(e);
       return ServicesFailure(
           code: MyGeneralConst.CODE_UNKWON_ERROR,
           errorResponse: "Unknwon Error!\nPlease try again!");
     }
   }
 }
-
-// {
-//   code : 404,
-//   data : asaas,
-//   message : asas
-// }

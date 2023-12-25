@@ -148,40 +148,73 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
         List<String> years = [];
         int currentYear = DateTime.now().year;
 
-        for (int year = currentYear - 20; year <= currentYear; year++) {
+        for (int year = currentYear - 40; year <= currentYear; year--) {
           years.add(year.toString());
         }
 
         return years;
       }
 
-      showModalBottomSheet(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
-        ),
+      showCupertinoModalPopup(
         context: context,
         builder: (BuildContext context) {
           return Container(
-            height: 300,
-            child: ListView.builder(
-              itemCount: _generateYears().length,
-              itemBuilder: (context, index) {
-                final year = _generateYears()[index];
-                return ListTile(
-                  title: Center(
-                    child: Text(
-                      year,
-                      style: GoogleFonts.poppins(
-                        fontSize: 14,
-                      ),
+            color: Colors.white,
+            height: 230.sp,
+            child: Column(
+              children: [
+                Container(
+                  height: 170,
+                  child: CupertinoPicker(
+                    itemExtent: 40,
+                    onSelectedItemChanged: (int index) {
+                      controller.text = _generateYears()[index];
+                    },
+                    children: List<Widget>.generate(
+                      _generateYears().length,
+                      (int index) {
+                        return Center(
+                          child: Text(
+                            _generateYears()[index],
+                            style: TextStyle(
+                                fontSize: 14.sp, fontWeight: FontWeight.w500),
+                          ),
+                        );
+                      },
                     ),
                   ),
-                  onTap: () {
-                    controller.text = year;
-                    Navigator.pop(context);
-                  },
-                );
-              },
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    // CupertinoButton(
+                    //   child: Text(
+                    //   'Batal',
+                    //   style: GoogleFonts.poppins(
+                    //     color: Colors.red.shade700,
+                    //     fontWeight: FontWeight.w500,
+                    //   ),
+                    // ),
+                    //   onPressed: () {
+                    //     Navigator.of(context).pop();
+                    //   },
+                    // ),
+                    CupertinoButton(
+                      child: Text(
+                        'Pilih',
+                        style: GoogleFonts.poppins(
+                          color: MyColorsConst.primaryColor,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      onPressed: () {
+                        // Tambahkan logika yang diperlukan untuk menanggapi pemilihan tahun
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
+              ],
             ),
           );
         },
@@ -407,34 +440,33 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                                 controller: widget.jurusanController,
                                 validator: (value) {},
                               ),
-                              FormInputData(
+                              FormDropDownData(
                                 input: '',
                                 onTap: () {
                                   showTahunMenu(
                                       context, widget.tahuunMasukController);
                                 },
-                                // idController: widget.tahuunMasukController,
-                                controller: widget.tahuunMasukController,
+                                idController: widget.tahuunMasukController,
+                                valueController: widget.tahuunMasukController,
                                 labelTag: 'Label-addtahunmasukpendidikan',
                                 labelForm: 'Tahun Masuk',
                                 formTag: 'Form-addtahunmasukpendidikan',
                                 hintText: 'Pilih Tahun',
-                                inputType: TextInputType.number,
+                                // inputType: TextInputType.number,
                                 validator: (value) {},
                               ),
-                              FormInputData(
+                              FormDropDownData(
                                 input: '',
                                 onTap: () {
                                   showTahunMenu(
                                       context, widget.tahunLulusController);
                                 },
-                                // idController: widget.tahunLulusController,
-                                controller: widget.tahunLulusController,
+                                idController: widget.tahunLulusController,
+                                valueController: widget.tahunLulusController,
                                 labelTag: 'Label-addtahunluluspendidikan',
                                 labelForm: 'Tahun Lulus',
                                 formTag: 'Form-addtahunluluspendidikan',
                                 hintText: 'Pilih Tahun',
-                                inputType: TextInputType.number,
                                 validator: (value) {},
                               ),
                               FormInputData(

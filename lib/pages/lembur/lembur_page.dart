@@ -7,6 +7,8 @@ import 'package:sj_presensi_mobile/componens/HRIS/monthYearPicker_custom.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/lembur/add_lembur.dart';
+import 'package:sj_presensi_mobile/pages/lembur/add_lembur/add_lembur_bloc.dart';
 import 'package:sj_presensi_mobile/pages/lembur/detail_lembur.dart';
 import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/list_lembur_bloc.dart';
 import 'package:sj_presensi_mobile/services/model/lembur/lembur_model.dart';
@@ -30,6 +32,11 @@ class _LemburPageState extends State<LemburPage> {
   @override
   void initState() {
     super.initState();
+    loadData();
+  }
+
+  void loadData() {
+    context.read<ListLemburBloc>().add(GetListLembur(date: DateTime.now()));
   }
 
   String formatTime(DateTime time) {
@@ -96,6 +103,29 @@ class _LemburPageState extends State<LemburPage> {
         }
       },
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BlocProvider(
+                  create: (context) => AddLemburBloc()
+                    ..add(OnSelectAlasanLembur())
+                    ..add(OnSelectTipeLembur()),
+                  child: AddLemburPage(
+                    // Teruskan callback ke AddCutiPage
+                    reloadDataCallback: loadData,
+                  ),
+                ),
+              ),
+            );
+          },
+          backgroundColor: MyColorsConst.primaryLightColor,
+          child: const Icon(
+            Icons.add,
+            size: 32,
+          ),
+        ),
         body: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -130,9 +160,9 @@ class _LemburPageState extends State<LemburPage> {
                     ),
                     Expanded(
                       child: Text(
-                        "History Lembur",
+                        "Riwayat Lembur",
                         style: GoogleFonts.poppins(
-                          fontSize: 14,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
                         ),
@@ -151,21 +181,10 @@ class _LemburPageState extends State<LemburPage> {
                     color: Colors.white,
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(18.0),
+                    padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Daftar Lembur",
-                          style: GoogleFonts.poppins(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: MyColorsConst.darkColor,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -262,9 +281,7 @@ class _LemburPageState extends State<LemburPage> {
                             builder: (context, state) {
                               var listlembur =
                                   context.read<ListLemburBloc>().listlembur;
-
                               debugPrint("LIST LEMBUR ? ${listlembur}");
-
                               return CardListView(
                                 listlembur: listlembur,
                                 formatDate: formatDate,
@@ -503,8 +520,8 @@ class CardListView extends StatelessWidget {
                   "Tidak ada data yang ditampilkan!",
                   style: GoogleFonts.poppins(
                     color: MyColorsConst.darkColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14.sp,
                   ),
                 ),
               ],

@@ -67,6 +67,8 @@ class DataListCuti with _$DataListCuti {
         dynamic timeFrom,
         @JsonKey(name: "time_to")
         dynamic timeTo,
+        @JsonKey(name: "interval_min")
+        int? intervalMin,
         @JsonKey(name: "keterangan")
         String? keterangan,
         @JsonKey(name: "status")

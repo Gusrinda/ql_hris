@@ -94,6 +94,8 @@ class AddDinasPage extends StatefulWidget {
   // kend Dinas
   final TextEditingController kendDinasController = TextEditingController();
 
+  final TextEditingController catatanController = TextEditingController();
+
   @override
   State<AddDinasPage> createState() => _AddDinasPageState();
 }
@@ -208,26 +210,26 @@ class _AddDinasPageState extends State<AddDinasPage> {
               if (currentStep == 2) {
                 context.read<AddDinasBloc>().add(
                       AddDinasSubmited(
-                        divisi: int.parse(widget.idDivisiController.text),
-                        departemen:
-                            int.parse(widget.idDepartemenController.text),
-                        posisi: int.parse(widget.idPosisiController.text),
-                        templateSpd:
-                            int.parse(widget.idTemplateSpdController.text),
-                        direktorat:
-                            int.parse(widget.idDirektoratController!.text),
-                        tanggal: widget.tanggalController.text,
-                        tanggalAwal: widget.tanggalAwalController.text,
-                        tanggalAkhir: widget.tanggalAkhirController.text,
-                        jenisSpd: int.parse(widget.idJenisSpdController.text),
-                        zonaAsal: int.parse(widget.idZonaAsalController.text),
-                        zonaTujuan:
-                            int.parse(widget.idZonaTujuanController.text),
-                        lokasiTujuan:
-                            int.parse(widget.idLokasiTujuanController.text),
-                        pic: int.parse(widget.idPicController.text),
-                        kendDinas: int.parse(widget.kendDinasController.text),
-                      ),
+                          divisi: int.parse(widget.idDivisiController.text),
+                          departemen:
+                              int.parse(widget.idDepartemenController.text),
+                          posisi: int.parse(widget.idPosisiController.text),
+                          templateSpd:
+                              int.parse(widget.idTemplateSpdController.text),
+                          // direktorat:
+                          //     int.parse(widget.idDirektoratController!.text),
+                          tanggal: widget.tanggalController.text,
+                          tanggalAwal: widget.tanggalAwalController.text,
+                          tanggalAkhir: widget.tanggalAkhirController.text,
+                          jenisSpd: int.parse(widget.idJenisSpdController.text),
+                          zonaAsal: int.parse(widget.idZonaAsalController.text),
+                          zonaTujuan:
+                              int.parse(widget.idZonaTujuanController.text),
+                          lokasiTujuan:
+                              int.parse(widget.idLokasiTujuanController.text),
+                          pic: int.parse(widget.idPicController.text),
+                          kendDinas: int.parse(widget.kendDinasController.text),
+                          desc: widget.catatanController.value.text),
                     );
               } else {
                 continueStep();
@@ -761,29 +763,29 @@ class _AddDinasPageState extends State<AddDinasPage> {
                                           fontSize: 8,
                                         ),
                                       ),
-                                      FormDropDownData(
-                                        showRedStar: false,
-                                        input: selectedDirektorat ?? '',
-                                        onTap: () {
-                                          _showDirektorat(context);
-                                        },
-                                        idController:
-                                            widget.idDirektoratController,
-                                        valueController:
-                                            widget.valueDirektoratController,
-                                        labelForm: 'Direktorat',
-                                        hintText: 'Pilih Direktorat',
-                                        labelTag: 'Label-Direktorat',
-                                        formTag: 'Form-Direktorat',
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return 'Pilih Direktorat';
-                                          }
-                                          return null;
-                                        },
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
+                                      // FormDropDownData(
+                                      //   showRedStar: false,
+                                      //   input: selectedDirektorat ?? '',
+                                      //   onTap: () {
+                                      //     _showDirektorat(context);
+                                      //   },
+                                      //   idController:
+                                      //       widget.idDirektoratController,
+                                      //   valueController:
+                                      //       widget.valueDirektoratController,
+                                      //   labelForm: 'Direktorat',
+                                      //   hintText: 'Pilih Direktorat',
+                                      //   labelTag: 'Label-Direktorat',
+                                      //   formTag: 'Form-Direktorat',
+                                      //   validator: (value) {
+                                      //     if (value == null || value.isEmpty) {
+                                      //       return 'Pilih Direktorat';
+                                      //     }
+                                      //     return null;
+                                      //   },
+                                      //   errorTextStyle:
+                                      //       GoogleFonts.poppins(fontSize: 8),
+                                      // ),
                                       FormDropDownData(
                                         input: selectedDivisi ?? '',
                                         onTap: () {
@@ -1180,6 +1182,22 @@ class _AddDinasPageState extends State<AddDinasPage> {
                                             ),
                                           ),
                                         ],
+                                      ),
+                                      SizedBox(height: 10.sp),
+                                      FormInputData(
+                                        showRedStar: true,
+                                        hintText:
+                                            'Tuliskan Keterangan Kendaraan',
+                                        labelForm: 'Nama Kendaraan',
+                                        labelTag: 'Label-catatanDinas',
+                                        formTag: 'Form-catatanDinas',
+                                        controller: widget.catatanController,
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Tuliskan Nama Kendaraan';
+                                          }
+                                          return null;
+                                        },
                                       ),
                                     ],
                                   ),

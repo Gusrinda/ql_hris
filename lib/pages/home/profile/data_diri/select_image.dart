@@ -279,10 +279,10 @@ class _FileSelectionWidgetState extends State<FileSelectionWidget> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            Text(
-              ' *',
-              style: TextStyle(color: Colors.red),
-            ),
+            // Text(
+            //   ' *',
+            //   style: TextStyle(color: Colors.red),
+            // ),
           ],
         ),
         const SizedBox(height: 5),

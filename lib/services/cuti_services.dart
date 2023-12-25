@@ -12,7 +12,7 @@ class CutiServices {
         "${date.year}-${date.month.toString().padLeft(2, '0')}-$lastDateStr";
     var url = Uri.parse(
         "${MyGeneralConst.API_URL}/operation/t_cuti?where=date_from > '${date.year}-${date.month.toString().padLeft(2, '0')}-01' and date_to < '$formattedDate'");
-        // "${MyGeneralConst.API_URL}/operation/t_cuti?date_from=${date.year}-${date.month}-1&date_to=$formattedDate");
+    // "${MyGeneralConst.API_URL}/operation/t_cuti?date_from=${date.year}-${date.month}-1&date_to=$formattedDate");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,

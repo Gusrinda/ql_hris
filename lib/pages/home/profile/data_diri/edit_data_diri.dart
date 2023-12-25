@@ -67,7 +67,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
   String? selectedProvinsi;
   String? selectedKotabyProvinsi;
   String? selectedKecamatan;
-  final _picker = ImagePicker();
   File? fotoKaryawan;
   String fileNameFotoKaryawan = "";
   String fileUrlFotoKaryawan = "";
@@ -84,8 +83,8 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
   String fileNameBpjs = "";
   String fileUrlBpjs = "";
   File? berkaspendukung;
-  String fileNameBerkasPendukunga = "";
-  String fileUrlBerkasPendukunga = "";
+  String fileNameBerkasPendukung = "";
+  String fileUrlBerkasPendukung = "";
 
   int currentStep = 0;
   // late GlobalKey<FormState> _formKeyStep1;
@@ -137,7 +136,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
     'Selanjutnya',
     'Selanjutnya',
     'Selanjutnya',
-    'Kirim'
+    'Simpan Data'
   ];
 
   continueStep() {
@@ -181,116 +180,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
               onPressed: details.onStepContinue,
             ),
           } else ...{
-            TextButtonCustomV1(
-              text: buttonTexts[currentStep],
-              height: 50,
-              backgroundColor: MyColorsConst.primaryColor.withOpacity(0.1),
-              textColor: MyColorsConst.primaryColor,
-              onPressed: () {
-                print("Ini Klik Submit Edit Biodata");
-                print(
-                    "status nikah ${controllers.idStatusPernikahanController.text}");
-
-                // Membangun data yang akan dikirimkan ke server
-                Map<String, dynamic> requestData = {};
-
-                // Menambahkan setiap field yang diinginkan ke dalam requestData
-                addToRequest(requestData, "divisiId",
-                    int.parse(controllers.idDivisiController.text));
-
-                addToRequest(requestData, "deptId",
-                    int.parse(controllers.idDepartemenController.text));
-                addToRequest(requestData, "posisiId",
-                    int.parse(controllers.idPosisiController.text));
-                addToRequest(requestData, "zonaId",
-                    int.parse(controllers.idZonaController.text));
-                addToRequest(requestData, "kodePresensi",
-                    controllers.valueKodePresensiController.text);
-                addToRequest(requestData, "namaDepan",
-                    controllers.namaDepanController.text);
-                addToRequest(requestData, "namaBelakang",
-                    controllers.namaBelakangController.text);
-                addToRequest(requestData, "namaLengkap",
-                    '${controllers.namaDepanController.text} ${controllers.namaBelakangController.text}');
-                addToRequest(requestData, "namaPanggilan",
-                    controllers.namaPanggilanController.text);
-                addToRequest(requestData, "jkId",
-                    int.parse(controllers.idJenisKelaminController.text));
-                addToRequest(requestData, "tempatLahir",
-                    controllers.idTempatLahirController.text);
-                addToRequest(requestData, "tglLahir",
-                    controllers.tanggalLahirController.text);
-                addToRequest(requestData, "provinsiId",
-                    int.parse(controllers.idProvinsiController.text));
-                addToRequest(requestData, "kotaId",
-                    int.parse(controllers.idKotaController.text));
-                addToRequest(requestData, "kecamatanId",
-                    int.parse(controllers.idKecamatanController.text));
-                addToRequest(
-                    requestData, "kodePos", controllers.kodePosController.text);
-                addToRequest(requestData, "alamatAsli",
-                    controllers.alamatKtpController.text);
-                addToRequest(requestData, "alamatDomisili",
-                    controllers.alamatDomisiliTinggalController.text);
-                addToRequest(
-                    requestData, "noTlp", controllers.noTelpController.text);
-                addToRequest(requestData, "noTlpLainnya",
-                    controllers.noTelpLainnyaController.text);
-                addToRequest(requestData, "noDarurat",
-                    controllers.noTelpDaruratController.text);
-                addToRequest(requestData, "namaKontakDarurat",
-                    controllers.namaKontakDaruratController.text);
-                addToRequest(requestData, "hubDgnKaryawan",
-                    controllers.hubkaryawanController.text);
-                addToRequest(requestData, "agamaId",
-                    int.parse(controllers.idAgamaController.text));
-                addToRequest(requestData, "golDarahId",
-                    int.parse(controllers.idGolDarahController.text));
-                addToRequest(requestData, "statusNikahId",
-                    int.parse(controllers.idStatusPernikahanController.text));
-                addToRequest(requestData, "tanggunganId",
-                    int.parse(controllers.idJumlahTanggunganController.text));
-                addToRequest(requestData, "tglMasuk",
-                    controllers.tanggalMasukController.text);
-                addToRequest(requestData, "ktpFoto", ktp);
-                addToRequest(requestData, "pasFoto", fotoKaryawan);
-                addToRequest(requestData, "bpjsFoto", bpjs);
-                addToRequest(
-                    requestData, "ktpNo", controllers.noKtpController.text);
-                addToRequest(
-                    requestData, "kkNo", controllers.noKkController.text);
-                addToRequest(requestData, "kkFoto", kartukeluarga);
-                addToRequest(requestData, "npwpFoto", npwp);
-                addToRequest(
-                    requestData, "npwpNo", controllers.noNpwpController.text);
-                addToRequest(requestData, "npwpTglBerlaku",
-                    controllers.tanggalNpwpController.text);
-                addToRequest(requestData, "bpjsTipeId",
-                    int.parse(controllers.idTipeBPJSController.text));
-                addToRequest(
-                    requestData, "bpjsNo", controllers.noBpjsController.text);
-                addToRequest(
-                    requestData, "desc", controllers.keteranganController.text);
-                addToRequest(
-                    requestData, "ukBaju", controllers.ukBajuController.text);
-                addToRequest(requestData, "ukCelana",
-                    controllers.ukCelanaController.text);
-                addToRequest(requestData, "ukSepatu",
-                    controllers.ukSepatuontroller.text);
-                addToRequest(requestData, "bankId",
-                    int.parse(controllers.idNamaBankController.text));
-                addToRequest(
-                    requestData, "noRek", controllers.noRekController.text);
-                addToRequest(requestData, "atasNamaRek",
-                    controllers.atasNamaController.text);
-
-                // Melakukan submit data
-                context
-                    .read<EditBiodataBloc>()
-                    .add(EditDataBiodataSubmited(requestData: requestData));
-              },
-            ),
-
             // TextButtonCustomV1(
             //   text: buttonTexts[currentStep],
             //   height: 50,
@@ -301,69 +190,253 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
             //     print(
             //         "status nikah ${controllers.idStatusPernikahanController.text}");
 
-            //     context.read<EditBiodataBloc>().add(EditDataBiodataSubmited(
-            //           divisiId: int.parse(controllers.idDivisiController.text),
-            //           deptId:
-            //               int.parse(controllers.idDepartemenController.text),
-            //           posisiId: int.parse(controllers.idPosisiController.text),
-            //           zonaId: int.parse(controllers.idZonaController.text),
-            //           kodePresensi:
-            //               controllers.valueKodePresensiController.text,
-            //           namaDepan: controllers.namaDepanController.text,
-            //           namaBelakang: controllers.namaBelakangController.text,
-            //           namaLengkap:
-            //               '${controllers.namaDepanController.text} ${controllers.namaBelakangController.text}',
-            //           namaPanggilan: controllers.namaPanggilanController.text,
-            //           jkId:
-            //               int.parse(controllers.idJenisKelaminController.text),
-            //           tempatLahir: controllers.idTempatLahirController.text,
-            //           tglLahir: controllers.tanggalLahirController.text,
-            //           provinsiId:
-            //               int.parse(controllers.idProvinsiController.text),
-            //           kotaId: int.parse(controllers.idKotaController.text),
-            //           kecamatanId:
-            //               int.parse(controllers.idKecamatanController.text),
-            //           kodePos: controllers.kodePosController.text,
-            //           alamatAsli: controllers.alamatKtpController.text,
-            //           alamatDomisili:
-            //               controllers.alamatDomisiliTinggalController.text,
-            //           noTlp: controllers.noTelpController.text,
-            //           noTlpLainnya: controllers.noTelpLainnyaController.text,
-            //           noDarurat: controllers.noTelpDaruratController.text,
-            //           namaKontakDarurat:
-            //               controllers.namaKontakDaruratController.text,
-            //           hubDgnKaryawan: controllers.hubkaryawanController.text,
-            //           agamaId: int.parse(controllers.idAgamaController.text),
-            //           golDarahId:
-            //               int.parse(controllers.idGolDarahController.text),
-            //           statusNikahId: int.parse(
-            //               controllers.idStatusPernikahanController.text),
-            //           tanggunganId: int.parse(
-            //               controllers.idJumlahTanggunganController.text),
-            //           tglMasuk: controllers.tanggalMasukController.text,
-            //           ktpFoto: File(ktp?.path ?? ''),
-            //           pasFoto: File(fotoKaryawan?.path ?? ''),
-            //           bpjsFoto: File(bpjs?.path ?? ''),
-            //           ktpNo: controllers.noKtpController.text,
-            //           kkNo: controllers.noKkController.text,
-            //           kkFoto: File(kartukeluarga?.path ?? ''),
-            //           npwpFoto: File(npwp?.path ?? ''),
-            //           npwpNo: controllers.noNpwpController.text,
-            //           // berkasLain: File(berkaspendukung?.path ?? ''),
-            //           npwpTglBerlaku: controllers.tanggalNpwpController.text,
-            //           bpjsTipeId:
-            //               int.parse(controllers.idTipeBPJSController.text),
-            //           bpjsNo: controllers.noBpjsController.text,
-            //           desc: controllers.keteranganController.text,
-            //           ukBaju: controllers.ukBajuController.text,
-            //           ukCelana: controllers.ukCelanaController.text,
-            //           ukSepatu: controllers.ukSepatuontroller.text,
-            //           bankId: int.parse(controllers.idNamaBankController.text),
-            //           noRek: controllers.noRekController.text,
-            //           atasNamaRek: controllers.atasNamaController.text,
-            //         ));
+            //     // Membangun data yang akan dikirimkan ke server
+            //     Map<String, dynamic> requestData = {};
+
+            //     // Menambahkan setiap field yang diinginkan ke dalam requestData
+            //     addToRequest(requestData, "divisiId",
+            //         int.parse(controllers.idDivisiController.text));
+
+            //     addToRequest(requestData, "deptId",
+            //         int.parse(controllers.idDepartemenController.text));
+            //     addToRequest(requestData, "posisiId",
+            //         int.parse(controllers.idPosisiController.text));
+            //     addToRequest(requestData, "zonaId",
+            //         int.parse(controllers.idZonaController.text));
+            //     addToRequest(requestData, "kodePresensi",
+            //         controllers.valueKodePresensiController.text);
+            //     addToRequest(requestData, "namaDepan",
+            //         controllers.namaDepanController.text);
+            //     addToRequest(requestData, "namaBelakang",
+            //         controllers.namaBelakangController.text);
+            //     addToRequest(requestData, "namaLengkap",
+            //         '${controllers.namaDepanController.text} ${controllers.namaBelakangController.text}');
+            //     addToRequest(requestData, "namaPanggilan",
+            //         controllers.namaPanggilanController.text);
+            //     addToRequest(requestData, "jkId",
+            //         int.parse(controllers.idJenisKelaminController.text));
+            //     addToRequest(requestData, "tempatLahir",
+            //         controllers.idTempatLahirController.text);
+            //     addToRequest(requestData, "tglLahir",
+            //         controllers.tanggalLahirController.text);
+            //     addToRequest(requestData, "provinsiId",
+            //         int.parse(controllers.idProvinsiController.text));
+            //     addToRequest(requestData, "kotaId",
+            //         int.parse(controllers.idKotaController.text));
+            //     addToRequest(requestData, "kecamatanId",
+            //         int.parse(controllers.idKecamatanController.text));
+            //     addToRequest(
+            //         requestData, "kodePos", controllers.kodePosController.text);
+            //     addToRequest(requestData, "alamatAsli",
+            //         controllers.alamatKtpController.text);
+            //     addToRequest(requestData, "alamatDomisili",
+            //         controllers.alamatDomisiliTinggalController.text);
+            //     addToRequest(
+            //         requestData, "noTlp", controllers.noTelpController.text);
+            //     addToRequest(requestData, "noTlpLainnya",
+            //         controllers.noTelpLainnyaController.text);
+            //     addToRequest(requestData, "noDarurat",
+            //         controllers.noTelpDaruratController.text);
+            //     addToRequest(requestData, "namaKontakDarurat",
+            //         controllers.namaKontakDaruratController.text);
+            //     addToRequest(requestData, "hubDgnKaryawan",
+            //         controllers.hubkaryawanController.text);
+            //     addToRequest(requestData, "agamaId",
+            //         int.parse(controllers.idAgamaController.text));
+            //     addToRequest(requestData, "golDarahId",
+            //         int.parse(controllers.idGolDarahController.text));
+            //     addToRequest(requestData, "statusNikahId",
+            //         int.parse(controllers.idStatusPernikahanController.text));
+            //     addToRequest(requestData, "tanggunganId",
+            //         int.parse(controllers.idJumlahTanggunganController.text));
+            //     addToRequest(requestData, "tglMasuk",
+            //         controllers.tanggalMasukController.text);
+            //     addToRequest(requestData, "ktpFoto", ktp);
+            //     addToRequest(requestData, "pasFoto", fotoKaryawan);
+            //     addToRequest(requestData, "bpjsFoto", bpjs);
+            //     addToRequest(
+            //         requestData, "ktpNo", controllers.noKtpController.text);
+            //     addToRequest(
+            //         requestData, "kkNo", controllers.noKkController.text);
+            //     addToRequest(requestData, "kkFoto", kartukeluarga);
+            //     addToRequest(requestData, "npwpFoto", npwp);
+            //     addToRequest(
+            //         requestData, "npwpNo", controllers.noNpwpController.text);
+            //     addToRequest(requestData, "npwpTglBerlaku",
+            //         controllers.tanggalNpwpController.text);
+            //     addToRequest(requestData, "bpjsTipeId",
+            //         int.parse(controllers.idTipeBPJSController.text));
+            //     addToRequest(
+            //         requestData, "bpjsNo", controllers.noBpjsController.text);
+            //     addToRequest(
+            //         requestData, "desc", controllers.keteranganController.text);
+            //     addToRequest(
+            //         requestData, "ukBaju", controllers.ukBajuController.text);
+            //     addToRequest(requestData, "ukCelana",
+            //         controllers.ukCelanaController.text);
+            //     addToRequest(requestData, "ukSepatu",
+            //         controllers.ukSepatuontroller.text);
+            //     addToRequest(requestData, "bankId",
+            //         int.parse(controllers.idNamaBankController.text));
+            //     addToRequest(
+            //         requestData, "noRek", controllers.noRekController.text);
+            //     addToRequest(requestData, "atasNamaRek",
+            //         controllers.atasNamaController.text);
+
+            //     // Melakukan submit data
+            //     context
+            //         .read<EditBiodataBloc>()
+            //         .add(EditDataBiodataSubmited(requestData: requestData));
             //   },
             // ),
+
+            TextButtonCustomV1(
+              text: buttonTexts[currentStep],
+              height: 50,
+              backgroundColor: MyColorsConst.primaryColor.withOpacity(0.1),
+              textColor: MyColorsConst.primaryColor,
+              onPressed: () {
+                print("Ini Klik Submit Edit Biodata");
+                print(
+                    "DivisiID : ${controllers.idDivisiController?.value.text}");
+                print(
+                    "DeptID : ${controllers.idDepartemenController?.value.text}");
+
+                context.read<EditBiodataBloc>().add(EditDataBiodataSubmited(
+                      divisiId:
+                          controllers.idDivisiController?.value.text != null
+                              ? int.tryParse(
+                                  controllers.idDivisiController!.value.text)
+                              : null,
+                      deptId: controllers.idDepartemenController?.value.text !=
+                              null
+                          ? int.tryParse(
+                              controllers.idDepartemenController!.value.text)
+                          : null,
+                      posisiId:
+                          controllers.idPosisiController?.value.text != null
+                              ? int.tryParse(
+                                  controllers.idPosisiController!.value.text)
+                              : null,
+                      zonaId: controllers.idZonaController?.value.text != null
+                          ? int.tryParse(
+                              controllers.idZonaController!.value.text)
+                          : null,
+                      kodePresensi:
+                          controllers.valueKodePresensiController?.value.text,
+                      namaDepan: controllers.namaDepanController?.value.text,
+                      nik: controllers.nikController?.value.text,
+                      namaBelakang:
+                          controllers.namaBelakangController?.value.text,
+                      namaLengkap:
+                          '${controllers.namaDepanController?.value.text} ${controllers.namaBelakangController?.value.text}',
+                      namaPanggilan:
+                          controllers.namaPanggilanController?.value.text,
+                      jkId: controllers.idJenisKelaminController?.value.text !=
+                              null
+                          ? int.tryParse(
+                              controllers.idJenisKelaminController!.value.text)
+                          : null,
+                      tempatLahir:
+                          controllers.idTempatLahirController?.value.text,
+                      tglLahir: controllers.tanggalLahirController?.value.text,
+                      provinsiId:
+                          controllers.idProvinsiController?.value.text != null
+                              ? int.tryParse(
+                                  controllers.idProvinsiController!.value.text)
+                              : null,
+                      kotaId: controllers.idKotaController?.value.text != null
+                          ? int.tryParse(
+                              controllers.idKotaController!.value.text)
+                          : null,
+                      kecamatanId:
+                          controllers.idKecamatanController?.value.text != null
+                              ? int.tryParse(
+                                  controllers.idKecamatanController!.value.text)
+                              : null,
+                      kodePos: controllers.kodePosController?.value.text,
+                      alamatAsli: controllers.alamatKtpController?.value.text,
+                      alamatDomisili: controllers
+                          .alamatDomisiliTinggalController?.value.text,
+                      noTlp: controllers.noTelpController?.value.text,
+                      noTlpLainnya:
+                          controllers.noTelpLainnyaController?.value.text,
+                      noDarurat:
+                          controllers.noTelpDaruratController?.value.text,
+                      namaKontakDarurat:
+                          controllers.namaKontakDaruratController?.value.text,
+                      hubDgnKaryawan:
+                          controllers.hubkaryawanController?.value.text,
+                      agamaId: controllers.idAgamaController?.value.text != null
+                          ? int.tryParse(
+                              controllers.idAgamaController!.value.text)
+                          : null,
+                      golDarahId:
+                          controllers.idGolDarahController?.value.text != null
+                              ? int.tryParse(
+                                  controllers.idGolDarahController!.value.text)
+                              : null,
+                      statusNikahId: controllers
+                                  .idStatusPernikahanController?.value.text !=
+                              null
+                          ? int.tryParse(controllers
+                              .idStatusPernikahanController!.value.text)
+                          : null,
+                      tanggunganId: controllers
+                                  .idJumlahTanggunganController?.value.text !=
+                              null
+                          ? int.tryParse(controllers
+                              .idJumlahTanggunganController!.value.text)
+                          : null,
+                      tglMasuk: controllers.tanggalMasukController?.value.text,
+                      ktpFoto: ktp != null && ktp!.path.isNotEmpty
+                          ? File(ktp!.path)
+                          : null,
+                      pasFoto:
+                          fotoKaryawan != null && fotoKaryawan!.path.isNotEmpty
+                              ? File(fotoKaryawan!.path)
+                              : null,
+                      // bpjsFoto: bpjs != null && bpjs!.path.isNotEmpty
+                      //     ? File(bpjs!.path)
+                      //     : null,
+                      ktpNo: controllers.nikController?.value.text,
+                      kkNo: controllers.noKkController?.value.text,
+                      kkFoto: kartukeluarga != null &&
+                              kartukeluarga!.path.isNotEmpty
+                          ? File(kartukeluarga!.path)
+                          : null,
+                      npwpFoto: npwp != null && npwp!.path.isNotEmpty
+                          ? File(npwp!.path)
+                          : null,
+                      npwpNo: controllers.noNpwpController?.value.text,
+                      berkasLain: berkaspendukung != null &&
+                              berkaspendukung!.path.isNotEmpty
+                          ? File(berkaspendukung!.path)
+                          : null,
+                      npwpTglBerlaku:
+                          controllers.tanggalNpwpController?.value.text,
+                      bpjsTipeId:
+                          controllers.idTipeBPJSController?.value.text != null
+                              ? int.tryParse(
+                                  controllers.idTipeBPJSController!.value.text)
+                              : null,
+                      // bpjsNo: controllers.noBpjsController?.value.text,
+                      bpjsNo: controllers.noBpjsKesehatanController?.value.text,
+                      bpjsKerjaNo: controllers.noBpjsKesehatanController?.value.text,  
+                      desc: controllers.keteranganController?.value.text,
+                      ukBaju: controllers.ukBajuController?.value.text,
+                      ukCelana: controllers.ukCelanaController?.value.text,
+                      ukSepatu: controllers.ukSepatuontroller?.value.text,
+                      bankId:
+                          controllers.idNamaBankController?.value.text != null
+                              ? int.tryParse(
+                                  controllers.idNamaBankController!.value.text)
+                              : null,
+                      noRek: controllers.noRekController?.value.text,
+                      atasNamaRek: controllers.atasNamaController?.value.text,
+                    ));
+              },
+            ),
           },
         ],
       ),
@@ -426,9 +499,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedDivisi != null) {
-          controllers.idDivisiController.text =
+          controllers.idDivisiController!.text =
               selectedDivisi.id?.toString() ?? '';
-          controllers.valueDivisiController.text =
+          controllers.valueDivisiController!.text =
               selectedDivisi.nama?.toString() ?? '';
 
           setState(() {
@@ -458,9 +531,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedDepartemen != null) {
-          controllers.idDepartemenController.text =
+          controllers.idDepartemenController!.text =
               selectedDepartemen.id?.toString() ?? '';
-          controllers.valueDepartemenController.text =
+          controllers.valueDepartemenController!.text =
               selectedDepartemen.nama?.toString() ?? '';
 
           setState(() {
@@ -490,9 +563,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedDivisi != null) {
-          controllers.idPosisiController.text =
+          controllers.idPosisiController!.text =
               selectedDivisi.id?.toString() ?? '';
-          controllers.valuePosisiController.text =
+          controllers.valuePosisiController!.text =
               selectedDivisi.descKerja?.toString() ?? '';
 
           setState(() {
@@ -522,8 +595,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedZona != null) {
-          controllers.idZonaController.text = selectedZona.id?.toString() ?? '';
-          controllers.valueZonaController.text =
+          controllers.idZonaController!.text =
+              selectedZona.id?.toString() ?? '';
+          controllers.valueZonaController!.text =
               selectedZona.nama?.toString() ?? '';
 
           setState(() {
@@ -553,9 +627,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedCostCentre != null) {
-          controllers.idCostCentreController.text =
+          controllers.idCostCentreController!.text =
               selectedCostCentre.id?.toString() ?? '';
-          controllers.valueCostCentreController.text =
+          controllers.valueCostCentreController!.text =
               selectedCostCentre.value?.toString() ?? '';
 
           setState(() {
@@ -586,8 +660,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedKota != null) {
-          controllers.idKotaController.text = selectedKota.id?.toString() ?? '';
-          controllers.valueKotaController.text =
+          controllers.idTempatLahirController!.text =
+              selectedKota.id?.toString() ?? '';
+          controllers.valueTempatLahirController!.text =
               selectedKota.value?.toString() ?? '';
 
           setState(() {
@@ -617,9 +692,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedJenisKelamin != null) {
-          controllers.idJenisKelaminController.text =
+          controllers.idJenisKelaminController!.text =
               selectedJenisKelamin.id?.toString() ?? '';
-          controllers.valueJenisKelaminController.text =
+          controllers.valueJenisKelaminController!.text =
               selectedJenisKelamin.value?.toString() ?? '';
 
           setState(() {
@@ -652,9 +727,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedStandarGaji != null) {
-          controllers.idStandardGajiController.text =
+          controllers.idStandardGajiController!.text =
               selectedStandarGaji.id?.toString() ?? '';
-          controllers.valueStandardGajiController.text =
+          controllers.valueStandardGajiController!.text =
               selectedStandarGaji.kode?.toString() ?? '';
 
           setState(() {
@@ -692,9 +767,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedKodePresensi != null) {
-          controllers.valueKodePresensiController.text =
+          controllers.valueKodePresensiController!.text =
               selectedKodePresensi.id?.toString() ?? '';
-          controllers.valueKodePresensiController.text =
+          controllers.valueKodePresensiController!.text =
               selectedKodePresensi.kode?.toString() ?? '';
 
           setState(() {
@@ -730,9 +805,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedAgama != null) {
-          controllers.idAgamaController.text =
+          controllers.idAgamaController!.text =
               selectedAgama.id?.toString() ?? '';
-          controllers.valueAgamaController.text =
+          controllers.valueAgamaController!.text =
               selectedAgama.value?.toString() ?? '';
 
           setState(() {
@@ -762,9 +837,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedStatusNikah != null) {
-          controllers.idStatusPernikahanController.text =
+          controllers.idStatusPernikahanController!.text =
               selectedStatusNikah.id?.toString() ?? '';
-          controllers.valueStatusPernikahanController.text =
+          controllers.valueStatusPernikahanController!.text =
               selectedStatusNikah.value?.toString() ?? '';
 
           setState(() {
@@ -795,9 +870,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedGolDarah != null) {
-          controllers.idGolDarahController.text =
+          controllers.idGolDarahController!.text =
               selectedGolDarah.id?.toString() ?? '';
-          controllers.valueGolDarahController.text =
+          controllers.valueGolDarahController!.text =
               selectedGolDarah.value?.toString() ?? '';
 
           setState(() {
@@ -827,9 +902,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedTanggungan != null) {
-          controllers.idJumlahTanggunganController.text =
+          controllers.idJumlahTanggunganController!.text =
               selectedTanggungan.id?.toString() ?? '';
-          controllers.valueJumlahTanggunganController.text =
+          controllers.valueJumlahTanggunganController!.text =
               selectedTanggungan.value?.toString() ?? '';
 
           setState(() {
@@ -859,15 +934,15 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedProvinsi != null) {
-          controllers.idProvinsiController.text =
+          controllers.idProvinsiController!.text =
               selectedProvinsi.id?.toString() ?? '';
-          controllers.valueProvinsiController.text =
+          controllers.valueProvinsiController!.text =
               selectedProvinsi.value?.toString() ?? '';
 
           setState(() {
             this.selectedProvinsi = selectedProvinsi.value;
             context.read<EditBiodataBloc>().add(OnSelectKotabyProvinsi(
-                idProvinsi: int.parse(controllers.idProvinsiController.text)));
+                idProvinsi: int.parse(controllers.idProvinsiController!.text)));
 
             print(selectedProvinsi.value);
             print("Selected ID Provinsi Terakhir: ${selectedProvinsi.id}");
@@ -879,12 +954,20 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
     }
 
     void showKotabyProvinsiMenu(BuildContext context) {
-      if (controllers.idProvinsiController.text.isEmpty) {
+      if (controllers.idProvinsiController!.value.text.isEmpty) {
         CircularProgressIndicator();
+        showDialog(
+          context: context,
+          builder: (_) => DialogCustom(
+            state: DialogCustomItem.error,
+            message: "Anda belum memilih Provinsi",
+          ),
+        );
       }
 
       // Dapatkan ID provinsi yang dipilih
-      int selectedProvinsiId = int.parse(controllers.idProvinsiController.text);
+      int selectedProvinsiId =
+          int.parse(controllers.idProvinsiController!.text);
 
       // Panggil fungsi untuk mendapatkan list kota berdasarkan provinsi
       context
@@ -909,14 +992,15 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         ),
       ).then((selectedKota) {
         if (selectedKota != null) {
-          controllers.idKotaController.text = selectedKota.id?.toString() ?? '';
-          controllers.valueKotaController.text =
+          controllers.idKotaController!.text =
+              selectedKota.id?.toString() ?? '';
+          controllers.valueKotaController!.text =
               selectedKota.value?.toString() ?? '';
 
           setState(() {
             this.selectedKotabyProvinsi = selectedKota.value;
             context.read<EditBiodataBloc>().add(OnSelectKecamatan(
-                idKota: int.parse(controllers.idKotaController.text)));
+                idKota: int.parse(controllers.idKotaController!.text)));
             print(selectedKota.value);
             print("Selected ID Kota Terakhir: ${selectedKota.id}");
           });
@@ -925,12 +1009,19 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
     }
 
     void showKecamatanMenu(BuildContext context) {
-      if (controllers.idKotaController.text.isEmpty) {
+      if (controllers.idKotaController!.text.isEmpty) {
         CircularProgressIndicator();
+        showDialog(
+          context: context,
+          builder: (_) => DialogCustom(
+            state: DialogCustomItem.error,
+            message: "Anda belum memilih Kota",
+          ),
+        );
       }
 
       // Dapatkan ID provinsi yang dipilih
-      int selectedKotaId = int.parse(controllers.idKotaController.text);
+      int selectedKotaId = int.parse(controllers.idKotaController!.text);
 
       // Panggil fungsi untuk mendapatkan list kota berdasarkan provinsi
       context
@@ -955,9 +1046,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         ),
       ).then((selectedKecamatan) {
         if (selectedKecamatan != null) {
-          controllers.idKecamatanController.text =
+          controllers.idKecamatanController!.text =
               selectedKecamatan.id?.toString() ?? '';
-          controllers.valueKecamatanController.text =
+          controllers.valueKecamatanController!.text =
               selectedKecamatan.value?.toString() ?? '';
 
           setState(() {
@@ -985,9 +1076,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedTipeBPJS != null) {
-          controllers.idTipeBPJSController.text =
+          controllers.idTipeBPJSController!.text =
               selectedTipeBPJS.id?.toString() ?? '';
-          controllers.valueTipeBPJSController.text =
+          controllers.valueTipeBPJSController!.text =
               selectedTipeBPJS.value?.toString() ?? '';
 
           setState(() {
@@ -1018,9 +1109,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedPeriodeGaji != null) {
-          controllers.idPeriodeGajiController.text =
+          controllers.idPeriodeGajiController!.text =
               selectedPeriodeGaji.id?.toString() ?? '';
-          controllers.valuePeriodeGajiController.text =
+          controllers.valuePeriodeGajiController!.text =
               selectedPeriodeGaji.value?.toString() ?? '';
 
           setState(() {
@@ -1051,9 +1142,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedTipePembayaran != null) {
-          controllers.idTipePembayaranController.text =
+          controllers.idTipePembayaranController!.text =
               selectedTipePembayaran.id?.toString() ?? '';
-          controllers.valueTipePembayaranController.text =
+          controllers.valueTipePembayaranController!.text =
               selectedTipePembayaran.value?.toString() ?? '';
 
           setState(() {
@@ -1085,9 +1176,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedMetodePembayaran != null) {
-          controllers.idMetodePembayaranController.text =
+          controllers.idMetodePembayaranController!.text =
               selectedMetodePembayaran.id?.toString() ?? '';
-          controllers.valueMetodePembayaranController.text =
+          controllers.valueMetodePembayaranController!.text =
               selectedMetodePembayaran.value?.toString() ?? '';
 
           setState(() {
@@ -1118,9 +1209,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         );
 
         if (selectedNamaBank != null) {
-          controllers.idNamaBankController.text =
+          controllers.idNamaBankController!.text =
               selectedNamaBank.id?.toString() ?? '';
-          controllers.valueNamaBankController.text =
+          controllers.valueNamaBankController!.text =
               selectedNamaBank.value?.toString() ?? '';
 
           setState(() {
@@ -1267,6 +1358,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               content: Column(
                                 children: [
                                   FormDropDownData(
+                                    showRedStar: false,
                                     onTap: () {
                                       _showDivisi(context);
                                     },
@@ -1275,11 +1367,12 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     labelTag: 'Label-DivisiDiri',
                                     formTag: 'Form-DivisiDiri',
                                     valueController:
-                                        controllers.valueDivisiController,
+                                        controllers.valueDivisiController!,
                                     idController:
-                                        controllers.idDivisiController,
+                                        controllers.idDivisiController!,
                                   ),
                                   FormDropDownData(
+                                    showRedStar: false,
                                     onTap: () {
                                       _showDepartemen(context);
                                     },
@@ -1288,11 +1381,12 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     labelTag: 'Label-DepartemenDiri',
                                     formTag: 'Form-DepartemenDiri',
                                     valueController:
-                                        controllers.valueDepartemenController,
+                                        controllers.valueDepartemenController!,
                                     idController:
-                                        controllers.idDepartemenController,
+                                        controllers.idDepartemenController!,
                                   ),
                                   FormDropDownData(
+                                    showRedStar: false,
                                     onTap: () {
                                       _showPosisi(context);
                                     },
@@ -1301,11 +1395,12 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     labelTag: 'Label-PosisiDiri',
                                     formTag: 'Form-PosisiDiri',
                                     valueController:
-                                        controllers.valuePosisiController,
+                                        controllers.valuePosisiController!,
                                     idController:
-                                        controllers.idPosisiController,
+                                        controllers.idPosisiController!,
                                   ),
                                   FormDropDownData(
+                                    showRedStar: false,
                                     onTap: () {
                                       _showZona(context);
                                     },
@@ -1314,10 +1409,11 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     labelTag: 'Label-ZonaDiri',
                                     formTag: 'Form-ZonaDiri',
                                     valueController:
-                                        controllers.valueZonaController,
-                                    idController: controllers.idZonaController,
+                                        controllers.valueZonaController!,
+                                    idController: controllers.idZonaController!,
                                   ),
                                   FormDropDownData(
+                                    showRedStar: false,
                                     onTap: () {
                                       showKodePresensiMenu(context);
                                     },
@@ -1325,10 +1421,10 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     labelForm: 'Kode Presensi',
                                     labelTag: 'Label-KodePresensi',
                                     formTag: 'Form-KodePresensi',
-                                    valueController:
-                                        controllers.valueKodePresensiController,
+                                    valueController: controllers
+                                        .valueKodePresensiController!,
                                     idController:
-                                        controllers.idKodePresensiController,
+                                        controllers.idKodePresensiController!,
                                   ),
                                 ],
                               ),
@@ -1350,41 +1446,47 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               content: Column(
                                 children: [
                                   FormInputData(
+                                    showRedStar: false,
                                     hintText: 'Tuliskan NIK',
                                     labelForm: 'NIK',
                                     labelTag: 'Label-NIK',
                                     formTag: 'Form-NIK',
-                                    controller: controllers.nikController,
-                                    enabled: false,
+                                    controller: controllers.nikController!,
+                                    enabled: true,
                                     validator: (value) {},
                                   ),
                                   FormInputData(
+                                    showRedStar: false,
                                     hintText: 'Tuliskan Nama Depan Anda',
                                     labelForm: 'Nama Depan',
                                     labelTag: 'Label-NamaDepanDiri',
                                     formTag: 'Form-NamaDepanDiri',
-                                    controller: controllers.namaDepanController,
+                                    controller:
+                                        controllers.namaDepanController!,
                                     validator: (value) {},
                                   ),
                                   FormInputData(
+                                    showRedStar: false,
                                     hintText: 'Tuliskan Nama Belakang Anda',
                                     labelForm: 'Nama Belakang',
                                     labelTag: 'Label-NamaBelakangDiri',
                                     formTag: 'Form-NamaBelakangDiri',
                                     controller:
-                                        controllers.namaBelakangController,
+                                        controllers.namaBelakangController!,
                                     validator: (value) {},
                                   ),
                                   FormInputData(
+                                    showRedStar: false,
                                     hintText: 'Tuliskan Nama Panggilan Anda',
                                     labelForm: 'Nama Panggilan',
                                     labelTag: 'Label-NamaPanggilan',
                                     formTag: 'Form-NamaPanggilan',
                                     controller:
-                                        controllers.namaPanggilanController,
+                                        controllers.namaPanggilanController!,
                                     validator: (value) {},
                                   ),
                                   FormDropDownData(
+                                    showRedStar: false,
                                     onTap: () {
                                       showGenderMenu(context);
                                     },
@@ -1392,12 +1494,13 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     labelForm: 'Jenis Kelamin',
                                     labelTag: 'Label-JenisKelamin',
                                     formTag: 'Form-JenisKelamin',
-                                    valueController:
-                                        controllers.valueJenisKelaminController,
-                                    idController:
-                                        controllers.valueJenisKelaminController,
+                                    valueController: controllers
+                                        .valueJenisKelaminController!,
+                                    idController: controllers
+                                        .valueJenisKelaminController!,
                                   ),
                                   FormDropDownData(
+                                    showRedStar: false,
                                     onTap: () {
                                       showKotaMenu(context);
                                     },
@@ -1406,25 +1509,27 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     labelTag: 'Label-TempatLahir',
                                     formTag: 'Form-TempatLahir',
                                     valueController:
-                                        controllers.valueTempatLahirController,
+                                        controllers.valueTempatLahirController!,
                                     idController:
-                                        controllers.idTempatLahirController,
+                                        controllers.idTempatLahirController!,
                                   ),
-                                  FormDropDownData(
+                                  FormDateData(
+                                    showRedStar: false,
                                     onTap: () {
                                       showTahunMenu(context,
-                                          controllers.tanggalLahirController);
+                                          controllers.tanggalLahirController!);
                                     },
                                     hintText: 'Pilih Tanggal Lahir',
                                     labelForm: 'Tanggal Lahir',
                                     labelTag: 'Label-TanggalLahir',
                                     formTag: 'Form-TanggalLahir',
                                     valueController:
-                                        controllers.tanggalLahirController,
+                                        controllers.tanggalLahirController!,
                                     idController:
-                                        controllers.tanggalLahirController,
+                                        controllers.tanggalLahirController!,
                                   ),
                                   FormDropDownData(
+                                    showRedStar: false,
                                     onTap: () {
                                       showProvinsiMenu(context);
                                     },
@@ -1433,11 +1538,12 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     labelTag: 'Label-Provinsi',
                                     formTag: 'Form-Provinsi',
                                     valueController:
-                                        controllers.valueProvinsiController,
+                                        controllers.valueProvinsiController!,
                                     idController:
-                                        controllers.idProvinsiController,
+                                        controllers.idProvinsiController!,
                                   ),
                                   FormDropDownData(
+                                    showRedStar: false,
                                     onTap: () {
                                       showKotabyProvinsiMenu(context);
                                     },
@@ -1446,10 +1552,11 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     labelTag: 'Label-Kota',
                                     formTag: 'Form-Kota',
                                     valueController:
-                                        controllers.valueKotaController,
-                                    idController: controllers.idKotaController,
+                                        controllers.valueKotaController!,
+                                    idController: controllers.idKotaController!,
                                   ),
                                   FormDropDownData(
+                                    showRedStar: false,
                                     onTap: () {
                                       showKecamatanMenu(context);
                                     },
@@ -1458,73 +1565,81 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     labelTag: 'Label-Kecamatan',
                                     formTag: 'Form-Kecamatan',
                                     valueController:
-                                        controllers.valueKecamatanController,
+                                        controllers.valueKecamatanController!,
                                     idController:
-                                        controllers.idKecamatanController,
+                                        controllers.idKecamatanController!,
                                   ),
                                   FormInputData(
+                                    showRedStar: false,
                                     hintText: 'Tuliskan Kode Pos',
                                     labelForm: 'Kode Pos',
                                     labelTag: 'Label-KodePos',
                                     formTag: 'Form-KodePos',
-                                    controller: controllers.kodePosController,
+                                    controller: controllers.kodePosController!,
                                     validator: (value) {},
                                   ),
                                   FormInputData(
+                                    showRedStar: false,
                                     hintText:
                                         'Tuliskan Alamat Domisili Tinggal',
                                     labelForm: 'Alamat Tinggal',
                                     labelTag: 'Label-AlamatTinggal',
                                     formTag: 'Form-AlamatTinggal',
                                     controller: controllers
-                                        .alamatDomisiliTinggalController,
+                                        .alamatDomisiliTinggalController!,
                                     validator: (value) {},
                                   ),
                                   FormInputData(
+                                    showRedStar: false,
                                     hintText: 'Tuliskan No. Telepon',
                                     labelForm: 'No. Telepon',
                                     labelTag: 'Label-NoTelepon',
                                     formTag: 'Form-NoTelepon',
-                                    controller: controllers.noTelpController,
+                                    controller: controllers.noTelpController!,
                                     validator: (value) {},
                                   ),
                                   FormInputData(
+                                    showRedStar: false,
                                     hintText: 'Tuliskan No. Telepon Lainnya',
                                     labelForm: 'No. Telepon Lainnya',
                                     labelTag: 'Label-NoTeleponLainnya',
                                     formTag: 'Form-NoTeleponLainnya',
                                     controller:
-                                        controllers.noTelpLainnyaController,
+                                        controllers.noTelpLainnyaController!,
                                     validator: (value) {},
                                   ),
                                   FormInputData(
+                                    showRedStar: false,
                                     hintText: 'Tuliskan No. Telepon Darurat',
                                     labelForm: 'No. Telepon Darurat',
                                     labelTag: 'Label-NoTelpDarurat',
                                     formTag: 'Form-NoTelpDarurat',
                                     controller:
-                                        controllers.noTelpDaruratController,
+                                        controllers.noTelpDaruratController!,
                                     validator: (value) {},
                                   ),
                                   FormInputData(
+                                    showRedStar: false,
                                     hintText: 'Tuliskan Nama Kontak Darurat',
                                     labelForm: 'Nama Kontak Darurat',
                                     labelTag: 'Label-KontakDarurat',
                                     formTag: 'Form-KontakDarurat',
-                                    controller:
-                                        controllers.namaKontakDaruratController,
+                                    controller: controllers
+                                        .namaKontakDaruratController!,
                                     validator: (value) {},
                                   ),
                                   FormInputData(
+                                    showRedStar: false,
                                     hintText: 'Contoh: Adik Kandung',
                                     labelForm: 'Hubungan Dengan Karyawan',
                                     labelTag: 'Label-HubunganKaryawan',
                                     formTag: 'Form-HubunganKaryawan',
                                     controller:
-                                        controllers.hubkaryawanController,
+                                        controllers.hubkaryawanController!,
                                     validator: (value) {},
                                   ),
                                   FormDropDownData(
+                                    showRedStar: false,
                                     onTap: () {
                                       showAgamaMenu(context);
                                     },
@@ -1533,10 +1648,12 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     labelTag: 'Label-Agama',
                                     formTag: 'Form-Agama',
                                     valueController:
-                                        controllers.valueAgamaController,
-                                    idController: controllers.idAgamaController,
+                                        controllers.valueAgamaController!,
+                                    idController:
+                                        controllers.idAgamaController!,
                                   ),
                                   FormDropDownData(
+                                    showRedStar: false,
                                     onTap: () {
                                       showGolDarahMenu(context);
                                     },
@@ -1545,11 +1662,12 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     labelTag: 'Label-GolonganDarah',
                                     formTag: 'Form-GolonganDarah',
                                     valueController:
-                                        controllers.valueGolDarahController,
+                                        controllers.valueGolDarahController!,
                                     idController:
-                                        controllers.idGolDarahController,
+                                        controllers.idGolDarahController!,
                                   ),
                                   FormDropDownData(
+                                    showRedStar: false,
                                     onTap: () {
                                       showStatusNikahMenu(context);
                                     },
@@ -1558,11 +1676,12 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     labelTag: 'Label-StatusPernikahan',
                                     formTag: 'Form-StatusPernikahan',
                                     valueController: controllers
-                                        .valueStatusPernikahanController,
+                                        .valueStatusPernikahanController!,
                                     idController: controllers
-                                        .idStatusPernikahanController,
+                                        .idStatusPernikahanController!,
                                   ),
                                   FormDropDownData(
+                                    showRedStar: false,
                                     onTap: () {
                                       showTanggunganMenu(context);
                                     },
@@ -1571,9 +1690,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     labelTag: 'Label-JumlahTanggungan',
                                     formTag: 'Form-JumlahTanggungan',
                                     valueController: controllers
-                                        .valueJumlahTanggunganController,
+                                        .valueJumlahTanggunganController!,
                                     idController: controllers
-                                        .idJumlahTanggunganController,
+                                        .idJumlahTanggunganController!,
                                   ),
                                   const SizedBox(height: 20),
                                 ],
@@ -1594,19 +1713,20 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               title: SizedBox.shrink(),
                               content: Column(
                                 children: [
-                                  FormDropDownData(
+                                  FormDateData(
+                                    showRedStar: false,
                                     onTap: () {
                                       showTahunMenu(context,
-                                          controllers.tanggalMasukController);
+                                          controllers.tanggalMasukController!);
                                     },
                                     hintText: 'Pilih Tanggal',
                                     labelForm: 'Tanggal Masuk Kerja',
                                     labelTag: 'Label-TanggalMasuk',
                                     formTag: 'Form-TanggalMasuk',
                                     valueController:
-                                        controllers.tanggalMasukController,
+                                        controllers.tanggalMasukController!,
                                     idController:
-                                        controllers.tanggalMasukController,
+                                        controllers.tanggalMasukController!,
                                   ),
                                 ],
                               ),
@@ -1667,20 +1787,23 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     fileName: fileNameKtp,
                                     selectedFile: ktp,
                                   ),
+                                  // FormInputData(
+                                    // showRedStar: false,
+                                  //   hintText: 'Tuliskan No. KTP',
+                                  //   labelForm: 'No. KTP',
+                                  //   labelTag: 'Label-NoKtp',
+                                  //   formTag: 'Form-NoKtp',
+                                  //   controller: controllers.noKtpController!,
+                                  //   validator: (value) {},
+                                  // ),
                                   FormInputData(
-                                    hintText: 'Tuliskan No. KTP',
-                                    labelForm: 'No. KTP',
-                                    labelTag: 'Label-NoKtp',
-                                    formTag: 'Form-NoKtp',
-                                    controller: controllers.noKtpController,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
+                                    showRedStar: false,
                                     hintText: 'Tuliskan Alamat Sesuai KTP',
                                     labelForm: 'Alamat Asli Sesuai KTP',
                                     labelTag: 'Label-AlamatKTP',
                                     formTag: 'Form-AlamatKTP',
-                                    controller: controllers.alamatKtpController,
+                                    controller:
+                                        controllers.alamatKtpController!,
                                     validator: (value) {},
                                   ),
                                   FileSelectionWidget(
@@ -1695,11 +1818,12 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     selectedFile: kartukeluarga,
                                   ),
                                   FormInputData(
+                                    showRedStar: false,
                                     hintText: 'Tuliskan No. Kartu Keluarga',
                                     labelForm: 'No. Kartu Keluarga',
                                     labelTag: 'Label-NoKk',
                                     formTag: 'Form-NoKk',
-                                    controller: controllers.noKkController,
+                                    controller: controllers.noKkController!,
                                     validator: (value) {},
                                   ),
                                   FileSelectionWidget(
@@ -1715,48 +1839,61 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     selectedFile: npwp,
                                   ),
                                   FormInputData(
+                                    showRedStar: false,
                                     hintText: 'Tuliskan No. NPWP',
                                     labelForm: 'No. NPWP',
                                     labelTag: 'Label-NoNpwp',
                                     formTag: 'Form-NoNpwp',
-                                    controller: controllers.noNpwpController,
+                                    controller: controllers.noNpwpController!,
                                     validator: (value) {},
                                   ),
                                   FormDropDownData(
+                                    showRedStar: false,
                                     onTap: () {
                                       showTahunMenu(context,
-                                          controllers.tanggalNpwpController);
+                                          controllers.tanggalNpwpController!);
                                     },
                                     hintText: 'Pilih Tanggal',
                                     labelForm: 'Tanggal Berlaku NPWP',
                                     labelTag: 'Label-TanggalNpwp',
                                     formTag: 'Form-TanggalNpwp',
                                     valueController:
-                                        controllers.tanggalNpwpController,
+                                        controllers.tanggalNpwpController!,
                                     idController:
-                                        controllers.tanggalNpwpController,
+                                        controllers.tanggalNpwpController!,
                                   ),
-                                  FileSelectionWidget(
-                                    onFileSelected: (file, fileUrl) {
-                                      setState(() {
-                                        bpjs = file;
-                                        fileNameBpjs =
-                                            file.path.split('/').last;
-                                      });
-                                    },
-                                    title: 'Foto BPJS',
-                                    fileName: fileNameBpjs,
-                                    selectedFile: bpjs,
+                                  // FileSelectionWidget(
+                                  //   onFileSelected: (file, fileUrl) {
+                                  //     setState(() {
+                                  //       bpjs = file;
+                                  //       fileNameBpjs =
+                                  //           file.path.split('/').last;
+                                  //     });
+                                  //   },
+                                  //   title: 'Foto BPJS',
+                                  //   fileName: fileNameBpjs,
+                                  //   selectedFile: bpjs,
+                                  // ),
+                                  FormInputData(
+                                    showRedStar: false,
+                                    hintText: 'Tuliskan No. BPJS Kesehatan',
+                                    labelForm: 'No. BPJS Kesehatan',
+                                    labelTag: 'Label-NoBpjsKes',
+                                    formTag: 'Form-NoBpjsKes',
+                                    controller: controllers.noBpjsKesehatanController!,
+                                    validator: (value) {},
                                   ),
                                   FormInputData(
-                                    hintText: 'Tuliskan No. BPJS',
-                                    labelForm: 'No. BPJS',
-                                    labelTag: 'Label-NoBpjs',
-                                    formTag: 'Form-NoBpjs',
-                                    controller: controllers.noBpjsController,
+                                    showRedStar: false,
+                                    hintText: 'Tuliskan No. BPJS Ketenagakerjaan',
+                                    labelForm: 'No. BPJS Ketenagakerjaan',
+                                    labelTag: 'Label-NoBpjsKer',
+                                    formTag: 'Form-NoBpjsKer',
+                                    controller: controllers.noBpjsKetenagakerjaanController!,
                                     validator: (value) {},
                                   ),
                                   FormDropDownData(
+                                    showRedStar: false,
                                     onTap: () {
                                       showTipeBPJS(context);
                                     },
@@ -1765,29 +1902,30 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     labelTag: 'Label-TipeBpjs',
                                     formTag: 'Form-TipeBpjs',
                                     valueController:
-                                        controllers.valueTipeBPJSController,
+                                        controllers.valueTipeBPJSController!,
                                     idController:
-                                        controllers.idTipeBPJSController,
+                                        controllers.idTipeBPJSController!,
                                   ),
                                   FileSelectionWidget(
                                     onFileSelected: (file, fileUrl) {
                                       setState(() {
                                         berkaspendukung = file;
-                                        fileNameBerkasPendukunga =
+                                        fileNameBerkasPendukung =
                                             file.path.split('/').last;
                                       });
                                     },
                                     title: 'Berkas Pendukung Lainnya',
-                                    fileName: fileNameBerkasPendukunga,
+                                    fileName: fileNameBerkasPendukung,
                                     selectedFile: berkaspendukung,
                                   ),
                                   FormInputData(
+                                    showRedStar: false,
                                     hintText: 'Tuliskan Keterangan',
                                     labelForm: 'Keterangan',
                                     labelTag: 'Label-KeteranganDiri',
                                     formTag: 'Form-KeteranganDiri',
                                     controller:
-                                        controllers.keteranganController,
+                                        controllers.keteranganController!,
                                     validator: (value) {},
                                   ),
                                 ],
@@ -1810,27 +1948,30 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               content: Column(
                                 children: [
                                   FormInputData(
+                                    showRedStar: false,
                                     hintText: 'S / M / L / XL / XXL',
                                     labelForm: 'Ukuran Baju',
                                     labelTag: 'Label-UkBaju',
                                     formTag: 'Form-UkBaju',
-                                    controller: controllers.ukBajuController,
+                                    controller: controllers.ukBajuController!,
                                     validator: (value) {},
                                   ),
                                   FormInputData(
+                                    showRedStar: false,
                                     hintText: 'Contoh: 32',
                                     labelForm: 'Ukuran Celana',
                                     labelTag: 'Label-UkCelana',
                                     formTag: 'Form-UkCelana',
-                                    controller: controllers.ukCelanaController,
+                                    controller: controllers.ukCelanaController!,
                                     validator: (value) {},
                                   ),
                                   FormInputData(
+                                    showRedStar: false,
                                     hintText: 'Contoh: 43',
                                     labelForm: 'Ukuran Sepatu',
                                     labelTag: 'Label-UkSepatu',
                                     formTag: 'Form-UkSepatu',
-                                    controller: controllers.ukSepatuontroller,
+                                    controller: controllers.ukSepatuontroller!,
                                     validator: (value) {},
                                   ),
                                 ],
@@ -1853,6 +1994,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               content: Column(
                                 children: [
                                   FormDropDownData(
+                                    showRedStar: false,
                                     onTap: () {
                                       showNamaBank(context);
                                     },
@@ -1861,25 +2003,27 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     labelTag: 'Label-NamaBank',
                                     formTag: 'Form-NamaBank',
                                     valueController:
-                                        controllers.valueNamaBankController,
+                                        controllers.valueNamaBankController!,
                                     idController:
-                                        controllers.idNamaBankController,
+                                        controllers.idNamaBankController!,
                                   ),
                                   FormInputData(
+                                    showRedStar: false,
                                     hintText: 'Tuliskan Nomor Rekening',
                                     labelForm: 'Nomor Rekening',
                                     labelTag: 'Label-NoRek',
                                     formTag: 'Form-NoRek',
-                                    controller: controllers.noRekController,
+                                    controller: controllers.noRekController!,
                                     validator: (value) {},
                                   ),
                                   FormInputData(
+                                    showRedStar: false,
                                     hintText:
                                         'Tuliskan Atas Nama Pemilik Rekening',
                                     labelForm: 'Atas Nama Rekening',
                                     labelTag: 'Label-NamaRek',
                                     formTag: 'Form-NamaRek',
-                                    controller: controllers.atasNamaController,
+                                    controller: controllers.atasNamaController!,
                                     validator: (value) {},
                                   ),
                                 ],

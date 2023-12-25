@@ -22,6 +22,7 @@ class AddDinasSubmited extends AddDinasEvent {
   int lokasiTujuan;
   int pic;
   int kendDinas;
+  String desc;
 
   AddDinasSubmited({
     required this.divisi,
@@ -38,6 +39,7 @@ class AddDinasSubmited extends AddDinasEvent {
     required this.lokasiTujuan,
     required this.pic,
     required this.kendDinas,
+    required this.desc,
   });
 
   @override
@@ -56,6 +58,7 @@ class AddDinasSubmited extends AddDinasEvent {
         lokasiTujuan,
         pic,
         kendDinas,
+        desc
       ];
 }
 

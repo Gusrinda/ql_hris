@@ -201,7 +201,7 @@ class _YearPickerCustomState extends State<YearPickerCustom> {
   int? _tempSelectedYear;
   int? _selectedYear;
   final List<int> _years =
-      List.generate(20, (index) => DateTime.now().year - 10 + index);
+      List.generate(40, (index) => DateTime.now().year - 20 + index);
 
   @override
   void initState() {

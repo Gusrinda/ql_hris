@@ -24,7 +24,7 @@ class DinasServices {
       int departemen,
       int posisi,
       int templateSpd,
-      int direktorat,
+      // int direktorat,
       tanggal,
       tanggalAwal,
       tanggalAkhir,
@@ -33,13 +33,15 @@ class DinasServices {
       int zonaTujuan,
       int lokasiTujuan,
       int pic,
-      int kendDinas) async {
+      int kendDinas,
+      String desc,
+      ) async {
     print('Token: $token');
     print('ini divisi: $divisi');
     print('ini departemen: $departemen');
     print('ini posisi: $posisi');
     print('ini template spd: $templateSpd');
-    print('ini direktorat: $direktorat');
+    // print('ini direktorat: $direktorat');
     print('ini tanggal: $tanggal');
     print('ini tanggal awal: $tanggalAwal');
     print('ini tanggal akhir: $tanggalAkhir');
@@ -49,6 +51,7 @@ class DinasServices {
     print('ini lokasi tujuan: $lokasiTujuan');
     print('ini pic: $pic');
     print('ini kenddinas: $kendDinas');
+    print('Kendaraan: $desc');
 
     var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_spd");
     return await GeneralServices.baseService(
@@ -60,7 +63,7 @@ class DinasServices {
         "m_dept_id": departemen,
         "m_posisi_id": posisi,
         "m_spd_id": templateSpd,
-        "m_dir_id": direktorat,
+        // "m_dir_id": direktorat,
         "tanggal": tanggal,
         "tgl_acara_awal": tanggalAwal,
         "tgl_acara_akhir": tanggalAkhir,
@@ -71,6 +74,7 @@ class DinasServices {
         "pic_id": pic,
         "total_biaya": 0,
         "is_kend_dinas": kendDinas,
+        "desc": desc,
       }),
     );
   }

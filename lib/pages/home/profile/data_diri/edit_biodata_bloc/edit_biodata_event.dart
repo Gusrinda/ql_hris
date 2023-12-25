@@ -7,172 +7,178 @@ abstract class EditBiodataEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class EditDataBiodataSubmited extends EditBiodataEvent {
-  final Map<String, dynamic> requestData;
-
-  EditDataBiodataSubmited({
-    required this.requestData,
-  });
-
-  @override
-  List<Object> get props => [requestData];
-}
-
-
-
 // class EditDataBiodataSubmited extends EditBiodataEvent {
-//   // int dirId;
-//   int? divisiId;
-//   int? deptId;
-//   int? zonaId;
-//   int? posisiId;
-//   String? kodePresensi;
-//   String? namaDepan;
-//   String? namaBelakang;
-//   String? namaLengkap;
-//   String? namaPanggilan;
-//   int? jkId;
-//   String? tempatLahir;
-//   String? tglLahir;
-//   int? provinsiId;
-//   int? kotaId;
-//   int? kecamatanId;
-//   String? kodePos;
-//   String? alamatAsli;
-//   String? alamatDomisili;
-//   String? noTlp;
-//   String? noTlpLainnya;
-//   String? noDarurat;
-//   String? namaKontakDarurat;
-//   int? agamaId;
-//   int? golDarahId;
-//   int? statusNikahId;
-//   int? tanggunganId;
-//   String? hubDgnKaryawan;
-//   String? tglMasuk;
-//   String? ukBaju;
-//   String? ukCelana;
-//   String? ukSepatu;
-//   File? ktpFoto;
-//   File? pasFoto;
-//   File? bpjsFoto;
-//   String? ktpNo;
-//   String? kkNo;
-//   File? kkFoto;
-//   String? npwpNo;
-//   File? npwpFoto;
-//   String? npwpTglBerlaku;
-//   int? bpjsTipeId;
-//   String? bpjsNo;
-//   // File? berkasLain;
-//   String? desc;
-//   int? bankId;
-//   String? noRek;
-//   String? atasNamaRek;
+//   final Map<String, dynamic> requestData;
 
 //   EditDataBiodataSubmited({
-//     // required this.dirId,
-//     this.divisiId,
-//     this.deptId,
-//     this.zonaId,
-//     this.posisiId,
-//     this.kodePresensi,
-//     this.namaDepan,
-//     this.namaBelakang,
-//     this.namaLengkap,
-//     this.namaPanggilan,
-//     this.jkId,
-//     this.tempatLahir,
-//     this.tglLahir,
-//     this.provinsiId,
-//     this.kotaId,
-//     this.kecamatanId,
-//     this.kodePos,
-//     this.alamatAsli,
-//     this.alamatDomisili,
-//     this.noTlp,
-//     this.noTlpLainnya,
-//     this.noDarurat,
-//     this.namaKontakDarurat,
-//     this.agamaId,
-//     this.golDarahId,
-//     this.statusNikahId,
-//     this.tanggunganId,
-//     this.hubDgnKaryawan,
-//     this.tglMasuk,
-//     this.ukBaju,
-//     this.ukCelana,
-//     this.ukSepatu,
-//     this.ktpFoto,
-//     this.pasFoto,
-//     this.bpjsFoto,
-//     this.ktpNo,
-//     this.kkNo,
-//     this.kkFoto,
-//     this.npwpNo,
-//     this.npwpFoto,
-//     this.npwpTglBerlaku,
-//     this.bpjsTipeId,
-//     this.bpjsNo,
-//     // this.berkasLain,
-//     this.desc,
-//     this.bankId,
-//     this.noRek,
-//     this.atasNamaRek,
+//     required this.requestData,
 //   });
 
 //   @override
-//   List<Object> get props => [
-//         // dirId,
-//         divisiId!,
-//         deptId!,
-//         zonaId!,
-//         posisiId!,
-//         kodePresensi!,
-//         namaDepan!,
-//         namaBelakang!,
-//         namaLengkap!,
-//         namaPanggilan!,
-//         jkId!,
-//         tempatLahir!,
-//         tglLahir!,
-//         provinsiId!,
-//         kotaId!,
-//         kecamatanId!,
-//         kodePos!,
-//         alamatAsli!,
-//         alamatDomisili!,
-//         noTlp!,
-//         noTlpLainnya!,
-//         noDarurat!,
-//         namaKontakDarurat!,
-//         agamaId!,
-//         golDarahId!,
-//         statusNikahId!,
-//         tanggunganId!,
-//         hubDgnKaryawan!,
-//         tglMasuk!,
-//         ukBaju!,
-//         ukCelana!,
-//         ukSepatu!,
-//         ktpFoto!,
-//         pasFoto!,
-//         bpjsFoto!,
-//         ktpNo!,
-//         kkNo!,
-//         kkFoto!,
-//         npwpNo!,
-//         npwpFoto!,
-//         npwpTglBerlaku!,
-//         bpjsTipeId!,
-//         bpjsNo!,
-//         // berkasLain!,
-//         desc!,
-//         bankId!,
-//         noRek!,
-//         atasNamaRek!,
-//       ];
+//   List<Object> get props => [requestData];
 // }
+
+
+
+class EditDataBiodataSubmited extends EditBiodataEvent {
+  int? dirId;
+  int? divisiId;
+  int? deptId;
+  int? zonaId;
+  int? posisiId;
+  String? kodePresensi;
+  String? nik;
+  String? namaDepan;
+  String? namaBelakang;
+  String? namaLengkap;
+  String? namaPanggilan;
+  int? jkId;
+  String? tempatLahir;
+  String? tglLahir;
+  int? provinsiId;
+  int? kotaId;
+  int? kecamatanId;
+  String? kodePos;
+  String? alamatAsli;
+  String? alamatDomisili;
+  String? noTlp;
+  String? noTlpLainnya;
+  String? noDarurat;
+  String? namaKontakDarurat;
+  int? agamaId;
+  int? golDarahId;
+  int? statusNikahId;
+  int? tanggunganId;
+  String? hubDgnKaryawan;
+  String? tglMasuk;
+  String? ukBaju;
+  String? ukCelana;
+  String? ukSepatu;
+  File? ktpFoto;
+  File? pasFoto;
+  File? bpjsFoto;
+  String? ktpNo;
+  String? kkNo;
+  File? kkFoto;
+  String? npwpNo;
+  File? npwpFoto;
+  String? npwpTglBerlaku;
+  int? bpjsTipeId;
+  String? bpjsNo;
+  String? bpjsKerjaNo;
+  File? berkasLain;
+  String? desc;
+  int? bankId;
+  String? noRek;
+  String? atasNamaRek;
+
+  EditDataBiodataSubmited({
+    this.dirId,
+    this.divisiId,
+    this.deptId,
+    this.zonaId,
+    this.posisiId,
+    this.kodePresensi,
+    this.nik,
+    this.namaDepan,
+    this.namaBelakang,
+    this.namaLengkap,
+    this.namaPanggilan,
+    this.jkId,
+    this.tempatLahir,
+    this.tglLahir,
+    this.provinsiId,
+    this.kotaId,
+    this.kecamatanId,
+    this.kodePos,
+    this.alamatAsli,
+    this.alamatDomisili,
+    this.noTlp,
+    this.noTlpLainnya,
+    this.noDarurat,
+    this.namaKontakDarurat,
+    this.agamaId,
+    this.golDarahId,
+    this.statusNikahId,
+    this.tanggunganId,
+    this.hubDgnKaryawan,
+    this.tglMasuk,
+    this.ukBaju,
+    this.ukCelana,
+    this.ukSepatu,
+    this.ktpFoto,
+    this.pasFoto,
+    this.bpjsFoto,
+    this.ktpNo,
+    this.kkNo,
+    this.kkFoto,
+    this.npwpNo,
+    this.npwpFoto,
+    this.npwpTglBerlaku,
+    this.bpjsTipeId,
+    this.bpjsNo,
+    this.bpjsKerjaNo,
+    this.berkasLain,
+    this.desc,
+    this.bankId,
+    this.noRek,
+    this.atasNamaRek,
+  });
+
+  @override
+  List<Object> get props => [
+        dirId!,
+        divisiId!,
+        deptId!,
+        zonaId!,
+        posisiId!,
+        kodePresensi!,
+        nik!,
+        namaDepan!,
+        namaBelakang!,
+        namaLengkap!,
+        namaPanggilan!,
+        jkId!,
+        tempatLahir!,
+        tglLahir!,
+        provinsiId!,
+        kotaId!,
+        kecamatanId!,
+        kodePos!,
+        alamatAsli!,
+        alamatDomisili!,
+        noTlp!,
+        noTlpLainnya!,
+        noDarurat!,
+        namaKontakDarurat!,
+        agamaId!,
+        golDarahId!,
+        statusNikahId!,
+        tanggunganId!,
+        hubDgnKaryawan!,
+        tglMasuk!,
+        ukBaju!,
+        ukCelana!,
+        ukSepatu!,
+        ktpFoto!,
+        pasFoto!,
+        bpjsFoto!,
+        ktpNo!,
+        kkNo!,
+        kkFoto!,
+        npwpNo!,
+        npwpFoto!,
+        npwpTglBerlaku!,
+        bpjsTipeId!,
+        bpjsKerjaNo!,
+        bpjsNo!,
+        berkasLain!,
+        desc!,
+        bankId!,
+        noRek!,
+        atasNamaRek!,
+      ];
+}
 
 // class EditDataBiodataSubmited extends EditBiodataEvent {
 //   int? userId;

@@ -11,42 +11,39 @@ import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
-import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
-import 'package:sj_presensi_mobile/pages/cuti/cuti_selector.dart';
-import 'package:sj_presensi_mobile/services/model/cuti/getDataCuti/get_alasan_cuti_model.dart';
-import 'package:sj_presensi_mobile/services/model/cuti/getDataCuti/get_tipe_cuti_model.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_diri/selector/general_selector.dart';
+import 'package:sj_presensi_mobile/pages/lembur/add_lembur/add_lembur_bloc.dart';
+import 'package:sj_presensi_mobile/services/model/list_general/response_general.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
-class AddCutiPage extends StatefulWidget {
-  static const routeName = '/AddCutiPage';
-  AddCutiPage({super.key, required this.reloadDataCallback});
+class AddLemburPage extends StatefulWidget {
+  static const routeName = '/AddLemburPage';
+  AddLemburPage({super.key, required this.reloadDataCallback});
   final VoidCallback reloadDataCallback;
 
   final TextEditingController idAlasanController = TextEditingController();
   final TextEditingController valueAlasanController = TextEditingController();
 
-  //Controller Tipe Cuti
-  final TextEditingController idTipeCutiController = TextEditingController();
-  final TextEditingController valueTipeCutiController = TextEditingController();
+  //Controller Tipe Lembur
+  final TextEditingController idTipeLemburController = TextEditingController();
+  final TextEditingController valueTipeLemburController =
+      TextEditingController();
 
   final TextEditingController keteranganController = TextEditingController();
-  final TextEditingController dateFromController = TextEditingController();
-  final TextEditingController dateToController = TextEditingController();
+  final TextEditingController dateController = TextEditingController();
   final TextEditingController? timeFromController = TextEditingController();
   final TextEditingController? timeToController = TextEditingController();
 
   @override
-  State<AddCutiPage> createState() => _AddCutiPageState();
+  State<AddLemburPage> createState() => _AddLemburPageState();
 }
 
-class _AddCutiPageState extends State<AddCutiPage> {
+class _AddLemburPageState extends State<AddLemburPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String? selectedValue;
   String? selectedTipeValue;
   String? selectedIDTipeValue;
-  DateTime? selectedDate;
-  DateTime? selectedDateFrom;
-  DateTime? selectedDateTo;
+  DateTime? selectedDateLembur;
   TimeOfDay? selectedTimeFrom;
   TimeOfDay? selectedTimeTo;
   int weekdaysCount = 0;
@@ -63,54 +60,54 @@ class _AddCutiPageState extends State<AddCutiPage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var selectAlasanCuti = context.read<AddCutiBloc>().dataAlasanCuti;
-    var selectTipeCuti = context.read<AddCutiBloc>().dataTipeCuti;
-    String selectedTipeCutiDisplay = "";
+    var selectAlasanLembur = context.read<AddLemburBloc>().dataAlasanLembur;
+    var selectTipeLembur = context.read<AddLemburBloc>().dataTipeLembur;
+    String selectedTipeLemburDisplay = "";
 
     void _showTipeMenu(BuildContext context) async {
-      if (selectTipeCuti.isEmpty) {
-        context.read<AddCutiBloc>().add(OnSelectTipeCuti());
-        selectTipeCuti = context.read<AddCutiBloc>().dataTipeCuti;
+      if (selectTipeLembur!.isEmpty) {
+        context.read<AddLemburBloc>().add(OnSelectTipeLembur());
+        selectTipeLembur = context.read<AddLemburBloc>().dataTipeLembur;
       }
 
-      if (selectTipeCuti.isNotEmpty) {
-        final selectedTipeValue = await showSearch<DataTipeCuti?>(
+      if (selectTipeLembur!.isNotEmpty) {
+        final selectedTipeValue = await showSearch<DataGeneral?>(
           context: context,
-          delegate: TipeCutiSearchDelegate(
-            tipeCutiData: selectTipeCuti,
-            filteredData: selectTipeCuti,
+          delegate: GeneralSearchDelegate(
+            dataList: selectTipeLembur!,
+            filteredData: selectTipeLembur!,
           ),
         );
 
         if (selectedTipeValue != null) {
-          widget.valueTipeCutiController.text =
+          widget.valueTipeLemburController.text =
               selectedTipeValue.value?.toString() ?? '';
-          widget.idTipeCutiController.text =
+          widget.idTipeLemburController.text =
               selectedTipeValue.id?.toString() ?? '';
 
           setState(() {
             this.selectedTipeValue = selectedTipeValue.value;
             print(selectedTipeValue.value);
-            print("Selected ID Tipe Cuti: ${selectedTipeValue.id}");
+            print("Selected ID Tipe Lembur: ${selectedTipeValue.id}");
           });
         }
       } else {
-        print("Tidak ada item dalam selectTipeCuti");
+        print("Tidak ada item dalam selectTipeLembur");
       }
     }
 
     void _showAlasanMenu(BuildContext context) async {
-      if (selectAlasanCuti.isEmpty) {
-        context.read<AddCutiBloc>().add(OnSelectAlasanCuti());
-        selectAlasanCuti = context.read<AddCutiBloc>().dataAlasanCuti;
+      if (selectAlasanLembur!.isEmpty) {
+        context.read<AddLemburBloc>().add(OnSelectAlasanLembur());
+        selectAlasanLembur = context.read<AddLemburBloc>().dataAlasanLembur;
       }
 
-      if (selectAlasanCuti.isNotEmpty) {
-        final selectedValue = await showSearch<Datum?>(
+      if (selectAlasanLembur!.isNotEmpty) {
+        final selectedValue = await showSearch<DataGeneral?>(
           context: context,
-          delegate: AlasanCutiSearchDelegate(
-            alasanCutiData: selectAlasanCuti,
-            filteredData: selectAlasanCuti,
+          delegate: GeneralSearchDelegate(
+            dataList: selectAlasanLembur!,
+            filteredData: selectAlasanLembur!,
           ),
         );
 
@@ -122,19 +119,19 @@ class _AddCutiPageState extends State<AddCutiPage> {
           setState(() {
             this.selectedValue = selectedValue.value;
             print(selectedValue.value);
-            print("Selected ID Alasan Cuti: ${selectedValue.id}");
+            print("Selected ID Alasan Lembur: ${selectedValue.id}");
           });
         }
       } else {
-        print("Tidak ada item dalam selectAlasanCuti");
+        print("Tidak ada item dalam selectAlasanLembur");
       }
     }
 
-    return BlocListener<AddCutiBloc, AddCutiState>(
+    return BlocListener<AddLemburBloc, AddLemburState>(
       listener: (context, state) async {
-        if (state is AddCutiLoading) {
+        if (state is AddLemburLoading) {
           LoadingDialog.showLoadingDialog(context);
-        } else if (state is AddCutiSuccess) {
+        } else if (state is AddLemburSuccess) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
             context: context,
@@ -145,7 +142,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
           );
           Navigator.of(context).pop();
           widget.reloadDataCallback();
-        } else if (state is AddCutiFailed) {
+        } else if (state is AddLemburFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
             context: context,
@@ -154,7 +151,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
               message: state.message,
             ),
           );
-        } else if (state is AddCutiFailedUserExpired) {
+        } else if (state is AddLemburFailedUserExpired) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
             context: context,
@@ -165,7 +162,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
           );
           Navigator.of(context)
               .pushNamedAndRemoveUntil(LoginPage.routeName, (route) => false);
-        } else if (state is AddCutiFailedInBackground) {
+        } else if (state is AddLemburFailed) {
           LoadingDialog.dismissDialog(context);
           Navigator.of(context)
               .pushNamedAndRemoveUntil(LoginPage.routeName, (route) => false);
@@ -175,7 +172,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
       },
       child: Scaffold(
         // appBar: appBarCustomV1(
-        //   title: "Pengajuan Cuti",
+        //   title: "Pengajuan Lembur",
         //   padLeft: 8,
         // ),
         body: Container(
@@ -212,7 +209,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                     ),
                     Expanded(
                       child: Text(
-                        "Pengajuan Cuti",
+                        "Pengajuan Lembur",
                         style: GoogleFonts.poppins(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
@@ -235,7 +232,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 20),
-                    child: BlocBuilder<AddCutiBloc, AddCutiState>(
+                    child: BlocBuilder<AddLemburBloc, AddLemburState>(
                       builder: (context, state) {
                         return Column(
                           children: [
@@ -254,22 +251,22 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         FormDropDownData(
-                                          input: selectedTipeCutiDisplay,
+                                          input: selectedTipeLemburDisplay,
                                           onTap: () {
                                             _showTipeMenu(context);
                                           },
                                           idController:
-                                              widget.idTipeCutiController,
+                                              widget.idTipeLemburController,
                                           valueController:
-                                              widget.valueTipeCutiController,
-                                          hintText: 'Pilih Tipe Cuti',
-                                          labelTag: 'Label-TipeCuti',
-                                          formTag: 'Form-TipeCuti',
-                                          labelForm: 'Tipe Cuti',
+                                              widget.valueTipeLemburController,
+                                          hintText: 'Pilih Tipe Lembur',
+                                          labelTag: 'Label-TipeLembur',
+                                          formTag: 'Form-TipeLembur',
+                                          labelForm: 'Tipe Lembur',
                                           validator: (value) {
                                             if (value == null ||
                                                 value.isEmpty) {
-                                              return 'Pilih Tipe Cuti';
+                                              return 'Pilih Tipe Lembur';
                                             }
                                             return null;
                                           },
@@ -285,14 +282,14 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                               widget.idAlasanController,
                                           valueController:
                                               widget.valueAlasanController,
-                                          labelForm: 'Alasan Cuti',
-                                          hintText: 'Pilih Alasan Cuti',
-                                          labelTag: 'Label-AlasanCuti',
-                                          formTag: 'Form-AlasanCuti',
+                                          labelForm: 'Alasan Lembur',
+                                          hintText: 'Pilih Alasan Lembur',
+                                          labelTag: 'Label-AlasanLembur',
+                                          formTag: 'Form-AlasanLembur',
                                           validator: (value) {
                                             if (value == null ||
                                                 value.isEmpty) {
-                                              return 'Pilih Alasan Cuti';
+                                              return 'Pilih Alasan Lembur';
                                             }
                                             return null;
                                           },
@@ -305,12 +302,56 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                               flightShuttleBuilder,
                                           child: Row(
                                             children: [
+                                              const FormTextLabel(
+                                                label: "Tanggal Lembur",
+                                                labelColor:
+                                                    MyColorsConst.darkColor,
+                                              ),
+                                              SizedBox(width: 2.sp),
+                                              Text(
+                                                '*',
+                                                style: GoogleFonts.poppins(
+                                                    color: Colors.red),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 4,
+                                        ),
+                                        _buildDateTextField(
+                                          "Masukkan Tanggal",
+                                          widget.dateController,
+                                          selectedDateLembur,
+                                          (selectedDate) {
+                                            setState(() {
+                                              selectedDate = selectedDate;
+                                            });
+                                            print(
+                                                "Selected Date From: $selectedDate");
+                                          },
+                                          (value) {
+                                            if (value == null) {
+                                              return 'Pilih Tanggal';
+                                            }
+                                            return null;
+                                          },
+                                        ),
+                                        SizedBox(
+                                          height: 20.sp,
+                                        ),
+                                        Hero(
+                                          tag: 'Label-RowJamVisiting',
+                                          flightShuttleBuilder:
+                                              flightShuttleBuilder,
+                                          child: Row(
+                                            children: [
                                               Expanded(
                                                 flex: 1,
                                                 child: Row(
                                                   children: [
                                                     FormTextLabel(
-                                                      label: "Tanggal Mulai",
+                                                      label: "Jam Mulai",
                                                       labelColor: MyColorsConst
                                                           .darkColor,
                                                     ),
@@ -333,7 +374,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                                 child: Row(
                                                   children: [
                                                     const FormTextLabel(
-                                                      label: "Tanggal Berakhir",
+                                                      label: "Jam Berakhir",
                                                       labelColor: MyColorsConst
                                                           .darkColor,
                                                     ),
@@ -358,23 +399,15 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                           children: [
                                             Expanded(
                                               flex: 1,
-                                              child: _buildDateTextField(
-                                                "Masukkan Tanggal",
-                                                widget.dateFromController,
-                                                selectedDateFrom,
-                                                (selectedDate) {
+                                              child: _buildTimeTextField(
+                                                "Jam : Menit",
+                                                widget.timeFromController!,
+                                                selectedTimeFrom,
+                                                (TimeOfDay time) {
                                                   setState(() {
-                                                    selectedDateFrom =
-                                                        selectedDate;
+                                                    selectedTimeFrom = time;
                                                   });
-                                                  print(
-                                                      "Selected Date From: $selectedDateFrom");
-                                                },
-                                                (value) {
-                                                  if (value == null) {
-                                                    return 'Pilih Tanggal';
-                                                  }
-                                                  return null;
+                                                  // Lakukan operasi lain jika diperlukan ketika waktu dipilih
                                                 },
                                               ),
                                             ),
@@ -383,23 +416,15 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                             ),
                                             Expanded(
                                               flex: 1,
-                                              child: _buildDateTextField(
-                                                "Masukkan Tanggal",
-                                                widget.dateToController,
-                                                selectedDateTo,
-                                                (selectedDate) {
+                                              child: _buildTimeTextField(
+                                                "Jam : Menit",
+                                                widget.timeToController!,
+                                                selectedTimeTo,
+                                                (TimeOfDay time) {
                                                   setState(() {
-                                                    selectedDateTo =
-                                                        selectedDate;
+                                                    selectedTimeTo = time;
                                                   });
-                                                  print(
-                                                      "Selected Date To: $selectedDateTo");
-                                                },
-                                                (value) {
-                                                  if (value == null) {
-                                                    return 'Pilih Tanggal';
-                                                  }
-                                                  return null;
+                                                  // Lakukan operasi lain jika diperlukan ketika waktu dipilih
                                                 },
                                               ),
                                             ),
@@ -408,106 +433,9 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                         SizedBox(
                                           height: 20.sp,
                                         ),
-                                        if (selectedTipeValue == "P24") ...{
-                                          Hero(
-                                            tag: 'Label-RowJamVisiting',
-                                            flightShuttleBuilder:
-                                                flightShuttleBuilder,
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Row(
-                                                    children: [
-                                                      FormTextLabel(
-                                                        label: "Jam Mulai",
-                                                        labelColor:
-                                                            MyColorsConst
-                                                                .darkColor,
-                                                      ),
-                                                      SizedBox(width: 2.sp),
-                                                      Text(
-                                                        '*',
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                                color:
-                                                                    Colors.red),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 20.sp,
-                                                ),
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Row(
-                                                    children: [
-                                                      const FormTextLabel(
-                                                        label: "Jam Berakhir",
-                                                        labelColor:
-                                                            MyColorsConst
-                                                                .darkColor,
-                                                      ),
-                                                      SizedBox(width: 2.sp),
-                                                      Text(
-                                                        '*',
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                                color:
-                                                                    Colors.red),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 4,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                flex: 1,
-                                                child: _buildTimeTextField(
-                                                  "Jam : Menit",
-                                                  widget.timeFromController!,
-                                                  selectedTimeFrom,
-                                                  (TimeOfDay time) {
-                                                    setState(() {
-                                                      selectedTimeFrom = time;
-                                                    });
-                                                    // Lakukan operasi lain jika diperlukan ketika waktu dipilih
-                                                  },
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 20.sp,
-                                              ),
-                                              Expanded(
-                                                flex: 1,
-                                                child: _buildTimeTextField(
-                                                  "Jam : Menit",
-                                                  widget.timeToController!,
-                                                  selectedTimeTo,
-                                                  (TimeOfDay time) {
-                                                    setState(() {
-                                                      selectedTimeTo = time;
-                                                    });
-                                                    // Lakukan operasi lain jika diperlukan ketika waktu dipilih
-                                                  },
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 20.sp,
-                                          ),
-                                        },
                                         Text.rich(
                                           TextSpan(
-                                            text: 'Cuti selama : ',
+                                            text: 'Lembur selama : ',
                                             style: GoogleFonts.poppins(
                                               fontSize: 13.sp,
                                               color: MyColorsConst.darkColor,
@@ -515,7 +443,8 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                             ),
                                             children: [
                                               TextSpan(
-                                                text: weekdaysCount.toString(),
+                                                text: _calculateMinutes()
+                                                    .toString(),
                                                 style: GoogleFonts.poppins(
                                                   fontSize: 18.sp,
                                                   color: Colors.red.shade600,
@@ -523,7 +452,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                                 ),
                                               ),
                                               TextSpan(
-                                                text: ' hari',
+                                                text: ' Menit',
                                                 style: GoogleFonts.poppins(
                                                   fontSize: 13.sp,
                                                   color: Colors.red.shade600,
@@ -538,9 +467,9 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                         ),
                                         FormCatatanData(
                                           hintText: 'Keterangan',
-                                          labelForm: 'Keterangan Cuti',
-                                          labelTag: 'Label-KeteranganCuti',
-                                          formTag: 'Form-KeteranganCuti',
+                                          labelForm: 'Keterangan Lembur',
+                                          labelTag: 'Label-KeteranganLembur',
+                                          formTag: 'Form-KeteranganLembur',
                                           input:
                                               widget.keteranganController.text,
                                           onTap: () {},
@@ -571,27 +500,32 @@ class _AddCutiPageState extends State<AddCutiPage> {
                               backgroundColor:
                                   MyColorsConst.primaryColor.withOpacity(0.1),
                               textColor: MyColorsConst.primaryColor,
-                              onPressed: state is AddCutiLoading
+                              onPressed: state is AddLemburLoading
                                   ? null
                                   : () {
-                                      context.read<AddCutiBloc>().add(
-                                            AddCutiSubmited(
-                                                alasan: int.parse(widget
-                                                    .idAlasanController.text),
-                                                tipeCuti: int.parse(widget
-                                                    .idTipeCutiController.text),
+                                      context.read<AddLemburBloc>().add(
+                                            OnSumbitLembur(
+                                                alasanLemburID: int.parse(widget
+                                                    .idAlasanController
+                                                    .value
+                                                    .text),
+                                                tipeLemburID: int.parse(widget
+                                                    .idTipeLemburController
+                                                    .value
+                                                    .text),
                                                 keterangan: widget
-                                                    .keteranganController.text,
-                                                dateFrom: widget
-                                                    .dateFromController.text,
-                                                dateTo: widget
-                                                    .dateToController.text,
+                                                    .keteranganController
+                                                    .value
+                                                    .text,
+                                                dateLembur: widget
+                                                    .dateController.value.text,
                                                 timeFrom: widget
                                                         .timeFromController
-                                                        ?.text ??
+                                                        ?.value
+                                                        .text ??
                                                     "00:00",
                                                 timeTo: widget.timeToController
-                                                        ?.text ??
+                                                        ?.value.text ??
                                                     "00:00"),
                                           );
                                     },
@@ -610,29 +544,23 @@ class _AddCutiPageState extends State<AddCutiPage> {
     );
   }
 
-  int calculateWeekdays(DateTime startDate, DateTime endDate) {
-    int weekdaysCount = 0;
-    DateTime currentDate = startDate;
-
-    while (currentDate.isBefore(endDate) ||
-        currentDate.isAtSameMomentAs(endDate)) {
-      if (currentDate.weekday != 7) {
-        weekdaysCount++;
-      }
-
-      currentDate = currentDate.add(Duration(days: 1));
+  int _calculateMinutes() {
+    if (selectedTimeFrom != null && selectedTimeTo != null) {
+      int minutesDifference = calculateMinutesDifference(
+          selectedTimeFrom as TimeOfDay, selectedTimeTo! as TimeOfDay);
+      print("Selisih waktu dalam menit: $minutesDifference menit");
+      return minutesDifference;
+    } else {
+      print("Pilih waktu mulai dan waktu berakhir terlebih dahulu.");
+      return 0; // or any default value you prefer
     }
-
-    return weekdaysCount;
   }
 
-  void _calculateWeekdays() {
-    if (selectedDateFrom != null && selectedDateTo != null) {
-      weekdaysCount = calculateWeekdays(selectedDateFrom!, selectedDateTo!);
-      print("Jumlah hari kerja: $weekdaysCount");
-    } else {
-      print("Pilih tanggal mulai dan tanggal berakhir terlebih dahulu.");
-    }
+  int calculateMinutesDifference(TimeOfDay from, TimeOfDay to) {
+    int fromMinutes = from.hour * 60 + from.minute;
+    int toMinutes = to.hour * 60 + to.minute;
+
+    return toMinutes - fromMinutes;
   }
 
   Widget _buildDateTextField(
@@ -648,28 +576,17 @@ class _AddCutiPageState extends State<AddCutiPage> {
           context: context,
           initialDate: selectedDate ?? DateTime.now(),
           firstDate: DateTime.now(),
-          lastDate: DateTime(2101),
+          lastDate: DateTime(2500),
         );
 
         if (pickedDate != null) {
           onDateSelected(pickedDate);
-          if (controller == widget.dateFromController) {
-            widget.dateFromController.text =
-                DateFormat('yyyy-MM-dd').format(pickedDate);
-            setState(() {
-              selectedDateFrom = pickedDate;
-            });
-            print("Selected Date From: $selectedDateFrom");
-            _calculateWeekdays();
-          } else if (controller == widget.dateToController) {
-            widget.dateToController.text =
-                DateFormat('yyyy-MM-dd').format(pickedDate);
-            setState(() {
-              selectedDateTo = pickedDate;
-            });
-            print("Selected Date To: $selectedDateTo");
-            _calculateWeekdays();
-          }
+          widget.dateController.text =
+              DateFormat('yyyy-MM-dd').format(pickedDate);
+          setState(() {
+            selectedDateLembur = pickedDate;
+          });
+          print("Selected Date From: $selectedDateLembur");
         }
       },
       child: Container(
@@ -686,9 +603,8 @@ class _AddCutiPageState extends State<AddCutiPage> {
                   ? DateFormat('yyyy-MM-dd').format(selectedDate)
                   : hintText,
               style: GoogleFonts.poppins(
-                fontSize: selectedDate != null ? 13.sp : 9.sp,
-                fontWeight:
-                    selectedDate != null ? FontWeight.w500 : FontWeight.w400,
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w500,
                 color: selectedDate != null
                     ? MyColorsConst.darkColor
                     : MyColorsConst.disableColor,
@@ -705,65 +621,64 @@ class _AddCutiPageState extends State<AddCutiPage> {
     );
   }
 
-Widget _buildTimeTextField(
-  String hintText,
-  TextEditingController controller,
-  TimeOfDay? selectedTime,
-  Function(TimeOfDay) onTimeSelected,
-) {
-  return InkWell(
-    onTap: () async {
-      final TimeOfDay? pickedTime = await showTimePicker(
-        context: context,
-        initialTime: selectedTime ?? TimeOfDay.now(),
-      );
+  Widget _buildTimeTextField(
+    String hintText,
+    TextEditingController controller,
+    TimeOfDay? selectedTime,
+    Function(TimeOfDay) onTimeSelected,
+  ) {
+    return InkWell(
+      onTap: () async {
+        final TimeOfDay? pickedTime = await showTimePicker(
+          context: context,
+          initialTime: selectedTime ?? TimeOfDay.now(),
+        );
 
-      if (pickedTime != null) {
-        onTimeSelected(pickedTime);
+        if (pickedTime != null) {
+          onTimeSelected(pickedTime);
 
-        String formattedHour = pickedTime.hour.toString().padLeft(2, '0');
-        String formattedMinute = pickedTime.minute.toString().padLeft(2, '0');
-        String formattedTime = '$formattedHour:$formattedMinute';
+          String formattedHour = pickedTime.hour.toString().padLeft(2, '0');
+          String formattedMinute = pickedTime.minute.toString().padLeft(2, '0');
+          String formattedTime = '$formattedHour:$formattedMinute';
 
-        controller.text = formattedTime;
-      }
-    },
-    child: Container(
-      padding: const EdgeInsets.all(18.0),
-      decoration: BoxDecoration(
-        border: Border.all(color: Color(0xFFDDDDDD)),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            selectedTime != null
-                ? _formatTime(selectedTime)
-                : hintText,
-            style: GoogleFonts.poppins(
-              fontSize: selectedTime != null ? 13.sp : 9.sp,
-              fontWeight:
-                  selectedTime != null ? FontWeight.w500 : FontWeight.w400,
-              color: selectedTime != null
-                  ? MyColorsConst.darkColor
-                  : MyColorsConst.disableColor,
+          controller.text = formattedTime;
+          _calculateMinutes();
+        }
+      },
+      child: Container(
+        padding: const EdgeInsets.all(18.0),
+        decoration: BoxDecoration(
+          border: Border.all(color: Color(0xFFDDDDDD)),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              selectedTime != null ? _formatTime(selectedTime) : hintText,
+              style: GoogleFonts.poppins(
+                fontSize: selectedTime != null ? 13.sp : 10.sp,
+                fontWeight:
+                    selectedTime != null ? FontWeight.w500 : FontWeight.w500,
+                color: selectedTime != null
+                    ? MyColorsConst.darkColor
+                    : MyColorsConst.disableColor,
+              ),
             ),
-          ),
-          Icon(
-            CupertinoIcons.clock_fill,
-            color: MyColorsConst.primaryColor,
-            size: 20.sp,
-          ),
-        ],
+            Icon(
+              CupertinoIcons.clock_fill,
+              color: MyColorsConst.primaryColor,
+              size: 20.sp,
+            ),
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
-String _formatTime(TimeOfDay timeOfDay) {
-  final DateTime dateTime = DateTime(2023, 1, 1, timeOfDay.hour, timeOfDay.minute);
-  return DateFormat.Hm().format(dateTime);
-}
-
+  String _formatTime(TimeOfDay timeOfDay) {
+    final DateTime dateTime =
+        DateTime(2023, 1, 1, timeOfDay.hour, timeOfDay.minute);
+    return DateFormat.Hm().format(dateTime);
+  }
 }

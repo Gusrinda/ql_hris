@@ -167,10 +167,7 @@ class _DialogCustomState extends State<DialogCustom> {
       child: Text(
         text,
         style: GoogleFonts.poppins(
-          color: color,
-          fontSize: 12.sp,
-          fontWeight: FontWeight.w600
-        ),
+            color: color, fontSize: 12.sp, fontWeight: FontWeight.w600),
       ),
     );
   }
