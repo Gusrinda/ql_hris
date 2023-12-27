@@ -12,7 +12,7 @@ class ListPengumumanInitial extends PengumumanState {}
 class ListPengumumanLoading extends PengumumanState {}
 
 class ListPengumumanSuccess extends PengumumanState {
-  List<PengumumanModel> dataPengumuman;
+  List<DataPengumuman> dataPengumuman;
 
   ListPengumumanSuccess({
     required this.dataPengumuman,

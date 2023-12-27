@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/bloc/pengumuman_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/pengumuman_card.widget.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -44,6 +46,21 @@ class _ListPengumumanPageState extends State<ListPengumumanPage> {
               message: state.message,
             ),
           );
+        } else if (state is ListPengumumanFailedUserExpired) {
+          LoadingDialog.dismissDialog(context);
+          await showDialog(
+            context: context,
+            builder: (_) => DialogCustom(
+              state: DialogCustomItem.error,
+              message: state.message,
+            ),
+          );
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil(LoginPage.routeName, (route) => false);
+        } else if (state is ListPengumumanFailedInBackground) {
+          LoadingDialog.dismissDialog(context);
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil(LoginPage.routeName, (route) => false);
         } else {
           LoadingDialog.dismissDialog(context);
         }
@@ -97,56 +114,51 @@ class _ListPengumumanPageState extends State<ListPengumumanPage> {
               Expanded(
                 child: BlocBuilder<PengumumanBloc, PengumumanState>(
                   builder: (context, state) {
-                    if (state is ListPengumumanSuccess) {
-                      var listPengumuman = state.dataPengumuman;
-                      return Container(
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20),
-                          ),
-                          color: Colors.white,
+                    var listPengumuman =
+                        context.read<PengumumanBloc>().listpengumuman;
+                    return Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
                         ),
-                        child: Padding(
-                          padding: EdgeInsets.all(20.sp),
-                          child: Column(
-                            children: [
-                              Expanded(
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: listPengumuman.length,
-                                  itemBuilder: (context, index) {
-                                    var pengumuman = listPengumuman[index];
-                                    return Padding(
-                                      padding: EdgeInsets.only(bottom: 15.sp),
-                                      child: PengumumanCard(
-                                        imageUrl:
-                                            'https://server.qqltech.com:7007/uploads/t_artikel/${pengumuman.foto}',
-                                        judul: pengumuman.judul,
-                                        tanggal:
-                                            DateFormat('dd MMMM yyyy', 'id_ID')
-                                                .format(pengumuman.tanggal!),
-                                        detail: pengumuman.detail,
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
+                        color: Colors.white,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(20.sp),
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: listPengumuman.isNotEmpty
+                                  ? ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: listPengumuman.length,
+                                      itemBuilder: (context, index) {
+                                        var pengumuman = listPengumuman[index];
+                                        return Padding(
+                                          padding:
+                                              EdgeInsets.only(bottom: 15.sp),
+                                          child: PengumumanCard(
+                                            imageUrl: 'assets/images/cuti_bersama.jpg',
+                                                // 'https://server.qqltech.com:7007/uploads/t_artikel/${pengumuman.foto}',
+                                            judul: pengumuman.judul,
+                                            tanggal: "17 Desember 2023",
+                                            // DateFormat(
+                                            //         'dd MMMM yyyy', 'id_ID')
+                                            //     .format(pengumuman.tanggal!),
+                                            detail: pengumuman.content,
+                                          ),
+                                        );
+                                      },
+                                    )
+                                  : Center(
+                                      child: EmptyStateBuilder(),
+                                    ),
+                            ),
+                          ],
                         ),
-                      );
-                    } else {
-                      return Center(
-                        child: Text(
-                          "Gagal Load Data",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      );
-                    }
+                      ),
+                    );
                   },
                 ),
               )

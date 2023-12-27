@@ -7,37 +7,61 @@ part 'pengumuman_model.g.dart';
 @freezed
 class PengumumanModel with _$PengumumanModel {
     const factory PengumumanModel({
+        @JsonKey(name: "data")
+        List<DataPengumuman>? data,
+        @JsonKey(name: "total")
+        int? total,
+        @JsonKey(name: "current_page")
+        int? currentPage,
+        @JsonKey(name: "per_page")
+        int? perPage,
+        @JsonKey(name: "from")
+        int? from,
+        @JsonKey(name: "to")
+        int? to,
+        @JsonKey(name: "last_page")
+        int? lastPage,
+        @JsonKey(name: "has_next")
+        bool? hasNext,
+        @JsonKey(name: "prev")
+        dynamic prev,
+        @JsonKey(name: "next")
+        dynamic next,
+        @JsonKey(name: "processed_time")
+        double? processedTime,
+    }) = _PengumumanModel;
+
+    factory PengumumanModel.fromJson(Map<String, dynamic> json) => _$PengumumanModelFromJson(json);
+}
+
+@freezed
+class DataPengumuman with _$DataPengumuman {
+    const factory DataPengumuman({
+        @JsonKey(name: "meta_read")
+        bool? metaRead,
+        @JsonKey(name: "meta_delete")
+        bool? metaDelete,
+        @JsonKey(name: "meta_update")
+        bool? metaUpdate,
+        @JsonKey(name: "meta_create")
+        bool? metaCreate,
         @JsonKey(name: "id")
         int? id,
-        @JsonKey(name: "kategori")
-        String? kategori,
         @JsonKey(name: "judul")
         String? judul,
-        @JsonKey(name: "tanggal")
-        DateTime? tanggal,
-        @JsonKey(name: "foto")
-        String? foto,
-        @JsonKey(name: "penulis_id")
-        int? penulisId,
-        @JsonKey(name: "editor_id")
-        int? editorId,
-        @JsonKey(name: "detail")
-        String? detail,
-        @JsonKey(name: "status")
-        String? status,
+        @JsonKey(name: "tag")
+        dynamic tag,
+        @JsonKey(name: "content")
+        String? content,
+        @JsonKey(name: "creator_id")
+        dynamic creatorId,
+        @JsonKey(name: "last_editor_id")
+        dynamic lastEditorId,
         @JsonKey(name: "created_at")
         String? createdAt,
         @JsonKey(name: "updated_at")
         String? updatedAt,
-        @JsonKey(name: "penulis")
-        String? penulis,
-        @JsonKey(name: "kecamatan")
-        String? kecamatan,
-        @JsonKey(name: "puskesmas_ids")
-        String? puskesmasIds,
-        @JsonKey(name: "lampiran")
-        List<String?>? lampiran,
-    }) = _PengumumanModel;
+    }) = _DataPengumuman;
 
-    factory PengumumanModel.fromJson(Map<String, dynamic> json) => _$PengumumanModelFromJson(json);
+    factory DataPengumuman.fromJson(Map<String, dynamic> json) => _$DataPengumumanFromJson(json);
 }

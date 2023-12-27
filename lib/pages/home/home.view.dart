@@ -92,8 +92,9 @@ class _HomePageState extends State<HomePage> {
                       child: SizedBox(
                           height: MediaQuery.of(context).size.height * 1 / 2,
                           child: Opacity(
-                            opacity: 0.5,
-                            child: Image.asset("assets/images/white-sj-30.png"))),
+                              opacity: 0.5,
+                              child: Image.asset(
+                                  "assets/images/white-sj-30.png"))),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -615,39 +616,42 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(height: 5),
                         BlocBuilder<PengumumanBloc, PengumumanState>(
                           builder: (context, state) {
-                            if (state is ListPengumumanSuccess) {
-                              var listPengumuman = state.dataPengumuman;
-                              return Container(
-                                constraints: BoxConstraints(maxHeight: 280.sp),
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  shrinkWrap: true,
-                                  itemCount: 5,
-                                  itemBuilder: (context, index) {
-                                    var pengumuman = listPengumuman[index];
-                                    return PengumumanCard(
-                                      imageUrl:
-                                          'https://server.qqltech.com:7007/uploads/t_artikel/${pengumuman.foto}',
-                                      judul: pengumuman.judul,
-                                      tanggal:
-                                          DateFormat('dd MMMM yyyy', 'id_ID')
-                                              .format(pengumuman.tanggal!),
-                                      detail: pengumuman.detail,
-                                    );
-                                  },
-                                ),
-                              );
-                            } else {
-                              return Center(
-                                child: Text(
-                                  "Gagal Load Data",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              );
-                            }
+                            var listPengumuman =
+                                context.read<PengumumanBloc>().listpengumuman;
+                            return Container(
+                              constraints: BoxConstraints(maxHeight: 280.sp),
+                              child: listPengumuman.isNotEmpty
+                                  ? ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true,
+                                      itemCount: listPengumuman.length,
+                                      itemBuilder: (context, index) {
+                                        var pengumuman = listPengumuman[index];
+                                        return PengumumanCard(
+                                          imageUrl:
+                                              'assets/images/cuti_bersama.jpg',
+                                          // 'https://server.qqltech.com:7007/uploads/t_artikel/${pengumuman.foto}',
+                                          judul: pengumuman.judul,
+                                          tanggal: "17 Desember 2023",
+                                          // DateFormat('dd MMMM yyyy', 'id_ID')
+                                          //     .format(pengumuman.tanggal!),
+                                          detail: pengumuman.content,
+                                        );
+                                      },
+                                    )
+                                  : Container(
+                                      constraints:
+                                          BoxConstraints(maxHeight: 280.sp),
+                                      child: Center(
+                                        child: Text('Tidak ada pengumuman',
+                                            style: GoogleFonts.poppins(
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w500,
+                                                color:
+                                                    MyColorsConst.darkColor)),
+                                      ),
+                                    ),
+                            );
                           },
                         ),
                         const SizedBox(height: 100)

@@ -32,11 +32,11 @@ class PengumumanCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(5), topRight: Radius.circular(5)),
               child: AspectRatio(
                   aspectRatio: 16 / 9.sp,
-                  child: Image.network(
+                  child: Image.asset(
                     imageUrl ?? '',
                     fit: BoxFit.cover,
                   )),
@@ -137,13 +137,13 @@ class PengumumanCard extends StatelessWidget {
                 controller: scrollController,
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(5),
                       topRight: Radius.circular(5),
                     ),
                     child: AspectRatio(
                       aspectRatio: 16 / 9.sp,
-                      child: Image.network(
+                      child: Image.asset(
                         imageUrl ?? '',
                         fit: BoxFit.cover,
                       ),
