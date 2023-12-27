@@ -159,13 +159,13 @@ class _DataDiriPageState extends State<DataDiriPage> {
                                       'Divisi', biodata?.bioData?.div ?? '-'),
                                   buildInfoText('Posisi',
                                       biodata?.bioData?.posisi ?? '-'),
-                                  buildInfoText(
-                                      'Standard Gaji',
-                                      biodata?.bioData?.mStandartGajiId
-                                              ?.toString() ??
-                                          '-'),
-                                  buildInfoText('Kode Presensi',
-                                      biodata?.bioData?.kodePresensi ?? '-'),
+                                  // buildInfoText(
+                                  //     'Standard Gaji',
+                                  //     biodata?.bioData?.mStandartGajiId
+                                  //             ?.toString() ??
+                                  //         '-'),
+                                  // buildInfoText('Kode Presensi',
+                                  //     biodata?.bioData?.kodePresensi ?? '-'),
                                 ],
                               ),
                             ),
@@ -177,13 +177,13 @@ class _DataDiriPageState extends State<DataDiriPage> {
                                 children: [
                                   buildInfoText('Departemen',
                                       biodata?.bioData?.dept ?? '-'),
-                                  buildInfoText(
-                                      'Zona', biodata?.bioData?.zona ?? '-'),
-                                  buildInfoText(
-                                      'Cost Centre',
-                                      biodata?.bioData?.costcontre
-                                              ?.toString() ??
-                                          '-'),
+                                  // buildInfoText(
+                                  //     'Zona', biodata?.bioData?.zona ?? '-'),
+                                  // buildInfoText(
+                                  //     'Cost Centre',
+                                  //     biodata?.bioData?.costcontre
+                                  //             ?.toString() ??
+                                  //         '-'),
                                   buildInfoText(
                                       'Status',
                                       biodata?.bioData?.isActive == true
@@ -273,70 +273,65 @@ class _DataDiriPageState extends State<DataDiriPage> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 20.sp),
-                        Text(
-                          'Info Lain',
-                          style: GoogleFonts.poppins(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: MyColorsConst.primaryColor,
-                          ),
-                        ),
-                        SizedBox(height: 10.sp),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  buildInfoText(
-                                      'Jatah Cuti Reguler',
-                                      biodata?.bioData?.cutiJatahReguler
-                                              ?.toString() ??
-                                          '-'),
-                                  buildInfoText(
-                                      'Jatah Cuti Masa Kerja',
-                                      biodata?.bioData?.cutiPanjang
-                                              ?.toString() ??
-                                          '-'),
-                                  buildInfoText(
-                                      'Tanggal Masuk Kerja',
-                                      biodata?.bioData?.tglMasuk != null
-                                          ? DateFormat('dd MMMM yyyy').format(
-                                              biodata!.bioData!.tglMasuk!)
-                                          : '-'),
-                                ],
-                              ),
-                            ),
-                            SizedBox(width: 20.sp),
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  buildInfoText(
-                                      'Sisa Cuti Reguler',
-                                      biodata?.bioData?.cutiSisaReguler
-                                              ?.toString() ??
-                                          '-'),
-                                  buildInfoText(
-                                      'Sisa Cuti Masa Kerja',
-                                      biodata?.bioData?.cutiSisaPanjang
-                                              ?.toString() ??
-                                          '-'),
-                                  // buildInfoText(
-                                  //     'Tanggal Berhenti Kerja',
-                                  //     biodata?.bioData?.tglBerhenti != null
-                                  //         ? DateFormat('dd MMMM yyyy').format(
-                                  //             biodata?.bioData?.tglBerhenti!)
-                                  //         : '-'),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                        // SizedBox(height: 20.sp),
+                        // Text(
+                        //   'Info Lain',
+                        //   style: GoogleFonts.poppins(
+                        //     fontSize: 14,
+                        //     fontWeight: FontWeight.bold,
+                        //     color: MyColorsConst.primaryColor,
+                        //   ),
+                        // ),
+                        // SizedBox(height: 10.sp),
+                        // Row(
+                        //   crossAxisAlignment: CrossAxisAlignment.start,
+                        //   children: [
+                        //     Expanded(
+                        //       flex: 1,
+                        //       child: Column(
+                        //         crossAxisAlignment: CrossAxisAlignment.start,
+                        //         children: [
+                        //           buildInfoText(
+                        //               'Jatah Cuti Reguler',
+                        //               biodata?.bioData?.cutiJatahReguler
+                        //                       ?.toString() ??
+                        //                   '-'),
+                        //           buildInfoText(
+                        //               'Jatah Cuti Masa Kerja',
+                        //               biodata?.bioData?.cutiPanjang
+                        //                       ?.toString() ??
+                        //                   '-'),
+                                  
+                        //         ],
+                        //       ),
+                        //     ),
+                        //     SizedBox(width: 20.sp),
+                        //     Expanded(
+                        //       flex: 1,
+                        //       child: Column(
+                        //         crossAxisAlignment: CrossAxisAlignment.start,
+                        //         children: [
+                        //           buildInfoText(
+                        //               'Sisa Cuti Reguler',
+                        //               biodata?.bioData?.cutiSisaReguler
+                        //                       ?.toString() ??
+                        //                   '-'),
+                        //           buildInfoText(
+                        //               'Sisa Cuti Masa Kerja',
+                        //               biodata?.bioData?.cutiSisaPanjang
+                        //                       ?.toString() ??
+                        //                   '-'),
+                        //           // buildInfoText(
+                        //           //     'Tanggal Berhenti Kerja',
+                        //           //     biodata?.bioData?.tglBerhenti != null
+                        //           //         ? DateFormat('dd MMMM yyyy').format(
+                        //           //             biodata?.bioData?.tglBerhenti!)
+                        //           //         : '-'),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
                         SizedBox(height: 20.sp),
                         Text(
                           'Berkas',

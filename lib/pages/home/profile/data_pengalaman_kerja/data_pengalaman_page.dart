@@ -209,15 +209,20 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
-                                                      Text(
-                                                        '${dataPengalaman.instansi ?? '-'}',
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                          fontSize: 16.sp,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: MyColorsConst
-                                                              .primaryColor,
+                                                      SizedBox(
+                                                        width: size.width * 3/5,
+                                                        child: Text(
+                                                          '${dataPengalaman.instansi ?? '-'}',
+                                                          maxLines: 2,
+                                                          overflow: TextOverflow.ellipsis,
+                                                          style:
+                                                              GoogleFonts.poppins(
+                                                            fontSize: 14.sp,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            color: MyColorsConst
+                                                                .primaryColor,
+                                                          ),
                                                         ),
                                                       ),
                                                       IconButton(

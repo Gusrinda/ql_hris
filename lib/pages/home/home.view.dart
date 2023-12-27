@@ -36,7 +36,9 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    context.read<PengumumanBloc>().add(GetListPengumuman());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<PengumumanBloc>().add(GetListPengumuman());
+    });
     // BlocProvider.of<CheckInOutBloc>(context).add(AttendanceStateChecked());
   }
 
@@ -88,12 +90,13 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Positioned(
                       top: 62.sp,
-                      left: 60.sp,
+                      left: MediaQuery.of(context).size.width * 1 / 5,
                       child: SizedBox(
                           height: MediaQuery.of(context).size.height * 1 / 2,
                           child: Opacity(
-                            opacity: 0.5,
-                            child: Image.asset("assets/images/white-sj-30.png"))),
+                              opacity: 0.5,
+                              child: Image.asset(
+                                  "assets/images/white-sj-30.png"))),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,37 +152,42 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                     ),
                                     const SizedBox(width: 10),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Selamat Datang,',
-                                          style: GoogleFonts.poppins(
-                                            color: Colors.white,
-                                            fontSize: 10.sp,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                        Text(
-                                          '#SJGWarrior',
-                                          style: GoogleFonts.poppins(
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          4 /
+                                          7,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Selamat Datang,',
+                                            style: GoogleFonts.poppins(
                                               color: Colors.white,
                                               fontSize: 10.sp,
-                                              fontWeight: FontWeight.w700,
-                                              fontStyle: FontStyle.italic),
-                                        ),
-                                        Text(
-                                          name ?? 'Karyawan SJ',
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: GoogleFonts.poppins(
-                                            color: Colors.white,
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w600,
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                          Text(
+                                            '#SJGWarrior',
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.white,
+                                                fontSize: 10.sp,
+                                                fontWeight: FontWeight.w700,
+                                                fontStyle: FontStyle.italic),
+                                          ),
+                                          Text(
+                                            name ?? 'Karyawan SJ',
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: GoogleFonts.poppins(
+                                              color: Colors.white,
+                                              fontSize: 14.sp,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -345,7 +353,7 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                 )
                                               : Text(
-                                                  "${p24} Jam",
+                                                  "${p24} Menit",
                                                   style: GoogleFonts.poppins(
                                                     fontSize: 14.sp,
                                                     fontWeight: FontWeight.w600,
@@ -553,7 +561,7 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                           const SizedBox(height: 5),
                                           Text(
-                                            "Download Berkas",
+                                            "SOP Dan Training",
                                             textAlign: TextAlign.center,
                                             style: GoogleFonts.poppins(
                                                 fontSize: 10.sp,
@@ -622,7 +630,7 @@ class _HomePageState extends State<HomePage> {
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   shrinkWrap: true,
-                                  itemCount: 5,
+                                  itemCount: listPengumuman.length,
                                   itemBuilder: (context, index) {
                                     var pengumuman = listPengumuman[index];
                                     return PengumumanCard(

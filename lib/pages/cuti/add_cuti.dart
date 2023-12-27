@@ -470,7 +470,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                             children: [
                                               Expanded(
                                                 flex: 1,
-                                                child: _buildTimeTextField(
+                                                child: _buildCustomTimeDropdown(
                                                   "Jam : Menit",
                                                   widget.timeFromController!,
                                                   selectedTimeFrom,
@@ -487,7 +487,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                               ),
                                               Expanded(
                                                 flex: 1,
-                                                child: _buildTimeTextField(
+                                                child: _buildCustomTimeDropdown(
                                                   "Jam : Menit",
                                                   widget.timeToController!,
                                                   selectedTimeTo,
@@ -618,25 +618,34 @@ class _AddCutiPageState extends State<AddCutiPage> {
                               onPressed: state is AddCutiLoading
                                   ? null
                                   : () {
+                                      // Update the controller values before submitting
+                                      widget.timeFromController?.text =
+                                          selectedTimeFrom!.format(context);
+                                      widget.timeToController?.text =
+                                          selectedTimeTo!.format(context);
+
+                                      // Convert TimeOfDay to a formatted string in HH:mm format
+                                      String formattedTimeFrom =
+                                          '${selectedTimeFrom!.hour.toString().padLeft(2, '0')}:${selectedTimeFrom!.minute.toString().padLeft(2, '0')}';
+
+                                      String formattedTimeTo =
+                                          '${selectedTimeTo!.hour.toString().padLeft(2, '0')}:${selectedTimeTo!.minute.toString().padLeft(2, '0')}';
+
                                       context.read<AddCutiBloc>().add(
                                             AddCutiSubmited(
-                                                alasan: int.parse(widget
-                                                    .idAlasanController.text),
-                                                tipeCuti: int.parse(widget
-                                                    .idTipeCutiController.text),
-                                                keterangan: widget
-                                                    .keteranganController.text,
-                                                dateFrom: widget
-                                                    .dateFromController.text,
-                                                dateTo: widget
-                                                    .dateToController.text,
-                                                timeFrom: widget
-                                                        .timeFromController
-                                                        ?.text ??
-                                                    "00:00",
-                                                timeTo: widget.timeToController
-                                                        ?.text ??
-                                                    "00:00"),
+                                              alasan: int.parse(widget
+                                                  .idAlasanController.text),
+                                              tipeCuti: int.parse(widget
+                                                  .idTipeCutiController.text),
+                                              keterangan: widget
+                                                  .keteranganController.text,
+                                              dateFrom: widget
+                                                  .dateFromController.text,
+                                              dateTo:
+                                                  widget.dateToController.text,
+                                              timeFrom: formattedTimeFrom,
+                                              timeTo: formattedTimeTo,
+                                            ),
                                           );
                                     },
                             ),
@@ -769,56 +778,53 @@ class _AddCutiPageState extends State<AddCutiPage> {
     );
   }
 
-  Widget _buildTimeTextField(
+  Widget _buildCustomTimeDropdown(
     String hintText,
     TextEditingController controller,
     TimeOfDay? selectedTime,
     Function(TimeOfDay) onTimeSelected,
   ) {
-    return InkWell(
-      onTap: () async {
-        final TimeOfDay? pickedTime = await showTimePicker(
-          context: context,
-          initialTime: selectedTime ?? TimeOfDay.now(),
-        );
-
-        if (pickedTime != null) {
-          onTimeSelected(pickedTime);
-
-          String formattedHour = pickedTime.hour.toString().padLeft(2, '0');
-          String formattedMinute = pickedTime.minute.toString().padLeft(2, '0');
-          String formattedTime = '$formattedHour:$formattedMinute';
-
-          controller.text = formattedTime;
-        }
-      },
-      child: Container(
-        padding: const EdgeInsets.all(18.0),
-        decoration: BoxDecoration(
-          border: Border.all(color: Color(0xFFDDDDDD)),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              selectedTime != null ? _formatTime(selectedTime) : hintText,
-              style: GoogleFonts.poppins(
-                fontSize: selectedTime != null ? 13.sp : 9.sp,
-                fontWeight:
-                    selectedTime != null ? FontWeight.w500 : FontWeight.w400,
-                color: selectedTime != null
-                    ? MyColorsConst.darkColor
-                    : MyColorsConst.disableColor,
-              ),
-            ),
-            Icon(
-              CupertinoIcons.clock_fill,
-              color: MyColorsConst.primaryColor,
-              size: 20.sp,
-            ),
-          ],
-        ),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      decoration: BoxDecoration(
+        border: Border.all(color: Color(0xFFDDDDDD)),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          DropdownButton<int>(
+            value: selectedTime?.hour ?? 8, // Start from 08
+            items: List.generate(10, (index) => index + 8)
+                .map((hour) => DropdownMenuItem<int>(
+                      value: hour,
+                      child: Text(hour.toString().padLeft(2, '0')),
+                    ))
+                .toList(),
+            onChanged: (int? newValue) {
+              if (newValue != null) {
+                onTimeSelected(TimeOfDay(
+                    hour: newValue, minute: selectedTime?.minute ?? 0));
+              }
+            },
+          ),
+          Text(':'),
+          DropdownButton<int>(
+            value: selectedTime?.minute ?? 0,
+            items: List.generate(60, (index) => index)
+                .map((minute) => DropdownMenuItem<int>(
+                      value: minute,
+                      child: Text(minute.toString().padLeft(2, '0')),
+                    ))
+                .toList(),
+            onChanged: (int? newValue) {
+              if (newValue != null) {
+                onTimeSelected(
+                    TimeOfDay(hour: selectedTime?.hour ?? 8, minute: newValue));
+              }
+            },
+          ),
+        ],
       ),
     );
   }

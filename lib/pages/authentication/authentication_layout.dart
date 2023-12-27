@@ -61,7 +61,7 @@ class AuthenticationLayout extends StatelessWidget {
               ],
             ),
           ),
-          height: size.height.sp,
+          height: size.height,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

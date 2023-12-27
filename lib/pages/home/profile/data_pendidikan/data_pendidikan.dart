@@ -215,17 +215,20 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
-                                                      Text(
-                                                        dataPendidikan
-                                                                .namaSekolah ??
-                                                            '-',
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                          fontSize: 16.sp,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: MyColorsConst
-                                                              .primaryColor,
+                                                      SizedBox(
+                                                        width: size.width * 3/5,
+                                                        child: Text(
+                                                          '${dataPendidikan.namaSekolah ?? '-'}',
+                                                          maxLines: 2,
+                                                          overflow: TextOverflow.ellipsis,
+                                                          style:
+                                                              GoogleFonts.poppins(
+                                                            fontSize: 14.sp,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            color: MyColorsConst
+                                                                .primaryColor,
+                                                          ),
                                                         ),
                                                       ),
                                                       IconButton(

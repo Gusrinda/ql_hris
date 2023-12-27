@@ -158,17 +158,17 @@ class ChangePasswordPage extends StatelessWidget {
                                 color: MyColorsConst.darkColor,
                               ),
                             ),
-                            SizedBox(height: 30.sp),
-                            TextFormCustomV1(
-                              titleText: "Password Lama",
-                              hintText: "Masukkan password lama",
-                              isPassword: true,
-                              keyboardType: TextInputType.visiblePassword,
-                              controller: oldPasswordController,
-                              validator: MultiValidator([
-                                RequiredValidator(errorText: "* Required!"),
-                              ]),
-                            ),
+                            // SizedBox(height: 30.sp),
+                            // TextFormCustomV1(
+                            //   titleText: "Password Lama",
+                            //   hintText: "Masukkan password lama",
+                            //   isPassword: true,
+                            //   keyboardType: TextInputType.visiblePassword,
+                            //   controller: oldPasswordController,
+                            //   validator: MultiValidator([
+                            //     RequiredValidator(errorText: "* Required!"),
+                            //   ]),
+                            // ),
                             SizedBox(height: 20.sp),
                             TextFormCustomV1(
                               titleText: "Password Baru",

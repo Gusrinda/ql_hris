@@ -55,7 +55,17 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    context.read<ProfileBloc>().add(GetDataProfile());
+    _onRefresh();
+    loadData();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<ProfileBloc>().add(GetDataProfile());
+    });
+  }
+
+  void loadData() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<ProfileBloc>().add(GetDataProfile());
+    });
   }
 
   Future<void> _onRefresh() async {
@@ -199,11 +209,19 @@ class _ProfilePageState extends State<ProfilePage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        data?.name ?? "-",
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w700,
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                4 /
+                                                7,
+                                        child: Text(
+                                          data?.name ?? "-",
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.w700,
+                                          ),
                                         ),
                                       ),
                                       SizedBox(height: 5),
