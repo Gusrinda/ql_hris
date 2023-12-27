@@ -101,8 +101,8 @@ class DataDiriControllers {
     idJumlahTanggunganController?.text = bioData.tanggunganId?.toString() ?? '';
     valueJumlahTanggunganController?.text = bioData.tanggungan ?? '';
 
-    tanggalMasukController?.text = bioData.tglLahir != null
-        ? DateFormat('yyyy-MM-dd').format(bioData.tglLahir!)
+    tanggalMasukController?.text = bioData.tglMasuk != null
+        ? DateFormat('yyyy-MM-dd').format(bioData.tglMasuk!)
         : '';
 
     // BERKAS

@@ -211,15 +211,20 @@ class _DataKeluargaPageState extends State<DataKeluargaPage> {
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
-                                                      Text(
-                                                        '${dataKeluarga.nama ?? '-'}',
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                          fontSize: 16.sp,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: MyColorsConst
-                                                              .primaryColor,
+                                                      SizedBox(
+                                                        width: size.width * 3/5,
+                                                        child: Text(
+                                                          '${dataKeluarga.nama ?? '-'}',
+                                                          maxLines: 2,
+                                                          overflow: TextOverflow.ellipsis,
+                                                          style:
+                                                              GoogleFonts.poppins(
+                                                            fontSize: 14.sp,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            color: MyColorsConst
+                                                                .primaryColor,
+                                                          ),
                                                         ),
                                                       ),
                                                       IconButton(

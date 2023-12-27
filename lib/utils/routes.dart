@@ -330,7 +330,12 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
             create: (context) => EditBiodataBloc(),
-            child: EditDataDiriPage(bioData: bioData!),
+            child: EditDataDiriPage(
+              bioData: bioData!,
+              reloadDataCallback: () {
+                context.read<ProfileBloc>().add(GetDataProfile());
+              },
+            ),
           );
         });
       case DataBahasaPage.routeName:

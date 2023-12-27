@@ -26,6 +26,11 @@ class CheckInOutBloc extends Bloc<CheckInOutEvent, CheckInOutState> {
             final cutiTahunan = resUser.response["data"]["m_kary.cuti_sisa_panjang"].toString()  ?? '0';
             final p24 = resUser.response["data"]["m_kary.cuti_sisa_p24"].toString()  ?? '0';
 
+            print("Cuti Masa Kerja: ${cutiMasaKerja}");
+            print("Cuti Tahunan: ${cutiTahunan}");
+            print("Cuti Tahunan: ${p24}");
+
+
             final jsonData = res.response["data"];
             final status = jsonData["status"];
 

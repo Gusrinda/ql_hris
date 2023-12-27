@@ -59,7 +59,7 @@ class ProfileServices {
     confirmPassword,
   ) async {
     var url =
-        Uri.parse("${MyGeneralConst.API_URL}/operation/default_users/$userId");
+        Uri.parse("${MyGeneralConst.API_URL}/operation/default_users/reset_password");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.put,

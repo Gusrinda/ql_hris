@@ -37,7 +37,9 @@ class EditDataDiriPage extends StatefulWidget {
   static const routeName = '/EditDataDiriPage';
   final Biodata? bioData;
 
-  EditDataDiriPage({super.key, this.bioData});
+  EditDataDiriPage({super.key, this.bioData, required this.reloadDataCallback});
+
+  final VoidCallback reloadDataCallback;
 
   @override
   State<EditDataDiriPage> createState() => _EditDataDiriPageState();
@@ -180,116 +182,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
               onPressed: details.onStepContinue,
             ),
           } else ...{
-            // TextButtonCustomV1(
-            //   text: buttonTexts[currentStep],
-            //   height: 50,
-            //   backgroundColor: MyColorsConst.primaryColor.withOpacity(0.1),
-            //   textColor: MyColorsConst.primaryColor,
-            //   onPressed: () {
-            //     print("Ini Klik Submit Edit Biodata");
-            //     print(
-            //         "status nikah ${controllers.idStatusPernikahanController.text}");
-
-            //     // Membangun data yang akan dikirimkan ke server
-            //     Map<String, dynamic> requestData = {};
-
-            //     // Menambahkan setiap field yang diinginkan ke dalam requestData
-            //     addToRequest(requestData, "divisiId",
-            //         int.parse(controllers.idDivisiController.text));
-
-            //     addToRequest(requestData, "deptId",
-            //         int.parse(controllers.idDepartemenController.text));
-            //     addToRequest(requestData, "posisiId",
-            //         int.parse(controllers.idPosisiController.text));
-            //     addToRequest(requestData, "zonaId",
-            //         int.parse(controllers.idZonaController.text));
-            //     addToRequest(requestData, "kodePresensi",
-            //         controllers.valueKodePresensiController.text);
-            //     addToRequest(requestData, "namaDepan",
-            //         controllers.namaDepanController.text);
-            //     addToRequest(requestData, "namaBelakang",
-            //         controllers.namaBelakangController.text);
-            //     addToRequest(requestData, "namaLengkap",
-            //         '${controllers.namaDepanController.text} ${controllers.namaBelakangController.text}');
-            //     addToRequest(requestData, "namaPanggilan",
-            //         controllers.namaPanggilanController.text);
-            //     addToRequest(requestData, "jkId",
-            //         int.parse(controllers.idJenisKelaminController.text));
-            //     addToRequest(requestData, "tempatLahir",
-            //         controllers.idTempatLahirController.text);
-            //     addToRequest(requestData, "tglLahir",
-            //         controllers.tanggalLahirController.text);
-            //     addToRequest(requestData, "provinsiId",
-            //         int.parse(controllers.idProvinsiController.text));
-            //     addToRequest(requestData, "kotaId",
-            //         int.parse(controllers.idKotaController.text));
-            //     addToRequest(requestData, "kecamatanId",
-            //         int.parse(controllers.idKecamatanController.text));
-            //     addToRequest(
-            //         requestData, "kodePos", controllers.kodePosController.text);
-            //     addToRequest(requestData, "alamatAsli",
-            //         controllers.alamatKtpController.text);
-            //     addToRequest(requestData, "alamatDomisili",
-            //         controllers.alamatDomisiliTinggalController.text);
-            //     addToRequest(
-            //         requestData, "noTlp", controllers.noTelpController.text);
-            //     addToRequest(requestData, "noTlpLainnya",
-            //         controllers.noTelpLainnyaController.text);
-            //     addToRequest(requestData, "noDarurat",
-            //         controllers.noTelpDaruratController.text);
-            //     addToRequest(requestData, "namaKontakDarurat",
-            //         controllers.namaKontakDaruratController.text);
-            //     addToRequest(requestData, "hubDgnKaryawan",
-            //         controllers.hubkaryawanController.text);
-            //     addToRequest(requestData, "agamaId",
-            //         int.parse(controllers.idAgamaController.text));
-            //     addToRequest(requestData, "golDarahId",
-            //         int.parse(controllers.idGolDarahController.text));
-            //     addToRequest(requestData, "statusNikahId",
-            //         int.parse(controllers.idStatusPernikahanController.text));
-            //     addToRequest(requestData, "tanggunganId",
-            //         int.parse(controllers.idJumlahTanggunganController.text));
-            //     addToRequest(requestData, "tglMasuk",
-            //         controllers.tanggalMasukController.text);
-            //     addToRequest(requestData, "ktpFoto", ktp);
-            //     addToRequest(requestData, "pasFoto", fotoKaryawan);
-            //     addToRequest(requestData, "bpjsFoto", bpjs);
-            //     addToRequest(
-            //         requestData, "ktpNo", controllers.noKtpController.text);
-            //     addToRequest(
-            //         requestData, "kkNo", controllers.noKkController.text);
-            //     addToRequest(requestData, "kkFoto", kartukeluarga);
-            //     addToRequest(requestData, "npwpFoto", npwp);
-            //     addToRequest(
-            //         requestData, "npwpNo", controllers.noNpwpController.text);
-            //     addToRequest(requestData, "npwpTglBerlaku",
-            //         controllers.tanggalNpwpController.text);
-            //     addToRequest(requestData, "bpjsTipeId",
-            //         int.parse(controllers.idTipeBPJSController.text));
-            //     addToRequest(
-            //         requestData, "bpjsNo", controllers.noBpjsController.text);
-            //     addToRequest(
-            //         requestData, "desc", controllers.keteranganController.text);
-            //     addToRequest(
-            //         requestData, "ukBaju", controllers.ukBajuController.text);
-            //     addToRequest(requestData, "ukCelana",
-            //         controllers.ukCelanaController.text);
-            //     addToRequest(requestData, "ukSepatu",
-            //         controllers.ukSepatuontroller.text);
-            //     addToRequest(requestData, "bankId",
-            //         int.parse(controllers.idNamaBankController.text));
-            //     addToRequest(
-            //         requestData, "noRek", controllers.noRekController.text);
-            //     addToRequest(requestData, "atasNamaRek",
-            //         controllers.atasNamaController.text);
-
-            //     // Melakukan submit data
-            //     context
-            //         .read<EditBiodataBloc>()
-            //         .add(EditDataBiodataSubmited(requestData: requestData));
-            //   },
-            // ),
-
             TextButtonCustomV1(
               text: buttonTexts[currentStep],
               height: 50,
@@ -338,7 +230,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               controllers.idJenisKelaminController!.value.text)
                           : null,
                       tempatLahir:
-                          controllers.idTempatLahirController?.value.text,
+                          controllers.valueTempatLahirController?.value.text,
                       tglLahir: controllers.tanggalLahirController?.value.text,
                       provinsiId:
                           controllers.idProvinsiController?.value.text != null
@@ -422,7 +314,8 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               : null,
                       // bpjsNo: controllers.noBpjsController?.value.text,
                       bpjsNo: controllers.noBpjsKesehatanController?.value.text,
-                      bpjsKerjaNo: controllers.noBpjsKesehatanController?.value.text,  
+                      bpjsKerjaNo:
+                          controllers.noBpjsKesehatanController?.value.text,
                       desc: controllers.keteranganController?.value.text,
                       ukBaju: controllers.ukBajuController?.value.text,
                       ukCelana: controllers.ukCelanaController?.value.text,
@@ -956,13 +849,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
     void showKotabyProvinsiMenu(BuildContext context) {
       if (controllers.idProvinsiController!.value.text.isEmpty) {
         CircularProgressIndicator();
-        showDialog(
-          context: context,
-          builder: (_) => DialogCustom(
-            state: DialogCustomItem.error,
-            message: "Anda belum memilih Provinsi",
-          ),
-        );
       }
 
       // Dapatkan ID provinsi yang dipilih
@@ -980,6 +866,13 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
 
       if (dataKotabyProvinsi.isEmpty) {
         print("Tidak Ada Kota untuk Provinsi yang Dipilih");
+        showDialog(
+          context: context,
+          builder: (_) => const DialogCustom(
+            state: DialogCustomItem.error,
+            message: "Anda belum memilih Provinsi",
+          ),
+        );
         return;
       }
 
@@ -1011,13 +904,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
     void showKecamatanMenu(BuildContext context) {
       if (controllers.idKotaController!.text.isEmpty) {
         CircularProgressIndicator();
-        showDialog(
-          context: context,
-          builder: (_) => DialogCustom(
-            state: DialogCustomItem.error,
-            message: "Anda belum memilih Kota",
-          ),
-        );
       }
 
       // Dapatkan ID provinsi yang dipilih
@@ -1034,6 +920,13 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
 
       if (dataKecamatan.isEmpty) {
         print("Tidak Ada Kecamatan untuk Kota yang Dipilih");
+        showDialog(
+          context: context,
+          builder: (_) => const DialogCustom(
+            state: DialogCustomItem.error,
+            message: "Anda belum memilih Kota",
+          ),
+        );
         return;
       }
 
@@ -1250,6 +1143,8 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
               ),
             );
             Navigator.of(context).pop();
+            Navigator.pop(context);
+            widget.reloadDataCallback();
           } else if (state is EditBiodataFailed) {
             LoadingDialog.dismissDialog(context);
             await showDialog(
@@ -1788,7 +1683,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     selectedFile: ktp,
                                   ),
                                   // FormInputData(
-                                    // showRedStar: false,
+                                  // showRedStar: false,
                                   //   hintText: 'Tuliskan No. KTP',
                                   //   labelForm: 'No. KTP',
                                   //   labelTag: 'Label-NoKtp',
@@ -1847,7 +1742,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     controller: controllers.noNpwpController!,
                                     validator: (value) {},
                                   ),
-                                  FormDropDownData(
+                                  FormDateData(
                                     showRedStar: false,
                                     onTap: () {
                                       showTahunMenu(context,
@@ -1880,16 +1775,19 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     labelForm: 'No. BPJS Kesehatan',
                                     labelTag: 'Label-NoBpjsKes',
                                     formTag: 'Form-NoBpjsKes',
-                                    controller: controllers.noBpjsKesehatanController!,
+                                    controller:
+                                        controllers.noBpjsKesehatanController!,
                                     validator: (value) {},
                                   ),
                                   FormInputData(
                                     showRedStar: false,
-                                    hintText: 'Tuliskan No. BPJS Ketenagakerjaan',
+                                    hintText:
+                                        'Tuliskan No. BPJS Ketenagakerjaan',
                                     labelForm: 'No. BPJS Ketenagakerjaan',
                                     labelTag: 'Label-NoBpjsKer',
                                     formTag: 'Form-NoBpjsKer',
-                                    controller: controllers.noBpjsKetenagakerjaanController!,
+                                    controller: controllers
+                                        .noBpjsKetenagakerjaanController!,
                                     validator: (value) {},
                                   ),
                                   FormDropDownData(

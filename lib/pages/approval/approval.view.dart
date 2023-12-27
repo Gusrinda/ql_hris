@@ -30,9 +30,8 @@ class _ApprovalPageState extends State<ApprovalPage> {
   void initState() {
     super.initState();
     loadData();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ApprovalBloc>().add(GetListApproval());
-    });
+    context.read<ApprovalBloc>().add(GetListApproval());
+    WidgetsBinding.instance.addPostFrameCallback((_) {});
   }
 
   void loadData() {

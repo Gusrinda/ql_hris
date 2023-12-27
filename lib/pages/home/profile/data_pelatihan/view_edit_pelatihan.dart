@@ -73,7 +73,7 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
         List<String> years = [];
         int currentYear = DateTime.now().year;
 
-        for (int year = currentYear - 20; year <= currentYear; year++) {
+        for (int year = currentYear - 40; year <= currentYear; year++) {
           years.add(year.toString());
         }
 
