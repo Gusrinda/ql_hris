@@ -9,9 +9,13 @@ abstract class ListRealisasiDinasEvent extends Equatable {
 }
 
 class GetListRealisasiDinas extends ListRealisasiDinasEvent {
-
-  GetListRealisasiDinas();
+  DateTime date;
+  GetListRealisasiDinas(
+    {
+    required this.date,
+  }
+  );
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [date];
 }

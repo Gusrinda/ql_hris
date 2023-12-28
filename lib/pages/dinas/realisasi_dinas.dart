@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sj_presensi_mobile/componens/HRIS/monthYearPicker_custom.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
@@ -28,12 +29,16 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
     super.initState();
     loadData();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ListRealisasiDinasBloc>().add(GetListRealisasiDinas());
+      context
+          .read<ListRealisasiDinasBloc>()
+          .add(GetListRealisasiDinas(date: DateTime.now()));
     });
   }
 
   void loadData() {
-    context.read<ListRealisasiDinasBloc>().add(GetListRealisasiDinas());
+    context
+        .read<ListRealisasiDinasBloc>()
+        .add(GetListRealisasiDinas(date: DateTime.now()));
   }
 
   @override
@@ -140,6 +145,108 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            SizedBox(
+                              height: 15.sp,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Bulan",
+                                      style: GoogleFonts.poppins(
+                                        color: MyColorsConst.darkColor,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                    MonthPicker(
+                                      onTap:
+                                          (DateTime? months, DateTime? years) {
+                                        if (months != null) {
+                                          setState(() {
+                                            selectedMonth = months;
+                                          });
+                                          print(
+                                              "ini bulan terpilih ${selectedMonth} ${selectedYear}");
+                                          DateTime newDate;
+                                          if (selectedYear != null) {
+                                            newDate = DateTime(
+                                                selectedYear!.year,
+                                                selectedMonth!.month,
+                                                DateTime.now().day);
+                                          } else {
+                                            newDate = DateTime(
+                                                DateTime.now().year,
+                                                selectedMonth!.month,
+                                                DateTime.now().day);
+                                          }
+
+                                          context
+                                              .read<ListRealisasiDinasBloc>()
+                                              .add(
+                                                GetListRealisasiDinas(
+                                                  date: newDate,
+                                                ),
+                                              );
+                                        }
+                                      },
+                                      selectedYear: selectedYear,
+                                    )
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Tahun",
+                                      style: GoogleFonts.poppins(
+                                        color: MyColorsConst.darkColor,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                    YearPickerCustom(
+                                      onTap:
+                                          (DateTime? years, DateTime? months) {
+                                        if (years != null) {
+                                          setState(() {
+                                            selectedYear = years;
+                                          });
+                                          print(
+                                              "ini tahun yang dipilih ${selectedYear} ${selectedMonth}");
+
+                                          DateTime newDate;
+                                          if (selectedMonth != null) {
+                                            newDate = DateTime(
+                                                selectedYear!.year,
+                                                selectedMonth!.month);
+                                          } else {
+                                            newDate = DateTime(
+                                                selectedYear!.year,
+                                                DateTime.now().month);
+                                          }
+
+                                          context
+                                              .read<ListRealisasiDinasBloc>()
+                                              .add(
+                                                GetListRealisasiDinas(
+                                                  date: newDate,
+                                                ),
+                                              );
+                                        }
+                                      },
+                                      selectedMonth: selectedMonth,
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 15.sp,
+                            ),
                             Expanded(
                               child: listRealisasiDinas.isNotEmpty
                                   ? ListView.builder(
@@ -169,40 +276,49 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                 ),
                                               );
                                             },
-                                            child: Container(
-                                              margin: EdgeInsets.only(
-                                                  bottom: 5.sp),
-                                              padding: EdgeInsets.symmetric(
-                                                horizontal: 12.sp,
-                                                vertical: 10.sp,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: MyColorsConst
-                                                          .formBorderColor),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)),
-                                              height: 100.sp,
-                                              width: size.width,
-                                              child: Row(
-                                                children: [
-                                                  Container(
-                                                    padding: EdgeInsets.all(10),
-                                                    decoration: BoxDecoration(
-                                                        color: Colors
-                                                            .green.shade700
-                                                            .withOpacity(0.2),
-                                                        shape: BoxShape.circle),
-                                                    child: Icon(
-                                                      CupertinoIcons
-                                                          .doc_chart_fill,
-                                                      color:
-                                                          Colors.green.shade700,
-                                                    ),
+                                            child: Stack(
+                                              children: [
+                                                Container(
+                                                  margin: const EdgeInsets.only(
+                                                      bottom: 7,
+                                                      left: 5,
+                                                      right: 3),
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 15,
+                                                      vertical: 15),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6),
+                                                    // border: Border.all(color: const Color(0xFFDDDDDD)),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                          color: Colors.black
+                                                              .withOpacity(0.1),
+                                                          offset: Offset(0, 0),
+                                                          blurRadius: 5)
+                                                    ],
+                                                    color: MyColorsConst
+                                                        .whiteColor,
                                                   ),
-                                                  SizedBox(width: 10.sp),
-                                                  Column(
+                                                  height: 100.sp,
+                                                  width: size.width,
+                                                  // Container(
+                                                  //   padding: EdgeInsets.all(10),
+                                                  //   decoration: BoxDecoration(
+                                                  //       color: Colors
+                                                  //           .green.shade700
+                                                  //           .withOpacity(0.2),
+                                                  //       shape: BoxShape.circle),
+                                                  //   child: Icon(
+                                                  //     CupertinoIcons
+                                                  //         .doc_chart_fill,
+                                                  //     color:
+                                                  //         Colors.green.shade700,
+                                                  //   ),
+                                                  // ),
+                                                  child: Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
@@ -212,21 +328,45 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                     children: [
                                                       Text(
                                                         "${dataRealisasiDinas.nomor ?? '-'}",
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                                fontSize: 14.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600),
-                                                      ),
-                                                      Text(
-                                                        "${dataRealisasiDinas.creatorName ?? '-'}",
                                                         style: GoogleFonts.poppins(
-                                                            fontSize: 12.sp,
+                                                            fontSize: 14.sp,
                                                             fontWeight:
-                                                                FontWeight.w500,
+                                                                FontWeight.w600,
                                                             color: MyColorsConst
                                                                 .darkColor),
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Expanded(
+                                                            flex: 1,
+                                                            child: Text(
+                                                              'Nama',
+                                                              style: GoogleFonts
+                                                                  .poppins(
+                                                                color:
+                                                                    Colors.grey,
+                                                                fontSize: 10,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            flex: 3,
+                                                            child: Text(
+                                                              "${dataRealisasiDinas.creatorName ?? '-'}",
+                                                              style: GoogleFonts.poppins(
+                                                                  fontSize:
+                                                                      12.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  color: MyColorsConst
+                                                                      .darkColor),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
                                                       // Text(
                                                       //   "${dataRealisasiDinas.totalBiayaSelisih ?? '-'}",
@@ -237,22 +377,81 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                       //       color: MyColorsConst
                                                       //           .darkColor),
                                                       // ),
-                                                      Text(
-                                                        "${dataRealisasiDinas.tSpdTglAcaraAwal ?? '-'} - ${dataRealisasiDinas.tSpdTglAcaraAkhir ?? '-'}",
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                                fontSize: 10.sp,
+                                                      Row(
+                                                        children: [
+                                                          Expanded(
+                                                            flex: 1,
+                                                            child: Text(
+                                                              'Tanggal',
+                                                              style: GoogleFonts
+                                                                  .poppins(
+                                                                color:
+                                                                    Colors.grey,
+                                                                fontSize: 10,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w400,
-                                                                color: Colors
-                                                                    .grey
-                                                                    .shade600),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            flex: 3,
+                                                            child: Text(
+                                                              "${dataRealisasiDinas.tSpdTglAcaraAwal ?? '-'} - ${dataRealisasiDinas.tSpdTglAcaraAkhir ?? '-'}",
+                                                              style: GoogleFonts.poppins(
+                                                                  fontSize:
+                                                                      10.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color: MyColorsConst
+                                                                      .darkColor),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       )
                                                     ],
-                                                  )
-                                                ],
-                                              ),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  top: 0,
+                                                  right: 0,
+                                                  child: Container(
+                                                    height: 30,
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 6,
+                                                        vertical: 3),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topRight:
+                                                            Radius.circular(
+                                                                10.sp),
+                                                        bottomLeft:
+                                                            Radius.circular(
+                                                                10.sp),
+                                                      ),
+                                                      color: MyColorsConst
+                                                          .primaryColor,
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        dataRealisasiDinas
+                                                                .status ??
+                                                            '-',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          color: Colors.white,
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         );

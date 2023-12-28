@@ -6,8 +6,8 @@ import 'package:sj_presensi_mobile/utils/services_no_source_mobile.dart';
 
 class RealisasiDinasServices {
   static Future<Object> getListDinasApprove(String token) async {
-    var url =
-        Uri.parse("${MyGeneralConst.API_URL}/operation/t_spd?paginate=1000&filter_status=APPROVED");
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/t_spd?paginate=1000&filter_status=APPROVED");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -15,8 +15,29 @@ class RealisasiDinasServices {
     );
   }
 
-  static Future<Object> getListRealisasiDinas(String token) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_rpd");
+  // static Future<Object> getListRealisasiDinas(String token) async {
+  //   var url =
+  //       Uri.parse("${MyGeneralConst.API_URL}/operation/t_rpd?paginate=1000");
+  //   return await GeneralServicesNoMobile.baseService(
+  //     url: url,
+  //     method: GeneralServicesMethodNoMobile.get,
+  //     headers: GeneralServicesNoMobile.addToken2Headers(token),
+  //   );
+  // }
+
+  static Future<Object> getListRealisasiDinas(
+      String token, DateTime date) async {
+    // Format tanggal awal
+    var startDate = "${date.year}-${date.month.toString().padLeft(2, '0')}-01";
+
+    // Format tanggal akhir (akhir bulan)
+    var lastDate = DateTime(date.year, date.month + 1, 0).day;
+    var endDate =
+        "${date.year}-${date.month.toString().padLeft(2, '0')}-$lastDate";
+
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/t_rpd?where=this.created_at between '$startDate' and '$endDate'");
+
     return await GeneralServicesNoMobile.baseService(
       url: url,
       method: GeneralServicesMethodNoMobile.get,
@@ -102,17 +123,14 @@ class RealisasiDinasServices {
     );
   }
 
-  
   static Future<Object> getDetailSPD(String token, int spdID) async {
-    var url =
-        Uri.parse("${MyGeneralConst.API_URL}/operation/t_spd/${spdID}");
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_spd/${spdID}");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
       headers: GeneralServices.addToken2Headers(token),
     );
   }
-
 
   static Future<Object> getDetailRealisasiDinas(String token, int id) async {
     var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_rpd/$id");
