@@ -627,11 +627,18 @@ class _AddLemburPageState extends State<AddLemburPage> {
     TimeOfDay? selectedTime,
     Function(TimeOfDay) onTimeSelected,
   ) {
-    return InkWell(
+    return GestureDetector(
       onTap: () async {
         final TimeOfDay? pickedTime = await showTimePicker(
           context: context,
           initialTime: selectedTime ?? TimeOfDay.now(),
+          builder: (BuildContext context, Widget? child) {
+            return MediaQuery(
+              data:
+                  MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+              child: child!,
+            );
+          },
         );
 
         if (pickedTime != null) {
@@ -642,7 +649,6 @@ class _AddLemburPageState extends State<AddLemburPage> {
           String formattedTime = '$formattedHour:$formattedMinute';
 
           controller.text = formattedTime;
-          _calculateMinutes();
         }
       },
       child: Container(
@@ -656,7 +662,7 @@ class _AddLemburPageState extends State<AddLemburPage> {
           children: [
             Text(
               selectedTime != null ? _formatTime(selectedTime) : hintText,
-              style: GoogleFonts.poppins(
+              style: TextStyle(
                 fontSize: selectedTime != null ? 13.sp : 10.sp,
                 fontWeight:
                     selectedTime != null ? FontWeight.w500 : FontWeight.w500,
@@ -668,7 +674,7 @@ class _AddLemburPageState extends State<AddLemburPage> {
             Icon(
               CupertinoIcons.clock_fill,
               color: MyColorsConst.primaryColor,
-              size: 20.sp,
+              size: 20,
             ),
           ],
         ),

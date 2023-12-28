@@ -658,11 +658,11 @@ class FormTemplateSpd extends StatelessWidget {
                 label: labelForm,
                 labelColor: MyColorsConst.darkColor,
               ),
-              SizedBox(width: 2.sp),
-              Text(
-                '*',
-                style: GoogleFonts.poppins(color: Colors.red),
-              ),
+              // SizedBox(width: 2.sp),
+              // Text(
+              //   '*',
+              //   style: GoogleFonts.poppins(color: Colors.red),
+              // ),
             ],
           ),
         ),

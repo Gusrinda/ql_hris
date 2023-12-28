@@ -112,7 +112,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
   String? selectedLokasiTujuan;
   String? selectedPic;
   DateTime? selectedDate;
-  DateTime? selectedTanggal;
+  DateTime? selectedTanggal = DateTime.now();
   DateTime? selectedTanggalAwal;
   DateTime? selectedTanggalAkhir;
   int? _kendDinas;
@@ -130,6 +130,8 @@ class _AddDinasPageState extends State<AddDinasPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<AddDinasBloc>().add(OnSelectPic());
     });
+    widget.tanggalController.text =
+        DateFormat('yyyy-MM-dd').format(DateTime.now());
   }
 
   List<String> buttonTexts = ['Selanjutnya', 'Selanjutnya', 'Kirim'];
@@ -753,12 +755,12 @@ class _AddDinasPageState extends State<AddDinasPage> {
                                         hintText: 'Cari Template SPD',
                                         labelTag: 'Label-TemplateSPd',
                                         formTag: 'Form-TemplateSpd',
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return 'Pilih Template SPD';
-                                          }
-                                          return null;
-                                        },
+                                        // validator: (value) {
+                                        //   if (value == null || value.isEmpty) {
+                                        //     return 'Pilih Template SPD';
+                                        //   }
+                                        //   return null;
+                                        // },
                                         errorTextStyle: GoogleFonts.poppins(
                                           fontSize: 8,
                                         ),
@@ -898,7 +900,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
                                           Row(
                                             children: [
                                               FormTextLabel(
-                                                label: "Tanggal",
+                                                label: "Tanggal Pengajuan",
                                                 labelColor:
                                                     MyColorsConst.darkColor,
                                               ),

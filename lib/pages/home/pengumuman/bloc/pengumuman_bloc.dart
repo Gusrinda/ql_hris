@@ -17,8 +17,9 @@ class PengumumanBloc extends Bloc<PengumumanEvent, PengumumanState> {
       var resToken = await GeneralSharedPreferences.getUserToken();
       print(resToken);
       if (resToken is ServicesSuccess) {
-        var res =
-            await PengumumanServices.getPengumuman(resToken.response["token"]);
+        String staticToken =
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNGU1ZTIxYmVhMzg5NGVmMmUyMmZjNzIwM2Q1Y2I0MTExOTNhMDkzMmFlZGRjNjYwZGUwZTgyOTA4YmIyODBkMjAzOTZiZDQwMTk1Y2FjY2UiLCJpYXQiOjE3MDM3MTcyNDcuNjQzNzA1LCJuYmYiOjE3MDM3MTcyNDcuNjQzNzEsImV4cCI6MTczNTMzOTY0Ny42MzY3Nywic3ViIjoiMTciLCJzY29wZXMiOltdfQ.kjaagij0MCwey4fsfP8toiPPyPiPD0QIQb3sJhnAZNzLmsleGXAWA9VAPVLv_WJPlnqULO7ZFOP3WO7qMZCP3lNUFFIO0dDgOsiadKY-eI0-L2r_PT7HethNEJOlVxmPCPOiw_ACNX8Mg394fVOgDx9rvbAZoQ509T2Vn7NGLAMeBgaNCIM_P45lBZPKB695TVtlM135dHQUuiuQnaLjpbPT1CYNmFoeNkRQJsJCiOEYPUIOHenTUevIe2LqgEgSeRxbWy4NltVhx-sUnb2uvzW3vqJU_BTC5ohfZLYDUNcYbbOZjRFxbfhYZyFMzO3vJqhcnIgfyKG9XVOsqxaBvfZdlSa2Qa7EwIvs_pDuIN_OevyY6Z3IMpl26jZ5lv4RQ4UfJ90TztZRTPTo_MJJ49xKktkXUeALORlpI57Sx7-D8wR0n07Ij_kSkct4hlBAjSRL2IWC7YAdIocXPoDs-Ad4bPg9amYp9tsyxQy55tcKTJHjHCP7QaAL5KSN2jYHXhLgn_3CPUN1vicjxZg95s_hVwaBJgs8en2FZ3j8iBDmsmRfFznkxTwQyzydJFHezLfuytcd2ZzU8nbDEYxZ-JVUJiiOGQx9Y-T3T9g4yLT2gmmPlIOAzFdwoRIfvL3eKM95NcO4zAFyRGRBQtGHlMGID7B0hIIJoUwLIvzCtYU";
+        var res = await PengumumanServices.getPengumuman(staticToken);
         if (res is ServicesSuccessNoMobile) {
           if (res.response is Map<String, dynamic>) {
             print("INI RES: ${res.response}");
@@ -31,7 +32,7 @@ class PengumumanBloc extends Bloc<PengumumanEvent, PengumumanState> {
             emit(ListPengumumanFailedInBackground(
                 message: 'Response format is invalid'));
           }
-        } else if (res is ServicesFailure) {
+        } else if (res is ServicesFailureNoMobile) {
           if (res.errorResponse == null) {
             await GeneralSharedPreferences.removeUserToken();
             emit(ListPengumumanFailedUserExpired(message: "Token expired"));

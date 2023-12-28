@@ -90,6 +90,16 @@ class _AddCutiPageState extends State<AddCutiPage> {
 
           setState(() {
             this.selectedTipeValue = selectedTipeValue.value;
+            if (this.selectedTipeValue == "P24") {
+              selectedTimeFrom = TimeOfDay(hour: 8, minute: 0);
+              selectedTimeTo = TimeOfDay(hour: 8, minute: 0);
+              selectedDateFrom = DateTime.now();
+              widget.dateFromController.text =
+                  DateFormat('yyyy-MM-dd').format(DateTime.now());
+              selectedDateTo = DateTime.now();
+              widget.dateToController.text =
+                  DateFormat('yyyy-MM-dd').format(DateTime.now());
+            }
             print(selectedTipeValue.value);
             print("Selected ID Tipe Cuti: ${selectedTipeValue.id}");
           });
@@ -624,6 +634,9 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                       widget.timeToController?.text =
                                           selectedTimeTo!.format(context);
 
+                                      print(
+                                          "Tanggal Hari ini : ${widget.dateFromController.text}");
+
                                       // Convert TimeOfDay to a formatted string in HH:mm format
                                       String formattedTimeFrom =
                                           '${selectedTimeFrom!.hour.toString().padLeft(2, '0')}:${selectedTimeFrom!.minute.toString().padLeft(2, '0')}';
@@ -794,6 +807,12 @@ class _AddCutiPageState extends State<AddCutiPage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           DropdownButton<int>(
+            style: GoogleFonts.poppins(
+                color: MyColorsConst.darkColor,
+                fontSize: 15.sp,
+                fontWeight: FontWeight.w500),
+            underline: Container(),
+            icon: Icon(Icons.arrow_drop_down_rounded),
             value: selectedTime?.hour ?? 8, // Start from 08
             items: List.generate(10, (index) => index + 8)
                 .map((hour) => DropdownMenuItem<int>(
@@ -810,6 +829,12 @@ class _AddCutiPageState extends State<AddCutiPage> {
           ),
           Text(':'),
           DropdownButton<int>(
+            style: GoogleFonts.poppins(
+                color: MyColorsConst.darkColor,
+                fontSize: 15.sp,
+                fontWeight: FontWeight.w500),
+            underline: Container(),
+            icon: Icon(Icons.arrow_drop_down_rounded),
             value: selectedTime?.minute ?? 0,
             items: List.generate(60, (index) => index)
                 .map((minute) => DropdownMenuItem<int>(
