@@ -5,13 +5,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
-import 'package:sj_presensi_mobile/pages/download_berkas/bloc/berkas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/download_berkas/kategori_berkas_bloc/berkas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/download_berkas/list_berkas_bloc/list_berkas_bloc.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 import 'package:url_launcher/link.dart';
 
 class DetailListBerkasPage extends StatefulWidget {
   static const routeName = '/DetailListBerkasPage';
-  const DetailListBerkasPage({super.key});
+  const DetailListBerkasPage({
+    super.key,
+    this.kategori,
+  });
+  final String? kategori;
 
   @override
   State<DetailListBerkasPage> createState() => _DetailListBerkasPageState();
@@ -22,14 +27,16 @@ class _DetailListBerkasPageState extends State<DetailListBerkasPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<BerkasBloc>().add(GetListBerkas());
+      context
+          .read<ListBerkasBloc>()
+          .add(GetListBerkas(kategori: widget.kategori ?? ''));
     });
   }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return BlocListener<BerkasBloc, BerkasState>(
+    return BlocListener<ListBerkasBloc, ListBerkasState>(
       listener: (context, state) async {
         if (state is ListBerkasLoading) {
           LoadingDialog.showLoadingDialog(context);
@@ -110,16 +117,10 @@ class _DetailListBerkasPageState extends State<DetailListBerkasPage> {
                 ),
               ),
               Expanded(
-                child: BlocBuilder<BerkasBloc, BerkasState>(
+                child: BlocBuilder<ListBerkasBloc, ListBerkasState>(
                   builder: (context, state) {
-                    var listberkas = context.read<BerkasBloc>().listberkas;
+                    var listberkas = context.read<ListBerkasBloc>().listBerkas;
                     // Filter berkas berdasarkan kategori
-                    var sopBerkas = listberkas
-                        .where((berkas) => berkas.kategori == "SOP")
-                        .toList();
-                    var academyBerkas = listberkas
-                        .where((berkas) => berkas.kategori == "ACADEMY")
-                        .toList();
                     return Container(
                       decoration: const BoxDecoration(
                         borderRadius: BorderRadius.only(
@@ -130,23 +131,22 @@ class _DetailListBerkasPageState extends State<DetailListBerkasPage> {
                       ),
                       child: Padding(
                         padding: EdgeInsets.all(20.sp),
-                        child: Column(
-                          children: [
-                            DashboardItem(
-                              label: 'Prosedur SOP Perusahaan',
-                              image: 'assets/images/sop_sj.png',
-                              docUrl: sopBerkas.isNotEmpty
-                                  ? sopBerkas[0].url
-                                  : null,
-                            ),
-                            DashboardItem(
-                              label: 'Sucess Jaya Academy',
-                              image: 'assets/images/academy_sj.png',
-                              docUrl: academyBerkas.isNotEmpty
-                                  ? academyBerkas[0].url
-                                  : null,
-                            ),
-                          ],
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: listberkas.length,
+                          itemBuilder: (context, index) {
+                            var dataBerkas = listberkas[index];
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                DashboardItem(
+                                  label: dataBerkas.nama ?? '-',
+                                  desc: dataBerkas.desc ?? '-',
+                                  docUrl: dataBerkas.url,
+                                )
+                              ],
+                            );
+                          },
                         ),
                       ),
                     );
@@ -163,14 +163,14 @@ class _DetailListBerkasPageState extends State<DetailListBerkasPage> {
 
 class DashboardItem extends StatelessWidget {
   final String label;
-  final String image;
   final String? docUrl;
+  final String desc;
 
   const DashboardItem({
     Key? key,
     required this.label,
-    required this.image,
-    this.docUrl,
+    required this.docUrl,
+    required this.desc,
   }) : super(key: key);
 
   @override
@@ -202,18 +202,25 @@ class DashboardItem extends StatelessWidget {
                 flex: 10,
                 child: Row(
                   children: [
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundColor: Color(0xFF6F7BF7).withOpacity(0.0),
-                      child: Image.asset(image),
-                    ),
-                    SizedBox(width: 15.sp),
-                    Text(
-                      label,
-                      style: GoogleFonts.poppins(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w700,
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          label,
+                          style: GoogleFonts.poppins(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w700,
+                              color: MyColorsConst.darkColor),
+                        ),
+                        SizedBox(height: 10.sp),
+                        Text(
+                          'Deskripsi : $desc',
+                          style: GoogleFonts.poppins(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w500,
+                              color: MyColorsConst.lightDarkColor),
+                        ),
+                      ],
                     ),
                   ],
                 ),

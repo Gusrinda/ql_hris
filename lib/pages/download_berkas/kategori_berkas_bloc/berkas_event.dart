@@ -7,9 +7,9 @@ abstract class BerkasEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetListBerkas extends BerkasEvent {
+class GetKategoriBerkas extends BerkasEvent {
 
-  GetListBerkas();
+  GetKategoriBerkas();
 
   @override
   List<Object> get props => [];

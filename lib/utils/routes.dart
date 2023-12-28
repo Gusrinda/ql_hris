@@ -21,8 +21,10 @@ import 'package:sj_presensi_mobile/pages/dinas/edit_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_realisasi_dinas_bloc/list_realisasi_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/realisasi_dinas.dart';
-import 'package:sj_presensi_mobile/pages/download_berkas/bloc/berkas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/download_berkas/detail_list_berkas.dart';
+import 'package:sj_presensi_mobile/pages/download_berkas/kategori_berkas_bloc/berkas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/download_berkas/download_berkas_page.dart';
+import 'package:sj_presensi_mobile/pages/download_berkas/list_berkas_bloc/list_berkas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/add_check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/location_acio_bloc.dart';
@@ -147,6 +149,13 @@ class RouteGenerator {
           return BlocProvider(
             create: (context) => BerkasBloc(),
             child: const DownloadBerkasPage(),
+          );
+        });
+      case DetailListBerkasPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return BlocProvider(
+            create: (context) => ListBerkasBloc(),
+            child: const DetailListBerkasPage(),
           );
         });
       case ApprovalPage.routeName:

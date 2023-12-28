@@ -1,17 +1,16 @@
-part of 'berkas_bloc.dart';
+part of 'list_berkas_bloc.dart';
 
-abstract class BerkasState extends Equatable {
-  const BerkasState();
-
-  @override
+abstract class ListBerkasState extends Equatable {
+  const ListBerkasState();
+   @override
   List<Object> get props => [];
 }
 
-class ListBerkasInitial extends BerkasState {}
+class ListBerkasInitial extends ListBerkasState {}
 
-class ListBerkasLoading extends BerkasState {}
+class ListBerkasLoading extends ListBerkasState {}
 
-class ListBerkasSuccess extends BerkasState {
+class ListBerkasSuccess extends ListBerkasState {
   List<DataBerkas> dataBerkas;
 
   ListBerkasSuccess({
@@ -22,12 +21,12 @@ class ListBerkasSuccess extends BerkasState {
   List<Object> get props => [dataBerkas];
 }
 
-class ListBerkasFailedInBackground extends BerkasState {
+class ListBerkasFailedInBackground extends ListBerkasState {
   String message;
   ListBerkasFailedInBackground({required this.message});
 }
 
-class ListBerkasFailed extends BerkasState {
+class ListBerkasFailed extends ListBerkasState {
   String message;
   ListBerkasFailed({required this.message});
 
@@ -35,7 +34,7 @@ class ListBerkasFailed extends BerkasState {
   List<Object> get props => [message];
 }
 
-class ListBerkasFailedUserExpired extends BerkasState {
+class ListBerkasFailedUserExpired extends ListBerkasState {
   String message;
 
   ListBerkasFailedUserExpired({required this.message});

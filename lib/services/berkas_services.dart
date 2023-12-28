@@ -10,4 +10,14 @@ class BerkasServices {
       headers: GeneralServicesNoMobile.addToken2Headers(token),
     );
   }
+
+  static Future<Object> getListBerkas(String token, String kategori) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_berkas?where=this.kategori='$kategori'&paginate=100");
+    return await GeneralServicesNoMobile.baseService(
+      url: url,
+      method: GeneralServicesMethodNoMobile.get,
+      headers: GeneralServicesNoMobile.addToken2Headers(token),
+    );
+  }
 }

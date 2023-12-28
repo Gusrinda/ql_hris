@@ -1,32 +1,32 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sj_presensi_mobile/services/berkas_services.dart';
 import 'package:sj_presensi_mobile/services/model/berkas_model.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:sj_presensi_mobile/utils/services_no_source_mobile.dart';
 import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
-part 'berkas_event.dart';
-part 'berkas_state.dart';
+part 'list_berkas_event.dart';
+part 'list_berkas_state.dart';
 
-class BerkasBloc extends Bloc<BerkasEvent, BerkasState> {
-  List<DataBerkas> listberkas = [];
-  BerkasBloc() : super(ListBerkasInitial()) {
+class ListBerkasBloc extends Bloc<ListBerkasEvent, ListBerkasState> {
+  List<DataBerkas> listBerkas = [];
+  ListBerkasBloc() : super(ListBerkasInitial()) {
     on<GetListBerkas>((event, emit) async {
-       emit(ListBerkasLoading());
+      emit(ListBerkasLoading());
       var resToken = await GeneralSharedPreferences.getUserToken();
       print(resToken);
       if (resToken is ServicesSuccess) {
-        var res =
-            await BerkasServices.getBerkas(resToken.response["token"]);
+        var res = await BerkasServices.getListBerkas(
+            resToken.response["token"], event.kategori);
         if (res is ServicesSuccessNoMobile) {
           if (res.response is Map<String, dynamic>) {
             print("INI RES: ${res.response}");
-            BerkasModel dataResponse =
-                BerkasModel.fromJson(res.response);
-            listberkas = dataResponse.data ?? [];
-            print("GET Pelatihan: $listberkas}");
-            emit(ListBerkasSuccess(dataBerkas: listberkas));
+            BerkasModel dataResponse = BerkasModel.fromJson(res.response);
+            listBerkas = dataResponse.data ?? [];
+            print("GET Pelatihan: $listBerkas}");
+            emit(ListBerkasSuccess(dataBerkas: listBerkas));
           } else {
             emit(ListBerkasFailedInBackground(
                 message: 'Response format is invalid'));
