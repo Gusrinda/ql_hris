@@ -21,7 +21,8 @@ class ListRealisasiDinasBloc
       var resToken = await GeneralSharedPreferences.getUserToken();
       if (resToken is ServicesSuccess) {
         var res = await RealisasiDinasServices.getListRealisasiDinas(
-            resToken.response["token"]);
+            resToken.response["token"], event.date);
+        print(res);
         if (res is ServicesSuccessNoMobile) {
           debugPrint(res.response.toString());
           if (res.response is Map<String, dynamic>) {
@@ -47,6 +48,7 @@ class ListRealisasiDinasBloc
             emit(ListRealisasiDinasFailedUserExpired(message: "Token expired"));
           } else {
             emit(ListRealisasiDinasFailed(message: res.errorResponse));
+            print(res.errorResponse);
           }
         }
       } else if (resToken is ServicesFailure) {

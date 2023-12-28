@@ -17,11 +17,11 @@ import 'package:sj_presensi_mobile/pages/dinas/add_realisasi_dinas_bloc/add_real
 import 'package:sj_presensi_mobile/pages/dinas/dashboard_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/detail_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/detail_realisasi_dinas.dart';
-import 'package:sj_presensi_mobile/pages/dinas/detail_realisasi_dinas_bloc/detail_realisasi_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/edit_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_realisasi_dinas_bloc/list_realisasi_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/realisasi_dinas.dart';
+import 'package:sj_presensi_mobile/pages/download_berkas/bloc/berkas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/download_berkas/download_berkas_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/add_check_in_out_bloc.dart';
@@ -36,14 +36,12 @@ import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dar
 import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/bloc/pengumuman_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/list_pengumuman.dart';
-import 'package:sj_presensi_mobile/pages/home/pengumuman/pengumuman.view.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/add_bahasa.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/add_bahasa_bloc/add_bahasa_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/data_bahasa_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/list_bahasa_bloc/list_bahasa_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/view_edit_bahasa.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/data_diri/bloc/biodata_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/data_diri_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_biodata_bloc/edit_biodata_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_data_diri.dart';
@@ -144,7 +142,13 @@ class RouteGenerator {
             child: const NotifikasiPage(),
           );
         });
-
+      case DownloadBerkasPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return BlocProvider(
+            create: (context) => BerkasBloc(),
+            child: const DownloadBerkasPage(),
+          );
+        });
       case ApprovalPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
@@ -284,7 +288,8 @@ class RouteGenerator {
               reloadDataCallback: () {
                 context
                     .read<ListRealisasiDinasBloc>()
-                    .add(GetListRealisasiDinas());
+                    .add(GetListRealisasiDinas(
+                      date: DateTime.now()));
               },
             ),
           );

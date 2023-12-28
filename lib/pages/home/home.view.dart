@@ -11,6 +11,7 @@ import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dashboard_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/download_berkas/bloc/berkas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/download_berkas/download_berkas_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
@@ -548,8 +549,10 @@ class _HomePageState extends State<HomePage> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) =>
-                                                DownloadBerkasPage(),
+                                            builder: (context) => BlocProvider(
+                                              create: (context) => BerkasBloc(),
+                                              child: const DownloadBerkasPage(),
+                                            ),
                                           ),
                                         );
                                       },
@@ -625,13 +628,16 @@ class _HomePageState extends State<HomePage> {
                           builder: (context, state) {
                             var listPengumuman =
                                 context.read<PengumumanBloc>().listpengumuman;
+                            int itemCount = listPengumuman.length > 5
+                                ? 5
+                                : listPengumuman.length;
                             return Container(
                               constraints: BoxConstraints(maxHeight: 280.sp),
                               child: listPengumuman.isNotEmpty
                                   ? ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       shrinkWrap: true,
-                                      itemCount: listPengumuman.length,
+                                      itemCount: itemCount,
                                       itemBuilder: (context, index) {
                                         var pengumuman = listPengumuman[index];
                                         return PengumumanCard(
