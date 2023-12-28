@@ -22,14 +22,13 @@ class CheckInOutBloc extends Bloc<CheckInOutEvent, CheckInOutState> {
           if (res is ServicesSuccess && resUser is ServicesSuccess) {
             final name = resUser.response["data"]["m_kary.nama_lengkap"] ?? 'Karyawan SJ';
             final fotoProfil = resUser.response["data"]["profil_image"] ?? '';
-            final cutiMasaKerja = resUser.response["data"]["m_kary.cuti_sisa_reguler"].toString() ?? '0';
-            final cutiTahunan = resUser.response["data"]["m_kary.cuti_sisa_panjang"].toString()  ?? '0';
-            final p24 = resUser.response["data"]["m_kary.cuti_sisa_p24"].toString()  ?? '0';
+            final cutiMasaKerja = resUser.response["data"]["m_kary.cuti_sisa_reguler"]?.toString() ?? '0';
+            final cutiTahunan = resUser.response["data"]["m_kary.cuti_sisa_panjang"]?.toString()  ?? '0';
+            final p24 = resUser.response["data"]["m_kary.cuti_sisa_p24"]?.toString()  ?? '0';
 
             print("Cuti Masa Kerja: ${cutiMasaKerja}");
             print("Cuti Tahunan: ${cutiTahunan}");
-            print("Cuti Tahunan: ${p24}");
-
+            print("Cuti P24: ${p24}");
 
             final jsonData = res.response["data"];
             final status = jsonData["status"];
