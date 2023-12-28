@@ -19,23 +19,24 @@ class DinasServices {
   }
 
   static Future<Object> addDinas(
-      String token,
-      int divisi,
-      int departemen,
-      int posisi,
-      int templateSpd,
-      // int direktorat,
-      tanggal,
-      tanggalAwal,
-      tanggalAkhir,
-      int jenisSpd,
-      int zonaAsal,
-      int zonaTujuan,
-      int lokasiTujuan,
-      int pic,
-      int kendDinas,
-      String desc,
-      ) async {
+    String token,
+    int divisi,
+    int departemen,
+    int posisi,
+    int? templateSpd,
+    // int direktorat,
+    tanggal,
+    tanggalAwal,
+    tanggalAkhir,
+    int jenisSpd,
+    int zonaAsal,
+    int zonaTujuan,
+    int lokasiTujuan,
+    // int biaya,
+    int pic,
+    int kendDinas,
+    String desc,
+  ) async {
     print('Token: $token');
     print('ini divisi: $divisi');
     print('ini departemen: $departemen');
@@ -53,29 +54,31 @@ class DinasServices {
     print('ini kenddinas: $kendDinas');
     print('Kendaraan: $desc');
 
+    Object requestBody = {
+      "m_divisi_id": divisi,
+      // "m_dir_id": direktorat,
+      "m_dept_id": departemen,
+      "m_posisi_id": posisi,
+      "m_spd_id": templateSpd,
+      "tanggal": tanggal,
+      "tgl_acara_awal": tanggalAwal,
+      "tgl_acara_akhir": tanggalAkhir,
+      "jenis_spd_id": jenisSpd,
+      "m_zona_asal_id": zonaAsal,
+      "m_zona_tujuan_id": zonaTujuan,
+      "m_lokasi_tujuan_id": lokasiTujuan,
+      "pic_id": pic,
+      "total_biaya": 0,
+      "is_kend_dinas": kendDinas,
+      "nama_kend": desc,
+    }..removeWhere((key, value) => value == null || value == '' || value == -99);
+
     var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_spd");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.post,
       headers: GeneralServices.addToken2Headers(token),
-      body: json.encode({
-        "m_divisi_id": divisi,
-        "m_dept_id": departemen,
-        "m_posisi_id": posisi,
-        "m_spd_id": templateSpd,
-        // "m_dir_id": direktorat,
-        "tanggal": tanggal,
-        "tgl_acara_awal": tanggalAwal,
-        "tgl_acara_akhir": tanggalAkhir,
-        "jenis_spd_id": jenisSpd,
-        "m_zona_asal_id": zonaAsal,
-        "m_zona_tujuan_id": zonaTujuan,
-        "m_lokasi_tujuan_id": lokasiTujuan,
-        "pic_id": pic,
-        "total_biaya": 0,
-        "is_kend_dinas": kendDinas,
-        "desc": desc,
-      }),
+      body: json.encode(requestBody),
     );
   }
 

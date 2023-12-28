@@ -571,23 +571,23 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                       formTag: 'Form-TotalBRS',
                                       labelForm: 'Total Biaya Rencana Selisih',
                                       onChanged: (value) {
-                                        onDataChanged();
+                                        // onDataChanged();
                                       },
                                       validator: (value) {},
                                       errorTextStyle:
                                           GoogleFonts.poppins(fontSize: 10.sp),
                                     ),
                                   ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: SizedBox(
-                                      child: IconButton(
-                                          onPressed: () {
-                                            onDataChanged();
-                                          },
-                                          icon: Icon(Icons.calculate)),
-                                    ),
-                                  )
+                                  // Expanded(
+                                  //   flex: 1,
+                                  //   child: SizedBox(
+                                  //     child: IconButton(
+                                  //         onPressed: () {
+                                  //           onDataChanged();
+                                  //         },
+                                  //         icon: Icon(Icons.calculate)),
+                                  //   ),
+                                  // )
                                 ],
                               ),
                               FormInputData(
@@ -710,6 +710,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                               .remove(expenseDetails[index]);
                                         });
                                       },
+                                      onBiayaChanged: onDataChanged,
                                       indexForm: index,
                                     );
                                   },
@@ -790,11 +791,10 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                                               .biayaRealisasiController
                                                               .value
                                                               .text,
-                                                          "keterangan":
-                                                              expense
-                                                                  .descriptionController
-                                                                  .value
-                                                                  .text,
+                                                          "keterangan": expense
+                                                              .descriptionController
+                                                              .value
+                                                              .text,
                                                           "catatan_realisasi":
                                                               expense
                                                                   .catatanRealisasiController
@@ -858,11 +858,13 @@ class ExpenseDetail {
 class DynamicFormField extends StatefulWidget {
   final ExpenseDetail expenseDetail;
   final VoidCallback onDelete;
+  final VoidCallback onBiayaChanged;
   final int indexForm;
 
   const DynamicFormField({
     required this.expenseDetail,
     required this.onDelete,
+    required this.onBiayaChanged,
     required this.indexForm,
   });
 
@@ -958,6 +960,9 @@ class _DynamicFormFieldState extends State<DynamicFormField> {
         FormInputData(
           input: '',
           onTap: () {},
+          onChanged: (value) {
+            widget.onBiayaChanged();
+          },
           controller: widget.expenseDetail.biayaRealisasiController,
           hintText: 'Tuliskan Biaya',
           labelTag: 'Label-BiayaRealisasi${widget.indexForm}',
@@ -984,7 +989,10 @@ class _DynamicFormFieldState extends State<DynamicFormField> {
           children: [
             Expanded(
               child: ElevatedButton(
-                onPressed: widget.onDelete,
+                onPressed: () {
+                  widget.onDelete();
+                  widget.onBiayaChanged();
+                },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red.shade700),
                 child: Text(

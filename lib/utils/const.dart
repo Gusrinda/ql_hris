@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 class MyGeneralConst {
   //Server Production
-  // static const _BASE_URL = "https://server.qqltech.com:7011";
   static const _BASE_URL = "https://server.qqltech.com:7011";
-
 
   //Server Development
   // static const _BASE_URL = "https://server.qqltech.com:7005";

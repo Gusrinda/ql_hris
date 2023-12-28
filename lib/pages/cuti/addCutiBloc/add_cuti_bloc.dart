@@ -39,8 +39,8 @@ class AddCutiBloc extends Bloc<AddCutiEvent, AddCutiState> {
           event.tipeCuti,
           event.dateFrom,
           event.dateTo,
-          event.timeFrom ?? "00:00",
-          event.timeTo ?? "00:00",
+          event.timeFrom ?? "08:00",
+          event.timeTo ?? "08:00",
         );
 
         if (res is ServicesSuccess) {

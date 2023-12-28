@@ -43,6 +43,7 @@ class AddCheckInOutBloc extends Bloc<AddCheckInOutEvent, AddCheckInOutState> {
                 formDataSubmited.isOnSite,
                 formDataSubmited.latitude,
                 formDataSubmited.longitude,
+                formDataSubmited.catatan
               );
               if (res is ServicesSuccess) {
                 emit(AddCheckInOutSuccess(message: "Check-In Berhasil!"));
@@ -72,6 +73,7 @@ class AddCheckInOutBloc extends Bloc<AddCheckInOutEvent, AddCheckInOutState> {
                 formDataSubmited.isOnSite,
                 formDataSubmited.latitude,
                 formDataSubmited.longitude,
+                formDataSubmited.catatan
               );
               if (res is ServicesSuccess) {
                 emit(AddCheckInOutSuccess(message: "Check-Out Berhasil!"));

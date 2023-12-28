@@ -36,8 +36,8 @@ class AddDinasBloc extends Bloc<AddDinasEvent, AddDinasState> {
           event.divisi,
           event.departemen,
           event.posisi,
-          event.templateSpd,
-          // event.direktorat ?? 9,
+          event.templateSpd ?? -99,
+          // event.direktorat ?? -99,
           event.tanggal,
           event.tanggalAwal,
           event.tanggalAkhir,
@@ -47,7 +47,7 @@ class AddDinasBloc extends Bloc<AddDinasEvent, AddDinasState> {
           event.lokasiTujuan,
           event.pic,
           event.kendDinas,
-          event.desc,
+          event.desc ?? '',
         );
 
         if (res is ServicesSuccess) {

@@ -54,8 +54,9 @@ class AddDinasPage extends StatefulWidget {
   final TextEditingController valuePosisiController = TextEditingController();
 
   // TemplateSpd Controller
-  final TextEditingController idTemplateSpdController = TextEditingController();
-  final TextEditingController valueTemplateSpdController =
+  final TextEditingController? idTemplateSpdController =
+      TextEditingController();
+  final TextEditingController? valueTemplateSpdController =
       TextEditingController();
 
   // Direktorat Controller
@@ -94,7 +95,7 @@ class AddDinasPage extends StatefulWidget {
   // kend Dinas
   final TextEditingController kendDinasController = TextEditingController();
 
-  final TextEditingController catatanController = TextEditingController();
+  final TextEditingController? catatanController = TextEditingController();
 
   @override
   State<AddDinasPage> createState() => _AddDinasPageState();
@@ -217,7 +218,10 @@ class _AddDinasPageState extends State<AddDinasPage> {
                               int.parse(widget.idDepartemenController.text),
                           posisi: int.parse(widget.idPosisiController.text),
                           templateSpd:
-                              int.parse(widget.idTemplateSpdController.text),
+                              widget.idTemplateSpdController?.text != null
+                                  ? int.tryParse(
+                                      widget.idTemplateSpdController!.text)
+                                  : null,
                           // direktorat:
                           //     int.parse(widget.idDirektoratController!.text),
                           tanggal: widget.tanggalController.text,
@@ -231,7 +235,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
                               int.parse(widget.idLokasiTujuanController.text),
                           pic: int.parse(widget.idPicController.text),
                           kendDinas: int.parse(widget.kendDinasController.text),
-                          desc: widget.catatanController.value.text),
+                          desc: widget.catatanController?.value.text),
                     );
               } else {
                 continueStep();
@@ -367,9 +371,9 @@ class _AddDinasPageState extends State<AddDinasPage> {
         );
 
         if (selectedTemplateSpdValue != null) {
-          widget.valueTemplateSpdController.text =
+          widget.valueTemplateSpdController!.text =
               selectedTemplateSpdValue.kode?.toString() ?? '';
-          widget.idTemplateSpdController.text =
+          widget.idTemplateSpdController!.text =
               selectedTemplateSpdValue.id?.toString() ?? '';
 
           widget.valueDivisiController.text =
@@ -748,9 +752,9 @@ class _AddDinasPageState extends State<AddDinasPage> {
                                           _showTemplateSpd(context);
                                         },
                                         idController:
-                                            widget.idTemplateSpdController,
+                                            widget.idTemplateSpdController!,
                                         valueController:
-                                            widget.valueTemplateSpdController,
+                                            widget.valueTemplateSpdController!,
                                         labelForm: 'Template SPD',
                                         hintText: 'Cari Template SPD',
                                         labelTag: 'Label-TemplateSPd',
@@ -1131,7 +1135,8 @@ class _AddDinasPageState extends State<AddDinasPage> {
                                           Text(
                                             '*',
                                             style: GoogleFonts.poppins(
-                                                color: Colors.red),
+                                              color: Colors.red,
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -1156,8 +1161,9 @@ class _AddDinasPageState extends State<AddDinasPage> {
                                             child: Text(
                                               'Ya',
                                               style: GoogleFonts.poppins(
-                                                  fontSize: 13.sp,
-                                                  fontWeight: FontWeight.w500),
+                                                fontSize: 13.sp,
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                             ),
                                           ),
                                           Expanded(
@@ -1179,28 +1185,27 @@ class _AddDinasPageState extends State<AddDinasPage> {
                                             child: Text(
                                               'Tidak',
                                               style: GoogleFonts.poppins(
-                                                  fontSize: 13.sp,
-                                                  fontWeight: FontWeight.w500),
+                                                fontSize: 13.sp,
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                             ),
                                           ),
                                         ],
                                       ),
                                       SizedBox(height: 10.sp),
-                                      FormInputData(
-                                        showRedStar: true,
-                                        hintText:
-                                            'Tuliskan Keterangan Kendaraan',
-                                        labelForm: 'Nama Kendaraan',
-                                        labelTag: 'Label-catatanDinas',
-                                        formTag: 'Form-catatanDinas',
-                                        controller: widget.catatanController,
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return 'Tuliskan Nama Kendaraan';
-                                          }
-                                          return null;
-                                        },
-                                      ),
+                                      if (_kendDinas == 1)
+                                        FormInputData(
+                                          showRedStar: false,
+                                          hintText:
+                                              'Tuliskan Keterangan Kendaraan',
+                                          labelForm: 'Nama Kendaraan',
+                                          labelTag: 'Label-catatanDinas',
+                                          formTag: 'Form-catatanDinas',
+                                          controller: widget.catatanController!,
+                                          validator: (value) {
+                                            return null;
+                                          },
+                                        ),
                                     ],
                                   ),
                                 ),

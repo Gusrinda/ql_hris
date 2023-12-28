@@ -11,7 +11,7 @@ class AddDinasSubmited extends AddDinasEvent {
   int divisi;
   int departemen;
   int posisi;
-  int templateSpd;
+  int? templateSpd;
   int? direktorat;
   String tanggal;
   String tanggalAwal;
@@ -22,13 +22,13 @@ class AddDinasSubmited extends AddDinasEvent {
   int lokasiTujuan;
   int pic;
   int kendDinas;
-  String desc;
+  String? desc;
 
   AddDinasSubmited({
     required this.divisi,
     required this.departemen,
     required this.posisi,
-    required this.templateSpd,
+    this.templateSpd,
     this.direktorat,
     required this.tanggal,
     required this.tanggalAwal,
@@ -39,7 +39,7 @@ class AddDinasSubmited extends AddDinasEvent {
     required this.lokasiTujuan,
     required this.pic,
     required this.kendDinas,
-    required this.desc,
+    this.desc,
   });
 
   @override
@@ -47,7 +47,7 @@ class AddDinasSubmited extends AddDinasEvent {
         divisi,
         departemen,
         posisi,
-        templateSpd,
+        templateSpd!,
         direktorat!,
         tanggal,
         tanggalAwal,
@@ -58,7 +58,7 @@ class AddDinasSubmited extends AddDinasEvent {
         lokasiTujuan,
         pic,
         kendDinas,
-        desc
+        desc!
       ];
 }
 

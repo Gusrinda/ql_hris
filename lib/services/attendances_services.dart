@@ -16,7 +16,7 @@ class AttendancesServices {
   }
 
   static Future<Object> addAttendanceIn(
-      String token, imagePath, address, isOnsite, latitude, longitude) async {
+      String token, imagePath, address, isOnsite, latitude, longitude, catatan) async {
     var url = Uri.parse(
         "${MyGeneralConst.API_URL}/operation/presensi_absensi/checkin");
     return await GeneralServices.baseService(
@@ -27,13 +27,14 @@ class AttendancesServices {
         "address": address,
         "lat": latitude,
         "long": longitude,
+        "catatan": catatan
       },
       imagePath: imagePath,
     );
   }
 
   static Future<Object> addAttendanceOut(
-      String token, imagePath, address, isOnsite, latitude, longitude) async {
+      String token, imagePath, address, isOnsite, latitude, longitude, catatan) async {
     var url = Uri.parse(
         "${MyGeneralConst.API_URL}/operation/presensi_absensi/checkout");
     return await GeneralServices.baseService(
@@ -44,6 +45,7 @@ class AttendancesServices {
         "address": address,
         "lat": latitude,
         "long": longitude,
+        "catatan": catatan
       },
       imagePath: imagePath,
     );

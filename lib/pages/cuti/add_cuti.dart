@@ -629,20 +629,20 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                   ? null
                                   : () {
                                       // Update the controller values before submitting
-                                      widget.timeFromController?.text =
-                                          selectedTimeFrom!.format(context);
-                                      widget.timeToController?.text =
-                                          selectedTimeTo!.format(context);
+                                      // widget.timeFromController?.text =
+                                      //     selectedTimeFrom?.format(context) ?? "00:00";
+                                      // widget.timeToController?.text =
+                                      //     selectedTimeTo?.format(context) ?? "00:00";
 
-                                      print(
-                                          "Tanggal Hari ini : ${widget.dateFromController.text}");
+                                      // print(
+                                      //     "Tanggal Hari ini : ${widget.dateFromController.text}");
 
-                                      // Convert TimeOfDay to a formatted string in HH:mm format
-                                      String formattedTimeFrom =
-                                          '${selectedTimeFrom!.hour.toString().padLeft(2, '0')}:${selectedTimeFrom!.minute.toString().padLeft(2, '0')}';
+                                      // // Convert TimeOfDay to a formatted string in HH:mm format
+                                      // String formattedTimeFrom =
+                                      //     '${selectedTimeFrom!.hour.toString().padLeft(2, '0')}:${selectedTimeFrom!.minute.toString().padLeft(2, '0')}';
 
-                                      String formattedTimeTo =
-                                          '${selectedTimeTo!.hour.toString().padLeft(2, '0')}:${selectedTimeTo!.minute.toString().padLeft(2, '0')}';
+                                      // String formattedTimeTo =
+                                      //     '${selectedTimeTo!.hour.toString().padLeft(2, '0')}:${selectedTimeTo!.minute.toString().padLeft(2, '0')}';
 
                                       context.read<AddCutiBloc>().add(
                                             AddCutiSubmited(
@@ -656,8 +656,8 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                                   .dateFromController.text,
                                               dateTo:
                                                   widget.dateToController.text,
-                                              timeFrom: formattedTimeFrom,
-                                              timeTo: formattedTimeTo,
+                                              timeFrom: widget.timeFromController?.value.text ?? "08:00",
+                                              timeTo: widget.timeToController?.value.text ?? "08:00",
                                             ),
                                           );
                                     },
@@ -754,7 +754,6 @@ class _AddCutiPageState extends State<AddCutiPage> {
             });
             print("Selected Date To: $selectedDateTo");
             _calculateWeekdays();
-            _calculateMinutes();
           }
         }
       },

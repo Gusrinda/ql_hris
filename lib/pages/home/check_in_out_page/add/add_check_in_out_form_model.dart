@@ -4,6 +4,7 @@ class AddCheckInOutModel {
   bool? isOnSite;
   String? latitude;
   String? longitude;
+  String? catatan;
 
   AddCheckInOutModel({
     this.imagePath,
@@ -11,6 +12,7 @@ class AddCheckInOutModel {
     this.isOnSite,
     this.latitude,
     this.longitude,
+    this.catatan
   });
 
   AddCheckInOutModel copyWith({
@@ -19,6 +21,7 @@ class AddCheckInOutModel {
     bool? isOnSite,
     String? latitude,
     String? longitude,
+    String? catatan
   }) {
     return AddCheckInOutModel(
       imagePath: imagePath ?? this.imagePath,
@@ -26,6 +29,7 @@ class AddCheckInOutModel {
       isOnSite: isOnSite ?? this.isOnSite,
       latitude: latitude ?? this.latitude,
       longitude: longitude ?? this.longitude,
+      catatan: catatan ?? this.catatan
     );
   }
 }
