@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/hero_widget.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/text_form_custom.dart';
@@ -16,6 +18,8 @@ import 'package:sj_presensi_mobile/pages/cuti/cuti_selector.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/getDataCuti/get_alasan_cuti_model.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/getDataCuti/get_tipe_cuti_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
+import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
 class AddCutiPage extends StatefulWidget {
   static const routeName = '/AddCutiPage';
@@ -718,30 +722,101 @@ class _AddCutiPageState extends State<AddCutiPage> {
     );
   }
 
-  int calculateWeekdays(DateTime startDate, DateTime endDate) {
-    int weekdaysCount = 0;
-    DateTime currentDate = startDate;
+  Future<int> calculateWeekdaysFromAPI(String dateFrom, String dateTo) async {
+    const apiUrl = '${MyGeneralConst.API_URL}/operation/t_cuti/hitungHari';
 
-    while (currentDate.isBefore(endDate) ||
-        currentDate.isAtSameMomentAs(endDate)) {
-      if (currentDate.weekday != 7) {
-        weekdaysCount++;
+    final Map<String, String> postData = {
+      "date_from": "$dateFrom",
+      "date_to": "$dateTo",
+    };
+
+    print("URL API: $apiUrl");
+    print("BODY API: $postData");
+
+    try {
+      final userToken = await GeneralSharedPreferences.getUserToken();
+      if (userToken is ServicesSuccess) {
+        // print("${userToken.response["token"]}");
+        final response = await http.post(
+          Uri.parse(apiUrl),
+          body: postData,
+          headers: {
+            'Authorization': 'Bearer ${userToken.response["token"]}',
+            'Source': 'mobile',
+          },
+        );
+
+        if (response.statusCode == 200) {
+          print('RESPONSE BODY API: ${response.body}');
+          return int.parse(response.body);
+        } else {
+          // Print the API response for debugging purposes.
+          print('API Response: ${response.body}');
+
+          // Handle error if needed.
+          print('Failed to fetch data: ${response.statusCode}');
+          return 0;
+        }
+      } else {
+        // Handle error if there is an issue with getting the user token.
+        print('Failed to get user token.');
+        return 0;
       }
-
-      currentDate = currentDate.add(Duration(days: 1));
+    } catch (e) {
+      // Print the exception for debugging purposes.
+      print('Exception occurred: $e');
+      throw Exception('Failed to fetch data');
     }
-
-    return weekdaysCount;
   }
 
-  void _calculateWeekdays() {
+  void _calculateWeekdaysFromAPI() async {
     if (selectedDateFrom != null && selectedDateTo != null) {
-      weekdaysCount = calculateWeekdays(selectedDateFrom!, selectedDateTo!);
-      print("Jumlah hari kerja: $weekdaysCount");
+      try {
+        final dateFrom = selectedDateFrom!.toLocal().toString().split(' ')[0];
+        final dateTo = selectedDateTo!.toLocal().toString().split(' ')[0];
+
+        print("INI Data POST Calculate: $dateFrom & $dateTo");
+        final newWeekdaysCount =
+            await calculateWeekdaysFromAPI(dateFrom, dateTo);
+
+        // Update the weekdaysCount variable with the new value
+        setState(() {
+          weekdaysCount = newWeekdaysCount;
+        });
+
+        print("Jumlah hari kerja: $weekdaysCount");
+      } catch (e) {
+        print("Gagal mengambil data dari API: $e");
+      }
     } else {
       print("Pilih tanggal mulai dan tanggal berakhir terlebih dahulu.");
     }
   }
+
+  // int calculateWeekdays(DateTime startDate, DateTime endDate) {
+  //   int weekdaysCount = 0;
+  //   DateTime currentDate = startDate;
+
+  //   while (currentDate.isBefore(endDate) ||
+  //       currentDate.isAtSameMomentAs(endDate)) {
+  //     if (currentDate.weekday != 7) {
+  //       weekdaysCount++;
+  //     }
+
+  //     currentDate = currentDate.add(Duration(days: 1));
+  //   }
+
+  //   return weekdaysCount;
+  // }
+
+  // void _calculateWeekdays() {
+  //   if (selectedDateFrom != null && selectedDateTo != null) {
+  //     weekdaysCount = calculateWeekdays(selectedDateFrom!, selectedDateTo!);
+  //     print("Jumlah hari kerja: $weekdaysCount");
+  //   } else {
+  //     print("Pilih tanggal mulai dan tanggal berakhir terlebih dahulu.");
+  //   }
+  // }
 
   int _calculateMinutes() {
     if (selectedTimeFrom != null && selectedTimeTo != null) {
@@ -787,7 +862,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
               selectedDateFrom = pickedDate;
             });
             print("Selected Date From: $selectedDateFrom");
-            _calculateWeekdays();
+            _calculateWeekdaysFromAPI(); // Menggunakan fungsi baru untuk mengambil data dari API
           } else if (controller == widget.dateToController) {
             widget.dateToController.text =
                 DateFormat('yyyy-MM-dd').format(pickedDate);
@@ -795,7 +870,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
               selectedDateTo = pickedDate;
             });
             print("Selected Date To: $selectedDateTo");
-            _calculateWeekdays();
+            _calculateWeekdaysFromAPI(); // Menggunakan fungsi baru untuk mengambil data dari API
           }
         }
       },
