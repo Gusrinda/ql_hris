@@ -27,7 +27,7 @@ class AttendancesServices {
         "address": address,
         "lat": latitude,
         "long": longitude,
-        "catatan": catatan
+        "catatan_in": catatan
       },
       imagePath: imagePath,
     );
@@ -45,7 +45,7 @@ class AttendancesServices {
         "address": address,
         "lat": latitude,
         "long": longitude,
-        "catatan": catatan
+        "catatan_out": catatan
       },
       imagePath: imagePath,
     );

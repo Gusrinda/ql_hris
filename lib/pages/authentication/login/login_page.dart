@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
@@ -72,10 +71,10 @@ class LoginPage extends StatelessWidget {
           ),
           SizedBox(height: 40.sp),
           TextButtonCustomV1(
-            width: MediaQuery.of(context).size.width,
+            width: size.width,
             height: 50.sp,
-            text: "Login",
-            textSize: 12.sp,
+            text: "LOGIN",
+            textSize: 13.sp,
             backgroundColor: MyColorsConst.primaryColor,
             textColor: MyColorsConst.whiteColor,
             onPressed: () {

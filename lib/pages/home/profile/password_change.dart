@@ -177,7 +177,8 @@ class ChangePasswordPage extends StatelessWidget {
                               keyboardType: TextInputType.visiblePassword,
                               controller: newPasswordController,
                               validator: MultiValidator([
-                                RequiredValidator(errorText: "* Required!"),
+                                RequiredValidator(
+                                    errorText: "Tuliskan Password Baru!"),
                                 // MinLengthValidator(8,
                                 //     errorText:
                                 //         'password must be at least 8 digits long!'),
@@ -194,7 +195,7 @@ class ChangePasswordPage extends StatelessWidget {
                               keyboardType: TextInputType.visiblePassword,
                               controller: confirmNewPasswordController,
                               validator: (val) => MatchValidator(
-                                errorText: 'passwords do not match!',
+                                errorText: "Konfirmasi Password Tidak Sama!",
                               ).validateMatch(
                                 val ?? "",
                                 newPasswordController.text,
@@ -212,15 +213,28 @@ class ChangePasswordPage extends StatelessWidget {
                                     'password lama: ${newPasswordController}');
                                 print(
                                     'password baru: ${confirmNewPasswordController}');
-                                context.read<ProfileBloc>().add(
-                                      EditPasswordProfile(
-                                        oldPassword: newPasswordController.text,
-                                        newPassword:
-                                            confirmNewPasswordController.text,
-                                        status:
-                                            _formKey.currentState!.validate(),
-                                      ),
-                                    );
+
+                                showDialog(
+                                  context: context,
+                                  builder: (_) => DialogCustom(
+                                    state: DialogCustomItem.confirm,
+                                    message:
+                                        "Apakah Anda Yakin Ingin Mengubah Password Anda?",
+                                    durationInSec: 3,
+                                    onContinue: () =>
+                                        context.read<ProfileBloc>().add(
+                                              EditPasswordProfile(
+                                                oldPassword:
+                                                    newPasswordController.text,
+                                                newPassword:
+                                                    confirmNewPasswordController
+                                                        .text,
+                                                status: _formKey.currentState!
+                                                    .validate(),
+                                              ),
+                                            ),
+                                  ),
+                                );
                               },
                             ),
                           ],

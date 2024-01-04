@@ -396,6 +396,8 @@ mixin _$DataProfile {
   int? get mKaryLimitPotong => throw _privateConstructorUsedError;
   @JsonKey(name: "atasan")
   String? get atasan => throw _privateConstructorUsedError;
+  @JsonKey(name: "info_cuti")
+  InfoCuti? get infoCuti => throw _privateConstructorUsedError;
   @JsonKey(name: "default_users_socialite")
   List<dynamic>? get defaultUsersSocialite =>
       throw _privateConstructorUsedError;
@@ -510,8 +512,11 @@ abstract class $DataProfileCopyWith<$Res> {
       @JsonKey(name: "m_kary.exp_date_cuti") String? mKaryExpDateCuti,
       @JsonKey(name: "m_kary.limit_potong") int? mKaryLimitPotong,
       @JsonKey(name: "atasan") String? atasan,
+      @JsonKey(name: "info_cuti") InfoCuti? infoCuti,
       @JsonKey(name: "default_users_socialite")
       List<dynamic>? defaultUsersSocialite});
+
+  $InfoCutiCopyWith<$Res>? get infoCuti;
 }
 
 /// @nodoc
@@ -622,6 +627,7 @@ class _$DataProfileCopyWithImpl<$Res, $Val extends DataProfile>
     Object? mKaryExpDateCuti = freezed,
     Object? mKaryLimitPotong = freezed,
     Object? atasan = freezed,
+    Object? infoCuti = freezed,
     Object? defaultUsersSocialite = freezed,
   }) {
     return _then(_value.copyWith(
@@ -1005,11 +1011,27 @@ class _$DataProfileCopyWithImpl<$Res, $Val extends DataProfile>
           ? _value.atasan
           : atasan // ignore: cast_nullable_to_non_nullable
               as String?,
+      infoCuti: freezed == infoCuti
+          ? _value.infoCuti
+          : infoCuti // ignore: cast_nullable_to_non_nullable
+              as InfoCuti?,
       defaultUsersSocialite: freezed == defaultUsersSocialite
           ? _value.defaultUsersSocialite
           : defaultUsersSocialite // ignore: cast_nullable_to_non_nullable
               as List<dynamic>?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $InfoCutiCopyWith<$Res>? get infoCuti {
+    if (_value.infoCuti == null) {
+      return null;
+    }
+
+    return $InfoCutiCopyWith<$Res>(_value.infoCuti!, (value) {
+      return _then(_value.copyWith(infoCuti: value) as $Val);
+    });
   }
 }
 
@@ -1119,8 +1141,12 @@ abstract class _$$DataProfileImplCopyWith<$Res>
       @JsonKey(name: "m_kary.exp_date_cuti") String? mKaryExpDateCuti,
       @JsonKey(name: "m_kary.limit_potong") int? mKaryLimitPotong,
       @JsonKey(name: "atasan") String? atasan,
+      @JsonKey(name: "info_cuti") InfoCuti? infoCuti,
       @JsonKey(name: "default_users_socialite")
       List<dynamic>? defaultUsersSocialite});
+
+  @override
+  $InfoCutiCopyWith<$Res>? get infoCuti;
 }
 
 /// @nodoc
@@ -1229,6 +1255,7 @@ class __$$DataProfileImplCopyWithImpl<$Res>
     Object? mKaryExpDateCuti = freezed,
     Object? mKaryLimitPotong = freezed,
     Object? atasan = freezed,
+    Object? infoCuti = freezed,
     Object? defaultUsersSocialite = freezed,
   }) {
     return _then(_$DataProfileImpl(
@@ -1612,6 +1639,10 @@ class __$$DataProfileImplCopyWithImpl<$Res>
           ? _value.atasan
           : atasan // ignore: cast_nullable_to_non_nullable
               as String?,
+      infoCuti: freezed == infoCuti
+          ? _value.infoCuti
+          : infoCuti // ignore: cast_nullable_to_non_nullable
+              as InfoCuti?,
       defaultUsersSocialite: freezed == defaultUsersSocialite
           ? _value._defaultUsersSocialite
           : defaultUsersSocialite // ignore: cast_nullable_to_non_nullable
@@ -1720,6 +1751,7 @@ class _$DataProfileImpl implements _DataProfile {
       @JsonKey(name: "m_kary.exp_date_cuti") this.mKaryExpDateCuti,
       @JsonKey(name: "m_kary.limit_potong") this.mKaryLimitPotong,
       @JsonKey(name: "atasan") this.atasan,
+      @JsonKey(name: "info_cuti") this.infoCuti,
       @JsonKey(name: "default_users_socialite")
       final List<dynamic>? defaultUsersSocialite})
       : _defaultUsersSocialite = defaultUsersSocialite;
@@ -2012,6 +2044,9 @@ class _$DataProfileImpl implements _DataProfile {
   @override
   @JsonKey(name: "atasan")
   final String? atasan;
+  @override
+  @JsonKey(name: "info_cuti")
+  final InfoCuti? infoCuti;
   final List<dynamic>? _defaultUsersSocialite;
   @override
   @JsonKey(name: "default_users_socialite")
@@ -2026,7 +2061,7 @@ class _$DataProfileImpl implements _DataProfile {
 
   @override
   String toString() {
-    return 'DataProfile(id: $id, name: $name, email: $email, username: $username, emailVerifiedAt: $emailVerifiedAt, dataMCompId: $dataMCompId, dataMDirId: $dataMDirId, isActive: $isActive, creatorId: $creatorId, lastEditorId: $lastEditorId, rememberToken: $rememberToken, createdAt: $createdAt, updatedAt: $updatedAt, profilImage: $profilImage, telp: $telp, dataMKaryId: $dataMKaryId, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, mDirId: $mDirId, mDirMCompId: $mDirMCompId, mDirNama: $mDirNama, mDirDesc: $mDirDesc, mDirIsActive: $mDirIsActive, mDirCreatorId: $mDirCreatorId, mDirLastEditorId: $mDirLastEditorId, mDirCreatedAt: $mDirCreatedAt, mDirUpdatedAt: $mDirUpdatedAt, mKaryId: $mKaryId, mKaryMCompId: $mKaryMCompId, mKaryMDirId: $mKaryMDirId, mKaryMDivisiId: $mKaryMDivisiId, mKaryMDeptId: $mKaryMDeptId, mKaryMZonaId: $mKaryMZonaId, mKaryGradingId: $mKaryGradingId, mKaryCostcontreId: $mKaryCostcontreId, mKaryKode: $mKaryKode, mKaryMPosisiId: $mKaryMPosisiId, mKaryMJamKerjaId: $mKaryMJamKerjaId, mKaryKodePresensi: $mKaryKodePresensi, mKaryNik: $mKaryNik, mKaryNamaDepan: $mKaryNamaDepan, mKaryNamaBelakang: $mKaryNamaBelakang, mKaryNamaLengkap: $mKaryNamaLengkap, mKaryNamaPanggilan: $mKaryNamaPanggilan, mKaryJkId: $mKaryJkId, mKaryTempatLahir: $mKaryTempatLahir, mKaryTglLahir: $mKaryTglLahir, mKaryProvinsiId: $mKaryProvinsiId, mKaryKotaId: $mKaryKotaId, mKaryKecamatanId: $mKaryKecamatanId, mKaryKodePos: $mKaryKodePos, mKaryAlamatAsli: $mKaryAlamatAsli, mKaryAlamatDomisili: $mKaryAlamatDomisili, mKaryNoTlp: $mKaryNoTlp, mKaryNoTlpLainnya: $mKaryNoTlpLainnya, mKaryNoDarurat: $mKaryNoDarurat, mKaryNamaKontakDarurat: $mKaryNamaKontakDarurat, mKaryAgamaId: $mKaryAgamaId, mKaryGolDarahId: $mKaryGolDarahId, mKaryStatusNikahId: $mKaryStatusNikahId, mKaryTanggunganId: $mKaryTanggunganId, mKaryHubDgnKaryawan: $mKaryHubDgnKaryawan, mKaryCutiJatahReguler: $mKaryCutiJatahReguler, mKaryCutiSisaReguler: $mKaryCutiSisaReguler, mKaryCutiPanjang: $mKaryCutiPanjang, mKaryCutiSisaPanjang: $mKaryCutiSisaPanjang, mKaryStatusKaryId: $mKaryStatusKaryId, mKaryLamaKontrakAwal: $mKaryLamaKontrakAwal, mKaryLamaKontrakAkhir: $mKaryLamaKontrakAkhir, mKaryTglMasuk: $mKaryTglMasuk, mKaryTglBerhenti: $mKaryTglBerhenti, mKaryAlasanBerhenti: $mKaryAlasanBerhenti, mKaryUkBaju: $mKaryUkBaju, mKaryUkCelana: $mKaryUkCelana, mKaryUkSepatu: $mKaryUkSepatu, mKaryDesc: $mKaryDesc, mKaryIsActive: $mKaryIsActive, mKaryCreatorId: $mKaryCreatorId, mKaryLastEditorId: $mKaryLastEditorId, mKaryCreatedAt: $mKaryCreatedAt, mKaryUpdatedAt: $mKaryUpdatedAt, mKaryMStandartGajiId: $mKaryMStandartGajiId, mKaryPeriodeGajiId: $mKaryPeriodeGajiId, mKaryRefId: $mKaryRefId, mKaryAtasanId: $mKaryAtasanId, mKaryPresensiLokasiDefaultId: $mKaryPresensiLokasiDefaultId, mKaryExpDateCuti: $mKaryExpDateCuti, mKaryLimitPotong: $mKaryLimitPotong, atasan: $atasan, defaultUsersSocialite: $defaultUsersSocialite)';
+    return 'DataProfile(id: $id, name: $name, email: $email, username: $username, emailVerifiedAt: $emailVerifiedAt, dataMCompId: $dataMCompId, dataMDirId: $dataMDirId, isActive: $isActive, creatorId: $creatorId, lastEditorId: $lastEditorId, rememberToken: $rememberToken, createdAt: $createdAt, updatedAt: $updatedAt, profilImage: $profilImage, telp: $telp, dataMKaryId: $dataMKaryId, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, mDirId: $mDirId, mDirMCompId: $mDirMCompId, mDirNama: $mDirNama, mDirDesc: $mDirDesc, mDirIsActive: $mDirIsActive, mDirCreatorId: $mDirCreatorId, mDirLastEditorId: $mDirLastEditorId, mDirCreatedAt: $mDirCreatedAt, mDirUpdatedAt: $mDirUpdatedAt, mKaryId: $mKaryId, mKaryMCompId: $mKaryMCompId, mKaryMDirId: $mKaryMDirId, mKaryMDivisiId: $mKaryMDivisiId, mKaryMDeptId: $mKaryMDeptId, mKaryMZonaId: $mKaryMZonaId, mKaryGradingId: $mKaryGradingId, mKaryCostcontreId: $mKaryCostcontreId, mKaryKode: $mKaryKode, mKaryMPosisiId: $mKaryMPosisiId, mKaryMJamKerjaId: $mKaryMJamKerjaId, mKaryKodePresensi: $mKaryKodePresensi, mKaryNik: $mKaryNik, mKaryNamaDepan: $mKaryNamaDepan, mKaryNamaBelakang: $mKaryNamaBelakang, mKaryNamaLengkap: $mKaryNamaLengkap, mKaryNamaPanggilan: $mKaryNamaPanggilan, mKaryJkId: $mKaryJkId, mKaryTempatLahir: $mKaryTempatLahir, mKaryTglLahir: $mKaryTglLahir, mKaryProvinsiId: $mKaryProvinsiId, mKaryKotaId: $mKaryKotaId, mKaryKecamatanId: $mKaryKecamatanId, mKaryKodePos: $mKaryKodePos, mKaryAlamatAsli: $mKaryAlamatAsli, mKaryAlamatDomisili: $mKaryAlamatDomisili, mKaryNoTlp: $mKaryNoTlp, mKaryNoTlpLainnya: $mKaryNoTlpLainnya, mKaryNoDarurat: $mKaryNoDarurat, mKaryNamaKontakDarurat: $mKaryNamaKontakDarurat, mKaryAgamaId: $mKaryAgamaId, mKaryGolDarahId: $mKaryGolDarahId, mKaryStatusNikahId: $mKaryStatusNikahId, mKaryTanggunganId: $mKaryTanggunganId, mKaryHubDgnKaryawan: $mKaryHubDgnKaryawan, mKaryCutiJatahReguler: $mKaryCutiJatahReguler, mKaryCutiSisaReguler: $mKaryCutiSisaReguler, mKaryCutiPanjang: $mKaryCutiPanjang, mKaryCutiSisaPanjang: $mKaryCutiSisaPanjang, mKaryStatusKaryId: $mKaryStatusKaryId, mKaryLamaKontrakAwal: $mKaryLamaKontrakAwal, mKaryLamaKontrakAkhir: $mKaryLamaKontrakAkhir, mKaryTglMasuk: $mKaryTglMasuk, mKaryTglBerhenti: $mKaryTglBerhenti, mKaryAlasanBerhenti: $mKaryAlasanBerhenti, mKaryUkBaju: $mKaryUkBaju, mKaryUkCelana: $mKaryUkCelana, mKaryUkSepatu: $mKaryUkSepatu, mKaryDesc: $mKaryDesc, mKaryIsActive: $mKaryIsActive, mKaryCreatorId: $mKaryCreatorId, mKaryLastEditorId: $mKaryLastEditorId, mKaryCreatedAt: $mKaryCreatedAt, mKaryUpdatedAt: $mKaryUpdatedAt, mKaryMStandartGajiId: $mKaryMStandartGajiId, mKaryPeriodeGajiId: $mKaryPeriodeGajiId, mKaryRefId: $mKaryRefId, mKaryAtasanId: $mKaryAtasanId, mKaryPresensiLokasiDefaultId: $mKaryPresensiLokasiDefaultId, mKaryExpDateCuti: $mKaryExpDateCuti, mKaryLimitPotong: $mKaryLimitPotong, atasan: $atasan, infoCuti: $infoCuti, defaultUsersSocialite: $defaultUsersSocialite)';
   }
 
   @override
@@ -2171,6 +2206,7 @@ class _$DataProfileImpl implements _DataProfile {
             (identical(other.mKaryExpDateCuti, mKaryExpDateCuti) || other.mKaryExpDateCuti == mKaryExpDateCuti) &&
             (identical(other.mKaryLimitPotong, mKaryLimitPotong) || other.mKaryLimitPotong == mKaryLimitPotong) &&
             (identical(other.atasan, atasan) || other.atasan == atasan) &&
+            (identical(other.infoCuti, infoCuti) || other.infoCuti == infoCuti) &&
             const DeepCollectionEquality().equals(other._defaultUsersSocialite, _defaultUsersSocialite));
   }
 
@@ -2273,6 +2309,7 @@ class _$DataProfileImpl implements _DataProfile {
         mKaryExpDateCuti,
         mKaryLimitPotong,
         atasan,
+        infoCuti,
         const DeepCollectionEquality().hash(_defaultUsersSocialite)
       ]);
 
@@ -2398,6 +2435,7 @@ abstract class _DataProfile implements DataProfile {
       @JsonKey(name: "m_kary.exp_date_cuti") final String? mKaryExpDateCuti,
       @JsonKey(name: "m_kary.limit_potong") final int? mKaryLimitPotong,
       @JsonKey(name: "atasan") final String? atasan,
+      @JsonKey(name: "info_cuti") final InfoCuti? infoCuti,
       @JsonKey(name: "default_users_socialite")
       final List<dynamic>? defaultUsersSocialite}) = _$DataProfileImpl;
 
@@ -2690,10 +2728,433 @@ abstract class _DataProfile implements DataProfile {
   @JsonKey(name: "atasan")
   String? get atasan;
   @override
+  @JsonKey(name: "info_cuti")
+  InfoCuti? get infoCuti;
+  @override
   @JsonKey(name: "default_users_socialite")
   List<dynamic>? get defaultUsersSocialite;
   @override
   @JsonKey(ignore: true)
   _$$DataProfileImplCopyWith<_$DataProfileImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+InfoCuti _$InfoCutiFromJson(Map<String, dynamic> json) {
+  return _InfoCuti.fromJson(json);
+}
+
+/// @nodoc
+mixin _$InfoCuti {
+  @JsonKey(name: "cuti_p24")
+  int? get cutiP24 => throw _privateConstructorUsedError;
+  @JsonKey(name: "cuti_reguler")
+  int? get cutiReguler => throw _privateConstructorUsedError;
+  @JsonKey(name: "work_present")
+  int? get workPresent => throw _privateConstructorUsedError;
+  @JsonKey(name: "cuti_terpakai")
+  int? get cutiTerpakai => throw _privateConstructorUsedError;
+  @JsonKey(name: "potongan_cuti")
+  int? get potonganCuti => throw _privateConstructorUsedError;
+  @JsonKey(name: "sisa_cuti_p24")
+  int? get sisaCutiP24 => throw _privateConstructorUsedError;
+  @JsonKey(name: "cuti_masa_kerja")
+  int? get cutiMasaKerja => throw _privateConstructorUsedError;
+  @JsonKey(name: "work_not_present")
+  int? get workNotPresent => throw _privateConstructorUsedError;
+  @JsonKey(name: "cuti_p24_terpakai")
+  int? get cutiP24Terpakai => throw _privateConstructorUsedError;
+  @JsonKey(name: "sisa_cuti_reguler")
+  int? get sisaCutiReguler => throw _privateConstructorUsedError;
+  @JsonKey(name: "work_days_in_month")
+  int? get workDaysInMonth => throw _privateConstructorUsedError;
+  @JsonKey(name: "sisa_cuti_masa_kerja")
+  int? get sisaCutiMasaKerja => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $InfoCutiCopyWith<InfoCuti> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $InfoCutiCopyWith<$Res> {
+  factory $InfoCutiCopyWith(InfoCuti value, $Res Function(InfoCuti) then) =
+      _$InfoCutiCopyWithImpl<$Res, InfoCuti>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "cuti_p24") int? cutiP24,
+      @JsonKey(name: "cuti_reguler") int? cutiReguler,
+      @JsonKey(name: "work_present") int? workPresent,
+      @JsonKey(name: "cuti_terpakai") int? cutiTerpakai,
+      @JsonKey(name: "potongan_cuti") int? potonganCuti,
+      @JsonKey(name: "sisa_cuti_p24") int? sisaCutiP24,
+      @JsonKey(name: "cuti_masa_kerja") int? cutiMasaKerja,
+      @JsonKey(name: "work_not_present") int? workNotPresent,
+      @JsonKey(name: "cuti_p24_terpakai") int? cutiP24Terpakai,
+      @JsonKey(name: "sisa_cuti_reguler") int? sisaCutiReguler,
+      @JsonKey(name: "work_days_in_month") int? workDaysInMonth,
+      @JsonKey(name: "sisa_cuti_masa_kerja") int? sisaCutiMasaKerja});
+}
+
+/// @nodoc
+class _$InfoCutiCopyWithImpl<$Res, $Val extends InfoCuti>
+    implements $InfoCutiCopyWith<$Res> {
+  _$InfoCutiCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cutiP24 = freezed,
+    Object? cutiReguler = freezed,
+    Object? workPresent = freezed,
+    Object? cutiTerpakai = freezed,
+    Object? potonganCuti = freezed,
+    Object? sisaCutiP24 = freezed,
+    Object? cutiMasaKerja = freezed,
+    Object? workNotPresent = freezed,
+    Object? cutiP24Terpakai = freezed,
+    Object? sisaCutiReguler = freezed,
+    Object? workDaysInMonth = freezed,
+    Object? sisaCutiMasaKerja = freezed,
+  }) {
+    return _then(_value.copyWith(
+      cutiP24: freezed == cutiP24
+          ? _value.cutiP24
+          : cutiP24 // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiReguler: freezed == cutiReguler
+          ? _value.cutiReguler
+          : cutiReguler // ignore: cast_nullable_to_non_nullable
+              as int?,
+      workPresent: freezed == workPresent
+          ? _value.workPresent
+          : workPresent // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiTerpakai: freezed == cutiTerpakai
+          ? _value.cutiTerpakai
+          : cutiTerpakai // ignore: cast_nullable_to_non_nullable
+              as int?,
+      potonganCuti: freezed == potonganCuti
+          ? _value.potonganCuti
+          : potonganCuti // ignore: cast_nullable_to_non_nullable
+              as int?,
+      sisaCutiP24: freezed == sisaCutiP24
+          ? _value.sisaCutiP24
+          : sisaCutiP24 // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiMasaKerja: freezed == cutiMasaKerja
+          ? _value.cutiMasaKerja
+          : cutiMasaKerja // ignore: cast_nullable_to_non_nullable
+              as int?,
+      workNotPresent: freezed == workNotPresent
+          ? _value.workNotPresent
+          : workNotPresent // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiP24Terpakai: freezed == cutiP24Terpakai
+          ? _value.cutiP24Terpakai
+          : cutiP24Terpakai // ignore: cast_nullable_to_non_nullable
+              as int?,
+      sisaCutiReguler: freezed == sisaCutiReguler
+          ? _value.sisaCutiReguler
+          : sisaCutiReguler // ignore: cast_nullable_to_non_nullable
+              as int?,
+      workDaysInMonth: freezed == workDaysInMonth
+          ? _value.workDaysInMonth
+          : workDaysInMonth // ignore: cast_nullable_to_non_nullable
+              as int?,
+      sisaCutiMasaKerja: freezed == sisaCutiMasaKerja
+          ? _value.sisaCutiMasaKerja
+          : sisaCutiMasaKerja // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$InfoCutiImplCopyWith<$Res>
+    implements $InfoCutiCopyWith<$Res> {
+  factory _$$InfoCutiImplCopyWith(
+          _$InfoCutiImpl value, $Res Function(_$InfoCutiImpl) then) =
+      __$$InfoCutiImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "cuti_p24") int? cutiP24,
+      @JsonKey(name: "cuti_reguler") int? cutiReguler,
+      @JsonKey(name: "work_present") int? workPresent,
+      @JsonKey(name: "cuti_terpakai") int? cutiTerpakai,
+      @JsonKey(name: "potongan_cuti") int? potonganCuti,
+      @JsonKey(name: "sisa_cuti_p24") int? sisaCutiP24,
+      @JsonKey(name: "cuti_masa_kerja") int? cutiMasaKerja,
+      @JsonKey(name: "work_not_present") int? workNotPresent,
+      @JsonKey(name: "cuti_p24_terpakai") int? cutiP24Terpakai,
+      @JsonKey(name: "sisa_cuti_reguler") int? sisaCutiReguler,
+      @JsonKey(name: "work_days_in_month") int? workDaysInMonth,
+      @JsonKey(name: "sisa_cuti_masa_kerja") int? sisaCutiMasaKerja});
+}
+
+/// @nodoc
+class __$$InfoCutiImplCopyWithImpl<$Res>
+    extends _$InfoCutiCopyWithImpl<$Res, _$InfoCutiImpl>
+    implements _$$InfoCutiImplCopyWith<$Res> {
+  __$$InfoCutiImplCopyWithImpl(
+      _$InfoCutiImpl _value, $Res Function(_$InfoCutiImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cutiP24 = freezed,
+    Object? cutiReguler = freezed,
+    Object? workPresent = freezed,
+    Object? cutiTerpakai = freezed,
+    Object? potonganCuti = freezed,
+    Object? sisaCutiP24 = freezed,
+    Object? cutiMasaKerja = freezed,
+    Object? workNotPresent = freezed,
+    Object? cutiP24Terpakai = freezed,
+    Object? sisaCutiReguler = freezed,
+    Object? workDaysInMonth = freezed,
+    Object? sisaCutiMasaKerja = freezed,
+  }) {
+    return _then(_$InfoCutiImpl(
+      cutiP24: freezed == cutiP24
+          ? _value.cutiP24
+          : cutiP24 // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiReguler: freezed == cutiReguler
+          ? _value.cutiReguler
+          : cutiReguler // ignore: cast_nullable_to_non_nullable
+              as int?,
+      workPresent: freezed == workPresent
+          ? _value.workPresent
+          : workPresent // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiTerpakai: freezed == cutiTerpakai
+          ? _value.cutiTerpakai
+          : cutiTerpakai // ignore: cast_nullable_to_non_nullable
+              as int?,
+      potonganCuti: freezed == potonganCuti
+          ? _value.potonganCuti
+          : potonganCuti // ignore: cast_nullable_to_non_nullable
+              as int?,
+      sisaCutiP24: freezed == sisaCutiP24
+          ? _value.sisaCutiP24
+          : sisaCutiP24 // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiMasaKerja: freezed == cutiMasaKerja
+          ? _value.cutiMasaKerja
+          : cutiMasaKerja // ignore: cast_nullable_to_non_nullable
+              as int?,
+      workNotPresent: freezed == workNotPresent
+          ? _value.workNotPresent
+          : workNotPresent // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiP24Terpakai: freezed == cutiP24Terpakai
+          ? _value.cutiP24Terpakai
+          : cutiP24Terpakai // ignore: cast_nullable_to_non_nullable
+              as int?,
+      sisaCutiReguler: freezed == sisaCutiReguler
+          ? _value.sisaCutiReguler
+          : sisaCutiReguler // ignore: cast_nullable_to_non_nullable
+              as int?,
+      workDaysInMonth: freezed == workDaysInMonth
+          ? _value.workDaysInMonth
+          : workDaysInMonth // ignore: cast_nullable_to_non_nullable
+              as int?,
+      sisaCutiMasaKerja: freezed == sisaCutiMasaKerja
+          ? _value.sisaCutiMasaKerja
+          : sisaCutiMasaKerja // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$InfoCutiImpl implements _InfoCuti {
+  const _$InfoCutiImpl(
+      {@JsonKey(name: "cuti_p24") this.cutiP24,
+      @JsonKey(name: "cuti_reguler") this.cutiReguler,
+      @JsonKey(name: "work_present") this.workPresent,
+      @JsonKey(name: "cuti_terpakai") this.cutiTerpakai,
+      @JsonKey(name: "potongan_cuti") this.potonganCuti,
+      @JsonKey(name: "sisa_cuti_p24") this.sisaCutiP24,
+      @JsonKey(name: "cuti_masa_kerja") this.cutiMasaKerja,
+      @JsonKey(name: "work_not_present") this.workNotPresent,
+      @JsonKey(name: "cuti_p24_terpakai") this.cutiP24Terpakai,
+      @JsonKey(name: "sisa_cuti_reguler") this.sisaCutiReguler,
+      @JsonKey(name: "work_days_in_month") this.workDaysInMonth,
+      @JsonKey(name: "sisa_cuti_masa_kerja") this.sisaCutiMasaKerja});
+
+  factory _$InfoCutiImpl.fromJson(Map<String, dynamic> json) =>
+      _$$InfoCutiImplFromJson(json);
+
+  @override
+  @JsonKey(name: "cuti_p24")
+  final int? cutiP24;
+  @override
+  @JsonKey(name: "cuti_reguler")
+  final int? cutiReguler;
+  @override
+  @JsonKey(name: "work_present")
+  final int? workPresent;
+  @override
+  @JsonKey(name: "cuti_terpakai")
+  final int? cutiTerpakai;
+  @override
+  @JsonKey(name: "potongan_cuti")
+  final int? potonganCuti;
+  @override
+  @JsonKey(name: "sisa_cuti_p24")
+  final int? sisaCutiP24;
+  @override
+  @JsonKey(name: "cuti_masa_kerja")
+  final int? cutiMasaKerja;
+  @override
+  @JsonKey(name: "work_not_present")
+  final int? workNotPresent;
+  @override
+  @JsonKey(name: "cuti_p24_terpakai")
+  final int? cutiP24Terpakai;
+  @override
+  @JsonKey(name: "sisa_cuti_reguler")
+  final int? sisaCutiReguler;
+  @override
+  @JsonKey(name: "work_days_in_month")
+  final int? workDaysInMonth;
+  @override
+  @JsonKey(name: "sisa_cuti_masa_kerja")
+  final int? sisaCutiMasaKerja;
+
+  @override
+  String toString() {
+    return 'InfoCuti(cutiP24: $cutiP24, cutiReguler: $cutiReguler, workPresent: $workPresent, cutiTerpakai: $cutiTerpakai, potonganCuti: $potonganCuti, sisaCutiP24: $sisaCutiP24, cutiMasaKerja: $cutiMasaKerja, workNotPresent: $workNotPresent, cutiP24Terpakai: $cutiP24Terpakai, sisaCutiReguler: $sisaCutiReguler, workDaysInMonth: $workDaysInMonth, sisaCutiMasaKerja: $sisaCutiMasaKerja)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$InfoCutiImpl &&
+            (identical(other.cutiP24, cutiP24) || other.cutiP24 == cutiP24) &&
+            (identical(other.cutiReguler, cutiReguler) ||
+                other.cutiReguler == cutiReguler) &&
+            (identical(other.workPresent, workPresent) ||
+                other.workPresent == workPresent) &&
+            (identical(other.cutiTerpakai, cutiTerpakai) ||
+                other.cutiTerpakai == cutiTerpakai) &&
+            (identical(other.potonganCuti, potonganCuti) ||
+                other.potonganCuti == potonganCuti) &&
+            (identical(other.sisaCutiP24, sisaCutiP24) ||
+                other.sisaCutiP24 == sisaCutiP24) &&
+            (identical(other.cutiMasaKerja, cutiMasaKerja) ||
+                other.cutiMasaKerja == cutiMasaKerja) &&
+            (identical(other.workNotPresent, workNotPresent) ||
+                other.workNotPresent == workNotPresent) &&
+            (identical(other.cutiP24Terpakai, cutiP24Terpakai) ||
+                other.cutiP24Terpakai == cutiP24Terpakai) &&
+            (identical(other.sisaCutiReguler, sisaCutiReguler) ||
+                other.sisaCutiReguler == sisaCutiReguler) &&
+            (identical(other.workDaysInMonth, workDaysInMonth) ||
+                other.workDaysInMonth == workDaysInMonth) &&
+            (identical(other.sisaCutiMasaKerja, sisaCutiMasaKerja) ||
+                other.sisaCutiMasaKerja == sisaCutiMasaKerja));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      cutiP24,
+      cutiReguler,
+      workPresent,
+      cutiTerpakai,
+      potonganCuti,
+      sisaCutiP24,
+      cutiMasaKerja,
+      workNotPresent,
+      cutiP24Terpakai,
+      sisaCutiReguler,
+      workDaysInMonth,
+      sisaCutiMasaKerja);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InfoCutiImplCopyWith<_$InfoCutiImpl> get copyWith =>
+      __$$InfoCutiImplCopyWithImpl<_$InfoCutiImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$InfoCutiImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _InfoCuti implements InfoCuti {
+  const factory _InfoCuti(
+      {@JsonKey(name: "cuti_p24") final int? cutiP24,
+      @JsonKey(name: "cuti_reguler") final int? cutiReguler,
+      @JsonKey(name: "work_present") final int? workPresent,
+      @JsonKey(name: "cuti_terpakai") final int? cutiTerpakai,
+      @JsonKey(name: "potongan_cuti") final int? potonganCuti,
+      @JsonKey(name: "sisa_cuti_p24") final int? sisaCutiP24,
+      @JsonKey(name: "cuti_masa_kerja") final int? cutiMasaKerja,
+      @JsonKey(name: "work_not_present") final int? workNotPresent,
+      @JsonKey(name: "cuti_p24_terpakai") final int? cutiP24Terpakai,
+      @JsonKey(name: "sisa_cuti_reguler") final int? sisaCutiReguler,
+      @JsonKey(name: "work_days_in_month") final int? workDaysInMonth,
+      @JsonKey(name: "sisa_cuti_masa_kerja")
+      final int? sisaCutiMasaKerja}) = _$InfoCutiImpl;
+
+  factory _InfoCuti.fromJson(Map<String, dynamic> json) =
+      _$InfoCutiImpl.fromJson;
+
+  @override
+  @JsonKey(name: "cuti_p24")
+  int? get cutiP24;
+  @override
+  @JsonKey(name: "cuti_reguler")
+  int? get cutiReguler;
+  @override
+  @JsonKey(name: "work_present")
+  int? get workPresent;
+  @override
+  @JsonKey(name: "cuti_terpakai")
+  int? get cutiTerpakai;
+  @override
+  @JsonKey(name: "potongan_cuti")
+  int? get potonganCuti;
+  @override
+  @JsonKey(name: "sisa_cuti_p24")
+  int? get sisaCutiP24;
+  @override
+  @JsonKey(name: "cuti_masa_kerja")
+  int? get cutiMasaKerja;
+  @override
+  @JsonKey(name: "work_not_present")
+  int? get workNotPresent;
+  @override
+  @JsonKey(name: "cuti_p24_terpakai")
+  int? get cutiP24Terpakai;
+  @override
+  @JsonKey(name: "sisa_cuti_reguler")
+  int? get sisaCutiReguler;
+  @override
+  @JsonKey(name: "work_days_in_month")
+  int? get workDaysInMonth;
+  @override
+  @JsonKey(name: "sisa_cuti_masa_kerja")
+  int? get sisaCutiMasaKerja;
+  @override
+  @JsonKey(ignore: true)
+  _$$InfoCutiImplCopyWith<_$InfoCutiImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

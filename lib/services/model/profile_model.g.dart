@@ -117,6 +117,9 @@ _$DataProfileImpl _$$DataProfileImplFromJson(Map<String, dynamic> json) =>
       mKaryExpDateCuti: json['m_kary.exp_date_cuti'] as String?,
       mKaryLimitPotong: json['m_kary.limit_potong'] as int?,
       atasan: json['atasan'] as String?,
+      infoCuti: json['info_cuti'] == null
+          ? null
+          : InfoCuti.fromJson(json['info_cuti'] as Map<String, dynamic>),
       defaultUsersSocialite: json['default_users_socialite'] as List<dynamic>?,
     );
 
@@ -218,5 +221,38 @@ Map<String, dynamic> _$$DataProfileImplToJson(_$DataProfileImpl instance) =>
       'm_kary.exp_date_cuti': instance.mKaryExpDateCuti,
       'm_kary.limit_potong': instance.mKaryLimitPotong,
       'atasan': instance.atasan,
+      'info_cuti': instance.infoCuti,
       'default_users_socialite': instance.defaultUsersSocialite,
+    };
+
+_$InfoCutiImpl _$$InfoCutiImplFromJson(Map<String, dynamic> json) =>
+    _$InfoCutiImpl(
+      cutiP24: json['cuti_p24'] as int?,
+      cutiReguler: json['cuti_reguler'] as int?,
+      workPresent: json['work_present'] as int?,
+      cutiTerpakai: json['cuti_terpakai'] as int?,
+      potonganCuti: json['potongan_cuti'] as int?,
+      sisaCutiP24: json['sisa_cuti_p24'] as int?,
+      cutiMasaKerja: json['cuti_masa_kerja'] as int?,
+      workNotPresent: json['work_not_present'] as int?,
+      cutiP24Terpakai: json['cuti_p24_terpakai'] as int?,
+      sisaCutiReguler: json['sisa_cuti_reguler'] as int?,
+      workDaysInMonth: json['work_days_in_month'] as int?,
+      sisaCutiMasaKerja: json['sisa_cuti_masa_kerja'] as int?,
+    );
+
+Map<String, dynamic> _$$InfoCutiImplToJson(_$InfoCutiImpl instance) =>
+    <String, dynamic>{
+      'cuti_p24': instance.cutiP24,
+      'cuti_reguler': instance.cutiReguler,
+      'work_present': instance.workPresent,
+      'cuti_terpakai': instance.cutiTerpakai,
+      'potongan_cuti': instance.potonganCuti,
+      'sisa_cuti_p24': instance.sisaCutiP24,
+      'cuti_masa_kerja': instance.cutiMasaKerja,
+      'work_not_present': instance.workNotPresent,
+      'cuti_p24_terpakai': instance.cutiP24Terpakai,
+      'sisa_cuti_reguler': instance.sisaCutiReguler,
+      'work_days_in_month': instance.workDaysInMonth,
+      'sisa_cuti_masa_kerja': instance.sisaCutiMasaKerja,
     };

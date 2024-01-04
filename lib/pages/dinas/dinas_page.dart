@@ -227,11 +227,11 @@ class _DinasPageState extends State<DinasPage> {
                       color: Colors.white,
                     ),
                     SizedBox(
-                      width: size.width * 1 / 7,
+                      width: size.width * 1 / 9,
                     ),
                     Expanded(
                       child: Text(
-                        "History Perjalanan Dinas",
+                        "Rencana Perjalanan Dinas",
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -688,15 +688,15 @@ class EmptyStateBuilder extends StatelessWidget {
       children: [
         Image.asset(
           "assets/images/box_nodata.png",
-          height: size.width * 1 / 2,
+          height: size.width * 1 / 2.5,
         ),
         const SizedBox(height: 8),
         Text(
-          "Tidak ada data yang ditampilkan!",
+          "Tidak Ada Data Yang Ditampilkan!",
           style: GoogleFonts.poppins(
             color: MyColorsConst.darkColor,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            fontSize: 14.sp,
           ),
         ),
       ],

@@ -287,7 +287,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                 _buildText('Lokasi Tujuan',
                                     widget.lokasiTujuan ?? '-'),
                                 _buildText('Keterangan Kendaraan',
-                                    widget.zonaTujuan ?? '-'),
+                                    widget.data?.catatanKend ?? '-'),
                               ],
                             ),
                           ),

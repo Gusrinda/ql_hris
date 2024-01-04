@@ -8,7 +8,7 @@ abstract class AddCutiEvent extends Equatable {
 }
 
 class AddCutiSubmited extends AddCutiEvent {
-  int alasan;
+  int? alasan;
   int tipeCuti;
   String keterangan;
   String dateFrom;
@@ -18,7 +18,7 @@ class AddCutiSubmited extends AddCutiEvent {
 
 
   AddCutiSubmited({
-    required this.alasan,
+    this.alasan,
     required this.tipeCuti,
     required this.keterangan,
     required this.dateFrom,
@@ -30,7 +30,7 @@ class AddCutiSubmited extends AddCutiEvent {
 
   @override
   List<Object> get props => [
-        alasan,
+        alasan!,
         tipeCuti,
         keterangan,
         dateFrom,

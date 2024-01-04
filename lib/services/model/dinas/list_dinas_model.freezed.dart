@@ -481,6 +481,8 @@ mixin _$DataDinas {
   bool? get isKendDinas => throw _privateConstructorUsedError;
   @JsonKey(name: "interval")
   int? get interval => throw _privateConstructorUsedError;
+  @JsonKey(name: "catatan_kend")
+  String? get catatanKend => throw _privateConstructorUsedError;
   @JsonKey(name: "m_comp.id")
   int? get mCompId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_comp.nama")
@@ -530,17 +532,17 @@ mixin _$DataDinas {
   @JsonKey(name: "m_spd.updated_at")
   String? get mSpdUpdatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "m_dir.id")
-  int? get mDirId => throw _privateConstructorUsedError;
+  dynamic get mDirId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_dir.m_comp_id")
-  int? get mDirMCompId => throw _privateConstructorUsedError;
+  dynamic get mDirMCompId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_dir.nama")
-  String? get mDirNama => throw _privateConstructorUsedError;
+  dynamic get mDirNama => throw _privateConstructorUsedError;
   @JsonKey(name: "m_dir.desc")
   dynamic get mDirDesc => throw _privateConstructorUsedError;
   @JsonKey(name: "m_dir.is_active")
-  bool? get mDirIsActive => throw _privateConstructorUsedError;
+  dynamic get mDirIsActive => throw _privateConstructorUsedError;
   @JsonKey(name: "m_dir.creator_id")
-  int? get mDirCreatorId => throw _privateConstructorUsedError;
+  dynamic get mDirCreatorId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_dir.last_editor_id")
   dynamic get mDirLastEditorId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_dir.created_at")
@@ -556,17 +558,17 @@ mixin _$DataDinas {
   @JsonKey(name: "m_divisi.nama")
   String? get mDivisiNama => throw _privateConstructorUsedError;
   @JsonKey(name: "m_divisi.desc")
-  String? get mDivisiDesc => throw _privateConstructorUsedError;
+  dynamic get mDivisiDesc => throw _privateConstructorUsedError;
   @JsonKey(name: "m_divisi.is_active")
   bool? get mDivisiIsActive => throw _privateConstructorUsedError;
   @JsonKey(name: "m_divisi.creator_id")
-  int? get mDivisiCreatorId => throw _privateConstructorUsedError;
+  dynamic get mDivisiCreatorId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_divisi.last_editor_id")
-  int? get mDivisiLastEditorId => throw _privateConstructorUsedError;
+  dynamic get mDivisiLastEditorId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_divisi.created_at")
-  String? get mDivisiCreatedAt => throw _privateConstructorUsedError;
+  dynamic get mDivisiCreatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "m_divisi.updated_at")
-  String? get mDivisiUpdatedAt => throw _privateConstructorUsedError;
+  dynamic get mDivisiUpdatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "m_dept.id")
   int? get mDeptId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_dept.m_dir_id")
@@ -576,7 +578,7 @@ mixin _$DataDinas {
   @JsonKey(name: "m_dept.nama")
   String? get mDeptNama => throw _privateConstructorUsedError;
   @JsonKey(name: "m_dept.desc")
-  String? get mDeptDesc => throw _privateConstructorUsedError;
+  dynamic get mDeptDesc => throw _privateConstructorUsedError;
   @JsonKey(name: "m_dept.is_active")
   bool? get mDeptIsActive => throw _privateConstructorUsedError;
   @JsonKey(name: "m_dept.creator_id")
@@ -584,9 +586,9 @@ mixin _$DataDinas {
   @JsonKey(name: "m_dept.last_editor_id")
   dynamic get mDeptLastEditorId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_dept.created_at")
-  String? get mDeptCreatedAt => throw _privateConstructorUsedError;
+  dynamic get mDeptCreatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "m_dept.updated_at")
-  String? get mDeptUpdatedAt => throw _privateConstructorUsedError;
+  dynamic get mDeptUpdatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "m_posisi.id")
   int? get mPosisiId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_posisi.m_comp_id")
@@ -632,7 +634,7 @@ mixin _$DataDinas {
   @JsonKey(name: "jenis_spd.m_comp_id")
   int? get jenisSpdMCompId => throw _privateConstructorUsedError;
   @JsonKey(name: "jenis_spd.m_dir_id")
-  int? get jenisSpdMDirId => throw _privateConstructorUsedError;
+  dynamic get jenisSpdMDirId => throw _privateConstructorUsedError;
   @JsonKey(name: "jenis_spd.group")
   String? get jenisSpdGroup => throw _privateConstructorUsedError;
   @JsonKey(name: "jenis_spd.key")
@@ -648,9 +650,9 @@ mixin _$DataDinas {
   @JsonKey(name: "jenis_spd.last_editor_id")
   dynamic get jenisSpdLastEditorId => throw _privateConstructorUsedError;
   @JsonKey(name: "jenis_spd.created_at")
-  String? get jenisSpdCreatedAt => throw _privateConstructorUsedError;
+  dynamic get jenisSpdCreatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "jenis_spd.updated_at")
-  String? get jenisSpdUpdatedAt => throw _privateConstructorUsedError;
+  dynamic get jenisSpdUpdatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "jenis_spd.value_2")
   dynamic get jenisSpdValue2 => throw _privateConstructorUsedError;
   @JsonKey(name: "jenis_spd.value_3")
@@ -661,8 +663,6 @@ mixin _$DataDinas {
   int? get mZonaAsalMCompId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_zona_asal.m_dir_id")
   int? get mZonaAsalMDirId => throw _privateConstructorUsedError;
-  @JsonKey(name: "m_zona_asal.m_tunj_kemahalan_id")
-  int? get mZonaAsalMTunjKemahalanId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_zona_asal.kode")
   String? get mZonaAsalKode => throw _privateConstructorUsedError;
   @JsonKey(name: "m_zona_asal.nama")
@@ -685,8 +685,6 @@ mixin _$DataDinas {
   int? get mZonaTujuanMCompId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_zona_tujuan.m_dir_id")
   int? get mZonaTujuanMDirId => throw _privateConstructorUsedError;
-  @JsonKey(name: "m_zona_tujuan.m_tunj_kemahalan_id")
-  int? get mZonaTujuanMTunjKemahalanId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_zona_tujuan.kode")
   String? get mZonaTujuanKode => throw _privateConstructorUsedError;
   @JsonKey(name: "m_zona_tujuan.nama")
@@ -738,7 +736,7 @@ mixin _$DataDinas {
   @JsonKey(name: "m_kary.m_zona_id")
   int? get mKaryMZonaId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.grading_id")
-  dynamic get mKaryGradingId => throw _privateConstructorUsedError;
+  int? get mKaryGradingId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.costcontre_id")
   int? get mKaryCostcontreId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.kode")
@@ -810,7 +808,7 @@ mixin _$DataDinas {
   @JsonKey(name: "m_kary.lama_kontrak_akhir")
   dynamic get mKaryLamaKontrakAkhir => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.tgl_masuk")
-  String? get mKaryTglMasuk => throw _privateConstructorUsedError;
+  dynamic get mKaryTglMasuk => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.tgl_berhenti")
   dynamic get mKaryTglBerhenti => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.alasan_berhenti")
@@ -822,13 +820,13 @@ mixin _$DataDinas {
   @JsonKey(name: "m_kary.uk_sepatu")
   String? get mKaryUkSepatu => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.desc")
-  String? get mKaryDesc => throw _privateConstructorUsedError;
+  dynamic get mKaryDesc => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.is_active")
   bool? get mKaryIsActive => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.creator_id")
   dynamic get mKaryCreatorId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.last_editor_id")
-  int? get mKaryLastEditorId => throw _privateConstructorUsedError;
+  dynamic get mKaryLastEditorId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.created_at")
   String? get mKaryCreatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.updated_at")
@@ -838,12 +836,12 @@ mixin _$DataDinas {
   @JsonKey(name: "m_kary.periode_gaji_id")
   int? get mKaryPeriodeGajiId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.ref_id")
-  dynamic get mKaryRefId => throw _privateConstructorUsedError;
+  int? get mKaryRefId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.presensi_lokasi_default_id")
   dynamic get mKaryPresensiLokasiDefaultId =>
       throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.exp_date_cuti")
-  String? get mKaryExpDateCuti => throw _privateConstructorUsedError;
+  dynamic get mKaryExpDateCuti => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.limit_potong")
   int? get mKaryLimitPotong => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.atasan_id")
@@ -853,83 +851,83 @@ mixin _$DataDinas {
   @JsonKey(name: "m_kary.cuti_sisa_p24")
   dynamic get mKaryCutiSisaP24 => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.id")
-  int? get picId => throw _privateConstructorUsedError;
+  dynamic get picId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.m_comp_id")
-  int? get picMCompId => throw _privateConstructorUsedError;
+  dynamic get picMCompId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.m_dir_id")
-  int? get picMDirId => throw _privateConstructorUsedError;
+  dynamic get picMDirId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.m_divisi_id")
-  int? get picMDivisiId => throw _privateConstructorUsedError;
+  dynamic get picMDivisiId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.m_dept_id")
-  int? get picMDeptId => throw _privateConstructorUsedError;
+  dynamic get picMDeptId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.m_zona_id")
-  int? get picMZonaId => throw _privateConstructorUsedError;
+  dynamic get picMZonaId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.grading_id")
-  int? get picGradingId => throw _privateConstructorUsedError;
+  dynamic get picGradingId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.costcontre_id")
-  int? get picCostcontreId => throw _privateConstructorUsedError;
+  dynamic get picCostcontreId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.kode")
-  String? get picKode => throw _privateConstructorUsedError;
+  dynamic get picKode => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.m_posisi_id")
-  int? get picMPosisiId => throw _privateConstructorUsedError;
+  dynamic get picMPosisiId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.m_jam_kerja_id")
-  int? get picMJamKerjaId => throw _privateConstructorUsedError;
+  dynamic get picMJamKerjaId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.kode_presensi")
-  String? get picKodePresensi => throw _privateConstructorUsedError;
+  dynamic get picKodePresensi => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.nik")
-  String? get picNik => throw _privateConstructorUsedError;
+  dynamic get picNik => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.nama_depan")
-  String? get picNamaDepan => throw _privateConstructorUsedError;
+  dynamic get picNamaDepan => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.nama_belakang")
-  String? get picNamaBelakang => throw _privateConstructorUsedError;
+  dynamic get picNamaBelakang => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.nama_lengkap")
-  String? get picNamaLengkap => throw _privateConstructorUsedError;
+  dynamic get picNamaLengkap => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.nama_panggilan")
-  String? get picNamaPanggilan => throw _privateConstructorUsedError;
+  dynamic get picNamaPanggilan => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.jk_id")
-  int? get picJkId => throw _privateConstructorUsedError;
+  dynamic get picJkId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.tempat_lahir")
-  String? get picTempatLahir => throw _privateConstructorUsedError;
+  dynamic get picTempatLahir => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.tgl_lahir")
-  String? get picTglLahir => throw _privateConstructorUsedError;
+  dynamic get picTglLahir => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.provinsi_id")
-  int? get picProvinsiId => throw _privateConstructorUsedError;
+  dynamic get picProvinsiId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.kota_id")
-  int? get picKotaId => throw _privateConstructorUsedError;
+  dynamic get picKotaId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.kecamatan_id")
-  int? get picKecamatanId => throw _privateConstructorUsedError;
+  dynamic get picKecamatanId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.kode_pos")
-  String? get picKodePos => throw _privateConstructorUsedError;
+  dynamic get picKodePos => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.alamat_asli")
-  String? get picAlamatAsli => throw _privateConstructorUsedError;
+  dynamic get picAlamatAsli => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.alamat_domisili")
-  String? get picAlamatDomisili => throw _privateConstructorUsedError;
+  dynamic get picAlamatDomisili => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.no_tlp")
-  String? get picNoTlp => throw _privateConstructorUsedError;
+  dynamic get picNoTlp => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.no_tlp_lainnya")
   dynamic get picNoTlpLainnya => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.no_darurat")
-  String? get picNoDarurat => throw _privateConstructorUsedError;
+  dynamic get picNoDarurat => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.nama_kontak_darurat")
-  String? get picNamaKontakDarurat => throw _privateConstructorUsedError;
+  dynamic get picNamaKontakDarurat => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.agama_id")
-  int? get picAgamaId => throw _privateConstructorUsedError;
+  dynamic get picAgamaId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.gol_darah_id")
-  int? get picGolDarahId => throw _privateConstructorUsedError;
+  dynamic get picGolDarahId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.status_nikah_id")
-  int? get picStatusNikahId => throw _privateConstructorUsedError;
+  dynamic get picStatusNikahId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.tanggungan_id")
-  int? get picTanggunganId => throw _privateConstructorUsedError;
+  dynamic get picTanggunganId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.hub_dgn_karyawan")
-  String? get picHubDgnKaryawan => throw _privateConstructorUsedError;
+  dynamic get picHubDgnKaryawan => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.cuti_jatah_reguler")
-  int? get picCutiJatahReguler => throw _privateConstructorUsedError;
+  dynamic get picCutiJatahReguler => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.cuti_sisa_reguler")
-  int? get picCutiSisaReguler => throw _privateConstructorUsedError;
+  dynamic get picCutiSisaReguler => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.cuti_panjang")
-  int? get picCutiPanjang => throw _privateConstructorUsedError;
+  dynamic get picCutiPanjang => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.cuti_sisa_panjang")
-  int? get picCutiSisaPanjang => throw _privateConstructorUsedError;
+  dynamic get picCutiSisaPanjang => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.status_kary_id")
   dynamic get picStatusKaryId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.lama_kontrak_awal")
@@ -943,37 +941,37 @@ mixin _$DataDinas {
   @JsonKey(name: "pic.alasan_berhenti")
   dynamic get picAlasanBerhenti => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.uk_baju")
-  String? get picUkBaju => throw _privateConstructorUsedError;
+  dynamic get picUkBaju => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.uk_celana")
-  String? get picUkCelana => throw _privateConstructorUsedError;
+  dynamic get picUkCelana => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.uk_sepatu")
-  String? get picUkSepatu => throw _privateConstructorUsedError;
+  dynamic get picUkSepatu => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.desc")
   dynamic get picDesc => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.is_active")
-  bool? get picIsActive => throw _privateConstructorUsedError;
+  dynamic get picIsActive => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.creator_id")
   dynamic get picCreatorId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.last_editor_id")
-  int? get picLastEditorId => throw _privateConstructorUsedError;
+  dynamic get picLastEditorId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.created_at")
-  String? get picCreatedAt => throw _privateConstructorUsedError;
+  dynamic get picCreatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.updated_at")
-  String? get picUpdatedAt => throw _privateConstructorUsedError;
+  dynamic get picUpdatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.m_standart_gaji_id")
-  int? get picMStandartGajiId => throw _privateConstructorUsedError;
+  dynamic get picMStandartGajiId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.periode_gaji_id")
-  int? get picPeriodeGajiId => throw _privateConstructorUsedError;
+  dynamic get picPeriodeGajiId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.ref_id")
-  int? get picRefId => throw _privateConstructorUsedError;
+  dynamic get picRefId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.presensi_lokasi_default_id")
   dynamic get picPresensiLokasiDefaultId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.exp_date_cuti")
-  String? get picExpDateCuti => throw _privateConstructorUsedError;
+  dynamic get picExpDateCuti => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.limit_potong")
-  int? get picLimitPotong => throw _privateConstructorUsedError;
+  dynamic get picLimitPotong => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.atasan_id")
-  int? get picAtasanId => throw _privateConstructorUsedError;
+  dynamic get picAtasanId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.cuti_p24")
   dynamic get picCutiP24 => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.cuti_sisa_p24")
@@ -983,7 +981,7 @@ mixin _$DataDinas {
   @JsonKey(name: "creator.name")
   String? get creatorName => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.email")
-  String? get creatorEmail => throw _privateConstructorUsedError;
+  dynamic get creatorEmail => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.username")
   String? get creatorUsername => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.email_verified_at")
@@ -997,19 +995,19 @@ mixin _$DataDinas {
   @JsonKey(name: "creator.is_active")
   bool? get creatorIsActive => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.creator_id")
-  dynamic get creatorCreatorId => throw _privateConstructorUsedError;
+  int? get creatorCreatorId => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.last_editor_id")
-  int? get creatorLastEditorId => throw _privateConstructorUsedError;
+  dynamic get creatorLastEditorId => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.remember_token")
   dynamic get creatorRememberToken => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.created_at")
-  dynamic get creatorCreatedAt => throw _privateConstructorUsedError;
+  String? get creatorCreatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.updated_at")
   String? get creatorUpdatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.profil_image")
   String? get creatorProfilImage => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.telp")
-  String? get creatorTelp => throw _privateConstructorUsedError;
+  dynamic get creatorTelp => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.m_kary_id")
   int? get creatorMKaryId => throw _privateConstructorUsedError;
   @JsonKey(name: "last_editor.id")
@@ -1092,6 +1090,7 @@ abstract class $DataDinasCopyWith<$Res> {
       @JsonKey(name: "updated_at") String? updatedAt,
       @JsonKey(name: "is_kend_dinas") bool? isKendDinas,
       @JsonKey(name: "interval") int? interval,
+      @JsonKey(name: "catatan_kend") String? catatanKend,
       @JsonKey(name: "m_comp.id") int? mCompId,
       @JsonKey(name: "m_comp.nama") String? mCompNama,
       @JsonKey(name: "m_comp.is_active") bool? mCompIsActive,
@@ -1116,12 +1115,12 @@ abstract class $DataDinasCopyWith<$Res> {
       @JsonKey(name: "m_spd.last_editor_id") dynamic mSpdLastEditorId,
       @JsonKey(name: "m_spd.created_at") String? mSpdCreatedAt,
       @JsonKey(name: "m_spd.updated_at") String? mSpdUpdatedAt,
-      @JsonKey(name: "m_dir.id") int? mDirId,
-      @JsonKey(name: "m_dir.m_comp_id") int? mDirMCompId,
-      @JsonKey(name: "m_dir.nama") String? mDirNama,
+      @JsonKey(name: "m_dir.id") dynamic mDirId,
+      @JsonKey(name: "m_dir.m_comp_id") dynamic mDirMCompId,
+      @JsonKey(name: "m_dir.nama") dynamic mDirNama,
       @JsonKey(name: "m_dir.desc") dynamic mDirDesc,
-      @JsonKey(name: "m_dir.is_active") bool? mDirIsActive,
-      @JsonKey(name: "m_dir.creator_id") int? mDirCreatorId,
+      @JsonKey(name: "m_dir.is_active") dynamic mDirIsActive,
+      @JsonKey(name: "m_dir.creator_id") dynamic mDirCreatorId,
       @JsonKey(name: "m_dir.last_editor_id") dynamic mDirLastEditorId,
       @JsonKey(name: "m_dir.created_at") dynamic mDirCreatedAt,
       @JsonKey(name: "m_dir.updated_at") dynamic mDirUpdatedAt,
@@ -1129,22 +1128,22 @@ abstract class $DataDinasCopyWith<$Res> {
       @JsonKey(name: "m_divisi.m_comp_id") int? mDivisiMCompId,
       @JsonKey(name: "m_divisi.m_dir_id") int? mDivisiMDirId,
       @JsonKey(name: "m_divisi.nama") String? mDivisiNama,
-      @JsonKey(name: "m_divisi.desc") String? mDivisiDesc,
+      @JsonKey(name: "m_divisi.desc") dynamic mDivisiDesc,
       @JsonKey(name: "m_divisi.is_active") bool? mDivisiIsActive,
-      @JsonKey(name: "m_divisi.creator_id") int? mDivisiCreatorId,
-      @JsonKey(name: "m_divisi.last_editor_id") int? mDivisiLastEditorId,
-      @JsonKey(name: "m_divisi.created_at") String? mDivisiCreatedAt,
-      @JsonKey(name: "m_divisi.updated_at") String? mDivisiUpdatedAt,
+      @JsonKey(name: "m_divisi.creator_id") dynamic mDivisiCreatorId,
+      @JsonKey(name: "m_divisi.last_editor_id") dynamic mDivisiLastEditorId,
+      @JsonKey(name: "m_divisi.created_at") dynamic mDivisiCreatedAt,
+      @JsonKey(name: "m_divisi.updated_at") dynamic mDivisiUpdatedAt,
       @JsonKey(name: "m_dept.id") int? mDeptId,
       @JsonKey(name: "m_dept.m_dir_id") int? mDeptMDirId,
       @JsonKey(name: "m_dept.m_divisi_id") int? mDeptMDivisiId,
       @JsonKey(name: "m_dept.nama") String? mDeptNama,
-      @JsonKey(name: "m_dept.desc") String? mDeptDesc,
+      @JsonKey(name: "m_dept.desc") dynamic mDeptDesc,
       @JsonKey(name: "m_dept.is_active") bool? mDeptIsActive,
       @JsonKey(name: "m_dept.creator_id") dynamic mDeptCreatorId,
       @JsonKey(name: "m_dept.last_editor_id") dynamic mDeptLastEditorId,
-      @JsonKey(name: "m_dept.created_at") String? mDeptCreatedAt,
-      @JsonKey(name: "m_dept.updated_at") String? mDeptUpdatedAt,
+      @JsonKey(name: "m_dept.created_at") dynamic mDeptCreatedAt,
+      @JsonKey(name: "m_dept.updated_at") dynamic mDeptUpdatedAt,
       @JsonKey(name: "m_posisi.id") int? mPosisiId,
       @JsonKey(name: "m_posisi.m_comp_id") int? mPosisiMCompId,
       @JsonKey(name: "m_posisi.m_dir_id") int? mPosisiMDirId,
@@ -1167,7 +1166,7 @@ abstract class $DataDinasCopyWith<$Res> {
       @JsonKey(name: "m_posisi.updated_at") String? mPosisiUpdatedAt,
       @JsonKey(name: "jenis_spd.id") int? jenisSpdId,
       @JsonKey(name: "jenis_spd.m_comp_id") int? jenisSpdMCompId,
-      @JsonKey(name: "jenis_spd.m_dir_id") int? jenisSpdMDirId,
+      @JsonKey(name: "jenis_spd.m_dir_id") dynamic jenisSpdMDirId,
       @JsonKey(name: "jenis_spd.group") String? jenisSpdGroup,
       @JsonKey(name: "jenis_spd.key") String? jenisSpdKey,
       @JsonKey(name: "jenis_spd.code") String? jenisSpdCode,
@@ -1175,15 +1174,13 @@ abstract class $DataDinasCopyWith<$Res> {
       @JsonKey(name: "jenis_spd.is_active") bool? jenisSpdIsActive,
       @JsonKey(name: "jenis_spd.creator_id") dynamic jenisSpdCreatorId,
       @JsonKey(name: "jenis_spd.last_editor_id") dynamic jenisSpdLastEditorId,
-      @JsonKey(name: "jenis_spd.created_at") String? jenisSpdCreatedAt,
-      @JsonKey(name: "jenis_spd.updated_at") String? jenisSpdUpdatedAt,
+      @JsonKey(name: "jenis_spd.created_at") dynamic jenisSpdCreatedAt,
+      @JsonKey(name: "jenis_spd.updated_at") dynamic jenisSpdUpdatedAt,
       @JsonKey(name: "jenis_spd.value_2") dynamic jenisSpdValue2,
       @JsonKey(name: "jenis_spd.value_3") dynamic jenisSpdValue3,
       @JsonKey(name: "m_zona_asal.id") int? mZonaAsalId,
       @JsonKey(name: "m_zona_asal.m_comp_id") int? mZonaAsalMCompId,
       @JsonKey(name: "m_zona_asal.m_dir_id") int? mZonaAsalMDirId,
-      @JsonKey(name: "m_zona_asal.m_tunj_kemahalan_id")
-      int? mZonaAsalMTunjKemahalanId,
       @JsonKey(name: "m_zona_asal.kode") String? mZonaAsalKode,
       @JsonKey(name: "m_zona_asal.nama") String? mZonaAsalNama,
       @JsonKey(name: "m_zona_asal.desc") String? mZonaAsalDesc,
@@ -1196,8 +1193,6 @@ abstract class $DataDinasCopyWith<$Res> {
       @JsonKey(name: "m_zona_tujuan.id") int? mZonaTujuanId,
       @JsonKey(name: "m_zona_tujuan.m_comp_id") int? mZonaTujuanMCompId,
       @JsonKey(name: "m_zona_tujuan.m_dir_id") int? mZonaTujuanMDirId,
-      @JsonKey(name: "m_zona_tujuan.m_tunj_kemahalan_id")
-      int? mZonaTujuanMTunjKemahalanId,
       @JsonKey(name: "m_zona_tujuan.kode") String? mZonaTujuanKode,
       @JsonKey(name: "m_zona_tujuan.nama") String? mZonaTujuanNama,
       @JsonKey(name: "m_zona_tujuan.desc") String? mZonaTujuanDesc,
@@ -1228,7 +1223,7 @@ abstract class $DataDinasCopyWith<$Res> {
       @JsonKey(name: "m_kary.m_divisi_id") int? mKaryMDivisiId,
       @JsonKey(name: "m_kary.m_dept_id") int? mKaryMDeptId,
       @JsonKey(name: "m_kary.m_zona_id") int? mKaryMZonaId,
-      @JsonKey(name: "m_kary.grading_id") dynamic mKaryGradingId,
+      @JsonKey(name: "m_kary.grading_id") int? mKaryGradingId,
       @JsonKey(name: "m_kary.costcontre_id") int? mKaryCostcontreId,
       @JsonKey(name: "m_kary.kode") String? mKaryKode,
       @JsonKey(name: "m_kary.m_posisi_id") int? mKaryMPosisiId,
@@ -1265,95 +1260,95 @@ abstract class $DataDinasCopyWith<$Res> {
       @JsonKey(name: "m_kary.status_kary_id") dynamic mKaryStatusKaryId,
       @JsonKey(name: "m_kary.lama_kontrak_awal") dynamic mKaryLamaKontrakAwal,
       @JsonKey(name: "m_kary.lama_kontrak_akhir") dynamic mKaryLamaKontrakAkhir,
-      @JsonKey(name: "m_kary.tgl_masuk") String? mKaryTglMasuk,
+      @JsonKey(name: "m_kary.tgl_masuk") dynamic mKaryTglMasuk,
       @JsonKey(name: "m_kary.tgl_berhenti") dynamic mKaryTglBerhenti,
       @JsonKey(name: "m_kary.alasan_berhenti") dynamic mKaryAlasanBerhenti,
       @JsonKey(name: "m_kary.uk_baju") String? mKaryUkBaju,
       @JsonKey(name: "m_kary.uk_celana") String? mKaryUkCelana,
       @JsonKey(name: "m_kary.uk_sepatu") String? mKaryUkSepatu,
-      @JsonKey(name: "m_kary.desc") String? mKaryDesc,
+      @JsonKey(name: "m_kary.desc") dynamic mKaryDesc,
       @JsonKey(name: "m_kary.is_active") bool? mKaryIsActive,
       @JsonKey(name: "m_kary.creator_id") dynamic mKaryCreatorId,
-      @JsonKey(name: "m_kary.last_editor_id") int? mKaryLastEditorId,
+      @JsonKey(name: "m_kary.last_editor_id") dynamic mKaryLastEditorId,
       @JsonKey(name: "m_kary.created_at") String? mKaryCreatedAt,
       @JsonKey(name: "m_kary.updated_at") String? mKaryUpdatedAt,
       @JsonKey(name: "m_kary.m_standart_gaji_id") int? mKaryMStandartGajiId,
       @JsonKey(name: "m_kary.periode_gaji_id") int? mKaryPeriodeGajiId,
-      @JsonKey(name: "m_kary.ref_id") dynamic mKaryRefId,
+      @JsonKey(name: "m_kary.ref_id") int? mKaryRefId,
       @JsonKey(name: "m_kary.presensi_lokasi_default_id")
       dynamic mKaryPresensiLokasiDefaultId,
-      @JsonKey(name: "m_kary.exp_date_cuti") String? mKaryExpDateCuti,
+      @JsonKey(name: "m_kary.exp_date_cuti") dynamic mKaryExpDateCuti,
       @JsonKey(name: "m_kary.limit_potong") int? mKaryLimitPotong,
       @JsonKey(name: "m_kary.atasan_id") int? mKaryAtasanId,
       @JsonKey(name: "m_kary.cuti_p24") dynamic mKaryCutiP24,
       @JsonKey(name: "m_kary.cuti_sisa_p24") dynamic mKaryCutiSisaP24,
-      @JsonKey(name: "pic.id") int? picId,
-      @JsonKey(name: "pic.m_comp_id") int? picMCompId,
-      @JsonKey(name: "pic.m_dir_id") int? picMDirId,
-      @JsonKey(name: "pic.m_divisi_id") int? picMDivisiId,
-      @JsonKey(name: "pic.m_dept_id") int? picMDeptId,
-      @JsonKey(name: "pic.m_zona_id") int? picMZonaId,
-      @JsonKey(name: "pic.grading_id") int? picGradingId,
-      @JsonKey(name: "pic.costcontre_id") int? picCostcontreId,
-      @JsonKey(name: "pic.kode") String? picKode,
-      @JsonKey(name: "pic.m_posisi_id") int? picMPosisiId,
-      @JsonKey(name: "pic.m_jam_kerja_id") int? picMJamKerjaId,
-      @JsonKey(name: "pic.kode_presensi") String? picKodePresensi,
-      @JsonKey(name: "pic.nik") String? picNik,
-      @JsonKey(name: "pic.nama_depan") String? picNamaDepan,
-      @JsonKey(name: "pic.nama_belakang") String? picNamaBelakang,
-      @JsonKey(name: "pic.nama_lengkap") String? picNamaLengkap,
-      @JsonKey(name: "pic.nama_panggilan") String? picNamaPanggilan,
-      @JsonKey(name: "pic.jk_id") int? picJkId,
-      @JsonKey(name: "pic.tempat_lahir") String? picTempatLahir,
-      @JsonKey(name: "pic.tgl_lahir") String? picTglLahir,
-      @JsonKey(name: "pic.provinsi_id") int? picProvinsiId,
-      @JsonKey(name: "pic.kota_id") int? picKotaId,
-      @JsonKey(name: "pic.kecamatan_id") int? picKecamatanId,
-      @JsonKey(name: "pic.kode_pos") String? picKodePos,
-      @JsonKey(name: "pic.alamat_asli") String? picAlamatAsli,
-      @JsonKey(name: "pic.alamat_domisili") String? picAlamatDomisili,
-      @JsonKey(name: "pic.no_tlp") String? picNoTlp,
+      @JsonKey(name: "pic.id") dynamic picId,
+      @JsonKey(name: "pic.m_comp_id") dynamic picMCompId,
+      @JsonKey(name: "pic.m_dir_id") dynamic picMDirId,
+      @JsonKey(name: "pic.m_divisi_id") dynamic picMDivisiId,
+      @JsonKey(name: "pic.m_dept_id") dynamic picMDeptId,
+      @JsonKey(name: "pic.m_zona_id") dynamic picMZonaId,
+      @JsonKey(name: "pic.grading_id") dynamic picGradingId,
+      @JsonKey(name: "pic.costcontre_id") dynamic picCostcontreId,
+      @JsonKey(name: "pic.kode") dynamic picKode,
+      @JsonKey(name: "pic.m_posisi_id") dynamic picMPosisiId,
+      @JsonKey(name: "pic.m_jam_kerja_id") dynamic picMJamKerjaId,
+      @JsonKey(name: "pic.kode_presensi") dynamic picKodePresensi,
+      @JsonKey(name: "pic.nik") dynamic picNik,
+      @JsonKey(name: "pic.nama_depan") dynamic picNamaDepan,
+      @JsonKey(name: "pic.nama_belakang") dynamic picNamaBelakang,
+      @JsonKey(name: "pic.nama_lengkap") dynamic picNamaLengkap,
+      @JsonKey(name: "pic.nama_panggilan") dynamic picNamaPanggilan,
+      @JsonKey(name: "pic.jk_id") dynamic picJkId,
+      @JsonKey(name: "pic.tempat_lahir") dynamic picTempatLahir,
+      @JsonKey(name: "pic.tgl_lahir") dynamic picTglLahir,
+      @JsonKey(name: "pic.provinsi_id") dynamic picProvinsiId,
+      @JsonKey(name: "pic.kota_id") dynamic picKotaId,
+      @JsonKey(name: "pic.kecamatan_id") dynamic picKecamatanId,
+      @JsonKey(name: "pic.kode_pos") dynamic picKodePos,
+      @JsonKey(name: "pic.alamat_asli") dynamic picAlamatAsli,
+      @JsonKey(name: "pic.alamat_domisili") dynamic picAlamatDomisili,
+      @JsonKey(name: "pic.no_tlp") dynamic picNoTlp,
       @JsonKey(name: "pic.no_tlp_lainnya") dynamic picNoTlpLainnya,
-      @JsonKey(name: "pic.no_darurat") String? picNoDarurat,
-      @JsonKey(name: "pic.nama_kontak_darurat") String? picNamaKontakDarurat,
-      @JsonKey(name: "pic.agama_id") int? picAgamaId,
-      @JsonKey(name: "pic.gol_darah_id") int? picGolDarahId,
-      @JsonKey(name: "pic.status_nikah_id") int? picStatusNikahId,
-      @JsonKey(name: "pic.tanggungan_id") int? picTanggunganId,
-      @JsonKey(name: "pic.hub_dgn_karyawan") String? picHubDgnKaryawan,
-      @JsonKey(name: "pic.cuti_jatah_reguler") int? picCutiJatahReguler,
-      @JsonKey(name: "pic.cuti_sisa_reguler") int? picCutiSisaReguler,
-      @JsonKey(name: "pic.cuti_panjang") int? picCutiPanjang,
-      @JsonKey(name: "pic.cuti_sisa_panjang") int? picCutiSisaPanjang,
+      @JsonKey(name: "pic.no_darurat") dynamic picNoDarurat,
+      @JsonKey(name: "pic.nama_kontak_darurat") dynamic picNamaKontakDarurat,
+      @JsonKey(name: "pic.agama_id") dynamic picAgamaId,
+      @JsonKey(name: "pic.gol_darah_id") dynamic picGolDarahId,
+      @JsonKey(name: "pic.status_nikah_id") dynamic picStatusNikahId,
+      @JsonKey(name: "pic.tanggungan_id") dynamic picTanggunganId,
+      @JsonKey(name: "pic.hub_dgn_karyawan") dynamic picHubDgnKaryawan,
+      @JsonKey(name: "pic.cuti_jatah_reguler") dynamic picCutiJatahReguler,
+      @JsonKey(name: "pic.cuti_sisa_reguler") dynamic picCutiSisaReguler,
+      @JsonKey(name: "pic.cuti_panjang") dynamic picCutiPanjang,
+      @JsonKey(name: "pic.cuti_sisa_panjang") dynamic picCutiSisaPanjang,
       @JsonKey(name: "pic.status_kary_id") dynamic picStatusKaryId,
       @JsonKey(name: "pic.lama_kontrak_awal") dynamic picLamaKontrakAwal,
       @JsonKey(name: "pic.lama_kontrak_akhir") dynamic picLamaKontrakAkhir,
       @JsonKey(name: "pic.tgl_masuk") dynamic picTglMasuk,
       @JsonKey(name: "pic.tgl_berhenti") dynamic picTglBerhenti,
       @JsonKey(name: "pic.alasan_berhenti") dynamic picAlasanBerhenti,
-      @JsonKey(name: "pic.uk_baju") String? picUkBaju,
-      @JsonKey(name: "pic.uk_celana") String? picUkCelana,
-      @JsonKey(name: "pic.uk_sepatu") String? picUkSepatu,
+      @JsonKey(name: "pic.uk_baju") dynamic picUkBaju,
+      @JsonKey(name: "pic.uk_celana") dynamic picUkCelana,
+      @JsonKey(name: "pic.uk_sepatu") dynamic picUkSepatu,
       @JsonKey(name: "pic.desc") dynamic picDesc,
-      @JsonKey(name: "pic.is_active") bool? picIsActive,
+      @JsonKey(name: "pic.is_active") dynamic picIsActive,
       @JsonKey(name: "pic.creator_id") dynamic picCreatorId,
-      @JsonKey(name: "pic.last_editor_id") int? picLastEditorId,
-      @JsonKey(name: "pic.created_at") String? picCreatedAt,
-      @JsonKey(name: "pic.updated_at") String? picUpdatedAt,
-      @JsonKey(name: "pic.m_standart_gaji_id") int? picMStandartGajiId,
-      @JsonKey(name: "pic.periode_gaji_id") int? picPeriodeGajiId,
-      @JsonKey(name: "pic.ref_id") int? picRefId,
+      @JsonKey(name: "pic.last_editor_id") dynamic picLastEditorId,
+      @JsonKey(name: "pic.created_at") dynamic picCreatedAt,
+      @JsonKey(name: "pic.updated_at") dynamic picUpdatedAt,
+      @JsonKey(name: "pic.m_standart_gaji_id") dynamic picMStandartGajiId,
+      @JsonKey(name: "pic.periode_gaji_id") dynamic picPeriodeGajiId,
+      @JsonKey(name: "pic.ref_id") dynamic picRefId,
       @JsonKey(name: "pic.presensi_lokasi_default_id")
       dynamic picPresensiLokasiDefaultId,
-      @JsonKey(name: "pic.exp_date_cuti") String? picExpDateCuti,
-      @JsonKey(name: "pic.limit_potong") int? picLimitPotong,
-      @JsonKey(name: "pic.atasan_id") int? picAtasanId,
+      @JsonKey(name: "pic.exp_date_cuti") dynamic picExpDateCuti,
+      @JsonKey(name: "pic.limit_potong") dynamic picLimitPotong,
+      @JsonKey(name: "pic.atasan_id") dynamic picAtasanId,
       @JsonKey(name: "pic.cuti_p24") dynamic picCutiP24,
       @JsonKey(name: "pic.cuti_sisa_p24") dynamic picCutiSisaP24,
       @JsonKey(name: "creator.id") int? creatorId,
       @JsonKey(name: "creator.name") String? creatorName,
-      @JsonKey(name: "creator.email") String? creatorEmail,
+      @JsonKey(name: "creator.email") dynamic creatorEmail,
       @JsonKey(name: "creator.username") String? creatorUsername,
       @JsonKey(name: "creator.email_verified_at")
       dynamic creatorEmailVerifiedAt,
@@ -1361,13 +1356,13 @@ abstract class $DataDinasCopyWith<$Res> {
       @JsonKey(name: "creator.m_comp_id") int? creatorMCompId,
       @JsonKey(name: "creator.m_dir_id") int? creatorMDirId,
       @JsonKey(name: "creator.is_active") bool? creatorIsActive,
-      @JsonKey(name: "creator.creator_id") dynamic creatorCreatorId,
-      @JsonKey(name: "creator.last_editor_id") int? creatorLastEditorId,
+      @JsonKey(name: "creator.creator_id") int? creatorCreatorId,
+      @JsonKey(name: "creator.last_editor_id") dynamic creatorLastEditorId,
       @JsonKey(name: "creator.remember_token") dynamic creatorRememberToken,
-      @JsonKey(name: "creator.created_at") dynamic creatorCreatedAt,
+      @JsonKey(name: "creator.created_at") String? creatorCreatedAt,
       @JsonKey(name: "creator.updated_at") String? creatorUpdatedAt,
       @JsonKey(name: "creator.profil_image") String? creatorProfilImage,
-      @JsonKey(name: "creator.telp") String? creatorTelp,
+      @JsonKey(name: "creator.telp") dynamic creatorTelp,
       @JsonKey(name: "creator.m_kary_id") int? creatorMKaryId,
       @JsonKey(name: "last_editor.id") dynamic lastEditorId,
       @JsonKey(name: "last_editor.name") dynamic lastEditorName,
@@ -1436,6 +1431,7 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
     Object? updatedAt = freezed,
     Object? isKendDinas = freezed,
     Object? interval = freezed,
+    Object? catatanKend = freezed,
     Object? mCompId = freezed,
     Object? mCompNama = freezed,
     Object? mCompIsActive = freezed,
@@ -1526,7 +1522,6 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
     Object? mZonaAsalId = freezed,
     Object? mZonaAsalMCompId = freezed,
     Object? mZonaAsalMDirId = freezed,
-    Object? mZonaAsalMTunjKemahalanId = freezed,
     Object? mZonaAsalKode = freezed,
     Object? mZonaAsalNama = freezed,
     Object? mZonaAsalDesc = freezed,
@@ -1538,7 +1533,6 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
     Object? mZonaTujuanId = freezed,
     Object? mZonaTujuanMCompId = freezed,
     Object? mZonaTujuanMDirId = freezed,
-    Object? mZonaTujuanMTunjKemahalanId = freezed,
     Object? mZonaTujuanKode = freezed,
     Object? mZonaTujuanNama = freezed,
     Object? mZonaTujuanDesc = freezed,
@@ -1845,6 +1839,10 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
           ? _value.interval
           : interval // ignore: cast_nullable_to_non_nullable
               as int?,
+      catatanKend: freezed == catatanKend
+          ? _value.catatanKend
+          : catatanKend // ignore: cast_nullable_to_non_nullable
+              as String?,
       mCompId: freezed == mCompId
           ? _value.mCompId
           : mCompId // ignore: cast_nullable_to_non_nullable
@@ -1944,15 +1942,15 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       mDirId: freezed == mDirId
           ? _value.mDirId
           : mDirId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mDirMCompId: freezed == mDirMCompId
           ? _value.mDirMCompId
           : mDirMCompId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mDirNama: freezed == mDirNama
           ? _value.mDirNama
           : mDirNama // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mDirDesc: freezed == mDirDesc
           ? _value.mDirDesc
           : mDirDesc // ignore: cast_nullable_to_non_nullable
@@ -1960,11 +1958,11 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       mDirIsActive: freezed == mDirIsActive
           ? _value.mDirIsActive
           : mDirIsActive // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       mDirCreatorId: freezed == mDirCreatorId
           ? _value.mDirCreatorId
           : mDirCreatorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mDirLastEditorId: freezed == mDirLastEditorId
           ? _value.mDirLastEditorId
           : mDirLastEditorId // ignore: cast_nullable_to_non_nullable
@@ -1996,7 +1994,7 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       mDivisiDesc: freezed == mDivisiDesc
           ? _value.mDivisiDesc
           : mDivisiDesc // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mDivisiIsActive: freezed == mDivisiIsActive
           ? _value.mDivisiIsActive
           : mDivisiIsActive // ignore: cast_nullable_to_non_nullable
@@ -2004,19 +2002,19 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       mDivisiCreatorId: freezed == mDivisiCreatorId
           ? _value.mDivisiCreatorId
           : mDivisiCreatorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mDivisiLastEditorId: freezed == mDivisiLastEditorId
           ? _value.mDivisiLastEditorId
           : mDivisiLastEditorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mDivisiCreatedAt: freezed == mDivisiCreatedAt
           ? _value.mDivisiCreatedAt
           : mDivisiCreatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mDivisiUpdatedAt: freezed == mDivisiUpdatedAt
           ? _value.mDivisiUpdatedAt
           : mDivisiUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mDeptId: freezed == mDeptId
           ? _value.mDeptId
           : mDeptId // ignore: cast_nullable_to_non_nullable
@@ -2036,7 +2034,7 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       mDeptDesc: freezed == mDeptDesc
           ? _value.mDeptDesc
           : mDeptDesc // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mDeptIsActive: freezed == mDeptIsActive
           ? _value.mDeptIsActive
           : mDeptIsActive // ignore: cast_nullable_to_non_nullable
@@ -2052,11 +2050,11 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       mDeptCreatedAt: freezed == mDeptCreatedAt
           ? _value.mDeptCreatedAt
           : mDeptCreatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mDeptUpdatedAt: freezed == mDeptUpdatedAt
           ? _value.mDeptUpdatedAt
           : mDeptUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mPosisiId: freezed == mPosisiId
           ? _value.mPosisiId
           : mPosisiId // ignore: cast_nullable_to_non_nullable
@@ -2148,7 +2146,7 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       jenisSpdMDirId: freezed == jenisSpdMDirId
           ? _value.jenisSpdMDirId
           : jenisSpdMDirId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       jenisSpdGroup: freezed == jenisSpdGroup
           ? _value.jenisSpdGroup
           : jenisSpdGroup // ignore: cast_nullable_to_non_nullable
@@ -2180,11 +2178,11 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       jenisSpdCreatedAt: freezed == jenisSpdCreatedAt
           ? _value.jenisSpdCreatedAt
           : jenisSpdCreatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       jenisSpdUpdatedAt: freezed == jenisSpdUpdatedAt
           ? _value.jenisSpdUpdatedAt
           : jenisSpdUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       jenisSpdValue2: freezed == jenisSpdValue2
           ? _value.jenisSpdValue2
           : jenisSpdValue2 // ignore: cast_nullable_to_non_nullable
@@ -2204,10 +2202,6 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       mZonaAsalMDirId: freezed == mZonaAsalMDirId
           ? _value.mZonaAsalMDirId
           : mZonaAsalMDirId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      mZonaAsalMTunjKemahalanId: freezed == mZonaAsalMTunjKemahalanId
-          ? _value.mZonaAsalMTunjKemahalanId
-          : mZonaAsalMTunjKemahalanId // ignore: cast_nullable_to_non_nullable
               as int?,
       mZonaAsalKode: freezed == mZonaAsalKode
           ? _value.mZonaAsalKode
@@ -2252,10 +2246,6 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       mZonaTujuanMDirId: freezed == mZonaTujuanMDirId
           ? _value.mZonaTujuanMDirId
           : mZonaTujuanMDirId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      mZonaTujuanMTunjKemahalanId: freezed == mZonaTujuanMTunjKemahalanId
-          ? _value.mZonaTujuanMTunjKemahalanId
-          : mZonaTujuanMTunjKemahalanId // ignore: cast_nullable_to_non_nullable
               as int?,
       mZonaTujuanKode: freezed == mZonaTujuanKode
           ? _value.mZonaTujuanKode
@@ -2360,7 +2350,7 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       mKaryGradingId: freezed == mKaryGradingId
           ? _value.mKaryGradingId
           : mKaryGradingId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       mKaryCostcontreId: freezed == mKaryCostcontreId
           ? _value.mKaryCostcontreId
           : mKaryCostcontreId // ignore: cast_nullable_to_non_nullable
@@ -2504,7 +2494,7 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       mKaryTglMasuk: freezed == mKaryTglMasuk
           ? _value.mKaryTglMasuk
           : mKaryTglMasuk // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mKaryTglBerhenti: freezed == mKaryTglBerhenti
           ? _value.mKaryTglBerhenti
           : mKaryTglBerhenti // ignore: cast_nullable_to_non_nullable
@@ -2528,7 +2518,7 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       mKaryDesc: freezed == mKaryDesc
           ? _value.mKaryDesc
           : mKaryDesc // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mKaryIsActive: freezed == mKaryIsActive
           ? _value.mKaryIsActive
           : mKaryIsActive // ignore: cast_nullable_to_non_nullable
@@ -2540,7 +2530,7 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       mKaryLastEditorId: freezed == mKaryLastEditorId
           ? _value.mKaryLastEditorId
           : mKaryLastEditorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryCreatedAt: freezed == mKaryCreatedAt
           ? _value.mKaryCreatedAt
           : mKaryCreatedAt // ignore: cast_nullable_to_non_nullable
@@ -2560,7 +2550,7 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       mKaryRefId: freezed == mKaryRefId
           ? _value.mKaryRefId
           : mKaryRefId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       mKaryPresensiLokasiDefaultId: freezed == mKaryPresensiLokasiDefaultId
           ? _value.mKaryPresensiLokasiDefaultId
           : mKaryPresensiLokasiDefaultId // ignore: cast_nullable_to_non_nullable
@@ -2568,7 +2558,7 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       mKaryExpDateCuti: freezed == mKaryExpDateCuti
           ? _value.mKaryExpDateCuti
           : mKaryExpDateCuti // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mKaryLimitPotong: freezed == mKaryLimitPotong
           ? _value.mKaryLimitPotong
           : mKaryLimitPotong // ignore: cast_nullable_to_non_nullable
@@ -2588,111 +2578,111 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       picId: freezed == picId
           ? _value.picId
           : picId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picMCompId: freezed == picMCompId
           ? _value.picMCompId
           : picMCompId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picMDirId: freezed == picMDirId
           ? _value.picMDirId
           : picMDirId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picMDivisiId: freezed == picMDivisiId
           ? _value.picMDivisiId
           : picMDivisiId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picMDeptId: freezed == picMDeptId
           ? _value.picMDeptId
           : picMDeptId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picMZonaId: freezed == picMZonaId
           ? _value.picMZonaId
           : picMZonaId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picGradingId: freezed == picGradingId
           ? _value.picGradingId
           : picGradingId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picCostcontreId: freezed == picCostcontreId
           ? _value.picCostcontreId
           : picCostcontreId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picKode: freezed == picKode
           ? _value.picKode
           : picKode // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picMPosisiId: freezed == picMPosisiId
           ? _value.picMPosisiId
           : picMPosisiId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picMJamKerjaId: freezed == picMJamKerjaId
           ? _value.picMJamKerjaId
           : picMJamKerjaId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picKodePresensi: freezed == picKodePresensi
           ? _value.picKodePresensi
           : picKodePresensi // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picNik: freezed == picNik
           ? _value.picNik
           : picNik // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picNamaDepan: freezed == picNamaDepan
           ? _value.picNamaDepan
           : picNamaDepan // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picNamaBelakang: freezed == picNamaBelakang
           ? _value.picNamaBelakang
           : picNamaBelakang // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picNamaLengkap: freezed == picNamaLengkap
           ? _value.picNamaLengkap
           : picNamaLengkap // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picNamaPanggilan: freezed == picNamaPanggilan
           ? _value.picNamaPanggilan
           : picNamaPanggilan // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picJkId: freezed == picJkId
           ? _value.picJkId
           : picJkId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picTempatLahir: freezed == picTempatLahir
           ? _value.picTempatLahir
           : picTempatLahir // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picTglLahir: freezed == picTglLahir
           ? _value.picTglLahir
           : picTglLahir // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picProvinsiId: freezed == picProvinsiId
           ? _value.picProvinsiId
           : picProvinsiId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picKotaId: freezed == picKotaId
           ? _value.picKotaId
           : picKotaId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picKecamatanId: freezed == picKecamatanId
           ? _value.picKecamatanId
           : picKecamatanId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picKodePos: freezed == picKodePos
           ? _value.picKodePos
           : picKodePos // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picAlamatAsli: freezed == picAlamatAsli
           ? _value.picAlamatAsli
           : picAlamatAsli // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picAlamatDomisili: freezed == picAlamatDomisili
           ? _value.picAlamatDomisili
           : picAlamatDomisili // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picNoTlp: freezed == picNoTlp
           ? _value.picNoTlp
           : picNoTlp // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picNoTlpLainnya: freezed == picNoTlpLainnya
           ? _value.picNoTlpLainnya
           : picNoTlpLainnya // ignore: cast_nullable_to_non_nullable
@@ -2700,47 +2690,47 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       picNoDarurat: freezed == picNoDarurat
           ? _value.picNoDarurat
           : picNoDarurat // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picNamaKontakDarurat: freezed == picNamaKontakDarurat
           ? _value.picNamaKontakDarurat
           : picNamaKontakDarurat // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picAgamaId: freezed == picAgamaId
           ? _value.picAgamaId
           : picAgamaId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picGolDarahId: freezed == picGolDarahId
           ? _value.picGolDarahId
           : picGolDarahId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picStatusNikahId: freezed == picStatusNikahId
           ? _value.picStatusNikahId
           : picStatusNikahId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picTanggunganId: freezed == picTanggunganId
           ? _value.picTanggunganId
           : picTanggunganId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picHubDgnKaryawan: freezed == picHubDgnKaryawan
           ? _value.picHubDgnKaryawan
           : picHubDgnKaryawan // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picCutiJatahReguler: freezed == picCutiJatahReguler
           ? _value.picCutiJatahReguler
           : picCutiJatahReguler // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picCutiSisaReguler: freezed == picCutiSisaReguler
           ? _value.picCutiSisaReguler
           : picCutiSisaReguler // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picCutiPanjang: freezed == picCutiPanjang
           ? _value.picCutiPanjang
           : picCutiPanjang // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picCutiSisaPanjang: freezed == picCutiSisaPanjang
           ? _value.picCutiSisaPanjang
           : picCutiSisaPanjang // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picStatusKaryId: freezed == picStatusKaryId
           ? _value.picStatusKaryId
           : picStatusKaryId // ignore: cast_nullable_to_non_nullable
@@ -2768,15 +2758,15 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       picUkBaju: freezed == picUkBaju
           ? _value.picUkBaju
           : picUkBaju // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picUkCelana: freezed == picUkCelana
           ? _value.picUkCelana
           : picUkCelana // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picUkSepatu: freezed == picUkSepatu
           ? _value.picUkSepatu
           : picUkSepatu // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picDesc: freezed == picDesc
           ? _value.picDesc
           : picDesc // ignore: cast_nullable_to_non_nullable
@@ -2784,7 +2774,7 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       picIsActive: freezed == picIsActive
           ? _value.picIsActive
           : picIsActive // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       picCreatorId: freezed == picCreatorId
           ? _value.picCreatorId
           : picCreatorId // ignore: cast_nullable_to_non_nullable
@@ -2792,27 +2782,27 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       picLastEditorId: freezed == picLastEditorId
           ? _value.picLastEditorId
           : picLastEditorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picCreatedAt: freezed == picCreatedAt
           ? _value.picCreatedAt
           : picCreatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picUpdatedAt: freezed == picUpdatedAt
           ? _value.picUpdatedAt
           : picUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picMStandartGajiId: freezed == picMStandartGajiId
           ? _value.picMStandartGajiId
           : picMStandartGajiId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picPeriodeGajiId: freezed == picPeriodeGajiId
           ? _value.picPeriodeGajiId
           : picPeriodeGajiId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picRefId: freezed == picRefId
           ? _value.picRefId
           : picRefId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picPresensiLokasiDefaultId: freezed == picPresensiLokasiDefaultId
           ? _value.picPresensiLokasiDefaultId
           : picPresensiLokasiDefaultId // ignore: cast_nullable_to_non_nullable
@@ -2820,15 +2810,15 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       picExpDateCuti: freezed == picExpDateCuti
           ? _value.picExpDateCuti
           : picExpDateCuti // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picLimitPotong: freezed == picLimitPotong
           ? _value.picLimitPotong
           : picLimitPotong // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picAtasanId: freezed == picAtasanId
           ? _value.picAtasanId
           : picAtasanId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picCutiP24: freezed == picCutiP24
           ? _value.picCutiP24
           : picCutiP24 // ignore: cast_nullable_to_non_nullable
@@ -2848,7 +2838,7 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       creatorEmail: freezed == creatorEmail
           ? _value.creatorEmail
           : creatorEmail // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       creatorUsername: freezed == creatorUsername
           ? _value.creatorUsername
           : creatorUsername // ignore: cast_nullable_to_non_nullable
@@ -2876,11 +2866,11 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       creatorCreatorId: freezed == creatorCreatorId
           ? _value.creatorCreatorId
           : creatorCreatorId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       creatorLastEditorId: freezed == creatorLastEditorId
           ? _value.creatorLastEditorId
           : creatorLastEditorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       creatorRememberToken: freezed == creatorRememberToken
           ? _value.creatorRememberToken
           : creatorRememberToken // ignore: cast_nullable_to_non_nullable
@@ -2888,7 +2878,7 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       creatorCreatedAt: freezed == creatorCreatedAt
           ? _value.creatorCreatedAt
           : creatorCreatedAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       creatorUpdatedAt: freezed == creatorUpdatedAt
           ? _value.creatorUpdatedAt
           : creatorUpdatedAt // ignore: cast_nullable_to_non_nullable
@@ -2900,7 +2890,7 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
       creatorTelp: freezed == creatorTelp
           ? _value.creatorTelp
           : creatorTelp // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       creatorMKaryId: freezed == creatorMKaryId
           ? _value.creatorMKaryId
           : creatorMKaryId // ignore: cast_nullable_to_non_nullable
@@ -3021,6 +3011,7 @@ abstract class _$$DataDinasImplCopyWith<$Res>
       @JsonKey(name: "updated_at") String? updatedAt,
       @JsonKey(name: "is_kend_dinas") bool? isKendDinas,
       @JsonKey(name: "interval") int? interval,
+      @JsonKey(name: "catatan_kend") String? catatanKend,
       @JsonKey(name: "m_comp.id") int? mCompId,
       @JsonKey(name: "m_comp.nama") String? mCompNama,
       @JsonKey(name: "m_comp.is_active") bool? mCompIsActive,
@@ -3045,12 +3036,12 @@ abstract class _$$DataDinasImplCopyWith<$Res>
       @JsonKey(name: "m_spd.last_editor_id") dynamic mSpdLastEditorId,
       @JsonKey(name: "m_spd.created_at") String? mSpdCreatedAt,
       @JsonKey(name: "m_spd.updated_at") String? mSpdUpdatedAt,
-      @JsonKey(name: "m_dir.id") int? mDirId,
-      @JsonKey(name: "m_dir.m_comp_id") int? mDirMCompId,
-      @JsonKey(name: "m_dir.nama") String? mDirNama,
+      @JsonKey(name: "m_dir.id") dynamic mDirId,
+      @JsonKey(name: "m_dir.m_comp_id") dynamic mDirMCompId,
+      @JsonKey(name: "m_dir.nama") dynamic mDirNama,
       @JsonKey(name: "m_dir.desc") dynamic mDirDesc,
-      @JsonKey(name: "m_dir.is_active") bool? mDirIsActive,
-      @JsonKey(name: "m_dir.creator_id") int? mDirCreatorId,
+      @JsonKey(name: "m_dir.is_active") dynamic mDirIsActive,
+      @JsonKey(name: "m_dir.creator_id") dynamic mDirCreatorId,
       @JsonKey(name: "m_dir.last_editor_id") dynamic mDirLastEditorId,
       @JsonKey(name: "m_dir.created_at") dynamic mDirCreatedAt,
       @JsonKey(name: "m_dir.updated_at") dynamic mDirUpdatedAt,
@@ -3058,22 +3049,22 @@ abstract class _$$DataDinasImplCopyWith<$Res>
       @JsonKey(name: "m_divisi.m_comp_id") int? mDivisiMCompId,
       @JsonKey(name: "m_divisi.m_dir_id") int? mDivisiMDirId,
       @JsonKey(name: "m_divisi.nama") String? mDivisiNama,
-      @JsonKey(name: "m_divisi.desc") String? mDivisiDesc,
+      @JsonKey(name: "m_divisi.desc") dynamic mDivisiDesc,
       @JsonKey(name: "m_divisi.is_active") bool? mDivisiIsActive,
-      @JsonKey(name: "m_divisi.creator_id") int? mDivisiCreatorId,
-      @JsonKey(name: "m_divisi.last_editor_id") int? mDivisiLastEditorId,
-      @JsonKey(name: "m_divisi.created_at") String? mDivisiCreatedAt,
-      @JsonKey(name: "m_divisi.updated_at") String? mDivisiUpdatedAt,
+      @JsonKey(name: "m_divisi.creator_id") dynamic mDivisiCreatorId,
+      @JsonKey(name: "m_divisi.last_editor_id") dynamic mDivisiLastEditorId,
+      @JsonKey(name: "m_divisi.created_at") dynamic mDivisiCreatedAt,
+      @JsonKey(name: "m_divisi.updated_at") dynamic mDivisiUpdatedAt,
       @JsonKey(name: "m_dept.id") int? mDeptId,
       @JsonKey(name: "m_dept.m_dir_id") int? mDeptMDirId,
       @JsonKey(name: "m_dept.m_divisi_id") int? mDeptMDivisiId,
       @JsonKey(name: "m_dept.nama") String? mDeptNama,
-      @JsonKey(name: "m_dept.desc") String? mDeptDesc,
+      @JsonKey(name: "m_dept.desc") dynamic mDeptDesc,
       @JsonKey(name: "m_dept.is_active") bool? mDeptIsActive,
       @JsonKey(name: "m_dept.creator_id") dynamic mDeptCreatorId,
       @JsonKey(name: "m_dept.last_editor_id") dynamic mDeptLastEditorId,
-      @JsonKey(name: "m_dept.created_at") String? mDeptCreatedAt,
-      @JsonKey(name: "m_dept.updated_at") String? mDeptUpdatedAt,
+      @JsonKey(name: "m_dept.created_at") dynamic mDeptCreatedAt,
+      @JsonKey(name: "m_dept.updated_at") dynamic mDeptUpdatedAt,
       @JsonKey(name: "m_posisi.id") int? mPosisiId,
       @JsonKey(name: "m_posisi.m_comp_id") int? mPosisiMCompId,
       @JsonKey(name: "m_posisi.m_dir_id") int? mPosisiMDirId,
@@ -3096,7 +3087,7 @@ abstract class _$$DataDinasImplCopyWith<$Res>
       @JsonKey(name: "m_posisi.updated_at") String? mPosisiUpdatedAt,
       @JsonKey(name: "jenis_spd.id") int? jenisSpdId,
       @JsonKey(name: "jenis_spd.m_comp_id") int? jenisSpdMCompId,
-      @JsonKey(name: "jenis_spd.m_dir_id") int? jenisSpdMDirId,
+      @JsonKey(name: "jenis_spd.m_dir_id") dynamic jenisSpdMDirId,
       @JsonKey(name: "jenis_spd.group") String? jenisSpdGroup,
       @JsonKey(name: "jenis_spd.key") String? jenisSpdKey,
       @JsonKey(name: "jenis_spd.code") String? jenisSpdCode,
@@ -3104,15 +3095,13 @@ abstract class _$$DataDinasImplCopyWith<$Res>
       @JsonKey(name: "jenis_spd.is_active") bool? jenisSpdIsActive,
       @JsonKey(name: "jenis_spd.creator_id") dynamic jenisSpdCreatorId,
       @JsonKey(name: "jenis_spd.last_editor_id") dynamic jenisSpdLastEditorId,
-      @JsonKey(name: "jenis_spd.created_at") String? jenisSpdCreatedAt,
-      @JsonKey(name: "jenis_spd.updated_at") String? jenisSpdUpdatedAt,
+      @JsonKey(name: "jenis_spd.created_at") dynamic jenisSpdCreatedAt,
+      @JsonKey(name: "jenis_spd.updated_at") dynamic jenisSpdUpdatedAt,
       @JsonKey(name: "jenis_spd.value_2") dynamic jenisSpdValue2,
       @JsonKey(name: "jenis_spd.value_3") dynamic jenisSpdValue3,
       @JsonKey(name: "m_zona_asal.id") int? mZonaAsalId,
       @JsonKey(name: "m_zona_asal.m_comp_id") int? mZonaAsalMCompId,
       @JsonKey(name: "m_zona_asal.m_dir_id") int? mZonaAsalMDirId,
-      @JsonKey(name: "m_zona_asal.m_tunj_kemahalan_id")
-      int? mZonaAsalMTunjKemahalanId,
       @JsonKey(name: "m_zona_asal.kode") String? mZonaAsalKode,
       @JsonKey(name: "m_zona_asal.nama") String? mZonaAsalNama,
       @JsonKey(name: "m_zona_asal.desc") String? mZonaAsalDesc,
@@ -3125,8 +3114,6 @@ abstract class _$$DataDinasImplCopyWith<$Res>
       @JsonKey(name: "m_zona_tujuan.id") int? mZonaTujuanId,
       @JsonKey(name: "m_zona_tujuan.m_comp_id") int? mZonaTujuanMCompId,
       @JsonKey(name: "m_zona_tujuan.m_dir_id") int? mZonaTujuanMDirId,
-      @JsonKey(name: "m_zona_tujuan.m_tunj_kemahalan_id")
-      int? mZonaTujuanMTunjKemahalanId,
       @JsonKey(name: "m_zona_tujuan.kode") String? mZonaTujuanKode,
       @JsonKey(name: "m_zona_tujuan.nama") String? mZonaTujuanNama,
       @JsonKey(name: "m_zona_tujuan.desc") String? mZonaTujuanDesc,
@@ -3157,7 +3144,7 @@ abstract class _$$DataDinasImplCopyWith<$Res>
       @JsonKey(name: "m_kary.m_divisi_id") int? mKaryMDivisiId,
       @JsonKey(name: "m_kary.m_dept_id") int? mKaryMDeptId,
       @JsonKey(name: "m_kary.m_zona_id") int? mKaryMZonaId,
-      @JsonKey(name: "m_kary.grading_id") dynamic mKaryGradingId,
+      @JsonKey(name: "m_kary.grading_id") int? mKaryGradingId,
       @JsonKey(name: "m_kary.costcontre_id") int? mKaryCostcontreId,
       @JsonKey(name: "m_kary.kode") String? mKaryKode,
       @JsonKey(name: "m_kary.m_posisi_id") int? mKaryMPosisiId,
@@ -3194,95 +3181,95 @@ abstract class _$$DataDinasImplCopyWith<$Res>
       @JsonKey(name: "m_kary.status_kary_id") dynamic mKaryStatusKaryId,
       @JsonKey(name: "m_kary.lama_kontrak_awal") dynamic mKaryLamaKontrakAwal,
       @JsonKey(name: "m_kary.lama_kontrak_akhir") dynamic mKaryLamaKontrakAkhir,
-      @JsonKey(name: "m_kary.tgl_masuk") String? mKaryTglMasuk,
+      @JsonKey(name: "m_kary.tgl_masuk") dynamic mKaryTglMasuk,
       @JsonKey(name: "m_kary.tgl_berhenti") dynamic mKaryTglBerhenti,
       @JsonKey(name: "m_kary.alasan_berhenti") dynamic mKaryAlasanBerhenti,
       @JsonKey(name: "m_kary.uk_baju") String? mKaryUkBaju,
       @JsonKey(name: "m_kary.uk_celana") String? mKaryUkCelana,
       @JsonKey(name: "m_kary.uk_sepatu") String? mKaryUkSepatu,
-      @JsonKey(name: "m_kary.desc") String? mKaryDesc,
+      @JsonKey(name: "m_kary.desc") dynamic mKaryDesc,
       @JsonKey(name: "m_kary.is_active") bool? mKaryIsActive,
       @JsonKey(name: "m_kary.creator_id") dynamic mKaryCreatorId,
-      @JsonKey(name: "m_kary.last_editor_id") int? mKaryLastEditorId,
+      @JsonKey(name: "m_kary.last_editor_id") dynamic mKaryLastEditorId,
       @JsonKey(name: "m_kary.created_at") String? mKaryCreatedAt,
       @JsonKey(name: "m_kary.updated_at") String? mKaryUpdatedAt,
       @JsonKey(name: "m_kary.m_standart_gaji_id") int? mKaryMStandartGajiId,
       @JsonKey(name: "m_kary.periode_gaji_id") int? mKaryPeriodeGajiId,
-      @JsonKey(name: "m_kary.ref_id") dynamic mKaryRefId,
+      @JsonKey(name: "m_kary.ref_id") int? mKaryRefId,
       @JsonKey(name: "m_kary.presensi_lokasi_default_id")
       dynamic mKaryPresensiLokasiDefaultId,
-      @JsonKey(name: "m_kary.exp_date_cuti") String? mKaryExpDateCuti,
+      @JsonKey(name: "m_kary.exp_date_cuti") dynamic mKaryExpDateCuti,
       @JsonKey(name: "m_kary.limit_potong") int? mKaryLimitPotong,
       @JsonKey(name: "m_kary.atasan_id") int? mKaryAtasanId,
       @JsonKey(name: "m_kary.cuti_p24") dynamic mKaryCutiP24,
       @JsonKey(name: "m_kary.cuti_sisa_p24") dynamic mKaryCutiSisaP24,
-      @JsonKey(name: "pic.id") int? picId,
-      @JsonKey(name: "pic.m_comp_id") int? picMCompId,
-      @JsonKey(name: "pic.m_dir_id") int? picMDirId,
-      @JsonKey(name: "pic.m_divisi_id") int? picMDivisiId,
-      @JsonKey(name: "pic.m_dept_id") int? picMDeptId,
-      @JsonKey(name: "pic.m_zona_id") int? picMZonaId,
-      @JsonKey(name: "pic.grading_id") int? picGradingId,
-      @JsonKey(name: "pic.costcontre_id") int? picCostcontreId,
-      @JsonKey(name: "pic.kode") String? picKode,
-      @JsonKey(name: "pic.m_posisi_id") int? picMPosisiId,
-      @JsonKey(name: "pic.m_jam_kerja_id") int? picMJamKerjaId,
-      @JsonKey(name: "pic.kode_presensi") String? picKodePresensi,
-      @JsonKey(name: "pic.nik") String? picNik,
-      @JsonKey(name: "pic.nama_depan") String? picNamaDepan,
-      @JsonKey(name: "pic.nama_belakang") String? picNamaBelakang,
-      @JsonKey(name: "pic.nama_lengkap") String? picNamaLengkap,
-      @JsonKey(name: "pic.nama_panggilan") String? picNamaPanggilan,
-      @JsonKey(name: "pic.jk_id") int? picJkId,
-      @JsonKey(name: "pic.tempat_lahir") String? picTempatLahir,
-      @JsonKey(name: "pic.tgl_lahir") String? picTglLahir,
-      @JsonKey(name: "pic.provinsi_id") int? picProvinsiId,
-      @JsonKey(name: "pic.kota_id") int? picKotaId,
-      @JsonKey(name: "pic.kecamatan_id") int? picKecamatanId,
-      @JsonKey(name: "pic.kode_pos") String? picKodePos,
-      @JsonKey(name: "pic.alamat_asli") String? picAlamatAsli,
-      @JsonKey(name: "pic.alamat_domisili") String? picAlamatDomisili,
-      @JsonKey(name: "pic.no_tlp") String? picNoTlp,
+      @JsonKey(name: "pic.id") dynamic picId,
+      @JsonKey(name: "pic.m_comp_id") dynamic picMCompId,
+      @JsonKey(name: "pic.m_dir_id") dynamic picMDirId,
+      @JsonKey(name: "pic.m_divisi_id") dynamic picMDivisiId,
+      @JsonKey(name: "pic.m_dept_id") dynamic picMDeptId,
+      @JsonKey(name: "pic.m_zona_id") dynamic picMZonaId,
+      @JsonKey(name: "pic.grading_id") dynamic picGradingId,
+      @JsonKey(name: "pic.costcontre_id") dynamic picCostcontreId,
+      @JsonKey(name: "pic.kode") dynamic picKode,
+      @JsonKey(name: "pic.m_posisi_id") dynamic picMPosisiId,
+      @JsonKey(name: "pic.m_jam_kerja_id") dynamic picMJamKerjaId,
+      @JsonKey(name: "pic.kode_presensi") dynamic picKodePresensi,
+      @JsonKey(name: "pic.nik") dynamic picNik,
+      @JsonKey(name: "pic.nama_depan") dynamic picNamaDepan,
+      @JsonKey(name: "pic.nama_belakang") dynamic picNamaBelakang,
+      @JsonKey(name: "pic.nama_lengkap") dynamic picNamaLengkap,
+      @JsonKey(name: "pic.nama_panggilan") dynamic picNamaPanggilan,
+      @JsonKey(name: "pic.jk_id") dynamic picJkId,
+      @JsonKey(name: "pic.tempat_lahir") dynamic picTempatLahir,
+      @JsonKey(name: "pic.tgl_lahir") dynamic picTglLahir,
+      @JsonKey(name: "pic.provinsi_id") dynamic picProvinsiId,
+      @JsonKey(name: "pic.kota_id") dynamic picKotaId,
+      @JsonKey(name: "pic.kecamatan_id") dynamic picKecamatanId,
+      @JsonKey(name: "pic.kode_pos") dynamic picKodePos,
+      @JsonKey(name: "pic.alamat_asli") dynamic picAlamatAsli,
+      @JsonKey(name: "pic.alamat_domisili") dynamic picAlamatDomisili,
+      @JsonKey(name: "pic.no_tlp") dynamic picNoTlp,
       @JsonKey(name: "pic.no_tlp_lainnya") dynamic picNoTlpLainnya,
-      @JsonKey(name: "pic.no_darurat") String? picNoDarurat,
-      @JsonKey(name: "pic.nama_kontak_darurat") String? picNamaKontakDarurat,
-      @JsonKey(name: "pic.agama_id") int? picAgamaId,
-      @JsonKey(name: "pic.gol_darah_id") int? picGolDarahId,
-      @JsonKey(name: "pic.status_nikah_id") int? picStatusNikahId,
-      @JsonKey(name: "pic.tanggungan_id") int? picTanggunganId,
-      @JsonKey(name: "pic.hub_dgn_karyawan") String? picHubDgnKaryawan,
-      @JsonKey(name: "pic.cuti_jatah_reguler") int? picCutiJatahReguler,
-      @JsonKey(name: "pic.cuti_sisa_reguler") int? picCutiSisaReguler,
-      @JsonKey(name: "pic.cuti_panjang") int? picCutiPanjang,
-      @JsonKey(name: "pic.cuti_sisa_panjang") int? picCutiSisaPanjang,
+      @JsonKey(name: "pic.no_darurat") dynamic picNoDarurat,
+      @JsonKey(name: "pic.nama_kontak_darurat") dynamic picNamaKontakDarurat,
+      @JsonKey(name: "pic.agama_id") dynamic picAgamaId,
+      @JsonKey(name: "pic.gol_darah_id") dynamic picGolDarahId,
+      @JsonKey(name: "pic.status_nikah_id") dynamic picStatusNikahId,
+      @JsonKey(name: "pic.tanggungan_id") dynamic picTanggunganId,
+      @JsonKey(name: "pic.hub_dgn_karyawan") dynamic picHubDgnKaryawan,
+      @JsonKey(name: "pic.cuti_jatah_reguler") dynamic picCutiJatahReguler,
+      @JsonKey(name: "pic.cuti_sisa_reguler") dynamic picCutiSisaReguler,
+      @JsonKey(name: "pic.cuti_panjang") dynamic picCutiPanjang,
+      @JsonKey(name: "pic.cuti_sisa_panjang") dynamic picCutiSisaPanjang,
       @JsonKey(name: "pic.status_kary_id") dynamic picStatusKaryId,
       @JsonKey(name: "pic.lama_kontrak_awal") dynamic picLamaKontrakAwal,
       @JsonKey(name: "pic.lama_kontrak_akhir") dynamic picLamaKontrakAkhir,
       @JsonKey(name: "pic.tgl_masuk") dynamic picTglMasuk,
       @JsonKey(name: "pic.tgl_berhenti") dynamic picTglBerhenti,
       @JsonKey(name: "pic.alasan_berhenti") dynamic picAlasanBerhenti,
-      @JsonKey(name: "pic.uk_baju") String? picUkBaju,
-      @JsonKey(name: "pic.uk_celana") String? picUkCelana,
-      @JsonKey(name: "pic.uk_sepatu") String? picUkSepatu,
+      @JsonKey(name: "pic.uk_baju") dynamic picUkBaju,
+      @JsonKey(name: "pic.uk_celana") dynamic picUkCelana,
+      @JsonKey(name: "pic.uk_sepatu") dynamic picUkSepatu,
       @JsonKey(name: "pic.desc") dynamic picDesc,
-      @JsonKey(name: "pic.is_active") bool? picIsActive,
+      @JsonKey(name: "pic.is_active") dynamic picIsActive,
       @JsonKey(name: "pic.creator_id") dynamic picCreatorId,
-      @JsonKey(name: "pic.last_editor_id") int? picLastEditorId,
-      @JsonKey(name: "pic.created_at") String? picCreatedAt,
-      @JsonKey(name: "pic.updated_at") String? picUpdatedAt,
-      @JsonKey(name: "pic.m_standart_gaji_id") int? picMStandartGajiId,
-      @JsonKey(name: "pic.periode_gaji_id") int? picPeriodeGajiId,
-      @JsonKey(name: "pic.ref_id") int? picRefId,
+      @JsonKey(name: "pic.last_editor_id") dynamic picLastEditorId,
+      @JsonKey(name: "pic.created_at") dynamic picCreatedAt,
+      @JsonKey(name: "pic.updated_at") dynamic picUpdatedAt,
+      @JsonKey(name: "pic.m_standart_gaji_id") dynamic picMStandartGajiId,
+      @JsonKey(name: "pic.periode_gaji_id") dynamic picPeriodeGajiId,
+      @JsonKey(name: "pic.ref_id") dynamic picRefId,
       @JsonKey(name: "pic.presensi_lokasi_default_id")
       dynamic picPresensiLokasiDefaultId,
-      @JsonKey(name: "pic.exp_date_cuti") String? picExpDateCuti,
-      @JsonKey(name: "pic.limit_potong") int? picLimitPotong,
-      @JsonKey(name: "pic.atasan_id") int? picAtasanId,
+      @JsonKey(name: "pic.exp_date_cuti") dynamic picExpDateCuti,
+      @JsonKey(name: "pic.limit_potong") dynamic picLimitPotong,
+      @JsonKey(name: "pic.atasan_id") dynamic picAtasanId,
       @JsonKey(name: "pic.cuti_p24") dynamic picCutiP24,
       @JsonKey(name: "pic.cuti_sisa_p24") dynamic picCutiSisaP24,
       @JsonKey(name: "creator.id") int? creatorId,
       @JsonKey(name: "creator.name") String? creatorName,
-      @JsonKey(name: "creator.email") String? creatorEmail,
+      @JsonKey(name: "creator.email") dynamic creatorEmail,
       @JsonKey(name: "creator.username") String? creatorUsername,
       @JsonKey(name: "creator.email_verified_at")
       dynamic creatorEmailVerifiedAt,
@@ -3290,13 +3277,13 @@ abstract class _$$DataDinasImplCopyWith<$Res>
       @JsonKey(name: "creator.m_comp_id") int? creatorMCompId,
       @JsonKey(name: "creator.m_dir_id") int? creatorMDirId,
       @JsonKey(name: "creator.is_active") bool? creatorIsActive,
-      @JsonKey(name: "creator.creator_id") dynamic creatorCreatorId,
-      @JsonKey(name: "creator.last_editor_id") int? creatorLastEditorId,
+      @JsonKey(name: "creator.creator_id") int? creatorCreatorId,
+      @JsonKey(name: "creator.last_editor_id") dynamic creatorLastEditorId,
       @JsonKey(name: "creator.remember_token") dynamic creatorRememberToken,
-      @JsonKey(name: "creator.created_at") dynamic creatorCreatedAt,
+      @JsonKey(name: "creator.created_at") String? creatorCreatedAt,
       @JsonKey(name: "creator.updated_at") String? creatorUpdatedAt,
       @JsonKey(name: "creator.profil_image") String? creatorProfilImage,
-      @JsonKey(name: "creator.telp") String? creatorTelp,
+      @JsonKey(name: "creator.telp") dynamic creatorTelp,
       @JsonKey(name: "creator.m_kary_id") int? creatorMKaryId,
       @JsonKey(name: "last_editor.id") dynamic lastEditorId,
       @JsonKey(name: "last_editor.name") dynamic lastEditorName,
@@ -3363,6 +3350,7 @@ class __$$DataDinasImplCopyWithImpl<$Res>
     Object? updatedAt = freezed,
     Object? isKendDinas = freezed,
     Object? interval = freezed,
+    Object? catatanKend = freezed,
     Object? mCompId = freezed,
     Object? mCompNama = freezed,
     Object? mCompIsActive = freezed,
@@ -3453,7 +3441,6 @@ class __$$DataDinasImplCopyWithImpl<$Res>
     Object? mZonaAsalId = freezed,
     Object? mZonaAsalMCompId = freezed,
     Object? mZonaAsalMDirId = freezed,
-    Object? mZonaAsalMTunjKemahalanId = freezed,
     Object? mZonaAsalKode = freezed,
     Object? mZonaAsalNama = freezed,
     Object? mZonaAsalDesc = freezed,
@@ -3465,7 +3452,6 @@ class __$$DataDinasImplCopyWithImpl<$Res>
     Object? mZonaTujuanId = freezed,
     Object? mZonaTujuanMCompId = freezed,
     Object? mZonaTujuanMDirId = freezed,
-    Object? mZonaTujuanMTunjKemahalanId = freezed,
     Object? mZonaTujuanKode = freezed,
     Object? mZonaTujuanNama = freezed,
     Object? mZonaTujuanDesc = freezed,
@@ -3772,6 +3758,10 @@ class __$$DataDinasImplCopyWithImpl<$Res>
           ? _value.interval
           : interval // ignore: cast_nullable_to_non_nullable
               as int?,
+      catatanKend: freezed == catatanKend
+          ? _value.catatanKend
+          : catatanKend // ignore: cast_nullable_to_non_nullable
+              as String?,
       mCompId: freezed == mCompId
           ? _value.mCompId
           : mCompId // ignore: cast_nullable_to_non_nullable
@@ -3871,15 +3861,15 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       mDirId: freezed == mDirId
           ? _value.mDirId
           : mDirId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mDirMCompId: freezed == mDirMCompId
           ? _value.mDirMCompId
           : mDirMCompId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mDirNama: freezed == mDirNama
           ? _value.mDirNama
           : mDirNama // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mDirDesc: freezed == mDirDesc
           ? _value.mDirDesc
           : mDirDesc // ignore: cast_nullable_to_non_nullable
@@ -3887,11 +3877,11 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       mDirIsActive: freezed == mDirIsActive
           ? _value.mDirIsActive
           : mDirIsActive // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       mDirCreatorId: freezed == mDirCreatorId
           ? _value.mDirCreatorId
           : mDirCreatorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mDirLastEditorId: freezed == mDirLastEditorId
           ? _value.mDirLastEditorId
           : mDirLastEditorId // ignore: cast_nullable_to_non_nullable
@@ -3923,7 +3913,7 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       mDivisiDesc: freezed == mDivisiDesc
           ? _value.mDivisiDesc
           : mDivisiDesc // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mDivisiIsActive: freezed == mDivisiIsActive
           ? _value.mDivisiIsActive
           : mDivisiIsActive // ignore: cast_nullable_to_non_nullable
@@ -3931,19 +3921,19 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       mDivisiCreatorId: freezed == mDivisiCreatorId
           ? _value.mDivisiCreatorId
           : mDivisiCreatorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mDivisiLastEditorId: freezed == mDivisiLastEditorId
           ? _value.mDivisiLastEditorId
           : mDivisiLastEditorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mDivisiCreatedAt: freezed == mDivisiCreatedAt
           ? _value.mDivisiCreatedAt
           : mDivisiCreatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mDivisiUpdatedAt: freezed == mDivisiUpdatedAt
           ? _value.mDivisiUpdatedAt
           : mDivisiUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mDeptId: freezed == mDeptId
           ? _value.mDeptId
           : mDeptId // ignore: cast_nullable_to_non_nullable
@@ -3963,7 +3953,7 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       mDeptDesc: freezed == mDeptDesc
           ? _value.mDeptDesc
           : mDeptDesc // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mDeptIsActive: freezed == mDeptIsActive
           ? _value.mDeptIsActive
           : mDeptIsActive // ignore: cast_nullable_to_non_nullable
@@ -3979,11 +3969,11 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       mDeptCreatedAt: freezed == mDeptCreatedAt
           ? _value.mDeptCreatedAt
           : mDeptCreatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mDeptUpdatedAt: freezed == mDeptUpdatedAt
           ? _value.mDeptUpdatedAt
           : mDeptUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mPosisiId: freezed == mPosisiId
           ? _value.mPosisiId
           : mPosisiId // ignore: cast_nullable_to_non_nullable
@@ -4075,7 +4065,7 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       jenisSpdMDirId: freezed == jenisSpdMDirId
           ? _value.jenisSpdMDirId
           : jenisSpdMDirId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       jenisSpdGroup: freezed == jenisSpdGroup
           ? _value.jenisSpdGroup
           : jenisSpdGroup // ignore: cast_nullable_to_non_nullable
@@ -4107,11 +4097,11 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       jenisSpdCreatedAt: freezed == jenisSpdCreatedAt
           ? _value.jenisSpdCreatedAt
           : jenisSpdCreatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       jenisSpdUpdatedAt: freezed == jenisSpdUpdatedAt
           ? _value.jenisSpdUpdatedAt
           : jenisSpdUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       jenisSpdValue2: freezed == jenisSpdValue2
           ? _value.jenisSpdValue2
           : jenisSpdValue2 // ignore: cast_nullable_to_non_nullable
@@ -4131,10 +4121,6 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       mZonaAsalMDirId: freezed == mZonaAsalMDirId
           ? _value.mZonaAsalMDirId
           : mZonaAsalMDirId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      mZonaAsalMTunjKemahalanId: freezed == mZonaAsalMTunjKemahalanId
-          ? _value.mZonaAsalMTunjKemahalanId
-          : mZonaAsalMTunjKemahalanId // ignore: cast_nullable_to_non_nullable
               as int?,
       mZonaAsalKode: freezed == mZonaAsalKode
           ? _value.mZonaAsalKode
@@ -4179,10 +4165,6 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       mZonaTujuanMDirId: freezed == mZonaTujuanMDirId
           ? _value.mZonaTujuanMDirId
           : mZonaTujuanMDirId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      mZonaTujuanMTunjKemahalanId: freezed == mZonaTujuanMTunjKemahalanId
-          ? _value.mZonaTujuanMTunjKemahalanId
-          : mZonaTujuanMTunjKemahalanId // ignore: cast_nullable_to_non_nullable
               as int?,
       mZonaTujuanKode: freezed == mZonaTujuanKode
           ? _value.mZonaTujuanKode
@@ -4287,7 +4269,7 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       mKaryGradingId: freezed == mKaryGradingId
           ? _value.mKaryGradingId
           : mKaryGradingId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       mKaryCostcontreId: freezed == mKaryCostcontreId
           ? _value.mKaryCostcontreId
           : mKaryCostcontreId // ignore: cast_nullable_to_non_nullable
@@ -4431,7 +4413,7 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       mKaryTglMasuk: freezed == mKaryTglMasuk
           ? _value.mKaryTglMasuk
           : mKaryTglMasuk // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mKaryTglBerhenti: freezed == mKaryTglBerhenti
           ? _value.mKaryTglBerhenti
           : mKaryTglBerhenti // ignore: cast_nullable_to_non_nullable
@@ -4455,7 +4437,7 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       mKaryDesc: freezed == mKaryDesc
           ? _value.mKaryDesc
           : mKaryDesc // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mKaryIsActive: freezed == mKaryIsActive
           ? _value.mKaryIsActive
           : mKaryIsActive // ignore: cast_nullable_to_non_nullable
@@ -4467,7 +4449,7 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       mKaryLastEditorId: freezed == mKaryLastEditorId
           ? _value.mKaryLastEditorId
           : mKaryLastEditorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryCreatedAt: freezed == mKaryCreatedAt
           ? _value.mKaryCreatedAt
           : mKaryCreatedAt // ignore: cast_nullable_to_non_nullable
@@ -4487,7 +4469,7 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       mKaryRefId: freezed == mKaryRefId
           ? _value.mKaryRefId
           : mKaryRefId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       mKaryPresensiLokasiDefaultId: freezed == mKaryPresensiLokasiDefaultId
           ? _value.mKaryPresensiLokasiDefaultId
           : mKaryPresensiLokasiDefaultId // ignore: cast_nullable_to_non_nullable
@@ -4495,7 +4477,7 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       mKaryExpDateCuti: freezed == mKaryExpDateCuti
           ? _value.mKaryExpDateCuti
           : mKaryExpDateCuti // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mKaryLimitPotong: freezed == mKaryLimitPotong
           ? _value.mKaryLimitPotong
           : mKaryLimitPotong // ignore: cast_nullable_to_non_nullable
@@ -4515,111 +4497,111 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       picId: freezed == picId
           ? _value.picId
           : picId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picMCompId: freezed == picMCompId
           ? _value.picMCompId
           : picMCompId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picMDirId: freezed == picMDirId
           ? _value.picMDirId
           : picMDirId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picMDivisiId: freezed == picMDivisiId
           ? _value.picMDivisiId
           : picMDivisiId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picMDeptId: freezed == picMDeptId
           ? _value.picMDeptId
           : picMDeptId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picMZonaId: freezed == picMZonaId
           ? _value.picMZonaId
           : picMZonaId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picGradingId: freezed == picGradingId
           ? _value.picGradingId
           : picGradingId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picCostcontreId: freezed == picCostcontreId
           ? _value.picCostcontreId
           : picCostcontreId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picKode: freezed == picKode
           ? _value.picKode
           : picKode // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picMPosisiId: freezed == picMPosisiId
           ? _value.picMPosisiId
           : picMPosisiId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picMJamKerjaId: freezed == picMJamKerjaId
           ? _value.picMJamKerjaId
           : picMJamKerjaId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picKodePresensi: freezed == picKodePresensi
           ? _value.picKodePresensi
           : picKodePresensi // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picNik: freezed == picNik
           ? _value.picNik
           : picNik // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picNamaDepan: freezed == picNamaDepan
           ? _value.picNamaDepan
           : picNamaDepan // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picNamaBelakang: freezed == picNamaBelakang
           ? _value.picNamaBelakang
           : picNamaBelakang // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picNamaLengkap: freezed == picNamaLengkap
           ? _value.picNamaLengkap
           : picNamaLengkap // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picNamaPanggilan: freezed == picNamaPanggilan
           ? _value.picNamaPanggilan
           : picNamaPanggilan // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picJkId: freezed == picJkId
           ? _value.picJkId
           : picJkId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picTempatLahir: freezed == picTempatLahir
           ? _value.picTempatLahir
           : picTempatLahir // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picTglLahir: freezed == picTglLahir
           ? _value.picTglLahir
           : picTglLahir // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picProvinsiId: freezed == picProvinsiId
           ? _value.picProvinsiId
           : picProvinsiId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picKotaId: freezed == picKotaId
           ? _value.picKotaId
           : picKotaId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picKecamatanId: freezed == picKecamatanId
           ? _value.picKecamatanId
           : picKecamatanId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picKodePos: freezed == picKodePos
           ? _value.picKodePos
           : picKodePos // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picAlamatAsli: freezed == picAlamatAsli
           ? _value.picAlamatAsli
           : picAlamatAsli // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picAlamatDomisili: freezed == picAlamatDomisili
           ? _value.picAlamatDomisili
           : picAlamatDomisili // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picNoTlp: freezed == picNoTlp
           ? _value.picNoTlp
           : picNoTlp // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picNoTlpLainnya: freezed == picNoTlpLainnya
           ? _value.picNoTlpLainnya
           : picNoTlpLainnya // ignore: cast_nullable_to_non_nullable
@@ -4627,47 +4609,47 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       picNoDarurat: freezed == picNoDarurat
           ? _value.picNoDarurat
           : picNoDarurat // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picNamaKontakDarurat: freezed == picNamaKontakDarurat
           ? _value.picNamaKontakDarurat
           : picNamaKontakDarurat // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picAgamaId: freezed == picAgamaId
           ? _value.picAgamaId
           : picAgamaId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picGolDarahId: freezed == picGolDarahId
           ? _value.picGolDarahId
           : picGolDarahId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picStatusNikahId: freezed == picStatusNikahId
           ? _value.picStatusNikahId
           : picStatusNikahId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picTanggunganId: freezed == picTanggunganId
           ? _value.picTanggunganId
           : picTanggunganId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picHubDgnKaryawan: freezed == picHubDgnKaryawan
           ? _value.picHubDgnKaryawan
           : picHubDgnKaryawan // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picCutiJatahReguler: freezed == picCutiJatahReguler
           ? _value.picCutiJatahReguler
           : picCutiJatahReguler // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picCutiSisaReguler: freezed == picCutiSisaReguler
           ? _value.picCutiSisaReguler
           : picCutiSisaReguler // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picCutiPanjang: freezed == picCutiPanjang
           ? _value.picCutiPanjang
           : picCutiPanjang // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picCutiSisaPanjang: freezed == picCutiSisaPanjang
           ? _value.picCutiSisaPanjang
           : picCutiSisaPanjang // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picStatusKaryId: freezed == picStatusKaryId
           ? _value.picStatusKaryId
           : picStatusKaryId // ignore: cast_nullable_to_non_nullable
@@ -4695,15 +4677,15 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       picUkBaju: freezed == picUkBaju
           ? _value.picUkBaju
           : picUkBaju // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picUkCelana: freezed == picUkCelana
           ? _value.picUkCelana
           : picUkCelana // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picUkSepatu: freezed == picUkSepatu
           ? _value.picUkSepatu
           : picUkSepatu // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picDesc: freezed == picDesc
           ? _value.picDesc
           : picDesc // ignore: cast_nullable_to_non_nullable
@@ -4711,7 +4693,7 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       picIsActive: freezed == picIsActive
           ? _value.picIsActive
           : picIsActive // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as dynamic,
       picCreatorId: freezed == picCreatorId
           ? _value.picCreatorId
           : picCreatorId // ignore: cast_nullable_to_non_nullable
@@ -4719,27 +4701,27 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       picLastEditorId: freezed == picLastEditorId
           ? _value.picLastEditorId
           : picLastEditorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picCreatedAt: freezed == picCreatedAt
           ? _value.picCreatedAt
           : picCreatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picUpdatedAt: freezed == picUpdatedAt
           ? _value.picUpdatedAt
           : picUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picMStandartGajiId: freezed == picMStandartGajiId
           ? _value.picMStandartGajiId
           : picMStandartGajiId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picPeriodeGajiId: freezed == picPeriodeGajiId
           ? _value.picPeriodeGajiId
           : picPeriodeGajiId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picRefId: freezed == picRefId
           ? _value.picRefId
           : picRefId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picPresensiLokasiDefaultId: freezed == picPresensiLokasiDefaultId
           ? _value.picPresensiLokasiDefaultId
           : picPresensiLokasiDefaultId // ignore: cast_nullable_to_non_nullable
@@ -4747,15 +4729,15 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       picExpDateCuti: freezed == picExpDateCuti
           ? _value.picExpDateCuti
           : picExpDateCuti // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picLimitPotong: freezed == picLimitPotong
           ? _value.picLimitPotong
           : picLimitPotong // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picAtasanId: freezed == picAtasanId
           ? _value.picAtasanId
           : picAtasanId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picCutiP24: freezed == picCutiP24
           ? _value.picCutiP24
           : picCutiP24 // ignore: cast_nullable_to_non_nullable
@@ -4775,7 +4757,7 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       creatorEmail: freezed == creatorEmail
           ? _value.creatorEmail
           : creatorEmail // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       creatorUsername: freezed == creatorUsername
           ? _value.creatorUsername
           : creatorUsername // ignore: cast_nullable_to_non_nullable
@@ -4803,11 +4785,11 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       creatorCreatorId: freezed == creatorCreatorId
           ? _value.creatorCreatorId
           : creatorCreatorId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       creatorLastEditorId: freezed == creatorLastEditorId
           ? _value.creatorLastEditorId
           : creatorLastEditorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       creatorRememberToken: freezed == creatorRememberToken
           ? _value.creatorRememberToken
           : creatorRememberToken // ignore: cast_nullable_to_non_nullable
@@ -4815,7 +4797,7 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       creatorCreatedAt: freezed == creatorCreatedAt
           ? _value.creatorCreatedAt
           : creatorCreatedAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       creatorUpdatedAt: freezed == creatorUpdatedAt
           ? _value.creatorUpdatedAt
           : creatorUpdatedAt // ignore: cast_nullable_to_non_nullable
@@ -4827,7 +4809,7 @@ class __$$DataDinasImplCopyWithImpl<$Res>
       creatorTelp: freezed == creatorTelp
           ? _value.creatorTelp
           : creatorTelp // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       creatorMKaryId: freezed == creatorMKaryId
           ? _value.creatorMKaryId
           : creatorMKaryId // ignore: cast_nullable_to_non_nullable
@@ -4943,6 +4925,7 @@ class _$DataDinasImpl implements _DataDinas {
       @JsonKey(name: "updated_at") this.updatedAt,
       @JsonKey(name: "is_kend_dinas") this.isKendDinas,
       @JsonKey(name: "interval") this.interval,
+      @JsonKey(name: "catatan_kend") this.catatanKend,
       @JsonKey(name: "m_comp.id") this.mCompId,
       @JsonKey(name: "m_comp.nama") this.mCompNama,
       @JsonKey(name: "m_comp.is_active") this.mCompIsActive,
@@ -5033,8 +5016,6 @@ class _$DataDinasImpl implements _DataDinas {
       @JsonKey(name: "m_zona_asal.id") this.mZonaAsalId,
       @JsonKey(name: "m_zona_asal.m_comp_id") this.mZonaAsalMCompId,
       @JsonKey(name: "m_zona_asal.m_dir_id") this.mZonaAsalMDirId,
-      @JsonKey(name: "m_zona_asal.m_tunj_kemahalan_id")
-      this.mZonaAsalMTunjKemahalanId,
       @JsonKey(name: "m_zona_asal.kode") this.mZonaAsalKode,
       @JsonKey(name: "m_zona_asal.nama") this.mZonaAsalNama,
       @JsonKey(name: "m_zona_asal.desc") this.mZonaAsalDesc,
@@ -5046,8 +5027,6 @@ class _$DataDinasImpl implements _DataDinas {
       @JsonKey(name: "m_zona_tujuan.id") this.mZonaTujuanId,
       @JsonKey(name: "m_zona_tujuan.m_comp_id") this.mZonaTujuanMCompId,
       @JsonKey(name: "m_zona_tujuan.m_dir_id") this.mZonaTujuanMDirId,
-      @JsonKey(name: "m_zona_tujuan.m_tunj_kemahalan_id")
-      this.mZonaTujuanMTunjKemahalanId,
       @JsonKey(name: "m_zona_tujuan.kode") this.mZonaTujuanKode,
       @JsonKey(name: "m_zona_tujuan.nama") this.mZonaTujuanNama,
       @JsonKey(name: "m_zona_tujuan.desc") this.mZonaTujuanDesc,
@@ -5331,6 +5310,9 @@ class _$DataDinasImpl implements _DataDinas {
   @JsonKey(name: "interval")
   final int? interval;
   @override
+  @JsonKey(name: "catatan_kend")
+  final String? catatanKend;
+  @override
   @JsonKey(name: "m_comp.id")
   final int? mCompId;
   @override
@@ -5404,22 +5386,22 @@ class _$DataDinasImpl implements _DataDinas {
   final String? mSpdUpdatedAt;
   @override
   @JsonKey(name: "m_dir.id")
-  final int? mDirId;
+  final dynamic mDirId;
   @override
   @JsonKey(name: "m_dir.m_comp_id")
-  final int? mDirMCompId;
+  final dynamic mDirMCompId;
   @override
   @JsonKey(name: "m_dir.nama")
-  final String? mDirNama;
+  final dynamic mDirNama;
   @override
   @JsonKey(name: "m_dir.desc")
   final dynamic mDirDesc;
   @override
   @JsonKey(name: "m_dir.is_active")
-  final bool? mDirIsActive;
+  final dynamic mDirIsActive;
   @override
   @JsonKey(name: "m_dir.creator_id")
-  final int? mDirCreatorId;
+  final dynamic mDirCreatorId;
   @override
   @JsonKey(name: "m_dir.last_editor_id")
   final dynamic mDirLastEditorId;
@@ -5443,22 +5425,22 @@ class _$DataDinasImpl implements _DataDinas {
   final String? mDivisiNama;
   @override
   @JsonKey(name: "m_divisi.desc")
-  final String? mDivisiDesc;
+  final dynamic mDivisiDesc;
   @override
   @JsonKey(name: "m_divisi.is_active")
   final bool? mDivisiIsActive;
   @override
   @JsonKey(name: "m_divisi.creator_id")
-  final int? mDivisiCreatorId;
+  final dynamic mDivisiCreatorId;
   @override
   @JsonKey(name: "m_divisi.last_editor_id")
-  final int? mDivisiLastEditorId;
+  final dynamic mDivisiLastEditorId;
   @override
   @JsonKey(name: "m_divisi.created_at")
-  final String? mDivisiCreatedAt;
+  final dynamic mDivisiCreatedAt;
   @override
   @JsonKey(name: "m_divisi.updated_at")
-  final String? mDivisiUpdatedAt;
+  final dynamic mDivisiUpdatedAt;
   @override
   @JsonKey(name: "m_dept.id")
   final int? mDeptId;
@@ -5473,7 +5455,7 @@ class _$DataDinasImpl implements _DataDinas {
   final String? mDeptNama;
   @override
   @JsonKey(name: "m_dept.desc")
-  final String? mDeptDesc;
+  final dynamic mDeptDesc;
   @override
   @JsonKey(name: "m_dept.is_active")
   final bool? mDeptIsActive;
@@ -5485,10 +5467,10 @@ class _$DataDinasImpl implements _DataDinas {
   final dynamic mDeptLastEditorId;
   @override
   @JsonKey(name: "m_dept.created_at")
-  final String? mDeptCreatedAt;
+  final dynamic mDeptCreatedAt;
   @override
   @JsonKey(name: "m_dept.updated_at")
-  final String? mDeptUpdatedAt;
+  final dynamic mDeptUpdatedAt;
   @override
   @JsonKey(name: "m_posisi.id")
   final int? mPosisiId;
@@ -5557,7 +5539,7 @@ class _$DataDinasImpl implements _DataDinas {
   final int? jenisSpdMCompId;
   @override
   @JsonKey(name: "jenis_spd.m_dir_id")
-  final int? jenisSpdMDirId;
+  final dynamic jenisSpdMDirId;
   @override
   @JsonKey(name: "jenis_spd.group")
   final String? jenisSpdGroup;
@@ -5581,10 +5563,10 @@ class _$DataDinasImpl implements _DataDinas {
   final dynamic jenisSpdLastEditorId;
   @override
   @JsonKey(name: "jenis_spd.created_at")
-  final String? jenisSpdCreatedAt;
+  final dynamic jenisSpdCreatedAt;
   @override
   @JsonKey(name: "jenis_spd.updated_at")
-  final String? jenisSpdUpdatedAt;
+  final dynamic jenisSpdUpdatedAt;
   @override
   @JsonKey(name: "jenis_spd.value_2")
   final dynamic jenisSpdValue2;
@@ -5600,9 +5582,6 @@ class _$DataDinasImpl implements _DataDinas {
   @override
   @JsonKey(name: "m_zona_asal.m_dir_id")
   final int? mZonaAsalMDirId;
-  @override
-  @JsonKey(name: "m_zona_asal.m_tunj_kemahalan_id")
-  final int? mZonaAsalMTunjKemahalanId;
   @override
   @JsonKey(name: "m_zona_asal.kode")
   final String? mZonaAsalKode;
@@ -5636,9 +5615,6 @@ class _$DataDinasImpl implements _DataDinas {
   @override
   @JsonKey(name: "m_zona_tujuan.m_dir_id")
   final int? mZonaTujuanMDirId;
-  @override
-  @JsonKey(name: "m_zona_tujuan.m_tunj_kemahalan_id")
-  final int? mZonaTujuanMTunjKemahalanId;
   @override
   @JsonKey(name: "m_zona_tujuan.kode")
   final String? mZonaTujuanKode;
@@ -5716,7 +5692,7 @@ class _$DataDinasImpl implements _DataDinas {
   final int? mKaryMZonaId;
   @override
   @JsonKey(name: "m_kary.grading_id")
-  final dynamic mKaryGradingId;
+  final int? mKaryGradingId;
   @override
   @JsonKey(name: "m_kary.costcontre_id")
   final int? mKaryCostcontreId;
@@ -5824,7 +5800,7 @@ class _$DataDinasImpl implements _DataDinas {
   final dynamic mKaryLamaKontrakAkhir;
   @override
   @JsonKey(name: "m_kary.tgl_masuk")
-  final String? mKaryTglMasuk;
+  final dynamic mKaryTglMasuk;
   @override
   @JsonKey(name: "m_kary.tgl_berhenti")
   final dynamic mKaryTglBerhenti;
@@ -5842,7 +5818,7 @@ class _$DataDinasImpl implements _DataDinas {
   final String? mKaryUkSepatu;
   @override
   @JsonKey(name: "m_kary.desc")
-  final String? mKaryDesc;
+  final dynamic mKaryDesc;
   @override
   @JsonKey(name: "m_kary.is_active")
   final bool? mKaryIsActive;
@@ -5851,7 +5827,7 @@ class _$DataDinasImpl implements _DataDinas {
   final dynamic mKaryCreatorId;
   @override
   @JsonKey(name: "m_kary.last_editor_id")
-  final int? mKaryLastEditorId;
+  final dynamic mKaryLastEditorId;
   @override
   @JsonKey(name: "m_kary.created_at")
   final String? mKaryCreatedAt;
@@ -5866,13 +5842,13 @@ class _$DataDinasImpl implements _DataDinas {
   final int? mKaryPeriodeGajiId;
   @override
   @JsonKey(name: "m_kary.ref_id")
-  final dynamic mKaryRefId;
+  final int? mKaryRefId;
   @override
   @JsonKey(name: "m_kary.presensi_lokasi_default_id")
   final dynamic mKaryPresensiLokasiDefaultId;
   @override
   @JsonKey(name: "m_kary.exp_date_cuti")
-  final String? mKaryExpDateCuti;
+  final dynamic mKaryExpDateCuti;
   @override
   @JsonKey(name: "m_kary.limit_potong")
   final int? mKaryLimitPotong;
@@ -5887,121 +5863,121 @@ class _$DataDinasImpl implements _DataDinas {
   final dynamic mKaryCutiSisaP24;
   @override
   @JsonKey(name: "pic.id")
-  final int? picId;
+  final dynamic picId;
   @override
   @JsonKey(name: "pic.m_comp_id")
-  final int? picMCompId;
+  final dynamic picMCompId;
   @override
   @JsonKey(name: "pic.m_dir_id")
-  final int? picMDirId;
+  final dynamic picMDirId;
   @override
   @JsonKey(name: "pic.m_divisi_id")
-  final int? picMDivisiId;
+  final dynamic picMDivisiId;
   @override
   @JsonKey(name: "pic.m_dept_id")
-  final int? picMDeptId;
+  final dynamic picMDeptId;
   @override
   @JsonKey(name: "pic.m_zona_id")
-  final int? picMZonaId;
+  final dynamic picMZonaId;
   @override
   @JsonKey(name: "pic.grading_id")
-  final int? picGradingId;
+  final dynamic picGradingId;
   @override
   @JsonKey(name: "pic.costcontre_id")
-  final int? picCostcontreId;
+  final dynamic picCostcontreId;
   @override
   @JsonKey(name: "pic.kode")
-  final String? picKode;
+  final dynamic picKode;
   @override
   @JsonKey(name: "pic.m_posisi_id")
-  final int? picMPosisiId;
+  final dynamic picMPosisiId;
   @override
   @JsonKey(name: "pic.m_jam_kerja_id")
-  final int? picMJamKerjaId;
+  final dynamic picMJamKerjaId;
   @override
   @JsonKey(name: "pic.kode_presensi")
-  final String? picKodePresensi;
+  final dynamic picKodePresensi;
   @override
   @JsonKey(name: "pic.nik")
-  final String? picNik;
+  final dynamic picNik;
   @override
   @JsonKey(name: "pic.nama_depan")
-  final String? picNamaDepan;
+  final dynamic picNamaDepan;
   @override
   @JsonKey(name: "pic.nama_belakang")
-  final String? picNamaBelakang;
+  final dynamic picNamaBelakang;
   @override
   @JsonKey(name: "pic.nama_lengkap")
-  final String? picNamaLengkap;
+  final dynamic picNamaLengkap;
   @override
   @JsonKey(name: "pic.nama_panggilan")
-  final String? picNamaPanggilan;
+  final dynamic picNamaPanggilan;
   @override
   @JsonKey(name: "pic.jk_id")
-  final int? picJkId;
+  final dynamic picJkId;
   @override
   @JsonKey(name: "pic.tempat_lahir")
-  final String? picTempatLahir;
+  final dynamic picTempatLahir;
   @override
   @JsonKey(name: "pic.tgl_lahir")
-  final String? picTglLahir;
+  final dynamic picTglLahir;
   @override
   @JsonKey(name: "pic.provinsi_id")
-  final int? picProvinsiId;
+  final dynamic picProvinsiId;
   @override
   @JsonKey(name: "pic.kota_id")
-  final int? picKotaId;
+  final dynamic picKotaId;
   @override
   @JsonKey(name: "pic.kecamatan_id")
-  final int? picKecamatanId;
+  final dynamic picKecamatanId;
   @override
   @JsonKey(name: "pic.kode_pos")
-  final String? picKodePos;
+  final dynamic picKodePos;
   @override
   @JsonKey(name: "pic.alamat_asli")
-  final String? picAlamatAsli;
+  final dynamic picAlamatAsli;
   @override
   @JsonKey(name: "pic.alamat_domisili")
-  final String? picAlamatDomisili;
+  final dynamic picAlamatDomisili;
   @override
   @JsonKey(name: "pic.no_tlp")
-  final String? picNoTlp;
+  final dynamic picNoTlp;
   @override
   @JsonKey(name: "pic.no_tlp_lainnya")
   final dynamic picNoTlpLainnya;
   @override
   @JsonKey(name: "pic.no_darurat")
-  final String? picNoDarurat;
+  final dynamic picNoDarurat;
   @override
   @JsonKey(name: "pic.nama_kontak_darurat")
-  final String? picNamaKontakDarurat;
+  final dynamic picNamaKontakDarurat;
   @override
   @JsonKey(name: "pic.agama_id")
-  final int? picAgamaId;
+  final dynamic picAgamaId;
   @override
   @JsonKey(name: "pic.gol_darah_id")
-  final int? picGolDarahId;
+  final dynamic picGolDarahId;
   @override
   @JsonKey(name: "pic.status_nikah_id")
-  final int? picStatusNikahId;
+  final dynamic picStatusNikahId;
   @override
   @JsonKey(name: "pic.tanggungan_id")
-  final int? picTanggunganId;
+  final dynamic picTanggunganId;
   @override
   @JsonKey(name: "pic.hub_dgn_karyawan")
-  final String? picHubDgnKaryawan;
+  final dynamic picHubDgnKaryawan;
   @override
   @JsonKey(name: "pic.cuti_jatah_reguler")
-  final int? picCutiJatahReguler;
+  final dynamic picCutiJatahReguler;
   @override
   @JsonKey(name: "pic.cuti_sisa_reguler")
-  final int? picCutiSisaReguler;
+  final dynamic picCutiSisaReguler;
   @override
   @JsonKey(name: "pic.cuti_panjang")
-  final int? picCutiPanjang;
+  final dynamic picCutiPanjang;
   @override
   @JsonKey(name: "pic.cuti_sisa_panjang")
-  final int? picCutiSisaPanjang;
+  final dynamic picCutiSisaPanjang;
   @override
   @JsonKey(name: "pic.status_kary_id")
   final dynamic picStatusKaryId;
@@ -6022,52 +5998,52 @@ class _$DataDinasImpl implements _DataDinas {
   final dynamic picAlasanBerhenti;
   @override
   @JsonKey(name: "pic.uk_baju")
-  final String? picUkBaju;
+  final dynamic picUkBaju;
   @override
   @JsonKey(name: "pic.uk_celana")
-  final String? picUkCelana;
+  final dynamic picUkCelana;
   @override
   @JsonKey(name: "pic.uk_sepatu")
-  final String? picUkSepatu;
+  final dynamic picUkSepatu;
   @override
   @JsonKey(name: "pic.desc")
   final dynamic picDesc;
   @override
   @JsonKey(name: "pic.is_active")
-  final bool? picIsActive;
+  final dynamic picIsActive;
   @override
   @JsonKey(name: "pic.creator_id")
   final dynamic picCreatorId;
   @override
   @JsonKey(name: "pic.last_editor_id")
-  final int? picLastEditorId;
+  final dynamic picLastEditorId;
   @override
   @JsonKey(name: "pic.created_at")
-  final String? picCreatedAt;
+  final dynamic picCreatedAt;
   @override
   @JsonKey(name: "pic.updated_at")
-  final String? picUpdatedAt;
+  final dynamic picUpdatedAt;
   @override
   @JsonKey(name: "pic.m_standart_gaji_id")
-  final int? picMStandartGajiId;
+  final dynamic picMStandartGajiId;
   @override
   @JsonKey(name: "pic.periode_gaji_id")
-  final int? picPeriodeGajiId;
+  final dynamic picPeriodeGajiId;
   @override
   @JsonKey(name: "pic.ref_id")
-  final int? picRefId;
+  final dynamic picRefId;
   @override
   @JsonKey(name: "pic.presensi_lokasi_default_id")
   final dynamic picPresensiLokasiDefaultId;
   @override
   @JsonKey(name: "pic.exp_date_cuti")
-  final String? picExpDateCuti;
+  final dynamic picExpDateCuti;
   @override
   @JsonKey(name: "pic.limit_potong")
-  final int? picLimitPotong;
+  final dynamic picLimitPotong;
   @override
   @JsonKey(name: "pic.atasan_id")
-  final int? picAtasanId;
+  final dynamic picAtasanId;
   @override
   @JsonKey(name: "pic.cuti_p24")
   final dynamic picCutiP24;
@@ -6082,7 +6058,7 @@ class _$DataDinasImpl implements _DataDinas {
   final String? creatorName;
   @override
   @JsonKey(name: "creator.email")
-  final String? creatorEmail;
+  final dynamic creatorEmail;
   @override
   @JsonKey(name: "creator.username")
   final String? creatorUsername;
@@ -6103,16 +6079,16 @@ class _$DataDinasImpl implements _DataDinas {
   final bool? creatorIsActive;
   @override
   @JsonKey(name: "creator.creator_id")
-  final dynamic creatorCreatorId;
+  final int? creatorCreatorId;
   @override
   @JsonKey(name: "creator.last_editor_id")
-  final int? creatorLastEditorId;
+  final dynamic creatorLastEditorId;
   @override
   @JsonKey(name: "creator.remember_token")
   final dynamic creatorRememberToken;
   @override
   @JsonKey(name: "creator.created_at")
-  final dynamic creatorCreatedAt;
+  final String? creatorCreatedAt;
   @override
   @JsonKey(name: "creator.updated_at")
   final String? creatorUpdatedAt;
@@ -6121,7 +6097,7 @@ class _$DataDinasImpl implements _DataDinas {
   final String? creatorProfilImage;
   @override
   @JsonKey(name: "creator.telp")
-  final String? creatorTelp;
+  final dynamic creatorTelp;
   @override
   @JsonKey(name: "creator.m_kary_id")
   final int? creatorMKaryId;
@@ -6182,7 +6158,7 @@ class _$DataDinasImpl implements _DataDinas {
 
   @override
   String toString() {
-    return 'DataDinas(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, nomor: $nomor, datumMCompId: $datumMCompId, datumMSpdId: $datumMSpdId, datumMDirId: $datumMDirId, datumMDivisiId: $datumMDivisiId, datumMDeptId: $datumMDeptId, datumMPosisiId: $datumMPosisiId, tanggal: $tanggal, tglAcaraAwal: $tglAcaraAwal, tglAcaraAkhir: $tglAcaraAkhir, datumJenisSpdId: $datumJenisSpdId, datumMZonaAsalId: $datumMZonaAsalId, datumMZonaTujuanId: $datumMZonaTujuanId, datumMLokasiTujuanId: $datumMLokasiTujuanId, datumMKaryId: $datumMKaryId, datumPicId: $datumPicId, totalBiaya: $totalBiaya, kegiatan: $kegiatan, keterangan: $keterangan, status: $status, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, isKendDinas: $isKendDinas, interval: $interval, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, mSpdId: $mSpdId, mSpdMCompId: $mSpdMCompId, mSpdMDirId: $mSpdMDirId, mSpdKode: $mSpdKode, mSpdMDivisiId: $mSpdMDivisiId, mSpdMPosisiId: $mSpdMPosisiId, mSpdMDeptId: $mSpdMDeptId, mSpdMZonaId: $mSpdMZonaId, mSpdGradingId: $mSpdGradingId, mSpdGrading: $mSpdGrading, mSpdDesc: $mSpdDesc, mSpdIsActive: $mSpdIsActive, mSpdCreatorId: $mSpdCreatorId, mSpdLastEditorId: $mSpdLastEditorId, mSpdCreatedAt: $mSpdCreatedAt, mSpdUpdatedAt: $mSpdUpdatedAt, mDirId: $mDirId, mDirMCompId: $mDirMCompId, mDirNama: $mDirNama, mDirDesc: $mDirDesc, mDirIsActive: $mDirIsActive, mDirCreatorId: $mDirCreatorId, mDirLastEditorId: $mDirLastEditorId, mDirCreatedAt: $mDirCreatedAt, mDirUpdatedAt: $mDirUpdatedAt, mDivisiId: $mDivisiId, mDivisiMCompId: $mDivisiMCompId, mDivisiMDirId: $mDivisiMDirId, mDivisiNama: $mDivisiNama, mDivisiDesc: $mDivisiDesc, mDivisiIsActive: $mDivisiIsActive, mDivisiCreatorId: $mDivisiCreatorId, mDivisiLastEditorId: $mDivisiLastEditorId, mDivisiCreatedAt: $mDivisiCreatedAt, mDivisiUpdatedAt: $mDivisiUpdatedAt, mDeptId: $mDeptId, mDeptMDirId: $mDeptMDirId, mDeptMDivisiId: $mDeptMDivisiId, mDeptNama: $mDeptNama, mDeptDesc: $mDeptDesc, mDeptIsActive: $mDeptIsActive, mDeptCreatorId: $mDeptCreatorId, mDeptLastEditorId: $mDeptLastEditorId, mDeptCreatedAt: $mDeptCreatedAt, mDeptUpdatedAt: $mDeptUpdatedAt, mPosisiId: $mPosisiId, mPosisiMCompId: $mPosisiMCompId, mPosisiMDirId: $mPosisiMDirId, mPosisiKode: $mPosisiKode, mPosisiDescKerja: $mPosisiDescKerja, mPosisiDescKerja1: $mPosisiDescKerja1, mPosisiDescKerja2: $mPosisiDescKerja2, mPosisiMinPengalaman: $mPosisiMinPengalaman, mPosisiMinPendidikanId: $mPosisiMinPendidikanId, mPosisiMinGajiPokok: $mPosisiMinGajiPokok, mPosisiMaxGajiPokok: $mPosisiMaxGajiPokok, mPosisiBiaya: $mPosisiBiaya, mPosisiTipeBpjsId: $mPosisiTipeBpjsId, mPosisiPotonganBpjs: $mPosisiPotonganBpjs, mPosisiDesc: $mPosisiDesc, mPosisiIsActive: $mPosisiIsActive, mPosisiCreatorId: $mPosisiCreatorId, mPosisiLastEditorId: $mPosisiLastEditorId, mPosisiCreatedAt: $mPosisiCreatedAt, mPosisiUpdatedAt: $mPosisiUpdatedAt, jenisSpdId: $jenisSpdId, jenisSpdMCompId: $jenisSpdMCompId, jenisSpdMDirId: $jenisSpdMDirId, jenisSpdGroup: $jenisSpdGroup, jenisSpdKey: $jenisSpdKey, jenisSpdCode: $jenisSpdCode, jenisSpdValue: $jenisSpdValue, jenisSpdIsActive: $jenisSpdIsActive, jenisSpdCreatorId: $jenisSpdCreatorId, jenisSpdLastEditorId: $jenisSpdLastEditorId, jenisSpdCreatedAt: $jenisSpdCreatedAt, jenisSpdUpdatedAt: $jenisSpdUpdatedAt, jenisSpdValue2: $jenisSpdValue2, jenisSpdValue3: $jenisSpdValue3, mZonaAsalId: $mZonaAsalId, mZonaAsalMCompId: $mZonaAsalMCompId, mZonaAsalMDirId: $mZonaAsalMDirId, mZonaAsalMTunjKemahalanId: $mZonaAsalMTunjKemahalanId, mZonaAsalKode: $mZonaAsalKode, mZonaAsalNama: $mZonaAsalNama, mZonaAsalDesc: $mZonaAsalDesc, mZonaAsalIsActive: $mZonaAsalIsActive, mZonaAsalCreatorId: $mZonaAsalCreatorId, mZonaAsalLastEditorId: $mZonaAsalLastEditorId, mZonaAsalCreatedAt: $mZonaAsalCreatedAt, mZonaAsalUpdatedAt: $mZonaAsalUpdatedAt, mZonaTujuanId: $mZonaTujuanId, mZonaTujuanMCompId: $mZonaTujuanMCompId, mZonaTujuanMDirId: $mZonaTujuanMDirId, mZonaTujuanMTunjKemahalanId: $mZonaTujuanMTunjKemahalanId, mZonaTujuanKode: $mZonaTujuanKode, mZonaTujuanNama: $mZonaTujuanNama, mZonaTujuanDesc: $mZonaTujuanDesc, mZonaTujuanIsActive: $mZonaTujuanIsActive, mZonaTujuanCreatorId: $mZonaTujuanCreatorId, mZonaTujuanLastEditorId: $mZonaTujuanLastEditorId, mZonaTujuanCreatedAt: $mZonaTujuanCreatedAt, mZonaTujuanUpdatedAt: $mZonaTujuanUpdatedAt, mLokasiTujuanId: $mLokasiTujuanId, mLokasiTujuanMCompId: $mLokasiTujuanMCompId, mLokasiTujuanMDirId: $mLokasiTujuanMDirId, mLokasiTujuanKode: $mLokasiTujuanKode, mLokasiTujuanNama: $mLokasiTujuanNama, mLokasiTujuanDesc: $mLokasiTujuanDesc, mLokasiTujuanIsActive: $mLokasiTujuanIsActive, mLokasiTujuanCreatorId: $mLokasiTujuanCreatorId, mLokasiTujuanLastEditorId: $mLokasiTujuanLastEditorId, mLokasiTujuanCreatedAt: $mLokasiTujuanCreatedAt, mLokasiTujuanUpdatedAt: $mLokasiTujuanUpdatedAt, mKaryId: $mKaryId, mKaryMCompId: $mKaryMCompId, mKaryMDirId: $mKaryMDirId, mKaryMDivisiId: $mKaryMDivisiId, mKaryMDeptId: $mKaryMDeptId, mKaryMZonaId: $mKaryMZonaId, mKaryGradingId: $mKaryGradingId, mKaryCostcontreId: $mKaryCostcontreId, mKaryKode: $mKaryKode, mKaryMPosisiId: $mKaryMPosisiId, mKaryMJamKerjaId: $mKaryMJamKerjaId, mKaryKodePresensi: $mKaryKodePresensi, mKaryNik: $mKaryNik, mKaryNamaDepan: $mKaryNamaDepan, mKaryNamaBelakang: $mKaryNamaBelakang, mKaryNamaLengkap: $mKaryNamaLengkap, mKaryNamaPanggilan: $mKaryNamaPanggilan, mKaryJkId: $mKaryJkId, mKaryTempatLahir: $mKaryTempatLahir, mKaryTglLahir: $mKaryTglLahir, mKaryProvinsiId: $mKaryProvinsiId, mKaryKotaId: $mKaryKotaId, mKaryKecamatanId: $mKaryKecamatanId, mKaryKodePos: $mKaryKodePos, mKaryAlamatAsli: $mKaryAlamatAsli, mKaryAlamatDomisili: $mKaryAlamatDomisili, mKaryNoTlp: $mKaryNoTlp, mKaryNoTlpLainnya: $mKaryNoTlpLainnya, mKaryNoDarurat: $mKaryNoDarurat, mKaryNamaKontakDarurat: $mKaryNamaKontakDarurat, mKaryAgamaId: $mKaryAgamaId, mKaryGolDarahId: $mKaryGolDarahId, mKaryStatusNikahId: $mKaryStatusNikahId, mKaryTanggunganId: $mKaryTanggunganId, mKaryHubDgnKaryawan: $mKaryHubDgnKaryawan, mKaryCutiJatahReguler: $mKaryCutiJatahReguler, mKaryCutiSisaReguler: $mKaryCutiSisaReguler, mKaryCutiPanjang: $mKaryCutiPanjang, mKaryCutiSisaPanjang: $mKaryCutiSisaPanjang, mKaryStatusKaryId: $mKaryStatusKaryId, mKaryLamaKontrakAwal: $mKaryLamaKontrakAwal, mKaryLamaKontrakAkhir: $mKaryLamaKontrakAkhir, mKaryTglMasuk: $mKaryTglMasuk, mKaryTglBerhenti: $mKaryTglBerhenti, mKaryAlasanBerhenti: $mKaryAlasanBerhenti, mKaryUkBaju: $mKaryUkBaju, mKaryUkCelana: $mKaryUkCelana, mKaryUkSepatu: $mKaryUkSepatu, mKaryDesc: $mKaryDesc, mKaryIsActive: $mKaryIsActive, mKaryCreatorId: $mKaryCreatorId, mKaryLastEditorId: $mKaryLastEditorId, mKaryCreatedAt: $mKaryCreatedAt, mKaryUpdatedAt: $mKaryUpdatedAt, mKaryMStandartGajiId: $mKaryMStandartGajiId, mKaryPeriodeGajiId: $mKaryPeriodeGajiId, mKaryRefId: $mKaryRefId, mKaryPresensiLokasiDefaultId: $mKaryPresensiLokasiDefaultId, mKaryExpDateCuti: $mKaryExpDateCuti, mKaryLimitPotong: $mKaryLimitPotong, mKaryAtasanId: $mKaryAtasanId, mKaryCutiP24: $mKaryCutiP24, mKaryCutiSisaP24: $mKaryCutiSisaP24, picId: $picId, picMCompId: $picMCompId, picMDirId: $picMDirId, picMDivisiId: $picMDivisiId, picMDeptId: $picMDeptId, picMZonaId: $picMZonaId, picGradingId: $picGradingId, picCostcontreId: $picCostcontreId, picKode: $picKode, picMPosisiId: $picMPosisiId, picMJamKerjaId: $picMJamKerjaId, picKodePresensi: $picKodePresensi, picNik: $picNik, picNamaDepan: $picNamaDepan, picNamaBelakang: $picNamaBelakang, picNamaLengkap: $picNamaLengkap, picNamaPanggilan: $picNamaPanggilan, picJkId: $picJkId, picTempatLahir: $picTempatLahir, picTglLahir: $picTglLahir, picProvinsiId: $picProvinsiId, picKotaId: $picKotaId, picKecamatanId: $picKecamatanId, picKodePos: $picKodePos, picAlamatAsli: $picAlamatAsli, picAlamatDomisili: $picAlamatDomisili, picNoTlp: $picNoTlp, picNoTlpLainnya: $picNoTlpLainnya, picNoDarurat: $picNoDarurat, picNamaKontakDarurat: $picNamaKontakDarurat, picAgamaId: $picAgamaId, picGolDarahId: $picGolDarahId, picStatusNikahId: $picStatusNikahId, picTanggunganId: $picTanggunganId, picHubDgnKaryawan: $picHubDgnKaryawan, picCutiJatahReguler: $picCutiJatahReguler, picCutiSisaReguler: $picCutiSisaReguler, picCutiPanjang: $picCutiPanjang, picCutiSisaPanjang: $picCutiSisaPanjang, picStatusKaryId: $picStatusKaryId, picLamaKontrakAwal: $picLamaKontrakAwal, picLamaKontrakAkhir: $picLamaKontrakAkhir, picTglMasuk: $picTglMasuk, picTglBerhenti: $picTglBerhenti, picAlasanBerhenti: $picAlasanBerhenti, picUkBaju: $picUkBaju, picUkCelana: $picUkCelana, picUkSepatu: $picUkSepatu, picDesc: $picDesc, picIsActive: $picIsActive, picCreatorId: $picCreatorId, picLastEditorId: $picLastEditorId, picCreatedAt: $picCreatedAt, picUpdatedAt: $picUpdatedAt, picMStandartGajiId: $picMStandartGajiId, picPeriodeGajiId: $picPeriodeGajiId, picRefId: $picRefId, picPresensiLokasiDefaultId: $picPresensiLokasiDefaultId, picExpDateCuti: $picExpDateCuti, picLimitPotong: $picLimitPotong, picAtasanId: $picAtasanId, picCutiP24: $picCutiP24, picCutiSisaP24: $picCutiSisaP24, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, creatorTelp: $creatorTelp, creatorMKaryId: $creatorMKaryId, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage, lastEditorTelp: $lastEditorTelp, lastEditorMKaryId: $lastEditorMKaryId, approvalNote: $approvalNote)';
+    return 'DataDinas(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, nomor: $nomor, datumMCompId: $datumMCompId, datumMSpdId: $datumMSpdId, datumMDirId: $datumMDirId, datumMDivisiId: $datumMDivisiId, datumMDeptId: $datumMDeptId, datumMPosisiId: $datumMPosisiId, tanggal: $tanggal, tglAcaraAwal: $tglAcaraAwal, tglAcaraAkhir: $tglAcaraAkhir, datumJenisSpdId: $datumJenisSpdId, datumMZonaAsalId: $datumMZonaAsalId, datumMZonaTujuanId: $datumMZonaTujuanId, datumMLokasiTujuanId: $datumMLokasiTujuanId, datumMKaryId: $datumMKaryId, datumPicId: $datumPicId, totalBiaya: $totalBiaya, kegiatan: $kegiatan, keterangan: $keterangan, status: $status, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, isKendDinas: $isKendDinas, interval: $interval, catatanKend: $catatanKend, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, mSpdId: $mSpdId, mSpdMCompId: $mSpdMCompId, mSpdMDirId: $mSpdMDirId, mSpdKode: $mSpdKode, mSpdMDivisiId: $mSpdMDivisiId, mSpdMPosisiId: $mSpdMPosisiId, mSpdMDeptId: $mSpdMDeptId, mSpdMZonaId: $mSpdMZonaId, mSpdGradingId: $mSpdGradingId, mSpdGrading: $mSpdGrading, mSpdDesc: $mSpdDesc, mSpdIsActive: $mSpdIsActive, mSpdCreatorId: $mSpdCreatorId, mSpdLastEditorId: $mSpdLastEditorId, mSpdCreatedAt: $mSpdCreatedAt, mSpdUpdatedAt: $mSpdUpdatedAt, mDirId: $mDirId, mDirMCompId: $mDirMCompId, mDirNama: $mDirNama, mDirDesc: $mDirDesc, mDirIsActive: $mDirIsActive, mDirCreatorId: $mDirCreatorId, mDirLastEditorId: $mDirLastEditorId, mDirCreatedAt: $mDirCreatedAt, mDirUpdatedAt: $mDirUpdatedAt, mDivisiId: $mDivisiId, mDivisiMCompId: $mDivisiMCompId, mDivisiMDirId: $mDivisiMDirId, mDivisiNama: $mDivisiNama, mDivisiDesc: $mDivisiDesc, mDivisiIsActive: $mDivisiIsActive, mDivisiCreatorId: $mDivisiCreatorId, mDivisiLastEditorId: $mDivisiLastEditorId, mDivisiCreatedAt: $mDivisiCreatedAt, mDivisiUpdatedAt: $mDivisiUpdatedAt, mDeptId: $mDeptId, mDeptMDirId: $mDeptMDirId, mDeptMDivisiId: $mDeptMDivisiId, mDeptNama: $mDeptNama, mDeptDesc: $mDeptDesc, mDeptIsActive: $mDeptIsActive, mDeptCreatorId: $mDeptCreatorId, mDeptLastEditorId: $mDeptLastEditorId, mDeptCreatedAt: $mDeptCreatedAt, mDeptUpdatedAt: $mDeptUpdatedAt, mPosisiId: $mPosisiId, mPosisiMCompId: $mPosisiMCompId, mPosisiMDirId: $mPosisiMDirId, mPosisiKode: $mPosisiKode, mPosisiDescKerja: $mPosisiDescKerja, mPosisiDescKerja1: $mPosisiDescKerja1, mPosisiDescKerja2: $mPosisiDescKerja2, mPosisiMinPengalaman: $mPosisiMinPengalaman, mPosisiMinPendidikanId: $mPosisiMinPendidikanId, mPosisiMinGajiPokok: $mPosisiMinGajiPokok, mPosisiMaxGajiPokok: $mPosisiMaxGajiPokok, mPosisiBiaya: $mPosisiBiaya, mPosisiTipeBpjsId: $mPosisiTipeBpjsId, mPosisiPotonganBpjs: $mPosisiPotonganBpjs, mPosisiDesc: $mPosisiDesc, mPosisiIsActive: $mPosisiIsActive, mPosisiCreatorId: $mPosisiCreatorId, mPosisiLastEditorId: $mPosisiLastEditorId, mPosisiCreatedAt: $mPosisiCreatedAt, mPosisiUpdatedAt: $mPosisiUpdatedAt, jenisSpdId: $jenisSpdId, jenisSpdMCompId: $jenisSpdMCompId, jenisSpdMDirId: $jenisSpdMDirId, jenisSpdGroup: $jenisSpdGroup, jenisSpdKey: $jenisSpdKey, jenisSpdCode: $jenisSpdCode, jenisSpdValue: $jenisSpdValue, jenisSpdIsActive: $jenisSpdIsActive, jenisSpdCreatorId: $jenisSpdCreatorId, jenisSpdLastEditorId: $jenisSpdLastEditorId, jenisSpdCreatedAt: $jenisSpdCreatedAt, jenisSpdUpdatedAt: $jenisSpdUpdatedAt, jenisSpdValue2: $jenisSpdValue2, jenisSpdValue3: $jenisSpdValue3, mZonaAsalId: $mZonaAsalId, mZonaAsalMCompId: $mZonaAsalMCompId, mZonaAsalMDirId: $mZonaAsalMDirId, mZonaAsalKode: $mZonaAsalKode, mZonaAsalNama: $mZonaAsalNama, mZonaAsalDesc: $mZonaAsalDesc, mZonaAsalIsActive: $mZonaAsalIsActive, mZonaAsalCreatorId: $mZonaAsalCreatorId, mZonaAsalLastEditorId: $mZonaAsalLastEditorId, mZonaAsalCreatedAt: $mZonaAsalCreatedAt, mZonaAsalUpdatedAt: $mZonaAsalUpdatedAt, mZonaTujuanId: $mZonaTujuanId, mZonaTujuanMCompId: $mZonaTujuanMCompId, mZonaTujuanMDirId: $mZonaTujuanMDirId, mZonaTujuanKode: $mZonaTujuanKode, mZonaTujuanNama: $mZonaTujuanNama, mZonaTujuanDesc: $mZonaTujuanDesc, mZonaTujuanIsActive: $mZonaTujuanIsActive, mZonaTujuanCreatorId: $mZonaTujuanCreatorId, mZonaTujuanLastEditorId: $mZonaTujuanLastEditorId, mZonaTujuanCreatedAt: $mZonaTujuanCreatedAt, mZonaTujuanUpdatedAt: $mZonaTujuanUpdatedAt, mLokasiTujuanId: $mLokasiTujuanId, mLokasiTujuanMCompId: $mLokasiTujuanMCompId, mLokasiTujuanMDirId: $mLokasiTujuanMDirId, mLokasiTujuanKode: $mLokasiTujuanKode, mLokasiTujuanNama: $mLokasiTujuanNama, mLokasiTujuanDesc: $mLokasiTujuanDesc, mLokasiTujuanIsActive: $mLokasiTujuanIsActive, mLokasiTujuanCreatorId: $mLokasiTujuanCreatorId, mLokasiTujuanLastEditorId: $mLokasiTujuanLastEditorId, mLokasiTujuanCreatedAt: $mLokasiTujuanCreatedAt, mLokasiTujuanUpdatedAt: $mLokasiTujuanUpdatedAt, mKaryId: $mKaryId, mKaryMCompId: $mKaryMCompId, mKaryMDirId: $mKaryMDirId, mKaryMDivisiId: $mKaryMDivisiId, mKaryMDeptId: $mKaryMDeptId, mKaryMZonaId: $mKaryMZonaId, mKaryGradingId: $mKaryGradingId, mKaryCostcontreId: $mKaryCostcontreId, mKaryKode: $mKaryKode, mKaryMPosisiId: $mKaryMPosisiId, mKaryMJamKerjaId: $mKaryMJamKerjaId, mKaryKodePresensi: $mKaryKodePresensi, mKaryNik: $mKaryNik, mKaryNamaDepan: $mKaryNamaDepan, mKaryNamaBelakang: $mKaryNamaBelakang, mKaryNamaLengkap: $mKaryNamaLengkap, mKaryNamaPanggilan: $mKaryNamaPanggilan, mKaryJkId: $mKaryJkId, mKaryTempatLahir: $mKaryTempatLahir, mKaryTglLahir: $mKaryTglLahir, mKaryProvinsiId: $mKaryProvinsiId, mKaryKotaId: $mKaryKotaId, mKaryKecamatanId: $mKaryKecamatanId, mKaryKodePos: $mKaryKodePos, mKaryAlamatAsli: $mKaryAlamatAsli, mKaryAlamatDomisili: $mKaryAlamatDomisili, mKaryNoTlp: $mKaryNoTlp, mKaryNoTlpLainnya: $mKaryNoTlpLainnya, mKaryNoDarurat: $mKaryNoDarurat, mKaryNamaKontakDarurat: $mKaryNamaKontakDarurat, mKaryAgamaId: $mKaryAgamaId, mKaryGolDarahId: $mKaryGolDarahId, mKaryStatusNikahId: $mKaryStatusNikahId, mKaryTanggunganId: $mKaryTanggunganId, mKaryHubDgnKaryawan: $mKaryHubDgnKaryawan, mKaryCutiJatahReguler: $mKaryCutiJatahReguler, mKaryCutiSisaReguler: $mKaryCutiSisaReguler, mKaryCutiPanjang: $mKaryCutiPanjang, mKaryCutiSisaPanjang: $mKaryCutiSisaPanjang, mKaryStatusKaryId: $mKaryStatusKaryId, mKaryLamaKontrakAwal: $mKaryLamaKontrakAwal, mKaryLamaKontrakAkhir: $mKaryLamaKontrakAkhir, mKaryTglMasuk: $mKaryTglMasuk, mKaryTglBerhenti: $mKaryTglBerhenti, mKaryAlasanBerhenti: $mKaryAlasanBerhenti, mKaryUkBaju: $mKaryUkBaju, mKaryUkCelana: $mKaryUkCelana, mKaryUkSepatu: $mKaryUkSepatu, mKaryDesc: $mKaryDesc, mKaryIsActive: $mKaryIsActive, mKaryCreatorId: $mKaryCreatorId, mKaryLastEditorId: $mKaryLastEditorId, mKaryCreatedAt: $mKaryCreatedAt, mKaryUpdatedAt: $mKaryUpdatedAt, mKaryMStandartGajiId: $mKaryMStandartGajiId, mKaryPeriodeGajiId: $mKaryPeriodeGajiId, mKaryRefId: $mKaryRefId, mKaryPresensiLokasiDefaultId: $mKaryPresensiLokasiDefaultId, mKaryExpDateCuti: $mKaryExpDateCuti, mKaryLimitPotong: $mKaryLimitPotong, mKaryAtasanId: $mKaryAtasanId, mKaryCutiP24: $mKaryCutiP24, mKaryCutiSisaP24: $mKaryCutiSisaP24, picId: $picId, picMCompId: $picMCompId, picMDirId: $picMDirId, picMDivisiId: $picMDivisiId, picMDeptId: $picMDeptId, picMZonaId: $picMZonaId, picGradingId: $picGradingId, picCostcontreId: $picCostcontreId, picKode: $picKode, picMPosisiId: $picMPosisiId, picMJamKerjaId: $picMJamKerjaId, picKodePresensi: $picKodePresensi, picNik: $picNik, picNamaDepan: $picNamaDepan, picNamaBelakang: $picNamaBelakang, picNamaLengkap: $picNamaLengkap, picNamaPanggilan: $picNamaPanggilan, picJkId: $picJkId, picTempatLahir: $picTempatLahir, picTglLahir: $picTglLahir, picProvinsiId: $picProvinsiId, picKotaId: $picKotaId, picKecamatanId: $picKecamatanId, picKodePos: $picKodePos, picAlamatAsli: $picAlamatAsli, picAlamatDomisili: $picAlamatDomisili, picNoTlp: $picNoTlp, picNoTlpLainnya: $picNoTlpLainnya, picNoDarurat: $picNoDarurat, picNamaKontakDarurat: $picNamaKontakDarurat, picAgamaId: $picAgamaId, picGolDarahId: $picGolDarahId, picStatusNikahId: $picStatusNikahId, picTanggunganId: $picTanggunganId, picHubDgnKaryawan: $picHubDgnKaryawan, picCutiJatahReguler: $picCutiJatahReguler, picCutiSisaReguler: $picCutiSisaReguler, picCutiPanjang: $picCutiPanjang, picCutiSisaPanjang: $picCutiSisaPanjang, picStatusKaryId: $picStatusKaryId, picLamaKontrakAwal: $picLamaKontrakAwal, picLamaKontrakAkhir: $picLamaKontrakAkhir, picTglMasuk: $picTglMasuk, picTglBerhenti: $picTglBerhenti, picAlasanBerhenti: $picAlasanBerhenti, picUkBaju: $picUkBaju, picUkCelana: $picUkCelana, picUkSepatu: $picUkSepatu, picDesc: $picDesc, picIsActive: $picIsActive, picCreatorId: $picCreatorId, picLastEditorId: $picLastEditorId, picCreatedAt: $picCreatedAt, picUpdatedAt: $picUpdatedAt, picMStandartGajiId: $picMStandartGajiId, picPeriodeGajiId: $picPeriodeGajiId, picRefId: $picRefId, picPresensiLokasiDefaultId: $picPresensiLokasiDefaultId, picExpDateCuti: $picExpDateCuti, picLimitPotong: $picLimitPotong, picAtasanId: $picAtasanId, picCutiP24: $picCutiP24, picCutiSisaP24: $picCutiSisaP24, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, creatorTelp: $creatorTelp, creatorMKaryId: $creatorMKaryId, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage, lastEditorTelp: $lastEditorTelp, lastEditorMKaryId: $lastEditorMKaryId, approvalNote: $approvalNote)';
   }
 
   @override
@@ -6247,6 +6223,8 @@ class _$DataDinasImpl implements _DataDinas {
                 other.isKendDinas == isKendDinas) &&
             (identical(other.interval, interval) ||
                 other.interval == interval) &&
+            (identical(other.catatanKend, catatanKend) ||
+                other.catatanKend == catatanKend) &&
             (identical(other.mCompId, mCompId) || other.mCompId == mCompId) &&
             (identical(other.mCompNama, mCompNama) ||
                 other.mCompNama == mCompNama) &&
@@ -6282,18 +6260,17 @@ class _$DataDinasImpl implements _DataDinas {
                 .equals(other.mSpdGrading, mSpdGrading) &&
             (identical(other.mSpdDesc, mSpdDesc) ||
                 other.mSpdDesc == mSpdDesc) &&
-            (identical(other.mSpdIsActive, mSpdIsActive) ||
-                other.mSpdIsActive == mSpdIsActive) &&
+            (identical(other.mSpdIsActive, mSpdIsActive) || other.mSpdIsActive == mSpdIsActive) &&
             const DeepCollectionEquality().equals(other.mSpdCreatorId, mSpdCreatorId) &&
             const DeepCollectionEquality().equals(other.mSpdLastEditorId, mSpdLastEditorId) &&
             (identical(other.mSpdCreatedAt, mSpdCreatedAt) || other.mSpdCreatedAt == mSpdCreatedAt) &&
             (identical(other.mSpdUpdatedAt, mSpdUpdatedAt) || other.mSpdUpdatedAt == mSpdUpdatedAt) &&
-            (identical(other.mDirId, mDirId) || other.mDirId == mDirId) &&
-            (identical(other.mDirMCompId, mDirMCompId) || other.mDirMCompId == mDirMCompId) &&
-            (identical(other.mDirNama, mDirNama) || other.mDirNama == mDirNama) &&
+            const DeepCollectionEquality().equals(other.mDirId, mDirId) &&
+            const DeepCollectionEquality().equals(other.mDirMCompId, mDirMCompId) &&
+            const DeepCollectionEquality().equals(other.mDirNama, mDirNama) &&
             const DeepCollectionEquality().equals(other.mDirDesc, mDirDesc) &&
-            (identical(other.mDirIsActive, mDirIsActive) || other.mDirIsActive == mDirIsActive) &&
-            (identical(other.mDirCreatorId, mDirCreatorId) || other.mDirCreatorId == mDirCreatorId) &&
+            const DeepCollectionEquality().equals(other.mDirIsActive, mDirIsActive) &&
+            const DeepCollectionEquality().equals(other.mDirCreatorId, mDirCreatorId) &&
             const DeepCollectionEquality().equals(other.mDirLastEditorId, mDirLastEditorId) &&
             const DeepCollectionEquality().equals(other.mDirCreatedAt, mDirCreatedAt) &&
             const DeepCollectionEquality().equals(other.mDirUpdatedAt, mDirUpdatedAt) &&
@@ -6301,22 +6278,22 @@ class _$DataDinasImpl implements _DataDinas {
             (identical(other.mDivisiMCompId, mDivisiMCompId) || other.mDivisiMCompId == mDivisiMCompId) &&
             (identical(other.mDivisiMDirId, mDivisiMDirId) || other.mDivisiMDirId == mDivisiMDirId) &&
             (identical(other.mDivisiNama, mDivisiNama) || other.mDivisiNama == mDivisiNama) &&
-            (identical(other.mDivisiDesc, mDivisiDesc) || other.mDivisiDesc == mDivisiDesc) &&
+            const DeepCollectionEquality().equals(other.mDivisiDesc, mDivisiDesc) &&
             (identical(other.mDivisiIsActive, mDivisiIsActive) || other.mDivisiIsActive == mDivisiIsActive) &&
-            (identical(other.mDivisiCreatorId, mDivisiCreatorId) || other.mDivisiCreatorId == mDivisiCreatorId) &&
-            (identical(other.mDivisiLastEditorId, mDivisiLastEditorId) || other.mDivisiLastEditorId == mDivisiLastEditorId) &&
-            (identical(other.mDivisiCreatedAt, mDivisiCreatedAt) || other.mDivisiCreatedAt == mDivisiCreatedAt) &&
-            (identical(other.mDivisiUpdatedAt, mDivisiUpdatedAt) || other.mDivisiUpdatedAt == mDivisiUpdatedAt) &&
+            const DeepCollectionEquality().equals(other.mDivisiCreatorId, mDivisiCreatorId) &&
+            const DeepCollectionEquality().equals(other.mDivisiLastEditorId, mDivisiLastEditorId) &&
+            const DeepCollectionEquality().equals(other.mDivisiCreatedAt, mDivisiCreatedAt) &&
+            const DeepCollectionEquality().equals(other.mDivisiUpdatedAt, mDivisiUpdatedAt) &&
             (identical(other.mDeptId, mDeptId) || other.mDeptId == mDeptId) &&
             (identical(other.mDeptMDirId, mDeptMDirId) || other.mDeptMDirId == mDeptMDirId) &&
             (identical(other.mDeptMDivisiId, mDeptMDivisiId) || other.mDeptMDivisiId == mDeptMDivisiId) &&
             (identical(other.mDeptNama, mDeptNama) || other.mDeptNama == mDeptNama) &&
-            (identical(other.mDeptDesc, mDeptDesc) || other.mDeptDesc == mDeptDesc) &&
+            const DeepCollectionEquality().equals(other.mDeptDesc, mDeptDesc) &&
             (identical(other.mDeptIsActive, mDeptIsActive) || other.mDeptIsActive == mDeptIsActive) &&
             const DeepCollectionEquality().equals(other.mDeptCreatorId, mDeptCreatorId) &&
             const DeepCollectionEquality().equals(other.mDeptLastEditorId, mDeptLastEditorId) &&
-            (identical(other.mDeptCreatedAt, mDeptCreatedAt) || other.mDeptCreatedAt == mDeptCreatedAt) &&
-            (identical(other.mDeptUpdatedAt, mDeptUpdatedAt) || other.mDeptUpdatedAt == mDeptUpdatedAt) &&
+            const DeepCollectionEquality().equals(other.mDeptCreatedAt, mDeptCreatedAt) &&
+            const DeepCollectionEquality().equals(other.mDeptUpdatedAt, mDeptUpdatedAt) &&
             (identical(other.mPosisiId, mPosisiId) || other.mPosisiId == mPosisiId) &&
             (identical(other.mPosisiMCompId, mPosisiMCompId) || other.mPosisiMCompId == mPosisiMCompId) &&
             (identical(other.mPosisiMDirId, mPosisiMDirId) || other.mPosisiMDirId == mPosisiMDirId) &&
@@ -6339,7 +6316,7 @@ class _$DataDinasImpl implements _DataDinas {
             (identical(other.mPosisiUpdatedAt, mPosisiUpdatedAt) || other.mPosisiUpdatedAt == mPosisiUpdatedAt) &&
             (identical(other.jenisSpdId, jenisSpdId) || other.jenisSpdId == jenisSpdId) &&
             (identical(other.jenisSpdMCompId, jenisSpdMCompId) || other.jenisSpdMCompId == jenisSpdMCompId) &&
-            (identical(other.jenisSpdMDirId, jenisSpdMDirId) || other.jenisSpdMDirId == jenisSpdMDirId) &&
+            const DeepCollectionEquality().equals(other.jenisSpdMDirId, jenisSpdMDirId) &&
             (identical(other.jenisSpdGroup, jenisSpdGroup) || other.jenisSpdGroup == jenisSpdGroup) &&
             (identical(other.jenisSpdKey, jenisSpdKey) || other.jenisSpdKey == jenisSpdKey) &&
             (identical(other.jenisSpdCode, jenisSpdCode) || other.jenisSpdCode == jenisSpdCode) &&
@@ -6347,14 +6324,13 @@ class _$DataDinasImpl implements _DataDinas {
             (identical(other.jenisSpdIsActive, jenisSpdIsActive) || other.jenisSpdIsActive == jenisSpdIsActive) &&
             const DeepCollectionEquality().equals(other.jenisSpdCreatorId, jenisSpdCreatorId) &&
             const DeepCollectionEquality().equals(other.jenisSpdLastEditorId, jenisSpdLastEditorId) &&
-            (identical(other.jenisSpdCreatedAt, jenisSpdCreatedAt) || other.jenisSpdCreatedAt == jenisSpdCreatedAt) &&
-            (identical(other.jenisSpdUpdatedAt, jenisSpdUpdatedAt) || other.jenisSpdUpdatedAt == jenisSpdUpdatedAt) &&
+            const DeepCollectionEquality().equals(other.jenisSpdCreatedAt, jenisSpdCreatedAt) &&
+            const DeepCollectionEquality().equals(other.jenisSpdUpdatedAt, jenisSpdUpdatedAt) &&
             const DeepCollectionEquality().equals(other.jenisSpdValue2, jenisSpdValue2) &&
             const DeepCollectionEquality().equals(other.jenisSpdValue3, jenisSpdValue3) &&
             (identical(other.mZonaAsalId, mZonaAsalId) || other.mZonaAsalId == mZonaAsalId) &&
             (identical(other.mZonaAsalMCompId, mZonaAsalMCompId) || other.mZonaAsalMCompId == mZonaAsalMCompId) &&
             (identical(other.mZonaAsalMDirId, mZonaAsalMDirId) || other.mZonaAsalMDirId == mZonaAsalMDirId) &&
-            (identical(other.mZonaAsalMTunjKemahalanId, mZonaAsalMTunjKemahalanId) || other.mZonaAsalMTunjKemahalanId == mZonaAsalMTunjKemahalanId) &&
             (identical(other.mZonaAsalKode, mZonaAsalKode) || other.mZonaAsalKode == mZonaAsalKode) &&
             (identical(other.mZonaAsalNama, mZonaAsalNama) || other.mZonaAsalNama == mZonaAsalNama) &&
             (identical(other.mZonaAsalDesc, mZonaAsalDesc) || other.mZonaAsalDesc == mZonaAsalDesc) &&
@@ -6366,7 +6342,6 @@ class _$DataDinasImpl implements _DataDinas {
             (identical(other.mZonaTujuanId, mZonaTujuanId) || other.mZonaTujuanId == mZonaTujuanId) &&
             (identical(other.mZonaTujuanMCompId, mZonaTujuanMCompId) || other.mZonaTujuanMCompId == mZonaTujuanMCompId) &&
             (identical(other.mZonaTujuanMDirId, mZonaTujuanMDirId) || other.mZonaTujuanMDirId == mZonaTujuanMDirId) &&
-            (identical(other.mZonaTujuanMTunjKemahalanId, mZonaTujuanMTunjKemahalanId) || other.mZonaTujuanMTunjKemahalanId == mZonaTujuanMTunjKemahalanId) &&
             (identical(other.mZonaTujuanKode, mZonaTujuanKode) || other.mZonaTujuanKode == mZonaTujuanKode) &&
             (identical(other.mZonaTujuanNama, mZonaTujuanNama) || other.mZonaTujuanNama == mZonaTujuanNama) &&
             (identical(other.mZonaTujuanDesc, mZonaTujuanDesc) || other.mZonaTujuanDesc == mZonaTujuanDesc) &&
@@ -6392,7 +6367,7 @@ class _$DataDinasImpl implements _DataDinas {
             (identical(other.mKaryMDivisiId, mKaryMDivisiId) || other.mKaryMDivisiId == mKaryMDivisiId) &&
             (identical(other.mKaryMDeptId, mKaryMDeptId) || other.mKaryMDeptId == mKaryMDeptId) &&
             (identical(other.mKaryMZonaId, mKaryMZonaId) || other.mKaryMZonaId == mKaryMZonaId) &&
-            const DeepCollectionEquality().equals(other.mKaryGradingId, mKaryGradingId) &&
+            (identical(other.mKaryGradingId, mKaryGradingId) || other.mKaryGradingId == mKaryGradingId) &&
             (identical(other.mKaryCostcontreId, mKaryCostcontreId) || other.mKaryCostcontreId == mKaryCostcontreId) &&
             (identical(other.mKaryKode, mKaryKode) || other.mKaryKode == mKaryKode) &&
             (identical(other.mKaryMPosisiId, mKaryMPosisiId) || other.mKaryMPosisiId == mKaryMPosisiId) &&
@@ -6428,106 +6403,106 @@ class _$DataDinasImpl implements _DataDinas {
             const DeepCollectionEquality().equals(other.mKaryStatusKaryId, mKaryStatusKaryId) &&
             const DeepCollectionEquality().equals(other.mKaryLamaKontrakAwal, mKaryLamaKontrakAwal) &&
             const DeepCollectionEquality().equals(other.mKaryLamaKontrakAkhir, mKaryLamaKontrakAkhir) &&
-            (identical(other.mKaryTglMasuk, mKaryTglMasuk) || other.mKaryTglMasuk == mKaryTglMasuk) &&
+            const DeepCollectionEquality().equals(other.mKaryTglMasuk, mKaryTglMasuk) &&
             const DeepCollectionEquality().equals(other.mKaryTglBerhenti, mKaryTglBerhenti) &&
             const DeepCollectionEquality().equals(other.mKaryAlasanBerhenti, mKaryAlasanBerhenti) &&
             (identical(other.mKaryUkBaju, mKaryUkBaju) || other.mKaryUkBaju == mKaryUkBaju) &&
             (identical(other.mKaryUkCelana, mKaryUkCelana) || other.mKaryUkCelana == mKaryUkCelana) &&
             (identical(other.mKaryUkSepatu, mKaryUkSepatu) || other.mKaryUkSepatu == mKaryUkSepatu) &&
-            (identical(other.mKaryDesc, mKaryDesc) || other.mKaryDesc == mKaryDesc) &&
+            const DeepCollectionEquality().equals(other.mKaryDesc, mKaryDesc) &&
             (identical(other.mKaryIsActive, mKaryIsActive) || other.mKaryIsActive == mKaryIsActive) &&
             const DeepCollectionEquality().equals(other.mKaryCreatorId, mKaryCreatorId) &&
-            (identical(other.mKaryLastEditorId, mKaryLastEditorId) || other.mKaryLastEditorId == mKaryLastEditorId) &&
+            const DeepCollectionEquality().equals(other.mKaryLastEditorId, mKaryLastEditorId) &&
             (identical(other.mKaryCreatedAt, mKaryCreatedAt) || other.mKaryCreatedAt == mKaryCreatedAt) &&
             (identical(other.mKaryUpdatedAt, mKaryUpdatedAt) || other.mKaryUpdatedAt == mKaryUpdatedAt) &&
             (identical(other.mKaryMStandartGajiId, mKaryMStandartGajiId) || other.mKaryMStandartGajiId == mKaryMStandartGajiId) &&
             (identical(other.mKaryPeriodeGajiId, mKaryPeriodeGajiId) || other.mKaryPeriodeGajiId == mKaryPeriodeGajiId) &&
-            const DeepCollectionEquality().equals(other.mKaryRefId, mKaryRefId) &&
+            (identical(other.mKaryRefId, mKaryRefId) || other.mKaryRefId == mKaryRefId) &&
             const DeepCollectionEquality().equals(other.mKaryPresensiLokasiDefaultId, mKaryPresensiLokasiDefaultId) &&
-            (identical(other.mKaryExpDateCuti, mKaryExpDateCuti) || other.mKaryExpDateCuti == mKaryExpDateCuti) &&
+            const DeepCollectionEquality().equals(other.mKaryExpDateCuti, mKaryExpDateCuti) &&
             (identical(other.mKaryLimitPotong, mKaryLimitPotong) || other.mKaryLimitPotong == mKaryLimitPotong) &&
             (identical(other.mKaryAtasanId, mKaryAtasanId) || other.mKaryAtasanId == mKaryAtasanId) &&
             const DeepCollectionEquality().equals(other.mKaryCutiP24, mKaryCutiP24) &&
             const DeepCollectionEquality().equals(other.mKaryCutiSisaP24, mKaryCutiSisaP24) &&
-            (identical(other.picId, picId) || other.picId == picId) &&
-            (identical(other.picMCompId, picMCompId) || other.picMCompId == picMCompId) &&
-            (identical(other.picMDirId, picMDirId) || other.picMDirId == picMDirId) &&
-            (identical(other.picMDivisiId, picMDivisiId) || other.picMDivisiId == picMDivisiId) &&
-            (identical(other.picMDeptId, picMDeptId) || other.picMDeptId == picMDeptId) &&
-            (identical(other.picMZonaId, picMZonaId) || other.picMZonaId == picMZonaId) &&
-            (identical(other.picGradingId, picGradingId) || other.picGradingId == picGradingId) &&
-            (identical(other.picCostcontreId, picCostcontreId) || other.picCostcontreId == picCostcontreId) &&
-            (identical(other.picKode, picKode) || other.picKode == picKode) &&
-            (identical(other.picMPosisiId, picMPosisiId) || other.picMPosisiId == picMPosisiId) &&
-            (identical(other.picMJamKerjaId, picMJamKerjaId) || other.picMJamKerjaId == picMJamKerjaId) &&
-            (identical(other.picKodePresensi, picKodePresensi) || other.picKodePresensi == picKodePresensi) &&
-            (identical(other.picNik, picNik) || other.picNik == picNik) &&
-            (identical(other.picNamaDepan, picNamaDepan) || other.picNamaDepan == picNamaDepan) &&
-            (identical(other.picNamaBelakang, picNamaBelakang) || other.picNamaBelakang == picNamaBelakang) &&
-            (identical(other.picNamaLengkap, picNamaLengkap) || other.picNamaLengkap == picNamaLengkap) &&
-            (identical(other.picNamaPanggilan, picNamaPanggilan) || other.picNamaPanggilan == picNamaPanggilan) &&
-            (identical(other.picJkId, picJkId) || other.picJkId == picJkId) &&
-            (identical(other.picTempatLahir, picTempatLahir) || other.picTempatLahir == picTempatLahir) &&
-            (identical(other.picTglLahir, picTglLahir) || other.picTglLahir == picTglLahir) &&
-            (identical(other.picProvinsiId, picProvinsiId) || other.picProvinsiId == picProvinsiId) &&
-            (identical(other.picKotaId, picKotaId) || other.picKotaId == picKotaId) &&
-            (identical(other.picKecamatanId, picKecamatanId) || other.picKecamatanId == picKecamatanId) &&
-            (identical(other.picKodePos, picKodePos) || other.picKodePos == picKodePos) &&
-            (identical(other.picAlamatAsli, picAlamatAsli) || other.picAlamatAsli == picAlamatAsli) &&
-            (identical(other.picAlamatDomisili, picAlamatDomisili) || other.picAlamatDomisili == picAlamatDomisili) &&
-            (identical(other.picNoTlp, picNoTlp) || other.picNoTlp == picNoTlp) &&
+            const DeepCollectionEquality().equals(other.picId, picId) &&
+            const DeepCollectionEquality().equals(other.picMCompId, picMCompId) &&
+            const DeepCollectionEquality().equals(other.picMDirId, picMDirId) &&
+            const DeepCollectionEquality().equals(other.picMDivisiId, picMDivisiId) &&
+            const DeepCollectionEquality().equals(other.picMDeptId, picMDeptId) &&
+            const DeepCollectionEquality().equals(other.picMZonaId, picMZonaId) &&
+            const DeepCollectionEquality().equals(other.picGradingId, picGradingId) &&
+            const DeepCollectionEquality().equals(other.picCostcontreId, picCostcontreId) &&
+            const DeepCollectionEquality().equals(other.picKode, picKode) &&
+            const DeepCollectionEquality().equals(other.picMPosisiId, picMPosisiId) &&
+            const DeepCollectionEquality().equals(other.picMJamKerjaId, picMJamKerjaId) &&
+            const DeepCollectionEquality().equals(other.picKodePresensi, picKodePresensi) &&
+            const DeepCollectionEquality().equals(other.picNik, picNik) &&
+            const DeepCollectionEquality().equals(other.picNamaDepan, picNamaDepan) &&
+            const DeepCollectionEquality().equals(other.picNamaBelakang, picNamaBelakang) &&
+            const DeepCollectionEquality().equals(other.picNamaLengkap, picNamaLengkap) &&
+            const DeepCollectionEquality().equals(other.picNamaPanggilan, picNamaPanggilan) &&
+            const DeepCollectionEquality().equals(other.picJkId, picJkId) &&
+            const DeepCollectionEquality().equals(other.picTempatLahir, picTempatLahir) &&
+            const DeepCollectionEquality().equals(other.picTglLahir, picTglLahir) &&
+            const DeepCollectionEquality().equals(other.picProvinsiId, picProvinsiId) &&
+            const DeepCollectionEquality().equals(other.picKotaId, picKotaId) &&
+            const DeepCollectionEquality().equals(other.picKecamatanId, picKecamatanId) &&
+            const DeepCollectionEquality().equals(other.picKodePos, picKodePos) &&
+            const DeepCollectionEquality().equals(other.picAlamatAsli, picAlamatAsli) &&
+            const DeepCollectionEquality().equals(other.picAlamatDomisili, picAlamatDomisili) &&
+            const DeepCollectionEquality().equals(other.picNoTlp, picNoTlp) &&
             const DeepCollectionEquality().equals(other.picNoTlpLainnya, picNoTlpLainnya) &&
-            (identical(other.picNoDarurat, picNoDarurat) || other.picNoDarurat == picNoDarurat) &&
-            (identical(other.picNamaKontakDarurat, picNamaKontakDarurat) || other.picNamaKontakDarurat == picNamaKontakDarurat) &&
-            (identical(other.picAgamaId, picAgamaId) || other.picAgamaId == picAgamaId) &&
-            (identical(other.picGolDarahId, picGolDarahId) || other.picGolDarahId == picGolDarahId) &&
-            (identical(other.picStatusNikahId, picStatusNikahId) || other.picStatusNikahId == picStatusNikahId) &&
-            (identical(other.picTanggunganId, picTanggunganId) || other.picTanggunganId == picTanggunganId) &&
-            (identical(other.picHubDgnKaryawan, picHubDgnKaryawan) || other.picHubDgnKaryawan == picHubDgnKaryawan) &&
-            (identical(other.picCutiJatahReguler, picCutiJatahReguler) || other.picCutiJatahReguler == picCutiJatahReguler) &&
-            (identical(other.picCutiSisaReguler, picCutiSisaReguler) || other.picCutiSisaReguler == picCutiSisaReguler) &&
-            (identical(other.picCutiPanjang, picCutiPanjang) || other.picCutiPanjang == picCutiPanjang) &&
-            (identical(other.picCutiSisaPanjang, picCutiSisaPanjang) || other.picCutiSisaPanjang == picCutiSisaPanjang) &&
+            const DeepCollectionEquality().equals(other.picNoDarurat, picNoDarurat) &&
+            const DeepCollectionEquality().equals(other.picNamaKontakDarurat, picNamaKontakDarurat) &&
+            const DeepCollectionEquality().equals(other.picAgamaId, picAgamaId) &&
+            const DeepCollectionEquality().equals(other.picGolDarahId, picGolDarahId) &&
+            const DeepCollectionEquality().equals(other.picStatusNikahId, picStatusNikahId) &&
+            const DeepCollectionEquality().equals(other.picTanggunganId, picTanggunganId) &&
+            const DeepCollectionEquality().equals(other.picHubDgnKaryawan, picHubDgnKaryawan) &&
+            const DeepCollectionEquality().equals(other.picCutiJatahReguler, picCutiJatahReguler) &&
+            const DeepCollectionEquality().equals(other.picCutiSisaReguler, picCutiSisaReguler) &&
+            const DeepCollectionEquality().equals(other.picCutiPanjang, picCutiPanjang) &&
+            const DeepCollectionEquality().equals(other.picCutiSisaPanjang, picCutiSisaPanjang) &&
             const DeepCollectionEquality().equals(other.picStatusKaryId, picStatusKaryId) &&
             const DeepCollectionEquality().equals(other.picLamaKontrakAwal, picLamaKontrakAwal) &&
             const DeepCollectionEquality().equals(other.picLamaKontrakAkhir, picLamaKontrakAkhir) &&
             const DeepCollectionEquality().equals(other.picTglMasuk, picTglMasuk) &&
             const DeepCollectionEquality().equals(other.picTglBerhenti, picTglBerhenti) &&
             const DeepCollectionEquality().equals(other.picAlasanBerhenti, picAlasanBerhenti) &&
-            (identical(other.picUkBaju, picUkBaju) || other.picUkBaju == picUkBaju) &&
-            (identical(other.picUkCelana, picUkCelana) || other.picUkCelana == picUkCelana) &&
-            (identical(other.picUkSepatu, picUkSepatu) || other.picUkSepatu == picUkSepatu) &&
+            const DeepCollectionEquality().equals(other.picUkBaju, picUkBaju) &&
+            const DeepCollectionEquality().equals(other.picUkCelana, picUkCelana) &&
+            const DeepCollectionEquality().equals(other.picUkSepatu, picUkSepatu) &&
             const DeepCollectionEquality().equals(other.picDesc, picDesc) &&
-            (identical(other.picIsActive, picIsActive) || other.picIsActive == picIsActive) &&
+            const DeepCollectionEquality().equals(other.picIsActive, picIsActive) &&
             const DeepCollectionEquality().equals(other.picCreatorId, picCreatorId) &&
-            (identical(other.picLastEditorId, picLastEditorId) || other.picLastEditorId == picLastEditorId) &&
-            (identical(other.picCreatedAt, picCreatedAt) || other.picCreatedAt == picCreatedAt) &&
-            (identical(other.picUpdatedAt, picUpdatedAt) || other.picUpdatedAt == picUpdatedAt) &&
-            (identical(other.picMStandartGajiId, picMStandartGajiId) || other.picMStandartGajiId == picMStandartGajiId) &&
-            (identical(other.picPeriodeGajiId, picPeriodeGajiId) || other.picPeriodeGajiId == picPeriodeGajiId) &&
-            (identical(other.picRefId, picRefId) || other.picRefId == picRefId) &&
+            const DeepCollectionEquality().equals(other.picLastEditorId, picLastEditorId) &&
+            const DeepCollectionEquality().equals(other.picCreatedAt, picCreatedAt) &&
+            const DeepCollectionEquality().equals(other.picUpdatedAt, picUpdatedAt) &&
+            const DeepCollectionEquality().equals(other.picMStandartGajiId, picMStandartGajiId) &&
+            const DeepCollectionEquality().equals(other.picPeriodeGajiId, picPeriodeGajiId) &&
+            const DeepCollectionEquality().equals(other.picRefId, picRefId) &&
             const DeepCollectionEquality().equals(other.picPresensiLokasiDefaultId, picPresensiLokasiDefaultId) &&
-            (identical(other.picExpDateCuti, picExpDateCuti) || other.picExpDateCuti == picExpDateCuti) &&
-            (identical(other.picLimitPotong, picLimitPotong) || other.picLimitPotong == picLimitPotong) &&
-            (identical(other.picAtasanId, picAtasanId) || other.picAtasanId == picAtasanId) &&
+            const DeepCollectionEquality().equals(other.picExpDateCuti, picExpDateCuti) &&
+            const DeepCollectionEquality().equals(other.picLimitPotong, picLimitPotong) &&
+            const DeepCollectionEquality().equals(other.picAtasanId, picAtasanId) &&
             const DeepCollectionEquality().equals(other.picCutiP24, picCutiP24) &&
             const DeepCollectionEquality().equals(other.picCutiSisaP24, picCutiSisaP24) &&
             (identical(other.creatorId, creatorId) || other.creatorId == creatorId) &&
             (identical(other.creatorName, creatorName) || other.creatorName == creatorName) &&
-            (identical(other.creatorEmail, creatorEmail) || other.creatorEmail == creatorEmail) &&
+            const DeepCollectionEquality().equals(other.creatorEmail, creatorEmail) &&
             (identical(other.creatorUsername, creatorUsername) || other.creatorUsername == creatorUsername) &&
             const DeepCollectionEquality().equals(other.creatorEmailVerifiedAt, creatorEmailVerifiedAt) &&
             (identical(other.creatorPassword, creatorPassword) || other.creatorPassword == creatorPassword) &&
             (identical(other.creatorMCompId, creatorMCompId) || other.creatorMCompId == creatorMCompId) &&
             (identical(other.creatorMDirId, creatorMDirId) || other.creatorMDirId == creatorMDirId) &&
             (identical(other.creatorIsActive, creatorIsActive) || other.creatorIsActive == creatorIsActive) &&
-            const DeepCollectionEquality().equals(other.creatorCreatorId, creatorCreatorId) &&
-            (identical(other.creatorLastEditorId, creatorLastEditorId) || other.creatorLastEditorId == creatorLastEditorId) &&
+            (identical(other.creatorCreatorId, creatorCreatorId) || other.creatorCreatorId == creatorCreatorId) &&
+            const DeepCollectionEquality().equals(other.creatorLastEditorId, creatorLastEditorId) &&
             const DeepCollectionEquality().equals(other.creatorRememberToken, creatorRememberToken) &&
-            const DeepCollectionEquality().equals(other.creatorCreatedAt, creatorCreatedAt) &&
+            (identical(other.creatorCreatedAt, creatorCreatedAt) || other.creatorCreatedAt == creatorCreatedAt) &&
             (identical(other.creatorUpdatedAt, creatorUpdatedAt) || other.creatorUpdatedAt == creatorUpdatedAt) &&
             (identical(other.creatorProfilImage, creatorProfilImage) || other.creatorProfilImage == creatorProfilImage) &&
-            (identical(other.creatorTelp, creatorTelp) || other.creatorTelp == creatorTelp) &&
+            const DeepCollectionEquality().equals(other.creatorTelp, creatorTelp) &&
             (identical(other.creatorMKaryId, creatorMKaryId) || other.creatorMKaryId == creatorMKaryId) &&
             const DeepCollectionEquality().equals(other.lastEditorId, lastEditorId) &&
             const DeepCollectionEquality().equals(other.lastEditorName, lastEditorName) &&
@@ -6584,6 +6559,7 @@ class _$DataDinasImpl implements _DataDinas {
         updatedAt,
         isKendDinas,
         interval,
+        catatanKend,
         mCompId,
         mCompNama,
         mCompIsActive,
@@ -6608,12 +6584,12 @@ class _$DataDinasImpl implements _DataDinas {
         const DeepCollectionEquality().hash(mSpdLastEditorId),
         mSpdCreatedAt,
         mSpdUpdatedAt,
-        mDirId,
-        mDirMCompId,
-        mDirNama,
+        const DeepCollectionEquality().hash(mDirId),
+        const DeepCollectionEquality().hash(mDirMCompId),
+        const DeepCollectionEquality().hash(mDirNama),
         const DeepCollectionEquality().hash(mDirDesc),
-        mDirIsActive,
-        mDirCreatorId,
+        const DeepCollectionEquality().hash(mDirIsActive),
+        const DeepCollectionEquality().hash(mDirCreatorId),
         const DeepCollectionEquality().hash(mDirLastEditorId),
         const DeepCollectionEquality().hash(mDirCreatedAt),
         const DeepCollectionEquality().hash(mDirUpdatedAt),
@@ -6621,22 +6597,22 @@ class _$DataDinasImpl implements _DataDinas {
         mDivisiMCompId,
         mDivisiMDirId,
         mDivisiNama,
-        mDivisiDesc,
+        const DeepCollectionEquality().hash(mDivisiDesc),
         mDivisiIsActive,
-        mDivisiCreatorId,
-        mDivisiLastEditorId,
-        mDivisiCreatedAt,
-        mDivisiUpdatedAt,
+        const DeepCollectionEquality().hash(mDivisiCreatorId),
+        const DeepCollectionEquality().hash(mDivisiLastEditorId),
+        const DeepCollectionEquality().hash(mDivisiCreatedAt),
+        const DeepCollectionEquality().hash(mDivisiUpdatedAt),
         mDeptId,
         mDeptMDirId,
         mDeptMDivisiId,
         mDeptNama,
-        mDeptDesc,
+        const DeepCollectionEquality().hash(mDeptDesc),
         mDeptIsActive,
         const DeepCollectionEquality().hash(mDeptCreatorId),
         const DeepCollectionEquality().hash(mDeptLastEditorId),
-        mDeptCreatedAt,
-        mDeptUpdatedAt,
+        const DeepCollectionEquality().hash(mDeptCreatedAt),
+        const DeepCollectionEquality().hash(mDeptUpdatedAt),
         mPosisiId,
         mPosisiMCompId,
         mPosisiMDirId,
@@ -6659,7 +6635,7 @@ class _$DataDinasImpl implements _DataDinas {
         mPosisiUpdatedAt,
         jenisSpdId,
         jenisSpdMCompId,
-        jenisSpdMDirId,
+        const DeepCollectionEquality().hash(jenisSpdMDirId),
         jenisSpdGroup,
         jenisSpdKey,
         jenisSpdCode,
@@ -6667,14 +6643,13 @@ class _$DataDinasImpl implements _DataDinas {
         jenisSpdIsActive,
         const DeepCollectionEquality().hash(jenisSpdCreatorId),
         const DeepCollectionEquality().hash(jenisSpdLastEditorId),
-        jenisSpdCreatedAt,
-        jenisSpdUpdatedAt,
+        const DeepCollectionEquality().hash(jenisSpdCreatedAt),
+        const DeepCollectionEquality().hash(jenisSpdUpdatedAt),
         const DeepCollectionEquality().hash(jenisSpdValue2),
         const DeepCollectionEquality().hash(jenisSpdValue3),
         mZonaAsalId,
         mZonaAsalMCompId,
         mZonaAsalMDirId,
-        mZonaAsalMTunjKemahalanId,
         mZonaAsalKode,
         mZonaAsalNama,
         mZonaAsalDesc,
@@ -6686,7 +6661,6 @@ class _$DataDinasImpl implements _DataDinas {
         mZonaTujuanId,
         mZonaTujuanMCompId,
         mZonaTujuanMDirId,
-        mZonaTujuanMTunjKemahalanId,
         mZonaTujuanKode,
         mZonaTujuanNama,
         mZonaTujuanDesc,
@@ -6712,7 +6686,7 @@ class _$DataDinasImpl implements _DataDinas {
         mKaryMDivisiId,
         mKaryMDeptId,
         mKaryMZonaId,
-        const DeepCollectionEquality().hash(mKaryGradingId),
+        mKaryGradingId,
         mKaryCostcontreId,
         mKaryKode,
         mKaryMPosisiId,
@@ -6748,106 +6722,106 @@ class _$DataDinasImpl implements _DataDinas {
         const DeepCollectionEquality().hash(mKaryStatusKaryId),
         const DeepCollectionEquality().hash(mKaryLamaKontrakAwal),
         const DeepCollectionEquality().hash(mKaryLamaKontrakAkhir),
-        mKaryTglMasuk,
+        const DeepCollectionEquality().hash(mKaryTglMasuk),
         const DeepCollectionEquality().hash(mKaryTglBerhenti),
         const DeepCollectionEquality().hash(mKaryAlasanBerhenti),
         mKaryUkBaju,
         mKaryUkCelana,
         mKaryUkSepatu,
-        mKaryDesc,
+        const DeepCollectionEquality().hash(mKaryDesc),
         mKaryIsActive,
         const DeepCollectionEquality().hash(mKaryCreatorId),
-        mKaryLastEditorId,
+        const DeepCollectionEquality().hash(mKaryLastEditorId),
         mKaryCreatedAt,
         mKaryUpdatedAt,
         mKaryMStandartGajiId,
         mKaryPeriodeGajiId,
-        const DeepCollectionEquality().hash(mKaryRefId),
+        mKaryRefId,
         const DeepCollectionEquality().hash(mKaryPresensiLokasiDefaultId),
-        mKaryExpDateCuti,
+        const DeepCollectionEquality().hash(mKaryExpDateCuti),
         mKaryLimitPotong,
         mKaryAtasanId,
         const DeepCollectionEquality().hash(mKaryCutiP24),
         const DeepCollectionEquality().hash(mKaryCutiSisaP24),
-        picId,
-        picMCompId,
-        picMDirId,
-        picMDivisiId,
-        picMDeptId,
-        picMZonaId,
-        picGradingId,
-        picCostcontreId,
-        picKode,
-        picMPosisiId,
-        picMJamKerjaId,
-        picKodePresensi,
-        picNik,
-        picNamaDepan,
-        picNamaBelakang,
-        picNamaLengkap,
-        picNamaPanggilan,
-        picJkId,
-        picTempatLahir,
-        picTglLahir,
-        picProvinsiId,
-        picKotaId,
-        picKecamatanId,
-        picKodePos,
-        picAlamatAsli,
-        picAlamatDomisili,
-        picNoTlp,
+        const DeepCollectionEquality().hash(picId),
+        const DeepCollectionEquality().hash(picMCompId),
+        const DeepCollectionEquality().hash(picMDirId),
+        const DeepCollectionEquality().hash(picMDivisiId),
+        const DeepCollectionEquality().hash(picMDeptId),
+        const DeepCollectionEquality().hash(picMZonaId),
+        const DeepCollectionEquality().hash(picGradingId),
+        const DeepCollectionEquality().hash(picCostcontreId),
+        const DeepCollectionEquality().hash(picKode),
+        const DeepCollectionEquality().hash(picMPosisiId),
+        const DeepCollectionEquality().hash(picMJamKerjaId),
+        const DeepCollectionEquality().hash(picKodePresensi),
+        const DeepCollectionEquality().hash(picNik),
+        const DeepCollectionEquality().hash(picNamaDepan),
+        const DeepCollectionEquality().hash(picNamaBelakang),
+        const DeepCollectionEquality().hash(picNamaLengkap),
+        const DeepCollectionEquality().hash(picNamaPanggilan),
+        const DeepCollectionEquality().hash(picJkId),
+        const DeepCollectionEquality().hash(picTempatLahir),
+        const DeepCollectionEquality().hash(picTglLahir),
+        const DeepCollectionEquality().hash(picProvinsiId),
+        const DeepCollectionEquality().hash(picKotaId),
+        const DeepCollectionEquality().hash(picKecamatanId),
+        const DeepCollectionEquality().hash(picKodePos),
+        const DeepCollectionEquality().hash(picAlamatAsli),
+        const DeepCollectionEquality().hash(picAlamatDomisili),
+        const DeepCollectionEquality().hash(picNoTlp),
         const DeepCollectionEquality().hash(picNoTlpLainnya),
-        picNoDarurat,
-        picNamaKontakDarurat,
-        picAgamaId,
-        picGolDarahId,
-        picStatusNikahId,
-        picTanggunganId,
-        picHubDgnKaryawan,
-        picCutiJatahReguler,
-        picCutiSisaReguler,
-        picCutiPanjang,
-        picCutiSisaPanjang,
+        const DeepCollectionEquality().hash(picNoDarurat),
+        const DeepCollectionEquality().hash(picNamaKontakDarurat),
+        const DeepCollectionEquality().hash(picAgamaId),
+        const DeepCollectionEquality().hash(picGolDarahId),
+        const DeepCollectionEquality().hash(picStatusNikahId),
+        const DeepCollectionEquality().hash(picTanggunganId),
+        const DeepCollectionEquality().hash(picHubDgnKaryawan),
+        const DeepCollectionEquality().hash(picCutiJatahReguler),
+        const DeepCollectionEquality().hash(picCutiSisaReguler),
+        const DeepCollectionEquality().hash(picCutiPanjang),
+        const DeepCollectionEquality().hash(picCutiSisaPanjang),
         const DeepCollectionEquality().hash(picStatusKaryId),
         const DeepCollectionEquality().hash(picLamaKontrakAwal),
         const DeepCollectionEquality().hash(picLamaKontrakAkhir),
         const DeepCollectionEquality().hash(picTglMasuk),
         const DeepCollectionEquality().hash(picTglBerhenti),
         const DeepCollectionEquality().hash(picAlasanBerhenti),
-        picUkBaju,
-        picUkCelana,
-        picUkSepatu,
+        const DeepCollectionEquality().hash(picUkBaju),
+        const DeepCollectionEquality().hash(picUkCelana),
+        const DeepCollectionEquality().hash(picUkSepatu),
         const DeepCollectionEquality().hash(picDesc),
-        picIsActive,
+        const DeepCollectionEquality().hash(picIsActive),
         const DeepCollectionEquality().hash(picCreatorId),
-        picLastEditorId,
-        picCreatedAt,
-        picUpdatedAt,
-        picMStandartGajiId,
-        picPeriodeGajiId,
-        picRefId,
+        const DeepCollectionEquality().hash(picLastEditorId),
+        const DeepCollectionEquality().hash(picCreatedAt),
+        const DeepCollectionEquality().hash(picUpdatedAt),
+        const DeepCollectionEquality().hash(picMStandartGajiId),
+        const DeepCollectionEquality().hash(picPeriodeGajiId),
+        const DeepCollectionEquality().hash(picRefId),
         const DeepCollectionEquality().hash(picPresensiLokasiDefaultId),
-        picExpDateCuti,
-        picLimitPotong,
-        picAtasanId,
+        const DeepCollectionEquality().hash(picExpDateCuti),
+        const DeepCollectionEquality().hash(picLimitPotong),
+        const DeepCollectionEquality().hash(picAtasanId),
         const DeepCollectionEquality().hash(picCutiP24),
         const DeepCollectionEquality().hash(picCutiSisaP24),
         creatorId,
         creatorName,
-        creatorEmail,
+        const DeepCollectionEquality().hash(creatorEmail),
         creatorUsername,
         const DeepCollectionEquality().hash(creatorEmailVerifiedAt),
         creatorPassword,
         creatorMCompId,
         creatorMDirId,
         creatorIsActive,
-        const DeepCollectionEquality().hash(creatorCreatorId),
-        creatorLastEditorId,
+        creatorCreatorId,
+        const DeepCollectionEquality().hash(creatorLastEditorId),
         const DeepCollectionEquality().hash(creatorRememberToken),
-        const DeepCollectionEquality().hash(creatorCreatedAt),
+        creatorCreatedAt,
         creatorUpdatedAt,
         creatorProfilImage,
-        creatorTelp,
+        const DeepCollectionEquality().hash(creatorTelp),
         creatorMKaryId,
         const DeepCollectionEquality().hash(lastEditorId),
         const DeepCollectionEquality().hash(lastEditorName),
@@ -6916,6 +6890,7 @@ abstract class _DataDinas implements DataDinas {
       @JsonKey(name: "updated_at") final String? updatedAt,
       @JsonKey(name: "is_kend_dinas") final bool? isKendDinas,
       @JsonKey(name: "interval") final int? interval,
+      @JsonKey(name: "catatan_kend") final String? catatanKend,
       @JsonKey(name: "m_comp.id") final int? mCompId,
       @JsonKey(name: "m_comp.nama") final String? mCompNama,
       @JsonKey(name: "m_comp.is_active") final bool? mCompIsActive,
@@ -6940,12 +6915,12 @@ abstract class _DataDinas implements DataDinas {
       @JsonKey(name: "m_spd.last_editor_id") final dynamic mSpdLastEditorId,
       @JsonKey(name: "m_spd.created_at") final String? mSpdCreatedAt,
       @JsonKey(name: "m_spd.updated_at") final String? mSpdUpdatedAt,
-      @JsonKey(name: "m_dir.id") final int? mDirId,
-      @JsonKey(name: "m_dir.m_comp_id") final int? mDirMCompId,
-      @JsonKey(name: "m_dir.nama") final String? mDirNama,
+      @JsonKey(name: "m_dir.id") final dynamic mDirId,
+      @JsonKey(name: "m_dir.m_comp_id") final dynamic mDirMCompId,
+      @JsonKey(name: "m_dir.nama") final dynamic mDirNama,
       @JsonKey(name: "m_dir.desc") final dynamic mDirDesc,
-      @JsonKey(name: "m_dir.is_active") final bool? mDirIsActive,
-      @JsonKey(name: "m_dir.creator_id") final int? mDirCreatorId,
+      @JsonKey(name: "m_dir.is_active") final dynamic mDirIsActive,
+      @JsonKey(name: "m_dir.creator_id") final dynamic mDirCreatorId,
       @JsonKey(name: "m_dir.last_editor_id") final dynamic mDirLastEditorId,
       @JsonKey(name: "m_dir.created_at") final dynamic mDirCreatedAt,
       @JsonKey(name: "m_dir.updated_at") final dynamic mDirUpdatedAt,
@@ -6953,22 +6928,23 @@ abstract class _DataDinas implements DataDinas {
       @JsonKey(name: "m_divisi.m_comp_id") final int? mDivisiMCompId,
       @JsonKey(name: "m_divisi.m_dir_id") final int? mDivisiMDirId,
       @JsonKey(name: "m_divisi.nama") final String? mDivisiNama,
-      @JsonKey(name: "m_divisi.desc") final String? mDivisiDesc,
+      @JsonKey(name: "m_divisi.desc") final dynamic mDivisiDesc,
       @JsonKey(name: "m_divisi.is_active") final bool? mDivisiIsActive,
-      @JsonKey(name: "m_divisi.creator_id") final int? mDivisiCreatorId,
-      @JsonKey(name: "m_divisi.last_editor_id") final int? mDivisiLastEditorId,
-      @JsonKey(name: "m_divisi.created_at") final String? mDivisiCreatedAt,
-      @JsonKey(name: "m_divisi.updated_at") final String? mDivisiUpdatedAt,
+      @JsonKey(name: "m_divisi.creator_id") final dynamic mDivisiCreatorId,
+      @JsonKey(name: "m_divisi.last_editor_id")
+      final dynamic mDivisiLastEditorId,
+      @JsonKey(name: "m_divisi.created_at") final dynamic mDivisiCreatedAt,
+      @JsonKey(name: "m_divisi.updated_at") final dynamic mDivisiUpdatedAt,
       @JsonKey(name: "m_dept.id") final int? mDeptId,
       @JsonKey(name: "m_dept.m_dir_id") final int? mDeptMDirId,
       @JsonKey(name: "m_dept.m_divisi_id") final int? mDeptMDivisiId,
       @JsonKey(name: "m_dept.nama") final String? mDeptNama,
-      @JsonKey(name: "m_dept.desc") final String? mDeptDesc,
+      @JsonKey(name: "m_dept.desc") final dynamic mDeptDesc,
       @JsonKey(name: "m_dept.is_active") final bool? mDeptIsActive,
       @JsonKey(name: "m_dept.creator_id") final dynamic mDeptCreatorId,
       @JsonKey(name: "m_dept.last_editor_id") final dynamic mDeptLastEditorId,
-      @JsonKey(name: "m_dept.created_at") final String? mDeptCreatedAt,
-      @JsonKey(name: "m_dept.updated_at") final String? mDeptUpdatedAt,
+      @JsonKey(name: "m_dept.created_at") final dynamic mDeptCreatedAt,
+      @JsonKey(name: "m_dept.updated_at") final dynamic mDeptUpdatedAt,
       @JsonKey(name: "m_posisi.id") final int? mPosisiId,
       @JsonKey(name: "m_posisi.m_comp_id") final int? mPosisiMCompId,
       @JsonKey(name: "m_posisi.m_dir_id") final int? mPosisiMDirId,
@@ -6997,7 +6973,7 @@ abstract class _DataDinas implements DataDinas {
       @JsonKey(name: "m_posisi.updated_at") final String? mPosisiUpdatedAt,
       @JsonKey(name: "jenis_spd.id") final int? jenisSpdId,
       @JsonKey(name: "jenis_spd.m_comp_id") final int? jenisSpdMCompId,
-      @JsonKey(name: "jenis_spd.m_dir_id") final int? jenisSpdMDirId,
+      @JsonKey(name: "jenis_spd.m_dir_id") final dynamic jenisSpdMDirId,
       @JsonKey(name: "jenis_spd.group") final String? jenisSpdGroup,
       @JsonKey(name: "jenis_spd.key") final String? jenisSpdKey,
       @JsonKey(name: "jenis_spd.code") final String? jenisSpdCode,
@@ -7006,15 +6982,13 @@ abstract class _DataDinas implements DataDinas {
       @JsonKey(name: "jenis_spd.creator_id") final dynamic jenisSpdCreatorId,
       @JsonKey(name: "jenis_spd.last_editor_id")
       final dynamic jenisSpdLastEditorId,
-      @JsonKey(name: "jenis_spd.created_at") final String? jenisSpdCreatedAt,
-      @JsonKey(name: "jenis_spd.updated_at") final String? jenisSpdUpdatedAt,
+      @JsonKey(name: "jenis_spd.created_at") final dynamic jenisSpdCreatedAt,
+      @JsonKey(name: "jenis_spd.updated_at") final dynamic jenisSpdUpdatedAt,
       @JsonKey(name: "jenis_spd.value_2") final dynamic jenisSpdValue2,
       @JsonKey(name: "jenis_spd.value_3") final dynamic jenisSpdValue3,
       @JsonKey(name: "m_zona_asal.id") final int? mZonaAsalId,
       @JsonKey(name: "m_zona_asal.m_comp_id") final int? mZonaAsalMCompId,
       @JsonKey(name: "m_zona_asal.m_dir_id") final int? mZonaAsalMDirId,
-      @JsonKey(name: "m_zona_asal.m_tunj_kemahalan_id")
-      final int? mZonaAsalMTunjKemahalanId,
       @JsonKey(name: "m_zona_asal.kode") final String? mZonaAsalKode,
       @JsonKey(name: "m_zona_asal.nama") final String? mZonaAsalNama,
       @JsonKey(name: "m_zona_asal.desc") final String? mZonaAsalDesc,
@@ -7027,8 +7001,6 @@ abstract class _DataDinas implements DataDinas {
       @JsonKey(name: "m_zona_tujuan.id") final int? mZonaTujuanId,
       @JsonKey(name: "m_zona_tujuan.m_comp_id") final int? mZonaTujuanMCompId,
       @JsonKey(name: "m_zona_tujuan.m_dir_id") final int? mZonaTujuanMDirId,
-      @JsonKey(name: "m_zona_tujuan.m_tunj_kemahalan_id")
-      final int? mZonaTujuanMTunjKemahalanId,
       @JsonKey(name: "m_zona_tujuan.kode") final String? mZonaTujuanKode,
       @JsonKey(name: "m_zona_tujuan.nama") final String? mZonaTujuanNama,
       @JsonKey(name: "m_zona_tujuan.desc") final String? mZonaTujuanDesc,
@@ -7064,7 +7036,7 @@ abstract class _DataDinas implements DataDinas {
       @JsonKey(name: "m_kary.m_divisi_id") final int? mKaryMDivisiId,
       @JsonKey(name: "m_kary.m_dept_id") final int? mKaryMDeptId,
       @JsonKey(name: "m_kary.m_zona_id") final int? mKaryMZonaId,
-      @JsonKey(name: "m_kary.grading_id") final dynamic mKaryGradingId,
+      @JsonKey(name: "m_kary.grading_id") final int? mKaryGradingId,
       @JsonKey(name: "m_kary.costcontre_id") final int? mKaryCostcontreId,
       @JsonKey(name: "m_kary.kode") final String? mKaryKode,
       @JsonKey(name: "m_kary.m_posisi_id") final int? mKaryMPosisiId,
@@ -7108,70 +7080,71 @@ abstract class _DataDinas implements DataDinas {
       final dynamic mKaryLamaKontrakAwal,
       @JsonKey(name: "m_kary.lama_kontrak_akhir")
       final dynamic mKaryLamaKontrakAkhir,
-      @JsonKey(name: "m_kary.tgl_masuk") final String? mKaryTglMasuk,
+      @JsonKey(name: "m_kary.tgl_masuk") final dynamic mKaryTglMasuk,
       @JsonKey(name: "m_kary.tgl_berhenti") final dynamic mKaryTglBerhenti,
       @JsonKey(name: "m_kary.alasan_berhenti")
       final dynamic mKaryAlasanBerhenti,
       @JsonKey(name: "m_kary.uk_baju") final String? mKaryUkBaju,
       @JsonKey(name: "m_kary.uk_celana") final String? mKaryUkCelana,
       @JsonKey(name: "m_kary.uk_sepatu") final String? mKaryUkSepatu,
-      @JsonKey(name: "m_kary.desc") final String? mKaryDesc,
+      @JsonKey(name: "m_kary.desc") final dynamic mKaryDesc,
       @JsonKey(name: "m_kary.is_active") final bool? mKaryIsActive,
       @JsonKey(name: "m_kary.creator_id") final dynamic mKaryCreatorId,
-      @JsonKey(name: "m_kary.last_editor_id") final int? mKaryLastEditorId,
+      @JsonKey(name: "m_kary.last_editor_id") final dynamic mKaryLastEditorId,
       @JsonKey(name: "m_kary.created_at") final String? mKaryCreatedAt,
       @JsonKey(name: "m_kary.updated_at") final String? mKaryUpdatedAt,
       @JsonKey(name: "m_kary.m_standart_gaji_id")
       final int? mKaryMStandartGajiId,
       @JsonKey(name: "m_kary.periode_gaji_id") final int? mKaryPeriodeGajiId,
-      @JsonKey(name: "m_kary.ref_id") final dynamic mKaryRefId,
+      @JsonKey(name: "m_kary.ref_id") final int? mKaryRefId,
       @JsonKey(name: "m_kary.presensi_lokasi_default_id")
       final dynamic mKaryPresensiLokasiDefaultId,
-      @JsonKey(name: "m_kary.exp_date_cuti") final String? mKaryExpDateCuti,
+      @JsonKey(name: "m_kary.exp_date_cuti") final dynamic mKaryExpDateCuti,
       @JsonKey(name: "m_kary.limit_potong") final int? mKaryLimitPotong,
       @JsonKey(name: "m_kary.atasan_id") final int? mKaryAtasanId,
       @JsonKey(name: "m_kary.cuti_p24") final dynamic mKaryCutiP24,
       @JsonKey(name: "m_kary.cuti_sisa_p24") final dynamic mKaryCutiSisaP24,
-      @JsonKey(name: "pic.id") final int? picId,
-      @JsonKey(name: "pic.m_comp_id") final int? picMCompId,
-      @JsonKey(name: "pic.m_dir_id") final int? picMDirId,
-      @JsonKey(name: "pic.m_divisi_id") final int? picMDivisiId,
-      @JsonKey(name: "pic.m_dept_id") final int? picMDeptId,
-      @JsonKey(name: "pic.m_zona_id") final int? picMZonaId,
-      @JsonKey(name: "pic.grading_id") final int? picGradingId,
-      @JsonKey(name: "pic.costcontre_id") final int? picCostcontreId,
-      @JsonKey(name: "pic.kode") final String? picKode,
-      @JsonKey(name: "pic.m_posisi_id") final int? picMPosisiId,
-      @JsonKey(name: "pic.m_jam_kerja_id") final int? picMJamKerjaId,
-      @JsonKey(name: "pic.kode_presensi") final String? picKodePresensi,
-      @JsonKey(name: "pic.nik") final String? picNik,
-      @JsonKey(name: "pic.nama_depan") final String? picNamaDepan,
-      @JsonKey(name: "pic.nama_belakang") final String? picNamaBelakang,
-      @JsonKey(name: "pic.nama_lengkap") final String? picNamaLengkap,
-      @JsonKey(name: "pic.nama_panggilan") final String? picNamaPanggilan,
-      @JsonKey(name: "pic.jk_id") final int? picJkId,
-      @JsonKey(name: "pic.tempat_lahir") final String? picTempatLahir,
-      @JsonKey(name: "pic.tgl_lahir") final String? picTglLahir,
-      @JsonKey(name: "pic.provinsi_id") final int? picProvinsiId,
-      @JsonKey(name: "pic.kota_id") final int? picKotaId,
-      @JsonKey(name: "pic.kecamatan_id") final int? picKecamatanId,
-      @JsonKey(name: "pic.kode_pos") final String? picKodePos,
-      @JsonKey(name: "pic.alamat_asli") final String? picAlamatAsli,
-      @JsonKey(name: "pic.alamat_domisili") final String? picAlamatDomisili,
-      @JsonKey(name: "pic.no_tlp") final String? picNoTlp,
+      @JsonKey(name: "pic.id") final dynamic picId,
+      @JsonKey(name: "pic.m_comp_id") final dynamic picMCompId,
+      @JsonKey(name: "pic.m_dir_id") final dynamic picMDirId,
+      @JsonKey(name: "pic.m_divisi_id") final dynamic picMDivisiId,
+      @JsonKey(name: "pic.m_dept_id") final dynamic picMDeptId,
+      @JsonKey(name: "pic.m_zona_id") final dynamic picMZonaId,
+      @JsonKey(name: "pic.grading_id") final dynamic picGradingId,
+      @JsonKey(name: "pic.costcontre_id") final dynamic picCostcontreId,
+      @JsonKey(name: "pic.kode") final dynamic picKode,
+      @JsonKey(name: "pic.m_posisi_id") final dynamic picMPosisiId,
+      @JsonKey(name: "pic.m_jam_kerja_id") final dynamic picMJamKerjaId,
+      @JsonKey(name: "pic.kode_presensi") final dynamic picKodePresensi,
+      @JsonKey(name: "pic.nik") final dynamic picNik,
+      @JsonKey(name: "pic.nama_depan") final dynamic picNamaDepan,
+      @JsonKey(name: "pic.nama_belakang") final dynamic picNamaBelakang,
+      @JsonKey(name: "pic.nama_lengkap") final dynamic picNamaLengkap,
+      @JsonKey(name: "pic.nama_panggilan") final dynamic picNamaPanggilan,
+      @JsonKey(name: "pic.jk_id") final dynamic picJkId,
+      @JsonKey(name: "pic.tempat_lahir") final dynamic picTempatLahir,
+      @JsonKey(name: "pic.tgl_lahir") final dynamic picTglLahir,
+      @JsonKey(name: "pic.provinsi_id") final dynamic picProvinsiId,
+      @JsonKey(name: "pic.kota_id") final dynamic picKotaId,
+      @JsonKey(name: "pic.kecamatan_id") final dynamic picKecamatanId,
+      @JsonKey(name: "pic.kode_pos") final dynamic picKodePos,
+      @JsonKey(name: "pic.alamat_asli") final dynamic picAlamatAsli,
+      @JsonKey(name: "pic.alamat_domisili") final dynamic picAlamatDomisili,
+      @JsonKey(name: "pic.no_tlp") final dynamic picNoTlp,
       @JsonKey(name: "pic.no_tlp_lainnya") final dynamic picNoTlpLainnya,
-      @JsonKey(name: "pic.no_darurat") final String? picNoDarurat,
+      @JsonKey(name: "pic.no_darurat") final dynamic picNoDarurat,
       @JsonKey(name: "pic.nama_kontak_darurat")
-      final String? picNamaKontakDarurat,
-      @JsonKey(name: "pic.agama_id") final int? picAgamaId,
-      @JsonKey(name: "pic.gol_darah_id") final int? picGolDarahId,
-      @JsonKey(name: "pic.status_nikah_id") final int? picStatusNikahId,
-      @JsonKey(name: "pic.tanggungan_id") final int? picTanggunganId,
-      @JsonKey(name: "pic.hub_dgn_karyawan") final String? picHubDgnKaryawan,
-      @JsonKey(name: "pic.cuti_jatah_reguler") final int? picCutiJatahReguler,
-      @JsonKey(name: "pic.cuti_sisa_reguler") final int? picCutiSisaReguler,
-      @JsonKey(name: "pic.cuti_panjang") final int? picCutiPanjang,
-      @JsonKey(name: "pic.cuti_sisa_panjang") final int? picCutiSisaPanjang,
+      final dynamic picNamaKontakDarurat,
+      @JsonKey(name: "pic.agama_id") final dynamic picAgamaId,
+      @JsonKey(name: "pic.gol_darah_id") final dynamic picGolDarahId,
+      @JsonKey(name: "pic.status_nikah_id") final dynamic picStatusNikahId,
+      @JsonKey(name: "pic.tanggungan_id") final dynamic picTanggunganId,
+      @JsonKey(name: "pic.hub_dgn_karyawan") final dynamic picHubDgnKaryawan,
+      @JsonKey(name: "pic.cuti_jatah_reguler")
+      final dynamic picCutiJatahReguler,
+      @JsonKey(name: "pic.cuti_sisa_reguler") final dynamic picCutiSisaReguler,
+      @JsonKey(name: "pic.cuti_panjang") final dynamic picCutiPanjang,
+      @JsonKey(name: "pic.cuti_sisa_panjang") final dynamic picCutiSisaPanjang,
       @JsonKey(name: "pic.status_kary_id") final dynamic picStatusKaryId,
       @JsonKey(name: "pic.lama_kontrak_awal") final dynamic picLamaKontrakAwal,
       @JsonKey(name: "pic.lama_kontrak_akhir")
@@ -7179,28 +7152,28 @@ abstract class _DataDinas implements DataDinas {
       @JsonKey(name: "pic.tgl_masuk") final dynamic picTglMasuk,
       @JsonKey(name: "pic.tgl_berhenti") final dynamic picTglBerhenti,
       @JsonKey(name: "pic.alasan_berhenti") final dynamic picAlasanBerhenti,
-      @JsonKey(name: "pic.uk_baju") final String? picUkBaju,
-      @JsonKey(name: "pic.uk_celana") final String? picUkCelana,
-      @JsonKey(name: "pic.uk_sepatu") final String? picUkSepatu,
+      @JsonKey(name: "pic.uk_baju") final dynamic picUkBaju,
+      @JsonKey(name: "pic.uk_celana") final dynamic picUkCelana,
+      @JsonKey(name: "pic.uk_sepatu") final dynamic picUkSepatu,
       @JsonKey(name: "pic.desc") final dynamic picDesc,
-      @JsonKey(name: "pic.is_active") final bool? picIsActive,
+      @JsonKey(name: "pic.is_active") final dynamic picIsActive,
       @JsonKey(name: "pic.creator_id") final dynamic picCreatorId,
-      @JsonKey(name: "pic.last_editor_id") final int? picLastEditorId,
-      @JsonKey(name: "pic.created_at") final String? picCreatedAt,
-      @JsonKey(name: "pic.updated_at") final String? picUpdatedAt,
-      @JsonKey(name: "pic.m_standart_gaji_id") final int? picMStandartGajiId,
-      @JsonKey(name: "pic.periode_gaji_id") final int? picPeriodeGajiId,
-      @JsonKey(name: "pic.ref_id") final int? picRefId,
+      @JsonKey(name: "pic.last_editor_id") final dynamic picLastEditorId,
+      @JsonKey(name: "pic.created_at") final dynamic picCreatedAt,
+      @JsonKey(name: "pic.updated_at") final dynamic picUpdatedAt,
+      @JsonKey(name: "pic.m_standart_gaji_id") final dynamic picMStandartGajiId,
+      @JsonKey(name: "pic.periode_gaji_id") final dynamic picPeriodeGajiId,
+      @JsonKey(name: "pic.ref_id") final dynamic picRefId,
       @JsonKey(name: "pic.presensi_lokasi_default_id")
       final dynamic picPresensiLokasiDefaultId,
-      @JsonKey(name: "pic.exp_date_cuti") final String? picExpDateCuti,
-      @JsonKey(name: "pic.limit_potong") final int? picLimitPotong,
-      @JsonKey(name: "pic.atasan_id") final int? picAtasanId,
+      @JsonKey(name: "pic.exp_date_cuti") final dynamic picExpDateCuti,
+      @JsonKey(name: "pic.limit_potong") final dynamic picLimitPotong,
+      @JsonKey(name: "pic.atasan_id") final dynamic picAtasanId,
       @JsonKey(name: "pic.cuti_p24") final dynamic picCutiP24,
       @JsonKey(name: "pic.cuti_sisa_p24") final dynamic picCutiSisaP24,
       @JsonKey(name: "creator.id") final int? creatorId,
       @JsonKey(name: "creator.name") final String? creatorName,
-      @JsonKey(name: "creator.email") final String? creatorEmail,
+      @JsonKey(name: "creator.email") final dynamic creatorEmail,
       @JsonKey(name: "creator.username") final String? creatorUsername,
       @JsonKey(name: "creator.email_verified_at")
       final dynamic creatorEmailVerifiedAt,
@@ -7208,14 +7181,15 @@ abstract class _DataDinas implements DataDinas {
       @JsonKey(name: "creator.m_comp_id") final int? creatorMCompId,
       @JsonKey(name: "creator.m_dir_id") final int? creatorMDirId,
       @JsonKey(name: "creator.is_active") final bool? creatorIsActive,
-      @JsonKey(name: "creator.creator_id") final dynamic creatorCreatorId,
-      @JsonKey(name: "creator.last_editor_id") final int? creatorLastEditorId,
+      @JsonKey(name: "creator.creator_id") final int? creatorCreatorId,
+      @JsonKey(name: "creator.last_editor_id")
+      final dynamic creatorLastEditorId,
       @JsonKey(name: "creator.remember_token")
       final dynamic creatorRememberToken,
-      @JsonKey(name: "creator.created_at") final dynamic creatorCreatedAt,
+      @JsonKey(name: "creator.created_at") final String? creatorCreatedAt,
       @JsonKey(name: "creator.updated_at") final String? creatorUpdatedAt,
       @JsonKey(name: "creator.profil_image") final String? creatorProfilImage,
-      @JsonKey(name: "creator.telp") final String? creatorTelp,
+      @JsonKey(name: "creator.telp") final dynamic creatorTelp,
       @JsonKey(name: "creator.m_kary_id") final int? creatorMKaryId,
       @JsonKey(name: "last_editor.id") final dynamic lastEditorId,
       @JsonKey(name: "last_editor.name") final dynamic lastEditorName,
@@ -7341,6 +7315,9 @@ abstract class _DataDinas implements DataDinas {
   @JsonKey(name: "interval")
   int? get interval;
   @override
+  @JsonKey(name: "catatan_kend")
+  String? get catatanKend;
+  @override
   @JsonKey(name: "m_comp.id")
   int? get mCompId;
   @override
@@ -7414,22 +7391,22 @@ abstract class _DataDinas implements DataDinas {
   String? get mSpdUpdatedAt;
   @override
   @JsonKey(name: "m_dir.id")
-  int? get mDirId;
+  dynamic get mDirId;
   @override
   @JsonKey(name: "m_dir.m_comp_id")
-  int? get mDirMCompId;
+  dynamic get mDirMCompId;
   @override
   @JsonKey(name: "m_dir.nama")
-  String? get mDirNama;
+  dynamic get mDirNama;
   @override
   @JsonKey(name: "m_dir.desc")
   dynamic get mDirDesc;
   @override
   @JsonKey(name: "m_dir.is_active")
-  bool? get mDirIsActive;
+  dynamic get mDirIsActive;
   @override
   @JsonKey(name: "m_dir.creator_id")
-  int? get mDirCreatorId;
+  dynamic get mDirCreatorId;
   @override
   @JsonKey(name: "m_dir.last_editor_id")
   dynamic get mDirLastEditorId;
@@ -7453,22 +7430,22 @@ abstract class _DataDinas implements DataDinas {
   String? get mDivisiNama;
   @override
   @JsonKey(name: "m_divisi.desc")
-  String? get mDivisiDesc;
+  dynamic get mDivisiDesc;
   @override
   @JsonKey(name: "m_divisi.is_active")
   bool? get mDivisiIsActive;
   @override
   @JsonKey(name: "m_divisi.creator_id")
-  int? get mDivisiCreatorId;
+  dynamic get mDivisiCreatorId;
   @override
   @JsonKey(name: "m_divisi.last_editor_id")
-  int? get mDivisiLastEditorId;
+  dynamic get mDivisiLastEditorId;
   @override
   @JsonKey(name: "m_divisi.created_at")
-  String? get mDivisiCreatedAt;
+  dynamic get mDivisiCreatedAt;
   @override
   @JsonKey(name: "m_divisi.updated_at")
-  String? get mDivisiUpdatedAt;
+  dynamic get mDivisiUpdatedAt;
   @override
   @JsonKey(name: "m_dept.id")
   int? get mDeptId;
@@ -7483,7 +7460,7 @@ abstract class _DataDinas implements DataDinas {
   String? get mDeptNama;
   @override
   @JsonKey(name: "m_dept.desc")
-  String? get mDeptDesc;
+  dynamic get mDeptDesc;
   @override
   @JsonKey(name: "m_dept.is_active")
   bool? get mDeptIsActive;
@@ -7495,10 +7472,10 @@ abstract class _DataDinas implements DataDinas {
   dynamic get mDeptLastEditorId;
   @override
   @JsonKey(name: "m_dept.created_at")
-  String? get mDeptCreatedAt;
+  dynamic get mDeptCreatedAt;
   @override
   @JsonKey(name: "m_dept.updated_at")
-  String? get mDeptUpdatedAt;
+  dynamic get mDeptUpdatedAt;
   @override
   @JsonKey(name: "m_posisi.id")
   int? get mPosisiId;
@@ -7567,7 +7544,7 @@ abstract class _DataDinas implements DataDinas {
   int? get jenisSpdMCompId;
   @override
   @JsonKey(name: "jenis_spd.m_dir_id")
-  int? get jenisSpdMDirId;
+  dynamic get jenisSpdMDirId;
   @override
   @JsonKey(name: "jenis_spd.group")
   String? get jenisSpdGroup;
@@ -7591,10 +7568,10 @@ abstract class _DataDinas implements DataDinas {
   dynamic get jenisSpdLastEditorId;
   @override
   @JsonKey(name: "jenis_spd.created_at")
-  String? get jenisSpdCreatedAt;
+  dynamic get jenisSpdCreatedAt;
   @override
   @JsonKey(name: "jenis_spd.updated_at")
-  String? get jenisSpdUpdatedAt;
+  dynamic get jenisSpdUpdatedAt;
   @override
   @JsonKey(name: "jenis_spd.value_2")
   dynamic get jenisSpdValue2;
@@ -7610,9 +7587,6 @@ abstract class _DataDinas implements DataDinas {
   @override
   @JsonKey(name: "m_zona_asal.m_dir_id")
   int? get mZonaAsalMDirId;
-  @override
-  @JsonKey(name: "m_zona_asal.m_tunj_kemahalan_id")
-  int? get mZonaAsalMTunjKemahalanId;
   @override
   @JsonKey(name: "m_zona_asal.kode")
   String? get mZonaAsalKode;
@@ -7646,9 +7620,6 @@ abstract class _DataDinas implements DataDinas {
   @override
   @JsonKey(name: "m_zona_tujuan.m_dir_id")
   int? get mZonaTujuanMDirId;
-  @override
-  @JsonKey(name: "m_zona_tujuan.m_tunj_kemahalan_id")
-  int? get mZonaTujuanMTunjKemahalanId;
   @override
   @JsonKey(name: "m_zona_tujuan.kode")
   String? get mZonaTujuanKode;
@@ -7726,7 +7697,7 @@ abstract class _DataDinas implements DataDinas {
   int? get mKaryMZonaId;
   @override
   @JsonKey(name: "m_kary.grading_id")
-  dynamic get mKaryGradingId;
+  int? get mKaryGradingId;
   @override
   @JsonKey(name: "m_kary.costcontre_id")
   int? get mKaryCostcontreId;
@@ -7834,7 +7805,7 @@ abstract class _DataDinas implements DataDinas {
   dynamic get mKaryLamaKontrakAkhir;
   @override
   @JsonKey(name: "m_kary.tgl_masuk")
-  String? get mKaryTglMasuk;
+  dynamic get mKaryTglMasuk;
   @override
   @JsonKey(name: "m_kary.tgl_berhenti")
   dynamic get mKaryTglBerhenti;
@@ -7852,7 +7823,7 @@ abstract class _DataDinas implements DataDinas {
   String? get mKaryUkSepatu;
   @override
   @JsonKey(name: "m_kary.desc")
-  String? get mKaryDesc;
+  dynamic get mKaryDesc;
   @override
   @JsonKey(name: "m_kary.is_active")
   bool? get mKaryIsActive;
@@ -7861,7 +7832,7 @@ abstract class _DataDinas implements DataDinas {
   dynamic get mKaryCreatorId;
   @override
   @JsonKey(name: "m_kary.last_editor_id")
-  int? get mKaryLastEditorId;
+  dynamic get mKaryLastEditorId;
   @override
   @JsonKey(name: "m_kary.created_at")
   String? get mKaryCreatedAt;
@@ -7876,13 +7847,13 @@ abstract class _DataDinas implements DataDinas {
   int? get mKaryPeriodeGajiId;
   @override
   @JsonKey(name: "m_kary.ref_id")
-  dynamic get mKaryRefId;
+  int? get mKaryRefId;
   @override
   @JsonKey(name: "m_kary.presensi_lokasi_default_id")
   dynamic get mKaryPresensiLokasiDefaultId;
   @override
   @JsonKey(name: "m_kary.exp_date_cuti")
-  String? get mKaryExpDateCuti;
+  dynamic get mKaryExpDateCuti;
   @override
   @JsonKey(name: "m_kary.limit_potong")
   int? get mKaryLimitPotong;
@@ -7897,121 +7868,121 @@ abstract class _DataDinas implements DataDinas {
   dynamic get mKaryCutiSisaP24;
   @override
   @JsonKey(name: "pic.id")
-  int? get picId;
+  dynamic get picId;
   @override
   @JsonKey(name: "pic.m_comp_id")
-  int? get picMCompId;
+  dynamic get picMCompId;
   @override
   @JsonKey(name: "pic.m_dir_id")
-  int? get picMDirId;
+  dynamic get picMDirId;
   @override
   @JsonKey(name: "pic.m_divisi_id")
-  int? get picMDivisiId;
+  dynamic get picMDivisiId;
   @override
   @JsonKey(name: "pic.m_dept_id")
-  int? get picMDeptId;
+  dynamic get picMDeptId;
   @override
   @JsonKey(name: "pic.m_zona_id")
-  int? get picMZonaId;
+  dynamic get picMZonaId;
   @override
   @JsonKey(name: "pic.grading_id")
-  int? get picGradingId;
+  dynamic get picGradingId;
   @override
   @JsonKey(name: "pic.costcontre_id")
-  int? get picCostcontreId;
+  dynamic get picCostcontreId;
   @override
   @JsonKey(name: "pic.kode")
-  String? get picKode;
+  dynamic get picKode;
   @override
   @JsonKey(name: "pic.m_posisi_id")
-  int? get picMPosisiId;
+  dynamic get picMPosisiId;
   @override
   @JsonKey(name: "pic.m_jam_kerja_id")
-  int? get picMJamKerjaId;
+  dynamic get picMJamKerjaId;
   @override
   @JsonKey(name: "pic.kode_presensi")
-  String? get picKodePresensi;
+  dynamic get picKodePresensi;
   @override
   @JsonKey(name: "pic.nik")
-  String? get picNik;
+  dynamic get picNik;
   @override
   @JsonKey(name: "pic.nama_depan")
-  String? get picNamaDepan;
+  dynamic get picNamaDepan;
   @override
   @JsonKey(name: "pic.nama_belakang")
-  String? get picNamaBelakang;
+  dynamic get picNamaBelakang;
   @override
   @JsonKey(name: "pic.nama_lengkap")
-  String? get picNamaLengkap;
+  dynamic get picNamaLengkap;
   @override
   @JsonKey(name: "pic.nama_panggilan")
-  String? get picNamaPanggilan;
+  dynamic get picNamaPanggilan;
   @override
   @JsonKey(name: "pic.jk_id")
-  int? get picJkId;
+  dynamic get picJkId;
   @override
   @JsonKey(name: "pic.tempat_lahir")
-  String? get picTempatLahir;
+  dynamic get picTempatLahir;
   @override
   @JsonKey(name: "pic.tgl_lahir")
-  String? get picTglLahir;
+  dynamic get picTglLahir;
   @override
   @JsonKey(name: "pic.provinsi_id")
-  int? get picProvinsiId;
+  dynamic get picProvinsiId;
   @override
   @JsonKey(name: "pic.kota_id")
-  int? get picKotaId;
+  dynamic get picKotaId;
   @override
   @JsonKey(name: "pic.kecamatan_id")
-  int? get picKecamatanId;
+  dynamic get picKecamatanId;
   @override
   @JsonKey(name: "pic.kode_pos")
-  String? get picKodePos;
+  dynamic get picKodePos;
   @override
   @JsonKey(name: "pic.alamat_asli")
-  String? get picAlamatAsli;
+  dynamic get picAlamatAsli;
   @override
   @JsonKey(name: "pic.alamat_domisili")
-  String? get picAlamatDomisili;
+  dynamic get picAlamatDomisili;
   @override
   @JsonKey(name: "pic.no_tlp")
-  String? get picNoTlp;
+  dynamic get picNoTlp;
   @override
   @JsonKey(name: "pic.no_tlp_lainnya")
   dynamic get picNoTlpLainnya;
   @override
   @JsonKey(name: "pic.no_darurat")
-  String? get picNoDarurat;
+  dynamic get picNoDarurat;
   @override
   @JsonKey(name: "pic.nama_kontak_darurat")
-  String? get picNamaKontakDarurat;
+  dynamic get picNamaKontakDarurat;
   @override
   @JsonKey(name: "pic.agama_id")
-  int? get picAgamaId;
+  dynamic get picAgamaId;
   @override
   @JsonKey(name: "pic.gol_darah_id")
-  int? get picGolDarahId;
+  dynamic get picGolDarahId;
   @override
   @JsonKey(name: "pic.status_nikah_id")
-  int? get picStatusNikahId;
+  dynamic get picStatusNikahId;
   @override
   @JsonKey(name: "pic.tanggungan_id")
-  int? get picTanggunganId;
+  dynamic get picTanggunganId;
   @override
   @JsonKey(name: "pic.hub_dgn_karyawan")
-  String? get picHubDgnKaryawan;
+  dynamic get picHubDgnKaryawan;
   @override
   @JsonKey(name: "pic.cuti_jatah_reguler")
-  int? get picCutiJatahReguler;
+  dynamic get picCutiJatahReguler;
   @override
   @JsonKey(name: "pic.cuti_sisa_reguler")
-  int? get picCutiSisaReguler;
+  dynamic get picCutiSisaReguler;
   @override
   @JsonKey(name: "pic.cuti_panjang")
-  int? get picCutiPanjang;
+  dynamic get picCutiPanjang;
   @override
   @JsonKey(name: "pic.cuti_sisa_panjang")
-  int? get picCutiSisaPanjang;
+  dynamic get picCutiSisaPanjang;
   @override
   @JsonKey(name: "pic.status_kary_id")
   dynamic get picStatusKaryId;
@@ -8032,52 +8003,52 @@ abstract class _DataDinas implements DataDinas {
   dynamic get picAlasanBerhenti;
   @override
   @JsonKey(name: "pic.uk_baju")
-  String? get picUkBaju;
+  dynamic get picUkBaju;
   @override
   @JsonKey(name: "pic.uk_celana")
-  String? get picUkCelana;
+  dynamic get picUkCelana;
   @override
   @JsonKey(name: "pic.uk_sepatu")
-  String? get picUkSepatu;
+  dynamic get picUkSepatu;
   @override
   @JsonKey(name: "pic.desc")
   dynamic get picDesc;
   @override
   @JsonKey(name: "pic.is_active")
-  bool? get picIsActive;
+  dynamic get picIsActive;
   @override
   @JsonKey(name: "pic.creator_id")
   dynamic get picCreatorId;
   @override
   @JsonKey(name: "pic.last_editor_id")
-  int? get picLastEditorId;
+  dynamic get picLastEditorId;
   @override
   @JsonKey(name: "pic.created_at")
-  String? get picCreatedAt;
+  dynamic get picCreatedAt;
   @override
   @JsonKey(name: "pic.updated_at")
-  String? get picUpdatedAt;
+  dynamic get picUpdatedAt;
   @override
   @JsonKey(name: "pic.m_standart_gaji_id")
-  int? get picMStandartGajiId;
+  dynamic get picMStandartGajiId;
   @override
   @JsonKey(name: "pic.periode_gaji_id")
-  int? get picPeriodeGajiId;
+  dynamic get picPeriodeGajiId;
   @override
   @JsonKey(name: "pic.ref_id")
-  int? get picRefId;
+  dynamic get picRefId;
   @override
   @JsonKey(name: "pic.presensi_lokasi_default_id")
   dynamic get picPresensiLokasiDefaultId;
   @override
   @JsonKey(name: "pic.exp_date_cuti")
-  String? get picExpDateCuti;
+  dynamic get picExpDateCuti;
   @override
   @JsonKey(name: "pic.limit_potong")
-  int? get picLimitPotong;
+  dynamic get picLimitPotong;
   @override
   @JsonKey(name: "pic.atasan_id")
-  int? get picAtasanId;
+  dynamic get picAtasanId;
   @override
   @JsonKey(name: "pic.cuti_p24")
   dynamic get picCutiP24;
@@ -8092,7 +8063,7 @@ abstract class _DataDinas implements DataDinas {
   String? get creatorName;
   @override
   @JsonKey(name: "creator.email")
-  String? get creatorEmail;
+  dynamic get creatorEmail;
   @override
   @JsonKey(name: "creator.username")
   String? get creatorUsername;
@@ -8113,16 +8084,16 @@ abstract class _DataDinas implements DataDinas {
   bool? get creatorIsActive;
   @override
   @JsonKey(name: "creator.creator_id")
-  dynamic get creatorCreatorId;
+  int? get creatorCreatorId;
   @override
   @JsonKey(name: "creator.last_editor_id")
-  int? get creatorLastEditorId;
+  dynamic get creatorLastEditorId;
   @override
   @JsonKey(name: "creator.remember_token")
   dynamic get creatorRememberToken;
   @override
   @JsonKey(name: "creator.created_at")
-  dynamic get creatorCreatedAt;
+  String? get creatorCreatedAt;
   @override
   @JsonKey(name: "creator.updated_at")
   String? get creatorUpdatedAt;
@@ -8131,7 +8102,7 @@ abstract class _DataDinas implements DataDinas {
   String? get creatorProfilImage;
   @override
   @JsonKey(name: "creator.telp")
-  String? get creatorTelp;
+  dynamic get creatorTelp;
   @override
   @JsonKey(name: "creator.m_kary_id")
   int? get creatorMKaryId;

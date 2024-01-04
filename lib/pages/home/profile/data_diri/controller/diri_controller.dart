@@ -110,9 +110,9 @@ class DataDiriControllers {
     noKkController?.text = bioData.kkNo ?? '';
     noNpwpController?.text = bioData.npwpNo ?? '';
     noBpjsController?.text = bioData.bpjsNo ?? '';
-    noBpjsKesehatanController?.text = bioData.bpjsNo ?? '';
-    noBpjsKetenagakerjaanController?.text = bioData.bpjsNo ?? '';
-    keteranganController?.text = bioData.desc ?? '';
+    noBpjsKesehatanController?.text = bioData.bpjsNoKesehatan ?? '';
+    noBpjsKetenagakerjaanController?.text = bioData.bpjsNoKetenagakerjaan ?? '';
+    keteranganController?.text = bioData.descFile ?? '';
 
     //Tipe Bpjs
     idTipeBPJSController?.text = bioData.bpjsTipeId?.toString() ?? '';

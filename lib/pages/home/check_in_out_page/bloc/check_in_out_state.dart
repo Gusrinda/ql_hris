@@ -14,47 +14,36 @@ class CheckInOutLoading extends CheckInOutState {}
 class CheckInOutSuccessInBackground extends CheckInOutState {
   String? name;
   String? fotoProfil;
-  String? cutiMasaKerja;
-  String? cutiTahunan;
-  String? p24;
+  InfoCuti? infoCuti;
   bool isCheckin;
 
   CheckInOutSuccessInBackground({
     this.name,
     this.fotoProfil,
-    this.cutiMasaKerja,
-    this.cutiTahunan,
-    this.p24,
+    this.infoCuti,
     required this.isCheckin,
   });
 
   @override
-  List<Object> get props =>
-      [name!, fotoProfil!, cutiMasaKerja!, cutiTahunan!, p24!, isCheckin];
+  List<Object> get props => [name!, fotoProfil!, infoCuti!, isCheckin];
 }
 
 class InfoCheckInOutSuccessInBackground extends CheckInOutState {
   String? name;
   String? fotoProfil;
-  String? cutiMasaKerja;
-  String? cutiTahunan;
-  String? p24;
+  InfoCuti? infoCuti;
 
   InfoCheckInOutSuccessInBackground({
     this.name,
     this.fotoProfil,
-    this.cutiMasaKerja,
-    this.cutiTahunan,
-    this.p24,
+    this.infoCuti,
   });
 
   @override
   List<Object> get props => [
         name!,
         fotoProfil!,
-        cutiMasaKerja!,
-        cutiTahunan!,
-        p24!,
+        infoCuti!,
       ];
 }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -41,14 +42,14 @@ class _TextFormCustomHRIS1State extends State<TextFormCustomHRIS1> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: widget.height,
       width: widget.width,
       // margin: widget.margin,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 6),
+          const SizedBox(height: 7),
           TextFormField(
             controller: widget.controller,
             enabled: widget.enable,
@@ -56,25 +57,28 @@ class _TextFormCustomHRIS1State extends State<TextFormCustomHRIS1> {
             obscureText: _isPasswordShowed,
             style: GoogleFonts.poppins(
               fontSize: widget.textSize,
+              fontWeight: FontWeight.w500,
               color: widget.enable!
                   ? MyColorsConst.darkColor
                   : MyColorsConst.disableColor,
             ),
             validator: widget.validator,
             decoration: InputDecoration(
+              errorStyle: GoogleFonts.poppins(
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w500,
+                color: MyColorsConst.redColor,
+              ),
               labelText: widget.labelText,
               labelStyle: GoogleFonts.poppins(
-                // fontFamily: "Poppins",
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w600,
               ),
               floatingLabelStyle: GoogleFonts.poppins(
-                // fontFamily: "Poppins",
-                fontSize: 14,
-                fontWeight: FontWeight.w500
-              ),
+                  fontSize: 13.sp, fontWeight: FontWeight.w600),
               // isDense: true,
-              contentPadding: EdgeInsets.zero,
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 15, vertical: 7),
               suffixIcon: widget.isPassword && widget.enable!
                   ? InkWell(
                       onTap: () {
@@ -83,13 +87,13 @@ class _TextFormCustomHRIS1State extends State<TextFormCustomHRIS1> {
                         });
                       },
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Icon(
                           _isPasswordShowed
                               ? Icons.visibility
                               : Icons.visibility_off,
-                          color: MyColorsConst.lightDarkColor,
-                          size: 24,
+                          color: MyColorsConst.darkColor,
+                          size: 24.sp,
                         ),
                       ),
                     )
@@ -98,9 +102,9 @@ class _TextFormCustomHRIS1State extends State<TextFormCustomHRIS1> {
                   ? const BoxConstraints(minWidth: 0, minHeight: 0)
                   : null,
               border: InputBorder.none,
-              enabledBorder: UnderlineInputBorder(
+              enabledBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(
-                  color: MyColorsConst.lightDarkColor,
+                  color: MyColorsConst.darkColor,
                   width: 2,
                 ),
               ),
@@ -110,20 +114,22 @@ class _TextFormCustomHRIS1State extends State<TextFormCustomHRIS1> {
                   width: 2,
                 ),
               ),
-              errorBorder: UnderlineInputBorder(
+              errorBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(
                   color: Colors.red,
                   width: 2,
                 ),
               ),
-              focusedErrorBorder: UnderlineInputBorder(
+              focusedErrorBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(
                   color: Colors.red,
                   width: 2,
                 ),
               ),
               filled: true,
-              fillColor: widget.enable! ? Colors.transparent : Colors.black12,
+              fillColor: widget.enable!
+                  ? Colors.white.withOpacity(0.85)
+                  : Colors.black12,
             ),
           ),
         ],

@@ -31,11 +31,11 @@ class AddCutiBloc extends Bloc<AddCutiEvent, AddCutiState> {
 
         var res = await CutiServices.addCuti(
           resToken.response["token"],
-          resToken.response["m_comp_id"] ?? 1,
-          resToken.response["m_dir_id"] ?? 1,
-          resToken.response["m_kary_id"] ?? 1,
+          resToken.response["m_comp_id"] ?? -99,
+          resToken.response["m_dir_id"] ?? -99,
+          resToken.response["m_kary_id"] ?? -99,
           event.keterangan,
-          event.alasan,
+          event.alasan ?? -99,
           event.tipeCuti,
           event.dateFrom,
           event.dateTo,

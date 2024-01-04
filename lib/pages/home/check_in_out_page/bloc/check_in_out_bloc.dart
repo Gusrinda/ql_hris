@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:sj_presensi_mobile/services/attendances_services.dart';
+import 'package:sj_presensi_mobile/services/model/profile_model.dart';
 import 'package:sj_presensi_mobile/services/profile_services.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:sj_presensi_mobile/utils/shared_pref.dart';
@@ -10,6 +11,8 @@ part 'check_in_out_state.dart';
 
 class CheckInOutBloc extends Bloc<CheckInOutEvent, CheckInOutState> {
   CheckInOutBloc() : super(CheckInOutInitial()) {
+    DataProfile? dataProfile;
+
     on<AttendanceStateChecked>(
       (event, emit) async {
         emit(CheckInOutLoading());
@@ -20,15 +23,22 @@ class CheckInOutBloc extends Bloc<CheckInOutEvent, CheckInOutState> {
           var resUser = await ProfileServices.getDataProfilel(
               resToken.response["token"], resToken.response["id"]);
           if (res is ServicesSuccess && resUser is ServicesSuccess) {
-            final name = resUser.response["data"]["m_kary.nama_lengkap"] ?? 'Karyawan SJ';
-            final fotoProfil = resUser.response["data"]["profil_image"] ?? '';
-            final cutiMasaKerja = resUser.response["data"]["m_kary.cuti_sisa_reguler"]?.toString() ?? '0';
-            final cutiTahunan = resUser.response["data"]["m_kary.cuti_sisa_panjang"]?.toString()  ?? '0';
-            final p24 = resUser.response["data"]["m_kary.cuti_sisa_p24"]?.toString()  ?? '0';
+            dataProfile = DataProfile.fromJson(resUser.response["data"]);
+            print("DATA PROFILE: $dataProfile");
 
-            print("Cuti Masa Kerja: ${cutiMasaKerja}");
-            print("Cuti Tahunan: ${cutiTahunan}");
-            print("Cuti P24: ${p24}");
+            final name = dataProfile?.mKaryNamaLengkap ?? 'Karyawan SJ';
+            final fotoProfil = dataProfile?.profilImage ?? '';
+            // final cutiMasaKerja = resUser.response["data"]["m_kary.cuti_sisa_reguler"]?.toString() ?? '0';
+            // final cutiTahunan = resUser.response["data"]["m_kary.cuti_sisa_panjang"]?.toString()  ?? '0';
+            // final p24 = resUser.response["data"]["m_kary.cuti_sisa_p24"]?.toString()  ?? '0';
+            final infoCuti = dataProfile?.infoCuti;
+
+            print(
+                "Cuti Masa Kerja: ${dataProfile?.infoCuti?.sisaCutiMasaKerja?.toString() ?? 0}");
+            print(
+                "Cuti Tahunan: ${dataProfile?.infoCuti?.sisaCutiReguler?.toString() ?? 0}");
+            print(
+                "Cuti P24: ${dataProfile?.infoCuti?.sisaCutiP24?.toString() ?? 0}");
 
             final jsonData = res.response["data"];
             final status = jsonData["status"];
@@ -37,27 +47,21 @@ class CheckInOutBloc extends Bloc<CheckInOutEvent, CheckInOutState> {
               emit(InfoCheckInOutSuccessInBackground(
                 fotoProfil: fotoProfil,
                 name: name,
-                cutiMasaKerja: cutiMasaKerja,
-                cutiTahunan: cutiTahunan,
-                p24: p24
+                infoCuti: infoCuti,
               ));
             } else if (status == "NOT ATTEND") {
               emit(CheckInOutSuccessInBackground(
                 fotoProfil: fotoProfil,
                 name: name,
                 isCheckin: true,
-                cutiMasaKerja: cutiMasaKerja,
-                cutiTahunan: cutiTahunan,
-                p24: p24
+                infoCuti: infoCuti,
               ));
             } else if (status == "WORKING") {
               emit(CheckInOutSuccessInBackground(
                 fotoProfil: fotoProfil,
                 name: name,
                 isCheckin: false,
-                cutiMasaKerja: cutiMasaKerja,
-                cutiTahunan: cutiTahunan,
-                p24: p24
+                infoCuti: infoCuti,
               ));
             }
           } else if (res is ServicesFailure) {

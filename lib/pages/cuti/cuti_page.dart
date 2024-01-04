@@ -224,364 +224,184 @@ class _CutiPageState extends State<CutiPage> {
             ),
           ),
           // margin: EdgeInsets.only(top: 20, left: 20, right: 20),
-          child: Stack(
+          child: Column(
             children: [
-              Column(
-                children: [
-                  SizedBox(height: 40.sp),
-                  Container(
-                    padding: EdgeInsets.all(5.0.sp),
-                    child: Row(
-                      children: [
-                        IconButton(
-                          icon: Icon(
-                            Icons.arrow_back_ios_rounded,
-                            size: 18,
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
+              SizedBox(height: 40.sp),
+              Container(
+                padding: EdgeInsets.all(5.0.sp),
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_back_ios_rounded,
+                        size: 18,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      width: size.width * 1 / 4,
+                    ),
+                    Expanded(
+                      child: Text(
+                        "Riwayat Cuti",
+                        style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
                           color: Colors.white,
                         ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                    color: Colors.white,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 20, right: 20, top: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Bulan",
+                                  style: GoogleFonts.poppins(
+                                    color: MyColorsConst.darkColor,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                                MonthPicker(
+                                  onTap: (DateTime? months, DateTime? years) {
+                                    if (months != null) {
+                                      setState(() {
+                                        selectedMonth = months;
+                                      });
+                                      print(
+                                          "Selected month: ${selectedMonth} ${selectedYear}");
+
+                                      DateTime newDate = DateTime(
+                                        selectedYear?.year ??
+                                            DateTime.now().year,
+                                        selectedMonth!.month,
+                                        DateTime.now().day,
+                                      );
+
+                                      context.read<ListCutiBloc>().add(
+                                            GetListCuti(
+                                              date: newDate,
+                                            ),
+                                          );
+                                    }
+                                  },
+                                  selectedYear: selectedYear,
+                                )
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Tahun",
+                                  style: GoogleFonts.poppins(
+                                    color: MyColorsConst.darkColor,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                                YearPickerCustom(
+                                  onTap: (DateTime? years, DateTime? months) {
+                                    if (years != null) {
+                                      setState(() {
+                                        selectedYear = years;
+                                      });
+                                      print(
+                                          "ini tahun yang dipilih ${selectedYear} ${selectedMonth}");
+
+                                      DateTime newDate;
+                                      if (selectedMonth != null) {
+                                        newDate = DateTime(selectedYear!.year,
+                                            selectedMonth!.month);
+                                      } else {
+                                        newDate = DateTime(selectedYear!.year,
+                                            DateTime.now().month);
+                                      }
+
+                                      context.read<ListCutiBloc>().add(
+                                            GetListCuti(
+                                              date: newDate,
+                                            ),
+                                          );
+                                    }
+                                  },
+                                  selectedMonth: selectedMonth,
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                         SizedBox(
-                          width: size.width * 1 / 4,
+                          height: 15.sp,
                         ),
                         Expanded(
-                          child: Text(
-                            "History Cuti",
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                            ),
+                          child: BlocBuilder<ListCutiBloc, ListCutiState>(
+                            builder: (context, state) {
+                              var listcuti =
+                                  context.read<ListCutiBloc>().listcuti;
+                              var groupedData = groupByDate(listcuti);
+
+                              // debugPrint("LIST CUTI ? ${listcuti}");
+
+                              return listcuti.isNotEmpty
+                                  ? ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: groupedData.length,
+                                      itemBuilder: (context, index) {
+                                        var date =
+                                            groupedData.keys.toList()[index];
+                                        var dataList = groupedData[date]!;
+
+                                        return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              date,
+                                              style: GoogleFonts.poppins(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                            ListViewByDate(
+                                              dataList: dataList,
+                                              reloadDataCallback: loadData,
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    )
+                                  : Center(
+                                      child: EmptyStateBuilder(),
+                                    );
+                            },
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  SizedBox(
-                    height: 50.sp,
-                  ),
-                  Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                        ),
-                        color: Colors.white,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(18.0.sp),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 60.sp,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Bulan",
-                                      style: GoogleFonts.poppins(
-                                        color: MyColorsConst.darkColor,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                    MonthPicker(
-                                      onTap:
-                                          (DateTime? months, DateTime? years) {
-                                        if (months != null) {
-                                          setState(() {
-                                            selectedMonth = months;
-                                          });
-                                          print(
-                                              "Selected month: ${selectedMonth} ${selectedYear}");
-
-                                          DateTime newDate = DateTime(
-                                            selectedYear?.year ??
-                                                DateTime.now().year,
-                                            selectedMonth!.month,
-                                            DateTime.now().day,
-                                          );
-
-                                          context.read<ListCutiBloc>().add(
-                                                GetListCuti(
-                                                  date: newDate,
-                                                ),
-                                              );
-                                        }
-                                      },
-                                      selectedYear: selectedYear,
-                                    )
-                                  ],
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Tahun",
-                                      style: GoogleFonts.poppins(
-                                        color: MyColorsConst.darkColor,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                    ),
-                                    YearPickerCustom(
-                                      onTap:
-                                          (DateTime? years, DateTime? months) {
-                                        if (years != null) {
-                                          setState(() {
-                                            selectedYear = years;
-                                          });
-                                          print(
-                                              "ini tahun yang dipilih ${selectedYear} ${selectedMonth}");
-
-                                          DateTime newDate;
-                                          if (selectedMonth != null) {
-                                            newDate = DateTime(
-                                                selectedYear!.year,
-                                                selectedMonth!.month);
-                                          } else {
-                                            newDate = DateTime(
-                                                selectedYear!.year,
-                                                DateTime.now().month);
-                                          }
-
-                                          context.read<ListCutiBloc>().add(
-                                                GetListCuti(
-                                                  date: newDate,
-                                                ),
-                                              );
-                                        }
-                                      },
-                                      selectedMonth: selectedMonth,
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 15.sp,
-                            ),
-                            Expanded(
-                              child: BlocBuilder<ListCutiBloc, ListCutiState>(
-                                builder: (context, state) {
-                                  var listcuti =
-                                      context.read<ListCutiBloc>().listcuti;
-                                  var groupedData = groupByDate(listcuti);
-
-                                  // debugPrint("LIST CUTI ? ${listcuti}");
-
-                                  return listcuti.isNotEmpty
-                                      ? ListView.builder(
-                                          shrinkWrap: true,
-                                          itemCount: groupedData.length,
-                                          itemBuilder: (context, index) {
-                                            var date = groupedData.keys
-                                                .toList()[index];
-                                            var dataList = groupedData[date]!;
-
-                                            return Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  date,
-                                                  style: GoogleFonts.poppins(
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                                ListViewByDate(
-                                                  dataList: dataList,
-                                                  reloadDataCallback: loadData,
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        )
-                                      : Center(
-                                          child: EmptyStateBuilder(),
-                                        );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Positioned(
-                top: 100,
-                left: 20,
-                right: 20,
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                  margin: const EdgeInsets.only(bottom: 20),
-                  height: 110.sp,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Color(0xFFDDDDDD)),
-                    color: MyColorsConst.whiteColor,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        offset: Offset(0, 0),
-                        blurRadius: 5,
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Column(
-                          children: [
-                            Text(
-                              'Total Cuti Terpakai',
-                              style: GoogleFonts.poppins(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                  color: MyColorsConst.lightDarkColor),
-                            ),
-                            Text(
-                              totalCutiTerpakai ?? '0',
-                              style: GoogleFonts.poppins(
-                                fontSize: 14,
-                                color: MyColorsConst.primaryColor,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  children: [
-                                    Text(
-                                      'Tahunan',
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                        color: MyColorsConst.lightDarkColor,
-                                      ),
-                                    ),
-                                    Text(
-                                      jatahCutiTahunan ?? "0",
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      'Masa Kerja',
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                        color: MyColorsConst.lightDarkColor,
-                                      ),
-                                    ),
-                                    Text(
-                                      jatahCutiMasaKerja ?? "0",
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 80,
-                        width: 2,
-                        color: Color(0xFFDDDDDD),
-                        margin: const EdgeInsets.symmetric(horizontal: 10),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Column(
-                          children: [
-                            Text(
-                              'Total Sisa Jatah Cuti',
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: MyColorsConst.lightDarkColor,
-                              ),
-                            ),
-                            Text(
-                              totalSisaCuti ?? "0",
-                              style: GoogleFonts.poppins(
-                                color: MyColorsConst.primaryColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  children: [
-                                    Text(
-                                      'Tahunan',
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                        color: MyColorsConst.lightDarkColor,
-                                      ),
-                                    ),
-                                    Text(
-                                      sisaCutiTahunan ?? "0",
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      'Masa Kerja',
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                        color: MyColorsConst.lightDarkColor,
-                                      ),
-                                    ),
-                                    Text(
-                                      sisaCutiMasaKerja ?? "0",
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
                   ),
                 ),
               ),
@@ -821,15 +641,15 @@ class EmptyStateBuilder extends StatelessWidget {
       children: [
         Image.asset(
           "assets/images/box_nodata.png",
-          height: size.width * 1 / 2,
+          height: size.width * 1 / 2.5,
         ),
         const SizedBox(height: 8),
         Text(
-          "Tidak ada data yang ditampilkan!",
+          "Tidak Ada Data Yang Ditampilkan!",
           style: GoogleFonts.poppins(
             color: MyColorsConst.darkColor,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
+            fontWeight: FontWeight.w600,
+            fontSize: 14.sp,
           ),
         ),
       ],

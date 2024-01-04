@@ -59,8 +59,10 @@ class _ApprovalPageState extends State<ApprovalPage> {
         return Colors.red.shade700;
       case 't_lembur':
         return Colors.blue.shade700;
+      case 't_rpd':
+        return Colors.orange.shade900;
       default:
-        return Colors.grey;
+        return Colors.blueGrey.shade800;
     }
   }
 
@@ -72,8 +74,10 @@ class _ApprovalPageState extends State<ApprovalPage> {
         return CupertinoIcons.doc_person_fill;
       case 't_lembur':
         return CupertinoIcons.timer_fill;
+      case 't_rpd':
+        return Icons.receipt_long_rounded;
       default:
-        return CupertinoIcons.arrow_2_circlepath;
+        return Icons.new_releases_rounded;
     }
   }
 
@@ -201,12 +205,13 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                             arguments: listApproval[index]);
                                       },
                                       child: Container(
-                                        margin: EdgeInsets.only(bottom: 10),
-                                        padding: EdgeInsets.all(10),
+                                        margin:
+                                            const EdgeInsets.only(bottom: 10),
                                         decoration: BoxDecoration(
                                             border: Border.all(
-                                                color: MyColorsConst
-                                                    .formBorderColor),
+                                                color: _getColorByTrxTable(
+                                                    listApproval[index]
+                                                        .trxTable!).withOpacity(0.2)),
                                             borderRadius:
                                                 BorderRadius.circular(10)),
                                         height: 100.sp,
@@ -214,13 +219,22 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                         child: Row(
                                           children: [
                                             Container(
+                                              height: 100.sp,
                                               padding: EdgeInsets.all(10),
                                               decoration: BoxDecoration(
                                                   color: _getColorByTrxTable(
                                                           listApproval[index]
                                                               .trxTable!)
                                                       .withOpacity(0.2),
-                                                  shape: BoxShape.circle),
+                                                  shape: BoxShape.rectangle,
+                                                  borderRadius:
+                                                      const BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  9),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  9))),
                                               child: Icon(
                                                 getIconByTrxTable(
                                                     listApproval[index]
@@ -231,51 +245,60 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                               ),
                                             ),
                                             const SizedBox(width: 10),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  "${listApproval[index].trxNomor ?? ''}",
-                                                  style: GoogleFonts.poppins(
-                                                      fontSize: 14.sp,
-                                                      fontWeight:
-                                                          FontWeight.w600),
+                                            Expanded(
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 10),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "${listApproval[index].trxNomor ?? ''}",
+                                                      style: GoogleFonts.poppins(
+                                                          fontSize: 14.sp,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
+                                                    Text(
+                                                      "${listApproval[index].creator ?? ''}",
+                                                      maxLines: 1,
+                                                      overflow: TextOverflow.ellipsis,
+                                                      style: GoogleFonts.poppins(
+                                                          fontSize: 12.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: MyColorsConst
+                                                              .darkColor),
+                                                    ),
+                                                    Text(
+                                                      "${listApproval[index].trxName ?? ''}",
+                                                      style: GoogleFonts.poppins(
+                                                          fontSize: 12.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color:
+                                                              _getColorByTrxTable(
+                                                                  listApproval[
+                                                                          index]
+                                                                      .trxTable!)),
+                                                    ),
+                                                    SizedBox(height: 5.sp),
+                                                    Text(
+                                                      "${_formatDate(listApproval[index].trxDate.toString())}",
+                                                      style: GoogleFonts.poppins(
+                                                          fontSize: 10.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: MyColorsConst
+                                                              .lightDarkColor),
+                                                    ),
+                                                  ],
                                                 ),
-                                                Text(
-                                                  "${listApproval[index].creator ?? ''}",
-                                                  style: GoogleFonts.poppins(
-                                                      fontSize: 12.sp,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: MyColorsConst
-                                                          .darkColor),
-                                                ),
-                                                Text(
-                                                  "${listApproval[index].trxName ?? ''}",
-                                                  style: GoogleFonts.poppins(
-                                                      fontSize: 12.sp,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color:
-                                                          _getColorByTrxTable(
-                                                              listApproval[
-                                                                      index]
-                                                                  .trxTable!)),
-                                                ),
-                                                SizedBox(height: 5.sp),
-                                                Text(
-                                                  "${_formatDate(listApproval[index].trxDate.toString())}",
-                                                  style: GoogleFonts.poppins(
-                                                      fontSize: 10.sp,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      color: MyColorsConst
-                                                          .lightDarkColor),
-                                                ),
-                                              ],
+                                              ),
                                             ),
                                           ],
                                         ),

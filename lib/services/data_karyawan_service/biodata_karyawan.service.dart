@@ -161,7 +161,7 @@ class BiodataKaryawanService {
         'bpjs_no': bpjsNo,
         'bpjs_no_kesehatan': bpjsNo,
         'bpjs_no_ketenagakerjaan': bpjsKerjaNo,
-        'desc': desc,
+        'desc_file': desc,
         'bank_id': bankId,
         'no_rek': noRek,
         'atas_nama_rek': atasNamaRek,

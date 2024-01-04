@@ -46,7 +46,7 @@ class AddCheckInOutBloc extends Bloc<AddCheckInOutEvent, AddCheckInOutState> {
                 formDataSubmited.catatan
               );
               if (res is ServicesSuccess) {
-                emit(AddCheckInOutSuccess(message: "Check-In Berhasil!"));
+                emit(AddCheckInOutSuccess(message: "Check-In Berhasil!\nSemangat Bekerja_^!"));
               } else if (res is ServicesFailure) {
                 if (res.errorResponse == null) {
                   emit(AddCheckInOutFailedUserExpired(
@@ -76,7 +76,7 @@ class AddCheckInOutBloc extends Bloc<AddCheckInOutEvent, AddCheckInOutState> {
                 formDataSubmited.catatan
               );
               if (res is ServicesSuccess) {
-                emit(AddCheckInOutSuccess(message: "Check-Out Berhasil!"));
+                emit(AddCheckInOutSuccess(message: "Check-Out Berhasil!\nTerima Kasih Telah Bekerja Keras Hari Ini!"));
               } else if (res is ServicesFailure) {
                 if (res.errorResponse == null) {
                   emit(AddCheckInOutFailedUserExpired(

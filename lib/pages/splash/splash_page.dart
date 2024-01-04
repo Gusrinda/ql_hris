@@ -19,7 +19,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     Timer(
-      Duration(seconds: 2),
+      const Duration(seconds: 3),
       () => Navigator.of(context).pushReplacementNamed(LoginPage.routeName),
     );
   }
@@ -27,47 +27,60 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.centerRight,
-          colors: [
-            MyColorsConst.primaryColor,
-            MyColorsConst.whiteColor,
-          ],
-        ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset(
-                "assets/images/logo_SJ.png",
-                width: size.width / 4,
-              ),
-              const SizedBox(height: 2),
-              Text(
-                "My Success",
-                style: GoogleFonts.poppins(
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0XFF273E8D)),
-              ),
-              SizedBox(height: 10.sp),
-              SizedBox(
-                width: 30.sp,
-                height: 30.sp,
-                child: CircularProgressIndicator(
-                  color: Color(0XFF273E8D),
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(color: Colors.white
+                // gradient: LinearGradient(
+                //   begin: Alignment.topCenter,
+                //   end: Alignment.centerRight,
+                //   colors: [
+                //     MyColorsConst.primaryColor,
+                //     MyColorsConst.whiteColor,
+                //   ],
+                // ),
                 ),
-              )
-            ],
           ),
-        ),
+          Container(
+            height: size.height,
+            width: size.width,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/bg_login.jpg"),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    "assets/images/logo_SJ.png",
+                    width: size.width / 4,
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    "My Success",
+                    style: GoogleFonts.poppins(
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0XFF273E8D)),
+                  ),
+                  SizedBox(height: 10.sp),
+                  SizedBox(
+                    width: 30.sp,
+                    height: 30.sp,
+                    child: const CircularProgressIndicator(
+                        color: Color(0XFF273E8D)),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

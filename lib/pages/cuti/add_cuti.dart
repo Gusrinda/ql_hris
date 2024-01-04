@@ -22,7 +22,7 @@ class AddCutiPage extends StatefulWidget {
   AddCutiPage({super.key, required this.reloadDataCallback});
   final VoidCallback reloadDataCallback;
 
-  final TextEditingController idAlasanController = TextEditingController();
+  final TextEditingController? idAlasanController = TextEditingController();
   final TextEditingController valueAlasanController = TextEditingController();
 
   //Controller Tipe Cuti
@@ -50,6 +50,8 @@ class _AddCutiPageState extends State<AddCutiPage> {
   TimeOfDay? selectedTimeFrom;
   TimeOfDay? selectedTimeTo;
   int weekdaysCount = 0;
+  bool dateFromError = false;
+  bool dateToError = false;
 
   DateTime? parseDate(String? date) {
     try {
@@ -127,7 +129,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
         if (selectedValue != null) {
           widget.valueAlasanController.text =
               selectedValue.value?.toString() ?? '';
-          widget.idAlasanController.text = selectedValue.id?.toString() ?? '';
+          widget.idAlasanController!.text = selectedValue.id?.toString() ?? '';
 
           setState(() {
             this.selectedValue = selectedValue.value;
@@ -154,6 +156,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
             ),
           );
           Navigator.of(context).pop();
+          Navigator.pop(context);
           widget.reloadDataCallback();
         } else if (state is AddCutiFailed) {
           LoadingDialog.dismissDialog(context);
@@ -286,29 +289,31 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                           errorTextStyle:
                                               GoogleFonts.poppins(fontSize: 8),
                                         ),
-                                        FormDropDownData(
-                                          input: selectedValue ?? "",
-                                          onTap: () {
-                                            _showAlasanMenu(context);
-                                          },
-                                          idController:
-                                              widget.idAlasanController,
-                                          valueController:
-                                              widget.valueAlasanController,
-                                          labelForm: 'Alasan Cuti',
-                                          hintText: 'Pilih Alasan Cuti',
-                                          labelTag: 'Label-AlasanCuti',
-                                          formTag: 'Form-AlasanCuti',
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return 'Pilih Alasan Cuti';
-                                            }
-                                            return null;
-                                          },
-                                          errorTextStyle: GoogleFonts.poppins(
-                                              fontSize: 10.sp),
-                                        ),
+                                        if (selectedTipeValue != "P24") ...{
+                                          FormDropDownData(
+                                            input: selectedValue ?? "",
+                                            onTap: () {
+                                              _showAlasanMenu(context);
+                                            },
+                                            idController:
+                                                widget.idAlasanController!,
+                                            valueController:
+                                                widget.valueAlasanController,
+                                            labelForm: 'Alasan Cuti',
+                                            hintText: 'Pilih Alasan Cuti',
+                                            labelTag: 'Label-AlasanCuti',
+                                            formTag: 'Form-AlasanCuti',
+                                            validator: (value) {
+                                              if (value == null ||
+                                                  value.isEmpty) {
+                                                return 'Pilih Alasan Cuti';
+                                              }
+                                              return null;
+                                            },
+                                            errorTextStyle: GoogleFonts.poppins(
+                                                fontSize: 10.sp),
+                                          ),
+                                        },
                                         Hero(
                                           tag: 'Label-RowDateVisiting',
                                           flightShuttleBuilder:
@@ -369,24 +374,17 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                             Expanded(
                                               flex: 1,
                                               child: _buildDateTextField(
-                                                "Masukkan Tanggal",
-                                                widget.dateFromController,
-                                                selectedDateFrom,
-                                                (selectedDate) {
-                                                  setState(() {
-                                                    selectedDateFrom =
-                                                        selectedDate;
-                                                  });
-                                                  print(
-                                                      "Selected Date From: $selectedDateFrom");
-                                                },
-                                                (value) {
-                                                  if (value == null) {
-                                                    return 'Pilih Tanggal';
-                                                  }
-                                                  return null;
-                                                },
-                                              ),
+                                                  "Pilih Tanggal",
+                                                  widget.dateFromController,
+                                                  selectedDateFrom,
+                                                  (selectedDate) {
+                                                setState(() {
+                                                  selectedDateFrom =
+                                                      selectedDate;
+                                                });
+                                                print(
+                                                    "Selected Date From: $selectedDateFrom");
+                                              }, dateFromError),
                                             ),
                                             SizedBox(
                                               width: 20.sp,
@@ -394,7 +392,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                             Expanded(
                                               flex: 1,
                                               child: _buildDateTextField(
-                                                "Masukkan Tanggal",
+                                                "Pilih Tanggal",
                                                 widget.dateToController,
                                                 selectedDateTo,
                                                 (selectedDate) {
@@ -405,12 +403,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                                   print(
                                                       "Selected Date To: $selectedDateTo");
                                                 },
-                                                (value) {
-                                                  if (value == null) {
-                                                    return 'Pilih Tanggal';
-                                                  }
-                                                  return null;
-                                                },
+                                                dateToError,
                                               ),
                                             ),
                                           ],
@@ -488,7 +481,6 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                                     setState(() {
                                                       selectedTimeFrom = time;
                                                     });
-                                                    // Lakukan operasi lain jika diperlukan ketika waktu dipilih
                                                   },
                                                 ),
                                               ),
@@ -603,7 +595,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                           validator: (value) {
                                             if (value == null ||
                                                 value.isEmpty) {
-                                              return 'Tuliskan Keterangan';
+                                              return 'Tuliskan Keterangan Cuti';
                                             }
                                             return null;
                                           },
@@ -620,46 +612,96 @@ class _AddCutiPageState extends State<AddCutiPage> {
                               ),
                             ),
                             TextButtonCustomV1(
-                              text: "Kirim",
+                              text: "Kirim Pengajuan",
                               height: 50,
                               backgroundColor:
-                                  MyColorsConst.primaryColor.withOpacity(0.1),
+                                  MyColorsConst.primaryColor.withOpacity(0.2),
                               textColor: MyColorsConst.primaryColor,
                               onPressed: state is AddCutiLoading
                                   ? null
                                   : () {
-                                      // Update the controller values before submitting
-                                      // widget.timeFromController?.text =
-                                      //     selectedTimeFrom?.format(context) ?? "00:00";
-                                      // widget.timeToController?.text =
-                                      //     selectedTimeTo?.format(context) ?? "00:00";
+                                      final FormState? formState =
+                                          _formKey.currentState;
 
-                                      // print(
-                                      //     "Tanggal Hari ini : ${widget.dateFromController.text}");
+                                      setState(() {
+                                        if (selectedDateFrom == null) {
+                                          dateFromError = true;
+                                        } else {
+                                          dateFromError = false;
+                                        }
 
-                                      // // Convert TimeOfDay to a formatted string in HH:mm format
-                                      // String formattedTimeFrom =
-                                      //     '${selectedTimeFrom!.hour.toString().padLeft(2, '0')}:${selectedTimeFrom!.minute.toString().padLeft(2, '0')}';
+                                        if (selectedDateTo == null) {
+                                          dateToError = true;
+                                        } else {
+                                          dateToError = false;
+                                        }
+                                      });
 
-                                      // String formattedTimeTo =
-                                      //     '${selectedTimeTo!.hour.toString().padLeft(2, '0')}:${selectedTimeTo!.minute.toString().padLeft(2, '0')}';
+                                      if (formState != null &&
+                                          formState.validate()) {
+                                        if (!dateFromError && !dateToError) {
+                                          if (selectedTipeValue != "P24") {
+                                            setState(() {
+                                              selectedTimeFrom = null;
+                                              selectedTimeTo = null;
+                                            });
+                                          }
 
-                                      context.read<AddCutiBloc>().add(
-                                            AddCutiSubmited(
-                                              alasan: int.parse(widget
-                                                  .idAlasanController.text),
-                                              tipeCuti: int.parse(widget
-                                                  .idTipeCutiController.text),
-                                              keterangan: widget
-                                                  .keteranganController.text,
-                                              dateFrom: widget
-                                                  .dateFromController.text,
-                                              dateTo:
-                                                  widget.dateToController.text,
-                                              timeFrom: widget.timeFromController?.value.text ?? "08:00",
-                                              timeTo: widget.timeToController?.value.text ?? "08:00",
+                                          print(dateFromError);
+                                          // Form is valid, proceed with submission
+                                          widget.timeFromController?.text =
+                                              selectedTimeFrom
+                                                      ?.format(context) ??
+                                                  "";
+                                          widget.timeToController?.text =
+                                              selectedTimeTo?.format(context) ??
+                                                  "";
+
+                                          showDialog(
+                                            context: context,
+                                            builder: (_) => DialogCustom(
+                                              state: DialogCustomItem.confirm,
+                                              message:
+                                                  "Anda Yakin Mengirim Pengajuan Cuti?",
+                                              durationInSec: 7,
+                                              onContinue: () => context
+                                                  .read<AddCutiBloc>()
+                                                  .add(
+                                                    AddCutiSubmited(
+                                                      alasan: widget
+                                                                  .idAlasanController!
+                                                                  .text !=
+                                                              null
+                                                          ? int.tryParse(widget
+                                                              .idAlasanController!
+                                                              .text)
+                                                          : null,
+                                                      tipeCuti: int.parse(widget
+                                                          .idTipeCutiController
+                                                          .text),
+                                                      keterangan: widget
+                                                          .keteranganController
+                                                          .text,
+                                                      dateFrom: widget
+                                                          .dateFromController
+                                                          .text,
+                                                      dateTo: widget
+                                                          .dateToController
+                                                          .text,
+                                                      timeFrom: widget
+                                                              .timeFromController
+                                                              ?.text ??
+                                                          "",
+                                                      timeTo: widget
+                                                              .timeToController
+                                                              ?.text ??
+                                                          "",
+                                                    ),
+                                                  ),
                                             ),
                                           );
+                                        }
+                                      }
                                     },
                             ),
                           ],
@@ -725,7 +767,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
     TextEditingController controller,
     DateTime? selectedDate,
     Function(DateTime) onDateSelected,
-    String? Function(DateTime?)? validator,
+    bool isError,
   ) {
     return InkWell(
       onTap: () async {
@@ -757,35 +799,56 @@ class _AddCutiPageState extends State<AddCutiPage> {
           }
         }
       },
-      child: Container(
-        padding: const EdgeInsets.all(18.0),
-        decoration: BoxDecoration(
-          border: Border.all(color: Color(0xFFDDDDDD)),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              selectedDate != null
-                  ? DateFormat('yyyy-MM-dd').format(selectedDate)
-                  : hintText,
-              style: GoogleFonts.poppins(
-                fontSize: selectedDate != null ? 13.sp : 9.sp,
-                fontWeight:
-                    selectedDate != null ? FontWeight.w500 : FontWeight.w400,
-                color: selectedDate != null
-                    ? MyColorsConst.darkColor
-                    : MyColorsConst.disableColor,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(18.0),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: isError ? Colors.red.shade700 : const Color(0xFFDDDDDD),
+                width: 1.5,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  selectedDate != null
+                      ? DateFormat('yyyy-MM-dd').format(selectedDate)
+                      : hintText,
+                  style: GoogleFonts.poppins(
+                    fontSize: selectedDate != null ? 13.sp : 12.sp,
+                    fontWeight: selectedDate != null
+                        ? FontWeight.w500
+                        : FontWeight.w400,
+                    color: selectedDate != null
+                        ? MyColorsConst.darkColor
+                        : MyColorsConst.disableColor,
+                  ),
+                ),
+                Icon(
+                  CupertinoIcons.calendar_today,
+                  color: MyColorsConst.primaryColor,
+                  size: 20.sp,
+                ),
+              ],
+            ),
+          ),
+          if (isError)
+            Padding(
+              padding: const EdgeInsets.only(top: 4, left: 20),
+              child: Text(
+                'Pilih Tanggal',
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 10.sp,
+                ),
               ),
             ),
-            Icon(
-              CupertinoIcons.calendar_today,
-              color: MyColorsConst.primaryColor,
-              size: 20.sp,
-            ),
-          ],
-        ),
+        ],
       ),
     );
   }
@@ -811,7 +874,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                 fontSize: 15.sp,
                 fontWeight: FontWeight.w500),
             underline: Container(),
-            icon: Icon(Icons.arrow_drop_down_rounded),
+            icon: const Icon(Icons.arrow_drop_down_rounded),
             value: selectedTime?.hour ?? 8, // Start from 08
             items: List.generate(10, (index) => index + 8)
                 .map((hour) => DropdownMenuItem<int>(
@@ -826,7 +889,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
               }
             },
           ),
-          Text(':'),
+          const Text(':'),
           DropdownButton<int>(
             style: GoogleFonts.poppins(
                 color: MyColorsConst.darkColor,

@@ -70,7 +70,7 @@ class DinasServices {
       "pic_id": pic,
       "total_biaya": 0,
       "is_kend_dinas": kendDinas,
-      "nama_kend": desc,
+      "catatan_kend": desc,
     }..removeWhere((key, value) => value == null || value == '' || value == -99);
 
     var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_spd");

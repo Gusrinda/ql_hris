@@ -210,14 +210,20 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                                     'Nomor', widget.nomorFromList ?? '-'),
                                 _buildText(
                                     'Tipe Cuti', widget.tipeCutiValue ?? '-'),
-                                _buildText('Tanggal Awal',
-                                    formatDate(widget.dateFrom ?? '-')),
+                                if (widget.data?.timeFrom != null &&
+                                    widget.data?.timeFrom != 0)
+                                  _buildText(
+                                      'Waktu Awal',
+                                      widget.data?.timeFrom?.toString() ??
+                                          '00:00'),
+                                if (widget.data?.timeTo != null &&
+                                    widget.data?.timeTo != 0)
+                                  _buildText(
+                                      'Waktu Berakhir',
+                                      widget.data?.timeTo?.toString() ??
+                                          '00:00'),
                                 _buildText(
-                                    'Waktu Awal',
-                                    widget.data?.timeFrom?.toString() ??
-                                        '00:00'),
-                                _buildText('Durasi Hari',
-                                    "${widget.data?.interval?.toString() ?? '0'} Hari"),
+                                    'Keterangan', widget.keterangan ?? '-'),
                                 Text(
                                   'Status Approval',
                                   style: GoogleFonts.poppins(
@@ -261,16 +267,21 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 _buildText('Alasan', widget.alasanValue ?? '-'),
-                                _buildText(
-                                    'Keterangan', widget.keterangan ?? '-'),
+                                _buildText('Tanggal Awal',
+                                    formatDate(widget.dateFrom ?? '-')),
                                 _buildText('Tanggal Berakhir',
                                     formatDate(widget.dateTo ?? '-')),
-                                _buildText('Waktu Berakhir',
-                                    widget.data?.timeTo?.toString() ?? '00:00'),
-                                _buildText(
-                                    'Durasi Waktu',
-                                    convertMinutesToHours(
-                                        widget.data?.intervalMin ?? 0)),
+                                if (widget.data?.interval != null &&
+                                    widget.data?.interval != 0)
+                                  _buildText('Durasi Hari',
+                                      "${widget.data?.interval?.toString() ?? '0'} Hari"),
+
+                                if (widget.data?.intervalMin != null &&
+                                    widget.data?.intervalMin != 0)
+                                  _buildText(
+                                      'Durasi Waktu',
+                                      convertMinutesToHours(
+                                          widget.data?.intervalMin ?? 0)),
 
                                 // _buildText('Catatan Approval',
                                 //     widget.data?.keterangan?.toString() ?? '-'),

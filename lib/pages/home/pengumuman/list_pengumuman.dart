@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
-import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/bloc/pengumuman_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/pengumuman_card.widget.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
@@ -96,11 +94,11 @@ class _ListPengumumanPageState extends State<ListPengumumanPage> {
                       color: Colors.white,
                     ),
                     SizedBox(
-                      width: size.width * 1 / 4.5,
+                      width: size.width * 1 / 6.5,
                     ),
                     Expanded(
                       child: Text(
-                        "Pengumuman",
+                        "Semua Pengumuman",
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -166,6 +164,34 @@ class _ListPengumumanPageState extends State<ListPengumumanPage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class EmptyStateBuilder extends StatelessWidget {
+  const EmptyStateBuilder({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          "assets/images/box_nodata.png",
+          height: size.width * 1 / 2.5,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          "Tidak Ada Pengumuman",
+          style: GoogleFonts.poppins(
+            color: MyColorsConst.darkColor,
+            fontWeight: FontWeight.w600,
+            fontSize: 14.sp,
+          ),
+        ),
+      ],
     );
   }
 }

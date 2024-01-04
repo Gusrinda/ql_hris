@@ -29,6 +29,7 @@ class AddRealisasiDinasPage extends StatefulWidget {
   final TextEditingController idDirektoratController = TextEditingController();
   final TextEditingController valueDirektoratController =
       TextEditingController();
+      
   // Divisi Controller
   final TextEditingController idDivisiController = TextEditingController();
   final TextEditingController valueDivisiController = TextEditingController();
@@ -60,7 +61,6 @@ class AddRealisasiDinasPage extends StatefulWidget {
       TextEditingController();
   final TextEditingController valueLokasiTujuanController =
       TextEditingController();
-
   final TextEditingController nikController = TextEditingController();
 
   // Pic Controller
@@ -68,6 +68,7 @@ class AddRealisasiDinasPage extends StatefulWidget {
   final TextEditingController valuePicController = TextEditingController();
   final TextEditingController totalBiayaController = TextEditingController();
   final TextEditingController statusController = TextEditingController();
+
   // kend Dinas
   final TextEditingController kendDinasController = TextEditingController();
   final TextEditingController totalBiayaRencanaSelisihController =
@@ -76,8 +77,6 @@ class AddRealisasiDinasPage extends StatefulWidget {
       TextEditingController();
 
   // Rincian biaya
-  // final TextEditingController idTipeController = TextEditingController();
-  // final TextEditingController valueTipeController = TextEditingController();
   final TextEditingController biayaController = TextEditingController();
   final TextEditingController keteranganController = TextEditingController();
   final TextEditingController biayaRealisasiController =
@@ -97,8 +96,6 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      widget.biayaRealisasiController.addListener(_updateTotalBiaya);
-
       final organisasiBloc = context.read<AddRealisasiDinasBloc>();
 
       organisasiBloc.add(OnSelectDinasApproved());
@@ -106,25 +103,8 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
     });
   }
 
-  void _updateTotalBiaya() {
-    double totalBiaya = 0.0;
-
-    // Hitung total biaya dari semua expenseDetails
-    for (ExpenseDetail expenseDetail in expenseDetails) {
-      double biayaRealisasi =
-          double.tryParse(expenseDetail.biayaRealisasiController.text) ?? 0.0;
-      totalBiaya += biayaRealisasi;
-    }
-
-    // Set nilai totalBiaya ke totalBiayaRencanaSelisihController
-    widget.totalBiayaRencanaSelisihController.text = totalBiaya.toString();
-  }
-
   @override
   void dispose() {
-    // Hapus listener saat widget di dispose
-    widget.biayaRealisasiController.removeListener(_updateTotalBiaya);
-
     super.dispose();
   }
 
@@ -229,6 +209,27 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
         );
         print("Tidak Ada Item");
       }
+    }
+
+    double calculateTotalCost() {
+      double totalCost = 0.0;
+
+      // Iterate through each expense detail and sum up the costs
+      for (var expense in expenseDetails) {
+        double biayaRealisasi =
+            double.tryParse(expense.biayaRealisasiController.text) ?? 0.0;
+        totalCost += biayaRealisasi;
+      }
+
+      return totalCost;
+    }
+
+    void onDataChanged() {
+      // Call the function to calculate the total cost
+      double totalCost = calculateTotalCost();
+
+      // Update the totalBiayaRencanaSelisihController
+      widget.totalBiayaRencanaSelisihController.text = totalCost.toString();
     }
 
     return BlocListener<AddRealisasiDinasBloc, AddRealisasiDinasState>(
@@ -820,27 +821,6 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
         ),
       ),
     );
-  }
-
-  double calculateTotalCost() {
-    double totalCost = 0.0;
-
-    // Iterate through each expense detail and sum up the costs
-    for (var expense in expenseDetails) {
-      double biayaRealisasi =
-          double.tryParse(expense.biayaRealisasiController.text) ?? 0.0;
-      totalCost += biayaRealisasi;
-    }
-
-    return totalCost;
-  }
-
-  void onDataChanged() {
-    // Call the function to calculate the total cost
-    double totalCost = calculateTotalCost();
-
-    // Update the totalBiayaRencanaSelisihController
-    widget.totalBiayaRencanaSelisihController.text = totalCost.toString();
   }
 }
 

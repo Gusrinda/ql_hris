@@ -236,9 +236,43 @@ class DataProfile with _$DataProfile {
         int? mKaryLimitPotong,
         @JsonKey(name: "atasan")
         String? atasan,
+        @JsonKey(name: "info_cuti")
+        InfoCuti? infoCuti,
         @JsonKey(name: "default_users_socialite")
         List<dynamic>? defaultUsersSocialite,
     }) = _DataProfile;
 
     factory DataProfile.fromJson(Map<String, dynamic> json) => _$DataProfileFromJson(json);
+}
+
+@freezed
+class InfoCuti with _$InfoCuti {
+    const factory InfoCuti({
+        @JsonKey(name: "cuti_p24")
+        int? cutiP24,
+        @JsonKey(name: "cuti_reguler")
+        int? cutiReguler,
+        @JsonKey(name: "work_present")
+        int? workPresent,
+        @JsonKey(name: "cuti_terpakai")
+        int? cutiTerpakai,
+        @JsonKey(name: "potongan_cuti")
+        int? potonganCuti,
+        @JsonKey(name: "sisa_cuti_p24")
+        int? sisaCutiP24,
+        @JsonKey(name: "cuti_masa_kerja")
+        int? cutiMasaKerja,
+        @JsonKey(name: "work_not_present")
+        int? workNotPresent,
+        @JsonKey(name: "cuti_p24_terpakai")
+        int? cutiP24Terpakai,
+        @JsonKey(name: "sisa_cuti_reguler")
+        int? sisaCutiReguler,
+        @JsonKey(name: "work_days_in_month")
+        int? workDaysInMonth,
+        @JsonKey(name: "sisa_cuti_masa_kerja")
+        int? sisaCutiMasaKerja,
+    }) = _InfoCuti;
+
+    factory InfoCuti.fromJson(Map<String, dynamic> json) => _$InfoCutiFromJson(json);
 }

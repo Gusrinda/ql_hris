@@ -18,7 +18,7 @@ class FormDropDownData extends StatelessWidget {
     required this.labelTag,
     required this.formTag,
     required this.valueController,
-    required this.idController,
+    this.idController,
     this.validator,
     this.errorTextStyle,
   }) : super(key: key);
@@ -31,7 +31,7 @@ class FormDropDownData extends StatelessWidget {
   final String labelTag;
   final String formTag;
   final TextEditingController valueController;
-  final TextEditingController idController;
+  final TextEditingController? idController;
   final VoidCallback? onTap;
   final String? Function(String?)? validator;
   final TextStyle? errorTextStyle;

@@ -315,7 +315,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                       // bpjsNo: controllers.noBpjsController?.value.text,
                       bpjsNo: controllers.noBpjsKesehatanController?.value.text,
                       bpjsKerjaNo:
-                          controllers.noBpjsKesehatanController?.value.text,
+                          controllers.noBpjsKetenagakerjaanController?.value.text,
                       desc: controllers.keteranganController?.value.text,
                       ukBaju: controllers.ukBajuController?.value.text,
                       ukCelana: controllers.ukCelanaController?.value.text,

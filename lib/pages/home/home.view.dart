@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/approval/approval.view.dart';
 import 'package:sj_presensi_mobile/pages/approval/bloc/approval_bloc.dart';
+import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dashboard_dinas.dart';
@@ -18,6 +21,8 @@ import 'package:sj_presensi_mobile/pages/home/pengumuman/list_pengumuman.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/pengumuman_card.widget.dart';
 import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/list_lembur_bloc.dart';
 import 'package:sj_presensi_mobile/pages/lembur/lembur_page.dart';
+import 'package:sj_presensi_mobile/services/model/list_approval/response_list_approval.dart';
+import 'package:sj_presensi_mobile/services/model/profile_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,7 +40,9 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<CheckInOutBloc>().add(AttendanceStateChecked());
       context.read<PengumumanBloc>().add(GetListPengumuman());
+      context.read<ApprovalBloc>().add(GetListApproval());
     });
     // BlocProvider.of<CheckInOutBloc>(context).add(AttendanceStateChecked());
   }
@@ -45,6 +52,8 @@ class _HomePageState extends State<HomePage> {
       // Dispatch the CheckInOutEvent to refresh the data
       WidgetsBinding.instance.addPostFrameCallback((_) {
         context.read<CheckInOutBloc>().add(AttendanceStateChecked());
+        context.read<PengumumanBloc>().add(GetListPengumuman());
+        context.read<ApprovalBloc>().add(GetListApproval());
       });
       // Add any additional refreshing logic here if needed
       await Future.delayed(Duration(seconds: 1));
@@ -59,617 +68,760 @@ class _HomePageState extends State<HomePage> {
       displacement: 50,
       key: _refreshIndicatorKey,
       onRefresh: _onRefresh,
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: CustomPaint(
-            painter: BackgroundPainter(),
-            child: BlocBuilder<CheckInOutBloc, CheckInOutState>(
-              builder: (context, state) {
-                String? name;
-                String? fotoProfil;
-                String? cutiMasaKerja;
-                String? cutiTahunan;
-                String? p24;
-                if (state is InfoCheckInOutSuccessInBackground) {
-                  name = state.name;
-                  fotoProfil = state.fotoProfil;
-                  cutiMasaKerja = state.cutiMasaKerja;
-                  cutiTahunan = state.cutiTahunan;
-                  p24 = state.p24;
-                } else if (state is CheckInOutSuccessInBackground) {
-                  name = state.name;
-                  fotoProfil = state.fotoProfil;
-                  print("INI LINK FOTO PROFILE ${fotoProfil}");
-                  cutiMasaKerja = state.cutiMasaKerja;
-                  cutiTahunan = state.cutiTahunan;
-                  p24 = state.p24;
-                }
-                return Stack(
-                  children: [
-                    Positioned(
-                      top: 62.sp,
-                      left: MediaQuery.of(context).size.width * 1 / 5,
-                      child: SizedBox(
-                          height: MediaQuery.of(context).size.height * 1 / 2,
-                          child: Opacity(
-                              opacity: 0.5,
-                              child: Image.asset(
-                                  "assets/images/white-sj-30.png"))),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 50.sp), // Spacer for status bar
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Row(
-                                  children: [
-                                    CircleAvatar(
-                                      minRadius: 25.sp,
-                                      maxRadius: 25.sp,
-                                      backgroundColor: Colors.black54,
-                                      child: fotoProfil !=
-                                              "https://server.qqltech.com:7005/"
-                                          ? ClipOval(
-                                              child: Image.network(
-                                                fotoProfil ??
-                                                    "https://i.pinimg.com/564x/de/6e/8d/de6e8d53598eecfb6a2d86919b267791.jpg",
-                                                fit: BoxFit.cover,
-                                                width: 50.sp,
-                                                height: 50.sp,
-                                              ),
-                                            )
-                                          : Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  Icons.no_photography,
-                                                  size: 15.sp,
-                                                  color: Colors.white,
+      child: BlocListener<CheckInOutBloc, CheckInOutState>(
+        listener: (context, state) async {
+          if (state is CheckInOutLoading) {
+            LoadingDialog.showLoadingDialog(context);
+          } else if (state is InfoCheckInOutSuccessInBackground) {
+            LoadingDialog.dismissDialog(context);
+          } else if (state is CheckInOutSuccessInBackground) {
+            LoadingDialog.dismissDialog(context);
+          } else if (state is CheckInOutFailed) {
+            LoadingDialog.dismissDialog(context);
+            await showDialog(
+              context: context,
+              builder: (_) => DialogCustom(
+                state: DialogCustomItem.error,
+                message: state.message,
+              ),
+            );
+          } else if (state is CheckInOutFailedUserExpired) {
+            LoadingDialog.dismissDialog(context);
+            await showDialog(
+              context: context,
+              builder: (_) => DialogCustom(
+                state: DialogCustomItem.error,
+                message: state.message,
+              ),
+            );
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil(LoginPage.routeName, (route) => false);
+          } else if (state is CheckInOutFailedInBackground) {
+            LoadingDialog.dismissDialog(context);
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil(LoginPage.routeName, (route) => false);
+          }
+        },
+        child: Scaffold(
+          body: SingleChildScrollView(
+            child: CustomPaint(
+              painter: BackgroundPainter(),
+              child: BlocBuilder<CheckInOutBloc, CheckInOutState>(
+                builder: (context, state) {
+                  String? name;
+                  String? fotoProfil;
+                  InfoCuti? infoCuti;
+                  if (state is InfoCheckInOutSuccessInBackground) {
+                    name = state.name;
+                    fotoProfil = state.fotoProfil;
+                    infoCuti = state.infoCuti;
+                  } else if (state is CheckInOutSuccessInBackground) {
+                    name = state.name;
+                    fotoProfil = state.fotoProfil;
+                    print("INI LINK FOTO PROFILE ${fotoProfil}");
+                    infoCuti = state.infoCuti;
+                  }
+                  return Stack(
+                    children: [
+                      Positioned(
+                        top: 62.sp,
+                        left: MediaQuery.of(context).size.width * 1 / 5,
+                        child: SizedBox(
+                            height: MediaQuery.of(context).size.height * 1 / 2,
+                            child: Opacity(
+                                opacity: 0.5,
+                                child: Image.asset(
+                                    "assets/images/white-sj-30.png"))),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 50.sp), // Spacer for status bar
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    children: [
+                                      CircleAvatar(
+                                        minRadius: 25.sp,
+                                        maxRadius: 25.sp,
+                                        backgroundColor: Colors.black54,
+                                        child: fotoProfil !=
+                                                "https://server.qqltech.com:7005/"
+                                            ? ClipOval(
+                                                child: Image.network(
+                                                  fotoProfil ??
+                                                      "https://i.pinimg.com/564x/de/6e/8d/de6e8d53598eecfb6a2d86919b267791.jpg",
+                                                  fit: BoxFit.cover,
+                                                  width: 50.sp,
+                                                  height: 50.sp,
                                                 ),
-                                                SizedBox(
-                                                  width: 27.sp,
-                                                  child: Text(
-                                                    "Tidak Ada Foto",
-                                                    textAlign: TextAlign.center,
-                                                    style: GoogleFonts.poppins(
-                                                        fontSize: 5.sp,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Colors.white),
+                                              )
+                                            : Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.no_photography,
+                                                    size: 15.sp,
+                                                    color: Colors.white,
                                                   ),
-                                                )
-                                              ],
-                                            ),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          4 /
-                                          7,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Selamat Datang,',
-                                            style: GoogleFonts.poppins(
-                                              color: Colors.white,
-                                              fontSize: 10.sp,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                          Text(
-                                            '#SJGWarrior',
-                                            style: GoogleFonts.poppins(
+                                                  SizedBox(
+                                                    width: 27.sp,
+                                                    child: Text(
+                                                      "Tidak Ada Foto",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              fontSize: 5.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              color:
+                                                                  Colors.white),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                4 /
+                                                7,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Selamat Datang,',
+                                              style: GoogleFonts.poppins(
                                                 color: Colors.white,
                                                 fontSize: 10.sp,
-                                                fontWeight: FontWeight.w700,
-                                                fontStyle: FontStyle.italic),
-                                          ),
-                                          Text(
-                                            name ?? 'Karyawan SJ',
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: GoogleFonts.poppins(
-                                              color: Colors.white,
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w600,
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                InkWell(
-                                  onTap: () async {
-                                    await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => BlocProvider(
-                                          create: (context) => ApprovalBloc()
-                                            ..add(
-                                              GetListApproval(),
+                                            Text(
+                                              '#SJGWarrior',
+                                              style: GoogleFonts.poppins(
+                                                  color: Colors.white,
+                                                  fontSize: 10.sp,
+                                                  fontWeight: FontWeight.w700,
+                                                  fontStyle: FontStyle.italic),
                                             ),
-                                          child: ApprovalPage(),
+                                            Text(
+                                              name ?? 'Karyawan SJ',
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: GoogleFonts.poppins(
+                                                color: Colors.white,
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                    );
-                                  },
-                                  child: Container(
-                                    height: 45.sp,
-                                    width: 45.sp,
-                                    child: Stack(
-                                      children: [
-                                        // Ikon
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(7),
-                                          ),
-                                          alignment: Alignment.center,
-                                          child: Icon(
-                                            CupertinoIcons.doc_checkmark_fill,
-                                            size: 25.sp,
-                                            color: MyColorsConst.primaryColor,
-                                          ),
-                                        ),
-                                        // Lingkaran indikator merah
-                                        Positioned(
-                                          top: 6.sp,
-                                          right: 6.sp,
-                                          child: Container(
-                                            height: 10.sp,
-                                            width: 10.sp,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: Colors.red,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                    ],
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20.0),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(7),
-                                color: Colors.white),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 15),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const Icon(
-                                            CupertinoIcons.bag_badge_minus,
-                                            color: MyColorsConst.primaryColor,
-                                          ),
-                                          const SizedBox(height: 7),
-                                          Text(
-                                            "${cutiMasaKerja ?? '-'} Hari",
-                                            style: GoogleFonts.poppins(
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                          Text(
-                                            "Cuti Masa Kerja",
-                                            style: GoogleFonts.poppins(
-                                                fontSize: 8.sp,
-                                                fontWeight: FontWeight.w500,
-                                                color:
-                                                    MyColorsConst.disableColor),
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                                Container(
-                                  width: 1,
-                                  height: 60.sp,
-                                  color: MyColorsConst.disableColor,
-                                ),
-                                Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 15),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const Icon(
-                                            CupertinoIcons.calendar_badge_minus,
-                                            color: MyColorsConst.primaryColor,
-                                          ),
-                                          const SizedBox(height: 7),
-                                          Text(
-                                            "${cutiTahunan ?? '-'} Hari",
-                                            style: GoogleFonts.poppins(
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                                          Text(
-                                            "Cuti Tahunan",
-                                            style: GoogleFonts.poppins(
-                                                fontSize: 8.sp,
-                                                fontWeight: FontWeight.w500,
-                                                color:
-                                                    MyColorsConst.disableColor),
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                                Container(
-                                  width: 1,
-                                  height: 60,
-                                  color: MyColorsConst.disableColor,
-                                ),
-                                Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 15),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const Icon(
-                                            CupertinoIcons.timer,
-                                            color: MyColorsConst.primaryColor,
-                                          ),
-                                          const SizedBox(height: 7),
-                                          p24 == null
-                                              ? Text(
-                                                  "- Jam",
-                                                  style: GoogleFonts.poppins(
-                                                    fontSize: 14.sp,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                                )
-                                              : Text(
-                                                  "${p24} Menit",
-                                                  style: GoogleFonts.poppins(
-                                                    fontSize: 14.sp,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
+                                  BlocBuilder<ApprovalBloc, ApprovalState>(
+                                    builder: (context, state) {
+                                      List<DataApproval>? listApproval;
+                                      if (state
+                                          is ListApprovalSuccessInBackground) {
+                                        listApproval = state.listApproval ?? [];
+                                      }
+                                      if (state is ListApprovalFailed) {
+                                        listApproval = [];
+                                      }
+
+                                      return InkWell(
+                                        onTap: () async {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  BlocProvider(
+                                                create: (context) =>
+                                                    ApprovalBloc()
+                                                      ..add(GetListApproval()),
+                                                child: ApprovalPage(),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                          height: 45.sp,
+                                          width: 45.sp,
+                                          child: Stack(
+                                            children: [
+                                              // Ikon
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(7),
                                                 ),
-                                          Text(
-                                            "P24",
-                                            style: GoogleFonts.poppins(
-                                                fontSize: 8.sp,
-                                                fontWeight: FontWeight.w500,
-                                                color:
-                                                    MyColorsConst.disableColor),
-                                          )
-                                        ],
-                                      ),
-                                    ))
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Text(
-                            "Menu",
-                            style: GoogleFonts.poppins(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white),
-                          ),
-                        ),
-                        const SizedBox(height: 5),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 20, horizontal: 10),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(7),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                      blurRadius: 20,
-                                      offset: Offset(0, 2),
-                                      color: MyColorsConst.primaryColor
-                                          .withOpacity(0.1))
-                                ]),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => BlocProvider(
-                                            create: (context) =>
-                                                HistoryAttendanceBloc()
-                                                  ..add(
-                                                    GetAttendancesHistory(
-                                                      date: DateTime.now(),
+                                                alignment: Alignment.center,
+                                                child: Icon(
+                                                  CupertinoIcons
+                                                      .doc_checkmark_fill,
+                                                  size: 25.sp,
+                                                  color: MyColorsConst
+                                                      .primaryColor,
+                                                ),
+                                              ),
+                                              // Small Circle
+                                              if (listApproval != null &&
+                                                  listApproval.isNotEmpty)
+                                                Positioned(
+                                                  top: 6.sp,
+                                                  right: 6.sp,
+                                                  child: Container(
+                                                    height: 10.sp,
+                                                    width: 10.sp,
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: Colors.red,
                                                     ),
                                                   ),
-                                            child: const HistoryPage(),
+                                                ),
+                                            ],
                                           ),
                                         ),
                                       );
                                     },
-                                    child: Column(
-                                      children: [
-                                        Image.asset(
-                                          'assets/images/presensi_menu.png',
-                                          width: 50.sp,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20.0),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(7),
+                                  color: Colors.white),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 15),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const Icon(
+                                              CupertinoIcons.bag_badge_minus,
+                                              color: MyColorsConst.primaryColor,
+                                            ),
+                                            const SizedBox(height: 7),
+                                            RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text:
+                                                        "${infoCuti?.sisaCutiMasaKerja?.toString() ?? '-'}",
+                                                    style: GoogleFonts.poppins(
+                                                      fontSize: 18.sp,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      color: MyColorsConst
+                                                          .primaryColor,
+                                                    ),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        " / ${infoCuti?.cutiMasaKerja?.toString() ?? '-'}\nHari",
+                                                    style: GoogleFonts.poppins(
+                                                      height: 1,
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: MyColorsConst
+                                                          .darkColor,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            const SizedBox(height: 5),
+                                            Text(
+                                              "Cuti Masa",
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 9.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.grey.shade500),
+                                            )
+                                          ],
                                         ),
-                                        const SizedBox(height: 5),
-                                        Text(
-                                          "Presensi",
-                                          style: GoogleFonts.poppins(
-                                            fontSize: 10.sp,
-                                            fontWeight: FontWeight.w500,
-                                            color: MyColorsConst.darkColor,
+                                      )),
+                                  Container(
+                                    width: 1,
+                                    height: 60.sp,
+                                    color: MyColorsConst.disableColor,
+                                  ),
+                                  Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 15),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const Icon(
+                                              CupertinoIcons
+                                                  .calendar_badge_minus,
+                                              color: MyColorsConst.primaryColor,
+                                            ),
+                                            const SizedBox(height: 7),
+                                            RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text:
+                                                        "${infoCuti?.sisaCutiReguler?.toString() ?? '-'}",
+                                                    style: GoogleFonts.poppins(
+                                                      fontSize: 18.sp,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      color: MyColorsConst
+                                                          .primaryColor,
+                                                    ),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        " / ${infoCuti?.cutiReguler?.toString() ?? '-'}\nHari",
+                                                    style: GoogleFonts.poppins(
+                                                      height: 1,
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: MyColorsConst
+                                                          .darkColor,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            const SizedBox(height: 5),
+                                            Text(
+                                              "Cuti Tahunan",
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 9.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.grey.shade500),
+                                            )
+                                          ],
+                                        ),
+                                      )),
+                                  Container(
+                                    width: 1,
+                                    height: 60,
+                                    color: MyColorsConst.disableColor,
+                                  ),
+                                  Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 15),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const Icon(
+                                              CupertinoIcons.timer,
+                                              color: MyColorsConst.primaryColor,
+                                            ),
+                                            const SizedBox(height: 7),
+                                            RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text:
+                                                        "${infoCuti?.sisaCutiP24?.toString() ?? '-'}",
+                                                    style: GoogleFonts.poppins(
+                                                      fontSize: 18.sp,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      color: MyColorsConst
+                                                          .primaryColor,
+                                                    ),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        " / ${infoCuti?.cutiP24?.toString() ?? '-'}\nMenit",
+                                                    style: GoogleFonts.poppins(
+                                                      height: 1,
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: MyColorsConst
+                                                          .darkColor,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            const SizedBox(height: 5),
+                                            Text(
+                                              "P24",
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 9.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.grey.shade500),
+                                            )
+                                          ],
+                                        ),
+                                      ))
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Text(
+                              "Menu",
+                              style: GoogleFonts.poppins(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white),
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 20, horizontal: 10),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(7),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        blurRadius: 20,
+                                        offset: Offset(0, 2),
+                                        color: MyColorsConst.primaryColor
+                                            .withOpacity(0.1))
+                                  ]),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => BlocProvider(
+                                              create: (context) =>
+                                                  HistoryAttendanceBloc()
+                                                    ..add(
+                                                      GetAttendancesHistory(
+                                                        date: DateTime.now(),
+                                                      ),
+                                                    ),
+                                              child: const HistoryPage(),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        );
+                                      },
+                                      child: Column(
+                                        children: [
+                                          Image.asset(
+                                            'assets/images/presensi_menu.png',
+                                            width: 50.sp,
+                                          ),
+                                          const SizedBox(height: 5),
+                                          Text(
+                                            "Presensi",
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 10.sp,
+                                              fontWeight: FontWeight.w500,
+                                              color: MyColorsConst.darkColor,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
+                                  Expanded(
+                                      flex: 1,
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  BlocProvider(
+                                                create: (context) =>
+                                                    ListLemburBloc()
+                                                      ..add(GetListLembur(
+                                                          date:
+                                                              DateTime.now())),
+                                                child: const LemburPage(),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Column(
+                                          children: [
+                                            Image.asset(
+                                              'assets/images/lembur_menu.png',
+                                              width: 50.sp,
+                                            ),
+                                            const SizedBox(height: 5),
+                                            Text(
+                                              "Lembur",
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 10.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color:
+                                                      MyColorsConst.darkColor),
+                                            )
+                                          ],
+                                        ),
+                                      )),
+                                  Expanded(
+                                      flex: 1,
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DashboardDinasPage(),
+                                            ),
+                                          );
+                                        },
+                                        child: Column(
+                                          children: [
+                                            Image.asset(
+                                              'assets/images/spd_menu.png',
+                                              width: 50.sp,
+                                            ),
+                                            const SizedBox(height: 5),
+                                            Text(
+                                              "Perjalanan Dinas",
+                                              textAlign: TextAlign.center,
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 10.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color:
+                                                      MyColorsConst.darkColor),
+                                            )
+                                          ],
+                                        ),
+                                      )),
+                                  Expanded(
+                                      flex: 1,
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  BlocProvider(
+                                                create: (context) =>
+                                                    ListCutiBloc()
+                                                      ..add(GetListCuti(
+                                                          date:
+                                                              DateTime.now())),
+                                                child: CutiPage(),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Column(
+                                          children: [
+                                            Image.asset(
+                                              'assets/images/cuti_new.png',
+                                              width: 50.sp,
+                                            ),
+                                            const SizedBox(height: 5),
+                                            Text(
+                                              "Cuti",
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 10.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color:
+                                                      MyColorsConst.darkColor),
+                                            )
+                                          ],
+                                        ),
+                                      )),
+                                  Expanded(
+                                      flex: 1,
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  BlocProvider(
+                                                create: (context) =>
+                                                    BerkasBloc(),
+                                                child:
+                                                    const DownloadBerkasPage(),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Column(
+                                          children: [
+                                            Image.asset(
+                                              'assets/images/doc.png',
+                                              width: 50.sp,
+                                            ),
+                                            const SizedBox(height: 5),
+                                            Text(
+                                              "SOP Dan Training",
+                                              textAlign: TextAlign.center,
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 10.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color:
+                                                      MyColorsConst.darkColor),
+                                            )
+                                          ],
+                                        ),
+                                      )),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 30),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Pengumuman",
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: MyColorsConst.darkColor),
                                 ),
-                                Expanded(
-                                    flex: 1,
-                                    child: InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => BlocProvider(
-                                              create: (context) =>
-                                                  ListLemburBloc()
-                                                    ..add(GetListLembur(
-                                                        date: DateTime.now())),
-                                              child: const LemburPage(),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      child: Column(
-                                        children: [
-                                          Image.asset(
-                                            'assets/images/lembur_menu.png',
-                                            width: 50.sp,
-                                          ),
-                                          const SizedBox(height: 5),
-                                          Text(
-                                            "Lembur",
-                                            style: GoogleFonts.poppins(
-                                                fontSize: 10.sp,
-                                                fontWeight: FontWeight.w500,
-                                                color: MyColorsConst.darkColor),
-                                          )
-                                        ],
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => BlocProvider(
+                                                create: (context) =>
+                                                    PengumumanBloc(),
+                                                child: ListPengumumanPage(),
+                                              )),
+                                    );
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "Lihat Semua",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: MyColorsConst.primaryColor),
                                       ),
-                                    )),
-                                Expanded(
-                                    flex: 1,
-                                    child: InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                DashboardDinasPage(),
-                                          ),
-                                        );
-                                      },
-                                      child: Column(
-                                        children: [
-                                          Image.asset(
-                                            'assets/images/spd_menu.png',
-                                            width: 50.sp,
-                                          ),
-                                          const SizedBox(height: 5),
-                                          Text(
-                                            "Perjalanan Dinas",
-                                            textAlign: TextAlign.center,
-                                            style: GoogleFonts.poppins(
-                                                fontSize: 10.sp,
-                                                fontWeight: FontWeight.w500,
-                                                color: MyColorsConst.darkColor),
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                                Expanded(
-                                    flex: 1,
-                                    child: InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => BlocProvider(
-                                              create: (context) =>
-                                                  ListCutiBloc()
-                                                    ..add(GetListCuti(
-                                                        date: DateTime.now())),
-                                              child: CutiPage(),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      child: Column(
-                                        children: [
-                                          Image.asset(
-                                            'assets/images/cuti_new.png',
-                                            width: 50.sp,
-                                          ),
-                                          const SizedBox(height: 5),
-                                          Text(
-                                            "Cuti",
-                                            style: GoogleFonts.poppins(
-                                                fontSize: 10.sp,
-                                                fontWeight: FontWeight.w500,
-                                                color: MyColorsConst.darkColor),
-                                          )
-                                        ],
-                                      ),
-                                    )),
-                                Expanded(
-                                    flex: 1,
-                                    child: InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => BlocProvider(
-                                              create: (context) => BerkasBloc(),
-                                              child: const DownloadBerkasPage(),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      child: Column(
-                                        children: [
-                                          Image.asset(
-                                            'assets/images/doc.png',
-                                            width: 50.sp,
-                                          ),
-                                          const SizedBox(height: 5),
-                                          Text(
-                                            "SOP Dan Training",
-                                            textAlign: TextAlign.center,
-                                            style: GoogleFonts.poppins(
-                                                fontSize: 10.sp,
-                                                fontWeight: FontWeight.w500,
-                                                color: MyColorsConst.darkColor),
-                                          )
-                                        ],
-                                      ),
-                                    )),
+                                      Icon(
+                                        Icons.keyboard_arrow_right_rounded,
+                                        color: MyColorsConst.primaryColor,
+                                        size: 20.sp,
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 30),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Pengumuman",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w600,
-                                    color: MyColorsConst.darkColor),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => BlocProvider(
-                                              create: (context) =>
-                                                  PengumumanBloc(),
-                                              child: ListPengumumanPage(),
-                                            )),
-                                  );
-                                },
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      "Lihat Semua",
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 12.sp,
-                                          fontWeight: FontWeight.w500,
-                                          color: MyColorsConst.primaryColor),
-                                    ),
-                                    Icon(
-                                      Icons.keyboard_arrow_right_rounded,
-                                      color: MyColorsConst.primaryColor,
-                                      size: 20.sp,
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 5),
-                        BlocBuilder<PengumumanBloc, PengumumanState>(
-                          builder: (context, state) {
-                            var listPengumuman =
-                                context.read<PengumumanBloc>().listpengumuman;
-                            int itemCount = listPengumuman.length > 5
-                                ? 5
-                                : listPengumuman.length;
-                            return Container(
-                              constraints: BoxConstraints(maxHeight: 280.sp),
-                              child: listPengumuman.isNotEmpty
-                                  ? ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      shrinkWrap: true,
-                                      itemCount: itemCount,
-                                      itemBuilder: (context, index) {
-                                        var pengumuman = listPengumuman[index];
-                                        return PengumumanCard(
-                                          imageUrl:
-                                              'assets/images/cuti_bersama.jpg',
-                                          // 'https://server.qqltech.com:7007/uploads/t_artikel/${pengumuman.foto}',
-                                          judul: pengumuman.judul,
-                                          tanggal: "17 Desember 2023",
-                                          // DateFormat('dd MMMM yyyy', 'id_ID')
-                                          //     .format(pengumuman.tanggal!),
-                                          detail: pengumuman.content,
-                                        );
-                                      },
-                                    )
-                                  : Container(
-                                      constraints:
-                                          BoxConstraints(maxHeight: 280.sp),
-                                      child: Center(
-                                        child: Text('Tidak ada pengumuman',
-                                            style: GoogleFonts.poppins(
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w500,
-                                                color:
-                                                    MyColorsConst.darkColor)),
+                          const SizedBox(height: 5),
+                          BlocBuilder<PengumumanBloc, PengumumanState>(
+                            builder: (context, state) {
+                              var listPengumuman =
+                                  context.read<PengumumanBloc>().listpengumuman;
+                              int itemCount = listPengumuman.length > 5
+                                  ? 5
+                                  : listPengumuman.length;
+                              return Container(
+                                constraints: BoxConstraints(maxHeight: 280.sp),
+                                child: listPengumuman.isNotEmpty
+                                    ? ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        shrinkWrap: true,
+                                        itemCount: itemCount,
+                                        itemBuilder: (context, index) {
+                                          var pengumuman =
+                                              listPengumuman[index];
+                                          return PengumumanCard(
+                                            imageUrl:
+                                                'assets/images/cuti_bersama.jpg',
+                                            // 'https://server.qqltech.com:7007/uploads/t_artikel/${pengumuman.foto}',
+                                            judul: pengumuman.judul,
+                                            tanggal: "17 Desember 2023",
+                                            // DateFormat('dd MMMM yyyy', 'id_ID')
+                                            //     .format(pengumuman.tanggal!),
+                                            detail: pengumuman.content,
+                                          );
+                                        },
+                                      )
+                                    : Container(
+                                        constraints: BoxConstraints(
+                                            maxHeight: 280.sp,
+                                            minHeight: 100.sp),
+                                        child: Center(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              SizedBox(height: 30.sp),
+                                              Image.asset(
+                                                "assets/images/box_nodata.png",
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    1 /
+                                                    4,
+                                              ),
+                                              Text('Tidak Ada Pengumuman',
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 14.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: MyColorsConst
+                                                          .darkColor)),
+                                            ],
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                            );
-                          },
-                        ),
-                        const SizedBox(height: 100)
-                      ],
-                    ),
-                  ],
-                );
-              },
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 100)
+                        ],
+                      ),
+                    ],
+                  );
+                },
+              ),
             ),
           ),
         ),

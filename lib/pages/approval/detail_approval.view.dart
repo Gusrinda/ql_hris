@@ -211,24 +211,28 @@ class _DetailApprovalState extends State<DetailApproval> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                margin: EdgeInsets.only(bottom: 10),
-                                padding: EdgeInsets.all(10),
+                                margin: const EdgeInsets.only(bottom: 10),
                                 decoration: BoxDecoration(
                                     border: Border.all(
-                                        color: MyColorsConst.formBorderColor),
+                                        color: _getColorByTrxTable(
+                                                widget.dataApproval.trxTable!)
+                                            .withOpacity(0.2)),
                                     borderRadius: BorderRadius.circular(10)),
                                 height: 100.sp,
                                 width: size.width,
                                 child: Row(
                                   children: [
                                     Container(
+                                      height: 100.sp,
                                       padding: EdgeInsets.all(10),
                                       decoration: BoxDecoration(
-                                          color: _getColorByTrxTable(widget
-                                                      .dataApproval.trxTable ??
-                                                  '')
+                                          color: _getColorByTrxTable(
+                                                  widget.dataApproval.trxTable!)
                                               .withOpacity(0.2),
-                                          shape: BoxShape.circle),
+                                          shape: BoxShape.rectangle,
+                                          borderRadius: const BorderRadius.only(
+                                              topLeft: Radius.circular(9),
+                                              bottomLeft: Radius.circular(9))),
                                       child: Icon(
                                         getIconByTrxTable(
                                             widget.dataApproval.trxTable!),
@@ -237,43 +241,53 @@ class _DetailApprovalState extends State<DetailApproval> {
                                       ),
                                     ),
                                     const SizedBox(width: 10),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "${widget.dataApproval.trxNomor ?? ''}",
-                                          style: GoogleFonts.poppins(
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w600),
+                                    Expanded(
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "${widget.dataApproval.trxNomor ?? ''}",
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                            Text(
+                                              "${widget.dataApproval.creator ?? ''}",
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color:
+                                                      MyColorsConst.darkColor),
+                                            ),
+                                            Text(
+                                              "${widget.dataApproval.trxName ?? ''}",
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: _getColorByTrxTable(
+                                                      widget.dataApproval
+                                                          .trxTable!)),
+                                            ),
+                                            SizedBox(height: 5.sp),
+                                            Text(
+                                              "${_formatDate(widget.dataApproval.trxDate.toString())}",
+                                              style: GoogleFonts.poppins(
+                                                  fontSize: 10.sp,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: MyColorsConst
+                                                      .lightDarkColor),
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          "${widget.dataApproval.creator ?? ''}",
-                                          style: GoogleFonts.poppins(
-                                              fontSize: 12.sp,
-                                              fontWeight: FontWeight.w500,
-                                              color: MyColorsConst.darkColor),
-                                        ),
-                                        Text(
-                                          "${widget.dataApproval.trxName ?? ''}",
-                                          style: GoogleFonts.poppins(
-                                              fontSize: 12.sp,
-                                              fontWeight: FontWeight.w500,
-                                              color: _getColorByTrxTable(widget
-                                                  .dataApproval.trxTable!)),
-                                        ),
-                                        SizedBox(height: 5.sp),
-                                        Text(
-                                          "${_formatDate(widget.dataApproval.trxDate.toString())}",
-                                          style: GoogleFonts.poppins(
-                                              fontSize: 10.sp,
-                                              fontWeight: FontWeight.w400,
-                                              color:
-                                                  MyColorsConst.lightDarkColor),
-                                        ),
-                                      ],
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -315,7 +329,6 @@ class _DetailApprovalState extends State<DetailApproval> {
                                               dataTRX!.tanggal.toString())),
 
                                     // SPD
-
                                     if (dataTRX?.jenisSpdId != null)
                                       buildInfoText('Jenis SPD',
                                           dataTRX!.jenisSpd.toString()),
@@ -390,14 +403,27 @@ class _DetailApprovalState extends State<DetailApproval> {
                                           _formatDate(
                                               dataTRX!.dateTo.toString())),
 
+                                    if (dataTRX?.timeFrom != null)
+                                      buildInfoText('Jam Mulai',
+                                          dataTRX!.timeFrom.toString()),
+
+                                    if (dataTRX?.timeTo != null)
+                                      buildInfoText('Jam Berakhir',
+                                          dataTRX!.timeTo.toString()),
+
                                     // All
-                                    if (dataTRX?.interval != null)
+                                    if (dataTRX?.interval != null &&
+                                        dataTRX?.interval != 0)
                                       buildInfoText('Durasi Hari',
                                           "${dataTRX!.interval.toString()} Hari"),
 
-                                    if (dataTRX?.intervalMin != null)
-                                      buildInfoText('Durasi Waktu',
-                                          convertMinutesToHours(dataTRX!.intervalMin?.toInt() ?? 0)),
+                                    if (dataTRX?.intervalMin != null &&
+                                        dataTRX?.intervalMin != 0)
+                                      buildInfoText(
+                                          'Durasi Waktu',
+                                          convertMinutesToHours(
+                                              dataTRX!.intervalMin?.toInt() ??
+                                                  0)),
 
                                     if (dataTRX?.keterangan != null)
                                       buildInfoText('Keterangan',

@@ -301,7 +301,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                         //               biodata?.bioData?.cutiPanjang
                         //                       ?.toString() ??
                         //                   '-'),
-                                  
+
                         //         ],
                         //       ),
                         //     ),
@@ -471,11 +471,11 @@ class _DataDiriPageState extends State<DataDiriPage> {
                                   //         : '-'),
                                   buildInfoText(
                                       'No. BPJS Kesehatan',
-                                      biodata?.bioData?.bpjsNo?.toString() ??
+                                      biodata?.bioData?.bpjsNoKesehatan?.toString() ??
                                           '-'),
                                   buildInfoText(
                                       'No. BPJS Ketenagakerjaan',
-                                      biodata?.bioData?.bpjsNo?.toString() ??
+                                      biodata?.bioData?.bpjsNoKetenagakerjaan?.toString() ??
                                           '-'),
 
                                   buildInfoText(
@@ -542,6 +542,12 @@ class _DataDiriPageState extends State<DataDiriPage> {
                                       'No. NPWP',
                                       biodata?.bioData?.npwpNo?.toString() ??
                                           '-'),
+                                  buildInfoText(
+                                      'Tanggal Berlaku NPWP',
+                                      biodata?.bioData?.npwpTglBerlaku != null
+                                        ? DateFormat('dd MMMM yyyy')
+                                            .format(biodata!.bioData!.npwpTglBerlaku!)
+                                        : '-'),
                                   // Text(
                                   //   'Foto BPJS',
                                   //   style: GoogleFonts.poppins(

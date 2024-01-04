@@ -49,7 +49,7 @@ class _AddPrestasiPageState extends State<AddPrestasiPage> {
         List<String> years = [];
         int currentYear = DateTime.now().year;
 
-        for (int year = currentYear - 40; year <= currentYear; year++) {
+        for (int year = currentYear; year >= currentYear - 100; year--) {
           years.add(year.toString());
         }
 
@@ -58,31 +58,48 @@ class _AddPrestasiPageState extends State<AddPrestasiPage> {
 
       showModalBottomSheet(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         ),
         context: context,
         builder: (BuildContext context) {
           return Container(
             height: 300,
-            child: ListView.builder(
-              itemCount: _generateYears().length,
-              itemBuilder: (context, index) {
-                final year = _generateYears()[index];
-                return ListTile(
+            child: Column(
+              children: [
+                ListTile(
                   title: Center(
                     child: Text(
-                      year,
+                      "Scroll & Tap pada data untuk memilih Tahun",
                       style: GoogleFonts.poppins(
-                        fontSize: 14,
-                      ),
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w600,
+                          color: MyColorsConst.darkColor),
                     ),
                   ),
-                  onTap: () {
-                    controller.text = year;
-                    Navigator.pop(context);
-                  },
-                );
-              },
+                ),
+                Divider(),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: _generateYears().length,
+                    itemBuilder: (context, index) {
+                      final year = _generateYears()[index];
+                      return ListTile(
+                        title: Center(
+                          child: Text(
+                            year,
+                            style: GoogleFonts.poppins(
+                                fontSize: 14.sp, fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                        onTap: () {
+                          controller.text = year;
+                          Navigator.pop(context);
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           );
         },
@@ -253,18 +270,17 @@ class _AddPrestasiPageState extends State<AddPrestasiPage> {
                                 hintText: 'Pilih Tingkat',
                                 validator: (value) {},
                               ),
-                              FormInputData(
+                              FormDropDownData(
                                 input: '',
                                 onTap: () {
                                   showTahunMenu(
                                       context, widget.tahunController);
                                 },
-                                controller: widget.tahunController,
+                                valueController: widget.tahunController,
                                 labelTag: 'Label-addtahunprestasi',
                                 labelForm: 'Tahun',
                                 formTag: 'Form-addtahunprestasi',
                                 hintText: 'Pilih Tahun',
-                                inputType: TextInputType.number,
                                 validator: (value) {},
                               ),
                               SizedBox(height: 30.sp),

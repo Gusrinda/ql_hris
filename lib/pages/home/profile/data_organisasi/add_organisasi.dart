@@ -64,7 +64,7 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
         List<String> years = [];
         int currentYear = DateTime.now().year;
 
-        for (int year = currentYear - 40; year <= currentYear; year++) {
+        for (int year = currentYear; year >= currentYear - 100; year--) {
           years.add(year.toString());
         }
 
@@ -73,31 +73,48 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
 
       showModalBottomSheet(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         ),
         context: context,
         builder: (BuildContext context) {
           return Container(
             height: 300,
-            child: ListView.builder(
-              itemCount: _generateYears().length,
-              itemBuilder: (context, index) {
-                final year = _generateYears()[index];
-                return ListTile(
+            child: Column(
+              children: [
+                ListTile(
                   title: Center(
                     child: Text(
-                      year,
+                      "Scroll & Tap pada data untuk memilih Tahun",
                       style: GoogleFonts.poppins(
-                        fontSize: 14,
-                      ),
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w600,
+                          color: MyColorsConst.darkColor),
                     ),
                   ),
-                  onTap: () {
-                    controller.text = year;
-                    Navigator.pop(context);
-                  },
-                );
-              },
+                ),
+                Divider(),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: _generateYears().length,
+                    itemBuilder: (context, index) {
+                      final year = _generateYears()[index];
+                      return ListTile(
+                        title: Center(
+                          child: Text(
+                            year,
+                            style: GoogleFonts.poppins(
+                                fontSize: 14.sp, fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                        onTap: () {
+                          controller.text = year;
+                          Navigator.pop(context);
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           );
         },
@@ -287,18 +304,17 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
                                 controller: widget.namaOrganisasiController,
                                 validator: (value) {},
                               ),
-                              FormInputData(
+                              FormDropDownData(
                                 input: '',
                                 onTap: () {
                                   showTahunMenu(context,
                                       widget.tahunOrganisasiController);
                                 },
-                                controller: widget.tahunOrganisasiController,
+                                valueController: widget.tahunOrganisasiController,
                                 labelTag: 'Label-addtahunorganisasi',
                                 labelForm: 'Tahun',
                                 formTag: 'Form-addtahunorganisasi',
                                 hintText: 'Pilih Tahun',
-                                inputType: TextInputType.number,
                                 validator: (value) {},
                               ),
                               FormDropDownData(
