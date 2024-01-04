@@ -49,10 +49,16 @@ class DataPengumuman with _$DataPengumuman {
         int? id,
         @JsonKey(name: "judul")
         String? judul,
+        @JsonKey(name: "thumb")
+        String? thumb,
+        @JsonKey(name: "slug")
+        dynamic slug,
         @JsonKey(name: "tag")
-        dynamic tag,
+        String? tag,
         @JsonKey(name: "content")
         String? content,
+        @JsonKey(name: "is_active")
+        bool? isActive,
         @JsonKey(name: "creator_id")
         dynamic creatorId,
         @JsonKey(name: "last_editor_id")

@@ -5,12 +5,18 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 
 class PengumumanCard extends StatelessWidget {
   const PengumumanCard(
-      {super.key, this.imageUrl, this.judul, this.tanggal, this.detail});
+      {super.key,
+      this.imageUrl,
+      this.judul,
+      this.tanggal,
+      this.detail,
+      this.tag});
 
   final String? imageUrl;
   final String? tanggal;
   final String? judul;
   final String? detail;
+  final String? tag;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +42,7 @@ class PengumumanCard extends StatelessWidget {
                   topLeft: Radius.circular(5), topRight: Radius.circular(5)),
               child: AspectRatio(
                   aspectRatio: 16 / 9.sp,
-                  child: Image.asset(
+                  child: Image.network(
                     imageUrl ?? '',
                     fit: BoxFit.cover,
                   )),
@@ -54,8 +60,18 @@ class PengumumanCard extends StatelessWidget {
                 ),
                 Text(
                   tanggal ?? '',
-                  style:
-                      GoogleFonts.poppins(fontSize: 8.sp, color: Colors.grey),
+                  style: GoogleFonts.poppins(
+                    fontSize: 8.sp,
+                    color: Colors.grey,
+                  ),
+                ),
+                const Spacer(),
+                Text(
+                  tag ?? '',
+                  style: GoogleFonts.poppins(
+                    fontSize: 8.sp,
+                    color: Colors.grey,
+                  ),
                 ),
               ],
             ),
@@ -143,7 +159,7 @@ class PengumumanCard extends StatelessWidget {
                     ),
                     child: AspectRatio(
                       aspectRatio: 16 / 9.sp,
-                      child: Image.asset(
+                      child: Image.network(
                         imageUrl ?? '',
                         fit: BoxFit.cover,
                       ),
@@ -162,6 +178,14 @@ class PengumumanCard extends StatelessWidget {
                       ),
                       Text(
                         tanggal ?? '',
+                        style: GoogleFonts.poppins(
+                          fontSize: 10.sp,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      const Spacer(),
+                      Text(
+                        tag ?? '',
                         style: GoogleFonts.poppins(
                           fontSize: 10.sp,
                           color: Colors.grey,
