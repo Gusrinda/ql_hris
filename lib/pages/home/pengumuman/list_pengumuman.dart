@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
@@ -137,13 +138,18 @@ class _ListPengumumanPageState extends State<ListPengumumanPage> {
                                           padding:
                                               EdgeInsets.only(bottom: 15.sp),
                                           child: PengumumanCard(
-                                            imageUrl: 'assets/images/cuti_bersama.jpg',
-                                                // 'https://server.qqltech.com:7007/uploads/t_artikel/${pengumuman.foto}',
+                                            imageUrl: pengumuman.thumb,
                                             judul: pengumuman.judul,
-                                            tanggal: "17 Desember 2023",
-                                            // DateFormat(
-                                            //         'dd MMMM yyyy', 'id_ID')
-                                            //     .format(pengumuman.tanggal!),
+                                            tanggal: DateFormat(
+                                              "dd MMMM yyyy",
+                                              "id_ID",
+                                            ).format(
+                                              DateFormat(
+                                                "dd/MM/yyyy HH:mm",
+                                              ).parse(
+                                                  pengumuman.createdAt ?? '-'),
+                                            ),
+                                            tag: '#${pengumuman.tag}',
                                             detail: pengumuman.content,
                                           ),
                                         );

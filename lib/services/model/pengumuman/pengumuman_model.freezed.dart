@@ -431,10 +431,16 @@ mixin _$DataPengumuman {
   int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: "judul")
   String? get judul => throw _privateConstructorUsedError;
+  @JsonKey(name: "thumb")
+  String? get thumb => throw _privateConstructorUsedError;
+  @JsonKey(name: "slug")
+  dynamic get slug => throw _privateConstructorUsedError;
   @JsonKey(name: "tag")
-  dynamic get tag => throw _privateConstructorUsedError;
+  String? get tag => throw _privateConstructorUsedError;
   @JsonKey(name: "content")
   String? get content => throw _privateConstructorUsedError;
+  @JsonKey(name: "is_active")
+  bool? get isActive => throw _privateConstructorUsedError;
   @JsonKey(name: "creator_id")
   dynamic get creatorId => throw _privateConstructorUsedError;
   @JsonKey(name: "last_editor_id")
@@ -463,8 +469,11 @@ abstract class $DataPengumumanCopyWith<$Res> {
       @JsonKey(name: "meta_create") bool? metaCreate,
       @JsonKey(name: "id") int? id,
       @JsonKey(name: "judul") String? judul,
-      @JsonKey(name: "tag") dynamic tag,
+      @JsonKey(name: "thumb") String? thumb,
+      @JsonKey(name: "slug") dynamic slug,
+      @JsonKey(name: "tag") String? tag,
       @JsonKey(name: "content") String? content,
+      @JsonKey(name: "is_active") bool? isActive,
       @JsonKey(name: "creator_id") dynamic creatorId,
       @JsonKey(name: "last_editor_id") dynamic lastEditorId,
       @JsonKey(name: "created_at") String? createdAt,
@@ -490,8 +499,11 @@ class _$DataPengumumanCopyWithImpl<$Res, $Val extends DataPengumuman>
     Object? metaCreate = freezed,
     Object? id = freezed,
     Object? judul = freezed,
+    Object? thumb = freezed,
+    Object? slug = freezed,
     Object? tag = freezed,
     Object? content = freezed,
+    Object? isActive = freezed,
     Object? creatorId = freezed,
     Object? lastEditorId = freezed,
     Object? createdAt = freezed,
@@ -522,14 +534,26 @@ class _$DataPengumumanCopyWithImpl<$Res, $Val extends DataPengumuman>
           ? _value.judul
           : judul // ignore: cast_nullable_to_non_nullable
               as String?,
+      thumb: freezed == thumb
+          ? _value.thumb
+          : thumb // ignore: cast_nullable_to_non_nullable
+              as String?,
+      slug: freezed == slug
+          ? _value.slug
+          : slug // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       tag: freezed == tag
           ? _value.tag
           : tag // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String?,
+      isActive: freezed == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool?,
       creatorId: freezed == creatorId
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
@@ -565,8 +589,11 @@ abstract class _$$DataPengumumanImplCopyWith<$Res>
       @JsonKey(name: "meta_create") bool? metaCreate,
       @JsonKey(name: "id") int? id,
       @JsonKey(name: "judul") String? judul,
-      @JsonKey(name: "tag") dynamic tag,
+      @JsonKey(name: "thumb") String? thumb,
+      @JsonKey(name: "slug") dynamic slug,
+      @JsonKey(name: "tag") String? tag,
       @JsonKey(name: "content") String? content,
+      @JsonKey(name: "is_active") bool? isActive,
       @JsonKey(name: "creator_id") dynamic creatorId,
       @JsonKey(name: "last_editor_id") dynamic lastEditorId,
       @JsonKey(name: "created_at") String? createdAt,
@@ -590,8 +617,11 @@ class __$$DataPengumumanImplCopyWithImpl<$Res>
     Object? metaCreate = freezed,
     Object? id = freezed,
     Object? judul = freezed,
+    Object? thumb = freezed,
+    Object? slug = freezed,
     Object? tag = freezed,
     Object? content = freezed,
+    Object? isActive = freezed,
     Object? creatorId = freezed,
     Object? lastEditorId = freezed,
     Object? createdAt = freezed,
@@ -622,14 +652,26 @@ class __$$DataPengumumanImplCopyWithImpl<$Res>
           ? _value.judul
           : judul // ignore: cast_nullable_to_non_nullable
               as String?,
+      thumb: freezed == thumb
+          ? _value.thumb
+          : thumb // ignore: cast_nullable_to_non_nullable
+              as String?,
+      slug: freezed == slug
+          ? _value.slug
+          : slug // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       tag: freezed == tag
           ? _value.tag
           : tag // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String?,
+      isActive: freezed == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool?,
       creatorId: freezed == creatorId
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
@@ -660,8 +702,11 @@ class _$DataPengumumanImpl implements _DataPengumuman {
       @JsonKey(name: "meta_create") this.metaCreate,
       @JsonKey(name: "id") this.id,
       @JsonKey(name: "judul") this.judul,
+      @JsonKey(name: "thumb") this.thumb,
+      @JsonKey(name: "slug") this.slug,
       @JsonKey(name: "tag") this.tag,
       @JsonKey(name: "content") this.content,
+      @JsonKey(name: "is_active") this.isActive,
       @JsonKey(name: "creator_id") this.creatorId,
       @JsonKey(name: "last_editor_id") this.lastEditorId,
       @JsonKey(name: "created_at") this.createdAt,
@@ -689,11 +734,20 @@ class _$DataPengumumanImpl implements _DataPengumuman {
   @JsonKey(name: "judul")
   final String? judul;
   @override
+  @JsonKey(name: "thumb")
+  final String? thumb;
+  @override
+  @JsonKey(name: "slug")
+  final dynamic slug;
+  @override
   @JsonKey(name: "tag")
-  final dynamic tag;
+  final String? tag;
   @override
   @JsonKey(name: "content")
   final String? content;
+  @override
+  @JsonKey(name: "is_active")
+  final bool? isActive;
   @override
   @JsonKey(name: "creator_id")
   final dynamic creatorId;
@@ -709,7 +763,7 @@ class _$DataPengumumanImpl implements _DataPengumuman {
 
   @override
   String toString() {
-    return 'DataPengumuman(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, judul: $judul, tag: $tag, content: $content, creatorId: $creatorId, lastEditorId: $lastEditorId, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'DataPengumuman(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, judul: $judul, thumb: $thumb, slug: $slug, tag: $tag, content: $content, isActive: $isActive, creatorId: $creatorId, lastEditorId: $lastEditorId, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -727,8 +781,12 @@ class _$DataPengumumanImpl implements _DataPengumuman {
                 other.metaCreate == metaCreate) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.judul, judul) || other.judul == judul) &&
-            const DeepCollectionEquality().equals(other.tag, tag) &&
+            (identical(other.thumb, thumb) || other.thumb == thumb) &&
+            const DeepCollectionEquality().equals(other.slug, slug) &&
+            (identical(other.tag, tag) || other.tag == tag) &&
             (identical(other.content, content) || other.content == content) &&
+            (identical(other.isActive, isActive) ||
+                other.isActive == isActive) &&
             const DeepCollectionEquality().equals(other.creatorId, creatorId) &&
             const DeepCollectionEquality()
                 .equals(other.lastEditorId, lastEditorId) &&
@@ -748,8 +806,11 @@ class _$DataPengumumanImpl implements _DataPengumuman {
       metaCreate,
       id,
       judul,
-      const DeepCollectionEquality().hash(tag),
+      thumb,
+      const DeepCollectionEquality().hash(slug),
+      tag,
       content,
+      isActive,
       const DeepCollectionEquality().hash(creatorId),
       const DeepCollectionEquality().hash(lastEditorId),
       createdAt,
@@ -778,8 +839,11 @@ abstract class _DataPengumuman implements DataPengumuman {
           @JsonKey(name: "meta_create") final bool? metaCreate,
           @JsonKey(name: "id") final int? id,
           @JsonKey(name: "judul") final String? judul,
-          @JsonKey(name: "tag") final dynamic tag,
+          @JsonKey(name: "thumb") final String? thumb,
+          @JsonKey(name: "slug") final dynamic slug,
+          @JsonKey(name: "tag") final String? tag,
           @JsonKey(name: "content") final String? content,
+          @JsonKey(name: "is_active") final bool? isActive,
           @JsonKey(name: "creator_id") final dynamic creatorId,
           @JsonKey(name: "last_editor_id") final dynamic lastEditorId,
           @JsonKey(name: "created_at") final String? createdAt,
@@ -808,11 +872,20 @@ abstract class _DataPengumuman implements DataPengumuman {
   @JsonKey(name: "judul")
   String? get judul;
   @override
+  @JsonKey(name: "thumb")
+  String? get thumb;
+  @override
+  @JsonKey(name: "slug")
+  dynamic get slug;
+  @override
   @JsonKey(name: "tag")
-  dynamic get tag;
+  String? get tag;
   @override
   @JsonKey(name: "content")
   String? get content;
+  @override
+  @JsonKey(name: "is_active")
+  bool? get isActive;
   @override
   @JsonKey(name: "creator_id")
   dynamic get creatorId;
