@@ -23,7 +23,7 @@ class DetailApproval extends StatefulWidget {
       required this.reloadDataCallback});
   final VoidCallback reloadDataCallback;
 
-  final DataApproval dataApproval;
+  final DataApproval? dataApproval;
 
   @override
   State<DetailApproval> createState() => _DetailApprovalState();
@@ -36,11 +36,11 @@ class _DetailApprovalState extends State<DetailApproval> {
 
   @override
   void initState() {
-    print("INI APPROVAL ID: ${widget.dataApproval.id}");
+    print("INI APPROVAL ID: ${widget.dataApproval!.id}");
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ApprovalBloc>().add(
-          GetDetailApproval(approvalID: widget.dataApproval.id.toString()));
+          GetDetailApproval(approvalID: widget.dataApproval!.id.toString()));
     });
   }
 
@@ -72,6 +72,25 @@ class _DetailApprovalState extends State<DetailApproval> {
         default:
           return CupertinoIcons.arrow_2_circlepath;
       }
+    }
+
+    String _formatDateTime(String date) {
+      if (date != null && date.isNotEmpty) {
+        final customFormat = DateFormat('dd/MM/yyyy HH:mm');
+        try {
+          final parsedDate = customFormat.parse(date);
+
+          final formattedTime = DateFormat.Hm().format(parsedDate);
+          final dayOfWeek = DateFormat('EEEE', 'id_ID').format(parsedDate);
+          final formattedDate = DateFormat.yMMMMd('id_ID').format(parsedDate);
+
+          return 'Pukul $formattedTime, $dayOfWeek, $formattedDate';
+        } catch (e) {
+          print('Error parsing date: $e');
+          return '';
+        }
+      }
+      return '';
     }
 
     String _formatDate(String date) {
@@ -215,7 +234,7 @@ class _DetailApprovalState extends State<DetailApproval> {
                                 decoration: BoxDecoration(
                                     border: Border.all(
                                         color: _getColorByTrxTable(
-                                                widget.dataApproval.trxTable!)
+                                                widget.dataApproval!.trxTable!)
                                             .withOpacity(0.2)),
                                     borderRadius: BorderRadius.circular(10)),
                                 height: 100.sp,
@@ -226,8 +245,8 @@ class _DetailApprovalState extends State<DetailApproval> {
                                       height: 100.sp,
                                       padding: EdgeInsets.all(10),
                                       decoration: BoxDecoration(
-                                          color: _getColorByTrxTable(
-                                                  widget.dataApproval.trxTable!)
+                                          color: _getColorByTrxTable(widget
+                                                  .dataApproval!.trxTable!)
                                               .withOpacity(0.2),
                                           shape: BoxShape.rectangle,
                                           borderRadius: const BorderRadius.only(
@@ -235,9 +254,9 @@ class _DetailApprovalState extends State<DetailApproval> {
                                               bottomLeft: Radius.circular(9))),
                                       child: Icon(
                                         getIconByTrxTable(
-                                            widget.dataApproval.trxTable!),
+                                            widget.dataApproval!.trxTable!),
                                         color: _getColorByTrxTable(
-                                            widget.dataApproval.trxTable!),
+                                            widget.dataApproval!.trxTable!),
                                       ),
                                     ),
                                     const SizedBox(width: 10),
@@ -252,13 +271,13 @@ class _DetailApprovalState extends State<DetailApproval> {
                                               MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              "${widget.dataApproval.trxNomor ?? ''}",
+                                              "${widget.dataApproval!.trxNomor ?? ''}",
                                               style: GoogleFonts.poppins(
                                                   fontSize: 14.sp,
                                                   fontWeight: FontWeight.w600),
                                             ),
                                             Text(
-                                              "${widget.dataApproval.creator ?? ''}",
+                                              "${widget.dataApproval!.creator ?? ''}",
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                               style: GoogleFonts.poppins(
@@ -268,17 +287,20 @@ class _DetailApprovalState extends State<DetailApproval> {
                                                       MyColorsConst.darkColor),
                                             ),
                                             Text(
-                                              "${widget.dataApproval.trxName ?? ''}",
+                                              "${widget.dataApproval!.trxName ?? ''}",
                                               style: GoogleFonts.poppins(
                                                   fontSize: 12.sp,
                                                   fontWeight: FontWeight.w500,
                                                   color: _getColorByTrxTable(
-                                                      widget.dataApproval
+                                                      widget.dataApproval!
                                                           .trxTable!)),
                                             ),
                                             SizedBox(height: 5.sp),
                                             Text(
-                                              "${_formatDate(widget.dataApproval.trxDate.toString())}",
+                                              _formatDateTime(widget
+                                                      .dataApproval?.createdAt
+                                                      .toString() ??
+                                                  "01/01/2024 08:00"),
                                               style: GoogleFonts.poppins(
                                                   fontSize: 10.sp,
                                                   fontWeight: FontWeight.w400,
@@ -314,13 +336,21 @@ class _DetailApprovalState extends State<DetailApproval> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    if (widget.dataApproval?.createdAt != null)
+                                      buildInfoText(
+                                          'Diajukan Pada',
+                                          _formatDateTime(widget
+                                                  .dataApproval?.createdAt
+                                                  .toString() ??
+                                              "01/01/2024 08:00")),
+
                                     if (dataTRX?.nomor != null)
                                       buildInfoText('Nomor Pengajuan',
                                           dataTRX!.nomor.toString()),
 
-                                    if (widget.dataApproval.creator != null)
+                                    if (widget.dataApproval!.creator != null)
                                       buildInfoText('Nama Karyawan',
-                                          widget.dataApproval.creator ?? '-'),
+                                          widget.dataApproval!.creator ?? '-'),
 
                                     if (dataTRX?.tanggal != null)
                                       buildInfoText(
@@ -478,7 +508,7 @@ class _DetailApprovalState extends State<DetailApproval> {
                                                   .read<ApprovalBloc>()
                                                   .add(SendApproval(
                                                       approvalID: widget
-                                                          .dataApproval.id
+                                                          .dataApproval!.id
                                                           .toString(),
                                                       typeApproval: "APPROVED",
                                                       note: catatanController
@@ -487,35 +517,40 @@ class _DetailApprovalState extends State<DetailApproval> {
                                           );
                                         }),
                               SizedBox(height: 10.sp),
-                              // TextButtonCustomV1(
-                              //     textSize: 13.sp,
-                              //     text: "REVISE",
-                              //     height: 50.sp,
-                              //     backgroundColor: Colors.orange.shade800,
-                              //     textColor: Colors.white,
-                              //     onPressed: state is DetailApprovalLoading
-                              //         ? null
-                              //         : () {
-                              //             showDialog(
-                              //               context: context,
-                              //               builder: (_) => DialogCustom(
-                              //                 state: DialogCustomItem.confirm,
-                              //                 message:
-                              //                     "Apakah Benar Anda Merevisi Pengajuan Ini?",
-                              //                 durationInSec: 5,
-                              //                 onContinue: () => context
-                              //                     .read<ApprovalBloc>()
-                              //                     .add(SendApproval(
-                              //                         approvalID: widget
-                              //                             .dataApproval.id
-                              //                             .toString(),
-                              //                         typeApproval: "REVISED",
-                              //                         note: catatanController
-                              //                             .text)),
-                              //               ),
-                              //             );
-                              //           }),
-                              // SizedBox(height: 10.sp),
+                              if (widget.dataApproval!.trxTable! !=
+                                      't_lembur' &&
+                                  widget.dataApproval!.trxTable! !=
+                                      't_rpd') ...{
+                                TextButtonCustomV1(
+                                    textSize: 13.sp,
+                                    text: "REVISE",
+                                    height: 50.sp,
+                                    backgroundColor: Colors.orange.shade800,
+                                    textColor: Colors.white,
+                                    onPressed: state is DetailApprovalLoading
+                                        ? null
+                                        : () {
+                                            showDialog(
+                                              context: context,
+                                              builder: (_) => DialogCustom(
+                                                state: DialogCustomItem.confirm,
+                                                message:
+                                                    "Apakah Benar Anda Merevisi Pengajuan Ini?",
+                                                durationInSec: 5,
+                                                onContinue: () => context
+                                                    .read<ApprovalBloc>()
+                                                    .add(SendApproval(
+                                                        approvalID: widget
+                                                            .dataApproval!.id
+                                                            .toString(),
+                                                        typeApproval: "REVISED",
+                                                        note: catatanController
+                                                            .text)),
+                                              ),
+                                            );
+                                          }),
+                                SizedBox(height: 10.sp),
+                              },
                               TextButtonCustomV1(
                                   textSize: 13.sp,
                                   text: "REJECT",
@@ -536,7 +571,7 @@ class _DetailApprovalState extends State<DetailApproval> {
                                                   .read<ApprovalBloc>()
                                                   .add(SendApproval(
                                                       approvalID: widget
-                                                          .dataApproval.id
+                                                          .dataApproval!.id
                                                           .toString(),
                                                       typeApproval: "REJECTED",
                                                       note: catatanController

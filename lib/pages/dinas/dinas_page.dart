@@ -547,7 +547,7 @@ class ListViewDinas extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "Surat Perjalanan Dinas",
+                        data.nomor ?? "-",
                         style: GoogleFonts.poppins(
                           color: MyColorsConst.primaryColor,
                           fontSize: 14,
@@ -654,7 +654,7 @@ class ListViewDinas extends StatelessWidget {
               right: 0,
               child: Container(
                 height: 30,
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(10.sp),
@@ -667,8 +667,8 @@ class ListViewDinas extends StatelessWidget {
                     mapStatusToString(currentStatus),
                     style: GoogleFonts.poppins(
                       color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),

@@ -9,8 +9,8 @@ abstract class AddBahasaEvent extends Equatable {
 
 class AddDatabahasaSubmited extends AddBahasaEvent {
   String bhsDikuasai;
-  int nilaiLisan;
-  int nilaiTertulis;
+  String nilaiLisan;
+  String nilaiTertulis;
 
   AddDatabahasaSubmited({
     required this.bhsDikuasai,

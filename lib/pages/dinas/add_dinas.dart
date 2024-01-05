@@ -399,7 +399,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
 
           widget.valueDirektoratController.text =
               selectedTemplateSpdValue.mDirNama?.toString() ?? '';
-          widget.idDirektoratController!.text =
+          widget.idDirektoratController.text =
               selectedTemplateSpdValue.mDirId?.toString() ?? '';
 
           // widget.valueJenisSpdController.text =
@@ -601,11 +601,11 @@ class _AddDinasPageState extends State<AddDinasPage> {
 
         if (selectedPic != null) {
           widget.idPicController.text = selectedPic.id?.toString() ?? '';
-          widget.valuePicController.text = selectedPic.name?.toString() ?? '';
+          widget.valuePicController.text = selectedPic.mKaryNamaLengkap?.toString() ?? '';
 
           setState(() {
-            this.selectedPic = selectedPic.name;
-            print(selectedPic.name);
+            this.selectedPic = selectedPic.mKaryNamaLengkap;
+            print(selectedPic.mKaryNamaLengkap);
             print("Selected ID Kota: ${selectedPic.id}");
           });
         }
@@ -1173,7 +1173,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
                                       ),
                                       Row(
                                         children: [
-                                          FormTextLabel(
+                                          const FormTextLabel(
                                             label:
                                                 'Menggunakan Kendaraan Dinas',
                                             labelColor: MyColorsConst.darkColor,

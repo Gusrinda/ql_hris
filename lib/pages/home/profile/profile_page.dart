@@ -141,51 +141,50 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: SingleChildScrollView(
-            child: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    MyColorsConst.primaryDarkColor,
-                    MyColorsConst.primaryColor,
-                  ],
-                  stops: [0.0, 0.1],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-              ),
-              child: Column(
-                children: [
-                  SizedBox(height: 40.sp),
-                  Container(
-                    padding: const EdgeInsets.all(15),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Profile",
-                      style: GoogleFonts.poppins(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
+            child: BlocBuilder<ProfileBloc, ProfileState>(
+              builder: (context, state) {
+                data = state is GetDataProfileSuccess ? state : null;
+                return Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        MyColorsConst.primaryDarkColor,
+                        MyColorsConst.primaryColor,
+                      ],
+                      stops: [0.0, 0.1],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
                     ),
                   ),
-                  Container(
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 40.sp),
+                      Container(
+                        padding: const EdgeInsets.all(15),
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Profile",
+                          style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
-                      color: Colors.white,
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(16.0.sp),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          BlocBuilder<ProfileBloc, ProfileState>(
-                            builder: (context, state) {
-                              data =
-                                  state is GetDataProfileSuccess ? state : null;
-                              return Row(
+                      Container(
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                          ),
+                          color: Colors.white,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(16.0.sp),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
                                 children: [
                                   ImageFormCustomV2(
                                     imagePath: data?.imagePath,
@@ -275,177 +274,196 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ],
                                   ),
                                 ],
-                              );
-                            },
-                          ),
-                          const SizedBox(height: 25),
-                          Text(
-                            'Data Profil',
-                            style: GoogleFonts.poppins(
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
-                              color: MyColorsConst.lightDarkColor,
-                            ),
-                          ),
-                          Divider(
-                            color: MyColorsConst.primaryColor.withOpacity(0.1),
-                            thickness: 1,
-                          ),
-                          TextFormCustomV2(
-                            labelText: "Biodata",
-                            color: MyColorsConst.whiteColor,
-                            icon: CupertinoIcons.person_fill,
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => BlocProvider(
-                                    create: (context) => BiodataBloc(),
-                                    child: DataDiriPage(),
-                                  ),
+                              ),
+                              const SizedBox(height: 25),
+                              Text(
+                                'Data Profil',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: MyColorsConst.lightDarkColor,
                                 ),
-                              );
-                            },
-                          ),
-                          TextFormCustomV2(
-                            labelText: "Data Pendidikan",
-                            color: MyColorsConst.whiteColor,
-                            icon: Icons.school_rounded,
-                            onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed(DataPendidikanPage.routeName);
-                            },
-                          ),
-                          TextFormCustomV2(
-                            labelText: "Data Keluarga",
-                            color: MyColorsConst.whiteColor,
-                            icon: Icons.groups_rounded,
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => BlocProvider(
-                                    create: (context) => ListKeluargaBloc(),
-                                    child: DataKeluargaPage(),
-                                  ),
+                              ),
+                              Divider(
+                                color:
+                                    MyColorsConst.primaryColor.withOpacity(0.1),
+                                thickness: 1,
+                              ),
+                              TextFormCustomV2(
+                                labelText: "Biodata",
+                                color: MyColorsConst.whiteColor,
+                                icon: CupertinoIcons.person_fill,
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => BlocProvider(
+                                        create: (context) => BiodataBloc(),
+                                        child: DataDiriPage(),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                              TextFormCustomV2(
+                                labelText: "Data Pendidikan",
+                                color: MyColorsConst.whiteColor,
+                                icon: Icons.school_rounded,
+                                onTap: () {
+                                  Navigator.of(context)
+                                      .pushNamed(DataPendidikanPage.routeName);
+                                },
+                              ),
+                              TextFormCustomV2(
+                                labelText: "Data Keluarga",
+                                color: MyColorsConst.whiteColor,
+                                icon: Icons.groups_rounded,
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => BlocProvider(
+                                        create: (context) => ListKeluargaBloc(),
+                                        child: DataKeluargaPage(),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                              TextFormCustomV2(
+                                labelText: "Data Pelatihan",
+                                color: MyColorsConst.whiteColor,
+                                icon: Icons.article_rounded,
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => BlocProvider(
+                                        create: (context) =>
+                                            ListPelatihanBloc(),
+                                        child: DataPelatihanPage(),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                              TextFormCustomV2(
+                                labelText: "Data Prestasi",
+                                color: MyColorsConst.whiteColor,
+                                icon: Icons.workspace_premium_rounded,
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => BlocProvider(
+                                        create: (context) => ListPrestasiBloc(),
+                                        child: DataPrestasiPage(),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                              TextFormCustomV2(
+                                labelText: "Data Organisasi",
+                                color: MyColorsConst.whiteColor,
+                                icon: Icons.language,
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => BlocProvider(
+                                        create: (context) =>
+                                            ListOrganisasiBloc(),
+                                        child: DataOrganisasiPage(),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                              TextFormCustomV2(
+                                labelText: "Data Bahasa",
+                                color: MyColorsConst.whiteColor,
+                                icon: Icons.translate_rounded,
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => BlocProvider(
+                                        create: (context) => ListBahasaBloc(),
+                                        child: DataBahasaPage(),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                              TextFormCustomV2(
+                                labelText: "Data Pengalaman Kerja",
+                                color: MyColorsConst.whiteColor,
+                                icon: CupertinoIcons.graph_square_fill,
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => BlocProvider(
+                                        create: (context) =>
+                                            ListPengalamanBloc(),
+                                        child: DataPengalamanKerjaPage(),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                              const SizedBox(height: 25),
+                              Text(
+                                'Akun',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: MyColorsConst.lightDarkColor,
                                 ),
-                              );
-                            },
+                              ),
+                              Divider(
+                                color:
+                                    MyColorsConst.primaryColor.withOpacity(0.1),
+                                thickness: 1,
+                              ),
+                              TextFormCustomV2(
+                                labelText: "Ganti Kata Sandi",
+                                color: MyColorsConst.whiteColor,
+                                icon: Icons.lock,
+                                editable: true,
+                                onTap: () {
+                                  Navigator.of(context)
+                                      .pushNamed(ChangePasswordPage.routeName);
+                                },
+                              ),
+                              TextFormCustomV2(
+                                  labelText: "Logout",
+                                  color: MyColorsConst.whiteColor,
+                                  icon: Icons.logout_outlined,
+                                  onTap: state is ProfileLoading
+                                      ? null
+                                      : () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (_) => DialogCustom(
+                                              state: DialogCustomItem.confirm,
+                                              message:
+                                                  "Yakin Ingin Logout?",
+                                              durationInSec: 5,
+                                              onContinue: () => context
+                                                  .read<ProfileBloc>()
+                                                  .add(LogoutProfile(
+                                                    username:
+                                                        usernameController.text,
+                                                    password:
+                                                        passwordController.text,
+                                                  )),
+                                            ),
+                                          );
+                                        }),
+                              SizedBox(height: 100.sp)
+                            ],
                           ),
-                          TextFormCustomV2(
-                            labelText: "Data Pelatihan",
-                            color: MyColorsConst.whiteColor,
-                            icon: Icons.article_rounded,
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => BlocProvider(
-                                    create: (context) => ListPelatihanBloc(),
-                                    child: DataPelatihanPage(),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                          TextFormCustomV2(
-                            labelText: "Data Prestasi",
-                            color: MyColorsConst.whiteColor,
-                            icon: Icons.workspace_premium_rounded,
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => BlocProvider(
-                                    create: (context) => ListPrestasiBloc(),
-                                    child: DataPrestasiPage(),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                          TextFormCustomV2(
-                            labelText: "Data Organisasi",
-                            color: MyColorsConst.whiteColor,
-                            icon: Icons.language,
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => BlocProvider(
-                                    create: (context) => ListOrganisasiBloc(),
-                                    child: DataOrganisasiPage(),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                          TextFormCustomV2(
-                            labelText: "Data Bahasa",
-                            color: MyColorsConst.whiteColor,
-                            icon: Icons.translate_rounded,
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => BlocProvider(
-                                    create: (context) => ListBahasaBloc(),
-                                    child: DataBahasaPage(),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                          TextFormCustomV2(
-                            labelText: "Data Pengalaman Kerja",
-                            color: MyColorsConst.whiteColor,
-                            icon: CupertinoIcons.graph_square_fill,
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => BlocProvider(
-                                    create: (context) => ListPengalamanBloc(),
-                                    child: DataPengalamanKerjaPage(),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                          const SizedBox(height: 25),
-                          Text(
-                            'Akun',
-                            style: GoogleFonts.poppins(
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w500,
-                              color: MyColorsConst.lightDarkColor,
-                            ),
-                          ),
-                          Divider(
-                            color: MyColorsConst.primaryColor.withOpacity(0.1),
-                            thickness: 1,
-                          ),
-                          TextFormCustomV2(
-                            labelText: "Ganti Kata Sandi",
-                            color: MyColorsConst.whiteColor,
-                            icon: Icons.lock,
-                            editable: true,
-                            onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed(ChangePasswordPage.routeName);
-                            },
-                          ),
-                          TextFormCustomV2(
-                            labelText: "Logout",
-                            color: MyColorsConst.whiteColor,
-                            icon: Icons.logout_outlined,
-                            onTap: () {
-                              context.read<ProfileBloc>().add(LogoutProfile(
-                                    username: usernameController.text,
-                                    password: passwordController.text,
-                                  ));
-                            },
-                          ),
-                          SizedBox(height: 100.sp)
-                        ],
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
+                );
+              },
             ),
           ),
         ),

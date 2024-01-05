@@ -292,7 +292,6 @@ class _HistoryPageState extends State<HistoryPage> {
                                           data.status as String;
                                       Color currentColor =
                                           getColorFromStatus(currentStatus);
-
                                       return Padding(
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 20.sp),
@@ -303,7 +302,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                               children: [
                                                 Container(
                                                   margin: const EdgeInsets.only(
-                                                      bottom: 7),
+                                                      bottom: 10),
                                                   decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -454,7 +453,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                                     height: 30,
                                                     padding:
                                                         EdgeInsets.symmetric(
-                                                            horizontal: 6.sp,
+                                                            horizontal: 10.sp,
                                                             vertical: 3.sp),
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -475,9 +474,9 @@ class _HistoryPageState extends State<HistoryPage> {
                                                         style:
                                                             GoogleFonts.poppins(
                                                           color: Colors.white,
-                                                          fontSize: 12,
+                                                          fontSize: 10.sp,
                                                           fontWeight:
-                                                              FontWeight.w500,
+                                                              FontWeight.w600,
                                                         ),
                                                       ),
                                                     ),

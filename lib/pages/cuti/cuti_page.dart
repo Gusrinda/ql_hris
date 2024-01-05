@@ -295,7 +295,6 @@ class _CutiPageState extends State<CutiPage> {
                                       });
                                       print(
                                           "Selected month: ${selectedMonth} ${selectedYear}");
-
                                       DateTime newDate = DateTime(
                                         selectedYear?.year ??
                                             DateTime.now().year,
@@ -537,9 +536,20 @@ class ListViewCuti extends StatelessWidget {
                   Text(
                     "${data.tipeCutiValue}",
                     style: GoogleFonts.poppins(
+                      color: MyColorsConst.darkColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.sp,
+                  ),
+                  Text(
+                    data.nomor ?? '-',
+                    style: GoogleFonts.poppins(
                       color: MyColorsConst.primaryColor,
                       fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   SizedBox(
@@ -550,7 +560,7 @@ class ListViewCuti extends StatelessWidget {
                       Expanded(
                         flex: 1,
                         child: Text(
-                          'Alasan',
+                          'Durasi',
                           style: GoogleFonts.poppins(
                             color: Colors.grey,
                             fontSize: 10,
@@ -561,7 +571,9 @@ class ListViewCuti extends StatelessWidget {
                       Expanded(
                         flex: 3,
                         child: Text(
-                          '${data.alasanValue}',
+                          data.tipeCutiValue == "P24"
+                              ? '${data.intervalMin} Menit'
+                              : '${data.interval ?? 0} Hari',
                           style: GoogleFonts.poppins(
                             color: Colors.black,
                             fontSize: 12,
@@ -579,7 +591,7 @@ class ListViewCuti extends StatelessWidget {
                       Expanded(
                         flex: 1,
                         child: Text(
-                          'Tanggal',
+                          data.tipeCutiValue == "P24" ? 'Waktu' : 'Tanggal',
                           style: GoogleFonts.poppins(
                             color: Colors.grey,
                             fontSize: 10,
@@ -590,7 +602,9 @@ class ListViewCuti extends StatelessWidget {
                       Expanded(
                         flex: 3,
                         child: Text(
-                          '${data.dateFrom} - ${data.dateTo}',
+                          data.tipeCutiValue == "P24"
+                              ? '${data.timeFrom?.substring(0, 5) ?? "08:00"} - ${data.timeTo?.substring(0, 5) ?? "08:00"}'
+                              : '${data.dateFrom} - ${data.dateTo}',
                           style: GoogleFonts.poppins(
                             color: Colors.black,
                             fontSize: 12,
@@ -608,7 +622,7 @@ class ListViewCuti extends StatelessWidget {
               right: 0,
               child: Container(
                 height: 30,
-                padding: EdgeInsets.symmetric(horizontal: 6.sp, vertical: 3.sp),
+                padding: EdgeInsets.symmetric(horizontal: 10.sp, vertical: 3.sp),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(10.sp),
@@ -621,8 +635,8 @@ class ListViewCuti extends StatelessWidget {
                     mapStatusToString(currentStatus),
                     style: GoogleFonts.poppins(
                       color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),

@@ -16,7 +16,6 @@ class AddCutiSubmited extends AddCutiEvent {
   String? timeFrom;
   String? timeTo;
 
-
   AddCutiSubmited({
     this.alasan,
     required this.tipeCuti,
@@ -25,7 +24,6 @@ class AddCutiSubmited extends AddCutiEvent {
     required this.dateTo,
     this.timeFrom,
     this.timeTo,
-
   });
 
   @override
@@ -37,7 +35,40 @@ class AddCutiSubmited extends AddCutiEvent {
         dateTo,
         timeFrom!,
         timeTo!,
+      ];
+}
 
+class EditCutiSubmited extends AddCutiEvent {
+  int cutiID;
+  int? alasan;
+  int tipeCuti;
+  String keterangan;
+  String dateFrom;
+  String dateTo;
+  String? timeFrom;
+  String? timeTo;
+
+  EditCutiSubmited({
+    required this.cutiID,
+    this.alasan,
+    required this.tipeCuti,
+    required this.keterangan,
+    required this.dateFrom,
+    required this.dateTo,
+    this.timeFrom,
+    this.timeTo,
+  });
+
+  @override
+  List<Object> get props => [
+        cutiID,
+        alasan!,
+        tipeCuti,
+        keterangan,
+        dateFrom,
+        dateTo,
+        timeFrom!,
+        timeTo!,
       ];
 }
 
@@ -51,32 +82,4 @@ class OnSelectTipeCuti extends AddCutiEvent {
   OnSelectTipeCuti();
   @override
   List<Object> get props => [];
-}
-
-class EditCutiSubmited extends AddCutiEvent {
-  int id;
-  int alasan;
-  int tipeCuti;
-  String keterangan;
-  String dateFrom;
-  String dateTo;
-
-  EditCutiSubmited({
-    required this.id,
-    required this.alasan,
-    required this.tipeCuti,
-    required this.keterangan,
-    required this.dateFrom,
-    required this.dateTo,
-  });
-  
-  @override
-  List<Object> get props => [
-        id,
-        alasan,
-        tipeCuti,
-        keterangan,
-        dateFrom,
-        dateTo,
-      ];
 }

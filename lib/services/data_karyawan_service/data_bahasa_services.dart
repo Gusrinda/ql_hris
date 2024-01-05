@@ -31,8 +31,8 @@ class DataBahasaServices {
     int compId,
     int dirId,
     String bhsDikuasai,
-    int nilaiLisan,
-    int nilaiTetulis,
+    String nilaiLisan,
+    String nilaiTetulis,
   ) async {
     var url =
         Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/bahasa_create");
@@ -51,8 +51,8 @@ class DataBahasaServices {
         "m_comp_id": compId,
         "m_dir_id": dirId,
         "bhs_dikuasai": bhsDikuasai,
-        "nilai_lisan": nilaiLisan,
-        "nilai_tertulis": nilaiTetulis,
+        "level_lisan": nilaiLisan,
+        "level_tertulis": nilaiTetulis,
       }),
     );
   }

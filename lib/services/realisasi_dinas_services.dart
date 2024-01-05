@@ -27,17 +27,12 @@ class RealisasiDinasServices {
 
   static Future<Object> getListRealisasiDinas(
       String token, DateTime date) async {
-    // Format tanggal awal
-    var startDate = "${date.year}-${date.month.toString().padLeft(2, '0')}-01";
-
-    // Format tanggal akhir (akhir bulan)
     var lastDate = DateTime(date.year, date.month + 1, 0).day;
-    var endDate =
-        "${date.year}-${date.month.toString().padLeft(2, '0')}-$lastDate";
-
+    var lastDateStr = lastDate.toString();
+    var formattedDate =
+        "${date.year}-${date.month.toString().padLeft(2, '0')}-$lastDateStr";
     var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/t_rpd?where=this.created_at between '$startDate' and '$endDate'");
-
+        "${MyGeneralConst.API_URL}/operation/t_rpd?where=this.created_at between '${date.year}-${date.month.toString().padLeft(2, '0')}-01 00:00:00' and '$formattedDate 23:59:59'");
     return await GeneralServicesNoMobile.baseService(
       url: url,
       method: GeneralServicesMethodNoMobile.get,

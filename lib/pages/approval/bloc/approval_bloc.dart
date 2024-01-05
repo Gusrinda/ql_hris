@@ -119,9 +119,9 @@ class ApprovalBloc extends Bloc<ApprovalEvent, ApprovalState> {
             print(response.response);
           } else if (response is ServicesFailure) {
             if (response.errorResponse == null) {
-              await GeneralSharedPreferences.removeUserToken();
-              emit(DetailApprovalFailedUserExpired(message: 'Token expired'));
-            } else {
+              emit(DetailApprovalFailed(message: response.errorResponse));
+              print(response.errorResponse);
+            } else if (response.errorResponse.isNotEmpty) {
               emit(DetailApprovalFailed(message: response.errorResponse));
               print(response.errorResponse);
             }

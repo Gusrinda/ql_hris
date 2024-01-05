@@ -10,6 +10,7 @@ import 'package:sj_presensi_mobile/pages/approval/bloc/approval_bloc.dart';
 import 'package:sj_presensi_mobile/pages/approval/detail_approval.view.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/services/model/list_approval/response_detail_approval.dart';
+import 'package:sj_presensi_mobile/services/model/list_approval/response_list_approval.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class ApprovalPage extends StatefulWidget {
@@ -83,9 +84,19 @@ class _ApprovalPageState extends State<ApprovalPage> {
 
   String _formatDate(String date) {
     if (date != null && date.isNotEmpty) {
-      final parsedDate = DateTime.parse(date);
-      final formattedDate = DateFormat.yMMMMEEEEd('id_ID').format(parsedDate);
-      return formattedDate;
+      final customFormat = DateFormat('dd/MM/yyyy HH:mm');
+      try {
+        final parsedDate = customFormat.parse(date);
+
+        final formattedTime = DateFormat.Hm().format(parsedDate);
+        final dayOfWeek = DateFormat('EEEE', 'id_ID').format(parsedDate);
+        final formattedDate = DateFormat.yMMMMd('id_ID').format(parsedDate);
+
+        return '$dayOfWeek, $formattedDate, Pukul $formattedTime';
+      } catch (e) {
+        print('Error parsing date: $e');
+        return '';
+      }
     }
     return '';
   }
@@ -186,7 +197,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                     ),
                     child: BlocBuilder<ApprovalBloc, ApprovalState>(
                       builder: (context, state) {
-                        var listApproval =
+                        List<DataApproval?>? listApproval =
                             context.read<ApprovalBloc>().listApproval;
                         return Stack(
                           children: [
@@ -209,7 +220,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                               child: DetailApproval(
                                                 reloadDataCallback: loadData,
                                                 dataApproval:
-                                                    listApproval[index],
+                                                    listApproval[index]!,
                                               ),
                                             ),
                                           ),
@@ -221,7 +232,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                         decoration: BoxDecoration(
                                             border: Border.all(
                                                 color: _getColorByTrxTable(
-                                                        listApproval[index]
+                                                        listApproval[index]!
                                                             .trxTable!)
                                                     .withOpacity(0.2)),
                                             borderRadius:
@@ -235,7 +246,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                               padding: EdgeInsets.all(10),
                                               decoration: BoxDecoration(
                                                   color: _getColorByTrxTable(
-                                                          listApproval[index]
+                                                          listApproval[index]!
                                                               .trxTable!)
                                                       .withOpacity(0.2),
                                                   shape: BoxShape.rectangle,
@@ -249,10 +260,10 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                                   9))),
                                               child: Icon(
                                                 getIconByTrxTable(
-                                                    listApproval[index]
+                                                    listApproval[index]!
                                                         .trxTable!),
                                                 color: _getColorByTrxTable(
-                                                    listApproval[index]
+                                                    listApproval[index]!
                                                         .trxTable!),
                                               ),
                                             ),
@@ -269,7 +280,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                       MainAxisAlignment.center,
                                                   children: [
                                                     Text(
-                                                      "${listApproval[index].trxNomor ?? ''}",
+                                                      "${listApproval[index]!.trxNomor ?? ''}",
                                                       style:
                                                           GoogleFonts.poppins(
                                                               fontSize: 14.sp,
@@ -278,7 +289,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                                       .w600),
                                                     ),
                                                     Text(
-                                                      "${listApproval[index].creator ?? ''}",
+                                                      "${listApproval[index]!.creator ?? ''}",
                                                       maxLines: 1,
                                                       overflow:
                                                           TextOverflow.ellipsis,
@@ -290,19 +301,19 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                               .darkColor),
                                                     ),
                                                     Text(
-                                                      "${listApproval[index].trxName ?? ''}",
+                                                      "${listApproval[index]!.trxName ?? ''}",
                                                       style: GoogleFonts.poppins(
                                                           fontSize: 12.sp,
                                                           fontWeight:
                                                               FontWeight.w500,
                                                           color: _getColorByTrxTable(
                                                               listApproval[
-                                                                      index]
+                                                                      index]!
                                                                   .trxTable!)),
                                                     ),
                                                     SizedBox(height: 5.sp),
                                                     Text(
-                                                      "${_formatDate(listApproval[index].trxDate.toString())}",
+                                                      "${_formatDate(listApproval[index]?.createdAt.toString() ?? "01/01/2024 08:00")}",
                                                       style: GoogleFonts.poppins(
                                                           fontSize: 10.sp,
                                                           fontWeight:
