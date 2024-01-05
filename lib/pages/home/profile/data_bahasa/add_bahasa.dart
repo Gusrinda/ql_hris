@@ -134,42 +134,67 @@ class _AddBahasaPageState extends State<AddBahasaPage> {
                         return SingleChildScrollView(
                           child: Column(
                             children: [
-                              Column(
-                                children: [
-                                  SizedBox(height: 16.sp),
-                                  FormInputData(
-                                    input: widget.bahasaController.text,
-                                    labelTag: 'label-addbahasa',
-                                    labelForm: 'Bahasa Yang Dikuasai',
-                                    formTag: 'form-addbahasa',
-                                    hintText: 'Bahasa yang Dikuasai',
-                                    onTap: () {},
-                                    controller: widget.bahasaController,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    input: widget.lisanController.text,
-                                    labelTag: 'label-addlisan',
-                                    labelForm: 'Nilai Lisan',
-                                    formTag: 'form-addlisan',
-                                    hintText: 'Nilai Lisan',
-                                    inputType: TextInputType.number,
-                                    onTap: () {},
-                                    controller: widget.lisanController,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    input: widget.tertulisController.text,
-                                    labelTag: 'label-addtertulis',
-                                    labelForm: 'Nilai Tertulis',
-                                    formTag: 'form-addtertulis',
-                                    hintText: 'Nilai Tertulis',
-                                    inputType: TextInputType.number,
-                                    onTap: () {},
-                                    controller: widget.tertulisController,
-                                    validator: (value) {},
-                                  ),
-                                ],
+                              Form(
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: 16.sp),
+                                    FormInputData(
+                                      input: widget.bahasaController.text,
+                                      labelTag: 'label-addbahasa',
+                                      labelForm: 'Bahasa Yang Dikuasai',
+                                      formTag: 'form-addbahasa',
+                                      hintText: 'Bahasa yang Dikuasai',
+                                      onTap: () {},
+                                      controller: widget.bahasaController,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Tuliskan Bahasa Yang Dikuasai';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormInputData(
+                                      input: widget.lisanController.text,
+                                      labelTag: 'label-addlisan',
+                                      labelForm: 'Nilai Lisan',
+                                      formTag: 'form-addlisan',
+                                      hintText: 'Nilai Lisan',
+                                      inputType: TextInputType.number,
+                                      onTap: () {},
+                                      controller: widget.lisanController,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Tuliskan Nilai Lisan';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormInputData(
+                                      input: widget.tertulisController.text,
+                                      labelTag: 'label-addtertulis',
+                                      labelForm: 'Nilai Tertulis',
+                                      formTag: 'form-addtertulis',
+                                      hintText: 'Nilai Tertulis',
+                                      inputType: TextInputType.number,
+                                      onTap: () {},
+                                      controller: widget.tertulisController,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Tuliskan Nilai Tertulis';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                  ],
+                                ),
                               ),
                               SizedBox(height: 30.sp),
                               TextButtonCustomV1(
