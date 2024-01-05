@@ -453,7 +453,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                                     height: 30,
                                                     padding:
                                                         EdgeInsets.symmetric(
-                                                            horizontal: 6.sp,
+                                                            horizontal: 10.sp,
                                                             vertical: 3.sp),
                                                     decoration: BoxDecoration(
                                                       borderRadius:
@@ -474,9 +474,9 @@ class _HistoryPageState extends State<HistoryPage> {
                                                         style:
                                                             GoogleFonts.poppins(
                                                           color: Colors.white,
-                                                          fontSize: 12,
+                                                          fontSize: 10.sp,
                                                           fontWeight:
-                                                              FontWeight.w500,
+                                                              FontWeight.w600,
                                                         ),
                                                       ),
                                                     ),

@@ -622,7 +622,7 @@ class ListViewCuti extends StatelessWidget {
               right: 0,
               child: Container(
                 height: 30,
-                padding: EdgeInsets.symmetric(horizontal: 6.sp, vertical: 3.sp),
+                padding: EdgeInsets.symmetric(horizontal: 10.sp, vertical: 3.sp),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(10.sp),
@@ -635,8 +635,8 @@ class ListViewCuti extends StatelessWidget {
                     mapStatusToString(currentStatus),
                     style: GoogleFonts.poppins(
                       color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),

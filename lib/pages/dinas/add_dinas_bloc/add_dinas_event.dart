@@ -63,14 +63,12 @@ class AddDinasSubmited extends AddDinasEvent {
 }
 
 class OnSelectDivisi extends AddDinasEvent {
-
   OnSelectDivisi();
   @override
   List<Object> get props => [];
 }
 
 class OnSelectDepartemen extends AddDinasEvent {
-
   OnSelectDepartemen();
 
   @override
@@ -78,28 +76,24 @@ class OnSelectDepartemen extends AddDinasEvent {
 }
 
 class OnSelectPosisi extends AddDinasEvent {
-
   OnSelectPosisi();
   @override
   List<Object> get props => [];
 }
 
 class OnSelectTemplateSpd extends AddDinasEvent {
-
   OnSelectTemplateSpd();
   @override
   List<Object> get props => [];
 }
 
 class OnSelectDirektorat extends AddDinasEvent {
-
   OnSelectDirektorat();
   @override
   List<Object> get props => [];
 }
 
 class OnSelectJenisSpd extends AddDinasEvent {
-
   OnSelectJenisSpd();
   @override
   List<Object> get props => [];
@@ -112,14 +106,12 @@ class OnSelectZona extends AddDinasEvent {
 }
 
 class OnSelectLokasiTujuan extends AddDinasEvent {
-
   OnSelectLokasiTujuan();
   @override
   List<Object> get props => [];
 }
 
 class OnSelectPic extends AddDinasEvent {
-
   OnSelectPic();
 
   @override
@@ -127,12 +119,12 @@ class OnSelectPic extends AddDinasEvent {
 }
 
 class EditDinasSubmited extends AddDinasEvent {
-  int id;
+  int spdID;
   int divisi;
   int departemen;
   int posisi;
-  int templateSpd;
-  int direktorat;
+  int? templateSpd;
+  int? direktorat;
   String tanggal;
   String tanggalAwal;
   String tanggalAkhir;
@@ -142,14 +134,15 @@ class EditDinasSubmited extends AddDinasEvent {
   int lokasiTujuan;
   int pic;
   int kendDinas;
+  String? desc;
 
   EditDinasSubmited({
-    required this.id,
+    required this.spdID,
     required this.divisi,
     required this.departemen,
     required this.posisi,
-    required this.templateSpd,
-    required this.direktorat,
+    this.templateSpd,
+    this.direktorat,
     required this.tanggal,
     required this.tanggalAwal,
     required this.tanggalAkhir,
@@ -159,16 +152,17 @@ class EditDinasSubmited extends AddDinasEvent {
     required this.lokasiTujuan,
     required this.pic,
     required this.kendDinas,
+    this.desc,
   });
 
   @override
   List<Object> get props => [
-        id,
+        spdID,
         divisi,
         departemen,
         posisi,
-        templateSpd,
-        direktorat,
+        templateSpd!,
+        direktorat!,
         tanggal,
         tanggalAwal,
         tanggalAkhir,
@@ -178,5 +172,6 @@ class EditDinasSubmited extends AddDinasEvent {
         lokasiTujuan,
         pic,
         kendDinas,
+        desc!
       ];
 }

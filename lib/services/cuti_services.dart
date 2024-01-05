@@ -87,26 +87,50 @@ class CutiServices {
   }
 
   static Future<Object> editCuti(
-    String token,
-    int cutiId,
-    keterangan,
-    int alasan,
-    int tipeCuti,
-    String dateFrom,
-    String dateTo,
-  ) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_cuti/$cutiId");
+      String token,
+      int cutiID,
+      int mCompID,
+      int mDirID,
+      int mKaryID,
+      String keterangan,
+      int? alasan,
+      int tipeCuti,
+      String dateFrom,
+      String dateTo,
+      String? timeFrom,
+      String? timeTo) async {
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_cuti/$cutiID");
+    print("Ini yang dikirim saat PUT Cuti :");
+    print("alasan_id : ${alasan}");
+    print("tipe_cuti_id : ${tipeCuti}");
+    print("date_from : ${dateFrom}");
+    print("date_to : ${dateTo}");
+    print("keterangan : ${keterangan}");
+    print("Ini mCompID : ${mCompID}");
+    print("Ini mDirID : ${mDirID}");
+    print("Ini mKaryID : ${mKaryID}");
+    print("Ini timeFrom : ${timeFrom}");
+    print("Ini timeTo : ${timeTo}");
+
+    Object requestBody = {
+      "m_comp_id": mCompID,
+      "m_dir_id": mDirID,
+      "m_kary_id": mKaryID,
+      "alasan_id": alasan,
+      "tipe_cuti_id": tipeCuti,
+      "date_from": dateFrom,
+      "date_to": dateTo,
+      "time_from": timeFrom,
+      "time_to": timeTo,
+      "keterangan": keterangan,
+    }..removeWhere(
+        (key, value) => value == null || value == '' || value == -99);
+
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.put,
       headers: GeneralServices.addToken2Headers(token),
-      body: json.encode({
-        "alasan_id": alasan,
-        "tipe_cuti_id": tipeCuti,
-        "date_from": dateFrom,
-        "date_to": dateTo,
-        "keterangan": keterangan,
-      }),
+      body: json.encode(requestBody),
     );
   }
 }

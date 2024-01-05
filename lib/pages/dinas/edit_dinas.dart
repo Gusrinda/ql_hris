@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,7 +30,11 @@ import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_pic_mod
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_posisi_model.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_templatespd_model.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_zona_model.dart';
+import 'package:sj_presensi_mobile/services/model/dinas/list_dinas_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
+import 'package:sj_presensi_mobile/utils/shared_pref.dart';
+import 'package:http/http.dart' as http;
 
 class EditDinasPage extends StatefulWidget {
   static const routeName = '/EditDinasPage';
@@ -57,6 +62,9 @@ class EditDinasPage extends StatefulWidget {
     this.direktoratId,
     this.direktoratValue,
     this.tanggal,
+    this.isKendDinas,
+    this.namaKend,
+    this.dataDinas,
     required this.reloadDataCallback,
     // required this.reloadDataCallback,
   });
@@ -83,6 +91,9 @@ class EditDinasPage extends StatefulWidget {
   final int? direktoratId;
   final String? direktoratValue;
   final String? tanggal;
+  final bool? isKendDinas;
+  final String? namaKend;
+  final DataDinas? dataDinas;
   final VoidCallback reloadDataCallback;
 
   // Divisi Controller
@@ -99,8 +110,9 @@ class EditDinasPage extends StatefulWidget {
   final TextEditingController valuePosisiController = TextEditingController();
 
   // TemplateSpd Controller
-  final TextEditingController idTemplateSpdController = TextEditingController();
-  final TextEditingController valueTemplateSpdController =
+  final TextEditingController? idTemplateSpdController =
+      TextEditingController();
+  final TextEditingController? valueTemplateSpdController =
       TextEditingController();
 
   // Direktorat Controller
@@ -139,6 +151,8 @@ class EditDinasPage extends StatefulWidget {
   // kend Dinas
   final TextEditingController kendDinasController = TextEditingController();
 
+  final TextEditingController? catatanController = TextEditingController();
+
   @override
   State<EditDinasPage> createState() => _EditDinasPageState();
 }
@@ -159,6 +173,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
   DateTime? selectedTanggalAwal;
   DateTime? selectedTanggalAkhir;
   int? _kendDinas;
+  int weekdaysCount = 0;
 
   int currentStep = 0;
   late GlobalKey<FormState> _formKeyStep1;
@@ -180,8 +195,8 @@ class _EditDinasPageState extends State<EditDinasPage> {
     widget.idPosisiController.text = widget.posisiId.toString();
     widget.valuePosisiController.text = widget.posisi ?? '';
 
-    widget.idTemplateSpdController.text = widget.templateSpdId.toString();
-    widget.valueTemplateSpdController.text = widget.templateSpd ?? '';
+    widget.idTemplateSpdController!.text = widget.templateSpdId.toString();
+    widget.valueTemplateSpdController!.text = widget.templateSpd ?? '';
 
     widget.idDirektoratController.text = widget.direktoratId.toString();
     widget.valueDirektoratController.text = widget.direktoratValue ?? '';
@@ -198,12 +213,24 @@ class _EditDinasPageState extends State<EditDinasPage> {
     widget.idLokasiTujuanController.text = widget.lokasiTujuanId.toString();
     widget.valueLokasiTujuanController.text = widget.lokasiTujuan ?? '';
 
-    // widget.idPicController.text = widget.dateTo ?? '';
-    // widget.valuePicController.text = widget.dateFrom ?? '';
+    widget.idPicController.text = widget.dataDinas!.picId.toString();
+    widget.valuePicController.text = widget.dataDinas?.namaPic ?? "";
 
     widget.tanggalController.text = widget.tanggal ?? '';
     widget.tanggalAwalController.text = widget.tanggalAwal ?? '';
     widget.tanggalAkhirController.text = widget.tanggalAkhir ?? '';
+
+    widget.catatanController!.text = widget.dataDinas!.catatanKend ?? '';
+
+    if (widget.dataDinas?.isKendDinas == true) {
+      _kendDinas = 1;
+      widget.kendDinasController.text = 1.toString();
+    } else {
+      _kendDinas = 0;
+      widget.kendDinasController.text = 0.toString();
+    }
+
+    weekdaysCount = widget.dataDinas!.interval!;
 
     selectedTanggal = parseDateString(widget.tanggal);
     selectedTanggalAwal = parseDateString(widget.tanggalAwal);
@@ -303,27 +330,30 @@ class _EditDinasPageState extends State<EditDinasPage> {
               if (currentStep == 2) {
                 context.read<AddDinasBloc>().add(
                       EditDinasSubmited(
-                        id: widget.dinasId ?? 1,
-                        divisi: int.parse(widget.idDivisiController.text),
-                        departemen:
-                            int.parse(widget.idDepartemenController.text),
-                        posisi: int.parse(widget.idPosisiController.text),
-                        templateSpd:
-                            int.parse(widget.idTemplateSpdController.text),
-                        direktorat:
-                            int.parse(widget.idDirektoratController.text),
-                        tanggal: widget.tanggalController.text,
-                        tanggalAwal: widget.tanggalAwalController.text,
-                        tanggalAkhir: widget.tanggalAkhirController.text,
-                        jenisSpd: int.parse(widget.idJenisSpdController.text),
-                        zonaAsal: int.parse(widget.idZonaAsalController.text),
-                        zonaTujuan:
-                            int.parse(widget.idZonaTujuanController.text),
-                        lokasiTujuan:
-                            int.parse(widget.idLokasiTujuanController.text),
-                        pic: int.parse(widget.idPicController.text),
-                        kendDinas: int.parse(widget.kendDinasController.text),
-                      ),
+                          spdID: widget.dinasId ?? -99,
+                          divisi: int.parse(widget.idDivisiController.text),
+                          departemen:
+                              int.parse(widget.idDepartemenController.text),
+                          posisi: int.parse(widget.idPosisiController.text),
+                          templateSpd:
+                              widget.idTemplateSpdController?.text != null
+                                  ? int.tryParse(
+                                      widget.idTemplateSpdController!.text)
+                                  : null,
+                          // direktorat:
+                          //     int.parse(widget.idDirektoratController!.text),
+                          tanggal: widget.tanggalController.text,
+                          tanggalAwal: widget.tanggalAwalController.text,
+                          tanggalAkhir: widget.tanggalAkhirController.text,
+                          jenisSpd: int.parse(widget.idJenisSpdController.text),
+                          zonaAsal: int.parse(widget.idZonaAsalController.text),
+                          zonaTujuan:
+                              int.parse(widget.idZonaTujuanController.text),
+                          lokasiTujuan:
+                              int.parse(widget.idLokasiTujuanController.text),
+                          pic: int.tryParse(widget.idPicController.text) ?? -99,
+                          kendDinas: int.parse(widget.kendDinasController.text),
+                          desc: widget.catatanController?.value.text),
                     );
               } else {
                 continueStep();
@@ -340,14 +370,14 @@ class _EditDinasPageState extends State<EditDinasPage> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var dataDivisi = context.read<AddDinasBloc>().dataDivisi;
-     var dataDepartemen =context.read<AddDinasBloc>().dataDepartemen;
-    var dataPosisi =context.read<AddDinasBloc>().dataPosisi;
-    var dataTemplateSpd =context.read<AddDinasBloc>().dataTemplateSpd;
-    var dataDirektorat =context.read<AddDinasBloc>().dataDirektorat;
-    var dataJenisSpd =context.read<AddDinasBloc>().dataJenisSpd;
-    var dataZona =context.read<AddDinasBloc>().dataZona;
-    var dataLokasi =context.read<AddDinasBloc>().dataLokasiTujuan;
-    var dataPic =context.read<AddDinasBloc>().dataPic;
+    var dataDepartemen = context.read<AddDinasBloc>().dataDepartemen;
+    var dataPosisi = context.read<AddDinasBloc>().dataPosisi;
+    var dataTemplateSpd = context.read<AddDinasBloc>().dataTemplateSpd;
+    var dataDirektorat = context.read<AddDinasBloc>().dataDirektorat;
+    var dataJenisSpd = context.read<AddDinasBloc>().dataJenisSpd;
+    var dataZona = context.read<AddDinasBloc>().dataZona;
+    var dataLokasi = context.read<AddDinasBloc>().dataLokasiTujuan;
+    var dataPic = context.read<AddDinasBloc>().dataPic;
 
     void _showDivisi(BuildContext context) async {
       if (dataDivisi.isEmpty) {
@@ -396,7 +426,8 @@ class _EditDinasPageState extends State<EditDinasPage> {
         );
 
         if (selectedDepartemen != null) {
-          widget.idDepartemenController.text = selectedDepartemen.id?.toString() ?? '';
+          widget.idDepartemenController.text =
+              selectedDepartemen.id?.toString() ?? '';
           widget.valueDepartemenController.text =
               selectedDepartemen.nama?.toString() ?? '';
 
@@ -457,37 +488,42 @@ class _EditDinasPageState extends State<EditDinasPage> {
           ),
         );
 
-      if (selectedTemplateSpdValue != null) {
-        widget.valueTemplateSpdController.text =
-            selectedTemplateSpdValue.kode?.toString() ?? '';
-        widget.idTemplateSpdController.text =
-            selectedTemplateSpdValue.id?.toString() ?? '';
+        if (selectedTemplateSpdValue != null) {
+          widget.valueTemplateSpdController!.text =
+              selectedTemplateSpdValue.kode?.toString() ?? '';
+          widget.idTemplateSpdController!.text =
+              selectedTemplateSpdValue.id?.toString() ?? '';
 
-        widget.valueDivisiController.text =
-            selectedTemplateSpdValue.mDivisiNama?.toString() ?? '';
-        widget.idDivisiController.text =
-            selectedTemplateSpdValue.mDivisiId?.toString() ?? '';
+          widget.valueDivisiController.text =
+              selectedTemplateSpdValue.mDivisiNama?.toString() ?? '';
+          widget.idDivisiController.text =
+              selectedTemplateSpdValue.mDivisiId?.toString() ?? '';
 
-        widget.valueDepartemenController.text =
-            selectedTemplateSpdValue.mDeptNama?.toString() ?? '';
-        widget.idDepartemenController.text =
-            selectedTemplateSpdValue.mDeptId?.toString() ?? '';
+          widget.valueDepartemenController.text =
+              selectedTemplateSpdValue.mDeptNama?.toString() ?? '';
+          widget.idDepartemenController.text =
+              selectedTemplateSpdValue.mDeptId?.toString() ?? '';
 
-        widget.valuePosisiController.text =
-            selectedTemplateSpdValue.mPosisiDescKerja?.toString() ?? '';
-        widget.idPosisiController.text =
-            selectedTemplateSpdValue.mPosisiId?.toString() ?? '';
+          widget.valuePosisiController.text =
+              selectedTemplateSpdValue.mPosisiDescKerja?.toString() ?? '';
+          widget.idPosisiController.text =
+              selectedTemplateSpdValue.mPosisiId?.toString() ?? '';
 
-        widget.valueDirektoratController.text =
-            selectedTemplateSpdValue.mDirNama?.toString() ?? '';
-        widget.idDirektoratController.text =
-            selectedTemplateSpdValue.mDirId?.toString() ?? '';
-        setState(() {
-          this.selectedTemplateSpd = selectedTemplateSpdValue.kode;
-        });
-      }
-      } 
-      else {
+          widget.valueDirektoratController.text =
+              selectedTemplateSpdValue.mDirNama?.toString() ?? '';
+          widget.idDirektoratController.text =
+              selectedTemplateSpdValue.mDirId?.toString() ?? '';
+
+          // widget.valueJenisSpdController.text =
+          // selectedTemplateSpdValue.?.toString() ?? '';
+          //  widget.idPicController.text =
+          // selectedTemplateSpdValue.?.toString() ?? '';
+
+          setState(() {
+            this.selectedTemplateSpd = selectedTemplateSpdValue.kode;
+          });
+        }
+      } else {
         print("Tidak Ada Item");
       }
     }
@@ -508,9 +544,13 @@ class _EditDinasPageState extends State<EditDinasPage> {
         );
 
         if (selectedDirektorat != null) {
-          widget.idDirektoratController.text = selectedDirektorat.id?.toString() ?? '';
+          widget.idDirektoratController!.text =
+              selectedDirektorat.id?.toString() ?? '';
           widget.valueDirektoratController.text =
               selectedDirektorat.nama?.toString() ?? '';
+
+          // widget.valueDirektoratController.text =
+          //     selectedDirektorat.id?.toString() ?? '';
 
           setState(() {
             this.selectedDirektorat = selectedDirektorat.nama;
@@ -519,6 +559,11 @@ class _EditDinasPageState extends State<EditDinasPage> {
           });
         }
       } else {
+        showDialog(
+          context: context,
+          builder: (_) => const DialogCustom(
+              state: DialogCustomItem.error, message: "Tidak Ada Item"),
+        );
         print("Tidak Ada Item");
       }
     }
@@ -539,7 +584,8 @@ class _EditDinasPageState extends State<EditDinasPage> {
         );
 
         if (selectedJenisSpd != null) {
-          widget.idJenisSpdController.text = selectedJenisSpd.id?.toString() ?? '';
+          widget.idJenisSpdController.text =
+              selectedJenisSpd.id?.toString() ?? '';
           widget.valueJenisSpdController.text =
               selectedJenisSpd.value?.toString() ?? '';
 
@@ -570,7 +616,8 @@ class _EditDinasPageState extends State<EditDinasPage> {
         );
 
         if (selectedZonaAsal != null) {
-          widget.idZonaAsalController.text = selectedZonaAsal.id?.toString() ?? '';
+          widget.idZonaAsalController.text =
+              selectedZonaAsal.id?.toString() ?? '';
           widget.valueZonaAsalController.text =
               selectedZonaAsal.nama?.toString() ?? '';
 
@@ -586,7 +633,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
     }
 
     void _showZonaTujuan(BuildContext context) async {
-     if (dataZona.isEmpty) {
+      if (dataZona.isEmpty) {
         context.read<AddDinasBloc>().add(OnSelectZona());
         dataZona = context.read<AddDinasBloc>().dataZona;
       }
@@ -601,7 +648,8 @@ class _EditDinasPageState extends State<EditDinasPage> {
         );
 
         if (selectedZonaTujuan != null) {
-          widget.idZonaTujuanController.text = selectedZonaTujuan.id?.toString() ?? '';
+          widget.idZonaTujuanController.text =
+              selectedZonaTujuan.id?.toString() ?? '';
           widget.valueZonaTujuanController.text =
               selectedZonaTujuan.nama?.toString() ?? '';
 
@@ -632,7 +680,8 @@ class _EditDinasPageState extends State<EditDinasPage> {
         );
 
         if (selectedLokasiTujuan != null) {
-          widget.idLokasiTujuanController.text = selectedLokasiTujuan.id?.toString() ?? '';
+          widget.idLokasiTujuanController.text =
+              selectedLokasiTujuan.id?.toString() ?? '';
           widget.valueLokasiTujuanController.text =
               selectedLokasiTujuan.nama?.toString() ?? '';
 
@@ -664,8 +713,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
 
         if (selectedPic != null) {
           widget.idPicController.text = selectedPic.id?.toString() ?? '';
-          widget.valuePicController.text =
-              selectedPic.name?.toString() ?? '';
+          widget.valuePicController.text = selectedPic.name?.toString() ?? '';
 
           setState(() {
             this.selectedPic = selectedPic.name;
@@ -701,7 +749,9 @@ class _EditDinasPageState extends State<EditDinasPage> {
                 message: state.message,
               ),
             );
-            Navigator.of(context).popUntil((route) => route.isFirst);
+            Navigator.of(context).pop();
+            Navigator.pop(context);
+            // Navigator.of(context).popUntil((route) => route.isFirst);
             widget.reloadDataCallback();
           } else if (state is AddDinasFailed) {
             LoadingDialog.dismissDialog(context);
@@ -822,45 +872,46 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           _showTemplateSpd(context);
                                         },
                                         idController:
-                                            widget.idTemplateSpdController,
+                                            widget.idTemplateSpdController!,
                                         valueController:
-                                            widget.valueTemplateSpdController,
+                                            widget.valueTemplateSpdController!,
                                         labelForm: 'Template SPD',
                                         hintText: 'Cari Template SPD',
                                         labelTag: 'Label-TemplateSPd',
                                         formTag: 'Form-TemplateSpd',
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return 'Pilih Template SPD';
-                                          }
-                                          return null;
-                                        },
+                                        // validator: (value) {
+                                        //   if (value == null || value.isEmpty) {
+                                        //     return 'Pilih Template SPD';
+                                        //   }
+                                        //   return null;
+                                        // },
                                         errorTextStyle: GoogleFonts.poppins(
                                           fontSize: 8,
                                         ),
                                       ),
-                                      FormDropDownData(
-                                        input: selectedDirektorat ?? '',
-                                        onTap: () {
-                                          _showDirektorat(context);
-                                        },
-                                        idController:
-                                            widget.idDirektoratController,
-                                        valueController:
-                                            widget.valueDirektoratController,
-                                        labelForm: 'Direktorat',
-                                        hintText: 'Pilih Direktorat',
-                                        labelTag: 'Label-Direktorat',
-                                        formTag: 'Form-Direktorat',
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return 'Pilih Direktorat';
-                                          }
-                                          return null;
-                                        },
-                                        errorTextStyle:
-                                            GoogleFonts.poppins(fontSize: 8),
-                                      ),
+                                      // FormDropDownData(
+                                      //   showRedStar: false,
+                                      //   input: selectedDirektorat ?? '',
+                                      //   onTap: () {
+                                      //     _showDirektorat(context);
+                                      //   },
+                                      //   idController:
+                                      //       widget.idDirektoratController,
+                                      //   valueController:
+                                      //       widget.valueDirektoratController,
+                                      //   labelForm: 'Direktorat',
+                                      //   hintText: 'Pilih Direktorat',
+                                      //   labelTag: 'Label-Direktorat',
+                                      //   formTag: 'Form-Direktorat',
+                                      //   validator: (value) {
+                                      //     if (value == null || value.isEmpty) {
+                                      //       return 'Pilih Direktorat';
+                                      //     }
+                                      //     return null;
+                                      //   },
+                                      //   errorTextStyle:
+                                      //       GoogleFonts.poppins(fontSize: 8),
+                                      // ),
                                       FormDropDownData(
                                         input: selectedDivisi ?? '',
                                         onTap: () {
@@ -973,7 +1024,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           Row(
                                             children: [
                                               FormTextLabel(
-                                                label: "Tanggal",
+                                                label: "Tanggal Pengajuan",
                                                 labelColor:
                                                     MyColorsConst.darkColor,
                                               ),
@@ -1004,8 +1055,8 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                               return null;
                                             },
                                           ),
-                                          const SizedBox(
-                                            height: 30,
+                                          SizedBox(
+                                            height: 30.sp,
                                           ),
                                           Row(
                                             children: [
@@ -1042,8 +1093,8 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                               return null;
                                             },
                                           ),
-                                          const SizedBox(
-                                            height: 30,
+                                          SizedBox(
+                                            height: 30.sp,
                                           ),
                                           Row(
                                             children: [
@@ -1079,6 +1130,47 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                               }
                                               return null;
                                             },
+                                          ),
+                                          const SizedBox(height: 20),
+                                          Row(
+                                            children: [
+                                              Text.rich(
+                                                TextSpan(
+                                                  text: 'Dinas Selama : ',
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 13.sp,
+                                                    color:
+                                                        MyColorsConst.darkColor,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                  children: [
+                                                    TextSpan(
+                                                      text: weekdaysCount
+                                                          .toString(),
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 18.sp,
+                                                        color:
+                                                            Colors.red.shade600,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                      ),
+                                                    ),
+                                                    TextSpan(
+                                                      text: ' hari',
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 13.sp,
+                                                        color:
+                                                            Colors.red.shade600,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -1195,7 +1287,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                       ),
                                       Row(
                                         children: [
-                                          FormTextLabel(
+                                          const FormTextLabel(
                                             label:
                                                 'Menggunakan Kendaraan Dinas',
                                             labelColor: MyColorsConst.darkColor,
@@ -1258,6 +1350,19 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           ),
                                         ],
                                       ),
+                                      if (_kendDinas == 1)
+                                        FormInputData(
+                                          showRedStar: false,
+                                          hintText:
+                                              'Tuliskan Keterangan Kendaraan',
+                                          labelForm: 'Nama Kendaraan',
+                                          labelTag: 'Label-catatanDinas',
+                                          formTag: 'Form-catatanDinas',
+                                          controller: widget.catatanController!,
+                                          validator: (value) {
+                                            return null;
+                                          },
+                                        ),
                                     ],
                                   ),
                                 ),
@@ -1279,6 +1384,78 @@ class _EditDinasPageState extends State<EditDinasPage> {
         ),
       ),
     );
+  }
+
+  Future<int> calculateWeekdaysFromAPI(String dateFrom, String dateTo) async {
+    const apiUrl = '${MyGeneralConst.API_URL}/operation/t_spd/hitungHari';
+
+    final Map<String, String> postData = {
+      "date_from": "$dateFrom",
+      "date_to": "$dateTo",
+    };
+
+    print("URL API: $apiUrl");
+    print("BODY API: $postData");
+
+    try {
+      final userToken = await GeneralSharedPreferences.getUserToken();
+      if (userToken is ServicesSuccess) {
+        // print("${userToken.response["token"]}");
+        final response = await http.post(
+          Uri.parse(apiUrl),
+          body: postData,
+          headers: {
+            'Authorization': 'Bearer ${userToken.response["token"]}',
+            'Source': 'mobile',
+          },
+        );
+
+        if (response.statusCode == 200) {
+          print('RESPONSE BODY API: ${response.body}');
+          return int.parse(response.body);
+        } else {
+          // Print the API response for debugging purposes.
+          print('API Response: ${response.body}');
+
+          // Handle error if needed.
+          print('Failed to fetch data: ${response.statusCode}');
+          return 0;
+        }
+      } else {
+        // Handle error if there is an issue with getting the user token.
+        print('Failed to get user token.');
+        return 0;
+      }
+    } catch (e) {
+      // Print the exception for debugging purposes.
+      print('Exception occurred: $e');
+      throw Exception('Failed to fetch data');
+    }
+  }
+
+  void _calculateWeekdaysFromAPI() async {
+    if (selectedTanggalAwal != null && selectedTanggalAkhir != null) {
+      try {
+        final dateFrom =
+            selectedTanggalAwal!.toLocal().toString().split(' ')[0];
+        final dateTo = selectedTanggalAkhir!.toLocal().toString().split(' ')[0];
+
+        print("INI Data POST Calculate: $dateFrom & $dateTo");
+        final newWeekdaysCount =
+            await calculateWeekdaysFromAPI(dateFrom, dateTo);
+
+        // Update the weekdaysCount variable with the new value
+        setState(() {
+          weekdaysCount = newWeekdaysCount;
+        });
+
+        print("Jumlah hari kerja: $weekdaysCount");
+      } catch (e) {
+        print("Gagal mengambil data dari API: $e");
+      }
+    } else {
+      print("Pilih tanggal mulai dan tanggal berakhir terlebih dahulu.");
+    }
   }
 
   Widget _buildDateTextField(
@@ -1313,6 +1490,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
               selectedTanggalAwal = pickedDate;
             });
             print("Pilih tanggal awal: $selectedTanggalAwal");
+            _calculateWeekdaysFromAPI();
           } else if (controller == widget.tanggalAkhirController) {
             widget.tanggalAkhirController.text =
                 DateFormat('yyyy-MM-dd').format(pickedDate);
@@ -1320,6 +1498,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
               selectedTanggalAkhir = pickedDate;
             });
             print("Pilih tanggal akhir: $selectedTanggalAkhir");
+            _calculateWeekdaysFromAPI();
           }
         }
       },
@@ -1327,10 +1506,10 @@ class _EditDinasPageState extends State<EditDinasPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(18.0),
             decoration: BoxDecoration(
               border: Border.all(color: Color(0xFFDDDDDD)),
-              borderRadius: BorderRadius.circular(6),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1340,25 +1519,34 @@ class _EditDinasPageState extends State<EditDinasPage> {
                       ? DateFormat('yyyy-MM-dd').format(selectedDate)
                       : hintText,
                   style: GoogleFonts.poppins(
-                    fontSize: 13.sp,
+                    fontSize: selectedDate != null ? 13.sp : 12.sp,
+                    fontWeight: selectedDate != null
+                        ? FontWeight.w600
+                        : FontWeight.w500, // Different fontWeight for hintText
+                    color: selectedDate != null
+                        ? MyColorsConst.darkColor
+                        : MyColorsConst
+                            .disableColor, // Different color for hintText
                   ),
                 ),
-                // const SizedBox(width: 8),
                 Icon(
-                  Icons.calendar_month_rounded,
+                  CupertinoIcons.calendar_today,
                   color: MyColorsConst.primaryColor,
-                  size: 20,
+                  size: 20.sp,
                 ),
               ],
             ),
           ),
           if (validator != null &&
               (controller.text.isEmpty || validator(selectedDate) != null))
-            Text(
-              validator(selectedDate) ?? '',
-              style: GoogleFonts.poppins(
-                color: MyColorsConst.redColor,
-                fontSize: 8,
+            Padding(
+              padding: const EdgeInsets.only(left: 18, top: 5),
+              child: Text(
+                validator(selectedDate) ?? '',
+                style: GoogleFonts.poppins(
+                  color: MyColorsConst.redColor,
+                  fontSize: 10.sp,
+                ),
               ),
             ),
         ],

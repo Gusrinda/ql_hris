@@ -165,7 +165,7 @@ class GeneralServices {
       if (response.statusCode == MyGeneralConst.CODE_ERROR_VALIDATION) {
         return ServicesFailure(
           code: response.statusCode,
-          errorResponse: json.decode(response.body),
+          errorResponse: json.decode(response.body)['message'],
         );
       }
       return ServicesFailure(

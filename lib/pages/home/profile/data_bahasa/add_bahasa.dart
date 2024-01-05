@@ -16,14 +16,59 @@ class AddBahasaPage extends StatefulWidget {
   final VoidCallback reloadDataCallback;
 
   final TextEditingController bahasaController = TextEditingController();
-  final TextEditingController lisanController = TextEditingController();
-  final TextEditingController tertulisController = TextEditingController();
+  final TextEditingController? lisanController = TextEditingController();
+  final TextEditingController? tertulisController = TextEditingController();
+  final TextEditingController levelLisanController = TextEditingController();
+  final TextEditingController levelTertulisController = TextEditingController();
 
   @override
   State<AddBahasaPage> createState() => _AddBahasaPageState();
 }
 
 class _AddBahasaPageState extends State<AddBahasaPage> {
+  void _showLanguageLevelBottomSheet(
+      BuildContext context, TextEditingController controller) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          child: Wrap(
+            children: [
+              ListTile(
+                title: Text('Beginner'),
+                onTap: () {
+                  Navigator.pop(context, 'Beginner');
+                },
+              ),
+              ListTile(
+                title: Text('Intermediate'),
+                onTap: () {
+                  Navigator.pop(context, 'Intermediate');
+                },
+              ),
+              ListTile(
+                title: Text('Advanced'),
+                onTap: () {
+                  Navigator.pop(context, 'Advanced');
+                },
+              ),
+              ListTile(
+                title: Text('Mastery'),
+                onTap: () {
+                  Navigator.pop(context, 'Mastery');
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    ).then((selectedLevel) {
+      if (selectedLevel != null) {
+        controller.text = selectedLevel;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -147,28 +192,56 @@ class _AddBahasaPageState extends State<AddBahasaPage> {
                                     controller: widget.bahasaController,
                                     validator: (value) {},
                                   ),
-                                  FormInputData(
-                                    input: widget.lisanController.text,
-                                    labelTag: 'label-addlisan',
-                                    labelForm: 'Nilai Lisan',
-                                    formTag: 'form-addlisan',
-                                    hintText: 'Nilai Lisan',
-                                    inputType: TextInputType.number,
-                                    onTap: () {},
-                                    controller: widget.lisanController,
-                                    validator: (value) {},
+                                  FormDropDownData(
+                                    input: widget.levelLisanController.text,
+                                    labelTag: 'label-addlevelLisan',
+                                    labelForm: 'Level Lisan Bahasa',
+                                    formTag: 'form-addlevelLisan',
+                                    hintText: 'Pilih Tingkatan Lisan Bahasa',
+                                    onTap: () {
+                                      _showLanguageLevelBottomSheet(
+                                          context, widget.levelLisanController);
+                                    },
+                                    valueController:
+                                        widget.levelLisanController,
                                   ),
-                                  FormInputData(
-                                    input: widget.tertulisController.text,
-                                    labelTag: 'label-addtertulis',
-                                    labelForm: 'Nilai Tertulis',
-                                    formTag: 'form-addtertulis',
-                                    hintText: 'Nilai Tertulis',
-                                    inputType: TextInputType.number,
-                                    onTap: () {},
-                                    controller: widget.tertulisController,
-                                    validator: (value) {},
+                                  // FormInputData(
+                                  //   showRedStar: false,
+                                  //   input: widget.lisanController!.text,
+                                  //   labelTag: 'label-addlisan',
+                                  //   labelForm: 'Nilai Lisan',
+                                  //   formTag: 'form-addlisan',
+                                  //   hintText: 'Nilai Lisan',
+                                  //   inputType: TextInputType.number,
+                                  //   onTap: () {},
+                                  //   controller: widget.lisanController!,
+                                  //   validator: (value) {},
+                                  // ),
+                                  FormDropDownData(
+                                    input: widget.levelTertulisController.text,
+                                    labelTag: 'label-addlevelTertulis',
+                                    labelForm: 'Level Tertulis Bahasa',
+                                    formTag: 'form-addlevelTertulis',
+                                    hintText: 'Pilih Tingkatan Tertulis Bahasa',
+                                    onTap: () {
+                                      _showLanguageLevelBottomSheet(context,
+                                          widget.levelTertulisController);
+                                    },
+                                    valueController:
+                                        widget.levelTertulisController,
                                   ),
+                                  // FormInputData(
+                                  //   showRedStar: false,
+                                  //   input: widget.tertulisController!.text,
+                                  //   labelTag: 'label-addtertulis',
+                                  //   labelForm: 'Nilai Tertulis',
+                                  //   formTag: 'form-addtertulis',
+                                  //   hintText: 'Nilai Tertulis',
+                                  //   inputType: TextInputType.number,
+                                  //   onTap: () {},
+                                  //   controller: widget.tertulisController!,
+                                  //   validator: (value) {},
+                                  // ),
                                 ],
                               ),
                               SizedBox(height: 30.sp),
@@ -185,10 +258,10 @@ class _AddBahasaPageState extends State<AddBahasaPage> {
                                               AddDatabahasaSubmited(
                                                 bhsDikuasai: widget
                                                     .bahasaController.text,
-                                                nilaiLisan: int.parse(widget
-                                                    .lisanController.text),
-                                                nilaiTertulis: int.parse(widget
-                                                    .tertulisController.text),
+                                                nilaiLisan: widget
+                                                    .levelLisanController.text,
+                                                nilaiTertulis:widget
+                                                    .levelTertulisController.text,
                                               ),
                                             );
                                       },

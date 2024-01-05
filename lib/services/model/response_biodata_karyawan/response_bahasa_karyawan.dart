@@ -37,6 +37,10 @@ class DataBahasa with _$DataBahasa {
         int? nilaiLisan,
         @JsonKey(name: "nilai_tertulis")
         int? nilaiTertulis,
+        @JsonKey(name: "level_lisan")
+        dynamic levelLisan,
+        @JsonKey(name: "level_tertulis")
+        dynamic levelTertulis,
         @JsonKey(name: "desc")
         dynamic desc,
         @JsonKey(name: "creator_id")

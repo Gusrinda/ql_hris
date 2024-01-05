@@ -263,6 +263,10 @@ mixin _$DataBahasa {
   int? get nilaiLisan => throw _privateConstructorUsedError;
   @JsonKey(name: "nilai_tertulis")
   int? get nilaiTertulis => throw _privateConstructorUsedError;
+  @JsonKey(name: "level_lisan")
+  dynamic get levelLisan => throw _privateConstructorUsedError;
+  @JsonKey(name: "level_tertulis")
+  dynamic get levelTertulis => throw _privateConstructorUsedError;
   @JsonKey(name: "desc")
   dynamic get desc => throw _privateConstructorUsedError;
   @JsonKey(name: "creator_id")
@@ -294,6 +298,8 @@ abstract class $DataBahasaCopyWith<$Res> {
       @JsonKey(name: "bhs_dikuasai") String? bhsDikuasai,
       @JsonKey(name: "nilai_lisan") int? nilaiLisan,
       @JsonKey(name: "nilai_tertulis") int? nilaiTertulis,
+      @JsonKey(name: "level_lisan") dynamic levelLisan,
+      @JsonKey(name: "level_tertulis") dynamic levelTertulis,
       @JsonKey(name: "desc") dynamic desc,
       @JsonKey(name: "creator_id") int? creatorId,
       @JsonKey(name: "last_editor_id") int? lastEditorId,
@@ -321,6 +327,8 @@ class _$DataBahasaCopyWithImpl<$Res, $Val extends DataBahasa>
     Object? bhsDikuasai = freezed,
     Object? nilaiLisan = freezed,
     Object? nilaiTertulis = freezed,
+    Object? levelLisan = freezed,
+    Object? levelTertulis = freezed,
     Object? desc = freezed,
     Object? creatorId = freezed,
     Object? lastEditorId = freezed,
@@ -356,6 +364,14 @@ class _$DataBahasaCopyWithImpl<$Res, $Val extends DataBahasa>
           ? _value.nilaiTertulis
           : nilaiTertulis // ignore: cast_nullable_to_non_nullable
               as int?,
+      levelLisan: freezed == levelLisan
+          ? _value.levelLisan
+          : levelLisan // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      levelTertulis: freezed == levelTertulis
+          ? _value.levelTertulis
+          : levelTertulis // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       desc: freezed == desc
           ? _value.desc
           : desc // ignore: cast_nullable_to_non_nullable
@@ -396,6 +412,8 @@ abstract class _$$DataBahasaImplCopyWith<$Res>
       @JsonKey(name: "bhs_dikuasai") String? bhsDikuasai,
       @JsonKey(name: "nilai_lisan") int? nilaiLisan,
       @JsonKey(name: "nilai_tertulis") int? nilaiTertulis,
+      @JsonKey(name: "level_lisan") dynamic levelLisan,
+      @JsonKey(name: "level_tertulis") dynamic levelTertulis,
       @JsonKey(name: "desc") dynamic desc,
       @JsonKey(name: "creator_id") int? creatorId,
       @JsonKey(name: "last_editor_id") int? lastEditorId,
@@ -421,6 +439,8 @@ class __$$DataBahasaImplCopyWithImpl<$Res>
     Object? bhsDikuasai = freezed,
     Object? nilaiLisan = freezed,
     Object? nilaiTertulis = freezed,
+    Object? levelLisan = freezed,
+    Object? levelTertulis = freezed,
     Object? desc = freezed,
     Object? creatorId = freezed,
     Object? lastEditorId = freezed,
@@ -456,6 +476,14 @@ class __$$DataBahasaImplCopyWithImpl<$Res>
           ? _value.nilaiTertulis
           : nilaiTertulis // ignore: cast_nullable_to_non_nullable
               as int?,
+      levelLisan: freezed == levelLisan
+          ? _value.levelLisan
+          : levelLisan // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      levelTertulis: freezed == levelTertulis
+          ? _value.levelTertulis
+          : levelTertulis // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       desc: freezed == desc
           ? _value.desc
           : desc // ignore: cast_nullable_to_non_nullable
@@ -491,6 +519,8 @@ class _$DataBahasaImpl implements _DataBahasa {
       @JsonKey(name: "bhs_dikuasai") this.bhsDikuasai,
       @JsonKey(name: "nilai_lisan") this.nilaiLisan,
       @JsonKey(name: "nilai_tertulis") this.nilaiTertulis,
+      @JsonKey(name: "level_lisan") this.levelLisan,
+      @JsonKey(name: "level_tertulis") this.levelTertulis,
       @JsonKey(name: "desc") this.desc,
       @JsonKey(name: "creator_id") this.creatorId,
       @JsonKey(name: "last_editor_id") this.lastEditorId,
@@ -522,6 +552,12 @@ class _$DataBahasaImpl implements _DataBahasa {
   @JsonKey(name: "nilai_tertulis")
   final int? nilaiTertulis;
   @override
+  @JsonKey(name: "level_lisan")
+  final dynamic levelLisan;
+  @override
+  @JsonKey(name: "level_tertulis")
+  final dynamic levelTertulis;
+  @override
   @JsonKey(name: "desc")
   final dynamic desc;
   @override
@@ -539,7 +575,7 @@ class _$DataBahasaImpl implements _DataBahasa {
 
   @override
   String toString() {
-    return 'DataBahasa(id: $id, mKaryId: $mKaryId, mCompId: $mCompId, mDirId: $mDirId, bhsDikuasai: $bhsDikuasai, nilaiLisan: $nilaiLisan, nilaiTertulis: $nilaiTertulis, desc: $desc, creatorId: $creatorId, lastEditorId: $lastEditorId, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'DataBahasa(id: $id, mKaryId: $mKaryId, mCompId: $mCompId, mDirId: $mDirId, bhsDikuasai: $bhsDikuasai, nilaiLisan: $nilaiLisan, nilaiTertulis: $nilaiTertulis, levelLisan: $levelLisan, levelTertulis: $levelTertulis, desc: $desc, creatorId: $creatorId, lastEditorId: $lastEditorId, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -557,6 +593,10 @@ class _$DataBahasaImpl implements _DataBahasa {
                 other.nilaiLisan == nilaiLisan) &&
             (identical(other.nilaiTertulis, nilaiTertulis) ||
                 other.nilaiTertulis == nilaiTertulis) &&
+            const DeepCollectionEquality()
+                .equals(other.levelLisan, levelLisan) &&
+            const DeepCollectionEquality()
+                .equals(other.levelTertulis, levelTertulis) &&
             const DeepCollectionEquality().equals(other.desc, desc) &&
             (identical(other.creatorId, creatorId) ||
                 other.creatorId == creatorId) &&
@@ -579,6 +619,8 @@ class _$DataBahasaImpl implements _DataBahasa {
       bhsDikuasai,
       nilaiLisan,
       nilaiTertulis,
+      const DeepCollectionEquality().hash(levelLisan),
+      const DeepCollectionEquality().hash(levelTertulis),
       const DeepCollectionEquality().hash(desc),
       creatorId,
       lastEditorId,
@@ -608,6 +650,8 @@ abstract class _DataBahasa implements DataBahasa {
       @JsonKey(name: "bhs_dikuasai") final String? bhsDikuasai,
       @JsonKey(name: "nilai_lisan") final int? nilaiLisan,
       @JsonKey(name: "nilai_tertulis") final int? nilaiTertulis,
+      @JsonKey(name: "level_lisan") final dynamic levelLisan,
+      @JsonKey(name: "level_tertulis") final dynamic levelTertulis,
       @JsonKey(name: "desc") final dynamic desc,
       @JsonKey(name: "creator_id") final int? creatorId,
       @JsonKey(name: "last_editor_id") final int? lastEditorId,
@@ -638,6 +682,12 @@ abstract class _DataBahasa implements DataBahasa {
   @override
   @JsonKey(name: "nilai_tertulis")
   int? get nilaiTertulis;
+  @override
+  @JsonKey(name: "level_lisan")
+  dynamic get levelLisan;
+  @override
+  @JsonKey(name: "level_tertulis")
+  dynamic get levelTertulis;
   @override
   @JsonKey(name: "desc")
   dynamic get desc;

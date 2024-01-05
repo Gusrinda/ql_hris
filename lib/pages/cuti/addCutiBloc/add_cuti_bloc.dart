@@ -152,12 +152,17 @@ class AddCutiBloc extends Bloc<AddCutiEvent, AddCutiState> {
       if (resToken is ServicesSuccess) {
         var res = await CutiServices.editCuti(
           resToken.response["token"],
-          event.id,
+          event.cutiID,
+          resToken.response["m_comp_id"] ?? -99,
+          resToken.response["m_dir_id"] ?? -99,
+          resToken.response["m_kary_id"] ?? -99,
           event.keterangan,
-          event.alasan,
+          event.alasan ?? -99,
           event.tipeCuti,
           event.dateFrom,
           event.dateTo,
+          event.timeFrom ?? "08:00",
+          event.timeTo ?? "08:00",
         );
         if (res is ServicesSuccess) {
           emit(AddCutiSuccess(message: "Edit pengajuan cuti berhasil"));

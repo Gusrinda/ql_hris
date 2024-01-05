@@ -15,12 +15,15 @@ import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/pic_search.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/selector/general_selector.dart';
 import 'package:sj_presensi_mobile/pages/lembur/add_lembur/add_lembur_bloc.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_pic_model.dart';
+import 'package:sj_presensi_mobile/services/model/lembur/lembur_model.dart';
 import 'package:sj_presensi_mobile/services/model/list_general/response_general.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
-class AddLemburPage extends StatefulWidget {
-  static const routeName = '/AddLemburPage';
-  AddLemburPage({super.key, required this.reloadDataCallback});
+class EditLemburPage extends StatefulWidget {
+  static const routeName = '/EditLemburPage';
+  EditLemburPage(
+      {super.key, this.dataLembur, required this.reloadDataCallback});
+  final DataLembur? dataLembur;
   final VoidCallback reloadDataCallback;
 
   final TextEditingController idAlasanController = TextEditingController();
@@ -40,10 +43,10 @@ class AddLemburPage extends StatefulWidget {
   final TextEditingController? valuePicController = TextEditingController();
 
   @override
-  State<AddLemburPage> createState() => _AddLemburPageState();
+  State<EditLemburPage> createState() => _EditLemburPageState();
 }
 
-class _AddLemburPageState extends State<AddLemburPage> {
+class _EditLemburPageState extends State<EditLemburPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String? selectedValue;
   String? selectedTipeValue;
@@ -161,7 +164,8 @@ class _AddLemburPageState extends State<AddLemburPage> {
 
         if (selectedPic != null) {
           widget.idPicController?.text = selectedPic.id?.toString() ?? '';
-          widget.valuePicController?.text = selectedPic.mKaryNamaLengkap?.toString() ?? '';
+          widget.valuePicController?.text =
+              selectedPic.mKaryNamaLengkap?.toString() ?? '';
 
           setState(() {
             this.selectedPic = selectedPic.mKaryNamaLengkap;
@@ -218,10 +222,6 @@ class _AddLemburPageState extends State<AddLemburPage> {
         }
       },
       child: Scaffold(
-        // appBar: appBarCustomV1(
-        //   title: "Pengajuan Lembur",
-        //   padLeft: 8,
-        // ),
         body: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -256,7 +256,7 @@ class _AddLemburPageState extends State<AddLemburPage> {
                     ),
                     Expanded(
                       child: Text(
-                        "Pengajuan Lembur",
+                        "Revisi Pengajuan Lembur",
                         style: GoogleFonts.poppins(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
@@ -298,7 +298,8 @@ class _AddLemburPageState extends State<AddLemburPage> {
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         FormDropDownDataWithNote(
-                                          note: "   Isi data PIC jika lembur ditujukan untuk bawahan.",
+                                          note:
+                                              "   Isi data PIC jika lembur ditujukan untuk bawahan.",
                                           showRedStar: false,
                                           input: selectedPic ?? '',
                                           onTap: () {

@@ -51,7 +51,7 @@ class PicSearchDelegate extends SearchDelegate<DataPic?> {
           children: [
             ListTile(
               title: Text(
-                searchResults[index].name ?? '-',
+                searchResults[index].mKaryNamaLengkap ?? '-',
                 style: GoogleFonts.poppins(
                     fontSize: 14.sp, fontWeight: FontWeight.w500),
               ),

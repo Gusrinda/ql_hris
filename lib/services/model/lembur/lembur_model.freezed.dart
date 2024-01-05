@@ -513,7 +513,7 @@ mixin _$DataLembur {
   @JsonKey(name: "m_kary.m_zona_id")
   int? get mKaryMZonaId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.grading_id")
-  int? get mKaryGradingId => throw _privateConstructorUsedError;
+  dynamic get mKaryGradingId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.costcontre_id")
   int? get mKaryCostcontreId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.kode")
@@ -613,10 +613,9 @@ mixin _$DataLembur {
   @JsonKey(name: "m_kary.periode_gaji_id")
   int? get mKaryPeriodeGajiId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.ref_id")
-  int? get mKaryRefId => throw _privateConstructorUsedError;
+  dynamic get mKaryRefId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.presensi_lokasi_default_id")
-  dynamic get mKaryPresensiLokasiDefaultId =>
-      throw _privateConstructorUsedError;
+  int? get mKaryPresensiLokasiDefaultId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.exp_date_cuti")
   dynamic get mKaryExpDateCuti => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.limit_potong")
@@ -702,7 +701,7 @@ mixin _$DataLembur {
   @JsonKey(name: "creator.is_active")
   bool? get creatorIsActive => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.creator_id")
-  int? get creatorCreatorId => throw _privateConstructorUsedError;
+  dynamic get creatorCreatorId => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.last_editor_id")
   int? get creatorLastEditorId => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.remember_token")
@@ -753,130 +752,40 @@ mixin _$DataLembur {
   dynamic get lastEditorMKaryId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.id")
   int? get picId => throw _privateConstructorUsedError;
+  @JsonKey(name: "pic.name")
+  String? get picName => throw _privateConstructorUsedError;
+  @JsonKey(name: "pic.email")
+  String? get picEmail => throw _privateConstructorUsedError;
+  @JsonKey(name: "pic.username")
+  String? get picUsername => throw _privateConstructorUsedError;
+  @JsonKey(name: "pic.email_verified_at")
+  dynamic get picEmailVerifiedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "pic.password")
+  String? get picPassword => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.m_comp_id")
   int? get picMCompId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.m_dir_id")
   int? get picMDirId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.m_divisi_id")
-  int? get picMDivisiId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.m_dept_id")
-  int? get picMDeptId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.m_zona_id")
-  int? get picMZonaId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.grading_id")
-  int? get picGradingId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.costcontre_id")
-  int? get picCostcontreId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.kode")
-  String? get picKode => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.m_posisi_id")
-  int? get picMPosisiId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.m_jam_kerja_id")
-  int? get picMJamKerjaId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.kode_presensi")
-  String? get picKodePresensi => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.nik")
-  String? get picNik => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.nama_depan")
-  String? get picNamaDepan => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.nama_belakang")
-  String? get picNamaBelakang => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.nama_lengkap")
-  String? get picNamaLengkap => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.nama_panggilan")
-  String? get picNamaPanggilan => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.jk_id")
-  int? get picJkId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.tempat_lahir")
-  String? get picTempatLahir => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.tgl_lahir")
-  String? get picTglLahir => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.provinsi_id")
-  int? get picProvinsiId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.kota_id")
-  int? get picKotaId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.kecamatan_id")
-  int? get picKecamatanId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.kode_pos")
-  String? get picKodePos => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.alamat_asli")
-  String? get picAlamatAsli => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.alamat_domisili")
-  String? get picAlamatDomisili => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.no_tlp")
-  String? get picNoTlp => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.no_tlp_lainnya")
-  dynamic get picNoTlpLainnya => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.no_darurat")
-  String? get picNoDarurat => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.nama_kontak_darurat")
-  String? get picNamaKontakDarurat => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.agama_id")
-  int? get picAgamaId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.gol_darah_id")
-  int? get picGolDarahId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.status_nikah_id")
-  int? get picStatusNikahId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.tanggungan_id")
-  int? get picTanggunganId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.hub_dgn_karyawan")
-  String? get picHubDgnKaryawan => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.cuti_jatah_reguler")
-  int? get picCutiJatahReguler => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.cuti_sisa_reguler")
-  int? get picCutiSisaReguler => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.cuti_panjang")
-  int? get picCutiPanjang => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.cuti_sisa_panjang")
-  int? get picCutiSisaPanjang => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.status_kary_id")
-  dynamic get picStatusKaryId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.lama_kontrak_awal")
-  dynamic get picLamaKontrakAwal => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.lama_kontrak_akhir")
-  dynamic get picLamaKontrakAkhir => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.tgl_masuk")
-  dynamic get picTglMasuk => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.tgl_berhenti")
-  dynamic get picTglBerhenti => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.alasan_berhenti")
-  dynamic get picAlasanBerhenti => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.uk_baju")
-  String? get picUkBaju => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.uk_celana")
-  String? get picUkCelana => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.uk_sepatu")
-  String? get picUkSepatu => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.desc")
-  dynamic get picDesc => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.is_active")
   bool? get picIsActive => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.creator_id")
-  dynamic get picCreatorId => throw _privateConstructorUsedError;
+  int? get picCreatorId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.last_editor_id")
   int? get picLastEditorId => throw _privateConstructorUsedError;
+  @JsonKey(name: "pic.remember_token")
+  dynamic get picRememberToken => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.created_at")
   String? get picCreatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.updated_at")
   String? get picUpdatedAt => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.m_standart_gaji_id")
-  int? get picMStandartGajiId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.periode_gaji_id")
-  int? get picPeriodeGajiId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.ref_id")
-  int? get picRefId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.presensi_lokasi_default_id")
-  dynamic get picPresensiLokasiDefaultId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.exp_date_cuti")
-  String? get picExpDateCuti => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.limit_potong")
-  int? get picLimitPotong => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.atasan_id")
-  int? get picAtasanId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.cuti_p24")
-  dynamic get picCutiP24 => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.cuti_sisa_p24")
-  dynamic get picCutiSisaP24 => throw _privateConstructorUsedError;
+  @JsonKey(name: "pic.profil_image")
+  String? get picProfilImage => throw _privateConstructorUsedError;
+  @JsonKey(name: "pic.telp")
+  String? get picTelp => throw _privateConstructorUsedError;
+  @JsonKey(name: "pic.m_kary_id")
+  int? get picMKaryId => throw _privateConstructorUsedError;
+  @JsonKey(name: "pic.nama_lengkap")
+  String? get picNamaLengkap => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -938,7 +847,7 @@ abstract class $DataLemburCopyWith<$Res> {
       @JsonKey(name: "m_kary.m_divisi_id") int? mKaryMDivisiId,
       @JsonKey(name: "m_kary.m_dept_id") int? mKaryMDeptId,
       @JsonKey(name: "m_kary.m_zona_id") int? mKaryMZonaId,
-      @JsonKey(name: "m_kary.grading_id") int? mKaryGradingId,
+      @JsonKey(name: "m_kary.grading_id") dynamic mKaryGradingId,
       @JsonKey(name: "m_kary.costcontre_id") int? mKaryCostcontreId,
       @JsonKey(name: "m_kary.kode") String? mKaryKode,
       @JsonKey(name: "m_kary.m_posisi_id") int? mKaryMPosisiId,
@@ -989,9 +898,9 @@ abstract class $DataLemburCopyWith<$Res> {
       @JsonKey(name: "m_kary.updated_at") String? mKaryUpdatedAt,
       @JsonKey(name: "m_kary.m_standart_gaji_id") int? mKaryMStandartGajiId,
       @JsonKey(name: "m_kary.periode_gaji_id") int? mKaryPeriodeGajiId,
-      @JsonKey(name: "m_kary.ref_id") int? mKaryRefId,
+      @JsonKey(name: "m_kary.ref_id") dynamic mKaryRefId,
       @JsonKey(name: "m_kary.presensi_lokasi_default_id")
-      dynamic mKaryPresensiLokasiDefaultId,
+      int? mKaryPresensiLokasiDefaultId,
       @JsonKey(name: "m_kary.exp_date_cuti") dynamic mKaryExpDateCuti,
       @JsonKey(name: "m_kary.limit_potong") int? mKaryLimitPotong,
       @JsonKey(name: "m_kary.atasan_id") int? mKaryAtasanId,
@@ -1036,7 +945,7 @@ abstract class $DataLemburCopyWith<$Res> {
       @JsonKey(name: "creator.m_comp_id") int? creatorMCompId,
       @JsonKey(name: "creator.m_dir_id") int? creatorMDirId,
       @JsonKey(name: "creator.is_active") bool? creatorIsActive,
-      @JsonKey(name: "creator.creator_id") int? creatorCreatorId,
+      @JsonKey(name: "creator.creator_id") dynamic creatorCreatorId,
       @JsonKey(name: "creator.last_editor_id") int? creatorLastEditorId,
       @JsonKey(name: "creator.remember_token") dynamic creatorRememberToken,
       @JsonKey(name: "creator.created_at") String? creatorCreatedAt,
@@ -1065,69 +974,23 @@ abstract class $DataLemburCopyWith<$Res> {
       @JsonKey(name: "last_editor.telp") dynamic lastEditorTelp,
       @JsonKey(name: "last_editor.m_kary_id") dynamic lastEditorMKaryId,
       @JsonKey(name: "pic.id") int? picId,
+      @JsonKey(name: "pic.name") String? picName,
+      @JsonKey(name: "pic.email") String? picEmail,
+      @JsonKey(name: "pic.username") String? picUsername,
+      @JsonKey(name: "pic.email_verified_at") dynamic picEmailVerifiedAt,
+      @JsonKey(name: "pic.password") String? picPassword,
       @JsonKey(name: "pic.m_comp_id") int? picMCompId,
       @JsonKey(name: "pic.m_dir_id") int? picMDirId,
-      @JsonKey(name: "pic.m_divisi_id") int? picMDivisiId,
-      @JsonKey(name: "pic.m_dept_id") int? picMDeptId,
-      @JsonKey(name: "pic.m_zona_id") int? picMZonaId,
-      @JsonKey(name: "pic.grading_id") int? picGradingId,
-      @JsonKey(name: "pic.costcontre_id") int? picCostcontreId,
-      @JsonKey(name: "pic.kode") String? picKode,
-      @JsonKey(name: "pic.m_posisi_id") int? picMPosisiId,
-      @JsonKey(name: "pic.m_jam_kerja_id") int? picMJamKerjaId,
-      @JsonKey(name: "pic.kode_presensi") String? picKodePresensi,
-      @JsonKey(name: "pic.nik") String? picNik,
-      @JsonKey(name: "pic.nama_depan") String? picNamaDepan,
-      @JsonKey(name: "pic.nama_belakang") String? picNamaBelakang,
-      @JsonKey(name: "pic.nama_lengkap") String? picNamaLengkap,
-      @JsonKey(name: "pic.nama_panggilan") String? picNamaPanggilan,
-      @JsonKey(name: "pic.jk_id") int? picJkId,
-      @JsonKey(name: "pic.tempat_lahir") String? picTempatLahir,
-      @JsonKey(name: "pic.tgl_lahir") String? picTglLahir,
-      @JsonKey(name: "pic.provinsi_id") int? picProvinsiId,
-      @JsonKey(name: "pic.kota_id") int? picKotaId,
-      @JsonKey(name: "pic.kecamatan_id") int? picKecamatanId,
-      @JsonKey(name: "pic.kode_pos") String? picKodePos,
-      @JsonKey(name: "pic.alamat_asli") String? picAlamatAsli,
-      @JsonKey(name: "pic.alamat_domisili") String? picAlamatDomisili,
-      @JsonKey(name: "pic.no_tlp") String? picNoTlp,
-      @JsonKey(name: "pic.no_tlp_lainnya") dynamic picNoTlpLainnya,
-      @JsonKey(name: "pic.no_darurat") String? picNoDarurat,
-      @JsonKey(name: "pic.nama_kontak_darurat") String? picNamaKontakDarurat,
-      @JsonKey(name: "pic.agama_id") int? picAgamaId,
-      @JsonKey(name: "pic.gol_darah_id") int? picGolDarahId,
-      @JsonKey(name: "pic.status_nikah_id") int? picStatusNikahId,
-      @JsonKey(name: "pic.tanggungan_id") int? picTanggunganId,
-      @JsonKey(name: "pic.hub_dgn_karyawan") String? picHubDgnKaryawan,
-      @JsonKey(name: "pic.cuti_jatah_reguler") int? picCutiJatahReguler,
-      @JsonKey(name: "pic.cuti_sisa_reguler") int? picCutiSisaReguler,
-      @JsonKey(name: "pic.cuti_panjang") int? picCutiPanjang,
-      @JsonKey(name: "pic.cuti_sisa_panjang") int? picCutiSisaPanjang,
-      @JsonKey(name: "pic.status_kary_id") dynamic picStatusKaryId,
-      @JsonKey(name: "pic.lama_kontrak_awal") dynamic picLamaKontrakAwal,
-      @JsonKey(name: "pic.lama_kontrak_akhir") dynamic picLamaKontrakAkhir,
-      @JsonKey(name: "pic.tgl_masuk") dynamic picTglMasuk,
-      @JsonKey(name: "pic.tgl_berhenti") dynamic picTglBerhenti,
-      @JsonKey(name: "pic.alasan_berhenti") dynamic picAlasanBerhenti,
-      @JsonKey(name: "pic.uk_baju") String? picUkBaju,
-      @JsonKey(name: "pic.uk_celana") String? picUkCelana,
-      @JsonKey(name: "pic.uk_sepatu") String? picUkSepatu,
-      @JsonKey(name: "pic.desc") dynamic picDesc,
       @JsonKey(name: "pic.is_active") bool? picIsActive,
-      @JsonKey(name: "pic.creator_id") dynamic picCreatorId,
+      @JsonKey(name: "pic.creator_id") int? picCreatorId,
       @JsonKey(name: "pic.last_editor_id") int? picLastEditorId,
+      @JsonKey(name: "pic.remember_token") dynamic picRememberToken,
       @JsonKey(name: "pic.created_at") String? picCreatedAt,
       @JsonKey(name: "pic.updated_at") String? picUpdatedAt,
-      @JsonKey(name: "pic.m_standart_gaji_id") int? picMStandartGajiId,
-      @JsonKey(name: "pic.periode_gaji_id") int? picPeriodeGajiId,
-      @JsonKey(name: "pic.ref_id") int? picRefId,
-      @JsonKey(name: "pic.presensi_lokasi_default_id")
-      dynamic picPresensiLokasiDefaultId,
-      @JsonKey(name: "pic.exp_date_cuti") String? picExpDateCuti,
-      @JsonKey(name: "pic.limit_potong") int? picLimitPotong,
-      @JsonKey(name: "pic.atasan_id") int? picAtasanId,
-      @JsonKey(name: "pic.cuti_p24") dynamic picCutiP24,
-      @JsonKey(name: "pic.cuti_sisa_p24") dynamic picCutiSisaP24});
+      @JsonKey(name: "pic.profil_image") String? picProfilImage,
+      @JsonKey(name: "pic.telp") String? picTelp,
+      @JsonKey(name: "pic.m_kary_id") int? picMKaryId,
+      @JsonKey(name: "pic.nama_lengkap") String? picNamaLengkap});
 }
 
 /// @nodoc
@@ -1310,68 +1173,23 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
     Object? lastEditorTelp = freezed,
     Object? lastEditorMKaryId = freezed,
     Object? picId = freezed,
+    Object? picName = freezed,
+    Object? picEmail = freezed,
+    Object? picUsername = freezed,
+    Object? picEmailVerifiedAt = freezed,
+    Object? picPassword = freezed,
     Object? picMCompId = freezed,
     Object? picMDirId = freezed,
-    Object? picMDivisiId = freezed,
-    Object? picMDeptId = freezed,
-    Object? picMZonaId = freezed,
-    Object? picGradingId = freezed,
-    Object? picCostcontreId = freezed,
-    Object? picKode = freezed,
-    Object? picMPosisiId = freezed,
-    Object? picMJamKerjaId = freezed,
-    Object? picKodePresensi = freezed,
-    Object? picNik = freezed,
-    Object? picNamaDepan = freezed,
-    Object? picNamaBelakang = freezed,
-    Object? picNamaLengkap = freezed,
-    Object? picNamaPanggilan = freezed,
-    Object? picJkId = freezed,
-    Object? picTempatLahir = freezed,
-    Object? picTglLahir = freezed,
-    Object? picProvinsiId = freezed,
-    Object? picKotaId = freezed,
-    Object? picKecamatanId = freezed,
-    Object? picKodePos = freezed,
-    Object? picAlamatAsli = freezed,
-    Object? picAlamatDomisili = freezed,
-    Object? picNoTlp = freezed,
-    Object? picNoTlpLainnya = freezed,
-    Object? picNoDarurat = freezed,
-    Object? picNamaKontakDarurat = freezed,
-    Object? picAgamaId = freezed,
-    Object? picGolDarahId = freezed,
-    Object? picStatusNikahId = freezed,
-    Object? picTanggunganId = freezed,
-    Object? picHubDgnKaryawan = freezed,
-    Object? picCutiJatahReguler = freezed,
-    Object? picCutiSisaReguler = freezed,
-    Object? picCutiPanjang = freezed,
-    Object? picCutiSisaPanjang = freezed,
-    Object? picStatusKaryId = freezed,
-    Object? picLamaKontrakAwal = freezed,
-    Object? picLamaKontrakAkhir = freezed,
-    Object? picTglMasuk = freezed,
-    Object? picTglBerhenti = freezed,
-    Object? picAlasanBerhenti = freezed,
-    Object? picUkBaju = freezed,
-    Object? picUkCelana = freezed,
-    Object? picUkSepatu = freezed,
-    Object? picDesc = freezed,
     Object? picIsActive = freezed,
     Object? picCreatorId = freezed,
     Object? picLastEditorId = freezed,
+    Object? picRememberToken = freezed,
     Object? picCreatedAt = freezed,
     Object? picUpdatedAt = freezed,
-    Object? picMStandartGajiId = freezed,
-    Object? picPeriodeGajiId = freezed,
-    Object? picRefId = freezed,
-    Object? picPresensiLokasiDefaultId = freezed,
-    Object? picExpDateCuti = freezed,
-    Object? picLimitPotong = freezed,
-    Object? picAtasanId = freezed,
-    Object? picCutiP24 = freezed,
-    Object? picCutiSisaP24 = freezed,
+    Object? picProfilImage = freezed,
+    Object? picTelp = freezed,
+    Object? picMKaryId = freezed,
+    Object? picNamaLengkap = freezed,
   }) {
     return _then(_value.copyWith(
       metaRead: freezed == metaRead
@@ -1565,7 +1383,7 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
       mKaryGradingId: freezed == mKaryGradingId
           ? _value.mKaryGradingId
           : mKaryGradingId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryCostcontreId: freezed == mKaryCostcontreId
           ? _value.mKaryCostcontreId
           : mKaryCostcontreId // ignore: cast_nullable_to_non_nullable
@@ -1765,11 +1583,11 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
       mKaryRefId: freezed == mKaryRefId
           ? _value.mKaryRefId
           : mKaryRefId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryPresensiLokasiDefaultId: freezed == mKaryPresensiLokasiDefaultId
           ? _value.mKaryPresensiLokasiDefaultId
           : mKaryPresensiLokasiDefaultId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       mKaryExpDateCuti: freezed == mKaryExpDateCuti
           ? _value.mKaryExpDateCuti
           : mKaryExpDateCuti // ignore: cast_nullable_to_non_nullable
@@ -1941,7 +1759,7 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
       creatorCreatorId: freezed == creatorCreatorId
           ? _value.creatorCreatorId
           : creatorCreatorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       creatorLastEditorId: freezed == creatorLastEditorId
           ? _value.creatorLastEditorId
           : creatorLastEditorId // ignore: cast_nullable_to_non_nullable
@@ -2042,6 +1860,26 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
           ? _value.picId
           : picId // ignore: cast_nullable_to_non_nullable
               as int?,
+      picName: freezed == picName
+          ? _value.picName
+          : picName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      picEmail: freezed == picEmail
+          ? _value.picEmail
+          : picEmail // ignore: cast_nullable_to_non_nullable
+              as String?,
+      picUsername: freezed == picUsername
+          ? _value.picUsername
+          : picUsername // ignore: cast_nullable_to_non_nullable
+              as String?,
+      picEmailVerifiedAt: freezed == picEmailVerifiedAt
+          ? _value.picEmailVerifiedAt
+          : picEmailVerifiedAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      picPassword: freezed == picPassword
+          ? _value.picPassword
+          : picPassword // ignore: cast_nullable_to_non_nullable
+              as String?,
       picMCompId: freezed == picMCompId
           ? _value.picMCompId
           : picMCompId // ignore: cast_nullable_to_non_nullable
@@ -2050,190 +1888,6 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
           ? _value.picMDirId
           : picMDirId // ignore: cast_nullable_to_non_nullable
               as int?,
-      picMDivisiId: freezed == picMDivisiId
-          ? _value.picMDivisiId
-          : picMDivisiId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picMDeptId: freezed == picMDeptId
-          ? _value.picMDeptId
-          : picMDeptId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picMZonaId: freezed == picMZonaId
-          ? _value.picMZonaId
-          : picMZonaId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picGradingId: freezed == picGradingId
-          ? _value.picGradingId
-          : picGradingId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picCostcontreId: freezed == picCostcontreId
-          ? _value.picCostcontreId
-          : picCostcontreId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picKode: freezed == picKode
-          ? _value.picKode
-          : picKode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picMPosisiId: freezed == picMPosisiId
-          ? _value.picMPosisiId
-          : picMPosisiId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picMJamKerjaId: freezed == picMJamKerjaId
-          ? _value.picMJamKerjaId
-          : picMJamKerjaId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picKodePresensi: freezed == picKodePresensi
-          ? _value.picKodePresensi
-          : picKodePresensi // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picNik: freezed == picNik
-          ? _value.picNik
-          : picNik // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picNamaDepan: freezed == picNamaDepan
-          ? _value.picNamaDepan
-          : picNamaDepan // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picNamaBelakang: freezed == picNamaBelakang
-          ? _value.picNamaBelakang
-          : picNamaBelakang // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picNamaLengkap: freezed == picNamaLengkap
-          ? _value.picNamaLengkap
-          : picNamaLengkap // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picNamaPanggilan: freezed == picNamaPanggilan
-          ? _value.picNamaPanggilan
-          : picNamaPanggilan // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picJkId: freezed == picJkId
-          ? _value.picJkId
-          : picJkId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picTempatLahir: freezed == picTempatLahir
-          ? _value.picTempatLahir
-          : picTempatLahir // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picTglLahir: freezed == picTglLahir
-          ? _value.picTglLahir
-          : picTglLahir // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picProvinsiId: freezed == picProvinsiId
-          ? _value.picProvinsiId
-          : picProvinsiId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picKotaId: freezed == picKotaId
-          ? _value.picKotaId
-          : picKotaId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picKecamatanId: freezed == picKecamatanId
-          ? _value.picKecamatanId
-          : picKecamatanId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picKodePos: freezed == picKodePos
-          ? _value.picKodePos
-          : picKodePos // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picAlamatAsli: freezed == picAlamatAsli
-          ? _value.picAlamatAsli
-          : picAlamatAsli // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picAlamatDomisili: freezed == picAlamatDomisili
-          ? _value.picAlamatDomisili
-          : picAlamatDomisili // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picNoTlp: freezed == picNoTlp
-          ? _value.picNoTlp
-          : picNoTlp // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picNoTlpLainnya: freezed == picNoTlpLainnya
-          ? _value.picNoTlpLainnya
-          : picNoTlpLainnya // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      picNoDarurat: freezed == picNoDarurat
-          ? _value.picNoDarurat
-          : picNoDarurat // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picNamaKontakDarurat: freezed == picNamaKontakDarurat
-          ? _value.picNamaKontakDarurat
-          : picNamaKontakDarurat // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picAgamaId: freezed == picAgamaId
-          ? _value.picAgamaId
-          : picAgamaId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picGolDarahId: freezed == picGolDarahId
-          ? _value.picGolDarahId
-          : picGolDarahId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picStatusNikahId: freezed == picStatusNikahId
-          ? _value.picStatusNikahId
-          : picStatusNikahId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picTanggunganId: freezed == picTanggunganId
-          ? _value.picTanggunganId
-          : picTanggunganId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picHubDgnKaryawan: freezed == picHubDgnKaryawan
-          ? _value.picHubDgnKaryawan
-          : picHubDgnKaryawan // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picCutiJatahReguler: freezed == picCutiJatahReguler
-          ? _value.picCutiJatahReguler
-          : picCutiJatahReguler // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picCutiSisaReguler: freezed == picCutiSisaReguler
-          ? _value.picCutiSisaReguler
-          : picCutiSisaReguler // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picCutiPanjang: freezed == picCutiPanjang
-          ? _value.picCutiPanjang
-          : picCutiPanjang // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picCutiSisaPanjang: freezed == picCutiSisaPanjang
-          ? _value.picCutiSisaPanjang
-          : picCutiSisaPanjang // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picStatusKaryId: freezed == picStatusKaryId
-          ? _value.picStatusKaryId
-          : picStatusKaryId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      picLamaKontrakAwal: freezed == picLamaKontrakAwal
-          ? _value.picLamaKontrakAwal
-          : picLamaKontrakAwal // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      picLamaKontrakAkhir: freezed == picLamaKontrakAkhir
-          ? _value.picLamaKontrakAkhir
-          : picLamaKontrakAkhir // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      picTglMasuk: freezed == picTglMasuk
-          ? _value.picTglMasuk
-          : picTglMasuk // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      picTglBerhenti: freezed == picTglBerhenti
-          ? _value.picTglBerhenti
-          : picTglBerhenti // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      picAlasanBerhenti: freezed == picAlasanBerhenti
-          ? _value.picAlasanBerhenti
-          : picAlasanBerhenti // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      picUkBaju: freezed == picUkBaju
-          ? _value.picUkBaju
-          : picUkBaju // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picUkCelana: freezed == picUkCelana
-          ? _value.picUkCelana
-          : picUkCelana // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picUkSepatu: freezed == picUkSepatu
-          ? _value.picUkSepatu
-          : picUkSepatu // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picDesc: freezed == picDesc
-          ? _value.picDesc
-          : picDesc // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       picIsActive: freezed == picIsActive
           ? _value.picIsActive
           : picIsActive // ignore: cast_nullable_to_non_nullable
@@ -2241,11 +1895,15 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
       picCreatorId: freezed == picCreatorId
           ? _value.picCreatorId
           : picCreatorId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       picLastEditorId: freezed == picLastEditorId
           ? _value.picLastEditorId
           : picLastEditorId // ignore: cast_nullable_to_non_nullable
               as int?,
+      picRememberToken: freezed == picRememberToken
+          ? _value.picRememberToken
+          : picRememberToken // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       picCreatedAt: freezed == picCreatedAt
           ? _value.picCreatedAt
           : picCreatedAt // ignore: cast_nullable_to_non_nullable
@@ -2254,42 +1912,22 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
           ? _value.picUpdatedAt
           : picUpdatedAt // ignore: cast_nullable_to_non_nullable
               as String?,
-      picMStandartGajiId: freezed == picMStandartGajiId
-          ? _value.picMStandartGajiId
-          : picMStandartGajiId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picPeriodeGajiId: freezed == picPeriodeGajiId
-          ? _value.picPeriodeGajiId
-          : picPeriodeGajiId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picRefId: freezed == picRefId
-          ? _value.picRefId
-          : picRefId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picPresensiLokasiDefaultId: freezed == picPresensiLokasiDefaultId
-          ? _value.picPresensiLokasiDefaultId
-          : picPresensiLokasiDefaultId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      picExpDateCuti: freezed == picExpDateCuti
-          ? _value.picExpDateCuti
-          : picExpDateCuti // ignore: cast_nullable_to_non_nullable
+      picProfilImage: freezed == picProfilImage
+          ? _value.picProfilImage
+          : picProfilImage // ignore: cast_nullable_to_non_nullable
               as String?,
-      picLimitPotong: freezed == picLimitPotong
-          ? _value.picLimitPotong
-          : picLimitPotong // ignore: cast_nullable_to_non_nullable
+      picTelp: freezed == picTelp
+          ? _value.picTelp
+          : picTelp // ignore: cast_nullable_to_non_nullable
+              as String?,
+      picMKaryId: freezed == picMKaryId
+          ? _value.picMKaryId
+          : picMKaryId // ignore: cast_nullable_to_non_nullable
               as int?,
-      picAtasanId: freezed == picAtasanId
-          ? _value.picAtasanId
-          : picAtasanId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picCutiP24: freezed == picCutiP24
-          ? _value.picCutiP24
-          : picCutiP24 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      picCutiSisaP24: freezed == picCutiSisaP24
-          ? _value.picCutiSisaP24
-          : picCutiSisaP24 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+      picNamaLengkap: freezed == picNamaLengkap
+          ? _value.picNamaLengkap
+          : picNamaLengkap // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -2350,7 +1988,7 @@ abstract class _$$DataLemburImplCopyWith<$Res>
       @JsonKey(name: "m_kary.m_divisi_id") int? mKaryMDivisiId,
       @JsonKey(name: "m_kary.m_dept_id") int? mKaryMDeptId,
       @JsonKey(name: "m_kary.m_zona_id") int? mKaryMZonaId,
-      @JsonKey(name: "m_kary.grading_id") int? mKaryGradingId,
+      @JsonKey(name: "m_kary.grading_id") dynamic mKaryGradingId,
       @JsonKey(name: "m_kary.costcontre_id") int? mKaryCostcontreId,
       @JsonKey(name: "m_kary.kode") String? mKaryKode,
       @JsonKey(name: "m_kary.m_posisi_id") int? mKaryMPosisiId,
@@ -2401,9 +2039,9 @@ abstract class _$$DataLemburImplCopyWith<$Res>
       @JsonKey(name: "m_kary.updated_at") String? mKaryUpdatedAt,
       @JsonKey(name: "m_kary.m_standart_gaji_id") int? mKaryMStandartGajiId,
       @JsonKey(name: "m_kary.periode_gaji_id") int? mKaryPeriodeGajiId,
-      @JsonKey(name: "m_kary.ref_id") int? mKaryRefId,
+      @JsonKey(name: "m_kary.ref_id") dynamic mKaryRefId,
       @JsonKey(name: "m_kary.presensi_lokasi_default_id")
-      dynamic mKaryPresensiLokasiDefaultId,
+      int? mKaryPresensiLokasiDefaultId,
       @JsonKey(name: "m_kary.exp_date_cuti") dynamic mKaryExpDateCuti,
       @JsonKey(name: "m_kary.limit_potong") int? mKaryLimitPotong,
       @JsonKey(name: "m_kary.atasan_id") int? mKaryAtasanId,
@@ -2448,7 +2086,7 @@ abstract class _$$DataLemburImplCopyWith<$Res>
       @JsonKey(name: "creator.m_comp_id") int? creatorMCompId,
       @JsonKey(name: "creator.m_dir_id") int? creatorMDirId,
       @JsonKey(name: "creator.is_active") bool? creatorIsActive,
-      @JsonKey(name: "creator.creator_id") int? creatorCreatorId,
+      @JsonKey(name: "creator.creator_id") dynamic creatorCreatorId,
       @JsonKey(name: "creator.last_editor_id") int? creatorLastEditorId,
       @JsonKey(name: "creator.remember_token") dynamic creatorRememberToken,
       @JsonKey(name: "creator.created_at") String? creatorCreatedAt,
@@ -2477,69 +2115,23 @@ abstract class _$$DataLemburImplCopyWith<$Res>
       @JsonKey(name: "last_editor.telp") dynamic lastEditorTelp,
       @JsonKey(name: "last_editor.m_kary_id") dynamic lastEditorMKaryId,
       @JsonKey(name: "pic.id") int? picId,
+      @JsonKey(name: "pic.name") String? picName,
+      @JsonKey(name: "pic.email") String? picEmail,
+      @JsonKey(name: "pic.username") String? picUsername,
+      @JsonKey(name: "pic.email_verified_at") dynamic picEmailVerifiedAt,
+      @JsonKey(name: "pic.password") String? picPassword,
       @JsonKey(name: "pic.m_comp_id") int? picMCompId,
       @JsonKey(name: "pic.m_dir_id") int? picMDirId,
-      @JsonKey(name: "pic.m_divisi_id") int? picMDivisiId,
-      @JsonKey(name: "pic.m_dept_id") int? picMDeptId,
-      @JsonKey(name: "pic.m_zona_id") int? picMZonaId,
-      @JsonKey(name: "pic.grading_id") int? picGradingId,
-      @JsonKey(name: "pic.costcontre_id") int? picCostcontreId,
-      @JsonKey(name: "pic.kode") String? picKode,
-      @JsonKey(name: "pic.m_posisi_id") int? picMPosisiId,
-      @JsonKey(name: "pic.m_jam_kerja_id") int? picMJamKerjaId,
-      @JsonKey(name: "pic.kode_presensi") String? picKodePresensi,
-      @JsonKey(name: "pic.nik") String? picNik,
-      @JsonKey(name: "pic.nama_depan") String? picNamaDepan,
-      @JsonKey(name: "pic.nama_belakang") String? picNamaBelakang,
-      @JsonKey(name: "pic.nama_lengkap") String? picNamaLengkap,
-      @JsonKey(name: "pic.nama_panggilan") String? picNamaPanggilan,
-      @JsonKey(name: "pic.jk_id") int? picJkId,
-      @JsonKey(name: "pic.tempat_lahir") String? picTempatLahir,
-      @JsonKey(name: "pic.tgl_lahir") String? picTglLahir,
-      @JsonKey(name: "pic.provinsi_id") int? picProvinsiId,
-      @JsonKey(name: "pic.kota_id") int? picKotaId,
-      @JsonKey(name: "pic.kecamatan_id") int? picKecamatanId,
-      @JsonKey(name: "pic.kode_pos") String? picKodePos,
-      @JsonKey(name: "pic.alamat_asli") String? picAlamatAsli,
-      @JsonKey(name: "pic.alamat_domisili") String? picAlamatDomisili,
-      @JsonKey(name: "pic.no_tlp") String? picNoTlp,
-      @JsonKey(name: "pic.no_tlp_lainnya") dynamic picNoTlpLainnya,
-      @JsonKey(name: "pic.no_darurat") String? picNoDarurat,
-      @JsonKey(name: "pic.nama_kontak_darurat") String? picNamaKontakDarurat,
-      @JsonKey(name: "pic.agama_id") int? picAgamaId,
-      @JsonKey(name: "pic.gol_darah_id") int? picGolDarahId,
-      @JsonKey(name: "pic.status_nikah_id") int? picStatusNikahId,
-      @JsonKey(name: "pic.tanggungan_id") int? picTanggunganId,
-      @JsonKey(name: "pic.hub_dgn_karyawan") String? picHubDgnKaryawan,
-      @JsonKey(name: "pic.cuti_jatah_reguler") int? picCutiJatahReguler,
-      @JsonKey(name: "pic.cuti_sisa_reguler") int? picCutiSisaReguler,
-      @JsonKey(name: "pic.cuti_panjang") int? picCutiPanjang,
-      @JsonKey(name: "pic.cuti_sisa_panjang") int? picCutiSisaPanjang,
-      @JsonKey(name: "pic.status_kary_id") dynamic picStatusKaryId,
-      @JsonKey(name: "pic.lama_kontrak_awal") dynamic picLamaKontrakAwal,
-      @JsonKey(name: "pic.lama_kontrak_akhir") dynamic picLamaKontrakAkhir,
-      @JsonKey(name: "pic.tgl_masuk") dynamic picTglMasuk,
-      @JsonKey(name: "pic.tgl_berhenti") dynamic picTglBerhenti,
-      @JsonKey(name: "pic.alasan_berhenti") dynamic picAlasanBerhenti,
-      @JsonKey(name: "pic.uk_baju") String? picUkBaju,
-      @JsonKey(name: "pic.uk_celana") String? picUkCelana,
-      @JsonKey(name: "pic.uk_sepatu") String? picUkSepatu,
-      @JsonKey(name: "pic.desc") dynamic picDesc,
       @JsonKey(name: "pic.is_active") bool? picIsActive,
-      @JsonKey(name: "pic.creator_id") dynamic picCreatorId,
+      @JsonKey(name: "pic.creator_id") int? picCreatorId,
       @JsonKey(name: "pic.last_editor_id") int? picLastEditorId,
+      @JsonKey(name: "pic.remember_token") dynamic picRememberToken,
       @JsonKey(name: "pic.created_at") String? picCreatedAt,
       @JsonKey(name: "pic.updated_at") String? picUpdatedAt,
-      @JsonKey(name: "pic.m_standart_gaji_id") int? picMStandartGajiId,
-      @JsonKey(name: "pic.periode_gaji_id") int? picPeriodeGajiId,
-      @JsonKey(name: "pic.ref_id") int? picRefId,
-      @JsonKey(name: "pic.presensi_lokasi_default_id")
-      dynamic picPresensiLokasiDefaultId,
-      @JsonKey(name: "pic.exp_date_cuti") String? picExpDateCuti,
-      @JsonKey(name: "pic.limit_potong") int? picLimitPotong,
-      @JsonKey(name: "pic.atasan_id") int? picAtasanId,
-      @JsonKey(name: "pic.cuti_p24") dynamic picCutiP24,
-      @JsonKey(name: "pic.cuti_sisa_p24") dynamic picCutiSisaP24});
+      @JsonKey(name: "pic.profil_image") String? picProfilImage,
+      @JsonKey(name: "pic.telp") String? picTelp,
+      @JsonKey(name: "pic.m_kary_id") int? picMKaryId,
+      @JsonKey(name: "pic.nama_lengkap") String? picNamaLengkap});
 }
 
 /// @nodoc
@@ -2720,68 +2312,23 @@ class __$$DataLemburImplCopyWithImpl<$Res>
     Object? lastEditorTelp = freezed,
     Object? lastEditorMKaryId = freezed,
     Object? picId = freezed,
+    Object? picName = freezed,
+    Object? picEmail = freezed,
+    Object? picUsername = freezed,
+    Object? picEmailVerifiedAt = freezed,
+    Object? picPassword = freezed,
     Object? picMCompId = freezed,
     Object? picMDirId = freezed,
-    Object? picMDivisiId = freezed,
-    Object? picMDeptId = freezed,
-    Object? picMZonaId = freezed,
-    Object? picGradingId = freezed,
-    Object? picCostcontreId = freezed,
-    Object? picKode = freezed,
-    Object? picMPosisiId = freezed,
-    Object? picMJamKerjaId = freezed,
-    Object? picKodePresensi = freezed,
-    Object? picNik = freezed,
-    Object? picNamaDepan = freezed,
-    Object? picNamaBelakang = freezed,
-    Object? picNamaLengkap = freezed,
-    Object? picNamaPanggilan = freezed,
-    Object? picJkId = freezed,
-    Object? picTempatLahir = freezed,
-    Object? picTglLahir = freezed,
-    Object? picProvinsiId = freezed,
-    Object? picKotaId = freezed,
-    Object? picKecamatanId = freezed,
-    Object? picKodePos = freezed,
-    Object? picAlamatAsli = freezed,
-    Object? picAlamatDomisili = freezed,
-    Object? picNoTlp = freezed,
-    Object? picNoTlpLainnya = freezed,
-    Object? picNoDarurat = freezed,
-    Object? picNamaKontakDarurat = freezed,
-    Object? picAgamaId = freezed,
-    Object? picGolDarahId = freezed,
-    Object? picStatusNikahId = freezed,
-    Object? picTanggunganId = freezed,
-    Object? picHubDgnKaryawan = freezed,
-    Object? picCutiJatahReguler = freezed,
-    Object? picCutiSisaReguler = freezed,
-    Object? picCutiPanjang = freezed,
-    Object? picCutiSisaPanjang = freezed,
-    Object? picStatusKaryId = freezed,
-    Object? picLamaKontrakAwal = freezed,
-    Object? picLamaKontrakAkhir = freezed,
-    Object? picTglMasuk = freezed,
-    Object? picTglBerhenti = freezed,
-    Object? picAlasanBerhenti = freezed,
-    Object? picUkBaju = freezed,
-    Object? picUkCelana = freezed,
-    Object? picUkSepatu = freezed,
-    Object? picDesc = freezed,
     Object? picIsActive = freezed,
     Object? picCreatorId = freezed,
     Object? picLastEditorId = freezed,
+    Object? picRememberToken = freezed,
     Object? picCreatedAt = freezed,
     Object? picUpdatedAt = freezed,
-    Object? picMStandartGajiId = freezed,
-    Object? picPeriodeGajiId = freezed,
-    Object? picRefId = freezed,
-    Object? picPresensiLokasiDefaultId = freezed,
-    Object? picExpDateCuti = freezed,
-    Object? picLimitPotong = freezed,
-    Object? picAtasanId = freezed,
-    Object? picCutiP24 = freezed,
-    Object? picCutiSisaP24 = freezed,
+    Object? picProfilImage = freezed,
+    Object? picTelp = freezed,
+    Object? picMKaryId = freezed,
+    Object? picNamaLengkap = freezed,
   }) {
     return _then(_$DataLemburImpl(
       metaRead: freezed == metaRead
@@ -2975,7 +2522,7 @@ class __$$DataLemburImplCopyWithImpl<$Res>
       mKaryGradingId: freezed == mKaryGradingId
           ? _value.mKaryGradingId
           : mKaryGradingId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryCostcontreId: freezed == mKaryCostcontreId
           ? _value.mKaryCostcontreId
           : mKaryCostcontreId // ignore: cast_nullable_to_non_nullable
@@ -3175,11 +2722,11 @@ class __$$DataLemburImplCopyWithImpl<$Res>
       mKaryRefId: freezed == mKaryRefId
           ? _value.mKaryRefId
           : mKaryRefId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryPresensiLokasiDefaultId: freezed == mKaryPresensiLokasiDefaultId
           ? _value.mKaryPresensiLokasiDefaultId
           : mKaryPresensiLokasiDefaultId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       mKaryExpDateCuti: freezed == mKaryExpDateCuti
           ? _value.mKaryExpDateCuti
           : mKaryExpDateCuti // ignore: cast_nullable_to_non_nullable
@@ -3351,7 +2898,7 @@ class __$$DataLemburImplCopyWithImpl<$Res>
       creatorCreatorId: freezed == creatorCreatorId
           ? _value.creatorCreatorId
           : creatorCreatorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       creatorLastEditorId: freezed == creatorLastEditorId
           ? _value.creatorLastEditorId
           : creatorLastEditorId // ignore: cast_nullable_to_non_nullable
@@ -3452,6 +2999,26 @@ class __$$DataLemburImplCopyWithImpl<$Res>
           ? _value.picId
           : picId // ignore: cast_nullable_to_non_nullable
               as int?,
+      picName: freezed == picName
+          ? _value.picName
+          : picName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      picEmail: freezed == picEmail
+          ? _value.picEmail
+          : picEmail // ignore: cast_nullable_to_non_nullable
+              as String?,
+      picUsername: freezed == picUsername
+          ? _value.picUsername
+          : picUsername // ignore: cast_nullable_to_non_nullable
+              as String?,
+      picEmailVerifiedAt: freezed == picEmailVerifiedAt
+          ? _value.picEmailVerifiedAt
+          : picEmailVerifiedAt // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      picPassword: freezed == picPassword
+          ? _value.picPassword
+          : picPassword // ignore: cast_nullable_to_non_nullable
+              as String?,
       picMCompId: freezed == picMCompId
           ? _value.picMCompId
           : picMCompId // ignore: cast_nullable_to_non_nullable
@@ -3460,190 +3027,6 @@ class __$$DataLemburImplCopyWithImpl<$Res>
           ? _value.picMDirId
           : picMDirId // ignore: cast_nullable_to_non_nullable
               as int?,
-      picMDivisiId: freezed == picMDivisiId
-          ? _value.picMDivisiId
-          : picMDivisiId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picMDeptId: freezed == picMDeptId
-          ? _value.picMDeptId
-          : picMDeptId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picMZonaId: freezed == picMZonaId
-          ? _value.picMZonaId
-          : picMZonaId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picGradingId: freezed == picGradingId
-          ? _value.picGradingId
-          : picGradingId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picCostcontreId: freezed == picCostcontreId
-          ? _value.picCostcontreId
-          : picCostcontreId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picKode: freezed == picKode
-          ? _value.picKode
-          : picKode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picMPosisiId: freezed == picMPosisiId
-          ? _value.picMPosisiId
-          : picMPosisiId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picMJamKerjaId: freezed == picMJamKerjaId
-          ? _value.picMJamKerjaId
-          : picMJamKerjaId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picKodePresensi: freezed == picKodePresensi
-          ? _value.picKodePresensi
-          : picKodePresensi // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picNik: freezed == picNik
-          ? _value.picNik
-          : picNik // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picNamaDepan: freezed == picNamaDepan
-          ? _value.picNamaDepan
-          : picNamaDepan // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picNamaBelakang: freezed == picNamaBelakang
-          ? _value.picNamaBelakang
-          : picNamaBelakang // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picNamaLengkap: freezed == picNamaLengkap
-          ? _value.picNamaLengkap
-          : picNamaLengkap // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picNamaPanggilan: freezed == picNamaPanggilan
-          ? _value.picNamaPanggilan
-          : picNamaPanggilan // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picJkId: freezed == picJkId
-          ? _value.picJkId
-          : picJkId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picTempatLahir: freezed == picTempatLahir
-          ? _value.picTempatLahir
-          : picTempatLahir // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picTglLahir: freezed == picTglLahir
-          ? _value.picTglLahir
-          : picTglLahir // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picProvinsiId: freezed == picProvinsiId
-          ? _value.picProvinsiId
-          : picProvinsiId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picKotaId: freezed == picKotaId
-          ? _value.picKotaId
-          : picKotaId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picKecamatanId: freezed == picKecamatanId
-          ? _value.picKecamatanId
-          : picKecamatanId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picKodePos: freezed == picKodePos
-          ? _value.picKodePos
-          : picKodePos // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picAlamatAsli: freezed == picAlamatAsli
-          ? _value.picAlamatAsli
-          : picAlamatAsli // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picAlamatDomisili: freezed == picAlamatDomisili
-          ? _value.picAlamatDomisili
-          : picAlamatDomisili // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picNoTlp: freezed == picNoTlp
-          ? _value.picNoTlp
-          : picNoTlp // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picNoTlpLainnya: freezed == picNoTlpLainnya
-          ? _value.picNoTlpLainnya
-          : picNoTlpLainnya // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      picNoDarurat: freezed == picNoDarurat
-          ? _value.picNoDarurat
-          : picNoDarurat // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picNamaKontakDarurat: freezed == picNamaKontakDarurat
-          ? _value.picNamaKontakDarurat
-          : picNamaKontakDarurat // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picAgamaId: freezed == picAgamaId
-          ? _value.picAgamaId
-          : picAgamaId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picGolDarahId: freezed == picGolDarahId
-          ? _value.picGolDarahId
-          : picGolDarahId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picStatusNikahId: freezed == picStatusNikahId
-          ? _value.picStatusNikahId
-          : picStatusNikahId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picTanggunganId: freezed == picTanggunganId
-          ? _value.picTanggunganId
-          : picTanggunganId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picHubDgnKaryawan: freezed == picHubDgnKaryawan
-          ? _value.picHubDgnKaryawan
-          : picHubDgnKaryawan // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picCutiJatahReguler: freezed == picCutiJatahReguler
-          ? _value.picCutiJatahReguler
-          : picCutiJatahReguler // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picCutiSisaReguler: freezed == picCutiSisaReguler
-          ? _value.picCutiSisaReguler
-          : picCutiSisaReguler // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picCutiPanjang: freezed == picCutiPanjang
-          ? _value.picCutiPanjang
-          : picCutiPanjang // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picCutiSisaPanjang: freezed == picCutiSisaPanjang
-          ? _value.picCutiSisaPanjang
-          : picCutiSisaPanjang // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picStatusKaryId: freezed == picStatusKaryId
-          ? _value.picStatusKaryId
-          : picStatusKaryId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      picLamaKontrakAwal: freezed == picLamaKontrakAwal
-          ? _value.picLamaKontrakAwal
-          : picLamaKontrakAwal // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      picLamaKontrakAkhir: freezed == picLamaKontrakAkhir
-          ? _value.picLamaKontrakAkhir
-          : picLamaKontrakAkhir // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      picTglMasuk: freezed == picTglMasuk
-          ? _value.picTglMasuk
-          : picTglMasuk // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      picTglBerhenti: freezed == picTglBerhenti
-          ? _value.picTglBerhenti
-          : picTglBerhenti // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      picAlasanBerhenti: freezed == picAlasanBerhenti
-          ? _value.picAlasanBerhenti
-          : picAlasanBerhenti // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      picUkBaju: freezed == picUkBaju
-          ? _value.picUkBaju
-          : picUkBaju // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picUkCelana: freezed == picUkCelana
-          ? _value.picUkCelana
-          : picUkCelana // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picUkSepatu: freezed == picUkSepatu
-          ? _value.picUkSepatu
-          : picUkSepatu // ignore: cast_nullable_to_non_nullable
-              as String?,
-      picDesc: freezed == picDesc
-          ? _value.picDesc
-          : picDesc // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       picIsActive: freezed == picIsActive
           ? _value.picIsActive
           : picIsActive // ignore: cast_nullable_to_non_nullable
@@ -3651,11 +3034,15 @@ class __$$DataLemburImplCopyWithImpl<$Res>
       picCreatorId: freezed == picCreatorId
           ? _value.picCreatorId
           : picCreatorId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       picLastEditorId: freezed == picLastEditorId
           ? _value.picLastEditorId
           : picLastEditorId // ignore: cast_nullable_to_non_nullable
               as int?,
+      picRememberToken: freezed == picRememberToken
+          ? _value.picRememberToken
+          : picRememberToken // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       picCreatedAt: freezed == picCreatedAt
           ? _value.picCreatedAt
           : picCreatedAt // ignore: cast_nullable_to_non_nullable
@@ -3664,42 +3051,22 @@ class __$$DataLemburImplCopyWithImpl<$Res>
           ? _value.picUpdatedAt
           : picUpdatedAt // ignore: cast_nullable_to_non_nullable
               as String?,
-      picMStandartGajiId: freezed == picMStandartGajiId
-          ? _value.picMStandartGajiId
-          : picMStandartGajiId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picPeriodeGajiId: freezed == picPeriodeGajiId
-          ? _value.picPeriodeGajiId
-          : picPeriodeGajiId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picRefId: freezed == picRefId
-          ? _value.picRefId
-          : picRefId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picPresensiLokasiDefaultId: freezed == picPresensiLokasiDefaultId
-          ? _value.picPresensiLokasiDefaultId
-          : picPresensiLokasiDefaultId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      picExpDateCuti: freezed == picExpDateCuti
-          ? _value.picExpDateCuti
-          : picExpDateCuti // ignore: cast_nullable_to_non_nullable
+      picProfilImage: freezed == picProfilImage
+          ? _value.picProfilImage
+          : picProfilImage // ignore: cast_nullable_to_non_nullable
               as String?,
-      picLimitPotong: freezed == picLimitPotong
-          ? _value.picLimitPotong
-          : picLimitPotong // ignore: cast_nullable_to_non_nullable
+      picTelp: freezed == picTelp
+          ? _value.picTelp
+          : picTelp // ignore: cast_nullable_to_non_nullable
+              as String?,
+      picMKaryId: freezed == picMKaryId
+          ? _value.picMKaryId
+          : picMKaryId // ignore: cast_nullable_to_non_nullable
               as int?,
-      picAtasanId: freezed == picAtasanId
-          ? _value.picAtasanId
-          : picAtasanId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      picCutiP24: freezed == picCutiP24
-          ? _value.picCutiP24
-          : picCutiP24 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-      picCutiSisaP24: freezed == picCutiSisaP24
-          ? _value.picCutiSisaP24
-          : picCutiSisaP24 // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+      picNamaLengkap: freezed == picNamaLengkap
+          ? _value.picNamaLengkap
+          : picNamaLengkap // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -3877,69 +3244,23 @@ class _$DataLemburImpl implements _DataLembur {
       @JsonKey(name: "last_editor.telp") this.lastEditorTelp,
       @JsonKey(name: "last_editor.m_kary_id") this.lastEditorMKaryId,
       @JsonKey(name: "pic.id") this.picId,
+      @JsonKey(name: "pic.name") this.picName,
+      @JsonKey(name: "pic.email") this.picEmail,
+      @JsonKey(name: "pic.username") this.picUsername,
+      @JsonKey(name: "pic.email_verified_at") this.picEmailVerifiedAt,
+      @JsonKey(name: "pic.password") this.picPassword,
       @JsonKey(name: "pic.m_comp_id") this.picMCompId,
       @JsonKey(name: "pic.m_dir_id") this.picMDirId,
-      @JsonKey(name: "pic.m_divisi_id") this.picMDivisiId,
-      @JsonKey(name: "pic.m_dept_id") this.picMDeptId,
-      @JsonKey(name: "pic.m_zona_id") this.picMZonaId,
-      @JsonKey(name: "pic.grading_id") this.picGradingId,
-      @JsonKey(name: "pic.costcontre_id") this.picCostcontreId,
-      @JsonKey(name: "pic.kode") this.picKode,
-      @JsonKey(name: "pic.m_posisi_id") this.picMPosisiId,
-      @JsonKey(name: "pic.m_jam_kerja_id") this.picMJamKerjaId,
-      @JsonKey(name: "pic.kode_presensi") this.picKodePresensi,
-      @JsonKey(name: "pic.nik") this.picNik,
-      @JsonKey(name: "pic.nama_depan") this.picNamaDepan,
-      @JsonKey(name: "pic.nama_belakang") this.picNamaBelakang,
-      @JsonKey(name: "pic.nama_lengkap") this.picNamaLengkap,
-      @JsonKey(name: "pic.nama_panggilan") this.picNamaPanggilan,
-      @JsonKey(name: "pic.jk_id") this.picJkId,
-      @JsonKey(name: "pic.tempat_lahir") this.picTempatLahir,
-      @JsonKey(name: "pic.tgl_lahir") this.picTglLahir,
-      @JsonKey(name: "pic.provinsi_id") this.picProvinsiId,
-      @JsonKey(name: "pic.kota_id") this.picKotaId,
-      @JsonKey(name: "pic.kecamatan_id") this.picKecamatanId,
-      @JsonKey(name: "pic.kode_pos") this.picKodePos,
-      @JsonKey(name: "pic.alamat_asli") this.picAlamatAsli,
-      @JsonKey(name: "pic.alamat_domisili") this.picAlamatDomisili,
-      @JsonKey(name: "pic.no_tlp") this.picNoTlp,
-      @JsonKey(name: "pic.no_tlp_lainnya") this.picNoTlpLainnya,
-      @JsonKey(name: "pic.no_darurat") this.picNoDarurat,
-      @JsonKey(name: "pic.nama_kontak_darurat") this.picNamaKontakDarurat,
-      @JsonKey(name: "pic.agama_id") this.picAgamaId,
-      @JsonKey(name: "pic.gol_darah_id") this.picGolDarahId,
-      @JsonKey(name: "pic.status_nikah_id") this.picStatusNikahId,
-      @JsonKey(name: "pic.tanggungan_id") this.picTanggunganId,
-      @JsonKey(name: "pic.hub_dgn_karyawan") this.picHubDgnKaryawan,
-      @JsonKey(name: "pic.cuti_jatah_reguler") this.picCutiJatahReguler,
-      @JsonKey(name: "pic.cuti_sisa_reguler") this.picCutiSisaReguler,
-      @JsonKey(name: "pic.cuti_panjang") this.picCutiPanjang,
-      @JsonKey(name: "pic.cuti_sisa_panjang") this.picCutiSisaPanjang,
-      @JsonKey(name: "pic.status_kary_id") this.picStatusKaryId,
-      @JsonKey(name: "pic.lama_kontrak_awal") this.picLamaKontrakAwal,
-      @JsonKey(name: "pic.lama_kontrak_akhir") this.picLamaKontrakAkhir,
-      @JsonKey(name: "pic.tgl_masuk") this.picTglMasuk,
-      @JsonKey(name: "pic.tgl_berhenti") this.picTglBerhenti,
-      @JsonKey(name: "pic.alasan_berhenti") this.picAlasanBerhenti,
-      @JsonKey(name: "pic.uk_baju") this.picUkBaju,
-      @JsonKey(name: "pic.uk_celana") this.picUkCelana,
-      @JsonKey(name: "pic.uk_sepatu") this.picUkSepatu,
-      @JsonKey(name: "pic.desc") this.picDesc,
       @JsonKey(name: "pic.is_active") this.picIsActive,
       @JsonKey(name: "pic.creator_id") this.picCreatorId,
       @JsonKey(name: "pic.last_editor_id") this.picLastEditorId,
+      @JsonKey(name: "pic.remember_token") this.picRememberToken,
       @JsonKey(name: "pic.created_at") this.picCreatedAt,
       @JsonKey(name: "pic.updated_at") this.picUpdatedAt,
-      @JsonKey(name: "pic.m_standart_gaji_id") this.picMStandartGajiId,
-      @JsonKey(name: "pic.periode_gaji_id") this.picPeriodeGajiId,
-      @JsonKey(name: "pic.ref_id") this.picRefId,
-      @JsonKey(name: "pic.presensi_lokasi_default_id")
-      this.picPresensiLokasiDefaultId,
-      @JsonKey(name: "pic.exp_date_cuti") this.picExpDateCuti,
-      @JsonKey(name: "pic.limit_potong") this.picLimitPotong,
-      @JsonKey(name: "pic.atasan_id") this.picAtasanId,
-      @JsonKey(name: "pic.cuti_p24") this.picCutiP24,
-      @JsonKey(name: "pic.cuti_sisa_p24") this.picCutiSisaP24});
+      @JsonKey(name: "pic.profil_image") this.picProfilImage,
+      @JsonKey(name: "pic.telp") this.picTelp,
+      @JsonKey(name: "pic.m_kary_id") this.picMKaryId,
+      @JsonKey(name: "pic.nama_lengkap") this.picNamaLengkap});
 
   factory _$DataLemburImpl.fromJson(Map<String, dynamic> json) =>
       _$$DataLemburImplFromJson(json);
@@ -4087,7 +3408,7 @@ class _$DataLemburImpl implements _DataLembur {
   final int? mKaryMZonaId;
   @override
   @JsonKey(name: "m_kary.grading_id")
-  final int? mKaryGradingId;
+  final dynamic mKaryGradingId;
   @override
   @JsonKey(name: "m_kary.costcontre_id")
   final int? mKaryCostcontreId;
@@ -4237,10 +3558,10 @@ class _$DataLemburImpl implements _DataLembur {
   final int? mKaryPeriodeGajiId;
   @override
   @JsonKey(name: "m_kary.ref_id")
-  final int? mKaryRefId;
+  final dynamic mKaryRefId;
   @override
   @JsonKey(name: "m_kary.presensi_lokasi_default_id")
-  final dynamic mKaryPresensiLokasiDefaultId;
+  final int? mKaryPresensiLokasiDefaultId;
   @override
   @JsonKey(name: "m_kary.exp_date_cuti")
   final dynamic mKaryExpDateCuti;
@@ -4369,7 +3690,7 @@ class _$DataLemburImpl implements _DataLembur {
   final bool? creatorIsActive;
   @override
   @JsonKey(name: "creator.creator_id")
-  final int? creatorCreatorId;
+  final dynamic creatorCreatorId;
   @override
   @JsonKey(name: "creator.last_editor_id")
   final int? creatorLastEditorId;
@@ -4446,158 +3767,38 @@ class _$DataLemburImpl implements _DataLembur {
   @JsonKey(name: "pic.id")
   final int? picId;
   @override
+  @JsonKey(name: "pic.name")
+  final String? picName;
+  @override
+  @JsonKey(name: "pic.email")
+  final String? picEmail;
+  @override
+  @JsonKey(name: "pic.username")
+  final String? picUsername;
+  @override
+  @JsonKey(name: "pic.email_verified_at")
+  final dynamic picEmailVerifiedAt;
+  @override
+  @JsonKey(name: "pic.password")
+  final String? picPassword;
+  @override
   @JsonKey(name: "pic.m_comp_id")
   final int? picMCompId;
   @override
   @JsonKey(name: "pic.m_dir_id")
   final int? picMDirId;
   @override
-  @JsonKey(name: "pic.m_divisi_id")
-  final int? picMDivisiId;
-  @override
-  @JsonKey(name: "pic.m_dept_id")
-  final int? picMDeptId;
-  @override
-  @JsonKey(name: "pic.m_zona_id")
-  final int? picMZonaId;
-  @override
-  @JsonKey(name: "pic.grading_id")
-  final int? picGradingId;
-  @override
-  @JsonKey(name: "pic.costcontre_id")
-  final int? picCostcontreId;
-  @override
-  @JsonKey(name: "pic.kode")
-  final String? picKode;
-  @override
-  @JsonKey(name: "pic.m_posisi_id")
-  final int? picMPosisiId;
-  @override
-  @JsonKey(name: "pic.m_jam_kerja_id")
-  final int? picMJamKerjaId;
-  @override
-  @JsonKey(name: "pic.kode_presensi")
-  final String? picKodePresensi;
-  @override
-  @JsonKey(name: "pic.nik")
-  final String? picNik;
-  @override
-  @JsonKey(name: "pic.nama_depan")
-  final String? picNamaDepan;
-  @override
-  @JsonKey(name: "pic.nama_belakang")
-  final String? picNamaBelakang;
-  @override
-  @JsonKey(name: "pic.nama_lengkap")
-  final String? picNamaLengkap;
-  @override
-  @JsonKey(name: "pic.nama_panggilan")
-  final String? picNamaPanggilan;
-  @override
-  @JsonKey(name: "pic.jk_id")
-  final int? picJkId;
-  @override
-  @JsonKey(name: "pic.tempat_lahir")
-  final String? picTempatLahir;
-  @override
-  @JsonKey(name: "pic.tgl_lahir")
-  final String? picTglLahir;
-  @override
-  @JsonKey(name: "pic.provinsi_id")
-  final int? picProvinsiId;
-  @override
-  @JsonKey(name: "pic.kota_id")
-  final int? picKotaId;
-  @override
-  @JsonKey(name: "pic.kecamatan_id")
-  final int? picKecamatanId;
-  @override
-  @JsonKey(name: "pic.kode_pos")
-  final String? picKodePos;
-  @override
-  @JsonKey(name: "pic.alamat_asli")
-  final String? picAlamatAsli;
-  @override
-  @JsonKey(name: "pic.alamat_domisili")
-  final String? picAlamatDomisili;
-  @override
-  @JsonKey(name: "pic.no_tlp")
-  final String? picNoTlp;
-  @override
-  @JsonKey(name: "pic.no_tlp_lainnya")
-  final dynamic picNoTlpLainnya;
-  @override
-  @JsonKey(name: "pic.no_darurat")
-  final String? picNoDarurat;
-  @override
-  @JsonKey(name: "pic.nama_kontak_darurat")
-  final String? picNamaKontakDarurat;
-  @override
-  @JsonKey(name: "pic.agama_id")
-  final int? picAgamaId;
-  @override
-  @JsonKey(name: "pic.gol_darah_id")
-  final int? picGolDarahId;
-  @override
-  @JsonKey(name: "pic.status_nikah_id")
-  final int? picStatusNikahId;
-  @override
-  @JsonKey(name: "pic.tanggungan_id")
-  final int? picTanggunganId;
-  @override
-  @JsonKey(name: "pic.hub_dgn_karyawan")
-  final String? picHubDgnKaryawan;
-  @override
-  @JsonKey(name: "pic.cuti_jatah_reguler")
-  final int? picCutiJatahReguler;
-  @override
-  @JsonKey(name: "pic.cuti_sisa_reguler")
-  final int? picCutiSisaReguler;
-  @override
-  @JsonKey(name: "pic.cuti_panjang")
-  final int? picCutiPanjang;
-  @override
-  @JsonKey(name: "pic.cuti_sisa_panjang")
-  final int? picCutiSisaPanjang;
-  @override
-  @JsonKey(name: "pic.status_kary_id")
-  final dynamic picStatusKaryId;
-  @override
-  @JsonKey(name: "pic.lama_kontrak_awal")
-  final dynamic picLamaKontrakAwal;
-  @override
-  @JsonKey(name: "pic.lama_kontrak_akhir")
-  final dynamic picLamaKontrakAkhir;
-  @override
-  @JsonKey(name: "pic.tgl_masuk")
-  final dynamic picTglMasuk;
-  @override
-  @JsonKey(name: "pic.tgl_berhenti")
-  final dynamic picTglBerhenti;
-  @override
-  @JsonKey(name: "pic.alasan_berhenti")
-  final dynamic picAlasanBerhenti;
-  @override
-  @JsonKey(name: "pic.uk_baju")
-  final String? picUkBaju;
-  @override
-  @JsonKey(name: "pic.uk_celana")
-  final String? picUkCelana;
-  @override
-  @JsonKey(name: "pic.uk_sepatu")
-  final String? picUkSepatu;
-  @override
-  @JsonKey(name: "pic.desc")
-  final dynamic picDesc;
-  @override
   @JsonKey(name: "pic.is_active")
   final bool? picIsActive;
   @override
   @JsonKey(name: "pic.creator_id")
-  final dynamic picCreatorId;
+  final int? picCreatorId;
   @override
   @JsonKey(name: "pic.last_editor_id")
   final int? picLastEditorId;
+  @override
+  @JsonKey(name: "pic.remember_token")
+  final dynamic picRememberToken;
   @override
   @JsonKey(name: "pic.created_at")
   final String? picCreatedAt;
@@ -4605,36 +3806,21 @@ class _$DataLemburImpl implements _DataLembur {
   @JsonKey(name: "pic.updated_at")
   final String? picUpdatedAt;
   @override
-  @JsonKey(name: "pic.m_standart_gaji_id")
-  final int? picMStandartGajiId;
+  @JsonKey(name: "pic.profil_image")
+  final String? picProfilImage;
   @override
-  @JsonKey(name: "pic.periode_gaji_id")
-  final int? picPeriodeGajiId;
+  @JsonKey(name: "pic.telp")
+  final String? picTelp;
   @override
-  @JsonKey(name: "pic.ref_id")
-  final int? picRefId;
+  @JsonKey(name: "pic.m_kary_id")
+  final int? picMKaryId;
   @override
-  @JsonKey(name: "pic.presensi_lokasi_default_id")
-  final dynamic picPresensiLokasiDefaultId;
-  @override
-  @JsonKey(name: "pic.exp_date_cuti")
-  final String? picExpDateCuti;
-  @override
-  @JsonKey(name: "pic.limit_potong")
-  final int? picLimitPotong;
-  @override
-  @JsonKey(name: "pic.atasan_id")
-  final int? picAtasanId;
-  @override
-  @JsonKey(name: "pic.cuti_p24")
-  final dynamic picCutiP24;
-  @override
-  @JsonKey(name: "pic.cuti_sisa_p24")
-  final dynamic picCutiSisaP24;
+  @JsonKey(name: "pic.nama_lengkap")
+  final String? picNamaLengkap;
 
   @override
   String toString() {
-    return 'DataLembur(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, nomor: $nomor, datumMCompId: $datumMCompId, datumMDirId: $datumMDirId, datumMKaryId: $datumMKaryId, tanggal: $tanggal, jamMulai: $jamMulai, jamSelesai: $jamSelesai, datumTipeLemburId: $datumTipeLemburId, datumAlasanId: $datumAlasanId, noDoc: $noDoc, doc: $doc, keterangan: $keterangan, status: $status, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, intervalMin: $intervalMin, datumPicId: $datumPicId, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, mDirId: $mDirId, mDirMCompId: $mDirMCompId, mDirNama: $mDirNama, mDirDesc: $mDirDesc, mDirIsActive: $mDirIsActive, mDirCreatorId: $mDirCreatorId, mDirLastEditorId: $mDirLastEditorId, mDirCreatedAt: $mDirCreatedAt, mDirUpdatedAt: $mDirUpdatedAt, mKaryId: $mKaryId, mKaryMCompId: $mKaryMCompId, mKaryMDirId: $mKaryMDirId, mKaryMDivisiId: $mKaryMDivisiId, mKaryMDeptId: $mKaryMDeptId, mKaryMZonaId: $mKaryMZonaId, mKaryGradingId: $mKaryGradingId, mKaryCostcontreId: $mKaryCostcontreId, mKaryKode: $mKaryKode, mKaryMPosisiId: $mKaryMPosisiId, mKaryMJamKerjaId: $mKaryMJamKerjaId, mKaryKodePresensi: $mKaryKodePresensi, mKaryNik: $mKaryNik, mKaryNamaDepan: $mKaryNamaDepan, mKaryNamaBelakang: $mKaryNamaBelakang, mKaryNamaLengkap: $mKaryNamaLengkap, mKaryNamaPanggilan: $mKaryNamaPanggilan, mKaryJkId: $mKaryJkId, mKaryTempatLahir: $mKaryTempatLahir, mKaryTglLahir: $mKaryTglLahir, mKaryProvinsiId: $mKaryProvinsiId, mKaryKotaId: $mKaryKotaId, mKaryKecamatanId: $mKaryKecamatanId, mKaryKodePos: $mKaryKodePos, mKaryAlamatAsli: $mKaryAlamatAsli, mKaryAlamatDomisili: $mKaryAlamatDomisili, mKaryNoTlp: $mKaryNoTlp, mKaryNoTlpLainnya: $mKaryNoTlpLainnya, mKaryNoDarurat: $mKaryNoDarurat, mKaryNamaKontakDarurat: $mKaryNamaKontakDarurat, mKaryAgamaId: $mKaryAgamaId, mKaryGolDarahId: $mKaryGolDarahId, mKaryStatusNikahId: $mKaryStatusNikahId, mKaryTanggunganId: $mKaryTanggunganId, mKaryHubDgnKaryawan: $mKaryHubDgnKaryawan, mKaryCutiJatahReguler: $mKaryCutiJatahReguler, mKaryCutiSisaReguler: $mKaryCutiSisaReguler, mKaryCutiPanjang: $mKaryCutiPanjang, mKaryCutiSisaPanjang: $mKaryCutiSisaPanjang, mKaryStatusKaryId: $mKaryStatusKaryId, mKaryLamaKontrakAwal: $mKaryLamaKontrakAwal, mKaryLamaKontrakAkhir: $mKaryLamaKontrakAkhir, mKaryTglMasuk: $mKaryTglMasuk, mKaryTglBerhenti: $mKaryTglBerhenti, mKaryAlasanBerhenti: $mKaryAlasanBerhenti, mKaryUkBaju: $mKaryUkBaju, mKaryUkCelana: $mKaryUkCelana, mKaryUkSepatu: $mKaryUkSepatu, mKaryDesc: $mKaryDesc, mKaryIsActive: $mKaryIsActive, mKaryCreatorId: $mKaryCreatorId, mKaryLastEditorId: $mKaryLastEditorId, mKaryCreatedAt: $mKaryCreatedAt, mKaryUpdatedAt: $mKaryUpdatedAt, mKaryMStandartGajiId: $mKaryMStandartGajiId, mKaryPeriodeGajiId: $mKaryPeriodeGajiId, mKaryRefId: $mKaryRefId, mKaryPresensiLokasiDefaultId: $mKaryPresensiLokasiDefaultId, mKaryExpDateCuti: $mKaryExpDateCuti, mKaryLimitPotong: $mKaryLimitPotong, mKaryAtasanId: $mKaryAtasanId, mKaryCutiP24: $mKaryCutiP24, mKaryCutiSisaP24: $mKaryCutiSisaP24, tipeLemburId: $tipeLemburId, tipeLemburMCompId: $tipeLemburMCompId, tipeLemburMDirId: $tipeLemburMDirId, tipeLemburGroup: $tipeLemburGroup, tipeLemburKey: $tipeLemburKey, tipeLemburCode: $tipeLemburCode, tipeLemburValue: $tipeLemburValue, tipeLemburIsActive: $tipeLemburIsActive, tipeLemburCreatorId: $tipeLemburCreatorId, tipeLemburLastEditorId: $tipeLemburLastEditorId, tipeLemburCreatedAt: $tipeLemburCreatedAt, tipeLemburUpdatedAt: $tipeLemburUpdatedAt, tipeLemburValue2: $tipeLemburValue2, tipeLemburValue3: $tipeLemburValue3, alasanId: $alasanId, alasanMCompId: $alasanMCompId, alasanMDirId: $alasanMDirId, alasanGroup: $alasanGroup, alasanKey: $alasanKey, alasanCode: $alasanCode, alasanValue: $alasanValue, alasanIsActive: $alasanIsActive, alasanCreatorId: $alasanCreatorId, alasanLastEditorId: $alasanLastEditorId, alasanCreatedAt: $alasanCreatedAt, alasanUpdatedAt: $alasanUpdatedAt, alasanValue2: $alasanValue2, alasanValue3: $alasanValue3, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, creatorTelp: $creatorTelp, creatorMKaryId: $creatorMKaryId, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage, lastEditorTelp: $lastEditorTelp, lastEditorMKaryId: $lastEditorMKaryId, picId: $picId, picMCompId: $picMCompId, picMDirId: $picMDirId, picMDivisiId: $picMDivisiId, picMDeptId: $picMDeptId, picMZonaId: $picMZonaId, picGradingId: $picGradingId, picCostcontreId: $picCostcontreId, picKode: $picKode, picMPosisiId: $picMPosisiId, picMJamKerjaId: $picMJamKerjaId, picKodePresensi: $picKodePresensi, picNik: $picNik, picNamaDepan: $picNamaDepan, picNamaBelakang: $picNamaBelakang, picNamaLengkap: $picNamaLengkap, picNamaPanggilan: $picNamaPanggilan, picJkId: $picJkId, picTempatLahir: $picTempatLahir, picTglLahir: $picTglLahir, picProvinsiId: $picProvinsiId, picKotaId: $picKotaId, picKecamatanId: $picKecamatanId, picKodePos: $picKodePos, picAlamatAsli: $picAlamatAsli, picAlamatDomisili: $picAlamatDomisili, picNoTlp: $picNoTlp, picNoTlpLainnya: $picNoTlpLainnya, picNoDarurat: $picNoDarurat, picNamaKontakDarurat: $picNamaKontakDarurat, picAgamaId: $picAgamaId, picGolDarahId: $picGolDarahId, picStatusNikahId: $picStatusNikahId, picTanggunganId: $picTanggunganId, picHubDgnKaryawan: $picHubDgnKaryawan, picCutiJatahReguler: $picCutiJatahReguler, picCutiSisaReguler: $picCutiSisaReguler, picCutiPanjang: $picCutiPanjang, picCutiSisaPanjang: $picCutiSisaPanjang, picStatusKaryId: $picStatusKaryId, picLamaKontrakAwal: $picLamaKontrakAwal, picLamaKontrakAkhir: $picLamaKontrakAkhir, picTglMasuk: $picTglMasuk, picTglBerhenti: $picTglBerhenti, picAlasanBerhenti: $picAlasanBerhenti, picUkBaju: $picUkBaju, picUkCelana: $picUkCelana, picUkSepatu: $picUkSepatu, picDesc: $picDesc, picIsActive: $picIsActive, picCreatorId: $picCreatorId, picLastEditorId: $picLastEditorId, picCreatedAt: $picCreatedAt, picUpdatedAt: $picUpdatedAt, picMStandartGajiId: $picMStandartGajiId, picPeriodeGajiId: $picPeriodeGajiId, picRefId: $picRefId, picPresensiLokasiDefaultId: $picPresensiLokasiDefaultId, picExpDateCuti: $picExpDateCuti, picLimitPotong: $picLimitPotong, picAtasanId: $picAtasanId, picCutiP24: $picCutiP24, picCutiSisaP24: $picCutiSisaP24)';
+    return 'DataLembur(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, nomor: $nomor, datumMCompId: $datumMCompId, datumMDirId: $datumMDirId, datumMKaryId: $datumMKaryId, tanggal: $tanggal, jamMulai: $jamMulai, jamSelesai: $jamSelesai, datumTipeLemburId: $datumTipeLemburId, datumAlasanId: $datumAlasanId, noDoc: $noDoc, doc: $doc, keterangan: $keterangan, status: $status, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, intervalMin: $intervalMin, datumPicId: $datumPicId, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, mDirId: $mDirId, mDirMCompId: $mDirMCompId, mDirNama: $mDirNama, mDirDesc: $mDirDesc, mDirIsActive: $mDirIsActive, mDirCreatorId: $mDirCreatorId, mDirLastEditorId: $mDirLastEditorId, mDirCreatedAt: $mDirCreatedAt, mDirUpdatedAt: $mDirUpdatedAt, mKaryId: $mKaryId, mKaryMCompId: $mKaryMCompId, mKaryMDirId: $mKaryMDirId, mKaryMDivisiId: $mKaryMDivisiId, mKaryMDeptId: $mKaryMDeptId, mKaryMZonaId: $mKaryMZonaId, mKaryGradingId: $mKaryGradingId, mKaryCostcontreId: $mKaryCostcontreId, mKaryKode: $mKaryKode, mKaryMPosisiId: $mKaryMPosisiId, mKaryMJamKerjaId: $mKaryMJamKerjaId, mKaryKodePresensi: $mKaryKodePresensi, mKaryNik: $mKaryNik, mKaryNamaDepan: $mKaryNamaDepan, mKaryNamaBelakang: $mKaryNamaBelakang, mKaryNamaLengkap: $mKaryNamaLengkap, mKaryNamaPanggilan: $mKaryNamaPanggilan, mKaryJkId: $mKaryJkId, mKaryTempatLahir: $mKaryTempatLahir, mKaryTglLahir: $mKaryTglLahir, mKaryProvinsiId: $mKaryProvinsiId, mKaryKotaId: $mKaryKotaId, mKaryKecamatanId: $mKaryKecamatanId, mKaryKodePos: $mKaryKodePos, mKaryAlamatAsli: $mKaryAlamatAsli, mKaryAlamatDomisili: $mKaryAlamatDomisili, mKaryNoTlp: $mKaryNoTlp, mKaryNoTlpLainnya: $mKaryNoTlpLainnya, mKaryNoDarurat: $mKaryNoDarurat, mKaryNamaKontakDarurat: $mKaryNamaKontakDarurat, mKaryAgamaId: $mKaryAgamaId, mKaryGolDarahId: $mKaryGolDarahId, mKaryStatusNikahId: $mKaryStatusNikahId, mKaryTanggunganId: $mKaryTanggunganId, mKaryHubDgnKaryawan: $mKaryHubDgnKaryawan, mKaryCutiJatahReguler: $mKaryCutiJatahReguler, mKaryCutiSisaReguler: $mKaryCutiSisaReguler, mKaryCutiPanjang: $mKaryCutiPanjang, mKaryCutiSisaPanjang: $mKaryCutiSisaPanjang, mKaryStatusKaryId: $mKaryStatusKaryId, mKaryLamaKontrakAwal: $mKaryLamaKontrakAwal, mKaryLamaKontrakAkhir: $mKaryLamaKontrakAkhir, mKaryTglMasuk: $mKaryTglMasuk, mKaryTglBerhenti: $mKaryTglBerhenti, mKaryAlasanBerhenti: $mKaryAlasanBerhenti, mKaryUkBaju: $mKaryUkBaju, mKaryUkCelana: $mKaryUkCelana, mKaryUkSepatu: $mKaryUkSepatu, mKaryDesc: $mKaryDesc, mKaryIsActive: $mKaryIsActive, mKaryCreatorId: $mKaryCreatorId, mKaryLastEditorId: $mKaryLastEditorId, mKaryCreatedAt: $mKaryCreatedAt, mKaryUpdatedAt: $mKaryUpdatedAt, mKaryMStandartGajiId: $mKaryMStandartGajiId, mKaryPeriodeGajiId: $mKaryPeriodeGajiId, mKaryRefId: $mKaryRefId, mKaryPresensiLokasiDefaultId: $mKaryPresensiLokasiDefaultId, mKaryExpDateCuti: $mKaryExpDateCuti, mKaryLimitPotong: $mKaryLimitPotong, mKaryAtasanId: $mKaryAtasanId, mKaryCutiP24: $mKaryCutiP24, mKaryCutiSisaP24: $mKaryCutiSisaP24, tipeLemburId: $tipeLemburId, tipeLemburMCompId: $tipeLemburMCompId, tipeLemburMDirId: $tipeLemburMDirId, tipeLemburGroup: $tipeLemburGroup, tipeLemburKey: $tipeLemburKey, tipeLemburCode: $tipeLemburCode, tipeLemburValue: $tipeLemburValue, tipeLemburIsActive: $tipeLemburIsActive, tipeLemburCreatorId: $tipeLemburCreatorId, tipeLemburLastEditorId: $tipeLemburLastEditorId, tipeLemburCreatedAt: $tipeLemburCreatedAt, tipeLemburUpdatedAt: $tipeLemburUpdatedAt, tipeLemburValue2: $tipeLemburValue2, tipeLemburValue3: $tipeLemburValue3, alasanId: $alasanId, alasanMCompId: $alasanMCompId, alasanMDirId: $alasanMDirId, alasanGroup: $alasanGroup, alasanKey: $alasanKey, alasanCode: $alasanCode, alasanValue: $alasanValue, alasanIsActive: $alasanIsActive, alasanCreatorId: $alasanCreatorId, alasanLastEditorId: $alasanLastEditorId, alasanCreatedAt: $alasanCreatedAt, alasanUpdatedAt: $alasanUpdatedAt, alasanValue2: $alasanValue2, alasanValue3: $alasanValue3, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, creatorTelp: $creatorTelp, creatorMKaryId: $creatorMKaryId, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage, lastEditorTelp: $lastEditorTelp, lastEditorMKaryId: $lastEditorMKaryId, picId: $picId, picName: $picName, picEmail: $picEmail, picUsername: $picUsername, picEmailVerifiedAt: $picEmailVerifiedAt, picPassword: $picPassword, picMCompId: $picMCompId, picMDirId: $picMDirId, picIsActive: $picIsActive, picCreatorId: $picCreatorId, picLastEditorId: $picLastEditorId, picRememberToken: $picRememberToken, picCreatedAt: $picCreatedAt, picUpdatedAt: $picUpdatedAt, picProfilImage: $picProfilImage, picTelp: $picTelp, picMKaryId: $picMKaryId, picNamaLengkap: $picNamaLengkap)';
   }
 
   @override
@@ -4724,8 +3910,8 @@ class _$DataLemburImpl implements _DataLembur {
                 other.mKaryMDeptId == mKaryMDeptId) &&
             (identical(other.mKaryMZonaId, mKaryMZonaId) ||
                 other.mKaryMZonaId == mKaryMZonaId) &&
-            (identical(other.mKaryGradingId, mKaryGradingId) ||
-                other.mKaryGradingId == mKaryGradingId) &&
+            const DeepCollectionEquality()
+                .equals(other.mKaryGradingId, mKaryGradingId) &&
             (identical(other.mKaryCostcontreId, mKaryCostcontreId) ||
                 other.mKaryCostcontreId == mKaryCostcontreId) &&
             (identical(other.mKaryKode, mKaryKode) ||
@@ -4781,8 +3967,8 @@ class _$DataLemburImpl implements _DataLembur {
             (identical(other.mKaryUpdatedAt, mKaryUpdatedAt) || other.mKaryUpdatedAt == mKaryUpdatedAt) &&
             (identical(other.mKaryMStandartGajiId, mKaryMStandartGajiId) || other.mKaryMStandartGajiId == mKaryMStandartGajiId) &&
             (identical(other.mKaryPeriodeGajiId, mKaryPeriodeGajiId) || other.mKaryPeriodeGajiId == mKaryPeriodeGajiId) &&
-            (identical(other.mKaryRefId, mKaryRefId) || other.mKaryRefId == mKaryRefId) &&
-            const DeepCollectionEquality().equals(other.mKaryPresensiLokasiDefaultId, mKaryPresensiLokasiDefaultId) &&
+            const DeepCollectionEquality().equals(other.mKaryRefId, mKaryRefId) &&
+            (identical(other.mKaryPresensiLokasiDefaultId, mKaryPresensiLokasiDefaultId) || other.mKaryPresensiLokasiDefaultId == mKaryPresensiLokasiDefaultId) &&
             const DeepCollectionEquality().equals(other.mKaryExpDateCuti, mKaryExpDateCuti) &&
             (identical(other.mKaryLimitPotong, mKaryLimitPotong) || other.mKaryLimitPotong == mKaryLimitPotong) &&
             (identical(other.mKaryAtasanId, mKaryAtasanId) || other.mKaryAtasanId == mKaryAtasanId) &&
@@ -4825,7 +4011,7 @@ class _$DataLemburImpl implements _DataLembur {
             (identical(other.creatorMCompId, creatorMCompId) || other.creatorMCompId == creatorMCompId) &&
             (identical(other.creatorMDirId, creatorMDirId) || other.creatorMDirId == creatorMDirId) &&
             (identical(other.creatorIsActive, creatorIsActive) || other.creatorIsActive == creatorIsActive) &&
-            (identical(other.creatorCreatorId, creatorCreatorId) || other.creatorCreatorId == creatorCreatorId) &&
+            const DeepCollectionEquality().equals(other.creatorCreatorId, creatorCreatorId) &&
             (identical(other.creatorLastEditorId, creatorLastEditorId) || other.creatorLastEditorId == creatorLastEditorId) &&
             const DeepCollectionEquality().equals(other.creatorRememberToken, creatorRememberToken) &&
             (identical(other.creatorCreatedAt, creatorCreatedAt) || other.creatorCreatedAt == creatorCreatedAt) &&
@@ -4851,68 +4037,23 @@ class _$DataLemburImpl implements _DataLembur {
             const DeepCollectionEquality().equals(other.lastEditorTelp, lastEditorTelp) &&
             const DeepCollectionEquality().equals(other.lastEditorMKaryId, lastEditorMKaryId) &&
             (identical(other.picId, picId) || other.picId == picId) &&
+            (identical(other.picName, picName) || other.picName == picName) &&
+            (identical(other.picEmail, picEmail) || other.picEmail == picEmail) &&
+            (identical(other.picUsername, picUsername) || other.picUsername == picUsername) &&
+            const DeepCollectionEquality().equals(other.picEmailVerifiedAt, picEmailVerifiedAt) &&
+            (identical(other.picPassword, picPassword) || other.picPassword == picPassword) &&
             (identical(other.picMCompId, picMCompId) || other.picMCompId == picMCompId) &&
             (identical(other.picMDirId, picMDirId) || other.picMDirId == picMDirId) &&
-            (identical(other.picMDivisiId, picMDivisiId) || other.picMDivisiId == picMDivisiId) &&
-            (identical(other.picMDeptId, picMDeptId) || other.picMDeptId == picMDeptId) &&
-            (identical(other.picMZonaId, picMZonaId) || other.picMZonaId == picMZonaId) &&
-            (identical(other.picGradingId, picGradingId) || other.picGradingId == picGradingId) &&
-            (identical(other.picCostcontreId, picCostcontreId) || other.picCostcontreId == picCostcontreId) &&
-            (identical(other.picKode, picKode) || other.picKode == picKode) &&
-            (identical(other.picMPosisiId, picMPosisiId) || other.picMPosisiId == picMPosisiId) &&
-            (identical(other.picMJamKerjaId, picMJamKerjaId) || other.picMJamKerjaId == picMJamKerjaId) &&
-            (identical(other.picKodePresensi, picKodePresensi) || other.picKodePresensi == picKodePresensi) &&
-            (identical(other.picNik, picNik) || other.picNik == picNik) &&
-            (identical(other.picNamaDepan, picNamaDepan) || other.picNamaDepan == picNamaDepan) &&
-            (identical(other.picNamaBelakang, picNamaBelakang) || other.picNamaBelakang == picNamaBelakang) &&
-            (identical(other.picNamaLengkap, picNamaLengkap) || other.picNamaLengkap == picNamaLengkap) &&
-            (identical(other.picNamaPanggilan, picNamaPanggilan) || other.picNamaPanggilan == picNamaPanggilan) &&
-            (identical(other.picJkId, picJkId) || other.picJkId == picJkId) &&
-            (identical(other.picTempatLahir, picTempatLahir) || other.picTempatLahir == picTempatLahir) &&
-            (identical(other.picTglLahir, picTglLahir) || other.picTglLahir == picTglLahir) &&
-            (identical(other.picProvinsiId, picProvinsiId) || other.picProvinsiId == picProvinsiId) &&
-            (identical(other.picKotaId, picKotaId) || other.picKotaId == picKotaId) &&
-            (identical(other.picKecamatanId, picKecamatanId) || other.picKecamatanId == picKecamatanId) &&
-            (identical(other.picKodePos, picKodePos) || other.picKodePos == picKodePos) &&
-            (identical(other.picAlamatAsli, picAlamatAsli) || other.picAlamatAsli == picAlamatAsli) &&
-            (identical(other.picAlamatDomisili, picAlamatDomisili) || other.picAlamatDomisili == picAlamatDomisili) &&
-            (identical(other.picNoTlp, picNoTlp) || other.picNoTlp == picNoTlp) &&
-            const DeepCollectionEquality().equals(other.picNoTlpLainnya, picNoTlpLainnya) &&
-            (identical(other.picNoDarurat, picNoDarurat) || other.picNoDarurat == picNoDarurat) &&
-            (identical(other.picNamaKontakDarurat, picNamaKontakDarurat) || other.picNamaKontakDarurat == picNamaKontakDarurat) &&
-            (identical(other.picAgamaId, picAgamaId) || other.picAgamaId == picAgamaId) &&
-            (identical(other.picGolDarahId, picGolDarahId) || other.picGolDarahId == picGolDarahId) &&
-            (identical(other.picStatusNikahId, picStatusNikahId) || other.picStatusNikahId == picStatusNikahId) &&
-            (identical(other.picTanggunganId, picTanggunganId) || other.picTanggunganId == picTanggunganId) &&
-            (identical(other.picHubDgnKaryawan, picHubDgnKaryawan) || other.picHubDgnKaryawan == picHubDgnKaryawan) &&
-            (identical(other.picCutiJatahReguler, picCutiJatahReguler) || other.picCutiJatahReguler == picCutiJatahReguler) &&
-            (identical(other.picCutiSisaReguler, picCutiSisaReguler) || other.picCutiSisaReguler == picCutiSisaReguler) &&
-            (identical(other.picCutiPanjang, picCutiPanjang) || other.picCutiPanjang == picCutiPanjang) &&
-            (identical(other.picCutiSisaPanjang, picCutiSisaPanjang) || other.picCutiSisaPanjang == picCutiSisaPanjang) &&
-            const DeepCollectionEquality().equals(other.picStatusKaryId, picStatusKaryId) &&
-            const DeepCollectionEquality().equals(other.picLamaKontrakAwal, picLamaKontrakAwal) &&
-            const DeepCollectionEquality().equals(other.picLamaKontrakAkhir, picLamaKontrakAkhir) &&
-            const DeepCollectionEquality().equals(other.picTglMasuk, picTglMasuk) &&
-            const DeepCollectionEquality().equals(other.picTglBerhenti, picTglBerhenti) &&
-            const DeepCollectionEquality().equals(other.picAlasanBerhenti, picAlasanBerhenti) &&
-            (identical(other.picUkBaju, picUkBaju) || other.picUkBaju == picUkBaju) &&
-            (identical(other.picUkCelana, picUkCelana) || other.picUkCelana == picUkCelana) &&
-            (identical(other.picUkSepatu, picUkSepatu) || other.picUkSepatu == picUkSepatu) &&
-            const DeepCollectionEquality().equals(other.picDesc, picDesc) &&
             (identical(other.picIsActive, picIsActive) || other.picIsActive == picIsActive) &&
-            const DeepCollectionEquality().equals(other.picCreatorId, picCreatorId) &&
+            (identical(other.picCreatorId, picCreatorId) || other.picCreatorId == picCreatorId) &&
             (identical(other.picLastEditorId, picLastEditorId) || other.picLastEditorId == picLastEditorId) &&
+            const DeepCollectionEquality().equals(other.picRememberToken, picRememberToken) &&
             (identical(other.picCreatedAt, picCreatedAt) || other.picCreatedAt == picCreatedAt) &&
             (identical(other.picUpdatedAt, picUpdatedAt) || other.picUpdatedAt == picUpdatedAt) &&
-            (identical(other.picMStandartGajiId, picMStandartGajiId) || other.picMStandartGajiId == picMStandartGajiId) &&
-            (identical(other.picPeriodeGajiId, picPeriodeGajiId) || other.picPeriodeGajiId == picPeriodeGajiId) &&
-            (identical(other.picRefId, picRefId) || other.picRefId == picRefId) &&
-            const DeepCollectionEquality().equals(other.picPresensiLokasiDefaultId, picPresensiLokasiDefaultId) &&
-            (identical(other.picExpDateCuti, picExpDateCuti) || other.picExpDateCuti == picExpDateCuti) &&
-            (identical(other.picLimitPotong, picLimitPotong) || other.picLimitPotong == picLimitPotong) &&
-            (identical(other.picAtasanId, picAtasanId) || other.picAtasanId == picAtasanId) &&
-            const DeepCollectionEquality().equals(other.picCutiP24, picCutiP24) &&
-            const DeepCollectionEquality().equals(other.picCutiSisaP24, picCutiSisaP24));
+            (identical(other.picProfilImage, picProfilImage) || other.picProfilImage == picProfilImage) &&
+            (identical(other.picTelp, picTelp) || other.picTelp == picTelp) &&
+            (identical(other.picMKaryId, picMKaryId) || other.picMKaryId == picMKaryId) &&
+            (identical(other.picNamaLengkap, picNamaLengkap) || other.picNamaLengkap == picNamaLengkap));
   }
 
   @JsonKey(ignore: true)
@@ -4966,7 +4107,7 @@ class _$DataLemburImpl implements _DataLembur {
         mKaryMDivisiId,
         mKaryMDeptId,
         mKaryMZonaId,
-        mKaryGradingId,
+        const DeepCollectionEquality().hash(mKaryGradingId),
         mKaryCostcontreId,
         mKaryKode,
         mKaryMPosisiId,
@@ -5016,8 +4157,8 @@ class _$DataLemburImpl implements _DataLembur {
         mKaryUpdatedAt,
         mKaryMStandartGajiId,
         mKaryPeriodeGajiId,
-        mKaryRefId,
-        const DeepCollectionEquality().hash(mKaryPresensiLokasiDefaultId),
+        const DeepCollectionEquality().hash(mKaryRefId),
+        mKaryPresensiLokasiDefaultId,
         const DeepCollectionEquality().hash(mKaryExpDateCuti),
         mKaryLimitPotong,
         mKaryAtasanId,
@@ -5060,7 +4201,7 @@ class _$DataLemburImpl implements _DataLembur {
         creatorMCompId,
         creatorMDirId,
         creatorIsActive,
-        creatorCreatorId,
+        const DeepCollectionEquality().hash(creatorCreatorId),
         creatorLastEditorId,
         const DeepCollectionEquality().hash(creatorRememberToken),
         creatorCreatedAt,
@@ -5086,68 +4227,23 @@ class _$DataLemburImpl implements _DataLembur {
         const DeepCollectionEquality().hash(lastEditorTelp),
         const DeepCollectionEquality().hash(lastEditorMKaryId),
         picId,
+        picName,
+        picEmail,
+        picUsername,
+        const DeepCollectionEquality().hash(picEmailVerifiedAt),
+        picPassword,
         picMCompId,
         picMDirId,
-        picMDivisiId,
-        picMDeptId,
-        picMZonaId,
-        picGradingId,
-        picCostcontreId,
-        picKode,
-        picMPosisiId,
-        picMJamKerjaId,
-        picKodePresensi,
-        picNik,
-        picNamaDepan,
-        picNamaBelakang,
-        picNamaLengkap,
-        picNamaPanggilan,
-        picJkId,
-        picTempatLahir,
-        picTglLahir,
-        picProvinsiId,
-        picKotaId,
-        picKecamatanId,
-        picKodePos,
-        picAlamatAsli,
-        picAlamatDomisili,
-        picNoTlp,
-        const DeepCollectionEquality().hash(picNoTlpLainnya),
-        picNoDarurat,
-        picNamaKontakDarurat,
-        picAgamaId,
-        picGolDarahId,
-        picStatusNikahId,
-        picTanggunganId,
-        picHubDgnKaryawan,
-        picCutiJatahReguler,
-        picCutiSisaReguler,
-        picCutiPanjang,
-        picCutiSisaPanjang,
-        const DeepCollectionEquality().hash(picStatusKaryId),
-        const DeepCollectionEquality().hash(picLamaKontrakAwal),
-        const DeepCollectionEquality().hash(picLamaKontrakAkhir),
-        const DeepCollectionEquality().hash(picTglMasuk),
-        const DeepCollectionEquality().hash(picTglBerhenti),
-        const DeepCollectionEquality().hash(picAlasanBerhenti),
-        picUkBaju,
-        picUkCelana,
-        picUkSepatu,
-        const DeepCollectionEquality().hash(picDesc),
         picIsActive,
-        const DeepCollectionEquality().hash(picCreatorId),
+        picCreatorId,
         picLastEditorId,
+        const DeepCollectionEquality().hash(picRememberToken),
         picCreatedAt,
         picUpdatedAt,
-        picMStandartGajiId,
-        picPeriodeGajiId,
-        picRefId,
-        const DeepCollectionEquality().hash(picPresensiLokasiDefaultId),
-        picExpDateCuti,
-        picLimitPotong,
-        picAtasanId,
-        const DeepCollectionEquality().hash(picCutiP24),
-        const DeepCollectionEquality().hash(picCutiSisaP24)
+        picProfilImage,
+        picTelp,
+        picMKaryId,
+        picNamaLengkap
       ]);
 
   @JsonKey(ignore: true)
@@ -5213,7 +4309,7 @@ abstract class _DataLembur implements DataLembur {
       @JsonKey(name: "m_kary.m_divisi_id") final int? mKaryMDivisiId,
       @JsonKey(name: "m_kary.m_dept_id") final int? mKaryMDeptId,
       @JsonKey(name: "m_kary.m_zona_id") final int? mKaryMZonaId,
-      @JsonKey(name: "m_kary.grading_id") final int? mKaryGradingId,
+      @JsonKey(name: "m_kary.grading_id") final dynamic mKaryGradingId,
       @JsonKey(name: "m_kary.costcontre_id") final int? mKaryCostcontreId,
       @JsonKey(name: "m_kary.kode") final String? mKaryKode,
       @JsonKey(name: "m_kary.m_posisi_id") final int? mKaryMPosisiId,
@@ -5273,9 +4369,9 @@ abstract class _DataLembur implements DataLembur {
       @JsonKey(name: "m_kary.m_standart_gaji_id")
       final int? mKaryMStandartGajiId,
       @JsonKey(name: "m_kary.periode_gaji_id") final int? mKaryPeriodeGajiId,
-      @JsonKey(name: "m_kary.ref_id") final int? mKaryRefId,
+      @JsonKey(name: "m_kary.ref_id") final dynamic mKaryRefId,
       @JsonKey(name: "m_kary.presensi_lokasi_default_id")
-      final dynamic mKaryPresensiLokasiDefaultId,
+      final int? mKaryPresensiLokasiDefaultId,
       @JsonKey(name: "m_kary.exp_date_cuti") final dynamic mKaryExpDateCuti,
       @JsonKey(name: "m_kary.limit_potong") final int? mKaryLimitPotong,
       @JsonKey(name: "m_kary.atasan_id") final int? mKaryAtasanId,
@@ -5323,7 +4419,7 @@ abstract class _DataLembur implements DataLembur {
       @JsonKey(name: "creator.m_comp_id") final int? creatorMCompId,
       @JsonKey(name: "creator.m_dir_id") final int? creatorMDirId,
       @JsonKey(name: "creator.is_active") final bool? creatorIsActive,
-      @JsonKey(name: "creator.creator_id") final int? creatorCreatorId,
+      @JsonKey(name: "creator.creator_id") final dynamic creatorCreatorId,
       @JsonKey(name: "creator.last_editor_id") final int? creatorLastEditorId,
       @JsonKey(name: "creator.remember_token")
       final dynamic creatorRememberToken,
@@ -5357,72 +4453,24 @@ abstract class _DataLembur implements DataLembur {
       @JsonKey(name: "last_editor.telp") final dynamic lastEditorTelp,
       @JsonKey(name: "last_editor.m_kary_id") final dynamic lastEditorMKaryId,
       @JsonKey(name: "pic.id") final int? picId,
+      @JsonKey(name: "pic.name") final String? picName,
+      @JsonKey(name: "pic.email") final String? picEmail,
+      @JsonKey(name: "pic.username") final String? picUsername,
+      @JsonKey(name: "pic.email_verified_at") final dynamic picEmailVerifiedAt,
+      @JsonKey(name: "pic.password") final String? picPassword,
       @JsonKey(name: "pic.m_comp_id") final int? picMCompId,
       @JsonKey(name: "pic.m_dir_id") final int? picMDirId,
-      @JsonKey(name: "pic.m_divisi_id") final int? picMDivisiId,
-      @JsonKey(name: "pic.m_dept_id") final int? picMDeptId,
-      @JsonKey(name: "pic.m_zona_id") final int? picMZonaId,
-      @JsonKey(name: "pic.grading_id") final int? picGradingId,
-      @JsonKey(name: "pic.costcontre_id") final int? picCostcontreId,
-      @JsonKey(name: "pic.kode") final String? picKode,
-      @JsonKey(name: "pic.m_posisi_id") final int? picMPosisiId,
-      @JsonKey(name: "pic.m_jam_kerja_id") final int? picMJamKerjaId,
-      @JsonKey(name: "pic.kode_presensi") final String? picKodePresensi,
-      @JsonKey(name: "pic.nik") final String? picNik,
-      @JsonKey(name: "pic.nama_depan") final String? picNamaDepan,
-      @JsonKey(name: "pic.nama_belakang") final String? picNamaBelakang,
-      @JsonKey(name: "pic.nama_lengkap") final String? picNamaLengkap,
-      @JsonKey(name: "pic.nama_panggilan") final String? picNamaPanggilan,
-      @JsonKey(name: "pic.jk_id") final int? picJkId,
-      @JsonKey(name: "pic.tempat_lahir") final String? picTempatLahir,
-      @JsonKey(name: "pic.tgl_lahir") final String? picTglLahir,
-      @JsonKey(name: "pic.provinsi_id") final int? picProvinsiId,
-      @JsonKey(name: "pic.kota_id") final int? picKotaId,
-      @JsonKey(name: "pic.kecamatan_id") final int? picKecamatanId,
-      @JsonKey(name: "pic.kode_pos") final String? picKodePos,
-      @JsonKey(name: "pic.alamat_asli") final String? picAlamatAsli,
-      @JsonKey(name: "pic.alamat_domisili") final String? picAlamatDomisili,
-      @JsonKey(name: "pic.no_tlp") final String? picNoTlp,
-      @JsonKey(name: "pic.no_tlp_lainnya") final dynamic picNoTlpLainnya,
-      @JsonKey(name: "pic.no_darurat") final String? picNoDarurat,
-      @JsonKey(name: "pic.nama_kontak_darurat")
-      final String? picNamaKontakDarurat,
-      @JsonKey(name: "pic.agama_id") final int? picAgamaId,
-      @JsonKey(name: "pic.gol_darah_id") final int? picGolDarahId,
-      @JsonKey(name: "pic.status_nikah_id") final int? picStatusNikahId,
-      @JsonKey(name: "pic.tanggungan_id") final int? picTanggunganId,
-      @JsonKey(name: "pic.hub_dgn_karyawan") final String? picHubDgnKaryawan,
-      @JsonKey(name: "pic.cuti_jatah_reguler") final int? picCutiJatahReguler,
-      @JsonKey(name: "pic.cuti_sisa_reguler") final int? picCutiSisaReguler,
-      @JsonKey(name: "pic.cuti_panjang") final int? picCutiPanjang,
-      @JsonKey(name: "pic.cuti_sisa_panjang") final int? picCutiSisaPanjang,
-      @JsonKey(name: "pic.status_kary_id") final dynamic picStatusKaryId,
-      @JsonKey(name: "pic.lama_kontrak_awal") final dynamic picLamaKontrakAwal,
-      @JsonKey(name: "pic.lama_kontrak_akhir")
-      final dynamic picLamaKontrakAkhir,
-      @JsonKey(name: "pic.tgl_masuk") final dynamic picTglMasuk,
-      @JsonKey(name: "pic.tgl_berhenti") final dynamic picTglBerhenti,
-      @JsonKey(name: "pic.alasan_berhenti") final dynamic picAlasanBerhenti,
-      @JsonKey(name: "pic.uk_baju") final String? picUkBaju,
-      @JsonKey(name: "pic.uk_celana") final String? picUkCelana,
-      @JsonKey(name: "pic.uk_sepatu") final String? picUkSepatu,
-      @JsonKey(name: "pic.desc") final dynamic picDesc,
       @JsonKey(name: "pic.is_active") final bool? picIsActive,
-      @JsonKey(name: "pic.creator_id") final dynamic picCreatorId,
+      @JsonKey(name: "pic.creator_id") final int? picCreatorId,
       @JsonKey(name: "pic.last_editor_id") final int? picLastEditorId,
+      @JsonKey(name: "pic.remember_token") final dynamic picRememberToken,
       @JsonKey(name: "pic.created_at") final String? picCreatedAt,
       @JsonKey(name: "pic.updated_at") final String? picUpdatedAt,
-      @JsonKey(name: "pic.m_standart_gaji_id") final int? picMStandartGajiId,
-      @JsonKey(name: "pic.periode_gaji_id") final int? picPeriodeGajiId,
-      @JsonKey(name: "pic.ref_id") final int? picRefId,
-      @JsonKey(name: "pic.presensi_lokasi_default_id")
-      final dynamic picPresensiLokasiDefaultId,
-      @JsonKey(name: "pic.exp_date_cuti") final String? picExpDateCuti,
-      @JsonKey(name: "pic.limit_potong") final int? picLimitPotong,
-      @JsonKey(name: "pic.atasan_id") final int? picAtasanId,
-      @JsonKey(name: "pic.cuti_p24") final dynamic picCutiP24,
-      @JsonKey(name: "pic.cuti_sisa_p24")
-      final dynamic picCutiSisaP24}) = _$DataLemburImpl;
+      @JsonKey(name: "pic.profil_image") final String? picProfilImage,
+      @JsonKey(name: "pic.telp") final String? picTelp,
+      @JsonKey(name: "pic.m_kary_id") final int? picMKaryId,
+      @JsonKey(name: "pic.nama_lengkap")
+      final String? picNamaLengkap}) = _$DataLemburImpl;
 
   factory _DataLembur.fromJson(Map<String, dynamic> json) =
       _$DataLemburImpl.fromJson;
@@ -5570,7 +4618,7 @@ abstract class _DataLembur implements DataLembur {
   int? get mKaryMZonaId;
   @override
   @JsonKey(name: "m_kary.grading_id")
-  int? get mKaryGradingId;
+  dynamic get mKaryGradingId;
   @override
   @JsonKey(name: "m_kary.costcontre_id")
   int? get mKaryCostcontreId;
@@ -5720,10 +4768,10 @@ abstract class _DataLembur implements DataLembur {
   int? get mKaryPeriodeGajiId;
   @override
   @JsonKey(name: "m_kary.ref_id")
-  int? get mKaryRefId;
+  dynamic get mKaryRefId;
   @override
   @JsonKey(name: "m_kary.presensi_lokasi_default_id")
-  dynamic get mKaryPresensiLokasiDefaultId;
+  int? get mKaryPresensiLokasiDefaultId;
   @override
   @JsonKey(name: "m_kary.exp_date_cuti")
   dynamic get mKaryExpDateCuti;
@@ -5852,7 +4900,7 @@ abstract class _DataLembur implements DataLembur {
   bool? get creatorIsActive;
   @override
   @JsonKey(name: "creator.creator_id")
-  int? get creatorCreatorId;
+  dynamic get creatorCreatorId;
   @override
   @JsonKey(name: "creator.last_editor_id")
   int? get creatorLastEditorId;
@@ -5929,158 +4977,38 @@ abstract class _DataLembur implements DataLembur {
   @JsonKey(name: "pic.id")
   int? get picId;
   @override
+  @JsonKey(name: "pic.name")
+  String? get picName;
+  @override
+  @JsonKey(name: "pic.email")
+  String? get picEmail;
+  @override
+  @JsonKey(name: "pic.username")
+  String? get picUsername;
+  @override
+  @JsonKey(name: "pic.email_verified_at")
+  dynamic get picEmailVerifiedAt;
+  @override
+  @JsonKey(name: "pic.password")
+  String? get picPassword;
+  @override
   @JsonKey(name: "pic.m_comp_id")
   int? get picMCompId;
   @override
   @JsonKey(name: "pic.m_dir_id")
   int? get picMDirId;
   @override
-  @JsonKey(name: "pic.m_divisi_id")
-  int? get picMDivisiId;
-  @override
-  @JsonKey(name: "pic.m_dept_id")
-  int? get picMDeptId;
-  @override
-  @JsonKey(name: "pic.m_zona_id")
-  int? get picMZonaId;
-  @override
-  @JsonKey(name: "pic.grading_id")
-  int? get picGradingId;
-  @override
-  @JsonKey(name: "pic.costcontre_id")
-  int? get picCostcontreId;
-  @override
-  @JsonKey(name: "pic.kode")
-  String? get picKode;
-  @override
-  @JsonKey(name: "pic.m_posisi_id")
-  int? get picMPosisiId;
-  @override
-  @JsonKey(name: "pic.m_jam_kerja_id")
-  int? get picMJamKerjaId;
-  @override
-  @JsonKey(name: "pic.kode_presensi")
-  String? get picKodePresensi;
-  @override
-  @JsonKey(name: "pic.nik")
-  String? get picNik;
-  @override
-  @JsonKey(name: "pic.nama_depan")
-  String? get picNamaDepan;
-  @override
-  @JsonKey(name: "pic.nama_belakang")
-  String? get picNamaBelakang;
-  @override
-  @JsonKey(name: "pic.nama_lengkap")
-  String? get picNamaLengkap;
-  @override
-  @JsonKey(name: "pic.nama_panggilan")
-  String? get picNamaPanggilan;
-  @override
-  @JsonKey(name: "pic.jk_id")
-  int? get picJkId;
-  @override
-  @JsonKey(name: "pic.tempat_lahir")
-  String? get picTempatLahir;
-  @override
-  @JsonKey(name: "pic.tgl_lahir")
-  String? get picTglLahir;
-  @override
-  @JsonKey(name: "pic.provinsi_id")
-  int? get picProvinsiId;
-  @override
-  @JsonKey(name: "pic.kota_id")
-  int? get picKotaId;
-  @override
-  @JsonKey(name: "pic.kecamatan_id")
-  int? get picKecamatanId;
-  @override
-  @JsonKey(name: "pic.kode_pos")
-  String? get picKodePos;
-  @override
-  @JsonKey(name: "pic.alamat_asli")
-  String? get picAlamatAsli;
-  @override
-  @JsonKey(name: "pic.alamat_domisili")
-  String? get picAlamatDomisili;
-  @override
-  @JsonKey(name: "pic.no_tlp")
-  String? get picNoTlp;
-  @override
-  @JsonKey(name: "pic.no_tlp_lainnya")
-  dynamic get picNoTlpLainnya;
-  @override
-  @JsonKey(name: "pic.no_darurat")
-  String? get picNoDarurat;
-  @override
-  @JsonKey(name: "pic.nama_kontak_darurat")
-  String? get picNamaKontakDarurat;
-  @override
-  @JsonKey(name: "pic.agama_id")
-  int? get picAgamaId;
-  @override
-  @JsonKey(name: "pic.gol_darah_id")
-  int? get picGolDarahId;
-  @override
-  @JsonKey(name: "pic.status_nikah_id")
-  int? get picStatusNikahId;
-  @override
-  @JsonKey(name: "pic.tanggungan_id")
-  int? get picTanggunganId;
-  @override
-  @JsonKey(name: "pic.hub_dgn_karyawan")
-  String? get picHubDgnKaryawan;
-  @override
-  @JsonKey(name: "pic.cuti_jatah_reguler")
-  int? get picCutiJatahReguler;
-  @override
-  @JsonKey(name: "pic.cuti_sisa_reguler")
-  int? get picCutiSisaReguler;
-  @override
-  @JsonKey(name: "pic.cuti_panjang")
-  int? get picCutiPanjang;
-  @override
-  @JsonKey(name: "pic.cuti_sisa_panjang")
-  int? get picCutiSisaPanjang;
-  @override
-  @JsonKey(name: "pic.status_kary_id")
-  dynamic get picStatusKaryId;
-  @override
-  @JsonKey(name: "pic.lama_kontrak_awal")
-  dynamic get picLamaKontrakAwal;
-  @override
-  @JsonKey(name: "pic.lama_kontrak_akhir")
-  dynamic get picLamaKontrakAkhir;
-  @override
-  @JsonKey(name: "pic.tgl_masuk")
-  dynamic get picTglMasuk;
-  @override
-  @JsonKey(name: "pic.tgl_berhenti")
-  dynamic get picTglBerhenti;
-  @override
-  @JsonKey(name: "pic.alasan_berhenti")
-  dynamic get picAlasanBerhenti;
-  @override
-  @JsonKey(name: "pic.uk_baju")
-  String? get picUkBaju;
-  @override
-  @JsonKey(name: "pic.uk_celana")
-  String? get picUkCelana;
-  @override
-  @JsonKey(name: "pic.uk_sepatu")
-  String? get picUkSepatu;
-  @override
-  @JsonKey(name: "pic.desc")
-  dynamic get picDesc;
-  @override
   @JsonKey(name: "pic.is_active")
   bool? get picIsActive;
   @override
   @JsonKey(name: "pic.creator_id")
-  dynamic get picCreatorId;
+  int? get picCreatorId;
   @override
   @JsonKey(name: "pic.last_editor_id")
   int? get picLastEditorId;
+  @override
+  @JsonKey(name: "pic.remember_token")
+  dynamic get picRememberToken;
   @override
   @JsonKey(name: "pic.created_at")
   String? get picCreatedAt;
@@ -6088,32 +5016,17 @@ abstract class _DataLembur implements DataLembur {
   @JsonKey(name: "pic.updated_at")
   String? get picUpdatedAt;
   @override
-  @JsonKey(name: "pic.m_standart_gaji_id")
-  int? get picMStandartGajiId;
+  @JsonKey(name: "pic.profil_image")
+  String? get picProfilImage;
   @override
-  @JsonKey(name: "pic.periode_gaji_id")
-  int? get picPeriodeGajiId;
+  @JsonKey(name: "pic.telp")
+  String? get picTelp;
   @override
-  @JsonKey(name: "pic.ref_id")
-  int? get picRefId;
+  @JsonKey(name: "pic.m_kary_id")
+  int? get picMKaryId;
   @override
-  @JsonKey(name: "pic.presensi_lokasi_default_id")
-  dynamic get picPresensiLokasiDefaultId;
-  @override
-  @JsonKey(name: "pic.exp_date_cuti")
-  String? get picExpDateCuti;
-  @override
-  @JsonKey(name: "pic.limit_potong")
-  int? get picLimitPotong;
-  @override
-  @JsonKey(name: "pic.atasan_id")
-  int? get picAtasanId;
-  @override
-  @JsonKey(name: "pic.cuti_p24")
-  dynamic get picCutiP24;
-  @override
-  @JsonKey(name: "pic.cuti_sisa_p24")
-  dynamic get picCutiSisaP24;
+  @JsonKey(name: "pic.nama_lengkap")
+  String? get picNamaLengkap;
   @override
   @JsonKey(ignore: true)
   _$$DataLemburImplCopyWith<_$DataLemburImpl> get copyWith =>

@@ -132,7 +132,7 @@ class DataLembur with _$DataLembur {
         @JsonKey(name: "m_kary.m_zona_id")
         int? mKaryMZonaId,
         @JsonKey(name: "m_kary.grading_id")
-        int? mKaryGradingId,
+        dynamic mKaryGradingId,
         @JsonKey(name: "m_kary.costcontre_id")
         int? mKaryCostcontreId,
         @JsonKey(name: "m_kary.kode")
@@ -232,9 +232,9 @@ class DataLembur with _$DataLembur {
         @JsonKey(name: "m_kary.periode_gaji_id")
         int? mKaryPeriodeGajiId,
         @JsonKey(name: "m_kary.ref_id")
-        int? mKaryRefId,
+        dynamic mKaryRefId,
         @JsonKey(name: "m_kary.presensi_lokasi_default_id")
-        dynamic mKaryPresensiLokasiDefaultId,
+        int? mKaryPresensiLokasiDefaultId,
         @JsonKey(name: "m_kary.exp_date_cuti")
         dynamic mKaryExpDateCuti,
         @JsonKey(name: "m_kary.limit_potong")
@@ -320,7 +320,7 @@ class DataLembur with _$DataLembur {
         @JsonKey(name: "creator.is_active")
         bool? creatorIsActive,
         @JsonKey(name: "creator.creator_id")
-        int? creatorCreatorId,
+        dynamic creatorCreatorId,
         @JsonKey(name: "creator.last_editor_id")
         int? creatorLastEditorId,
         @JsonKey(name: "creator.remember_token")
@@ -371,130 +371,40 @@ class DataLembur with _$DataLembur {
         dynamic lastEditorMKaryId,
         @JsonKey(name: "pic.id")
         int? picId,
+        @JsonKey(name: "pic.name")
+        String? picName,
+        @JsonKey(name: "pic.email")
+        String? picEmail,
+        @JsonKey(name: "pic.username")
+        String? picUsername,
+        @JsonKey(name: "pic.email_verified_at")
+        dynamic picEmailVerifiedAt,
+        @JsonKey(name: "pic.password")
+        String? picPassword,
         @JsonKey(name: "pic.m_comp_id")
         int? picMCompId,
         @JsonKey(name: "pic.m_dir_id")
         int? picMDirId,
-        @JsonKey(name: "pic.m_divisi_id")
-        int? picMDivisiId,
-        @JsonKey(name: "pic.m_dept_id")
-        int? picMDeptId,
-        @JsonKey(name: "pic.m_zona_id")
-        int? picMZonaId,
-        @JsonKey(name: "pic.grading_id")
-        int? picGradingId,
-        @JsonKey(name: "pic.costcontre_id")
-        int? picCostcontreId,
-        @JsonKey(name: "pic.kode")
-        String? picKode,
-        @JsonKey(name: "pic.m_posisi_id")
-        int? picMPosisiId,
-        @JsonKey(name: "pic.m_jam_kerja_id")
-        int? picMJamKerjaId,
-        @JsonKey(name: "pic.kode_presensi")
-        String? picKodePresensi,
-        @JsonKey(name: "pic.nik")
-        String? picNik,
-        @JsonKey(name: "pic.nama_depan")
-        String? picNamaDepan,
-        @JsonKey(name: "pic.nama_belakang")
-        String? picNamaBelakang,
-        @JsonKey(name: "pic.nama_lengkap")
-        String? picNamaLengkap,
-        @JsonKey(name: "pic.nama_panggilan")
-        String? picNamaPanggilan,
-        @JsonKey(name: "pic.jk_id")
-        int? picJkId,
-        @JsonKey(name: "pic.tempat_lahir")
-        String? picTempatLahir,
-        @JsonKey(name: "pic.tgl_lahir")
-        String? picTglLahir,
-        @JsonKey(name: "pic.provinsi_id")
-        int? picProvinsiId,
-        @JsonKey(name: "pic.kota_id")
-        int? picKotaId,
-        @JsonKey(name: "pic.kecamatan_id")
-        int? picKecamatanId,
-        @JsonKey(name: "pic.kode_pos")
-        String? picKodePos,
-        @JsonKey(name: "pic.alamat_asli")
-        String? picAlamatAsli,
-        @JsonKey(name: "pic.alamat_domisili")
-        String? picAlamatDomisili,
-        @JsonKey(name: "pic.no_tlp")
-        String? picNoTlp,
-        @JsonKey(name: "pic.no_tlp_lainnya")
-        dynamic picNoTlpLainnya,
-        @JsonKey(name: "pic.no_darurat")
-        String? picNoDarurat,
-        @JsonKey(name: "pic.nama_kontak_darurat")
-        String? picNamaKontakDarurat,
-        @JsonKey(name: "pic.agama_id")
-        int? picAgamaId,
-        @JsonKey(name: "pic.gol_darah_id")
-        int? picGolDarahId,
-        @JsonKey(name: "pic.status_nikah_id")
-        int? picStatusNikahId,
-        @JsonKey(name: "pic.tanggungan_id")
-        int? picTanggunganId,
-        @JsonKey(name: "pic.hub_dgn_karyawan")
-        String? picHubDgnKaryawan,
-        @JsonKey(name: "pic.cuti_jatah_reguler")
-        int? picCutiJatahReguler,
-        @JsonKey(name: "pic.cuti_sisa_reguler")
-        int? picCutiSisaReguler,
-        @JsonKey(name: "pic.cuti_panjang")
-        int? picCutiPanjang,
-        @JsonKey(name: "pic.cuti_sisa_panjang")
-        int? picCutiSisaPanjang,
-        @JsonKey(name: "pic.status_kary_id")
-        dynamic picStatusKaryId,
-        @JsonKey(name: "pic.lama_kontrak_awal")
-        dynamic picLamaKontrakAwal,
-        @JsonKey(name: "pic.lama_kontrak_akhir")
-        dynamic picLamaKontrakAkhir,
-        @JsonKey(name: "pic.tgl_masuk")
-        dynamic picTglMasuk,
-        @JsonKey(name: "pic.tgl_berhenti")
-        dynamic picTglBerhenti,
-        @JsonKey(name: "pic.alasan_berhenti")
-        dynamic picAlasanBerhenti,
-        @JsonKey(name: "pic.uk_baju")
-        String? picUkBaju,
-        @JsonKey(name: "pic.uk_celana")
-        String? picUkCelana,
-        @JsonKey(name: "pic.uk_sepatu")
-        String? picUkSepatu,
-        @JsonKey(name: "pic.desc")
-        dynamic picDesc,
         @JsonKey(name: "pic.is_active")
         bool? picIsActive,
         @JsonKey(name: "pic.creator_id")
-        dynamic picCreatorId,
+        int? picCreatorId,
         @JsonKey(name: "pic.last_editor_id")
         int? picLastEditorId,
+        @JsonKey(name: "pic.remember_token")
+        dynamic picRememberToken,
         @JsonKey(name: "pic.created_at")
         String? picCreatedAt,
         @JsonKey(name: "pic.updated_at")
         String? picUpdatedAt,
-        @JsonKey(name: "pic.m_standart_gaji_id")
-        int? picMStandartGajiId,
-        @JsonKey(name: "pic.periode_gaji_id")
-        int? picPeriodeGajiId,
-        @JsonKey(name: "pic.ref_id")
-        int? picRefId,
-        @JsonKey(name: "pic.presensi_lokasi_default_id")
-        dynamic picPresensiLokasiDefaultId,
-        @JsonKey(name: "pic.exp_date_cuti")
-        String? picExpDateCuti,
-        @JsonKey(name: "pic.limit_potong")
-        int? picLimitPotong,
-        @JsonKey(name: "pic.atasan_id")
-        int? picAtasanId,
-        @JsonKey(name: "pic.cuti_p24")
-        dynamic picCutiP24,
-        @JsonKey(name: "pic.cuti_sisa_p24")
-        dynamic picCutiSisaP24,
+        @JsonKey(name: "pic.profil_image")
+        String? picProfilImage,
+        @JsonKey(name: "pic.telp")
+        String? picTelp,
+        @JsonKey(name: "pic.m_kary_id")
+        int? picMKaryId,
+        @JsonKey(name: "pic.nama_lengkap")
+        String? picNamaLengkap,
     }) = _DataLembur;
 
     factory DataLembur.fromJson(Map<String, dynamic> json) => _$DataLemburFromJson(json);

@@ -389,12 +389,12 @@ class AddDinasBloc extends Bloc<AddDinasEvent, AddDinasState> {
       if (resToken is ServicesSuccess) {
         var res = await DinasServices.editDinas(
           resToken.response["token"],
-          event.id,
+          event.spdID,
           event.divisi,
           event.departemen,
           event.posisi,
-          event.templateSpd,
-          event.direktorat,
+          event.templateSpd ?? -99,
+          // event.direktorat ?? -99,
           event.tanggal,
           event.tanggalAwal,
           event.tanggalAkhir,
@@ -404,6 +404,7 @@ class AddDinasBloc extends Bloc<AddDinasEvent, AddDinasState> {
           event.lokasiTujuan,
           event.pic,
           event.kendDinas,
+          event.desc ?? '',
         );
         if (res is ServicesSuccess) {
           emit(AddDinasSuccess(message: "Edit perjalanan dinas berhasil"));

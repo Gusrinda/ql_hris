@@ -264,7 +264,7 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                                                                   .start,
                                                           children: [
                                                             Text(
-                                                              'Nilai Lisan',
+                                                              'Level Lisan',
                                                               style: GoogleFonts
                                                                   .poppins(
                                                                 fontSize: 10.sp,
@@ -273,7 +273,7 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                                                               ),
                                                             ),
                                                             Text(
-                                                              '${dataBahasa.nilaiLisan ?? '-'}',
+                                                              '${dataBahasa.levelLisan ?? '-'}',
                                                               style: GoogleFonts
                                                                   .poppins(
                                                                 fontSize: 12.sp,
@@ -294,7 +294,7 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                                                                   .start,
                                                           children: [
                                                             Text(
-                                                              'Nilai Tertulis',
+                                                              'Level Tertulis',
                                                               style: GoogleFonts
                                                                   .poppins(
                                                                 fontSize: 10.sp,
@@ -303,7 +303,7 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                                                               ),
                                                             ),
                                                             Text(
-                                                              '${dataBahasa.nilaiTertulis ?? '-'}',
+                                                              '${dataBahasa.levelTertulis ?? '-'}',
                                                               style: GoogleFonts
                                                                   .poppins(
                                                                 fontSize: 12.sp,

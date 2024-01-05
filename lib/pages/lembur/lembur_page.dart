@@ -14,6 +14,24 @@ import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/list_lembur_bloc.dar
 import 'package:sj_presensi_mobile/services/model/lembur/lembur_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
+final Map<String, dynamic> stateDict = {
+  "IN APPROVAL": {
+    "name": "Menunggu Disetujui",
+  },
+  "APPROVED": {
+    "name": "Disetujui",
+  },
+  "REJECTED": {
+    "name": "Ditolak",
+  },
+  "REVISED": {
+    "name": "Revisi",
+  },
+  "DRAFT": {
+    "name": "Draft",
+  },
+};
+
 class LemburPage extends StatefulWidget {
   static const routeName = '/LemburPage';
   const LemburPage({
@@ -22,6 +40,33 @@ class LemburPage extends StatefulWidget {
 
   @override
   State<LemburPage> createState() => _LemburPageState();
+}
+
+String mapStatusToString(String status) {
+  if (stateDict.containsKey(status)) {
+    return stateDict[status]['name'];
+  } else {
+    return 'Menunggu Disetujui';
+  }
+}
+
+Color getColorFromStatus(String status) {
+  if (stateDict.containsKey(status)) {
+    switch (status) {
+      case "IN APPROVAL":
+        return const Color(0xFF0068D4);
+      case "REVISED":
+        return Colors.orange;
+      case "REJECTED":
+        return const Color(0xFFED1B24);
+      case "APPROVED":
+        return const Color(0xFF0CA356);
+      default:
+        return Colors.grey; // warna default
+    }
+  } else {
+    return const Color(0xFF0068D4); // warna default
+  }
 }
 
 class _LemburPageState extends State<LemburPage> {
@@ -181,7 +226,8 @@ class _LemburPageState extends State<LemburPage> {
                     color: Colors.white,
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+                    padding:
+                        const EdgeInsets.only(top: 20, left: 20, right: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -325,7 +371,10 @@ class CardListView extends StatelessWidget {
             itemBuilder: (context, index) {
               // DateTime sampleDate = DateTime.now();
               DataLembur? data = listlembur[index];
-              
+
+              String currentStatus = data.status ?? '';
+              Color currentColor = getColorFromStatus(currentStatus);
+
               return ListTile(
                 contentPadding: EdgeInsets.zero,
                 subtitle: GestureDetector(
@@ -381,40 +430,24 @@ class CardListView extends StatelessWidget {
                             SizedBox(
                               height: 20.sp,
                             ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 7,
-                                  child: Text(
-                                    "${data.nomor ?? 0}",
-                                    style: GoogleFonts.poppins(
-                                      color: MyColorsConst.primaryColor,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ),
-                                // const Spacer(),
-                                // Expanded(
-                                //   flex: 3,
-                                //   child: Container(
-                                //     padding: const EdgeInsets.symmetric(
-                                //         horizontal: 6, vertical: 3),
-                                //     decoration: BoxDecoration(
-                                //       borderRadius: BorderRadius.circular(4),
-                                //       color: Colors.blue.withOpacity(0.1),
-                                //     ),
-                                //     child: Text(
-                                //       '${data.tipeLemburValue}',
-                                //       style: GoogleFonts.poppins(
-                                //         color: Color(0XFF0068D4),
-                                //         fontSize: 8,
-                                //         fontWeight: FontWeight.w500,
-                                //       ),
-                                //     ),
-                                //   ),
-                                // ),
-                              ],
+                            Text(
+                              data.tipeLemburValue ?? '',
+                              style: GoogleFonts.poppins(
+                                color: MyColorsConst.darkColor,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 2.sp,
+                            ),
+                            Text(
+                              "${data.nomor ?? 0}",
+                              style: GoogleFonts.poppins(
+                                color: MyColorsConst.primaryColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                             SizedBox(
                               height: 10.sp,
@@ -481,21 +514,21 @@ class CardListView extends StatelessWidget {
                         child: Container(
                           height: 30,
                           padding: EdgeInsets.symmetric(
-                              horizontal: 6.sp, vertical: 3.sp),
+                              horizontal: 10.sp, vertical: 3.sp),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
                               topRight: Radius.circular(10.sp),
                               bottomLeft: Radius.circular(10.sp),
                             ),
-                            color: Color(0XFF0068D4),
+                            color: currentColor,
                           ),
                           child: Center(
                             child: Text(
-                              '${data.tipeLemburValue}',
+                              mapStatusToString(currentStatus),
                               style: GoogleFonts.poppins(
                                 color: Colors.white,
                                 fontSize: 10,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),

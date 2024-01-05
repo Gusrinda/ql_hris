@@ -2,10 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/services/model/lembur/lembur_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 import 'package:url_launcher/link.dart';
+
+final Map<String, dynamic> stateDict = {
+  "IN APPROVAL": {
+    "name": "Menunggu Disetujui",
+  },
+  "APPROVED": {
+    "name": "Disetujui",
+  },
+  "REJECTED": {
+    "name": "Ditolak",
+  },
+  "REVISED": {
+    "name": "Revisi",
+  },
+  "DRAFT": {
+    "name": "Draft",
+  },
+};
 
 class DetailLemburPage extends StatefulWidget {
   static const routeName = '/DetailLemburPage';
@@ -40,6 +59,34 @@ class DetailLemburPage extends StatefulWidget {
 }
 
 class _DetailLemburPageState extends State<DetailLemburPage> {
+  String mapStatusToString(String status) {
+    if (widget.data?.status != null &&
+        stateDict.containsKey(widget.data?.status)) {
+      return stateDict[widget.data?.status]['name'];
+    } else {
+      return 'Undefined';
+    }
+  }
+
+  Color getColorFromStatus(String status) {
+    if (stateDict.containsKey(status)) {
+      switch (status) {
+        case "IN APPROVAL":
+          return const Color(0xFF0068D4);
+        case "REVISED":
+          return Colors.orange;
+        case "REJECTED":
+          return const Color(0xFFED1B24);
+        case "APPROVED":
+          return const Color(0xFF0CA356);
+        default:
+          return Colors.grey; // warna default
+      }
+    } else {
+      return Colors.grey; // warna default
+    }
+  }
+
   String formatDate(String? dateString) {
     if (dateString != null) {
       DateTime date = DateFormat("dd/MM/yyyy").parse(dateString);
@@ -60,6 +107,9 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    String currentStatus = widget.data?.status as String;
+    Color currentColor = getColorFromStatus(currentStatus);
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -134,15 +184,15 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                   "${widget.nomorFromList ?? '-'}",
                                 ),
                                 if (widget.noDoc != null)
-                                _buildText(
-                                  'No. Dokumen',
-                                  "${widget.noDoc ?? '-'}",
-                                ),
+                                  _buildText(
+                                    'No. Dokumen',
+                                    "${widget.noDoc ?? '-'}",
+                                  ),
                                 if (widget.data?.picNamaLengkap != null)
-                                _buildText(
-                                  'PIC',
-                                  "${widget.data?.picNamaLengkap ?? '-'}",
-                                ),
+                                  _buildText(
+                                    'PIC',
+                                    widget.data?.picNamaLengkap ?? '-',
+                                  ),
                                 Text(
                                   'Tipe Lembur',
                                   style: GoogleFonts.poppins(
@@ -163,6 +213,27 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                   'Keterangan',
                                   "${widget.keterangan ?? '-'}",
                                 ),
+                                Text(
+                                  'Status Approval',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 10,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Text(
+                                  mapStatusToString(widget.data?.status as String),
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    color: currentColor,
+                                  ),
+                                ),
+                                // SizedBox(height: 10),
+                                // _buildText(
+                                //   'Keterangan',
+                                //   "${widget.data?.keterangan ?? '-'}",
+                                // ),
                               ],
                             ),
                           ),
