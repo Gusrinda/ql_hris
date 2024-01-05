@@ -177,12 +177,12 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                       color: Colors.white,
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(18.0.sp),
+                      padding: EdgeInsets.symmetric(horizontal: 5.sp),
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
                             SizedBox(
-                              height: 20.sp,
+                              height: 50.sp,
                             ),
                             buildCardImage(
                               dataPresensi: widget.data,
@@ -191,9 +191,12 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                               address: "${widget.checkinAddress}",
                               onSite: "${widget.checkinOnScope}",
                             ),
-                            const Divider(
-                              color: Color(0xFFDDDDDD),
-                              thickness: 1,
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 20.sp, vertical: 10.sp),
+                              child: const Divider(
+                                color: Color(0xFFDDDDDD),
+                                thickness: 1,
+                              ),
                             ),
                             buildCardImage(
                               dataPresensi: widget.data,
@@ -390,7 +393,7 @@ Padding buildCardImage({
     );
   });
   return Padding(
-    padding: EdgeInsets.all(16.0.sp),
+    padding: EdgeInsets.symmetric(horizontal: 20.sp),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

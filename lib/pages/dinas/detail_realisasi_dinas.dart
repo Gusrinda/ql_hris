@@ -219,7 +219,13 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         _buildText(
-                                            'Tanggal',
+                                            'Dibuat Pada',
+                                            dataDetailrealisasiDinas
+                                                    ?.dataDetailrealisasiDinas
+                                                    ?.createdAt ??
+                                                '-'),
+                                        _buildText(
+                                            'Tanggal Pengajuan',
                                             dataDetailrealisasiDinas
                                                     ?.dataDetailrealisasiDinas
                                                     ?.tSpdTanggal ??

@@ -328,7 +328,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                                 child: Row(
                                                   children: [
                                                     FormTextLabel(
-                                                      label: "Tanggal Mulai",
+                                                      label: selectedTipeValue != "P24" ? "Tanggal Mulai" : "Tanggal Cuti P24",
                                                       labelColor: MyColorsConst
                                                           .darkColor,
                                                     ),
@@ -343,29 +343,34 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                                   ],
                                                 ),
                                               ),
-                                              SizedBox(
-                                                width: 20.sp,
-                                              ),
-                                              Expanded(
-                                                flex: 1,
-                                                child: Row(
-                                                  children: [
-                                                    const FormTextLabel(
-                                                      label: "Tanggal Berakhir",
-                                                      labelColor: MyColorsConst
-                                                          .darkColor,
-                                                    ),
-                                                    SizedBox(width: 2.sp),
-                                                    Text(
-                                                      '*',
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                              color:
-                                                                  Colors.red),
-                                                    ),
-                                                  ],
+                                              if (selectedTipeValue !=
+                                                  "P24") ...{
+                                                SizedBox(
+                                                  width: 20.sp,
                                                 ),
-                                              ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Row(
+                                                    children: [
+                                                      const FormTextLabel(
+                                                        label:
+                                                            "Tanggal Berakhir",
+                                                        labelColor:
+                                                            MyColorsConst
+                                                                .darkColor,
+                                                      ),
+                                                      SizedBox(width: 2.sp),
+                                                      Text(
+                                                        '*',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                color:
+                                                                    Colors.red),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              }
                                             ],
                                           ),
                                         ),
@@ -389,26 +394,28 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                                     "Selected Date From: $selectedDateFrom");
                                               }, dateFromError),
                                             ),
-                                            SizedBox(
-                                              width: 20.sp,
-                                            ),
-                                            Expanded(
-                                              flex: 1,
-                                              child: _buildDateTextField(
-                                                "Pilih Tanggal",
-                                                widget.dateToController,
-                                                selectedDateTo,
-                                                (selectedDate) {
-                                                  setState(() {
-                                                    selectedDateTo =
-                                                        selectedDate;
-                                                  });
-                                                  print(
-                                                      "Selected Date To: $selectedDateTo");
-                                                },
-                                                dateToError,
+                                            if (selectedTipeValue != "P24") ...{
+                                              SizedBox(
+                                                width: 20.sp,
                                               ),
-                                            ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: _buildDateTextField(
+                                                  "Pilih Tanggal",
+                                                  widget.dateToController,
+                                                  selectedDateTo,
+                                                  (selectedDate) {
+                                                    setState(() {
+                                                      selectedDateTo =
+                                                          selectedDate;
+                                                    });
+                                                    print(
+                                                        "Selected Date To: $selectedDateTo");
+                                                  },
+                                                  dateToError,
+                                                ),
+                                              ),
+                                            }
                                           ],
                                         ),
                                         SizedBox(
@@ -513,7 +520,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                         if (selectedTipeValue == "P24") ...{
                                           Text.rich(
                                             TextSpan(
-                                              text: 'Cuti P24 selama : ',
+                                              text: 'Cuti P24 Selama : ',
                                               style: GoogleFonts.poppins(
                                                 fontSize: 13.sp,
                                                 color: MyColorsConst.darkColor,
@@ -545,7 +552,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                             children: [
                                               Text.rich(
                                                 TextSpan(
-                                                  text: 'Cuti selama : ',
+                                                  text: 'Cuti Selama : ',
                                                   style: GoogleFonts.poppins(
                                                     fontSize: 13.sp,
                                                     color:
@@ -688,9 +695,14 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                                       dateFrom: widget
                                                           .dateFromController
                                                           .text,
-                                                      dateTo: widget
-                                                          .dateToController
-                                                          .text,
+                                                      dateTo: selectedTipeValue !=
+                                                              "P24"
+                                                          ? widget
+                                                              .dateToController
+                                                              .text
+                                                          : widget
+                                                              .dateFromController
+                                                              .text,
                                                       timeFrom: widget
                                                               .timeFromController
                                                               ?.text ??

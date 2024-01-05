@@ -312,10 +312,10 @@ class _AddLemburPageState extends State<AddLemburPage> {
                                           labelTag: 'Label-Pic',
                                           formTag: 'Form-Pic',
                                           validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return 'Pilih Pic';
-                                            }
+                                            // if (value == null ||
+                                            //     value.isEmpty) {
+                                            //   return 'Pilih Pic';
+                                            // }
                                             return null;
                                           },
                                           errorTextStyle:

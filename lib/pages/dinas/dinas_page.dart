@@ -547,7 +547,7 @@ class ListViewDinas extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "Surat Perjalanan Dinas",
+                        data.nomor ?? "-",
                         style: GoogleFonts.poppins(
                           color: MyColorsConst.primaryColor,
                           fontSize: 14,

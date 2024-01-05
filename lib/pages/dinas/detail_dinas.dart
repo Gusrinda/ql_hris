@@ -226,14 +226,16 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 _buildText(
-                                    'Template Spd', widget.templateSpd ?? '-'),
+                                    'Nomor Pengajuan SPD', widget.data?.nomor ?? '-'),
+                                _buildText(
+                                    'NOmor Template SPD', widget.templateSpd ?? '-'),
                                 _buildText('Direktorat',
                                     widget.direktoratValue ?? '-'),
                                 _buildText('Divisi', widget.divisiValue ?? '-'),
                                 _buildText(
                                     'Departemen', widget.deptValue ?? '-'),
                                 _buildText('Posisi', widget.posisi ?? '-'),
-                                _buildText('Jenis Spd', widget.jenisSpd ?? '-'),
+                                _buildText('Jenis SPD', widget.jenisSpd ?? '-'),
                                 _buildText('Durasi Hari',
                                     "${widget.data!.interval?.toString() ?? '0'} Hari"),
                                 Text(
@@ -277,8 +279,10 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 _buildText(
+                                    'Dibuat Pada', widget.data?.createdAt ?? '-'),
+                                _buildText(
                                     'Nama PIC', widget.data?.namaPic ?? '-'),
-                                _buildText('Tanggal', widget.tanggal ?? '-'),
+                                _buildText('Tanggal Pengajuan', widget.tanggal ?? '-'),
                                 _buildText('Tanggal Acara Awal',
                                     widget.tanggalAwal ?? '-'),
                                 _buildText('Tanggal Acara Akhir',

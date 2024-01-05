@@ -292,7 +292,6 @@ class _HistoryPageState extends State<HistoryPage> {
                                           data.status as String;
                                       Color currentColor =
                                           getColorFromStatus(currentStatus);
-
                                       return Padding(
                                         padding: EdgeInsets.symmetric(
                                             horizontal: 20.sp),
@@ -303,7 +302,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                               children: [
                                                 Container(
                                                   margin: const EdgeInsets.only(
-                                                      bottom: 7),
+                                                      bottom: 10),
                                                   decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(

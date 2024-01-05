@@ -158,7 +158,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
               child: Row(
                 children: [
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_back_ios_rounded,
                       size: 18,
                     ),
@@ -207,7 +207,7 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 _buildText(
-                                    'Nomor', widget.nomorFromList ?? '-'),
+                                    'Nomor Pengajuan Cuti', widget.nomorFromList ?? '-'),
                                 _buildText(
                                     'Tipe Cuti', widget.tipeCutiValue ?? '-'),
                                 if (widget.data?.timeFrom != null &&
@@ -266,6 +266,8 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                _buildText('Dibuat Pada',
+                                    widget.data?.createdAt ?? '-'),
                                 _buildText('Alasan', widget.alasanValue ?? '-'),
                                 _buildText('Tanggal Awal',
                                     formatDate(widget.dateFrom ?? '-')),
@@ -282,7 +284,6 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                                       'Durasi Waktu',
                                       convertMinutesToHours(
                                           widget.data?.intervalMin ?? 0)),
-
                                 // _buildText('Catatan Approval',
                                 //     widget.data?.keterangan?.toString() ?? '-'),
                               ],

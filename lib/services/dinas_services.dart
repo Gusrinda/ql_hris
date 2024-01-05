@@ -10,7 +10,7 @@ class DinasServices {
     var formattedDate =
         "${date.year}-${date.month.toString().padLeft(2, '0')}-$lastDateStr";
     var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/t_spd?where=tgl_acara_awal> '${date.year}-${date.month.toString().padLeft(2, '0')}-01' and tgl_acara_akhir < '$formattedDate'");
+        "${MyGeneralConst.API_URL}/operation/t_spd?where=this.created_at between '${date.year}-${date.month.toString().padLeft(2, '0')}-01 00:00:00' and '$formattedDate 23:59:59'");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,

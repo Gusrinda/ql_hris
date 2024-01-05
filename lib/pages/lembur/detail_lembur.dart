@@ -172,6 +172,10 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 _buildText(
+                                  'Dibuat Pada',
+                                  "${widget.data?.createdAt ?? '-'}",
+                                ),
+                                _buildText(
                                   'Tanggal Lembur',
                                   "${widget.tanggal ?? '-'}",
                                 ),
