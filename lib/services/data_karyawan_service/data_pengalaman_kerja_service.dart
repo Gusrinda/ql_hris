@@ -41,7 +41,7 @@ class DataPengalamanKerjaService {
     String tahunKeluar,
     String alamat,
     int kotaId,
-    File suratReferensi,
+    File? suratReferensi,
   ) async {
     try {
       var url =
@@ -78,10 +78,91 @@ class DataPengalamanKerjaService {
       // request.fields['surat_referensi'] = suratReferensi;
 
       // Mengirimkan File
-      request.files.add(
-        await http.MultipartFile.fromPath(
-            'surat_referensi', suratReferensi.path),
+     Map<String, File?> files = {
+        'surat_referensi': suratReferensi,
+      }..removeWhere((key, value) => value == null || value.path.isEmpty);
+
+      request.files.addAll(await Future.wait(
+        files.entries.map(
+          (entry) async => await http.MultipartFile.fromPath(
+            entry.key,
+            entry.value!.path,
+          ),
+        ),
+      ));
+
+      var response = await request.send();
+      var responseBody = await response.stream.bytesToString();
+
+      if (response.statusCode == 200) {
+        return ServicesSuccess(
+          code: response.statusCode,
+          response: json.decode(responseBody),
+        );
+      } else {
+        return ServicesFailure(
+          code: response.statusCode,
+          errorResponse: json.decode(responseBody)['message'],
+        );
+      }
+    } catch (e) {
+      // Handle exceptions
+      print("Exception: $e");
+      return ServicesFailure(
+        code: MyGeneralConst.CODE_UNKWON_ERROR,
+        errorResponse: "Unknown Error!\nPlease try again!",
       );
+    }
+  }
+
+  static Future<Object> editDataPengalamanKerja(
+    String token,
+    int compId,
+    int dirId,
+    int pengalamanId,
+    String instansi,
+    String bidangUsaha,
+    String noTelp,
+    String posisi,
+    String tahunMasuk,
+    String tahunKeluar,
+    String alamat,
+    int kotaId,
+    File? suratReferensi,
+  ) async {
+    try {
+      var url =
+          Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/pk_create/$pengalamanId");
+
+      var request = http.MultipartRequest('PUT', url)
+        ..headers.addAll(GeneralServices.addToken2Headers(token));
+
+      // Mengirimkan Data Biasa
+      request.fields['m_comp_id'] = compId.toString();
+      request.fields['m_dir_id'] = dirId.toString();
+      request.fields['instansi'] = instansi;
+      request.fields['bidang_usaha'] = bidangUsaha;
+      request.fields['no_tlp'] = noTelp;
+      request.fields['posisi'] = posisi;
+      request.fields['thn_masuk'] = tahunMasuk;
+      request.fields['thn_keluar'] = tahunKeluar;
+      request.fields['alamat_kantor'] = alamat;
+      request.fields['kota_id'] = kotaId.toString();
+      // request.fields['surat_referensi'] = suratReferensi;
+
+      // Mengirimkan File
+      Map<String, File?> files = {
+        'surat_referensi': suratReferensi,
+      }..removeWhere((key, value) => value == null || value.path.isEmpty);
+
+      request.files.addAll(await Future.wait(
+        files.entries.map(
+          (entry) async => await http.MultipartFile.fromPath(
+            entry.key,
+            entry.value!.path,
+          ),
+        ),
+      ));
 
       var response = await request.send();
       var responseBody = await response.stream.bytesToString();

@@ -26,6 +26,8 @@ class AddDataPendidikanBloc
         print("ini res Token : ${resToken.response}");
         var res = await DataKaryawanService.createDataPendidikan(
             resToken.response["token"],
+            resToken.response["m_comp_id"] ?? 1,
+            resToken.response["m_dir_id"] ?? 1,
             event.tingkatID,
             event.namaSekolah,
             event.tahunMasuk,
@@ -48,6 +50,47 @@ class AddDataPendidikanBloc
             emit(AddDataPendidikanFailedUserExpired(message: "Token expired"));
           } else {
             emit(AddDataPendidikanFailed(message: "Unknown error occurred"));
+            print("Response from API: ${res.errorResponse}");
+          }
+        }
+      } else if (resToken is ServicesFailure) {
+        emit(AddDataPendidikanFailedInBackground(
+            message: 'Response format is invalid'));
+      }
+    });
+
+    on<EditDataPendidikanSubmited>((event, emit) async {
+      emit(AddDataPendidikanLoading());
+      var resToken = await GeneralSharedPreferences.getUserToken();
+      if (resToken is ServicesSuccess) {
+        print("ini res Token : ${resToken.response}");
+        var res = await DataKaryawanService.editDataPendidikan(
+            resToken.response["token"],
+            resToken.response["m_comp_id"] ?? 1,
+            resToken.response["m_dir_id"] ?? 1,
+            event.pendidikanId,
+            event.tingkatID,
+            event.namaSekolah,
+            event.tahunMasuk,
+            event.tahunLulus,
+            event.kotaID,
+            event.nilai,
+            event.jurusan,
+            event.isPendTerakhir,
+            event.ijazahNo,
+            event.ijazahFoto,
+            event.desc);
+
+        if (res is ServicesSuccess) {
+          emit(EditDataPendidikanSuccess(
+              message: "Edit Data Pendidikan Berhasil"));
+          print(res.response);
+        } else if (res is ServicesFailure) {
+          if (res.errorResponse == null) {
+            await GeneralSharedPreferences.removeUserToken();
+            emit(AddDataPendidikanFailedUserExpired(message: "Token expired"));
+          } else {
+            emit(EditDataPendidikanFailed(message: "Unknown error occurred"));
             print("Response from API: ${res.errorResponse}");
           }
         }

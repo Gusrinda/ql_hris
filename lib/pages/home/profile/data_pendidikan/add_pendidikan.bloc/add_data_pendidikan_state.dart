@@ -68,3 +68,21 @@ class AddDataPendidikanFailedUserExpired extends AddDataPendidikanState {
   @override
   List<Object> get props => [message];
 }
+
+class EditDataPendidikanSuccess extends AddDataPendidikanState {
+  String message;
+
+  EditDataPendidikanSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+class EditDataPendidikanFailed extends AddDataPendidikanState {
+  String message;
+
+  EditDataPendidikanFailed({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}

@@ -9,12 +9,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
-import 'package:sj_presensi_mobile/componens/HRIS/form_input_file.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
-import 'package:sj_presensi_mobile/pages/cuti/cuti_selector.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/add_pendidikan.bloc/add_data_pendidikan_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/selector/kota_selector.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/selector/tingkat_selector.dart';
@@ -45,7 +43,7 @@ class AddPendidikanPage extends StatefulWidget {
   final TextEditingController pendidikanTerakhirController =
       TextEditingController();
   final TextEditingController ijazahController = TextEditingController();
-  final TextEditingController ijazahNoController = TextEditingController();
+  final TextEditingController? ijazahNoController = TextEditingController();
 
   final TextEditingController catatanController = TextEditingController();
 
@@ -54,6 +52,7 @@ class AddPendidikanPage extends StatefulWidget {
 }
 
 class _AddPendidikanPageState extends State<AddPendidikanPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
@@ -314,7 +313,7 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
       },
       child: Scaffold(
         body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
                 MyColorsConst.primaryDarkColor,
@@ -377,398 +376,459 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(height: 16.sp),
-                              FormDropDownData(
-                                // input: selectedTingkat ?? '',
-                                onTap: () {
-                                  showTingkatPendidikanMenu(context);
-                                },
-                                idController: widget.idTingkatController,
-                                valueController: widget.valueTingkatController,
-                                labelTag: 'Label-addTingkatPendidikan',
-                                labelForm: 'Tingkat',
-                                formTag: 'Form-addTingkatPendidikan',
-                                hintText: 'Pilih Tingkat',
-                                validator: (value) {},
-                              ),
-                              FormInputData(
-                                input: widget.namaSekolahController.text,
-                                labelTag: 'label-addnamasekolah',
-                                labelForm: 'Nama Sekolah',
-                                formTag: 'form-addnamasekolah',
-                                hintText: 'Nama Sekolah',
-                                onTap: () {},
-                                controller: widget.namaSekolahController,
-                                validator: (value) {},
-                              ),
-                              FormDropDownData(
-                                input: '',
-                                onTap: () {
-                                  showKotaMenu(context);
-                                },
-                                idController: widget.idKotaController,
-                                valueController: widget.valueKotaController,
-                                labelTag: 'Label-addkotapendidikan',
-                                labelForm: 'Kota',
-                                formTag: 'Form-addkotapendidikan',
-                                hintText: 'Pilih Kota',
-                                validator: (value) {},
-                              ),
-                              FormInputData(
-                                input: widget.jurusanController.text,
-                                labelTag: 'label-addjurusan',
-                                labelForm: 'Jurusan',
-                                formTag: 'form-addjurusan',
-                                hintText: 'Jurusan',
-                                onTap: () {},
-                                controller: widget.jurusanController,
-                                validator: (value) {},
-                              ),
-                              FormDropDownData(
-                                input: '',
-                                onTap: () {
-                                  showTahunMenu(
-                                      context, widget.tahuunMasukController);
-                                },
-                                idController: widget.tahuunMasukController,
-                                valueController: widget.tahuunMasukController,
-                                labelTag: 'Label-addtahunmasukpendidikan',
-                                labelForm: 'Tahun Masuk',
-                                formTag: 'Form-addtahunmasukpendidikan',
-                                hintText: 'Pilih Tahun',
-                                // inputType: TextInputType.number,
-                                validator: (value) {},
-                              ),
-                              FormDropDownData(
-                                input: '',
-                                onTap: () {
-                                  showTahunMenu(
-                                      context, widget.tahunLulusController);
-                                },
-                                idController: widget.tahunLulusController,
-                                valueController: widget.tahunLulusController,
-                                labelTag: 'Label-addtahunluluspendidikan',
-                                labelForm: 'Tahun Lulus',
-                                formTag: 'Form-addtahunluluspendidikan',
-                                hintText: 'Pilih Tahun',
-                                validator: (value) {},
-                              ),
-                              FormInputData(
-                                input: widget.nilaiController.text,
-                                labelTag: 'label-addnilai',
-                                labelForm: 'Nilai',
-                                formTag: 'form-addnilai',
-                                hintText: 'Nilai',
-                                onTap: () {},
-                                controller: widget.nilaiController,
-                                inputType: TextInputType.number,
-                                validator: (value) {},
-                              ),
-                              FormInputData(
-                                input: widget.ijazahNoController.text,
-                                labelTag: 'label-ijazahNo',
-                                labelForm: 'Nomor Ijazah',
-                                formTag: 'form-ijazahNo',
-                                hintText: 'Tuliskan Nomor Ijazah',
-                                onTap: () {},
-                                controller: widget.ijazahNoController,
-                                // inputType: TextInputType.number,
-                                validator: (value) {},
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Apakah Pendidikan Terakhir Anda',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 13.sp,
-                                      color: MyColorsConst.darkColor,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  Text(
-                                    ' *',
-                                    style:
-                                        GoogleFonts.poppins(color: Colors.red),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 10.sp),
-                              Row(
-                                children: <Widget>[
-                                  InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        pendidikanTerakhir = 1;
-                                        widget.pendidikanTerakhirController
-                                                .text =
-                                            pendidikanTerakhir.toString();
-                                      });
-                                    },
-                                    child: Container(
-                                      width: 110.sp,
-                                      padding: EdgeInsets.all(7.sp),
-                                      decoration: BoxDecoration(
-                                        color: pendidikanTerakhir == 1
-                                            ? MyColorsConst.primaryColor
-                                            : Colors.transparent,
-                                        borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(
-                                          width: 1.5,
-                                          color: pendidikanTerakhir == 1
-                                              ? MyColorsConst
-                                                  .primaryColor // Warna ketika terpilih
-                                              : MyColorsConst
-                                                  .formBorderColor, // Warna ketika tidak terpilih
-                                        ),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          'Iya',
-                                          style: GoogleFonts.poppins(
-                                            color: pendidikanTerakhir == 1
-                                                ? Colors.white
-                                                : MyColorsConst.darkColor,
-                                            fontSize: 13.sp,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        pendidikanTerakhir = 0;
-                                        widget.pendidikanTerakhirController
-                                                .text =
-                                            pendidikanTerakhir.toString();
-                                      });
-                                    },
-                                    child: Container(
-                                      width: 110.sp,
-                                      padding: EdgeInsets.all(7.sp),
-                                      decoration: BoxDecoration(
-                                        color: pendidikanTerakhir == 0
-                                            ? MyColorsConst.primaryColor
-                                            : Colors.transparent,
-                                        borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(
-                                          width: 1.5,
-                                          color: pendidikanTerakhir == 0
-                                              ? MyColorsConst.primaryColor
-                                              : MyColorsConst.formBorderColor,
-                                        ),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          'Tidak',
-                                          style: GoogleFonts.poppins(
-                                            fontSize: 13.sp,
-                                            fontWeight: FontWeight.w500,
-                                            color: pendidikanTerakhir == 0
-                                                ? Colors.white
-                                                : MyColorsConst.darkColor,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 20.sp),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Foto Ijazah',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 13.sp,
-                                      color: MyColorsConst.darkColor,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  Text(
-                                    ' *',
-                                    style:
-                                        GoogleFonts.poppins(color: Colors.red),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 5),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: OutlinedButton.icon(
-                                      onPressed: () async {
-                                        final file = await uploadFile(context);
-
-                                        if (file != null) {
-                                          setState(() {
-                                            uploadedFile =
-                                                file.files.first as File?;
-                                          });
-
-                                          // Extract file name from the path
-                                          fileName = uploadedFile != null
-                                              ? uploadedFile!.path
-                                                  .split('/')
-                                                  .last
-                                              : "";
-                                          print('Uploaded file: $fileName');
-                                        }
-                                      },
-                                      style: OutlinedButton.styleFrom(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 15),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        foregroundColor:
-                                            MyColorsConst.primaryColor,
-                                        side: BorderSide(
-                                          width: 1.5,
-                                          color: MyColorsConst.formBorderColor,
-                                        ),
-                                      ),
-                                      icon: Icon(
-                                        CupertinoIcons.doc,
-                                        size: 20.sp,
-                                        color: MyColorsConst.lightDarkColor,
-                                      ),
-                                      label: Text(
-                                        'Upload',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 13.sp,
-                                          color: MyColorsConst.lightDarkColor,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Expanded(
-                                    child: OutlinedButton.icon(
-                                      onPressed: () async {
-                                        final file = await captureFile(context);
-
-                                        if (file != null) {
-                                          setState(() {
-                                            uploadedFile = File(file.path);
-                                          });
-
-                                          fileName = uploadedFile!.path
-                                              .split('/')
-                                              .last;
-                                          print('Captured file: $fileName');
-                                        }
-                                      },
-                                      style: OutlinedButton.styleFrom(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 15),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        foregroundColor:
-                                            MyColorsConst.primaryColor,
-                                        side: BorderSide(
-                                          width: 1.5,
-                                          color: MyColorsConst.formBorderColor,
-                                        ),
-                                      ),
-                                      icon: Icon(
-                                        CupertinoIcons.camera,
-                                        size: 20.sp,
-                                        color: MyColorsConst.lightDarkColor,
-                                      ),
-                                      label: Text(
-                                        'Kamera',
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 13.sp,
-                                          color: MyColorsConst.lightDarkColor,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              if (uploadedFile != null)
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                              Form(
+                                key: _formKey,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                child: Column(
                                   children: [
-                                    SizedBox(height: 7.sp),
-                                    SizedBox(
-                                      width: size.width,
-                                      child: RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: 'Nama File: ',
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 12.sp,
-                                                color: MyColorsConst
-                                                    .lightDarkColor,
-                                                fontWeight: FontWeight.w600,
+                                    SizedBox(height: 16.sp),
+                                    FormDropDownData(
+                                      // input: selectedTingkat ?? '',
+                                      onTap: () {
+                                        showTingkatPendidikanMenu(context);
+                                      },
+                                      idController: widget.idTingkatController,
+                                      valueController:
+                                          widget.valueTingkatController,
+                                      labelTag: 'Label-addTingkatPendidikan',
+                                      labelForm: 'Tingkat',
+                                      formTag: 'Form-addTingkatPendidikan',
+                                      hintText: 'Pilih Tingkat Pendidikan',
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Pilih Tingkat Pendidikan';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormInputData(
+                                      input: widget.namaSekolahController.text,
+                                      labelTag: 'label-addnamasekolah',
+                                      labelForm: 'Nama Sekolah',
+                                      formTag: 'form-addnamasekolah',
+                                      hintText: 'Nama Sekolah',
+                                      onTap: () {},
+                                      controller: widget.namaSekolahController,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Tuliskan Nama Sekolah';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormDropDownData(
+                                      input: '',
+                                      onTap: () {
+                                        showKotaMenu(context);
+                                      },
+                                      idController: widget.idKotaController,
+                                      valueController:
+                                          widget.valueKotaController,
+                                      labelTag: 'Label-addkotapendidikan',
+                                      labelForm: 'Kota',
+                                      formTag: 'Form-addkotapendidikan',
+                                      hintText: 'Pilih Kota',
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Pilih Kota';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormInputData(
+                                      input: widget.jurusanController.text,
+                                      labelTag: 'label-addjurusan',
+                                      labelForm: 'Jurusan',
+                                      formTag: 'form-addjurusan',
+                                      hintText: 'Jurusan',
+                                      onTap: () {},
+                                      controller: widget.jurusanController,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Tuliskan Jurusan';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormDropDownData(
+                                      input: '',
+                                      onTap: () {
+                                        showTahunMenu(context,
+                                            widget.tahuunMasukController);
+                                      },
+                                      idController:
+                                          widget.tahuunMasukController,
+                                      valueController:
+                                          widget.tahuunMasukController,
+                                      labelTag: 'Label-addtahunmasukpendidikan',
+                                      labelForm: 'Tahun Masuk',
+                                      formTag: 'Form-addtahunmasukpendidikan',
+                                      hintText: 'Pilih Tahun',
+                                      // inputType: TextInputType.number,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Pilih Tahun Masuk';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormDropDownData(
+                                      input: '',
+                                      onTap: () {
+                                        showTahunMenu(context,
+                                            widget.tahunLulusController);
+                                      },
+                                      idController: widget.tahunLulusController,
+                                      valueController:
+                                          widget.tahunLulusController,
+                                      labelTag: 'Label-addtahunluluspendidikan',
+                                      labelForm: 'Tahun Lulus',
+                                      formTag: 'Form-addtahunluluspendidikan',
+                                      hintText: 'Pilih Tahun',
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Pilih Tahun Lulus';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormInputData(
+                                      input: widget.nilaiController.text,
+                                      labelTag: 'label-addnilai',
+                                      labelForm: 'Nilai',
+                                      formTag: 'form-addnilai',
+                                      hintText: 'Nilai',
+                                      onTap: () {},
+                                      controller: widget.nilaiController,
+                                      inputType: TextInputType.number,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Tuliskan Nilai';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormInputData(
+                                      input: widget.ijazahNoController!.text,
+                                      labelTag: 'label-ijazahNo',
+                                      labelForm: 'Nomor Ijazah',
+                                      formTag: 'form-ijazahNo',
+                                      hintText: 'Tuliskan Nomor Ijazah',
+                                      onTap: () {},
+                                      controller: widget.ijazahNoController!,
+                                      showRedStar: false,
+                                      validator: (value) {},
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Apakah Pendidikan Terakhir Anda',
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 13.sp,
+                                            color: MyColorsConst.darkColor,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        Text(
+                                          '*',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.red),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 10.sp),
+                                    Row(
+                                      children: <Widget>[
+                                        InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              pendidikanTerakhir = 1;
+                                              widget.pendidikanTerakhirController
+                                                      .text =
+                                                  pendidikanTerakhir.toString();
+                                            });
+                                          },
+                                          child: Container(
+                                            width: 110.sp,
+                                            padding: EdgeInsets.all(7.sp),
+                                            decoration: BoxDecoration(
+                                              color: pendidikanTerakhir == 1
+                                                  ? MyColorsConst.primaryColor
+                                                  : Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              border: Border.all(
+                                                width: 1.5,
+                                                color: pendidikanTerakhir == 1
+                                                    ? MyColorsConst
+                                                        .primaryColor // Warna ketika terpilih
+                                                    : MyColorsConst
+                                                        .formBorderColor, // Warna ketika tidak terpilih
                                               ),
                                             ),
-                                            TextSpan(
-                                              text: ' $fileName',
+                                            child: Center(
+                                              child: Text(
+                                                'Iya',
+                                                style: GoogleFonts.poppins(
+                                                  color: pendidikanTerakhir == 1
+                                                      ? Colors.white
+                                                      : MyColorsConst.darkColor,
+                                                  fontSize: 13.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 10),
+                                        InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              pendidikanTerakhir = 0;
+                                              widget.pendidikanTerakhirController
+                                                      .text =
+                                                  pendidikanTerakhir.toString();
+                                            });
+                                          },
+                                          child: Container(
+                                            width: 110.sp,
+                                            padding: EdgeInsets.all(7.sp),
+                                            decoration: BoxDecoration(
+                                              color: pendidikanTerakhir == 0
+                                                  ? MyColorsConst.primaryColor
+                                                  : Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              border: Border.all(
+                                                width: 1.5,
+                                                color: pendidikanTerakhir == 0
+                                                    ? MyColorsConst.primaryColor
+                                                    : MyColorsConst
+                                                        .formBorderColor,
+                                              ),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                'Tidak',
+                                                style: GoogleFonts.poppins(
+                                                  fontSize: 13.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: pendidikanTerakhir == 0
+                                                      ? Colors.white
+                                                      : MyColorsConst.darkColor,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 20.sp),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Foto Ijazah',
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 13.sp,
+                                            color: MyColorsConst.darkColor,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        Text(
+                                          ' *',
+                                          style: GoogleFonts.poppins(
+                                              color: Colors.red),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 5),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: OutlinedButton.icon(
+                                            onPressed: () async {
+                                              final file =
+                                                  await uploadFile(context);
+
+                                              if (file != null) {
+                                                setState(() {
+                                                  uploadedFile =
+                                                      file.files.first as File?;
+                                                });
+
+                                                // Extract file name from the path
+                                                fileName = uploadedFile != null
+                                                    ? uploadedFile!.path
+                                                        .split('/')
+                                                        .last
+                                                    : "";
+                                                print(
+                                                    'Uploaded file: $fileName');
+                                              }
+                                            },
+                                            style: OutlinedButton.styleFrom(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 15),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              foregroundColor:
+                                                  MyColorsConst.primaryColor,
+                                              side: BorderSide(
+                                                width: 1.5,
+                                                color: MyColorsConst
+                                                    .formBorderColor,
+                                              ),
+                                            ),
+                                            icon: Icon(
+                                              CupertinoIcons.doc,
+                                              size: 20.sp,
+                                              color:
+                                                  MyColorsConst.lightDarkColor,
+                                            ),
+                                            label: Text(
+                                              'Upload',
                                               style: GoogleFonts.poppins(
-                                                fontSize: 12.sp,
-                                                color:
-                                                    MyColorsConst.primaryColor,
+                                                fontSize: 13.sp,
+                                                color: MyColorsConst
+                                                    .lightDarkColor,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
-                                          ],
+                                          ),
                                         ),
-                                      ),
+                                        const SizedBox(width: 10),
+                                        Expanded(
+                                          child: OutlinedButton.icon(
+                                            onPressed: () async {
+                                              final file =
+                                                  await captureFile(context);
+
+                                              if (file != null) {
+                                                setState(() {
+                                                  uploadedFile =
+                                                      File(file.path);
+                                                });
+
+                                                fileName = uploadedFile!.path
+                                                    .split('/')
+                                                    .last;
+                                                print(
+                                                    'Captured file: $fileName');
+                                              }
+                                            },
+                                            style: OutlinedButton.styleFrom(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 15),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              foregroundColor:
+                                                  MyColorsConst.primaryColor,
+                                              side: BorderSide(
+                                                width: 1.5,
+                                                color: MyColorsConst
+                                                    .formBorderColor,
+                                              ),
+                                            ),
+                                            icon: Icon(
+                                              CupertinoIcons.camera,
+                                              size: 20.sp,
+                                              color:
+                                                  MyColorsConst.lightDarkColor,
+                                            ),
+                                            label: Text(
+                                              'Kamera',
+                                              style: GoogleFonts.poppins(
+                                                fontSize: 13.sp,
+                                                color: MyColorsConst
+                                                    .lightDarkColor,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    // SizedBox(height: 7.sp),
-                                    // RichText(
-                                    //   text: TextSpan(
-                                    //     children: [
-                                    //       TextSpan(
-                                    //         text: 'File URL: ',
-                                    //         style: GoogleFonts.poppins(
-                                    //           fontSize: 10.sp,
-                                    //           color: MyColorsConst.darkColor,
-                                    //           fontWeight: FontWeight.w600,
-                                    //         ),
-                                    //       ),
-                                    //       TextSpan(
-                                    //         text: '$fileUrl',
-                                    //         style: GoogleFonts.poppins(
-                                    //           fontSize: 10.sp,
-                                    //           color: MyColorsConst.darkColor,
-                                    //           fontWeight: FontWeight.w400,
-                                    //         ),
-                                    //       ),
-                                    //     ],
-                                    //   ),
-                                    // ),
-                                    // if (fileUrl.toLowerCase().endsWith('.jpg') ||
-                                    //     fileUrl.toLowerCase().endsWith('.jpeg') ||
-                                    //     fileUrl.toLowerCase().endsWith('.png'))
-                                    //   Image.file(
-                                    //       uploadedFile!),
+                                    if (uploadedFile != null)
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(height: 7.sp),
+                                          SizedBox(
+                                            width: size.width,
+                                            child: RichText(
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: 'Nama File: ',
+                                                    style: GoogleFonts.poppins(
+                                                      fontSize: 12.sp,
+                                                      color: MyColorsConst
+                                                          .lightDarkColor,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                  TextSpan(
+                                                    text: ' $fileName',
+                                                    style: GoogleFonts.poppins(
+                                                      fontSize: 12.sp,
+                                                      color: MyColorsConst
+                                                          .primaryColor,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    SizedBox(height: 15.sp),
+                                    FormInputData(
+                                      input: widget.catatanController.text,
+                                      labelTag: 'label-addcatatanpendidikan',
+                                      labelForm: 'Catatan',
+                                      formTag: 'form-addcatatanpendidikan',
+                                      hintText: 'Catatan',
+                                      showRedStar: false,
+                                      onTap: () {},
+                                      controller: widget.catatanController,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Tuliskan Catatan';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    SizedBox(height: 20.sp),
                                   ],
                                 ),
-                              SizedBox(height: 15.sp),
-                              FormInputData(
-                                input: widget.catatanController.text,
-                                labelTag: 'label-addcatatanpendidikan',
-                                labelForm: 'Catatan',
-                                formTag: 'form-addcatatanpendidikan',
-                                hintText: 'Catatan',
-                                showRedStar: false,
-                                onTap: () {},
-                                controller: widget.catatanController,
-                                validator: (value) {},
                               ),
-                              SizedBox(height: 20.sp),
                               TextButtonCustomV1(
                                 text: "Simpan",
                                 height: 50.sp,
@@ -778,35 +838,45 @@ class _AddPendidikanPageState extends State<AddPendidikanPage> {
                                 onPressed: state is AddDataPendidikanLoading
                                     ? null
                                     : () {
-                                        context
-                                            .read<AddDataPendidikanBloc>()
-                                            .add(
-                                              AddDataPendidikanSubmited(
-                                                tingkatID: int.parse(widget
-                                                    .idTingkatController.text),
-                                                namaSekolah: widget
-                                                    .namaSekolahController.text,
-                                                tahunMasuk: widget
-                                                    .tahuunMasukController.text,
-                                                tahunLulus: widget
-                                                    .tahunLulusController.text,
-                                                kotaID: int.parse(widget
-                                                    .idKotaController.text),
-                                                nilai: double.parse(widget
-                                                    .nilaiController.text),
-                                                jurusan: widget
-                                                    .jurusanController.text,
-                                                isPendTerakhir: int.parse(widget
-                                                    .pendidikanTerakhirController
-                                                    .text),
-                                                ijazahNo: widget
-                                                    .ijazahNoController.text,
-                                                ijazahFoto:
-                                                    File(uploadedFile!.path),
-                                                desc: widget
-                                                    .catatanController.text,
-                                              ),
-                                            );
+                                        if (_formKey.currentState!.validate()) {
+                                          context
+                                              .read<AddDataPendidikanBloc>()
+                                              .add(
+                                                AddDataPendidikanSubmited(
+                                                  tingkatID: int.parse(widget
+                                                      .idTingkatController
+                                                      .text),
+                                                  namaSekolah: widget
+                                                      .namaSekolahController
+                                                      .text,
+                                                  tahunMasuk: widget
+                                                      .tahuunMasukController
+                                                      .text,
+                                                  tahunLulus: widget
+                                                      .tahunLulusController
+                                                      .text,
+                                                  kotaID: int.parse(widget
+                                                      .idKotaController.text),
+                                                  nilai: double.parse(widget
+                                                      .nilaiController.text),
+                                                  jurusan: widget
+                                                      .jurusanController.text,
+                                                  isPendTerakhir: int.parse(widget
+                                                      .pendidikanTerakhirController
+                                                      .text),
+                                                  ijazahNo: widget
+                                                      .ijazahNoController?.text,
+                                                  ijazahFoto: uploadedFile !=
+                                                              null &&
+                                                          uploadedFile!
+                                                              .path.isNotEmpty
+                                                      ? File(uploadedFile!.path)
+                                                      : null,
+                                                  desc: widget
+                                                      .catatanController.text,
+                                                ),
+                                              );
+                                        }
                                       },
                               ),
                             ],

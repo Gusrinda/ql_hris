@@ -297,8 +297,7 @@ class RouteGenerator {
               reloadDataCallback: () {
                 context
                     .read<ListRealisasiDinasBloc>()
-                    .add(GetListRealisasiDinas(
-                      date: DateTime.now()));
+                    .add(GetListRealisasiDinas(date: DateTime.now()));
               },
             ),
           );
@@ -360,8 +359,18 @@ class RouteGenerator {
           );
         });
       case ViewEditBahasaPage.routeName:
+        final arguments = settings.arguments as Map<String, dynamic>;
+        final bahasaId = arguments['bahasaId'] as int;
         return MaterialPageRoute(builder: (context) {
-          return ViewEditBahasaPage();
+          return BlocProvider(
+            create: (context) => AddBahasaBloc(),
+            child: ViewEditBahasaPage(
+              reloadDataCallback: () {
+                context.read<ListBahasaBloc>().add(GetListBahasa());
+              },
+              bahasaId: bahasaId,
+            ),
+          );
         });
       case AddBahasaPage.routeName:
         return MaterialPageRoute(builder: (context) {
@@ -382,8 +391,20 @@ class RouteGenerator {
           );
         });
       case ViewEditKeluargaPage.routeName:
+        final arguments = settings.arguments as Map<String, dynamic>;
+        final dataKeluargaId = arguments['dataKeluargaId'] as int;
         return MaterialPageRoute(builder: (context) {
-          return ViewEditKeluargaPage();
+          return BlocProvider(
+            create: (context) => AddKeluargaBloc(),
+            child: ViewEditKeluargaPage(
+              reloadDataCallback: () {
+                context.read<ListKeluargaBloc>().add(
+                      GetListKeluarga(),
+                    );
+              },
+              dataKeluargaId: dataKeluargaId,
+            ),
+          );
         });
       case AddKeluargaPage.routeName:
         return MaterialPageRoute(builder: (context) {
@@ -404,9 +425,23 @@ class RouteGenerator {
           );
         });
       case ViewEditOrganisasiPage.routeName:
-        return MaterialPageRoute(builder: (context) {
-          return ViewEditOrganisasiPage();
-        });
+        final arguments = settings.arguments as Map<String, dynamic>;
+        final organisasiId = arguments['organisasiId'] as int;
+        return MaterialPageRoute(
+          builder: (context) {
+            return BlocProvider(
+              create: (context) => AddOrganisasiBloc(),
+              child: ViewEditOrganisasiPage(
+                reloadDataCallback: () {
+                  context.read<ListKeluargaBloc>().add(
+                        GetListKeluarga(),
+                      );
+                },
+                organisasiId: organisasiId,
+              ),
+            );
+          },
+        );
       case AddOrganisasiPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
@@ -426,8 +461,18 @@ class RouteGenerator {
           );
         });
       case ViewEditPelatihanPage.routeName:
+        final arguments = settings.arguments as Map<String, dynamic>;
+        final pelatihanId = arguments['pelatihanId'] as int;
         return MaterialPageRoute(builder: (context) {
-          return ViewEditPelatihanPage();
+          return BlocProvider(
+            create: (context) => AddPelatihanBloc(),
+            child: ViewEditPelatihanPage(
+              reloadDataCallback: () {
+                context.read<ListPelatihanBloc>().add(GetListPelatihan());
+              },
+              idPelatihan: pelatihanId,
+            ),
+          );
         });
       case AddPelatihanPage.routeName:
         return MaterialPageRoute(builder: (context) {
@@ -459,8 +504,18 @@ class RouteGenerator {
           );
         });
       case ViewEditPendidikanPage.routeName:
+        final arguments = settings.arguments as Map<String, dynamic>;
+        final pendidikanId = arguments['pendidikanId'] as int;
         return MaterialPageRoute(builder: (context) {
-          return ViewEditPendidikanPage();
+          return BlocProvider(
+            create: (context) => AddDataPendidikanBloc(),
+            child: ViewEditPendidikanPage(
+              reloadDataCallback: () {
+                context.read<ListPendidikanBloc>().add(GetListPendidikan());
+              },
+              pendidikanId: pendidikanId,
+            ),
+          );
         });
       case DataPengalamanKerjaPage.routeName:
         return MaterialPageRoute(builder: (context) {
@@ -470,8 +525,18 @@ class RouteGenerator {
           );
         });
       case ViewEditPengalamanPage.routeName:
+        final arguments = settings.arguments as Map<String, dynamic>;
+        final pengalamanId = arguments['pengalamanId'] as int;
         return MaterialPageRoute(builder: (context) {
-          return ViewEditPengalamanPage();
+          return BlocProvider(
+            create: (context) => AddPengalamanKerjaBloc(),
+            child: ViewEditPengalamanPage(
+              reloadDataCallback: () {
+                context.read<ListPengalamanBloc>().add(GetListPengalaman());
+              },
+              pengalamanId: pengalamanId,
+            ),
+          );
         });
       case AddPengalamanPage.routeName:
         return MaterialPageRoute(builder: (context) {
@@ -492,8 +557,18 @@ class RouteGenerator {
           );
         });
       case ViewEditPrestasiPage.routeName:
+        final arguments = settings.arguments as Map<String, dynamic>;
+        final prestasiId = arguments['prestasiId'] as int;
         return MaterialPageRoute(builder: (context) {
-          return ViewEditPrestasiPage();
+          return BlocProvider(
+            create: (context) => AddPrestasiBloc(),
+            child: ViewEditPrestasiPage(
+              reloadDataCallback: () {
+                context.read<ListPrestasiBloc>().add(GetListPrestasi());
+              },
+              prestasiId: prestasiId,
+            ),
+          );
         });
       case AddPrestasiPage.routeName:
         return MaterialPageRoute(builder: (context) {

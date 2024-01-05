@@ -10,6 +10,7 @@ import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/add_pelatihan.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/add_pelatihan_bloc/add_pelatihan_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/list_pelatihan_bloc/list_pelatihan_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/view_edit_pelatihan.dart';
 import 'package:sj_presensi_mobile/services/model/response_biodata_karyawan/response_pelatihan_karyawan.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -172,261 +173,298 @@ class _DataPelatihanPageState extends State<DataPelatihanPage> {
                             children: [
                               Expanded(
                                 child: listPelatihan.isNotEmpty
-                                ? ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: listPelatihan.length,
-                                  itemBuilder: (context, index) {
-                                    var dataPelatihan = listPelatihan[index];
-                                    return ListTile(
-                                      contentPadding: EdgeInsets.zero,
-                                      subtitle: GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            showDeleteButton = false;
-                                            deleteIndex = null;
-                                          });
-                                          // Navigator.push(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //     builder: (context) => BlocProvider(
-                                          //       create: (context) =>
-                                          //           AddPelatihanBloc()..add(OnSelectKota()),
-                                          //       child: ViewEditPelatihanPage(
-                                          //           dataPelatihan: dataPelatihan,
-                                          //           idPelatihan: dataPelatihan.id,
-                                          //           namaPelatihan:
-                                          //               dataPelatihan.namaPel,
-                                          //           namaLembaga:
-                                          //               dataPelatihan.namaLem,
-                                          //           tahun: dataPelatihan.tahun,
-                                          //           idKota: dataPelatihan.kotaId,
-                                          //           valueKota:
-                                          //               dataPelatihan.kota),
-                                          //     ),
-                                          //   ),
-                                          // );
-                                        },
-                                        child: Container(
-                                          margin:
-                                              EdgeInsets.only(bottom: 10.sp),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            border: Border.all(
-                                                width: 1.5.sp,
-                                                color: Color(0xFFDDDDDD)),
-                                            color: MyColorsConst.whiteColor,
-                                          ),
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: 20.sp,
-                                            vertical: 10.sp,
-                                          ),
-                                          child: Stack(
-                                            children: [
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      SizedBox(
-                                                        width: size.width * 3/5,
-                                                        child: Text(
-                                                          '${dataPelatihan.namaPel ?? '-'}',
-                                                          maxLines: 2,
-                                                          overflow: TextOverflow.ellipsis,
-                                                          style:
-                                                              GoogleFonts.poppins(
-                                                            fontSize: 14.sp,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: MyColorsConst
-                                                                .primaryColor,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      IconButton(
-                                                        splashColor:
-                                                            MyColorsConst
-                                                                .redColor,
-                                                        icon: Icon(
-                                                            Icons.more_horiz),
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            // Ini buat munculkan tombol di index data itu saja
-                                                            if (deleteIndex ==
-                                                                index) {
-                                                              // Ini buat nutup tombol
-                                                              deleteIndex =
-                                                                  null;
-                                                              showDeleteButton =
-                                                                  false;
-                                                            } else {
-                                                              // handle buat kalau ga klik apa apa
-                                                              deleteIndex =
-                                                                  index;
-                                                              showDeleteButton =
-                                                                  true;
-                                                            }
-                                                          });
-                                                        },
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                              'Lembaga',
-                                                              style: GoogleFonts
-                                                                  .poppins(
-                                                                fontSize: 10.sp,
-                                                                color: MyColorsConst
-                                                                    .lightDarkColor,
-                                                              ),
-                                                            ),
-                                                            Text(
-                                                              "${dataPelatihan.namaLem}",
-                                                              style: GoogleFonts
-                                                                  .poppins(
-                                                                fontSize: 12.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                color: MyColorsConst
-                                                                    .darkColor,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                              'Tahun',
-                                                              style: GoogleFonts
-                                                                  .poppins(
-                                                                fontSize: 10.sp,
-                                                                color: MyColorsConst
-                                                                    .lightDarkColor,
-                                                              ),
-                                                            ),
-                                                            Text(
-                                                              "${dataPelatihan.tahun}",
-                                                              style: GoogleFonts
-                                                                  .poppins(
-                                                                fontSize: 12.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                color: MyColorsConst
-                                                                    .darkColor,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    height: 5.sp,
-                                                  ),
-                                                ],
-                                              ),
-                                              Positioned(
-                                                top: 30,
-                                                right: 15,
-                                                child: Visibility(
-                                                  visible: showDeleteButton &&
-                                                      deleteIndex == index,
-                                                  child: Material(
-                                                    elevation: 5,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4),
-                                                    child: InkWell(
-                                                      onTap: state
-                                                              is ListPelatihanLoading
-                                                          ? null
-                                                          : () {
-                                                              showDialog(
-                                                                context:
-                                                                    context,
-                                                                builder: (_) =>
-                                                                    DialogCustom(
-                                                                  state: DialogCustomItem
-                                                                      .confirm,
-                                                                  message:
-                                                                      "Apakah Yakin Menghapus Data Ini?",
-                                                                  durationInSec:
-                                                                      5,
-                                                                  onContinue: () => context
-                                                                      .read<
-                                                                          ListPelatihanBloc>()
-                                                                      .add(DeleteListPelatihan(
-                                                                          dataID: dataPelatihan
-                                                                              .id
-                                                                              .toString())),
-                                                                ),
-                                                              );
-                                                            },
-                                                      child: Container(
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                          horizontal: 15.sp,
-                                                          vertical: 7.sp,
-                                                        ),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(7),
-                                                          border: Border.all(
-                                                              color: Color(
-                                                                  0xFFDDDDDD)),
-                                                          color: Colors.red
-                                                              .withOpacity(0.2),
-                                                        ),
-                                                        child: Text(
-                                                          'Hapus',
-                                                          style: GoogleFonts
-                                                              .poppins(
-                                                                  fontSize:
-                                                                      12.sp,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  color: Colors
-                                                                      .red
-                                                                      .shade900),
-                                                        ),
+                                    ? ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: listPelatihan.length,
+                                        itemBuilder: (context, index) {
+                                          var dataPelatihan =
+                                              listPelatihan[index];
+                                          return ListTile(
+                                            contentPadding: EdgeInsets.zero,
+                                            subtitle: GestureDetector(
+                                              onTap: () {
+                                                //  Navigator.push(
+                                                //         context,
+                                                //         MaterialPageRoute(
+                                                //             builder: (context) =>
+                                                //                 ViewEditPelatihanPage()),
+                                                //       );
+                                                setState(() {
+                                                  showDeleteButton = false;
+                                                  deleteIndex = null;
+                                                });
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        BlocProvider(
+                                                      create: (context) =>
+                                                          AddPelatihanBloc()
+                                                            ..add(
+                                                                OnSelectKota()),
+                                                      child:
+                                                          ViewEditPelatihanPage(
+                                                        dataPelatihan:
+                                                            dataPelatihan,
+                                                        idPelatihan:
+                                                            dataPelatihan.id ?? 0,
+                                                        namaPelatihan:
+                                                            dataPelatihan
+                                                                .namaPel,
+                                                        namaLembaga:
+                                                            dataPelatihan
+                                                                .namaLem,
+                                                        tahun:
+                                                            dataPelatihan.tahun,
+                                                        idKota: dataPelatihan
+                                                            .kotaId,
+                                                        valueKota:
+                                                            dataPelatihan.kota,
+                                                        reloadDataCallback:
+                                                            loadData,
                                                       ),
                                                     ),
                                                   ),
+                                                );
+                                              },
+                                              child: Container(
+                                                margin: EdgeInsets.only(
+                                                    bottom: 10.sp),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                      width: 1.5.sp,
+                                                      color: Color(0xFFDDDDDD)),
+                                                  color:
+                                                      MyColorsConst.whiteColor,
+                                                ),
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 20.sp,
+                                                  vertical: 10.sp,
+                                                ),
+                                                child: Stack(
+                                                  children: [
+                                                    Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            SizedBox(
+                                                              width:
+                                                                  size.width *
+                                                                      3 /
+                                                                      5,
+                                                              child: Text(
+                                                                '${dataPelatihan.namaPel ?? '-'}',
+                                                                maxLines: 2,
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .poppins(
+                                                                  fontSize:
+                                                                      14.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  color: MyColorsConst
+                                                                      .primaryColor,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            IconButton(
+                                                              splashColor:
+                                                                  MyColorsConst
+                                                                      .redColor,
+                                                              icon: Icon(Icons
+                                                                  .more_horiz),
+                                                              onPressed: () {
+                                                                setState(() {
+                                                                  // Ini buat munculkan tombol di index data itu saja
+                                                                  if (deleteIndex ==
+                                                                      index) {
+                                                                    // Ini buat nutup tombol
+                                                                    deleteIndex =
+                                                                        null;
+                                                                    showDeleteButton =
+                                                                        false;
+                                                                  } else {
+                                                                    // handle buat kalau ga klik apa apa
+                                                                    deleteIndex =
+                                                                        index;
+                                                                    showDeleteButton =
+                                                                        true;
+                                                                  }
+                                                                });
+                                                              },
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Expanded(
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    'Lembaga',
+                                                                    style: GoogleFonts
+                                                                        .poppins(
+                                                                      fontSize:
+                                                                          10.sp,
+                                                                      color: MyColorsConst
+                                                                          .lightDarkColor,
+                                                                    ),
+                                                                  ),
+                                                                  Text(
+                                                                    "${dataPelatihan.namaLem}",
+                                                                    style: GoogleFonts
+                                                                        .poppins(
+                                                                      fontSize:
+                                                                          12.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      color: MyColorsConst
+                                                                          .darkColor,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    'Tahun',
+                                                                    style: GoogleFonts
+                                                                        .poppins(
+                                                                      fontSize:
+                                                                          10.sp,
+                                                                      color: MyColorsConst
+                                                                          .lightDarkColor,
+                                                                    ),
+                                                                  ),
+                                                                  Text(
+                                                                    "${dataPelatihan.tahun}",
+                                                                    style: GoogleFonts
+                                                                        .poppins(
+                                                                      fontSize:
+                                                                          12.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      color: MyColorsConst
+                                                                          .darkColor,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height: 5.sp,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Positioned(
+                                                      top: 30,
+                                                      right: 15,
+                                                      child: Visibility(
+                                                        visible:
+                                                            showDeleteButton &&
+                                                                deleteIndex ==
+                                                                    index,
+                                                        child: Material(
+                                                          elevation: 5,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(4),
+                                                          child: InkWell(
+                                                            onTap: state
+                                                                    is ListPelatihanLoading
+                                                                ? null
+                                                                : () {
+                                                                    showDialog(
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (_) =>
+                                                                              DialogCustom(
+                                                                        state: DialogCustomItem
+                                                                            .confirm,
+                                                                        message:
+                                                                            "Apakah Yakin Menghapus Data Ini?",
+                                                                        durationInSec:
+                                                                            5,
+                                                                        onContinue: () => context
+                                                                            .read<ListPelatihanBloc>()
+                                                                            .add(DeleteListPelatihan(dataID: dataPelatihan.id.toString())),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                            child: Container(
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                horizontal:
+                                                                    15.sp,
+                                                                vertical: 7.sp,
+                                                              ),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            7),
+                                                                border: Border.all(
+                                                                    color: Color(
+                                                                        0xFFDDDDDD)),
+                                                                color: Colors
+                                                                    .red
+                                                                    .withOpacity(
+                                                                        0.2),
+                                                              ),
+                                                              child: Text(
+                                                                'Hapus',
+                                                                style: GoogleFonts.poppins(
+                                                                    fontSize:
+                                                                        12.sp,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    color: Colors
+                                                                        .red
+                                                                        .shade900),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                )
-                                : Center(
+                                            ),
+                                          );
+                                        },
+                                      )
+                                    : Center(
                                         child: EmptyStateBuilder(),
                                       ),
                               ),

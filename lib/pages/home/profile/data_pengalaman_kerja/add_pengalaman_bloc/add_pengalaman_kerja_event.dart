@@ -12,11 +12,11 @@ class AddDataPengalamanKerjaSubmited extends AddPengalamanKerjaEvent {
   String bidangUsaha;
   String noTelp;
   String posisi;
-    String tahunMasuk;
-    String tahunKeluar;
-    String alamat;
-    int kotaId;
-    File suratReferensi;
+  String tahunMasuk;
+  String tahunKeluar;
+  String alamat;
+  int kotaId;
+  File? suratReferensi;
 
   AddDataPengalamanKerjaSubmited({
     required this.instansi,
@@ -27,7 +27,7 @@ class AddDataPengalamanKerjaSubmited extends AddPengalamanKerjaEvent {
     required this.tahunKeluar,
     required this.alamat,
     required this.kotaId,
-    required this.suratReferensi,
+    this.suratReferensi,
   });
 
   @override
@@ -40,7 +40,7 @@ class AddDataPengalamanKerjaSubmited extends AddPengalamanKerjaEvent {
         tahunKeluar,
         alamat,
         kotaId,
-        suratReferensi,
+        suratReferensi!,
       ];
 }
 
@@ -48,4 +48,44 @@ class OnSelectKota extends AddPengalamanKerjaEvent {
   const OnSelectKota();
   @override
   List<Object> get props => [];
+}
+
+class EditDataPengalamanKerjaSubmited extends AddPengalamanKerjaEvent {
+  int pengalamanId;
+  String instansi;
+  String bidangUsaha;
+  String noTelp;
+  String posisi;
+  String tahunMasuk;
+  String tahunKeluar;
+  String alamat;
+  int kotaId;
+  File? suratReferensi;
+
+  EditDataPengalamanKerjaSubmited({
+    required this.pengalamanId,
+    required this.instansi,
+    required this.bidangUsaha,
+    required this.noTelp,
+    required this.posisi,
+    required this.tahunMasuk,
+    required this.tahunKeluar,
+    required this.alamat,
+    required this.kotaId,
+    this.suratReferensi,
+  });
+
+  @override
+  List<Object> get props => [
+    pengalamanId,
+        instansi,
+        bidangUsaha,
+        noTelp,
+        posisi,
+        tahunMasuk,
+        tahunKeluar,
+        alamat,
+        kotaId,
+        suratReferensi!,
+      ];
 }

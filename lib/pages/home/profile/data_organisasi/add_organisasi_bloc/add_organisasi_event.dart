@@ -43,3 +43,31 @@ class OnSelectJenisOrganisasi extends AddOrganisasiEvent {
   @override
   List<Object> get props => [];
 }
+
+class EditDataOrganisasiSubmited extends AddOrganisasiEvent {
+  int organisasiId;
+  String nama;
+  String tahun;
+  int jenisOrgId;
+  int kotaId;
+  String posisi;
+
+  EditDataOrganisasiSubmited({
+    required this.organisasiId,
+    required this.nama,
+    required this.tahun,
+    required this.jenisOrgId,
+    required this.kotaId,
+    required this.posisi,
+  });
+
+  @override
+  List<Object> get props => [
+    organisasiId,
+        nama,
+        tahun,
+        jenisOrgId,
+        kotaId,
+        posisi,
+      ];
+}

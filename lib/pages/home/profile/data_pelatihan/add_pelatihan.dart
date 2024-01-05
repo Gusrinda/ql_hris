@@ -34,6 +34,7 @@ class AddPelatihanPage extends StatefulWidget {
 }
 
 class _AddPelatihanPageState extends State<AddPelatihanPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
@@ -251,59 +252,103 @@ class _AddPelatihanPageState extends State<AddPelatihanPage> {
                             return SingleChildScrollView(
                               child: Column(
                                 children: [
-                                  SizedBox(height: 16.sp),
-                                  FormInputData(
-                                    labelTag: 'label-addnamaPelatihan',
-                                    labelForm: 'Nama Pelatihan',
-                                    formTag: 'form-addnamapelatihan',
-                                    hintText: 'Nama Pelatihan',
-                                    onTap: () {},
-                                    controller: widget.namaPelatihanController,
-                                    validator: (value) {},
+                                  Form(
+                                    key: _formKey,
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
+                                    child: Column(
+                                      children: [
+                                        SizedBox(height: 16.sp),
+                                        FormInputData(
+                                          labelTag: 'label-addnamaPelatihan',
+                                          labelForm: 'Nama Pelatihan',
+                                          formTag: 'form-addnamapelatihan',
+                                          hintText: 'Nama Pelatihan',
+                                          onTap: () {},
+                                          controller:
+                                              widget.namaPelatihanController,
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'Tuliskan Nama Pelatihan';
+                                            }
+                                            return null;
+                                          },
+                                          errorTextStyle:
+                                              GoogleFonts.poppins(fontSize: 8),
+                                        ),
+                                        FormInputData(
+                                          input: widget
+                                              .lembagaPelatihanController.text,
+                                          labelTag: 'label-addnamalembaga',
+                                          labelForm: 'Nama Lembaga',
+                                          formTag: 'form-addnamalembaga',
+                                          hintText: 'Nama Lembaga',
+                                          onTap: () {},
+                                          controller:
+                                              widget.lembagaPelatihanController,
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'Tuliskan Nama Lembaga';
+                                            }
+                                            return null;
+                                          },
+                                          errorTextStyle:
+                                              GoogleFonts.poppins(fontSize: 8),
+                                        ),
+                                        FormDropDownData(
+                                          input: '',
+                                          onTap: () {
+                                            showTahunMenu(
+                                                context,
+                                                widget
+                                                    .tahunPelatihanController);
+                                          },
+                                          valueController:
+                                              widget.tahunPelatihanController,
+                                          labelTag: 'Label-addtahunpelatihan',
+                                          labelForm: 'Tahun',
+                                          formTag: 'Form-addtahunpelatihan',
+                                          hintText: 'Pilih Tahun',
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'Pilih Tahun';
+                                            }
+                                            return null;
+                                          },
+                                          errorTextStyle:
+                                              GoogleFonts.poppins(fontSize: 8),
+                                          idController: null,
+                                        ),
+                                        FormDropDownData(
+                                          input: '',
+                                          onTap: () {
+                                            showKotaMenu(context);
+                                          },
+                                          idController:
+                                              widget.idKotapelatihanController,
+                                          valueController: widget
+                                              .valueKotapelatihanController,
+                                          labelTag: 'Label-addkotapelatihan',
+                                          labelForm: 'Kota',
+                                          formTag: 'Form-addkotapelatihan',
+                                          hintText: 'Pilih Kota',
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'Pilih Kota';
+                                            }
+                                            return null;
+                                          },
+                                          errorTextStyle:
+                                              GoogleFonts.poppins(fontSize: 8),
+                                        ),
+                                        SizedBox(height: 30.sp),
+                                      ],
+                                    ),
                                   ),
-                                  FormInputData(
-                                    input:
-                                        widget.lembagaPelatihanController.text,
-                                    labelTag: 'label-addnamalembaga',
-                                    labelForm: 'Nama Lembaga',
-                                    formTag: 'form-addnamalembaga',
-                                    hintText: 'Nama Lembaga',
-                                    onTap: () {},
-                                    controller:
-                                        widget.lembagaPelatihanController,
-                                    validator: (value) {},
-                                  ),
-                                  FormDropDownData(
-                                    input: '',
-                                    onTap: () {
-                                      showTahunMenu(context,
-                                          widget.tahunPelatihanController);
-                                    },
-                                    valueController:
-                                        widget.tahunPelatihanController,
-                                    labelTag: 'Label-addtahunpelatihan',
-                                    labelForm: 'Tahun',
-                                    formTag: 'Form-addtahunpelatihan',
-                                    hintText: 'Pilih Tahun',
-                                    validator: (value) {},
-                                    idController: null,
-                                  ),
-                                  FormDropDownData(
-                                    input: '',
-                                    onTap: () {
-                                      showKotaMenu(context);
-                                    },
-                                    idController:
-                                        widget.idKotapelatihanController,
-                                    valueController:
-                                        widget.valueKotapelatihanController,
-                                    labelTag: 'Label-addkotapelatihan',
-                                    labelForm: 'Kota',
-                                    formTag: 'Form-addkotapelatihan',
-                                    hintText: 'Pilih Kota',
-                                    validator: (value) {},
-                                  ),
-                                  SizedBox(height: 30.sp),
                                   TextButtonCustomV1(
                                     text: "Simpan",
                                     height: 50.sp,
@@ -313,24 +358,27 @@ class _AddPelatihanPageState extends State<AddPelatihanPage> {
                                     onPressed: state is AddDataPelatihanLoading
                                         ? null
                                         : () {
-                                            context
-                                                .read<AddPelatihanBloc>()
-                                                .add(
-                                                  AddDataPelatihanSubmited(
-                                                    namaPel: widget
-                                                        .namaPelatihanController
-                                                        .text,
-                                                    tahun: widget
-                                                        .tahunPelatihanController
-                                                        .text,
-                                                    namaLem: widget
-                                                        .lembagaPelatihanController
-                                                        .text,
-                                                    kotaId: int.parse(widget
-                                                        .idKotapelatihanController
-                                                        .text),
-                                                  ),
-                                                );
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              context
+                                                  .read<AddPelatihanBloc>()
+                                                  .add(
+                                                    AddDataPelatihanSubmited(
+                                                      namaPel: widget
+                                                          .namaPelatihanController
+                                                          .text,
+                                                      tahun: widget
+                                                          .tahunPelatihanController
+                                                          .text,
+                                                      namaLem: widget
+                                                          .lembagaPelatihanController
+                                                          .text,
+                                                      kotaId: int.parse(widget
+                                                          .idKotapelatihanController
+                                                          .text),
+                                                    ),
+                                                  );
+                                            }
                                           },
                                   ),
                                 ],

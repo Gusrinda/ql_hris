@@ -14,29 +14,32 @@ import 'package:sj_presensi_mobile/utils/const.dart';
 
 class ViewEditPelatihanPage extends StatefulWidget {
   static const routeName = '/ViewEditPelatihanPage';
-  ViewEditPelatihanPage(
-      {super.key,
-      this.dataPelatihan,
-      this.namaPelatihan,
-      this.namaLembaga,
-      this.tahun,
-      this.valueKota,
-      this.idKota,
-      this.idPelatihan});
+  ViewEditPelatihanPage({
+    super.key,
+    this.dataPelatihan,
+    this.namaPelatihan,
+    this.namaLembaga,
+    this.tahun,
+    this.valueKota,
+    this.idKota,
+    required this.idPelatihan,
+    required this.reloadDataCallback,
+  });
   final dynamic? dataPelatihan;
   final String? namaPelatihan;
   final String? namaLembaga;
   final int? tahun;
   final String? valueKota;
   final int? idKota;
-  final int? idPelatihan;
+  final int idPelatihan;
+  final VoidCallback reloadDataCallback;
 
   final TextEditingController namaPelatihanController = TextEditingController();
   final TextEditingController lembagaPelatihanController =
       TextEditingController();
   final TextEditingController tahunPelatihanController =
       TextEditingController();
-  final TextEditingController idkKotapelatihanController =
+  final TextEditingController idKotapelatihanController =
       TextEditingController();
   final TextEditingController valueKotapelatihanController =
       TextEditingController();
@@ -48,6 +51,7 @@ class ViewEditPelatihanPage extends StatefulWidget {
 }
 
 class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
@@ -58,7 +62,10 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
     widget.tahunPelatihanController.text = widget.tahun.toString();
 
     widget.valueKotapelatihanController.text = widget.valueKota ?? '';
-    widget.idkKotapelatihanController.text = widget.idKota.toString();
+    widget.idKotapelatihanController.text = widget.idKota.toString();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<AddPelatihanBloc>().add(OnSelectKota());
+    });
   }
 
   String? selectedKota;
@@ -81,32 +88,49 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
       }
 
       showModalBottomSheet(
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         ),
         context: context,
         builder: (BuildContext context) {
           return Container(
             height: 300,
-            child: ListView.builder(
-              itemCount: _generateYears().length,
-              itemBuilder: (context, index) {
-                final year = _generateYears()[index];
-                return ListTile(
+            child: Column(
+              children: [
+                ListTile(
                   title: Center(
                     child: Text(
-                      year,
+                      "Scroll & Tap pada data untuk memilih Tahun",
                       style: GoogleFonts.poppins(
-                        fontSize: 14,
-                      ),
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w600,
+                          color: MyColorsConst.darkColor),
                     ),
                   ),
-                  onTap: () {
-                    controller.text = year;
-                    Navigator.pop(context);
-                  },
-                );
-              },
+                ),
+                const Divider(),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: _generateYears().length,
+                    itemBuilder: (context, index) {
+                      final year = _generateYears()[index];
+                      return ListTile(
+                        title: Center(
+                          child: Text(
+                            year,
+                            style: GoogleFonts.poppins(
+                                fontSize: 14.sp, fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                        onTap: () {
+                          controller.text = year;
+                          Navigator.pop(context);
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           );
         },
@@ -129,7 +153,7 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
         );
 
         if (selectedKota != null) {
-          widget.idkKotapelatihanController.text =
+          widget.idKotapelatihanController.text =
               selectedKota.id?.toString() ?? '';
           widget.valueKotapelatihanController.text =
               selectedKota.value?.toString() ?? '';
@@ -159,6 +183,7 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
             ),
           );
           Navigator.of(context).pop();
+          widget.reloadDataCallback();
         } else if (state is EditPelatihanFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
@@ -251,56 +276,97 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
                         return SingleChildScrollView(
                           child: Column(
                             children: [
-                              SizedBox(height: 16.sp),
-                              FormInputData(
-                                labelTag: 'label-namaPelatihan',
-                                labelForm: 'Nama Pelatihan',
-                                formTag: 'form-namapelatihan',
-                                hintText: 'Nama Pelatihan',
-                                onTap: () {},
-                                controller: widget.namaPelatihanController,
-                                validator: (value) {},
+                              Form(
+                                key: _formKey,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: 16.sp),
+                                    FormInputData(
+                                      labelTag: 'label-addnamaPelatihan',
+                                      labelForm: 'Nama Pelatihan',
+                                      formTag: 'form-addnamapelatihan',
+                                      hintText: 'Nama Pelatihan',
+                                      onTap: () {},
+                                      controller:
+                                          widget.namaPelatihanController,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Tuliskan Nama Pelatihan';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormInputData(
+                                      input: widget
+                                          .lembagaPelatihanController.text,
+                                      labelTag: 'label-addnamalembaga',
+                                      labelForm: 'Nama Lembaga',
+                                      formTag: 'form-addnamalembaga',
+                                      hintText: 'Nama Lembaga',
+                                      onTap: () {},
+                                      controller:
+                                          widget.lembagaPelatihanController,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Tuliskan Nama Lembaga';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormDropDownData(
+                                      input: '',
+                                      onTap: () {
+                                        showTahunMenu(context,
+                                            widget.tahunPelatihanController);
+                                      },
+                                      valueController:
+                                          widget.tahunPelatihanController,
+                                      labelTag: 'Label-addtahunpelatihan',
+                                      labelForm: 'Tahun',
+                                      formTag: 'Form-addtahunpelatihan',
+                                      hintText: 'Pilih Tahun',
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Pilih Tahun';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                      idController: null,
+                                    ),
+                                    FormDropDownData(
+                                      input: '',
+                                      onTap: () {
+                                        showKotaMenu(context);
+                                      },
+                                      idController:
+                                          widget.idKotapelatihanController,
+                                      valueController:
+                                          widget.valueKotapelatihanController,
+                                      labelTag: 'Label-addkotapelatihan',
+                                      labelForm: 'Kota',
+                                      formTag: 'Form-addkotapelatihan',
+                                      hintText: 'Pilih Kota',
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Pilih Kota';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    SizedBox(height: 30.sp),
+                                  ],
+                                ),
                               ),
-                              FormInputData(
-                                input: widget.lembagaPelatihanController.text,
-                                labelTag: 'label-namalembaga',
-                                labelForm: 'Nama Lembaga',
-                                formTag: 'form-namalembaga',
-                                hintText: 'Nama Lembaga',
-                                onTap: () {},
-                                controller: widget.lembagaPelatihanController,
-                                validator: (value) {},
-                              ),
-                              FormDropDownData(
-                                input: '',
-                                onTap: () {
-                                  showTahunMenu(
-                                      context, widget.tahunPelatihanController);
-                                },
-                                idController: widget.tahunPelatihanController,
-                                valueController:
-                                    widget.tahunPelatihanController,
-                                labelTag: 'Label-tahunpelatihan',
-                                labelForm: 'Tahun',
-                                formTag: 'Form-tahunpelatihan',
-                                hintText: 'Pilih Tahun',
-                                validator: (value) {},
-                              ),
-                              FormDropDownData(
-                                input: '',
-                                onTap: () {
-                                  showKotaMenu(context);
-                                },
-                                idController: widget.idkKotapelatihanController,
-                                valueController:
-                                    widget.valueKotapelatihanController,
-                                labelTag: 'Label-kotapelatihan',
-                                labelForm: 'Kota',
-                                formTag: 'Form-kotapelatihan',
-                                hintText: 'Pilih Kota',
-                                validator: (value) {},
-                              ),
-                              SizedBox(height: 30.sp),
                               TextButtonCustomV1(
                                 text: "Simpan Perubahan",
                                 height: 50.sp,
@@ -310,22 +376,24 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
                                 onPressed: state is AddDataPelatihanLoading
                                     ? null
                                     : () {
-                                        context.read<AddPelatihanBloc>().add(
-                                              EditDataPelatihanSubmited(
-                                                // pelatihanId:
-                                                //     widget.idPelatihan ?? 0,
-                                                namaPel: widget
-                                                    .namaPelatihanController
-                                                    .text,
-                                                namaLem: widget
-                                                    .lembagaPelatihanController
-                                                    .text,
-                                                tahun: int.parse(widget
-                                                    .tahunPelatihanController
-                                                    .text),
-                                                kotaId: widget.idKota ?? 1,
-                                              ),
-                                            );
+                                        if (_formKey.currentState!.validate()) {
+                                          context.read<AddPelatihanBloc>().add(
+                                                EditDataPelatihanSubmited(
+                                                  pelatihanId:
+                                                      widget.idPelatihan ?? 0,
+                                                  namaPel: widget
+                                                      .namaPelatihanController
+                                                      .text,
+                                                  namaLem: widget
+                                                      .lembagaPelatihanController
+                                                      .text,
+                                                  tahun: int.parse(widget
+                                                      .tahunPelatihanController
+                                                      .text),
+                                                  kotaId: widget.idKota ?? 1,
+                                                ),
+                                              );
+                                        }
                                       },
                               ),
                             ],

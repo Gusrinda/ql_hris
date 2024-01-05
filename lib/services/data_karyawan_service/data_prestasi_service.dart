@@ -59,4 +59,30 @@ class DataPrestasiServices {
       }),
     );
   }
+
+  static Future<Object> editDataPrestasi(
+    String token,
+    int compId,
+    int dirId,
+    int prestasiId,
+    String namaPres,
+    String tahun,
+    int tingkatPresId,
+  ) async {
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/prestasi_create/$prestasiId");
+
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.put,
+      headers: GeneralServices.addToken2Headers(token),
+      body: json.encode({
+        "m_comp_id": compId,
+        "m_dir_id": dirId,
+        "nama_pres": namaPres,
+        "tahun": tahun,
+        "tingkat_pres_id": tingkatPresId,
+      }),
+    );
+  }
 }

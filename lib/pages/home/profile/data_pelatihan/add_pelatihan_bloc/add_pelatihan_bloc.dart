@@ -90,21 +90,21 @@ class AddPelatihanBloc extends Bloc<AddPelatihanEvent, AddPelatihanState> {
           resToken.response["token"],
           resToken.response["m_comp_id"] ?? 1,
            resToken.response["m_dir_id"] ?? 1,
-          //  event.pelatihanId,
+           event.pelatihanId,
           event.namaPel,
           event.tahun,
           event.namaLem,
           event.kotaId,
         );
         if (res is ServicesSuccess) {
-          emit(AddDataPelatihanSuccess(message: "Edit Data Pelatihan Berhasil"));
+          emit(EditPelatihanSuccess(message: "Edit Data Pelatihan Berhasil"));
           print(res.response);
         } else if (res is ServicesFailure) {
           if (res.errorResponse == null) {
             await GeneralSharedPreferences.removeUserToken();
             emit(AddDataPelatihanFailedUserExpired(message: "Token Expired"));
           } else {
-            emit(AddDataPelatihanFailed(message: "Unknown error occured"));
+            emit(EditPelatihanFailed(message: "Unknown error occured"));
             print("Response from API: ${res.errorResponse}");
           }
         }

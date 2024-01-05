@@ -64,4 +64,34 @@ class DataOrganisasiServices {
       }),
     );
   }
+
+  static Future<Object> editDataOrganisasi(
+    String token,
+    int compId,
+    int dirId,
+    int organisasiId,
+    String nama,
+    String tahun,
+    int jenisOrgId,
+    int kotaId,
+    String posisi,
+  ) async {
+    var url = Uri.parse(
+        "${MyGeneralConst.API_URL}/operation/m_kary/organisasi_create/$organisasiId");
+
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.put,
+      headers: GeneralServices.addToken2Headers(token),
+      body: json.encode({
+        "m_comp_id": compId,
+        "m_dir_id": dirId,
+        "nama": nama,
+        "tahun": tahun,
+        "jenis_org_id": jenisOrgId,
+        "kota_id": kotaId,
+        "posisi": posisi,
+      }),
+    );
+  }
 }

@@ -50,6 +50,41 @@ class AddKeluargaBloc extends Bloc<AddKeluargaEvent, AddKeluargaState> {
       }
     });
 
+    on<EditDataKeluargaSubmited>((event, emit) async {
+     emit(AddDataKeluargaLoading());
+      var resToken = await GeneralSharedPreferences.getUserToken();
+      if (resToken is ServicesSuccess) {
+        var res = await DataKeluargaServices.editDataKeluarga(
+          resToken.response["token"],
+          resToken.response["m_comp_id"] ?? 1,
+           resToken.response["m_dir_id"] ?? 1,
+           event.dataKeluargaId,
+          event.keluargaId,
+          event.nama,
+          event.pendTerakhirId,
+          event.jenisKelaminId,
+          event.pekerjaanId,
+          event.usia,
+          event.desc,
+        );
+        if (res is ServicesSuccess) {
+          emit(EditDataKeluargaSuccess(message: "Edit Data Keluarga Berhasil"));
+          print(res.response);
+        } else if (res is ServicesFailure) {
+          if (res.errorResponse == null) {
+            await GeneralSharedPreferences.removeUserToken();
+            emit(AddDataKeluargaFailedUserExpired(message: "Token Expired"));
+          } else {
+            emit(EditDataKeluargaFailed(message: "Unknown error occured"));
+            print("Response from API: ${res.errorResponse}");
+          }
+        }
+      }
+      else if (resToken is ServicesFailure) {
+        emit(AddDataKeluargaFailedInBackground(message: "Response format is invalid"));
+      }
+    });
+
     on<OnSelectHubKeluarga>(
       (event, emit) async {
         emit(AddDataKeluargaLoading());

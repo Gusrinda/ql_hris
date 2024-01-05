@@ -57,3 +57,21 @@ class AddDataPengalamanKerjaFailedUserExpired extends AddPengalamanKerjaState {
   @override
   List<Object> get props => [message];
 }
+
+class EditPengalamanSuccess extends AddPengalamanKerjaState {
+  String message;
+
+  EditPengalamanSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+class EditPengalamanFailed extends AddPengalamanKerjaState {
+  String message;
+
+  EditPengalamanFailed({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}

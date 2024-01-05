@@ -24,6 +24,7 @@ class AddBahasaPage extends StatefulWidget {
 }
 
 class _AddBahasaPageState extends State<AddBahasaPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -135,6 +136,7 @@ class _AddBahasaPageState extends State<AddBahasaPage> {
                           child: Column(
                             children: [
                               Form(
+                                key: _formKey,
                                 autovalidateMode:
                                     AutovalidateMode.onUserInteraction,
                                 child: Column(
@@ -206,16 +208,19 @@ class _AddBahasaPageState extends State<AddBahasaPage> {
                                 onPressed: state is AddDatabahasaLoading
                                     ? null
                                     : () {
-                                        context.read<AddBahasaBloc>().add(
-                                              AddDatabahasaSubmited(
-                                                bhsDikuasai: widget
-                                                    .bahasaController.text,
-                                                nilaiLisan: int.parse(widget
-                                                    .lisanController.text),
-                                                nilaiTertulis: int.parse(widget
-                                                    .tertulisController.text),
-                                              ),
-                                            );
+                                        if (_formKey.currentState!.validate()) {
+                                          context.read<AddBahasaBloc>().add(
+                                                AddDatabahasaSubmited(
+                                                  bhsDikuasai: widget
+                                                      .bahasaController.text,
+                                                  nilaiLisan: int.parse(widget
+                                                      .lisanController.text),
+                                                  nilaiTertulis: int.parse(
+                                                      widget.tertulisController
+                                                          .text),
+                                                ),
+                                              );
+                                        }
                                       },
                               ),
                             ],

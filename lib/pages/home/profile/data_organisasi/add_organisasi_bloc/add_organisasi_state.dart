@@ -67,3 +67,21 @@ class AddDataOrganisasiFailedUserExpired extends AddOrganisasiState {
   @override
   List<Object> get props => [message];
 }
+
+class EditOrganisasiSuccess extends AddOrganisasiState {
+  String message;
+
+  EditOrganisasiSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+class EditOrganisasiFailed extends AddOrganisasiState {
+  String message;
+
+  EditOrganisasiFailed({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}

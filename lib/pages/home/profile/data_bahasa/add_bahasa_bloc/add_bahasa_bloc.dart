@@ -16,7 +16,7 @@ class AddBahasaBloc extends Bloc<AddBahasaEvent, AddBahasaState> {
         var res = await DataBahasaServices.createDataBahasa(
           resToken.response["token"],
           resToken.response["m_comp_id"] ?? 1,
-           resToken.response["m_dir_id"] ?? 1,
+          resToken.response["m_dir_id"] ?? 1,
           event.bhsDikuasai,
           event.nilaiLisan,
           event.nilaiTertulis,
@@ -33,9 +33,40 @@ class AddBahasaBloc extends Bloc<AddBahasaEvent, AddBahasaState> {
             print("Response from API: ${res.errorResponse}");
           }
         }
+      } else if (resToken is ServicesFailure) {
+        emit(AddDatabahasaFailedInBackground(
+            message: "Response format is invalid"));
       }
-      else if (resToken is ServicesFailure) {
-        emit(AddDatabahasaFailedInBackground(message: "Response format is invalid"));
+    });
+
+    on<EditDatabahasaSubmited>((event, emit) async {
+      emit(AddDatabahasaLoading());
+      var resToken = await GeneralSharedPreferences.getUserToken();
+      if (resToken is ServicesSuccess) {
+        var res = await DataBahasaServices.editDataBahasa(
+          resToken.response["token"],
+          resToken.response["m_comp_id"] ?? 1,
+          resToken.response["m_dir_id"] ?? 1,
+          event.bahasaId,
+          event.bhsDikuasai,
+          event.nilaiLisan,
+          event.nilaiTertulis,
+        );
+        if (res is ServicesSuccess) {
+          emit(EditBahasanSuccess(message: "Edit Data Pelatihan Berhasil"));
+          print(res.response);
+        } else if (res is ServicesFailure) {
+          if (res.errorResponse == null) {
+            await GeneralSharedPreferences.removeUserToken();
+            emit(AddDatabahasaFailedUserExpired(message: "Token Expired"));
+          } else {
+            emit(EditBahasanFailed(message: "Unknown error occured"));
+            print("Response from API: ${res.errorResponse}");
+          }
+        }
+      } else if (resToken is ServicesFailure) {
+        emit(AddDatabahasaFailedInBackground(
+            message: "Response format is invalid"));
       }
     });
   }

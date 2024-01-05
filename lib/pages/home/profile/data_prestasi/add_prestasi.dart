@@ -30,11 +30,12 @@ class AddPrestasiPage extends StatefulWidget {
 }
 
 class _AddPrestasiPageState extends State<AddPrestasiPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<AddPrestasiBloc>().add(OnSelectTingkatPrestasi());
+      context.read<AddPrestasiBloc>().add(const OnSelectTingkatPrestasi());
     });
   }
 
@@ -244,46 +245,76 @@ class _AddPrestasiPageState extends State<AddPrestasiPage> {
                         return SingleChildScrollView(
                           child: Column(
                             children: [
-                              SizedBox(height: 16.sp),
-                              FormInputData(
-                                input: widget.namaPrestasiController.text,
-                                labelTag: 'label-addnamaprestasi',
-                                labelForm: 'Nama Prestasi',
-                                formTag: 'form-addnamaprestasi',
-                                hintText: 'Nama Prestasi',
-                                onTap: () {},
-                                controller: widget.namaPrestasiController,
-                                validator: (value) {},
+                              Form(
+                                key: _formKey,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: 16.sp),
+                                    FormInputData(
+                                      input: widget.namaPrestasiController.text,
+                                      labelTag: 'label-addnamaprestasi',
+                                      labelForm: 'Nama Prestasi',
+                                      formTag: 'form-addnamaprestasi',
+                                      hintText: 'Nama Prestasi',
+                                      onTap: () {},
+                                      controller: widget.namaPrestasiController,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Tuliskan Prestasi';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormDropDownData(
+                                      input: '',
+                                      onTap: () {
+                                        showTingkatPrestasiMenu(context);
+                                      },
+                                      idController:
+                                          widget.idTingkatPrestasiController,
+                                      valueController:
+                                          widget.valueTingkatPrestasiController,
+                                      labelTag: 'Label-addtingkatprestasi',
+                                      labelForm: 'Tingkat',
+                                      formTag: 'Form-addtingkatprestasi',
+                                      hintText: 'Pilih Tingkat',
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Pilih Tingkat';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormDropDownData(
+                                      input: '',
+                                      onTap: () {
+                                        showTahunMenu(
+                                            context, widget.tahunController);
+                                      },
+                                      valueController: widget.tahunController,
+                                      labelTag: 'Label-addtahunprestasi',
+                                      labelForm: 'Tahun',
+                                      formTag: 'Form-addtahunprestasi',
+                                      hintText: 'Pilih Tahun',
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Pilih Tahun';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    SizedBox(height: 30.sp),
+                                  ],
+                                ),
                               ),
-                              FormDropDownData(
-                                input: '',
-                                onTap: () {
-                                  showTingkatPrestasiMenu(context);
-                                },
-                                idController:
-                                    widget.idTingkatPrestasiController,
-                                valueController:
-                                    widget.valueTingkatPrestasiController,
-                                labelTag: 'Label-addtingkatprestasi',
-                                labelForm: 'Tingkat',
-                                formTag: 'Form-addtingkatprestasi',
-                                hintText: 'Pilih Tingkat',
-                                validator: (value) {},
-                              ),
-                              FormDropDownData(
-                                input: '',
-                                onTap: () {
-                                  showTahunMenu(
-                                      context, widget.tahunController);
-                                },
-                                valueController: widget.tahunController,
-                                labelTag: 'Label-addtahunprestasi',
-                                labelForm: 'Tahun',
-                                formTag: 'Form-addtahunprestasi',
-                                hintText: 'Pilih Tahun',
-                                validator: (value) {},
-                              ),
-                              SizedBox(height: 30.sp),
                               TextButtonCustomV1(
                                 text: "Simpan",
                                 height: 50.sp,
@@ -293,18 +324,20 @@ class _AddPrestasiPageState extends State<AddPrestasiPage> {
                                 onPressed: state is AddDataPrestasiLoading
                                     ? null
                                     : () {
-                                        context.read<AddPrestasiBloc>().add(
-                                              AddDataPrestasiSubmited(
-                                                namaPres: widget
-                                                    .namaPrestasiController
-                                                    .text,
-                                                tahun:
-                                                    widget.tahunController.text,
-                                                tingkatPresId: int.parse(widget
-                                                    .idTingkatPrestasiController
-                                                    .text),
-                                              ),
-                                            );
+                                        if (_formKey.currentState!.validate()) {
+                                          context.read<AddPrestasiBloc>().add(
+                                                AddDataPrestasiSubmited(
+                                                  namaPres: widget
+                                                      .namaPrestasiController
+                                                      .text,
+                                                  tahun: widget
+                                                      .tahunController.text,
+                                                  tingkatPresId: int.parse(widget
+                                                      .idTingkatPrestasiController
+                                                      .text),
+                                                ),
+                                              );
+                                        }
                                       },
                               ),
                             ],
