@@ -22,6 +22,17 @@ class SelectAlasanSuccess extends AddLemburState {
   List<Object> get props => [dataAlasanLembur];
 }
 
+class SelectPicSuccessInBackground extends AddLemburState {
+  List<DataPic> dataPic;
+
+  SelectPicSuccessInBackground({
+    required this.dataPic,
+  });
+
+  @override
+  List<Object> get props => [dataPic];
+}
+
 class SelectTipeSuccess extends AddLemburState {
   List<DataGeneral> dataTipeLembur;
 

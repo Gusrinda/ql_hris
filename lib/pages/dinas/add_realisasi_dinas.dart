@@ -29,7 +29,7 @@ class AddRealisasiDinasPage extends StatefulWidget {
   final TextEditingController idDirektoratController = TextEditingController();
   final TextEditingController valueDirektoratController =
       TextEditingController();
-      
+
   // Divisi Controller
   final TextEditingController idDivisiController = TextEditingController();
   final TextEditingController valueDivisiController = TextEditingController();

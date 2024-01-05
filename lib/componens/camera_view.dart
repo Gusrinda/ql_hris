@@ -59,11 +59,16 @@ class _CameraCapturePageState extends State<CameraCapturePage> {
             backgroundColor: Colors.black,
             toolbarHeight: 70,
             title: Text(
-                      "Posisikan wajah pada lingkaran",
-                      style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontSize: 16,),
-                    ),
+              "😊Senyum dan posisikan wajah pada lingkaran📷",
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.poppins(
+                color: Colors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.w500
+              ),
+            ),
           ),
           body: Stack(
             children: [

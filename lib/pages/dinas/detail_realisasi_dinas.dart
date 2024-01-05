@@ -136,18 +136,17 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                   ),
                   color: Colors.white,
                 ),
-                child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 24.sp, vertical: 16.sp),
-                  child: BlocBuilder<DetailRealisasiDinasBloc,
-                      DetailRealisasiDinasState>(
-                    builder: (context, state) {
-                      return ListView(
-                        children: [
-                          Column(
+                child: BlocBuilder<DetailRealisasiDinasBloc,
+                    DetailRealisasiDinasState>(
+                  builder: (context, state) {
+                    return ListView(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: 20.sp, vertical: 20.sp),
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(height: 20.sp),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -270,25 +269,31 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                               Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      color: MyColorsConst.darkColor, width: 2),
-                                  borderRadius: BorderRadius.circular(7),
+                                      color: MyColorsConst.primaryColor
+                                          .withOpacity(0.3),
+                                      width: 1.5),
+                                  borderRadius: BorderRadius.circular(4),
                                 ),
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child: DataTable(
+                                    headingRowHeight: 40.sp,
+                                    // ignore: deprecated_member_use
+                                    dataRowHeight: 40.sp,
+                                    dividerThickness: 1,
                                     headingRowColor:
                                         MaterialStateColor.resolveWith(
-                                      (states) =>
-                                          MyColorsConst.primaryDarkColor,
+                                      (states) => MyColorsConst.primaryColor
+                                          .withOpacity(0.3),
                                     ),
                                     headingTextStyle: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      color: Colors.white,
+                                      fontSize: 12.sp,
+                                      color: MyColorsConst.darkColor,
                                       fontWeight: FontWeight.w600,
                                     ),
                                     dataTextStyle: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      color: Colors.black,
+                                      fontSize: 12.sp,
+                                      color: MyColorsConst.darkColor,
                                     ),
                                     columns: const [
                                       DataColumn(label: Text('No')),
@@ -321,7 +326,8 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                                                   'No ${index + 1}',
                                                   style: GoogleFonts.poppins(
                                                     fontSize: 12,
-                                                    color: Colors.black,
+                                                    color:
+                                                        MyColorsConst.darkColor,
                                                     fontWeight: FontWeight.w500,
                                                   ),
                                                 ),
@@ -374,10 +380,10 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                               ),
                             ],
                           ),
-                        ],
-                      );
-                    },
-                  ),
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ))
             ],

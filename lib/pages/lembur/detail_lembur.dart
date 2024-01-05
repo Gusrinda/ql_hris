@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
+import 'package:sj_presensi_mobile/services/model/lembur/lembur_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 import 'package:url_launcher/link.dart';
 
@@ -23,7 +24,7 @@ class DetailLemburPage extends StatefulWidget {
     this.alasanValue,
     // required this.id,
   }) : super(key: key);
-  final dynamic? data;
+  final DataLembur? data;
   final String? tipeLemburValue;
   final String? nomorFromList;
   final String? tanggal;
@@ -132,22 +133,16 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                   'Nomor',
                                   "${widget.nomorFromList ?? '-'}",
                                 ),
+                                if (widget.noDoc != null)
                                 _buildText(
                                   'No. Dokumen',
                                   "${widget.noDoc ?? '-'}",
                                 ),
+                                if (widget.data?.picNamaLengkap != null)
                                 _buildText(
-                                  'Jam Mulai',
-                                  "${widget.jamMulai ?? '-'}",
+                                  'PIC',
+                                  "${widget.data?.picNamaLengkap ?? '-'}",
                                 ),
-                                _buildText(
-                                  'Keterangan',
-                                  "${widget.keterangan ?? '-'}",
-                                ),
-                                // _buildText(
-                                //   'Tipe Lembur',
-                                //   "${widget.tipeLemburValue ?? '-'}",
-                                // ),
                                 Text(
                                   'Tipe Lembur',
                                   style: GoogleFonts.poppins(
@@ -162,6 +157,11 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400,
                                   ),
+                                ),
+                                SizedBox(height: 15),
+                                _buildText(
+                                  'Keterangan',
+                                  "${widget.keterangan ?? '-'}",
                                 ),
                               ],
                             ),
@@ -180,36 +180,42 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                   "${widget.alasanValue ?? '-'}",
                                 ),
                                 _buildText(
+                                  'Jam Mulai',
+                                  "${widget.jamMulai ?? '-'}",
+                                ),
+                                _buildText(
                                   'Jam Selesai',
                                   "${widget.jamSelesai ?? '-'}",
                                 ),
-                                Text(
-                                  'File Ref.',
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 10,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600,
+                                if (widget.doc != null) ...{
+                                  Text(
+                                    'File Ref.',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 10,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Link(
-                                  target: LinkTarget.self,
-                                  uri: Uri.parse('${widget.doc}'),
-                                  builder: (context, followLink) =>
-                                      GestureDetector(
-                                    onTap: followLink,
-                                    child: Text(
-                                      "Doc.pdf",
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 12,
-                                        color: MyColorsConst.primaryColor,
-                                        fontWeight: FontWeight.w400,
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Link(
+                                    target: LinkTarget.self,
+                                    uri: Uri.parse('${widget.doc}'),
+                                    builder: (context, followLink) =>
+                                        GestureDetector(
+                                      onTap: followLink,
+                                      child: Text(
+                                        "Doc.pdf",
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 12,
+                                          color: MyColorsConst.primaryColor,
+                                          fontWeight: FontWeight.w400,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
+                                }
                               ],
                             ),
                           )

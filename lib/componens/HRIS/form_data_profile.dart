@@ -250,22 +250,22 @@ class FormCatatanData extends StatelessWidget {
 }
 
 class FormInputData extends StatelessWidget {
-  const FormInputData({
-    Key? key,
-    this.enabled = true,
-    this.input = "",
-    this.onTap,
-    required this.controller,
-    required this.validator,
-    this.errorTextStyle,
-    required this.labelForm,
-    required this.labelTag,
-    required this.formTag,
-    required this.hintText,
-    this.showRedStar = true,
-    this.inputType = TextInputType.text,
-    this.onChanged
-  }) : super(key: key);
+  const FormInputData(
+      {Key? key,
+      this.enabled = true,
+      this.input = "",
+      this.onTap,
+      required this.controller,
+      required this.validator,
+      this.errorTextStyle,
+      required this.labelForm,
+      required this.labelTag,
+      required this.formTag,
+      required this.hintText,
+      this.showRedStar = true,
+      this.inputType = TextInputType.text,
+      this.onChanged})
+      : super(key: key);
 
   final ValueChanged<String?>? onChanged;
   final bool enabled;
@@ -732,6 +732,147 @@ class FormTemplateSpd extends StatelessWidget {
             ),
           ),
         ),
+      ],
+    );
+  }
+}
+
+class FormDropDownDataWithNote extends StatelessWidget {
+  const FormDropDownDataWithNote({
+    Key? key,
+    this.enabled = true,
+    this.showRedStar = true,
+    this.input = "",
+    this.onTap,
+    required this.hintText,
+    required this.labelForm,
+    required this.labelTag,
+    required this.formTag,
+    required this.valueController,
+    this.idController,
+    this.validator,
+    this.errorTextStyle,
+    this.note,
+  }) : super(key: key);
+
+  final bool enabled;
+  final bool showRedStar;
+  final String input;
+  final String labelForm;
+  final String hintText;
+  final String labelTag;
+  final String formTag;
+  final TextEditingController valueController;
+  final TextEditingController? idController;
+  final VoidCallback? onTap;
+  final String? Function(String?)? validator;
+  final TextStyle? errorTextStyle;
+  final String? note;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Hero(
+          tag: labelTag,
+          flightShuttleBuilder: flightShuttleBuilder,
+          child: Row(
+            children: [
+              FormTextLabel(
+                label: labelForm,
+                labelColor: MyColorsConst.darkColor,
+              ),
+              SizedBox(width: 2.sp),
+              Text(
+                '(Opsional)',
+                style: GoogleFonts.poppins(
+                    color: MyColorsConst.lightDarkColor, fontSize: 9.sp),
+              ),
+              SizedBox(width: 2.sp),
+              if (showRedStar == true)
+                Text(
+                  '*',
+                  style: GoogleFonts.poppins(color: Colors.red),
+                ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 5.sp,
+        ),
+        Hero(
+          tag: formTag,
+          child: Material(
+            color: Colors.transparent,
+            child: Container(
+              alignment: Alignment.center,
+              // height: 56.sp,
+              // decoration: BoxDecoration(
+              //   borderRadius: BorderRadius.circular(10),
+
+              // ),
+              child: TextFormField(
+                readOnly: true,
+                onTap: onTap,
+                controller: valueController,
+                style: GoogleFonts.poppins(
+                    fontSize: 13.sp,
+                    fontWeight: FontWeight.w500,
+                    color: MyColorsConst.darkColor),
+                validator: validator,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(18.sp),
+                  fillColor: Colors.transparent,
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1.5, color: MyColorsConst.formBorderColor),
+                      borderRadius: BorderRadius.circular(10)),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1.5, color: MyColorsConst.formBorderColor),
+                      borderRadius: BorderRadius.circular(10)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1.5, color: MyColorsConst.primaryColor),
+                      borderRadius: BorderRadius.circular(10)),
+                  focusedErrorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1.5, color: Color(0XFF0b00020)),
+                      borderRadius: BorderRadius.circular(10)),
+                  errorBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(width: 1.5, color: Color(0XFF0b00020)),
+                      borderRadius: BorderRadius.circular(10)),
+                  suffixIcon: Padding(
+                    padding: EdgeInsets.all(8.sp),
+                    child: Icon(
+                      Icons.search_rounded,
+                      color: MyColorsConst.darkColor,
+                    ),
+                  ),
+                  hintText: hintText,
+                  hintStyle: GoogleFonts.poppins(
+                      fontSize: 13.sp,
+                      color: MyColorsConst.disableColor,
+                      fontWeight: FontWeight.w500),
+                  errorStyle: GoogleFonts.poppins(
+                    fontSize: 10.sp,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 5.sp),
+        Text(
+          note ?? "",
+          style: GoogleFonts.poppins(
+              color: MyColorsConst.lightDarkColor,
+              fontSize: 11.sp,
+              fontWeight: FontWeight.w400),
+        ),
+        SizedBox(height: 20.sp),
       ],
     );
   }

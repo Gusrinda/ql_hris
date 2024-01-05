@@ -8,26 +8,26 @@ abstract class AddLemburEvent extends Equatable {
 }
 
 class OnSumbitLembur extends AddLemburEvent {
-    String dateLembur;
-    int alasanLemburID;
-    int tipeLemburID;
-    String timeFrom;
-    String timeTo;
-    String? noDoc;
-    File? doc;
-    String keterangan;
+  String dateLembur;
+  int alasanLemburID;
+  int tipeLemburID;
+  String timeFrom;
+  String timeTo;
+  int? picID;
+  String? noDoc;
+  File? doc;
+  String keterangan;
 
-
-  OnSumbitLembur({
-    required this.dateLembur,
-    required this.alasanLemburID,
-    required this.tipeLemburID,
-    required this.timeFrom,
-    required this.timeTo,
-    this.noDoc,
-    this.doc,
-    required this.keterangan
-  });
+  OnSumbitLembur(
+      {required this.dateLembur,
+      required this.alasanLemburID,
+      required this.tipeLemburID,
+      required this.timeFrom,
+      required this.timeTo,
+      this.picID,
+      this.noDoc,
+      this.doc,
+      required this.keterangan});
 
   @override
   List<Object> get props => [
@@ -36,10 +36,18 @@ class OnSumbitLembur extends AddLemburEvent {
         tipeLemburID,
         timeFrom,
         timeTo,
+        picID!,
         noDoc!,
         doc!,
         keterangan
       ];
+}
+
+class OnSelectPic extends AddLemburEvent {
+  OnSelectPic();
+
+  @override
+  List<Object> get props => [];
 }
 
 class OnSelectAlasanLembur extends AddLemburEvent {

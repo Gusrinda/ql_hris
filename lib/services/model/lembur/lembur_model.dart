@@ -37,7 +37,7 @@ class LemburModel with _$LemburModel {
 @freezed
 class DataLembur with _$DataLembur {
     const factory DataLembur({
-        @JsonKey(name: "meta_read")
+       @JsonKey(name: "meta_read")
         bool? metaRead,
         @JsonKey(name: "meta_delete")
         bool? metaDelete,
@@ -63,26 +63,28 @@ class DataLembur with _$DataLembur {
         String? jamSelesai,
         @JsonKey(name: "tipe_lembur_id")
         int? datumTipeLemburId,
-        @JsonKey(name: "interval_min")
-        int? intervalMin,
         @JsonKey(name: "alasan_id")
         int? datumAlasanId,
         @JsonKey(name: "no_doc")
-        String? noDoc,
+        dynamic noDoc,
         @JsonKey(name: "doc")
-        String? doc,
+        dynamic doc,
         @JsonKey(name: "keterangan")
-        dynamic keterangan,
+        String? keterangan,
         @JsonKey(name: "status")
         String? status,
         @JsonKey(name: "creator_id")
-        dynamic datumCreatorId,
+        int? datumCreatorId,
         @JsonKey(name: "last_editor_id")
         dynamic datumLastEditorId,
         @JsonKey(name: "created_at")
-        dynamic createdAt,
+        String? createdAt,
         @JsonKey(name: "updated_at")
-        dynamic updatedAt,
+        String? updatedAt,
+        @JsonKey(name: "interval_min")
+        int? intervalMin,
+        @JsonKey(name: "pic_id")
+        int? datumPicId,
         @JsonKey(name: "m_comp.id")
         int? mCompId,
         @JsonKey(name: "m_comp.nama")
@@ -100,15 +102,15 @@ class DataLembur with _$DataLembur {
         @JsonKey(name: "m_comp.updated_at")
         dynamic mCompUpdatedAt,
         @JsonKey(name: "m_dir.id")
-        int? mDirId,
+        dynamic mDirId,
         @JsonKey(name: "m_dir.m_comp_id")
-        int? mDirMCompId,
+        dynamic mDirMCompId,
         @JsonKey(name: "m_dir.nama")
-        String? mDirNama,
+        dynamic mDirNama,
         @JsonKey(name: "m_dir.desc")
         dynamic mDirDesc,
         @JsonKey(name: "m_dir.is_active")
-        bool? mDirIsActive,
+        dynamic mDirIsActive,
         @JsonKey(name: "m_dir.creator_id")
         dynamic mDirCreatorId,
         @JsonKey(name: "m_dir.last_editor_id")
@@ -130,7 +132,7 @@ class DataLembur with _$DataLembur {
         @JsonKey(name: "m_kary.m_zona_id")
         int? mKaryMZonaId,
         @JsonKey(name: "m_kary.grading_id")
-        dynamic mKaryGradingId,
+        int? mKaryGradingId,
         @JsonKey(name: "m_kary.costcontre_id")
         int? mKaryCostcontreId,
         @JsonKey(name: "m_kary.kode")
@@ -172,7 +174,7 @@ class DataLembur with _$DataLembur {
         @JsonKey(name: "m_kary.no_tlp")
         String? mKaryNoTlp,
         @JsonKey(name: "m_kary.no_tlp_lainnya")
-        dynamic mKaryNoTlpLainnya,
+        String? mKaryNoTlpLainnya,
         @JsonKey(name: "m_kary.no_darurat")
         String? mKaryNoDarurat,
         @JsonKey(name: "m_kary.nama_kontak_darurat")
@@ -183,8 +185,8 @@ class DataLembur with _$DataLembur {
         int? mKaryGolDarahId,
         @JsonKey(name: "m_kary.status_nikah_id")
         int? mKaryStatusNikahId,
-        @JsonKey(name: "m_kary.jml_tanggungan")
-        dynamic mKaryJmlTanggungan,
+        @JsonKey(name: "m_kary.tanggungan_id")
+        int? mKaryTanggunganId,
         @JsonKey(name: "m_kary.hub_dgn_karyawan")
         String? mKaryHubDgnKaryawan,
         @JsonKey(name: "m_kary.cuti_jatah_reguler")
@@ -202,7 +204,7 @@ class DataLembur with _$DataLembur {
         @JsonKey(name: "m_kary.lama_kontrak_akhir")
         dynamic mKaryLamaKontrakAkhir,
         @JsonKey(name: "m_kary.tgl_masuk")
-        dynamic mKaryTglMasuk,
+        String? mKaryTglMasuk,
         @JsonKey(name: "m_kary.tgl_berhenti")
         dynamic mKaryTglBerhenti,
         @JsonKey(name: "m_kary.alasan_berhenti")
@@ -214,23 +216,41 @@ class DataLembur with _$DataLembur {
         @JsonKey(name: "m_kary.uk_sepatu")
         String? mKaryUkSepatu,
         @JsonKey(name: "m_kary.desc")
-        dynamic mKaryDesc,
+        String? mKaryDesc,
         @JsonKey(name: "m_kary.is_active")
         bool? mKaryIsActive,
         @JsonKey(name: "m_kary.creator_id")
         dynamic mKaryCreatorId,
         @JsonKey(name: "m_kary.last_editor_id")
-        dynamic mKaryLastEditorId,
+        int? mKaryLastEditorId,
         @JsonKey(name: "m_kary.created_at")
         String? mKaryCreatedAt,
         @JsonKey(name: "m_kary.updated_at")
         String? mKaryUpdatedAt,
+        @JsonKey(name: "m_kary.m_standart_gaji_id")
+        int? mKaryMStandartGajiId,
+        @JsonKey(name: "m_kary.periode_gaji_id")
+        int? mKaryPeriodeGajiId,
+        @JsonKey(name: "m_kary.ref_id")
+        int? mKaryRefId,
+        @JsonKey(name: "m_kary.presensi_lokasi_default_id")
+        dynamic mKaryPresensiLokasiDefaultId,
+        @JsonKey(name: "m_kary.exp_date_cuti")
+        dynamic mKaryExpDateCuti,
+        @JsonKey(name: "m_kary.limit_potong")
+        int? mKaryLimitPotong,
+        @JsonKey(name: "m_kary.atasan_id")
+        int? mKaryAtasanId,
+        @JsonKey(name: "m_kary.cuti_p24")
+        dynamic mKaryCutiP24,
+        @JsonKey(name: "m_kary.cuti_sisa_p24")
+        dynamic mKaryCutiSisaP24,
         @JsonKey(name: "tipe_lembur.id")
         int? tipeLemburId,
         @JsonKey(name: "tipe_lembur.m_comp_id")
         int? tipeLemburMCompId,
         @JsonKey(name: "tipe_lembur.m_dir_id")
-        dynamic tipeLemburMDirId,
+        int? tipeLemburMDirId,
         @JsonKey(name: "tipe_lembur.group")
         String? tipeLemburGroup,
         @JsonKey(name: "tipe_lembur.key")
@@ -249,12 +269,16 @@ class DataLembur with _$DataLembur {
         String? tipeLemburCreatedAt,
         @JsonKey(name: "tipe_lembur.updated_at")
         String? tipeLemburUpdatedAt,
+        @JsonKey(name: "tipe_lembur.value_2")
+        dynamic tipeLemburValue2,
+        @JsonKey(name: "tipe_lembur.value_3")
+        dynamic tipeLemburValue3,
         @JsonKey(name: "alasan.id")
         int? alasanId,
         @JsonKey(name: "alasan.m_comp_id")
         int? alasanMCompId,
         @JsonKey(name: "alasan.m_dir_id")
-        dynamic alasanMDirId,
+        int? alasanMDirId,
         @JsonKey(name: "alasan.group")
         String? alasanGroup,
         @JsonKey(name: "alasan.key")
@@ -273,40 +297,44 @@ class DataLembur with _$DataLembur {
         String? alasanCreatedAt,
         @JsonKey(name: "alasan.updated_at")
         String? alasanUpdatedAt,
+        @JsonKey(name: "alasan.value_2")
+        dynamic alasanValue2,
+        @JsonKey(name: "alasan.value_3")
+        dynamic alasanValue3,
         @JsonKey(name: "creator.id")
-        dynamic creatorId,
+        int? creatorId,
         @JsonKey(name: "creator.name")
-        dynamic creatorName,
+        String? creatorName,
         @JsonKey(name: "creator.email")
-        dynamic creatorEmail,
+        String? creatorEmail,
         @JsonKey(name: "creator.username")
-        dynamic creatorUsername,
+        String? creatorUsername,
         @JsonKey(name: "creator.email_verified_at")
         dynamic creatorEmailVerifiedAt,
         @JsonKey(name: "creator.password")
-        dynamic creatorPassword,
+        String? creatorPassword,
         @JsonKey(name: "creator.m_comp_id")
-        dynamic creatorMCompId,
+        int? creatorMCompId,
         @JsonKey(name: "creator.m_dir_id")
-        dynamic creatorMDirId,
+        int? creatorMDirId,
         @JsonKey(name: "creator.is_active")
-        dynamic creatorIsActive,
+        bool? creatorIsActive,
         @JsonKey(name: "creator.creator_id")
-        dynamic creatorCreatorId,
+        int? creatorCreatorId,
         @JsonKey(name: "creator.last_editor_id")
-        dynamic creatorLastEditorId,
+        int? creatorLastEditorId,
         @JsonKey(name: "creator.remember_token")
         dynamic creatorRememberToken,
         @JsonKey(name: "creator.created_at")
-        dynamic creatorCreatedAt,
+        String? creatorCreatedAt,
         @JsonKey(name: "creator.updated_at")
-        dynamic creatorUpdatedAt,
+        String? creatorUpdatedAt,
         @JsonKey(name: "creator.profil_image")
-        dynamic creatorProfilImage,
+        String? creatorProfilImage,
         @JsonKey(name: "creator.telp")
-        dynamic creatorTelp,
+        String? creatorTelp,
         @JsonKey(name: "creator.m_kary_id")
-        dynamic creatorMKaryId,
+        int? creatorMKaryId,
         @JsonKey(name: "last_editor.id")
         dynamic lastEditorId,
         @JsonKey(name: "last_editor.name")
@@ -341,6 +369,132 @@ class DataLembur with _$DataLembur {
         dynamic lastEditorTelp,
         @JsonKey(name: "last_editor.m_kary_id")
         dynamic lastEditorMKaryId,
+        @JsonKey(name: "pic.id")
+        int? picId,
+        @JsonKey(name: "pic.m_comp_id")
+        int? picMCompId,
+        @JsonKey(name: "pic.m_dir_id")
+        int? picMDirId,
+        @JsonKey(name: "pic.m_divisi_id")
+        int? picMDivisiId,
+        @JsonKey(name: "pic.m_dept_id")
+        int? picMDeptId,
+        @JsonKey(name: "pic.m_zona_id")
+        int? picMZonaId,
+        @JsonKey(name: "pic.grading_id")
+        int? picGradingId,
+        @JsonKey(name: "pic.costcontre_id")
+        int? picCostcontreId,
+        @JsonKey(name: "pic.kode")
+        String? picKode,
+        @JsonKey(name: "pic.m_posisi_id")
+        int? picMPosisiId,
+        @JsonKey(name: "pic.m_jam_kerja_id")
+        int? picMJamKerjaId,
+        @JsonKey(name: "pic.kode_presensi")
+        String? picKodePresensi,
+        @JsonKey(name: "pic.nik")
+        String? picNik,
+        @JsonKey(name: "pic.nama_depan")
+        String? picNamaDepan,
+        @JsonKey(name: "pic.nama_belakang")
+        String? picNamaBelakang,
+        @JsonKey(name: "pic.nama_lengkap")
+        String? picNamaLengkap,
+        @JsonKey(name: "pic.nama_panggilan")
+        String? picNamaPanggilan,
+        @JsonKey(name: "pic.jk_id")
+        int? picJkId,
+        @JsonKey(name: "pic.tempat_lahir")
+        String? picTempatLahir,
+        @JsonKey(name: "pic.tgl_lahir")
+        String? picTglLahir,
+        @JsonKey(name: "pic.provinsi_id")
+        int? picProvinsiId,
+        @JsonKey(name: "pic.kota_id")
+        int? picKotaId,
+        @JsonKey(name: "pic.kecamatan_id")
+        int? picKecamatanId,
+        @JsonKey(name: "pic.kode_pos")
+        String? picKodePos,
+        @JsonKey(name: "pic.alamat_asli")
+        String? picAlamatAsli,
+        @JsonKey(name: "pic.alamat_domisili")
+        String? picAlamatDomisili,
+        @JsonKey(name: "pic.no_tlp")
+        String? picNoTlp,
+        @JsonKey(name: "pic.no_tlp_lainnya")
+        dynamic picNoTlpLainnya,
+        @JsonKey(name: "pic.no_darurat")
+        String? picNoDarurat,
+        @JsonKey(name: "pic.nama_kontak_darurat")
+        String? picNamaKontakDarurat,
+        @JsonKey(name: "pic.agama_id")
+        int? picAgamaId,
+        @JsonKey(name: "pic.gol_darah_id")
+        int? picGolDarahId,
+        @JsonKey(name: "pic.status_nikah_id")
+        int? picStatusNikahId,
+        @JsonKey(name: "pic.tanggungan_id")
+        int? picTanggunganId,
+        @JsonKey(name: "pic.hub_dgn_karyawan")
+        String? picHubDgnKaryawan,
+        @JsonKey(name: "pic.cuti_jatah_reguler")
+        int? picCutiJatahReguler,
+        @JsonKey(name: "pic.cuti_sisa_reguler")
+        int? picCutiSisaReguler,
+        @JsonKey(name: "pic.cuti_panjang")
+        int? picCutiPanjang,
+        @JsonKey(name: "pic.cuti_sisa_panjang")
+        int? picCutiSisaPanjang,
+        @JsonKey(name: "pic.status_kary_id")
+        dynamic picStatusKaryId,
+        @JsonKey(name: "pic.lama_kontrak_awal")
+        dynamic picLamaKontrakAwal,
+        @JsonKey(name: "pic.lama_kontrak_akhir")
+        dynamic picLamaKontrakAkhir,
+        @JsonKey(name: "pic.tgl_masuk")
+        dynamic picTglMasuk,
+        @JsonKey(name: "pic.tgl_berhenti")
+        dynamic picTglBerhenti,
+        @JsonKey(name: "pic.alasan_berhenti")
+        dynamic picAlasanBerhenti,
+        @JsonKey(name: "pic.uk_baju")
+        String? picUkBaju,
+        @JsonKey(name: "pic.uk_celana")
+        String? picUkCelana,
+        @JsonKey(name: "pic.uk_sepatu")
+        String? picUkSepatu,
+        @JsonKey(name: "pic.desc")
+        dynamic picDesc,
+        @JsonKey(name: "pic.is_active")
+        bool? picIsActive,
+        @JsonKey(name: "pic.creator_id")
+        dynamic picCreatorId,
+        @JsonKey(name: "pic.last_editor_id")
+        int? picLastEditorId,
+        @JsonKey(name: "pic.created_at")
+        String? picCreatedAt,
+        @JsonKey(name: "pic.updated_at")
+        String? picUpdatedAt,
+        @JsonKey(name: "pic.m_standart_gaji_id")
+        int? picMStandartGajiId,
+        @JsonKey(name: "pic.periode_gaji_id")
+        int? picPeriodeGajiId,
+        @JsonKey(name: "pic.ref_id")
+        int? picRefId,
+        @JsonKey(name: "pic.presensi_lokasi_default_id")
+        dynamic picPresensiLokasiDefaultId,
+        @JsonKey(name: "pic.exp_date_cuti")
+        String? picExpDateCuti,
+        @JsonKey(name: "pic.limit_potong")
+        int? picLimitPotong,
+        @JsonKey(name: "pic.atasan_id")
+        int? picAtasanId,
+        @JsonKey(name: "pic.cuti_p24")
+        dynamic picCutiP24,
+        @JsonKey(name: "pic.cuti_sisa_p24")
+        dynamic picCutiSisaP24,
     }) = _DataLembur;
 
     factory DataLembur.fromJson(Map<String, dynamic> json) => _$DataLemburFromJson(json);

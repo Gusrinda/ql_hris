@@ -1046,6 +1046,8 @@ mixin _$DataDinas {
   dynamic get lastEditorMKaryId => throw _privateConstructorUsedError;
   @JsonKey(name: "approval_note")
   String? get approvalNote => throw _privateConstructorUsedError;
+  @JsonKey(name: "nama_pic")
+  String? get namaPic => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1384,7 +1386,8 @@ abstract class $DataDinasCopyWith<$Res> {
       @JsonKey(name: "last_editor.profil_image") dynamic lastEditorProfilImage,
       @JsonKey(name: "last_editor.telp") dynamic lastEditorTelp,
       @JsonKey(name: "last_editor.m_kary_id") dynamic lastEditorMKaryId,
-      @JsonKey(name: "approval_note") String? approvalNote});
+      @JsonKey(name: "approval_note") String? approvalNote,
+      @JsonKey(name: "nama_pic") String? namaPic});
 }
 
 /// @nodoc
@@ -1713,6 +1716,7 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
     Object? lastEditorTelp = freezed,
     Object? lastEditorMKaryId = freezed,
     Object? approvalNote = freezed,
+    Object? namaPic = freezed,
   }) {
     return _then(_value.copyWith(
       metaRead: freezed == metaRead
@@ -2967,6 +2971,10 @@ class _$DataDinasCopyWithImpl<$Res, $Val extends DataDinas>
           ? _value.approvalNote
           : approvalNote // ignore: cast_nullable_to_non_nullable
               as String?,
+      namaPic: freezed == namaPic
+          ? _value.namaPic
+          : namaPic // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -3305,7 +3313,8 @@ abstract class _$$DataDinasImplCopyWith<$Res>
       @JsonKey(name: "last_editor.profil_image") dynamic lastEditorProfilImage,
       @JsonKey(name: "last_editor.telp") dynamic lastEditorTelp,
       @JsonKey(name: "last_editor.m_kary_id") dynamic lastEditorMKaryId,
-      @JsonKey(name: "approval_note") String? approvalNote});
+      @JsonKey(name: "approval_note") String? approvalNote,
+      @JsonKey(name: "nama_pic") String? namaPic});
 }
 
 /// @nodoc
@@ -3632,6 +3641,7 @@ class __$$DataDinasImplCopyWithImpl<$Res>
     Object? lastEditorTelp = freezed,
     Object? lastEditorMKaryId = freezed,
     Object? approvalNote = freezed,
+    Object? namaPic = freezed,
   }) {
     return _then(_$DataDinasImpl(
       metaRead: freezed == metaRead
@@ -4886,6 +4896,10 @@ class __$$DataDinasImplCopyWithImpl<$Res>
           ? _value.approvalNote
           : approvalNote // ignore: cast_nullable_to_non_nullable
               as String?,
+      namaPic: freezed == namaPic
+          ? _value.namaPic
+          : namaPic // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -5211,7 +5225,8 @@ class _$DataDinasImpl implements _DataDinas {
       @JsonKey(name: "last_editor.profil_image") this.lastEditorProfilImage,
       @JsonKey(name: "last_editor.telp") this.lastEditorTelp,
       @JsonKey(name: "last_editor.m_kary_id") this.lastEditorMKaryId,
-      @JsonKey(name: "approval_note") this.approvalNote});
+      @JsonKey(name: "approval_note") this.approvalNote,
+      @JsonKey(name: "nama_pic") this.namaPic});
 
   factory _$DataDinasImpl.fromJson(Map<String, dynamic> json) =>
       _$$DataDinasImplFromJson(json);
@@ -6155,10 +6170,13 @@ class _$DataDinasImpl implements _DataDinas {
   @override
   @JsonKey(name: "approval_note")
   final String? approvalNote;
+  @override
+  @JsonKey(name: "nama_pic")
+  final String? namaPic;
 
   @override
   String toString() {
-    return 'DataDinas(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, nomor: $nomor, datumMCompId: $datumMCompId, datumMSpdId: $datumMSpdId, datumMDirId: $datumMDirId, datumMDivisiId: $datumMDivisiId, datumMDeptId: $datumMDeptId, datumMPosisiId: $datumMPosisiId, tanggal: $tanggal, tglAcaraAwal: $tglAcaraAwal, tglAcaraAkhir: $tglAcaraAkhir, datumJenisSpdId: $datumJenisSpdId, datumMZonaAsalId: $datumMZonaAsalId, datumMZonaTujuanId: $datumMZonaTujuanId, datumMLokasiTujuanId: $datumMLokasiTujuanId, datumMKaryId: $datumMKaryId, datumPicId: $datumPicId, totalBiaya: $totalBiaya, kegiatan: $kegiatan, keterangan: $keterangan, status: $status, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, isKendDinas: $isKendDinas, interval: $interval, catatanKend: $catatanKend, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, mSpdId: $mSpdId, mSpdMCompId: $mSpdMCompId, mSpdMDirId: $mSpdMDirId, mSpdKode: $mSpdKode, mSpdMDivisiId: $mSpdMDivisiId, mSpdMPosisiId: $mSpdMPosisiId, mSpdMDeptId: $mSpdMDeptId, mSpdMZonaId: $mSpdMZonaId, mSpdGradingId: $mSpdGradingId, mSpdGrading: $mSpdGrading, mSpdDesc: $mSpdDesc, mSpdIsActive: $mSpdIsActive, mSpdCreatorId: $mSpdCreatorId, mSpdLastEditorId: $mSpdLastEditorId, mSpdCreatedAt: $mSpdCreatedAt, mSpdUpdatedAt: $mSpdUpdatedAt, mDirId: $mDirId, mDirMCompId: $mDirMCompId, mDirNama: $mDirNama, mDirDesc: $mDirDesc, mDirIsActive: $mDirIsActive, mDirCreatorId: $mDirCreatorId, mDirLastEditorId: $mDirLastEditorId, mDirCreatedAt: $mDirCreatedAt, mDirUpdatedAt: $mDirUpdatedAt, mDivisiId: $mDivisiId, mDivisiMCompId: $mDivisiMCompId, mDivisiMDirId: $mDivisiMDirId, mDivisiNama: $mDivisiNama, mDivisiDesc: $mDivisiDesc, mDivisiIsActive: $mDivisiIsActive, mDivisiCreatorId: $mDivisiCreatorId, mDivisiLastEditorId: $mDivisiLastEditorId, mDivisiCreatedAt: $mDivisiCreatedAt, mDivisiUpdatedAt: $mDivisiUpdatedAt, mDeptId: $mDeptId, mDeptMDirId: $mDeptMDirId, mDeptMDivisiId: $mDeptMDivisiId, mDeptNama: $mDeptNama, mDeptDesc: $mDeptDesc, mDeptIsActive: $mDeptIsActive, mDeptCreatorId: $mDeptCreatorId, mDeptLastEditorId: $mDeptLastEditorId, mDeptCreatedAt: $mDeptCreatedAt, mDeptUpdatedAt: $mDeptUpdatedAt, mPosisiId: $mPosisiId, mPosisiMCompId: $mPosisiMCompId, mPosisiMDirId: $mPosisiMDirId, mPosisiKode: $mPosisiKode, mPosisiDescKerja: $mPosisiDescKerja, mPosisiDescKerja1: $mPosisiDescKerja1, mPosisiDescKerja2: $mPosisiDescKerja2, mPosisiMinPengalaman: $mPosisiMinPengalaman, mPosisiMinPendidikanId: $mPosisiMinPendidikanId, mPosisiMinGajiPokok: $mPosisiMinGajiPokok, mPosisiMaxGajiPokok: $mPosisiMaxGajiPokok, mPosisiBiaya: $mPosisiBiaya, mPosisiTipeBpjsId: $mPosisiTipeBpjsId, mPosisiPotonganBpjs: $mPosisiPotonganBpjs, mPosisiDesc: $mPosisiDesc, mPosisiIsActive: $mPosisiIsActive, mPosisiCreatorId: $mPosisiCreatorId, mPosisiLastEditorId: $mPosisiLastEditorId, mPosisiCreatedAt: $mPosisiCreatedAt, mPosisiUpdatedAt: $mPosisiUpdatedAt, jenisSpdId: $jenisSpdId, jenisSpdMCompId: $jenisSpdMCompId, jenisSpdMDirId: $jenisSpdMDirId, jenisSpdGroup: $jenisSpdGroup, jenisSpdKey: $jenisSpdKey, jenisSpdCode: $jenisSpdCode, jenisSpdValue: $jenisSpdValue, jenisSpdIsActive: $jenisSpdIsActive, jenisSpdCreatorId: $jenisSpdCreatorId, jenisSpdLastEditorId: $jenisSpdLastEditorId, jenisSpdCreatedAt: $jenisSpdCreatedAt, jenisSpdUpdatedAt: $jenisSpdUpdatedAt, jenisSpdValue2: $jenisSpdValue2, jenisSpdValue3: $jenisSpdValue3, mZonaAsalId: $mZonaAsalId, mZonaAsalMCompId: $mZonaAsalMCompId, mZonaAsalMDirId: $mZonaAsalMDirId, mZonaAsalKode: $mZonaAsalKode, mZonaAsalNama: $mZonaAsalNama, mZonaAsalDesc: $mZonaAsalDesc, mZonaAsalIsActive: $mZonaAsalIsActive, mZonaAsalCreatorId: $mZonaAsalCreatorId, mZonaAsalLastEditorId: $mZonaAsalLastEditorId, mZonaAsalCreatedAt: $mZonaAsalCreatedAt, mZonaAsalUpdatedAt: $mZonaAsalUpdatedAt, mZonaTujuanId: $mZonaTujuanId, mZonaTujuanMCompId: $mZonaTujuanMCompId, mZonaTujuanMDirId: $mZonaTujuanMDirId, mZonaTujuanKode: $mZonaTujuanKode, mZonaTujuanNama: $mZonaTujuanNama, mZonaTujuanDesc: $mZonaTujuanDesc, mZonaTujuanIsActive: $mZonaTujuanIsActive, mZonaTujuanCreatorId: $mZonaTujuanCreatorId, mZonaTujuanLastEditorId: $mZonaTujuanLastEditorId, mZonaTujuanCreatedAt: $mZonaTujuanCreatedAt, mZonaTujuanUpdatedAt: $mZonaTujuanUpdatedAt, mLokasiTujuanId: $mLokasiTujuanId, mLokasiTujuanMCompId: $mLokasiTujuanMCompId, mLokasiTujuanMDirId: $mLokasiTujuanMDirId, mLokasiTujuanKode: $mLokasiTujuanKode, mLokasiTujuanNama: $mLokasiTujuanNama, mLokasiTujuanDesc: $mLokasiTujuanDesc, mLokasiTujuanIsActive: $mLokasiTujuanIsActive, mLokasiTujuanCreatorId: $mLokasiTujuanCreatorId, mLokasiTujuanLastEditorId: $mLokasiTujuanLastEditorId, mLokasiTujuanCreatedAt: $mLokasiTujuanCreatedAt, mLokasiTujuanUpdatedAt: $mLokasiTujuanUpdatedAt, mKaryId: $mKaryId, mKaryMCompId: $mKaryMCompId, mKaryMDirId: $mKaryMDirId, mKaryMDivisiId: $mKaryMDivisiId, mKaryMDeptId: $mKaryMDeptId, mKaryMZonaId: $mKaryMZonaId, mKaryGradingId: $mKaryGradingId, mKaryCostcontreId: $mKaryCostcontreId, mKaryKode: $mKaryKode, mKaryMPosisiId: $mKaryMPosisiId, mKaryMJamKerjaId: $mKaryMJamKerjaId, mKaryKodePresensi: $mKaryKodePresensi, mKaryNik: $mKaryNik, mKaryNamaDepan: $mKaryNamaDepan, mKaryNamaBelakang: $mKaryNamaBelakang, mKaryNamaLengkap: $mKaryNamaLengkap, mKaryNamaPanggilan: $mKaryNamaPanggilan, mKaryJkId: $mKaryJkId, mKaryTempatLahir: $mKaryTempatLahir, mKaryTglLahir: $mKaryTglLahir, mKaryProvinsiId: $mKaryProvinsiId, mKaryKotaId: $mKaryKotaId, mKaryKecamatanId: $mKaryKecamatanId, mKaryKodePos: $mKaryKodePos, mKaryAlamatAsli: $mKaryAlamatAsli, mKaryAlamatDomisili: $mKaryAlamatDomisili, mKaryNoTlp: $mKaryNoTlp, mKaryNoTlpLainnya: $mKaryNoTlpLainnya, mKaryNoDarurat: $mKaryNoDarurat, mKaryNamaKontakDarurat: $mKaryNamaKontakDarurat, mKaryAgamaId: $mKaryAgamaId, mKaryGolDarahId: $mKaryGolDarahId, mKaryStatusNikahId: $mKaryStatusNikahId, mKaryTanggunganId: $mKaryTanggunganId, mKaryHubDgnKaryawan: $mKaryHubDgnKaryawan, mKaryCutiJatahReguler: $mKaryCutiJatahReguler, mKaryCutiSisaReguler: $mKaryCutiSisaReguler, mKaryCutiPanjang: $mKaryCutiPanjang, mKaryCutiSisaPanjang: $mKaryCutiSisaPanjang, mKaryStatusKaryId: $mKaryStatusKaryId, mKaryLamaKontrakAwal: $mKaryLamaKontrakAwal, mKaryLamaKontrakAkhir: $mKaryLamaKontrakAkhir, mKaryTglMasuk: $mKaryTglMasuk, mKaryTglBerhenti: $mKaryTglBerhenti, mKaryAlasanBerhenti: $mKaryAlasanBerhenti, mKaryUkBaju: $mKaryUkBaju, mKaryUkCelana: $mKaryUkCelana, mKaryUkSepatu: $mKaryUkSepatu, mKaryDesc: $mKaryDesc, mKaryIsActive: $mKaryIsActive, mKaryCreatorId: $mKaryCreatorId, mKaryLastEditorId: $mKaryLastEditorId, mKaryCreatedAt: $mKaryCreatedAt, mKaryUpdatedAt: $mKaryUpdatedAt, mKaryMStandartGajiId: $mKaryMStandartGajiId, mKaryPeriodeGajiId: $mKaryPeriodeGajiId, mKaryRefId: $mKaryRefId, mKaryPresensiLokasiDefaultId: $mKaryPresensiLokasiDefaultId, mKaryExpDateCuti: $mKaryExpDateCuti, mKaryLimitPotong: $mKaryLimitPotong, mKaryAtasanId: $mKaryAtasanId, mKaryCutiP24: $mKaryCutiP24, mKaryCutiSisaP24: $mKaryCutiSisaP24, picId: $picId, picMCompId: $picMCompId, picMDirId: $picMDirId, picMDivisiId: $picMDivisiId, picMDeptId: $picMDeptId, picMZonaId: $picMZonaId, picGradingId: $picGradingId, picCostcontreId: $picCostcontreId, picKode: $picKode, picMPosisiId: $picMPosisiId, picMJamKerjaId: $picMJamKerjaId, picKodePresensi: $picKodePresensi, picNik: $picNik, picNamaDepan: $picNamaDepan, picNamaBelakang: $picNamaBelakang, picNamaLengkap: $picNamaLengkap, picNamaPanggilan: $picNamaPanggilan, picJkId: $picJkId, picTempatLahir: $picTempatLahir, picTglLahir: $picTglLahir, picProvinsiId: $picProvinsiId, picKotaId: $picKotaId, picKecamatanId: $picKecamatanId, picKodePos: $picKodePos, picAlamatAsli: $picAlamatAsli, picAlamatDomisili: $picAlamatDomisili, picNoTlp: $picNoTlp, picNoTlpLainnya: $picNoTlpLainnya, picNoDarurat: $picNoDarurat, picNamaKontakDarurat: $picNamaKontakDarurat, picAgamaId: $picAgamaId, picGolDarahId: $picGolDarahId, picStatusNikahId: $picStatusNikahId, picTanggunganId: $picTanggunganId, picHubDgnKaryawan: $picHubDgnKaryawan, picCutiJatahReguler: $picCutiJatahReguler, picCutiSisaReguler: $picCutiSisaReguler, picCutiPanjang: $picCutiPanjang, picCutiSisaPanjang: $picCutiSisaPanjang, picStatusKaryId: $picStatusKaryId, picLamaKontrakAwal: $picLamaKontrakAwal, picLamaKontrakAkhir: $picLamaKontrakAkhir, picTglMasuk: $picTglMasuk, picTglBerhenti: $picTglBerhenti, picAlasanBerhenti: $picAlasanBerhenti, picUkBaju: $picUkBaju, picUkCelana: $picUkCelana, picUkSepatu: $picUkSepatu, picDesc: $picDesc, picIsActive: $picIsActive, picCreatorId: $picCreatorId, picLastEditorId: $picLastEditorId, picCreatedAt: $picCreatedAt, picUpdatedAt: $picUpdatedAt, picMStandartGajiId: $picMStandartGajiId, picPeriodeGajiId: $picPeriodeGajiId, picRefId: $picRefId, picPresensiLokasiDefaultId: $picPresensiLokasiDefaultId, picExpDateCuti: $picExpDateCuti, picLimitPotong: $picLimitPotong, picAtasanId: $picAtasanId, picCutiP24: $picCutiP24, picCutiSisaP24: $picCutiSisaP24, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, creatorTelp: $creatorTelp, creatorMKaryId: $creatorMKaryId, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage, lastEditorTelp: $lastEditorTelp, lastEditorMKaryId: $lastEditorMKaryId, approvalNote: $approvalNote)';
+    return 'DataDinas(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, nomor: $nomor, datumMCompId: $datumMCompId, datumMSpdId: $datumMSpdId, datumMDirId: $datumMDirId, datumMDivisiId: $datumMDivisiId, datumMDeptId: $datumMDeptId, datumMPosisiId: $datumMPosisiId, tanggal: $tanggal, tglAcaraAwal: $tglAcaraAwal, tglAcaraAkhir: $tglAcaraAkhir, datumJenisSpdId: $datumJenisSpdId, datumMZonaAsalId: $datumMZonaAsalId, datumMZonaTujuanId: $datumMZonaTujuanId, datumMLokasiTujuanId: $datumMLokasiTujuanId, datumMKaryId: $datumMKaryId, datumPicId: $datumPicId, totalBiaya: $totalBiaya, kegiatan: $kegiatan, keterangan: $keterangan, status: $status, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, isKendDinas: $isKendDinas, interval: $interval, catatanKend: $catatanKend, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, mSpdId: $mSpdId, mSpdMCompId: $mSpdMCompId, mSpdMDirId: $mSpdMDirId, mSpdKode: $mSpdKode, mSpdMDivisiId: $mSpdMDivisiId, mSpdMPosisiId: $mSpdMPosisiId, mSpdMDeptId: $mSpdMDeptId, mSpdMZonaId: $mSpdMZonaId, mSpdGradingId: $mSpdGradingId, mSpdGrading: $mSpdGrading, mSpdDesc: $mSpdDesc, mSpdIsActive: $mSpdIsActive, mSpdCreatorId: $mSpdCreatorId, mSpdLastEditorId: $mSpdLastEditorId, mSpdCreatedAt: $mSpdCreatedAt, mSpdUpdatedAt: $mSpdUpdatedAt, mDirId: $mDirId, mDirMCompId: $mDirMCompId, mDirNama: $mDirNama, mDirDesc: $mDirDesc, mDirIsActive: $mDirIsActive, mDirCreatorId: $mDirCreatorId, mDirLastEditorId: $mDirLastEditorId, mDirCreatedAt: $mDirCreatedAt, mDirUpdatedAt: $mDirUpdatedAt, mDivisiId: $mDivisiId, mDivisiMCompId: $mDivisiMCompId, mDivisiMDirId: $mDivisiMDirId, mDivisiNama: $mDivisiNama, mDivisiDesc: $mDivisiDesc, mDivisiIsActive: $mDivisiIsActive, mDivisiCreatorId: $mDivisiCreatorId, mDivisiLastEditorId: $mDivisiLastEditorId, mDivisiCreatedAt: $mDivisiCreatedAt, mDivisiUpdatedAt: $mDivisiUpdatedAt, mDeptId: $mDeptId, mDeptMDirId: $mDeptMDirId, mDeptMDivisiId: $mDeptMDivisiId, mDeptNama: $mDeptNama, mDeptDesc: $mDeptDesc, mDeptIsActive: $mDeptIsActive, mDeptCreatorId: $mDeptCreatorId, mDeptLastEditorId: $mDeptLastEditorId, mDeptCreatedAt: $mDeptCreatedAt, mDeptUpdatedAt: $mDeptUpdatedAt, mPosisiId: $mPosisiId, mPosisiMCompId: $mPosisiMCompId, mPosisiMDirId: $mPosisiMDirId, mPosisiKode: $mPosisiKode, mPosisiDescKerja: $mPosisiDescKerja, mPosisiDescKerja1: $mPosisiDescKerja1, mPosisiDescKerja2: $mPosisiDescKerja2, mPosisiMinPengalaman: $mPosisiMinPengalaman, mPosisiMinPendidikanId: $mPosisiMinPendidikanId, mPosisiMinGajiPokok: $mPosisiMinGajiPokok, mPosisiMaxGajiPokok: $mPosisiMaxGajiPokok, mPosisiBiaya: $mPosisiBiaya, mPosisiTipeBpjsId: $mPosisiTipeBpjsId, mPosisiPotonganBpjs: $mPosisiPotonganBpjs, mPosisiDesc: $mPosisiDesc, mPosisiIsActive: $mPosisiIsActive, mPosisiCreatorId: $mPosisiCreatorId, mPosisiLastEditorId: $mPosisiLastEditorId, mPosisiCreatedAt: $mPosisiCreatedAt, mPosisiUpdatedAt: $mPosisiUpdatedAt, jenisSpdId: $jenisSpdId, jenisSpdMCompId: $jenisSpdMCompId, jenisSpdMDirId: $jenisSpdMDirId, jenisSpdGroup: $jenisSpdGroup, jenisSpdKey: $jenisSpdKey, jenisSpdCode: $jenisSpdCode, jenisSpdValue: $jenisSpdValue, jenisSpdIsActive: $jenisSpdIsActive, jenisSpdCreatorId: $jenisSpdCreatorId, jenisSpdLastEditorId: $jenisSpdLastEditorId, jenisSpdCreatedAt: $jenisSpdCreatedAt, jenisSpdUpdatedAt: $jenisSpdUpdatedAt, jenisSpdValue2: $jenisSpdValue2, jenisSpdValue3: $jenisSpdValue3, mZonaAsalId: $mZonaAsalId, mZonaAsalMCompId: $mZonaAsalMCompId, mZonaAsalMDirId: $mZonaAsalMDirId, mZonaAsalKode: $mZonaAsalKode, mZonaAsalNama: $mZonaAsalNama, mZonaAsalDesc: $mZonaAsalDesc, mZonaAsalIsActive: $mZonaAsalIsActive, mZonaAsalCreatorId: $mZonaAsalCreatorId, mZonaAsalLastEditorId: $mZonaAsalLastEditorId, mZonaAsalCreatedAt: $mZonaAsalCreatedAt, mZonaAsalUpdatedAt: $mZonaAsalUpdatedAt, mZonaTujuanId: $mZonaTujuanId, mZonaTujuanMCompId: $mZonaTujuanMCompId, mZonaTujuanMDirId: $mZonaTujuanMDirId, mZonaTujuanKode: $mZonaTujuanKode, mZonaTujuanNama: $mZonaTujuanNama, mZonaTujuanDesc: $mZonaTujuanDesc, mZonaTujuanIsActive: $mZonaTujuanIsActive, mZonaTujuanCreatorId: $mZonaTujuanCreatorId, mZonaTujuanLastEditorId: $mZonaTujuanLastEditorId, mZonaTujuanCreatedAt: $mZonaTujuanCreatedAt, mZonaTujuanUpdatedAt: $mZonaTujuanUpdatedAt, mLokasiTujuanId: $mLokasiTujuanId, mLokasiTujuanMCompId: $mLokasiTujuanMCompId, mLokasiTujuanMDirId: $mLokasiTujuanMDirId, mLokasiTujuanKode: $mLokasiTujuanKode, mLokasiTujuanNama: $mLokasiTujuanNama, mLokasiTujuanDesc: $mLokasiTujuanDesc, mLokasiTujuanIsActive: $mLokasiTujuanIsActive, mLokasiTujuanCreatorId: $mLokasiTujuanCreatorId, mLokasiTujuanLastEditorId: $mLokasiTujuanLastEditorId, mLokasiTujuanCreatedAt: $mLokasiTujuanCreatedAt, mLokasiTujuanUpdatedAt: $mLokasiTujuanUpdatedAt, mKaryId: $mKaryId, mKaryMCompId: $mKaryMCompId, mKaryMDirId: $mKaryMDirId, mKaryMDivisiId: $mKaryMDivisiId, mKaryMDeptId: $mKaryMDeptId, mKaryMZonaId: $mKaryMZonaId, mKaryGradingId: $mKaryGradingId, mKaryCostcontreId: $mKaryCostcontreId, mKaryKode: $mKaryKode, mKaryMPosisiId: $mKaryMPosisiId, mKaryMJamKerjaId: $mKaryMJamKerjaId, mKaryKodePresensi: $mKaryKodePresensi, mKaryNik: $mKaryNik, mKaryNamaDepan: $mKaryNamaDepan, mKaryNamaBelakang: $mKaryNamaBelakang, mKaryNamaLengkap: $mKaryNamaLengkap, mKaryNamaPanggilan: $mKaryNamaPanggilan, mKaryJkId: $mKaryJkId, mKaryTempatLahir: $mKaryTempatLahir, mKaryTglLahir: $mKaryTglLahir, mKaryProvinsiId: $mKaryProvinsiId, mKaryKotaId: $mKaryKotaId, mKaryKecamatanId: $mKaryKecamatanId, mKaryKodePos: $mKaryKodePos, mKaryAlamatAsli: $mKaryAlamatAsli, mKaryAlamatDomisili: $mKaryAlamatDomisili, mKaryNoTlp: $mKaryNoTlp, mKaryNoTlpLainnya: $mKaryNoTlpLainnya, mKaryNoDarurat: $mKaryNoDarurat, mKaryNamaKontakDarurat: $mKaryNamaKontakDarurat, mKaryAgamaId: $mKaryAgamaId, mKaryGolDarahId: $mKaryGolDarahId, mKaryStatusNikahId: $mKaryStatusNikahId, mKaryTanggunganId: $mKaryTanggunganId, mKaryHubDgnKaryawan: $mKaryHubDgnKaryawan, mKaryCutiJatahReguler: $mKaryCutiJatahReguler, mKaryCutiSisaReguler: $mKaryCutiSisaReguler, mKaryCutiPanjang: $mKaryCutiPanjang, mKaryCutiSisaPanjang: $mKaryCutiSisaPanjang, mKaryStatusKaryId: $mKaryStatusKaryId, mKaryLamaKontrakAwal: $mKaryLamaKontrakAwal, mKaryLamaKontrakAkhir: $mKaryLamaKontrakAkhir, mKaryTglMasuk: $mKaryTglMasuk, mKaryTglBerhenti: $mKaryTglBerhenti, mKaryAlasanBerhenti: $mKaryAlasanBerhenti, mKaryUkBaju: $mKaryUkBaju, mKaryUkCelana: $mKaryUkCelana, mKaryUkSepatu: $mKaryUkSepatu, mKaryDesc: $mKaryDesc, mKaryIsActive: $mKaryIsActive, mKaryCreatorId: $mKaryCreatorId, mKaryLastEditorId: $mKaryLastEditorId, mKaryCreatedAt: $mKaryCreatedAt, mKaryUpdatedAt: $mKaryUpdatedAt, mKaryMStandartGajiId: $mKaryMStandartGajiId, mKaryPeriodeGajiId: $mKaryPeriodeGajiId, mKaryRefId: $mKaryRefId, mKaryPresensiLokasiDefaultId: $mKaryPresensiLokasiDefaultId, mKaryExpDateCuti: $mKaryExpDateCuti, mKaryLimitPotong: $mKaryLimitPotong, mKaryAtasanId: $mKaryAtasanId, mKaryCutiP24: $mKaryCutiP24, mKaryCutiSisaP24: $mKaryCutiSisaP24, picId: $picId, picMCompId: $picMCompId, picMDirId: $picMDirId, picMDivisiId: $picMDivisiId, picMDeptId: $picMDeptId, picMZonaId: $picMZonaId, picGradingId: $picGradingId, picCostcontreId: $picCostcontreId, picKode: $picKode, picMPosisiId: $picMPosisiId, picMJamKerjaId: $picMJamKerjaId, picKodePresensi: $picKodePresensi, picNik: $picNik, picNamaDepan: $picNamaDepan, picNamaBelakang: $picNamaBelakang, picNamaLengkap: $picNamaLengkap, picNamaPanggilan: $picNamaPanggilan, picJkId: $picJkId, picTempatLahir: $picTempatLahir, picTglLahir: $picTglLahir, picProvinsiId: $picProvinsiId, picKotaId: $picKotaId, picKecamatanId: $picKecamatanId, picKodePos: $picKodePos, picAlamatAsli: $picAlamatAsli, picAlamatDomisili: $picAlamatDomisili, picNoTlp: $picNoTlp, picNoTlpLainnya: $picNoTlpLainnya, picNoDarurat: $picNoDarurat, picNamaKontakDarurat: $picNamaKontakDarurat, picAgamaId: $picAgamaId, picGolDarahId: $picGolDarahId, picStatusNikahId: $picStatusNikahId, picTanggunganId: $picTanggunganId, picHubDgnKaryawan: $picHubDgnKaryawan, picCutiJatahReguler: $picCutiJatahReguler, picCutiSisaReguler: $picCutiSisaReguler, picCutiPanjang: $picCutiPanjang, picCutiSisaPanjang: $picCutiSisaPanjang, picStatusKaryId: $picStatusKaryId, picLamaKontrakAwal: $picLamaKontrakAwal, picLamaKontrakAkhir: $picLamaKontrakAkhir, picTglMasuk: $picTglMasuk, picTglBerhenti: $picTglBerhenti, picAlasanBerhenti: $picAlasanBerhenti, picUkBaju: $picUkBaju, picUkCelana: $picUkCelana, picUkSepatu: $picUkSepatu, picDesc: $picDesc, picIsActive: $picIsActive, picCreatorId: $picCreatorId, picLastEditorId: $picLastEditorId, picCreatedAt: $picCreatedAt, picUpdatedAt: $picUpdatedAt, picMStandartGajiId: $picMStandartGajiId, picPeriodeGajiId: $picPeriodeGajiId, picRefId: $picRefId, picPresensiLokasiDefaultId: $picPresensiLokasiDefaultId, picExpDateCuti: $picExpDateCuti, picLimitPotong: $picLimitPotong, picAtasanId: $picAtasanId, picCutiP24: $picCutiP24, picCutiSisaP24: $picCutiSisaP24, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, creatorTelp: $creatorTelp, creatorMKaryId: $creatorMKaryId, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage, lastEditorTelp: $lastEditorTelp, lastEditorMKaryId: $lastEditorMKaryId, approvalNote: $approvalNote, namaPic: $namaPic)';
   }
 
   @override
@@ -6521,7 +6539,8 @@ class _$DataDinasImpl implements _DataDinas {
             const DeepCollectionEquality().equals(other.lastEditorProfilImage, lastEditorProfilImage) &&
             const DeepCollectionEquality().equals(other.lastEditorTelp, lastEditorTelp) &&
             const DeepCollectionEquality().equals(other.lastEditorMKaryId, lastEditorMKaryId) &&
-            (identical(other.approvalNote, approvalNote) || other.approvalNote == approvalNote));
+            (identical(other.approvalNote, approvalNote) || other.approvalNote == approvalNote) &&
+            (identical(other.namaPic, namaPic) || other.namaPic == namaPic));
   }
 
   @JsonKey(ignore: true)
@@ -6840,7 +6859,8 @@ class _$DataDinasImpl implements _DataDinas {
         const DeepCollectionEquality().hash(lastEditorProfilImage),
         const DeepCollectionEquality().hash(lastEditorTelp),
         const DeepCollectionEquality().hash(lastEditorMKaryId),
-        approvalNote
+        approvalNote,
+        namaPic
       ]);
 
   @JsonKey(ignore: true)
@@ -7215,8 +7235,8 @@ abstract class _DataDinas implements DataDinas {
       final dynamic lastEditorProfilImage,
       @JsonKey(name: "last_editor.telp") final dynamic lastEditorTelp,
       @JsonKey(name: "last_editor.m_kary_id") final dynamic lastEditorMKaryId,
-      @JsonKey(name: "approval_note")
-      final String? approvalNote}) = _$DataDinasImpl;
+      @JsonKey(name: "approval_note") final String? approvalNote,
+      @JsonKey(name: "nama_pic") final String? namaPic}) = _$DataDinasImpl;
 
   factory _DataDinas.fromJson(Map<String, dynamic> json) =
       _$DataDinasImpl.fromJson;
@@ -8160,6 +8180,9 @@ abstract class _DataDinas implements DataDinas {
   @override
   @JsonKey(name: "approval_note")
   String? get approvalNote;
+  @override
+  @JsonKey(name: "nama_pic")
+  String? get namaPic;
   @override
   @JsonKey(ignore: true)
   _$$DataDinasImplCopyWith<_$DataDinasImpl> get copyWith =>

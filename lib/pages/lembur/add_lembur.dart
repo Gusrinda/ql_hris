@@ -11,8 +11,10 @@ import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/pic_search.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/selector/general_selector.dart';
 import 'package:sj_presensi_mobile/pages/lembur/add_lembur/add_lembur_bloc.dart';
+import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_pic_model.dart';
 import 'package:sj_presensi_mobile/services/model/list_general/response_general.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -33,6 +35,9 @@ class AddLemburPage extends StatefulWidget {
   final TextEditingController dateController = TextEditingController();
   final TextEditingController? timeFromController = TextEditingController();
   final TextEditingController? timeToController = TextEditingController();
+  // Pic Controller
+  final TextEditingController? idPicController = TextEditingController();
+  final TextEditingController? valuePicController = TextEditingController();
 
   @override
   State<AddLemburPage> createState() => _AddLemburPageState();
@@ -46,6 +51,7 @@ class _AddLemburPageState extends State<AddLemburPage> {
   DateTime? selectedDateLembur;
   TimeOfDay? selectedTimeFrom;
   TimeOfDay? selectedTimeTo;
+  String? selectedPic;
   int weekdaysCount = 0;
 
   DateTime? parseDate(String? date) {
@@ -58,10 +64,19 @@ class _AddLemburPageState extends State<AddLemburPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<AddLemburBloc>().add(OnSelectPic());
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var selectAlasanLembur = context.read<AddLemburBloc>().dataAlasanLembur;
     var selectTipeLembur = context.read<AddLemburBloc>().dataTipeLembur;
+    var dataPic = context.read<AddLemburBloc>().dataPic;
     String selectedTipeLemburDisplay = "";
 
     void _showTipeMenu(BuildContext context) async {
@@ -124,6 +139,38 @@ class _AddLemburPageState extends State<AddLemburPage> {
         }
       } else {
         print("Tidak ada item dalam selectAlasanLembur");
+      }
+    }
+
+    void _showPic(BuildContext context) async {
+      if (dataPic.isEmpty) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          context.read<AddLemburBloc>().add(OnSelectPic());
+        });
+        dataPic = context.read<AddLemburBloc>().dataPic;
+      }
+
+      if (dataPic.isNotEmpty) {
+        final selectedPic = await showSearch<DataPic?>(
+          context: context,
+          delegate: PicSearchDelegate(
+            dataPic: dataPic,
+            filteredData: dataPic,
+          ),
+        );
+
+        if (selectedPic != null) {
+          widget.idPicController?.text = selectedPic.id?.toString() ?? '';
+          widget.valuePicController?.text = selectedPic.name?.toString() ?? '';
+
+          setState(() {
+            this.selectedPic = selectedPic.name;
+            print(selectedPic.name);
+            print("Selected ID Kota: ${selectedPic.id}");
+          });
+        }
+      } else {
+        print("Tidak Ada Item");
       }
     }
 
@@ -250,6 +297,30 @@ class _AddLemburPageState extends State<AddLemburPage> {
                                           CrossAxisAlignment.start,
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
+                                        FormDropDownDataWithNote(
+                                          note: "   Isi data PIC jika lembur ditujukan untuk bawahan.",
+                                          showRedStar: false,
+                                          input: selectedPic ?? '',
+                                          onTap: () {
+                                            _showPic(context);
+                                          },
+                                          idController: widget.idPicController!,
+                                          valueController:
+                                              widget.valuePicController!,
+                                          labelForm: 'PIC',
+                                          hintText: 'Pilih Pic',
+                                          labelTag: 'Label-Pic',
+                                          formTag: 'Form-Pic',
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'Pilih Pic';
+                                            }
+                                            return null;
+                                          },
+                                          errorTextStyle:
+                                              GoogleFonts.poppins(fontSize: 8),
+                                        ),
                                         FormDropDownData(
                                           input: selectedTipeLemburDisplay,
                                           onTap: () {
@@ -505,6 +576,13 @@ class _AddLemburPageState extends State<AddLemburPage> {
                                   : () {
                                       context.read<AddLemburBloc>().add(
                                             OnSumbitLembur(
+                                                picID: widget.idPicController?.value.text !=
+                                                        null
+                                                    ? int.tryParse(widget
+                                                        .idPicController!
+                                                        .value
+                                                        .text)
+                                                    : null,
                                                 alasanLemburID: int.parse(widget
                                                     .idAlasanController
                                                     .value
@@ -524,9 +602,7 @@ class _AddLemburPageState extends State<AddLemburPage> {
                                                         ?.value
                                                         .text ??
                                                     "00:00",
-                                                timeTo: widget.timeToController
-                                                        ?.value.text ??
-                                                    "00:00"),
+                                                timeTo: widget.timeToController?.value.text ?? "00:00"),
                                           );
                                     },
                             ),

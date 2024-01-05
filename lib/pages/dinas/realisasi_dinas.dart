@@ -140,15 +140,14 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                         ),
                         color: Colors.white,
                       ),
-                      child: Padding(
-                        padding: EdgeInsets.all(10.sp),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 15.sp,
-                            ),
-                            Row(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 20.sp),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Column(
@@ -244,21 +243,24 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                 ),
                               ],
                             ),
-                            SizedBox(
-                              height: 15.sp,
-                            ),
-                            Expanded(
-                              child: listRealisasiDinas.isNotEmpty
-                                  ? ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: listRealisasiDinas.length,
-                                      itemBuilder: (
-                                        context,
-                                        index,
-                                      ) {
-                                        var dataRealisasiDinas =
-                                            listRealisasiDinas[index];
-                                        return ListTile(
+                          ),
+                          SizedBox(
+                            height: 10.sp,
+                          ),
+                          Expanded(
+                            child: listRealisasiDinas.isNotEmpty
+                                ? ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: listRealisasiDinas.length,
+                                    itemBuilder: (
+                                      context,
+                                      index,
+                                    ) {
+                                      var dataRealisasiDinas =
+                                          listRealisasiDinas[index];
+                                      return Container(
+                                        margin: EdgeInsets.only(bottom: 5.sp),
+                                        child: ListTile(
                                           subtitle: GestureDetector(
                                             onTap: () {
                                               Navigator.push(
@@ -279,18 +281,13 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                             child: Stack(
                                               children: [
                                                 Container(
-                                                  margin: const EdgeInsets.only(
-                                                      bottom: 7,
-                                                      left: 5,
-                                                      right: 3),
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 15,
-                                                      vertical: 15),
+                                                  padding:
+                                                      const EdgeInsets.symmetric(
+                                                          horizontal: 15,
+                                                          vertical: 15),
                                                   decoration: BoxDecoration(
                                                     borderRadius:
-                                                        BorderRadius.circular(
-                                                            6),
+                                                        BorderRadius.circular(7),
                                                     // border: Border.all(color: const Color(0xFFDDDDDD)),
                                                     boxShadow: [
                                                       BoxShadow(
@@ -299,8 +296,8 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                           offset: Offset(0, 0),
                                                           blurRadius: 5)
                                                     ],
-                                                    color: MyColorsConst
-                                                        .whiteColor,
+                                                    color:
+                                                        MyColorsConst.whiteColor,
                                                   ),
                                                   height: 100.sp,
                                                   width: size.width,
@@ -320,8 +317,7 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                   // ),
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                        CrossAxisAlignment.start,
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .spaceEvenly,
@@ -357,8 +353,7 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                             child: Text(
                                                               "${dataRealisasiDinas.creatorName ?? '-'}",
                                                               style: GoogleFonts.poppins(
-                                                                  fontSize:
-                                                                      12.sp,
+                                                                  fontSize: 12.sp,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w500,
@@ -399,8 +394,7 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                             child: Text(
                                                               "${dataRealisasiDinas.tSpdTglAcaraAwal ?? '-'} - ${dataRealisasiDinas.tSpdTglAcaraAkhir ?? '-'}",
                                                               style: GoogleFonts.poppins(
-                                                                  fontSize:
-                                                                      10.sp,
+                                                                  fontSize: 10.sp,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w400,
@@ -425,9 +419,8 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                     decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.only(
-                                                        topRight:
-                                                            Radius.circular(
-                                                                10.sp),
+                                                        topRight: Radius.circular(
+                                                            10.sp),
                                                         bottomLeft:
                                                             Radius.circular(
                                                                 10.sp),
@@ -443,7 +436,7 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                         style:
                                                             GoogleFonts.poppins(
                                                           color: Colors.white,
-                                                          fontSize: 12,
+                                                          fontSize: 12.sp,
                                                           fontWeight:
                                                               FontWeight.w500,
                                                         ),
@@ -454,15 +447,15 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                               ],
                                             ),
                                           ),
-                                        );
-                                      },
-                                    )
-                                  : Center(
-                                      child: EmptyStateBuilder(),
-                                    ),
-                            ),
-                          ],
-                        ),
+                                        ),
+                                      );
+                                    },
+                                  )
+                                : Center(
+                                    child: EmptyStateBuilder(),
+                                  ),
+                          ),
+                        ],
                       ),
                     );
                   },

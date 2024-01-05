@@ -10,6 +10,7 @@ import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dart';
+import 'package:sj_presensi_mobile/services/model/history_attendance_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 final Map<String, dynamic> stateDict = {
@@ -152,7 +153,7 @@ class _HistoryPageState extends State<HistoryPage> {
                     ),
                     Expanded(
                       child: Text(
-                        "History Presensi",
+                        "Riwayat Presensi",
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -172,12 +173,12 @@ class _HistoryPageState extends State<HistoryPage> {
                     ),
                     color: Colors.white,
                   ),
-                  child: Padding(
-                    padding: EdgeInsets.all(18.0.sp),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
@@ -265,33 +266,37 @@ class _HistoryPageState extends State<HistoryPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 15.sp,
-                        ),
-                        Expanded(
-                          child: BlocBuilder<HistoryAttendanceBloc,
-                              HistoryAttendanceState>(
-                            builder: (context, state) {
-                              // Aku butuh data attendance
-                              // Data attendace didapat dari BLOC historyAttendance
-                              var attendances = context
-                                  .read<HistoryAttendanceBloc>()
-                                  .attendances;
+                      ),
+                      SizedBox(
+                        height: 10.sp,
+                      ),
+                      Expanded(
+                        child: BlocBuilder<HistoryAttendanceBloc,
+                            HistoryAttendanceState>(
+                          builder: (context, state) {
+                            // Aku butuh data attendance
+                            // Data attendace didapat dari BLOC historyAttendance
+                            List<Datum>? attendances = context
+                                .read<HistoryAttendanceBloc>()
+                                .attendances;
 
-                              debugPrint("ATTENDANCE ? ${attendances}");
+                            debugPrint("ATTENDANCE ? ${attendances}");
 
-                              return attendances.isNotEmpty
-                                  ? ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: attendances.length,
-                                      itemBuilder: (context, index) {
-                                        var data = attendances;
-                                        String currentStatus =
-                                            data[index].status as String;
-                                        Color currentColor =
-                                            getColorFromStatus(currentStatus);
+                            return attendances.isNotEmpty
+                                ? ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: attendances.length,
+                                    itemBuilder: (context, index) {
+                                      Datum? data = attendances[index];
+                                      String currentStatus =
+                                          data.status as String;
+                                      Color currentColor =
+                                          getColorFromStatus(currentStatus);
 
-                                        return ListTile(
+                                      return Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 20.sp),
+                                        child: ListTile(
                                           contentPadding: EdgeInsets.zero,
                                           subtitle: GestureDetector(
                                             child: Stack(
@@ -315,8 +320,8 @@ class _HistoryPageState extends State<HistoryPage> {
                                                         .whiteColor,
                                                   ),
                                                   padding: EdgeInsets.symmetric(
-                                                      horizontal: 12.sp,
-                                                      vertical: 10.sp),
+                                                      horizontal: 15.sp,
+                                                      vertical: 15.sp),
                                                   child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -326,14 +331,14 @@ class _HistoryPageState extends State<HistoryPage> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        "${getDayFromDate("${data[index].tanggal}")}, ${data[index].tanggal}",
+                                                        "${getDayFromDate("${data.tanggal}")}, ${data.tanggal}",
                                                         style: GoogleFonts.poppins(
                                                             color: MyColorsConst
                                                                 .primaryColor,
                                                             fontSize: 14,
                                                             fontWeight:
                                                                 FontWeight
-                                                                    .w500),
+                                                                    .w600),
                                                       ),
                                                       SizedBox(
                                                         height: 10.sp,
@@ -358,8 +363,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                                           Expanded(
                                                             flex: 3,
                                                             child: Text(
-                                                              data[index]
-                                                                      .checkinTime ??
+                                                              data.checkinTime ??
                                                                   "-",
                                                               style: GoogleFonts
                                                                   .poppins(
@@ -394,8 +398,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                                           Expanded(
                                                             flex: 3,
                                                             child: Text(
-                                                              data[index]
-                                                                      .checkoutTime ??
+                                                              data.checkoutTime ??
                                                                   "-",
                                                               style: GoogleFonts
                                                                   .poppins(
@@ -423,10 +426,10 @@ class _HistoryPageState extends State<HistoryPage> {
                                                       //     ),
                                                       //     children: <TextSpan>[
                                                       //       TextSpan(
-                                                      //         text: data[index]
+                                                      //         text: data
                                                       //                     .checkoutTime !=
                                                       //                 null
-                                                      //             ? "${data[index].checkoutTime}"
+                                                      //             ? "${data.checkoutTime}"
                                                       //             : "-",
                                                       //         style: GoogleFonts
                                                       //             .poppins(
@@ -489,64 +492,58 @@ class _HistoryPageState extends State<HistoryPage> {
                                                     builder: (context) =>
                                                         DetailHistoryAbsensiPage(
                                                       data: data,
-                                                      status:
-                                                          data[index].status,
-                                                      checkinFoto: data[index]
-                                                          .checkinFoto,
-                                                      checkoutFoto: data[index]
-                                                          .checkoutFoto,
-                                                      checkinTime: data[index]
-                                                          .checkinTime,
-                                                      checkoutTime: data[index]
-                                                          .checkoutTime,
-                                                      tanggal:
-                                                          data[index].tanggal,
+                                                      status: data.status,
+                                                      checkinFoto:
+                                                          data.checkinFoto,
+                                                      checkoutFoto:
+                                                          data.checkoutFoto,
+                                                      checkinTime:
+                                                          data.checkinTime,
+                                                      checkoutTime:
+                                                          data.checkoutTime,
+                                                      tanggal: data.tanggal,
                                                       checkoutAddress:
-                                                          data[index]
-                                                              .checkoutAddress,
+                                                          data.checkoutAddress,
                                                       checkinAddress:
-                                                          data[index]
-                                                              .checkinAddress,
+                                                          data.checkinAddress,
                                                       checkinOnScope:
-                                                          data[index]
-                                                              .checkinOnScope,
+                                                          data.checkinOnScope,
                                                       checkoutOnScope:
-                                                          data[index]
-                                                              .checkoutOnScope,
+                                                          data.checkoutOnScope,
                                                     ),
                                                   ));
                                             },
                                           ),
-                                        );
-                                      },
-                                    )
-                                  : Center(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Image.asset(
-                                            "assets/images/box_nodata.png",
-                                            height: size.width * 1 / 2,
+                                        ),
+                                      );
+                                    },
+                                  )
+                                : Center(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          "assets/images/box_nodata.png",
+                                          height: size.width * 1 / 2,
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          "Tidak ada data yang ditampilkan!",
+                                          style: GoogleFonts.poppins(
+                                            color: MyColorsConst.darkColor,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
                                           ),
-                                          const SizedBox(height: 8),
-                                          Text(
-                                            "Tidak ada data yang ditampilkan!",
-                                            style: GoogleFonts.poppins(
-                                              color: MyColorsConst.darkColor,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                            },
-                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                          },
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),

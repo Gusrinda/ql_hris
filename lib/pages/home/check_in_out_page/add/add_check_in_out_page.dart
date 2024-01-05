@@ -20,6 +20,8 @@ enum ProcessCheckInOutPageState { checkin, checkout }
 class AddCheckInOutPage extends StatelessWidget {
   static const routeName = '/ProcessCheckInOutPage';
   final ProcessCheckInOutPageState? formState;
+  final TextEditingController? catatanController = TextEditingController();
+
   AddCheckInOutPage({
     super.key,
     this.formState = ProcessCheckInOutPageState.checkin,
@@ -109,7 +111,7 @@ class AddCheckInOutPage extends StatelessWidget {
                 child: Row(
                   children: [
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back_ios_rounded,
                         size: 18,
                       ),
@@ -304,26 +306,42 @@ class AddCheckInOutPage extends StatelessWidget {
                                                         vertical: 10,
                                                         horizontal: 9),
                                                 child: TextFormField(
+                                                  controller:
+                                                      catatanController!,
+                                                  maxLines: 5,
+                                                  textAlign: TextAlign.start,
                                                   decoration: InputDecoration(
-                                                    focusColor: MyColorsConst
-                                                        .primaryColor,
+                                                    focusColor:
+                                                        MyColorsConst.redColor,
+                                                    focusedBorder:
+                                                        const OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: MyColorsConst
+                                                              .redColor,
+                                                          width: 1.5),
+                                                    ),
                                                     contentPadding:
-                                                        EdgeInsets.symmetric(
+                                                        const EdgeInsets
+                                                            .symmetric(
                                                             vertical: 10,
                                                             horizontal: 15),
                                                     labelStyle:
                                                         GoogleFonts.poppins(
-                                                            fontSize: 12,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w600),
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
                                                     labelText:
                                                         'Alasan Presensi Out Scope',
+                                                    alignLabelWithHint:
+                                                        true, // Align label with the top
                                                     border:
                                                         OutlineInputBorder(),
                                                   ),
                                                   style: GoogleFonts.poppins(
-                                                      fontSize: 13),
+                                                    fontSize: 12.sp,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
                                                 ),
                                               ),
                                           ],
@@ -352,11 +370,17 @@ class AddCheckInOutPage extends StatelessWidget {
                                           if (state.isOnSite) {
                                             context
                                                 .read<AddCheckInOutBloc>()
-                                                .add(AddCheckInOutSubmited());
+                                                .add(AddCheckInOutSubmited(
+                                                    catatan: catatanController
+                                                            ?.value.text ??
+                                                        "-"));
                                           } else {
                                             context
                                                 .read<AddCheckInOutBloc>()
-                                                .add(AddCheckInOutSubmited());
+                                                .add(AddCheckInOutSubmited(
+                                                    catatan: catatanController
+                                                            ?.value.text ??
+                                                        "-"));
                                             // showDialog(
                                             //   context: context,
                                             //   builder: (_) => DialogCustom(

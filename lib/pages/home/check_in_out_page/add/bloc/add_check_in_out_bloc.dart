@@ -18,6 +18,7 @@ class AddCheckInOutBloc extends Bloc<AddCheckInOutEvent, AddCheckInOutState> {
       print("isOnSite Submit : ${formDataSubmited.isOnSite}");
       print("Latitude Submit : ${formDataSubmited.latitude}");
       print("Longitude Submit : ${formDataSubmited.longitude}");
+      print("Catatan Submit : ${event.catatan}");
       if (formDataSubmited.imagePath == null) {
         emit(AddCheckInOutFailed(message: "Foto kehadiran harus di isi!"));
       } else if (formDataSubmited.address == null ||
@@ -43,10 +44,10 @@ class AddCheckInOutBloc extends Bloc<AddCheckInOutEvent, AddCheckInOutState> {
                 formDataSubmited.isOnSite,
                 formDataSubmited.latitude,
                 formDataSubmited.longitude,
-                formDataSubmited.catatan
+                event.catatan
               );
               if (res is ServicesSuccess) {
-                emit(AddCheckInOutSuccess(message: "Check-In Berhasil!\nSemangat Bekerja_^!"));
+                emit(AddCheckInOutSuccess(message: "Check-In Berhasil!\n\nSelamat Bekerja😊"));
               } else if (res is ServicesFailure) {
                 if (res.errorResponse == null) {
                   emit(AddCheckInOutFailedUserExpired(
@@ -73,10 +74,10 @@ class AddCheckInOutBloc extends Bloc<AddCheckInOutEvent, AddCheckInOutState> {
                 formDataSubmited.isOnSite,
                 formDataSubmited.latitude,
                 formDataSubmited.longitude,
-                formDataSubmited.catatan
+                event.catatan
               );
               if (res is ServicesSuccess) {
-                emit(AddCheckInOutSuccess(message: "Check-Out Berhasil!\nTerima Kasih Telah Bekerja Keras Hari Ini!"));
+                emit(AddCheckInOutSuccess(message: "Check-Out Berhasil!\n\nTerima Kasih Telah Bekerja Keras Hari Ini😊"));
               } else if (res is ServicesFailure) {
                 if (res.errorResponse == null) {
                   emit(AddCheckInOutFailedUserExpired(

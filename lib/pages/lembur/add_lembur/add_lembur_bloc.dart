@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sj_presensi_mobile/services/dinas_services.dart';
 import 'package:sj_presensi_mobile/services/lembur_services.dart';
+import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_pic_model.dart';
 import 'package:sj_presensi_mobile/services/model/list_general/response_general.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:sj_presensi_mobile/utils/shared_pref.dart';
@@ -14,6 +15,7 @@ part 'add_lembur_state.dart';
 class AddLemburBloc extends Bloc<AddLemburEvent, AddLemburState> {
   List<DataGeneral>? dataAlasanLembur = [];
   List<DataGeneral>? dataTipeLembur = [];
+  List<DataPic> dataPic = [];
 
   AddLemburBloc() : super(AddLemburInitial()) {
     on<OnSumbitLembur>((event, emit) async {
@@ -31,6 +33,7 @@ class AddLemburBloc extends Bloc<AddLemburEvent, AddLemburState> {
             resToken.response["m_comp_id"] ?? 1,
             resToken.response["m_dir_id"] ?? 1,
             resToken.response["m_kary_id"] ?? 1,
+            event.picID ?? -99,
             event.dateLembur,
             event.alasanLemburID,
             event.tipeLemburID,
@@ -58,6 +61,39 @@ class AddLemburBloc extends Bloc<AddLemburEvent, AddLemburState> {
         emit(AddLemburFailed(message: 'Response format is invalid'));
       }
     });
+
+    on<OnSelectPic>(
+      (event, emit) async {
+        emit(AddLemburLoading());
+        var resToken = await GeneralSharedPreferences.getUserToken();
+        if (resToken is ServicesSuccess) {
+          var res = await DinasServices.getPic(resToken.response["token"]);
+          if (res is ServicesSuccess) {
+            if (res.response is Map<String, dynamic>) {
+              GetPicModel dataResponse = GetPicModel.fromJson(res.response);
+
+              dataPic = dataResponse.data ?? [];
+              emit(
+                SelectPicSuccessInBackground(dataPic: dataPic),
+              );
+            } else {
+              emit(
+                AddLemburFailed(message: 'Response format is invalid'),
+              );
+            }
+          } else if (res is ServicesFailure) {
+            if (res.errorResponse == null) {
+              await GeneralSharedPreferences.removeUserToken();
+              emit(AddLemburFailedUserExpired(message: "Token expired"));
+            } else {
+              emit(AddLemburFailed(message: res.errorResponse));
+            }
+          }
+        } else if (resToken is ServicesFailure) {
+          emit(AddLemburFailed(message: 'Response invalid'));
+        }
+      },
+    );
 
     on<OnSelectAlasanLembur>(
       (event, emit) async {
