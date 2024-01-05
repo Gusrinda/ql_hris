@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
+import 'package:sj_presensi_mobile/services/model/history_attendance_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 final Map<String, dynamic> stateDict = {
@@ -40,7 +41,7 @@ class DetailHistoryAbsensiPage extends StatefulWidget {
       this.checkinAddress,
       this.checkinOnScope,
       this.checkoutOnScope});
-  final dynamic data;
+  final Datum? data;
   final String? status;
   final String? checkinFoto;
   final String? checkoutFoto;
@@ -75,18 +76,18 @@ Color getColorFromStatus(String status) {
   if (stateDict.containsKey(status)) {
     switch (status) {
       case "WORKING":
-        return Color(0XFF0068D4);
+        return const Color(0XFF0068D4);
       case "NOT ATTEND":
-        return Color(0XFFED1B24);
+        return const Color(0XFFED1B24);
       case "ATTEND NO CHECKOUT":
-        return Color(0XFF0CA356);
+        return const Color(0XFF0CA356);
       case "ATTEND":
-        return Color(0XFF0CA356);
+        return const Color(0XFF0CA356);
       default:
-        return Colors.black; // warna default
+        return MyColorsConst.darkColor; // warna default
     }
   } else {
-    return Colors.black; // warna default
+    return MyColorsConst.darkColor; // warna default
   }
 }
 
@@ -137,7 +138,7 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                   child: Row(
                     children: [
                       IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.arrow_back_ios_rounded,
                           size: 18,
                         ),
@@ -163,10 +164,11 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 50.sp,
+                  height: 70.sp,
                 ),
                 Expanded(
                   child: Container(
+                    height: size.height,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
@@ -176,28 +178,32 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                     ),
                     child: Padding(
                       padding: EdgeInsets.all(18.0.sp),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 20.sp,
-                          ),
-                          buildCardImage(
-                            checkIn: true,
-                            url: "${widget.checkinFoto}",
-                            address: "${widget.checkinAddress}",
-                            onSite: "${widget.checkinOnScope}",
-                          ),
-                          Divider(
-                            color: Color(0xFFDDDDDD),
-                            thickness: 1,
-                          ),
-                          buildCardImage(
-                            checkIn: false,
-                            url: "${widget.checkoutFoto}",
-                            address: "${widget.checkoutAddress}",
-                            onSite: "${widget.checkoutOnScope}",
-                          ),
-                        ],
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 20.sp,
+                            ),
+                            buildCardImage(
+                              dataPresensi: widget.data,
+                              checkIn: true,
+                              url: "${widget.checkinFoto}",
+                              address: "${widget.checkinAddress}",
+                              onSite: "${widget.checkinOnScope}",
+                            ),
+                            const Divider(
+                              color: Color(0xFFDDDDDD),
+                              thickness: 1,
+                            ),
+                            buildCardImage(
+                              dataPresensi: widget.data,
+                              checkIn: false,
+                              url: "${widget.checkoutFoto}",
+                              address: "${widget.checkoutAddress}",
+                              onSite: "${widget.checkoutOnScope}",
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -213,10 +219,10 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                   Container(
                     margin: EdgeInsets.only(bottom: 7.sp),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
+                          color: MyColorsConst.darkColor.withOpacity(0.1),
                           offset: Offset(0, 0),
                           blurRadius: 5,
                         ),
@@ -224,7 +230,7 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                       color: MyColorsConst.whiteColor,
                     ),
                     padding: EdgeInsets.symmetric(
-                        horizontal: 12.sp, vertical: 10.sp),
+                        horizontal: 15.sp, vertical: 15.sp),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -246,9 +252,9 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                               child: Text(
                                 'In ',
                                 style: GoogleFonts.poppins(
-                                  fontSize: 12,
+                                  fontSize: 12.sp,
                                   color: Colors.grey,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),
@@ -257,9 +263,9 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                               child: Text(
                                 widget.checkinTime ?? "-",
                                 style: GoogleFonts.poppins(
-                                  fontSize: 12,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
+                                  fontSize: 12.sp,
+                                  color: MyColorsConst.darkColor,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ),
@@ -272,9 +278,9 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                               child: Text(
                                 'Out',
                                 style: GoogleFonts.poppins(
-                                  fontSize: 10,
+                                  fontSize: 10.sp,
                                   color: Colors.grey,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ),
@@ -283,9 +289,9 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                               child: Text(
                                 widget.checkoutTime ?? "-",
                                 style: GoogleFonts.poppins(
-                                  fontSize: 12,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400,
+                                  fontSize: 12.sp,
+                                  color: MyColorsConst.darkColor,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ),
@@ -300,7 +306,7 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                     child: Container(
                       height: 30,
                       padding: EdgeInsets.symmetric(
-                          horizontal: 6.sp, vertical: 3.sp),
+                          horizontal: 7.sp, vertical: 3.sp),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(10.sp),
@@ -313,7 +319,7 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                           mapStatusToString(currentStatus),
                           style: GoogleFonts.poppins(
                             color: Colors.white,
-                            fontSize: 12,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -361,6 +367,7 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
 }
 
 Padding buildCardImage({
+  Datum? dataPresensi,
   String? url,
   String? onSite,
   checkIn = true,
@@ -407,12 +414,13 @@ Padding buildCardImage({
                     imageBuilder: (context, imageProvider) {
                       final size = MediaQuery.of(context).size;
                       return Container(
-                        width: size.width * 1.9 / 5,
-                        height: size.width * 1.9 / 5,
+                        width: size.width * 2 / 5,
+                        height: size.width * 2.5 / 5,
                         decoration: BoxDecoration(
                           image: DecorationImage(
+                            alignment: Alignment.topCenter,
                             image: imageProvider,
-                            fit: BoxFit.cover,
+                            fit: BoxFit.fitWidth,
                           ),
                           shape: BoxShape.rectangle,
                         ),
@@ -441,43 +449,63 @@ Padding buildCardImage({
                   Text(
                     "Lokasi",
                     style: GoogleFonts.poppins(
-                      fontSize: 10,
-                      color: MyColorsConst.darkColor,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 10.sp,
+                      color: MyColorsConst.lightDarkColor,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                   Text(
                     address ?? "-",
                     style: GoogleFonts.poppins(
-                      fontSize: 10,
-                      color: MyColorsConst.darkColor,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15.sp,
-                  ),
-                  Text(
-                    "Keterangan",
-                    style: GoogleFonts.poppins(
-                      fontSize: 10,
+                      fontSize: 12.sp,
                       color: MyColorsConst.darkColor,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
+                  SizedBox(
+                    height: 10.sp,
+                  ),
+                  Text(
+                    "Status Lokasi",
+                    style: GoogleFonts.poppins(
+                      fontSize: 10.sp,
+                      color: MyColorsConst.lightDarkColor,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                   Text(
                     (onSite != null && onSite.toLowerCase() == 'true')
-                        ? "In Scope"
+                        ? "In-Scope"
                         : (onSite != null && onSite.toLowerCase() == 'false')
-                            ? "Out Scope"
+                            ? "Out-Scope"
                             : "-",
                     style: GoogleFonts.poppins(
-                      fontSize: 10,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w600,
                       color: (onSite != null && onSite.toLowerCase() == 'true')
                           ? Colors.green
                           : (onSite != null && onSite.toLowerCase() == 'false')
                               ? Colors.red
-                              : Colors.black,
+                              : MyColorsConst.darkColor,
+                    ),
+                  ),
+                  SizedBox(height: 10.sp),
+                  Text(
+                    "Alasan Out-Scope",
+                    style: GoogleFonts.poppins(
+                      fontSize: 10.sp,
+                      color: MyColorsConst.lightDarkColor,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Text(
+                    checkIn
+                        ? dataPresensi?.catatanIn ?? "-"
+                        : dataPresensi?.catatanOut ?? "-",
+                    style: GoogleFonts.poppins(
+                      fontSize: 12.sp,
+                      color: MyColorsConst.darkColor,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ],

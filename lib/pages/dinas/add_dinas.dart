@@ -1,9 +1,12 @@
+// ignore_for_file: unnecessary_string_interpolations
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/text_form_custom.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
@@ -31,6 +34,8 @@ import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_posisi_
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_templatespd_model.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_zona_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
+import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
 class AddDinasPage extends StatefulWidget {
   static const routeName = '/AddDinasPage';
@@ -117,6 +122,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
   DateTime? selectedTanggalAwal;
   DateTime? selectedTanggalAkhir;
   int? _kendDinas;
+  int weekdaysCount = 0;
 
   int currentStep = 0;
   late GlobalKey<FormState> _formKeyStep1;
@@ -995,7 +1001,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
                                             height: 8,
                                           ),
                                           _buildDateTextField(
-                                            "Pilih Tanggal Acara Awal",
+                                            "Pilih Tanggal Acara Akhir",
                                             widget.tanggalAkhirController,
                                             selectedTanggalAkhir,
                                             (selectedDate) {
@@ -1010,6 +1016,47 @@ class _AddDinasPageState extends State<AddDinasPage> {
                                               }
                                               return null;
                                             },
+                                          ),
+                                          const SizedBox(height: 20),
+                                          Row(
+                                            children: [
+                                              Text.rich(
+                                                TextSpan(
+                                                  text: 'Dinas Selama : ',
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 13.sp,
+                                                    color:
+                                                        MyColorsConst.darkColor,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                  children: [
+                                                    TextSpan(
+                                                      text: weekdaysCount
+                                                          .toString(),
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 18.sp,
+                                                        color:
+                                                            Colors.red.shade600,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                      ),
+                                                    ),
+                                                    TextSpan(
+                                                      text: ' hari',
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 13.sp,
+                                                        color:
+                                                            Colors.red.shade600,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -1229,6 +1276,78 @@ class _AddDinasPageState extends State<AddDinasPage> {
     );
   }
 
+  Future<int> calculateWeekdaysFromAPI(String dateFrom, String dateTo) async {
+    const apiUrl = '${MyGeneralConst.API_URL}/operation/t_spd/hitungHari';
+
+    final Map<String, String> postData = {
+      "date_from": "$dateFrom",
+      "date_to": "$dateTo",
+    };
+
+    print("URL API: $apiUrl");
+    print("BODY API: $postData");
+
+    try {
+      final userToken = await GeneralSharedPreferences.getUserToken();
+      if (userToken is ServicesSuccess) {
+        // print("${userToken.response["token"]}");
+        final response = await http.post(
+          Uri.parse(apiUrl),
+          body: postData,
+          headers: {
+            'Authorization': 'Bearer ${userToken.response["token"]}',
+            'Source': 'mobile',
+          },
+        );
+
+        if (response.statusCode == 200) {
+          print('RESPONSE BODY API: ${response.body}');
+          return int.parse(response.body);
+        } else {
+          // Print the API response for debugging purposes.
+          print('API Response: ${response.body}');
+
+          // Handle error if needed.
+          print('Failed to fetch data: ${response.statusCode}');
+          return 0;
+        }
+      } else {
+        // Handle error if there is an issue with getting the user token.
+        print('Failed to get user token.');
+        return 0;
+      }
+    } catch (e) {
+      // Print the exception for debugging purposes.
+      print('Exception occurred: $e');
+      throw Exception('Failed to fetch data');
+    }
+  }
+
+  void _calculateWeekdaysFromAPI() async {
+    if (selectedTanggalAwal != null && selectedTanggalAkhir != null) {
+      try {
+        final dateFrom =
+            selectedTanggalAwal!.toLocal().toString().split(' ')[0];
+        final dateTo = selectedTanggalAkhir!.toLocal().toString().split(' ')[0];
+
+        print("INI Data POST Calculate: $dateFrom & $dateTo");
+        final newWeekdaysCount =
+            await calculateWeekdaysFromAPI(dateFrom, dateTo);
+
+        // Update the weekdaysCount variable with the new value
+        setState(() {
+          weekdaysCount = newWeekdaysCount;
+        });
+
+        print("Jumlah hari kerja: $weekdaysCount");
+      } catch (e) {
+        print("Gagal mengambil data dari API: $e");
+      }
+    } else {
+      print("Pilih tanggal mulai dan tanggal berakhir terlebih dahulu.");
+    }
+  }
+
   Widget _buildDateTextField(
     String hintText,
     TextEditingController controller,
@@ -1261,6 +1380,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
               selectedTanggalAwal = pickedDate;
             });
             print("Pilih tanggal awal: $selectedTanggalAwal");
+            _calculateWeekdaysFromAPI();
           } else if (controller == widget.tanggalAkhirController) {
             widget.tanggalAkhirController.text =
                 DateFormat('yyyy-MM-dd').format(pickedDate);
@@ -1268,6 +1388,7 @@ class _AddDinasPageState extends State<AddDinasPage> {
               selectedTanggalAkhir = pickedDate;
             });
             print("Pilih tanggal akhir: $selectedTanggalAkhir");
+            _calculateWeekdaysFromAPI();
           }
         }
       },
@@ -1288,10 +1409,10 @@ class _AddDinasPageState extends State<AddDinasPage> {
                       ? DateFormat('yyyy-MM-dd').format(selectedDate)
                       : hintText,
                   style: GoogleFonts.poppins(
-                    fontSize: selectedDate != null ? 12.sp : 12.sp,
+                    fontSize: selectedDate != null ? 13.sp : 12.sp,
                     fontWeight: selectedDate != null
-                        ? FontWeight.w500
-                        : FontWeight.w400, // Different fontWeight for hintText
+                        ? FontWeight.w600
+                        : FontWeight.w500, // Different fontWeight for hintText
                     color: selectedDate != null
                         ? MyColorsConst.darkColor
                         : MyColorsConst

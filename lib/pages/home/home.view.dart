@@ -772,20 +772,24 @@ class _HomePageState extends State<HomePage> {
                                         itemBuilder: (context, index) {
                                           var pengumuman =
                                               listPengumuman[index];
-                                          return PengumumanCard(
-                                            imageUrl: pengumuman.thumb,
-                                            judul: pengumuman.judul,
-                                            tanggal: DateFormat(
-                                              "dd MMMM yyyy",
-                                              "id_ID",
-                                            ).format(
-                                              DateFormat(
-                                                "dd/MM/yyyy HH:mm",
-                                              ).parse(
-                                                  pengumuman.createdAt ?? '-'),
+                                          return Container(
+                                            margin: EdgeInsets.only(
+                                                left: index == 0 ? 20.0 : 0.0),
+                                            child: PengumumanCard(
+                                              imageUrl: pengumuman.thumb,
+                                              judul: pengumuman.judul,
+                                              tanggal: DateFormat(
+                                                "dd MMMM yyyy",
+                                                "id_ID",
+                                              ).format(
+                                                DateFormat(
+                                                  "dd/MM/yyyy HH:mm",
+                                                ).parse(pengumuman.createdAt ??
+                                                    '-'),
+                                              ),
+                                              tag: '#${pengumuman.tag}',
+                                              detail: pengumuman.content,
                                             ),
-                                            tag: '#${pengumuman.tag}',
-                                            detail: pengumuman.content,
                                           );
                                         },
                                       )

@@ -165,7 +165,7 @@ class DinasServices {
 
   static Future<Object> getPic(String token) async {
     var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/default_users?paginate=100000");
+        "${MyGeneralConst.API_URL}/operation/default_users?where=this.m_kary_id is not null&paginate=500000");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,

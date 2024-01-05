@@ -200,9 +200,20 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                     child: InkWell(
                                       splashColor: MyColorsConst.primaryColor,
                                       onTap: () async {
-                                        await Navigator.pushNamed(
-                                            context, DetailApproval.routeName,
-                                            arguments: listApproval[index]);
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => BlocProvider(
+                                              create: (context) =>
+                                                  ApprovalBloc(),
+                                              child: DetailApproval(
+                                                reloadDataCallback: loadData,
+                                                dataApproval:
+                                                    listApproval[index],
+                                              ),
+                                            ),
+                                          ),
+                                        );
                                       },
                                       child: Container(
                                         margin:
@@ -210,8 +221,9 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                         decoration: BoxDecoration(
                                             border: Border.all(
                                                 color: _getColorByTrxTable(
-                                                    listApproval[index]
-                                                        .trxTable!).withOpacity(0.2)),
+                                                        listApproval[index]
+                                                            .trxTable!)
+                                                    .withOpacity(0.2)),
                                             borderRadius:
                                                 BorderRadius.circular(10)),
                                         height: 100.sp,
@@ -258,15 +270,18 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                   children: [
                                                     Text(
                                                       "${listApproval[index].trxNomor ?? ''}",
-                                                      style: GoogleFonts.poppins(
-                                                          fontSize: 14.sp,
-                                                          fontWeight:
-                                                              FontWeight.w600),
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              fontSize: 14.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600),
                                                     ),
                                                     Text(
                                                       "${listApproval[index].creator ?? ''}",
                                                       maxLines: 1,
-                                                      overflow: TextOverflow.ellipsis,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
                                                       style: GoogleFonts.poppins(
                                                           fontSize: 12.sp,
                                                           fontWeight:
@@ -280,11 +295,10 @@ class _ApprovalPageState extends State<ApprovalPage> {
                                                           fontSize: 12.sp,
                                                           fontWeight:
                                                               FontWeight.w500,
-                                                          color:
-                                                              _getColorByTrxTable(
-                                                                  listApproval[
-                                                                          index]
-                                                                      .trxTable!)),
+                                                          color: _getColorByTrxTable(
+                                                              listApproval[
+                                                                      index]
+                                                                  .trxTable!)),
                                                     ),
                                                     SizedBox(height: 5.sp),
                                                     Text(

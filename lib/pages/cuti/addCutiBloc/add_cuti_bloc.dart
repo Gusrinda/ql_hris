@@ -18,7 +18,6 @@ class AddCutiBloc extends Bloc<AddCutiEvent, AddCutiState> {
   List<Datum> dataAlasanCuti = [];
   List<DataTipeCuti> dataTipeCuti = [];
   AddCutiBloc() : super(AddCutiInitial()) {
-    
     on<AddCutiSubmited>((event, emit) async {
       emit(AddCutiLoading());
       var resToken = await GeneralSharedPreferences.getUserToken();

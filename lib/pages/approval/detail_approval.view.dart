@@ -324,7 +324,7 @@ class _DetailApprovalState extends State<DetailApproval> {
 
                                     if (dataTRX?.tanggal != null)
                                       buildInfoText(
-                                          'Hari, Tanggal',
+                                          'Hari, Tanggal Pengajuan',
                                           _formatDate(
                                               dataTRX!.tanggal.toString())),
 
@@ -359,7 +359,7 @@ class _DetailApprovalState extends State<DetailApproval> {
 
                                     if (dataTRX?.tglAcaraAwal != null)
                                       buildInfoText(
-                                          'Tanggal Acara Awal',
+                                          'Hari, Tanggal Acara Awal',
                                           _formatDate(dataTRX!.tglAcaraAwal
                                               .toString())),
 
@@ -416,6 +416,10 @@ class _DetailApprovalState extends State<DetailApproval> {
                                         dataTRX?.interval != 0)
                                       buildInfoText('Durasi Hari',
                                           "${dataTRX!.interval.toString()} Hari"),
+
+                                    if (dataTRX?.catatanKend != null)
+                                      buildInfoText('Kendaraan Dinas',
+                                          dataTRX!.catatanKend ?? "-"),
 
                                     if (dataTRX?.intervalMin != null &&
                                         dataTRX?.intervalMin != 0)

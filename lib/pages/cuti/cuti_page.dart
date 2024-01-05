@@ -232,7 +232,7 @@ class _CutiPageState extends State<CutiPage> {
                 child: Row(
                   children: [
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back_ios_rounded,
                         size: 18,
                       ),
@@ -266,12 +266,14 @@ class _CutiPageState extends State<CutiPage> {
                     ),
                     color: Colors.white,
                   ),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20, top: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
@@ -354,28 +356,32 @@ class _CutiPageState extends State<CutiPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 15.sp,
-                        ),
-                        Expanded(
-                          child: BlocBuilder<ListCutiBloc, ListCutiState>(
-                            builder: (context, state) {
-                              var listcuti =
-                                  context.read<ListCutiBloc>().listcuti;
-                              var groupedData = groupByDate(listcuti);
+                      ),
+                      SizedBox(
+                        height: 10.sp,
+                      ),
+                      Expanded(
+                        child: BlocBuilder<ListCutiBloc, ListCutiState>(
+                          builder: (context, state) {
+                            var listcuti =
+                                context.read<ListCutiBloc>().listcuti;
+                            var groupedData = groupByDate(listcuti);
 
-                              // debugPrint("LIST CUTI ? ${listcuti}");
+                            // debugPrint("LIST CUTI ? ${listcuti}");
 
-                              return listcuti.isNotEmpty
-                                  ? ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: groupedData.length,
-                                      itemBuilder: (context, index) {
-                                        var date =
-                                            groupedData.keys.toList()[index];
-                                        var dataList = groupedData[date]!;
+                            return listcuti.isNotEmpty
+                                ? ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: groupedData.length,
+                                    itemBuilder: (context, index) {
+                                      var date =
+                                          groupedData.keys.toList()[index];
+                                      var dataList = groupedData[date]!;
 
-                                        return Column(
+                                      return Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 20),
+                                        child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
@@ -391,17 +397,17 @@ class _CutiPageState extends State<CutiPage> {
                                               reloadDataCallback: loadData,
                                             ),
                                           ],
-                                        );
-                                      },
-                                    )
-                                  : Center(
-                                      child: EmptyStateBuilder(),
-                                    );
-                            },
-                          ),
+                                        ),
+                                      );
+                                    },
+                                  )
+                                : Center(
+                                    child: EmptyStateBuilder(),
+                                  );
+                          },
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),

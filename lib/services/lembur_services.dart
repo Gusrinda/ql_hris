@@ -25,6 +25,7 @@ class LemburServices {
     int mCompID,
     int mDirID,
     int mKaryID,
+    int? picID,
     String dateLembur,
     int alasanLemburID,
     int tipeLemburID,
@@ -51,13 +52,17 @@ class LemburServices {
       "m_comp_id": mCompID,
       "m_dir_id": mDirID,
       "m_kary_id": mKaryID,
+      "pic_id": picID,
       "alasan_id": alasanLemburID,
       "tipe_lembur_id": tipeLemburID,
       "tanggal": dateLembur,
       "jam_mulai": timeFrom,
       "jam_selesai": timeTo,
+      // "no_doc": noDoc,
+      // "doc": doc,
       "keterangan": keterangan,
-    };
+    }..removeWhere(
+        (key, value) => value == null || value == '' || value == -99);
 
     // Tambahkan field-field opsional yang tidak perlu dikirim jika null
     // if (noDoc != null) body["no_doc"] = noDoc;

@@ -251,15 +251,16 @@ class _DinasPageState extends State<DinasPage> {
                     ),
                     color: Colors.white,
                   ),
-                  child: Padding(
-                    padding: EdgeInsets.all(18.0.sp),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 15.sp,
-                        ),
-                        Row(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 15.sp,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
@@ -347,26 +348,30 @@ class _DinasPageState extends State<DinasPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 15.sp,
-                        ),
-                        Expanded(
-                          child: BlocBuilder<ListDinasBloc, ListDinasState>(
-                            builder: (context, state) {
-                              var listdinas =
-                                  context.read<ListDinasBloc>().listdinas;
-                              var groupedData = groupByDate(listdinas);
+                      ),
+                      SizedBox(
+                        height: 10.sp,
+                      ),
+                      Expanded(
+                        child: BlocBuilder<ListDinasBloc, ListDinasState>(
+                          builder: (context, state) {
+                            var listdinas =
+                                context.read<ListDinasBloc>().listdinas;
+                            var groupedData = groupByDate(listdinas);
 
-                              return listdinas.isNotEmpty
-                                  ? ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: groupedData.length,
-                                      itemBuilder: (context, index) {
-                                        var date =
-                                            groupedData.keys.toList()[index];
-                                        var dataList = groupedData[date]!;
+                            return listdinas.isNotEmpty
+                                ? ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: groupedData.length,
+                                    itemBuilder: (context, index) {
+                                      var date =
+                                          groupedData.keys.toList()[index];
+                                      var dataList = groupedData[date]!;
 
-                                        return Column(
+                                      return Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 20),
+                                        child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
@@ -382,17 +387,17 @@ class _DinasPageState extends State<DinasPage> {
                                               reloadDataCallback: loadData,
                                             )
                                           ],
-                                        );
-                                      },
-                                    )
-                                  : Center(
-                                      child: EmptyStateBuilder(),
-                                    );
-                            },
-                          ),
-                        )
-                      ],
-                    ),
+                                        ),
+                                      );
+                                    },
+                                  )
+                                : Center(
+                                    child: EmptyStateBuilder(),
+                                  );
+                          },
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),

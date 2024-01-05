@@ -324,7 +324,8 @@ class CardListView extends StatelessWidget {
             itemCount: listlembur.length,
             itemBuilder: (context, index) {
               // DateTime sampleDate = DateTime.now();
-              var data = listlembur;
+              DataLembur? data = listlembur[index];
+              
               return ListTile(
                 contentPadding: EdgeInsets.zero,
                 subtitle: GestureDetector(
@@ -334,15 +335,15 @@ class CardListView extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) => DetailLemburPage(
                           data: data,
-                          tipeLemburValue: data[index].tipeLemburValue,
-                          nomorFromList: data[index].nomor,
-                          tanggal: data[index].tanggal,
-                          jamMulai: data[index].jamMulai,
-                          jamSelesai: data[index].jamSelesai,
-                          noDoc: data[index].noDoc,
-                          doc: data[index].doc,
-                          keterangan: data[index].keterangan,
-                          alasanValue: data[index].alasanValue,
+                          tipeLemburValue: data.tipeLemburValue,
+                          nomorFromList: data.nomor,
+                          tanggal: data.tanggal,
+                          jamMulai: data.jamMulai,
+                          jamSelesai: data.jamSelesai,
+                          noDoc: data.noDoc,
+                          doc: data.doc,
+                          keterangan: data.keterangan,
+                          alasanValue: data.alasanValue,
                         ),
                       ),
                     );
@@ -385,7 +386,7 @@ class CardListView extends StatelessWidget {
                                 Expanded(
                                   flex: 7,
                                   child: Text(
-                                    "${data[index].nomor ?? 0}",
+                                    "${data.nomor ?? 0}",
                                     style: GoogleFonts.poppins(
                                       color: MyColorsConst.primaryColor,
                                       fontSize: 14,
@@ -404,7 +405,7 @@ class CardListView extends StatelessWidget {
                                 //       color: Colors.blue.withOpacity(0.1),
                                 //     ),
                                 //     child: Text(
-                                //       '${data[index].tipeLemburValue}',
+                                //       '${data.tipeLemburValue}',
                                 //       style: GoogleFonts.poppins(
                                 //         color: Color(0XFF0068D4),
                                 //         fontSize: 8,
@@ -434,7 +435,7 @@ class CardListView extends StatelessWidget {
                                 Expanded(
                                   flex: 3,
                                   child: Text(
-                                    '${data[index].tanggal}',
+                                    '${data.tanggal}',
                                     style: GoogleFonts.poppins(
                                         color: Colors.black,
                                         fontSize: 12,
@@ -462,7 +463,7 @@ class CardListView extends StatelessWidget {
                                 Expanded(
                                   flex: 3,
                                   child: Text(
-                                    "${extractTime(data[index].jamMulai)} - ${extractTime(data[index].jamSelesai)}",
+                                    "${extractTime(data.jamMulai)} - ${extractTime(data.jamSelesai)}",
                                     style: GoogleFonts.poppins(
                                         color: Colors.black,
                                         fontSize: 12,
@@ -490,7 +491,7 @@ class CardListView extends StatelessWidget {
                           ),
                           child: Center(
                             child: Text(
-                              '${data[index].tipeLemburValue}',
+                              '${data.tipeLemburValue}',
                               style: GoogleFonts.poppins(
                                 color: Colors.white,
                                 fontSize: 10,

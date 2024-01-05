@@ -457,27 +457,31 @@ mixin _$Datum {
   @JsonKey(name: "checkin_on_scope")
   bool? get checkinOnScope => throw _privateConstructorUsedError;
   @JsonKey(name: "checkout_time")
-  dynamic get checkoutTime => throw _privateConstructorUsedError;
+  String? get checkoutTime => throw _privateConstructorUsedError;
   @JsonKey(name: "checkout_foto")
   String? get checkoutFoto => throw _privateConstructorUsedError;
   @JsonKey(name: "checkout_lat")
-  dynamic get checkoutLat => throw _privateConstructorUsedError;
+  String? get checkoutLat => throw _privateConstructorUsedError;
   @JsonKey(name: "checkout_long")
-  dynamic get checkoutLong => throw _privateConstructorUsedError;
+  String? get checkoutLong => throw _privateConstructorUsedError;
   @JsonKey(name: "checkout_address")
-  dynamic get checkoutAddress => throw _privateConstructorUsedError;
+  String? get checkoutAddress => throw _privateConstructorUsedError;
   @JsonKey(name: "checkout_region")
-  dynamic get checkoutRegion => throw _privateConstructorUsedError;
+  String? get checkoutRegion => throw _privateConstructorUsedError;
   @JsonKey(name: "checkout_on_scope")
-  dynamic get checkoutOnScope => throw _privateConstructorUsedError;
+  bool? get checkoutOnScope => throw _privateConstructorUsedError;
   @JsonKey(name: "creator_id")
-  dynamic get datumCreatorId => throw _privateConstructorUsedError;
+  int? get datumCreatorId => throw _privateConstructorUsedError;
   @JsonKey(name: "last_editor_id")
   dynamic get datumLastEditorId => throw _privateConstructorUsedError;
   @JsonKey(name: "created_at")
   String? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: "updated_at")
   String? get updatedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "catatan_in")
+  String? get catatanIn => throw _privateConstructorUsedError;
+  @JsonKey(name: "catatan_out")
+  dynamic get catatanOut => throw _privateConstructorUsedError;
   @JsonKey(name: "m_comp.id")
   int? get mCompId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_comp.nama")
@@ -523,37 +527,45 @@ mixin _$Datum {
   @JsonKey(name: "default_user.updated_at")
   String? get defaultUserUpdatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "default_user.profil_image")
-  dynamic get defaultUserProfilImage => throw _privateConstructorUsedError;
+  String? get defaultUserProfilImage => throw _privateConstructorUsedError;
+  @JsonKey(name: "default_user.telp")
+  String? get defaultUserTelp => throw _privateConstructorUsedError;
+  @JsonKey(name: "default_user.m_kary_id")
+  int? get defaultUserMKaryId => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.id")
-  dynamic get creatorId => throw _privateConstructorUsedError;
+  int? get creatorId => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.name")
-  dynamic get creatorName => throw _privateConstructorUsedError;
+  String? get creatorName => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.email")
-  dynamic get creatorEmail => throw _privateConstructorUsedError;
+  String? get creatorEmail => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.username")
-  dynamic get creatorUsername => throw _privateConstructorUsedError;
+  String? get creatorUsername => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.email_verified_at")
   dynamic get creatorEmailVerifiedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.password")
-  dynamic get creatorPassword => throw _privateConstructorUsedError;
+  String? get creatorPassword => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.m_comp_id")
-  dynamic get creatorMCompId => throw _privateConstructorUsedError;
+  int? get creatorMCompId => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.m_dir_id")
-  dynamic get creatorMDirId => throw _privateConstructorUsedError;
+  int? get creatorMDirId => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.is_active")
-  dynamic get creatorIsActive => throw _privateConstructorUsedError;
+  bool? get creatorIsActive => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.creator_id")
   dynamic get creatorCreatorId => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.last_editor_id")
-  dynamic get creatorLastEditorId => throw _privateConstructorUsedError;
+  int? get creatorLastEditorId => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.remember_token")
   dynamic get creatorRememberToken => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.created_at")
   dynamic get creatorCreatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.updated_at")
-  dynamic get creatorUpdatedAt => throw _privateConstructorUsedError;
+  String? get creatorUpdatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.profil_image")
-  dynamic get creatorProfilImage => throw _privateConstructorUsedError;
+  String? get creatorProfilImage => throw _privateConstructorUsedError;
+  @JsonKey(name: "creator.telp")
+  String? get creatorTelp => throw _privateConstructorUsedError;
+  @JsonKey(name: "creator.m_kary_id")
+  int? get creatorMKaryId => throw _privateConstructorUsedError;
   @JsonKey(name: "last_editor.id")
   dynamic get lastEditorId => throw _privateConstructorUsedError;
   @JsonKey(name: "last_editor.name")
@@ -584,6 +596,10 @@ mixin _$Datum {
   dynamic get lastEditorUpdatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "last_editor.profil_image")
   dynamic get lastEditorProfilImage => throw _privateConstructorUsedError;
+  @JsonKey(name: "last_editor.telp")
+  dynamic get lastEditorTelp => throw _privateConstructorUsedError;
+  @JsonKey(name: "last_editor.m_kary_id")
+  dynamic get lastEditorMKaryId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -612,17 +628,19 @@ abstract class $DatumCopyWith<$Res> {
       @JsonKey(name: "checkin_address") String? checkinAddress,
       @JsonKey(name: "checkin_region") String? checkinRegion,
       @JsonKey(name: "checkin_on_scope") bool? checkinOnScope,
-      @JsonKey(name: "checkout_time") dynamic checkoutTime,
+      @JsonKey(name: "checkout_time") String? checkoutTime,
       @JsonKey(name: "checkout_foto") String? checkoutFoto,
-      @JsonKey(name: "checkout_lat") dynamic checkoutLat,
-      @JsonKey(name: "checkout_long") dynamic checkoutLong,
-      @JsonKey(name: "checkout_address") dynamic checkoutAddress,
-      @JsonKey(name: "checkout_region") dynamic checkoutRegion,
-      @JsonKey(name: "checkout_on_scope") dynamic checkoutOnScope,
-      @JsonKey(name: "creator_id") dynamic datumCreatorId,
+      @JsonKey(name: "checkout_lat") String? checkoutLat,
+      @JsonKey(name: "checkout_long") String? checkoutLong,
+      @JsonKey(name: "checkout_address") String? checkoutAddress,
+      @JsonKey(name: "checkout_region") String? checkoutRegion,
+      @JsonKey(name: "checkout_on_scope") bool? checkoutOnScope,
+      @JsonKey(name: "creator_id") int? datumCreatorId,
       @JsonKey(name: "last_editor_id") dynamic datumLastEditorId,
       @JsonKey(name: "created_at") String? createdAt,
       @JsonKey(name: "updated_at") String? updatedAt,
+      @JsonKey(name: "catatan_in") String? catatanIn,
+      @JsonKey(name: "catatan_out") dynamic catatanOut,
       @JsonKey(name: "m_comp.id") int? mCompId,
       @JsonKey(name: "m_comp.nama") String? mCompNama,
       @JsonKey(name: "m_comp.is_active") bool? mCompIsActive,
@@ -649,23 +667,27 @@ abstract class $DatumCopyWith<$Res> {
       @JsonKey(name: "default_user.created_at") dynamic defaultUserCreatedAt,
       @JsonKey(name: "default_user.updated_at") String? defaultUserUpdatedAt,
       @JsonKey(name: "default_user.profil_image")
-      dynamic defaultUserProfilImage,
-      @JsonKey(name: "creator.id") dynamic creatorId,
-      @JsonKey(name: "creator.name") dynamic creatorName,
-      @JsonKey(name: "creator.email") dynamic creatorEmail,
-      @JsonKey(name: "creator.username") dynamic creatorUsername,
+      String? defaultUserProfilImage,
+      @JsonKey(name: "default_user.telp") String? defaultUserTelp,
+      @JsonKey(name: "default_user.m_kary_id") int? defaultUserMKaryId,
+      @JsonKey(name: "creator.id") int? creatorId,
+      @JsonKey(name: "creator.name") String? creatorName,
+      @JsonKey(name: "creator.email") String? creatorEmail,
+      @JsonKey(name: "creator.username") String? creatorUsername,
       @JsonKey(name: "creator.email_verified_at")
       dynamic creatorEmailVerifiedAt,
-      @JsonKey(name: "creator.password") dynamic creatorPassword,
-      @JsonKey(name: "creator.m_comp_id") dynamic creatorMCompId,
-      @JsonKey(name: "creator.m_dir_id") dynamic creatorMDirId,
-      @JsonKey(name: "creator.is_active") dynamic creatorIsActive,
+      @JsonKey(name: "creator.password") String? creatorPassword,
+      @JsonKey(name: "creator.m_comp_id") int? creatorMCompId,
+      @JsonKey(name: "creator.m_dir_id") int? creatorMDirId,
+      @JsonKey(name: "creator.is_active") bool? creatorIsActive,
       @JsonKey(name: "creator.creator_id") dynamic creatorCreatorId,
-      @JsonKey(name: "creator.last_editor_id") dynamic creatorLastEditorId,
+      @JsonKey(name: "creator.last_editor_id") int? creatorLastEditorId,
       @JsonKey(name: "creator.remember_token") dynamic creatorRememberToken,
       @JsonKey(name: "creator.created_at") dynamic creatorCreatedAt,
-      @JsonKey(name: "creator.updated_at") dynamic creatorUpdatedAt,
-      @JsonKey(name: "creator.profil_image") dynamic creatorProfilImage,
+      @JsonKey(name: "creator.updated_at") String? creatorUpdatedAt,
+      @JsonKey(name: "creator.profil_image") String? creatorProfilImage,
+      @JsonKey(name: "creator.telp") String? creatorTelp,
+      @JsonKey(name: "creator.m_kary_id") int? creatorMKaryId,
       @JsonKey(name: "last_editor.id") dynamic lastEditorId,
       @JsonKey(name: "last_editor.name") dynamic lastEditorName,
       @JsonKey(name: "last_editor.email") dynamic lastEditorEmail,
@@ -683,8 +705,9 @@ abstract class $DatumCopyWith<$Res> {
       dynamic lastEditorRememberToken,
       @JsonKey(name: "last_editor.created_at") dynamic lastEditorCreatedAt,
       @JsonKey(name: "last_editor.updated_at") dynamic lastEditorUpdatedAt,
-      @JsonKey(name: "last_editor.profil_image")
-      dynamic lastEditorProfilImage});
+      @JsonKey(name: "last_editor.profil_image") dynamic lastEditorProfilImage,
+      @JsonKey(name: "last_editor.telp") dynamic lastEditorTelp,
+      @JsonKey(name: "last_editor.m_kary_id") dynamic lastEditorMKaryId});
 }
 
 /// @nodoc
@@ -727,6 +750,8 @@ class _$DatumCopyWithImpl<$Res, $Val extends Datum>
     Object? datumLastEditorId = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? catatanIn = freezed,
+    Object? catatanOut = freezed,
     Object? mCompId = freezed,
     Object? mCompNama = freezed,
     Object? mCompIsActive = freezed,
@@ -750,6 +775,8 @@ class _$DatumCopyWithImpl<$Res, $Val extends Datum>
     Object? defaultUserCreatedAt = freezed,
     Object? defaultUserUpdatedAt = freezed,
     Object? defaultUserProfilImage = freezed,
+    Object? defaultUserTelp = freezed,
+    Object? defaultUserMKaryId = freezed,
     Object? creatorId = freezed,
     Object? creatorName = freezed,
     Object? creatorEmail = freezed,
@@ -765,6 +792,8 @@ class _$DatumCopyWithImpl<$Res, $Val extends Datum>
     Object? creatorCreatedAt = freezed,
     Object? creatorUpdatedAt = freezed,
     Object? creatorProfilImage = freezed,
+    Object? creatorTelp = freezed,
+    Object? creatorMKaryId = freezed,
     Object? lastEditorId = freezed,
     Object? lastEditorName = freezed,
     Object? lastEditorEmail = freezed,
@@ -780,6 +809,8 @@ class _$DatumCopyWithImpl<$Res, $Val extends Datum>
     Object? lastEditorCreatedAt = freezed,
     Object? lastEditorUpdatedAt = freezed,
     Object? lastEditorProfilImage = freezed,
+    Object? lastEditorTelp = freezed,
+    Object? lastEditorMKaryId = freezed,
   }) {
     return _then(_value.copyWith(
       metaRead: freezed == metaRead
@@ -849,7 +880,7 @@ class _$DatumCopyWithImpl<$Res, $Val extends Datum>
       checkoutTime: freezed == checkoutTime
           ? _value.checkoutTime
           : checkoutTime // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       checkoutFoto: freezed == checkoutFoto
           ? _value.checkoutFoto
           : checkoutFoto // ignore: cast_nullable_to_non_nullable
@@ -857,27 +888,27 @@ class _$DatumCopyWithImpl<$Res, $Val extends Datum>
       checkoutLat: freezed == checkoutLat
           ? _value.checkoutLat
           : checkoutLat // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       checkoutLong: freezed == checkoutLong
           ? _value.checkoutLong
           : checkoutLong // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       checkoutAddress: freezed == checkoutAddress
           ? _value.checkoutAddress
           : checkoutAddress // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       checkoutRegion: freezed == checkoutRegion
           ? _value.checkoutRegion
           : checkoutRegion // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       checkoutOnScope: freezed == checkoutOnScope
           ? _value.checkoutOnScope
           : checkoutOnScope // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as bool?,
       datumCreatorId: freezed == datumCreatorId
           ? _value.datumCreatorId
           : datumCreatorId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       datumLastEditorId: freezed == datumLastEditorId
           ? _value.datumLastEditorId
           : datumLastEditorId // ignore: cast_nullable_to_non_nullable
@@ -890,6 +921,14 @@ class _$DatumCopyWithImpl<$Res, $Val extends Datum>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String?,
+      catatanIn: freezed == catatanIn
+          ? _value.catatanIn
+          : catatanIn // ignore: cast_nullable_to_non_nullable
+              as String?,
+      catatanOut: freezed == catatanOut
+          ? _value.catatanOut
+          : catatanOut // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       mCompId: freezed == mCompId
           ? _value.mCompId
           : mCompId // ignore: cast_nullable_to_non_nullable
@@ -981,23 +1020,31 @@ class _$DatumCopyWithImpl<$Res, $Val extends Datum>
       defaultUserProfilImage: freezed == defaultUserProfilImage
           ? _value.defaultUserProfilImage
           : defaultUserProfilImage // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
+      defaultUserTelp: freezed == defaultUserTelp
+          ? _value.defaultUserTelp
+          : defaultUserTelp // ignore: cast_nullable_to_non_nullable
+              as String?,
+      defaultUserMKaryId: freezed == defaultUserMKaryId
+          ? _value.defaultUserMKaryId
+          : defaultUserMKaryId // ignore: cast_nullable_to_non_nullable
+              as int?,
       creatorId: freezed == creatorId
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       creatorName: freezed == creatorName
           ? _value.creatorName
           : creatorName // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       creatorEmail: freezed == creatorEmail
           ? _value.creatorEmail
           : creatorEmail // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       creatorUsername: freezed == creatorUsername
           ? _value.creatorUsername
           : creatorUsername // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       creatorEmailVerifiedAt: freezed == creatorEmailVerifiedAt
           ? _value.creatorEmailVerifiedAt
           : creatorEmailVerifiedAt // ignore: cast_nullable_to_non_nullable
@@ -1005,19 +1052,19 @@ class _$DatumCopyWithImpl<$Res, $Val extends Datum>
       creatorPassword: freezed == creatorPassword
           ? _value.creatorPassword
           : creatorPassword // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       creatorMCompId: freezed == creatorMCompId
           ? _value.creatorMCompId
           : creatorMCompId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       creatorMDirId: freezed == creatorMDirId
           ? _value.creatorMDirId
           : creatorMDirId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       creatorIsActive: freezed == creatorIsActive
           ? _value.creatorIsActive
           : creatorIsActive // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as bool?,
       creatorCreatorId: freezed == creatorCreatorId
           ? _value.creatorCreatorId
           : creatorCreatorId // ignore: cast_nullable_to_non_nullable
@@ -1025,7 +1072,7 @@ class _$DatumCopyWithImpl<$Res, $Val extends Datum>
       creatorLastEditorId: freezed == creatorLastEditorId
           ? _value.creatorLastEditorId
           : creatorLastEditorId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       creatorRememberToken: freezed == creatorRememberToken
           ? _value.creatorRememberToken
           : creatorRememberToken // ignore: cast_nullable_to_non_nullable
@@ -1037,11 +1084,19 @@ class _$DatumCopyWithImpl<$Res, $Val extends Datum>
       creatorUpdatedAt: freezed == creatorUpdatedAt
           ? _value.creatorUpdatedAt
           : creatorUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       creatorProfilImage: freezed == creatorProfilImage
           ? _value.creatorProfilImage
           : creatorProfilImage // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
+      creatorTelp: freezed == creatorTelp
+          ? _value.creatorTelp
+          : creatorTelp // ignore: cast_nullable_to_non_nullable
+              as String?,
+      creatorMKaryId: freezed == creatorMKaryId
+          ? _value.creatorMKaryId
+          : creatorMKaryId // ignore: cast_nullable_to_non_nullable
+              as int?,
       lastEditorId: freezed == lastEditorId
           ? _value.lastEditorId
           : lastEditorId // ignore: cast_nullable_to_non_nullable
@@ -1102,6 +1157,14 @@ class _$DatumCopyWithImpl<$Res, $Val extends Datum>
           ? _value.lastEditorProfilImage
           : lastEditorProfilImage // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      lastEditorTelp: freezed == lastEditorTelp
+          ? _value.lastEditorTelp
+          : lastEditorTelp // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      lastEditorMKaryId: freezed == lastEditorMKaryId
+          ? _value.lastEditorMKaryId
+          : lastEditorMKaryId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ) as $Val);
   }
 }
@@ -1130,17 +1193,19 @@ abstract class _$$DatumImplCopyWith<$Res> implements $DatumCopyWith<$Res> {
       @JsonKey(name: "checkin_address") String? checkinAddress,
       @JsonKey(name: "checkin_region") String? checkinRegion,
       @JsonKey(name: "checkin_on_scope") bool? checkinOnScope,
-      @JsonKey(name: "checkout_time") dynamic checkoutTime,
+      @JsonKey(name: "checkout_time") String? checkoutTime,
       @JsonKey(name: "checkout_foto") String? checkoutFoto,
-      @JsonKey(name: "checkout_lat") dynamic checkoutLat,
-      @JsonKey(name: "checkout_long") dynamic checkoutLong,
-      @JsonKey(name: "checkout_address") dynamic checkoutAddress,
-      @JsonKey(name: "checkout_region") dynamic checkoutRegion,
-      @JsonKey(name: "checkout_on_scope") dynamic checkoutOnScope,
-      @JsonKey(name: "creator_id") dynamic datumCreatorId,
+      @JsonKey(name: "checkout_lat") String? checkoutLat,
+      @JsonKey(name: "checkout_long") String? checkoutLong,
+      @JsonKey(name: "checkout_address") String? checkoutAddress,
+      @JsonKey(name: "checkout_region") String? checkoutRegion,
+      @JsonKey(name: "checkout_on_scope") bool? checkoutOnScope,
+      @JsonKey(name: "creator_id") int? datumCreatorId,
       @JsonKey(name: "last_editor_id") dynamic datumLastEditorId,
       @JsonKey(name: "created_at") String? createdAt,
       @JsonKey(name: "updated_at") String? updatedAt,
+      @JsonKey(name: "catatan_in") String? catatanIn,
+      @JsonKey(name: "catatan_out") dynamic catatanOut,
       @JsonKey(name: "m_comp.id") int? mCompId,
       @JsonKey(name: "m_comp.nama") String? mCompNama,
       @JsonKey(name: "m_comp.is_active") bool? mCompIsActive,
@@ -1167,23 +1232,27 @@ abstract class _$$DatumImplCopyWith<$Res> implements $DatumCopyWith<$Res> {
       @JsonKey(name: "default_user.created_at") dynamic defaultUserCreatedAt,
       @JsonKey(name: "default_user.updated_at") String? defaultUserUpdatedAt,
       @JsonKey(name: "default_user.profil_image")
-      dynamic defaultUserProfilImage,
-      @JsonKey(name: "creator.id") dynamic creatorId,
-      @JsonKey(name: "creator.name") dynamic creatorName,
-      @JsonKey(name: "creator.email") dynamic creatorEmail,
-      @JsonKey(name: "creator.username") dynamic creatorUsername,
+      String? defaultUserProfilImage,
+      @JsonKey(name: "default_user.telp") String? defaultUserTelp,
+      @JsonKey(name: "default_user.m_kary_id") int? defaultUserMKaryId,
+      @JsonKey(name: "creator.id") int? creatorId,
+      @JsonKey(name: "creator.name") String? creatorName,
+      @JsonKey(name: "creator.email") String? creatorEmail,
+      @JsonKey(name: "creator.username") String? creatorUsername,
       @JsonKey(name: "creator.email_verified_at")
       dynamic creatorEmailVerifiedAt,
-      @JsonKey(name: "creator.password") dynamic creatorPassword,
-      @JsonKey(name: "creator.m_comp_id") dynamic creatorMCompId,
-      @JsonKey(name: "creator.m_dir_id") dynamic creatorMDirId,
-      @JsonKey(name: "creator.is_active") dynamic creatorIsActive,
+      @JsonKey(name: "creator.password") String? creatorPassword,
+      @JsonKey(name: "creator.m_comp_id") int? creatorMCompId,
+      @JsonKey(name: "creator.m_dir_id") int? creatorMDirId,
+      @JsonKey(name: "creator.is_active") bool? creatorIsActive,
       @JsonKey(name: "creator.creator_id") dynamic creatorCreatorId,
-      @JsonKey(name: "creator.last_editor_id") dynamic creatorLastEditorId,
+      @JsonKey(name: "creator.last_editor_id") int? creatorLastEditorId,
       @JsonKey(name: "creator.remember_token") dynamic creatorRememberToken,
       @JsonKey(name: "creator.created_at") dynamic creatorCreatedAt,
-      @JsonKey(name: "creator.updated_at") dynamic creatorUpdatedAt,
-      @JsonKey(name: "creator.profil_image") dynamic creatorProfilImage,
+      @JsonKey(name: "creator.updated_at") String? creatorUpdatedAt,
+      @JsonKey(name: "creator.profil_image") String? creatorProfilImage,
+      @JsonKey(name: "creator.telp") String? creatorTelp,
+      @JsonKey(name: "creator.m_kary_id") int? creatorMKaryId,
       @JsonKey(name: "last_editor.id") dynamic lastEditorId,
       @JsonKey(name: "last_editor.name") dynamic lastEditorName,
       @JsonKey(name: "last_editor.email") dynamic lastEditorEmail,
@@ -1201,8 +1270,9 @@ abstract class _$$DatumImplCopyWith<$Res> implements $DatumCopyWith<$Res> {
       dynamic lastEditorRememberToken,
       @JsonKey(name: "last_editor.created_at") dynamic lastEditorCreatedAt,
       @JsonKey(name: "last_editor.updated_at") dynamic lastEditorUpdatedAt,
-      @JsonKey(name: "last_editor.profil_image")
-      dynamic lastEditorProfilImage});
+      @JsonKey(name: "last_editor.profil_image") dynamic lastEditorProfilImage,
+      @JsonKey(name: "last_editor.telp") dynamic lastEditorTelp,
+      @JsonKey(name: "last_editor.m_kary_id") dynamic lastEditorMKaryId});
 }
 
 /// @nodoc
@@ -1243,6 +1313,8 @@ class __$$DatumImplCopyWithImpl<$Res>
     Object? datumLastEditorId = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? catatanIn = freezed,
+    Object? catatanOut = freezed,
     Object? mCompId = freezed,
     Object? mCompNama = freezed,
     Object? mCompIsActive = freezed,
@@ -1266,6 +1338,8 @@ class __$$DatumImplCopyWithImpl<$Res>
     Object? defaultUserCreatedAt = freezed,
     Object? defaultUserUpdatedAt = freezed,
     Object? defaultUserProfilImage = freezed,
+    Object? defaultUserTelp = freezed,
+    Object? defaultUserMKaryId = freezed,
     Object? creatorId = freezed,
     Object? creatorName = freezed,
     Object? creatorEmail = freezed,
@@ -1281,6 +1355,8 @@ class __$$DatumImplCopyWithImpl<$Res>
     Object? creatorCreatedAt = freezed,
     Object? creatorUpdatedAt = freezed,
     Object? creatorProfilImage = freezed,
+    Object? creatorTelp = freezed,
+    Object? creatorMKaryId = freezed,
     Object? lastEditorId = freezed,
     Object? lastEditorName = freezed,
     Object? lastEditorEmail = freezed,
@@ -1296,6 +1372,8 @@ class __$$DatumImplCopyWithImpl<$Res>
     Object? lastEditorCreatedAt = freezed,
     Object? lastEditorUpdatedAt = freezed,
     Object? lastEditorProfilImage = freezed,
+    Object? lastEditorTelp = freezed,
+    Object? lastEditorMKaryId = freezed,
   }) {
     return _then(_$DatumImpl(
       metaRead: freezed == metaRead
@@ -1365,7 +1443,7 @@ class __$$DatumImplCopyWithImpl<$Res>
       checkoutTime: freezed == checkoutTime
           ? _value.checkoutTime
           : checkoutTime // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       checkoutFoto: freezed == checkoutFoto
           ? _value.checkoutFoto
           : checkoutFoto // ignore: cast_nullable_to_non_nullable
@@ -1373,27 +1451,27 @@ class __$$DatumImplCopyWithImpl<$Res>
       checkoutLat: freezed == checkoutLat
           ? _value.checkoutLat
           : checkoutLat // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       checkoutLong: freezed == checkoutLong
           ? _value.checkoutLong
           : checkoutLong // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       checkoutAddress: freezed == checkoutAddress
           ? _value.checkoutAddress
           : checkoutAddress // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       checkoutRegion: freezed == checkoutRegion
           ? _value.checkoutRegion
           : checkoutRegion // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       checkoutOnScope: freezed == checkoutOnScope
           ? _value.checkoutOnScope
           : checkoutOnScope // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as bool?,
       datumCreatorId: freezed == datumCreatorId
           ? _value.datumCreatorId
           : datumCreatorId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       datumLastEditorId: freezed == datumLastEditorId
           ? _value.datumLastEditorId
           : datumLastEditorId // ignore: cast_nullable_to_non_nullable
@@ -1406,6 +1484,14 @@ class __$$DatumImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String?,
+      catatanIn: freezed == catatanIn
+          ? _value.catatanIn
+          : catatanIn // ignore: cast_nullable_to_non_nullable
+              as String?,
+      catatanOut: freezed == catatanOut
+          ? _value.catatanOut
+          : catatanOut // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       mCompId: freezed == mCompId
           ? _value.mCompId
           : mCompId // ignore: cast_nullable_to_non_nullable
@@ -1497,23 +1583,31 @@ class __$$DatumImplCopyWithImpl<$Res>
       defaultUserProfilImage: freezed == defaultUserProfilImage
           ? _value.defaultUserProfilImage
           : defaultUserProfilImage // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
+      defaultUserTelp: freezed == defaultUserTelp
+          ? _value.defaultUserTelp
+          : defaultUserTelp // ignore: cast_nullable_to_non_nullable
+              as String?,
+      defaultUserMKaryId: freezed == defaultUserMKaryId
+          ? _value.defaultUserMKaryId
+          : defaultUserMKaryId // ignore: cast_nullable_to_non_nullable
+              as int?,
       creatorId: freezed == creatorId
           ? _value.creatorId
           : creatorId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       creatorName: freezed == creatorName
           ? _value.creatorName
           : creatorName // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       creatorEmail: freezed == creatorEmail
           ? _value.creatorEmail
           : creatorEmail // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       creatorUsername: freezed == creatorUsername
           ? _value.creatorUsername
           : creatorUsername // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       creatorEmailVerifiedAt: freezed == creatorEmailVerifiedAt
           ? _value.creatorEmailVerifiedAt
           : creatorEmailVerifiedAt // ignore: cast_nullable_to_non_nullable
@@ -1521,19 +1615,19 @@ class __$$DatumImplCopyWithImpl<$Res>
       creatorPassword: freezed == creatorPassword
           ? _value.creatorPassword
           : creatorPassword // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       creatorMCompId: freezed == creatorMCompId
           ? _value.creatorMCompId
           : creatorMCompId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       creatorMDirId: freezed == creatorMDirId
           ? _value.creatorMDirId
           : creatorMDirId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       creatorIsActive: freezed == creatorIsActive
           ? _value.creatorIsActive
           : creatorIsActive // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as bool?,
       creatorCreatorId: freezed == creatorCreatorId
           ? _value.creatorCreatorId
           : creatorCreatorId // ignore: cast_nullable_to_non_nullable
@@ -1541,7 +1635,7 @@ class __$$DatumImplCopyWithImpl<$Res>
       creatorLastEditorId: freezed == creatorLastEditorId
           ? _value.creatorLastEditorId
           : creatorLastEditorId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       creatorRememberToken: freezed == creatorRememberToken
           ? _value.creatorRememberToken
           : creatorRememberToken // ignore: cast_nullable_to_non_nullable
@@ -1553,11 +1647,19 @@ class __$$DatumImplCopyWithImpl<$Res>
       creatorUpdatedAt: freezed == creatorUpdatedAt
           ? _value.creatorUpdatedAt
           : creatorUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       creatorProfilImage: freezed == creatorProfilImage
           ? _value.creatorProfilImage
           : creatorProfilImage // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
+      creatorTelp: freezed == creatorTelp
+          ? _value.creatorTelp
+          : creatorTelp // ignore: cast_nullable_to_non_nullable
+              as String?,
+      creatorMKaryId: freezed == creatorMKaryId
+          ? _value.creatorMKaryId
+          : creatorMKaryId // ignore: cast_nullable_to_non_nullable
+              as int?,
       lastEditorId: freezed == lastEditorId
           ? _value.lastEditorId
           : lastEditorId // ignore: cast_nullable_to_non_nullable
@@ -1618,6 +1720,14 @@ class __$$DatumImplCopyWithImpl<$Res>
           ? _value.lastEditorProfilImage
           : lastEditorProfilImage // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      lastEditorTelp: freezed == lastEditorTelp
+          ? _value.lastEditorTelp
+          : lastEditorTelp // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      lastEditorMKaryId: freezed == lastEditorMKaryId
+          ? _value.lastEditorMKaryId
+          : lastEditorMKaryId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
@@ -1653,6 +1763,8 @@ class _$DatumImpl implements _Datum {
       @JsonKey(name: "last_editor_id") this.datumLastEditorId,
       @JsonKey(name: "created_at") this.createdAt,
       @JsonKey(name: "updated_at") this.updatedAt,
+      @JsonKey(name: "catatan_in") this.catatanIn,
+      @JsonKey(name: "catatan_out") this.catatanOut,
       @JsonKey(name: "m_comp.id") this.mCompId,
       @JsonKey(name: "m_comp.nama") this.mCompNama,
       @JsonKey(name: "m_comp.is_active") this.mCompIsActive,
@@ -1679,6 +1791,8 @@ class _$DatumImpl implements _Datum {
       @JsonKey(name: "default_user.created_at") this.defaultUserCreatedAt,
       @JsonKey(name: "default_user.updated_at") this.defaultUserUpdatedAt,
       @JsonKey(name: "default_user.profil_image") this.defaultUserProfilImage,
+      @JsonKey(name: "default_user.telp") this.defaultUserTelp,
+      @JsonKey(name: "default_user.m_kary_id") this.defaultUserMKaryId,
       @JsonKey(name: "creator.id") this.creatorId,
       @JsonKey(name: "creator.name") this.creatorName,
       @JsonKey(name: "creator.email") this.creatorEmail,
@@ -1694,6 +1808,8 @@ class _$DatumImpl implements _Datum {
       @JsonKey(name: "creator.created_at") this.creatorCreatedAt,
       @JsonKey(name: "creator.updated_at") this.creatorUpdatedAt,
       @JsonKey(name: "creator.profil_image") this.creatorProfilImage,
+      @JsonKey(name: "creator.telp") this.creatorTelp,
+      @JsonKey(name: "creator.m_kary_id") this.creatorMKaryId,
       @JsonKey(name: "last_editor.id") this.lastEditorId,
       @JsonKey(name: "last_editor.name") this.lastEditorName,
       @JsonKey(name: "last_editor.email") this.lastEditorEmail,
@@ -1709,7 +1825,9 @@ class _$DatumImpl implements _Datum {
       @JsonKey(name: "last_editor.remember_token") this.lastEditorRememberToken,
       @JsonKey(name: "last_editor.created_at") this.lastEditorCreatedAt,
       @JsonKey(name: "last_editor.updated_at") this.lastEditorUpdatedAt,
-      @JsonKey(name: "last_editor.profil_image") this.lastEditorProfilImage});
+      @JsonKey(name: "last_editor.profil_image") this.lastEditorProfilImage,
+      @JsonKey(name: "last_editor.telp") this.lastEditorTelp,
+      @JsonKey(name: "last_editor.m_kary_id") this.lastEditorMKaryId});
 
   factory _$DatumImpl.fromJson(Map<String, dynamic> json) =>
       _$$DatumImplFromJson(json);
@@ -1764,28 +1882,28 @@ class _$DatumImpl implements _Datum {
   final bool? checkinOnScope;
   @override
   @JsonKey(name: "checkout_time")
-  final dynamic checkoutTime;
+  final String? checkoutTime;
   @override
   @JsonKey(name: "checkout_foto")
   final String? checkoutFoto;
   @override
   @JsonKey(name: "checkout_lat")
-  final dynamic checkoutLat;
+  final String? checkoutLat;
   @override
   @JsonKey(name: "checkout_long")
-  final dynamic checkoutLong;
+  final String? checkoutLong;
   @override
   @JsonKey(name: "checkout_address")
-  final dynamic checkoutAddress;
+  final String? checkoutAddress;
   @override
   @JsonKey(name: "checkout_region")
-  final dynamic checkoutRegion;
+  final String? checkoutRegion;
   @override
   @JsonKey(name: "checkout_on_scope")
-  final dynamic checkoutOnScope;
+  final bool? checkoutOnScope;
   @override
   @JsonKey(name: "creator_id")
-  final dynamic datumCreatorId;
+  final int? datumCreatorId;
   @override
   @JsonKey(name: "last_editor_id")
   final dynamic datumLastEditorId;
@@ -1795,6 +1913,12 @@ class _$DatumImpl implements _Datum {
   @override
   @JsonKey(name: "updated_at")
   final String? updatedAt;
+  @override
+  @JsonKey(name: "catatan_in")
+  final String? catatanIn;
+  @override
+  @JsonKey(name: "catatan_out")
+  final dynamic catatanOut;
   @override
   @JsonKey(name: "m_comp.id")
   final int? mCompId;
@@ -1863,40 +1987,46 @@ class _$DatumImpl implements _Datum {
   final String? defaultUserUpdatedAt;
   @override
   @JsonKey(name: "default_user.profil_image")
-  final dynamic defaultUserProfilImage;
+  final String? defaultUserProfilImage;
+  @override
+  @JsonKey(name: "default_user.telp")
+  final String? defaultUserTelp;
+  @override
+  @JsonKey(name: "default_user.m_kary_id")
+  final int? defaultUserMKaryId;
   @override
   @JsonKey(name: "creator.id")
-  final dynamic creatorId;
+  final int? creatorId;
   @override
   @JsonKey(name: "creator.name")
-  final dynamic creatorName;
+  final String? creatorName;
   @override
   @JsonKey(name: "creator.email")
-  final dynamic creatorEmail;
+  final String? creatorEmail;
   @override
   @JsonKey(name: "creator.username")
-  final dynamic creatorUsername;
+  final String? creatorUsername;
   @override
   @JsonKey(name: "creator.email_verified_at")
   final dynamic creatorEmailVerifiedAt;
   @override
   @JsonKey(name: "creator.password")
-  final dynamic creatorPassword;
+  final String? creatorPassword;
   @override
   @JsonKey(name: "creator.m_comp_id")
-  final dynamic creatorMCompId;
+  final int? creatorMCompId;
   @override
   @JsonKey(name: "creator.m_dir_id")
-  final dynamic creatorMDirId;
+  final int? creatorMDirId;
   @override
   @JsonKey(name: "creator.is_active")
-  final dynamic creatorIsActive;
+  final bool? creatorIsActive;
   @override
   @JsonKey(name: "creator.creator_id")
   final dynamic creatorCreatorId;
   @override
   @JsonKey(name: "creator.last_editor_id")
-  final dynamic creatorLastEditorId;
+  final int? creatorLastEditorId;
   @override
   @JsonKey(name: "creator.remember_token")
   final dynamic creatorRememberToken;
@@ -1905,10 +2035,16 @@ class _$DatumImpl implements _Datum {
   final dynamic creatorCreatedAt;
   @override
   @JsonKey(name: "creator.updated_at")
-  final dynamic creatorUpdatedAt;
+  final String? creatorUpdatedAt;
   @override
   @JsonKey(name: "creator.profil_image")
-  final dynamic creatorProfilImage;
+  final String? creatorProfilImage;
+  @override
+  @JsonKey(name: "creator.telp")
+  final String? creatorTelp;
+  @override
+  @JsonKey(name: "creator.m_kary_id")
+  final int? creatorMKaryId;
   @override
   @JsonKey(name: "last_editor.id")
   final dynamic lastEditorId;
@@ -1954,10 +2090,16 @@ class _$DatumImpl implements _Datum {
   @override
   @JsonKey(name: "last_editor.profil_image")
   final dynamic lastEditorProfilImage;
+  @override
+  @JsonKey(name: "last_editor.telp")
+  final dynamic lastEditorTelp;
+  @override
+  @JsonKey(name: "last_editor.m_kary_id")
+  final dynamic lastEditorMKaryId;
 
   @override
   String toString() {
-    return 'Datum(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, datumMCompId: $datumMCompId, datumDefaultUserId: $datumDefaultUserId, tanggal: $tanggal, status: $status, checkinTime: $checkinTime, checkinFoto: $checkinFoto, checkinLat: $checkinLat, checkinLong: $checkinLong, checkinAddress: $checkinAddress, checkinRegion: $checkinRegion, checkinOnScope: $checkinOnScope, checkoutTime: $checkoutTime, checkoutFoto: $checkoutFoto, checkoutLat: $checkoutLat, checkoutLong: $checkoutLong, checkoutAddress: $checkoutAddress, checkoutRegion: $checkoutRegion, checkoutOnScope: $checkoutOnScope, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, defaultUserId: $defaultUserId, defaultUserName: $defaultUserName, defaultUserEmail: $defaultUserEmail, defaultUserUsername: $defaultUserUsername, defaultUserEmailVerifiedAt: $defaultUserEmailVerifiedAt, defaultUserPassword: $defaultUserPassword, defaultUserMCompId: $defaultUserMCompId, defaultUserMDirId: $defaultUserMDirId, defaultUserIsActive: $defaultUserIsActive, defaultUserCreatorId: $defaultUserCreatorId, defaultUserLastEditorId: $defaultUserLastEditorId, defaultUserRememberToken: $defaultUserRememberToken, defaultUserCreatedAt: $defaultUserCreatedAt, defaultUserUpdatedAt: $defaultUserUpdatedAt, defaultUserProfilImage: $defaultUserProfilImage, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage)';
+    return 'Datum(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, datumMCompId: $datumMCompId, datumDefaultUserId: $datumDefaultUserId, tanggal: $tanggal, status: $status, checkinTime: $checkinTime, checkinFoto: $checkinFoto, checkinLat: $checkinLat, checkinLong: $checkinLong, checkinAddress: $checkinAddress, checkinRegion: $checkinRegion, checkinOnScope: $checkinOnScope, checkoutTime: $checkoutTime, checkoutFoto: $checkoutFoto, checkoutLat: $checkoutLat, checkoutLong: $checkoutLong, checkoutAddress: $checkoutAddress, checkoutRegion: $checkoutRegion, checkoutOnScope: $checkoutOnScope, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, catatanIn: $catatanIn, catatanOut: $catatanOut, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, defaultUserId: $defaultUserId, defaultUserName: $defaultUserName, defaultUserEmail: $defaultUserEmail, defaultUserUsername: $defaultUserUsername, defaultUserEmailVerifiedAt: $defaultUserEmailVerifiedAt, defaultUserPassword: $defaultUserPassword, defaultUserMCompId: $defaultUserMCompId, defaultUserMDirId: $defaultUserMDirId, defaultUserIsActive: $defaultUserIsActive, defaultUserCreatorId: $defaultUserCreatorId, defaultUserLastEditorId: $defaultUserLastEditorId, defaultUserRememberToken: $defaultUserRememberToken, defaultUserCreatedAt: $defaultUserCreatedAt, defaultUserUpdatedAt: $defaultUserUpdatedAt, defaultUserProfilImage: $defaultUserProfilImage, defaultUserTelp: $defaultUserTelp, defaultUserMKaryId: $defaultUserMKaryId, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, creatorTelp: $creatorTelp, creatorMKaryId: $creatorMKaryId, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage, lastEditorTelp: $lastEditorTelp, lastEditorMKaryId: $lastEditorMKaryId)';
   }
 
   @override
@@ -1994,28 +2136,32 @@ class _$DatumImpl implements _Datum {
                 other.checkinRegion == checkinRegion) &&
             (identical(other.checkinOnScope, checkinOnScope) ||
                 other.checkinOnScope == checkinOnScope) &&
-            const DeepCollectionEquality()
-                .equals(other.checkoutTime, checkoutTime) &&
+            (identical(other.checkoutTime, checkoutTime) ||
+                other.checkoutTime == checkoutTime) &&
             (identical(other.checkoutFoto, checkoutFoto) ||
                 other.checkoutFoto == checkoutFoto) &&
-            const DeepCollectionEquality()
-                .equals(other.checkoutLat, checkoutLat) &&
-            const DeepCollectionEquality()
-                .equals(other.checkoutLong, checkoutLong) &&
-            const DeepCollectionEquality()
-                .equals(other.checkoutAddress, checkoutAddress) &&
-            const DeepCollectionEquality()
-                .equals(other.checkoutRegion, checkoutRegion) &&
-            const DeepCollectionEquality()
-                .equals(other.checkoutOnScope, checkoutOnScope) &&
-            const DeepCollectionEquality()
-                .equals(other.datumCreatorId, datumCreatorId) &&
+            (identical(other.checkoutLat, checkoutLat) ||
+                other.checkoutLat == checkoutLat) &&
+            (identical(other.checkoutLong, checkoutLong) ||
+                other.checkoutLong == checkoutLong) &&
+            (identical(other.checkoutAddress, checkoutAddress) ||
+                other.checkoutAddress == checkoutAddress) &&
+            (identical(other.checkoutRegion, checkoutRegion) ||
+                other.checkoutRegion == checkoutRegion) &&
+            (identical(other.checkoutOnScope, checkoutOnScope) ||
+                other.checkoutOnScope == checkoutOnScope) &&
+            (identical(other.datumCreatorId, datumCreatorId) ||
+                other.datumCreatorId == datumCreatorId) &&
             const DeepCollectionEquality()
                 .equals(other.datumLastEditorId, datumLastEditorId) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
+            (identical(other.catatanIn, catatanIn) ||
+                other.catatanIn == catatanIn) &&
+            const DeepCollectionEquality()
+                .equals(other.catatanOut, catatanOut) &&
             (identical(other.mCompId, mCompId) || other.mCompId == mCompId) &&
             (identical(other.mCompNama, mCompNama) ||
                 other.mCompNama == mCompNama) &&
@@ -2050,28 +2196,30 @@ class _$DatumImpl implements _Datum {
                 other.defaultUserIsActive == defaultUserIsActive) &&
             const DeepCollectionEquality()
                 .equals(other.defaultUserCreatorId, defaultUserCreatorId) &&
-            (identical(other.defaultUserLastEditorId, defaultUserLastEditorId) ||
-                other.defaultUserLastEditorId == defaultUserLastEditorId) &&
-            const DeepCollectionEquality()
-                .equals(other.defaultUserRememberToken, defaultUserRememberToken) &&
+            (identical(other.defaultUserLastEditorId, defaultUserLastEditorId) || other.defaultUserLastEditorId == defaultUserLastEditorId) &&
+            const DeepCollectionEquality().equals(other.defaultUserRememberToken, defaultUserRememberToken) &&
             const DeepCollectionEquality().equals(other.defaultUserCreatedAt, defaultUserCreatedAt) &&
             (identical(other.defaultUserUpdatedAt, defaultUserUpdatedAt) || other.defaultUserUpdatedAt == defaultUserUpdatedAt) &&
-            const DeepCollectionEquality().equals(other.defaultUserProfilImage, defaultUserProfilImage) &&
-            const DeepCollectionEquality().equals(other.creatorId, creatorId) &&
-            const DeepCollectionEquality().equals(other.creatorName, creatorName) &&
-            const DeepCollectionEquality().equals(other.creatorEmail, creatorEmail) &&
-            const DeepCollectionEquality().equals(other.creatorUsername, creatorUsername) &&
+            (identical(other.defaultUserProfilImage, defaultUserProfilImage) || other.defaultUserProfilImage == defaultUserProfilImage) &&
+            (identical(other.defaultUserTelp, defaultUserTelp) || other.defaultUserTelp == defaultUserTelp) &&
+            (identical(other.defaultUserMKaryId, defaultUserMKaryId) || other.defaultUserMKaryId == defaultUserMKaryId) &&
+            (identical(other.creatorId, creatorId) || other.creatorId == creatorId) &&
+            (identical(other.creatorName, creatorName) || other.creatorName == creatorName) &&
+            (identical(other.creatorEmail, creatorEmail) || other.creatorEmail == creatorEmail) &&
+            (identical(other.creatorUsername, creatorUsername) || other.creatorUsername == creatorUsername) &&
             const DeepCollectionEquality().equals(other.creatorEmailVerifiedAt, creatorEmailVerifiedAt) &&
-            const DeepCollectionEquality().equals(other.creatorPassword, creatorPassword) &&
-            const DeepCollectionEquality().equals(other.creatorMCompId, creatorMCompId) &&
-            const DeepCollectionEquality().equals(other.creatorMDirId, creatorMDirId) &&
-            const DeepCollectionEquality().equals(other.creatorIsActive, creatorIsActive) &&
+            (identical(other.creatorPassword, creatorPassword) || other.creatorPassword == creatorPassword) &&
+            (identical(other.creatorMCompId, creatorMCompId) || other.creatorMCompId == creatorMCompId) &&
+            (identical(other.creatorMDirId, creatorMDirId) || other.creatorMDirId == creatorMDirId) &&
+            (identical(other.creatorIsActive, creatorIsActive) || other.creatorIsActive == creatorIsActive) &&
             const DeepCollectionEquality().equals(other.creatorCreatorId, creatorCreatorId) &&
-            const DeepCollectionEquality().equals(other.creatorLastEditorId, creatorLastEditorId) &&
+            (identical(other.creatorLastEditorId, creatorLastEditorId) || other.creatorLastEditorId == creatorLastEditorId) &&
             const DeepCollectionEquality().equals(other.creatorRememberToken, creatorRememberToken) &&
             const DeepCollectionEquality().equals(other.creatorCreatedAt, creatorCreatedAt) &&
-            const DeepCollectionEquality().equals(other.creatorUpdatedAt, creatorUpdatedAt) &&
-            const DeepCollectionEquality().equals(other.creatorProfilImage, creatorProfilImage) &&
+            (identical(other.creatorUpdatedAt, creatorUpdatedAt) || other.creatorUpdatedAt == creatorUpdatedAt) &&
+            (identical(other.creatorProfilImage, creatorProfilImage) || other.creatorProfilImage == creatorProfilImage) &&
+            (identical(other.creatorTelp, creatorTelp) || other.creatorTelp == creatorTelp) &&
+            (identical(other.creatorMKaryId, creatorMKaryId) || other.creatorMKaryId == creatorMKaryId) &&
             const DeepCollectionEquality().equals(other.lastEditorId, lastEditorId) &&
             const DeepCollectionEquality().equals(other.lastEditorName, lastEditorName) &&
             const DeepCollectionEquality().equals(other.lastEditorEmail, lastEditorEmail) &&
@@ -2086,7 +2234,9 @@ class _$DatumImpl implements _Datum {
             const DeepCollectionEquality().equals(other.lastEditorRememberToken, lastEditorRememberToken) &&
             const DeepCollectionEquality().equals(other.lastEditorCreatedAt, lastEditorCreatedAt) &&
             const DeepCollectionEquality().equals(other.lastEditorUpdatedAt, lastEditorUpdatedAt) &&
-            const DeepCollectionEquality().equals(other.lastEditorProfilImage, lastEditorProfilImage));
+            const DeepCollectionEquality().equals(other.lastEditorProfilImage, lastEditorProfilImage) &&
+            const DeepCollectionEquality().equals(other.lastEditorTelp, lastEditorTelp) &&
+            const DeepCollectionEquality().equals(other.lastEditorMKaryId, lastEditorMKaryId));
   }
 
   @JsonKey(ignore: true)
@@ -2109,17 +2259,19 @@ class _$DatumImpl implements _Datum {
         checkinAddress,
         checkinRegion,
         checkinOnScope,
-        const DeepCollectionEquality().hash(checkoutTime),
+        checkoutTime,
         checkoutFoto,
-        const DeepCollectionEquality().hash(checkoutLat),
-        const DeepCollectionEquality().hash(checkoutLong),
-        const DeepCollectionEquality().hash(checkoutAddress),
-        const DeepCollectionEquality().hash(checkoutRegion),
-        const DeepCollectionEquality().hash(checkoutOnScope),
-        const DeepCollectionEquality().hash(datumCreatorId),
+        checkoutLat,
+        checkoutLong,
+        checkoutAddress,
+        checkoutRegion,
+        checkoutOnScope,
+        datumCreatorId,
         const DeepCollectionEquality().hash(datumLastEditorId),
         createdAt,
         updatedAt,
+        catatanIn,
+        const DeepCollectionEquality().hash(catatanOut),
         mCompId,
         mCompNama,
         mCompIsActive,
@@ -2142,22 +2294,26 @@ class _$DatumImpl implements _Datum {
         const DeepCollectionEquality().hash(defaultUserRememberToken),
         const DeepCollectionEquality().hash(defaultUserCreatedAt),
         defaultUserUpdatedAt,
-        const DeepCollectionEquality().hash(defaultUserProfilImage),
-        const DeepCollectionEquality().hash(creatorId),
-        const DeepCollectionEquality().hash(creatorName),
-        const DeepCollectionEquality().hash(creatorEmail),
-        const DeepCollectionEquality().hash(creatorUsername),
+        defaultUserProfilImage,
+        defaultUserTelp,
+        defaultUserMKaryId,
+        creatorId,
+        creatorName,
+        creatorEmail,
+        creatorUsername,
         const DeepCollectionEquality().hash(creatorEmailVerifiedAt),
-        const DeepCollectionEquality().hash(creatorPassword),
-        const DeepCollectionEquality().hash(creatorMCompId),
-        const DeepCollectionEquality().hash(creatorMDirId),
-        const DeepCollectionEquality().hash(creatorIsActive),
+        creatorPassword,
+        creatorMCompId,
+        creatorMDirId,
+        creatorIsActive,
         const DeepCollectionEquality().hash(creatorCreatorId),
-        const DeepCollectionEquality().hash(creatorLastEditorId),
+        creatorLastEditorId,
         const DeepCollectionEquality().hash(creatorRememberToken),
         const DeepCollectionEquality().hash(creatorCreatedAt),
-        const DeepCollectionEquality().hash(creatorUpdatedAt),
-        const DeepCollectionEquality().hash(creatorProfilImage),
+        creatorUpdatedAt,
+        creatorProfilImage,
+        creatorTelp,
+        creatorMKaryId,
         const DeepCollectionEquality().hash(lastEditorId),
         const DeepCollectionEquality().hash(lastEditorName),
         const DeepCollectionEquality().hash(lastEditorEmail),
@@ -2172,7 +2328,9 @@ class _$DatumImpl implements _Datum {
         const DeepCollectionEquality().hash(lastEditorRememberToken),
         const DeepCollectionEquality().hash(lastEditorCreatedAt),
         const DeepCollectionEquality().hash(lastEditorUpdatedAt),
-        const DeepCollectionEquality().hash(lastEditorProfilImage)
+        const DeepCollectionEquality().hash(lastEditorProfilImage),
+        const DeepCollectionEquality().hash(lastEditorTelp),
+        const DeepCollectionEquality().hash(lastEditorMKaryId)
       ]);
 
   @JsonKey(ignore: true)
@@ -2207,17 +2365,19 @@ abstract class _Datum implements Datum {
       @JsonKey(name: "checkin_address") final String? checkinAddress,
       @JsonKey(name: "checkin_region") final String? checkinRegion,
       @JsonKey(name: "checkin_on_scope") final bool? checkinOnScope,
-      @JsonKey(name: "checkout_time") final dynamic checkoutTime,
+      @JsonKey(name: "checkout_time") final String? checkoutTime,
       @JsonKey(name: "checkout_foto") final String? checkoutFoto,
-      @JsonKey(name: "checkout_lat") final dynamic checkoutLat,
-      @JsonKey(name: "checkout_long") final dynamic checkoutLong,
-      @JsonKey(name: "checkout_address") final dynamic checkoutAddress,
-      @JsonKey(name: "checkout_region") final dynamic checkoutRegion,
-      @JsonKey(name: "checkout_on_scope") final dynamic checkoutOnScope,
-      @JsonKey(name: "creator_id") final dynamic datumCreatorId,
+      @JsonKey(name: "checkout_lat") final String? checkoutLat,
+      @JsonKey(name: "checkout_long") final String? checkoutLong,
+      @JsonKey(name: "checkout_address") final String? checkoutAddress,
+      @JsonKey(name: "checkout_region") final String? checkoutRegion,
+      @JsonKey(name: "checkout_on_scope") final bool? checkoutOnScope,
+      @JsonKey(name: "creator_id") final int? datumCreatorId,
       @JsonKey(name: "last_editor_id") final dynamic datumLastEditorId,
       @JsonKey(name: "created_at") final String? createdAt,
       @JsonKey(name: "updated_at") final String? updatedAt,
+      @JsonKey(name: "catatan_in") final String? catatanIn,
+      @JsonKey(name: "catatan_out") final dynamic catatanOut,
       @JsonKey(name: "m_comp.id") final int? mCompId,
       @JsonKey(name: "m_comp.nama") final String? mCompNama,
       @JsonKey(name: "m_comp.is_active") final bool? mCompIsActive,
@@ -2247,25 +2407,28 @@ abstract class _Datum implements Datum {
       @JsonKey(name: "default_user.updated_at")
       final String? defaultUserUpdatedAt,
       @JsonKey(name: "default_user.profil_image")
-      final dynamic defaultUserProfilImage,
-      @JsonKey(name: "creator.id") final dynamic creatorId,
-      @JsonKey(name: "creator.name") final dynamic creatorName,
-      @JsonKey(name: "creator.email") final dynamic creatorEmail,
-      @JsonKey(name: "creator.username") final dynamic creatorUsername,
+      final String? defaultUserProfilImage,
+      @JsonKey(name: "default_user.telp") final String? defaultUserTelp,
+      @JsonKey(name: "default_user.m_kary_id") final int? defaultUserMKaryId,
+      @JsonKey(name: "creator.id") final int? creatorId,
+      @JsonKey(name: "creator.name") final String? creatorName,
+      @JsonKey(name: "creator.email") final String? creatorEmail,
+      @JsonKey(name: "creator.username") final String? creatorUsername,
       @JsonKey(name: "creator.email_verified_at")
       final dynamic creatorEmailVerifiedAt,
-      @JsonKey(name: "creator.password") final dynamic creatorPassword,
-      @JsonKey(name: "creator.m_comp_id") final dynamic creatorMCompId,
-      @JsonKey(name: "creator.m_dir_id") final dynamic creatorMDirId,
-      @JsonKey(name: "creator.is_active") final dynamic creatorIsActive,
+      @JsonKey(name: "creator.password") final String? creatorPassword,
+      @JsonKey(name: "creator.m_comp_id") final int? creatorMCompId,
+      @JsonKey(name: "creator.m_dir_id") final int? creatorMDirId,
+      @JsonKey(name: "creator.is_active") final bool? creatorIsActive,
       @JsonKey(name: "creator.creator_id") final dynamic creatorCreatorId,
-      @JsonKey(name: "creator.last_editor_id")
-      final dynamic creatorLastEditorId,
+      @JsonKey(name: "creator.last_editor_id") final int? creatorLastEditorId,
       @JsonKey(name: "creator.remember_token")
       final dynamic creatorRememberToken,
       @JsonKey(name: "creator.created_at") final dynamic creatorCreatedAt,
-      @JsonKey(name: "creator.updated_at") final dynamic creatorUpdatedAt,
-      @JsonKey(name: "creator.profil_image") final dynamic creatorProfilImage,
+      @JsonKey(name: "creator.updated_at") final String? creatorUpdatedAt,
+      @JsonKey(name: "creator.profil_image") final String? creatorProfilImage,
+      @JsonKey(name: "creator.telp") final String? creatorTelp,
+      @JsonKey(name: "creator.m_kary_id") final int? creatorMKaryId,
       @JsonKey(name: "last_editor.id") final dynamic lastEditorId,
       @JsonKey(name: "last_editor.name") final dynamic lastEditorName,
       @JsonKey(name: "last_editor.email") final dynamic lastEditorEmail,
@@ -2287,7 +2450,10 @@ abstract class _Datum implements Datum {
       @JsonKey(name: "last_editor.updated_at")
       final dynamic lastEditorUpdatedAt,
       @JsonKey(name: "last_editor.profil_image")
-      final dynamic lastEditorProfilImage}) = _$DatumImpl;
+      final dynamic lastEditorProfilImage,
+      @JsonKey(name: "last_editor.telp") final dynamic lastEditorTelp,
+      @JsonKey(name: "last_editor.m_kary_id")
+      final dynamic lastEditorMKaryId}) = _$DatumImpl;
 
   factory _Datum.fromJson(Map<String, dynamic> json) = _$DatumImpl.fromJson;
 
@@ -2341,28 +2507,28 @@ abstract class _Datum implements Datum {
   bool? get checkinOnScope;
   @override
   @JsonKey(name: "checkout_time")
-  dynamic get checkoutTime;
+  String? get checkoutTime;
   @override
   @JsonKey(name: "checkout_foto")
   String? get checkoutFoto;
   @override
   @JsonKey(name: "checkout_lat")
-  dynamic get checkoutLat;
+  String? get checkoutLat;
   @override
   @JsonKey(name: "checkout_long")
-  dynamic get checkoutLong;
+  String? get checkoutLong;
   @override
   @JsonKey(name: "checkout_address")
-  dynamic get checkoutAddress;
+  String? get checkoutAddress;
   @override
   @JsonKey(name: "checkout_region")
-  dynamic get checkoutRegion;
+  String? get checkoutRegion;
   @override
   @JsonKey(name: "checkout_on_scope")
-  dynamic get checkoutOnScope;
+  bool? get checkoutOnScope;
   @override
   @JsonKey(name: "creator_id")
-  dynamic get datumCreatorId;
+  int? get datumCreatorId;
   @override
   @JsonKey(name: "last_editor_id")
   dynamic get datumLastEditorId;
@@ -2372,6 +2538,12 @@ abstract class _Datum implements Datum {
   @override
   @JsonKey(name: "updated_at")
   String? get updatedAt;
+  @override
+  @JsonKey(name: "catatan_in")
+  String? get catatanIn;
+  @override
+  @JsonKey(name: "catatan_out")
+  dynamic get catatanOut;
   @override
   @JsonKey(name: "m_comp.id")
   int? get mCompId;
@@ -2440,40 +2612,46 @@ abstract class _Datum implements Datum {
   String? get defaultUserUpdatedAt;
   @override
   @JsonKey(name: "default_user.profil_image")
-  dynamic get defaultUserProfilImage;
+  String? get defaultUserProfilImage;
+  @override
+  @JsonKey(name: "default_user.telp")
+  String? get defaultUserTelp;
+  @override
+  @JsonKey(name: "default_user.m_kary_id")
+  int? get defaultUserMKaryId;
   @override
   @JsonKey(name: "creator.id")
-  dynamic get creatorId;
+  int? get creatorId;
   @override
   @JsonKey(name: "creator.name")
-  dynamic get creatorName;
+  String? get creatorName;
   @override
   @JsonKey(name: "creator.email")
-  dynamic get creatorEmail;
+  String? get creatorEmail;
   @override
   @JsonKey(name: "creator.username")
-  dynamic get creatorUsername;
+  String? get creatorUsername;
   @override
   @JsonKey(name: "creator.email_verified_at")
   dynamic get creatorEmailVerifiedAt;
   @override
   @JsonKey(name: "creator.password")
-  dynamic get creatorPassword;
+  String? get creatorPassword;
   @override
   @JsonKey(name: "creator.m_comp_id")
-  dynamic get creatorMCompId;
+  int? get creatorMCompId;
   @override
   @JsonKey(name: "creator.m_dir_id")
-  dynamic get creatorMDirId;
+  int? get creatorMDirId;
   @override
   @JsonKey(name: "creator.is_active")
-  dynamic get creatorIsActive;
+  bool? get creatorIsActive;
   @override
   @JsonKey(name: "creator.creator_id")
   dynamic get creatorCreatorId;
   @override
   @JsonKey(name: "creator.last_editor_id")
-  dynamic get creatorLastEditorId;
+  int? get creatorLastEditorId;
   @override
   @JsonKey(name: "creator.remember_token")
   dynamic get creatorRememberToken;
@@ -2482,10 +2660,16 @@ abstract class _Datum implements Datum {
   dynamic get creatorCreatedAt;
   @override
   @JsonKey(name: "creator.updated_at")
-  dynamic get creatorUpdatedAt;
+  String? get creatorUpdatedAt;
   @override
   @JsonKey(name: "creator.profil_image")
-  dynamic get creatorProfilImage;
+  String? get creatorProfilImage;
+  @override
+  @JsonKey(name: "creator.telp")
+  String? get creatorTelp;
+  @override
+  @JsonKey(name: "creator.m_kary_id")
+  int? get creatorMKaryId;
   @override
   @JsonKey(name: "last_editor.id")
   dynamic get lastEditorId;
@@ -2531,6 +2715,12 @@ abstract class _Datum implements Datum {
   @override
   @JsonKey(name: "last_editor.profil_image")
   dynamic get lastEditorProfilImage;
+  @override
+  @JsonKey(name: "last_editor.telp")
+  dynamic get lastEditorTelp;
+  @override
+  @JsonKey(name: "last_editor.m_kary_id")
+  dynamic get lastEditorMKaryId;
   @override
   @JsonKey(ignore: true)
   _$$DatumImplCopyWith<_$DatumImpl> get copyWith =>

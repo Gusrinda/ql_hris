@@ -276,6 +276,8 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                _buildText(
+                                    'Nama PIC', widget.data?.namaPic ?? '-'),
                                 _buildText('Tanggal', widget.tanggal ?? '-'),
                                 _buildText('Tanggal Acara Awal',
                                     widget.tanggalAwal ?? '-'),
@@ -286,6 +288,8 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                     'Zona Tujuan', widget.zonaTujuan ?? '-'),
                                 _buildText('Lokasi Tujuan',
                                     widget.lokasiTujuan ?? '-'),
+                                _buildText('Kendaraan Dinas?',
+                                    widget.data?.isKendDinas == true ? "Iya" : "Tidak"),
                                 _buildText('Keterangan Kendaraan',
                                     widget.data?.catatanKend ?? '-'),
                               ],

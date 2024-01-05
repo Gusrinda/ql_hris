@@ -197,6 +197,7 @@ _$TrxImpl _$$TrxImplFromJson(Map<String, dynamic> json) => _$TrxImpl(
       intervalMin: json['interval_min'] as int?,
       timeFrom: json['time_from'],
       timeTo: json['time_to'],
+      catatanKend: json['catatan_kend'] as String?,
     );
 
 Map<String, dynamic> _$$TrxImplToJson(_$TrxImpl instance) => <String, dynamic>{
@@ -235,4 +236,5 @@ Map<String, dynamic> _$$TrxImplToJson(_$TrxImpl instance) => <String, dynamic>{
       'interval_min': instance.intervalMin,
       'time_from': instance.timeFrom,
       'time_to': instance.timeTo,
+      'catatan_kend': instance.catatanKend,
     };
