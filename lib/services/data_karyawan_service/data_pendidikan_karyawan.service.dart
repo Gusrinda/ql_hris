@@ -137,14 +137,29 @@ class DataKaryawanService {
   ) async {
     try {
       var url = Uri.parse(
-          "${MyGeneralConst.API_URL}/operation/m_kary/pendidikan_create/$pendidikanId");
+          "${MyGeneralConst.API_URL}/operation/m_kary/pendidikan_update");
 
-      var request = http.MultipartRequest('PUT', url)
+      print("Ini yang dikirim saat POST Pendidikan :");
+      print("pendidikanId : ${pendidikanId}");
+      print("tingkat_id : ${tingkatID}");
+      print("nama_sekolah : ${namaSekolah}");
+      print("thn_masuk : ${tahunMasuk}");
+      print("thn_lulus : ${tahunLulus}");
+      print("kota_id : ${kotaID}");
+      print("nilai : ${nilai}");
+      print("jurusan : ${jurusan}");
+      print("is_pend_terakhir : ${isPendTerakhir}");
+      print("ijazah_no : ${ijazahNo}");
+      print("desc : ${desc}");
+      print("ijazah_foto : ${ijazahFoto}");
+
+      var request = http.MultipartRequest('POST', url)
         ..headers.addAll(GeneralServices.addToken2Headers(token));
 
       // Mengirimkan Data Biasa
       request.fields['m_comp_id'] = compId.toString();
       request.fields['m_dir_id'] = dirId.toString();
+      request.fields['id'] = pendidikanId.toString();
       request.fields['tingkat_id'] = tingkatID.toString();
       request.fields['nama_sekolah'] = namaSekolah;
       request.fields['thn_masuk'] = tahunMasuk;

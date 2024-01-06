@@ -34,11 +34,12 @@ class ViewEditPendidikanPage extends StatefulWidget {
     this.tahunMasuk,
     this.tahunLulus,
     this.nilai,
-    // this.pendTerakhir,
+    this.pendTerakhir,
     this.ijazahNo,
     this.ijazah,
     this.catatan,
-    required this.reloadDataCallback, required this.pendidikanId,
+    required this.reloadDataCallback,
+    required this.pendidikanId,
   });
   final int? idTingkat;
   final String? valueTingkat;
@@ -49,7 +50,7 @@ class ViewEditPendidikanPage extends StatefulWidget {
   final int? tahunMasuk;
   final int? tahunLulus;
   final double? nilai;
-  // final bool? pendTerakhir;
+  final bool? pendTerakhir;
   final String? ijazahNo;
   final String? ijazah;
   final String? catatan;
@@ -71,7 +72,7 @@ class ViewEditPendidikanPage extends StatefulWidget {
   final TextEditingController pendidikanTerakhirController =
       TextEditingController();
   final TextEditingController ijazahController = TextEditingController();
-  final TextEditingController ijazahNoController = TextEditingController();
+  final TextEditingController? ijazahNoController = TextEditingController();
   final TextEditingController catatanController = TextEditingController();
 
   @override
@@ -93,9 +94,17 @@ class _ViewEditPendidikanPageState extends State<ViewEditPendidikanPage> {
     widget.tahunLulusController.text = widget.tahunLulus.toString();
     widget.nilaiController.text = widget.nilai.toString();
     // widget.pendidikanTerakhirController.text = widget.pendTerakhir ?? '';
-    widget.ijazahNoController.text = widget.ijazahNo ?? '';
+    widget.ijazahNoController!.text = widget.ijazahNo ?? '-';
     widget.ijazahController.text = widget.ijazah ?? '';
-    widget.catatanController.text = widget.catatan ?? '';
+    widget.catatanController.text = widget.catatan ?? '-';
+
+    if (widget.pendTerakhir == true) {
+      pendidikanTerakhir = 1;
+      widget.pendidikanTerakhirController.text = 1.toString();
+    } else {
+      pendidikanTerakhir = 0;
+      widget.pendidikanTerakhirController.text = 0.toString();
+    }
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final pendidikanBloc = context.read<AddDataPendidikanBloc>();
@@ -316,6 +325,7 @@ class _ViewEditPendidikanPageState extends State<ViewEditPendidikanPage> {
             ),
           );
           Navigator.of(context).pop();
+          Navigator.pop(context);
           widget.reloadDataCallback();
         } else if (state is EditDataPendidikanFailed) {
           LoadingDialog.dismissDialog(context);
@@ -559,13 +569,13 @@ class _ViewEditPendidikanPageState extends State<ViewEditPendidikanPage> {
                                           GoogleFonts.poppins(fontSize: 8),
                                     ),
                                     FormInputData(
-                                      input: widget.ijazahNoController.text,
+                                      input: widget.ijazahNoController!.text,
                                       labelTag: 'label-ijazahNo',
                                       labelForm: 'Nomor Ijazah',
                                       formTag: 'form-ijazahNo',
                                       hintText: 'Tuliskan Nomor Ijazah',
                                       onTap: () {},
-                                      controller: widget.ijazahNoController,
+                                      controller: widget.ijazahNoController!,
                                       showRedStar: false,
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
@@ -586,94 +596,165 @@ class _ViewEditPendidikanPageState extends State<ViewEditPendidikanPage> {
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
+                                        Text(
+                                          '*',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.red,
+                                          ),
+                                        ),
                                       ],
                                     ),
                                     SizedBox(height: 10.sp),
-                                    Row(
-                                      children: <Widget>[
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              pendidikanTerakhir = 1;
-                                              widget.pendidikanTerakhirController
-                                                      .text =
-                                                  pendidikanTerakhir.toString();
-                                            });
-                                          },
-                                          child: Container(
-                                            width: 110.sp,
-                                            padding: EdgeInsets.all(7.sp),
-                                            decoration: BoxDecoration(
-                                              color: pendidikanTerakhir == 1
-                                                  ? MyColorsConst.primaryColor
-                                                  : Colors.transparent,
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              border: Border.all(
-                                                width: 1.5,
-                                                color: pendidikanTerakhir == 1
-                                                    ? MyColorsConst
-                                                        .primaryColor // Warna ketika terpilih
-                                                    : MyColorsConst
-                                                        .formBorderColor, // Warna ketika tidak terpilih
-                                              ),
+                                    FormField<int>(
+                                      builder: (state) {
+                                        return Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      pendidikanTerakhir = 1;
+                                                      widget.pendidikanTerakhirController
+                                                              .text =
+                                                          pendidikanTerakhir
+                                                              .toString();
+                                                    });
+                                                    state.didChange(
+                                                        pendidikanTerakhir);
+                                                  },
+                                                  child: Container(
+                                                    width: 110.sp,
+                                                    padding:
+                                                        EdgeInsets.all(7.sp),
+                                                    decoration: BoxDecoration(
+                                                      color:
+                                                          pendidikanTerakhir ==
+                                                                  1
+                                                              ? MyColorsConst
+                                                                  .primaryColor
+                                                              : Colors
+                                                                  .transparent,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      border: Border.all(
+                                                        width: 1.5,
+                                                        color: state.hasError
+                                                            ? Color(
+                                                                0XFF0b00020) // Change border color if validation fails
+                                                            : pendidikanTerakhir ==
+                                                                    1
+                                                                ? MyColorsConst
+                                                                    .primaryColor
+                                                                : MyColorsConst
+                                                                    .formBorderColor,
+                                                      ),
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        'Iya',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          color:
+                                                              pendidikanTerakhir ==
+                                                                      1
+                                                                  ? Colors.white
+                                                                  : MyColorsConst
+                                                                      .darkColor,
+                                                          fontSize: 13.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 10),
+                                                InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      pendidikanTerakhir = 0;
+                                                      widget.pendidikanTerakhirController
+                                                              .text =
+                                                          pendidikanTerakhir
+                                                              .toString();
+                                                    });
+                                                    state.didChange(
+                                                        pendidikanTerakhir);
+                                                  },
+                                                  child: Container(
+                                                    width: 110.sp,
+                                                    padding:
+                                                        EdgeInsets.all(7.sp),
+                                                    decoration: BoxDecoration(
+                                                      color:
+                                                          pendidikanTerakhir ==
+                                                                  0
+                                                              ? MyColorsConst
+                                                                  .primaryColor
+                                                              : Colors
+                                                                  .transparent,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      border: Border.all(
+                                                        width: 1.5,
+                                                        color: state.hasError
+                                                            ? Color(
+                                                                0XFF0b00020) // Change border color if validation fails
+                                                            : pendidikanTerakhir ==
+                                                                    0
+                                                                ? MyColorsConst
+                                                                    .primaryColor
+                                                                : MyColorsConst
+                                                                    .formBorderColor,
+                                                      ),
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        'Tidak',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          fontSize: 13.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color:
+                                                              pendidikanTerakhir ==
+                                                                      0
+                                                                  ? Colors.white
+                                                                  : MyColorsConst
+                                                                      .darkColor,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            child: Center(
-                                              child: Text(
-                                                'Iya',
-                                                style: GoogleFonts.poppins(
-                                                  color: pendidikanTerakhir == 1
-                                                      ? Colors.white
-                                                      : MyColorsConst.darkColor,
-                                                  fontSize: 13.sp,
-                                                  fontWeight: FontWeight.w500,
+                                            if (state.hasError)
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 8.0, left: 15.0),
+                                                child: Text(
+                                                  state.errorText!,
+                                                  style: GoogleFonts.poppins(
+                                                    color: Color(0XFF0b00020),
+                                                    fontSize: 10.sp,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(width: 10),
-                                        InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              pendidikanTerakhir = 0;
-                                              widget.pendidikanTerakhirController
-                                                      .text =
-                                                  pendidikanTerakhir.toString();
-                                            });
-                                          },
-                                          child: Container(
-                                            width: 110.sp,
-                                            padding: EdgeInsets.all(7.sp),
-                                            decoration: BoxDecoration(
-                                              color: pendidikanTerakhir == 0
-                                                  ? MyColorsConst.primaryColor
-                                                  : Colors.transparent,
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              border: Border.all(
-                                                width: 1.5,
-                                                color: pendidikanTerakhir == 0
-                                                    ? MyColorsConst.primaryColor
-                                                    : MyColorsConst
-                                                        .formBorderColor,
-                                              ),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                'Tidak',
-                                                style: GoogleFonts.poppins(
-                                                  fontSize: 13.sp,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: pendidikanTerakhir == 0
-                                                      ? Colors.white
-                                                      : MyColorsConst.darkColor,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                                          ],
+                                        );
+                                      },
+                                      validator: (value) {
+                                        if (value == null) {
+                                          return 'Pilih Salah Satu Opsi';
+                                        }
+                                        return null;
+                                      },
                                     ),
                                     SizedBox(height: 20.sp),
                                     Row(
@@ -919,7 +1000,52 @@ class _ViewEditPendidikanPageState extends State<ViewEditPendidikanPage> {
                                 backgroundColor:
                                     MyColorsConst.primaryColor.withOpacity(0.1),
                                 textColor: MyColorsConst.primaryColor,
-                                onPressed: () {},
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (_) => DialogCustom(
+                                        state: DialogCustomItem.confirm,
+                                        message:
+                                            "Anda Yakin Mengubah Data Pendidikan?",
+                                        durationInSec: 7,
+                                        onContinue: () =>
+                                            context
+                                                .read<AddDataPendidikanBloc>()
+                                                .add(
+                                                  EditDataPendidikanSubmited(
+                                                      pendidikanId:
+                                                          widget.pendidikanId,
+                                                      tingkatID: int.parse(widget
+                                                          .idTingkatController
+                                                          .text),
+                                                      namaSekolah: widget
+                                                          .namaSekolahController
+                                                          .text,
+                                                      tahunMasuk: widget
+                                                          .tahuunMasukController
+                                                          .text,
+                                                      tahunLulus: widget
+                                                          .tahunLulusController
+                                                          .text,
+                                                      kotaID: int.parse(widget
+                                                          .idKotaController
+                                                          .text),
+                                                      nilai: double.parse(widget
+                                                          .nilaiController
+                                                          .text),
+                                                      jurusan: widget
+                                                          .jurusanController
+                                                          .text,
+                                                      ijazahNo: widget.ijazahNoController?.text,
+                                                      ijazahFoto: uploadedFile != null && uploadedFile!.path.isNotEmpty ? File(uploadedFile!.path) : null,
+                                                      isPendTerakhir: int.parse(widget.pendidikanTerakhirController.text),
+                                                      desc: widget.catatanController.text),
+                                                ),
+                                      ),
+                                    );
+                                  }
+                                },
                               ),
                             ],
                           ),

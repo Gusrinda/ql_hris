@@ -25,7 +25,8 @@ class ViewEditOrganisasiPage extends StatefulWidget {
     this.idKota,
     this.valueKota,
     this.posisiOrg,
-    required this.reloadDataCallback, required this.organisasiId,
+    required this.reloadDataCallback,
+    required this.organisasiId,
   });
   final String? namaOrg;
   final int? tahunOrg;
@@ -228,6 +229,7 @@ class _ViewEditOrganisasiPageState extends State<ViewEditOrganisasiPage> {
             ),
           );
           Navigator.of(context).pop();
+          Navigator.pop(context);
           widget.reloadDataCallback();
         } else if (state is EditOrganisasiFailed) {
           LoadingDialog.dismissDialog(context);
@@ -441,7 +443,40 @@ class _ViewEditOrganisasiPageState extends State<ViewEditOrganisasiPage> {
                                 backgroundColor:
                                     MyColorsConst.primaryColor.withOpacity(0.1),
                                 textColor: MyColorsConst.primaryColor,
-                                onPressed: () {},
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (_) => DialogCustom(
+                                      state: DialogCustomItem.confirm,
+                                      message:
+                                          "Anda Yakin Mengubah Data Organisasi?",
+                                      durationInSec: 7,
+                                      onContinue: () => context
+                                          .read<AddOrganisasiBloc>()
+                                          .add(
+                                            EditDataOrganisasiSubmited(
+                                              organisasiId: widget.organisasiId,
+                                              nama: widget
+                                                  .namaOrganisasiController
+                                                  .text,
+                                              tahun: widget
+                                                  .tahunOrganisasiController
+                                                  .text,
+                                              jenisOrgId: int.parse(widget
+                                                  .idJenisOrganisasiController
+                                                  .text),
+                                              kotaId: int.parse(widget
+                                                  .idKotaOrganisasiController
+                                                  .text),
+                                              posisi: widget
+                                                  .posisiaOrganisasiController
+                                                  .text,
+                                            ),
+                                          ),
+                                    ),
+                                  );
+                                } },
                               ),
                             ],
                           ),

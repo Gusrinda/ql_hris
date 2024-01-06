@@ -188,46 +188,56 @@ class _DataPendidikanPageState extends State<DataPendidikanPage> {
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
-                                                      builder:
-                                                          (context) =>
-                                                              BlocProvider(
-                                                                create: (context) =>
-                                                                    AddDataPendidikanBloc(),
-                                                                child:
-                                                                    ViewEditPendidikanPage(
-                                                                      pendidikanId: dataPendidikan.id ?? 0,
-                                                                        idTingkat: dataPendidikan
-                                                                            .tingkatId,
-                                                                        valueTingkat: dataPendidikan
-                                                                            .tingkat,
-                                                                        namaSekolah: dataPendidikan
-                                                                            .namaSekolah,
-                                                                        idKota: dataPendidikan
-                                                                            .kotaId,
-                                                                        valueKota: dataPendidikan
-                                                                            .kota,
-                                                                        jurusan: dataPendidikan
-                                                                            .jurusan,
-                                                                        tahunMasuk:
-                                                                            dataPendidikan
-                                                                                .thnMasuk,
-                                                                        tahunLulus:
-                                                                            dataPendidikan
-                                                                                .thnLulus,
-                                                                        nilai: dataPendidikan
-                                                                            .nilai,
-                                                                        // pendTerakhir: dataPendidikan.isPendTerakhir,
-                                                                        ijazahNo:
-                                                                            dataPendidikan
-                                                                                .ijazahNo,
-                                                                        ijazah: dataPendidikan
-                                                                            .ijazahFoto,
-                                                                        catatan:
-                                                                            dataPendidikan
-                                                                                .desc,
-                                                                        reloadDataCallback:
-                                                                            loadData),
-                                                              )),
+                                                    builder: (context) =>
+                                                        BlocProvider(
+                                                      create: (context) =>
+                                                          AddDataPendidikanBloc(),
+                                                      child:
+                                                          ViewEditPendidikanPage(
+                                                              pendidikanId:
+                                                                  dataPendidikan.id ??
+                                                                      0,
+                                                              idTingkat:
+                                                                  dataPendidikan
+                                                                      .tingkatId,
+                                                              valueTingkat:
+                                                                  dataPendidikan
+                                                                      .tingkat,
+                                                              namaSekolah:
+                                                                  dataPendidikan
+                                                                      .namaSekolah,
+                                                              idKota:
+                                                                  dataPendidikan
+                                                                      .kotaId,
+                                                              valueKota:
+                                                                  dataPendidikan
+                                                                      .kota,
+                                                              jurusan:
+                                                                  dataPendidikan
+                                                                      .jurusan,
+                                                              tahunMasuk:
+                                                                  dataPendidikan
+                                                                      .thnMasuk,
+                                                              tahunLulus:
+                                                                  dataPendidikan
+                                                                      .thnLulus,
+                                                              nilai: dataPendidikan
+                                                                  .nilai,
+                                                              pendTerakhir: dataPendidikan.isPendTerakhir ?? false,
+                                                              ijazahNo: dataPendidikan
+                                                                      .ijazahNo ??
+                                                                  '-',
+                                                              ijazah:
+                                                                  dataPendidikan
+                                                                      .ijazahFoto,
+                                                              catatan:
+                                                                  dataPendidikan
+                                                                          .desc ??
+                                                                      '-',
+                                                              reloadDataCallback:
+                                                                  loadData),
+                                                    ),
+                                                  ),
                                                 );
                                                 // Sembunyikan tombol saat area di luar tombol ditekan
                                                 if (showDeleteButton) {

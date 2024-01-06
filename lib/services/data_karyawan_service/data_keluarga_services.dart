@@ -83,13 +83,14 @@ class DataKeluargaServices {
     String desc,
   ) async {
     var url =
-        Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/keluarga_create/$dataKeluargaId");
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/keluarga_update");
 
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.put,
       headers: GeneralServices.addToken2Headers(token),
       body: json.encode({
+        "id" : dataKeluargaId,
         "m_comp_id": compId,
         "m_dir_id": dirId,
         "keluarga_id": keluargaId,

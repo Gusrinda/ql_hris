@@ -29,8 +29,8 @@ class AddDatabahasaSubmited extends AddBahasaEvent {
 class EditDatabahasaSubmited extends AddBahasaEvent {
   int bahasaId;
   String bhsDikuasai;
-  int nilaiLisan;
-  int nilaiTertulis;
+  String nilaiLisan;
+  String nilaiTertulis;
 
   EditDatabahasaSubmited({
     required this.bahasaId,

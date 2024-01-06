@@ -31,7 +31,8 @@ class ViewEditKeluargaPage extends StatefulWidget {
     this.valueJenisKelamin,
     this.usia,
     this.catatan,
-    required this.reloadDataCallback, required this.dataKeluargaId,
+    required this.reloadDataCallback,
+    required this.dataKeluargaId,
   });
   final int? idKeluarga;
   final String? valueKeluarga;
@@ -257,6 +258,7 @@ class _ViewEditKeluargaPageState extends State<ViewEditKeluargaPage> {
             ),
           );
           Navigator.of(context).pop();
+          Navigator.pop(context);
           widget.reloadDataCallback();
         } else if (state is EditDataKeluargaFailed) {
           LoadingDialog.dismissDialog(context);
@@ -507,7 +509,41 @@ class _ViewEditKeluargaPageState extends State<ViewEditKeluargaPage> {
                                 backgroundColor:
                                     MyColorsConst.primaryColor.withOpacity(0.1),
                                 textColor: MyColorsConst.primaryColor,
-                                onPressed: () {},
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (_) => DialogCustom(
+                                      state: DialogCustomItem.confirm,
+                                      message:
+                                          "Anda Yakin Mengubah Data Keluarga?",
+                                      durationInSec: 7,
+                                      onContinue: () => context
+                                          .read<AddKeluargaBloc>()
+                                          .add(
+                                            EditDataKeluargaSubmited(
+                                              dataKeluargaId:
+                                                  widget.dataKeluargaId,
+                                              keluargaId: int.parse(widget
+                                                  .idkeluargaController.text),
+                                              nama: widget.nameController.text,
+                                              pendTerakhirId: int.parse(widget
+                                                  .idPendidikanTerakhirController
+                                                  .text),
+                                              jenisKelaminId: int.parse(widget
+                                                  .idJenisKelaminController
+                                                  .text),
+                                              pekerjaanId: int.parse(widget
+                                                  .idPekerjaanController.text),
+                                              usia: int.parse(
+                                                  widget.usiaController.text),
+                                              desc:
+                                                  widget.catatanController.text,
+                                            ),
+                                          ),
+                                    ),
+                                  );
+                                } }
                               ),
                             ],
                           ),

@@ -183,6 +183,7 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
             ),
           );
           Navigator.of(context).pop();
+          Navigator.pop(context);
           widget.reloadDataCallback();
         } else if (state is EditPelatihanFailed) {
           LoadingDialog.dismissDialog(context);
@@ -373,28 +374,58 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
                                 backgroundColor:
                                     MyColorsConst.primaryColor.withOpacity(0.1),
                                 textColor: MyColorsConst.primaryColor,
-                                onPressed: state is AddDataPelatihanLoading
-                                    ? null
-                                    : () {
-                                        if (_formKey.currentState!.validate()) {
-                                          context.read<AddPelatihanBloc>().add(
-                                                EditDataPelatihanSubmited(
-                                                  pelatihanId:
-                                                      widget.idPelatihan ?? 0,
-                                                  namaPel: widget
-                                                      .namaPelatihanController
-                                                      .text,
-                                                  namaLem: widget
-                                                      .lembagaPelatihanController
-                                                      .text,
-                                                  tahun: int.parse(widget
-                                                      .tahunPelatihanController
-                                                      .text),
-                                                  kotaId: widget.idKota ?? 1,
-                                                ),
-                                              );
-                                        }
-                                      },
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (_) => DialogCustom(
+                                        state: DialogCustomItem.confirm,
+                                        message:
+                                            "Anda Yakin Mengubah Data Pelatihan?",
+                                        durationInSec: 7,
+                                        onContinue: () => context
+                                            .read<AddPelatihanBloc>()
+                                            .add(
+                                              EditDataPelatihanSubmited(
+                                                pelatihanId: widget.idPelatihan,
+                                                namaPel: widget
+                                                    .namaPelatihanController
+                                                    .text,
+                                                namaLem: widget
+                                                    .lembagaPelatihanController
+                                                    .text,
+                                                tahun: int.parse(widget
+                                                    .tahunPelatihanController
+                                                    .text),
+                                                kotaId: widget.idKota ?? 1,
+                                              ),
+                                            ),
+                                      ),
+                                    );
+                                  }
+                                },
+                                //  state is AddDataPelatihanLoading
+                                //     ? null
+                                //     : () {
+                                //         if (_formKey.currentState!.validate()) {
+                                // context.read<AddPelatihanBloc>().add(
+                                //       EditDataPelatihanSubmited(
+                                //         pelatihanId:
+                                //             widget.idPelatihan,
+                                //         namaPel: widget
+                                //             .namaPelatihanController
+                                //             .text,
+                                //         namaLem: widget
+                                //             .lembagaPelatihanController
+                                //             .text,
+                                //         tahun: int.parse(widget
+                                //             .tahunPelatihanController
+                                //             .text),
+                                //         kotaId: widget.idKota ?? 1,
+                                //       ),
+                                //     );
+                                //         }
+                                //       },
                               ),
                             ],
                           ),

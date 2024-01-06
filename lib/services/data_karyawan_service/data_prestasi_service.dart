@@ -13,9 +13,9 @@ class DataPrestasiServices {
     );
   }
 
-  static Future<Object> deleteDataPrestasi(
-      String token, String dataID) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/prestasi_delete");
+  static Future<Object> deleteDataPrestasi(String token, String dataID) async {
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/prestasi_delete");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.delete,
@@ -70,7 +70,7 @@ class DataPrestasiServices {
     int tingkatPresId,
   ) async {
     var url =
-        Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/prestasi_create/$prestasiId");
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/prestasi_update");
 
     return await GeneralServices.baseService(
       url: url,
@@ -79,6 +79,7 @@ class DataPrestasiServices {
       body: json.encode({
         "m_comp_id": compId,
         "m_dir_id": dirId,
+        "id": prestasiId,
         "nama_pres": namaPres,
         "tahun": tahun,
         "tingkat_pres_id": tingkatPresId,

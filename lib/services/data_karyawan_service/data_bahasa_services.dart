@@ -63,11 +63,11 @@ class DataBahasaServices {
     int dirId,
     int bahasaId,
     String bhsDikuasai,
-    int nilaiLisan,
-    int nilaiTetulis,
+    String nilaiLisan,
+    String nilaiTetulis,
   ) async {
     var url =
-        Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/bahasa_create/$bahasaId");
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/bahasa_update");
 
     return await GeneralServices.baseService(
       url: url,
@@ -76,9 +76,10 @@ class DataBahasaServices {
       body: json.encode({
         "m_comp_id": compId,
         "m_dir_id": dirId,
+        "id": bahasaId,
         "bhs_dikuasai": bhsDikuasai,
-        "nilai_lisan": nilaiLisan,
-        "nilai_tertulis": nilaiTetulis,
+        "level_lisan": nilaiLisan,
+        "level_tertulis": nilaiTetulis,
       }),
     );
   }

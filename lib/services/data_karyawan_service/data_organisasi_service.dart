@@ -77,13 +77,14 @@ class DataOrganisasiServices {
     String posisi,
   ) async {
     var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_kary/organisasi_create/$organisasiId");
+        "${MyGeneralConst.API_URL}/operation/m_kary/organisasi_update");
 
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.put,
       headers: GeneralServices.addToken2Headers(token),
       body: json.encode({
+        "id": organisasiId,
         "m_comp_id": compId,
         "m_dir_id": dirId,
         "nama": nama,

@@ -16,18 +16,19 @@ class ViewEditBahasaPage extends StatefulWidget {
     super.key,
     required this.reloadDataCallback,
     this.bhsDikuasai,
-    this.nilaiLisan,
-    this.nilaiTertulis, required this.bahasaId,
+    this.levelLisan,
+    this.levelTertulis,
+    required this.bahasaId,
   });
   final VoidCallback reloadDataCallback;
   final String? bhsDikuasai;
-  final int? nilaiLisan;
-  final int? nilaiTertulis;
+  final String? levelLisan;
+  final String? levelTertulis;
   final int bahasaId;
 
   final TextEditingController bahasaController = TextEditingController();
-  final TextEditingController lisanController = TextEditingController();
-  final TextEditingController tertulisController = TextEditingController();
+  final TextEditingController levelLisanController = TextEditingController();
+  final TextEditingController levelTertulisController = TextEditingController();
 
   @override
   State<ViewEditBahasaPage> createState() => _ViewEditBahasaPageState();
@@ -35,14 +36,57 @@ class ViewEditBahasaPage extends StatefulWidget {
 
 class _ViewEditBahasaPageState extends State<ViewEditBahasaPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  void _showLanguageLevelBottomSheet(
+      BuildContext context, TextEditingController controller) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          child: Wrap(
+            children: [
+              ListTile(
+                title: Text('Beginner'),
+                onTap: () {
+                  Navigator.pop(context, 'Beginner');
+                },
+              ),
+              ListTile(
+                title: Text('Intermediate'),
+                onTap: () {
+                  Navigator.pop(context, 'Intermediate');
+                },
+              ),
+              ListTile(
+                title: Text('Advanced'),
+                onTap: () {
+                  Navigator.pop(context, 'Advanced');
+                },
+              ),
+              ListTile(
+                title: Text('Mastery'),
+                onTap: () {
+                  Navigator.pop(context, 'Mastery');
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    ).then((selectedLevel) {
+      if (selectedLevel != null) {
+        controller.text = selectedLevel;
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
 
     widget.bahasaController.text = widget.bhsDikuasai ?? '';
-    widget.lisanController.text = widget.nilaiLisan.toString();
+    widget.levelLisanController.text = widget.levelLisan ?? '';
 
-    widget.tertulisController.text = widget.nilaiTertulis.toString();
+    widget.levelTertulisController.text = widget.levelTertulis ?? '';
   }
 
   @override
@@ -62,6 +106,7 @@ class _ViewEditBahasaPageState extends State<ViewEditBahasaPage> {
             ),
           );
           Navigator.of(context).pop();
+          Navigator.pop(context);
           widget.reloadDataCallback();
         } else if (state is EditBahasanFailed) {
           LoadingDialog.dismissDialog(context);
@@ -179,36 +224,44 @@ class _ViewEditBahasaPageState extends State<ViewEditBahasaPage> {
                                       errorTextStyle:
                                           GoogleFonts.poppins(fontSize: 8),
                                     ),
-                                    FormInputData(
-                                      input: widget.lisanController.text,
-                                      labelTag: 'label-addlisan',
-                                      labelForm: 'Nilai Lisan',
-                                      formTag: 'form-addlisan',
-                                      hintText: 'Nilai Lisan',
-                                      inputType: TextInputType.number,
-                                      onTap: () {},
-                                      controller: widget.lisanController,
+                                    FormDropDownData(
+                                      input: widget.levelLisanController.text,
+                                      labelTag: 'label-addlevelLisan',
+                                      labelForm: 'Level Lisan Bahasa',
+                                      formTag: 'form-addlevelLisan',
+                                      hintText: 'Pilih Tingkatan Lisan Bahasa',
+                                      onTap: () {
+                                        _showLanguageLevelBottomSheet(context,
+                                            widget.levelLisanController);
+                                      },
+                                      valueController:
+                                          widget.levelLisanController,
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
-                                          return 'Tuliskan Nilai Lisan';
+                                          return 'Pilih Tingkatan Lisan Bahasa';
                                         }
                                         return null;
                                       },
                                       errorTextStyle:
                                           GoogleFonts.poppins(fontSize: 8),
                                     ),
-                                    FormInputData(
-                                      input: widget.tertulisController.text,
-                                      labelTag: 'label-addtertulis',
-                                      labelForm: 'Nilai Tertulis',
-                                      formTag: 'form-addtertulis',
-                                      hintText: 'Nilai Tertulis',
-                                      inputType: TextInputType.number,
-                                      onTap: () {},
-                                      controller: widget.tertulisController,
+                                    FormDropDownData(
+                                      input:
+                                          widget.levelTertulisController.text,
+                                      labelTag: 'label-addlevelTertulis',
+                                      labelForm: 'Level Tertulis Bahasa',
+                                      formTag: 'form-addlevelTertulis',
+                                      hintText:
+                                          'Pilih Tingkatan Tertulis Bahasa',
+                                      onTap: () {
+                                        _showLanguageLevelBottomSheet(context,
+                                            widget.levelTertulisController);
+                                      },
+                                      valueController:
+                                          widget.levelTertulisController,
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
-                                          return 'Tuliskan Nilai Tertulis';
+                                          return 'Pilih Tingkatan Tertulis Bahasa';
                                         }
                                         return null;
                                       },
@@ -225,7 +278,32 @@ class _ViewEditBahasaPageState extends State<ViewEditBahasaPage> {
                                 backgroundColor:
                                     MyColorsConst.primaryColor.withOpacity(0.1),
                                 textColor: MyColorsConst.primaryColor,
-                                onPressed: () {},
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (_) => DialogCustom(
+                                      state: DialogCustomItem.confirm,
+                                      message:
+                                          "Anda Yakin Mengubah Data Bahasa?",
+                                      durationInSec: 7,
+                                      onContinue: () =>
+                                          context.read<AddBahasaBloc>().add(
+                                                EditDatabahasaSubmited(
+                                                    bahasaId: widget.bahasaId,
+                                                    bhsDikuasai: widget
+                                                        .bahasaController.text,
+                                                    nilaiLisan: widget
+                                                        .levelLisanController
+                                                        .text,
+                                                    nilaiTertulis: widget
+                                                        .levelTertulisController
+                                                        .text),
+                                              ),
+                                    ),
+                                  );
+                                }
+                                }
                               ),
                             ],
                           ),

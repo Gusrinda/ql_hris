@@ -33,7 +33,8 @@ class ViewEditPengalamanPage extends StatefulWidget {
     this.valueKota,
     this.suratReferensi,
     required this.reloadDataCallback,
-    this.noTelp, required this.pengalamanId,
+    this.noTelp,
+    required this.pengalamanId,
   });
   final String? namaPerusahaan;
   final String? bidangUsaha;
@@ -260,6 +261,7 @@ class _ViewEditPengalamanPageState extends State<ViewEditPengalamanPage> {
             ),
           );
           Navigator.of(context).pop();
+          Navigator.pop(context);
           widget.reloadDataCallback();
         } else if (state is EditPengalamanFailed) {
           LoadingDialog.dismissDialog(context);
@@ -348,7 +350,8 @@ class _ViewEditPengalamanPageState extends State<ViewEditPengalamanPage> {
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: 24.sp, vertical: 16.sp),
-                    child: BlocBuilder<AddPengalamanKerjaBloc, AddPengalamanKerjaState>(
+                    child: BlocBuilder<AddPengalamanKerjaBloc,
+                        AddPengalamanKerjaState>(
                       builder: (context, state) {
                         return SingleChildScrollView(
                           child: Column(
@@ -681,7 +684,7 @@ class _ViewEditPengalamanPageState extends State<ViewEditPengalamanPage> {
                                           ),
                                         ],
                                       ),
-                                      SizedBox(
+                                    SizedBox(
                                       width: size.width,
                                       child: Row(
                                         crossAxisAlignment:
@@ -696,12 +699,13 @@ class _ViewEditPengalamanPageState extends State<ViewEditPengalamanPage> {
                                               fontWeight: FontWeight.w600,
                                             ),
                                           ),
-                                          if (widget.suratReferensi?.isNotEmpty ??
+                                          if (widget
+                                                  .suratReferensi?.isNotEmpty ??
                                               false)
                                             Link(
                                               target: LinkTarget.self,
-                                              uri:
-                                                  Uri.parse('${widget.suratReferensi}'),
+                                              uri: Uri.parse(
+                                                  '${widget.suratReferensi}'),
                                               builder: (context, followLink) =>
                                                   GestureDetector(
                                                 onTap: followLink,
@@ -738,7 +742,52 @@ class _ViewEditPengalamanPageState extends State<ViewEditPengalamanPage> {
                                 backgroundColor:
                                     MyColorsConst.primaryColor.withOpacity(0.1),
                                 textColor: MyColorsConst.primaryColor,
-                                onPressed: () {},
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (_) => DialogCustom(
+                                        state: DialogCustomItem.confirm,
+                                        message:
+                                            "Anda Yakin Mengubah Data Pengalaman?",
+                                        durationInSec: 7,
+                                        onContinue: () => context
+                                            .read<AddPengalamanKerjaBloc>()
+                                            .add(
+                                              EditDataPengalamanKerjaSubmited(
+                                                pengalamanId:
+                                                    widget.pengalamanId,
+                                                instansi: widget
+                                                    .namaPerusahaanController
+                                                    .text,
+                                                bidangUsaha: widget
+                                                    .bidangUsahaController.text,
+                                                noTelp: widget
+                                                    .noTelpController.text,
+                                                posisi: widget
+                                                    .posisiController.text,
+                                                tahunMasuk: widget
+                                                    .tahunMasukController.text,
+                                                tahunKeluar: widget
+                                                    .tahunKeluarController.text,
+                                                alamat: widget
+                                                    .alamatKantorController
+                                                    .text,
+                                                kotaId: int.parse(
+                                                  widget.idKotaController.text,
+                                                ),
+                                                suratReferensi: uploadedFile !=
+                                                            null &&
+                                                        uploadedFile!
+                                                            .path.isNotEmpty
+                                                    ? File(uploadedFile!.path)
+                                                    : null,
+                                              ),
+                                            ),
+                                      ),
+                                    );
+                                  }
+                                },
                               ),
                             ],
                           ),

@@ -185,46 +185,45 @@ class _DataPengalamanKerjaPageState extends State<DataPengalamanKerjaPage> {
                                                 Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          BlocProvider(
-                                                            create: (context) =>
-                                                                AddPengalamanKerjaBloc(),
-                                                            child:
-                                                                ViewEditPengalamanPage(
-                                                                  pengalamanId: dataPengalaman.id ?? 0,
-                                                              namaPerusahaan:
-                                                                  dataPengalaman
-                                                                      .instansi,
-                                                              bidangUsaha:
-                                                                  dataPengalaman
-                                                                      .bidangUsaha,
-                                                              posisi:
-                                                                  dataPengalaman
-                                                                      .posisi,
-                                                              tahunMasuk:
-                                                                  dataPengalaman
-                                                                      .thnMasuk,
-                                                              noTelp:
-                                                                  dataPengalaman
-                                                                      .noTlp,
-                                                              tahunKeluar:
-                                                                  dataPengalaman
-                                                                      .thnKeluar,
-                                                              alamat: dataPengalaman
-                                                                  .alamatKantor,
-                                                              idKota:
-                                                                  dataPengalaman
-                                                                      .kotaId,
-                                                              valueKota:
-                                                                  dataPengalaman
-                                                                      .kota,
-                                                              suratReferensi:
-                                                                  dataPengalaman
-                                                                      .suratReferensi,
-                                                              reloadDataCallback:
-                                                                  loadData,
-                                                            ),
-                                                          )),
+                                                    builder: (context) =>
+                                                        BlocProvider(
+                                                      create: (context) =>
+                                                          AddPengalamanKerjaBloc(),
+                                                      child:
+                                                          ViewEditPengalamanPage(
+                                                        pengalamanId:
+                                                            dataPengalaman.id ??
+                                                                0,
+                                                        namaPerusahaan:
+                                                            dataPengalaman
+                                                                .instansi,
+                                                        bidangUsaha:
+                                                            dataPengalaman
+                                                                .bidangUsaha,
+                                                        posisi: dataPengalaman
+                                                            .posisi,
+                                                        tahunMasuk:
+                                                            dataPengalaman
+                                                                .thnMasuk,
+                                                        noTelp: dataPengalaman
+                                                            .noTlp,
+                                                        tahunKeluar:
+                                                            dataPengalaman
+                                                                .thnKeluar,
+                                                        alamat: dataPengalaman
+                                                            .alamatKantor,
+                                                        idKota: dataPengalaman
+                                                            .kotaId,
+                                                        valueKota:
+                                                            dataPengalaman.kota,
+                                                        suratReferensi:
+                                                            dataPengalaman
+                                                                .suratReferensi,
+                                                        reloadDataCallback:
+                                                            loadData,
+                                                      ),
+                                                    ),
+                                                  ),
                                                 );
                                                 setState(() {
                                                   showDeleteButton = false;

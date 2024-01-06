@@ -20,7 +20,8 @@ class ViewEditPrestasiPage extends StatefulWidget {
     this.idTingkat,
     this.valueTingkat,
     this.tahun,
-    required this.reloadDataCallback, required this.prestasiId,
+    required this.reloadDataCallback,
+    required this.prestasiId,
   });
   final String? namaPrestasi;
   final int? idTingkat;
@@ -169,6 +170,7 @@ class _ViewEditPrestasiPageState extends State<ViewEditPrestasiPage> {
             ),
           );
           Navigator.of(context).pop();
+          Navigator.pop(context);
           widget.reloadDataCallback();
         } else if (state is EditDataPrestasiFailed) {
           LoadingDialog.dismissDialog(context);
@@ -338,7 +340,36 @@ class _ViewEditPrestasiPageState extends State<ViewEditPrestasiPage> {
                                 backgroundColor:
                                     MyColorsConst.primaryColor.withOpacity(0.1),
                                 textColor: MyColorsConst.primaryColor,
-                                onPressed: () {},
+                                onPressed: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (_) => DialogCustom(
+                                        state: DialogCustomItem.confirm,
+                                        message:
+                                            "Anda Yakin Mengubah Data Bahasa?",
+                                        durationInSec: 7,
+                                        onContinue: () => context
+                                            .read<AddPrestasiBloc>()
+                                            .add(
+                                              EditDataPrestasiSubmited(
+                                                prestasiId: widget.prestasiId,
+                                                namaPres: widget
+                                                    .namaPrestasiController
+                                                    .text,
+                                                tahun:
+                                                    widget.tahunController.text,
+                                                tingkatPresId: int.parse(
+                                                  widget
+                                                      .idTingkatPrestasiController
+                                                      .text,
+                                                ),
+                                              ),
+                                            ),
+                                      ),
+                                    );
+                                  }
+                                },
                               ),
                             ],
                           ),
