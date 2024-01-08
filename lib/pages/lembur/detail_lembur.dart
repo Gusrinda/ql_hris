@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
+import 'package:sj_presensi_mobile/pages/lembur/add_lembur/add_lembur_bloc.dart';
+import 'package:sj_presensi_mobile/pages/lembur/edit_lembur.dart';
 import 'package:sj_presensi_mobile/services/model/lembur/lembur_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 import 'package:url_launcher/link.dart';
@@ -40,10 +42,16 @@ class DetailLemburPage extends StatefulWidget {
     this.doc,
     this.keterangan,
     this.data,
+    this.alasanId,
     this.alasanValue,
-    // required this.id,
+    required this.lemburID,
+    required this.reloadDataCallback,
+    this.tipeLemburId,
+    this.picId,
+    this.picValue,
   }) : super(key: key);
   final DataLembur? data;
+  final int? tipeLemburId;
   final String? tipeLemburValue;
   final String? nomorFromList;
   final String? tanggal;
@@ -52,7 +60,12 @@ class DetailLemburPage extends StatefulWidget {
   final String? noDoc;
   final String? doc;
   final String? keterangan;
+  final int? alasanId;
   final String? alasanValue;
+  final int? picId;
+  final String? picValue;
+  final int lemburID;
+  final VoidCallback reloadDataCallback;
 
   @override
   _DetailLemburPageState createState() => _DetailLemburPageState();
@@ -222,7 +235,8 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                   ),
                                 ),
                                 Text(
-                                  mapStatusToString(widget.data?.status as String),
+                                  mapStatusToString(
+                                      widget.data?.status as String),
                                   style: GoogleFonts.poppins(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w600,
@@ -295,7 +309,40 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                             ),
                           )
                         ],
-                      )
+                      ),
+                      // if (currentStatus == "REVISED")
+                      TextButtonCustomV1(
+                        text: "Revisi Pengajuan Lembur",
+                        height: 50.sp,
+                        textSize: 12,
+                        backgroundColor: Colors.orange.withOpacity(0.1),
+                        textColor: Colors.orange,
+                        onPressed: () {
+                          print("Edit Lembur ID : ${widget.lemburID}");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BlocProvider(
+                                create: (context) => AddLemburBloc(),
+                                child: EditLemburPage(
+                                  lemburID: widget.lemburID,
+                                  picId: widget.picId,
+                                  picValue: widget.picValue,
+                                  alasanValue: widget.alasanValue,
+                                  alasanId: widget.alasanId,
+                                  tipeLemburId: widget.tipeLemburId,
+                                  tipeLemburValue: widget.tipeLemburValue,
+                                  keterangan: widget.keterangan,
+                                  tanggal: widget.tanggal,
+                                  jamMulai: widget.jamMulai,
+                                  jamSelesai: widget.jamSelesai,
+                                  reloadDataCallback: widget.reloadDataCallback,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),

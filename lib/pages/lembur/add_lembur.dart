@@ -45,6 +45,7 @@ class AddLemburPage extends StatefulWidget {
 
 class _AddLemburPageState extends State<AddLemburPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   String? selectedValue;
   String? selectedTipeValue;
   String? selectedIDTipeValue;
@@ -161,7 +162,8 @@ class _AddLemburPageState extends State<AddLemburPage> {
 
         if (selectedPic != null) {
           widget.idPicController?.text = selectedPic.id?.toString() ?? '';
-          widget.valuePicController?.text = selectedPic.mKaryNamaLengkap?.toString() ?? '';
+          widget.valuePicController?.text =
+              selectedPic.mKaryNamaLengkap?.toString() ?? '';
 
           setState(() {
             this.selectedPic = selectedPic.mKaryNamaLengkap;
@@ -298,7 +300,8 @@ class _AddLemburPageState extends State<AddLemburPage> {
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         FormDropDownDataWithNote(
-                                          note: "   Isi data PIC jika lembur ditujukan untuk bawahan.",
+                                          note:
+                                              "   Isi data PIC jika lembur ditujukan untuk bawahan.",
                                           showRedStar: false,
                                           input: selectedPic ?? '',
                                           onTap: () {
@@ -574,36 +577,40 @@ class _AddLemburPageState extends State<AddLemburPage> {
                               onPressed: state is AddLemburLoading
                                   ? null
                                   : () {
-                                      context.read<AddLemburBloc>().add(
-                                            OnSumbitLembur(
-                                                picID: widget.idPicController?.value.text !=
-                                                        null
-                                                    ? int.tryParse(widget
-                                                        .idPicController!
-                                                        .value
-                                                        .text)
-                                                    : null,
-                                                alasanLemburID: int.parse(widget
-                                                    .idAlasanController
-                                                    .value
-                                                    .text),
-                                                tipeLemburID: int.parse(widget
-                                                    .idTipeLemburController
-                                                    .value
-                                                    .text),
-                                                keterangan: widget
-                                                    .keteranganController
-                                                    .value
-                                                    .text,
-                                                dateLembur: widget
-                                                    .dateController.value.text,
-                                                timeFrom: widget
-                                                        .timeFromController
-                                                        ?.value
-                                                        .text ??
-                                                    "00:00",
-                                                timeTo: widget.timeToController?.value.text ?? "00:00"),
-                                          );
+                                      if (_formKey.currentState!.validate()) {
+                                        context.read<AddLemburBloc>().add(
+                                              OnSumbitLembur(
+                                                  picID:
+                                                      widget.idPicController?.value.text != null
+                                                          ? int.tryParse(widget
+                                                              .idPicController!
+                                                              .value
+                                                              .text)
+                                                          : null,
+                                                  alasanLemburID: int.parse(widget
+                                                      .idAlasanController
+                                                      .value
+                                                      .text),
+                                                  tipeLemburID: int.parse(widget
+                                                      .idTipeLemburController
+                                                      .value
+                                                      .text),
+                                                  keterangan: widget
+                                                      .keteranganController
+                                                      .value
+                                                      .text,
+                                                  dateLembur: widget
+                                                      .dateController
+                                                      .value
+                                                      .text,
+                                                  timeFrom: widget
+                                                          .timeFromController
+                                                          ?.value
+                                                          .text ??
+                                                      "00:00",
+                                                  timeTo: widget.timeToController?.value.text ?? "00:00"),
+                                            );
+                                      }
                                     },
                             ),
                           ],

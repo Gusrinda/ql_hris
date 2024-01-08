@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/hero_widget.dart';
@@ -15,16 +15,38 @@ import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/pic_search.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/selector/general_selector.dart';
 import 'package:sj_presensi_mobile/pages/lembur/add_lembur/add_lembur_bloc.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_pic_model.dart';
-import 'package:sj_presensi_mobile/services/model/lembur/lembur_model.dart';
 import 'package:sj_presensi_mobile/services/model/list_general/response_general.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 class EditLemburPage extends StatefulWidget {
   static const routeName = '/EditLemburPage';
-  EditLemburPage(
-      {super.key, this.dataLembur, required this.reloadDataCallback});
-  final DataLembur? dataLembur;
+  EditLemburPage({
+    super.key,
+    required this.reloadDataCallback,
+    required this.lemburID,
+    this.picId,
+    this.picValue,
+    this.tipeLemburId,
+    this.tipeLemburValue,
+    this.alasanId,
+    this.alasanValue,
+    this.tanggal,
+    this.jamMulai,
+    this.jamSelesai,
+    this.keterangan,
+  });
   final VoidCallback reloadDataCallback;
+  final int lemburID;
+  final int? picId;
+  final String? picValue;
+  final int? tipeLemburId;
+  final String? tipeLemburValue;
+  final int? alasanId;
+  final String? alasanValue;
+  final String? tanggal;
+  final String? jamMulai;
+  final String? jamSelesai;
+  final String? keterangan;
 
   final TextEditingController idAlasanController = TextEditingController();
   final TextEditingController valueAlasanController = TextEditingController();
@@ -48,6 +70,70 @@ class EditLemburPage extends StatefulWidget {
 
 class _EditLemburPageState extends State<EditLemburPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    super.initState();
+    widget.idAlasanController.text = widget.alasanId.toString();
+    widget.valueAlasanController.text = widget.alasanValue ?? '';
+    widget.idTipeLemburController.text = widget.tipeLemburId.toString();
+    widget.valueTipeLemburController.text = widget.tipeLemburValue ?? '';
+    widget.keteranganController.text = widget.keterangan ?? '';
+    widget.dateController.text = convertDateFormat(widget.tanggal) ?? '';
+    selectedDateLembur = parseDateString(widget.tanggal);
+    widget.timeFromController?.text = widget.jamMulai ?? '';
+    widget.timeToController?.text = widget.jamSelesai ?? '';
+    // Konversi String ke TimeOfDay
+    selectedTimeFrom = widget.jamMulai != null
+        ? TimeOfDay(
+            hour: int.parse(widget.jamMulai!.split(":")[0]),
+            minute: int.parse(widget.jamMulai!.split(":")[1]),
+          )
+        : null;
+
+    selectedTimeTo = widget.jamSelesai != null
+        ? TimeOfDay(
+            hour: int.parse(widget.jamSelesai!.split(":")[0]),
+            minute: int.parse(widget.jamSelesai!.split(":")[1]),
+          )
+        : null;
+
+    widget.idPicController?.text = widget.picId.toString();
+    widget.valuePicController?.text = widget.picValue ?? '';
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final lemburBloc = context.read<AddLemburBloc>();
+      lemburBloc.add(OnSelectPic());
+      lemburBloc.add(OnSelectTipeLembur());
+      lemburBloc.add(OnSelectAlasanLembur());
+    });
+  }
+
+  String? convertDateFormat(String? originalDate) {
+    if (originalDate != null && originalDate.isNotEmpty) {
+      try {
+        final parsedDate = DateFormat('dd/MM/yyyy').parse(originalDate);
+        return DateFormat('yyyy-MM-dd').format(parsedDate);
+      } catch (e) {
+        print('Error converting date format: $e');
+      }
+    }
+    return null;
+  }
+
+  DateTime? parseDateString(String? date) {
+    try {
+      if (date != null) {
+        final List<String> dateParts = date.split('/');
+        final day = int.parse(dateParts[0]);
+        final month = int.parse(dateParts[1]);
+        final year = int.parse(dateParts[2]);
+        return DateTime(year, month, day);
+      }
+    } catch (e) {
+      print("Error parsing date string: $e");
+    }
+    return null;
+  }
+
   String? selectedValue;
   String? selectedTipeValue;
   String? selectedIDTipeValue;
@@ -64,14 +150,6 @@ class _EditLemburPageState extends State<EditLemburPage> {
       print("Error parsing date: $e");
       return null;
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<AddLemburBloc>().add(OnSelectPic());
-    });
   }
 
   @override
@@ -182,7 +260,7 @@ class _EditLemburPageState extends State<EditLemburPage> {
       listener: (context, state) async {
         if (state is AddLemburLoading) {
           LoadingDialog.showLoadingDialog(context);
-        } else if (state is AddLemburSuccess) {
+        } else if (state is EditLemburSuccess) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
             context: context,
@@ -193,7 +271,7 @@ class _EditLemburPageState extends State<EditLemburPage> {
           );
           Navigator.of(context).pop();
           widget.reloadDataCallback();
-        } else if (state is AddLemburFailed) {
+        } else if (state is EditLemburFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
             context: context,
@@ -252,7 +330,7 @@ class _EditLemburPageState extends State<EditLemburPage> {
                       color: Colors.white,
                     ),
                     SizedBox(
-                      width: size.width * 1 / 4.8,
+                      width: size.width * 0.5 / 4.5,
                     ),
                     Expanded(
                       child: Text(
@@ -575,36 +653,41 @@ class _EditLemburPageState extends State<EditLemburPage> {
                               onPressed: state is AddLemburLoading
                                   ? null
                                   : () {
-                                      context.read<AddLemburBloc>().add(
-                                            OnSumbitLembur(
-                                                picID: widget.idPicController?.value.text !=
-                                                        null
-                                                    ? int.tryParse(widget
-                                                        .idPicController!
-                                                        .value
-                                                        .text)
-                                                    : null,
-                                                alasanLemburID: int.parse(widget
-                                                    .idAlasanController
-                                                    .value
-                                                    .text),
-                                                tipeLemburID: int.parse(widget
-                                                    .idTipeLemburController
-                                                    .value
-                                                    .text),
-                                                keterangan: widget
-                                                    .keteranganController
-                                                    .value
-                                                    .text,
-                                                dateLembur: widget
-                                                    .dateController.value.text,
-                                                timeFrom: widget
-                                                        .timeFromController
-                                                        ?.value
-                                                        .text ??
-                                                    "00:00",
-                                                timeTo: widget.timeToController?.value.text ?? "00:00"),
-                                          );
+                                      if (_formKey.currentState!.validate()) {
+                                        context.read<AddLemburBloc>().add(
+                                              OnEditLembur(
+                                                  lemburID: widget.lemburID,
+                                                  picID:
+                                                      widget.idPicController?.value.text != null
+                                                          ? int.tryParse(widget
+                                                              .idPicController!
+                                                              .value
+                                                              .text)
+                                                          : null,
+                                                  alasanLemburID: int.parse(widget
+                                                      .idAlasanController
+                                                      .value
+                                                      .text),
+                                                  tipeLemburID: int.parse(widget
+                                                      .idTipeLemburController
+                                                      .value
+                                                      .text),
+                                                  keterangan: widget
+                                                      .keteranganController
+                                                      .value
+                                                      .text,
+                                                  dateLembur: widget
+                                                      .dateController
+                                                      .value
+                                                      .text,
+                                                  timeFrom: widget
+                                                          .timeFromController
+                                                          ?.value
+                                                          .text ??
+                                                      "00:00",
+                                                  timeTo: widget.timeToController?.value.text ?? "00:00"),
+                                            );
+                                      }
                                     },
                             ),
                           ],

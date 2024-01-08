@@ -70,3 +70,21 @@ class AddLemburFailedUserExpired extends AddLemburState {
   @override
   List<Object> get props => [message];
 }
+
+class EditLemburSuccess extends AddLemburState {
+  String message;
+
+  EditLemburSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+class EditLemburFailed extends AddLemburState {
+  String message;
+
+  EditLemburFailed({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
