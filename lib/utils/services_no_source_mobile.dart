@@ -137,6 +137,12 @@ class GeneralServicesNoMobile {
           errorResponse: json.decode(response.body)['message'],
         );
       }
+      if (response.statusCode == MyGeneralConst.CODE_LARGE_FILE) {
+        return ServicesFailureNoMobile(
+          code: response.statusCode,
+          errorResponse: "Ukuran File Terlalu Besar",
+        );
+      }
       return ServicesFailureNoMobile(
         code: response.statusCode,
         errorResponse: json.decode(response.body)['message'],

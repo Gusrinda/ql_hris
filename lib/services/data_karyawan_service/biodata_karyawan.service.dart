@@ -112,12 +112,12 @@ class BiodataKaryawanService {
       print("atas nama rekening : $atasNamaRek");
 
       print("Files yang diUpload:");
-      print("File KTP : ${File(ktpFoto?.path ?? "KTP Kosong")}");
-      print("File KTP : ${File(pasFoto?.path ?? "KTP Kosong")}");
-      // print("File KTP : ${File(bpjsFoto?.path ?? "KTP Kosong")}");
-      print("File KTP : ${File(kkFoto?.path ?? "KTP Kosong")}");
-      print("File KTP : ${File(npwpFoto?.path ?? "KTP Kosong")}");
-      print("File KTP : ${File(berkasLain?.path ?? "KTP Kosong")}");
+      print("File KTP : ${File(ktpFoto?.path ?? "")}");
+      print("File KTP : ${File(pasFoto?.path ?? "")}");
+      // print("File KTP : ${File(bpjsFoto?.path ?? "")}");
+      print("File KTP : ${File(kkFoto?.path ?? "")}");
+      print("File KTP : ${File(npwpFoto?.path ?? "")}");
+      print("File KTP : ${File(berkasLain?.path ?? "")}");
 
       // Create a map for the request body
       Object requestBody = {
