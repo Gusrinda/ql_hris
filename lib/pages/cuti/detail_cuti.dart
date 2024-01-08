@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/edit_cuti.dart';
-import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/list_cuti_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -296,41 +294,40 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                       SizedBox(
                         height: 30.sp,
                       ),
-                      if (currentStatus == "REVISED")
-                        TextButtonCustomV1(
-                          text: "Revisi Pengajuan Cuti",
-                          height: 50.sp,
-                          textSize: 12,
-                          backgroundColor: Colors.orange.withOpacity(0.1),
-                          textColor: Colors.orange,
-                          onPressed: () {
-                            print("Edit Cuti ID : ${widget.cutiId}");
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BlocProvider(
-                                  create: (context) => AddCutiBloc()
-                                    ..add(OnSelectAlasanCuti())
-                                    ..add(OnSelectTipeCuti()),
-                                  child: EditCutiPage(
-                                    dataCuti: widget.data,
-                                    cutiId: widget.cutiId ?? 1,
-                                    dateFrom: widget.dateFrom,
-                                    dateTo: widget.dateTo,
-                                    alasanValue: widget.alasanValue,
-                                    alasanID: widget.alasanID,
-                                    status: widget.status,
-                                    keterangan: widget.keterangan,
-                                    tipeCutiValue: widget.tipeCutiValue,
-                                    tipeCutiID: widget.tipeCutiID,
-                                    reloadDataCallback:
-                                        widget.reloadDataCallback,
-                                  ),
+                      // if (currentStatus == "REVISED")
+                      TextButtonCustomV1(
+                        text: "Revisi Pengajuan Cuti",
+                        height: 50.sp,
+                        textSize: 12,
+                        backgroundColor: Colors.orange.withOpacity(0.1),
+                        textColor: Colors.orange,
+                        onPressed: () {
+                          print("Edit Cuti ID : ${widget.cutiId}");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BlocProvider(
+                                create: (context) => AddCutiBloc()
+                                  ..add(OnSelectAlasanCuti())
+                                  ..add(OnSelectTipeCuti()),
+                                child: EditCutiPage(
+                                  dataCuti: widget.data,
+                                  cutiId: widget.cutiId ?? 1,
+                                  dateFrom: widget.dateFrom,
+                                  dateTo: widget.dateTo,
+                                  alasanValue: widget.alasanValue,
+                                  alasanID: widget.alasanID,
+                                  status: widget.status,
+                                  keterangan: widget.keterangan,
+                                  tipeCutiValue: widget.tipeCutiValue,
+                                  tipeCutiID: widget.tipeCutiID,
+                                  reloadDataCallback: widget.reloadDataCallback,
                                 ),
                               ),
-                            );
-                          },
-                        ),
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),

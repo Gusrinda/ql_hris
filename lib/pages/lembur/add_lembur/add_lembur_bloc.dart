@@ -62,6 +62,51 @@ class AddLemburBloc extends Bloc<AddLemburEvent, AddLemburState> {
       }
     });
 
+    on<OnEditLembur>((event, emit) async {
+      emit(AddLemburLoading());
+      var resToken = await GeneralSharedPreferences.getUserToken();
+      if (resToken is ServicesSuccess) {
+        print("ini res Token : ${resToken.response}");
+        print("GET DATA: ");
+        print("Ini M_COMP_ID : ${resToken.response["m_comp_id"]}");
+        print("Ini M_DIR_ID : ${resToken.response["m_dir_id"]}");
+        print("Ini M_KARY_ID : ${resToken.response["m_kari_id"]}");
+
+        var res = await LemburServices.editLembur(
+            resToken.response["token"],
+            resToken.response["m_comp_id"] ?? 1,
+            resToken.response["m_dir_id"] ?? 1,
+            resToken.response["m_kary_id"] ?? 1,
+            event.lemburID,
+            event.picID ?? -99,
+            event.dateLembur,
+            event.alasanLemburID,
+            event.tipeLemburID,
+            event.timeFrom,
+            event.timeTo,
+            // event.noDoc!,
+            // event.doc!,
+            event.keterangan);
+
+        if (res is ServicesSuccess) {
+          emit(EditLemburSuccess(
+              message: "Revisi lembur telah berhasil dikirim"));
+          print(res.response);
+        } else if (res is ServicesFailure) {
+          if (res.errorResponse == null) {
+            await GeneralSharedPreferences.removeUserToken();
+            emit(AddLemburFailedUserExpired(message: "Token expired"));
+          } else {
+            emit(EditLemburFailed(
+                message: "Maaf data belum valid, silahkan dikoreksi"));
+            print("Response from API: ${res.errorResponse}");
+          }
+        }
+      } else if (resToken is ServicesFailure) {
+        emit(AddLemburFailed(message: 'Response format is invalid'));
+      }
+    });
+
     on<OnSelectPic>(
       (event, emit) async {
         emit(AddLemburLoading());

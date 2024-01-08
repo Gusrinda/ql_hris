@@ -332,6 +332,7 @@ class _LemburPageState extends State<LemburPage> {
                                 listlembur: listlembur,
                                 formatDate: formatDate,
                                 extractTime: extractTime,
+                                reloadDataCallback: loadData,
                               );
                             },
                           ),
@@ -353,12 +354,14 @@ class CardListView extends StatelessWidget {
   final List<DataLembur> listlembur;
   final String Function(String?) formatDate;
   final String Function(String?) extractTime;
+  final VoidCallback reloadDataCallback;
 
   const CardListView(
       {Key? key,
       required this.listlembur,
       required this.formatDate,
-      required this.extractTime})
+      required this.extractTime,
+      required this.reloadDataCallback})
       : super(key: key);
 
   @override
@@ -384,6 +387,8 @@ class CardListView extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) => DetailLemburPage(
                           data: data,
+                          lemburID : data.id ?? 0,
+                          tipeLemburId : data.tipeLemburId,
                           tipeLemburValue: data.tipeLemburValue,
                           nomorFromList: data.nomor,
                           tanggal: data.tanggal,
@@ -392,7 +397,11 @@ class CardListView extends StatelessWidget {
                           noDoc: data.noDoc,
                           doc: data.doc,
                           keterangan: data.keterangan,
+                          alasanId : data.alasanId,
                           alasanValue: data.alasanValue,
+                          picId : data.picId,
+                          picValue : data.picNamaLengkap,
+                          reloadDataCallback: reloadDataCallback,
                         ),
                       ),
                     );

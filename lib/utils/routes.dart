@@ -82,6 +82,8 @@ import 'package:sj_presensi_mobile/pages/home/report/add/add_report_page.dart';
 import 'package:sj_presensi_mobile/pages/home/report/add/bloc/add_report_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/report/report_detail_page.dart';
 import 'package:sj_presensi_mobile/pages/lembur/detail_lembur.dart';
+import 'package:sj_presensi_mobile/pages/lembur/edit_lembur.dart';
+import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/list_lembur_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
 import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
@@ -194,8 +196,34 @@ class RouteGenerator {
         });
       case DetailLemburPage.routeName:
         final data = settings.arguments as DetailLemburPage;
+        final arguments = settings.arguments as Map<String, dynamic>;
+        final lemburID = arguments['lemburID'] as int;
         return MaterialPageRoute(builder: (context) {
-          return DetailLemburPage(data: data.data);
+          return DetailLemburPage(
+            data: data.data,
+            lemburID: lemburID,
+            reloadDataCallback: () {
+              context
+                  .read<ListLemburBloc>()
+                  .add(GetListLembur(date: DateTime.now()));
+            },
+          );
+        });
+      case EditLemburPage.routeName:
+        final arguments = settings.arguments as Map<String, dynamic>;
+        final lemburID = arguments['lemburID'] as int;
+        return MaterialPageRoute(builder: (context) {
+          return BlocProvider(
+            create: (context) => AddCutiBloc(),
+            child: EditCutiPage(
+              cutiId: lemburID,
+              reloadDataCallback: () {
+                context
+                    .read<ListLemburBloc>()
+                    .add(GetListLembur(date: DateTime.now()));
+              },
+            ),
+          );
         });
       case DetailCutiPage.routeName:
         final data = settings.arguments as DataListCuti;

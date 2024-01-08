@@ -466,6 +466,8 @@ class CardListNotifikasi extends StatelessWidget {
               jamSelesai: matchDataLembur?.jamSelesai,
               noDoc: matchDataLembur?.noDoc,
               doc: matchDataLembur?.doc,
+              lemburID: matchDataLembur?.id ?? 0,
+              reloadDataCallback: () {},
             ),
           ),
         );

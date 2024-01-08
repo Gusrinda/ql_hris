@@ -141,4 +141,55 @@ class LemburServices {
       headers: GeneralServices.addToken2Headers(token),
     );
   }
+
+  static Future<Object> editLembur(
+    String token,
+    int mCompID,
+    int mDirID,
+    int mKaryID,
+    int lemburID,
+    int? picID,
+    String dateLembur,
+    int alasanLemburID,
+    int tipeLemburID,
+    String timeFrom,
+    String timeTo,
+    String keterangan,
+  ) async {
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/t_lembur/$lemburID");
+    print("Ini yang dikirim saat POST Cuti :");
+    print("alasan_id : ${alasanLemburID}");
+    print("tipe_lembur_id : ${tipeLemburID}");
+    print("Tanggal : ${dateLembur}");
+    print("keterangan : ${keterangan}");
+    print("Ini mCompID : ${mCompID}");
+    print("Ini mDirID : ${mDirID}");
+    print("Ini mKaryID : ${mKaryID}");
+    print("Ini timeFrom : ${timeFrom}");
+    print("Ini timeTo : ${timeTo}");
+    print("Ini pic : ${picID}");
+
+    // Buat objek body dengan nilai null hanya untuk field-field yang tidak perlu dikirim
+    Map<String, dynamic> body = {
+      "m_comp_id": mCompID,
+      "m_dir_id": mDirID,
+      "m_kary_id": mKaryID,
+      "pic_id": picID,
+      "alasan_id": alasanLemburID,
+      "tipe_lembur_id": tipeLemburID,
+      "tanggal": dateLembur,
+      "jam_mulai": timeFrom,
+      "jam_selesai": timeTo,
+      "keterangan": keterangan,
+    }..removeWhere(
+        (key, value) => value == null || value == '' || value == -99);
+
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.put,
+      headers: GeneralServices.addToken2Headers(token),
+      body: json.encode(body),
+    );
+  }
 }

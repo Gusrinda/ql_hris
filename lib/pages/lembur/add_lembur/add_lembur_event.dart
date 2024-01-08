@@ -61,3 +61,43 @@ class OnSelectTipeLembur extends AddLemburEvent {
   @override
   List<Object> get props => [];
 }
+
+class OnEditLembur extends AddLemburEvent {
+  int lemburID;
+  String dateLembur;
+  int alasanLemburID;
+  int tipeLemburID;
+  String timeFrom;
+  String timeTo;
+  int? picID;
+  String? noDoc;
+  File? doc;
+  String keterangan;
+
+  OnEditLembur({
+    required this.lemburID,
+    required this.dateLembur,
+    required this.alasanLemburID,
+    required this.tipeLemburID,
+    required this.timeFrom,
+    required this.timeTo,
+    this.picID,
+    this.noDoc,
+    this.doc,
+    required this.keterangan,
+  });
+
+  @override
+  List<Object> get props => [
+        lemburID,
+        dateLembur,
+        alasanLemburID,
+        tipeLemburID,
+        timeFrom,
+        timeTo,
+        picID!,
+        noDoc!,
+        doc!,
+        keterangan
+      ];
+}
