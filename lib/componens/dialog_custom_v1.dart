@@ -93,7 +93,11 @@ class _DialogCustomState extends State<DialogCustom> {
           children: [
             const SizedBox(height: 20),
             Lottie.asset(dataLottie[widget.state.index]["asset"] as String,
-                height: 100),
+                height: 100,
+                repeat: dataLottie[widget.state.index]["asset"] ==
+                        'assets/lotties/json/success.json'
+                    ? false
+                    : true),
             const SizedBox(height: 10),
             Text(
               dataLottie[widget.state.index]["text"] as String,

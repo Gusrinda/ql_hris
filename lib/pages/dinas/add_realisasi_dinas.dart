@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
 import 'package:sj_presensi_mobile/componens/HRIS/text_form_custom.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
@@ -163,8 +164,8 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
               selectedNomorSpd.tglAcaraAwal?.toString() ?? '';
           widget.tanggalAkhirController.text =
               selectedNomorSpd.tglAcaraAkhir?.toString() ?? '';
-          // widget.jumlahHariController.text =
-          //     selectedNomorSpd.?.toString() ?? '';
+          widget.jumlahHariController.text =
+              selectedNomorSpd.interval?.toString() ?? '';
 
           widget.valueZonaAsalController.text =
               selectedNomorSpd.mZonaAsalNama?.toString() ?? '';
@@ -211,6 +212,27 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
       }
     }
 
+    // double calculateTotalCost() {
+    //   double totalCost = 0.0;
+
+    //   // Iterate through each expense detail and sum up the costs
+    //   for (var expense in expenseDetails) {
+    //     double biayaRealisasi =
+    //         double.tryParse(expense.biayaRealisasiController.text) ?? 0.0;
+    //     totalCost += biayaRealisasi;
+    //   }
+
+    //   return totalCost;
+    // }
+
+    // void onDataChanged() {
+    //   // Call the function to calculate the total cost
+    //   double totalCost = calculateTotalCost();
+
+    //   // Update the totalBiayaRencanaSelisihController
+    //   widget.totalBiayaRencanaSelisihController.text = totalCost.toString();
+    // }
+
     double calculateTotalCost() {
       double totalCost = 0.0;
 
@@ -224,12 +246,21 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
       return totalCost;
     }
 
+    String formatCurrency(double value) {
+      final numberFormat =
+          NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ');
+      return numberFormat.format(value);
+    }
+
     void onDataChanged() {
       // Call the function to calculate the total cost
       double totalCost = calculateTotalCost();
 
+      // Format the total cost as currency
+      String formattedTotalCost = formatCurrency(totalCost);
+
       // Update the totalBiayaRencanaSelisihController
-      widget.totalBiayaRencanaSelisihController.text = totalCost.toString();
+      widget.totalBiayaRencanaSelisihController.text = formattedTotalCost;
     }
 
     return BlocListener<AddRealisasiDinasBloc, AddRealisasiDinasState>(
@@ -332,13 +363,12 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                     ),
                     color: Colors.white,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 20),
-                    child: BlocBuilder<AddRealisasiDinasBloc,
-                        AddRealisasiDinasState>(
-                      builder: (context, state) {
-                        return SingleChildScrollView(
+                  child: BlocBuilder<AddRealisasiDinasBloc,
+                      AddRealisasiDinasState>(
+                    builder: (context, state) {
+                      return SingleChildScrollView(
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -359,6 +389,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                               //   errorTextStyle:
                               //       GoogleFonts.poppins(fontSize: 8),
                               // ),
+                              const SizedBox(height: 20),
                               FormDropDownData(
                                 input: '',
                                 onTap: () {
@@ -378,7 +409,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 input: '',
                                 onTap: () {},
                                 controller: widget.valueDirektoratController,
-                                hintText: 'Pilih Direktorat',
+                                hintText: 'Autofill Direktorat',
                                 labelTag: 'Label-DirektoratRspd',
                                 formTag: 'Form-DirektoratRspd',
                                 labelForm: 'Direktorat',
@@ -391,7 +422,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 input: '',
                                 onTap: () {},
                                 controller: widget.valueDivisiController,
-                                hintText: 'Pilih Divisi',
+                                hintText: 'Autofill Divisi',
                                 labelTag: 'Label-DivisiRspd',
                                 formTag: 'Form-DivisiRspd',
                                 labelForm: 'Divisi',
@@ -404,7 +435,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 input: '',
                                 onTap: () {},
                                 controller: widget.valueDepartemenController,
-                                hintText: 'Pilih Departemen',
+                                hintText: 'Autofill Departemen',
                                 labelTag: 'Label-DepartemenRspd',
                                 formTag: 'Form-DepartemenRspd',
                                 labelForm: 'Departemen',
@@ -417,7 +448,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 input: '',
                                 onTap: () {},
                                 controller: widget.valuePosisiController,
-                                hintText: 'Pilih Posisi',
+                                hintText: 'Autofill Posisi',
                                 labelTag: 'Label-PosisiRspd',
                                 formTag: 'Form-PosisiRspd',
                                 labelForm: 'Posisi',
@@ -430,7 +461,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 input: '',
                                 onTap: () {},
                                 controller: widget.tanggalController,
-                                hintText: 'Pilih Tanggal',
+                                hintText: 'Autofill Tanggal',
                                 labelTag: 'Label-TanggalPengajuan',
                                 formTag: 'Form-TanggalPengajuan',
                                 labelForm: 'Tanggal Pengajuan',
@@ -443,7 +474,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 input: '',
                                 onTap: () {},
                                 controller: widget.tanggalAwalController,
-                                hintText: 'Pilih Tanggal',
+                                hintText: 'Autofill Tanggal',
                                 labelTag: 'Label-TanggalAwalRspd',
                                 formTag: 'Form-TanggalAwalRspd',
                                 labelForm: 'Tanggal Acara Awal',
@@ -456,7 +487,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 input: '',
                                 onTap: () {},
                                 controller: widget.tanggalAwalController,
-                                hintText: 'Pilih Tanggal',
+                                hintText: 'Autofill Tanggal',
                                 labelTag: 'Label-TanggalAkhirRspd',
                                 formTag: 'Form-TanggalAkhirRspd',
                                 labelForm: 'Tanggal Acara Akhir',
@@ -482,7 +513,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 input: '',
                                 onTap: () {},
                                 controller: widget.valueZonaAsalController,
-                                hintText: 'Pilih Zona',
+                                hintText: 'Autofill Zona',
                                 labelTag: 'Label-ZonaAsalRspd',
                                 formTag: 'Form-ZonaAsalRspd',
                                 labelForm: 'Zona Asal',
@@ -495,7 +526,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 input: '',
                                 onTap: () {},
                                 controller: widget.valueZonaTujuanController,
-                                hintText: 'Pilih Zona',
+                                hintText: 'Autofill Zona',
                                 labelTag: 'Label-ZonaTujuanRspd',
                                 formTag: 'Form-ZonaTujuanRspd',
                                 labelForm: 'Zona Tujuan',
@@ -508,7 +539,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 input: '',
                                 onTap: () {},
                                 controller: widget.valueLokasiTujuanController,
-                                hintText: 'Pilih Lokasi',
+                                hintText: 'Autofill Lokasi',
                                 labelTag: 'Label-LokasiRspd',
                                 formTag: 'Form-LokasiRspd',
                                 labelForm: 'Lokasi Tujuan',
@@ -673,9 +704,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                                         .text.isEmpty
                                                     ? null
                                                     : true,
-                                        onChanged: (bool? value) {
-                                          // Tidak melakukan perubahan karena radio tidak dapat diubah
-                                        },
+                                        onChanged: (bool? value) {},
                                       ),
                                       Text(
                                         'Tidak',
@@ -737,82 +766,100 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                     ? null
                                     : () {
                                         print("INI DATA YANG DIKIRIM :");
-                                        print(double.parse(widget
-                                            .totalBiayaRencanaSelisihController
+
+                                        double parseCurrency(String currency) {
+                                          try {
+                                            final numberFormat =
+                                                NumberFormat.currency(
+                                                    locale: 'id_ID',
+                                                    symbol: 'Rp ');
+                                            return numberFormat.parse(currency
+                                                    .replaceAll(',', '')) /
+                                                100;
+                                          } catch (e) {
+                                            return 0.0;
+                                          }
+                                        }
+
+                                        // Parse formatted currency string to double
+                                        double totalBiayaSelisih =
+                                            parseCurrency(widget
+                                                .totalBiayaRencanaSelisihController
+                                                .value
+                                                .text);
+                                        print(totalBiayaSelisih);
+
+                                        int idNomorSpd = int.parse(widget
+                                            .idNomorSpdController.value.text);
+                                        print(idNomorSpd);
+
+                                        String keteranganUtama = widget
+                                            .keteranganUtamaController
                                             .value
-                                            .text));
-                                        print(int.parse(widget
-                                            .idNomorSpdController.value.text));
-                                        print(widget.keteranganUtamaController
-                                            .value.text);
+                                            .text;
+                                        print(keteranganUtama);
+
                                         showDialog(
                                           context: context,
                                           builder: (_) => DialogCustom(
-                                              state: DialogCustomItem.confirm,
-                                              message:
-                                                  "Pastikan Data Sudah Benar",
-                                              durationInSec: 5,
-                                              onContinue: () => context
-                                                  .read<AddRealisasiDinasBloc>()
-                                                  .add(
-                                                    AddRealisasiDinasSubmited(
-                                                      tSpdId: int.parse(widget
-                                                          .idNomorSpdController
-                                                          .value
-                                                          .text),
-                                                      totalBiayaSelisih:
-                                                          double.parse(widget
-                                                              .totalBiayaRencanaSelisihController
-                                                              .value
-                                                              .text),
-                                                      // totalBiayaSelisih:
-                                                      //     double.parse("2000000"),
-                                                      keterangan: widget
-                                                          .keteranganController
-                                                          .text,
-                                                      tRpdDetList:
-                                                          expenseDetails
-                                                              .map((expense) {
-                                                        return {
-                                                          "tipe_spd_id": expense
-                                                              .idTipeController
-                                                              .value
-                                                              .text,
-                                                          "is_kendaraan_dinas":
-                                                              widget.kendDinasController
-                                                                          .text ==
-                                                                      "false"
-                                                                  ? 0
-                                                                  : 1,
-                                                          "biaya": expense
-                                                              .costController
-                                                              .value
-                                                              .text,
-                                                          "biaya_realisasi": expense
-                                                              .biayaRealisasiController
-                                                              .value
-                                                              .text,
-                                                          "keterangan": expense
-                                                              .descriptionController
-                                                              .value
-                                                              .text,
-                                                          "catatan_realisasi":
-                                                              expense
-                                                                  .catatanRealisasiController
-                                                                  .value
-                                                                  .text,
-                                                        };
-                                                      }).toList(),
-                                                    ),
-                                                  )),
+                                            state: DialogCustomItem.confirm,
+                                            message:
+                                                "Pastikan Data Sudah Benar",
+                                            durationInSec: 5,
+                                            onContinue: () => context
+                                                .read<AddRealisasiDinasBloc>()
+                                                .add(
+                                                  AddRealisasiDinasSubmited(
+                                                    tSpdId: idNomorSpd,
+                                                    totalBiayaSelisih:
+                                                        totalBiayaSelisih,
+                                                    keterangan: widget
+                                                        .keteranganController
+                                                        .text,
+                                                    tRpdDetList: expenseDetails
+                                                        .map((expense) {
+                                                      return {
+                                                        "tipe_spd_id": expense
+                                                            .idTipeController
+                                                            .value
+                                                            .text,
+                                                        "is_kendaraan_dinas":
+                                                            widget.kendDinasController
+                                                                        .text ==
+                                                                    "false"
+                                                                ? 0
+                                                                : 1,
+                                                        "biaya": expense
+                                                            .costController
+                                                            .value
+                                                            .text,
+                                                        "biaya_realisasi": expense
+                                                            .biayaRealisasiController
+                                                            .value
+                                                            .text,
+                                                        "keterangan": expense
+                                                            .descriptionController
+                                                            .value
+                                                            .text,
+                                                        "catatan_realisasi": expense
+                                                            .catatanRealisasiController
+                                                            .value
+                                                            .text,
+                                                      };
+                                                    }).toList(),
+                                                  ),
+                                                ),
+                                          ),
                                         );
                                       },
                               ),
+
+                              const SizedBox(height: 30)
                             ],
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               )
