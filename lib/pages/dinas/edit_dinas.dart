@@ -223,7 +223,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
     widget.catatanController!.text = widget.dataDinas!.catatanKend ?? '';
 
     if (widget.dataDinas?.isKendDinas == true) {
-      _kendDinas = 1;
+      _kendDinas = 1
       widget.kendDinasController.text = 1.toString();
     } else {
       _kendDinas = 0;
