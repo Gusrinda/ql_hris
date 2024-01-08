@@ -46,7 +46,6 @@ class _AddCutiPageState extends State<AddCutiPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String? selectedValue;
   String? selectedTipeValue;
-  String? selectedIDTipeValue;
   DateTime? selectedDate;
   DateTime? selectedDateFrom;
   DateTime? selectedDateTo;

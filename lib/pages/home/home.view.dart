@@ -363,7 +363,7 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                             const SizedBox(height: 5),
                                             Text(
-                                              "Cuti Masa",
+                                              "Cuti Masa Kerja",
                                               style: GoogleFonts.poppins(
                                                   fontSize: 9.sp,
                                                   fontWeight: FontWeight.w500,

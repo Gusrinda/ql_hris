@@ -75,7 +75,6 @@ class _EditCutiPageState extends State<EditCutiPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String? selectedValue;
   String? selectedTipeValue;
-  String? selectedIDTipeValue;
   DateTime? selectedDate;
   DateTime? selectedDateFrom;
   DateTime? selectedDateTo;
@@ -91,9 +90,11 @@ class _EditCutiPageState extends State<EditCutiPage> {
 
     widget.valueAlasanController.text = widget.alasanValue ?? '';
     widget.idAlasanController!.text = widget.alasanID.toString();
+    selectedValue = widget.alasanValue ?? '';
 
     widget.valueTipeCutiController.text = widget.tipeCutiValue ?? '';
     widget.idTipeCutiController.text = widget.tipeCutiID.toString();
+    selectedTipeValue = widget.tipeCutiValue ?? '';
 
     widget.keteranganController.text = widget.keterangan ?? '';
     widget.dateFromController.text = convertDateFormat(widget.dateFrom) ?? '';

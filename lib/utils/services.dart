@@ -168,6 +168,12 @@ class GeneralServices {
           errorResponse: json.decode(response.body)['message'],
         );
       }
+      if (response.statusCode == MyGeneralConst.CODE_LARGE_FILE) {
+        return ServicesFailure(
+          code: response.statusCode,
+          errorResponse: "Ukuran File Terlalu Besar",
+        );
+      }
       return ServicesFailure(
         code: response.statusCode,
         errorResponse: json.decode(response.body)['message'],

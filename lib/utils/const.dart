@@ -9,7 +9,8 @@ class MyGeneralConst {
 
   static const API_URL = "$_BASE_URL";
   static const PREF_USER_TOKEN = "PREF_USER_TOKEN";
-
+ 
+  static const CODE_LARGE_FILE = 413;
   static const CODE_PROCESS_SUCCESS = 200;
   static const CODE_BAD_REQUEST = 400;
   static const CODE_INVALID_FORMAT = 402;
