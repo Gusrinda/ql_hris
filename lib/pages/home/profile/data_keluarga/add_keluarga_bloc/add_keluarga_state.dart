@@ -91,3 +91,21 @@ class AddDataKeluargaFailedUserExpired extends AddKeluargaState {
   @override
   List<Object> get props => [message];
 }
+
+class EditDataKeluargaSuccess extends AddKeluargaState {
+  String message;
+
+  EditDataKeluargaSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+class EditDataKeluargaFailed extends AddKeluargaState {
+  String message;
+
+  EditDataKeluargaFailed({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}

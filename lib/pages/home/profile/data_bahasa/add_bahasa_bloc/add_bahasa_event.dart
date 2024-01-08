@@ -25,3 +25,25 @@ class AddDatabahasaSubmited extends AddBahasaEvent {
         nilaiTertulis,
       ];
 }
+
+class EditDatabahasaSubmited extends AddBahasaEvent {
+  int bahasaId;
+  String bhsDikuasai;
+  String nilaiLisan;
+  String nilaiTertulis;
+
+  EditDatabahasaSubmited({
+    required this.bahasaId,
+    required this.bhsDikuasai,
+    required this.nilaiLisan,
+    required this.nilaiTertulis,
+  });
+
+  @override
+  List<Object> get props => [
+        bahasaId,
+        bhsDikuasai,
+        nilaiLisan,
+        nilaiTertulis,
+      ];
+}

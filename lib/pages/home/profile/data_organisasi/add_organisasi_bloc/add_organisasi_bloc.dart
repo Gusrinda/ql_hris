@@ -46,6 +46,39 @@ class AddOrganisasiBloc extends Bloc<AddOrganisasiEvent, AddOrganisasiState> {
       }
     });
 
+    on<EditDataOrganisasiSubmited>((event, emit) async {
+     emit(AddDataOrganisasiLoading());
+      var resToken = await GeneralSharedPreferences.getUserToken();
+      if (resToken is ServicesSuccess) {
+        var res = await DataOrganisasiServices.editDataOrganisasi(
+          resToken.response["token"],
+          resToken.response["m_comp_id"] ?? 1,
+           resToken.response["m_dir_id"] ?? 1,
+           event.organisasiId,
+          event.nama,
+          event.tahun,
+          event.jenisOrgId,
+          event.kotaId,
+          event.posisi
+        );
+        if (res is ServicesSuccess) {
+          emit(EditOrganisasiSuccess(message: "Edit Data Organisasi Berhasil"));
+          print(res.response);
+        } else if (res is ServicesFailure) {
+          if (res.errorResponse == null) {
+            await GeneralSharedPreferences.removeUserToken();
+            emit(AddDataOrganisasiFailedUserExpired(message: "Token Expired"));
+          } else {
+            emit(EditOrganisasiFailed(message: "Unknown error occured"));
+            print("Response from API: ${res.errorResponse}");
+          }
+        }
+      }
+      else if (resToken is ServicesFailure) {
+        emit(AddDataOrganisasiFailedInBackground(message: "Response format is invalid"));
+      }
+    });
+
     on<OnSelectKota>(
       (event, emit) async {
         emit(AddDataOrganisasiLoading());

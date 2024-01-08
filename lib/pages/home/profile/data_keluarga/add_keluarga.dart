@@ -49,16 +49,17 @@ class AddKeluargaPage extends StatefulWidget {
 }
 
 class _AddKeluargaPageState extends State<AddKeluargaPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final keluargaBloc = context.read<AddKeluargaBloc>();
 
-      keluargaBloc.add(OnSelectHubKeluarga());
-      keluargaBloc.add(OnSelectTingkatPendidikan());
-      keluargaBloc.add(OnSelectPekerjaan());
-      keluargaBloc.add(OnSelectJenisKelamin());
+      keluargaBloc.add(const OnSelectHubKeluarga());
+      keluargaBloc.add(const OnSelectTingkatPendidikan());
+      keluargaBloc.add(const OnSelectPekerjaan());
+      keluargaBloc.add(const OnSelectJenisKelamin());
     });
   }
 
@@ -310,96 +311,157 @@ class _AddKeluargaPageState extends State<AddKeluargaPage> {
                         return SingleChildScrollView(
                           child: Column(
                             children: [
-                              SizedBox(height: 16.sp),
-                              FormDropDownData(
-                                input: '',
-                                onTap: () {
-                                  showHubKeluargaMenu(context);
-                                },
-                                idController: widget.idkeluargaController,
-                                valueController: widget.valuekeluargaController,
-                                labelTag: 'Label-addkeluarga',
-                                labelForm: 'Keluarga',
-                                formTag: 'Form-addkeluarga',
-                                hintText: 'Pilih Keluarga',
-                                validator: (value) {},
+                              Form(
+                                key: _formKey,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: 16.sp),
+                                    FormDropDownData(
+                                      input: '',
+                                      onTap: () {
+                                        showHubKeluargaMenu(context);
+                                      },
+                                      idController: widget.idkeluargaController,
+                                      valueController:
+                                          widget.valuekeluargaController,
+                                      labelTag: 'Label-addkeluarga',
+                                      labelForm: 'Keluarga',
+                                      formTag: 'Form-addkeluarga',
+                                      hintText: 'Pilih Keluarga',
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Pilih Keluarga';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormInputData(
+                                      input: widget.nameController.text,
+                                      labelTag: 'label-addname',
+                                      labelForm: 'Nama',
+                                      formTag: 'form-addname',
+                                      hintText: 'Nama',
+                                      onTap: () {},
+                                      controller: widget.nameController,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Tuliskan Nama';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormDropDownData(
+                                      input: '',
+                                      onTap: () {
+                                        showTingkatPrestasiMenu(context);
+                                      },
+                                      idController:
+                                          widget.idPendidikanTerakhirController,
+                                      valueController: widget
+                                          .valuePendidikanTerakhirController,
+                                      labelTag: 'Label-addpendidikanterakhir',
+                                      labelForm: 'Pendidikan Terakhir',
+                                      formTag: 'Form-addpendidikanterakhir',
+                                      hintText: 'Pilih Pendidikan Terakhir',
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Pilih Pendidikan Terakhir';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormDropDownData(
+                                      input: '',
+                                      onTap: () {
+                                        showPekerjaanMenu(context);
+                                      },
+                                      idController:
+                                          widget.idPekerjaanController,
+                                      valueController:
+                                          widget.valuePekerjaanController,
+                                      labelTag: 'Label-addpekerjaan',
+                                      labelForm: 'Pekerjaan',
+                                      formTag: 'Form-addpekerjaan',
+                                      hintText: 'Pilih Pekerjaan',
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Pilih Pekerjaan';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormDropDownData(
+                                      input: '',
+                                      onTap: () {
+                                        showGenderMenu(context);
+                                      },
+                                      idController:
+                                          widget.idJenisKelaminController,
+                                      valueController:
+                                          widget.valueJenisKelaminController,
+                                      labelTag: 'Label-addjeniskelamin',
+                                      labelForm: 'Jenis Kelamin',
+                                      formTag: 'Form-addjeniskelamin',
+                                      hintText: 'Pilih Jenis Kelamin',
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Pilih Jenis Kelamin';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormInputData(
+                                      input: widget.usiaController.text,
+                                      labelTag: 'label-addusia',
+                                      labelForm: 'Usia',
+                                      formTag: 'form-addusia',
+                                      hintText: 'Usia (Dalam Tahun)',
+                                      inputType: TextInputType.number,
+                                      onTap: () {},
+                                      controller: widget.usiaController,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Tuliskan Usia';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormInputData(
+                                      input: widget.catatanController.text,
+                                      labelTag: 'label-addcatatankeluarga',
+                                      labelForm: 'Catatan',
+                                      formTag: 'form-addcatatankeluarga',
+                                      hintText: 'Catatan',
+                                      showRedStar: false,
+                                      onTap: () {},
+                                      controller: widget.catatanController,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Tuliskan Catatan';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    SizedBox(height: 20.sp),
+                                  ],
+                                ),
                               ),
-                              FormInputData(
-                                input: widget.nameController.text,
-                                labelTag: 'label-addname',
-                                labelForm: 'Nama',
-                                formTag: 'form-addname',
-                                hintText: 'Nama',
-                                onTap: () {},
-                                controller: widget.nameController,
-                                validator: (value) {},
-                              ),
-                              FormDropDownData(
-                                input: '',
-                                onTap: () {
-                                  showTingkatPrestasiMenu(context);
-                                },
-                                idController:
-                                    widget.idPendidikanTerakhirController,
-                                valueController:
-                                    widget.valuePendidikanTerakhirController,
-                                labelTag: 'Label-addpendidikanterakhir',
-                                labelForm: 'Pendidikan Terakhir',
-                                formTag: 'Form-addpendidikanterakhir',
-                                hintText: 'Pilih Pendidikan Terakhir',
-                                validator: (value) {},
-                              ),
-                              FormDropDownData(
-                                input: '',
-                                onTap: () {
-                                  showPekerjaanMenu(context);
-                                },
-                                idController: widget.idPekerjaanController,
-                                valueController:
-                                    widget.valuePekerjaanController,
-                                labelTag: 'Label-addpekerjaan',
-                                labelForm: 'Pekerjaan',
-                                formTag: 'Form-addpekerjaan',
-                                hintText: 'Pilih Pekerjaan',
-                                validator: (value) {},
-                              ),
-                              FormDropDownData(
-                                input: '',
-                                onTap: () {
-                                  showGenderMenu(context);
-                                },
-                                idController: widget.idJenisKelaminController,
-                                valueController:
-                                    widget.valueJenisKelaminController,
-                                labelTag: 'Label-addjeniskelamin',
-                                labelForm: 'Jenis Kelamin',
-                                formTag: 'Form-addjeniskelamin',
-                                hintText: 'Pilih Jenis Kelamin',
-                                validator: (value) {},
-                              ),
-                              FormInputData(
-                                input: widget.usiaController.text,
-                                labelTag: 'label-addusia',
-                                labelForm: 'Usia',
-                                formTag: 'form-addusia',
-                                hintText: 'Usia (Dalam Tahun)',
-                                inputType: TextInputType.number,
-                                onTap: () {},
-                                controller: widget.usiaController,
-                                validator: (value) {},
-                              ),
-                              FormInputData(
-                                input: widget.catatanController.text,
-                                labelTag: 'label-addcatatankeluarga',
-                                labelForm: 'Catatan',
-                                formTag: 'form-addcatatankeluarga',
-                                hintText: 'Catatan',
-                                showRedStar: false,
-                                onTap: () {},
-                                controller: widget.catatanController,
-                                validator: (value) {},
-                              ),
-                              SizedBox(height: 20.sp),
                               TextButtonCustomV1(
                                 text: "Simpan",
                                 height: 50.sp,
@@ -409,27 +471,30 @@ class _AddKeluargaPageState extends State<AddKeluargaPage> {
                                 onPressed: state is AddDataKeluargaLoading
                                     ? null
                                     : () {
-                                        context.read<AddKeluargaBloc>().add(
-                                              AddDataKeluargaSubmited(
-                                                keluargaId: int.parse(widget
-                                                    .idkeluargaController.text),
-                                                nama:
-                                                    widget.nameController.text,
-                                                pendTerakhirId: int.parse(widget
-                                                    .idPendidikanTerakhirController
-                                                    .text),
-                                                jenisKelaminId: int.parse(widget
-                                                    .idJenisKelaminController
-                                                    .text),
-                                                pekerjaanId: int.parse(widget
-                                                    .idPekerjaanController
-                                                    .text),
-                                                usia: int.parse(
-                                                    widget.usiaController.text),
-                                                desc: widget
-                                                    .catatanController.text,
-                                              ),
-                                            );
+                                        if (_formKey.currentState!.validate()) {
+                                          context.read<AddKeluargaBloc>().add(
+                                                AddDataKeluargaSubmited(
+                                                  keluargaId: int.parse(widget
+                                                      .idkeluargaController
+                                                      .text),
+                                                  nama: widget
+                                                      .nameController.text,
+                                                  pendTerakhirId: int.parse(widget
+                                                      .idPendidikanTerakhirController
+                                                      .text),
+                                                  jenisKelaminId: int.parse(widget
+                                                      .idJenisKelaminController
+                                                      .text),
+                                                  pekerjaanId: int.parse(widget
+                                                      .idPekerjaanController
+                                                      .text),
+                                                  usia: int.parse(widget
+                                                      .usiaController.text),
+                                                  desc: widget
+                                                      .catatanController.text,
+                                                ),
+                                              );
+                                        }
                                       },
                               ),
                             ],

@@ -179,6 +179,40 @@ class _DataOrganisasiPageState extends State<DataOrganisasiPage> {
                                               listOrganisasi[index];
                                           return GestureDetector(
                                             onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        BlocProvider(
+                                                          create: (context) =>
+                                                              AddOrganisasiBloc(),
+                                                          child: ViewEditOrganisasiPage(
+                                                            organisasiId: dataOrganisasi.id ?? 0,
+                                                              namaOrg:
+                                                                  dataOrganisasi
+                                                                      .nama,
+                                                              tahunOrg:
+                                                                  dataOrganisasi
+                                                                      .tahun,
+                                                              idJenisOrg:
+                                                                  dataOrganisasi
+                                                                      .jenisOrgId,
+                                                              valueJenisOrg:
+                                                                  dataOrganisasi
+                                                                      .jenisOrganisasi,
+                                                              idKota:
+                                                                  dataOrganisasi
+                                                                      .kotaId,
+                                                              valueKota:
+                                                                  dataOrganisasi
+                                                                      .kota,
+                                                              posisiOrg:
+                                                                  dataOrganisasi
+                                                                      .posisi,
+                                                              reloadDataCallback:
+                                                                  loadData),
+                                                        )),
+                                              );
                                               setState(() {
                                                 showDeleteButton = false;
                                                 deleteIndex = null;

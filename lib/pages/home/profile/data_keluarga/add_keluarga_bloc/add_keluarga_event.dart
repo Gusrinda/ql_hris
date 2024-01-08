@@ -61,3 +61,37 @@ class OnSelectJenisKelamin extends AddKeluargaEvent {
   @override
   List<Object> get props => [];
 }
+
+class EditDataKeluargaSubmited extends AddKeluargaEvent {
+  int dataKeluargaId;
+  int keluargaId;
+  String nama;
+  int pendTerakhirId;
+  int jenisKelaminId;
+  int pekerjaanId;
+  int usia;
+  String desc;
+
+  EditDataKeluargaSubmited({
+    required this.dataKeluargaId,
+    required this.keluargaId,
+    required this.nama,
+    required this.pendTerakhirId,
+    required this.jenisKelaminId,
+    required this.pekerjaanId,
+    required this.usia,
+    required this.desc,
+  });
+
+  @override
+  List<Object> get props => [
+    dataKeluargaId,
+        keluargaId,
+        nama,
+        pendTerakhirId,
+        jenisKelaminId,
+        pekerjaanId,
+        usia,
+        desc
+      ];
+}

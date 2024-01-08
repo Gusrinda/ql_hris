@@ -174,229 +174,274 @@ class _DataPrestasiPageState extends State<DataPrestasiPage> {
                             children: [
                               Expanded(
                                 child: listPrestasi.isNotEmpty
-                                ? ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: listPrestasi.length,
-                                  itemBuilder: (context, index) {
-                                    var dataPrestasi = listPrestasi[index];
-                                    return ListTile(
-                                      contentPadding: EdgeInsets.zero,
-                                      subtitle: GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            showDeleteButton = false;
-                                            deleteIndex = null;
-                                          });
-                                        },
-                                        child: Container(
-                                          margin:
-                                              EdgeInsets.only(bottom: 10.sp),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            border: Border.all(
-                                                color: Color(0xFFDDDDDD)),
-                                            color: MyColorsConst.whiteColor,
-                                          ),
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: 12.sp,
-                                            vertical: 10.sp,
-                                          ),
-                                          child: Stack(
-                                            children: [
-                                              Column(
-                                                children: [
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      SizedBox(
-                                                        width: size.width * 3/5,
-                                                        child: Text(
-                                                          '${dataPrestasi.namaPres ?? '-'}',
-                                                          maxLines: 2,
-                                                          overflow: TextOverflow.ellipsis,
-                                                          style:
-                                                              GoogleFonts.poppins(
-                                                            fontSize: 14.sp,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: MyColorsConst
-                                                                .primaryColor,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      IconButton(
-                                                        icon: Icon(
-                                                            Icons.more_horiz),
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            // Ini buat munculkan tombol di index data itu saja
-                                                            if (deleteIndex ==
-                                                                index) {
-                                                              // Ini buat nutup tombol
-                                                              deleteIndex =
-                                                                  null;
-                                                              showDeleteButton =
-                                                                  false;
-                                                            } else {
-                                                              // handle buat kalau ga klik apa apa
-                                                              deleteIndex =
-                                                                  index;
-                                                              showDeleteButton =
-                                                                  true;
-                                                            }
-                                                          });
-                                                        },
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
+                                    ? ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: listPrestasi.length,
+                                        itemBuilder: (context, index) {
+                                          var dataPrestasi =
+                                              listPrestasi[index];
+                                          return ListTile(
+                                            contentPadding: EdgeInsets.zero,
+                                            subtitle: GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          BlocProvider(
+                                                            create: (context) =>
+                                                                AddPrestasiBloc(),
+                                                            child: ViewEditPrestasiPage(
+                                                              prestasiId: dataPrestasi.id ?? 0,
+                                                                namaPrestasi:
+                                                                    dataPrestasi
+                                                                        .namaPres,
+                                                                idTingkat:
+                                                                    dataPrestasi
+                                                                        .tingkatPresId,
+                                                                valueTingkat:
+                                                                    dataPrestasi
+                                                                        .tingkatPrestasi,
+                                                                tahun:
+                                                                    dataPrestasi
+                                                                        .tahun,
+                                                                reloadDataCallback:
+                                                                    loadData),
+                                                          )),
+                                                );
+                                                setState(() {
+                                                  showDeleteButton = false;
+                                                  deleteIndex = null;
+                                                });
+                                              },
+                                              child: Container(
+                                                margin: EdgeInsets.only(
+                                                    bottom: 10.sp),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                      color: Color(0xFFDDDDDD)),
+                                                  color:
+                                                      MyColorsConst.whiteColor,
+                                                ),
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 12.sp,
+                                                  vertical: 10.sp,
+                                                ),
+                                                child: Stack(
+                                                  children: [
+                                                    Column(
+                                                      children: [
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
                                                           children: [
-                                                            Text(
-                                                              'Tingkat',
-                                                              style: GoogleFonts
-                                                                  .poppins(
-                                                                fontSize: 10.sp,
-                                                                color: MyColorsConst
-                                                                    .lightDarkColor,
-                                                              ),
-                                                            ),
-                                                            Text(
-                                                              "${listPrestasi[index].tingkatPrestasi}",
-                                                              style: GoogleFonts
-                                                                  .poppins(
-                                                                fontSize: 12.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                color: MyColorsConst
-                                                                    .darkColor,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                              'Tahun',
-                                                              style: GoogleFonts
-                                                                  .poppins(
-                                                                fontSize: 10.sp,
-                                                                color: MyColorsConst
-                                                                    .lightDarkColor,
-                                                              ),
-                                                            ),
-                                                            Text(
-                                                              '${dataPrestasi.tahun ?? '-'}',
-                                                              style: GoogleFonts
-                                                                  .poppins(
-                                                                fontSize: 12.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                color: MyColorsConst
-                                                                    .darkColor,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    height: 5.sp,
-                                                  ),
-                                                ],
-                                              ),
-                                              Positioned(
-                                                top: 30,
-                                                right: 15,
-                                                child: Visibility(
-                                                  visible: showDeleteButton &&
-                                                      deleteIndex == index,
-                                                  child: Material(
-                                                    elevation: 4,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4),
-                                                    child: InkWell(
-                                                      onTap: state
-                                                              is ListPrestasiLoading
-                                                          ? null
-                                                          : () {
-                                                              showDialog(
-                                                                context:
-                                                                    context,
-                                                                builder: (_) =>
-                                                                    DialogCustom(
-                                                                  state: DialogCustomItem
-                                                                      .confirm,
-                                                                  message:
-                                                                      "Apakah Yakin Menghapus Data Ini?",
-                                                                  durationInSec:
+                                                            SizedBox(
+                                                              width:
+                                                                  size.width *
+                                                                      3 /
                                                                       5,
-                                                                  onContinue: () => context
-                                                                      .read<
-                                                                          ListPrestasiBloc>()
-                                                                      .add(DeleteListPrestasi(
-                                                                          dataID: dataPrestasi
-                                                                              .id
-                                                                              .toString())),
+                                                              child: Text(
+                                                                '${dataPrestasi.namaPres ?? '-'}',
+                                                                maxLines: 2,
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .poppins(
+                                                                  fontSize:
+                                                                      14.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  color: MyColorsConst
+                                                                      .primaryColor,
                                                                 ),
-                                                              );
-                                                            },
-                                                      child: Container(
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                          horizontal: 8.sp,
-                                                          vertical: 4.sp,
+                                                              ),
+                                                            ),
+                                                            IconButton(
+                                                              icon: Icon(Icons
+                                                                  .more_horiz),
+                                                              onPressed: () {
+                                                                setState(() {
+                                                                  // Ini buat munculkan tombol di index data itu saja
+                                                                  if (deleteIndex ==
+                                                                      index) {
+                                                                    // Ini buat nutup tombol
+                                                                    deleteIndex =
+                                                                        null;
+                                                                    showDeleteButton =
+                                                                        false;
+                                                                  } else {
+                                                                    // handle buat kalau ga klik apa apa
+                                                                    deleteIndex =
+                                                                        index;
+                                                                    showDeleteButton =
+                                                                        true;
+                                                                  }
+                                                                });
+                                                              },
+                                                            ),
+                                                          ],
                                                         ),
-                                                        decoration:
-                                                            BoxDecoration(
+                                                        Row(
+                                                          children: [
+                                                            Expanded(
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    'Tingkat',
+                                                                    style: GoogleFonts
+                                                                        .poppins(
+                                                                      fontSize:
+                                                                          10.sp,
+                                                                      color: MyColorsConst
+                                                                          .lightDarkColor,
+                                                                    ),
+                                                                  ),
+                                                                  Text(
+                                                                    "${listPrestasi[index].tingkatPrestasi}",
+                                                                    style: GoogleFonts
+                                                                        .poppins(
+                                                                      fontSize:
+                                                                          12.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      color: MyColorsConst
+                                                                          .darkColor,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    'Tahun',
+                                                                    style: GoogleFonts
+                                                                        .poppins(
+                                                                      fontSize:
+                                                                          10.sp,
+                                                                      color: MyColorsConst
+                                                                          .lightDarkColor,
+                                                                    ),
+                                                                  ),
+                                                                  Text(
+                                                                    '${dataPrestasi.tahun ?? '-'}',
+                                                                    style: GoogleFonts
+                                                                        .poppins(
+                                                                      fontSize:
+                                                                          12.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      color: MyColorsConst
+                                                                          .darkColor,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          height: 5.sp,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Positioned(
+                                                      top: 30,
+                                                      right: 15,
+                                                      child: Visibility(
+                                                        visible:
+                                                            showDeleteButton &&
+                                                                deleteIndex ==
+                                                                    index,
+                                                        child: Material(
+                                                          elevation: 4,
                                                           borderRadius:
                                                               BorderRadius
-                                                                  .circular(6),
-                                                          border: Border.all(
-                                                              color: Color(
-                                                                  0xFFDDDDDD)),
-                                                          color: Colors.red
-                                                              .withOpacity(0.2),
-                                                        ),
-                                                        child: Text(
-                                                          'Hapus',
-                                                          style: GoogleFonts
-                                                              .poppins(
-                                                            fontSize: 12.sp,
-                                                            color: Colors
-                                                                .red.shade900,
+                                                                  .circular(4),
+                                                          child: InkWell(
+                                                            onTap: state
+                                                                    is ListPrestasiLoading
+                                                                ? null
+                                                                : () {
+                                                                    showDialog(
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (_) =>
+                                                                              DialogCustom(
+                                                                        state: DialogCustomItem
+                                                                            .confirm,
+                                                                        message:
+                                                                            "Apakah Yakin Menghapus Data Ini?",
+                                                                        durationInSec:
+                                                                            5,
+                                                                        onContinue: () => context
+                                                                            .read<ListPrestasiBloc>()
+                                                                            .add(DeleteListPrestasi(dataID: dataPrestasi.id.toString())),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                            child: Container(
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                horizontal:
+                                                                    8.sp,
+                                                                vertical: 4.sp,
+                                                              ),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            6),
+                                                                border: Border.all(
+                                                                    color: Color(
+                                                                        0xFFDDDDDD)),
+                                                                color: Colors
+                                                                    .red
+                                                                    .withOpacity(
+                                                                        0.2),
+                                                              ),
+                                                              child: Text(
+                                                                'Hapus',
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .poppins(
+                                                                  fontSize:
+                                                                      12.sp,
+                                                                  color: Colors
+                                                                      .red
+                                                                      .shade900,
+                                                                ),
+                                                              ),
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
+                                                  ],
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                )
-                                : Center(
+                                            ),
+                                          );
+                                        },
+                                      )
+                                    : Center(
                                         child: EmptyStateBuilder(),
                                       ),
                               ),

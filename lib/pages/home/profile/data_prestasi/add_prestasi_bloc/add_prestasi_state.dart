@@ -58,3 +58,21 @@ class AddDataPrestasiFailedUserExpired extends AddPrestasiState {
   @override
   List<Object> get props => [message];
 }
+
+class EditDataPrestasiSuccess extends AddPrestasiState {
+  String message;
+
+  EditDataPrestasiSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+class EditDataPrestasiFailed extends AddPrestasiState {
+  String message;
+
+  EditDataPrestasiFailed({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}

@@ -39,14 +39,15 @@ class AddOrganisasiPage extends StatefulWidget {
 }
 
 class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final organisasiBloc = context.read<AddOrganisasiBloc>();
 
-      organisasiBloc.add(OnSelectJenisOrganisasi());
-      organisasiBloc.add(OnSelectKota());
+      organisasiBloc.add(const OnSelectJenisOrganisasi());
+      organisasiBloc.add(const OnSelectKota());
     });
   }
 
@@ -293,70 +294,120 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
                         return SingleChildScrollView(
                           child: Column(
                             children: [
-                              SizedBox(height: 16.sp),
-                              FormInputData(
-                                input: widget.namaOrganisasiController.text,
-                                labelTag: 'label-addorganisasi',
-                                labelForm: 'Nama Organisasi',
-                                formTag: 'form-addorganisasi',
-                                hintText: 'Organisasi',
-                                onTap: () {},
-                                controller: widget.namaOrganisasiController,
-                                validator: (value) {},
+                              Form(
+                                key: _formKey,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: 16.sp),
+                                    FormInputData(
+                                      input:
+                                          widget.namaOrganisasiController.text,
+                                      labelTag: 'label-addorganisasi',
+                                      labelForm: 'Nama Organisasi',
+                                      formTag: 'form-addorganisasi',
+                                      hintText: 'Organisasi',
+                                      onTap: () {},
+                                      controller:
+                                          widget.namaOrganisasiController,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Tuliskan Nama Organisasi';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormDropDownData(
+                                      input: '',
+                                      onTap: () {
+                                        showTahunMenu(context,
+                                            widget.tahunOrganisasiController);
+                                      },
+                                      valueController:
+                                          widget.tahunOrganisasiController,
+                                      labelTag: 'Label-addtahunorganisasi',
+                                      labelForm: 'Tahun',
+                                      formTag: 'Form-addtahunorganisasi',
+                                      hintText: 'Pilih Tahun',
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Pilih Tahun';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormDropDownData(
+                                      input: '',
+                                      onTap: () {
+                                        showJenisOrganisasi(context);
+                                      },
+                                      idController:
+                                          widget.idJenisOrganisasiController,
+                                      valueController:
+                                          widget.valueJenisOrganisasiController,
+                                      labelTag: 'Label-addjenisorganisasi',
+                                      labelForm: 'Jenis Organisasi',
+                                      formTag: 'Form-addjenisorganisasi',
+                                      hintText: 'Pilih Jenis Organisasi',
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Pilih Jenis Organisasi';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormDropDownData(
+                                      input: '',
+                                      onTap: () {
+                                        showKotaMenu(context);
+                                      },
+                                      idController:
+                                          widget.idKotaOrganisasiController,
+                                      valueController:
+                                          widget.valueKotaOrganisasiController,
+                                      labelTag: 'Label-addkota',
+                                      labelForm: 'Kota',
+                                      formTag: 'Form-addkota',
+                                      hintText: 'Pilih Kota',
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Pilih Kota';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    FormInputData(
+                                      input: widget
+                                          .posisiaOrganisasiController.text,
+                                      labelTag: 'label-addposisiorganisasi',
+                                      labelForm: 'Posisi',
+                                      formTag: 'form-addposisiorganisasi',
+                                      hintText: 'Posisi',
+                                      onTap: () {},
+                                      controller:
+                                          widget.posisiaOrganisasiController,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Tuliskan Posisi';
+                                        }
+                                        return null;
+                                      },
+                                      errorTextStyle:
+                                          GoogleFonts.poppins(fontSize: 8),
+                                    ),
+                                    SizedBox(height: 30.sp),
+                                  ],
+                                ),
                               ),
-                              FormDropDownData(
-                                input: '',
-                                onTap: () {
-                                  showTahunMenu(context,
-                                      widget.tahunOrganisasiController);
-                                },
-                                valueController: widget.tahunOrganisasiController,
-                                labelTag: 'Label-addtahunorganisasi',
-                                labelForm: 'Tahun',
-                                formTag: 'Form-addtahunorganisasi',
-                                hintText: 'Pilih Tahun',
-                                validator: (value) {},
-                              ),
-                              FormDropDownData(
-                                input: '',
-                                onTap: () {
-                                  showJenisOrganisasi(context);
-                                },
-                                idController:
-                                    widget.idJenisOrganisasiController,
-                                valueController:
-                                    widget.valueJenisOrganisasiController,
-                                labelTag: 'Label-addjenisorganisasi',
-                                labelForm: 'Jenis Organisasi',
-                                formTag: 'Form-addjenisorganisasi',
-                                hintText: 'Pilih Jenis Organisasi',
-                                validator: (value) {},
-                              ),
-                              FormDropDownData(
-                                input: '',
-                                onTap: () {
-                                  showKotaMenu(context);
-                                },
-                                idController: widget.idKotaOrganisasiController,
-                                valueController:
-                                    widget.valueKotaOrganisasiController,
-                                labelTag: 'Label-addkota',
-                                labelForm: 'Kota',
-                                formTag: 'Form-addkota',
-                                hintText: 'Pilih Kota',
-                                validator: (value) {},
-                              ),
-                              FormInputData(
-                                input: widget.posisiaOrganisasiController.text,
-                                labelTag: 'label-addposisiorganisasi',
-                                labelForm: 'Posisi',
-                                formTag: 'form-addposisiorganisasi',
-                                hintText: 'Posisi',
-                                onTap: () {},
-                                controller: widget.posisiaOrganisasiController,
-                                validator: (value) {},
-                              ),
-                              SizedBox(height: 30.sp),
                               TextButtonCustomV1(
                                 text: "Simpan",
                                 height: 50.sp,
@@ -366,25 +417,27 @@ class _AddOrganisasiPageState extends State<AddOrganisasiPage> {
                                 onPressed: state is AddDataOrganisasiLoading
                                     ? null
                                     : () {
-                                        context.read<AddOrganisasiBloc>().add(
-                                              AddDataOrganisasiSubmited(
-                                                nama: widget
-                                                    .namaOrganisasiController
-                                                    .text,
-                                                tahun: widget
-                                                    .tahunOrganisasiController
-                                                    .text,
-                                                jenisOrgId: int.parse(widget
-                                                    .idJenisOrganisasiController
-                                                    .text),
-                                                kotaId: int.parse(widget
-                                                    .idKotaOrganisasiController
-                                                    .text),
-                                                posisi: widget
-                                                    .posisiaOrganisasiController
-                                                    .text,
-                                              ),
-                                            );
+                                        if (_formKey.currentState!.validate()) {
+                                          context.read<AddOrganisasiBloc>().add(
+                                                AddDataOrganisasiSubmited(
+                                                  nama: widget
+                                                      .namaOrganisasiController
+                                                      .text,
+                                                  tahun: widget
+                                                      .tahunOrganisasiController
+                                                      .text,
+                                                  jenisOrgId: int.parse(widget
+                                                      .idJenisOrganisasiController
+                                                      .text),
+                                                  kotaId: int.parse(widget
+                                                      .idKotaOrganisasiController
+                                                      .text),
+                                                  posisi: widget
+                                                      .posisiaOrganisasiController
+                                                      .text,
+                                                ),
+                                              );
+                                        }
                                       },
                               ),
                             ],

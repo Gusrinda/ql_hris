@@ -62,22 +62,23 @@ class DataPelatihanServices {
 
   static Future<Object> editDataPelatihan(
     String token,
-    // int pelatihanId,
     int compId,
     int dirId,
+    int pelatihanId,
     String namaPel,
     int tahun,
     String namaLem,
     int kotaId,
   ) async {
     var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/m_kary/pelatihan_create");
+        "${MyGeneralConst.API_URL}/operation/m_kary/pelatihan_update");
 
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.put,
       headers: GeneralServices.addToken2Headers(token),
       body: json.encode({
+        "id": pelatihanId,
         "m_comp_id": compId,
         "m_dir_id": dirId,
         "nama_pel": namaPel,

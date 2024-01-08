@@ -32,6 +32,7 @@ enum GeneralServicesMethod {
   delete,
   put,
   putMultipart,
+  putMultiFiles,
 }
 
 class GeneralServices {
@@ -120,6 +121,30 @@ class GeneralServices {
           ..headers.addAll(headers!)
           ..files.add(
               await http.MultipartFile.fromPath('profil_image', imagePath!));
+        var res = await request.send();
+        response = await http.Response.fromStream(res);
+      } else if (method == GeneralServicesMethod.putMultiFiles) {
+        body = body as Map<String, dynamic>;
+        Map<String, String> bodyFormed = {};
+        for (var key in body.keys) {
+          if (body[key] != null) bodyFormed[key] = body[key].toString();
+        }
+
+        var request = http.MultipartRequest('POST', url)
+          ..headers.addAll(headers!)
+          ..fields.addAll(bodyFormed);
+
+        // Add files to the request
+        if (files != null && files.isNotEmpty) {
+          for (var entry in files.entries) {
+            String? fieldName = entry.key;
+            File? file = entry.value;
+            request.files
+                .add(await http.MultipartFile.fromPath(fieldName!, file!.path));
+          }
+        }
+
+        // Send the request
         var res = await request.send();
         response = await http.Response.fromStream(res);
       } else if (method == GeneralServicesMethod.put) {

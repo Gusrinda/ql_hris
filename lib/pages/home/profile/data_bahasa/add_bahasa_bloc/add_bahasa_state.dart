@@ -47,3 +47,21 @@ class AddDatabahasaFailedUserExpired extends AddBahasaState {
   @override
   List<Object> get props => [message];
 }
+
+class EditBahasanSuccess extends AddBahasaState {
+  String message;
+
+  EditBahasanSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+class EditBahasanFailed extends AddBahasaState {
+  String message;
+
+  EditBahasanFailed({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}

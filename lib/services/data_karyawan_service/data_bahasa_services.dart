@@ -57,4 +57,30 @@ class DataBahasaServices {
     );
   }
 
+  static Future<Object> editDataBahasa(
+    String token,
+    int compId,
+    int dirId,
+    int bahasaId,
+    String bhsDikuasai,
+    String nilaiLisan,
+    String nilaiTetulis,
+  ) async {
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/bahasa_update");
+
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.put,
+      headers: GeneralServices.addToken2Headers(token),
+      body: json.encode({
+        "m_comp_id": compId,
+        "m_dir_id": dirId,
+        "id": bahasaId,
+        "bhs_dikuasai": bhsDikuasai,
+        "level_lisan": nilaiLisan,
+        "level_tertulis": nilaiTetulis,
+      }),
+    );
+  }
 }

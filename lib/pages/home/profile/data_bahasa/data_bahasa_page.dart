@@ -175,228 +175,282 @@ class _DataBahasaPageState extends State<DataBahasaPage> {
                             children: [
                               Expanded(
                                 child: listBahasa.isNotEmpty
-                                ? ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: listBahasa.length,
-                                  itemBuilder: (context, index) {
-                                    var dataBahasa = listBahasa[index];
-                                    return ListTile(
-                                      contentPadding: EdgeInsets.zero,
-                                      subtitle: GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            showDeleteButton = false;
-                                            deleteIndex = null;
-                                          });
-                                        },
-                                        child: Container(
-                                          margin:
-                                              EdgeInsets.only(bottom: 10.sp),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            border: Border.all(
-                                                color: Color(0xFFDDDDDD)),
-                                            color: MyColorsConst.whiteColor,
-                                          ),
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: 12.sp,
-                                            vertical: 10.sp,
-                                          ),
-                                          child: Stack(
-                                            children: [
-                                              Column(
-                                                children: [
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      SizedBox(
-                                                        width: size.width * 3/5,
-                                                        child: Text(
-                                                          '${dataBahasa.bhsDikuasai ?? '-'}',
-                                                          maxLines: 2,
-                                                          overflow: TextOverflow.ellipsis,
-                                                          style:
-                                                              GoogleFonts.poppins(
-                                                            fontSize: 14.sp,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: MyColorsConst
-                                                                .primaryColor,
-                                                          ),
-                                                        ),
+                                    ? ListView.builder(
+                                        shrinkWrap: true,
+                                        itemCount: listBahasa.length,
+                                        itemBuilder: (context, index) {
+                                          var dataBahasa = listBahasa[index];
+                                          return ListTile(
+                                            contentPadding: EdgeInsets.zero,
+                                            subtitle: GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        BlocProvider(
+                                                      create: (context) =>
+                                                          AddBahasaBloc(),
+                                                      child: ViewEditBahasaPage(
+                                                        bahasaId:
+                                                            dataBahasa.id ?? 0,
+                                                        bhsDikuasai: dataBahasa
+                                                            .bhsDikuasai,
+                                                        levelLisan: dataBahasa
+                                                            .levelLisan,
+                                                        levelTertulis:
+                                                            dataBahasa
+                                                                .levelTertulis,
+                                                        reloadDataCallback:
+                                                            loadData,
                                                       ),
-                                                      IconButton(
-                                                        icon: Icon(
-                                                            Icons.more_horiz),
-                                                        splashColor:
-                                                            MyColorsConst
-                                                                .redColor,
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            if (deleteIndex ==
-                                                                index) {
-                                                              // Menutup tombol hapus jika sudah terbuka
-                                                              showDeleteButton =
-                                                                  false;
-                                                              deleteIndex =
-                                                                  null;
-                                                            } else {
-                                                              // Membuka tombol hapus jika belum terbuka
-                                                              showDeleteButton =
-                                                                  true;
-                                                              deleteIndex =
-                                                                  index;
-                                                            }
-                                                          });
-                                                        },
-                                                      ),
-                                                    ],
+                                                    ),
                                                   ),
-                                                  Row(
-                                                    children: [
-                                                      Expanded(
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
+                                                );
+                                                setState(() {
+                                                  showDeleteButton = false;
+                                                  deleteIndex = null;
+                                                });
+                                              },
+                                              child: Container(
+                                                margin: EdgeInsets.only(
+                                                    bottom: 10.sp),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                      color: Color(0xFFDDDDDD)),
+                                                  color:
+                                                      MyColorsConst.whiteColor,
+                                                ),
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 12.sp,
+                                                  vertical: 10.sp,
+                                                ),
+                                                child: Stack(
+                                                  children: [
+                                                    Column(
+                                                      children: [
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
                                                           children: [
-                                                            Text(
-                                                              'Level Lisan',
-                                                              style: GoogleFonts
-                                                                  .poppins(
-                                                                fontSize: 10.sp,
-                                                                color: MyColorsConst
-                                                                    .lightDarkColor,
+                                                            SizedBox(
+                                                              width:
+                                                                  size.width *
+                                                                      3 /
+                                                                      5,
+                                                              child: Text(
+                                                                dataBahasa
+                                                                        .bhsDikuasai ??
+                                                                    '-',
+                                                                maxLines: 2,
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .poppins(
+                                                                  fontSize:
+                                                                      14.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  color: MyColorsConst
+                                                                      .primaryColor,
+                                                                ),
                                                               ),
                                                             ),
-                                                            Text(
-                                                              '${dataBahasa.levelLisan ?? '-'}',
-                                                              style: GoogleFonts
-                                                                  .poppins(
-                                                                fontSize: 12.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                color: MyColorsConst
-                                                                    .darkColor,
+                                                            IconButton(
+                                                              icon: Icon(Icons
+                                                                  .more_horiz),
+                                                              splashColor:
+                                                                  MyColorsConst
+                                                                      .redColor,
+                                                              onPressed: () {
+                                                                setState(() {
+                                                                  if (deleteIndex ==
+                                                                      index) {
+                                                                    // Menutup tombol hapus jika sudah terbuka
+                                                                    showDeleteButton =
+                                                                        false;
+                                                                    deleteIndex =
+                                                                        null;
+                                                                  } else {
+                                                                    // Membuka tombol hapus jika belum terbuka
+                                                                    showDeleteButton =
+                                                                        true;
+                                                                    deleteIndex =
+                                                                        index;
+                                                                  }
+                                                                });
+                                                              },
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Expanded(
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    'Level Lisan',
+                                                                    style: GoogleFonts
+                                                                        .poppins(
+                                                                      fontSize:
+                                                                          10.sp,
+                                                                      color: MyColorsConst
+                                                                          .lightDarkColor,
+                                                                    ),
+                                                                  ),
+                                                                  Text(
+                                                                    '${dataBahasa.levelLisan ?? '-'}',
+                                                                    style: GoogleFonts
+                                                                        .poppins(
+                                                                      fontSize:
+                                                                          12.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      color: MyColorsConst
+                                                                          .darkColor,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                    'Level Tertulis',
+                                                                    style: GoogleFonts
+                                                                        .poppins(
+                                                                      fontSize:
+                                                                          10.sp,
+                                                                      color: MyColorsConst
+                                                                          .lightDarkColor,
+                                                                    ),
+                                                                  ),
+                                                                  Text(
+                                                                    '${dataBahasa.levelTertulis ?? '-'}',
+                                                                    style: GoogleFonts
+                                                                        .poppins(
+                                                                      fontSize:
+                                                                          12.sp,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      color: MyColorsConst
+                                                                          .darkColor,
+                                                                    ),
+                                                                  ),
+                                                                ],
                                                               ),
                                                             ),
                                                           ],
                                                         ),
-                                                      ),
-                                                      Expanded(
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                              'Level Tertulis',
-                                                              style: GoogleFonts
-                                                                  .poppins(
-                                                                fontSize: 10.sp,
-                                                                color: MyColorsConst
-                                                                    .lightDarkColor,
-                                                              ),
-                                                            ),
-                                                            Text(
-                                                              '${dataBahasa.levelTertulis ?? '-'}',
-                                                              style: GoogleFonts
-                                                                  .poppins(
-                                                                fontSize: 12.sp,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                color: MyColorsConst
-                                                                    .darkColor,
-                                                              ),
-                                                            ),
-                                                          ],
+                                                        SizedBox(
+                                                          height: 5.sp,
                                                         ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  SizedBox(
-                                                    height: 5.sp,
-                                                  ),
-                                                ],
-                                              ),
-                                              Positioned(
-                                                top: 30,
-                                                right: 15,
-                                                child: Visibility(
-                                                  visible: showDeleteButton &&
-                                                      deleteIndex == index,
-                                                  child: Material(
-                                                    elevation: 4,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            4),
-                                                    child: InkWell(
-                                                      onTap: state
-                                                              is ListDataPendidikan
-                                                          ? null
-                                                          : () {
-                                                              showDialog(
-                                                                  context:
-                                                                      context,
-                                                                  builder: (_) =>
-                                                                      DialogCustom(
+                                                      ],
+                                                    ),
+                                                    Positioned(
+                                                      top: 30,
+                                                      right: 15,
+                                                      child: Visibility(
+                                                        visible:
+                                                            showDeleteButton &&
+                                                                deleteIndex ==
+                                                                    index,
+                                                        child: Material(
+                                                          elevation: 4,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(4),
+                                                          child: InkWell(
+                                                            onTap: state
+                                                                    is ListDataPendidikan
+                                                                ? null
+                                                                : () {
+                                                                    showDialog(
+                                                                      context:
+                                                                          context,
+                                                                      builder:
+                                                                          (_) =>
+                                                                              DialogCustom(
                                                                         state: DialogCustomItem
                                                                             .confirm,
                                                                         message:
-                                                                            "Apakah Yakin enghapus Data ini?",
+                                                                            "Apakah Yakin Menghapus Data ini?",
                                                                         durationInSec:
                                                                             5,
                                                                         onContinue: () => context
                                                                             .read<ListBahasaBloc>()
-                                                                            .add(DeleteListBahasa(dataID: dataBahasa.id.toString())),
-                                                                      ));
-                                                            },
-                                                      child: Container(
-                                                        padding: EdgeInsets
-                                                            .symmetric(
-                                                          horizontal: 8.sp,
-                                                          vertical: 4.sp,
-                                                        ),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(6),
-                                                          border: Border.all(
-                                                              color: Color(
-                                                                  0xFFDDDDDD)),
-                                                          color: Colors.red
-                                                              .withOpacity(0.2),
-                                                        ),
-                                                        child: Text(
-                                                          'Hapus',
-                                                          style: GoogleFonts
-                                                              .poppins(
-                                                            fontSize: 12.sp,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            color: Colors
-                                                                .red.shade900,
+                                                                            .add(
+                                                                              DeleteListBahasa(
+                                                                                dataID: dataBahasa.id.toString(),
+                                                                              ),
+                                                                            ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                            child: Container(
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                horizontal:
+                                                                    8.sp,
+                                                                vertical: 4.sp,
+                                                              ),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            6),
+                                                                border: Border.all(
+                                                                    color: Color(
+                                                                        0xFFDDDDDD)),
+                                                                color: Colors
+                                                                    .red
+                                                                    .withOpacity(
+                                                                        0.2),
+                                                              ),
+                                                              child: Text(
+                                                                'Hapus',
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .poppins(
+                                                                  fontSize:
+                                                                      12.sp,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  color: Colors
+                                                                      .red
+                                                                      .shade900,
+                                                                ),
+                                                              ),
+                                                            ),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
+                                                  ],
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ) 
-                                : Center(
+                                            ),
+                                          );
+                                        },
+                                      )
+                                    : Center(
                                         child: EmptyStateBuilder(),
                                       ),
                               ),

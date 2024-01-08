@@ -68,4 +68,39 @@ class DataKeluargaServices {
       }),
     );
   }
+
+  static Future<Object> editDataKeluarga(
+    String token,
+    int compId,
+    int dirId,
+    int dataKeluargaId,
+    int keluargaId,
+    String nama,
+    int pendTerakhirId,
+    int jenisKelaminId,
+    int pekerjaanId,
+    int usia,
+    String desc,
+  ) async {
+    var url =
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/keluarga_update");
+
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.put,
+      headers: GeneralServices.addToken2Headers(token),
+      body: json.encode({
+        "id" : dataKeluargaId,
+        "m_comp_id": compId,
+        "m_dir_id": dirId,
+        "keluarga_id": keluargaId,
+        "nama": nama,
+        "pend_terakhir_id": pendTerakhirId,
+        "jk_id": jenisKelaminId,
+        "pekerjaan_id": pekerjaanId,
+        "usia": usia,
+        "desc": desc,
+      }),
+    );
+  }
 }
