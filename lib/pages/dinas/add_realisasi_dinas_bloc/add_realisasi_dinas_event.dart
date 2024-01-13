@@ -29,6 +29,31 @@ class AddRealisasiDinasSubmited extends AddRealisasiDinasEvent {
       ];
 }
 
+class EditRealisasiDinasSubmited extends AddRealisasiDinasEvent {
+  int rpdID;
+  int tSpdId;
+  double totalBiayaSelisih;
+  String keterangan;
+  final List<Map<String, dynamic>>? tRpdDetList;
+
+  EditRealisasiDinasSubmited({
+    required this.rpdID,
+    required this.tSpdId,
+    required this.totalBiayaSelisih,
+    required this.keterangan,
+    this.tRpdDetList,
+  });
+
+  @override
+  List<Object> get props => [
+        rpdID,
+        tSpdId,
+        totalBiayaSelisih,
+        keterangan,
+        tRpdDetList!,
+      ];
+}
+
 class OnSelectDinasApproved extends AddRealisasiDinasEvent {
   OnSelectDinasApproved();
   @override
@@ -37,6 +62,26 @@ class OnSelectDinasApproved extends AddRealisasiDinasEvent {
 
 class OnSelectTipe extends AddRealisasiDinasEvent {
   OnSelectTipe();
+  @override
+  List<Object> get props => [];
+}
+
+class GetDetailEditRealisasiDinas extends AddRealisasiDinasEvent {
+  int id;
+
+  GetDetailEditRealisasiDinas({
+    required this.id,
+  });
+
+  @override
+  List<Object> get props => [id];
+}
+
+class GetDetailBiayaSPD extends AddRealisasiDinasEvent {
+  int spdID;
+
+  GetDetailBiayaSPD({required this.spdID});
+
   @override
   List<Object> get props => [];
 }

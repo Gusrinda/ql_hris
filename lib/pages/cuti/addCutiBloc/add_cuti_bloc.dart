@@ -51,8 +51,7 @@ class AddCutiBloc extends Bloc<AddCutiEvent, AddCutiState> {
             await GeneralSharedPreferences.removeUserToken();
             emit(AddCutiFailedUserExpired(message: "Token expired"));
           } else {
-            emit(AddCutiFailed(
-                message: "Maaf data belum valid, silahkan dikoreksi"));
+            emit(AddCutiFailed(message: res.errorResponse));
             print("Response from API: ${res.errorResponse}");
           }
         }
@@ -172,7 +171,7 @@ class AddCutiBloc extends Bloc<AddCutiEvent, AddCutiState> {
             await GeneralSharedPreferences.removeUserToken();
             emit(AddCutiFailedUserExpired(message: "Token expired"));
           } else {
-            emit(AddCutiFailed(message: "Unknown error occurred"));
+            emit(AddCutiFailed(message: res.errorResponse));
             print("Response from API: ${res.errorResponse}");
           }
         }

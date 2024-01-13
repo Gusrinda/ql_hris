@@ -122,6 +122,7 @@ _$BiodataImpl _$$BiodataImplFromJson(Map<String, dynamic> json) =>
           ? null
           : DateTime.parse(json['npwp_tgl_berlaku'] as String),
       bpjsTipeId: json['bpjs_tipe_id'] as int?,
+      bpjsTipe: json['bpjs_tipe'] as String?,
       bpjsNo: json['bpjs_no'] as String?,
       bpjsNoKesehatan: json['bpjs_no_kesehatan'] as String?,
       bpjsNoKetenagakerjaan: json['bpjs_no_ketenagakerjaan'] as String?,
@@ -229,6 +230,7 @@ Map<String, dynamic> _$$BiodataImplToJson(_$BiodataImpl instance) =>
       'npwp_foto': instance.npwpFoto,
       'npwp_tgl_berlaku': instance.npwpTglBerlaku?.toIso8601String(),
       'bpjs_tipe_id': instance.bpjsTipeId,
+      'bpjs_tipe': instance.bpjsTipe,
       'bpjs_no': instance.bpjsNo,
       'bpjs_no_kesehatan': instance.bpjsNoKesehatan,
       'bpjs_no_ketenagakerjaan': instance.bpjsNoKetenagakerjaan,

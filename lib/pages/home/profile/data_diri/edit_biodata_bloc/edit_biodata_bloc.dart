@@ -51,119 +51,6 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
   List<DataGeneral> dataKecamatan = [];
 
   EditBiodataBloc() : super(EditBiodataInitial()) {
-    // on<EditDataBiodataSubmited>((event, emit) async {
-    //   emit(EditBiodataLoading());
-    //   var resToken = await GeneralSharedPreferences.getUserToken();
-    //   if (resToken is ServicesSuccess) {
-    //     Map<String, dynamic> biodataFields = {
-    //       "m_divisi_id": event.divisiId,
-    //       "m_dept_id": event.deptId,
-    //       "m_posisi_id": event.posisiId,
-    //       "m_zona_id": event.zonaId,
-    //       "m_standart_gaji_id": event.standarGaji,
-    //       "costcontre_id": event.costcentreId,
-    //       "kode_presensi": event.kodePresensi,
-    //       // "is_active": event.isActive,
-    //       // "grading_id": event.gradingId,
-    //       // "nik": event.nik,
-    //       "nama_depan": event.namaDepan,
-    //       "nama_belakang": event.namaBelakang,
-    //       "nama_lengkap": event.namaLengkap,
-    //       "nama_panggilan": event.namaPanggilan,
-    //       "jk_id": event.jkId,
-    //       "tempat_lahir": event.tempatLahir,
-    //       "tgl_lahir": event.tglLahir,
-    //       "provinsi_id": event.provinsiId,
-    //       "kota_id": event.kotaId,
-    //       "kecamatan_id": event.kecamatanId,
-    //       "kode_pos": event.kodePos,
-    //       "alamat_domisili": event.alamatDomisili,
-    //       "alamat_asli": event.alamatAsli,
-    //       "no_tlp": event.noTlp,
-    //       "no_tlp_lainnya": event.noTlpLainnya,
-    //       "no_darurat": event.noDarurat,
-    //       "nama_kontak_darurat": event.namaKontakDarurat,
-    //       "agama_id": event.agamaId,
-    //       "gol_darah_id": event.golDarahId,
-    //       "status_nikah_id": event.statusNikahId,
-    //       "tanggungan_id": event.tanggunganId,
-    //       "hub_dgn_karyawan": event.hubDgnKaryawan,
-    //       // "cuti_jatah_reguler": event.cutiJatahReguler,
-    //       // "cuti_sisa_reguler": event.cutiSisaReguler,
-    //       // "cuti_panjang": event.cutiPanjang,
-    //       // "cuti_sisa_panjang": event.cutiSisaPanjang,
-    //       // // "status_kary_id": event.statusKaryId,
-    //       "tgl_masuk": event.tglMasuk,
-    //       // "tgl_berhenti": event.tglBerhenti,
-    //       // "alasan_berhenti": event.alasanBerhenti,
-    //       "uk_baju": event.ukBaju,
-    //       "uk_celana": event.ukCelana,
-    //       "uk_sepatu": event.ukSepatu,
-    // "ktp_no": event.ktpNo,
-    // "ktp_foto": event.ktpFoto,
-    // "pas_foto": event.pasFoto,
-    // "kk_no": event.kkNo,
-    // // "kk_foto": event.kkFoto,
-    // "npwp_no": event.npwpNo,
-    // // "npwp_foto": event.npwpFoto,
-    // "npwp_tgl_berlaku": event.npwpTglBerlaku,
-    // "bpjs_tipe_id": event.bpjsTipeId,
-    // "bpjs_no": event.bpjsNo,
-    // // "bpjs_foto": event.bpjsFoto,
-    // // "berkas_lain": event.berkasLain,
-    // "desc": event.desc,
-    // "bank_id": event.bankId,
-    // "no_rek": event.noRek,
-    // "atas_nama_rek": event.atasNamaRek,
-    //     };
-
-    //     // Mencetak nilai setiap field di biodataFields
-    //     // Pastikan variabel fotoKaryawan diinisialisasi
-    //     File?
-    //         fotoKaryawan; // Gantilah ini dengan variabel fotoKaryawan yang sesuai
-
-    //     try {
-    //       var request = http.MultipartRequest(
-    //         'POST',
-    //         Uri.parse(
-    //             "${MyGeneralConst.API_URL}/operation/m_kary/data_diri_update"),
-    //       );
-    //       request.headers.addAll(
-    //           GeneralServices.addToken2Headers(resToken.response["token"]));
-
-    //       // Menambahkan field ke FormData
-    //       biodataFields.forEach((key, value) {
-    //         request.fields[key] = value.toString();
-    //       });
-
-    //       // Menambahkan file fotoKaryawan ke FormData
-    //       if (fotoKaryawan != null) {
-    //         request.files.add(
-    //           await http.MultipartFile.fromPath(
-    //               'foto_karyawan', fotoKaryawan.path),
-    //         );
-    //       }
-
-    //       // Kirim request
-    //       var response = await request.send();
-    //       var responseBody = await response.stream.bytesToString();
-
-    //       if (response.statusCode == 200) {
-    //         emit(EditBiodataSuccess(message: "Data diri berhasil diupdate"));
-    //       } else {
-    //         emit(EditBiodataFailed(
-    //             message: json.decode(responseBody)['message']));
-    //       }
-    //     } catch (e) {
-    //       print("Exception: $e");
-    //       emit(EditBiodataFailedInBackground(
-    //           message: "Terjadi kesalahan. Silakan coba lagi nanti."));
-    //     }
-    //   } else if (resToken is ServicesFailure) {
-    //     emit(EditBiodataFailedInBackground(message: 'Response invalid'));
-    //   }
-    // });
-
     on<EditDataBiodataSubmited>((event, emit) async {
       emit(EditBiodataLoading());
       var resToken = await GeneralSharedPreferences.getUserToken();
@@ -256,7 +143,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
             } else {
               emit(
                 EditBiodataFailedInBackground(
-                    message: 'Response format is invalid'),
+                    message: 'Gagal Mengambil Data'),
               );
             }
           } else if (res is ServicesFailure) {
@@ -293,7 +180,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
             } else {
               emit(
                 EditBiodataFailedInBackground(
-                    message: 'Response format is invalid'),
+                    message: 'Gagal Mengambil Data'),
               );
             }
           } else if (res is ServicesFailure) {
@@ -328,7 +215,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
             } else {
               emit(
                 EditBiodataFailedInBackground(
-                    message: 'Response format is invalid'),
+                    message: 'Gagal Mengambil Data'),
               );
             }
           } else if (res is ServicesFailure) {
@@ -362,7 +249,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
             } else {
               emit(
                 EditBiodataFailedInBackground(
-                    message: 'Response format is invalid'),
+                    message: 'Gagal Mengambil Data'),
               );
             }
           } else if (res is ServicesFailure) {
@@ -402,7 +289,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               );
             } else {
               emit(EditBiodataFailedInBackground(
-                  message: 'Response format is invalid'));
+                  message: 'Gagal Mengambil Data'));
             }
           } else if (res is ServicesFailure) {
             if (res.errorResponse == null) {
@@ -443,7 +330,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               );
             } else {
               emit(EditBiodataFailedInBackground(
-                  message: 'Response format is invalid'));
+                  message: 'Gagal Mengambil Data'));
             }
           } else if (res is ServicesFailureNoMobile) {
             if (res.errorResponse == null) {
@@ -481,7 +368,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               );
             } else {
               emit(EditBiodataFailedInBackground(
-                  message: 'Response format is invalid'));
+                  message: 'Gagal Mengambil Data'));
             }
           } else if (res is ServicesFailure) {
             if (res.errorResponse == null) {
@@ -520,7 +407,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               );
             } else {
               emit(EditBiodataFailedInBackground(
-                  message: 'Response format is invalid'));
+                  message: 'Gagal Mengambil Data'));
             }
           } else if (res is ServicesFailure) {
             if (res.errorResponse == null) {
@@ -559,7 +446,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               );
             } else {
               emit(EditBiodataFailedInBackground(
-                  message: 'Response format is invalid'));
+                  message: 'Gagal Mengambil Data'));
             }
           } else if (res is ServicesFailure) {
             if (res.errorResponse == null) {
@@ -598,7 +485,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               );
             } else {
               emit(EditBiodataFailedInBackground(
-                  message: 'Response format is invalid'));
+                  message: 'Gagal Mengambil Data'));
             }
           } else if (res is ServicesFailure) {
             if (res.errorResponse == null) {
@@ -636,7 +523,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               );
             } else {
               emit(EditBiodataFailedInBackground(
-                  message: 'Response format is invalid'));
+                  message: 'Gagal Mengambil Data'));
             }
           } else if (res is ServicesFailure) {
             if (res.errorResponse == null) {
@@ -673,7 +560,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               );
             } else {
               emit(EditBiodataFailedInBackground(
-                  message: 'Response format is invalid'));
+                  message: 'Gagal Mengambil Data'));
             }
           } else if (res is ServicesFailure) {
             if (res.errorResponse == null) {
@@ -712,7 +599,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               );
             } else {
               emit(EditBiodataFailedInBackground(
-                  message: 'Response format is invalid'));
+                  message: 'Gagal Mengambil Data'));
             }
           } else if (res is ServicesFailure) {
             if (res.errorResponse == null) {
@@ -752,7 +639,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               );
             } else {
               emit(EditBiodataFailedInBackground(
-                  message: 'Response format is invalid'));
+                  message: 'Gagal Mengambil Data'));
             }
           } else if (res is ServicesFailureNoMobile) {
             if (res.errorResponse == null) {
@@ -790,7 +677,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               );
             } else {
               emit(EditBiodataFailedInBackground(
-                  message: 'Response format is invalid'));
+                  message: 'Gagal Mengambil Data'));
             }
           } else if (res is ServicesFailure) {
             if (res.errorResponse == null) {
@@ -828,7 +715,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               );
             } else {
               emit(EditBiodataFailedInBackground(
-                  message: 'Response format is invalid'));
+                  message: 'Gagal Mengambil Data'));
             }
           } else if (res is ServicesFailure) {
             if (res.errorResponse == null) {
@@ -867,7 +754,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               );
             } else {
               emit(EditBiodataFailedInBackground(
-                  message: 'Response format is invalid'));
+                  message: 'Gagal Mengambil Data'));
             }
           } else if (res is ServicesFailure) {
             if (res.errorResponse == null) {
@@ -906,7 +793,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               );
             } else {
               emit(EditBiodataFailedInBackground(
-                  message: 'Response format is invalid'));
+                  message: 'Gagal Mengambil Data'));
             }
           } else if (res is ServicesFailure) {
             if (res.errorResponse == null) {
@@ -944,7 +831,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               );
             } else {
               emit(EditBiodataFailedInBackground(
-                  message: 'Response format is invalid'));
+                  message: 'Gagal Mengambil Data'));
             }
           } else if (res is ServicesFailure) {
             if (res.errorResponse == null) {
@@ -983,7 +870,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               );
             } else {
               emit(EditBiodataFailedInBackground(
-                  message: 'Response format is invalid'));
+                  message: 'Gagal Mengambil Data'));
             }
           } else if (res is ServicesFailure) {
             if (res.errorResponse == null) {
@@ -1022,7 +909,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               );
             } else {
               emit(EditBiodataFailedInBackground(
-                  message: 'Response format is invalid'));
+                  message: 'Gagal Mengambil Data'));
             }
           } else if (res is ServicesFailure) {
             if (res.errorResponse == null) {

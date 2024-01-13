@@ -128,6 +128,7 @@ _$DataRealisasiDinasImpl _$$DataRealisasiDinasImplFromJson(
       lastEditorProfilImage: json['last_editor.profil_image'] as String?,
       lastEditorTelp: json['last_editor.telp'],
       lastEditorMKaryId: json['last_editor.m_kary_id'] as int?,
+      approvalNote: json['approval_note'] as String?,
     );
 
 Map<String, dynamic> _$$DataRealisasiDinasImplToJson(
@@ -218,4 +219,5 @@ Map<String, dynamic> _$$DataRealisasiDinasImplToJson(
       'last_editor.profil_image': instance.lastEditorProfilImage,
       'last_editor.telp': instance.lastEditorTelp,
       'last_editor.m_kary_id': instance.lastEditorMKaryId,
+      'approval_note': instance.approvalNote,
     };

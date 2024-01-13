@@ -196,6 +196,8 @@ class Biodata with _$Biodata {
         DateTime? npwpTglBerlaku,
         @JsonKey(name: "bpjs_tipe_id")
         int? bpjsTipeId,
+        @JsonKey(name: "bpjs_tipe")
+        String? bpjsTipe,
         @JsonKey(name: "bpjs_no")
         String? bpjsNo,
         @JsonKey(name: "bpjs_no_kesehatan")

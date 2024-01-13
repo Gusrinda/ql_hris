@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
    <application
-        android:label="My Success Production"
+        android:label="My Success Pre-Production"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_sj_logo">
         <activity

@@ -7,13 +7,34 @@ import 'package:sj_presensi_mobile/componens/HRIS/monthYearPicker_custom.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
-import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_realisasi_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_realisasi_dinas_bloc/add_realisasi_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/detail_realisasi_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/detail_realisasi_dinas_bloc/detail_realisasi_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_realisasi_dinas_bloc/list_realisasi_dinas_bloc.dart';
+import 'package:sj_presensi_mobile/services/model/dinas/realisasi_dinas_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
+
+final Map<String, dynamic> stateDict = {
+  "IN APPROVAL": {
+    "name": "Menunggu Disetujui",
+  },
+  "APPROVED": {
+    "name": "Disetujui",
+  },
+  "REJECTED": {
+    "name": "Ditolak",
+  },
+  "REVISED": {
+    "name": "Revisi",
+  },
+  "DRAFT": {
+    "name": "Draft",
+  },
+  "POSTED": {
+    "name": "Posted",
+  },
+};
 
 class RealisasiDinasPage extends StatefulWidget {
   static const routeName = '/RealisasiDinasPage';
@@ -21,6 +42,36 @@ class RealisasiDinasPage extends StatefulWidget {
 
   @override
   State<RealisasiDinasPage> createState() => _RealisasiDinasPageState();
+}
+
+DateTime? selectedMonth;
+DateTime? selectedYear;
+
+String mapStatusToString(String status) {
+  if (stateDict.containsKey(status)) {
+    return stateDict[status]['name'];
+  } else {
+    return 'Menunggu Disetujui';
+  }
+}
+
+Color getColorFromStatus(String status) {
+  if (stateDict.containsKey(status)) {
+    switch (status) {
+      case "IN APPROVAL":
+        return const Color(0xFF0068D4);
+      case "REVISED":
+        return Colors.orange;
+      case "REJECTED":
+        return const Color(0xFFED1B24);
+      case "APPROVED":
+        return const Color(0xFF0CA356);
+      default:
+        return Colors.grey.shade600; // warna default
+    }
+  } else {
+    return const Color(0xFF0068D4); // warna default
+  }
 }
 
 class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
@@ -256,8 +307,14 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                       context,
                                       index,
                                     ) {
-                                      var dataRealisasiDinas =
+                                      DataRealisasiDinas dataRealisasiDinas =
                                           listRealisasiDinas[index];
+
+                                      String currentStatus =
+                                          dataRealisasiDinas.status ?? 'DRAFT';
+                                      Color currentColor =
+                                          getColorFromStatus(currentStatus);
+
                                       return Container(
                                         margin: EdgeInsets.only(bottom: 5.sp),
                                         child: ListTile(
@@ -273,6 +330,8 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                     child: DetailRealisasiDinas(
                                                       dataRealisasi:
                                                           dataRealisasiDinas,
+                                                      reloadDataCallback:
+                                                          loadData,
                                                     ),
                                                   ),
                                                 ),
@@ -281,13 +340,14 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                             child: Stack(
                                               children: [
                                                 Container(
-                                                  padding:
-                                                      const EdgeInsets.symmetric(
-                                                          horizontal: 15,
-                                                          vertical: 15),
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 15,
+                                                      vertical: 15),
                                                   decoration: BoxDecoration(
                                                     borderRadius:
-                                                        BorderRadius.circular(7),
+                                                        BorderRadius.circular(
+                                                            7),
                                                     // border: Border.all(color: const Color(0xFFDDDDDD)),
                                                     boxShadow: [
                                                       BoxShadow(
@@ -296,8 +356,8 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                           offset: Offset(0, 0),
                                                           blurRadius: 5)
                                                     ],
-                                                    color:
-                                                        MyColorsConst.whiteColor,
+                                                    color: MyColorsConst
+                                                        .whiteColor,
                                                   ),
                                                   height: 100.sp,
                                                   width: size.width,
@@ -317,7 +377,8 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                   // ),
                                                   child: Column(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.start,
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .spaceEvenly,
@@ -353,7 +414,8 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                             child: Text(
                                                               "${dataRealisasiDinas.creatorName ?? '-'}",
                                                               style: GoogleFonts.poppins(
-                                                                  fontSize: 12.sp,
+                                                                  fontSize:
+                                                                      12.sp,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w500,
@@ -394,7 +456,8 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                             child: Text(
                                                               "${dataRealisasiDinas.tSpdTglAcaraAwal ?? '-'} - ${dataRealisasiDinas.tSpdTglAcaraAkhir ?? '-'}",
                                                               style: GoogleFonts.poppins(
-                                                                  fontSize: 10.sp,
+                                                                  fontSize:
+                                                                      10.sp,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w400,
@@ -414,31 +477,30 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                     height: 30,
                                                     padding: const EdgeInsets
                                                         .symmetric(
-                                                        horizontal: 6,
+                                                        horizontal: 10,
                                                         vertical: 3),
                                                     decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.only(
-                                                        topRight: Radius.circular(
-                                                            10.sp),
+                                                        topRight:
+                                                            Radius.circular(
+                                                                10.sp),
                                                         bottomLeft:
                                                             Radius.circular(
                                                                 10.sp),
                                                       ),
-                                                      color: MyColorsConst
-                                                          .primaryColor,
+                                                      color: currentColor,
                                                     ),
                                                     child: Center(
                                                       child: Text(
-                                                        dataRealisasiDinas
-                                                                .status ??
-                                                            '-',
+                                                        mapStatusToString(
+                                                            currentStatus),
                                                         style:
                                                             GoogleFonts.poppins(
                                                           color: Colors.white,
-                                                          fontSize: 12.sp,
+                                                          fontSize: 10,
                                                           fontWeight:
-                                                              FontWeight.w500,
+                                                              FontWeight.w600,
                                                         ),
                                                       ),
                                                     ),
@@ -470,8 +532,15 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return BlocProvider(
-                    create: (context) => AddRealisasiDinasBloc(),
+                  return MultiBlocProvider(
+                    providers: [
+                      BlocProvider(
+                        create: (context) => AddRealisasiDinasBloc(),
+                      ),
+                      BlocProvider(
+                        create: (context) => DetailRealisasiDinasBloc(),
+                      ),
+                    ],
                     child: AddRealisasiDinasPage(
                       reloadDataCallback: loadData,
                     ),
@@ -487,6 +556,34 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class EmptyStateBuilder extends StatelessWidget {
+  const EmptyStateBuilder({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          "assets/images/box_nodata.png",
+          height: size.width * 1 / 2.5,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          "Tidak Ada Data Yang Ditampilkan!",
+          style: GoogleFonts.poppins(
+            color: MyColorsConst.darkColor,
+            fontWeight: FontWeight.w600,
+            fontSize: 14.sp,
+          ),
+        ),
+      ],
     );
   }
 }

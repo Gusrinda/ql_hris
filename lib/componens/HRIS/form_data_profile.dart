@@ -381,6 +381,166 @@ class FormInputData extends StatelessWidget {
   }
 }
 
+class FormInputDataWithNote extends StatelessWidget {
+  const FormInputDataWithNote({
+    Key? key,
+    this.enabled = true,
+    this.input = "",
+    this.onTap,
+    required this.controller,
+    required this.validator,
+    this.errorTextStyle,
+    required this.labelForm,
+    required this.labelTag,
+    required this.formTag,
+    required this.hintText,
+    this.showRedStar = true,
+    this.inputType = TextInputType.text,
+    this.onChanged,
+    this.noteTop,
+    this.noteBottom,
+  }) : super(key: key);
+
+  final ValueChanged<String?>? onChanged;
+  final bool enabled;
+  final String input;
+  final String labelForm;
+  final String labelTag;
+  final String formTag;
+  final String hintText;
+  final VoidCallback? onTap;
+  final TextEditingController controller;
+  final String? Function(String?) validator;
+  final TextStyle? errorTextStyle;
+  final bool showRedStar;
+  final TextInputType inputType;
+  final String? noteTop;
+  final String? noteBottom;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Hero(
+          tag: labelTag,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  FormTextLabel(
+                    label: labelForm,
+                    labelColor: MyColorsConst.darkColor,
+                  ),
+                  if (showRedStar) // Tampilkan bintang merah sesuai showRedStar
+                    SizedBox(width: 2.sp),
+                  if (showRedStar)
+                    Text(
+                      '*',
+                      style: GoogleFonts.poppins(color: Colors.red),
+                    ),
+                ],
+              ),
+              if (noteTop != null && noteTop != '') ...{
+                SizedBox(height: 3.sp),
+                Text(
+                  noteTop!,
+                  style: GoogleFonts.poppins(
+                      color: MyColorsConst.primaryColor,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w600),
+                ),
+              }
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 5.sp,
+        ),
+        Hero(
+          tag: formTag,
+          flightShuttleBuilder: flightShuttleBuilder,
+          child: Material(
+            color: Colors.transparent,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: !enabled
+                        ? MyColorsConst.disableColor.withOpacity(0.2)
+                        : Colors.white,
+                  ),
+                  child: TextFormField(
+                    style: GoogleFonts.poppins(
+                        fontSize: 13.sp,
+                        color: MyColorsConst.darkColor,
+                        fontWeight: FontWeight.w500),
+                    maxLines: 1,
+                    readOnly: !enabled,
+                    decoration: InputDecoration(
+                      hintText: hintText,
+                      hintStyle: GoogleFonts.poppins(
+                          fontSize: 13.sp,
+                          color: MyColorsConst.disableColor,
+                          fontWeight: FontWeight.w500),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1.5, color: MyColorsConst.formBorderColor),
+                          borderRadius: BorderRadius.circular(10)),
+                      border: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1.5, color: MyColorsConst.formBorderColor),
+                          borderRadius: BorderRadius.circular(10)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              width: 1.5,
+                              color: enabled == true
+                                  ? MyColorsConst.primaryColor
+                                  : MyColorsConst.formBorderColor),
+                          borderRadius: BorderRadius.circular(10)),
+                      focusedErrorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1.5, color: Color(0XFF0b00020)),
+                          borderRadius: BorderRadius.circular(10)),
+                      errorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              width: 1.5, color: Color(0XFF0b00020)),
+                          borderRadius: BorderRadius.circular(10)),
+                      contentPadding: EdgeInsets.all(18.sp),
+                      errorStyle: GoogleFonts.poppins(fontSize: 10.sp),
+                    ),
+                    onChanged: onChanged,
+                    onTap: onTap,
+                    controller: controller,
+                    textInputAction: TextInputAction.next,
+                    validator: validator,
+                    keyboardType: inputType,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        if (noteBottom != null && noteBottom != '') ...{
+          SizedBox(height: 5.sp),
+          Text(
+            noteBottom ?? "",
+            style: GoogleFonts.poppins(
+                color: MyColorsConst.lightDarkColor,
+                fontSize: 11.sp,
+                fontWeight: FontWeight.w400),
+          ),
+          SizedBox(height: 20.sp),
+        }
+      ],
+    );
+  }
+}
+
 // class FormInputBiaya extends StatelessWidget {
 //   const FormInputBiaya(
 //       {Key? key,

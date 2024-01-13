@@ -29,7 +29,7 @@ class AddBahasaBloc extends Bloc<AddBahasaEvent, AddBahasaState> {
             await GeneralSharedPreferences.removeUserToken();
             emit(AddDatabahasaFailedUserExpired(message: "Token Expired"));
           } else {
-            emit(AddDatabahasaFailed(message: "Unknown error occured"));
+            emit(AddDatabahasaFailed(message: res.errorResponse));
             print("Response from API: ${res.errorResponse}");
           }
         }
@@ -60,7 +60,7 @@ class AddBahasaBloc extends Bloc<AddBahasaEvent, AddBahasaState> {
             await GeneralSharedPreferences.removeUserToken();
             emit(AddDatabahasaFailedUserExpired(message: "Token Expired"));
           } else {
-            emit(EditBahasanFailed(message: "Unknown error occured"));
+            emit(EditBahasanFailed(message: res.errorResponse));
             print("Response from API: ${res.errorResponse}");
           }
         }

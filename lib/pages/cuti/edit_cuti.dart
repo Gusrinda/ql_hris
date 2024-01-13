@@ -100,9 +100,22 @@ class _EditCutiPageState extends State<EditCutiPage> {
     widget.dateFromController.text = convertDateFormat(widget.dateFrom) ?? '';
     widget.dateToController.text = convertDateFormat(widget.dateTo) ?? '';
 
+    selectedTimeFrom =
+        convertStringToTimeOfDay(widget.dataCuti?.timeFrom ?? "08:00");
+    selectedTimeTo =
+        convertStringToTimeOfDay(widget.dataCuti?.timeTo ?? "08:00");
+
     selectedDateFrom = parseDateString(widget.dateFrom);
     selectedDateTo = parseDateString(widget.dateTo);
     weekdaysCount = widget.dataCuti?.interval ?? 0;
+  }
+
+  TimeOfDay convertStringToTimeOfDay(String timeString) {
+    List<String> parts = timeString.split(':');
+    return TimeOfDay(
+      hour: int.parse(parts[0]),
+      minute: int.parse(parts[1]),
+    );
   }
 
   DateTime? parseDate(String? date) {
@@ -301,7 +314,7 @@ class _EditCutiPageState extends State<EditCutiPage> {
                       color: Colors.white,
                     ),
                     SizedBox(
-                      width: size.width * 1 / 4.8,
+                      width: size.width * 1 / 7.3,
                     ),
                     Expanded(
                       child: Text(
@@ -705,8 +718,8 @@ class _EditCutiPageState extends State<EditCutiPage> {
                               text: "Kirim Revisi Pengajuan Cuti",
                               height: 50,
                               backgroundColor:
-                                  Colors.orange.withOpacity(0.2),
-                              textColor: Colors.orange,
+                                  Colors.orange.shade700.withOpacity(0.2),
+                              textColor: Colors.orange.shade700,
                               onPressed: state is AddCutiLoading
                                   ? null
                                   : () {
@@ -758,7 +771,9 @@ class _EditCutiPageState extends State<EditCutiPage> {
                                                   .read<AddCutiBloc>()
                                                   .add(
                                                     EditCutiSubmited(
-                                                      cutiID: widget.dataCuti?.id ?? 0,
+                                                      cutiID:
+                                                          widget.dataCuti?.id ??
+                                                              0,
                                                       alasan: widget
                                                                   .idAlasanController!
                                                                   .text !=

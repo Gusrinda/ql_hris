@@ -59,7 +59,7 @@ class AddDinasBloc extends Bloc<AddDinasEvent, AddDinasState> {
             await GeneralSharedPreferences.removeUserToken();
             emit(AddDinasFailedUserExpired(message: "Token expired"));
           } else {
-            emit(AddDinasFailed(message: "Unknown error occurred"));
+            emit(AddDinasFailed(message: res.errorResponse));
             print("Response from API: ${res.errorResponse}");
           }
         }
@@ -414,7 +414,7 @@ class AddDinasBloc extends Bloc<AddDinasEvent, AddDinasState> {
             await GeneralSharedPreferences.removeUserToken();
             emit(AddDinasFailedUserExpired(message: "Token expired"));
           } else {
-            emit(AddDinasFailed(message: "Unknown error occurred"));
+            emit(AddDinasFailed(message: res.errorResponse));
             print("Response from API: ${res.errorResponse}");
           }
         }

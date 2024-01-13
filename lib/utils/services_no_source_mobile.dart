@@ -128,6 +128,12 @@ class GeneralServicesNoMobile {
       if (response.statusCode == MyGeneralConst.CODE_BAD_REQUEST) {
         return ServicesFailureNoMobile(
           code: response.statusCode,
+          errorResponse: json.decode(response.body)["errors"].toString(),
+        );
+      }
+      if (response.statusCode == MyGeneralConst.CODE_NOT_FOUND) {
+        return ServicesFailureNoMobile(
+          code: response.statusCode,
           errorResponse: json.decode(response.body)['message'],
         );
       }
@@ -156,12 +162,14 @@ class GeneralServicesNoMobile {
           code: MyGeneralConst.CODE_INVALID_FORMAT,
           errorResponse: "Invalid Format");
     } catch (e) {
+      print(e);
       return ServicesFailureNoMobile(
           code: MyGeneralConst.CODE_UNKWON_ERROR,
           errorResponse: "Unknwon Error!\nPlease try again!");
     }
   }
 }
+
 
 // {
 //   code : 404,

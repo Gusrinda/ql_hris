@@ -550,12 +550,14 @@ class _ViewEditPendidikanPageState extends State<ViewEditPendidikanPage> {
                                       errorTextStyle:
                                           GoogleFonts.poppins(fontSize: 8),
                                     ),
-                                    FormInputData(
+                                    FormInputDataWithNote(
                                       input: widget.nilaiController.text,
                                       labelTag: 'label-addnilai',
-                                      labelForm: 'Nilai',
+                                      labelForm: 'Nilai / IPK',
                                       formTag: 'form-addnilai',
-                                      hintText: 'Nilai',
+                                      hintText: 'Nilai / IPK',
+                                      noteBottom:
+                                          'Jika terdapat koma isilah dengan titik(.) contoh: 94.7',
                                       onTap: () {},
                                       controller: widget.nilaiController,
                                       inputType: TextInputType.number,

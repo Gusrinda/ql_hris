@@ -80,7 +80,7 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
         List<String> years = [];
         int currentYear = DateTime.now().year;
 
-        for (int year = currentYear - 80; year <= currentYear; year++) {
+        for (int year = currentYear; year >= currentYear - 100; year--) {
           years.add(year.toString());
         }
 
@@ -88,7 +88,7 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
       }
 
       showModalBottomSheet(
-        shape: const RoundedRectangleBorder(
+        shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         ),
         context: context,
@@ -108,7 +108,7 @@ class _ViewEditPelatihanPageState extends State<ViewEditPelatihanPage> {
                     ),
                   ),
                 ),
-                const Divider(),
+                Divider(),
                 Expanded(
                   child: ListView.builder(
                     itemCount: _generateYears().length,

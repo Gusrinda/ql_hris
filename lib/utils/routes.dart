@@ -18,6 +18,7 @@ import 'package:sj_presensi_mobile/pages/dinas/dashboard_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/detail_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/detail_realisasi_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/edit_dinas.dart';
+import 'package:sj_presensi_mobile/pages/dinas/edit_realisasi_dinas.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/list_realisasi_dinas_bloc/list_realisasi_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/realisasi_dinas.dart';
@@ -315,6 +316,22 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) {
           return DetailRealisasiDinas(
             dataRealisasi: dataRealisasi!,
+            reloadDataCallback: () {},
+          );
+        });
+      case EditRealisasiDinasPage.routeName:
+        final dataRealisasi = settings.arguments as DataRealisasiDinas?;
+        return MaterialPageRoute(builder: (context) {
+          return BlocProvider(
+            create: (context) => AddCutiBloc(),
+            child: EditRealisasiDinasPage(
+              dataRealisasi: dataRealisasi,
+              reloadDataCallback: () {
+                context
+                    .read<ListDinasBloc>()
+                    .add(GetListDinas(date: DateTime.now()));
+              },
+            ),
           );
         });
       case AddRealisasiDinasPage.routeName:

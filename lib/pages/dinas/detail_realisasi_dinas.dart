@@ -1,18 +1,47 @@
+// ignore_for_file: prefer_is_empty
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/dinas/add_realisasi_dinas_bloc/add_realisasi_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/detail_realisasi_dinas_bloc/detail_realisasi_dinas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/dinas/edit_realisasi_dinas.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/detail_realisasi_dinas_model.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/realisasi_dinas_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
+final Map<String, dynamic> stateDict = {
+  "IN APPROVAL": {
+    "name": "Menunggu Disetujui",
+  },
+  "APPROVED": {
+    "name": "Disetujui",
+  },
+  "REJECTED": {
+    "name": "Ditolak",
+  },
+  "REVISED": {
+    "name": "Revisi",
+  },
+  "DRAFT": {
+    "name": "Draft",
+  },
+  "POSTED": {
+    "name": "Posted",
+  },
+};
+
 class DetailRealisasiDinas extends StatefulWidget {
   static const routeName = '/DetailRealisasiDinas';
-  const DetailRealisasiDinas({super.key, this.dataRealisasi});
+  const DetailRealisasiDinas(
+      {super.key, required this.reloadDataCallback, this.dataRealisasi});
+  final VoidCallback reloadDataCallback;
   final DataRealisasiDinas? dataRealisasi;
 
   @override
@@ -34,6 +63,40 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
           .read<DetailRealisasiDinasBloc>()
           .add(GetDetailSPD(spdID: widget.dataRealisasi?.tSpdId ?? 1));
     });
+  }
+
+  String mapStatusToString(String status) {
+    if (stateDict.containsKey(status)) {
+      return stateDict[status]['name'];
+    } else {
+      return 'Menunggu Disetujui';
+    }
+  }
+
+  Color getColorFromStatus(String status) {
+    if (stateDict.containsKey(status)) {
+      switch (status) {
+        case "IN APPROVAL":
+          return const Color(0xFF0068D4);
+        case "REVISED":
+          return Colors.orange;
+        case "REJECTED":
+          return const Color(0xFFED1B24);
+        case "APPROVED":
+          return const Color(0xFF0CA356);
+        default:
+          return Colors.grey.shade600; // warna default
+      }
+    } else {
+      return const Color(0xFF0068D4); // warna default
+    }
+  }
+
+  String formatRupiah(double? value) {
+    return NumberFormat.currency(
+      locale: 'id_ID',
+      symbol: 'Rp ',
+    ).format(value ?? 0.0).replaceAll(",00", "");
   }
 
   @override
@@ -139,6 +202,10 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                 child: BlocBuilder<DetailRealisasiDinasBloc,
                     DetailRealisasiDinasState>(
                   builder: (context, state) {
+                    String currentStatus = dataDetailrealisasiDinas
+                            ?.dataDetailrealisasiDinas?.status ??
+                        'Draft';
+                    Color currentColor = getColorFromStatus(currentStatus);
                     return ListView(
                       children: [
                         Container(
@@ -156,16 +223,25 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         _buildText(
-                                            'Template Spd',
+                                            'Nomor RPD',
+                                            dataDetailrealisasiDinas
+                                                    ?.dataDetailrealisasiDinas
+                                                    ?.nomor ??
+                                                '-'),
+                                        _buildText(
+                                            'Template SPD',
                                             dataDetailrealisasiDinas
                                                     ?.dataDetailrealisasiDinas
                                                     ?.tSpdNomor ??
                                                 '-'),
-                                        _buildText(
-                                            'Direktorat',
-                                            dataDetailSPD
-                                                    ?.dataDetailSPD.mDirNama ??
-                                                "-"),
+                                        if (dataDetailSPD
+                                                ?.dataDetailSPD.mDirNama !=
+                                            null)
+                                          _buildText(
+                                              'Direktorat',
+                                              dataDetailSPD?.dataDetailSPD
+                                                      .mDirNama ??
+                                                  "-"),
                                         _buildText(
                                             'Divisi',
                                             dataDetailSPD?.dataDetailSPD
@@ -183,13 +259,14 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                                                 "-"),
                                         _buildText(
                                             'Kegiatan',
-                                            dataDetailSPD
-                                                    ?.dataDetailSPD.kegiatan ??
+                                            dataDetailSPD?.dataDetailSPD
+                                                    .jenisSpdValue ??
                                                 "-"),
                                         _buildText(
-                                            'Keterangan',
-                                            dataDetailSPD?.dataDetailSPD
-                                                    .keterangan ??
+                                            'Keterangan Realisasi',
+                                            dataDetailrealisasiDinas
+                                                    ?.dataDetailrealisasiDinas
+                                                    ?.keterangan ??
                                                 "-"),
                                         Text(
                                           'Status',
@@ -200,16 +277,23 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                                           ),
                                         ),
                                         Text(
-                                          dataDetailrealisasiDinas
-                                                  ?.dataDetailrealisasiDinas
-                                                  ?.status ??
-                                              '-',
+                                          mapStatusToString(
+                                              dataDetailrealisasiDinas
+                                                      ?.dataDetailrealisasiDinas
+                                                      ?.status ??
+                                                  'Draft'),
                                           style: GoogleFonts.poppins(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w600,
-                                            color: MyColorsConst.primaryColor,
+                                            color: currentColor,
                                           ),
                                         ),
+                                        SizedBox(height: 10.sp),
+                                        _buildText(
+                                            'Catatan Approval',
+                                            widget.dataRealisasi
+                                                    ?.approvalNote ??
+                                                "-"),
                                       ],
                                     ),
                                   ),
@@ -242,6 +326,8 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                                                     ?.dataDetailrealisasiDinas
                                                     ?.tSpdTglAcaraAkhir ??
                                                 '-'),
+                                        _buildText('Durasi Hari',
+                                            "${dataDetailSPD?.dataDetailSPD.interval.toString() ?? '-'} Hari"),
                                         _buildText(
                                             'Zona Awal',
                                             dataDetailSPD?.dataDetailSPD
@@ -257,133 +343,229 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                                             dataDetailSPD?.dataDetailSPD
                                                     .mLokasiTujuanNama ??
                                                 "-"),
+                                        _buildText(
+                                            'Kendaraan Dinas',
+                                            dataDetailSPD?.dataDetailSPD
+                                                        .isKendDinas ==
+                                                    true
+                                                ? "Iya"
+                                                : "Tidak"),
+                                        if (dataDetailSPD
+                                                ?.dataDetailSPD.catatanKend !=
+                                            null)
+                                          _buildText(
+                                              'Nama Kendaraan',
+                                              dataDetailSPD?.dataDetailSPD
+                                                      .catatanKend ??
+                                                  "-"),
+                                        _buildText(
+                                            'Total Biaya Realisasi',
+                                            formatRupiah(double.parse(
+                                                dataDetailrealisasiDinas
+                                                        ?.dataDetailrealisasiDinas
+                                                        ?.totalBiayaSelisih
+                                                        .toString() ??
+                                                    "0.0"))),
                                       ],
                                     ),
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 30.sp),
-                              Text(
-                                'Rincian Biaya',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: MyColorsConst.darkColor,
+                              if (dataDetailrealisasiDinas
+                                      ?.dataDetailrealisasiDinas
+                                      ?.tRpdDet
+                                      ?.length !=
+                                  0) ...{
+                                SizedBox(height: 20.sp),
+                                Text(
+                                  'Rincian Biaya',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: MyColorsConst.darkColor,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 5.sp),
-                              Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: MyColorsConst.primaryColor
-                                          .withOpacity(0.3),
-                                      width: 1.5),
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: DataTable(
-                                    headingRowHeight: 40.sp,
-                                    // ignore: deprecated_member_use
-                                    dataRowHeight: 40.sp,
-                                    dividerThickness: 1,
-                                    headingRowColor:
-                                        MaterialStateColor.resolveWith(
-                                      (states) => MyColorsConst.primaryColor
-                                          .withOpacity(0.3),
-                                    ),
-                                    headingTextStyle: GoogleFonts.poppins(
-                                      fontSize: 12.sp,
-                                      color: MyColorsConst.darkColor,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    dataTextStyle: GoogleFonts.poppins(
-                                      fontSize: 12.sp,
-                                      color: MyColorsConst.darkColor,
-                                    ),
-                                    columns: const [
-                                      DataColumn(label: Text('No')),
-                                      DataColumn(label: Text('Tipe')),
-                                      DataColumn(label: Text('Biaya')),
-                                      DataColumn(label: Text('Keterangan')),
-                                      DataColumn(
-                                          label: Text('Biaya Realisasi')),
-                                      DataColumn(
-                                          label: Text('Catatan Realisasi')),
-                                    ],
-                                    rows: List.generate(
-                                      dataDetailrealisasiDinas
-                                              ?.dataDetailrealisasiDinas
-                                              ?.tRpdDet
-                                              ?.length ??
-                                          0,
-                                      (index) {
-                                        TRpdDet trpdDet =
-                                            dataDetailrealisasiDinas
-                                                    ?.dataDetailrealisasiDinas
-                                                    ?.tRpdDet?[index] ??
-                                                TRpdDet();
+                                SizedBox(height: 5.sp),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: MyColorsConst.primaryColor
+                                            .withOpacity(0.3),
+                                        width: 1.5),
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: DataTable(
+                                      headingRowHeight: 40.sp,
+                                      // ignore: deprecated_member_use
+                                      dataRowHeight: 40.sp,
+                                      dividerThickness: 1,
+                                      headingRowColor:
+                                          MaterialStateColor.resolveWith(
+                                        (states) => MyColorsConst.primaryColor
+                                            .withOpacity(0.3),
+                                      ),
+                                      headingTextStyle: GoogleFonts.poppins(
+                                        fontSize: 12.sp,
+                                        color: MyColorsConst.darkColor,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                      dataTextStyle: GoogleFonts.poppins(
+                                        fontSize: 12.sp,
+                                        color: MyColorsConst.darkColor,
+                                      ),
+                                      columns: const [
+                                        DataColumn(
+                                            label: Text(
+                                          'No',
+                                          textAlign: TextAlign.start,
+                                        )),
+                                        DataColumn(
+                                            label: Text('Tipe',
+                                                textAlign: TextAlign.start)),
+                                        DataColumn(
+                                            label: Text('Biaya Awal',
+                                                textAlign: TextAlign.start)),
+                                        DataColumn(
+                                            label: Text('Keterangan',
+                                                textAlign: TextAlign.start)),
+                                        DataColumn(
+                                            label: Text('Biaya Realisasi',
+                                                textAlign: TextAlign.start)),
+                                        DataColumn(
+                                            label: Text('Catatan Realisasi',
+                                                textAlign: TextAlign.start)),
+                                      ],
+                                      rows: List.generate(
+                                        dataDetailrealisasiDinas
+                                                ?.dataDetailrealisasiDinas
+                                                ?.tRpdDet
+                                                ?.length ??
+                                            0,
+                                        (index) {
+                                          TRpdDet? trpdDet =
+                                              dataDetailrealisasiDinas
+                                                  ?.dataDetailrealisasiDinas
+                                                  ?.tRpdDet?[index];
 
-                                        return DataRow(
-                                          cells: [
-                                            DataCell(
-                                              Center(
-                                                child: Text(
-                                                  'No ${index + 1}',
-                                                  style: GoogleFonts.poppins(
-                                                    fontSize: 12,
-                                                    color:
-                                                        MyColorsConst.darkColor,
-                                                    fontWeight: FontWeight.w500,
+                                          return DataRow(
+                                            cells: [
+                                              DataCell(
+                                                Center(
+                                                  child: Text(
+                                                    '${index + 1}',
+                                                    style: GoogleFonts.poppins(
+                                                      fontSize: 12,
+                                                      color: MyColorsConst
+                                                          .darkColor,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                            DataCell(
-                                              Container(
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                    trpdDet.tipeSpdValue ??
-                                                        '-'),
+                                              DataCell(
+                                                Container(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Text(
+                                                      trpdDet?.tipeSpdValue ??
+                                                          '-'),
+                                                ),
                                               ),
-                                            ),
-                                            DataCell(
-                                              Container(
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                    "${trpdDet.biaya ?? '-'}"),
+                                              DataCell(
+                                                Container(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Text(formatRupiah(
+                                                      (trpdDet?.biaya
+                                                              ?.toDouble() ??
+                                                          0.0))),
+                                                ),
                                               ),
-                                            ),
-                                            DataCell(
-                                              Container(
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                    trpdDet.tSpdDetKeterangan ??
-                                                        '-'),
+                                              DataCell(
+                                                Container(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Text(trpdDet
+                                                          ?.detailTransport ??
+                                                      '-'),
+                                                ),
                                               ),
-                                            ),
-                                            DataCell(
-                                              Container(
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                    "${trpdDet.biayaRealisasi ?? '-'}"),
+                                              DataCell(
+                                                Container(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Text(formatRupiah(
+                                                      double.parse(trpdDet
+                                                              ?.biayaRealisasi
+                                                              .toString() ??
+                                                          "0"))),
+                                                ),
                                               ),
-                                            ),
-                                            DataCell(
-                                              Container(
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                    trpdDet.catatanRealisasi ??
-                                                        '-'),
+                                              DataCell(
+                                                Container(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Text(trpdDet
+                                                          ?.catatanRealisasi ??
+                                                      '-'),
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        );
-                                      },
+                                            ],
+                                          );
+                                        },
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
+                              },
+                              if (currentStatus == "REVISED") ...{
+                                SizedBox(height: 20.sp),
+                                TextButtonCustomV1(
+                                  text: "Revisi Realisasi Dinas",
+                                  height: 50,
+                                  textSize: 12,
+                                  backgroundColor:
+                                      Colors.orange.shade700.withOpacity(0.2),
+                                  textColor: Colors.orange.shade700,
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MultiBlocProvider(
+                                          providers: [
+                                            BlocProvider(
+                                              create: (context) =>
+                                                  AddRealisasiDinasBloc()
+                                                    ..add(
+                                                        OnSelectDinasApproved())
+                                                    ..add(OnSelectTipe())
+                                                    ..add(GetDetailEditRealisasiDinas(
+                                                        id: widget.dataRealisasi
+                                                                ?.tSpdId ??
+                                                            1)),
+                                            ),
+                                            BlocProvider(
+                                              create: (context) =>
+                                                  DetailRealisasiDinasBloc(),
+                                            ),
+                                          ],
+                                          child: EditRealisasiDinasPage(
+                                            detailSPD:
+                                                dataDetailSPD?.dataDetailSPD,
+                                            dataRealisasi: widget.dataRealisasi,
+                                            reloadDataCallback:
+                                                widget.reloadDataCallback,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              },
+                              SizedBox(height: 30.sp)
                             ],
                           ),
                         ),

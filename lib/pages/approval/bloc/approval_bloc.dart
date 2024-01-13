@@ -85,7 +85,7 @@ class ApprovalBloc extends Bloc<ApprovalEvent, ApprovalState> {
               }
             } else {
               emit(DetailApprovalFailedInBackground(
-                  message: 'Failed to retrieve data'));
+                  message: 'Gagal Mendapatkan Data'));
             }
           } else if (response is ServicesFailureNoMobile) {
             if (response.errorResponse == null) {

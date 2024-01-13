@@ -49,37 +49,34 @@ class PengumumanCard extends StatelessWidget {
             ),
             SizedBox(height: 5.sp),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.calendar_month_outlined,
-                        size: 12.sp,
-                        color: Colors.grey,
-                      ),
-                      SizedBox(
-                        width: 3.sp,
-                      ),
-                      Text(
-                        tanggal ?? '',
-                        style: GoogleFonts.poppins(
-                          fontSize: 8.sp,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    tag ?? '',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.poppins(
-                      fontSize: 8.sp,
+                Row(
+                  children: [
+                    Icon(
+                      Icons.calendar_month_outlined,
+                      size: 12.sp,
                       color: Colors.grey,
                     ),
+                    SizedBox(
+                      width: 3.sp,
+                    ),
+                    Text(
+                      tanggal ?? '',
+                      style: GoogleFonts.poppins(
+                        fontSize: 8.sp,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+                Text(
+                  tag ?? '',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.poppins(
+                    fontSize: 8.sp,
+                    color: Colors.grey,
                   ),
                 ),
               ],

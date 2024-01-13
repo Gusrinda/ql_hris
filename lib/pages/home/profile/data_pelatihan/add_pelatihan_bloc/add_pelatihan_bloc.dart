@@ -34,7 +34,7 @@ class AddPelatihanBloc extends Bloc<AddPelatihanEvent, AddPelatihanState> {
             await GeneralSharedPreferences.removeUserToken();
             emit(AddDataPelatihanFailedUserExpired(message: "Token Expired"));
           } else {
-            emit(AddDataPelatihanFailed(message: "Unknown error occured"));
+            emit(AddDataPelatihanFailed(message: res.errorResponse));
             print("Response from API: ${res.errorResponse}");
           }
         }

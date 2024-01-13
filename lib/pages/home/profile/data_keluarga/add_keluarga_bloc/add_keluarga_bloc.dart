@@ -40,7 +40,7 @@ class AddKeluargaBloc extends Bloc<AddKeluargaEvent, AddKeluargaState> {
             await GeneralSharedPreferences.removeUserToken();
             emit(AddDataKeluargaFailedUserExpired(message: "Token Expired"));
           } else {
-            emit(AddDataKeluargaFailed(message: "Unknown error occured"));
+            emit(AddDataKeluargaFailed(message: res.errorResponse));
             print("Response from API: ${res.errorResponse}");
           }
         }
@@ -75,7 +75,7 @@ class AddKeluargaBloc extends Bloc<AddKeluargaEvent, AddKeluargaState> {
             await GeneralSharedPreferences.removeUserToken();
             emit(AddDataKeluargaFailedUserExpired(message: "Token Expired"));
           } else {
-            emit(EditDataKeluargaFailed(message: "Unknown error occured"));
+            emit(EditDataKeluargaFailed(message: res.errorResponse));
             print("Response from API: ${res.errorResponse}");
           }
         }

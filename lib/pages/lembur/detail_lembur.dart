@@ -109,11 +109,18 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
     }
   }
 
-  String extractTime(String? timeString) {
-    if (timeString != null) {
-      return timeString.substring(0, 5);
+  String convertMinutesToHours(int minutes) {
+    if (minutes < 60) {
+      return "$minutes Menit";
     } else {
-      return '';
+      int hours = minutes ~/ 60;
+      int remainingMinutes = minutes % 60;
+
+      if (remainingMinutes == 0) {
+        return "$hours Jam";
+      } else {
+        return "$hours Jam $remainingMinutes Menit";
+      }
     }
   }
 
@@ -243,9 +250,9 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                     color: currentColor,
                                   ),
                                 ),
-                                // SizedBox(height: 10),
+                                SizedBox(height: 10),
                                 // _buildText(
-                                //   'Keterangan',
+                                //   'Keterangan Approval',
                                 //   "${widget.data?.keterangan ?? '-'}",
                                 // ),
                               ],
@@ -258,23 +265,28 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                               children: [
                                 _buildText(
                                   'Dibuat Pada',
-                                  "${widget.data?.createdAt ?? '-'}",
+                                  widget.data?.createdAt ?? '-',
                                 ),
                                 _buildText(
                                   'Tanggal Lembur',
-                                  "${widget.tanggal ?? '-'}",
+                                  widget.tanggal ?? '-',
                                 ),
                                 _buildText(
                                   'Alasan',
-                                  "${widget.alasanValue ?? '-'}",
+                                  widget.alasanValue ?? '-',
                                 ),
                                 _buildText(
                                   'Jam Mulai',
-                                  "${widget.jamMulai ?? '-'}",
+                                  widget.jamMulai ?? '-',
                                 ),
                                 _buildText(
                                   'Jam Selesai',
-                                  "${widget.jamSelesai ?? '-'}",
+                                  widget.jamSelesai ?? '-',
+                                ),
+                                _buildText(
+                                  'Durasi Waktu',
+                                  convertMinutesToHours(
+                                      widget.data?.intervalMin ?? 0),
                                 ),
                                 if (widget.doc != null) ...{
                                   Text(
@@ -310,39 +322,42 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                           )
                         ],
                       ),
-                      // if (currentStatus == "REVISED")
-                      TextButtonCustomV1(
-                        text: "Revisi Pengajuan Lembur",
-                        height: 50.sp,
-                        textSize: 12,
-                        backgroundColor: Colors.orange.withOpacity(0.1),
-                        textColor: Colors.orange,
-                        onPressed: () {
-                          print("Edit Lembur ID : ${widget.lemburID}");
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BlocProvider(
-                                create: (context) => AddLemburBloc(),
-                                child: EditLemburPage(
-                                  lemburID: widget.lemburID,
-                                  picId: widget.picId,
-                                  picValue: widget.picValue,
-                                  alasanValue: widget.alasanValue,
-                                  alasanId: widget.alasanId,
-                                  tipeLemburId: widget.tipeLemburId,
-                                  tipeLemburValue: widget.tipeLemburValue,
-                                  keterangan: widget.keterangan,
-                                  tanggal: widget.tanggal,
-                                  jamMulai: widget.jamMulai,
-                                  jamSelesai: widget.jamSelesai,
-                                  reloadDataCallback: widget.reloadDataCallback,
+                      SizedBox(height: 20),
+                      if (currentStatus == "REVISED")
+                        TextButtonCustomV1(
+                          text: "Revisi Pengajuan Lembur",
+                          height: 50.sp,
+                          textSize: 12,
+                          backgroundColor:
+                              Colors.orange.shade700.withOpacity(0.2),
+                          textColor: Colors.orange.shade700,
+                          onPressed: () {
+                            print("Edit Lembur ID : ${widget.lemburID}");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BlocProvider(
+                                  create: (context) => AddLemburBloc(),
+                                  child: EditLemburPage(
+                                    lemburID: widget.lemburID,
+                                    picId: widget.picId,
+                                    picValue: widget.picValue,
+                                    alasanValue: widget.alasanValue,
+                                    alasanId: widget.alasanId,
+                                    tipeLemburId: widget.tipeLemburId,
+                                    tipeLemburValue: widget.tipeLemburValue,
+                                    keterangan: widget.keterangan,
+                                    tanggal: widget.tanggal,
+                                    jamMulai: widget.jamMulai,
+                                    jamSelesai: widget.jamSelesai,
+                                    reloadDataCallback:
+                                        widget.reloadDataCallback,
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                      ),
+                            );
+                          },
+                        ),
                     ],
                   ),
                 ),

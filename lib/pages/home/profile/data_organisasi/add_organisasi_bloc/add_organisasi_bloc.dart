@@ -36,7 +36,7 @@ class AddOrganisasiBloc extends Bloc<AddOrganisasiEvent, AddOrganisasiState> {
             await GeneralSharedPreferences.removeUserToken();
             emit(AddDataOrganisasiFailedUserExpired(message: "Token Expired"));
           } else {
-            emit(AddDataOrganisasiFailed(message: "Unknown error occured"));
+            emit(AddDataOrganisasiFailed(message: res.errorResponse));
             print("Response from API: ${res.errorResponse}");
           }
         }
@@ -69,7 +69,7 @@ class AddOrganisasiBloc extends Bloc<AddOrganisasiEvent, AddOrganisasiState> {
             await GeneralSharedPreferences.removeUserToken();
             emit(AddDataOrganisasiFailedUserExpired(message: "Token Expired"));
           } else {
-            emit(EditOrganisasiFailed(message: "Unknown error occured"));
+            emit(EditOrganisasiFailed(message: res.errorResponse));
             print("Response from API: ${res.errorResponse}");
           }
         }

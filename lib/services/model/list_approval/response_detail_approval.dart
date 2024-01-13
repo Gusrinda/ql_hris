@@ -110,6 +110,8 @@ class Trx with _$Trx {
     @JsonKey(name: "pic_id") int? picId,
     @JsonKey(name: "nama_pic") dynamic namaPic,
     @JsonKey(name: "total_biaya") String? totalBiaya,
+    @JsonKey(name: "total_biaya_spd") dynamic totalBiayaSpd,
+    @JsonKey(name: "total_biaya_selisih") String? totalBiayaSelisih,
     @JsonKey(name: "tipe_cuti") String? tipeCuti,
     @JsonKey(name: "alasan_cuti") String? alasanCuti,
     @JsonKey(name: "kegiatan") String? kegiatan,

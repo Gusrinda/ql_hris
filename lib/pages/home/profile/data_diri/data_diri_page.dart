@@ -480,7 +480,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
 
                                   buildInfoText(
                                       'Tipe BPJS',
-                                      biodata?.bioData?.bpjsTipeId
+                                      biodata?.bioData?.bpjsTipe
                                               ?.toString() ??
                                           '-'),
                                 ],

@@ -44,7 +44,7 @@ class AddPengalamanKerjaBloc
             await GeneralSharedPreferences.removeUserToken();
             emit(AddDataPengalamanKerjaFailedUserExpired(message: "Token expired"));
           } else {
-            emit(AddDataPengalamanKerjaFailed(message: "Unknown error occurred"));
+            emit(AddDataPengalamanKerjaFailed(message: res.errorResponse));
             print("Response from API: ${res.errorResponse}");
           }
         }

@@ -49,7 +49,7 @@ class AddDataPendidikanBloc
             await GeneralSharedPreferences.removeUserToken();
             emit(AddDataPendidikanFailedUserExpired(message: "Token expired"));
           } else {
-            emit(AddDataPendidikanFailed(message: "Unknown error occurred"));
+            emit(AddDataPendidikanFailed(message: res.errorResponse));
             print("Response from API: ${res.errorResponse}");
           }
         }

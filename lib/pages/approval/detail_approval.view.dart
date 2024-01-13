@@ -56,8 +56,10 @@ class _DetailApprovalState extends State<DetailApproval> {
           return Colors.red.shade700;
         case 't_lembur':
           return Colors.blue.shade700;
+        case 't_rpd':
+          return Colors.amber.shade900;
         default:
-          return Colors.grey;
+          return Colors.blueGrey.shade800;
       }
     }
 
@@ -69,8 +71,10 @@ class _DetailApprovalState extends State<DetailApproval> {
           return CupertinoIcons.doc_person_fill;
         case 't_lembur':
           return CupertinoIcons.timer_fill;
+        case 't_rpd':
+          return Icons.receipt_long;
         default:
-          return CupertinoIcons.arrow_2_circlepath;
+          return Icons.new_releases_rounded;
       }
     }
 
@@ -115,6 +119,13 @@ class _DetailApprovalState extends State<DetailApproval> {
           return "$hours Jam $remainingMinutes Menit";
         }
       }
+    }
+
+    String formatCurrency(double value) {
+      return NumberFormat.currency(
+        locale: 'id_ID',
+        symbol: 'Rp ',
+      ).format(value);
     }
 
     return BlocListener<ApprovalBloc, ApprovalState>(
@@ -399,6 +410,20 @@ class _DetailApprovalState extends State<DetailApproval> {
                                           _formatDate(dataTRX!.tglAcaraAkhir
                                               .toString())),
 
+                                    // RPD
+                                    if (dataTRX?.totalBiaya != null)
+                                      buildInfoText(
+                                          'Total Biaya',
+                                          formatCurrency(double.parse(
+                                              dataTRX!.totalBiaya.toString()))),
+
+                                    if (dataTRX?.totalBiayaSelisih != null)
+                                      buildInfoText(
+                                          'Total Biaya Rencana Selisih',
+                                          formatCurrency(double.parse(dataTRX!
+                                              .totalBiayaSelisih
+                                              .toString()))),
+
                                     // Lembur
                                     if (dataTRX?.jamMulai != null)
                                       buildInfoText('Jam Mulai',
@@ -517,8 +542,9 @@ class _DetailApprovalState extends State<DetailApproval> {
                                           );
                                         }),
                               SizedBox(height: 10.sp),
-                              if (widget.dataApproval!.trxTable! !=
-                                      't_lembur' &&
+                              if (
+                                // widget.dataApproval!.trxTable! !=
+                                //       't_lembur' &&
                                   widget.dataApproval!.trxTable! !=
                                       't_rpd') ...{
                                 TextButtonCustomV1(

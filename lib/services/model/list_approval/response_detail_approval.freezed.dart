@@ -1824,6 +1824,10 @@ mixin _$Trx {
   dynamic get namaPic => throw _privateConstructorUsedError;
   @JsonKey(name: "total_biaya")
   String? get totalBiaya => throw _privateConstructorUsedError;
+  @JsonKey(name: "total_biaya_spd")
+  dynamic get totalBiayaSpd => throw _privateConstructorUsedError;
+  @JsonKey(name: "total_biaya_selisih")
+  String? get totalBiayaSelisih => throw _privateConstructorUsedError;
   @JsonKey(name: "tipe_cuti")
   String? get tipeCuti => throw _privateConstructorUsedError;
   @JsonKey(name: "alasan_cuti")
@@ -1891,6 +1895,8 @@ abstract class $TrxCopyWith<$Res> {
       @JsonKey(name: "pic_id") int? picId,
       @JsonKey(name: "nama_pic") dynamic namaPic,
       @JsonKey(name: "total_biaya") String? totalBiaya,
+      @JsonKey(name: "total_biaya_spd") dynamic totalBiayaSpd,
+      @JsonKey(name: "total_biaya_selisih") String? totalBiayaSelisih,
       @JsonKey(name: "tipe_cuti") String? tipeCuti,
       @JsonKey(name: "alasan_cuti") String? alasanCuti,
       @JsonKey(name: "kegiatan") String? kegiatan,
@@ -1941,6 +1947,8 @@ class _$TrxCopyWithImpl<$Res, $Val extends Trx> implements $TrxCopyWith<$Res> {
     Object? picId = freezed,
     Object? namaPic = freezed,
     Object? totalBiaya = freezed,
+    Object? totalBiayaSpd = freezed,
+    Object? totalBiayaSelisih = freezed,
     Object? tipeCuti = freezed,
     Object? alasanCuti = freezed,
     Object? kegiatan = freezed,
@@ -2029,6 +2037,14 @@ class _$TrxCopyWithImpl<$Res, $Val extends Trx> implements $TrxCopyWith<$Res> {
       totalBiaya: freezed == totalBiaya
           ? _value.totalBiaya
           : totalBiaya // ignore: cast_nullable_to_non_nullable
+              as String?,
+      totalBiayaSpd: freezed == totalBiayaSpd
+          ? _value.totalBiayaSpd
+          : totalBiayaSpd // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      totalBiayaSelisih: freezed == totalBiayaSelisih
+          ? _value.totalBiayaSelisih
+          : totalBiayaSelisih // ignore: cast_nullable_to_non_nullable
               as String?,
       tipeCuti: freezed == tipeCuti
           ? _value.tipeCuti
@@ -2134,6 +2150,8 @@ abstract class _$$TrxImplCopyWith<$Res> implements $TrxCopyWith<$Res> {
       @JsonKey(name: "pic_id") int? picId,
       @JsonKey(name: "nama_pic") dynamic namaPic,
       @JsonKey(name: "total_biaya") String? totalBiaya,
+      @JsonKey(name: "total_biaya_spd") dynamic totalBiayaSpd,
+      @JsonKey(name: "total_biaya_selisih") String? totalBiayaSelisih,
       @JsonKey(name: "tipe_cuti") String? tipeCuti,
       @JsonKey(name: "alasan_cuti") String? alasanCuti,
       @JsonKey(name: "kegiatan") String? kegiatan,
@@ -2181,6 +2199,8 @@ class __$$TrxImplCopyWithImpl<$Res> extends _$TrxCopyWithImpl<$Res, _$TrxImpl>
     Object? picId = freezed,
     Object? namaPic = freezed,
     Object? totalBiaya = freezed,
+    Object? totalBiayaSpd = freezed,
+    Object? totalBiayaSelisih = freezed,
     Object? tipeCuti = freezed,
     Object? alasanCuti = freezed,
     Object? kegiatan = freezed,
@@ -2269,6 +2289,14 @@ class __$$TrxImplCopyWithImpl<$Res> extends _$TrxCopyWithImpl<$Res, _$TrxImpl>
       totalBiaya: freezed == totalBiaya
           ? _value.totalBiaya
           : totalBiaya // ignore: cast_nullable_to_non_nullable
+              as String?,
+      totalBiayaSpd: freezed == totalBiayaSpd
+          ? _value.totalBiayaSpd
+          : totalBiayaSpd // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      totalBiayaSelisih: freezed == totalBiayaSelisih
+          ? _value.totalBiayaSelisih
+          : totalBiayaSelisih // ignore: cast_nullable_to_non_nullable
               as String?,
       tipeCuti: freezed == tipeCuti
           ? _value.tipeCuti
@@ -2371,6 +2399,8 @@ class _$TrxImpl implements _Trx {
       @JsonKey(name: "pic_id") this.picId,
       @JsonKey(name: "nama_pic") this.namaPic,
       @JsonKey(name: "total_biaya") this.totalBiaya,
+      @JsonKey(name: "total_biaya_spd") this.totalBiayaSpd,
+      @JsonKey(name: "total_biaya_selisih") this.totalBiayaSelisih,
       @JsonKey(name: "tipe_cuti") this.tipeCuti,
       @JsonKey(name: "alasan_cuti") this.alasanCuti,
       @JsonKey(name: "kegiatan") this.kegiatan,
@@ -2446,6 +2476,12 @@ class _$TrxImpl implements _Trx {
   @JsonKey(name: "total_biaya")
   final String? totalBiaya;
   @override
+  @JsonKey(name: "total_biaya_spd")
+  final dynamic totalBiayaSpd;
+  @override
+  @JsonKey(name: "total_biaya_selisih")
+  final String? totalBiayaSelisih;
+  @override
   @JsonKey(name: "tipe_cuti")
   final String? tipeCuti;
   @override
@@ -2505,7 +2541,7 @@ class _$TrxImpl implements _Trx {
 
   @override
   String toString() {
-    return 'Trx(nomor: $nomor, tanggal: $tanggal, tglAcaraAwal: $tglAcaraAwal, tglAcaraAkhir: $tglAcaraAkhir, jenisSpdId: $jenisSpdId, jenisSpd: $jenisSpd, mZonaAsalId: $mZonaAsalId, zonaAsal: $zonaAsal, mZonaTujuanId: $mZonaTujuanId, zonaTujuan: $zonaTujuan, mLokasiTujuanId: $mLokasiTujuanId, lokasi: $lokasi, mKaryId: $mKaryId, namaKary: $namaKary, picId: $picId, namaPic: $namaPic, totalBiaya: $totalBiaya, tipeCuti: $tipeCuti, alasanCuti: $alasanCuti, kegiatan: $kegiatan, keterangan: $keterangan, status: $status, alasanId: $alasanId, alasan: $alasan, tipeCutiId: $tipeCutiId, dateFrom: $dateFrom, dateTo: $dateTo, jamMulai: $jamMulai, jamSelesai: $jamSelesai, noDoc: $noDoc, doc: $doc, interval: $interval, intervalMin: $intervalMin, timeFrom: $timeFrom, timeTo: $timeTo, catatanKend: $catatanKend)';
+    return 'Trx(nomor: $nomor, tanggal: $tanggal, tglAcaraAwal: $tglAcaraAwal, tglAcaraAkhir: $tglAcaraAkhir, jenisSpdId: $jenisSpdId, jenisSpd: $jenisSpd, mZonaAsalId: $mZonaAsalId, zonaAsal: $zonaAsal, mZonaTujuanId: $mZonaTujuanId, zonaTujuan: $zonaTujuan, mLokasiTujuanId: $mLokasiTujuanId, lokasi: $lokasi, mKaryId: $mKaryId, namaKary: $namaKary, picId: $picId, namaPic: $namaPic, totalBiaya: $totalBiaya, totalBiayaSpd: $totalBiayaSpd, totalBiayaSelisih: $totalBiayaSelisih, tipeCuti: $tipeCuti, alasanCuti: $alasanCuti, kegiatan: $kegiatan, keterangan: $keterangan, status: $status, alasanId: $alasanId, alasan: $alasan, tipeCutiId: $tipeCutiId, dateFrom: $dateFrom, dateTo: $dateTo, jamMulai: $jamMulai, jamSelesai: $jamSelesai, noDoc: $noDoc, doc: $doc, interval: $interval, intervalMin: $intervalMin, timeFrom: $timeFrom, timeTo: $timeTo, catatanKend: $catatanKend)';
   }
 
   @override
@@ -2540,6 +2576,10 @@ class _$TrxImpl implements _Trx {
             const DeepCollectionEquality().equals(other.namaPic, namaPic) &&
             (identical(other.totalBiaya, totalBiaya) ||
                 other.totalBiaya == totalBiaya) &&
+            const DeepCollectionEquality()
+                .equals(other.totalBiayaSpd, totalBiayaSpd) &&
+            (identical(other.totalBiayaSelisih, totalBiayaSelisih) ||
+                other.totalBiayaSelisih == totalBiayaSelisih) &&
             (identical(other.tipeCuti, tipeCuti) ||
                 other.tipeCuti == tipeCuti) &&
             (identical(other.alasanCuti, alasanCuti) ||
@@ -2594,6 +2634,8 @@ class _$TrxImpl implements _Trx {
         picId,
         const DeepCollectionEquality().hash(namaPic),
         totalBiaya,
+        const DeepCollectionEquality().hash(totalBiayaSpd),
+        totalBiayaSelisih,
         tipeCuti,
         alasanCuti,
         kegiatan,
@@ -2648,6 +2690,8 @@ abstract class _Trx implements Trx {
       @JsonKey(name: "pic_id") final int? picId,
       @JsonKey(name: "nama_pic") final dynamic namaPic,
       @JsonKey(name: "total_biaya") final String? totalBiaya,
+      @JsonKey(name: "total_biaya_spd") final dynamic totalBiayaSpd,
+      @JsonKey(name: "total_biaya_selisih") final String? totalBiayaSelisih,
       @JsonKey(name: "tipe_cuti") final String? tipeCuti,
       @JsonKey(name: "alasan_cuti") final String? alasanCuti,
       @JsonKey(name: "kegiatan") final String? kegiatan,
@@ -2721,6 +2765,12 @@ abstract class _Trx implements Trx {
   @override
   @JsonKey(name: "total_biaya")
   String? get totalBiaya;
+  @override
+  @JsonKey(name: "total_biaya_spd")
+  dynamic get totalBiayaSpd;
+  @override
+  @JsonKey(name: "total_biaya_selisih")
+  String? get totalBiayaSelisih;
   @override
   @JsonKey(name: "tipe_cuti")
   String? get tipeCuti;

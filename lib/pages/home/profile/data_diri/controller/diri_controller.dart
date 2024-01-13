@@ -106,7 +106,7 @@ class DataDiriControllers {
         : '';
 
     // BERKAS
-    noKtpController?.text = bioData.nik ?? '';
+    noKtpController?.text = bioData.ktpNo ?? '';
     noKkController?.text = bioData.kkNo ?? '';
     noNpwpController?.text = bioData.npwpNo ?? '';
     noBpjsController?.text = bioData.bpjsNo ?? '';
@@ -116,7 +116,7 @@ class DataDiriControllers {
 
     //Tipe Bpjs
     idTipeBPJSController?.text = bioData.bpjsTipeId?.toString() ?? '';
-    valueTipeBPJSController?.text = bioData.bpjsTipeId?.toString() ?? '';
+    valueTipeBPJSController?.text = bioData.bpjsTipe?.toString() ?? '';
 
     tanggalNpwpController?.text = bioData.npwpTglBerlaku != null
         ? DateFormat('yyyy-MM-dd').format(bioData.npwpTglBerlaku!)

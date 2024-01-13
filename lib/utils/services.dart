@@ -176,11 +176,28 @@ class GeneralServices {
         );
       }
       if (response.statusCode == MyGeneralConst.CODE_BAD_REQUEST) {
-        return ServicesFailure(
-          code: response.statusCode,
-          errorResponse: json.decode(response.body)['message'],
-        );
+        Map<String, dynamic> responseBody = json.decode(response.body);
+
+        if (responseBody.containsKey('errors') &&
+            responseBody['errors'] != null) {
+          return ServicesFailure(
+            code: response.statusCode,
+            errorResponse: responseBody["errors"].toString(),
+          );
+        } else if (responseBody.containsKey('message') &&
+            responseBody['message'] != null) {
+          return ServicesFailure(
+            code: response.statusCode,
+            errorResponse: responseBody["message"].toString(),
+          );
+        } else {
+          return ServicesFailure(
+            code: response.statusCode,
+            errorResponse: 'Error Tidak Diketahui',
+          );
+        }
       }
+
       if (response.statusCode == MyGeneralConst.CODE_NOT_FOUND) {
         return ServicesFailure(
           code: response.statusCode,

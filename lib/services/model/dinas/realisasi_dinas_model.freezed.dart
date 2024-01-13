@@ -589,6 +589,8 @@ mixin _$DataRealisasiDinas {
   dynamic get lastEditorTelp => throw _privateConstructorUsedError;
   @JsonKey(name: "last_editor.m_kary_id")
   int? get lastEditorMKaryId => throw _privateConstructorUsedError;
+  @JsonKey(name: "approval_note")
+  String? get approvalNote => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -690,7 +692,8 @@ abstract class $DataRealisasiDinasCopyWith<$Res> {
       @JsonKey(name: "last_editor.updated_at") String? lastEditorUpdatedAt,
       @JsonKey(name: "last_editor.profil_image") String? lastEditorProfilImage,
       @JsonKey(name: "last_editor.telp") dynamic lastEditorTelp,
-      @JsonKey(name: "last_editor.m_kary_id") int? lastEditorMKaryId});
+      @JsonKey(name: "last_editor.m_kary_id") int? lastEditorMKaryId,
+      @JsonKey(name: "approval_note") String? approvalNote});
 }
 
 /// @nodoc
@@ -791,6 +794,7 @@ class _$DataRealisasiDinasCopyWithImpl<$Res, $Val extends DataRealisasiDinas>
     Object? lastEditorProfilImage = freezed,
     Object? lastEditorTelp = freezed,
     Object? lastEditorMKaryId = freezed,
+    Object? approvalNote = freezed,
   }) {
     return _then(_value.copyWith(
       metaRead: freezed == metaRead
@@ -1133,6 +1137,10 @@ class _$DataRealisasiDinasCopyWithImpl<$Res, $Val extends DataRealisasiDinas>
           ? _value.lastEditorMKaryId
           : lastEditorMKaryId // ignore: cast_nullable_to_non_nullable
               as int?,
+      approvalNote: freezed == approvalNote
+          ? _value.approvalNote
+          : approvalNote // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -1233,7 +1241,8 @@ abstract class _$$DataRealisasiDinasImplCopyWith<$Res>
       @JsonKey(name: "last_editor.updated_at") String? lastEditorUpdatedAt,
       @JsonKey(name: "last_editor.profil_image") String? lastEditorProfilImage,
       @JsonKey(name: "last_editor.telp") dynamic lastEditorTelp,
-      @JsonKey(name: "last_editor.m_kary_id") int? lastEditorMKaryId});
+      @JsonKey(name: "last_editor.m_kary_id") int? lastEditorMKaryId,
+      @JsonKey(name: "approval_note") String? approvalNote});
 }
 
 /// @nodoc
@@ -1332,6 +1341,7 @@ class __$$DataRealisasiDinasImplCopyWithImpl<$Res>
     Object? lastEditorProfilImage = freezed,
     Object? lastEditorTelp = freezed,
     Object? lastEditorMKaryId = freezed,
+    Object? approvalNote = freezed,
   }) {
     return _then(_$DataRealisasiDinasImpl(
       metaRead: freezed == metaRead
@@ -1674,6 +1684,10 @@ class __$$DataRealisasiDinasImplCopyWithImpl<$Res>
           ? _value.lastEditorMKaryId
           : lastEditorMKaryId // ignore: cast_nullable_to_non_nullable
               as int?,
+      approvalNote: freezed == approvalNote
+          ? _value.approvalNote
+          : approvalNote // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -1767,7 +1781,8 @@ class _$DataRealisasiDinasImpl implements _DataRealisasiDinas {
       @JsonKey(name: "last_editor.updated_at") this.lastEditorUpdatedAt,
       @JsonKey(name: "last_editor.profil_image") this.lastEditorProfilImage,
       @JsonKey(name: "last_editor.telp") this.lastEditorTelp,
-      @JsonKey(name: "last_editor.m_kary_id") this.lastEditorMKaryId});
+      @JsonKey(name: "last_editor.m_kary_id") this.lastEditorMKaryId,
+      @JsonKey(name: "approval_note") this.approvalNote});
 
   factory _$DataRealisasiDinasImpl.fromJson(Map<String, dynamic> json) =>
       _$$DataRealisasiDinasImplFromJson(json);
@@ -2027,10 +2042,13 @@ class _$DataRealisasiDinasImpl implements _DataRealisasiDinas {
   @override
   @JsonKey(name: "last_editor.m_kary_id")
   final int? lastEditorMKaryId;
+  @override
+  @JsonKey(name: "approval_note")
+  final String? approvalNote;
 
   @override
   String toString() {
-    return 'DataRealisasiDinas(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, nomor: $nomor, datumMCompId: $datumMCompId, datumTSpdId: $datumTSpdId, totalBiayaSpd: $totalBiayaSpd, totalBiayaSelisih: $totalBiayaSelisih, pengambilanSpd: $pengambilanSpd, keterangan: $keterangan, status: $status, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, tSpdId: $tSpdId, tSpdNomor: $tSpdNomor, tSpdMCompId: $tSpdMCompId, tSpdMSpdId: $tSpdMSpdId, tSpdMDirId: $tSpdMDirId, tSpdMDivisiId: $tSpdMDivisiId, tSpdMDeptId: $tSpdMDeptId, tSpdMPosisiId: $tSpdMPosisiId, tSpdTanggal: $tSpdTanggal, tSpdTglAcaraAwal: $tSpdTglAcaraAwal, tSpdTglAcaraAkhir: $tSpdTglAcaraAkhir, tSpdJenisSpdId: $tSpdJenisSpdId, tSpdMZonaAsalId: $tSpdMZonaAsalId, tSpdMZonaTujuanId: $tSpdMZonaTujuanId, tSpdMLokasiTujuanId: $tSpdMLokasiTujuanId, tSpdMKaryId: $tSpdMKaryId, tSpdPicId: $tSpdPicId, tSpdTotalBiaya: $tSpdTotalBiaya, tSpdKegiatan: $tSpdKegiatan, tSpdKeterangan: $tSpdKeterangan, tSpdStatus: $tSpdStatus, tSpdCreatorId: $tSpdCreatorId, tSpdLastEditorId: $tSpdLastEditorId, tSpdCreatedAt: $tSpdCreatedAt, tSpdUpdatedAt: $tSpdUpdatedAt, tSpdIsKendDinas: $tSpdIsKendDinas, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, creatorTelp: $creatorTelp, creatorMKaryId: $creatorMKaryId, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage, lastEditorTelp: $lastEditorTelp, lastEditorMKaryId: $lastEditorMKaryId)';
+    return 'DataRealisasiDinas(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, nomor: $nomor, datumMCompId: $datumMCompId, datumTSpdId: $datumTSpdId, totalBiayaSpd: $totalBiayaSpd, totalBiayaSelisih: $totalBiayaSelisih, pengambilanSpd: $pengambilanSpd, keterangan: $keterangan, status: $status, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, tSpdId: $tSpdId, tSpdNomor: $tSpdNomor, tSpdMCompId: $tSpdMCompId, tSpdMSpdId: $tSpdMSpdId, tSpdMDirId: $tSpdMDirId, tSpdMDivisiId: $tSpdMDivisiId, tSpdMDeptId: $tSpdMDeptId, tSpdMPosisiId: $tSpdMPosisiId, tSpdTanggal: $tSpdTanggal, tSpdTglAcaraAwal: $tSpdTglAcaraAwal, tSpdTglAcaraAkhir: $tSpdTglAcaraAkhir, tSpdJenisSpdId: $tSpdJenisSpdId, tSpdMZonaAsalId: $tSpdMZonaAsalId, tSpdMZonaTujuanId: $tSpdMZonaTujuanId, tSpdMLokasiTujuanId: $tSpdMLokasiTujuanId, tSpdMKaryId: $tSpdMKaryId, tSpdPicId: $tSpdPicId, tSpdTotalBiaya: $tSpdTotalBiaya, tSpdKegiatan: $tSpdKegiatan, tSpdKeterangan: $tSpdKeterangan, tSpdStatus: $tSpdStatus, tSpdCreatorId: $tSpdCreatorId, tSpdLastEditorId: $tSpdLastEditorId, tSpdCreatedAt: $tSpdCreatedAt, tSpdUpdatedAt: $tSpdUpdatedAt, tSpdIsKendDinas: $tSpdIsKendDinas, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, creatorTelp: $creatorTelp, creatorMKaryId: $creatorMKaryId, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage, lastEditorTelp: $lastEditorTelp, lastEditorMKaryId: $lastEditorMKaryId, approvalNote: $approvalNote)';
   }
 
   @override
@@ -2165,7 +2183,8 @@ class _$DataRealisasiDinasImpl implements _DataRealisasiDinas {
             (identical(other.lastEditorUpdatedAt, lastEditorUpdatedAt) || other.lastEditorUpdatedAt == lastEditorUpdatedAt) &&
             (identical(other.lastEditorProfilImage, lastEditorProfilImage) || other.lastEditorProfilImage == lastEditorProfilImage) &&
             const DeepCollectionEquality().equals(other.lastEditorTelp, lastEditorTelp) &&
-            (identical(other.lastEditorMKaryId, lastEditorMKaryId) || other.lastEditorMKaryId == lastEditorMKaryId));
+            (identical(other.lastEditorMKaryId, lastEditorMKaryId) || other.lastEditorMKaryId == lastEditorMKaryId) &&
+            (identical(other.approvalNote, approvalNote) || other.approvalNote == approvalNote));
   }
 
   @JsonKey(ignore: true)
@@ -2256,7 +2275,8 @@ class _$DataRealisasiDinasImpl implements _DataRealisasiDinas {
         lastEditorUpdatedAt,
         lastEditorProfilImage,
         const DeepCollectionEquality().hash(lastEditorTelp),
-        lastEditorMKaryId
+        lastEditorMKaryId,
+        approvalNote
       ]);
 
   @JsonKey(ignore: true)
@@ -2368,8 +2388,9 @@ abstract class _DataRealisasiDinas implements DataRealisasiDinas {
       @JsonKey(name: "last_editor.profil_image")
       final String? lastEditorProfilImage,
       @JsonKey(name: "last_editor.telp") final dynamic lastEditorTelp,
-      @JsonKey(name: "last_editor.m_kary_id")
-      final int? lastEditorMKaryId}) = _$DataRealisasiDinasImpl;
+      @JsonKey(name: "last_editor.m_kary_id") final int? lastEditorMKaryId,
+      @JsonKey(name: "approval_note")
+      final String? approvalNote}) = _$DataRealisasiDinasImpl;
 
   factory _DataRealisasiDinas.fromJson(Map<String, dynamic> json) =
       _$DataRealisasiDinasImpl.fromJson;
@@ -2629,6 +2650,9 @@ abstract class _DataRealisasiDinas implements DataRealisasiDinas {
   @override
   @JsonKey(name: "last_editor.m_kary_id")
   int? get lastEditorMKaryId;
+  @override
+  @JsonKey(name: "approval_note")
+  String? get approvalNote;
   @override
   @JsonKey(ignore: true)
   _$$DataRealisasiDinasImplCopyWith<_$DataRealisasiDinasImpl> get copyWith =>

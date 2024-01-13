@@ -61,7 +61,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
       case 't_lembur':
         return Colors.blue.shade700;
       case 't_rpd':
-        return Colors.orange.shade900;
+        return Colors.amber.shade900;
       default:
         return Colors.blueGrey.shade800;
     }
@@ -76,7 +76,7 @@ class _ApprovalPageState extends State<ApprovalPage> {
       case 't_lembur':
         return CupertinoIcons.timer_fill;
       case 't_rpd':
-        return Icons.receipt_long_rounded;
+        return Icons.receipt_long;
       default:
         return Icons.new_releases_rounded;
     }

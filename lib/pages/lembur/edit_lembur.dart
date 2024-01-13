@@ -648,8 +648,8 @@ class _EditLemburPageState extends State<EditLemburPage> {
                               text: "Kirim",
                               height: 50,
                               backgroundColor:
-                                  MyColorsConst.primaryColor.withOpacity(0.1),
-                              textColor: MyColorsConst.primaryColor,
+                                  Colors.orange.shade700.withOpacity(0.2),
+                              textColor: Colors.orange.shade700,
                               onPressed: state is AddLemburLoading
                                   ? null
                                   : () {

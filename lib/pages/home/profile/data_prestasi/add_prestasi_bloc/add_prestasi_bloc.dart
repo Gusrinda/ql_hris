@@ -35,7 +35,7 @@ class AddPrestasiBloc extends Bloc<AddPrestasiEvent, AddPrestasiState> {
             await GeneralSharedPreferences.removeUserToken();
             emit(AddDataPrestasiFailedUserExpired(message: "Token Expired"));
           } else {
-            emit(AddDataPrestasiFailed(message: "Unknown error occured"));
+            emit(AddDataPrestasiFailed(message: res.errorResponse));
             print("Response from API: ${res.errorResponse}");
           }
         }
@@ -68,7 +68,7 @@ class AddPrestasiBloc extends Bloc<AddPrestasiEvent, AddPrestasiState> {
             await GeneralSharedPreferences.removeUserToken();
             emit(AddDataPrestasiFailedUserExpired(message: "Token Expired"));
           } else {
-            emit(EditDataPrestasiFailed(message: "Unknown error occured"));
+            emit(EditDataPrestasiFailed(message: res.errorResponse));
             print("Response from API: ${res.errorResponse}");
           }
         }

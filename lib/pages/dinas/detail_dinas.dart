@@ -224,10 +224,10 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                _buildText(
-                                    'Nomor Pengajuan SPD', widget.data?.nomor ?? '-'),
-                                _buildText(
-                                    'NOmor Template SPD', widget.templateSpd ?? '-'),
+                                _buildText('Nomor Pengajuan SPD',
+                                    widget.data?.nomor ?? '-'),
+                                _buildText('NOmor Template SPD',
+                                    widget.templateSpd ?? '-'),
                                 _buildText('Direktorat',
                                     widget.direktoratValue ?? '-'),
                                 _buildText('Divisi', widget.divisiValue ?? '-'),
@@ -277,11 +277,12 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                _buildText(
-                                    'Dibuat Pada', widget.data?.createdAt ?? '-'),
+                                _buildText('Dibuat Pada',
+                                    widget.data?.createdAt ?? '-'),
                                 _buildText(
                                     'Nama PIC', widget.data?.namaPic ?? '-'),
-                                _buildText('Tanggal Pengajuan', widget.tanggal ?? '-'),
+                                _buildText(
+                                    'Tanggal Pengajuan', widget.tanggal ?? '-'),
                                 _buildText('Tanggal Acara Awal',
                                     widget.tanggalAwal ?? '-'),
                                 _buildText('Tanggal Acara Akhir',
@@ -291,8 +292,11 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                     'Zona Tujuan', widget.zonaTujuan ?? '-'),
                                 _buildText('Lokasi Tujuan',
                                     widget.lokasiTujuan ?? '-'),
-                                _buildText('Kendaraan Dinas?',
-                                    widget.data?.isKendDinas == true ? "Iya" : "Tidak"),
+                                _buildText(
+                                    'Kendaraan Dinas?',
+                                    widget.data?.isKendDinas == true
+                                        ? "Iya"
+                                        : "Tidak"),
                                 _buildText('Keterangan Kendaraan',
                                     widget.data?.catatanKend ?? '-'),
                               ],
@@ -308,8 +312,9 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                           text: "Revisi Perjalanan Dinas",
                           height: 50,
                           textSize: 12,
-                          backgroundColor: Colors.orange.withOpacity(0.1),
-                          textColor: Colors.orange,
+                          backgroundColor:
+                              Colors.orange.shade700.withOpacity(0.2),
+                          textColor: Colors.orange.shade700,
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -348,7 +353,8 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                     direktoratId: widget.direktoratId,
                                     direktoratValue: widget.direktoratValue,
                                     tanggal: widget.tanggal,
-                                    isKendDinas: widget.data?.isKendDinas ?? false,
+                                    isKendDinas:
+                                        widget.data?.isKendDinas ?? false,
                                     namaKend: widget.data?.catatanKend,
                                     dataDinas: widget.data,
                                     reloadDataCallback:

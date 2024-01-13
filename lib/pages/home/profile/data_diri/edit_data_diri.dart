@@ -291,7 +291,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                       // bpjsFoto: bpjs != null && bpjs!.path.isNotEmpty
                       //     ? File(bpjs!.path)
                       //     : null,
-                      ktpNo: controllers.nikController?.value.text,
+                      ktpNo: controllers.noKtpController?.value.text,
                       kkNo: controllers.noKkController?.value.text,
                       kkFoto: kartukeluarga != null &&
                               kartukeluarga!.path.isNotEmpty
@@ -314,8 +314,8 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               : null,
                       // bpjsNo: controllers.noBpjsController?.value.text,
                       bpjsNo: controllers.noBpjsKesehatanController?.value.text,
-                      bpjsKerjaNo:
-                          controllers.noBpjsKetenagakerjaanController?.value.text,
+                      bpjsKerjaNo: controllers
+                          .noBpjsKetenagakerjaanController?.value.text,
                       desc: controllers.keteranganController?.value.text,
                       ukBaju: controllers.ukBajuController?.value.text,
                       ukCelana: controllers.ukCelanaController?.value.text,
@@ -1671,6 +1671,15 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                   //   fileName: fileNameFotoKaryawan,
                                   //   selectedFile: fotoKaryawan,
                                   // ),
+                                  FormInputData(
+                                    showRedStar: false,
+                                    hintText: 'Tuliskan No. KTP',
+                                    labelForm: 'No. KTP',
+                                    labelTag: 'Label-NoKtp',
+                                    formTag: 'Form-NoKtp',
+                                    controller: controllers.noKtpController!,
+                                    validator: (value) {},
+                                  ),
                                   FileSelectionWidget(
                                     onFileSelected: (file, fileUrl) {
                                       setState(() {
@@ -1682,15 +1691,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     fileName: fileNameKtp,
                                     selectedFile: ktp,
                                   ),
-                                  // FormInputData(
-                                  // showRedStar: false,
-                                  //   hintText: 'Tuliskan No. KTP',
-                                  //   labelForm: 'No. KTP',
-                                  //   labelTag: 'Label-NoKtp',
-                                  //   formTag: 'Form-NoKtp',
-                                  //   controller: controllers.noKtpController!,
-                                  //   validator: (value) {},
-                                  // ),
+
                                   FormInputData(
                                     showRedStar: false,
                                     hintText: 'Tuliskan Alamat Sesuai KTP',

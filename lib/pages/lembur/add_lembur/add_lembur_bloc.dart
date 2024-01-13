@@ -53,7 +53,7 @@ class AddLemburBloc extends Bloc<AddLemburEvent, AddLemburState> {
             emit(AddLemburFailedUserExpired(message: "Token expired"));
           } else {
             emit(AddLemburFailed(
-                message: "Maaf data belum valid, silahkan dikoreksi"));
+                message: res.errorResponse));
             print("Response from API: ${res.errorResponse}");
           }
         }
@@ -98,7 +98,7 @@ class AddLemburBloc extends Bloc<AddLemburEvent, AddLemburState> {
             emit(AddLemburFailedUserExpired(message: "Token expired"));
           } else {
             emit(EditLemburFailed(
-                message: "Maaf data belum valid, silahkan dikoreksi"));
+                message: res.errorResponse));
             print("Response from API: ${res.errorResponse}");
           }
         }

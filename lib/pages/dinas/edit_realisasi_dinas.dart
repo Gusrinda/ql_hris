@@ -13,14 +13,22 @@ import 'package:sj_presensi_mobile/pages/dinas/add_realisasi_dinas_bloc/add_real
 import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/dinas_selector.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/selector/general_selector.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/list_dinas_model.dart';
+import 'package:sj_presensi_mobile/services/model/dinas/realisasi_dinas_model.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/response_detail_spd.dart';
 import 'package:sj_presensi_mobile/services/model/list_general/response_general.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
-class AddRealisasiDinasPage extends StatefulWidget {
-  AddRealisasiDinasPage({super.key, required this.reloadDataCallback});
+class EditRealisasiDinasPage extends StatefulWidget {
+  EditRealisasiDinasPage({
+    super.key,
+    required this.reloadDataCallback,
+    this.dataRealisasi,
+    this.detailSPD,
+  });
   final VoidCallback reloadDataCallback;
-  static const routeName = '/AddRealisasiDinasPage';
+  final DataDetailDinas? detailSPD;
+  final DataRealisasiDinas? dataRealisasi;
+  static const routeName = '/EditRealisasiDinasPage';
 
   // TemplateSpd Controller
   final TextEditingController idNomorSpdController = TextEditingController();
@@ -92,26 +100,51 @@ class AddRealisasiDinasPage extends StatefulWidget {
   final TextEditingController catatanController = TextEditingController();
 
   @override
-  State<AddRealisasiDinasPage> createState() => _AddRealisasiDinasPageState();
+  State<EditRealisasiDinasPage> createState() => EditRealisasiDinasPageState();
 }
 
-class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
+class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
   String? selectedNomorSpd;
   String? selectedTipe;
   List<ExpenseDetail> expenseDetails = [];
+  DataDinas? selectedDataDinas;
   DetailBiayaSPDSuceess? detailSelectedSPD;
+  DetailEditRealisasiDinasSuccess? dataDetailrealisasiDinas;
 
   @override
   void initState() {
     super.initState();
+    print("Edit RPD ID ${widget.dataRealisasi?.id.toString()}");
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final organisasiBloc = context.read<AddRealisasiDinasBloc>();
+      context
+          .read<AddRealisasiDinasBloc>()
+          .add(GetDetailBiayaSPD(spdID: widget.dataRealisasi?.tSpdId ?? 1));
 
       organisasiBloc.add(OnSelectDinasApproved());
       organisasiBloc.add(OnSelectTipe());
     });
     widget.totalBiayaRealisasiController
         .addListener(_onTotalBiayaRealisasiChanged);
+
+    // selectedNomorSpd = widget.dataRealisasi?.tSpdNomor;
+    // widget.valueNomorSpdController.text =
+    //     widget.dataRealisasi?.tSpdNomor.toString() ?? '';
+    // widget.idNomorSpdController.text =
+    //     widget.dataRealisasi?.tSpdId.toString() ?? '';
+
+    // widget.valueDivisiController.text = widget.detailSPD?.mDivisiNama ?? '';
+    // widget.idDivisiController.text =
+    //     widget.detailSPD?.mDivisiId.toString() ?? '';
+
+    // widget.valueDepartemenController.text = widget.detailSPD?.mDeptNama ?? '';
+    // widget.idDepartemenController.text =
+    //     widget.detailSPD?.mDeptId.toString() ?? '';
+
+    // widget.valuePosisiController.text =
+    //     widget.detailSPD?.mPosisiDescKerja ?? '';
+    // widget.idPosisiController.text =
+    //     widget.detailSPD?.mPosisiId.toString() ?? '';
   }
 
   void _onTotalBiayaRealisasiChanged() {
@@ -213,8 +246,8 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
     //   // Call the function to calculate the total cost
     //   double totalCost = calculateTotalCost();
 
-    //   // Update the totalBiayaRealisasiController
-    //   widget.totalBiayaRealisasiController.text = totalCost.toString();
+    //   // Update the totalBiayaRencanaSelisihController
+    //   widget.totalBiayaRencanaSelisihController.text = totalCost.toString();
     // }
 
     double calculateTotalCost() {
@@ -230,15 +263,21 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
       return totalCost;
     }
 
+    String formatCurrency(double value) {
+      final numberFormat =
+          NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ');
+      return numberFormat.format(value);
+    }
+
     void onDataChanged() {
       // Call the function to calculate the total cost
       double totalCost = calculateTotalCost();
 
       // Format the total cost as currency
-      String formattedTotalCost = formatRupiah(totalCost);
+      String formattedTotalCost = formatCurrency(totalCost);
 
-      // Update the totalBiayaRealisasiController
-      widget.totalBiayaRealisasiController.text = formattedTotalCost;
+      // Update the totalBiayaRencanaSelisihController
+      widget.totalBiayaRencanaSelisihController.text = formattedTotalCost;
     }
 
     return BlocListener<AddRealisasiDinasBloc, AddRealisasiDinasState>(
@@ -259,6 +298,11 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
           Navigator.of(context).pop();
           Navigator.pop(context);
           widget.reloadDataCallback();
+        } else if (state is DetailEditRealisasiDinasSuccess) {
+          LoadingDialog.dismissDialog(context);
+          setState(() {
+            dataDetailrealisasiDinas = state;
+          });
         } else if (state is DetailBiayaSPDSuceess) {
           LoadingDialog.dismissDialog(context);
           setState(() {
@@ -425,11 +469,11 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                       color: Colors.white,
                     ),
                     SizedBox(
-                      width: size.width * 0.5 / 4,
+                      width: size.width / 14,
                     ),
                     Expanded(
                       child: Text(
-                        "Realisasi Perjalanan Dinas",
+                        "Edit Realisasi Perjalanan Dinas",
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -653,7 +697,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 hintText: 'Autofill Total Biaya',
                                 labelTag: 'Label-TotalBiaya',
                                 formTag: 'Form-TotalBiaya',
-                                labelForm: 'Total Biaya Awal',
+                                labelForm: 'Total Biaya',
                                 validator: (value) {},
                                 enabled: false,
                                 errorTextStyle:
@@ -749,9 +793,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                                         .text.isEmpty
                                                     ? null
                                                     : false,
-                                        onChanged: (bool? value) {
-                                          // Tidak melakukan perubahan karena radio tidak dapat diubah
-                                        },
+                                        onChanged: (bool? value) {},
                                       ),
                                       Text(
                                         'Iya',
@@ -839,7 +881,10 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                     onDataChanged();
                                   });
                                 },
-                                child: Text('Tambah Biaya'),
+                                child: Text(
+                                  'Tambah Biaya',
+                                  style: GoogleFonts.poppins(),
+                                ),
                               ),
                               SizedBox(height: 20.sp),
                               TextButtonCustomV1(
@@ -869,8 +914,8 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                         }
 
                                         // Parse formatted currency string to double
-                                        num totalBiayaSelisih =
-                                            parseCurrency(widget
+                                        num totalBiayaSelisih = parseCurrency(
+                                            widget
                                                 .totalBiayaRencanaSelisihController
                                                 .value
                                                 .text);
@@ -899,7 +944,8 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                                   AddRealisasiDinasSubmited(
                                                     tSpdId: idNomorSpd,
                                                     totalBiayaSelisih:
-                                                        totalBiayaSelisih.toDouble(),
+                                                        totalBiayaSelisih
+                                                            .toDouble(),
                                                     keterangan: widget
                                                         .keteranganUtamaController
                                                         .value
@@ -961,7 +1007,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
 class ExpenseDetail {
   final TextEditingController idTipeController = TextEditingController();
   final TextEditingController valueTipeController = TextEditingController();
-  TextEditingController costController = TextEditingController();
+  final TextEditingController costController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController biayaRealisasiController =
       TextEditingController();

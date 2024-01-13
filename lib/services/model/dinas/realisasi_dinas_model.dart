@@ -207,6 +207,8 @@ class DataRealisasiDinas with _$DataRealisasiDinas {
         dynamic lastEditorTelp,
         @JsonKey(name: "last_editor.m_kary_id")
         int? lastEditorMKaryId,
+        @JsonKey(name: "approval_note")
+        String? approvalNote,
     }) = _DataRealisasiDinas;
 
     factory DataRealisasiDinas.fromJson(Map<String, dynamic> json) => _$DataRealisasiDinasFromJson(json);

@@ -433,6 +433,8 @@ mixin _$Biodata {
   DateTime? get npwpTglBerlaku => throw _privateConstructorUsedError;
   @JsonKey(name: "bpjs_tipe_id")
   int? get bpjsTipeId => throw _privateConstructorUsedError;
+  @JsonKey(name: "bpjs_tipe")
+  String? get bpjsTipe => throw _privateConstructorUsedError;
   @JsonKey(name: "bpjs_no")
   String? get bpjsNo => throw _privateConstructorUsedError;
   @JsonKey(name: "bpjs_no_kesehatan")
@@ -564,6 +566,7 @@ abstract class $BiodataCopyWith<$Res> {
       @JsonKey(name: "npwp_foto") String? npwpFoto,
       @JsonKey(name: "npwp_tgl_berlaku") DateTime? npwpTglBerlaku,
       @JsonKey(name: "bpjs_tipe_id") int? bpjsTipeId,
+      @JsonKey(name: "bpjs_tipe") String? bpjsTipe,
       @JsonKey(name: "bpjs_no") String? bpjsNo,
       @JsonKey(name: "bpjs_no_kesehatan") String? bpjsNoKesehatan,
       @JsonKey(name: "bpjs_no_ketenagakerjaan") String? bpjsNoKetenagakerjaan,
@@ -682,6 +685,7 @@ class _$BiodataCopyWithImpl<$Res, $Val extends Biodata>
     Object? npwpFoto = freezed,
     Object? npwpTglBerlaku = freezed,
     Object? bpjsTipeId = freezed,
+    Object? bpjsTipe = freezed,
     Object? bpjsNo = freezed,
     Object? bpjsNoKesehatan = freezed,
     Object? bpjsNoKetenagakerjaan = freezed,
@@ -1051,6 +1055,10 @@ class _$BiodataCopyWithImpl<$Res, $Val extends Biodata>
           ? _value.bpjsTipeId
           : bpjsTipeId // ignore: cast_nullable_to_non_nullable
               as int?,
+      bpjsTipe: freezed == bpjsTipe
+          ? _value.bpjsTipe
+          : bpjsTipe // ignore: cast_nullable_to_non_nullable
+              as String?,
       bpjsNo: freezed == bpjsNo
           ? _value.bpjsNo
           : bpjsNo // ignore: cast_nullable_to_non_nullable
@@ -1212,6 +1220,7 @@ abstract class _$$BiodataImplCopyWith<$Res> implements $BiodataCopyWith<$Res> {
       @JsonKey(name: "npwp_foto") String? npwpFoto,
       @JsonKey(name: "npwp_tgl_berlaku") DateTime? npwpTglBerlaku,
       @JsonKey(name: "bpjs_tipe_id") int? bpjsTipeId,
+      @JsonKey(name: "bpjs_tipe") String? bpjsTipe,
       @JsonKey(name: "bpjs_no") String? bpjsNo,
       @JsonKey(name: "bpjs_no_kesehatan") String? bpjsNoKesehatan,
       @JsonKey(name: "bpjs_no_ketenagakerjaan") String? bpjsNoKetenagakerjaan,
@@ -1328,6 +1337,7 @@ class __$$BiodataImplCopyWithImpl<$Res>
     Object? npwpFoto = freezed,
     Object? npwpTglBerlaku = freezed,
     Object? bpjsTipeId = freezed,
+    Object? bpjsTipe = freezed,
     Object? bpjsNo = freezed,
     Object? bpjsNoKesehatan = freezed,
     Object? bpjsNoKetenagakerjaan = freezed,
@@ -1697,6 +1707,10 @@ class __$$BiodataImplCopyWithImpl<$Res>
           ? _value.bpjsTipeId
           : bpjsTipeId // ignore: cast_nullable_to_non_nullable
               as int?,
+      bpjsTipe: freezed == bpjsTipe
+          ? _value.bpjsTipe
+          : bpjsTipe // ignore: cast_nullable_to_non_nullable
+              as String?,
       bpjsNo: freezed == bpjsNo
           ? _value.bpjsNo
           : bpjsNo // ignore: cast_nullable_to_non_nullable
@@ -1853,6 +1867,7 @@ class _$BiodataImpl implements _Biodata {
       @JsonKey(name: "npwp_foto") this.npwpFoto,
       @JsonKey(name: "npwp_tgl_berlaku") this.npwpTglBerlaku,
       @JsonKey(name: "bpjs_tipe_id") this.bpjsTipeId,
+      @JsonKey(name: "bpjs_tipe") this.bpjsTipe,
       @JsonKey(name: "bpjs_no") this.bpjsNo,
       @JsonKey(name: "bpjs_no_kesehatan") this.bpjsNoKesehatan,
       @JsonKey(name: "bpjs_no_ketenagakerjaan") this.bpjsNoKetenagakerjaan,
@@ -2137,6 +2152,9 @@ class _$BiodataImpl implements _Biodata {
   @JsonKey(name: "bpjs_tipe_id")
   final int? bpjsTipeId;
   @override
+  @JsonKey(name: "bpjs_tipe")
+  final String? bpjsTipe;
+  @override
   @JsonKey(name: "bpjs_no")
   final String? bpjsNo;
   @override
@@ -2184,7 +2202,7 @@ class _$BiodataImpl implements _Biodata {
 
   @override
   String toString() {
-    return 'Biodata(id: $id, mCompId: $mCompId, mDirId: $mDirId, mDivisiId: $mDivisiId, mDeptId: $mDeptId, mZonaId: $mZonaId, gradingId: $gradingId, costcontreId: $costcontreId, kode: $kode, mPosisiId: $mPosisiId, mJamKerjaId: $mJamKerjaId, kodePresensi: $kodePresensi, nik: $nik, namaDepan: $namaDepan, namaBelakang: $namaBelakang, namaLengkap: $namaLengkap, namaPanggilan: $namaPanggilan, jkId: $jkId, tempatLahir: $tempatLahir, tglLahir: $tglLahir, provinsiId: $provinsiId, kotaId: $kotaId, kecamatanId: $kecamatanId, kodePos: $kodePos, alamatAsli: $alamatAsli, alamatDomisili: $alamatDomisili, noTlp: $noTlp, noTlpLainnya: $noTlpLainnya, noDarurat: $noDarurat, namaKontakDarurat: $namaKontakDarurat, agamaId: $agamaId, golDarahId: $golDarahId, statusNikahId: $statusNikahId, tanggunganId: $tanggunganId, hubDgnKaryawan: $hubDgnKaryawan, cutiJatahReguler: $cutiJatahReguler, cutiSisaReguler: $cutiSisaReguler, cutiPanjang: $cutiPanjang, cutiSisaPanjang: $cutiSisaPanjang, statusKaryId: $statusKaryId, lamaKontrakAwal: $lamaKontrakAwal, lamaKontrakAkhir: $lamaKontrakAkhir, tglMasuk: $tglMasuk, tglBerhenti: $tglBerhenti, alasanBerhenti: $alasanBerhenti, ukBaju: $ukBaju, ukCelana: $ukCelana, ukSepatu: $ukSepatu, desc: $desc, isActive: $isActive, creatorId: $creatorId, lastEditorId: $lastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, mStandartGajiId: $mStandartGajiId, periodeGajiId: $periodeGajiId, refId: $refId, presensiLokasiDefaultId: $presensiLokasiDefaultId, expDateCuti: $expDateCuti, limitPotong: $limitPotong, atasanId: $atasanId, cutiP24: $cutiP24, cutiSisaP24: $cutiSisaP24, dir: $dir, div: $div, dept: $dept, zona: $zona, grading: $grading, posisi: $posisi, jamKerja: $jamKerja, jk: $jk, provinsi: $provinsi, kota: $kota, kecamatan: $kecamatan, agama: $agama, golDarah: $golDarah, tanggungan: $tanggungan, costcontre: $costcontre, statusNikah: $statusNikah, ktpNo: $ktpNo, ktpFoto: $ktpFoto, pasFoto: $pasFoto, kkNo: $kkNo, kkFoto: $kkFoto, npwpNo: $npwpNo, npwpFoto: $npwpFoto, npwpTglBerlaku: $npwpTglBerlaku, bpjsTipeId: $bpjsTipeId, bpjsNo: $bpjsNo, bpjsNoKesehatan: $bpjsNoKesehatan, bpjsNoKetenagakerjaan: $bpjsNoKetenagakerjaan, bpjsFoto: $bpjsFoto, berkasLain: $berkasLain, descFile: $descFile, periodeGaji: $periodeGaji, metode: $metode, metodeId: $metodeId, tipe: $tipe, tipeId: $tipeId, bank: $bank, bankId: $bankId, noRek: $noRek, atasNamaRek: $atasNamaRek)';
+    return 'Biodata(id: $id, mCompId: $mCompId, mDirId: $mDirId, mDivisiId: $mDivisiId, mDeptId: $mDeptId, mZonaId: $mZonaId, gradingId: $gradingId, costcontreId: $costcontreId, kode: $kode, mPosisiId: $mPosisiId, mJamKerjaId: $mJamKerjaId, kodePresensi: $kodePresensi, nik: $nik, namaDepan: $namaDepan, namaBelakang: $namaBelakang, namaLengkap: $namaLengkap, namaPanggilan: $namaPanggilan, jkId: $jkId, tempatLahir: $tempatLahir, tglLahir: $tglLahir, provinsiId: $provinsiId, kotaId: $kotaId, kecamatanId: $kecamatanId, kodePos: $kodePos, alamatAsli: $alamatAsli, alamatDomisili: $alamatDomisili, noTlp: $noTlp, noTlpLainnya: $noTlpLainnya, noDarurat: $noDarurat, namaKontakDarurat: $namaKontakDarurat, agamaId: $agamaId, golDarahId: $golDarahId, statusNikahId: $statusNikahId, tanggunganId: $tanggunganId, hubDgnKaryawan: $hubDgnKaryawan, cutiJatahReguler: $cutiJatahReguler, cutiSisaReguler: $cutiSisaReguler, cutiPanjang: $cutiPanjang, cutiSisaPanjang: $cutiSisaPanjang, statusKaryId: $statusKaryId, lamaKontrakAwal: $lamaKontrakAwal, lamaKontrakAkhir: $lamaKontrakAkhir, tglMasuk: $tglMasuk, tglBerhenti: $tglBerhenti, alasanBerhenti: $alasanBerhenti, ukBaju: $ukBaju, ukCelana: $ukCelana, ukSepatu: $ukSepatu, desc: $desc, isActive: $isActive, creatorId: $creatorId, lastEditorId: $lastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, mStandartGajiId: $mStandartGajiId, periodeGajiId: $periodeGajiId, refId: $refId, presensiLokasiDefaultId: $presensiLokasiDefaultId, expDateCuti: $expDateCuti, limitPotong: $limitPotong, atasanId: $atasanId, cutiP24: $cutiP24, cutiSisaP24: $cutiSisaP24, dir: $dir, div: $div, dept: $dept, zona: $zona, grading: $grading, posisi: $posisi, jamKerja: $jamKerja, jk: $jk, provinsi: $provinsi, kota: $kota, kecamatan: $kecamatan, agama: $agama, golDarah: $golDarah, tanggungan: $tanggungan, costcontre: $costcontre, statusNikah: $statusNikah, ktpNo: $ktpNo, ktpFoto: $ktpFoto, pasFoto: $pasFoto, kkNo: $kkNo, kkFoto: $kkFoto, npwpNo: $npwpNo, npwpFoto: $npwpFoto, npwpTglBerlaku: $npwpTglBerlaku, bpjsTipeId: $bpjsTipeId, bpjsTipe: $bpjsTipe, bpjsNo: $bpjsNo, bpjsNoKesehatan: $bpjsNoKesehatan, bpjsNoKetenagakerjaan: $bpjsNoKetenagakerjaan, bpjsFoto: $bpjsFoto, berkasLain: $berkasLain, descFile: $descFile, periodeGaji: $periodeGaji, metode: $metode, metodeId: $metodeId, tipe: $tipe, tipeId: $tipeId, bank: $bank, bankId: $bankId, noRek: $noRek, atasNamaRek: $atasNamaRek)';
   }
 
   @override
@@ -2322,6 +2340,7 @@ class _$BiodataImpl implements _Biodata {
             (identical(other.npwpFoto, npwpFoto) || other.npwpFoto == npwpFoto) &&
             (identical(other.npwpTglBerlaku, npwpTglBerlaku) || other.npwpTglBerlaku == npwpTglBerlaku) &&
             (identical(other.bpjsTipeId, bpjsTipeId) || other.bpjsTipeId == bpjsTipeId) &&
+            (identical(other.bpjsTipe, bpjsTipe) || other.bpjsTipe == bpjsTipe) &&
             (identical(other.bpjsNo, bpjsNo) || other.bpjsNo == bpjsNo) &&
             (identical(other.bpjsNoKesehatan, bpjsNoKesehatan) || other.bpjsNoKesehatan == bpjsNoKesehatan) &&
             (identical(other.bpjsNoKetenagakerjaan, bpjsNoKetenagakerjaan) || other.bpjsNoKetenagakerjaan == bpjsNoKetenagakerjaan) &&
@@ -2431,6 +2450,7 @@ class _$BiodataImpl implements _Biodata {
         npwpFoto,
         npwpTglBerlaku,
         bpjsTipeId,
+        bpjsTipe,
         bpjsNo,
         bpjsNoKesehatan,
         bpjsNoKetenagakerjaan,
@@ -2553,6 +2573,7 @@ abstract class _Biodata implements Biodata {
           @JsonKey(name: "npwp_foto") final String? npwpFoto,
           @JsonKey(name: "npwp_tgl_berlaku") final DateTime? npwpTglBerlaku,
           @JsonKey(name: "bpjs_tipe_id") final int? bpjsTipeId,
+          @JsonKey(name: "bpjs_tipe") final String? bpjsTipe,
           @JsonKey(name: "bpjs_no") final String? bpjsNo,
           @JsonKey(name: "bpjs_no_kesehatan") final String? bpjsNoKesehatan,
           @JsonKey(name: "bpjs_no_ketenagakerjaan")
@@ -2837,6 +2858,9 @@ abstract class _Biodata implements Biodata {
   @override
   @JsonKey(name: "bpjs_tipe_id")
   int? get bpjsTipeId;
+  @override
+  @JsonKey(name: "bpjs_tipe")
+  String? get bpjsTipe;
   @override
   @JsonKey(name: "bpjs_no")
   String? get bpjsNo;

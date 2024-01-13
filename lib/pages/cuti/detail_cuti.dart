@@ -294,40 +294,42 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                       SizedBox(
                         height: 30.sp,
                       ),
-                      // if (currentStatus == "REVISED")
-                      TextButtonCustomV1(
-                        text: "Revisi Pengajuan Cuti",
-                        height: 50.sp,
-                        textSize: 12,
-                        backgroundColor: Colors.orange.withOpacity(0.1),
-                        textColor: Colors.orange,
-                        onPressed: () {
-                          print("Edit Cuti ID : ${widget.cutiId}");
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BlocProvider(
-                                create: (context) => AddCutiBloc()
-                                  ..add(OnSelectAlasanCuti())
-                                  ..add(OnSelectTipeCuti()),
-                                child: EditCutiPage(
-                                  dataCuti: widget.data,
-                                  cutiId: widget.cutiId ?? 1,
-                                  dateFrom: widget.dateFrom,
-                                  dateTo: widget.dateTo,
-                                  alasanValue: widget.alasanValue,
-                                  alasanID: widget.alasanID,
-                                  status: widget.status,
-                                  keterangan: widget.keterangan,
-                                  tipeCutiValue: widget.tipeCutiValue,
-                                  tipeCutiID: widget.tipeCutiID,
-                                  reloadDataCallback: widget.reloadDataCallback,
+                      if (currentStatus == "REVISED")
+                        TextButtonCustomV1(
+                          text: "Revisi Pengajuan Cuti",
+                          height: 50.sp,
+                          textSize: 12,
+                          backgroundColor:
+                              Colors.orange.shade700.withOpacity(0.2),
+                          textColor: Colors.orange.shade700,
+                          onPressed: () {
+                            print("Edit Cuti ID : ${widget.cutiId}");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BlocProvider(
+                                  create: (context) => AddCutiBloc()
+                                    ..add(OnSelectAlasanCuti())
+                                    ..add(OnSelectTipeCuti()),
+                                  child: EditCutiPage(
+                                    dataCuti: widget.data,
+                                    cutiId: widget.cutiId ?? 1,
+                                    dateFrom: widget.dateFrom,
+                                    dateTo: widget.dateTo,
+                                    alasanValue: widget.alasanValue,
+                                    alasanID: widget.alasanID,
+                                    status: widget.status,
+                                    keterangan: widget.keterangan,
+                                    tipeCutiValue: widget.tipeCutiValue,
+                                    tipeCutiID: widget.tipeCutiID,
+                                    reloadDataCallback:
+                                        widget.reloadDataCallback,
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                      ),
+                            );
+                          },
+                        ),
                     ],
                   ),
                 ),

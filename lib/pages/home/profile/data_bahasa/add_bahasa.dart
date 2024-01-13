@@ -27,6 +27,7 @@ class AddBahasaPage extends StatefulWidget {
 
 class _AddBahasaPageState extends State<AddBahasaPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   void _showLanguageLevelBottomSheet(
       BuildContext context, TextEditingController controller) {
     showModalBottomSheet(
@@ -36,27 +37,63 @@ class _AddBahasaPageState extends State<AddBahasaPage> {
           child: Wrap(
             children: [
               ListTile(
-                title: Text('Beginner'),
+                title: Text(
+                  'C2 - Proficient',
+                  style: GoogleFonts.poppins(
+                      fontSize: 14.sp, fontWeight: FontWeight.w500),
+                ),
                 onTap: () {
-                  Navigator.pop(context, 'Beginner');
+                  Navigator.pop(context, 'C2 - Proficient');
                 },
               ),
               ListTile(
-                title: Text('Intermediate'),
+                title: Text(
+                  'C1 - Advanced',
+                  style: GoogleFonts.poppins(
+                      fontSize: 14.sp, fontWeight: FontWeight.w500),
+                ),
                 onTap: () {
-                  Navigator.pop(context, 'Intermediate');
+                  Navigator.pop(context, 'C1 - Advanced');
                 },
               ),
               ListTile(
-                title: Text('Advanced'),
+                title: Text(
+                  'B2 - Upper Intermediate',
+                  style: GoogleFonts.poppins(
+                      fontSize: 14.sp, fontWeight: FontWeight.w500),
+                ),
                 onTap: () {
-                  Navigator.pop(context, 'Advanced');
+                  Navigator.pop(context, 'B2 - Upper Intermediate');
                 },
               ),
               ListTile(
-                title: Text('Mastery'),
+                title: Text(
+                  'B1 - Intermediate',
+                  style: GoogleFonts.poppins(
+                      fontSize: 14.sp, fontWeight: FontWeight.w500),
+                ),
                 onTap: () {
-                  Navigator.pop(context, 'Mastery');
+                  Navigator.pop(context, 'B1 - Intermediate');
+                },
+              ),
+              ListTile(
+                title: Text(
+                  'A2 - Elementary',
+                  style: GoogleFonts.poppins(
+                      fontSize: 14.sp, fontWeight: FontWeight.w500),
+                ),
+                onTap: () {
+                  Navigator.pop(context, 'A2 - Elementary');
+                },
+              ),
+              ListTile(
+                title: Text(
+                  'A1 - Beginner',
+                  style: GoogleFonts.poppins(
+                      fontSize: 14.sp, fontWeight: FontWeight.w500),
+                ),
+                onTap: () {
+                  Navigator.pop(context, 'A1 - Beginner');
                 },
               ),
             ],

@@ -21,6 +21,26 @@ class AddRealisasiDinasSuccess extends AddRealisasiDinasState {
   List<Object> get props => [message];
 }
 
+class DetailBiayaSPDSuceess extends AddRealisasiDinasState {
+  DataDetailDinas dataDetailSPD;
+
+  DetailBiayaSPDSuceess({
+    required this.dataDetailSPD,
+  });
+
+  @override
+  List<Object> get props => [dataDetailSPD];
+}
+
+class DetailEditRealisasiDinasSuccess extends AddRealisasiDinasState {
+ DetailRealisasiData? dataDetailrealisasiDinas;
+
+  DetailEditRealisasiDinasSuccess({this.dataDetailrealisasiDinas});
+
+  @override
+  List<Object> get props => [dataDetailrealisasiDinas!];
+}
+
 class AddRealisasiDinasFailed extends AddRealisasiDinasState {
   String message;
 

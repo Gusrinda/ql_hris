@@ -169,6 +169,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
               message: state.message,
             ),
           );
+          Navigator.of(context).pop();
         } else if (state is AddCutiFailedUserExpired) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
