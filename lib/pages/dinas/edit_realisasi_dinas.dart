@@ -12,6 +12,7 @@ import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/dinas/add_realisasi_dinas_bloc/add_realisasi_dinas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dinas_selector/dinas_selector.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_diri/selector/general_selector.dart';
+import 'package:sj_presensi_mobile/services/model/dinas/detail_realisasi_dinas_model.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/list_dinas_model.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/realisasi_dinas_model.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/response_detail_spd.dart';
@@ -109,6 +110,7 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
   List<ExpenseDetail> expenseDetails = [];
   DataDinas? selectedDataDinas;
   DetailBiayaSPDSuceess? detailSelectedSPD;
+  DetailEditSPDSuceess? detailEditSPD;
   DetailEditRealisasiDinasSuccess? dataDetailrealisasiDinas;
 
   @override
@@ -119,32 +121,13 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
       final organisasiBloc = context.read<AddRealisasiDinasBloc>();
       context
           .read<AddRealisasiDinasBloc>()
-          .add(GetDetailBiayaSPD(spdID: widget.dataRealisasi?.tSpdId ?? 1));
+          .add(GetDetailEditRealisasiDinas(id: widget.dataRealisasi?.id ?? 1));
 
       organisasiBloc.add(OnSelectDinasApproved());
       organisasiBloc.add(OnSelectTipe());
     });
     widget.totalBiayaRealisasiController
         .addListener(_onTotalBiayaRealisasiChanged);
-
-    // selectedNomorSpd = widget.dataRealisasi?.tSpdNomor;
-    // widget.valueNomorSpdController.text =
-    //     widget.dataRealisasi?.tSpdNomor.toString() ?? '';
-    // widget.idNomorSpdController.text =
-    //     widget.dataRealisasi?.tSpdId.toString() ?? '';
-
-    // widget.valueDivisiController.text = widget.detailSPD?.mDivisiNama ?? '';
-    // widget.idDivisiController.text =
-    //     widget.detailSPD?.mDivisiId.toString() ?? '';
-
-    // widget.valueDepartemenController.text = widget.detailSPD?.mDeptNama ?? '';
-    // widget.idDepartemenController.text =
-    //     widget.detailSPD?.mDeptId.toString() ?? '';
-
-    // widget.valuePosisiController.text =
-    //     widget.detailSPD?.mPosisiDescKerja ?? '';
-    // widget.idPosisiController.text =
-    //     widget.detailSPD?.mPosisiId.toString() ?? '';
   }
 
   void _onTotalBiayaRealisasiChanged() {
@@ -223,7 +206,8 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
         showDialog(
           context: context,
           builder: (_) => const DialogCustom(
-              state: DialogCustomItem.error, message: "Tidak Ada Item"),
+              state: DialogCustomItem.error,
+              message: "Tidak Ada SPD Yang Approved"),
         );
         print("Tidak Ada Item");
       }
@@ -246,8 +230,8 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
     //   // Call the function to calculate the total cost
     //   double totalCost = calculateTotalCost();
 
-    //   // Update the totalBiayaRencanaSelisihController
-    //   widget.totalBiayaRencanaSelisihController.text = totalCost.toString();
+    //   // Update the totalBiayaRealisasiController
+    //   widget.totalBiayaRealisasiController.text = totalCost.toString();
     // }
 
     double calculateTotalCost() {
@@ -263,21 +247,15 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
       return totalCost;
     }
 
-    String formatCurrency(double value) {
-      final numberFormat =
-          NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ');
-      return numberFormat.format(value);
-    }
-
     void onDataChanged() {
       // Call the function to calculate the total cost
       double totalCost = calculateTotalCost();
 
       // Format the total cost as currency
-      String formattedTotalCost = formatCurrency(totalCost);
+      String formattedTotalCost = formatRupiah(totalCost);
 
-      // Update the totalBiayaRencanaSelisihController
-      widget.totalBiayaRencanaSelisihController.text = formattedTotalCost;
+      // Update the totalBiayaRealisasiController
+      widget.totalBiayaRealisasiController.text = formattedTotalCost;
     }
 
     return BlocListener<AddRealisasiDinasBloc, AddRealisasiDinasState>(
@@ -302,6 +280,126 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
           LoadingDialog.dismissDialog(context);
           setState(() {
             dataDetailrealisasiDinas = state;
+            print("Detail Selected SPD >>> ${detailSelectedSPD}");
+
+            DetailRealisasiData? detailEditRealisasi =
+                dataDetailrealisasiDinas?.dataDetailrealisasiDinas;
+
+            widget.valueNomorSpdController.text =
+                detailEditRealisasi?.tSpdNomor?.toString() ?? '';
+            widget.idNomorSpdController.text =
+                detailEditRealisasi?.tSpdId?.toString() ?? '';
+
+            widget.totalBiayaController.text = formatRupiah(
+                detailEditRealisasi?.totalBiayaSpd?.toDouble() ?? 0.0);
+
+            widget.totalBiayaRencanaSelisihController.text = formatRupiah(
+                detailEditRealisasi?.totalBiayaSelisih?.toDouble() ?? 0.0);
+
+            widget.keteranganUtamaController.text =
+                detailEditRealisasi?.keterangan?.toString() ?? '';
+
+            print(
+                "Detail Revisi Biaya Realisasi ${detailEditRealisasi?.tRpdDet}");
+
+            /// Mengisi Data expenseDetails untuk Dynamic Form
+            // Clear the existing expenseDetails list
+            expenseDetails.clear();
+
+            // Check if dataDetailSPD is not null before accessing its properties
+            if (detailEditRealisasi?.tRpdDet != null) {
+              final detBiaya = detailEditRealisasi?.tRpdDet;
+
+              // Iterate over the detBiaya list and create ExpenseDetail objects
+              for (final detBiaya in detBiaya ?? []) {
+                final expenseDetail = ExpenseDetail();
+
+                expenseDetail.idTipeController.text =
+                    detBiaya?.tipeSpdId.toString() ?? '';
+                expenseDetail.valueTipeController.text =
+                    detBiaya?.tipeSpdValue?.toString() ?? '';
+                expenseDetail.costController.text =
+                    detBiaya.biayaRealisasi?.toString() ?? '0';
+                expenseDetail.descriptionController.text =
+                    detBiaya.detailTransport ?? '';
+                expenseDetail.biayaRealisasiController.text =
+                    detBiaya.biayaRealisasi?.toString() ?? '0';
+                expenseDetail.catatanRealisasiController.text =
+                    detBiaya?.catatanRealisasi.toString() ?? '';
+
+                expenseDetails.add(expenseDetail);
+              }
+            }
+            context
+                .read<AddRealisasiDinasBloc>()
+                .add(GetDetailEditSPD(spdID: detailEditRealisasi?.tSpdId ?? 1));
+          });
+        } else if (state is DetailEditSPDSuceess) {
+          LoadingDialog.dismissDialog(context);
+          setState(() {
+            detailEditSPD = state;
+            print("Detail Edit SPD >>> $detailSelectedSPD");
+
+            DataDetailDinas? editSPD = detailEditSPD?.dataEditDetailSPD;
+
+            widget.valueDivisiController.text =
+                editSPD?.mDivisiNama?.toString() ?? '';
+            widget.idDivisiController.text =
+                editSPD?.mDivisiId?.toString() ?? '';
+
+            widget.valueDepartemenController.text =
+                editSPD?.mDeptNama?.toString() ?? '';
+            widget.idDepartemenController.text =
+                editSPD?.mDeptId?.toString() ?? '';
+
+            widget.valuePosisiController.text =
+                editSPD?.mPosisiDescKerja?.toString() ?? '';
+            widget.idPosisiController.text =
+                editSPD?.mPosisiId?.toString() ?? '';
+
+            widget.valueDirektoratController.text =
+                editSPD?.mDirNama?.toString() ?? '';
+            widget.idDirektoratController.text =
+                editSPD?.mDirId?.toString() ?? '';
+
+            widget.tanggalController.text = editSPD?.tanggal?.toString() ?? '';
+            widget.tanggalAwalController.text =
+                editSPD?.tglAcaraAwal?.toString() ?? '';
+            widget.tanggalAkhirController.text =
+                editSPD?.tglAcaraAkhir?.toString() ?? '';
+            widget.jumlahHariController.text =
+                editSPD?.interval?.toString() ?? '';
+
+            widget.valueZonaAsalController.text =
+                editSPD?.mZonaAsalNama?.toString() ?? '';
+            widget.idZonaAsalController.text =
+                editSPD?.mZonaAsalId?.toString() ?? '';
+
+            widget.valueZonaTujuanController.text =
+                editSPD?.mZonaTujuanNama?.toString() ?? '';
+            widget.idZonaTujuanController.text =
+                editSPD?.mZonaTujuanId?.toString() ?? '';
+
+            widget.valueLokasiTujuanController.text =
+                editSPD?.mLokasiTujuanNama?.toString() ?? '';
+            widget.idLokasiTujuanController.text =
+                editSPD?.mLokasiTujuanId?.toString() ?? '';
+
+            widget.nikController.text = editSPD?.mKaryNik?.toString() ?? '';
+
+            widget.valuePicController.text =
+                editSPD?.picNamaLengkap?.toString() ?? '';
+            widget.idPicController.text = editSPD?.picId?.toString() ?? '';
+
+            widget.statusController.text = editSPD?.status?.toString() ?? '';
+
+            // widget.totalBiayaController.text =
+            //     formatRupiah(editSPD?.totalBiaya?.toDouble() ?? 0.0);
+
+            widget.kendDinasController.text =
+                editSPD?.isKendDinas?.toString() ?? '';
+
+            widget.namaKendDinasController.text = editSPD?.catatanKend ?? '';
           });
         } else if (state is DetailBiayaSPDSuceess) {
           LoadingDialog.dismissDialog(context);
@@ -469,11 +567,11 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
                       color: Colors.white,
                     ),
                     SizedBox(
-                      width: size.width / 14,
+                      width: size.width * 0.5 / 10,
                     ),
                     Expanded(
                       child: Text(
-                        "Edit Realisasi Perjalanan Dinas",
+                        "Revisi Realisasi Perjalanan Dinas",
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -512,7 +610,7 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
                                 },
                                 idController: widget.idNomorSpdController,
                                 valueController: widget.valueNomorSpdController,
-                                hintText: 'Cari Nomor Spd',
+                                hintText: 'Cari Nomor SPD',
                                 labelTag: 'Label-TemplateRspd',
                                 formTag: 'Form-TemplateRspd',
                                 labelForm: 'Nomor SPD',
@@ -697,7 +795,7 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
                                 hintText: 'Autofill Total Biaya',
                                 labelTag: 'Label-TotalBiaya',
                                 formTag: 'Form-TotalBiaya',
-                                labelForm: 'Total Biaya',
+                                labelForm: 'Total Biaya Awal',
                                 validator: (value) {},
                                 enabled: false,
                                 errorTextStyle:
@@ -793,7 +891,9 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
                                                         .text.isEmpty
                                                     ? null
                                                     : false,
-                                        onChanged: (bool? value) {},
+                                        onChanged: (bool? value) {
+                                          // Tidak melakukan perubahan karena radio tidak dapat diubah
+                                        },
                                       ),
                                       Text(
                                         'Iya',
@@ -881,45 +981,51 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
                                     onDataChanged();
                                   });
                                 },
-                                child: Text(
-                                  'Tambah Biaya',
-                                  style: GoogleFonts.poppins(),
-                                ),
+                                child: Text('Tambah Biaya'),
                               ),
                               SizedBox(height: 20.sp),
                               TextButtonCustomV1(
-                                text: "Kirim",
+                                text: "Kirim Revisi",
                                 height: 50,
                                 backgroundColor:
-                                    MyColorsConst.primaryColor.withOpacity(0.1),
-                                textColor: MyColorsConst.primaryColor,
+                                    Colors.orange.shade700.withOpacity(0.2),
+                                textColor: Colors.orange.shade700,
                                 onPressed: state is AddRealisasiDinasLoading
                                     ? null
                                     : () {
                                         print("INI DATA YANG DIKIRIM :");
 
-                                        num parseCurrency(String currency) {
+                                        double parseCurrency(String currency) {
                                           try {
-                                            final numberFormat =
-                                                NumberFormat.currency(
-                                                    locale: 'id_ID',
-                                                    symbol: 'Rp ');
-                                            // Hapus simbol mata uang dan koma, lalu parse sebagai num
-                                            return numberFormat.parse(currency
+                                            // Remove currency symbol and replace comma with dot
+                                            String cleanedCurrency = currency
                                                 .replaceAll('Rp ', '')
-                                                .replaceAll(',', ''));
+                                                .replaceAll('.', '')
+                                                .replaceAll(',', '.');
+
+                                            // Remove negative sign if present
+                                            if (cleanedCurrency
+                                                .startsWith('-')) {
+                                              cleanedCurrency =
+                                                  cleanedCurrency.substring(1);
+                                            }
+
+                                            // Parse as double
+                                            return double.parse(
+                                                cleanedCurrency);
                                           } catch (e) {
                                             return 0;
                                           }
                                         }
 
                                         // Parse formatted currency string to double
-                                        num totalBiayaSelisih = parseCurrency(
-                                            widget
+                                        double totalBiayaSelisih =
+                                            parseCurrency(widget
                                                 .totalBiayaRencanaSelisihController
                                                 .value
                                                 .text);
-                                        print(totalBiayaSelisih);
+                                        print(
+                                            "${widget.totalBiayaRencanaSelisihController.text} >>> $totalBiayaSelisih");
 
                                         int idNomorSpd = int.parse(widget
                                             .idNomorSpdController.value.text);
@@ -1007,7 +1113,7 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
 class ExpenseDetail {
   final TextEditingController idTipeController = TextEditingController();
   final TextEditingController valueTipeController = TextEditingController();
-  final TextEditingController costController = TextEditingController();
+  TextEditingController costController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController biayaRealisasiController =
       TextEditingController();

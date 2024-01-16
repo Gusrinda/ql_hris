@@ -258,6 +258,16 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                                                     .mPosisiDescKerja ??
                                                 "-"),
                                         _buildText(
+                                            'Zona Awal',
+                                            dataDetailSPD?.dataDetailSPD
+                                                    .mZonaAsalNama ??
+                                                "-"),
+                                        _buildText(
+                                            'Zona Tujuan',
+                                            dataDetailSPD?.dataDetailSPD
+                                                    .mZonaTujuanNama ??
+                                                "-"),
+                                        _buildText(
                                             'Kegiatan',
                                             dataDetailSPD?.dataDetailSPD
                                                     .jenisSpdValue ??
@@ -309,6 +319,11 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                                                     ?.createdAt ??
                                                 '-'),
                                         _buildText(
+                                            'PIC',
+                                            dataDetailSPD
+                                                    ?.dataDetailSPD.picName ??
+                                                "-"),
+                                        _buildText(
                                             'Tanggal Pengajuan',
                                             dataDetailrealisasiDinas
                                                     ?.dataDetailrealisasiDinas
@@ -328,16 +343,6 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                                                 '-'),
                                         _buildText('Durasi Hari',
                                             "${dataDetailSPD?.dataDetailSPD.interval.toString() ?? '-'} Hari"),
-                                        _buildText(
-                                            'Zona Awal',
-                                            dataDetailSPD?.dataDetailSPD
-                                                    .mZonaAsalNama ??
-                                                "-"),
-                                        _buildText(
-                                            'Zona Tujuan',
-                                            dataDetailSPD?.dataDetailSPD
-                                                    .mZonaTujuanNama ??
-                                                "-"),
                                         _buildText(
                                             'Lokasi Tujuan',
                                             dataDetailSPD?.dataDetailSPD
@@ -359,8 +364,16 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                                                       .catatanKend ??
                                                   "-"),
                                         _buildText(
-                                            'Total Biaya Realisasi',
-                                            formatRupiah(double.parse(
+                                            'Total Biaya SPD',
+                                            formatRupiah(double.tryParse(
+                                                dataDetailrealisasiDinas
+                                                        ?.dataDetailrealisasiDinas
+                                                        ?.totalBiayaSpd
+                                                        .toString() ??
+                                                    "0.0"))),
+                                        _buildText(
+                                            'Selisih Total Biaya Realisasi',
+                                            formatRupiah(double.tryParse(
                                                 dataDetailrealisasiDinas
                                                         ?.dataDetailrealisasiDinas
                                                         ?.totalBiayaSelisih
@@ -537,20 +550,16 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                                         builder: (context) => MultiBlocProvider(
                                           providers: [
                                             BlocProvider(
-                                              create: (context) =>
-                                                  AddRealisasiDinasBloc()
-                                                    ..add(
-                                                        OnSelectDinasApproved())
-                                                    ..add(OnSelectTipe())
-                                                    ..add(GetDetailEditRealisasiDinas(
-                                                        id: widget.dataRealisasi
-                                                                ?.tSpdId ??
-                                                            1)),
-                                            ),
-                                            BlocProvider(
-                                              create: (context) =>
-                                                  DetailRealisasiDinasBloc(),
-                                            ),
+                                                create: (context) =>
+                                                    AddRealisasiDinasBloc()
+                                                      ..add(
+                                                          OnSelectDinasApproved())
+                                                      ..add(OnSelectTipe())
+                                                // ..add(GetDetailEditRealisasiDinas(
+                                                //     id: widget.dataRealisasi
+                                                //             ?.id ??
+                                                //         1)),
+                                                ),
                                           ],
                                           child: EditRealisasiDinasPage(
                                             detailSPD:

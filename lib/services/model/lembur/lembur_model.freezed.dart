@@ -475,11 +475,11 @@ mixin _$DataLembur {
   @JsonKey(name: "m_comp.desc")
   dynamic get mCompDesc => throw _privateConstructorUsedError;
   @JsonKey(name: "m_comp.creator_id")
-  dynamic get mCompCreatorId => throw _privateConstructorUsedError;
+  int? get mCompCreatorId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_comp.last_editor_id")
   dynamic get mCompLastEditorId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_comp.created_at")
-  dynamic get mCompCreatedAt => throw _privateConstructorUsedError;
+  String? get mCompCreatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "m_comp.updated_at")
   dynamic get mCompUpdatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "m_dir.id")
@@ -511,19 +511,19 @@ mixin _$DataLembur {
   @JsonKey(name: "m_kary.m_dept_id")
   int? get mKaryMDeptId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.m_zona_id")
-  int? get mKaryMZonaId => throw _privateConstructorUsedError;
+  dynamic get mKaryMZonaId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.grading_id")
   dynamic get mKaryGradingId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.costcontre_id")
-  int? get mKaryCostcontreId => throw _privateConstructorUsedError;
+  dynamic get mKaryCostcontreId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.kode")
   String? get mKaryKode => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.m_posisi_id")
   int? get mKaryMPosisiId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.m_jam_kerja_id")
-  int? get mKaryMJamKerjaId => throw _privateConstructorUsedError;
+  dynamic get mKaryMJamKerjaId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.kode_presensi")
-  String? get mKaryKodePresensi => throw _privateConstructorUsedError;
+  dynamic get mKaryKodePresensi => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.nik")
   String? get mKaryNik => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.nama_depan")
@@ -571,13 +571,13 @@ mixin _$DataLembur {
   @JsonKey(name: "m_kary.hub_dgn_karyawan")
   String? get mKaryHubDgnKaryawan => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.cuti_jatah_reguler")
-  int? get mKaryCutiJatahReguler => throw _privateConstructorUsedError;
+  dynamic get mKaryCutiJatahReguler => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.cuti_sisa_reguler")
-  int? get mKaryCutiSisaReguler => throw _privateConstructorUsedError;
+  dynamic get mKaryCutiSisaReguler => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.cuti_panjang")
-  int? get mKaryCutiPanjang => throw _privateConstructorUsedError;
+  dynamic get mKaryCutiPanjang => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.cuti_sisa_panjang")
-  int? get mKaryCutiSisaPanjang => throw _privateConstructorUsedError;
+  dynamic get mKaryCutiSisaPanjang => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.status_kary_id")
   dynamic get mKaryStatusKaryId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.lama_kontrak_awal")
@@ -597,31 +597,32 @@ mixin _$DataLembur {
   @JsonKey(name: "m_kary.uk_sepatu")
   String? get mKaryUkSepatu => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.desc")
-  String? get mKaryDesc => throw _privateConstructorUsedError;
+  dynamic get mKaryDesc => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.is_active")
   bool? get mKaryIsActive => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.creator_id")
   dynamic get mKaryCreatorId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.last_editor_id")
-  int? get mKaryLastEditorId => throw _privateConstructorUsedError;
+  dynamic get mKaryLastEditorId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.created_at")
   String? get mKaryCreatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.updated_at")
   String? get mKaryUpdatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.m_standart_gaji_id")
-  int? get mKaryMStandartGajiId => throw _privateConstructorUsedError;
+  dynamic get mKaryMStandartGajiId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.periode_gaji_id")
-  int? get mKaryPeriodeGajiId => throw _privateConstructorUsedError;
+  dynamic get mKaryPeriodeGajiId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.ref_id")
   dynamic get mKaryRefId => throw _privateConstructorUsedError;
+  @JsonKey(name: "m_kary.atasan_id")
+  int? get mKaryAtasanId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.presensi_lokasi_default_id")
-  int? get mKaryPresensiLokasiDefaultId => throw _privateConstructorUsedError;
+  dynamic get mKaryPresensiLokasiDefaultId =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.exp_date_cuti")
   dynamic get mKaryExpDateCuti => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.limit_potong")
   int? get mKaryLimitPotong => throw _privateConstructorUsedError;
-  @JsonKey(name: "m_kary.atasan_id")
-  int? get mKaryAtasanId => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.cuti_p24")
   dynamic get mKaryCutiP24 => throw _privateConstructorUsedError;
   @JsonKey(name: "m_kary.cuti_sisa_p24")
@@ -713,7 +714,7 @@ mixin _$DataLembur {
   @JsonKey(name: "creator.profil_image")
   String? get creatorProfilImage => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.telp")
-  String? get creatorTelp => throw _privateConstructorUsedError;
+  dynamic get creatorTelp => throw _privateConstructorUsedError;
   @JsonKey(name: "creator.m_kary_id")
   int? get creatorMKaryId => throw _privateConstructorUsedError;
   @JsonKey(name: "last_editor.id")
@@ -769,9 +770,9 @@ mixin _$DataLembur {
   @JsonKey(name: "pic.is_active")
   bool? get picIsActive => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.creator_id")
-  int? get picCreatorId => throw _privateConstructorUsedError;
+  dynamic get picCreatorId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.last_editor_id")
-  int? get picLastEditorId => throw _privateConstructorUsedError;
+  dynamic get picLastEditorId => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.remember_token")
   dynamic get picRememberToken => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.created_at")
@@ -779,13 +780,13 @@ mixin _$DataLembur {
   @JsonKey(name: "pic.updated_at")
   String? get picUpdatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.profil_image")
-  String? get picProfilImage => throw _privateConstructorUsedError;
+  dynamic get picProfilImage => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.telp")
-  String? get picTelp => throw _privateConstructorUsedError;
+  dynamic get picTelp => throw _privateConstructorUsedError;
   @JsonKey(name: "pic.m_kary_id")
   int? get picMKaryId => throw _privateConstructorUsedError;
-  @JsonKey(name: "pic.nama_lengkap")
-  String? get picNamaLengkap => throw _privateConstructorUsedError;
+  @JsonKey(name: "approval_note")
+  String? get approvalNote => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -828,9 +829,9 @@ abstract class $DataLemburCopyWith<$Res> {
       @JsonKey(name: "m_comp.nama") String? mCompNama,
       @JsonKey(name: "m_comp.is_active") bool? mCompIsActive,
       @JsonKey(name: "m_comp.desc") dynamic mCompDesc,
-      @JsonKey(name: "m_comp.creator_id") dynamic mCompCreatorId,
+      @JsonKey(name: "m_comp.creator_id") int? mCompCreatorId,
       @JsonKey(name: "m_comp.last_editor_id") dynamic mCompLastEditorId,
-      @JsonKey(name: "m_comp.created_at") dynamic mCompCreatedAt,
+      @JsonKey(name: "m_comp.created_at") String? mCompCreatedAt,
       @JsonKey(name: "m_comp.updated_at") dynamic mCompUpdatedAt,
       @JsonKey(name: "m_dir.id") dynamic mDirId,
       @JsonKey(name: "m_dir.m_comp_id") dynamic mDirMCompId,
@@ -846,13 +847,13 @@ abstract class $DataLemburCopyWith<$Res> {
       @JsonKey(name: "m_kary.m_dir_id") int? mKaryMDirId,
       @JsonKey(name: "m_kary.m_divisi_id") int? mKaryMDivisiId,
       @JsonKey(name: "m_kary.m_dept_id") int? mKaryMDeptId,
-      @JsonKey(name: "m_kary.m_zona_id") int? mKaryMZonaId,
+      @JsonKey(name: "m_kary.m_zona_id") dynamic mKaryMZonaId,
       @JsonKey(name: "m_kary.grading_id") dynamic mKaryGradingId,
-      @JsonKey(name: "m_kary.costcontre_id") int? mKaryCostcontreId,
+      @JsonKey(name: "m_kary.costcontre_id") dynamic mKaryCostcontreId,
       @JsonKey(name: "m_kary.kode") String? mKaryKode,
       @JsonKey(name: "m_kary.m_posisi_id") int? mKaryMPosisiId,
-      @JsonKey(name: "m_kary.m_jam_kerja_id") int? mKaryMJamKerjaId,
-      @JsonKey(name: "m_kary.kode_presensi") String? mKaryKodePresensi,
+      @JsonKey(name: "m_kary.m_jam_kerja_id") dynamic mKaryMJamKerjaId,
+      @JsonKey(name: "m_kary.kode_presensi") dynamic mKaryKodePresensi,
       @JsonKey(name: "m_kary.nik") String? mKaryNik,
       @JsonKey(name: "m_kary.nama_depan") String? mKaryNamaDepan,
       @JsonKey(name: "m_kary.nama_belakang") String? mKaryNamaBelakang,
@@ -877,10 +878,10 @@ abstract class $DataLemburCopyWith<$Res> {
       @JsonKey(name: "m_kary.status_nikah_id") int? mKaryStatusNikahId,
       @JsonKey(name: "m_kary.tanggungan_id") int? mKaryTanggunganId,
       @JsonKey(name: "m_kary.hub_dgn_karyawan") String? mKaryHubDgnKaryawan,
-      @JsonKey(name: "m_kary.cuti_jatah_reguler") int? mKaryCutiJatahReguler,
-      @JsonKey(name: "m_kary.cuti_sisa_reguler") int? mKaryCutiSisaReguler,
-      @JsonKey(name: "m_kary.cuti_panjang") int? mKaryCutiPanjang,
-      @JsonKey(name: "m_kary.cuti_sisa_panjang") int? mKaryCutiSisaPanjang,
+      @JsonKey(name: "m_kary.cuti_jatah_reguler") dynamic mKaryCutiJatahReguler,
+      @JsonKey(name: "m_kary.cuti_sisa_reguler") dynamic mKaryCutiSisaReguler,
+      @JsonKey(name: "m_kary.cuti_panjang") dynamic mKaryCutiPanjang,
+      @JsonKey(name: "m_kary.cuti_sisa_panjang") dynamic mKaryCutiSisaPanjang,
       @JsonKey(name: "m_kary.status_kary_id") dynamic mKaryStatusKaryId,
       @JsonKey(name: "m_kary.lama_kontrak_awal") dynamic mKaryLamaKontrakAwal,
       @JsonKey(name: "m_kary.lama_kontrak_akhir") dynamic mKaryLamaKontrakAkhir,
@@ -890,20 +891,20 @@ abstract class $DataLemburCopyWith<$Res> {
       @JsonKey(name: "m_kary.uk_baju") String? mKaryUkBaju,
       @JsonKey(name: "m_kary.uk_celana") String? mKaryUkCelana,
       @JsonKey(name: "m_kary.uk_sepatu") String? mKaryUkSepatu,
-      @JsonKey(name: "m_kary.desc") String? mKaryDesc,
+      @JsonKey(name: "m_kary.desc") dynamic mKaryDesc,
       @JsonKey(name: "m_kary.is_active") bool? mKaryIsActive,
       @JsonKey(name: "m_kary.creator_id") dynamic mKaryCreatorId,
-      @JsonKey(name: "m_kary.last_editor_id") int? mKaryLastEditorId,
+      @JsonKey(name: "m_kary.last_editor_id") dynamic mKaryLastEditorId,
       @JsonKey(name: "m_kary.created_at") String? mKaryCreatedAt,
       @JsonKey(name: "m_kary.updated_at") String? mKaryUpdatedAt,
-      @JsonKey(name: "m_kary.m_standart_gaji_id") int? mKaryMStandartGajiId,
-      @JsonKey(name: "m_kary.periode_gaji_id") int? mKaryPeriodeGajiId,
+      @JsonKey(name: "m_kary.m_standart_gaji_id") dynamic mKaryMStandartGajiId,
+      @JsonKey(name: "m_kary.periode_gaji_id") dynamic mKaryPeriodeGajiId,
       @JsonKey(name: "m_kary.ref_id") dynamic mKaryRefId,
+      @JsonKey(name: "m_kary.atasan_id") int? mKaryAtasanId,
       @JsonKey(name: "m_kary.presensi_lokasi_default_id")
-      int? mKaryPresensiLokasiDefaultId,
+      dynamic mKaryPresensiLokasiDefaultId,
       @JsonKey(name: "m_kary.exp_date_cuti") dynamic mKaryExpDateCuti,
       @JsonKey(name: "m_kary.limit_potong") int? mKaryLimitPotong,
-      @JsonKey(name: "m_kary.atasan_id") int? mKaryAtasanId,
       @JsonKey(name: "m_kary.cuti_p24") dynamic mKaryCutiP24,
       @JsonKey(name: "m_kary.cuti_sisa_p24") dynamic mKaryCutiSisaP24,
       @JsonKey(name: "tipe_lembur.id") int? tipeLemburId,
@@ -951,7 +952,7 @@ abstract class $DataLemburCopyWith<$Res> {
       @JsonKey(name: "creator.created_at") String? creatorCreatedAt,
       @JsonKey(name: "creator.updated_at") String? creatorUpdatedAt,
       @JsonKey(name: "creator.profil_image") String? creatorProfilImage,
-      @JsonKey(name: "creator.telp") String? creatorTelp,
+      @JsonKey(name: "creator.telp") dynamic creatorTelp,
       @JsonKey(name: "creator.m_kary_id") int? creatorMKaryId,
       @JsonKey(name: "last_editor.id") dynamic lastEditorId,
       @JsonKey(name: "last_editor.name") dynamic lastEditorName,
@@ -982,15 +983,15 @@ abstract class $DataLemburCopyWith<$Res> {
       @JsonKey(name: "pic.m_comp_id") int? picMCompId,
       @JsonKey(name: "pic.m_dir_id") int? picMDirId,
       @JsonKey(name: "pic.is_active") bool? picIsActive,
-      @JsonKey(name: "pic.creator_id") int? picCreatorId,
-      @JsonKey(name: "pic.last_editor_id") int? picLastEditorId,
+      @JsonKey(name: "pic.creator_id") dynamic picCreatorId,
+      @JsonKey(name: "pic.last_editor_id") dynamic picLastEditorId,
       @JsonKey(name: "pic.remember_token") dynamic picRememberToken,
       @JsonKey(name: "pic.created_at") String? picCreatedAt,
       @JsonKey(name: "pic.updated_at") String? picUpdatedAt,
-      @JsonKey(name: "pic.profil_image") String? picProfilImage,
-      @JsonKey(name: "pic.telp") String? picTelp,
+      @JsonKey(name: "pic.profil_image") dynamic picProfilImage,
+      @JsonKey(name: "pic.telp") dynamic picTelp,
       @JsonKey(name: "pic.m_kary_id") int? picMKaryId,
-      @JsonKey(name: "pic.nama_lengkap") String? picNamaLengkap});
+      @JsonKey(name: "approval_note") String? approvalNote});
 }
 
 /// @nodoc
@@ -1104,10 +1105,10 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
     Object? mKaryMStandartGajiId = freezed,
     Object? mKaryPeriodeGajiId = freezed,
     Object? mKaryRefId = freezed,
+    Object? mKaryAtasanId = freezed,
     Object? mKaryPresensiLokasiDefaultId = freezed,
     Object? mKaryExpDateCuti = freezed,
     Object? mKaryLimitPotong = freezed,
-    Object? mKaryAtasanId = freezed,
     Object? mKaryCutiP24 = freezed,
     Object? mKaryCutiSisaP24 = freezed,
     Object? tipeLemburId = freezed,
@@ -1189,7 +1190,7 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
     Object? picProfilImage = freezed,
     Object? picTelp = freezed,
     Object? picMKaryId = freezed,
-    Object? picNamaLengkap = freezed,
+    Object? approvalNote = freezed,
   }) {
     return _then(_value.copyWith(
       metaRead: freezed == metaRead
@@ -1307,7 +1308,7 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
       mCompCreatorId: freezed == mCompCreatorId
           ? _value.mCompCreatorId
           : mCompCreatorId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       mCompLastEditorId: freezed == mCompLastEditorId
           ? _value.mCompLastEditorId
           : mCompLastEditorId // ignore: cast_nullable_to_non_nullable
@@ -1315,7 +1316,7 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
       mCompCreatedAt: freezed == mCompCreatedAt
           ? _value.mCompCreatedAt
           : mCompCreatedAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       mCompUpdatedAt: freezed == mCompUpdatedAt
           ? _value.mCompUpdatedAt
           : mCompUpdatedAt // ignore: cast_nullable_to_non_nullable
@@ -1379,7 +1380,7 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
       mKaryMZonaId: freezed == mKaryMZonaId
           ? _value.mKaryMZonaId
           : mKaryMZonaId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryGradingId: freezed == mKaryGradingId
           ? _value.mKaryGradingId
           : mKaryGradingId // ignore: cast_nullable_to_non_nullable
@@ -1387,7 +1388,7 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
       mKaryCostcontreId: freezed == mKaryCostcontreId
           ? _value.mKaryCostcontreId
           : mKaryCostcontreId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryKode: freezed == mKaryKode
           ? _value.mKaryKode
           : mKaryKode // ignore: cast_nullable_to_non_nullable
@@ -1399,11 +1400,11 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
       mKaryMJamKerjaId: freezed == mKaryMJamKerjaId
           ? _value.mKaryMJamKerjaId
           : mKaryMJamKerjaId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryKodePresensi: freezed == mKaryKodePresensi
           ? _value.mKaryKodePresensi
           : mKaryKodePresensi // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mKaryNik: freezed == mKaryNik
           ? _value.mKaryNik
           : mKaryNik // ignore: cast_nullable_to_non_nullable
@@ -1499,19 +1500,19 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
       mKaryCutiJatahReguler: freezed == mKaryCutiJatahReguler
           ? _value.mKaryCutiJatahReguler
           : mKaryCutiJatahReguler // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryCutiSisaReguler: freezed == mKaryCutiSisaReguler
           ? _value.mKaryCutiSisaReguler
           : mKaryCutiSisaReguler // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryCutiPanjang: freezed == mKaryCutiPanjang
           ? _value.mKaryCutiPanjang
           : mKaryCutiPanjang // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryCutiSisaPanjang: freezed == mKaryCutiSisaPanjang
           ? _value.mKaryCutiSisaPanjang
           : mKaryCutiSisaPanjang // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryStatusKaryId: freezed == mKaryStatusKaryId
           ? _value.mKaryStatusKaryId
           : mKaryStatusKaryId // ignore: cast_nullable_to_non_nullable
@@ -1551,7 +1552,7 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
       mKaryDesc: freezed == mKaryDesc
           ? _value.mKaryDesc
           : mKaryDesc // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mKaryIsActive: freezed == mKaryIsActive
           ? _value.mKaryIsActive
           : mKaryIsActive // ignore: cast_nullable_to_non_nullable
@@ -1563,7 +1564,7 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
       mKaryLastEditorId: freezed == mKaryLastEditorId
           ? _value.mKaryLastEditorId
           : mKaryLastEditorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryCreatedAt: freezed == mKaryCreatedAt
           ? _value.mKaryCreatedAt
           : mKaryCreatedAt // ignore: cast_nullable_to_non_nullable
@@ -1575,19 +1576,23 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
       mKaryMStandartGajiId: freezed == mKaryMStandartGajiId
           ? _value.mKaryMStandartGajiId
           : mKaryMStandartGajiId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryPeriodeGajiId: freezed == mKaryPeriodeGajiId
           ? _value.mKaryPeriodeGajiId
           : mKaryPeriodeGajiId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryRefId: freezed == mKaryRefId
           ? _value.mKaryRefId
           : mKaryRefId // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      mKaryAtasanId: freezed == mKaryAtasanId
+          ? _value.mKaryAtasanId
+          : mKaryAtasanId // ignore: cast_nullable_to_non_nullable
+              as int?,
       mKaryPresensiLokasiDefaultId: freezed == mKaryPresensiLokasiDefaultId
           ? _value.mKaryPresensiLokasiDefaultId
           : mKaryPresensiLokasiDefaultId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryExpDateCuti: freezed == mKaryExpDateCuti
           ? _value.mKaryExpDateCuti
           : mKaryExpDateCuti // ignore: cast_nullable_to_non_nullable
@@ -1595,10 +1600,6 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
       mKaryLimitPotong: freezed == mKaryLimitPotong
           ? _value.mKaryLimitPotong
           : mKaryLimitPotong // ignore: cast_nullable_to_non_nullable
-              as int?,
-      mKaryAtasanId: freezed == mKaryAtasanId
-          ? _value.mKaryAtasanId
-          : mKaryAtasanId // ignore: cast_nullable_to_non_nullable
               as int?,
       mKaryCutiP24: freezed == mKaryCutiP24
           ? _value.mKaryCutiP24
@@ -1783,7 +1784,7 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
       creatorTelp: freezed == creatorTelp
           ? _value.creatorTelp
           : creatorTelp // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       creatorMKaryId: freezed == creatorMKaryId
           ? _value.creatorMKaryId
           : creatorMKaryId // ignore: cast_nullable_to_non_nullable
@@ -1895,11 +1896,11 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
       picCreatorId: freezed == picCreatorId
           ? _value.picCreatorId
           : picCreatorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picLastEditorId: freezed == picLastEditorId
           ? _value.picLastEditorId
           : picLastEditorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picRememberToken: freezed == picRememberToken
           ? _value.picRememberToken
           : picRememberToken // ignore: cast_nullable_to_non_nullable
@@ -1915,18 +1916,18 @@ class _$DataLemburCopyWithImpl<$Res, $Val extends DataLembur>
       picProfilImage: freezed == picProfilImage
           ? _value.picProfilImage
           : picProfilImage // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picTelp: freezed == picTelp
           ? _value.picTelp
           : picTelp // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picMKaryId: freezed == picMKaryId
           ? _value.picMKaryId
           : picMKaryId // ignore: cast_nullable_to_non_nullable
               as int?,
-      picNamaLengkap: freezed == picNamaLengkap
-          ? _value.picNamaLengkap
-          : picNamaLengkap // ignore: cast_nullable_to_non_nullable
+      approvalNote: freezed == approvalNote
+          ? _value.approvalNote
+          : approvalNote // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -1969,9 +1970,9 @@ abstract class _$$DataLemburImplCopyWith<$Res>
       @JsonKey(name: "m_comp.nama") String? mCompNama,
       @JsonKey(name: "m_comp.is_active") bool? mCompIsActive,
       @JsonKey(name: "m_comp.desc") dynamic mCompDesc,
-      @JsonKey(name: "m_comp.creator_id") dynamic mCompCreatorId,
+      @JsonKey(name: "m_comp.creator_id") int? mCompCreatorId,
       @JsonKey(name: "m_comp.last_editor_id") dynamic mCompLastEditorId,
-      @JsonKey(name: "m_comp.created_at") dynamic mCompCreatedAt,
+      @JsonKey(name: "m_comp.created_at") String? mCompCreatedAt,
       @JsonKey(name: "m_comp.updated_at") dynamic mCompUpdatedAt,
       @JsonKey(name: "m_dir.id") dynamic mDirId,
       @JsonKey(name: "m_dir.m_comp_id") dynamic mDirMCompId,
@@ -1987,13 +1988,13 @@ abstract class _$$DataLemburImplCopyWith<$Res>
       @JsonKey(name: "m_kary.m_dir_id") int? mKaryMDirId,
       @JsonKey(name: "m_kary.m_divisi_id") int? mKaryMDivisiId,
       @JsonKey(name: "m_kary.m_dept_id") int? mKaryMDeptId,
-      @JsonKey(name: "m_kary.m_zona_id") int? mKaryMZonaId,
+      @JsonKey(name: "m_kary.m_zona_id") dynamic mKaryMZonaId,
       @JsonKey(name: "m_kary.grading_id") dynamic mKaryGradingId,
-      @JsonKey(name: "m_kary.costcontre_id") int? mKaryCostcontreId,
+      @JsonKey(name: "m_kary.costcontre_id") dynamic mKaryCostcontreId,
       @JsonKey(name: "m_kary.kode") String? mKaryKode,
       @JsonKey(name: "m_kary.m_posisi_id") int? mKaryMPosisiId,
-      @JsonKey(name: "m_kary.m_jam_kerja_id") int? mKaryMJamKerjaId,
-      @JsonKey(name: "m_kary.kode_presensi") String? mKaryKodePresensi,
+      @JsonKey(name: "m_kary.m_jam_kerja_id") dynamic mKaryMJamKerjaId,
+      @JsonKey(name: "m_kary.kode_presensi") dynamic mKaryKodePresensi,
       @JsonKey(name: "m_kary.nik") String? mKaryNik,
       @JsonKey(name: "m_kary.nama_depan") String? mKaryNamaDepan,
       @JsonKey(name: "m_kary.nama_belakang") String? mKaryNamaBelakang,
@@ -2018,10 +2019,10 @@ abstract class _$$DataLemburImplCopyWith<$Res>
       @JsonKey(name: "m_kary.status_nikah_id") int? mKaryStatusNikahId,
       @JsonKey(name: "m_kary.tanggungan_id") int? mKaryTanggunganId,
       @JsonKey(name: "m_kary.hub_dgn_karyawan") String? mKaryHubDgnKaryawan,
-      @JsonKey(name: "m_kary.cuti_jatah_reguler") int? mKaryCutiJatahReguler,
-      @JsonKey(name: "m_kary.cuti_sisa_reguler") int? mKaryCutiSisaReguler,
-      @JsonKey(name: "m_kary.cuti_panjang") int? mKaryCutiPanjang,
-      @JsonKey(name: "m_kary.cuti_sisa_panjang") int? mKaryCutiSisaPanjang,
+      @JsonKey(name: "m_kary.cuti_jatah_reguler") dynamic mKaryCutiJatahReguler,
+      @JsonKey(name: "m_kary.cuti_sisa_reguler") dynamic mKaryCutiSisaReguler,
+      @JsonKey(name: "m_kary.cuti_panjang") dynamic mKaryCutiPanjang,
+      @JsonKey(name: "m_kary.cuti_sisa_panjang") dynamic mKaryCutiSisaPanjang,
       @JsonKey(name: "m_kary.status_kary_id") dynamic mKaryStatusKaryId,
       @JsonKey(name: "m_kary.lama_kontrak_awal") dynamic mKaryLamaKontrakAwal,
       @JsonKey(name: "m_kary.lama_kontrak_akhir") dynamic mKaryLamaKontrakAkhir,
@@ -2031,20 +2032,20 @@ abstract class _$$DataLemburImplCopyWith<$Res>
       @JsonKey(name: "m_kary.uk_baju") String? mKaryUkBaju,
       @JsonKey(name: "m_kary.uk_celana") String? mKaryUkCelana,
       @JsonKey(name: "m_kary.uk_sepatu") String? mKaryUkSepatu,
-      @JsonKey(name: "m_kary.desc") String? mKaryDesc,
+      @JsonKey(name: "m_kary.desc") dynamic mKaryDesc,
       @JsonKey(name: "m_kary.is_active") bool? mKaryIsActive,
       @JsonKey(name: "m_kary.creator_id") dynamic mKaryCreatorId,
-      @JsonKey(name: "m_kary.last_editor_id") int? mKaryLastEditorId,
+      @JsonKey(name: "m_kary.last_editor_id") dynamic mKaryLastEditorId,
       @JsonKey(name: "m_kary.created_at") String? mKaryCreatedAt,
       @JsonKey(name: "m_kary.updated_at") String? mKaryUpdatedAt,
-      @JsonKey(name: "m_kary.m_standart_gaji_id") int? mKaryMStandartGajiId,
-      @JsonKey(name: "m_kary.periode_gaji_id") int? mKaryPeriodeGajiId,
+      @JsonKey(name: "m_kary.m_standart_gaji_id") dynamic mKaryMStandartGajiId,
+      @JsonKey(name: "m_kary.periode_gaji_id") dynamic mKaryPeriodeGajiId,
       @JsonKey(name: "m_kary.ref_id") dynamic mKaryRefId,
+      @JsonKey(name: "m_kary.atasan_id") int? mKaryAtasanId,
       @JsonKey(name: "m_kary.presensi_lokasi_default_id")
-      int? mKaryPresensiLokasiDefaultId,
+      dynamic mKaryPresensiLokasiDefaultId,
       @JsonKey(name: "m_kary.exp_date_cuti") dynamic mKaryExpDateCuti,
       @JsonKey(name: "m_kary.limit_potong") int? mKaryLimitPotong,
-      @JsonKey(name: "m_kary.atasan_id") int? mKaryAtasanId,
       @JsonKey(name: "m_kary.cuti_p24") dynamic mKaryCutiP24,
       @JsonKey(name: "m_kary.cuti_sisa_p24") dynamic mKaryCutiSisaP24,
       @JsonKey(name: "tipe_lembur.id") int? tipeLemburId,
@@ -2092,7 +2093,7 @@ abstract class _$$DataLemburImplCopyWith<$Res>
       @JsonKey(name: "creator.created_at") String? creatorCreatedAt,
       @JsonKey(name: "creator.updated_at") String? creatorUpdatedAt,
       @JsonKey(name: "creator.profil_image") String? creatorProfilImage,
-      @JsonKey(name: "creator.telp") String? creatorTelp,
+      @JsonKey(name: "creator.telp") dynamic creatorTelp,
       @JsonKey(name: "creator.m_kary_id") int? creatorMKaryId,
       @JsonKey(name: "last_editor.id") dynamic lastEditorId,
       @JsonKey(name: "last_editor.name") dynamic lastEditorName,
@@ -2123,15 +2124,15 @@ abstract class _$$DataLemburImplCopyWith<$Res>
       @JsonKey(name: "pic.m_comp_id") int? picMCompId,
       @JsonKey(name: "pic.m_dir_id") int? picMDirId,
       @JsonKey(name: "pic.is_active") bool? picIsActive,
-      @JsonKey(name: "pic.creator_id") int? picCreatorId,
-      @JsonKey(name: "pic.last_editor_id") int? picLastEditorId,
+      @JsonKey(name: "pic.creator_id") dynamic picCreatorId,
+      @JsonKey(name: "pic.last_editor_id") dynamic picLastEditorId,
       @JsonKey(name: "pic.remember_token") dynamic picRememberToken,
       @JsonKey(name: "pic.created_at") String? picCreatedAt,
       @JsonKey(name: "pic.updated_at") String? picUpdatedAt,
-      @JsonKey(name: "pic.profil_image") String? picProfilImage,
-      @JsonKey(name: "pic.telp") String? picTelp,
+      @JsonKey(name: "pic.profil_image") dynamic picProfilImage,
+      @JsonKey(name: "pic.telp") dynamic picTelp,
       @JsonKey(name: "pic.m_kary_id") int? picMKaryId,
-      @JsonKey(name: "pic.nama_lengkap") String? picNamaLengkap});
+      @JsonKey(name: "approval_note") String? approvalNote});
 }
 
 /// @nodoc
@@ -2243,10 +2244,10 @@ class __$$DataLemburImplCopyWithImpl<$Res>
     Object? mKaryMStandartGajiId = freezed,
     Object? mKaryPeriodeGajiId = freezed,
     Object? mKaryRefId = freezed,
+    Object? mKaryAtasanId = freezed,
     Object? mKaryPresensiLokasiDefaultId = freezed,
     Object? mKaryExpDateCuti = freezed,
     Object? mKaryLimitPotong = freezed,
-    Object? mKaryAtasanId = freezed,
     Object? mKaryCutiP24 = freezed,
     Object? mKaryCutiSisaP24 = freezed,
     Object? tipeLemburId = freezed,
@@ -2328,7 +2329,7 @@ class __$$DataLemburImplCopyWithImpl<$Res>
     Object? picProfilImage = freezed,
     Object? picTelp = freezed,
     Object? picMKaryId = freezed,
-    Object? picNamaLengkap = freezed,
+    Object? approvalNote = freezed,
   }) {
     return _then(_$DataLemburImpl(
       metaRead: freezed == metaRead
@@ -2446,7 +2447,7 @@ class __$$DataLemburImplCopyWithImpl<$Res>
       mCompCreatorId: freezed == mCompCreatorId
           ? _value.mCompCreatorId
           : mCompCreatorId // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
       mCompLastEditorId: freezed == mCompLastEditorId
           ? _value.mCompLastEditorId
           : mCompLastEditorId // ignore: cast_nullable_to_non_nullable
@@ -2454,7 +2455,7 @@ class __$$DataLemburImplCopyWithImpl<$Res>
       mCompCreatedAt: freezed == mCompCreatedAt
           ? _value.mCompCreatedAt
           : mCompCreatedAt // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       mCompUpdatedAt: freezed == mCompUpdatedAt
           ? _value.mCompUpdatedAt
           : mCompUpdatedAt // ignore: cast_nullable_to_non_nullable
@@ -2518,7 +2519,7 @@ class __$$DataLemburImplCopyWithImpl<$Res>
       mKaryMZonaId: freezed == mKaryMZonaId
           ? _value.mKaryMZonaId
           : mKaryMZonaId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryGradingId: freezed == mKaryGradingId
           ? _value.mKaryGradingId
           : mKaryGradingId // ignore: cast_nullable_to_non_nullable
@@ -2526,7 +2527,7 @@ class __$$DataLemburImplCopyWithImpl<$Res>
       mKaryCostcontreId: freezed == mKaryCostcontreId
           ? _value.mKaryCostcontreId
           : mKaryCostcontreId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryKode: freezed == mKaryKode
           ? _value.mKaryKode
           : mKaryKode // ignore: cast_nullable_to_non_nullable
@@ -2538,11 +2539,11 @@ class __$$DataLemburImplCopyWithImpl<$Res>
       mKaryMJamKerjaId: freezed == mKaryMJamKerjaId
           ? _value.mKaryMJamKerjaId
           : mKaryMJamKerjaId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryKodePresensi: freezed == mKaryKodePresensi
           ? _value.mKaryKodePresensi
           : mKaryKodePresensi // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mKaryNik: freezed == mKaryNik
           ? _value.mKaryNik
           : mKaryNik // ignore: cast_nullable_to_non_nullable
@@ -2638,19 +2639,19 @@ class __$$DataLemburImplCopyWithImpl<$Res>
       mKaryCutiJatahReguler: freezed == mKaryCutiJatahReguler
           ? _value.mKaryCutiJatahReguler
           : mKaryCutiJatahReguler // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryCutiSisaReguler: freezed == mKaryCutiSisaReguler
           ? _value.mKaryCutiSisaReguler
           : mKaryCutiSisaReguler // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryCutiPanjang: freezed == mKaryCutiPanjang
           ? _value.mKaryCutiPanjang
           : mKaryCutiPanjang // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryCutiSisaPanjang: freezed == mKaryCutiSisaPanjang
           ? _value.mKaryCutiSisaPanjang
           : mKaryCutiSisaPanjang // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryStatusKaryId: freezed == mKaryStatusKaryId
           ? _value.mKaryStatusKaryId
           : mKaryStatusKaryId // ignore: cast_nullable_to_non_nullable
@@ -2690,7 +2691,7 @@ class __$$DataLemburImplCopyWithImpl<$Res>
       mKaryDesc: freezed == mKaryDesc
           ? _value.mKaryDesc
           : mKaryDesc // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       mKaryIsActive: freezed == mKaryIsActive
           ? _value.mKaryIsActive
           : mKaryIsActive // ignore: cast_nullable_to_non_nullable
@@ -2702,7 +2703,7 @@ class __$$DataLemburImplCopyWithImpl<$Res>
       mKaryLastEditorId: freezed == mKaryLastEditorId
           ? _value.mKaryLastEditorId
           : mKaryLastEditorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryCreatedAt: freezed == mKaryCreatedAt
           ? _value.mKaryCreatedAt
           : mKaryCreatedAt // ignore: cast_nullable_to_non_nullable
@@ -2714,19 +2715,23 @@ class __$$DataLemburImplCopyWithImpl<$Res>
       mKaryMStandartGajiId: freezed == mKaryMStandartGajiId
           ? _value.mKaryMStandartGajiId
           : mKaryMStandartGajiId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryPeriodeGajiId: freezed == mKaryPeriodeGajiId
           ? _value.mKaryPeriodeGajiId
           : mKaryPeriodeGajiId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryRefId: freezed == mKaryRefId
           ? _value.mKaryRefId
           : mKaryRefId // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      mKaryAtasanId: freezed == mKaryAtasanId
+          ? _value.mKaryAtasanId
+          : mKaryAtasanId // ignore: cast_nullable_to_non_nullable
+              as int?,
       mKaryPresensiLokasiDefaultId: freezed == mKaryPresensiLokasiDefaultId
           ? _value.mKaryPresensiLokasiDefaultId
           : mKaryPresensiLokasiDefaultId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       mKaryExpDateCuti: freezed == mKaryExpDateCuti
           ? _value.mKaryExpDateCuti
           : mKaryExpDateCuti // ignore: cast_nullable_to_non_nullable
@@ -2734,10 +2739,6 @@ class __$$DataLemburImplCopyWithImpl<$Res>
       mKaryLimitPotong: freezed == mKaryLimitPotong
           ? _value.mKaryLimitPotong
           : mKaryLimitPotong // ignore: cast_nullable_to_non_nullable
-              as int?,
-      mKaryAtasanId: freezed == mKaryAtasanId
-          ? _value.mKaryAtasanId
-          : mKaryAtasanId // ignore: cast_nullable_to_non_nullable
               as int?,
       mKaryCutiP24: freezed == mKaryCutiP24
           ? _value.mKaryCutiP24
@@ -2922,7 +2923,7 @@ class __$$DataLemburImplCopyWithImpl<$Res>
       creatorTelp: freezed == creatorTelp
           ? _value.creatorTelp
           : creatorTelp // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       creatorMKaryId: freezed == creatorMKaryId
           ? _value.creatorMKaryId
           : creatorMKaryId // ignore: cast_nullable_to_non_nullable
@@ -3034,11 +3035,11 @@ class __$$DataLemburImplCopyWithImpl<$Res>
       picCreatorId: freezed == picCreatorId
           ? _value.picCreatorId
           : picCreatorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picLastEditorId: freezed == picLastEditorId
           ? _value.picLastEditorId
           : picLastEditorId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as dynamic,
       picRememberToken: freezed == picRememberToken
           ? _value.picRememberToken
           : picRememberToken // ignore: cast_nullable_to_non_nullable
@@ -3054,18 +3055,18 @@ class __$$DataLemburImplCopyWithImpl<$Res>
       picProfilImage: freezed == picProfilImage
           ? _value.picProfilImage
           : picProfilImage // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picTelp: freezed == picTelp
           ? _value.picTelp
           : picTelp // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       picMKaryId: freezed == picMKaryId
           ? _value.picMKaryId
           : picMKaryId // ignore: cast_nullable_to_non_nullable
               as int?,
-      picNamaLengkap: freezed == picNamaLengkap
-          ? _value.picNamaLengkap
-          : picNamaLengkap // ignore: cast_nullable_to_non_nullable
+      approvalNote: freezed == approvalNote
+          ? _value.approvalNote
+          : approvalNote // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -3173,11 +3174,11 @@ class _$DataLemburImpl implements _DataLembur {
       @JsonKey(name: "m_kary.m_standart_gaji_id") this.mKaryMStandartGajiId,
       @JsonKey(name: "m_kary.periode_gaji_id") this.mKaryPeriodeGajiId,
       @JsonKey(name: "m_kary.ref_id") this.mKaryRefId,
+      @JsonKey(name: "m_kary.atasan_id") this.mKaryAtasanId,
       @JsonKey(name: "m_kary.presensi_lokasi_default_id")
       this.mKaryPresensiLokasiDefaultId,
       @JsonKey(name: "m_kary.exp_date_cuti") this.mKaryExpDateCuti,
       @JsonKey(name: "m_kary.limit_potong") this.mKaryLimitPotong,
-      @JsonKey(name: "m_kary.atasan_id") this.mKaryAtasanId,
       @JsonKey(name: "m_kary.cuti_p24") this.mKaryCutiP24,
       @JsonKey(name: "m_kary.cuti_sisa_p24") this.mKaryCutiSisaP24,
       @JsonKey(name: "tipe_lembur.id") this.tipeLemburId,
@@ -3260,7 +3261,7 @@ class _$DataLemburImpl implements _DataLembur {
       @JsonKey(name: "pic.profil_image") this.picProfilImage,
       @JsonKey(name: "pic.telp") this.picTelp,
       @JsonKey(name: "pic.m_kary_id") this.picMKaryId,
-      @JsonKey(name: "pic.nama_lengkap") this.picNamaLengkap});
+      @JsonKey(name: "approval_note") this.approvalNote});
 
   factory _$DataLemburImpl.fromJson(Map<String, dynamic> json) =>
       _$$DataLemburImplFromJson(json);
@@ -3351,13 +3352,13 @@ class _$DataLemburImpl implements _DataLembur {
   final dynamic mCompDesc;
   @override
   @JsonKey(name: "m_comp.creator_id")
-  final dynamic mCompCreatorId;
+  final int? mCompCreatorId;
   @override
   @JsonKey(name: "m_comp.last_editor_id")
   final dynamic mCompLastEditorId;
   @override
   @JsonKey(name: "m_comp.created_at")
-  final dynamic mCompCreatedAt;
+  final String? mCompCreatedAt;
   @override
   @JsonKey(name: "m_comp.updated_at")
   final dynamic mCompUpdatedAt;
@@ -3405,13 +3406,13 @@ class _$DataLemburImpl implements _DataLembur {
   final int? mKaryMDeptId;
   @override
   @JsonKey(name: "m_kary.m_zona_id")
-  final int? mKaryMZonaId;
+  final dynamic mKaryMZonaId;
   @override
   @JsonKey(name: "m_kary.grading_id")
   final dynamic mKaryGradingId;
   @override
   @JsonKey(name: "m_kary.costcontre_id")
-  final int? mKaryCostcontreId;
+  final dynamic mKaryCostcontreId;
   @override
   @JsonKey(name: "m_kary.kode")
   final String? mKaryKode;
@@ -3420,10 +3421,10 @@ class _$DataLemburImpl implements _DataLembur {
   final int? mKaryMPosisiId;
   @override
   @JsonKey(name: "m_kary.m_jam_kerja_id")
-  final int? mKaryMJamKerjaId;
+  final dynamic mKaryMJamKerjaId;
   @override
   @JsonKey(name: "m_kary.kode_presensi")
-  final String? mKaryKodePresensi;
+  final dynamic mKaryKodePresensi;
   @override
   @JsonKey(name: "m_kary.nik")
   final String? mKaryNik;
@@ -3495,16 +3496,16 @@ class _$DataLemburImpl implements _DataLembur {
   final String? mKaryHubDgnKaryawan;
   @override
   @JsonKey(name: "m_kary.cuti_jatah_reguler")
-  final int? mKaryCutiJatahReguler;
+  final dynamic mKaryCutiJatahReguler;
   @override
   @JsonKey(name: "m_kary.cuti_sisa_reguler")
-  final int? mKaryCutiSisaReguler;
+  final dynamic mKaryCutiSisaReguler;
   @override
   @JsonKey(name: "m_kary.cuti_panjang")
-  final int? mKaryCutiPanjang;
+  final dynamic mKaryCutiPanjang;
   @override
   @JsonKey(name: "m_kary.cuti_sisa_panjang")
-  final int? mKaryCutiSisaPanjang;
+  final dynamic mKaryCutiSisaPanjang;
   @override
   @JsonKey(name: "m_kary.status_kary_id")
   final dynamic mKaryStatusKaryId;
@@ -3534,7 +3535,7 @@ class _$DataLemburImpl implements _DataLembur {
   final String? mKaryUkSepatu;
   @override
   @JsonKey(name: "m_kary.desc")
-  final String? mKaryDesc;
+  final dynamic mKaryDesc;
   @override
   @JsonKey(name: "m_kary.is_active")
   final bool? mKaryIsActive;
@@ -3543,7 +3544,7 @@ class _$DataLemburImpl implements _DataLembur {
   final dynamic mKaryCreatorId;
   @override
   @JsonKey(name: "m_kary.last_editor_id")
-  final int? mKaryLastEditorId;
+  final dynamic mKaryLastEditorId;
   @override
   @JsonKey(name: "m_kary.created_at")
   final String? mKaryCreatedAt;
@@ -3552,25 +3553,25 @@ class _$DataLemburImpl implements _DataLembur {
   final String? mKaryUpdatedAt;
   @override
   @JsonKey(name: "m_kary.m_standart_gaji_id")
-  final int? mKaryMStandartGajiId;
+  final dynamic mKaryMStandartGajiId;
   @override
   @JsonKey(name: "m_kary.periode_gaji_id")
-  final int? mKaryPeriodeGajiId;
+  final dynamic mKaryPeriodeGajiId;
   @override
   @JsonKey(name: "m_kary.ref_id")
   final dynamic mKaryRefId;
   @override
+  @JsonKey(name: "m_kary.atasan_id")
+  final int? mKaryAtasanId;
+  @override
   @JsonKey(name: "m_kary.presensi_lokasi_default_id")
-  final int? mKaryPresensiLokasiDefaultId;
+  final dynamic mKaryPresensiLokasiDefaultId;
   @override
   @JsonKey(name: "m_kary.exp_date_cuti")
   final dynamic mKaryExpDateCuti;
   @override
   @JsonKey(name: "m_kary.limit_potong")
   final int? mKaryLimitPotong;
-  @override
-  @JsonKey(name: "m_kary.atasan_id")
-  final int? mKaryAtasanId;
   @override
   @JsonKey(name: "m_kary.cuti_p24")
   final dynamic mKaryCutiP24;
@@ -3708,7 +3709,7 @@ class _$DataLemburImpl implements _DataLembur {
   final String? creatorProfilImage;
   @override
   @JsonKey(name: "creator.telp")
-  final String? creatorTelp;
+  final dynamic creatorTelp;
   @override
   @JsonKey(name: "creator.m_kary_id")
   final int? creatorMKaryId;
@@ -3792,10 +3793,10 @@ class _$DataLemburImpl implements _DataLembur {
   final bool? picIsActive;
   @override
   @JsonKey(name: "pic.creator_id")
-  final int? picCreatorId;
+  final dynamic picCreatorId;
   @override
   @JsonKey(name: "pic.last_editor_id")
-  final int? picLastEditorId;
+  final dynamic picLastEditorId;
   @override
   @JsonKey(name: "pic.remember_token")
   final dynamic picRememberToken;
@@ -3807,20 +3808,20 @@ class _$DataLemburImpl implements _DataLembur {
   final String? picUpdatedAt;
   @override
   @JsonKey(name: "pic.profil_image")
-  final String? picProfilImage;
+  final dynamic picProfilImage;
   @override
   @JsonKey(name: "pic.telp")
-  final String? picTelp;
+  final dynamic picTelp;
   @override
   @JsonKey(name: "pic.m_kary_id")
   final int? picMKaryId;
   @override
-  @JsonKey(name: "pic.nama_lengkap")
-  final String? picNamaLengkap;
+  @JsonKey(name: "approval_note")
+  final String? approvalNote;
 
   @override
   String toString() {
-    return 'DataLembur(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, nomor: $nomor, datumMCompId: $datumMCompId, datumMDirId: $datumMDirId, datumMKaryId: $datumMKaryId, tanggal: $tanggal, jamMulai: $jamMulai, jamSelesai: $jamSelesai, datumTipeLemburId: $datumTipeLemburId, datumAlasanId: $datumAlasanId, noDoc: $noDoc, doc: $doc, keterangan: $keterangan, status: $status, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, intervalMin: $intervalMin, datumPicId: $datumPicId, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, mDirId: $mDirId, mDirMCompId: $mDirMCompId, mDirNama: $mDirNama, mDirDesc: $mDirDesc, mDirIsActive: $mDirIsActive, mDirCreatorId: $mDirCreatorId, mDirLastEditorId: $mDirLastEditorId, mDirCreatedAt: $mDirCreatedAt, mDirUpdatedAt: $mDirUpdatedAt, mKaryId: $mKaryId, mKaryMCompId: $mKaryMCompId, mKaryMDirId: $mKaryMDirId, mKaryMDivisiId: $mKaryMDivisiId, mKaryMDeptId: $mKaryMDeptId, mKaryMZonaId: $mKaryMZonaId, mKaryGradingId: $mKaryGradingId, mKaryCostcontreId: $mKaryCostcontreId, mKaryKode: $mKaryKode, mKaryMPosisiId: $mKaryMPosisiId, mKaryMJamKerjaId: $mKaryMJamKerjaId, mKaryKodePresensi: $mKaryKodePresensi, mKaryNik: $mKaryNik, mKaryNamaDepan: $mKaryNamaDepan, mKaryNamaBelakang: $mKaryNamaBelakang, mKaryNamaLengkap: $mKaryNamaLengkap, mKaryNamaPanggilan: $mKaryNamaPanggilan, mKaryJkId: $mKaryJkId, mKaryTempatLahir: $mKaryTempatLahir, mKaryTglLahir: $mKaryTglLahir, mKaryProvinsiId: $mKaryProvinsiId, mKaryKotaId: $mKaryKotaId, mKaryKecamatanId: $mKaryKecamatanId, mKaryKodePos: $mKaryKodePos, mKaryAlamatAsli: $mKaryAlamatAsli, mKaryAlamatDomisili: $mKaryAlamatDomisili, mKaryNoTlp: $mKaryNoTlp, mKaryNoTlpLainnya: $mKaryNoTlpLainnya, mKaryNoDarurat: $mKaryNoDarurat, mKaryNamaKontakDarurat: $mKaryNamaKontakDarurat, mKaryAgamaId: $mKaryAgamaId, mKaryGolDarahId: $mKaryGolDarahId, mKaryStatusNikahId: $mKaryStatusNikahId, mKaryTanggunganId: $mKaryTanggunganId, mKaryHubDgnKaryawan: $mKaryHubDgnKaryawan, mKaryCutiJatahReguler: $mKaryCutiJatahReguler, mKaryCutiSisaReguler: $mKaryCutiSisaReguler, mKaryCutiPanjang: $mKaryCutiPanjang, mKaryCutiSisaPanjang: $mKaryCutiSisaPanjang, mKaryStatusKaryId: $mKaryStatusKaryId, mKaryLamaKontrakAwal: $mKaryLamaKontrakAwal, mKaryLamaKontrakAkhir: $mKaryLamaKontrakAkhir, mKaryTglMasuk: $mKaryTglMasuk, mKaryTglBerhenti: $mKaryTglBerhenti, mKaryAlasanBerhenti: $mKaryAlasanBerhenti, mKaryUkBaju: $mKaryUkBaju, mKaryUkCelana: $mKaryUkCelana, mKaryUkSepatu: $mKaryUkSepatu, mKaryDesc: $mKaryDesc, mKaryIsActive: $mKaryIsActive, mKaryCreatorId: $mKaryCreatorId, mKaryLastEditorId: $mKaryLastEditorId, mKaryCreatedAt: $mKaryCreatedAt, mKaryUpdatedAt: $mKaryUpdatedAt, mKaryMStandartGajiId: $mKaryMStandartGajiId, mKaryPeriodeGajiId: $mKaryPeriodeGajiId, mKaryRefId: $mKaryRefId, mKaryPresensiLokasiDefaultId: $mKaryPresensiLokasiDefaultId, mKaryExpDateCuti: $mKaryExpDateCuti, mKaryLimitPotong: $mKaryLimitPotong, mKaryAtasanId: $mKaryAtasanId, mKaryCutiP24: $mKaryCutiP24, mKaryCutiSisaP24: $mKaryCutiSisaP24, tipeLemburId: $tipeLemburId, tipeLemburMCompId: $tipeLemburMCompId, tipeLemburMDirId: $tipeLemburMDirId, tipeLemburGroup: $tipeLemburGroup, tipeLemburKey: $tipeLemburKey, tipeLemburCode: $tipeLemburCode, tipeLemburValue: $tipeLemburValue, tipeLemburIsActive: $tipeLemburIsActive, tipeLemburCreatorId: $tipeLemburCreatorId, tipeLemburLastEditorId: $tipeLemburLastEditorId, tipeLemburCreatedAt: $tipeLemburCreatedAt, tipeLemburUpdatedAt: $tipeLemburUpdatedAt, tipeLemburValue2: $tipeLemburValue2, tipeLemburValue3: $tipeLemburValue3, alasanId: $alasanId, alasanMCompId: $alasanMCompId, alasanMDirId: $alasanMDirId, alasanGroup: $alasanGroup, alasanKey: $alasanKey, alasanCode: $alasanCode, alasanValue: $alasanValue, alasanIsActive: $alasanIsActive, alasanCreatorId: $alasanCreatorId, alasanLastEditorId: $alasanLastEditorId, alasanCreatedAt: $alasanCreatedAt, alasanUpdatedAt: $alasanUpdatedAt, alasanValue2: $alasanValue2, alasanValue3: $alasanValue3, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, creatorTelp: $creatorTelp, creatorMKaryId: $creatorMKaryId, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage, lastEditorTelp: $lastEditorTelp, lastEditorMKaryId: $lastEditorMKaryId, picId: $picId, picName: $picName, picEmail: $picEmail, picUsername: $picUsername, picEmailVerifiedAt: $picEmailVerifiedAt, picPassword: $picPassword, picMCompId: $picMCompId, picMDirId: $picMDirId, picIsActive: $picIsActive, picCreatorId: $picCreatorId, picLastEditorId: $picLastEditorId, picRememberToken: $picRememberToken, picCreatedAt: $picCreatedAt, picUpdatedAt: $picUpdatedAt, picProfilImage: $picProfilImage, picTelp: $picTelp, picMKaryId: $picMKaryId, picNamaLengkap: $picNamaLengkap)';
+    return 'DataLembur(metaRead: $metaRead, metaDelete: $metaDelete, metaUpdate: $metaUpdate, metaCreate: $metaCreate, id: $id, nomor: $nomor, datumMCompId: $datumMCompId, datumMDirId: $datumMDirId, datumMKaryId: $datumMKaryId, tanggal: $tanggal, jamMulai: $jamMulai, jamSelesai: $jamSelesai, datumTipeLemburId: $datumTipeLemburId, datumAlasanId: $datumAlasanId, noDoc: $noDoc, doc: $doc, keterangan: $keterangan, status: $status, datumCreatorId: $datumCreatorId, datumLastEditorId: $datumLastEditorId, createdAt: $createdAt, updatedAt: $updatedAt, intervalMin: $intervalMin, datumPicId: $datumPicId, mCompId: $mCompId, mCompNama: $mCompNama, mCompIsActive: $mCompIsActive, mCompDesc: $mCompDesc, mCompCreatorId: $mCompCreatorId, mCompLastEditorId: $mCompLastEditorId, mCompCreatedAt: $mCompCreatedAt, mCompUpdatedAt: $mCompUpdatedAt, mDirId: $mDirId, mDirMCompId: $mDirMCompId, mDirNama: $mDirNama, mDirDesc: $mDirDesc, mDirIsActive: $mDirIsActive, mDirCreatorId: $mDirCreatorId, mDirLastEditorId: $mDirLastEditorId, mDirCreatedAt: $mDirCreatedAt, mDirUpdatedAt: $mDirUpdatedAt, mKaryId: $mKaryId, mKaryMCompId: $mKaryMCompId, mKaryMDirId: $mKaryMDirId, mKaryMDivisiId: $mKaryMDivisiId, mKaryMDeptId: $mKaryMDeptId, mKaryMZonaId: $mKaryMZonaId, mKaryGradingId: $mKaryGradingId, mKaryCostcontreId: $mKaryCostcontreId, mKaryKode: $mKaryKode, mKaryMPosisiId: $mKaryMPosisiId, mKaryMJamKerjaId: $mKaryMJamKerjaId, mKaryKodePresensi: $mKaryKodePresensi, mKaryNik: $mKaryNik, mKaryNamaDepan: $mKaryNamaDepan, mKaryNamaBelakang: $mKaryNamaBelakang, mKaryNamaLengkap: $mKaryNamaLengkap, mKaryNamaPanggilan: $mKaryNamaPanggilan, mKaryJkId: $mKaryJkId, mKaryTempatLahir: $mKaryTempatLahir, mKaryTglLahir: $mKaryTglLahir, mKaryProvinsiId: $mKaryProvinsiId, mKaryKotaId: $mKaryKotaId, mKaryKecamatanId: $mKaryKecamatanId, mKaryKodePos: $mKaryKodePos, mKaryAlamatAsli: $mKaryAlamatAsli, mKaryAlamatDomisili: $mKaryAlamatDomisili, mKaryNoTlp: $mKaryNoTlp, mKaryNoTlpLainnya: $mKaryNoTlpLainnya, mKaryNoDarurat: $mKaryNoDarurat, mKaryNamaKontakDarurat: $mKaryNamaKontakDarurat, mKaryAgamaId: $mKaryAgamaId, mKaryGolDarahId: $mKaryGolDarahId, mKaryStatusNikahId: $mKaryStatusNikahId, mKaryTanggunganId: $mKaryTanggunganId, mKaryHubDgnKaryawan: $mKaryHubDgnKaryawan, mKaryCutiJatahReguler: $mKaryCutiJatahReguler, mKaryCutiSisaReguler: $mKaryCutiSisaReguler, mKaryCutiPanjang: $mKaryCutiPanjang, mKaryCutiSisaPanjang: $mKaryCutiSisaPanjang, mKaryStatusKaryId: $mKaryStatusKaryId, mKaryLamaKontrakAwal: $mKaryLamaKontrakAwal, mKaryLamaKontrakAkhir: $mKaryLamaKontrakAkhir, mKaryTglMasuk: $mKaryTglMasuk, mKaryTglBerhenti: $mKaryTglBerhenti, mKaryAlasanBerhenti: $mKaryAlasanBerhenti, mKaryUkBaju: $mKaryUkBaju, mKaryUkCelana: $mKaryUkCelana, mKaryUkSepatu: $mKaryUkSepatu, mKaryDesc: $mKaryDesc, mKaryIsActive: $mKaryIsActive, mKaryCreatorId: $mKaryCreatorId, mKaryLastEditorId: $mKaryLastEditorId, mKaryCreatedAt: $mKaryCreatedAt, mKaryUpdatedAt: $mKaryUpdatedAt, mKaryMStandartGajiId: $mKaryMStandartGajiId, mKaryPeriodeGajiId: $mKaryPeriodeGajiId, mKaryRefId: $mKaryRefId, mKaryAtasanId: $mKaryAtasanId, mKaryPresensiLokasiDefaultId: $mKaryPresensiLokasiDefaultId, mKaryExpDateCuti: $mKaryExpDateCuti, mKaryLimitPotong: $mKaryLimitPotong, mKaryCutiP24: $mKaryCutiP24, mKaryCutiSisaP24: $mKaryCutiSisaP24, tipeLemburId: $tipeLemburId, tipeLemburMCompId: $tipeLemburMCompId, tipeLemburMDirId: $tipeLemburMDirId, tipeLemburGroup: $tipeLemburGroup, tipeLemburKey: $tipeLemburKey, tipeLemburCode: $tipeLemburCode, tipeLemburValue: $tipeLemburValue, tipeLemburIsActive: $tipeLemburIsActive, tipeLemburCreatorId: $tipeLemburCreatorId, tipeLemburLastEditorId: $tipeLemburLastEditorId, tipeLemburCreatedAt: $tipeLemburCreatedAt, tipeLemburUpdatedAt: $tipeLemburUpdatedAt, tipeLemburValue2: $tipeLemburValue2, tipeLemburValue3: $tipeLemburValue3, alasanId: $alasanId, alasanMCompId: $alasanMCompId, alasanMDirId: $alasanMDirId, alasanGroup: $alasanGroup, alasanKey: $alasanKey, alasanCode: $alasanCode, alasanValue: $alasanValue, alasanIsActive: $alasanIsActive, alasanCreatorId: $alasanCreatorId, alasanLastEditorId: $alasanLastEditorId, alasanCreatedAt: $alasanCreatedAt, alasanUpdatedAt: $alasanUpdatedAt, alasanValue2: $alasanValue2, alasanValue3: $alasanValue3, creatorId: $creatorId, creatorName: $creatorName, creatorEmail: $creatorEmail, creatorUsername: $creatorUsername, creatorEmailVerifiedAt: $creatorEmailVerifiedAt, creatorPassword: $creatorPassword, creatorMCompId: $creatorMCompId, creatorMDirId: $creatorMDirId, creatorIsActive: $creatorIsActive, creatorCreatorId: $creatorCreatorId, creatorLastEditorId: $creatorLastEditorId, creatorRememberToken: $creatorRememberToken, creatorCreatedAt: $creatorCreatedAt, creatorUpdatedAt: $creatorUpdatedAt, creatorProfilImage: $creatorProfilImage, creatorTelp: $creatorTelp, creatorMKaryId: $creatorMKaryId, lastEditorId: $lastEditorId, lastEditorName: $lastEditorName, lastEditorEmail: $lastEditorEmail, lastEditorUsername: $lastEditorUsername, lastEditorEmailVerifiedAt: $lastEditorEmailVerifiedAt, lastEditorPassword: $lastEditorPassword, lastEditorMCompId: $lastEditorMCompId, lastEditorMDirId: $lastEditorMDirId, lastEditorIsActive: $lastEditorIsActive, lastEditorCreatorId: $lastEditorCreatorId, lastEditorLastEditorId: $lastEditorLastEditorId, lastEditorRememberToken: $lastEditorRememberToken, lastEditorCreatedAt: $lastEditorCreatedAt, lastEditorUpdatedAt: $lastEditorUpdatedAt, lastEditorProfilImage: $lastEditorProfilImage, lastEditorTelp: $lastEditorTelp, lastEditorMKaryId: $lastEditorMKaryId, picId: $picId, picName: $picName, picEmail: $picEmail, picUsername: $picUsername, picEmailVerifiedAt: $picEmailVerifiedAt, picPassword: $picPassword, picMCompId: $picMCompId, picMDirId: $picMDirId, picIsActive: $picIsActive, picCreatorId: $picCreatorId, picLastEditorId: $picLastEditorId, picRememberToken: $picRememberToken, picCreatedAt: $picCreatedAt, picUpdatedAt: $picUpdatedAt, picProfilImage: $picProfilImage, picTelp: $picTelp, picMKaryId: $picMKaryId, approvalNote: $approvalNote)';
   }
 
   @override
@@ -3876,12 +3877,12 @@ class _$DataLemburImpl implements _DataLembur {
             (identical(other.mCompIsActive, mCompIsActive) ||
                 other.mCompIsActive == mCompIsActive) &&
             const DeepCollectionEquality().equals(other.mCompDesc, mCompDesc) &&
-            const DeepCollectionEquality()
-                .equals(other.mCompCreatorId, mCompCreatorId) &&
+            (identical(other.mCompCreatorId, mCompCreatorId) ||
+                other.mCompCreatorId == mCompCreatorId) &&
             const DeepCollectionEquality()
                 .equals(other.mCompLastEditorId, mCompLastEditorId) &&
-            const DeepCollectionEquality()
-                .equals(other.mCompCreatedAt, mCompCreatedAt) &&
+            (identical(other.mCompCreatedAt, mCompCreatedAt) ||
+                other.mCompCreatedAt == mCompCreatedAt) &&
             const DeepCollectionEquality()
                 .equals(other.mCompUpdatedAt, mCompUpdatedAt) &&
             const DeepCollectionEquality().equals(other.mDirId, mDirId) &&
@@ -3908,20 +3909,20 @@ class _$DataLemburImpl implements _DataLembur {
                 other.mKaryMDivisiId == mKaryMDivisiId) &&
             (identical(other.mKaryMDeptId, mKaryMDeptId) ||
                 other.mKaryMDeptId == mKaryMDeptId) &&
-            (identical(other.mKaryMZonaId, mKaryMZonaId) ||
-                other.mKaryMZonaId == mKaryMZonaId) &&
+            const DeepCollectionEquality()
+                .equals(other.mKaryMZonaId, mKaryMZonaId) &&
             const DeepCollectionEquality()
                 .equals(other.mKaryGradingId, mKaryGradingId) &&
-            (identical(other.mKaryCostcontreId, mKaryCostcontreId) ||
-                other.mKaryCostcontreId == mKaryCostcontreId) &&
+            const DeepCollectionEquality()
+                .equals(other.mKaryCostcontreId, mKaryCostcontreId) &&
             (identical(other.mKaryKode, mKaryKode) ||
                 other.mKaryKode == mKaryKode) &&
             (identical(other.mKaryMPosisiId, mKaryMPosisiId) ||
                 other.mKaryMPosisiId == mKaryMPosisiId) &&
-            (identical(other.mKaryMJamKerjaId, mKaryMJamKerjaId) ||
-                other.mKaryMJamKerjaId == mKaryMJamKerjaId) &&
-            (identical(other.mKaryKodePresensi, mKaryKodePresensi) ||
-                other.mKaryKodePresensi == mKaryKodePresensi) &&
+            const DeepCollectionEquality()
+                .equals(other.mKaryMJamKerjaId, mKaryMJamKerjaId) &&
+            const DeepCollectionEquality()
+                .equals(other.mKaryKodePresensi, mKaryKodePresensi) &&
             (identical(other.mKaryNik, mKaryNik) ||
                 other.mKaryNik == mKaryNik) &&
             (identical(other.mKaryNamaDepan, mKaryNamaDepan) || other.mKaryNamaDepan == mKaryNamaDepan) &&
@@ -3946,10 +3947,10 @@ class _$DataLemburImpl implements _DataLembur {
             (identical(other.mKaryStatusNikahId, mKaryStatusNikahId) || other.mKaryStatusNikahId == mKaryStatusNikahId) &&
             (identical(other.mKaryTanggunganId, mKaryTanggunganId) || other.mKaryTanggunganId == mKaryTanggunganId) &&
             (identical(other.mKaryHubDgnKaryawan, mKaryHubDgnKaryawan) || other.mKaryHubDgnKaryawan == mKaryHubDgnKaryawan) &&
-            (identical(other.mKaryCutiJatahReguler, mKaryCutiJatahReguler) || other.mKaryCutiJatahReguler == mKaryCutiJatahReguler) &&
-            (identical(other.mKaryCutiSisaReguler, mKaryCutiSisaReguler) || other.mKaryCutiSisaReguler == mKaryCutiSisaReguler) &&
-            (identical(other.mKaryCutiPanjang, mKaryCutiPanjang) || other.mKaryCutiPanjang == mKaryCutiPanjang) &&
-            (identical(other.mKaryCutiSisaPanjang, mKaryCutiSisaPanjang) || other.mKaryCutiSisaPanjang == mKaryCutiSisaPanjang) &&
+            const DeepCollectionEquality().equals(other.mKaryCutiJatahReguler, mKaryCutiJatahReguler) &&
+            const DeepCollectionEquality().equals(other.mKaryCutiSisaReguler, mKaryCutiSisaReguler) &&
+            const DeepCollectionEquality().equals(other.mKaryCutiPanjang, mKaryCutiPanjang) &&
+            const DeepCollectionEquality().equals(other.mKaryCutiSisaPanjang, mKaryCutiSisaPanjang) &&
             const DeepCollectionEquality().equals(other.mKaryStatusKaryId, mKaryStatusKaryId) &&
             const DeepCollectionEquality().equals(other.mKaryLamaKontrakAwal, mKaryLamaKontrakAwal) &&
             const DeepCollectionEquality().equals(other.mKaryLamaKontrakAkhir, mKaryLamaKontrakAkhir) &&
@@ -3959,19 +3960,19 @@ class _$DataLemburImpl implements _DataLembur {
             (identical(other.mKaryUkBaju, mKaryUkBaju) || other.mKaryUkBaju == mKaryUkBaju) &&
             (identical(other.mKaryUkCelana, mKaryUkCelana) || other.mKaryUkCelana == mKaryUkCelana) &&
             (identical(other.mKaryUkSepatu, mKaryUkSepatu) || other.mKaryUkSepatu == mKaryUkSepatu) &&
-            (identical(other.mKaryDesc, mKaryDesc) || other.mKaryDesc == mKaryDesc) &&
+            const DeepCollectionEquality().equals(other.mKaryDesc, mKaryDesc) &&
             (identical(other.mKaryIsActive, mKaryIsActive) || other.mKaryIsActive == mKaryIsActive) &&
             const DeepCollectionEquality().equals(other.mKaryCreatorId, mKaryCreatorId) &&
-            (identical(other.mKaryLastEditorId, mKaryLastEditorId) || other.mKaryLastEditorId == mKaryLastEditorId) &&
+            const DeepCollectionEquality().equals(other.mKaryLastEditorId, mKaryLastEditorId) &&
             (identical(other.mKaryCreatedAt, mKaryCreatedAt) || other.mKaryCreatedAt == mKaryCreatedAt) &&
             (identical(other.mKaryUpdatedAt, mKaryUpdatedAt) || other.mKaryUpdatedAt == mKaryUpdatedAt) &&
-            (identical(other.mKaryMStandartGajiId, mKaryMStandartGajiId) || other.mKaryMStandartGajiId == mKaryMStandartGajiId) &&
-            (identical(other.mKaryPeriodeGajiId, mKaryPeriodeGajiId) || other.mKaryPeriodeGajiId == mKaryPeriodeGajiId) &&
+            const DeepCollectionEquality().equals(other.mKaryMStandartGajiId, mKaryMStandartGajiId) &&
+            const DeepCollectionEquality().equals(other.mKaryPeriodeGajiId, mKaryPeriodeGajiId) &&
             const DeepCollectionEquality().equals(other.mKaryRefId, mKaryRefId) &&
-            (identical(other.mKaryPresensiLokasiDefaultId, mKaryPresensiLokasiDefaultId) || other.mKaryPresensiLokasiDefaultId == mKaryPresensiLokasiDefaultId) &&
+            (identical(other.mKaryAtasanId, mKaryAtasanId) || other.mKaryAtasanId == mKaryAtasanId) &&
+            const DeepCollectionEquality().equals(other.mKaryPresensiLokasiDefaultId, mKaryPresensiLokasiDefaultId) &&
             const DeepCollectionEquality().equals(other.mKaryExpDateCuti, mKaryExpDateCuti) &&
             (identical(other.mKaryLimitPotong, mKaryLimitPotong) || other.mKaryLimitPotong == mKaryLimitPotong) &&
-            (identical(other.mKaryAtasanId, mKaryAtasanId) || other.mKaryAtasanId == mKaryAtasanId) &&
             const DeepCollectionEquality().equals(other.mKaryCutiP24, mKaryCutiP24) &&
             const DeepCollectionEquality().equals(other.mKaryCutiSisaP24, mKaryCutiSisaP24) &&
             (identical(other.tipeLemburId, tipeLemburId) || other.tipeLemburId == tipeLemburId) &&
@@ -4017,7 +4018,7 @@ class _$DataLemburImpl implements _DataLembur {
             (identical(other.creatorCreatedAt, creatorCreatedAt) || other.creatorCreatedAt == creatorCreatedAt) &&
             (identical(other.creatorUpdatedAt, creatorUpdatedAt) || other.creatorUpdatedAt == creatorUpdatedAt) &&
             (identical(other.creatorProfilImage, creatorProfilImage) || other.creatorProfilImage == creatorProfilImage) &&
-            (identical(other.creatorTelp, creatorTelp) || other.creatorTelp == creatorTelp) &&
+            const DeepCollectionEquality().equals(other.creatorTelp, creatorTelp) &&
             (identical(other.creatorMKaryId, creatorMKaryId) || other.creatorMKaryId == creatorMKaryId) &&
             const DeepCollectionEquality().equals(other.lastEditorId, lastEditorId) &&
             const DeepCollectionEquality().equals(other.lastEditorName, lastEditorName) &&
@@ -4045,15 +4046,15 @@ class _$DataLemburImpl implements _DataLembur {
             (identical(other.picMCompId, picMCompId) || other.picMCompId == picMCompId) &&
             (identical(other.picMDirId, picMDirId) || other.picMDirId == picMDirId) &&
             (identical(other.picIsActive, picIsActive) || other.picIsActive == picIsActive) &&
-            (identical(other.picCreatorId, picCreatorId) || other.picCreatorId == picCreatorId) &&
-            (identical(other.picLastEditorId, picLastEditorId) || other.picLastEditorId == picLastEditorId) &&
+            const DeepCollectionEquality().equals(other.picCreatorId, picCreatorId) &&
+            const DeepCollectionEquality().equals(other.picLastEditorId, picLastEditorId) &&
             const DeepCollectionEquality().equals(other.picRememberToken, picRememberToken) &&
             (identical(other.picCreatedAt, picCreatedAt) || other.picCreatedAt == picCreatedAt) &&
             (identical(other.picUpdatedAt, picUpdatedAt) || other.picUpdatedAt == picUpdatedAt) &&
-            (identical(other.picProfilImage, picProfilImage) || other.picProfilImage == picProfilImage) &&
-            (identical(other.picTelp, picTelp) || other.picTelp == picTelp) &&
+            const DeepCollectionEquality().equals(other.picProfilImage, picProfilImage) &&
+            const DeepCollectionEquality().equals(other.picTelp, picTelp) &&
             (identical(other.picMKaryId, picMKaryId) || other.picMKaryId == picMKaryId) &&
-            (identical(other.picNamaLengkap, picNamaLengkap) || other.picNamaLengkap == picNamaLengkap));
+            (identical(other.approvalNote, approvalNote) || other.approvalNote == approvalNote));
   }
 
   @JsonKey(ignore: true)
@@ -4088,9 +4089,9 @@ class _$DataLemburImpl implements _DataLembur {
         mCompNama,
         mCompIsActive,
         const DeepCollectionEquality().hash(mCompDesc),
-        const DeepCollectionEquality().hash(mCompCreatorId),
+        mCompCreatorId,
         const DeepCollectionEquality().hash(mCompLastEditorId),
-        const DeepCollectionEquality().hash(mCompCreatedAt),
+        mCompCreatedAt,
         const DeepCollectionEquality().hash(mCompUpdatedAt),
         const DeepCollectionEquality().hash(mDirId),
         const DeepCollectionEquality().hash(mDirMCompId),
@@ -4106,13 +4107,13 @@ class _$DataLemburImpl implements _DataLembur {
         mKaryMDirId,
         mKaryMDivisiId,
         mKaryMDeptId,
-        mKaryMZonaId,
+        const DeepCollectionEquality().hash(mKaryMZonaId),
         const DeepCollectionEquality().hash(mKaryGradingId),
-        mKaryCostcontreId,
+        const DeepCollectionEquality().hash(mKaryCostcontreId),
         mKaryKode,
         mKaryMPosisiId,
-        mKaryMJamKerjaId,
-        mKaryKodePresensi,
+        const DeepCollectionEquality().hash(mKaryMJamKerjaId),
+        const DeepCollectionEquality().hash(mKaryKodePresensi),
         mKaryNik,
         mKaryNamaDepan,
         mKaryNamaBelakang,
@@ -4136,10 +4137,10 @@ class _$DataLemburImpl implements _DataLembur {
         mKaryStatusNikahId,
         mKaryTanggunganId,
         mKaryHubDgnKaryawan,
-        mKaryCutiJatahReguler,
-        mKaryCutiSisaReguler,
-        mKaryCutiPanjang,
-        mKaryCutiSisaPanjang,
+        const DeepCollectionEquality().hash(mKaryCutiJatahReguler),
+        const DeepCollectionEquality().hash(mKaryCutiSisaReguler),
+        const DeepCollectionEquality().hash(mKaryCutiPanjang),
+        const DeepCollectionEquality().hash(mKaryCutiSisaPanjang),
         const DeepCollectionEquality().hash(mKaryStatusKaryId),
         const DeepCollectionEquality().hash(mKaryLamaKontrakAwal),
         const DeepCollectionEquality().hash(mKaryLamaKontrakAkhir),
@@ -4149,19 +4150,19 @@ class _$DataLemburImpl implements _DataLembur {
         mKaryUkBaju,
         mKaryUkCelana,
         mKaryUkSepatu,
-        mKaryDesc,
+        const DeepCollectionEquality().hash(mKaryDesc),
         mKaryIsActive,
         const DeepCollectionEquality().hash(mKaryCreatorId),
-        mKaryLastEditorId,
+        const DeepCollectionEquality().hash(mKaryLastEditorId),
         mKaryCreatedAt,
         mKaryUpdatedAt,
-        mKaryMStandartGajiId,
-        mKaryPeriodeGajiId,
+        const DeepCollectionEquality().hash(mKaryMStandartGajiId),
+        const DeepCollectionEquality().hash(mKaryPeriodeGajiId),
         const DeepCollectionEquality().hash(mKaryRefId),
-        mKaryPresensiLokasiDefaultId,
+        mKaryAtasanId,
+        const DeepCollectionEquality().hash(mKaryPresensiLokasiDefaultId),
         const DeepCollectionEquality().hash(mKaryExpDateCuti),
         mKaryLimitPotong,
-        mKaryAtasanId,
         const DeepCollectionEquality().hash(mKaryCutiP24),
         const DeepCollectionEquality().hash(mKaryCutiSisaP24),
         tipeLemburId,
@@ -4207,7 +4208,7 @@ class _$DataLemburImpl implements _DataLembur {
         creatorCreatedAt,
         creatorUpdatedAt,
         creatorProfilImage,
-        creatorTelp,
+        const DeepCollectionEquality().hash(creatorTelp),
         creatorMKaryId,
         const DeepCollectionEquality().hash(lastEditorId),
         const DeepCollectionEquality().hash(lastEditorName),
@@ -4235,15 +4236,15 @@ class _$DataLemburImpl implements _DataLembur {
         picMCompId,
         picMDirId,
         picIsActive,
-        picCreatorId,
-        picLastEditorId,
+        const DeepCollectionEquality().hash(picCreatorId),
+        const DeepCollectionEquality().hash(picLastEditorId),
         const DeepCollectionEquality().hash(picRememberToken),
         picCreatedAt,
         picUpdatedAt,
-        picProfilImage,
-        picTelp,
+        const DeepCollectionEquality().hash(picProfilImage),
+        const DeepCollectionEquality().hash(picTelp),
         picMKaryId,
-        picNamaLengkap
+        approvalNote
       ]);
 
   @JsonKey(ignore: true)
@@ -4290,9 +4291,9 @@ abstract class _DataLembur implements DataLembur {
       @JsonKey(name: "m_comp.nama") final String? mCompNama,
       @JsonKey(name: "m_comp.is_active") final bool? mCompIsActive,
       @JsonKey(name: "m_comp.desc") final dynamic mCompDesc,
-      @JsonKey(name: "m_comp.creator_id") final dynamic mCompCreatorId,
+      @JsonKey(name: "m_comp.creator_id") final int? mCompCreatorId,
       @JsonKey(name: "m_comp.last_editor_id") final dynamic mCompLastEditorId,
-      @JsonKey(name: "m_comp.created_at") final dynamic mCompCreatedAt,
+      @JsonKey(name: "m_comp.created_at") final String? mCompCreatedAt,
       @JsonKey(name: "m_comp.updated_at") final dynamic mCompUpdatedAt,
       @JsonKey(name: "m_dir.id") final dynamic mDirId,
       @JsonKey(name: "m_dir.m_comp_id") final dynamic mDirMCompId,
@@ -4308,13 +4309,13 @@ abstract class _DataLembur implements DataLembur {
       @JsonKey(name: "m_kary.m_dir_id") final int? mKaryMDirId,
       @JsonKey(name: "m_kary.m_divisi_id") final int? mKaryMDivisiId,
       @JsonKey(name: "m_kary.m_dept_id") final int? mKaryMDeptId,
-      @JsonKey(name: "m_kary.m_zona_id") final int? mKaryMZonaId,
+      @JsonKey(name: "m_kary.m_zona_id") final dynamic mKaryMZonaId,
       @JsonKey(name: "m_kary.grading_id") final dynamic mKaryGradingId,
-      @JsonKey(name: "m_kary.costcontre_id") final int? mKaryCostcontreId,
+      @JsonKey(name: "m_kary.costcontre_id") final dynamic mKaryCostcontreId,
       @JsonKey(name: "m_kary.kode") final String? mKaryKode,
       @JsonKey(name: "m_kary.m_posisi_id") final int? mKaryMPosisiId,
-      @JsonKey(name: "m_kary.m_jam_kerja_id") final int? mKaryMJamKerjaId,
-      @JsonKey(name: "m_kary.kode_presensi") final String? mKaryKodePresensi,
+      @JsonKey(name: "m_kary.m_jam_kerja_id") final dynamic mKaryMJamKerjaId,
+      @JsonKey(name: "m_kary.kode_presensi") final dynamic mKaryKodePresensi,
       @JsonKey(name: "m_kary.nik") final String? mKaryNik,
       @JsonKey(name: "m_kary.nama_depan") final String? mKaryNamaDepan,
       @JsonKey(name: "m_kary.nama_belakang") final String? mKaryNamaBelakang,
@@ -4342,12 +4343,12 @@ abstract class _DataLembur implements DataLembur {
       @JsonKey(name: "m_kary.hub_dgn_karyawan")
       final String? mKaryHubDgnKaryawan,
       @JsonKey(name: "m_kary.cuti_jatah_reguler")
-      final int? mKaryCutiJatahReguler,
+      final dynamic mKaryCutiJatahReguler,
       @JsonKey(name: "m_kary.cuti_sisa_reguler")
-      final int? mKaryCutiSisaReguler,
-      @JsonKey(name: "m_kary.cuti_panjang") final int? mKaryCutiPanjang,
+      final dynamic mKaryCutiSisaReguler,
+      @JsonKey(name: "m_kary.cuti_panjang") final dynamic mKaryCutiPanjang,
       @JsonKey(name: "m_kary.cuti_sisa_panjang")
-      final int? mKaryCutiSisaPanjang,
+      final dynamic mKaryCutiSisaPanjang,
       @JsonKey(name: "m_kary.status_kary_id") final dynamic mKaryStatusKaryId,
       @JsonKey(name: "m_kary.lama_kontrak_awal")
       final dynamic mKaryLamaKontrakAwal,
@@ -4360,21 +4361,21 @@ abstract class _DataLembur implements DataLembur {
       @JsonKey(name: "m_kary.uk_baju") final String? mKaryUkBaju,
       @JsonKey(name: "m_kary.uk_celana") final String? mKaryUkCelana,
       @JsonKey(name: "m_kary.uk_sepatu") final String? mKaryUkSepatu,
-      @JsonKey(name: "m_kary.desc") final String? mKaryDesc,
+      @JsonKey(name: "m_kary.desc") final dynamic mKaryDesc,
       @JsonKey(name: "m_kary.is_active") final bool? mKaryIsActive,
       @JsonKey(name: "m_kary.creator_id") final dynamic mKaryCreatorId,
-      @JsonKey(name: "m_kary.last_editor_id") final int? mKaryLastEditorId,
+      @JsonKey(name: "m_kary.last_editor_id") final dynamic mKaryLastEditorId,
       @JsonKey(name: "m_kary.created_at") final String? mKaryCreatedAt,
       @JsonKey(name: "m_kary.updated_at") final String? mKaryUpdatedAt,
       @JsonKey(name: "m_kary.m_standart_gaji_id")
-      final int? mKaryMStandartGajiId,
-      @JsonKey(name: "m_kary.periode_gaji_id") final int? mKaryPeriodeGajiId,
+      final dynamic mKaryMStandartGajiId,
+      @JsonKey(name: "m_kary.periode_gaji_id") final dynamic mKaryPeriodeGajiId,
       @JsonKey(name: "m_kary.ref_id") final dynamic mKaryRefId,
+      @JsonKey(name: "m_kary.atasan_id") final int? mKaryAtasanId,
       @JsonKey(name: "m_kary.presensi_lokasi_default_id")
-      final int? mKaryPresensiLokasiDefaultId,
+      final dynamic mKaryPresensiLokasiDefaultId,
       @JsonKey(name: "m_kary.exp_date_cuti") final dynamic mKaryExpDateCuti,
       @JsonKey(name: "m_kary.limit_potong") final int? mKaryLimitPotong,
-      @JsonKey(name: "m_kary.atasan_id") final int? mKaryAtasanId,
       @JsonKey(name: "m_kary.cuti_p24") final dynamic mKaryCutiP24,
       @JsonKey(name: "m_kary.cuti_sisa_p24") final dynamic mKaryCutiSisaP24,
       @JsonKey(name: "tipe_lembur.id") final int? tipeLemburId,
@@ -4426,7 +4427,7 @@ abstract class _DataLembur implements DataLembur {
       @JsonKey(name: "creator.created_at") final String? creatorCreatedAt,
       @JsonKey(name: "creator.updated_at") final String? creatorUpdatedAt,
       @JsonKey(name: "creator.profil_image") final String? creatorProfilImage,
-      @JsonKey(name: "creator.telp") final String? creatorTelp,
+      @JsonKey(name: "creator.telp") final dynamic creatorTelp,
       @JsonKey(name: "creator.m_kary_id") final int? creatorMKaryId,
       @JsonKey(name: "last_editor.id") final dynamic lastEditorId,
       @JsonKey(name: "last_editor.name") final dynamic lastEditorName,
@@ -4461,16 +4462,16 @@ abstract class _DataLembur implements DataLembur {
       @JsonKey(name: "pic.m_comp_id") final int? picMCompId,
       @JsonKey(name: "pic.m_dir_id") final int? picMDirId,
       @JsonKey(name: "pic.is_active") final bool? picIsActive,
-      @JsonKey(name: "pic.creator_id") final int? picCreatorId,
-      @JsonKey(name: "pic.last_editor_id") final int? picLastEditorId,
+      @JsonKey(name: "pic.creator_id") final dynamic picCreatorId,
+      @JsonKey(name: "pic.last_editor_id") final dynamic picLastEditorId,
       @JsonKey(name: "pic.remember_token") final dynamic picRememberToken,
       @JsonKey(name: "pic.created_at") final String? picCreatedAt,
       @JsonKey(name: "pic.updated_at") final String? picUpdatedAt,
-      @JsonKey(name: "pic.profil_image") final String? picProfilImage,
-      @JsonKey(name: "pic.telp") final String? picTelp,
+      @JsonKey(name: "pic.profil_image") final dynamic picProfilImage,
+      @JsonKey(name: "pic.telp") final dynamic picTelp,
       @JsonKey(name: "pic.m_kary_id") final int? picMKaryId,
-      @JsonKey(name: "pic.nama_lengkap")
-      final String? picNamaLengkap}) = _$DataLemburImpl;
+      @JsonKey(name: "approval_note")
+      final String? approvalNote}) = _$DataLemburImpl;
 
   factory _DataLembur.fromJson(Map<String, dynamic> json) =
       _$DataLemburImpl.fromJson;
@@ -4561,13 +4562,13 @@ abstract class _DataLembur implements DataLembur {
   dynamic get mCompDesc;
   @override
   @JsonKey(name: "m_comp.creator_id")
-  dynamic get mCompCreatorId;
+  int? get mCompCreatorId;
   @override
   @JsonKey(name: "m_comp.last_editor_id")
   dynamic get mCompLastEditorId;
   @override
   @JsonKey(name: "m_comp.created_at")
-  dynamic get mCompCreatedAt;
+  String? get mCompCreatedAt;
   @override
   @JsonKey(name: "m_comp.updated_at")
   dynamic get mCompUpdatedAt;
@@ -4615,13 +4616,13 @@ abstract class _DataLembur implements DataLembur {
   int? get mKaryMDeptId;
   @override
   @JsonKey(name: "m_kary.m_zona_id")
-  int? get mKaryMZonaId;
+  dynamic get mKaryMZonaId;
   @override
   @JsonKey(name: "m_kary.grading_id")
   dynamic get mKaryGradingId;
   @override
   @JsonKey(name: "m_kary.costcontre_id")
-  int? get mKaryCostcontreId;
+  dynamic get mKaryCostcontreId;
   @override
   @JsonKey(name: "m_kary.kode")
   String? get mKaryKode;
@@ -4630,10 +4631,10 @@ abstract class _DataLembur implements DataLembur {
   int? get mKaryMPosisiId;
   @override
   @JsonKey(name: "m_kary.m_jam_kerja_id")
-  int? get mKaryMJamKerjaId;
+  dynamic get mKaryMJamKerjaId;
   @override
   @JsonKey(name: "m_kary.kode_presensi")
-  String? get mKaryKodePresensi;
+  dynamic get mKaryKodePresensi;
   @override
   @JsonKey(name: "m_kary.nik")
   String? get mKaryNik;
@@ -4705,16 +4706,16 @@ abstract class _DataLembur implements DataLembur {
   String? get mKaryHubDgnKaryawan;
   @override
   @JsonKey(name: "m_kary.cuti_jatah_reguler")
-  int? get mKaryCutiJatahReguler;
+  dynamic get mKaryCutiJatahReguler;
   @override
   @JsonKey(name: "m_kary.cuti_sisa_reguler")
-  int? get mKaryCutiSisaReguler;
+  dynamic get mKaryCutiSisaReguler;
   @override
   @JsonKey(name: "m_kary.cuti_panjang")
-  int? get mKaryCutiPanjang;
+  dynamic get mKaryCutiPanjang;
   @override
   @JsonKey(name: "m_kary.cuti_sisa_panjang")
-  int? get mKaryCutiSisaPanjang;
+  dynamic get mKaryCutiSisaPanjang;
   @override
   @JsonKey(name: "m_kary.status_kary_id")
   dynamic get mKaryStatusKaryId;
@@ -4744,7 +4745,7 @@ abstract class _DataLembur implements DataLembur {
   String? get mKaryUkSepatu;
   @override
   @JsonKey(name: "m_kary.desc")
-  String? get mKaryDesc;
+  dynamic get mKaryDesc;
   @override
   @JsonKey(name: "m_kary.is_active")
   bool? get mKaryIsActive;
@@ -4753,7 +4754,7 @@ abstract class _DataLembur implements DataLembur {
   dynamic get mKaryCreatorId;
   @override
   @JsonKey(name: "m_kary.last_editor_id")
-  int? get mKaryLastEditorId;
+  dynamic get mKaryLastEditorId;
   @override
   @JsonKey(name: "m_kary.created_at")
   String? get mKaryCreatedAt;
@@ -4762,25 +4763,25 @@ abstract class _DataLembur implements DataLembur {
   String? get mKaryUpdatedAt;
   @override
   @JsonKey(name: "m_kary.m_standart_gaji_id")
-  int? get mKaryMStandartGajiId;
+  dynamic get mKaryMStandartGajiId;
   @override
   @JsonKey(name: "m_kary.periode_gaji_id")
-  int? get mKaryPeriodeGajiId;
+  dynamic get mKaryPeriodeGajiId;
   @override
   @JsonKey(name: "m_kary.ref_id")
   dynamic get mKaryRefId;
   @override
+  @JsonKey(name: "m_kary.atasan_id")
+  int? get mKaryAtasanId;
+  @override
   @JsonKey(name: "m_kary.presensi_lokasi_default_id")
-  int? get mKaryPresensiLokasiDefaultId;
+  dynamic get mKaryPresensiLokasiDefaultId;
   @override
   @JsonKey(name: "m_kary.exp_date_cuti")
   dynamic get mKaryExpDateCuti;
   @override
   @JsonKey(name: "m_kary.limit_potong")
   int? get mKaryLimitPotong;
-  @override
-  @JsonKey(name: "m_kary.atasan_id")
-  int? get mKaryAtasanId;
   @override
   @JsonKey(name: "m_kary.cuti_p24")
   dynamic get mKaryCutiP24;
@@ -4918,7 +4919,7 @@ abstract class _DataLembur implements DataLembur {
   String? get creatorProfilImage;
   @override
   @JsonKey(name: "creator.telp")
-  String? get creatorTelp;
+  dynamic get creatorTelp;
   @override
   @JsonKey(name: "creator.m_kary_id")
   int? get creatorMKaryId;
@@ -5002,10 +5003,10 @@ abstract class _DataLembur implements DataLembur {
   bool? get picIsActive;
   @override
   @JsonKey(name: "pic.creator_id")
-  int? get picCreatorId;
+  dynamic get picCreatorId;
   @override
   @JsonKey(name: "pic.last_editor_id")
-  int? get picLastEditorId;
+  dynamic get picLastEditorId;
   @override
   @JsonKey(name: "pic.remember_token")
   dynamic get picRememberToken;
@@ -5017,16 +5018,16 @@ abstract class _DataLembur implements DataLembur {
   String? get picUpdatedAt;
   @override
   @JsonKey(name: "pic.profil_image")
-  String? get picProfilImage;
+  dynamic get picProfilImage;
   @override
   @JsonKey(name: "pic.telp")
-  String? get picTelp;
+  dynamic get picTelp;
   @override
   @JsonKey(name: "pic.m_kary_id")
   int? get picMKaryId;
   @override
-  @JsonKey(name: "pic.nama_lengkap")
-  String? get picNamaLengkap;
+  @JsonKey(name: "approval_note")
+  String? get approvalNote;
   @override
   @JsonKey(ignore: true)
   _$$DataLemburImplCopyWith<_$DataLemburImpl> get copyWith =>

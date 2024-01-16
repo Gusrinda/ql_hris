@@ -388,7 +388,7 @@ class _DataDiriPageState extends State<DataDiriPage> {
                                     ),
                                   SizedBox(height: 15.sp),
                                   buildInfoText('No. KTP',
-                                      biodata?.bioData?.nik?.toString() ?? '-'),
+                                      biodata?.bioData?.ktpNo?.toString() ?? '-'),
                                   Text(
                                     'Foto Kartu Keluarga',
                                     style: GoogleFonts.poppins(

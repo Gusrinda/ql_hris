@@ -578,38 +578,48 @@ class _AddLemburPageState extends State<AddLemburPage> {
                                   ? null
                                   : () {
                                       if (_formKey.currentState!.validate()) {
-                                        context.read<AddLemburBloc>().add(
-                                              OnSumbitLembur(
-                                                  picID:
-                                                      widget.idPicController?.value.text != null
+                                        showDialog(
+                                          context: context,
+                                          builder: (_) => DialogCustom(
+                                            state: DialogCustomItem.confirm,
+                                            message:
+                                                "Pastikan Data Sudah Benar Sebelum Mengirim Pengajuan Lembur?",
+                                            durationInSec: 7,
+                                            onContinue: () => context
+                                                .read<AddLemburBloc>()
+                                                .add(
+                                                  OnSumbitLembur(
+                                                      picID: widget.idPicController?.value.text != null
                                                           ? int.tryParse(widget
                                                               .idPicController!
                                                               .value
                                                               .text)
                                                           : null,
-                                                  alasanLemburID: int.parse(widget
-                                                      .idAlasanController
-                                                      .value
-                                                      .text),
-                                                  tipeLemburID: int.parse(widget
-                                                      .idTipeLemburController
-                                                      .value
-                                                      .text),
-                                                  keterangan: widget
-                                                      .keteranganController
-                                                      .value
-                                                      .text,
-                                                  dateLembur: widget
-                                                      .dateController
-                                                      .value
-                                                      .text,
-                                                  timeFrom: widget
-                                                          .timeFromController
-                                                          ?.value
-                                                          .text ??
-                                                      "00:00",
-                                                  timeTo: widget.timeToController?.value.text ?? "00:00"),
-                                            );
+                                                      alasanLemburID: int.parse(widget
+                                                          .idAlasanController
+                                                          .value
+                                                          .text),
+                                                      tipeLemburID: int.parse(widget
+                                                          .idTipeLemburController
+                                                          .value
+                                                          .text),
+                                                      keterangan: widget
+                                                          .keteranganController
+                                                          .value
+                                                          .text,
+                                                      dateLembur: widget
+                                                          .dateController
+                                                          .value
+                                                          .text,
+                                                      timeFrom: widget
+                                                              .timeFromController
+                                                              ?.value
+                                                              .text ??
+                                                          "00:00",
+                                                      timeTo: widget.timeToController?.value.text ?? "00:00"),
+                                                ),
+                                          ),
+                                        );
                                       }
                                     },
                             ),

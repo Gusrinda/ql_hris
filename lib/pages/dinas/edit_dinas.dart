@@ -328,33 +328,43 @@ class _EditDinasPageState extends State<EditDinasPage> {
             textColor: Colors.orange.shade700,
             onPressed: () {
               if (currentStep == 2) {
-                context.read<AddDinasBloc>().add(
-                      EditDinasSubmited(
-                          spdID: widget.dinasId ?? -99,
-                          divisi: int.parse(widget.idDivisiController.text),
-                          departemen:
-                              int.parse(widget.idDepartemenController.text),
-                          posisi: int.parse(widget.idPosisiController.text),
-                          templateSpd:
-                              widget.idTemplateSpdController?.text != null
-                                  ? int.tryParse(
-                                      widget.idTemplateSpdController!.text)
-                                  : null,
-                          // direktorat:
-                          //     int.parse(widget.idDirektoratController!.text),
-                          tanggal: widget.tanggalController.text,
-                          tanggalAwal: widget.tanggalAwalController.text,
-                          tanggalAkhir: widget.tanggalAkhirController.text,
-                          jenisSpd: int.parse(widget.idJenisSpdController.text),
-                          zonaAsal: int.parse(widget.idZonaAsalController.text),
-                          zonaTujuan:
-                              int.parse(widget.idZonaTujuanController.text),
-                          lokasiTujuan:
-                              int.parse(widget.idLokasiTujuanController.text),
-                          pic: int.tryParse(widget.idPicController.text) ?? -99,
-                          kendDinas: int.parse(widget.kendDinasController.text),
-                          desc: widget.catatanController?.value.text),
-                    );
+                showDialog(
+                  context: context,
+                  builder: (_) => DialogCustom(
+                    state: DialogCustomItem.confirm,
+                    message: "Pastikan Data Revisi Pengajuan Dinas Sudah Benar?",
+                    durationInSec: 7,
+                    onContinue: () => context.read<AddDinasBloc>().add(
+                          AddDinasSubmited(
+                              divisi: int.parse(widget.idDivisiController.text),
+                              departemen:
+                                  int.parse(widget.idDepartemenController.text),
+                              posisi: int.parse(widget.idPosisiController.text),
+                              templateSpd:
+                                  widget.idTemplateSpdController?.text != null
+                                      ? int.tryParse(
+                                          widget.idTemplateSpdController!.text)
+                                      : null,
+                              // direktorat:
+                              //     int.parse(widget.idDirektoratController!.text),
+                              tanggal: widget.tanggalController.text,
+                              tanggalAwal: widget.tanggalAwalController.text,
+                              tanggalAkhir: widget.tanggalAkhirController.text,
+                              jenisSpd:
+                                  int.parse(widget.idJenisSpdController.text),
+                              zonaAsal:
+                                  int.parse(widget.idZonaAsalController.text),
+                              zonaTujuan:
+                                  int.parse(widget.idZonaTujuanController.text),
+                              lokasiTujuan: int.parse(
+                                  widget.idLokasiTujuanController.text),
+                              pic: int.parse(widget.idPicController.text),
+                              kendDinas:
+                                  int.parse(widget.kendDinasController.text),
+                              desc: widget.catatanController?.value.text),
+                        ),
+                  ),
+                );
               } else {
                 continueStep();
               }

@@ -1,6 +1,5 @@
 part of 'add_realisasi_dinas_bloc.dart';
 
-
 abstract class AddRealisasiDinasState extends Equatable {
   const AddRealisasiDinasState();
 
@@ -32,8 +31,19 @@ class DetailBiayaSPDSuceess extends AddRealisasiDinasState {
   List<Object> get props => [dataDetailSPD];
 }
 
+class DetailEditSPDSuceess extends AddRealisasiDinasState {
+  DataDetailDinas dataEditDetailSPD;
+
+  DetailEditSPDSuceess({
+    required this.dataEditDetailSPD,
+  });
+
+  @override
+  List<Object> get props => [dataEditDetailSPD];
+}
+
 class DetailEditRealisasiDinasSuccess extends AddRealisasiDinasState {
- DetailRealisasiData? dataDetailrealisasiDinas;
+  DetailRealisasiData? dataDetailrealisasiDinas;
 
   DetailEditRealisasiDinasSuccess({this.dataDetailrealisasiDinas});
 

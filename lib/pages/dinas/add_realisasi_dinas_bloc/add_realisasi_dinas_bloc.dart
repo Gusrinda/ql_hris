@@ -107,16 +107,53 @@ class AddRealisasiDinasBloc
         } else if (res is ServicesFailureNoMobile) {
           if (res.errorResponse == null) {
             await GeneralSharedPreferences.removeUserToken();
-            emit(AddRealisasiDinasFailedUserExpired(
-                message: "Token expired"));
+            emit(AddRealisasiDinasFailedUserExpired(message: "Token expired"));
           } else {
             emit(AddRealisasiDinasFailed(message: res.errorResponse));
             print(res.errorResponse);
           }
         }
       } else if (resToken is ServicesFailure) {
-        emit(AddRealisasiDinasFailedInBackground(
-            message: 'Response invalid'));
+        emit(AddRealisasiDinasFailedInBackground(message: 'Response invalid'));
+      }
+    });
+
+    on<GetDetailEditSPD>((event, emit) async {
+      emit(AddRealisasiDinasLoading());
+      var resToken = await GeneralSharedPreferences.getUserToken();
+      if (resToken is ServicesSuccess) {
+        var res = await RealisasiDinasServices.getDetailSPD(
+            resToken.response["token"], event.spdID);
+
+        if (res is ServicesSuccess) {
+          debugPrint(res.response.toString());
+          if (res.response is Map<String, dynamic>) {
+            //Mengubah hasil response api ke model kelas
+            ResponseDetailSpd dataResponse =
+                ResponseDetailSpd.fromJson(res.response);
+
+            print("Print Data Detail Dinas Edit $dataResponse");
+
+            //Masukkan data dari model ke kebutuhan
+            dataDetailSPD = dataResponse.data!;
+
+            emit(
+              DetailEditSPDSuceess(dataEditDetailSPD: dataDetailSPD!),
+            );
+          } else {
+            emit(AddRealisasiDinasFailedInBackground(
+                message: 'Response format is invalid'));
+          }
+        } else if (res is ServicesFailure) {
+          if (res.errorResponse == null) {
+            await GeneralSharedPreferences.removeUserToken();
+            emit(AddRealisasiDinasFailedUserExpired(message: "Token expired"));
+          } else {
+            emit(AddRealisasiDinasFailed(message: res.errorResponse));
+          }
+        }
+      } else if (resToken is ServicesFailure) {
+        emit(AddRealisasiDinasFailedInBackground(message: 'Response invalid'));
       }
     });
 

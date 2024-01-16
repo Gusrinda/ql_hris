@@ -208,10 +208,10 @@ class _DetailLemburPageState extends State<DetailLemburPage> {
                                     'No. Dokumen',
                                     "${widget.noDoc ?? '-'}",
                                   ),
-                                if (widget.data?.picNamaLengkap != null)
+                                if (widget.data?.picName != null)
                                   _buildText(
                                     'PIC',
-                                    widget.data?.picNamaLengkap ?? '-',
+                                    widget.data?.picName ?? '-',
                                   ),
                                 Text(
                                   'Tipe Lembur',

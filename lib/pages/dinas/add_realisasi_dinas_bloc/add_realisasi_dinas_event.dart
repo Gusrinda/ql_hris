@@ -77,6 +77,15 @@ class GetDetailEditRealisasiDinas extends AddRealisasiDinasEvent {
   List<Object> get props => [id];
 }
 
+class GetDetailEditSPD extends AddRealisasiDinasEvent {
+  int spdID;
+
+  GetDetailEditSPD({required this.spdID});
+
+  @override
+  List<Object> get props => [];
+}
+
 class GetDetailBiayaSPD extends AddRealisasiDinasEvent {
   int spdID;
 

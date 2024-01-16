@@ -145,7 +145,7 @@ class DinasServices {
 
   static Future<Object> getZona(String token) async {
     var url =
-        Uri.parse("${MyGeneralConst.API_URL}/operation/m_zona?paginate=1000");
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_zona?paginate=2000&filter_is_active=true");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
@@ -155,7 +155,7 @@ class DinasServices {
 
   static Future<Object> getLokasiTujuan(String token) async {
     var url =
-        Uri.parse("${MyGeneralConst.API_URL}/operation/m_lokasi?paginate=1000");
+        Uri.parse("${MyGeneralConst.API_URL}/operation/m_lokasi?paginate=2000&filter_is_active=true");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,

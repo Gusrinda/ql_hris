@@ -546,7 +546,8 @@ class _DetailApprovalState extends State<DetailApproval> {
                                 // widget.dataApproval!.trxTable! !=
                                 //       't_lembur' &&
                                   widget.dataApproval!.trxTable! !=
-                                      't_rpd') ...{
+                                      ''
+                                      ) ...{
                                 TextButtonCustomV1(
                                     textSize: 13.sp,
                                     text: "REVISE",

@@ -226,10 +226,11 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                               children: [
                                 _buildText('Nomor Pengajuan SPD',
                                     widget.data?.nomor ?? '-'),
-                                _buildText('NOmor Template SPD',
+                                _buildText('Nomor Template SPD',
                                     widget.templateSpd ?? '-'),
-                                _buildText('Direktorat',
-                                    widget.direktoratValue ?? '-'),
+                                if (widget.direktoratValue != null)
+                                  _buildText('Direktorat',
+                                      widget.direktoratValue ?? '-'),
                                 _buildText('Divisi', widget.divisiValue ?? '-'),
                                 _buildText(
                                     'Departemen', widget.deptValue ?? '-'),
@@ -291,7 +292,7 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                 _buildText(
                                     'Zona Tujuan', widget.zonaTujuan ?? '-'),
                                 _buildText('Lokasi Tujuan',
-                                    widget.lokasiTujuan ?? '-'),
+                                    "${widget.lokasiTujuan ?? '-'}\n${widget.data?.mLokasiTujuanDesc ?? '-'}"),
                                 _buildText(
                                     'Kendaraan Dinas?',
                                     widget.data?.isKendDinas == true

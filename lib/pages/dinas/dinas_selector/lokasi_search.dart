@@ -43,7 +43,8 @@ class LokasiTujuanSearchDelegate extends SearchDelegate<DataLokasiTujuan?> {
   Widget buildResults(BuildContext context) {
     final searchResults = dataLokasi
         .where((element) =>
-            element.nama!.toLowerCase().contains(query.toLowerCase()))
+            element.nama!.toLowerCase().contains(query.toLowerCase()) ||
+            element.desc!.toLowerCase().contains(query.toLowerCase()))
         .toList();
 
     return ListView.builder(
@@ -52,10 +53,26 @@ class LokasiTujuanSearchDelegate extends SearchDelegate<DataLokasiTujuan?> {
         return Column(
           children: [
             ListTile(
-              title: Text(
-                searchResults[index].nama ?? '-',
-                style: GoogleFonts.poppins(
-                    fontSize: 14.sp, fontWeight: FontWeight.w500),
+              title: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    searchResults[index].nama ?? '-',
+                    style: GoogleFonts.poppins(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w600,
+                        color: MyColorsConst.darkColor),
+                  ),
+                  const SizedBox(height: 3),
+                  Text(
+                    searchResults[index].desc ?? '-',
+                    style: GoogleFonts.poppins(
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.grey.shade800),
+                  ),
+                ],
               ),
               onTap: () {
                 close(context, searchResults[index]);

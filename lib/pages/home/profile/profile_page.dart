@@ -441,8 +441,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             context: context,
                                             builder: (_) => DialogCustom(
                                               state: DialogCustomItem.confirm,
-                                              message:
-                                                  "Yakin Ingin Logout?",
+                                              message: "Yakin Ingin Logout?",
                                               durationInSec: 5,
                                               onContinue: () => context
                                                   .read<ProfileBloc>()

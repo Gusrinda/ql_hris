@@ -117,28 +117,36 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
   void _onTotalBiayaRealisasiChanged() {
     // Ambil nilai dari totalBiayaController dan totalBiayaRealisasiController
     double totalBiaya = _parseCurrency(widget.totalBiayaController.text);
+    print("Total Biaya = ${widget.totalBiayaController.text} >>> $totalBiaya");
     double totalBiayaRealisasi =
         _parseCurrency(widget.totalBiayaRealisasiController.text);
+    print(
+        "Total Realisasi = ${widget.totalBiayaRealisasiController.text} >>> $totalBiayaRealisasi");
 
     // Hitung selisihnya
     double selisih = totalBiaya - totalBiayaRealisasi;
+    print("Operasi [ $totalBiaya - $totalBiayaRealisasi ]");
+    print("#Hasil Selisih = $selisih >>> ${formatRupiah(selisih)} \n");
 
     // Set nilai baru ke totalBiayaRencanaSelisihController dengan format uang
-    widget.totalBiayaRencanaSelisihController.text = _formatCurrency(selisih);
+    widget.totalBiayaRencanaSelisihController.text = formatRupiah(selisih);
   }
 
   double _parseCurrency(String currencyString) {
-    // Hapus "Rp " dan ganti koma jika ada
-    String cleanedString =
-        currencyString.replaceAll('Rp ', '').replaceAll('.', '');
+    String cleanedString = currencyString
+        .replaceAll('Rp ', '')
+        .replaceAll('.', '')
+        .replaceAll(',', '.');
 
     // Parse string menjadi double
     return double.tryParse(cleanedString) ?? 0;
   }
 
-  String _formatCurrency(double amount) {
-    // Format nilai sebagai uang
-    return 'Rp ${NumberFormat('#,###').format(amount)}';
+  String formatRupiah(double? value) {
+    return NumberFormat.currency(
+      locale: 'id_ID',
+      symbol: 'Rp ',
+    ).format(value ?? 0.0).replaceAll(',00', '');
   }
 
   // @override
@@ -153,13 +161,6 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
     var dataDinasApproved =
         context.read<AddRealisasiDinasBloc>().listDinasApproved;
     var dataTipe = context.read<AddRealisasiDinasBloc>().listTipe;
-
-    String formatRupiah(double? value) {
-      return NumberFormat.currency(
-        locale: 'id_ID',
-        symbol: 'Rp ',
-      ).format(value ?? 0.0).replaceAll(',00', '');
-    }
 
     void _showNomoreSpd(BuildContext context) async {
       if (dataDinasApproved.isEmpty) {
@@ -190,7 +191,8 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
         showDialog(
           context: context,
           builder: (_) => const DialogCustom(
-              state: DialogCustomItem.error, message: "Tidak Ada Item"),
+              state: DialogCustomItem.error,
+              message: "Tidak Ada SPD Yang Approved"),
         );
         print("Tidak Ada Item");
       }
@@ -468,7 +470,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 },
                                 idController: widget.idNomorSpdController,
                                 valueController: widget.valueNomorSpdController,
-                                hintText: 'Cari Nomor Spd',
+                                hintText: 'Cari Nomor SPD',
                                 labelTag: 'Label-TemplateRspd',
                                 formTag: 'Form-TemplateRspd',
                                 labelForm: 'Nomor SPD',
@@ -853,28 +855,37 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                     : () {
                                         print("INI DATA YANG DIKIRIM :");
 
-                                        num parseCurrency(String currency) {
+                                        double parseCurrency(String currency) {
                                           try {
-                                            final numberFormat =
-                                                NumberFormat.currency(
-                                                    locale: 'id_ID',
-                                                    symbol: 'Rp ');
-                                            // Hapus simbol mata uang dan koma, lalu parse sebagai num
-                                            return numberFormat.parse(currency
+                                            // Remove currency symbol and replace comma with dot
+                                            String cleanedCurrency = currency
                                                 .replaceAll('Rp ', '')
-                                                .replaceAll(',', ''));
+                                                .replaceAll('.', '')
+                                                .replaceAll(',', '.');
+
+                                            // Remove negative sign if present
+                                            if (cleanedCurrency
+                                                .startsWith('-')) {
+                                              cleanedCurrency =
+                                                  cleanedCurrency.substring(1);
+                                            }
+
+                                            // Parse as double
+                                            return double.parse(
+                                                cleanedCurrency);
                                           } catch (e) {
                                             return 0;
                                           }
                                         }
 
                                         // Parse formatted currency string to double
-                                        num totalBiayaSelisih =
+                                        double totalBiayaSelisih =
                                             parseCurrency(widget
                                                 .totalBiayaRencanaSelisihController
                                                 .value
                                                 .text);
-                                        print(totalBiayaSelisih);
+                                        print(
+                                            "${widget.totalBiayaRencanaSelisihController.text} >>> $totalBiayaSelisih");
 
                                         int idNomorSpd = int.parse(widget
                                             .idNomorSpdController.value.text);
@@ -899,7 +910,8 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                                   AddRealisasiDinasSubmited(
                                                     tSpdId: idNomorSpd,
                                                     totalBiayaSelisih:
-                                                        totalBiayaSelisih.toDouble(),
+                                                        totalBiayaSelisih
+                                                            .toDouble(),
                                                     keterangan: widget
                                                         .keteranganUtamaController
                                                         .value

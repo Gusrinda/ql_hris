@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,7 +26,7 @@ class PengumumanCard extends StatelessWidget {
         _showDetailSlider(context);
       },
       child: Container(
-        width: 200.sp,
+        width: 210.sp,
         margin: EdgeInsets.only(right: 10.sp),
         padding: EdgeInsets.all(10.sp),
         decoration: BoxDecoration(
@@ -35,26 +36,27 @@ class PengumumanCard extends StatelessWidget {
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(5), topRight: Radius.circular(5)),
-              child: AspectRatio(
-                  aspectRatio: 16 / 9.sp,
-                  child: Image.network(
-                    imageUrl ?? '',
-                    fit: BoxFit.cover,
-                  )),
-            ),
-            SizedBox(height: 5.sp),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(5),
+                      topRight: Radius.circular(5)),
+                  child: AspectRatio(
+                      aspectRatio: 16 / 9.sp,
+                      child: Image.network(
+                        imageUrl ?? '',
+                        fit: BoxFit.cover,
+                      )),
+                ),
+                SizedBox(height: 5.sp),
                 Row(
                   children: [
                     Icon(
-                      Icons.calendar_month_outlined,
+                      CupertinoIcons.calendar,
                       size: 12.sp,
                       color: Colors.grey,
                     ),
@@ -64,45 +66,45 @@ class PengumumanCard extends StatelessWidget {
                     Text(
                       tanggal ?? '',
                       style: GoogleFonts.poppins(
-                        fontSize: 8.sp,
-                        color: Colors.grey,
-                      ),
+                          fontSize: 9.sp,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w500),
                     ),
                   ],
+                ),
+                SizedBox(height: 5.sp),
+                Text(
+                  judul ?? '',
+                  textAlign: TextAlign.start,
+                  style: GoogleFonts.poppins(
+                      fontSize: 13.sp,
+                      fontWeight: FontWeight.w700,
+                      color: MyColorsConst.darkColor),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 Text(
                   tag ?? '',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.poppins(
-                    fontSize: 8.sp,
-                    color: Colors.grey,
-                  ),
+                      fontSize: 8.sp,
+                      color: MyColorsConst.primaryColor,
+                      fontWeight: FontWeight.w500),
+                ),
+                SizedBox(height: 7.sp),
+                Text(
+                  detail ?? '',
+                  textAlign: TextAlign.justify,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.poppins(
+                      fontSize: 9.sp,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w500),
                 ),
               ],
             ),
-            SizedBox(height: 5.sp),
-            Text(
-              judul ?? '',
-              style: GoogleFonts.poppins(
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w600,
-                  color: MyColorsConst.darkColor),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-            SizedBox(height: 3.sp),
-            Text(
-              detail ?? '',
-              textAlign: TextAlign.justify,
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-              style: GoogleFonts.poppins(
-                  fontSize: 10.sp,
-                  color: MyColorsConst.darkColor,
-                  fontWeight: FontWeight.w400),
-            ),
-            SizedBox(height: 5.sp),
             InkWell(
               onTap: () {
                 _showDetailSlider(context);
@@ -163,20 +165,17 @@ class PengumumanCard extends StatelessWidget {
                       topLeft: Radius.circular(5),
                       topRight: Radius.circular(5),
                     ),
-                    child: AspectRatio(
-                      aspectRatio: 16 / 9.sp,
-                      child: Image.network(
-                        imageUrl ?? '',
-                        fit: BoxFit.cover,
-                      ),
+                    child: Image.network(
+                      imageUrl ?? '',
+                      fit: BoxFit.cover,
                     ),
                   ),
                   SizedBox(height: 5.sp),
                   Row(
                     children: [
                       Icon(
-                        Icons.calendar_month_outlined,
-                        size: 12.sp,
+                        CupertinoIcons.calendar,
+                        size: 15.sp,
                         color: Colors.grey,
                       ),
                       SizedBox(
@@ -185,39 +184,43 @@ class PengumumanCard extends StatelessWidget {
                       Text(
                         tanggal ?? '',
                         style: GoogleFonts.poppins(
-                          fontSize: 10.sp,
-                          color: Colors.grey,
-                        ),
-                      ),
-                      const Spacer(),
-                      Text(
-                        tag ?? '',
-                        style: GoogleFonts.poppins(
-                          fontSize: 10.sp,
-                          color: Colors.grey,
-                        ),
+                            fontSize: 10.sp,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),
-                  SizedBox(height: 5.sp),
+                  SizedBox(height: 10.sp),
                   Text(
                     judul ?? '',
+                    textAlign: TextAlign.start,
                     style: GoogleFonts.poppins(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w600,
-                      color: MyColorsConst.darkColor,
-                    ),
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w700,
+                        color: MyColorsConst.darkColor),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  SizedBox(height: 15.sp),
+                  SizedBox(height: 5.sp),
+                  Text(
+                    tag ?? '',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.poppins(
+                        fontSize: 11.sp,
+                        color: MyColorsConst.primaryColor,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(height: 20.sp),
                   Text(
                     detail ?? '',
                     textAlign: TextAlign.justify,
                     style: GoogleFonts.poppins(
                         fontSize: 12.sp,
-                        color: MyColorsConst.darkColor,
+                        color: Colors.grey.shade800,
                         fontWeight: FontWeight.w400),
                   ),
-                  SizedBox(height: 5.sp),
+                  SizedBox(height: 3.sp),
                 ],
               ),
             );

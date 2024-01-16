@@ -400,7 +400,7 @@ class CardListView extends StatelessWidget {
                           alasanId : data.alasanId,
                           alasanValue: data.alasanValue,
                           picId : data.picId,
-                          picValue : data.picNamaLengkap,
+                          picValue : data.picName,
                           reloadDataCallback: reloadDataCallback,
                         ),
                       ),
