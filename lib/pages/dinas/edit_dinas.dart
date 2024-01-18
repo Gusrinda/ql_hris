@@ -216,9 +216,20 @@ class _EditDinasPageState extends State<EditDinasPage> {
     widget.idPicController.text = widget.dataDinas!.picId.toString();
     widget.valuePicController.text = widget.dataDinas?.namaPic ?? "";
 
-    widget.tanggalController.text = widget.tanggal ?? '';
-    widget.tanggalAwalController.text = widget.tanggalAwal ?? '';
-    widget.tanggalAkhirController.text = widget.tanggalAkhir ?? '';
+    widget.tanggalController.text = parseDateString(widget.tanggal.toString())
+        .toString()
+        .replaceAll(" 00:00:00.000", "");
+    print(
+        "${widget.tanggal.toString()} >>> ${parseDateString(widget.tanggal.toString()).toString().replaceAll(" 00:00:00.000", "")}");
+
+    widget.tanggalAwalController.text =
+        parseDateString(widget.tanggalAwal.toString())
+            .toString()
+            .replaceAll(" 00:00:00.000", "");
+    widget.tanggalAkhirController.text =
+        parseDateString(widget.tanggalAkhir.toString())
+            .toString()
+            .replaceAll(" 00:00:00.000", "");
 
     widget.catatanController!.text = widget.dataDinas!.catatanKend ?? '';
 
@@ -232,9 +243,11 @@ class _EditDinasPageState extends State<EditDinasPage> {
 
     weekdaysCount = widget.dataDinas!.interval!;
 
-    selectedTanggal = parseDateString(widget.tanggal);
-    selectedTanggalAwal = parseDateString(widget.tanggalAwal);
-    selectedTanggalAkhir = parseDateString(widget.tanggalAkhir);
+    selectedTanggal = parseDateString(widget.tanggal.toString());
+
+    print("$selectedTanggal >>> ${parseDateString(widget.tanggal.toString())}");
+    selectedTanggalAwal = parseDateString(widget.tanggalAwal.toString());
+    selectedTanggalAkhir = parseDateString(widget.tanggalAkhir.toString());
   }
 
   DateTime? parseDateString(String? date) {
@@ -332,7 +345,8 @@ class _EditDinasPageState extends State<EditDinasPage> {
                   context: context,
                   builder: (_) => DialogCustom(
                     state: DialogCustomItem.confirm,
-                    message: "Pastikan Data Revisi Pengajuan Dinas Sudah Benar?",
+                    message:
+                        "Pastikan Data Revisi Pengajuan Dinas Sudah Benar?",
                     durationInSec: 7,
                     onContinue: () => context.read<AddDinasBloc>().add(
                           AddDinasSubmited(
@@ -759,6 +773,20 @@ class _EditDinasPageState extends State<EditDinasPage> {
                 message: state.message,
               ),
             );
+            Navigator.of(context).pop();
+            Navigator.pop(context);
+            // Navigator.of(context).popUntil((route) => route.isFirst);
+            widget.reloadDataCallback();
+          } else if (state is EditDinasSuccess) {
+            LoadingDialog.dismissDialog(context);
+            await showDialog(
+              context: context,
+              builder: (_) => DialogCustom(
+                state: DialogCustomItem.success,
+                message: state.message,
+              ),
+            );
+            Navigator.of(context).pop();
             Navigator.of(context).pop();
             Navigator.pop(context);
             // Navigator.of(context).popUntil((route) => route.isFirst);

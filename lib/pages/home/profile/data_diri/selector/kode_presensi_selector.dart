@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:sj_presensi_mobile/services/model/list_general/response_kode_presensi.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
@@ -39,9 +40,24 @@ class KodePresensiSearchDelegate extends SearchDelegate<DataKodePresensi?> {
 
   @override
   Widget buildResults(BuildContext context) {
+    String convertTimeFormat(String timeString) {
+      try {
+        final parsedTime = DateTime.parse('2000-01-01 $timeString');
+        final formattedTime = DateFormat('HH:mm').format(parsedTime);
+
+        return formattedTime;
+      } catch (e) {
+        print('Error: $e');
+        return timeString;
+      }
+    }
+
     final searchResults = dataKodePresensi
         .where((element) =>
-            element.kode!.toLowerCase().contains(query.toLowerCase()))
+            element.kode!.toLowerCase().contains(query.toLowerCase()) ||
+            element.waktuMulai!.toLowerCase().contains(query.toLowerCase()) ||
+            element.waktuAkhir!.toLowerCase().contains(query.toLowerCase()) ||
+            element.desc!.toLowerCase().contains(query.toLowerCase()))
         .toList();
 
     return ListView.builder(
@@ -50,10 +66,81 @@ class KodePresensiSearchDelegate extends SearchDelegate<DataKodePresensi?> {
         return Column(
           children: [
             ListTile(
-              title: Text(
-                searchResults[index].kode ?? '-',
-                style: GoogleFonts.poppins(
-                    fontSize: 14.sp, fontWeight: FontWeight.w500),
+              title: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    searchResults[index].kode ?? '-',
+                    style: GoogleFonts.poppins(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w600,
+                        color: MyColorsConst.darkColor),
+                  ),
+                  const SizedBox(height: 3),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Start : ',
+                          style: GoogleFonts.poppins(
+                            fontSize: 11.sp,
+                            color: MyColorsConst.lightDarkColor,
+                          ),
+                        ),
+                        TextSpan(
+                          text: convertTimeFormat(
+                              searchResults[index].waktuMulai ?? "08:00:00"),
+                          style: GoogleFonts.poppins(
+                              fontSize: 11.sp,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.grey.shade800),
+                        ),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'End   : ',
+                          style: GoogleFonts.poppins(
+                            fontSize: 11.sp,
+                            color: MyColorsConst.lightDarkColor,
+                          ),
+                        ),
+                        TextSpan(
+                          text: convertTimeFormat(
+                              searchResults[index].waktuAkhir ?? "08:00:00"),
+                          style: GoogleFonts.poppins(
+                              fontSize: 11.sp,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.grey.shade800),
+                        ),
+                      ],
+                    ),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'Ket    : ',
+                          style: GoogleFonts.poppins(
+                            fontSize: 11.sp,
+                            color: MyColorsConst.lightDarkColor,
+                          ),
+                        ),
+                        TextSpan(
+                          text: searchResults[index].desc ?? '-',
+                          style: GoogleFonts.poppins(
+                              fontSize: 11.sp,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.grey.shade800),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
               onTap: () {
                 close(context, searchResults[index]);

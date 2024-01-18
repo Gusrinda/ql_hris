@@ -200,6 +200,12 @@ _$TrxImpl _$$TrxImplFromJson(Map<String, dynamic> json) => _$TrxImpl(
       timeFrom: json['time_from'],
       timeTo: json['time_to'],
       catatanKend: json['catatan_kend'] as String?,
+      cutiSisaPanjang: json['cuti_sisa_panjang'] as int?,
+      cutiSisaReguler: json['cuti_sisa_reguler'] as int?,
+      cutiSisaP24: json['cuti_sisa_p24'] as int?,
+      infoCuti: json['info_cuti'] == null
+          ? null
+          : InfoCuti.fromJson(json['info_cuti'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$TrxImplToJson(_$TrxImpl instance) => <String, dynamic>{
@@ -241,4 +247,40 @@ Map<String, dynamic> _$$TrxImplToJson(_$TrxImpl instance) => <String, dynamic>{
       'time_from': instance.timeFrom,
       'time_to': instance.timeTo,
       'catatan_kend': instance.catatanKend,
+      'cuti_sisa_panjang': instance.cutiSisaPanjang,
+      'cuti_sisa_reguler': instance.cutiSisaReguler,
+      'cuti_sisa_p24': instance.cutiSisaP24,
+      'info_cuti': instance.infoCuti,
+    };
+
+_$InfoCutiImpl _$$InfoCutiImplFromJson(Map<String, dynamic> json) =>
+    _$InfoCutiImpl(
+      cutiP24: json['cuti_p24'] as int?,
+      cutiReguler: json['cuti_reguler'] as int?,
+      workPresent: json['work_present'] as int?,
+      cutiTerpakai: json['cuti_terpakai'] as int?,
+      potonganCuti: json['potongan_cuti'] as int?,
+      sisaCutiP24: json['sisa_cuti_p24'] as int?,
+      cutiMasaKerja: json['cuti_masa_kerja'] as int?,
+      workNotPresent: json['work_not_present'] as int?,
+      cutiP24Terpakai: json['cuti_p24_terpakai'] as int?,
+      sisaCutiReguler: json['sisa_cuti_reguler'] as int?,
+      workDaysInMonth: json['work_days_in_month'] as int?,
+      sisaCutiMasaKerja: json['sisa_cuti_masa_kerja'] as int?,
+    );
+
+Map<String, dynamic> _$$InfoCutiImplToJson(_$InfoCutiImpl instance) =>
+    <String, dynamic>{
+      'cuti_p24': instance.cutiP24,
+      'cuti_reguler': instance.cutiReguler,
+      'work_present': instance.workPresent,
+      'cuti_terpakai': instance.cutiTerpakai,
+      'potongan_cuti': instance.potonganCuti,
+      'sisa_cuti_p24': instance.sisaCutiP24,
+      'cuti_masa_kerja': instance.cutiMasaKerja,
+      'work_not_present': instance.workNotPresent,
+      'cuti_p24_terpakai': instance.cutiP24Terpakai,
+      'sisa_cuti_reguler': instance.sisaCutiReguler,
+      'work_days_in_month': instance.workDaysInMonth,
+      'sisa_cuti_masa_kerja': instance.sisaCutiMasaKerja,
     };

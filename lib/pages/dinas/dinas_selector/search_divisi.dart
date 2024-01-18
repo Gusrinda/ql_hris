@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/getDataDinas/get_divisi_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
-
 class DivisiSearchDelegate extends SearchDelegate<DataDivisi?> {
   final List<DataDivisi> dataDivisi;
   final List<DataDivisi> filteredData;
@@ -42,7 +41,8 @@ class DivisiSearchDelegate extends SearchDelegate<DataDivisi?> {
   Widget buildResults(BuildContext context) {
     final searchResults = dataDivisi
         .where((tipeCuti) =>
-            tipeCuti.nama!.toLowerCase().contains(query.toLowerCase()))
+            tipeCuti.nama!.toLowerCase().contains(query.toLowerCase()) ||
+            tipeCuti.mDirNama!.toLowerCase().contains(query.toLowerCase()))
         .toList();
 
     return ListView.builder(
@@ -51,10 +51,39 @@ class DivisiSearchDelegate extends SearchDelegate<DataDivisi?> {
         return Column(
           children: [
             ListTile(
-              title: Text(
-                searchResults[index].nama ?? '-',
-                style: GoogleFonts.poppins(
-                    fontSize: 14.sp, fontWeight: FontWeight.w500),
+              title: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    searchResults[index].nama ?? '-',
+                    style: GoogleFonts.poppins(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w600,
+                        color: MyColorsConst.darkColor),
+                  ),
+                  const SizedBox(height: 3),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'DIR : ',
+                          style: GoogleFonts.poppins(
+                            fontSize: 11.sp,
+                            color: MyColorsConst.lightDarkColor,
+                          ),
+                        ),
+                        TextSpan(
+                          text: searchResults[index].mDirNama ?? '-',
+                          style: GoogleFonts.poppins(
+                              fontSize: 11.sp,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.grey.shade800),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
               onTap: () {
                 close(context, searchResults[index]);

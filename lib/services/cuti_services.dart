@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:sj_presensi_mobile/utils/const.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
@@ -30,7 +31,8 @@ class CutiServices {
       String dateFrom,
       String dateTo,
       String? timeFrom,
-      String? timeTo) async {
+      String? timeTo,
+      File? suratDokter) async {
     var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_cuti");
     print("Ini yang dikirim saat POST Cuti :");
     print("alasan_id : ${alasan}");
@@ -43,26 +45,36 @@ class CutiServices {
     print("Ini mKaryID : ${mKaryID}");
     print("Ini timeFrom : ${timeFrom}");
     print("Ini timeTo : ${timeTo}");
+    print("File Surat Dokter : ${File(suratDokter?.path ?? "")}");
 
     Object requestBody = {
-      "m_comp_id": mCompID,
-      "m_dir_id": mDirID,
-      "m_kary_id": mKaryID,
-      "alasan_id": alasan,
-      "tipe_cuti_id": tipeCuti,
-      "date_from": dateFrom,
-      "date_to": dateTo,
-      "time_from": timeFrom,
-      "time_to": timeTo,
-      "keterangan": keterangan,
+      'm_comp_id': mCompID,
+      'm_dir_id': mDirID,
+      'm_kary_id': mKaryID,
+      'alasan_id': alasan,
+      'tipe_cuti_id': tipeCuti,
+      'date_from': dateFrom,
+      'date_to': dateTo,
+      'time_from': timeFrom,
+      'time_to': timeTo,
+      'keterangan': keterangan,
     }..removeWhere(
         (key, value) => value == null || value == '' || value == -99);
 
+    Map<String, File?> files = {
+      'attachment': File(suratDokter?.path ?? ''),
+    }..removeWhere((key, value) => value == null || value.path.isEmpty);
+
+    // Pengecekan tambahan untuk menghapus yang data path kosong
+    files.removeWhere(
+        (key, value) => value?.path == '' || value?.path == 'kosong');
+
     return await GeneralServices.baseService(
       url: url,
-      method: GeneralServicesMethod.post,
+      method: GeneralServicesMethod.postMultiFiles,
       headers: GeneralServices.addToken2Headers(token),
-      body: json.encode(requestBody),
+      body: requestBody,
+      files: files,
     );
   }
 
@@ -98,7 +110,8 @@ class CutiServices {
       String dateFrom,
       String dateTo,
       String? timeFrom,
-      String? timeTo) async {
+      String? timeTo,
+      File? suratDokter) async {
     var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_cuti/$cutiID");
     print("Ini yang dikirim saat PUT Cuti :");
     print("alasan_id : ${alasan}");
@@ -122,6 +135,7 @@ class CutiServices {
       "date_to": dateTo,
       "time_from": timeFrom,
       "time_to": timeTo,
+      "attachment": suratDokter,
       "keterangan": keterangan,
     }..removeWhere(
         (key, value) => value == null || value == '' || value == -99);

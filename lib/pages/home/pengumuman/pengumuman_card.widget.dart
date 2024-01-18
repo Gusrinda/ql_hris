@@ -49,7 +49,7 @@ class PengumumanCard extends StatelessWidget {
                       aspectRatio: 16 / 9.sp,
                       child: Image.network(
                         imageUrl ?? '',
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fitWidth,
                       )),
                 ),
                 SizedBox(height: 5.sp),

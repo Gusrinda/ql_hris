@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -40,6 +41,7 @@ class AddCutiBloc extends Bloc<AddCutiEvent, AddCutiState> {
           event.dateTo,
           event.timeFrom ?? "08:00",
           event.timeTo ?? "08:00",
+          event.suratDokter,
         );
 
         if (res is ServicesSuccess) {
@@ -162,6 +164,7 @@ class AddCutiBloc extends Bloc<AddCutiEvent, AddCutiState> {
           event.dateTo,
           event.timeFrom ?? "08:00",
           event.timeTo ?? "08:00",
+          event.suratDokter
         );
         if (res is ServicesSuccess) {
           emit(AddCutiSuccess(message: "Edit pengajuan cuti berhasil"));

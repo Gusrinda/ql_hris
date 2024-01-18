@@ -133,12 +133,12 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
   }
 
   List<String> buttonTexts = [
-    'Selanjutnya',
-    'Selanjutnya',
-    'Selanjutnya',
-    'Selanjutnya',
-    'Selanjutnya',
-    'Simpan Data'
+    'Simpan Data Informasi',
+    'Simpan Data Diri',
+    'Simpan Data Info Lain',
+    'Simpan Data Berkas',
+    'Simpan Data Ukuran',
+    'Simpan Data Pembayaran'
   ];
 
   continueStep() {
@@ -176,8 +176,9 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
           if (currentStep < 5) ...{
             TextButtonCustomV1(
               text: buttonTexts[currentStep],
+              textSize: 13.sp,
               height: 50,
-              backgroundColor: MyColorsConst.primaryColor.withOpacity(0.1),
+              backgroundColor: MyColorsConst.primaryColor.withOpacity(0.15),
               textColor: MyColorsConst.primaryColor,
               onPressed: details.onStepContinue,
             ),
@@ -185,7 +186,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
             TextButtonCustomV1(
               text: buttonTexts[currentStep],
               height: 50,
-              backgroundColor: MyColorsConst.primaryColor.withOpacity(0.1),
+              backgroundColor: MyColorsConst.primaryColor.withOpacity(0.15),
               textColor: MyColorsConst.primaryColor,
               onPressed: () {
                 print("Ini Klik Submit Edit Biodata");
