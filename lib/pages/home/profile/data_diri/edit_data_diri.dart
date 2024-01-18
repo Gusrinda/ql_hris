@@ -132,6 +132,8 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
     });
   }
 
+  bool isLastStepPressed = false;
+
   List<String> buttonTexts = [
     'Simpan Data Informasi',
     'Simpan Data Diri',
@@ -168,167 +170,234 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
     });
   }
 
+  void submitData(int step) {
+    switch (step) {
+      case 0:
+        context.read<EditBiodataBloc>().add(EditDataBiodataSubmited(
+              divisiId: controllers.idDivisiController?.value.text != null
+                  ? int.tryParse(controllers.idDivisiController!.value.text)
+                  : null,
+              deptId: controllers.idDepartemenController?.value.text != null
+                  ? int.tryParse(controllers.idDepartemenController!.value.text)
+                  : null,
+              posisiId: controllers.idPosisiController?.value.text != null
+                  ? int.tryParse(controllers.idPosisiController!.value.text)
+                  : null,
+              zonaId: controllers.idZonaController?.value.text != null
+                  ? int.tryParse(controllers.idZonaController!.value.text)
+                  : null,
+              kodePresensi: controllers.valueKodePresensiController?.value.text,
+            ));
+        break;
+      case 1:
+        context.read<EditBiodataBloc>().add(EditDataBiodataSubmited(
+              tglMasuk: controllers.tanggalMasukController?.value.text,
+              nik: controllers.nikController?.value.text,
+              namaDepan: controllers.namaDepanController?.value.text,
+              namaBelakang: controllers.namaBelakangController?.value.text,
+              namaPanggilan: controllers.namaPanggilanController?.value.text,
+              namaLengkap:
+                  '${controllers.namaDepanController?.value.text} ${controllers.namaBelakangController?.value.text}',
+              jkId: controllers.idJenisKelaminController?.value.text != null
+                  ? int.tryParse(
+                      controllers.idJenisKelaminController!.value.text)
+                  : null,
+              tempatLahir: controllers.valueTempatLahirController?.value.text,
+              tglLahir: controllers.tanggalLahirController?.value.text,
+              provinsiId: controllers.idProvinsiController?.value.text != null
+                  ? int.tryParse(controllers.idProvinsiController!.value.text)
+                  : null,
+              kotaId: controllers.idKotaController?.value.text != null
+                  ? int.tryParse(controllers.idKotaController!.value.text)
+                  : null,
+              kecamatanId: controllers.idKecamatanController?.value.text != null
+                  ? int.tryParse(controllers.idKecamatanController!.value.text)
+                  : null,
+              kodePos: controllers.kodePosController?.value.text,
+              alamatDomisili:
+                  controllers.alamatDomisiliTinggalController?.value.text,
+              noTlp: controllers.noTelpController?.value.text,
+              noTlpLainnya: controllers.noTelpLainnyaController?.value.text,
+              noDarurat: controllers.noTelpDaruratController?.value.text,
+              namaKontakDarurat:
+                  controllers.namaKontakDaruratController?.value.text,
+              hubDgnKaryawan: controllers.hubkaryawanController?.value.text,
+              agamaId: controllers.idAgamaController?.value.text != null
+                  ? int.tryParse(controllers.idAgamaController!.value.text)
+                  : null,
+              golDarahId: controllers.idGolDarahController?.value.text != null
+                  ? int.tryParse(controllers.idGolDarahController!.value.text)
+                  : null,
+              statusNikahId:
+                  controllers.idStatusPernikahanController?.value.text != null
+                      ? int.tryParse(
+                          controllers.idStatusPernikahanController!.value.text)
+                      : null,
+              tanggunganId:
+                  controllers.idJumlahTanggunganController?.value.text != null
+                      ? int.tryParse(
+                          controllers.idJumlahTanggunganController!.value.text)
+                      : null,
+            ));
+        break;
+      case 2:
+        context.read<EditBiodataBloc>().add(EditDataBiodataSubmited(
+              ktpNo: controllers.noKtpController?.value.text,
+              alamatAsli: controllers.alamatKtpController?.value.text,
+              kkNo: controllers.noKkController?.value.text,
+              npwpNo: controllers.noNpwpController?.value.text,
+              npwpTglBerlaku: controllers.tanggalNpwpController?.value.text,
+              bpjsNo: controllers.noBpjsKesehatanController?.value.text,
+              bpjsKerjaNo:
+                  controllers.noBpjsKetenagakerjaanController?.value.text,
+              bpjsTipeId: controllers.idTipeBPJSController?.value.text != null
+                  ? int.tryParse(controllers.idTipeBPJSController!.value.text)
+                  : null,
+            ));
+        break;
+      case 3:
+        context.read<EditBiodataBloc>().add(EditDataBiodataSubmited(
+              pasFoto: fotoKaryawan != null && fotoKaryawan!.path.isNotEmpty
+                  ? File(fotoKaryawan!.path)
+                  : null,
+              ktpFoto:
+                  ktp != null && ktp!.path.isNotEmpty ? File(ktp!.path) : null,
+              // bpjsFoto: bpjs != null && bpjs!.path.isNotEmpty
+              //     ? File(bpjs!.path)
+              //     : null,
+              kkFoto: kartukeluarga != null && kartukeluarga!.path.isNotEmpty
+                  ? File(kartukeluarga!.path)
+                  : null,
+              npwpFoto: npwp != null && npwp!.path.isNotEmpty
+                  ? File(npwp!.path)
+                  : null,
+              berkasLain:
+                  berkaspendukung != null && berkaspendukung!.path.isNotEmpty
+                      ? File(berkaspendukung!.path)
+                      : null,
+              desc: controllers.keteranganController?.value.text,
+            ));
+        break;
+      case 4:
+        context.read<EditBiodataBloc>().add(EditDataBiodataSubmited(
+              ukBaju: controllers.ukBajuController?.value.text,
+              ukCelana: controllers.ukCelanaController?.value.text,
+              ukSepatu: controllers.ukSepatuontroller?.value.text,
+            ));
+        break;
+      case 5:
+        context.read<EditBiodataBloc>().add(EditDataBiodataSubmited(
+              bankId: controllers.idNamaBankController?.value.text != null
+                  ? int.tryParse(controllers.idNamaBankController!.value.text)
+                  : null,
+              noRek: controllers.noRekController?.value.text,
+              atasNamaRek: controllers.atasNamaController?.value.text,
+            ));
+        isLastStepPressed = true; // Tambahkan ini di step terakhir
+        break;
+      default:
+        break;
+    }
+  }
+
   Widget controlBuilders(BuildContext context, dynamic details) {
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: Column(
         children: [
-          if (currentStep < 5) ...{
+          if (currentStep >= 0) ...{
             TextButtonCustomV1(
               text: buttonTexts[currentStep],
               textSize: 13.sp,
               height: 50,
               backgroundColor: MyColorsConst.primaryColor.withOpacity(0.15),
               textColor: MyColorsConst.primaryColor,
-              onPressed: details.onStepContinue,
+              onPressed: () {
+                submitData(currentStep);
+                setState(() {
+                  if (currentStep < 5) {
+                    currentStep = currentStep + 1;
+                  }
+                });
+              },
             ),
-          } else ...{
+          } else if (currentStep >= 1) ...{
+            TextButtonCustomV1(
+              text: buttonTexts[currentStep],
+              textSize: 13.sp,
+              height: 50,
+              backgroundColor: MyColorsConst.primaryColor.withOpacity(0.15),
+              textColor: MyColorsConst.primaryColor,
+              onPressed: () {
+                submitData(currentStep);
+                setState(() {
+                  if (currentStep < 5) {
+                    currentStep = currentStep + 1;
+                  }
+                });
+              },
+            ),
+          } else if (currentStep >= 2) ...{
+            TextButtonCustomV1(
+              text: buttonTexts[currentStep],
+              textSize: 13.sp,
+              height: 50,
+              backgroundColor: MyColorsConst.primaryColor.withOpacity(0.15),
+              textColor: MyColorsConst.primaryColor,
+              onPressed: () {
+                submitData(currentStep);
+                setState(() {
+                  if (currentStep < 5) {
+                    currentStep = currentStep + 1;
+                  }
+                });
+              },
+            ),
+          } else if (currentStep >= 3) ...{
+            TextButtonCustomV1(
+              text: buttonTexts[currentStep],
+              textSize: 13.sp,
+              height: 50,
+              backgroundColor: MyColorsConst.primaryColor.withOpacity(0.15),
+              textColor: MyColorsConst.primaryColor,
+              onPressed: () {
+                submitData(currentStep);
+                setState(() {
+                  if (currentStep < 5) {
+                    currentStep = currentStep + 1;
+                  }
+                });
+              },
+            ),
+          } else if (currentStep >= 4) ...{
+            TextButtonCustomV1(
+              text: buttonTexts[currentStep],
+              textSize: 13.sp,
+              height: 50,
+              backgroundColor: MyColorsConst.primaryColor.withOpacity(0.15),
+              textColor: MyColorsConst.primaryColor,
+              onPressed: () {
+                submitData(currentStep);
+                setState(() {
+                  if (currentStep < 5) {
+                    currentStep = currentStep + 1;
+                  }
+                });
+              },
+            ),
+          } else if (currentStep == 5) ...{
             TextButtonCustomV1(
               text: buttonTexts[currentStep],
               height: 50,
               backgroundColor: MyColorsConst.primaryColor.withOpacity(0.15),
               textColor: MyColorsConst.primaryColor,
               onPressed: () {
-                print("Ini Klik Submit Edit Biodata");
-                print(
-                    "DivisiID : ${controllers.idDivisiController?.value.text}");
-                print(
-                    "DeptID : ${controllers.idDepartemenController?.value.text}");
-
-                context.read<EditBiodataBloc>().add(EditDataBiodataSubmited(
-                      divisiId:
-                          controllers.idDivisiController?.value.text != null
-                              ? int.tryParse(
-                                  controllers.idDivisiController!.value.text)
-                              : null,
-                      deptId: controllers.idDepartemenController?.value.text !=
-                              null
-                          ? int.tryParse(
-                              controllers.idDepartemenController!.value.text)
-                          : null,
-                      posisiId:
-                          controllers.idPosisiController?.value.text != null
-                              ? int.tryParse(
-                                  controllers.idPosisiController!.value.text)
-                              : null,
-                      zonaId: controllers.idZonaController?.value.text != null
-                          ? int.tryParse(
-                              controllers.idZonaController!.value.text)
-                          : null,
-                      kodePresensi:
-                          controllers.valueKodePresensiController?.value.text,
-                      namaDepan: controllers.namaDepanController?.value.text,
-                      nik: controllers.nikController?.value.text,
-                      namaBelakang:
-                          controllers.namaBelakangController?.value.text,
-                      namaLengkap:
-                          '${controllers.namaDepanController?.value.text} ${controllers.namaBelakangController?.value.text}',
-                      namaPanggilan:
-                          controllers.namaPanggilanController?.value.text,
-                      jkId: controllers.idJenisKelaminController?.value.text !=
-                              null
-                          ? int.tryParse(
-                              controllers.idJenisKelaminController!.value.text)
-                          : null,
-                      tempatLahir:
-                          controllers.valueTempatLahirController?.value.text,
-                      tglLahir: controllers.tanggalLahirController?.value.text,
-                      provinsiId:
-                          controllers.idProvinsiController?.value.text != null
-                              ? int.tryParse(
-                                  controllers.idProvinsiController!.value.text)
-                              : null,
-                      kotaId: controllers.idKotaController?.value.text != null
-                          ? int.tryParse(
-                              controllers.idKotaController!.value.text)
-                          : null,
-                      kecamatanId:
-                          controllers.idKecamatanController?.value.text != null
-                              ? int.tryParse(
-                                  controllers.idKecamatanController!.value.text)
-                              : null,
-                      kodePos: controllers.kodePosController?.value.text,
-                      alamatAsli: controllers.alamatKtpController?.value.text,
-                      alamatDomisili: controllers
-                          .alamatDomisiliTinggalController?.value.text,
-                      noTlp: controllers.noTelpController?.value.text,
-                      noTlpLainnya:
-                          controllers.noTelpLainnyaController?.value.text,
-                      noDarurat:
-                          controllers.noTelpDaruratController?.value.text,
-                      namaKontakDarurat:
-                          controllers.namaKontakDaruratController?.value.text,
-                      hubDgnKaryawan:
-                          controllers.hubkaryawanController?.value.text,
-                      agamaId: controllers.idAgamaController?.value.text != null
-                          ? int.tryParse(
-                              controllers.idAgamaController!.value.text)
-                          : null,
-                      golDarahId:
-                          controllers.idGolDarahController?.value.text != null
-                              ? int.tryParse(
-                                  controllers.idGolDarahController!.value.text)
-                              : null,
-                      statusNikahId: controllers
-                                  .idStatusPernikahanController?.value.text !=
-                              null
-                          ? int.tryParse(controllers
-                              .idStatusPernikahanController!.value.text)
-                          : null,
-                      tanggunganId: controllers
-                                  .idJumlahTanggunganController?.value.text !=
-                              null
-                          ? int.tryParse(controllers
-                              .idJumlahTanggunganController!.value.text)
-                          : null,
-                      tglMasuk: controllers.tanggalMasukController?.value.text,
-                      ktpFoto: ktp != null && ktp!.path.isNotEmpty
-                          ? File(ktp!.path)
-                          : null,
-                      pasFoto:
-                          fotoKaryawan != null && fotoKaryawan!.path.isNotEmpty
-                              ? File(fotoKaryawan!.path)
-                              : null,
-                      // bpjsFoto: bpjs != null && bpjs!.path.isNotEmpty
-                      //     ? File(bpjs!.path)
-                      //     : null,
-                      ktpNo: controllers.noKtpController?.value.text,
-                      kkNo: controllers.noKkController?.value.text,
-                      kkFoto: kartukeluarga != null &&
-                              kartukeluarga!.path.isNotEmpty
-                          ? File(kartukeluarga!.path)
-                          : null,
-                      npwpFoto: npwp != null && npwp!.path.isNotEmpty
-                          ? File(npwp!.path)
-                          : null,
-                      npwpNo: controllers.noNpwpController?.value.text,
-                      berkasLain: berkaspendukung != null &&
-                              berkaspendukung!.path.isNotEmpty
-                          ? File(berkaspendukung!.path)
-                          : null,
-                      npwpTglBerlaku:
-                          controllers.tanggalNpwpController?.value.text,
-                      bpjsTipeId:
-                          controllers.idTipeBPJSController?.value.text != null
-                              ? int.tryParse(
-                                  controllers.idTipeBPJSController!.value.text)
-                              : null,
-                      // bpjsNo: controllers.noBpjsController?.value.text,
-                      bpjsNo: controllers.noBpjsKesehatanController?.value.text,
-                      bpjsKerjaNo: controllers
-                          .noBpjsKetenagakerjaanController?.value.text,
-                      desc: controllers.keteranganController?.value.text,
-                      ukBaju: controllers.ukBajuController?.value.text,
-                      ukCelana: controllers.ukCelanaController?.value.text,
-                      ukSepatu: controllers.ukSepatuontroller?.value.text,
-                      bankId:
-                          controllers.idNamaBankController?.value.text != null
-                              ? int.tryParse(
-                                  controllers.idNamaBankController!.value.text)
-                              : null,
-                      noRek: controllers.noRekController?.value.text,
-                      atasNamaRek: controllers.atasNamaController?.value.text,
-                    ));
+                submitData(currentStep);
+                setState(() {
+                  if (currentStep < 5) {
+                    currentStep = currentStep + 1;
+                  }
+                });
               },
             ),
           },
@@ -1136,15 +1205,17 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
             LoadingDialog.showLoadingDialog(context);
           } else if (state is EditBiodataSuccess) {
             LoadingDialog.dismissDialog(context);
-            await showDialog(
-              context: context,
-              builder: (_) => DialogCustom(
-                state: DialogCustomItem.success,
-                message: state.message,
-              ),
-            );
-            Navigator.of(context).pop();
-            Navigator.pop(context);
+            if (isLastStepPressed) {
+              await showDialog(
+                context: context,
+                builder: (_) => DialogCustom(
+                  state: DialogCustomItem.success,
+                  message: state.message,
+                ),
+              );
+              Navigator.of(context).pop();
+              Navigator.pop(context);
+            }
             widget.reloadDataCallback();
           } else if (state is EditBiodataFailed) {
             LoadingDialog.dismissDialog(context);
@@ -1341,6 +1412,21 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               // title: SizedBox.shrink(),
                               content: Column(
                                 children: [
+                                  FormDateData(
+                                    showRedStar: false,
+                                    onTap: () {
+                                      showTahunMenu(context,
+                                          controllers.tanggalMasukController!);
+                                    },
+                                    hintText: 'Pilih Tanggal',
+                                    labelForm: 'Tanggal Masuk Kerja',
+                                    labelTag: 'Label-TanggalMasuk',
+                                    formTag: 'Form-TanggalMasuk',
+                                    valueController:
+                                        controllers.tanggalMasukController!,
+                                    idController:
+                                        controllers.tanggalMasukController!,
+                                  ),
                                   FormInputData(
                                     showRedStar: false,
                                     hintText: 'Tuliskan NIK',
@@ -1609,69 +1695,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                               title: SizedBox.shrink(),
                               content: Column(
                                 children: [
-                                  FormDateData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      showTahunMenu(context,
-                                          controllers.tanggalMasukController!);
-                                    },
-                                    hintText: 'Pilih Tanggal',
-                                    labelForm: 'Tanggal Masuk Kerja',
-                                    labelTag: 'Label-TanggalMasuk',
-                                    formTag: 'Form-TanggalMasuk',
-                                    valueController:
-                                        controllers.tanggalMasukController!,
-                                    idController:
-                                        controllers.tanggalMasukController!,
-                                  ),
-                                ],
-                              ),
-                              isActive: currentStep >= 2,
-                              state: currentStep >= 2
-                                  ? StepState.complete
-                                  : StepState.disabled,
-                            ),
-                            Step(
-                              label: Text(
-                                'Berkas',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 8.5.sp,
-                                    color: MyColorsConst.darkColor,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              title: SizedBox.shrink(),
-                              // title: SizedBox.shrink(),
-                              content: Column(
-                                children: [
-                                  FileSelectionWidget(
-                                    onFileSelected: (file, fileUrl) {
-                                      setState(() {
-                                        fotoKaryawan = file;
-                                        fileNameFotoKaryawan =
-                                            file.path.split('/').last;
-                                      });
-                                    },
-                                    title: 'Foto Karyawan',
-                                    fileName: fileNameFotoKaryawan,
-                                    selectedFile: fotoKaryawan,
-                                  ),
-                                  // FilePickerWidget(
-                                  //   onFileSelected: (File? file) {
-                                  //     setState(() {
-                                  //       fotoKaryawan = file;
-                                  //       // Dapatkan nama file dari path
-                                  //       fileNameFotoKaryawan = fotoKaryawan !=
-                                  //               null
-                                  //           ? fotoKaryawan!.path.split('/').last
-                                  //           : "";
-                                  //       print(
-                                  //           'Selected file: $fileNameFotoKaryawan');
-                                  //     });
-                                  //   },
-                                  //   title: 'Foto Karyawan',
-                                  //   fileName: fileNameFotoKaryawan,
-                                  //   selectedFile: fotoKaryawan,
-                                  // ),
                                   FormInputData(
                                     showRedStar: false,
                                     hintText: 'Tuliskan No. KTP',
@@ -1681,18 +1704,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     controller: controllers.noKtpController!,
                                     validator: (value) {},
                                   ),
-                                  FileSelectionWidget(
-                                    onFileSelected: (file, fileUrl) {
-                                      setState(() {
-                                        ktp = file;
-                                        fileNameKtp = file.path.split('/').last;
-                                      });
-                                    },
-                                    title: 'Foto KTP',
-                                    fileName: fileNameKtp,
-                                    selectedFile: ktp,
-                                  ),
-
                                   FormInputData(
                                     showRedStar: false,
                                     hintText: 'Tuliskan Alamat Sesuai KTP',
@@ -1703,17 +1714,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                         controllers.alamatKtpController!,
                                     validator: (value) {},
                                   ),
-                                  FileSelectionWidget(
-                                    onFileSelected: (file, fileUrl) {
-                                      setState(() {
-                                        kartukeluarga = file;
-                                        fileNameKk = file.path.split('/').last;
-                                      });
-                                    },
-                                    title: 'Foto Kartu Keluarga',
-                                    fileName: fileNameKk,
-                                    selectedFile: kartukeluarga,
-                                  ),
                                   FormInputData(
                                     showRedStar: false,
                                     hintText: 'Tuliskan No. Kartu Keluarga',
@@ -1722,18 +1722,6 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     formTag: 'Form-NoKk',
                                     controller: controllers.noKkController!,
                                     validator: (value) {},
-                                  ),
-                                  FileSelectionWidget(
-                                    onFileSelected: (file, fileUrl) {
-                                      setState(() {
-                                        npwp = file;
-                                        fileNameNpwp =
-                                            file.path.split('/').last;
-                                      });
-                                    },
-                                    title: 'Foto NPWP',
-                                    fileName: fileNameNpwp,
-                                    selectedFile: npwp,
                                   ),
                                   FormInputData(
                                     showRedStar: false,
@@ -1806,6 +1794,88 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     idController:
                                         controllers.idTipeBPJSController!,
                                   ),
+                                ],
+                              ),
+                              isActive: currentStep >= 2,
+                              state: currentStep >= 2
+                                  ? StepState.complete
+                                  : StepState.disabled,
+                            ),
+                            Step(
+                              label: Text(
+                                'Berkas',
+                                style: GoogleFonts.poppins(
+                                    fontSize: 8.5.sp,
+                                    color: MyColorsConst.darkColor,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              title: SizedBox.shrink(),
+                              // title: SizedBox.shrink(),
+                              content: Column(
+                                children: [
+                                  FileSelectionWidget(
+                                    onFileSelected: (file, fileUrl) {
+                                      setState(() {
+                                        fotoKaryawan = file;
+                                        fileNameFotoKaryawan =
+                                            file.path.split('/').last;
+                                      });
+                                    },
+                                    title: 'Foto Karyawan',
+                                    fileName: fileNameFotoKaryawan,
+                                    selectedFile: fotoKaryawan,
+                                  ),
+                                  // FilePickerWidget(
+                                  //   onFileSelected: (File? file) {
+                                  //     setState(() {
+                                  //       fotoKaryawan = file;
+                                  //       // Dapatkan nama file dari path
+                                  //       fileNameFotoKaryawan = fotoKaryawan !=
+                                  //               null
+                                  //           ? fotoKaryawan!.path.split('/').last
+                                  //           : "";
+                                  //       print(
+                                  //           'Selected file: $fileNameFotoKaryawan');
+                                  //     });
+                                  //   },
+                                  //   title: 'Foto Karyawan',
+                                  //   fileName: fileNameFotoKaryawan,
+                                  //   selectedFile: fotoKaryawan,
+                                  // ),
+                                  FileSelectionWidget(
+                                    onFileSelected: (file, fileUrl) {
+                                      setState(() {
+                                        ktp = file;
+                                        fileNameKtp = file.path.split('/').last;
+                                      });
+                                    },
+                                    title: 'Foto KTP',
+                                    fileName: fileNameKtp,
+                                    selectedFile: ktp,
+                                  ),
+                                  FileSelectionWidget(
+                                    onFileSelected: (file, fileUrl) {
+                                      setState(() {
+                                        kartukeluarga = file;
+                                        fileNameKk = file.path.split('/').last;
+                                      });
+                                    },
+                                    title: 'Foto Kartu Keluarga',
+                                    fileName: fileNameKk,
+                                    selectedFile: kartukeluarga,
+                                  ),
+                                  FileSelectionWidget(
+                                    onFileSelected: (file, fileUrl) {
+                                      setState(() {
+                                        npwp = file;
+                                        fileNameNpwp =
+                                            file.path.split('/').last;
+                                      });
+                                    },
+                                    title: 'Foto NPWP',
+                                    fileName: fileNameNpwp,
+                                    selectedFile: npwp,
+                                  ),
                                   FileSelectionWidget(
                                     onFileSelected: (file, fileUrl) {
                                       setState(() {
@@ -1821,7 +1891,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                   FormInputData(
                                     showRedStar: false,
                                     hintText: 'Tuliskan Keterangan',
-                                    labelForm: 'Keterangan',
+                                    labelForm: 'Keterangan Berkas Pendukung',
                                     labelTag: 'Label-KeteranganDiri',
                                     formTag: 'Form-KeteranganDiri',
                                     controller:
