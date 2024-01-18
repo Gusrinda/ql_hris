@@ -179,16 +179,14 @@ class _DataDiriPageState extends State<DataDiriPage> {
                                       biodata?.bioData?.dept ?? '-'),
                                   // buildInfoText(
                                   //     'Zona', biodata?.bioData?.zona ?? '-'),
-                                  // buildInfoText(
-                                  //     'Cost Centre',
-                                  //     biodata?.bioData?.costcontre
-                                  //             ?.toString() ??
-                                  //         '-'),
-                                  buildInfoText(
-                                      'Status',
-                                      biodata?.bioData?.isActive == true
-                                          ? "Active"
-                                          : "Non-Active"),
+                                  buildStatusText(
+                                    'Status',
+                                    biodata?.bioData?.isActive == true
+                                        ? "Active"
+                                        : "Non-Active",
+                                    isActive:
+                                        biodata?.bioData?.isActive == true,
+                                  ),
                                 ],
                               ),
                             ),
@@ -387,8 +385,10 @@ class _DataDiriPageState extends State<DataDiriPage> {
                                       ),
                                     ),
                                   SizedBox(height: 15.sp),
-                                  buildInfoText('No. KTP',
-                                      biodata?.bioData?.ktpNo?.toString() ?? '-'),
+                                  buildInfoText(
+                                      'No. KTP',
+                                      biodata?.bioData?.ktpNo?.toString() ??
+                                          '-'),
                                   Text(
                                     'Foto Kartu Keluarga',
                                     style: GoogleFonts.poppins(
@@ -471,17 +471,18 @@ class _DataDiriPageState extends State<DataDiriPage> {
                                   //         : '-'),
                                   buildInfoText(
                                       'No. BPJS Kesehatan',
-                                      biodata?.bioData?.bpjsNoKesehatan?.toString() ??
+                                      biodata?.bioData?.bpjsNoKesehatan
+                                              ?.toString() ??
                                           '-'),
                                   buildInfoText(
                                       'No. BPJS Ketenagakerjaan',
-                                      biodata?.bioData?.bpjsNoKetenagakerjaan?.toString() ??
+                                      biodata?.bioData?.bpjsNoKetenagakerjaan
+                                              ?.toString() ??
                                           '-'),
 
                                   buildInfoText(
                                       'Tipe BPJS',
-                                      biodata?.bioData?.bpjsTipe
-                                              ?.toString() ??
+                                      biodata?.bioData?.bpjsTipe?.toString() ??
                                           '-'),
                                 ],
                               ),
@@ -545,9 +546,9 @@ class _DataDiriPageState extends State<DataDiriPage> {
                                   buildInfoText(
                                       'Tanggal Berlaku NPWP',
                                       biodata?.bioData?.npwpTglBerlaku != null
-                                        ? DateFormat('dd MMMM yyyy')
-                                            .format(biodata!.bioData!.npwpTglBerlaku!)
-                                        : '-'),
+                                          ? DateFormat('dd MMMM yyyy').format(
+                                              biodata!.bioData!.npwpTglBerlaku!)
+                                          : '-'),
                                   // Text(
                                   //   'Foto BPJS',
                                   //   style: GoogleFonts.poppins(
@@ -781,6 +782,38 @@ class _DataDiriPageState extends State<DataDiriPage> {
             fontSize: 12.sp,
             fontWeight: FontWeight.w600,
             color: MyColorsConst.darkColor,
+          ),
+        ),
+        SizedBox(height: 15.sp),
+      ],
+    );
+  }
+
+  Widget buildStatusText(String label, String value, {bool isActive = false}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: GoogleFonts.poppins(
+            fontSize: 10.sp,
+            color: MyColorsConst.lightDarkColor,
+          ),
+        ),
+        const SizedBox(height: 2),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: isActive ? Colors.green.shade500.withOpacity(0.15) : Colors.red.shade500.withOpacity(0.15)
+          ),
+          child: Text(
+            value,
+            style: GoogleFonts.poppins(
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w600,
+              color: isActive ? Colors.green.shade600 : Colors.red.shade600,
+            ),
           ),
         ),
         SizedBox(height: 15.sp),

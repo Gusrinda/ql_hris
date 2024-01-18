@@ -1,8 +1,13 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:sj_presensi_mobile/componens/HRIS/form_data_profile.dart';
@@ -54,6 +59,68 @@ class _AddCutiPageState extends State<AddCutiPage> {
   int weekdaysCount = 0;
   bool dateFromError = false;
   bool dateToError = false;
+  final _picker = ImagePicker();
+  File? uploadedFile;
+  String fileName = "";
+  String fileUrl = "";
+
+  Future<XFile?> captureFile(BuildContext context) async {
+    try {
+      final pickFile = await _picker.pickImage(
+        source: ImageSource.camera,
+        preferredCameraDevice: CameraDevice.front,
+      );
+
+      if (pickFile == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Gagal Mengambil File!'),
+            backgroundColor: MyColorsConst.redColor,
+          ),
+        );
+        return null;
+      }
+      return pickFile;
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+      return null;
+    }
+  }
+
+  Future<FilePickerResult?> uploadFile(BuildContext context) async {
+    try {
+      FilePickerResult? pickedFileNonCamera =
+          await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['pdf', 'jpeg', 'jpg', 'png'],
+      );
+
+      if (pickedFileNonCamera != null) {
+        PlatformFile file = pickedFileNonCamera.files.first;
+        setState(() {
+          uploadedFile = File(file.path ?? '');
+          fileName = file.name;
+          fileUrl = file.path ?? '';
+        });
+        print('Path: ${file.path}');
+        print('File Name: $fileName');
+        print('Size: ${file.size}');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            duration: Duration(seconds: 2),
+            content: Text('Gagal Mengambil File!'),
+            backgroundColor: MyColorsConst.redColor,
+          ),
+        );
+        return null;
+      }
+      return pickedFileNonCamera;
+    } on PlatformException catch (e) {
+      print('Failed to upload file: $e');
+      return null;
+    }
+  }
 
   DateTime? parseDate(String? date) {
     try {
@@ -328,7 +395,10 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                                 child: Row(
                                                   children: [
                                                     FormTextLabel(
-                                                      label: selectedTipeValue != "P24" ? "Tanggal Mulai" : "Tanggal Cuti P24",
+                                                      label: selectedTipeValue !=
+                                                              "P24"
+                                                          ? "Tanggal Mulai"
+                                                          : "Tanggal Cuti P24",
                                                       labelColor: MyColorsConst
                                                           .darkColor,
                                                     ),
@@ -588,6 +658,187 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                               ),
                                             ],
                                           ),
+                                          const SizedBox(height: 20),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'Surat Dokter',
+                                                style: GoogleFonts.poppins(
+                                                  fontSize: 13.sp,
+                                                  color:
+                                                      MyColorsConst.darkColor,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 5),
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: OutlinedButton.icon(
+                                                  onPressed: () async {
+                                                    final file =
+                                                        await uploadFile(
+                                                            context);
+
+                                                    if (file != null) {
+                                                      setState(() {
+                                                        uploadedFile = file
+                                                            .files
+                                                            .first as File?;
+                                                      });
+
+                                                      // Extract file name from the path
+                                                      fileName = uploadedFile !=
+                                                              null
+                                                          ? uploadedFile!.path
+                                                              .split('/')
+                                                              .last
+                                                          : "";
+                                                      print(
+                                                          'Uploaded file: $fileName');
+                                                    }
+                                                  },
+                                                  style:
+                                                      OutlinedButton.styleFrom(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        vertical: 15),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                    ),
+                                                    foregroundColor:
+                                                        MyColorsConst
+                                                            .primaryColor,
+                                                    side: BorderSide(
+                                                      width: 1.5,
+                                                      color: MyColorsConst
+                                                          .formBorderColor,
+                                                    ),
+                                                  ),
+                                                  icon: Icon(
+                                                    CupertinoIcons.doc,
+                                                    size: 20.sp,
+                                                    color: MyColorsConst
+                                                        .lightDarkColor,
+                                                  ),
+                                                  label: Text(
+                                                    'Upload',
+                                                    style: GoogleFonts.poppins(
+                                                      fontSize: 13.sp,
+                                                      color: MyColorsConst
+                                                          .lightDarkColor,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 10),
+                                              Expanded(
+                                                child: OutlinedButton.icon(
+                                                  onPressed: () async {
+                                                    final file =
+                                                        await captureFile(
+                                                            context);
+
+                                                    if (file != null) {
+                                                      setState(() {
+                                                        uploadedFile =
+                                                            File(file.path);
+                                                      });
+
+                                                      fileName = uploadedFile!
+                                                          .path
+                                                          .split('/')
+                                                          .last;
+                                                      print(
+                                                          'Captured file: $fileName');
+                                                    }
+                                                  },
+                                                  style:
+                                                      OutlinedButton.styleFrom(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        vertical: 15),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                    ),
+                                                    foregroundColor:
+                                                        MyColorsConst
+                                                            .primaryColor,
+                                                    side: BorderSide(
+                                                      width: 1.5,
+                                                      color: MyColorsConst
+                                                          .formBorderColor,
+                                                    ),
+                                                  ),
+                                                  icon: Icon(
+                                                    CupertinoIcons.camera,
+                                                    size: 20.sp,
+                                                    color: MyColorsConst
+                                                        .lightDarkColor,
+                                                  ),
+                                                  label: Text(
+                                                    'Kamera',
+                                                    style: GoogleFonts.poppins(
+                                                      fontSize: 13.sp,
+                                                      color: MyColorsConst
+                                                          .lightDarkColor,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          if (uploadedFile != null)
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                SizedBox(height: 7.sp),
+                                                SizedBox(
+                                                  width: size.width,
+                                                  child: RichText(
+                                                    text: TextSpan(
+                                                      children: [
+                                                        TextSpan(
+                                                          text: 'Nama File: ',
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                            fontSize: 12.sp,
+                                                            color: MyColorsConst
+                                                                .lightDarkColor,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ),
+                                                        ),
+                                                        TextSpan(
+                                                          text: ' $fileName',
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                            fontSize: 12.sp,
+                                                            color: MyColorsConst
+                                                                .primaryColor,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                         },
                                         SizedBox(
                                           height: 20.sp,
@@ -692,6 +943,13 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                                       keterangan: widget
                                                           .keteranganController
                                                           .text,
+                                                      suratDokter: uploadedFile !=
+                                                                  null &&
+                                                              uploadedFile!.path
+                                                                  .isNotEmpty
+                                                          ? File(uploadedFile!
+                                                              .path)
+                                                          : null,
                                                       dateFrom: widget
                                                           .dateFromController
                                                           .text,

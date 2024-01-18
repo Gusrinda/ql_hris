@@ -763,7 +763,7 @@ class _HomePageState extends State<HomePage> {
                                   ? 5
                                   : listPengumuman.length;
                               return Container(
-                                constraints: BoxConstraints(maxHeight: 280.sp),
+                                constraints: BoxConstraints(maxHeight: 300.sp),
                                 child: listPengumuman.isNotEmpty
                                     ? ListView.builder(
                                         scrollDirection: Axis.horizontal,

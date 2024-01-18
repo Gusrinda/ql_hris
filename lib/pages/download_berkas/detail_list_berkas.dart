@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
-import 'package:sj_presensi_mobile/pages/download_berkas/kategori_berkas_bloc/berkas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/download_berkas/list_berkas_bloc/list_berkas_bloc.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 import 'package:url_launcher/link.dart';
@@ -120,6 +119,23 @@ class _DetailListBerkasPageState extends State<DetailListBerkasPage> {
                 child: BlocBuilder<ListBerkasBloc, ListBerkasState>(
                   builder: (context, state) {
                     var listberkas = context.read<ListBerkasBloc>().listBerkas;
+                    if (listberkas.isEmpty) {
+                      return Container(
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                          ),
+                          color: Colors.white,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(20.sp),
+                          child: Center(
+                            child: EmptyStateBuilder(),
+                          ),
+                        ),
+                      );
+                    }
                     // Filter berkas berdasarkan kategori
                     return Container(
                       decoration: const BoxDecoration(
@@ -242,6 +258,35 @@ class DashboardItem extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+
+class EmptyStateBuilder extends StatelessWidget {
+  const EmptyStateBuilder({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          "assets/images/box_nodata.png",
+          height: size.width * 1 / 2.5,
+        ),
+        const SizedBox(height: 8),
+        Text(
+          "Tidak Ada Berkas",
+          style: GoogleFonts.poppins(
+            color: MyColorsConst.darkColor,
+            fontWeight: FontWeight.w600,
+            fontSize: 14.sp,
+          ),
+        ),
+      ],
     );
   }
 }

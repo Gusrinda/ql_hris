@@ -1866,6 +1866,14 @@ mixin _$Trx {
   dynamic get timeTo => throw _privateConstructorUsedError;
   @JsonKey(name: "catatan_kend")
   String? get catatanKend => throw _privateConstructorUsedError;
+  @JsonKey(name: "cuti_sisa_panjang")
+  int? get cutiSisaPanjang => throw _privateConstructorUsedError;
+  @JsonKey(name: "cuti_sisa_reguler")
+  int? get cutiSisaReguler => throw _privateConstructorUsedError;
+  @JsonKey(name: "cuti_sisa_p24")
+  int? get cutiSisaP24 => throw _privateConstructorUsedError;
+  @JsonKey(name: "info_cuti")
+  InfoCuti? get infoCuti => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1915,7 +1923,13 @@ abstract class $TrxCopyWith<$Res> {
       @JsonKey(name: "interval_min") int? intervalMin,
       @JsonKey(name: "time_from") dynamic timeFrom,
       @JsonKey(name: "time_to") dynamic timeTo,
-      @JsonKey(name: "catatan_kend") String? catatanKend});
+      @JsonKey(name: "catatan_kend") String? catatanKend,
+      @JsonKey(name: "cuti_sisa_panjang") int? cutiSisaPanjang,
+      @JsonKey(name: "cuti_sisa_reguler") int? cutiSisaReguler,
+      @JsonKey(name: "cuti_sisa_p24") int? cutiSisaP24,
+      @JsonKey(name: "info_cuti") InfoCuti? infoCuti});
+
+  $InfoCutiCopyWith<$Res>? get infoCuti;
 }
 
 /// @nodoc
@@ -1968,6 +1982,10 @@ class _$TrxCopyWithImpl<$Res, $Val extends Trx> implements $TrxCopyWith<$Res> {
     Object? timeFrom = freezed,
     Object? timeTo = freezed,
     Object? catatanKend = freezed,
+    Object? cutiSisaPanjang = freezed,
+    Object? cutiSisaReguler = freezed,
+    Object? cutiSisaP24 = freezed,
+    Object? infoCuti = freezed,
   }) {
     return _then(_value.copyWith(
       nomor: freezed == nomor
@@ -2122,7 +2140,35 @@ class _$TrxCopyWithImpl<$Res, $Val extends Trx> implements $TrxCopyWith<$Res> {
           ? _value.catatanKend
           : catatanKend // ignore: cast_nullable_to_non_nullable
               as String?,
+      cutiSisaPanjang: freezed == cutiSisaPanjang
+          ? _value.cutiSisaPanjang
+          : cutiSisaPanjang // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiSisaReguler: freezed == cutiSisaReguler
+          ? _value.cutiSisaReguler
+          : cutiSisaReguler // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiSisaP24: freezed == cutiSisaP24
+          ? _value.cutiSisaP24
+          : cutiSisaP24 // ignore: cast_nullable_to_non_nullable
+              as int?,
+      infoCuti: freezed == infoCuti
+          ? _value.infoCuti
+          : infoCuti // ignore: cast_nullable_to_non_nullable
+              as InfoCuti?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $InfoCutiCopyWith<$Res>? get infoCuti {
+    if (_value.infoCuti == null) {
+      return null;
+    }
+
+    return $InfoCutiCopyWith<$Res>(_value.infoCuti!, (value) {
+      return _then(_value.copyWith(infoCuti: value) as $Val);
+    });
   }
 }
 
@@ -2170,7 +2216,14 @@ abstract class _$$TrxImplCopyWith<$Res> implements $TrxCopyWith<$Res> {
       @JsonKey(name: "interval_min") int? intervalMin,
       @JsonKey(name: "time_from") dynamic timeFrom,
       @JsonKey(name: "time_to") dynamic timeTo,
-      @JsonKey(name: "catatan_kend") String? catatanKend});
+      @JsonKey(name: "catatan_kend") String? catatanKend,
+      @JsonKey(name: "cuti_sisa_panjang") int? cutiSisaPanjang,
+      @JsonKey(name: "cuti_sisa_reguler") int? cutiSisaReguler,
+      @JsonKey(name: "cuti_sisa_p24") int? cutiSisaP24,
+      @JsonKey(name: "info_cuti") InfoCuti? infoCuti});
+
+  @override
+  $InfoCutiCopyWith<$Res>? get infoCuti;
 }
 
 /// @nodoc
@@ -2220,6 +2273,10 @@ class __$$TrxImplCopyWithImpl<$Res> extends _$TrxCopyWithImpl<$Res, _$TrxImpl>
     Object? timeFrom = freezed,
     Object? timeTo = freezed,
     Object? catatanKend = freezed,
+    Object? cutiSisaPanjang = freezed,
+    Object? cutiSisaReguler = freezed,
+    Object? cutiSisaP24 = freezed,
+    Object? infoCuti = freezed,
   }) {
     return _then(_$TrxImpl(
       nomor: freezed == nomor
@@ -2374,6 +2431,22 @@ class __$$TrxImplCopyWithImpl<$Res> extends _$TrxCopyWithImpl<$Res, _$TrxImpl>
           ? _value.catatanKend
           : catatanKend // ignore: cast_nullable_to_non_nullable
               as String?,
+      cutiSisaPanjang: freezed == cutiSisaPanjang
+          ? _value.cutiSisaPanjang
+          : cutiSisaPanjang // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiSisaReguler: freezed == cutiSisaReguler
+          ? _value.cutiSisaReguler
+          : cutiSisaReguler // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiSisaP24: freezed == cutiSisaP24
+          ? _value.cutiSisaP24
+          : cutiSisaP24 // ignore: cast_nullable_to_non_nullable
+              as int?,
+      infoCuti: freezed == infoCuti
+          ? _value.infoCuti
+          : infoCuti // ignore: cast_nullable_to_non_nullable
+              as InfoCuti?,
     ));
   }
 }
@@ -2419,7 +2492,11 @@ class _$TrxImpl implements _Trx {
       @JsonKey(name: "interval_min") this.intervalMin,
       @JsonKey(name: "time_from") this.timeFrom,
       @JsonKey(name: "time_to") this.timeTo,
-      @JsonKey(name: "catatan_kend") this.catatanKend});
+      @JsonKey(name: "catatan_kend") this.catatanKend,
+      @JsonKey(name: "cuti_sisa_panjang") this.cutiSisaPanjang,
+      @JsonKey(name: "cuti_sisa_reguler") this.cutiSisaReguler,
+      @JsonKey(name: "cuti_sisa_p24") this.cutiSisaP24,
+      @JsonKey(name: "info_cuti") this.infoCuti});
 
   factory _$TrxImpl.fromJson(Map<String, dynamic> json) =>
       _$$TrxImplFromJson(json);
@@ -2538,10 +2615,22 @@ class _$TrxImpl implements _Trx {
   @override
   @JsonKey(name: "catatan_kend")
   final String? catatanKend;
+  @override
+  @JsonKey(name: "cuti_sisa_panjang")
+  final int? cutiSisaPanjang;
+  @override
+  @JsonKey(name: "cuti_sisa_reguler")
+  final int? cutiSisaReguler;
+  @override
+  @JsonKey(name: "cuti_sisa_p24")
+  final int? cutiSisaP24;
+  @override
+  @JsonKey(name: "info_cuti")
+  final InfoCuti? infoCuti;
 
   @override
   String toString() {
-    return 'Trx(nomor: $nomor, tanggal: $tanggal, tglAcaraAwal: $tglAcaraAwal, tglAcaraAkhir: $tglAcaraAkhir, jenisSpdId: $jenisSpdId, jenisSpd: $jenisSpd, mZonaAsalId: $mZonaAsalId, zonaAsal: $zonaAsal, mZonaTujuanId: $mZonaTujuanId, zonaTujuan: $zonaTujuan, mLokasiTujuanId: $mLokasiTujuanId, lokasi: $lokasi, mKaryId: $mKaryId, namaKary: $namaKary, picId: $picId, namaPic: $namaPic, totalBiaya: $totalBiaya, totalBiayaSpd: $totalBiayaSpd, totalBiayaSelisih: $totalBiayaSelisih, tipeCuti: $tipeCuti, alasanCuti: $alasanCuti, kegiatan: $kegiatan, keterangan: $keterangan, status: $status, alasanId: $alasanId, alasan: $alasan, tipeCutiId: $tipeCutiId, dateFrom: $dateFrom, dateTo: $dateTo, jamMulai: $jamMulai, jamSelesai: $jamSelesai, noDoc: $noDoc, doc: $doc, interval: $interval, intervalMin: $intervalMin, timeFrom: $timeFrom, timeTo: $timeTo, catatanKend: $catatanKend)';
+    return 'Trx(nomor: $nomor, tanggal: $tanggal, tglAcaraAwal: $tglAcaraAwal, tglAcaraAkhir: $tglAcaraAkhir, jenisSpdId: $jenisSpdId, jenisSpd: $jenisSpd, mZonaAsalId: $mZonaAsalId, zonaAsal: $zonaAsal, mZonaTujuanId: $mZonaTujuanId, zonaTujuan: $zonaTujuan, mLokasiTujuanId: $mLokasiTujuanId, lokasi: $lokasi, mKaryId: $mKaryId, namaKary: $namaKary, picId: $picId, namaPic: $namaPic, totalBiaya: $totalBiaya, totalBiayaSpd: $totalBiayaSpd, totalBiayaSelisih: $totalBiayaSelisih, tipeCuti: $tipeCuti, alasanCuti: $alasanCuti, kegiatan: $kegiatan, keterangan: $keterangan, status: $status, alasanId: $alasanId, alasan: $alasan, tipeCutiId: $tipeCutiId, dateFrom: $dateFrom, dateTo: $dateTo, jamMulai: $jamMulai, jamSelesai: $jamSelesai, noDoc: $noDoc, doc: $doc, interval: $interval, intervalMin: $intervalMin, timeFrom: $timeFrom, timeTo: $timeTo, catatanKend: $catatanKend, cutiSisaPanjang: $cutiSisaPanjang, cutiSisaReguler: $cutiSisaReguler, cutiSisaP24: $cutiSisaP24, infoCuti: $infoCuti)';
   }
 
   @override
@@ -2610,7 +2699,15 @@ class _$TrxImpl implements _Trx {
             const DeepCollectionEquality().equals(other.timeFrom, timeFrom) &&
             const DeepCollectionEquality().equals(other.timeTo, timeTo) &&
             (identical(other.catatanKend, catatanKend) ||
-                other.catatanKend == catatanKend));
+                other.catatanKend == catatanKend) &&
+            (identical(other.cutiSisaPanjang, cutiSisaPanjang) ||
+                other.cutiSisaPanjang == cutiSisaPanjang) &&
+            (identical(other.cutiSisaReguler, cutiSisaReguler) ||
+                other.cutiSisaReguler == cutiSisaReguler) &&
+            (identical(other.cutiSisaP24, cutiSisaP24) ||
+                other.cutiSisaP24 == cutiSisaP24) &&
+            (identical(other.infoCuti, infoCuti) ||
+                other.infoCuti == infoCuti));
   }
 
   @JsonKey(ignore: true)
@@ -2654,7 +2751,11 @@ class _$TrxImpl implements _Trx {
         intervalMin,
         const DeepCollectionEquality().hash(timeFrom),
         const DeepCollectionEquality().hash(timeTo),
-        catatanKend
+        catatanKend,
+        cutiSisaPanjang,
+        cutiSisaReguler,
+        cutiSisaP24,
+        infoCuti
       ]);
 
   @JsonKey(ignore: true)
@@ -2710,7 +2811,11 @@ abstract class _Trx implements Trx {
       @JsonKey(name: "interval_min") final int? intervalMin,
       @JsonKey(name: "time_from") final dynamic timeFrom,
       @JsonKey(name: "time_to") final dynamic timeTo,
-      @JsonKey(name: "catatan_kend") final String? catatanKend}) = _$TrxImpl;
+      @JsonKey(name: "catatan_kend") final String? catatanKend,
+      @JsonKey(name: "cuti_sisa_panjang") final int? cutiSisaPanjang,
+      @JsonKey(name: "cuti_sisa_reguler") final int? cutiSisaReguler,
+      @JsonKey(name: "cuti_sisa_p24") final int? cutiSisaP24,
+      @JsonKey(name: "info_cuti") final InfoCuti? infoCuti}) = _$TrxImpl;
 
   factory _Trx.fromJson(Map<String, dynamic> json) = _$TrxImpl.fromJson;
 
@@ -2829,7 +2934,439 @@ abstract class _Trx implements Trx {
   @JsonKey(name: "catatan_kend")
   String? get catatanKend;
   @override
+  @JsonKey(name: "cuti_sisa_panjang")
+  int? get cutiSisaPanjang;
+  @override
+  @JsonKey(name: "cuti_sisa_reguler")
+  int? get cutiSisaReguler;
+  @override
+  @JsonKey(name: "cuti_sisa_p24")
+  int? get cutiSisaP24;
+  @override
+  @JsonKey(name: "info_cuti")
+  InfoCuti? get infoCuti;
+  @override
   @JsonKey(ignore: true)
   _$$TrxImplCopyWith<_$TrxImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+InfoCuti _$InfoCutiFromJson(Map<String, dynamic> json) {
+  return _InfoCuti.fromJson(json);
+}
+
+/// @nodoc
+mixin _$InfoCuti {
+  @JsonKey(name: "cuti_p24")
+  int? get cutiP24 => throw _privateConstructorUsedError;
+  @JsonKey(name: "cuti_reguler")
+  int? get cutiReguler => throw _privateConstructorUsedError;
+  @JsonKey(name: "work_present")
+  int? get workPresent => throw _privateConstructorUsedError;
+  @JsonKey(name: "cuti_terpakai")
+  int? get cutiTerpakai => throw _privateConstructorUsedError;
+  @JsonKey(name: "potongan_cuti")
+  int? get potonganCuti => throw _privateConstructorUsedError;
+  @JsonKey(name: "sisa_cuti_p24")
+  int? get sisaCutiP24 => throw _privateConstructorUsedError;
+  @JsonKey(name: "cuti_masa_kerja")
+  int? get cutiMasaKerja => throw _privateConstructorUsedError;
+  @JsonKey(name: "work_not_present")
+  int? get workNotPresent => throw _privateConstructorUsedError;
+  @JsonKey(name: "cuti_p24_terpakai")
+  int? get cutiP24Terpakai => throw _privateConstructorUsedError;
+  @JsonKey(name: "sisa_cuti_reguler")
+  int? get sisaCutiReguler => throw _privateConstructorUsedError;
+  @JsonKey(name: "work_days_in_month")
+  int? get workDaysInMonth => throw _privateConstructorUsedError;
+  @JsonKey(name: "sisa_cuti_masa_kerja")
+  int? get sisaCutiMasaKerja => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $InfoCutiCopyWith<InfoCuti> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $InfoCutiCopyWith<$Res> {
+  factory $InfoCutiCopyWith(InfoCuti value, $Res Function(InfoCuti) then) =
+      _$InfoCutiCopyWithImpl<$Res, InfoCuti>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "cuti_p24") int? cutiP24,
+      @JsonKey(name: "cuti_reguler") int? cutiReguler,
+      @JsonKey(name: "work_present") int? workPresent,
+      @JsonKey(name: "cuti_terpakai") int? cutiTerpakai,
+      @JsonKey(name: "potongan_cuti") int? potonganCuti,
+      @JsonKey(name: "sisa_cuti_p24") int? sisaCutiP24,
+      @JsonKey(name: "cuti_masa_kerja") int? cutiMasaKerja,
+      @JsonKey(name: "work_not_present") int? workNotPresent,
+      @JsonKey(name: "cuti_p24_terpakai") int? cutiP24Terpakai,
+      @JsonKey(name: "sisa_cuti_reguler") int? sisaCutiReguler,
+      @JsonKey(name: "work_days_in_month") int? workDaysInMonth,
+      @JsonKey(name: "sisa_cuti_masa_kerja") int? sisaCutiMasaKerja});
+}
+
+/// @nodoc
+class _$InfoCutiCopyWithImpl<$Res, $Val extends InfoCuti>
+    implements $InfoCutiCopyWith<$Res> {
+  _$InfoCutiCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cutiP24 = freezed,
+    Object? cutiReguler = freezed,
+    Object? workPresent = freezed,
+    Object? cutiTerpakai = freezed,
+    Object? potonganCuti = freezed,
+    Object? sisaCutiP24 = freezed,
+    Object? cutiMasaKerja = freezed,
+    Object? workNotPresent = freezed,
+    Object? cutiP24Terpakai = freezed,
+    Object? sisaCutiReguler = freezed,
+    Object? workDaysInMonth = freezed,
+    Object? sisaCutiMasaKerja = freezed,
+  }) {
+    return _then(_value.copyWith(
+      cutiP24: freezed == cutiP24
+          ? _value.cutiP24
+          : cutiP24 // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiReguler: freezed == cutiReguler
+          ? _value.cutiReguler
+          : cutiReguler // ignore: cast_nullable_to_non_nullable
+              as int?,
+      workPresent: freezed == workPresent
+          ? _value.workPresent
+          : workPresent // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiTerpakai: freezed == cutiTerpakai
+          ? _value.cutiTerpakai
+          : cutiTerpakai // ignore: cast_nullable_to_non_nullable
+              as int?,
+      potonganCuti: freezed == potonganCuti
+          ? _value.potonganCuti
+          : potonganCuti // ignore: cast_nullable_to_non_nullable
+              as int?,
+      sisaCutiP24: freezed == sisaCutiP24
+          ? _value.sisaCutiP24
+          : sisaCutiP24 // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiMasaKerja: freezed == cutiMasaKerja
+          ? _value.cutiMasaKerja
+          : cutiMasaKerja // ignore: cast_nullable_to_non_nullable
+              as int?,
+      workNotPresent: freezed == workNotPresent
+          ? _value.workNotPresent
+          : workNotPresent // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiP24Terpakai: freezed == cutiP24Terpakai
+          ? _value.cutiP24Terpakai
+          : cutiP24Terpakai // ignore: cast_nullable_to_non_nullable
+              as int?,
+      sisaCutiReguler: freezed == sisaCutiReguler
+          ? _value.sisaCutiReguler
+          : sisaCutiReguler // ignore: cast_nullable_to_non_nullable
+              as int?,
+      workDaysInMonth: freezed == workDaysInMonth
+          ? _value.workDaysInMonth
+          : workDaysInMonth // ignore: cast_nullable_to_non_nullable
+              as int?,
+      sisaCutiMasaKerja: freezed == sisaCutiMasaKerja
+          ? _value.sisaCutiMasaKerja
+          : sisaCutiMasaKerja // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$InfoCutiImplCopyWith<$Res>
+    implements $InfoCutiCopyWith<$Res> {
+  factory _$$InfoCutiImplCopyWith(
+          _$InfoCutiImpl value, $Res Function(_$InfoCutiImpl) then) =
+      __$$InfoCutiImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "cuti_p24") int? cutiP24,
+      @JsonKey(name: "cuti_reguler") int? cutiReguler,
+      @JsonKey(name: "work_present") int? workPresent,
+      @JsonKey(name: "cuti_terpakai") int? cutiTerpakai,
+      @JsonKey(name: "potongan_cuti") int? potonganCuti,
+      @JsonKey(name: "sisa_cuti_p24") int? sisaCutiP24,
+      @JsonKey(name: "cuti_masa_kerja") int? cutiMasaKerja,
+      @JsonKey(name: "work_not_present") int? workNotPresent,
+      @JsonKey(name: "cuti_p24_terpakai") int? cutiP24Terpakai,
+      @JsonKey(name: "sisa_cuti_reguler") int? sisaCutiReguler,
+      @JsonKey(name: "work_days_in_month") int? workDaysInMonth,
+      @JsonKey(name: "sisa_cuti_masa_kerja") int? sisaCutiMasaKerja});
+}
+
+/// @nodoc
+class __$$InfoCutiImplCopyWithImpl<$Res>
+    extends _$InfoCutiCopyWithImpl<$Res, _$InfoCutiImpl>
+    implements _$$InfoCutiImplCopyWith<$Res> {
+  __$$InfoCutiImplCopyWithImpl(
+      _$InfoCutiImpl _value, $Res Function(_$InfoCutiImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cutiP24 = freezed,
+    Object? cutiReguler = freezed,
+    Object? workPresent = freezed,
+    Object? cutiTerpakai = freezed,
+    Object? potonganCuti = freezed,
+    Object? sisaCutiP24 = freezed,
+    Object? cutiMasaKerja = freezed,
+    Object? workNotPresent = freezed,
+    Object? cutiP24Terpakai = freezed,
+    Object? sisaCutiReguler = freezed,
+    Object? workDaysInMonth = freezed,
+    Object? sisaCutiMasaKerja = freezed,
+  }) {
+    return _then(_$InfoCutiImpl(
+      cutiP24: freezed == cutiP24
+          ? _value.cutiP24
+          : cutiP24 // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiReguler: freezed == cutiReguler
+          ? _value.cutiReguler
+          : cutiReguler // ignore: cast_nullable_to_non_nullable
+              as int?,
+      workPresent: freezed == workPresent
+          ? _value.workPresent
+          : workPresent // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiTerpakai: freezed == cutiTerpakai
+          ? _value.cutiTerpakai
+          : cutiTerpakai // ignore: cast_nullable_to_non_nullable
+              as int?,
+      potonganCuti: freezed == potonganCuti
+          ? _value.potonganCuti
+          : potonganCuti // ignore: cast_nullable_to_non_nullable
+              as int?,
+      sisaCutiP24: freezed == sisaCutiP24
+          ? _value.sisaCutiP24
+          : sisaCutiP24 // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiMasaKerja: freezed == cutiMasaKerja
+          ? _value.cutiMasaKerja
+          : cutiMasaKerja // ignore: cast_nullable_to_non_nullable
+              as int?,
+      workNotPresent: freezed == workNotPresent
+          ? _value.workNotPresent
+          : workNotPresent // ignore: cast_nullable_to_non_nullable
+              as int?,
+      cutiP24Terpakai: freezed == cutiP24Terpakai
+          ? _value.cutiP24Terpakai
+          : cutiP24Terpakai // ignore: cast_nullable_to_non_nullable
+              as int?,
+      sisaCutiReguler: freezed == sisaCutiReguler
+          ? _value.sisaCutiReguler
+          : sisaCutiReguler // ignore: cast_nullable_to_non_nullable
+              as int?,
+      workDaysInMonth: freezed == workDaysInMonth
+          ? _value.workDaysInMonth
+          : workDaysInMonth // ignore: cast_nullable_to_non_nullable
+              as int?,
+      sisaCutiMasaKerja: freezed == sisaCutiMasaKerja
+          ? _value.sisaCutiMasaKerja
+          : sisaCutiMasaKerja // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$InfoCutiImpl implements _InfoCuti {
+  const _$InfoCutiImpl(
+      {@JsonKey(name: "cuti_p24") this.cutiP24,
+      @JsonKey(name: "cuti_reguler") this.cutiReguler,
+      @JsonKey(name: "work_present") this.workPresent,
+      @JsonKey(name: "cuti_terpakai") this.cutiTerpakai,
+      @JsonKey(name: "potongan_cuti") this.potonganCuti,
+      @JsonKey(name: "sisa_cuti_p24") this.sisaCutiP24,
+      @JsonKey(name: "cuti_masa_kerja") this.cutiMasaKerja,
+      @JsonKey(name: "work_not_present") this.workNotPresent,
+      @JsonKey(name: "cuti_p24_terpakai") this.cutiP24Terpakai,
+      @JsonKey(name: "sisa_cuti_reguler") this.sisaCutiReguler,
+      @JsonKey(name: "work_days_in_month") this.workDaysInMonth,
+      @JsonKey(name: "sisa_cuti_masa_kerja") this.sisaCutiMasaKerja});
+
+  factory _$InfoCutiImpl.fromJson(Map<String, dynamic> json) =>
+      _$$InfoCutiImplFromJson(json);
+
+  @override
+  @JsonKey(name: "cuti_p24")
+  final int? cutiP24;
+  @override
+  @JsonKey(name: "cuti_reguler")
+  final int? cutiReguler;
+  @override
+  @JsonKey(name: "work_present")
+  final int? workPresent;
+  @override
+  @JsonKey(name: "cuti_terpakai")
+  final int? cutiTerpakai;
+  @override
+  @JsonKey(name: "potongan_cuti")
+  final int? potonganCuti;
+  @override
+  @JsonKey(name: "sisa_cuti_p24")
+  final int? sisaCutiP24;
+  @override
+  @JsonKey(name: "cuti_masa_kerja")
+  final int? cutiMasaKerja;
+  @override
+  @JsonKey(name: "work_not_present")
+  final int? workNotPresent;
+  @override
+  @JsonKey(name: "cuti_p24_terpakai")
+  final int? cutiP24Terpakai;
+  @override
+  @JsonKey(name: "sisa_cuti_reguler")
+  final int? sisaCutiReguler;
+  @override
+  @JsonKey(name: "work_days_in_month")
+  final int? workDaysInMonth;
+  @override
+  @JsonKey(name: "sisa_cuti_masa_kerja")
+  final int? sisaCutiMasaKerja;
+
+  @override
+  String toString() {
+    return 'InfoCuti(cutiP24: $cutiP24, cutiReguler: $cutiReguler, workPresent: $workPresent, cutiTerpakai: $cutiTerpakai, potonganCuti: $potonganCuti, sisaCutiP24: $sisaCutiP24, cutiMasaKerja: $cutiMasaKerja, workNotPresent: $workNotPresent, cutiP24Terpakai: $cutiP24Terpakai, sisaCutiReguler: $sisaCutiReguler, workDaysInMonth: $workDaysInMonth, sisaCutiMasaKerja: $sisaCutiMasaKerja)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$InfoCutiImpl &&
+            (identical(other.cutiP24, cutiP24) || other.cutiP24 == cutiP24) &&
+            (identical(other.cutiReguler, cutiReguler) ||
+                other.cutiReguler == cutiReguler) &&
+            (identical(other.workPresent, workPresent) ||
+                other.workPresent == workPresent) &&
+            (identical(other.cutiTerpakai, cutiTerpakai) ||
+                other.cutiTerpakai == cutiTerpakai) &&
+            (identical(other.potonganCuti, potonganCuti) ||
+                other.potonganCuti == potonganCuti) &&
+            (identical(other.sisaCutiP24, sisaCutiP24) ||
+                other.sisaCutiP24 == sisaCutiP24) &&
+            (identical(other.cutiMasaKerja, cutiMasaKerja) ||
+                other.cutiMasaKerja == cutiMasaKerja) &&
+            (identical(other.workNotPresent, workNotPresent) ||
+                other.workNotPresent == workNotPresent) &&
+            (identical(other.cutiP24Terpakai, cutiP24Terpakai) ||
+                other.cutiP24Terpakai == cutiP24Terpakai) &&
+            (identical(other.sisaCutiReguler, sisaCutiReguler) ||
+                other.sisaCutiReguler == sisaCutiReguler) &&
+            (identical(other.workDaysInMonth, workDaysInMonth) ||
+                other.workDaysInMonth == workDaysInMonth) &&
+            (identical(other.sisaCutiMasaKerja, sisaCutiMasaKerja) ||
+                other.sisaCutiMasaKerja == sisaCutiMasaKerja));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      cutiP24,
+      cutiReguler,
+      workPresent,
+      cutiTerpakai,
+      potonganCuti,
+      sisaCutiP24,
+      cutiMasaKerja,
+      workNotPresent,
+      cutiP24Terpakai,
+      sisaCutiReguler,
+      workDaysInMonth,
+      sisaCutiMasaKerja);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InfoCutiImplCopyWith<_$InfoCutiImpl> get copyWith =>
+      __$$InfoCutiImplCopyWithImpl<_$InfoCutiImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$InfoCutiImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _InfoCuti implements InfoCuti {
+  const factory _InfoCuti(
+      {@JsonKey(name: "cuti_p24") final int? cutiP24,
+      @JsonKey(name: "cuti_reguler") final int? cutiReguler,
+      @JsonKey(name: "work_present") final int? workPresent,
+      @JsonKey(name: "cuti_terpakai") final int? cutiTerpakai,
+      @JsonKey(name: "potongan_cuti") final int? potonganCuti,
+      @JsonKey(name: "sisa_cuti_p24") final int? sisaCutiP24,
+      @JsonKey(name: "cuti_masa_kerja") final int? cutiMasaKerja,
+      @JsonKey(name: "work_not_present") final int? workNotPresent,
+      @JsonKey(name: "cuti_p24_terpakai") final int? cutiP24Terpakai,
+      @JsonKey(name: "sisa_cuti_reguler") final int? sisaCutiReguler,
+      @JsonKey(name: "work_days_in_month") final int? workDaysInMonth,
+      @JsonKey(name: "sisa_cuti_masa_kerja")
+      final int? sisaCutiMasaKerja}) = _$InfoCutiImpl;
+
+  factory _InfoCuti.fromJson(Map<String, dynamic> json) =
+      _$InfoCutiImpl.fromJson;
+
+  @override
+  @JsonKey(name: "cuti_p24")
+  int? get cutiP24;
+  @override
+  @JsonKey(name: "cuti_reguler")
+  int? get cutiReguler;
+  @override
+  @JsonKey(name: "work_present")
+  int? get workPresent;
+  @override
+  @JsonKey(name: "cuti_terpakai")
+  int? get cutiTerpakai;
+  @override
+  @JsonKey(name: "potongan_cuti")
+  int? get potonganCuti;
+  @override
+  @JsonKey(name: "sisa_cuti_p24")
+  int? get sisaCutiP24;
+  @override
+  @JsonKey(name: "cuti_masa_kerja")
+  int? get cutiMasaKerja;
+  @override
+  @JsonKey(name: "work_not_present")
+  int? get workNotPresent;
+  @override
+  @JsonKey(name: "cuti_p24_terpakai")
+  int? get cutiP24Terpakai;
+  @override
+  @JsonKey(name: "sisa_cuti_reguler")
+  int? get sisaCutiReguler;
+  @override
+  @JsonKey(name: "work_days_in_month")
+  int? get workDaysInMonth;
+  @override
+  @JsonKey(name: "sisa_cuti_masa_kerja")
+  int? get sisaCutiMasaKerja;
+  @override
+  @JsonKey(ignore: true)
+  _$$InfoCutiImplCopyWith<_$InfoCutiImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

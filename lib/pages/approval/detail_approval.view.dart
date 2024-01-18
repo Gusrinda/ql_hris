@@ -125,7 +125,7 @@ class _DetailApprovalState extends State<DetailApproval> {
       return NumberFormat.currency(
         locale: 'id_ID',
         symbol: 'Rp ',
-      ).format(value);
+      ).format(value).replaceAll(',00', '');
     }
 
     return BlocListener<ApprovalBloc, ApprovalState>(
@@ -360,7 +360,7 @@ class _DetailApprovalState extends State<DetailApproval> {
                                           dataTRX!.nomor.toString()),
 
                                     if (widget.dataApproval!.creator != null)
-                                      buildInfoText('Nama Karyawan',
+                                      buildInfoText('Diajukan Oleh',
                                           widget.dataApproval!.creator ?? '-'),
 
                                     if (dataTRX?.tanggal != null)
@@ -370,27 +370,27 @@ class _DetailApprovalState extends State<DetailApproval> {
                                               dataTRX!.tanggal.toString())),
 
                                     // SPD
-                                    if (dataTRX?.jenisSpdId != null)
+                                    if (dataTRX?.jenisSpd != null)
                                       buildInfoText('Jenis SPD',
                                           dataTRX!.jenisSpd.toString()),
 
-                                    if (dataTRX?.mZonaAsalId != null)
+                                    if (dataTRX?.zonaAsal != null)
                                       buildInfoText('Zona Asal',
                                           dataTRX!.zonaAsal.toString()),
 
-                                    if (dataTRX?.mZonaTujuanId != null)
+                                    if (dataTRX?.zonaTujuan != null)
                                       buildInfoText('Zona Tujuan',
                                           dataTRX!.zonaTujuan.toString()),
 
-                                    if (dataTRX?.mLokasiTujuanId != null)
+                                    if (dataTRX?.lokasi != null)
                                       buildInfoText('Lokasi Tujuan',
                                           dataTRX!.lokasi.toString()),
 
-                                    if (dataTRX?.mKaryId != null)
+                                    if (dataTRX?.namaKary != null)
                                       buildInfoText('Nama Karyawan',
                                           dataTRX!.namaKary.toString()),
 
-                                    if (dataTRX?.picId != null)
+                                    if (dataTRX?.namaPic != null)
                                       buildInfoText('Nama PIC',
                                           dataTRX!.namaPic.toString()),
 
@@ -438,11 +438,11 @@ class _DetailApprovalState extends State<DetailApproval> {
                                           dataTRX!.noDoc.toString()),
 
                                     // Cuti
-                                    if (dataTRX?.tipeCutiId != null)
-                                      buildInfoText('Tipe Cuti Cuti',
+                                    if (dataTRX?.tipeCuti != null)
+                                      buildInfoText('Tipe Cuti',
                                           dataTRX!.tipeCuti.toString()),
 
-                                    if (dataTRX?.alasanId != null)
+                                    if (dataTRX?.alasan != null)
                                       buildInfoText('Alasan Cuti',
                                           dataTRX!.alasan.toString()),
 
@@ -471,6 +471,76 @@ class _DetailApprovalState extends State<DetailApproval> {
                                         dataTRX?.interval != 0)
                                       buildInfoText('Durasi Hari',
                                           "${dataTRX!.interval.toString()} Hari"),
+
+                                    if (dataTRX?.infoCuti != null) ...{
+                                      Text(
+                                        "Sisa Cuti Karyawan Terkait",
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.red.shade700,
+                                        ),
+                                      ),
+                                      SizedBox(height: 5.sp),
+                                      Container(
+                                        padding: const EdgeInsets.only(
+                                            top: 15),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(7),
+                                            border: Border.all(
+                                                color: Colors.red.shade700.withOpacity(0.3))),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                children: [
+                                                  buildInfoText('Masa Kerja',
+                                                      "${dataTRX!.infoCuti?.sisaCutiMasaKerja.toString() ?? '0'} Hari"),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 35.sp,
+                                              child: VerticalDivider(
+                                                thickness: 1,
+                                                color: Colors.red.shade700.withOpacity(0.3),
+                                                width: 2,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Column(
+                                                children: [
+                                                  buildInfoText('Tahunan',
+                                                      "${dataTRX!.infoCuti?.sisaCutiReguler.toString() ?? '0'} Hari"),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 35.sp,
+                                              child: VerticalDivider(
+                                                thickness: 1,
+                                                color: Colors.red.shade700.withOpacity(0.3),
+                                                width: 2,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Column(
+                                                children: [
+                                                  buildInfoText('P24',
+                                                      "${dataTRX!.infoCuti?.sisaCutiP24.toString() ?? '0'} Menit"),
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: 15.sp),
+                                    },
 
                                     if (dataTRX?.catatanKend != null)
                                       buildInfoText('Kendaraan Dinas',
@@ -543,11 +613,9 @@ class _DetailApprovalState extends State<DetailApproval> {
                                         }),
                               SizedBox(height: 10.sp),
                               if (
-                                // widget.dataApproval!.trxTable! !=
-                                //       't_lembur' &&
-                                  widget.dataApproval!.trxTable! !=
-                                      ''
-                                      ) ...{
+                                  // widget.dataApproval!.trxTable! !=
+                                  //       't_lembur' &&
+                                  widget.dataApproval!.trxTable! != '') ...{
                                 TextButtonCustomV1(
                                     textSize: 13.sp,
                                     text: "REVISE",

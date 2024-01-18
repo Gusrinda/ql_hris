@@ -1,6 +1,5 @@
 part of 'add_data_pendidikan_bloc.dart';
 
-
 abstract class AddDataPendidikanEvent extends Equatable {
   const AddDataPendidikanEvent();
 
@@ -30,8 +29,8 @@ class AddDataPendidikanSubmited extends AddDataPendidikanEvent {
     required this.nilai,
     required this.jurusan,
     required this.isPendTerakhir,
-     this.ijazahNo,
-   this.ijazahFoto,
+    this.ijazahNo,
+    this.ijazahFoto,
     required this.desc,
   });
 
@@ -50,7 +49,6 @@ class AddDataPendidikanSubmited extends AddDataPendidikanEvent {
         desc,
       ];
 }
-
 
 class OnSelectTingkatPendidikan extends AddDataPendidikanEvent {
   const OnSelectTingkatPendidikan();
@@ -89,13 +87,13 @@ class EditDataPendidikanSubmited extends AddDataPendidikanEvent {
     required this.jurusan,
     required this.isPendTerakhir,
     this.ijazahNo,
-   this.ijazahFoto,
+    this.ijazahFoto,
     required this.desc,
   });
 
   @override
   List<Object> get props => [
-    pendidikanId,
+        pendidikanId,
         tingkatID,
         namaSekolah,
         tahunMasuk,

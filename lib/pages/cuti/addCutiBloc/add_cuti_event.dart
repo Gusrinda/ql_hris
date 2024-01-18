@@ -11,6 +11,7 @@ class AddCutiSubmited extends AddCutiEvent {
   int? alasan;
   int tipeCuti;
   String keterangan;
+  File? suratDokter;
   String dateFrom;
   String dateTo;
   String? timeFrom;
@@ -20,6 +21,7 @@ class AddCutiSubmited extends AddCutiEvent {
     this.alasan,
     required this.tipeCuti,
     required this.keterangan,
+    this.suratDokter,
     required this.dateFrom,
     required this.dateTo,
     this.timeFrom,
@@ -31,6 +33,7 @@ class AddCutiSubmited extends AddCutiEvent {
         alasan!,
         tipeCuti,
         keterangan,
+        suratDokter!,
         dateFrom,
         dateTo,
         timeFrom!,
@@ -43,6 +46,7 @@ class EditCutiSubmited extends AddCutiEvent {
   int? alasan;
   int tipeCuti;
   String keterangan;
+  File? suratDokter;
   String dateFrom;
   String dateTo;
   String? timeFrom;
@@ -53,6 +57,7 @@ class EditCutiSubmited extends AddCutiEvent {
     this.alasan,
     required this.tipeCuti,
     required this.keterangan,
+    this.suratDokter,
     required this.dateFrom,
     required this.dateTo,
     this.timeFrom,
@@ -65,6 +70,7 @@ class EditCutiSubmited extends AddCutiEvent {
         alasan!,
         tipeCuti,
         keterangan,
+        suratDokter!,
         dateFrom,
         dateTo,
         timeFrom!,

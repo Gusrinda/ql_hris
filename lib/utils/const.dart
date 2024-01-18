@@ -5,10 +5,10 @@ class MyGeneralConst {
   // static const _BASE_URL = "https://server.qqltech.com:7011";
 
   //Server Production
-   static const _BASE_URL = "https://hris.successjaya.com:3207";
+  //  static const _BASE_URL = "https://hris.successjaya.com:3207";
 
   //Server Development
-  // static const _BASE_URL = "https://server.qqltech.com:7005";
+  static const _BASE_URL = "https://server.qqltech.com:7005";
 
   static const API_URL = "$_BASE_URL";
   static const PREF_USER_TOKEN = "PREF_USER_TOKEN";

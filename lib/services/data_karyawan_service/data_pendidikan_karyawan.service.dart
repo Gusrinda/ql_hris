@@ -177,6 +177,7 @@ class DataKaryawanService {
       Map<String, File?> files = {
         'ijazah_foto': ijazahFoto,
       }..removeWhere((key, value) => value == null || value.path.isEmpty);
+      
       request.files.addAll(await Future.wait(
         files.entries.map(
           (entry) async => await http.MultipartFile.fromPath(
