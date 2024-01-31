@@ -2,10 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:sj_presensi_mobile/services/model/dinas/realisasi_dinas_model.dart';
-import 'package:sj_presensi_mobile/services/model/dinas/response_detail_spd.dart';
 import 'package:sj_presensi_mobile/services/realisasi_dinas_services.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
-import 'package:sj_presensi_mobile/utils/services_no_source_mobile.dart';
 import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
 part 'list_realisasi_dinas_event.dart';
@@ -23,7 +21,7 @@ class ListRealisasiDinasBloc
         var res = await RealisasiDinasServices.getListRealisasiDinas(
             resToken.response["token"], event.date);
         print(res);
-        if (res is ServicesSuccessNoMobile) {
+        if (res is ServicesSuccess) {
           debugPrint(res.response.toString());
           if (res.response is Map<String, dynamic>) {
             //Mengubah hasil response api ke model kelas
@@ -42,7 +40,7 @@ class ListRealisasiDinasBloc
             emit(ListRealisasiDinasFailedInBackground(
                 message: 'Response format is invalid'));
           }
-        } else if (res is ServicesFailureNoMobile) {
+        } else if (res is ServicesFailure) {
           if (res.errorResponse == null) {
             await GeneralSharedPreferences.removeUserToken();
             emit(ListRealisasiDinasFailedUserExpired(message: "Token expired"));

@@ -28,6 +28,7 @@ class AddRealisasiDinasBloc
         var res = await RealisasiDinasServices.addRealisasiDinas(
           resToken.response["token"],
           event.tSpdId,
+          event.totalBiayaSPD,
           event.totalBiayaSelisih,
           event.keterangan,
           event.tRpdDetList ?? [],
@@ -58,6 +59,7 @@ class AddRealisasiDinasBloc
           resToken.response["token"],
           event.rpdID,
           event.tSpdId,
+          event.totalBiayaSPD,
           event.totalBiayaSelisih,
           event.keterangan,
           event.tRpdDetList ?? [],

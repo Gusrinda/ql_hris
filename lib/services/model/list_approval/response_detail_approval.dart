@@ -126,6 +126,7 @@ class Trx with _$Trx {
     @JsonKey(name: "jam_selesai") String? jamSelesai,
     @JsonKey(name: "no_doc") String? noDoc,
     @JsonKey(name: "doc") dynamic doc,
+    @JsonKey(name: "attachment") dynamic attachment,
     @JsonKey(name: "interval") int? interval,
     @JsonKey(name: "interval_min") int? intervalMin,
     @JsonKey(name: "time_from") dynamic timeFrom,
@@ -135,6 +136,11 @@ class Trx with _$Trx {
     @JsonKey(name: "cuti_sisa_reguler") int? cutiSisaReguler,
     @JsonKey(name: "cuti_sisa_p24") int? cutiSisaP24,
     @JsonKey(name: "info_cuti") InfoCuti? infoCuti,
+    @JsonKey(name: "nama_divisi") String? namaDivisi,
+    @JsonKey(name: "nama_dept") String? namaDept,
+    @JsonKey(name: "lokasi_tujuan") String? lokasiTujuan,
+    @JsonKey(name: "pic") String? pic,
+    @JsonKey(name: "t_rpd_det") List<TRpdDet>? tRpdDet,
   }) = _Trx;
 
   factory Trx.fromJson(Map<String, dynamic> json) => _$TrxFromJson(json);
@@ -142,32 +148,45 @@ class Trx with _$Trx {
 
 @freezed
 class InfoCuti with _$InfoCuti {
-    const factory InfoCuti({
-        @JsonKey(name: "cuti_p24")
-        int? cutiP24,
-        @JsonKey(name: "cuti_reguler")
-        int? cutiReguler,
-        @JsonKey(name: "work_present")
-        int? workPresent,
-        @JsonKey(name: "cuti_terpakai")
-        int? cutiTerpakai,
-        @JsonKey(name: "potongan_cuti")
-        int? potonganCuti,
-        @JsonKey(name: "sisa_cuti_p24")
-        int? sisaCutiP24,
-        @JsonKey(name: "cuti_masa_kerja")
-        int? cutiMasaKerja,
-        @JsonKey(name: "work_not_present")
-        int? workNotPresent,
-        @JsonKey(name: "cuti_p24_terpakai")
-        int? cutiP24Terpakai,
-        @JsonKey(name: "sisa_cuti_reguler")
-        int? sisaCutiReguler,
-        @JsonKey(name: "work_days_in_month")
-        int? workDaysInMonth,
-        @JsonKey(name: "sisa_cuti_masa_kerja")
-        int? sisaCutiMasaKerja,
-    }) = _InfoCuti;
+  const factory InfoCuti({
+    @JsonKey(name: "cuti_p24") int? cutiP24,
+    @JsonKey(name: "cuti_reguler") int? cutiReguler,
+    @JsonKey(name: "work_present") int? workPresent,
+    @JsonKey(name: "cuti_terpakai") int? cutiTerpakai,
+    @JsonKey(name: "potongan_cuti") int? potonganCuti,
+    @JsonKey(name: "sisa_cuti_p24") int? sisaCutiP24,
+    @JsonKey(name: "cuti_masa_kerja") int? cutiMasaKerja,
+    @JsonKey(name: "work_not_present") int? workNotPresent,
+    @JsonKey(name: "cuti_p24_terpakai") int? cutiP24Terpakai,
+    @JsonKey(name: "sisa_cuti_reguler") int? sisaCutiReguler,
+    @JsonKey(name: "work_days_in_month") int? workDaysInMonth,
+    @JsonKey(name: "sisa_cuti_masa_kerja") int? sisaCutiMasaKerja,
+  }) = _InfoCuti;
 
-    factory InfoCuti.fromJson(Map<String, dynamic> json) => _$InfoCutiFromJson(json);
+  factory InfoCuti.fromJson(Map<String, dynamic> json) =>
+      _$InfoCutiFromJson(json);
+}
+
+@freezed
+class TRpdDet with _$TRpdDet {
+  const factory TRpdDet({
+    @JsonKey(name: "id") int? id,
+    @JsonKey(name: "t_rpd_id") int? tRpdId,
+    @JsonKey(name: "t_spd_det_id") dynamic tSpdDetId,
+    @JsonKey(name: "tipe_spd_id") int? tipeSpdId,
+    @JsonKey(name: "tipe_spd") String? tipeSpd,
+    @JsonKey(name: "biaya") int? biaya,
+    @JsonKey(name: "biaya_realisasi") int? biayaRealisasi,
+    @JsonKey(name: "detail_transport") String? detailTransport,
+    @JsonKey(name: "m_knd_dinas_id") dynamic mKndDinasId,
+    @JsonKey(name: "is_kendaraan_dinas") bool? isKendaraanDinas,
+    @JsonKey(name: "catatan_realisasi") String? catatanRealisasi,
+    @JsonKey(name: "creator_id") dynamic creatorId,
+    @JsonKey(name: "last_editor_id") dynamic lastEditorId,
+    @JsonKey(name: "created_at") String? createdAt,
+    @JsonKey(name: "updated_at") String? updatedAt,
+  }) = _TRpdDet;
+
+  factory TRpdDet.fromJson(Map<String, dynamic> json) =>
+      _$TRpdDetFromJson(json);
 }

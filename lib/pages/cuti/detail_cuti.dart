@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +9,7 @@ import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/edit_cuti.dart';
 import 'package:sj_presensi_mobile/services/model/cuti/list_cuti_model.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
+import 'package:url_launcher/link.dart';
 
 final Map<String, dynamic> stateDict = {
   "IN APPROVAL": {
@@ -269,6 +271,44 @@ class _DetailCutiPageState extends State<DetailCutiPage> {
                                 if (widget.data?.alasanValue != null)
                                   _buildText('Alasan',
                                       widget.data?.alasanValue ?? '-'),
+                                if (widget.data?.attachment != null) ...{
+                                  Text(
+                                    "Surat Dokter",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 10.sp,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Link(
+                                    target: LinkTarget.self,
+                                    uri:
+                                        Uri.parse('${widget.data?.attachment}'),
+                                    builder: (context, followLink) =>
+                                        GestureDetector(
+                                      onTap: followLink,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "Lihat Surat Dokter",
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 12.sp,
+                                              color: MyColorsConst.primaryColor,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 2),
+                                          Icon(
+                                            Icons.image_search_rounded,
+                                            size: 14.sp,
+                                            color: MyColorsConst.primaryColor,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 15.sp),
+                                },
                                 _buildText('Tanggal Awal',
                                     formatDate(widget.dateFrom ?? '-')),
                                 _buildText('Tanggal Berakhir',

@@ -397,12 +397,12 @@ class _DataDiriPageState extends State<DataDiriPage> {
                                     ),
                                   ),
                                   SizedBox(height: 5.sp),
-                                  if (biodata?.bioData?.ktpFoto?.isNotEmpty ??
+                                  if (biodata?.bioData?.kkFoto?.isNotEmpty ??
                                       false)
                                     Link(
                                       target: LinkTarget.self,
                                       uri: Uri.parse(
-                                          '${biodata?.bioData?.ktpFoto}'),
+                                          '${biodata?.bioData?.kkFoto}'),
                                       builder: (context, followLink) =>
                                           GestureDetector(
                                         onTap: followLink,
@@ -543,12 +543,12 @@ class _DataDiriPageState extends State<DataDiriPage> {
                                       'No. NPWP',
                                       biodata?.bioData?.npwpNo?.toString() ??
                                           '-'),
-                                  buildInfoText(
-                                      'Tanggal Berlaku NPWP',
-                                      biodata?.bioData?.npwpTglBerlaku != null
-                                          ? DateFormat('dd MMMM yyyy').format(
-                                              biodata!.bioData!.npwpTglBerlaku!)
-                                          : '-'),
+                                  // buildInfoText(
+                                  //     'Tanggal Berlaku NPWP',
+                                  //     biodata?.bioData?.npwpTglBerlaku != null
+                                  //         ? DateFormat('dd MMMM yyyy').format(
+                                  //             biodata!.bioData!.npwpTglBerlaku!)
+                                  //         : '-'),
                                   // Text(
                                   //   'Foto BPJS',
                                   //   style: GoogleFonts.poppins(

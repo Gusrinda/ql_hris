@@ -11,7 +11,7 @@ class AddCutiSubmited extends AddCutiEvent {
   int? alasan;
   int tipeCuti;
   String keterangan;
-  File? suratDokter;
+  String? suratDokter;
   String dateFrom;
   String dateTo;
   String? timeFrom;
@@ -46,7 +46,7 @@ class EditCutiSubmited extends AddCutiEvent {
   int? alasan;
   int tipeCuti;
   String keterangan;
-  File? suratDokter;
+  String? suratDokter;
   String dateFrom;
   String dateTo;
   String? timeFrom;
@@ -75,6 +75,19 @@ class EditCutiSubmited extends AddCutiEvent {
         dateTo,
         timeFrom!,
         timeTo!,
+      ];
+}
+
+class OnUploadingFile extends AddCutiEvent {
+  File? storedFile;
+
+  OnUploadingFile({
+    this.storedFile,
+  });
+
+  @override
+  List<Object> get props => [
+        storedFile!,
       ];
 }
 

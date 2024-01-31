@@ -112,6 +112,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
     });
     widget.totalBiayaRealisasiController
         .addListener(_onTotalBiayaRealisasiChanged);
+    widget.totalBiayaController.addListener(_onTotalBiayaRealisasiChanged);
   }
 
   void _onTotalBiayaRealisasiChanged() {
@@ -198,49 +199,51 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
       }
     }
 
-    // double calculateTotalCost() {
-    //   double totalCost = 0.0;
-
-    //   // Iterate through each expense detail and sum up the costs
-    //   for (var expense in expenseDetails) {
-    //     double biayaRealisasi =
-    //         double.tryParse(expense.biayaRealisasiController.text) ?? 0.0;
-    //     totalCost += biayaRealisasi;
-    //   }
-
-    //   return totalCost;
-    // }
-
-    // void onDataChanged() {
-    //   // Call the function to calculate the total cost
-    //   double totalCost = calculateTotalCost();
-
-    //   // Update the totalBiayaRealisasiController
-    //   widget.totalBiayaRealisasiController.text = totalCost.toString();
-    // }
-
-    double calculateTotalCost() {
-      double totalCost = 0.0;
+    double calculateTotalRealisasi() {
+      double totalCalcRealisasi = 0.0;
 
       // Iterate through each expense detail and sum up the costs
       for (var expense in expenseDetails) {
         double biayaRealisasi =
             double.tryParse(expense.biayaRealisasiController.text) ?? 0.0;
-        totalCost += biayaRealisasi;
+        totalCalcRealisasi += biayaRealisasi;
       }
 
-      return totalCost;
+      return totalCalcRealisasi;
     }
 
-    void onDataChanged() {
+    void onDataRealisasiChanged() {
       // Call the function to calculate the total cost
-      double totalCost = calculateTotalCost();
+      double totalCalcRealisasi = calculateTotalRealisasi();
 
       // Format the total cost as currency
-      String formattedTotalCost = formatRupiah(totalCost);
+      String formattedTotalCost = formatRupiah(totalCalcRealisasi);
 
       // Update the totalBiayaRealisasiController
       widget.totalBiayaRealisasiController.text = formattedTotalCost;
+    }
+
+    double calculateTotalBiaya() {
+      double totalCalcBiaya = 0.0;
+
+      // Iterate through each expense detail and sum up the costs
+      for (var expense in expenseDetails) {
+        double biayaAwal = double.tryParse(expense.costController.text) ?? 0.0;
+        totalCalcBiaya += biayaAwal;
+      }
+
+      return totalCalcBiaya;
+    }
+
+    void onDataBiayaChanged() {
+      // Call the function to calculate the total cost
+      double totalCalcBiaya = calculateTotalBiaya();
+
+      // Format the total cost as currency
+      String formattedTotalCost = formatRupiah(totalCalcBiaya);
+
+      // Update the totalBiayaRealisasiController
+      widget.totalBiayaController.text = formattedTotalCost;
     }
 
     return BlocListener<AddRealisasiDinasBloc, AddRealisasiDinasState>(
@@ -258,6 +261,9 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
           );
           widget.totalBiayaRealisasiController
               .removeListener(_onTotalBiayaRealisasiChanged);
+          widget.totalBiayaController
+              .removeListener(_onTotalBiayaRealisasiChanged);
+          Navigator.of(context).pop();
           Navigator.of(context).pop();
           Navigator.pop(context);
           widget.reloadDataCallback();
@@ -327,8 +333,8 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
             widget.statusController.text =
                 selectedSPD?.status?.toString() ?? '';
 
-            widget.totalBiayaController.text =
-                formatRupiah(selectedSPD?.totalBiaya?.toDouble() ?? 0.0);
+            // widget.totalBiayaController.text =
+            //     formatRupiah(selectedSPD?.totalBiaya?.toDouble() ?? 0.0);
 
             widget.kendDinasController.text =
                 selectedSPD?.isKendDinas?.toString() ?? '';
@@ -343,23 +349,36 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
             expenseDetails.clear();
 
             // Check if dataDetailSPD is not null before accessing its properties
+            // Check if dataDetailSPD is not null before accessing its properties
             if (detailSelectedSPD?.dataDetailSPD.detBiaya != null) {
               final detBiaya = detailSelectedSPD?.dataDetailSPD.detBiaya;
 
+              // Calculate the total sum of detBiaya.totalBiaya
+              final totalBiayaSum = detBiaya?.fold<double>(
+                    0,
+                    (sum, item) =>
+                        sum + (double.tryParse(item.totalBiaya ?? '') ?? 0),
+                  ) ??
+                  0;
+
+              // Update widget.totalBiayaController.text with the formatted result
+              widget.totalBiayaController.text =
+                  formatRupiah(totalBiayaSum.toDouble());
+
               // Iterate over the detBiaya list and create ExpenseDetail objects
-              for (var detBiaya in detBiaya ?? []) {
+              for (var detBiayaItem in detBiaya ?? []) {
                 final expenseDetail = ExpenseDetail();
 
                 expenseDetail.idTipeController.text =
-                    detBiaya.tipeId?.toString() ?? '';
+                    detBiayaItem.tipeId?.toString() ?? '';
                 expenseDetail.valueTipeController.text =
-                    detBiaya.tipeValue?.toString() ?? '';
+                    detBiayaItem.tipeValue?.toString() ?? '';
                 expenseDetail.costController.text =
-                    (double.parse(detBiaya.totalBiaya?.toString() ?? '0')
+                    (double.parse(detBiayaItem.totalBiaya?.toString() ?? '0')
                             .round())
                         .toString();
                 expenseDetail.descriptionController.text =
-                    detBiaya.keterangan ?? '';
+                    detBiayaItem.keterangan ?? '';
                 expenseDetail.biayaRealisasiController.text = '';
                 expenseDetail.catatanRealisasiController.text = '';
 
@@ -551,7 +570,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 hintText: 'Autofill Tanggal',
                                 labelTag: 'Label-TanggalAwalRspd',
                                 formTag: 'Form-TanggalAwalRspd',
-                                labelForm: 'Tanggal Acara Awal',
+                                labelForm: 'Tanggal Berangkat Dinas',
                                 validator: (value) {},
                                 enabled: false,
                                 errorTextStyle:
@@ -564,7 +583,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 hintText: 'Autofill Tanggal',
                                 labelTag: 'Label-TanggalAkhirRspd',
                                 formTag: 'Form-TanggalAkhirRspd',
-                                labelForm: 'Tanggal Acara Akhir',
+                                labelForm: 'Tanggal Pulang Dinas',
                                 validator: (value) {},
                                 enabled: false,
                                 errorTextStyle:
@@ -696,6 +715,7 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                               FormInputData(
                                 input: '',
                                 onTap: () {},
+                                showRedStar: false,
                                 controller: widget.keteranganUtamaController,
                                 hintText: 'Tuliskan Keterangan',
                                 labelTag: 'Label-KeteranganUtama',
@@ -828,7 +848,9 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                               .remove(expenseDetails[index]);
                                         });
                                       },
-                                      onBiayaChanged: onDataChanged,
+                                      onRealisasiChanged:
+                                          onDataRealisasiChanged,
+                                      onBiayaChanged: onDataBiayaChanged,
                                       indexForm: index,
                                     );
                                   },
@@ -838,7 +860,8 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 onPressed: () {
                                   setState(() {
                                     expenseDetails.add(ExpenseDetail());
-                                    onDataChanged();
+                                    onDataRealisasiChanged();
+                                    onDataBiayaChanged();
                                   });
                                 },
                                 child: Text('Tambah Biaya'),
@@ -852,105 +875,248 @@ class _AddRealisasiDinasPageState extends State<AddRealisasiDinasPage> {
                                 textColor: MyColorsConst.primaryColor,
                                 onPressed: state is AddRealisasiDinasLoading
                                     ? null
-                                    : () {
-                                        print("INI DATA YANG DIKIRIM :");
+                                    : ()
+                                    // {
+                                    //     print("INI DATA YANG DIKIRIM :");
 
-                                        double parseCurrency(String currency) {
-                                          try {
-                                            // Remove currency symbol and replace comma with dot
-                                            String cleanedCurrency = currency
-                                                .replaceAll('Rp ', '')
-                                                .replaceAll('.', '')
-                                                .replaceAll(',', '.');
+                                    //     double parseCurrency(String currency) {
+                                    //       try {
+                                    //         // Remove currency symbol and replace comma with dot
+                                    //         String cleanedCurrency = currency
+                                    //             .replaceAll('Rp ', '')
+                                    //             .replaceAll('.', '')
+                                    //             .replaceAll(',', '.');
 
-                                            // Remove negative sign if present
-                                            if (cleanedCurrency
-                                                .startsWith('-')) {
-                                              cleanedCurrency =
-                                                  cleanedCurrency.substring(1);
+                                    //         // Remove negative sign if present
+                                    //         if (cleanedCurrency
+                                    //             .startsWith('-')) {
+                                    //           cleanedCurrency =
+                                    //               cleanedCurrency.substring(1);
+                                    //         }
+
+                                    //         // Parse as double
+                                    //         return double.parse(
+                                    //             cleanedCurrency);
+                                    //       } catch (e) {
+                                    //         return 0;
+                                    //       }
+                                    //     }
+
+                                    //     // Parse formatted currency string to double
+                                    //     double totalBiayaSelisih =
+                                    //         parseCurrency(widget
+                                    //             .totalBiayaRencanaSelisihController
+                                    //             .value
+                                    //             .text);
+
+                                    //     double totalBiaya = parseCurrency(widget
+                                    //         .totalBiayaController.value.text);
+                                    //     print(
+                                    //         "${widget.totalBiayaRencanaSelisihController.text} >>> $totalBiayaSelisih");
+
+                                    //     int idNomorSpd = int.parse(widget
+                                    //         .idNomorSpdController.value.text);
+                                    //     print(idNomorSpd);
+
+                                    //     String keteranganUtama = widget
+                                    //         .keteranganUtamaController
+                                    //         .value
+                                    //         .text;
+                                    //     print(keteranganUtama);
+
+                                    //     showDialog(
+                                    //       context: context,
+                                    //       builder: (_) => DialogCustom(
+                                    //         state: DialogCustomItem.confirm,
+                                    //         message:
+                                    //             "Pastikan Data Sudah Benar",
+                                    //         durationInSec: 5,
+                                    //         onContinue: () => context
+                                    //             .read<AddRealisasiDinasBloc>()
+                                    //             .add(
+                                    //               AddRealisasiDinasSubmited(
+                                    //                 tSpdId: idNomorSpd,
+                                    //                 totalBiayaSPD:
+                                    //                     totalBiaya.toDouble(),
+                                    //                 totalBiayaSelisih:
+                                    //                     totalBiayaSelisih
+                                    //                         .toDouble(),
+                                    //                 keterangan: widget
+                                    //                     .keteranganUtamaController
+                                    //                     .value
+                                    //                     .text,
+                                    //                 tRpdDetList: expenseDetails
+                                    //                     .map((expense) {
+                                    //                   return {
+                                    //                     "tipe_spd_id": expense
+                                    //                         .idTipeController
+                                    //                         .value
+                                    //                         .text,
+                                    //                     "is_kendaraan_dinas":
+                                    //                         widget.kendDinasController
+                                    //                                     .text ==
+                                    //                                 "false"
+                                    //                             ? 0
+                                    //                             : 1,
+                                    //                     "biaya": expense
+                                    //                         .costController
+                                    //                         .value
+                                    //                         .text,
+                                    //                     "biaya_realisasi": expense
+                                    //                         .biayaRealisasiController
+                                    //                         .value
+                                    //                         .text,
+                                    //                     "detail_transport": expense
+                                    //                         .descriptionController
+                                    //                         .value
+                                    //                         .text,
+                                    //                     "catatan_realisasi": expense
+                                    //                         .catatanRealisasiController
+                                    //                         .value
+                                    //                         .text,
+                                    //                   };
+                                    //                 }).toList(),
+                                    //               ),
+                                    //             ),
+                                    //       ),
+                                    //     );
+                                    //   },
+                                    {
+                                        // Check if any of the form fields is empty
+                                        bool isAnyFormEmpty =
+                                            expenseDetails.any((expense) {
+                                          return expense.idTipeController.text.isEmpty ||
+                                              expense.valueTipeController.text
+                                                  .isEmpty ||
+                                              expense.costController.text
+                                                  .isEmpty ||
+                                              expense.descriptionController.text
+                                                  .isEmpty ||
+                                              expense.biayaRealisasiController
+                                                  .text.isEmpty ||
+                                              expense.catatanRealisasiController
+                                                  .text.isEmpty;
+                                        });
+
+                                        if (isAnyFormEmpty) {
+                                          // Display an error message or handle the case when the form is not filled
+                                          showDialog(
+                                            context: context,
+                                            builder: (_) => DialogCustom(
+                                              state: DialogCustomItem.error,
+                                              message:
+                                                  "Pastikan Semua Form Rincian Biaya Sudah Terisi!",
+                                            ),
+                                          );
+                                        } else {
+                                          // Proceed with the submission logic
+
+                                          // Parse formatted currency string to double
+                                          double parseCurrency(
+                                              String currency) {
+                                            try {
+                                              // Remove currency symbol and replace comma with dot
+                                              String cleanedCurrency = currency
+                                                  .replaceAll('Rp ', '')
+                                                  .replaceAll('.', '')
+                                                  .replaceAll(',', '.');
+
+                                              // Remove negative sign if present
+                                              if (cleanedCurrency
+                                                  .startsWith('-')) {
+                                                cleanedCurrency =
+                                                    cleanedCurrency
+                                                        .substring(1);
+                                              }
+
+                                              // Parse as double
+                                              return double.parse(
+                                                  cleanedCurrency);
+                                            } catch (e) {
+                                              return 0;
                                             }
-
-                                            // Parse as double
-                                            return double.parse(
-                                                cleanedCurrency);
-                                          } catch (e) {
-                                            return 0;
                                           }
-                                        }
 
-                                        // Parse formatted currency string to double
-                                        double totalBiayaSelisih =
-                                            parseCurrency(widget
-                                                .totalBiayaRencanaSelisihController
-                                                .value
-                                                .text);
-                                        print(
-                                            "${widget.totalBiayaRencanaSelisihController.text} >>> $totalBiayaSelisih");
+                                          double totalBiayaSelisih =
+                                              parseCurrency(widget
+                                                  .totalBiayaRencanaSelisihController
+                                                  .value
+                                                  .text);
 
-                                        int idNomorSpd = int.parse(widget
-                                            .idNomorSpdController.value.text);
-                                        print(idNomorSpd);
+                                          double totalBiaya = parseCurrency(
+                                              widget.totalBiayaController.value
+                                                  .text);
+                                          print(
+                                              "${widget.totalBiayaRencanaSelisihController.text} >>> $totalBiayaSelisih");
 
-                                        String keteranganUtama = widget
-                                            .keteranganUtamaController
-                                            .value
-                                            .text;
-                                        print(keteranganUtama);
+                                          int idNomorSpd = int.parse(widget
+                                              .idNomorSpdController.value.text);
+                                          print(idNomorSpd);
 
-                                        showDialog(
-                                          context: context,
-                                          builder: (_) => DialogCustom(
-                                            state: DialogCustomItem.confirm,
-                                            message:
-                                                "Pastikan Data Sudah Benar",
-                                            durationInSec: 5,
-                                            onContinue: () => context
-                                                .read<AddRealisasiDinasBloc>()
-                                                .add(
-                                                  AddRealisasiDinasSubmited(
-                                                    tSpdId: idNomorSpd,
-                                                    totalBiayaSelisih:
-                                                        totalBiayaSelisih
-                                                            .toDouble(),
-                                                    keterangan: widget
-                                                        .keteranganUtamaController
-                                                        .value
-                                                        .text,
-                                                    tRpdDetList: expenseDetails
-                                                        .map((expense) {
-                                                      return {
-                                                        "tipe_spd_id": expense
-                                                            .idTipeController
-                                                            .value
-                                                            .text,
-                                                        "is_kendaraan_dinas":
-                                                            widget.kendDinasController
-                                                                        .text ==
-                                                                    "false"
-                                                                ? 0
-                                                                : 1,
-                                                        "biaya": expense
-                                                            .costController
-                                                            .value
-                                                            .text,
-                                                        "biaya_realisasi": expense
-                                                            .biayaRealisasiController
-                                                            .value
-                                                            .text,
-                                                        "detail_transport": expense
-                                                            .descriptionController
-                                                            .value
-                                                            .text,
-                                                        "catatan_realisasi": expense
-                                                            .catatanRealisasiController
-                                                            .value
-                                                            .text,
-                                                      };
-                                                    }).toList(),
+                                          String keteranganUtama = widget
+                                              .keteranganUtamaController
+                                              .value
+                                              .text;
+                                          print(keteranganUtama);
+
+                                          showDialog(
+                                            context: context,
+                                            builder: (_) => DialogCustom(
+                                              state: DialogCustomItem.confirm,
+                                              message:
+                                                  "Pastikan Data Sudah Benar",
+                                              durationInSec: 5,
+                                              onContinue: () => context
+                                                  .read<AddRealisasiDinasBloc>()
+                                                  .add(
+                                                    AddRealisasiDinasSubmited(
+                                                      tSpdId: idNomorSpd,
+                                                      totalBiayaSPD:
+                                                          totalBiaya.toDouble(),
+                                                      totalBiayaSelisih:
+                                                          totalBiayaSelisih
+                                                              .toDouble(),
+                                                      keterangan:
+                                                          keteranganUtama,
+                                                      tRpdDetList:
+                                                          expenseDetails
+                                                              .map((expense) {
+                                                        return {
+                                                          "tipe_spd_id": expense
+                                                              .idTipeController
+                                                              .value
+                                                              .text,
+                                                          "is_kendaraan_dinas":
+                                                              widget.kendDinasController
+                                                                          .text ==
+                                                                      "false"
+                                                                  ? 0
+                                                                  : 1,
+                                                          "biaya": expense
+                                                              .costController
+                                                              .value
+                                                              .text,
+                                                          "biaya_realisasi": expense
+                                                              .biayaRealisasiController
+                                                              .value
+                                                              .text,
+                                                          "detail_transport":
+                                                              expense
+                                                                  .descriptionController
+                                                                  .value
+                                                                  .text,
+                                                          "catatan_realisasi":
+                                                              expense
+                                                                  .catatanRealisasiController
+                                                                  .value
+                                                                  .text,
+                                                        };
+                                                      }).toList(),
+                                                    ),
                                                   ),
-                                                ),
-                                          ),
-                                        );
+                                            ),
+                                          );
+                                        }
                                       },
                               ),
                               const SizedBox(height: 30)
@@ -984,12 +1150,14 @@ class ExpenseDetail {
 class DynamicFormField extends StatefulWidget {
   final ExpenseDetail expenseDetail;
   final VoidCallback onDelete;
+  final VoidCallback onRealisasiChanged;
   final VoidCallback onBiayaChanged;
   final int indexForm;
 
   const DynamicFormField({
     required this.expenseDetail,
     required this.onDelete,
+    required this.onRealisasiChanged,
     required this.onBiayaChanged,
     required this.indexForm,
   });
@@ -1078,7 +1246,12 @@ class _DynamicFormFieldState extends State<DynamicFormField> {
           labelTag: 'Label-Tipe${widget.indexForm}',
           formTag: 'Form-Tipe${widget.indexForm}',
           labelForm: 'Tipe',
-          validator: (value) {},
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Tipe biaya belum dipilih';
+            }
+            return null;
+          },
           errorTextStyle: GoogleFonts.poppins(fontSize: 8),
         ),
         FormInputDataWithNote(
@@ -1086,6 +1259,7 @@ class _DynamicFormFieldState extends State<DynamicFormField> {
           onTap: () {},
           onChanged: (value) {
             updateNoteTop(value!, isBiayaAwal: false);
+            widget.onBiayaChanged();
           },
           noteTop: noteTopBiayaAwal,
           controller: widget.expenseDetail.costController,
@@ -1095,7 +1269,12 @@ class _DynamicFormFieldState extends State<DynamicFormField> {
           labelForm: 'Biaya Awal',
           noteBottom: 'Jika terdapat koma isilah dengan titik(.).',
           inputType: TextInputType.number,
-          validator: (value) {},
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Biaya awal belum diisi';
+            }
+            return null;
+          },
           enabled: true, // Sesuaikan dengan kebutuhan
           errorTextStyle: GoogleFonts.poppins(fontSize: 8),
         ),
@@ -1107,7 +1286,12 @@ class _DynamicFormFieldState extends State<DynamicFormField> {
           labelTag: 'Label-KeteranganBiaya${widget.indexForm}',
           formTag: 'Form-KeteranganBiaya${widget.indexForm}',
           labelForm: 'Keterangan',
-          validator: (value) {},
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Keterangan biaya belum diisi';
+            }
+            return null;
+          },
           enabled: true, // Sesuaikan dengan kebutuhan
           errorTextStyle: GoogleFonts.poppins(fontSize: 8),
         ),
@@ -1116,7 +1300,7 @@ class _DynamicFormFieldState extends State<DynamicFormField> {
           onTap: () {},
           onChanged: (value) {
             updateNoteTop(value!, isBiayaAwal: true);
-            widget.onBiayaChanged();
+            widget.onRealisasiChanged();
           },
           controller: widget.expenseDetail.biayaRealisasiController,
           noteTop: noteTopRealisasi.toString(),
@@ -1126,7 +1310,12 @@ class _DynamicFormFieldState extends State<DynamicFormField> {
           labelForm: 'Biaya Realisasi',
           noteBottom: 'Jika terdapat koma isilah dengan titik(.).',
           inputType: TextInputType.number,
-          validator: (value) {},
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Biaya realisasi belum diisi';
+            }
+            return null;
+          },
           enabled: true, // Sesuaikan dengan kebutuhan
           errorTextStyle: GoogleFonts.poppins(fontSize: 8),
         ),
@@ -1138,7 +1327,12 @@ class _DynamicFormFieldState extends State<DynamicFormField> {
           labelTag: 'Label-CatatanRealisasi${widget.indexForm}',
           formTag: 'Form-CatatanRealisasi${widget.indexForm}',
           labelForm: 'Catatan Realisasi',
-          validator: (value) {},
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Catatan realisasi belum diisi';
+            }
+            return null;
+          },
           enabled: true, // Sesuaikan dengan kebutuhan
           errorTextStyle: GoogleFonts.poppins(fontSize: 8),
         ),
@@ -1149,6 +1343,7 @@ class _DynamicFormFieldState extends State<DynamicFormField> {
                 onPressed: () {
                   widget.onDelete();
                   widget.onBiayaChanged();
+                  widget.onRealisasiChanged();
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red.shade700),

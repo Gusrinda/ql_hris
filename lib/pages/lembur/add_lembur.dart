@@ -190,6 +190,7 @@ class _AddLemburPageState extends State<AddLemburPage> {
             ),
           );
           Navigator.of(context).pop();
+          Navigator.pop(context);
           widget.reloadDataCallback();
         } else if (state is AddLemburFailed) {
           LoadingDialog.dismissDialog(context);

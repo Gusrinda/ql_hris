@@ -195,6 +195,7 @@ _$TrxImpl _$$TrxImplFromJson(Map<String, dynamic> json) => _$TrxImpl(
       jamSelesai: json['jam_selesai'] as String?,
       noDoc: json['no_doc'] as String?,
       doc: json['doc'],
+      attachment: json['attachment'],
       interval: json['interval'] as int?,
       intervalMin: json['interval_min'] as int?,
       timeFrom: json['time_from'],
@@ -206,6 +207,13 @@ _$TrxImpl _$$TrxImplFromJson(Map<String, dynamic> json) => _$TrxImpl(
       infoCuti: json['info_cuti'] == null
           ? null
           : InfoCuti.fromJson(json['info_cuti'] as Map<String, dynamic>),
+      namaDivisi: json['nama_divisi'] as String?,
+      namaDept: json['nama_dept'] as String?,
+      lokasiTujuan: json['lokasi_tujuan'] as String?,
+      pic: json['pic'] as String?,
+      tRpdDet: (json['t_rpd_det'] as List<dynamic>?)
+          ?.map((e) => TRpdDet.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$TrxImplToJson(_$TrxImpl instance) => <String, dynamic>{
@@ -242,6 +250,7 @@ Map<String, dynamic> _$$TrxImplToJson(_$TrxImpl instance) => <String, dynamic>{
       'jam_selesai': instance.jamSelesai,
       'no_doc': instance.noDoc,
       'doc': instance.doc,
+      'attachment': instance.attachment,
       'interval': instance.interval,
       'interval_min': instance.intervalMin,
       'time_from': instance.timeFrom,
@@ -251,6 +260,11 @@ Map<String, dynamic> _$$TrxImplToJson(_$TrxImpl instance) => <String, dynamic>{
       'cuti_sisa_reguler': instance.cutiSisaReguler,
       'cuti_sisa_p24': instance.cutiSisaP24,
       'info_cuti': instance.infoCuti,
+      'nama_divisi': instance.namaDivisi,
+      'nama_dept': instance.namaDept,
+      'lokasi_tujuan': instance.lokasiTujuan,
+      'pic': instance.pic,
+      't_rpd_det': instance.tRpdDet,
     };
 
 _$InfoCutiImpl _$$InfoCutiImplFromJson(Map<String, dynamic> json) =>
@@ -283,4 +297,42 @@ Map<String, dynamic> _$$InfoCutiImplToJson(_$InfoCutiImpl instance) =>
       'sisa_cuti_reguler': instance.sisaCutiReguler,
       'work_days_in_month': instance.workDaysInMonth,
       'sisa_cuti_masa_kerja': instance.sisaCutiMasaKerja,
+    };
+
+_$TRpdDetImpl _$$TRpdDetImplFromJson(Map<String, dynamic> json) =>
+    _$TRpdDetImpl(
+      id: json['id'] as int?,
+      tRpdId: json['t_rpd_id'] as int?,
+      tSpdDetId: json['t_spd_det_id'],
+      tipeSpdId: json['tipe_spd_id'] as int?,
+      tipeSpd: json['tipe_spd'] as String?,
+      biaya: json['biaya'] as int?,
+      biayaRealisasi: json['biaya_realisasi'] as int?,
+      detailTransport: json['detail_transport'] as String?,
+      mKndDinasId: json['m_knd_dinas_id'],
+      isKendaraanDinas: json['is_kendaraan_dinas'] as bool?,
+      catatanRealisasi: json['catatan_realisasi'] as String?,
+      creatorId: json['creator_id'],
+      lastEditorId: json['last_editor_id'],
+      createdAt: json['created_at'] as String?,
+      updatedAt: json['updated_at'] as String?,
+    );
+
+Map<String, dynamic> _$$TRpdDetImplToJson(_$TRpdDetImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      't_rpd_id': instance.tRpdId,
+      't_spd_det_id': instance.tSpdDetId,
+      'tipe_spd_id': instance.tipeSpdId,
+      'tipe_spd': instance.tipeSpd,
+      'biaya': instance.biaya,
+      'biaya_realisasi': instance.biayaRealisasi,
+      'detail_transport': instance.detailTransport,
+      'm_knd_dinas_id': instance.mKndDinasId,
+      'is_kendaraan_dinas': instance.isKendaraanDinas,
+      'catatan_realisasi': instance.catatanRealisasi,
+      'creator_id': instance.creatorId,
+      'last_editor_id': instance.lastEditorId,
+      'created_at': instance.createdAt,
+      'updated_at': instance.updatedAt,
     };

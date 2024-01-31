@@ -191,6 +191,19 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         break;
       case 1:
         context.read<EditBiodataBloc>().add(EditDataBiodataSubmited(
+              divisiId: controllers.idDivisiController?.value.text != null
+                  ? int.tryParse(controllers.idDivisiController!.value.text)
+                  : null,
+              deptId: controllers.idDepartemenController?.value.text != null
+                  ? int.tryParse(controllers.idDepartemenController!.value.text)
+                  : null,
+              posisiId: controllers.idPosisiController?.value.text != null
+                  ? int.tryParse(controllers.idPosisiController!.value.text)
+                  : null,
+              zonaId: controllers.idZonaController?.value.text != null
+                  ? int.tryParse(controllers.idZonaController!.value.text)
+                  : null,
+              kodePresensi: controllers.valueKodePresensiController?.value.text,
               tglMasuk: controllers.tanggalMasukController?.value.text,
               nik: controllers.nikController?.value.text,
               namaDepan: controllers.namaDepanController?.value.text,
@@ -242,6 +255,66 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         break;
       case 2:
         context.read<EditBiodataBloc>().add(EditDataBiodataSubmited(
+              divisiId: controllers.idDivisiController?.value.text != null
+                  ? int.tryParse(controllers.idDivisiController!.value.text)
+                  : null,
+              deptId: controllers.idDepartemenController?.value.text != null
+                  ? int.tryParse(controllers.idDepartemenController!.value.text)
+                  : null,
+              posisiId: controllers.idPosisiController?.value.text != null
+                  ? int.tryParse(controllers.idPosisiController!.value.text)
+                  : null,
+              zonaId: controllers.idZonaController?.value.text != null
+                  ? int.tryParse(controllers.idZonaController!.value.text)
+                  : null,
+              kodePresensi: controllers.valueKodePresensiController?.value.text,
+              tglMasuk: controllers.tanggalMasukController?.value.text,
+              nik: controllers.nikController?.value.text,
+              namaDepan: controllers.namaDepanController?.value.text,
+              namaBelakang: controllers.namaBelakangController?.value.text,
+              namaPanggilan: controllers.namaPanggilanController?.value.text,
+              namaLengkap:
+                  '${controllers.namaDepanController?.value.text} ${controllers.namaBelakangController?.value.text}',
+              jkId: controllers.idJenisKelaminController?.value.text != null
+                  ? int.tryParse(
+                      controllers.idJenisKelaminController!.value.text)
+                  : null,
+              tempatLahir: controllers.valueTempatLahirController?.value.text,
+              tglLahir: controllers.tanggalLahirController?.value.text,
+              provinsiId: controllers.idProvinsiController?.value.text != null
+                  ? int.tryParse(controllers.idProvinsiController!.value.text)
+                  : null,
+              kotaId: controllers.idKotaController?.value.text != null
+                  ? int.tryParse(controllers.idKotaController!.value.text)
+                  : null,
+              kecamatanId: controllers.idKecamatanController?.value.text != null
+                  ? int.tryParse(controllers.idKecamatanController!.value.text)
+                  : null,
+              kodePos: controllers.kodePosController?.value.text,
+              alamatDomisili:
+                  controllers.alamatDomisiliTinggalController?.value.text,
+              noTlp: controllers.noTelpController?.value.text,
+              noTlpLainnya: controllers.noTelpLainnyaController?.value.text,
+              noDarurat: controllers.noTelpDaruratController?.value.text,
+              namaKontakDarurat:
+                  controllers.namaKontakDaruratController?.value.text,
+              hubDgnKaryawan: controllers.hubkaryawanController?.value.text,
+              agamaId: controllers.idAgamaController?.value.text != null
+                  ? int.tryParse(controllers.idAgamaController!.value.text)
+                  : null,
+              golDarahId: controllers.idGolDarahController?.value.text != null
+                  ? int.tryParse(controllers.idGolDarahController!.value.text)
+                  : null,
+              statusNikahId:
+                  controllers.idStatusPernikahanController?.value.text != null
+                      ? int.tryParse(
+                          controllers.idStatusPernikahanController!.value.text)
+                      : null,
+              tanggunganId:
+                  controllers.idJumlahTanggunganController?.value.text != null
+                      ? int.tryParse(
+                          controllers.idJumlahTanggunganController!.value.text)
+                      : null,
               ktpNo: controllers.noKtpController?.value.text,
               alamatAsli: controllers.alamatKtpController?.value.text,
               kkNo: controllers.noKkController?.value.text,
@@ -257,6 +330,77 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         break;
       case 3:
         context.read<EditBiodataBloc>().add(EditDataBiodataSubmited(
+              divisiId: controllers.idDivisiController?.value.text != null
+                  ? int.tryParse(controllers.idDivisiController!.value.text)
+                  : null,
+              deptId: controllers.idDepartemenController?.value.text != null
+                  ? int.tryParse(controllers.idDepartemenController!.value.text)
+                  : null,
+              posisiId: controllers.idPosisiController?.value.text != null
+                  ? int.tryParse(controllers.idPosisiController!.value.text)
+                  : null,
+              zonaId: controllers.idZonaController?.value.text != null
+                  ? int.tryParse(controllers.idZonaController!.value.text)
+                  : null,
+              kodePresensi: controllers.valueKodePresensiController?.value.text,
+              tglMasuk: controllers.tanggalMasukController?.value.text,
+              nik: controllers.nikController?.value.text,
+              namaDepan: controllers.namaDepanController?.value.text,
+              namaBelakang: controllers.namaBelakangController?.value.text,
+              namaPanggilan: controllers.namaPanggilanController?.value.text,
+              namaLengkap:
+                  '${controllers.namaDepanController?.value.text} ${controllers.namaBelakangController?.value.text}',
+              jkId: controllers.idJenisKelaminController?.value.text != null
+                  ? int.tryParse(
+                      controllers.idJenisKelaminController!.value.text)
+                  : null,
+              tempatLahir: controllers.valueTempatLahirController?.value.text,
+              tglLahir: controllers.tanggalLahirController?.value.text,
+              provinsiId: controllers.idProvinsiController?.value.text != null
+                  ? int.tryParse(controllers.idProvinsiController!.value.text)
+                  : null,
+              kotaId: controllers.idKotaController?.value.text != null
+                  ? int.tryParse(controllers.idKotaController!.value.text)
+                  : null,
+              kecamatanId: controllers.idKecamatanController?.value.text != null
+                  ? int.tryParse(controllers.idKecamatanController!.value.text)
+                  : null,
+              kodePos: controllers.kodePosController?.value.text,
+              alamatDomisili:
+                  controllers.alamatDomisiliTinggalController?.value.text,
+              noTlp: controllers.noTelpController?.value.text,
+              noTlpLainnya: controllers.noTelpLainnyaController?.value.text,
+              noDarurat: controllers.noTelpDaruratController?.value.text,
+              namaKontakDarurat:
+                  controllers.namaKontakDaruratController?.value.text,
+              hubDgnKaryawan: controllers.hubkaryawanController?.value.text,
+              agamaId: controllers.idAgamaController?.value.text != null
+                  ? int.tryParse(controllers.idAgamaController!.value.text)
+                  : null,
+              golDarahId: controllers.idGolDarahController?.value.text != null
+                  ? int.tryParse(controllers.idGolDarahController!.value.text)
+                  : null,
+              statusNikahId:
+                  controllers.idStatusPernikahanController?.value.text != null
+                      ? int.tryParse(
+                          controllers.idStatusPernikahanController!.value.text)
+                      : null,
+              tanggunganId:
+                  controllers.idJumlahTanggunganController?.value.text != null
+                      ? int.tryParse(
+                          controllers.idJumlahTanggunganController!.value.text)
+                      : null,
+              ktpNo: controllers.noKtpController?.value.text,
+              alamatAsli: controllers.alamatKtpController?.value.text,
+              kkNo: controllers.noKkController?.value.text,
+              npwpNo: controllers.noNpwpController?.value.text,
+              npwpTglBerlaku: controllers.tanggalNpwpController?.value.text,
+              bpjsNo: controllers.noBpjsKesehatanController?.value.text,
+              bpjsKerjaNo:
+                  controllers.noBpjsKetenagakerjaanController?.value.text,
+              bpjsTipeId: controllers.idTipeBPJSController?.value.text != null
+                  ? int.tryParse(controllers.idTipeBPJSController!.value.text)
+                  : null,
               pasFoto: fotoKaryawan != null && fotoKaryawan!.path.isNotEmpty
                   ? File(fotoKaryawan!.path)
                   : null,
@@ -280,6 +424,96 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         break;
       case 4:
         context.read<EditBiodataBloc>().add(EditDataBiodataSubmited(
+              divisiId: controllers.idDivisiController?.value.text != null
+                  ? int.tryParse(controllers.idDivisiController!.value.text)
+                  : null,
+              deptId: controllers.idDepartemenController?.value.text != null
+                  ? int.tryParse(controllers.idDepartemenController!.value.text)
+                  : null,
+              posisiId: controllers.idPosisiController?.value.text != null
+                  ? int.tryParse(controllers.idPosisiController!.value.text)
+                  : null,
+              zonaId: controllers.idZonaController?.value.text != null
+                  ? int.tryParse(controllers.idZonaController!.value.text)
+                  : null,
+              kodePresensi: controllers.valueKodePresensiController?.value.text,
+              tglMasuk: controllers.tanggalMasukController?.value.text,
+              nik: controllers.nikController?.value.text,
+              namaDepan: controllers.namaDepanController?.value.text,
+              namaBelakang: controllers.namaBelakangController?.value.text,
+              namaPanggilan: controllers.namaPanggilanController?.value.text,
+              namaLengkap:
+                  '${controllers.namaDepanController?.value.text} ${controllers.namaBelakangController?.value.text}',
+              jkId: controllers.idJenisKelaminController?.value.text != null
+                  ? int.tryParse(
+                      controllers.idJenisKelaminController!.value.text)
+                  : null,
+              tempatLahir: controllers.valueTempatLahirController?.value.text,
+              tglLahir: controllers.tanggalLahirController?.value.text,
+              provinsiId: controllers.idProvinsiController?.value.text != null
+                  ? int.tryParse(controllers.idProvinsiController!.value.text)
+                  : null,
+              kotaId: controllers.idKotaController?.value.text != null
+                  ? int.tryParse(controllers.idKotaController!.value.text)
+                  : null,
+              kecamatanId: controllers.idKecamatanController?.value.text != null
+                  ? int.tryParse(controllers.idKecamatanController!.value.text)
+                  : null,
+              kodePos: controllers.kodePosController?.value.text,
+              alamatDomisili:
+                  controllers.alamatDomisiliTinggalController?.value.text,
+              noTlp: controllers.noTelpController?.value.text,
+              noTlpLainnya: controllers.noTelpLainnyaController?.value.text,
+              noDarurat: controllers.noTelpDaruratController?.value.text,
+              namaKontakDarurat:
+                  controllers.namaKontakDaruratController?.value.text,
+              hubDgnKaryawan: controllers.hubkaryawanController?.value.text,
+              agamaId: controllers.idAgamaController?.value.text != null
+                  ? int.tryParse(controllers.idAgamaController!.value.text)
+                  : null,
+              golDarahId: controllers.idGolDarahController?.value.text != null
+                  ? int.tryParse(controllers.idGolDarahController!.value.text)
+                  : null,
+              statusNikahId:
+                  controllers.idStatusPernikahanController?.value.text != null
+                      ? int.tryParse(
+                          controllers.idStatusPernikahanController!.value.text)
+                      : null,
+              tanggunganId:
+                  controllers.idJumlahTanggunganController?.value.text != null
+                      ? int.tryParse(
+                          controllers.idJumlahTanggunganController!.value.text)
+                      : null,
+              ktpNo: controllers.noKtpController?.value.text,
+              alamatAsli: controllers.alamatKtpController?.value.text,
+              kkNo: controllers.noKkController?.value.text,
+              npwpNo: controllers.noNpwpController?.value.text,
+              npwpTglBerlaku: controllers.tanggalNpwpController?.value.text,
+              bpjsNo: controllers.noBpjsKesehatanController?.value.text,
+              bpjsKerjaNo:
+                  controllers.noBpjsKetenagakerjaanController?.value.text,
+              bpjsTipeId: controllers.idTipeBPJSController?.value.text != null
+                  ? int.tryParse(controllers.idTipeBPJSController!.value.text)
+                  : null,
+              pasFoto: fotoKaryawan != null && fotoKaryawan!.path.isNotEmpty
+                  ? File(fotoKaryawan!.path)
+                  : null,
+              ktpFoto:
+                  ktp != null && ktp!.path.isNotEmpty ? File(ktp!.path) : null,
+              // bpjsFoto: bpjs != null && bpjs!.path.isNotEmpty
+              //     ? File(bpjs!.path)
+              //     : null,
+              kkFoto: kartukeluarga != null && kartukeluarga!.path.isNotEmpty
+                  ? File(kartukeluarga!.path)
+                  : null,
+              npwpFoto: npwp != null && npwp!.path.isNotEmpty
+                  ? File(npwp!.path)
+                  : null,
+              berkasLain:
+                  berkaspendukung != null && berkaspendukung!.path.isNotEmpty
+                      ? File(berkaspendukung!.path)
+                      : null,
+              desc: controllers.keteranganController?.value.text,
               ukBaju: controllers.ukBajuController?.value.text,
               ukCelana: controllers.ukCelanaController?.value.text,
               ukSepatu: controllers.ukSepatuontroller?.value.text,
@@ -287,6 +521,99 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
         break;
       case 5:
         context.read<EditBiodataBloc>().add(EditDataBiodataSubmited(
+              divisiId: controllers.idDivisiController?.value.text != null
+                  ? int.tryParse(controllers.idDivisiController!.value.text)
+                  : null,
+              deptId: controllers.idDepartemenController?.value.text != null
+                  ? int.tryParse(controllers.idDepartemenController!.value.text)
+                  : null,
+              posisiId: controllers.idPosisiController?.value.text != null
+                  ? int.tryParse(controllers.idPosisiController!.value.text)
+                  : null,
+              zonaId: controllers.idZonaController?.value.text != null
+                  ? int.tryParse(controllers.idZonaController!.value.text)
+                  : null,
+              kodePresensi: controllers.valueKodePresensiController?.value.text,
+              tglMasuk: controllers.tanggalMasukController?.value.text,
+              nik: controllers.nikController?.value.text,
+              namaDepan: controllers.namaDepanController?.value.text,
+              namaBelakang: controllers.namaBelakangController?.value.text,
+              namaPanggilan: controllers.namaPanggilanController?.value.text,
+              namaLengkap:
+                  '${controllers.namaDepanController?.value.text} ${controllers.namaBelakangController?.value.text}',
+              jkId: controllers.idJenisKelaminController?.value.text != null
+                  ? int.tryParse(
+                      controllers.idJenisKelaminController!.value.text)
+                  : null,
+              tempatLahir: controllers.valueTempatLahirController?.value.text,
+              tglLahir: controllers.tanggalLahirController?.value.text,
+              provinsiId: controllers.idProvinsiController?.value.text != null
+                  ? int.tryParse(controllers.idProvinsiController!.value.text)
+                  : null,
+              kotaId: controllers.idKotaController?.value.text != null
+                  ? int.tryParse(controllers.idKotaController!.value.text)
+                  : null,
+              kecamatanId: controllers.idKecamatanController?.value.text != null
+                  ? int.tryParse(controllers.idKecamatanController!.value.text)
+                  : null,
+              kodePos: controllers.kodePosController?.value.text,
+              alamatDomisili:
+                  controllers.alamatDomisiliTinggalController?.value.text,
+              noTlp: controllers.noTelpController?.value.text,
+              noTlpLainnya: controllers.noTelpLainnyaController?.value.text,
+              noDarurat: controllers.noTelpDaruratController?.value.text,
+              namaKontakDarurat:
+                  controllers.namaKontakDaruratController?.value.text,
+              hubDgnKaryawan: controllers.hubkaryawanController?.value.text,
+              agamaId: controllers.idAgamaController?.value.text != null
+                  ? int.tryParse(controllers.idAgamaController!.value.text)
+                  : null,
+              golDarahId: controllers.idGolDarahController?.value.text != null
+                  ? int.tryParse(controllers.idGolDarahController!.value.text)
+                  : null,
+              statusNikahId:
+                  controllers.idStatusPernikahanController?.value.text != null
+                      ? int.tryParse(
+                          controllers.idStatusPernikahanController!.value.text)
+                      : null,
+              tanggunganId:
+                  controllers.idJumlahTanggunganController?.value.text != null
+                      ? int.tryParse(
+                          controllers.idJumlahTanggunganController!.value.text)
+                      : null,
+              ktpNo: controllers.noKtpController?.value.text,
+              alamatAsli: controllers.alamatKtpController?.value.text,
+              kkNo: controllers.noKkController?.value.text,
+              npwpNo: controllers.noNpwpController?.value.text,
+              npwpTglBerlaku: controllers.tanggalNpwpController?.value.text,
+              bpjsNo: controllers.noBpjsKesehatanController?.value.text,
+              bpjsKerjaNo:
+                  controllers.noBpjsKetenagakerjaanController?.value.text,
+              bpjsTipeId: controllers.idTipeBPJSController?.value.text != null
+                  ? int.tryParse(controllers.idTipeBPJSController!.value.text)
+                  : null,
+              pasFoto: fotoKaryawan != null && fotoKaryawan!.path.isNotEmpty
+                  ? File(fotoKaryawan!.path)
+                  : null,
+              ktpFoto:
+                  ktp != null && ktp!.path.isNotEmpty ? File(ktp!.path) : null,
+              // bpjsFoto: bpjs != null && bpjs!.path.isNotEmpty
+              //     ? File(bpjs!.path)
+              //     : null,
+              kkFoto: kartukeluarga != null && kartukeluarga!.path.isNotEmpty
+                  ? File(kartukeluarga!.path)
+                  : null,
+              npwpFoto: npwp != null && npwp!.path.isNotEmpty
+                  ? File(npwp!.path)
+                  : null,
+              berkasLain:
+                  berkaspendukung != null && berkaspendukung!.path.isNotEmpty
+                      ? File(berkaspendukung!.path)
+                      : null,
+              desc: controllers.keteranganController?.value.text,
+              ukBaju: controllers.ukBajuController?.value.text,
+              ukCelana: controllers.ukCelanaController?.value.text,
+              ukSepatu: controllers.ukSepatuontroller?.value.text,
               bankId: controllers.idNamaBankController?.value.text != null
                   ? int.tryParse(controllers.idNamaBankController!.value.text)
                   : null,
@@ -1226,7 +1553,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                 message: state.message,
               ),
             );
-            Navigator.pop(context);
+            Navigator.of(context).pop();
           } else if (state is EditBiodataFailedUserExpired) {
             LoadingDialog.dismissDialog(context);
             await showDialog(
@@ -1732,21 +2059,21 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     controller: controllers.noNpwpController!,
                                     validator: (value) {},
                                   ),
-                                  FormDateData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      showTahunMenu(context,
-                                          controllers.tanggalNpwpController!);
-                                    },
-                                    hintText: 'Pilih Tanggal',
-                                    labelForm: 'Tanggal Berlaku NPWP',
-                                    labelTag: 'Label-TanggalNpwp',
-                                    formTag: 'Form-TanggalNpwp',
-                                    valueController:
-                                        controllers.tanggalNpwpController!,
-                                    idController:
-                                        controllers.tanggalNpwpController!,
-                                  ),
+                                  // FormDateData(
+                                  //   showRedStar: false,
+                                  //   onTap: () {
+                                  //     showTahunMenu(context,
+                                  //         controllers.tanggalNpwpController!);
+                                  //   },
+                                  //   hintText: 'Pilih Tanggal',
+                                  //   labelForm: 'Tanggal Berlaku NPWP',
+                                  //   labelTag: 'Label-TanggalNpwp',
+                                  //   formTag: 'Form-TanggalNpwp',
+                                  //   valueController:
+                                  //       controllers.tanggalNpwpController!,
+                                  //   idController:
+                                  //       controllers.tanggalNpwpController!,
+                                  // ),
                                   // FileSelectionWidget(
                                   //   onFileSelected: (file, fileUrl) {
                                   //     setState(() {

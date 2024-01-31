@@ -42,6 +42,24 @@ class AddCutiSuccess extends AddCutiState {
   List<Object> get props => [message];
 }
 
+class UploadingFileSuccess extends AddCutiState {
+  String message;
+
+  UploadingFileSuccess({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
+class UploadingFileFailed extends AddCutiState {
+  String message;
+
+  UploadingFileFailed({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
+
 class AddCutiFailed extends AddCutiState {
   String message;
 

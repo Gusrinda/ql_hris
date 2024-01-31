@@ -33,16 +33,17 @@ class RealisasiDinasServices {
         "${date.year}-${date.month.toString().padLeft(2, '0')}-$lastDateStr";
     var url = Uri.parse(
         "${MyGeneralConst.API_URL}/operation/t_rpd?where=this.created_at between '${date.year}-${date.month.toString().padLeft(2, '0')}-01 00:00:00' and '$formattedDate 23:59:59'");
-    return await GeneralServicesNoMobile.baseService(
+    return await GeneralServices.baseService(
       url: url,
-      method: GeneralServicesMethodNoMobile.get,
-      headers: GeneralServicesNoMobile.addToken2Headers(token),
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token),
     );
   }
 
   static Future<Object> addRealisasiDinas(
     String token,
     int tSpdId,
+    double totalBiayaSPD,
     double totalBiayaSelisih,
     String keterangan,
     List<Map<String, dynamic>> tRpdDetList,
@@ -57,6 +58,7 @@ class RealisasiDinasServices {
       headers: GeneralServices.addToken2Headers(token),
       body: json.encode({
         "t_spd_id": tSpdId,
+        "total_biaya_spd": totalBiayaSPD,
         "total_biaya_selisih": totalBiayaSelisih,
         "keterangan": keterangan,
         "t_rpd_det": tRpdDetList
@@ -68,6 +70,7 @@ class RealisasiDinasServices {
     String token,
     int rpdID,
     int tSpdId,
+    double totalBiayaSPD,
     double totalBiayaSelisih,
     String keterangan,
     List<Map<String, dynamic>> tRpdDetList,
@@ -82,6 +85,7 @@ class RealisasiDinasServices {
       headers: GeneralServices.addToken2Headers(token),
       body: json.encode({
         "t_spd_id": tSpdId,
+        "total_biaya_spd": totalBiayaSPD,
         "total_biaya_selisih": totalBiayaSelisih,
         "keterangan": keterangan,
         "t_rpd_det": tRpdDetList

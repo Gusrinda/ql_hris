@@ -9,12 +9,14 @@ abstract class AddRealisasiDinasEvent extends Equatable {
 
 class AddRealisasiDinasSubmited extends AddRealisasiDinasEvent {
   int tSpdId;
+  double totalBiayaSPD;
   double totalBiayaSelisih;
   String keterangan;
   final List<Map<String, dynamic>>? tRpdDetList;
 
   AddRealisasiDinasSubmited({
     required this.tSpdId,
+    required this.totalBiayaSPD,
     required this.totalBiayaSelisih,
     required this.keterangan,
     this.tRpdDetList,
@@ -23,6 +25,7 @@ class AddRealisasiDinasSubmited extends AddRealisasiDinasEvent {
   @override
   List<Object> get props => [
         tSpdId,
+        totalBiayaSPD,
         totalBiayaSelisih,
         keterangan,
         tRpdDetList!,
@@ -32,6 +35,7 @@ class AddRealisasiDinasSubmited extends AddRealisasiDinasEvent {
 class EditRealisasiDinasSubmited extends AddRealisasiDinasEvent {
   int rpdID;
   int tSpdId;
+  double totalBiayaSPD;
   double totalBiayaSelisih;
   String keterangan;
   final List<Map<String, dynamic>>? tRpdDetList;
@@ -39,6 +43,7 @@ class EditRealisasiDinasSubmited extends AddRealisasiDinasEvent {
   EditRealisasiDinasSubmited({
     required this.rpdID,
     required this.tSpdId,
+    required this.totalBiayaSPD,
     required this.totalBiayaSelisih,
     required this.keterangan,
     this.tRpdDetList,
@@ -48,6 +53,7 @@ class EditRealisasiDinasSubmited extends AddRealisasiDinasEvent {
   List<Object> get props => [
         rpdID,
         tSpdId,
+        totalBiayaSPD,
         totalBiayaSelisih,
         keterangan,
         tRpdDetList!,

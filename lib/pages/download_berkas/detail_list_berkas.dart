@@ -145,25 +145,22 @@ class _DetailListBerkasPageState extends State<DetailListBerkasPage> {
                         ),
                         color: Colors.white,
                       ),
-                      child: Padding(
-                        padding: EdgeInsets.all(20.sp),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: listberkas.length,
-                          itemBuilder: (context, index) {
-                            var dataBerkas = listberkas[index];
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                DashboardItem(
-                                  label: dataBerkas.nama ?? '-',
-                                  desc: dataBerkas.desc ?? '-',
-                                  docUrl: dataBerkas.url,
-                                )
-                              ],
-                            );
-                          },
-                        ),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: listberkas.length,
+                        itemBuilder: (context, index) {
+                          var dataBerkas = listberkas[index];
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              DashboardItem(
+                                label: dataBerkas.nama ?? '-',
+                                desc: dataBerkas.desc ?? '-',
+                                docUrl: dataBerkas.url,
+                              )
+                            ],
+                          );
+                        },
                       ),
                     );
                   },
@@ -198,20 +195,21 @@ class DashboardItem extends StatelessWidget {
       builder: (context, followLink) => GestureDetector(
         onTap: followLink,
         child: Container(
-          margin: const EdgeInsets.only(bottom: 20),
+          width: MediaQuery.of(context).size.width,
+          margin: const EdgeInsets.only(bottom: 15, left: 20, right: 20),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Color(0xFFDDDDDD)),
+            border: Border.all(color: Color.fromARGB(255, 219, 220, 255)),
             color: MyColorsConst.whiteColor,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                offset: Offset(0, 0),
+                color: MyColorsConst.primaryColor.withOpacity(0.15),
+                offset: const Offset(1, 3),
                 blurRadius: 5,
               ),
             ],
           ),
-          padding: EdgeInsets.symmetric(horizontal: 12.sp, vertical: 15.sp),
+          padding: EdgeInsets.symmetric(horizontal: 20.sp, vertical: 15.sp),
           child: Row(
             children: [
               Expanded(
@@ -223,18 +221,24 @@ class DashboardItem extends StatelessWidget {
                       children: [
                         Text(
                           label,
+                          maxLines: 3,
                           style: GoogleFonts.poppins(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w700,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w600,
                               color: MyColorsConst.darkColor),
                         ),
-                        SizedBox(height: 10.sp),
-                        Text(
-                          'Deskripsi : $desc',
-                          style: GoogleFonts.poppins(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w500,
-                              color: MyColorsConst.lightDarkColor),
+                        SizedBox(height: 7.sp),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width - 130.sp,
+                          child: Text(
+                            desc,
+                            maxLines: 7,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.poppins(
+                                fontSize: 11.sp,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.grey.shade600),
+                          ),
                         ),
                       ],
                     ),
@@ -247,8 +251,8 @@ class DashboardItem extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 10.sp),
                   child: Center(
                     child: Icon(
-                      Icons.file_download_outlined,
-                      size: 20.sp,
+                      Icons.download_rounded,
+                      size: 30.sp,
                       color: MyColorsConst.primaryColor,
                     ),
                   ),
@@ -261,7 +265,6 @@ class DashboardItem extends StatelessWidget {
     );
   }
 }
-
 
 class EmptyStateBuilder extends StatelessWidget {
   const EmptyStateBuilder({Key? key}) : super(key: key);

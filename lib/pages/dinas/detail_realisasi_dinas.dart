@@ -330,13 +330,13 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                                                     ?.tSpdTanggal ??
                                                 '-'),
                                         _buildText(
-                                            'Tanggal Acara Awal',
+                                            'Tanggal Berangkat Dinas',
                                             dataDetailrealisasiDinas
                                                     ?.dataDetailrealisasiDinas
                                                     ?.tSpdTglAcaraAwal ??
                                                 '-'),
                                         _buildText(
-                                            'Tanggal Acara Akhir',
+                                            'Tanggal Pulang Dinas',
                                             dataDetailrealisasiDinas
                                                     ?.dataDetailrealisasiDinas
                                                     ?.tSpdTglAcaraAkhir ??
@@ -510,11 +510,14 @@ class _DetailRealisasiDinasState extends State<DetailRealisasiDinas> {
                                                 Container(
                                                   alignment:
                                                       Alignment.centerLeft,
-                                                  child: Text(formatRupiah(
-                                                      double.parse(trpdDet
-                                                              ?.biayaRealisasi
-                                                              .toString() ??
-                                                          "0"))),
+                                                  child: Text(
+                                                    formatRupiah(
+                                                      double.tryParse(trpdDet!
+                                                              .biayaRealisasi
+                                                              .toString()) ??
+                                                          0.0,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                               DataCell(

@@ -13,6 +13,7 @@ import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/services/model/list_approval/response_detail_approval.dart';
 import 'package:sj_presensi_mobile/services/model/list_approval/response_list_approval.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
+import 'package:url_launcher/link.dart' as linkFile;
 
 class DetailApproval extends StatefulWidget {
   static const routeName = '/DetailApprovalPage';
@@ -400,29 +401,207 @@ class _DetailApprovalState extends State<DetailApproval> {
 
                                     if (dataTRX?.tglAcaraAwal != null)
                                       buildInfoText(
-                                          'Hari, Tanggal Acara Awal',
+                                          'Hari, Tanggal Berangkat Dinas',
                                           _formatDate(dataTRX!.tglAcaraAwal
                                               .toString())),
 
                                     if (dataTRX?.tglAcaraAkhir != null)
                                       buildInfoText(
-                                          'Hari, Tanggal Acara Akhir',
+                                          'Hari, Tanggal Pulang Dinas',
                                           _formatDate(dataTRX!.tglAcaraAkhir
                                               .toString())),
 
                                     // RPD
+
+                                    if (dataTRX?.namaDivisi != null)
+                                      buildInfoText('Divisi',
+                                          dataTRX!.namaDivisi.toString()),
+
+                                    if (dataTRX?.namaDept != null)
+                                      buildInfoText('Departemen',
+                                          dataTRX!.namaDept.toString()),
+
+                                    if (dataTRX?.lokasiTujuan != null)
+                                      buildInfoText('Lokasi Tujuan',
+                                          dataTRX!.lokasiTujuan.toString()),
+
+                                    if (dataTRX?.pic != null)
+                                      buildInfoText('Nama PIC',
+                                          dataTRX!.pic.toString()),
+
                                     if (dataTRX?.totalBiaya != null)
                                       buildInfoText(
                                           'Total Biaya',
                                           formatCurrency(double.parse(
                                               dataTRX!.totalBiaya.toString()))),
 
+                                    if (dataTRX?.totalBiayaSpd != null)
+                                      buildInfoText(
+                                          'Total Biaya Awal Dinas',
+                                          formatCurrency(double.parse(dataTRX!
+                                              .totalBiayaSpd
+                                              .toString()))),
+
                                     if (dataTRX?.totalBiayaSelisih != null)
                                       buildInfoText(
-                                          'Total Biaya Rencana Selisih',
+                                          'Selisih Total Biaya Realisasi',
                                           formatCurrency(double.parse(dataTRX!
                                               .totalBiayaSelisih
                                               .toString()))),
+
+                                    if (dataTRX?.tRpdDet != null) ...{
+                                      Text(
+                                        'Rincian Biaya',
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
+                                          color: MyColorsConst.primaryColor,
+                                        ),
+                                      ),
+                                      SizedBox(height: 5.sp),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: MyColorsConst.primaryColor
+                                                  .withOpacity(0.3),
+                                              width: 1.5),
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                        ),
+                                        child: SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: DataTable(
+                                            headingRowHeight: 40.sp,
+                                            // ignore: deprecated_member_use
+                                            dataRowHeight: 40.sp,
+                                            dividerThickness: 1,
+                                            headingRowColor:
+                                                MaterialStateColor.resolveWith(
+                                              (states) => MyColorsConst
+                                                  .primaryColor
+                                                  .withOpacity(0.3),
+                                            ),
+                                            headingTextStyle:
+                                                GoogleFonts.poppins(
+                                              fontSize: 12.sp,
+                                              color: MyColorsConst.darkColor,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                            dataTextStyle: GoogleFonts.poppins(
+                                              fontSize: 12.sp,
+                                              color: MyColorsConst.darkColor,
+                                            ),
+                                            columns: const [
+                                              DataColumn(
+                                                  label: Text(
+                                                'No',
+                                                textAlign: TextAlign.start,
+                                              )),
+                                              DataColumn(
+                                                  label: Text('Tipe',
+                                                      textAlign:
+                                                          TextAlign.start)),
+                                              DataColumn(
+                                                  label: Text('Biaya Awal',
+                                                      textAlign:
+                                                          TextAlign.start)),
+                                              DataColumn(
+                                                  label: Text('Keterangan',
+                                                      textAlign:
+                                                          TextAlign.start)),
+                                              DataColumn(
+                                                  label: Text('Biaya Realisasi',
+                                                      textAlign:
+                                                          TextAlign.start)),
+                                              DataColumn(
+                                                  label: Text(
+                                                      'Catatan Realisasi',
+                                                      textAlign:
+                                                          TextAlign.start)),
+                                            ],
+                                            rows: List.generate(
+                                              dataTRX?.tRpdDet?.length ?? 0,
+                                              (index) {
+                                                TRpdDet? trpdDet =
+                                                    dataTRX?.tRpdDet?[index];
+
+                                                return DataRow(
+                                                  cells: [
+                                                    DataCell(
+                                                      Center(
+                                                        child: Text(
+                                                          '${index + 1}',
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                            fontSize: 12,
+                                                            color: MyColorsConst
+                                                                .darkColor,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    DataCell(
+                                                      Container(
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        child: Text(trpdDet
+                                                                ?.tipeSpd ??
+                                                            '-'),
+                                                      ),
+                                                    ),
+                                                    DataCell(
+                                                      Container(
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        child: Text(formatCurrency(
+                                                            (trpdDet?.biaya
+                                                                    ?.toDouble() ??
+                                                                0.0))),
+                                                      ),
+                                                    ),
+                                                    DataCell(
+                                                      Container(
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        child: Text(trpdDet
+                                                                ?.detailTransport ??
+                                                            '-'),
+                                                      ),
+                                                    ),
+                                                    DataCell(
+                                                      Container(
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        child: Text(
+                                                          formatCurrency(
+                                                            double.tryParse(trpdDet!
+                                                                    .biayaRealisasi
+                                                                    .toString()) ??
+                                                                0.0,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    DataCell(
+                                                      Container(
+                                                        alignment: Alignment
+                                                            .centerLeft,
+                                                        child: Text(trpdDet
+                                                                ?.catatanRealisasi ??
+                                                            '-'),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: 20.sp),
+                                    },
 
                                     // Lembur
                                     if (dataTRX?.jamMulai != null)
@@ -445,6 +624,47 @@ class _DetailApprovalState extends State<DetailApproval> {
                                     if (dataTRX?.alasan != null)
                                       buildInfoText('Alasan Cuti',
                                           dataTRX!.alasan.toString()),
+
+                                    if (dataTRX?.attachment != null) ...{
+                                      Text(
+                                        "Surat Dokter",
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 11.sp,
+                                          color: MyColorsConst.lightDarkColor,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      linkFile.Link(
+                                        target: linkFile.LinkTarget.self,
+                                        uri: Uri.parse(
+                                            '${MyGeneralConst.API_URL}/uploads/t_cuti/${dataTRX?.attachment}'),
+                                        builder: (context, followLink) =>
+                                            GestureDetector(
+                                          onTap: followLink,
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                "Lihat Surat Dokter",
+                                                style: GoogleFonts.poppins(
+                                                  fontSize: 13.sp,
+                                                  color: MyColorsConst
+                                                      .primaryColor,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                              const SizedBox(width: 2),
+                                              Icon(
+                                                Icons.image_search_rounded,
+                                                size: 16.sp,
+                                                color:
+                                                    MyColorsConst.primaryColor,
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: 15.sp),
+                                    },
 
                                     if (dataTRX?.dateFrom != null)
                                       buildInfoText(
@@ -483,13 +703,13 @@ class _DetailApprovalState extends State<DetailApproval> {
                                       ),
                                       SizedBox(height: 5.sp),
                                       Container(
-                                        padding: const EdgeInsets.only(
-                                            top: 15),
+                                        padding: const EdgeInsets.only(top: 15),
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(7),
                                             border: Border.all(
-                                                color: Colors.red.shade700.withOpacity(0.3))),
+                                                color: Colors.red.shade700
+                                                    .withOpacity(0.3))),
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -500,7 +720,7 @@ class _DetailApprovalState extends State<DetailApproval> {
                                               child: Column(
                                                 children: [
                                                   buildInfoText('Masa Kerja',
-                                                      "${dataTRX!.infoCuti?.sisaCutiMasaKerja.toString() ?? '0'} Hari"),
+                                                      "${dataTRX!.infoCuti?.sisaCutiMasaKerja?.toString() ?? '0'} Hari"),
                                                 ],
                                               ),
                                             ),
@@ -508,7 +728,8 @@ class _DetailApprovalState extends State<DetailApproval> {
                                               height: 35.sp,
                                               child: VerticalDivider(
                                                 thickness: 1,
-                                                color: Colors.red.shade700.withOpacity(0.3),
+                                                color: Colors.red.shade700
+                                                    .withOpacity(0.3),
                                                 width: 2,
                                               ),
                                             ),
@@ -516,7 +737,7 @@ class _DetailApprovalState extends State<DetailApproval> {
                                               child: Column(
                                                 children: [
                                                   buildInfoText('Tahunan',
-                                                      "${dataTRX!.infoCuti?.sisaCutiReguler.toString() ?? '0'} Hari"),
+                                                      "${dataTRX!.infoCuti?.sisaCutiReguler?.toString() ?? '0'} Hari"),
                                                 ],
                                               ),
                                             ),
@@ -524,7 +745,8 @@ class _DetailApprovalState extends State<DetailApproval> {
                                               height: 35.sp,
                                               child: VerticalDivider(
                                                 thickness: 1,
-                                                color: Colors.red.shade700.withOpacity(0.3),
+                                                color: Colors.red.shade700
+                                                    .withOpacity(0.3),
                                                 width: 2,
                                               ),
                                             ),
@@ -532,7 +754,7 @@ class _DetailApprovalState extends State<DetailApproval> {
                                               child: Column(
                                                 children: [
                                                   buildInfoText('P24',
-                                                      "${dataTRX!.infoCuti?.sisaCutiP24.toString() ?? '0'} Menit"),
+                                                      "${dataTRX!.infoCuti?.sisaCutiP24?.toString() ?? '0'} Menit"),
                                                 ],
                                               ),
                                             )

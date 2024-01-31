@@ -11,6 +11,7 @@ class MyGeneralConst {
   static const _BASE_URL = "https://server.qqltech.com:7005";
 
   static const API_URL = "$_BASE_URL";
+  
   static const PREF_USER_TOKEN = "PREF_USER_TOKEN";
 
   static const CODE_LARGE_FILE = 413;

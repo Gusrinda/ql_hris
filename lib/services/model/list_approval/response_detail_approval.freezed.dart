@@ -1856,6 +1856,8 @@ mixin _$Trx {
   String? get noDoc => throw _privateConstructorUsedError;
   @JsonKey(name: "doc")
   dynamic get doc => throw _privateConstructorUsedError;
+  @JsonKey(name: "attachment")
+  dynamic get attachment => throw _privateConstructorUsedError;
   @JsonKey(name: "interval")
   int? get interval => throw _privateConstructorUsedError;
   @JsonKey(name: "interval_min")
@@ -1874,6 +1876,16 @@ mixin _$Trx {
   int? get cutiSisaP24 => throw _privateConstructorUsedError;
   @JsonKey(name: "info_cuti")
   InfoCuti? get infoCuti => throw _privateConstructorUsedError;
+  @JsonKey(name: "nama_divisi")
+  String? get namaDivisi => throw _privateConstructorUsedError;
+  @JsonKey(name: "nama_dept")
+  String? get namaDept => throw _privateConstructorUsedError;
+  @JsonKey(name: "lokasi_tujuan")
+  String? get lokasiTujuan => throw _privateConstructorUsedError;
+  @JsonKey(name: "pic")
+  String? get pic => throw _privateConstructorUsedError;
+  @JsonKey(name: "t_rpd_det")
+  List<TRpdDet>? get tRpdDet => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1919,6 +1931,7 @@ abstract class $TrxCopyWith<$Res> {
       @JsonKey(name: "jam_selesai") String? jamSelesai,
       @JsonKey(name: "no_doc") String? noDoc,
       @JsonKey(name: "doc") dynamic doc,
+      @JsonKey(name: "attachment") dynamic attachment,
       @JsonKey(name: "interval") int? interval,
       @JsonKey(name: "interval_min") int? intervalMin,
       @JsonKey(name: "time_from") dynamic timeFrom,
@@ -1927,7 +1940,12 @@ abstract class $TrxCopyWith<$Res> {
       @JsonKey(name: "cuti_sisa_panjang") int? cutiSisaPanjang,
       @JsonKey(name: "cuti_sisa_reguler") int? cutiSisaReguler,
       @JsonKey(name: "cuti_sisa_p24") int? cutiSisaP24,
-      @JsonKey(name: "info_cuti") InfoCuti? infoCuti});
+      @JsonKey(name: "info_cuti") InfoCuti? infoCuti,
+      @JsonKey(name: "nama_divisi") String? namaDivisi,
+      @JsonKey(name: "nama_dept") String? namaDept,
+      @JsonKey(name: "lokasi_tujuan") String? lokasiTujuan,
+      @JsonKey(name: "pic") String? pic,
+      @JsonKey(name: "t_rpd_det") List<TRpdDet>? tRpdDet});
 
   $InfoCutiCopyWith<$Res>? get infoCuti;
 }
@@ -1977,6 +1995,7 @@ class _$TrxCopyWithImpl<$Res, $Val extends Trx> implements $TrxCopyWith<$Res> {
     Object? jamSelesai = freezed,
     Object? noDoc = freezed,
     Object? doc = freezed,
+    Object? attachment = freezed,
     Object? interval = freezed,
     Object? intervalMin = freezed,
     Object? timeFrom = freezed,
@@ -1986,6 +2005,11 @@ class _$TrxCopyWithImpl<$Res, $Val extends Trx> implements $TrxCopyWith<$Res> {
     Object? cutiSisaReguler = freezed,
     Object? cutiSisaP24 = freezed,
     Object? infoCuti = freezed,
+    Object? namaDivisi = freezed,
+    Object? namaDept = freezed,
+    Object? lokasiTujuan = freezed,
+    Object? pic = freezed,
+    Object? tRpdDet = freezed,
   }) {
     return _then(_value.copyWith(
       nomor: freezed == nomor
@@ -2120,6 +2144,10 @@ class _$TrxCopyWithImpl<$Res, $Val extends Trx> implements $TrxCopyWith<$Res> {
           ? _value.doc
           : doc // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      attachment: freezed == attachment
+          ? _value.attachment
+          : attachment // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       interval: freezed == interval
           ? _value.interval
           : interval // ignore: cast_nullable_to_non_nullable
@@ -2156,6 +2184,26 @@ class _$TrxCopyWithImpl<$Res, $Val extends Trx> implements $TrxCopyWith<$Res> {
           ? _value.infoCuti
           : infoCuti // ignore: cast_nullable_to_non_nullable
               as InfoCuti?,
+      namaDivisi: freezed == namaDivisi
+          ? _value.namaDivisi
+          : namaDivisi // ignore: cast_nullable_to_non_nullable
+              as String?,
+      namaDept: freezed == namaDept
+          ? _value.namaDept
+          : namaDept // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lokasiTujuan: freezed == lokasiTujuan
+          ? _value.lokasiTujuan
+          : lokasiTujuan // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pic: freezed == pic
+          ? _value.pic
+          : pic // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tRpdDet: freezed == tRpdDet
+          ? _value.tRpdDet
+          : tRpdDet // ignore: cast_nullable_to_non_nullable
+              as List<TRpdDet>?,
     ) as $Val);
   }
 
@@ -2212,6 +2260,7 @@ abstract class _$$TrxImplCopyWith<$Res> implements $TrxCopyWith<$Res> {
       @JsonKey(name: "jam_selesai") String? jamSelesai,
       @JsonKey(name: "no_doc") String? noDoc,
       @JsonKey(name: "doc") dynamic doc,
+      @JsonKey(name: "attachment") dynamic attachment,
       @JsonKey(name: "interval") int? interval,
       @JsonKey(name: "interval_min") int? intervalMin,
       @JsonKey(name: "time_from") dynamic timeFrom,
@@ -2220,7 +2269,12 @@ abstract class _$$TrxImplCopyWith<$Res> implements $TrxCopyWith<$Res> {
       @JsonKey(name: "cuti_sisa_panjang") int? cutiSisaPanjang,
       @JsonKey(name: "cuti_sisa_reguler") int? cutiSisaReguler,
       @JsonKey(name: "cuti_sisa_p24") int? cutiSisaP24,
-      @JsonKey(name: "info_cuti") InfoCuti? infoCuti});
+      @JsonKey(name: "info_cuti") InfoCuti? infoCuti,
+      @JsonKey(name: "nama_divisi") String? namaDivisi,
+      @JsonKey(name: "nama_dept") String? namaDept,
+      @JsonKey(name: "lokasi_tujuan") String? lokasiTujuan,
+      @JsonKey(name: "pic") String? pic,
+      @JsonKey(name: "t_rpd_det") List<TRpdDet>? tRpdDet});
 
   @override
   $InfoCutiCopyWith<$Res>? get infoCuti;
@@ -2268,6 +2322,7 @@ class __$$TrxImplCopyWithImpl<$Res> extends _$TrxCopyWithImpl<$Res, _$TrxImpl>
     Object? jamSelesai = freezed,
     Object? noDoc = freezed,
     Object? doc = freezed,
+    Object? attachment = freezed,
     Object? interval = freezed,
     Object? intervalMin = freezed,
     Object? timeFrom = freezed,
@@ -2277,6 +2332,11 @@ class __$$TrxImplCopyWithImpl<$Res> extends _$TrxCopyWithImpl<$Res, _$TrxImpl>
     Object? cutiSisaReguler = freezed,
     Object? cutiSisaP24 = freezed,
     Object? infoCuti = freezed,
+    Object? namaDivisi = freezed,
+    Object? namaDept = freezed,
+    Object? lokasiTujuan = freezed,
+    Object? pic = freezed,
+    Object? tRpdDet = freezed,
   }) {
     return _then(_$TrxImpl(
       nomor: freezed == nomor
@@ -2411,6 +2471,10 @@ class __$$TrxImplCopyWithImpl<$Res> extends _$TrxCopyWithImpl<$Res, _$TrxImpl>
           ? _value.doc
           : doc // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      attachment: freezed == attachment
+          ? _value.attachment
+          : attachment // ignore: cast_nullable_to_non_nullable
+              as dynamic,
       interval: freezed == interval
           ? _value.interval
           : interval // ignore: cast_nullable_to_non_nullable
@@ -2447,6 +2511,26 @@ class __$$TrxImplCopyWithImpl<$Res> extends _$TrxCopyWithImpl<$Res, _$TrxImpl>
           ? _value.infoCuti
           : infoCuti // ignore: cast_nullable_to_non_nullable
               as InfoCuti?,
+      namaDivisi: freezed == namaDivisi
+          ? _value.namaDivisi
+          : namaDivisi // ignore: cast_nullable_to_non_nullable
+              as String?,
+      namaDept: freezed == namaDept
+          ? _value.namaDept
+          : namaDept // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lokasiTujuan: freezed == lokasiTujuan
+          ? _value.lokasiTujuan
+          : lokasiTujuan // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pic: freezed == pic
+          ? _value.pic
+          : pic // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tRpdDet: freezed == tRpdDet
+          ? _value._tRpdDet
+          : tRpdDet // ignore: cast_nullable_to_non_nullable
+              as List<TRpdDet>?,
     ));
   }
 }
@@ -2488,6 +2572,7 @@ class _$TrxImpl implements _Trx {
       @JsonKey(name: "jam_selesai") this.jamSelesai,
       @JsonKey(name: "no_doc") this.noDoc,
       @JsonKey(name: "doc") this.doc,
+      @JsonKey(name: "attachment") this.attachment,
       @JsonKey(name: "interval") this.interval,
       @JsonKey(name: "interval_min") this.intervalMin,
       @JsonKey(name: "time_from") this.timeFrom,
@@ -2496,7 +2581,13 @@ class _$TrxImpl implements _Trx {
       @JsonKey(name: "cuti_sisa_panjang") this.cutiSisaPanjang,
       @JsonKey(name: "cuti_sisa_reguler") this.cutiSisaReguler,
       @JsonKey(name: "cuti_sisa_p24") this.cutiSisaP24,
-      @JsonKey(name: "info_cuti") this.infoCuti});
+      @JsonKey(name: "info_cuti") this.infoCuti,
+      @JsonKey(name: "nama_divisi") this.namaDivisi,
+      @JsonKey(name: "nama_dept") this.namaDept,
+      @JsonKey(name: "lokasi_tujuan") this.lokasiTujuan,
+      @JsonKey(name: "pic") this.pic,
+      @JsonKey(name: "t_rpd_det") final List<TRpdDet>? tRpdDet})
+      : _tRpdDet = tRpdDet;
 
   factory _$TrxImpl.fromJson(Map<String, dynamic> json) =>
       _$$TrxImplFromJson(json);
@@ -2601,6 +2692,9 @@ class _$TrxImpl implements _Trx {
   @JsonKey(name: "doc")
   final dynamic doc;
   @override
+  @JsonKey(name: "attachment")
+  final dynamic attachment;
+  @override
   @JsonKey(name: "interval")
   final int? interval;
   @override
@@ -2627,10 +2721,32 @@ class _$TrxImpl implements _Trx {
   @override
   @JsonKey(name: "info_cuti")
   final InfoCuti? infoCuti;
+  @override
+  @JsonKey(name: "nama_divisi")
+  final String? namaDivisi;
+  @override
+  @JsonKey(name: "nama_dept")
+  final String? namaDept;
+  @override
+  @JsonKey(name: "lokasi_tujuan")
+  final String? lokasiTujuan;
+  @override
+  @JsonKey(name: "pic")
+  final String? pic;
+  final List<TRpdDet>? _tRpdDet;
+  @override
+  @JsonKey(name: "t_rpd_det")
+  List<TRpdDet>? get tRpdDet {
+    final value = _tRpdDet;
+    if (value == null) return null;
+    if (_tRpdDet is EqualUnmodifiableListView) return _tRpdDet;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'Trx(nomor: $nomor, tanggal: $tanggal, tglAcaraAwal: $tglAcaraAwal, tglAcaraAkhir: $tglAcaraAkhir, jenisSpdId: $jenisSpdId, jenisSpd: $jenisSpd, mZonaAsalId: $mZonaAsalId, zonaAsal: $zonaAsal, mZonaTujuanId: $mZonaTujuanId, zonaTujuan: $zonaTujuan, mLokasiTujuanId: $mLokasiTujuanId, lokasi: $lokasi, mKaryId: $mKaryId, namaKary: $namaKary, picId: $picId, namaPic: $namaPic, totalBiaya: $totalBiaya, totalBiayaSpd: $totalBiayaSpd, totalBiayaSelisih: $totalBiayaSelisih, tipeCuti: $tipeCuti, alasanCuti: $alasanCuti, kegiatan: $kegiatan, keterangan: $keterangan, status: $status, alasanId: $alasanId, alasan: $alasan, tipeCutiId: $tipeCutiId, dateFrom: $dateFrom, dateTo: $dateTo, jamMulai: $jamMulai, jamSelesai: $jamSelesai, noDoc: $noDoc, doc: $doc, interval: $interval, intervalMin: $intervalMin, timeFrom: $timeFrom, timeTo: $timeTo, catatanKend: $catatanKend, cutiSisaPanjang: $cutiSisaPanjang, cutiSisaReguler: $cutiSisaReguler, cutiSisaP24: $cutiSisaP24, infoCuti: $infoCuti)';
+    return 'Trx(nomor: $nomor, tanggal: $tanggal, tglAcaraAwal: $tglAcaraAwal, tglAcaraAkhir: $tglAcaraAkhir, jenisSpdId: $jenisSpdId, jenisSpd: $jenisSpd, mZonaAsalId: $mZonaAsalId, zonaAsal: $zonaAsal, mZonaTujuanId: $mZonaTujuanId, zonaTujuan: $zonaTujuan, mLokasiTujuanId: $mLokasiTujuanId, lokasi: $lokasi, mKaryId: $mKaryId, namaKary: $namaKary, picId: $picId, namaPic: $namaPic, totalBiaya: $totalBiaya, totalBiayaSpd: $totalBiayaSpd, totalBiayaSelisih: $totalBiayaSelisih, tipeCuti: $tipeCuti, alasanCuti: $alasanCuti, kegiatan: $kegiatan, keterangan: $keterangan, status: $status, alasanId: $alasanId, alasan: $alasan, tipeCutiId: $tipeCutiId, dateFrom: $dateFrom, dateTo: $dateTo, jamMulai: $jamMulai, jamSelesai: $jamSelesai, noDoc: $noDoc, doc: $doc, attachment: $attachment, interval: $interval, intervalMin: $intervalMin, timeFrom: $timeFrom, timeTo: $timeTo, catatanKend: $catatanKend, cutiSisaPanjang: $cutiSisaPanjang, cutiSisaReguler: $cutiSisaReguler, cutiSisaP24: $cutiSisaP24, infoCuti: $infoCuti, namaDivisi: $namaDivisi, namaDept: $namaDept, lokasiTujuan: $lokasiTujuan, pic: $pic, tRpdDet: $tRpdDet)';
   }
 
   @override
@@ -2692,6 +2808,8 @@ class _$TrxImpl implements _Trx {
                 other.jamSelesai == jamSelesai) &&
             (identical(other.noDoc, noDoc) || other.noDoc == noDoc) &&
             const DeepCollectionEquality().equals(other.doc, doc) &&
+            const DeepCollectionEquality()
+                .equals(other.attachment, attachment) &&
             (identical(other.interval, interval) ||
                 other.interval == interval) &&
             (identical(other.intervalMin, intervalMin) ||
@@ -2707,7 +2825,15 @@ class _$TrxImpl implements _Trx {
             (identical(other.cutiSisaP24, cutiSisaP24) ||
                 other.cutiSisaP24 == cutiSisaP24) &&
             (identical(other.infoCuti, infoCuti) ||
-                other.infoCuti == infoCuti));
+                other.infoCuti == infoCuti) &&
+            (identical(other.namaDivisi, namaDivisi) ||
+                other.namaDivisi == namaDivisi) &&
+            (identical(other.namaDept, namaDept) ||
+                other.namaDept == namaDept) &&
+            (identical(other.lokasiTujuan, lokasiTujuan) ||
+                other.lokasiTujuan == lokasiTujuan) &&
+            (identical(other.pic, pic) || other.pic == pic) &&
+            const DeepCollectionEquality().equals(other._tRpdDet, _tRpdDet));
   }
 
   @JsonKey(ignore: true)
@@ -2747,6 +2873,7 @@ class _$TrxImpl implements _Trx {
         jamSelesai,
         noDoc,
         const DeepCollectionEquality().hash(doc),
+        const DeepCollectionEquality().hash(attachment),
         interval,
         intervalMin,
         const DeepCollectionEquality().hash(timeFrom),
@@ -2755,7 +2882,12 @@ class _$TrxImpl implements _Trx {
         cutiSisaPanjang,
         cutiSisaReguler,
         cutiSisaP24,
-        infoCuti
+        infoCuti,
+        namaDivisi,
+        namaDept,
+        lokasiTujuan,
+        pic,
+        const DeepCollectionEquality().hash(_tRpdDet)
       ]);
 
   @JsonKey(ignore: true)
@@ -2807,6 +2939,7 @@ abstract class _Trx implements Trx {
       @JsonKey(name: "jam_selesai") final String? jamSelesai,
       @JsonKey(name: "no_doc") final String? noDoc,
       @JsonKey(name: "doc") final dynamic doc,
+      @JsonKey(name: "attachment") final dynamic attachment,
       @JsonKey(name: "interval") final int? interval,
       @JsonKey(name: "interval_min") final int? intervalMin,
       @JsonKey(name: "time_from") final dynamic timeFrom,
@@ -2815,7 +2948,12 @@ abstract class _Trx implements Trx {
       @JsonKey(name: "cuti_sisa_panjang") final int? cutiSisaPanjang,
       @JsonKey(name: "cuti_sisa_reguler") final int? cutiSisaReguler,
       @JsonKey(name: "cuti_sisa_p24") final int? cutiSisaP24,
-      @JsonKey(name: "info_cuti") final InfoCuti? infoCuti}) = _$TrxImpl;
+      @JsonKey(name: "info_cuti") final InfoCuti? infoCuti,
+      @JsonKey(name: "nama_divisi") final String? namaDivisi,
+      @JsonKey(name: "nama_dept") final String? namaDept,
+      @JsonKey(name: "lokasi_tujuan") final String? lokasiTujuan,
+      @JsonKey(name: "pic") final String? pic,
+      @JsonKey(name: "t_rpd_det") final List<TRpdDet>? tRpdDet}) = _$TrxImpl;
 
   factory _Trx.fromJson(Map<String, dynamic> json) = _$TrxImpl.fromJson;
 
@@ -2919,6 +3057,9 @@ abstract class _Trx implements Trx {
   @JsonKey(name: "doc")
   dynamic get doc;
   @override
+  @JsonKey(name: "attachment")
+  dynamic get attachment;
+  @override
   @JsonKey(name: "interval")
   int? get interval;
   @override
@@ -2945,6 +3086,21 @@ abstract class _Trx implements Trx {
   @override
   @JsonKey(name: "info_cuti")
   InfoCuti? get infoCuti;
+  @override
+  @JsonKey(name: "nama_divisi")
+  String? get namaDivisi;
+  @override
+  @JsonKey(name: "nama_dept")
+  String? get namaDept;
+  @override
+  @JsonKey(name: "lokasi_tujuan")
+  String? get lokasiTujuan;
+  @override
+  @JsonKey(name: "pic")
+  String? get pic;
+  @override
+  @JsonKey(name: "t_rpd_det")
+  List<TRpdDet>? get tRpdDet;
   @override
   @JsonKey(ignore: true)
   _$$TrxImplCopyWith<_$TrxImpl> get copyWith =>
@@ -3368,5 +3524,491 @@ abstract class _InfoCuti implements InfoCuti {
   @override
   @JsonKey(ignore: true)
   _$$InfoCutiImplCopyWith<_$InfoCutiImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+TRpdDet _$TRpdDetFromJson(Map<String, dynamic> json) {
+  return _TRpdDet.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TRpdDet {
+  @JsonKey(name: "id")
+  int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "t_rpd_id")
+  int? get tRpdId => throw _privateConstructorUsedError;
+  @JsonKey(name: "t_spd_det_id")
+  dynamic get tSpdDetId => throw _privateConstructorUsedError;
+  @JsonKey(name: "tipe_spd_id")
+  int? get tipeSpdId => throw _privateConstructorUsedError;
+  @JsonKey(name: "tipe_spd")
+  String? get tipeSpd => throw _privateConstructorUsedError;
+  @JsonKey(name: "biaya")
+  int? get biaya => throw _privateConstructorUsedError;
+  @JsonKey(name: "biaya_realisasi")
+  int? get biayaRealisasi => throw _privateConstructorUsedError;
+  @JsonKey(name: "detail_transport")
+  String? get detailTransport => throw _privateConstructorUsedError;
+  @JsonKey(name: "m_knd_dinas_id")
+  dynamic get mKndDinasId => throw _privateConstructorUsedError;
+  @JsonKey(name: "is_kendaraan_dinas")
+  bool? get isKendaraanDinas => throw _privateConstructorUsedError;
+  @JsonKey(name: "catatan_realisasi")
+  String? get catatanRealisasi => throw _privateConstructorUsedError;
+  @JsonKey(name: "creator_id")
+  dynamic get creatorId => throw _privateConstructorUsedError;
+  @JsonKey(name: "last_editor_id")
+  dynamic get lastEditorId => throw _privateConstructorUsedError;
+  @JsonKey(name: "created_at")
+  String? get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: "updated_at")
+  String? get updatedAt => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TRpdDetCopyWith<TRpdDet> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TRpdDetCopyWith<$Res> {
+  factory $TRpdDetCopyWith(TRpdDet value, $Res Function(TRpdDet) then) =
+      _$TRpdDetCopyWithImpl<$Res, TRpdDet>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "id") int? id,
+      @JsonKey(name: "t_rpd_id") int? tRpdId,
+      @JsonKey(name: "t_spd_det_id") dynamic tSpdDetId,
+      @JsonKey(name: "tipe_spd_id") int? tipeSpdId,
+      @JsonKey(name: "tipe_spd") String? tipeSpd,
+      @JsonKey(name: "biaya") int? biaya,
+      @JsonKey(name: "biaya_realisasi") int? biayaRealisasi,
+      @JsonKey(name: "detail_transport") String? detailTransport,
+      @JsonKey(name: "m_knd_dinas_id") dynamic mKndDinasId,
+      @JsonKey(name: "is_kendaraan_dinas") bool? isKendaraanDinas,
+      @JsonKey(name: "catatan_realisasi") String? catatanRealisasi,
+      @JsonKey(name: "creator_id") dynamic creatorId,
+      @JsonKey(name: "last_editor_id") dynamic lastEditorId,
+      @JsonKey(name: "created_at") String? createdAt,
+      @JsonKey(name: "updated_at") String? updatedAt});
+}
+
+/// @nodoc
+class _$TRpdDetCopyWithImpl<$Res, $Val extends TRpdDet>
+    implements $TRpdDetCopyWith<$Res> {
+  _$TRpdDetCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? tRpdId = freezed,
+    Object? tSpdDetId = freezed,
+    Object? tipeSpdId = freezed,
+    Object? tipeSpd = freezed,
+    Object? biaya = freezed,
+    Object? biayaRealisasi = freezed,
+    Object? detailTransport = freezed,
+    Object? mKndDinasId = freezed,
+    Object? isKendaraanDinas = freezed,
+    Object? catatanRealisasi = freezed,
+    Object? creatorId = freezed,
+    Object? lastEditorId = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      tRpdId: freezed == tRpdId
+          ? _value.tRpdId
+          : tRpdId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      tSpdDetId: freezed == tSpdDetId
+          ? _value.tSpdDetId
+          : tSpdDetId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      tipeSpdId: freezed == tipeSpdId
+          ? _value.tipeSpdId
+          : tipeSpdId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      tipeSpd: freezed == tipeSpd
+          ? _value.tipeSpd
+          : tipeSpd // ignore: cast_nullable_to_non_nullable
+              as String?,
+      biaya: freezed == biaya
+          ? _value.biaya
+          : biaya // ignore: cast_nullable_to_non_nullable
+              as int?,
+      biayaRealisasi: freezed == biayaRealisasi
+          ? _value.biayaRealisasi
+          : biayaRealisasi // ignore: cast_nullable_to_non_nullable
+              as int?,
+      detailTransport: freezed == detailTransport
+          ? _value.detailTransport
+          : detailTransport // ignore: cast_nullable_to_non_nullable
+              as String?,
+      mKndDinasId: freezed == mKndDinasId
+          ? _value.mKndDinasId
+          : mKndDinasId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      isKendaraanDinas: freezed == isKendaraanDinas
+          ? _value.isKendaraanDinas
+          : isKendaraanDinas // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      catatanRealisasi: freezed == catatanRealisasi
+          ? _value.catatanRealisasi
+          : catatanRealisasi // ignore: cast_nullable_to_non_nullable
+              as String?,
+      creatorId: freezed == creatorId
+          ? _value.creatorId
+          : creatorId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      lastEditorId: freezed == lastEditorId
+          ? _value.lastEditorId
+          : lastEditorId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$TRpdDetImplCopyWith<$Res> implements $TRpdDetCopyWith<$Res> {
+  factory _$$TRpdDetImplCopyWith(
+          _$TRpdDetImpl value, $Res Function(_$TRpdDetImpl) then) =
+      __$$TRpdDetImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "id") int? id,
+      @JsonKey(name: "t_rpd_id") int? tRpdId,
+      @JsonKey(name: "t_spd_det_id") dynamic tSpdDetId,
+      @JsonKey(name: "tipe_spd_id") int? tipeSpdId,
+      @JsonKey(name: "tipe_spd") String? tipeSpd,
+      @JsonKey(name: "biaya") int? biaya,
+      @JsonKey(name: "biaya_realisasi") int? biayaRealisasi,
+      @JsonKey(name: "detail_transport") String? detailTransport,
+      @JsonKey(name: "m_knd_dinas_id") dynamic mKndDinasId,
+      @JsonKey(name: "is_kendaraan_dinas") bool? isKendaraanDinas,
+      @JsonKey(name: "catatan_realisasi") String? catatanRealisasi,
+      @JsonKey(name: "creator_id") dynamic creatorId,
+      @JsonKey(name: "last_editor_id") dynamic lastEditorId,
+      @JsonKey(name: "created_at") String? createdAt,
+      @JsonKey(name: "updated_at") String? updatedAt});
+}
+
+/// @nodoc
+class __$$TRpdDetImplCopyWithImpl<$Res>
+    extends _$TRpdDetCopyWithImpl<$Res, _$TRpdDetImpl>
+    implements _$$TRpdDetImplCopyWith<$Res> {
+  __$$TRpdDetImplCopyWithImpl(
+      _$TRpdDetImpl _value, $Res Function(_$TRpdDetImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? tRpdId = freezed,
+    Object? tSpdDetId = freezed,
+    Object? tipeSpdId = freezed,
+    Object? tipeSpd = freezed,
+    Object? biaya = freezed,
+    Object? biayaRealisasi = freezed,
+    Object? detailTransport = freezed,
+    Object? mKndDinasId = freezed,
+    Object? isKendaraanDinas = freezed,
+    Object? catatanRealisasi = freezed,
+    Object? creatorId = freezed,
+    Object? lastEditorId = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_$TRpdDetImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      tRpdId: freezed == tRpdId
+          ? _value.tRpdId
+          : tRpdId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      tSpdDetId: freezed == tSpdDetId
+          ? _value.tSpdDetId
+          : tSpdDetId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      tipeSpdId: freezed == tipeSpdId
+          ? _value.tipeSpdId
+          : tipeSpdId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      tipeSpd: freezed == tipeSpd
+          ? _value.tipeSpd
+          : tipeSpd // ignore: cast_nullable_to_non_nullable
+              as String?,
+      biaya: freezed == biaya
+          ? _value.biaya
+          : biaya // ignore: cast_nullable_to_non_nullable
+              as int?,
+      biayaRealisasi: freezed == biayaRealisasi
+          ? _value.biayaRealisasi
+          : biayaRealisasi // ignore: cast_nullable_to_non_nullable
+              as int?,
+      detailTransport: freezed == detailTransport
+          ? _value.detailTransport
+          : detailTransport // ignore: cast_nullable_to_non_nullable
+              as String?,
+      mKndDinasId: freezed == mKndDinasId
+          ? _value.mKndDinasId
+          : mKndDinasId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      isKendaraanDinas: freezed == isKendaraanDinas
+          ? _value.isKendaraanDinas
+          : isKendaraanDinas // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      catatanRealisasi: freezed == catatanRealisasi
+          ? _value.catatanRealisasi
+          : catatanRealisasi // ignore: cast_nullable_to_non_nullable
+              as String?,
+      creatorId: freezed == creatorId
+          ? _value.creatorId
+          : creatorId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      lastEditorId: freezed == lastEditorId
+          ? _value.lastEditorId
+          : lastEditorId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$TRpdDetImpl implements _TRpdDet {
+  const _$TRpdDetImpl(
+      {@JsonKey(name: "id") this.id,
+      @JsonKey(name: "t_rpd_id") this.tRpdId,
+      @JsonKey(name: "t_spd_det_id") this.tSpdDetId,
+      @JsonKey(name: "tipe_spd_id") this.tipeSpdId,
+      @JsonKey(name: "tipe_spd") this.tipeSpd,
+      @JsonKey(name: "biaya") this.biaya,
+      @JsonKey(name: "biaya_realisasi") this.biayaRealisasi,
+      @JsonKey(name: "detail_transport") this.detailTransport,
+      @JsonKey(name: "m_knd_dinas_id") this.mKndDinasId,
+      @JsonKey(name: "is_kendaraan_dinas") this.isKendaraanDinas,
+      @JsonKey(name: "catatan_realisasi") this.catatanRealisasi,
+      @JsonKey(name: "creator_id") this.creatorId,
+      @JsonKey(name: "last_editor_id") this.lastEditorId,
+      @JsonKey(name: "created_at") this.createdAt,
+      @JsonKey(name: "updated_at") this.updatedAt});
+
+  factory _$TRpdDetImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TRpdDetImplFromJson(json);
+
+  @override
+  @JsonKey(name: "id")
+  final int? id;
+  @override
+  @JsonKey(name: "t_rpd_id")
+  final int? tRpdId;
+  @override
+  @JsonKey(name: "t_spd_det_id")
+  final dynamic tSpdDetId;
+  @override
+  @JsonKey(name: "tipe_spd_id")
+  final int? tipeSpdId;
+  @override
+  @JsonKey(name: "tipe_spd")
+  final String? tipeSpd;
+  @override
+  @JsonKey(name: "biaya")
+  final int? biaya;
+  @override
+  @JsonKey(name: "biaya_realisasi")
+  final int? biayaRealisasi;
+  @override
+  @JsonKey(name: "detail_transport")
+  final String? detailTransport;
+  @override
+  @JsonKey(name: "m_knd_dinas_id")
+  final dynamic mKndDinasId;
+  @override
+  @JsonKey(name: "is_kendaraan_dinas")
+  final bool? isKendaraanDinas;
+  @override
+  @JsonKey(name: "catatan_realisasi")
+  final String? catatanRealisasi;
+  @override
+  @JsonKey(name: "creator_id")
+  final dynamic creatorId;
+  @override
+  @JsonKey(name: "last_editor_id")
+  final dynamic lastEditorId;
+  @override
+  @JsonKey(name: "created_at")
+  final String? createdAt;
+  @override
+  @JsonKey(name: "updated_at")
+  final String? updatedAt;
+
+  @override
+  String toString() {
+    return 'TRpdDet(id: $id, tRpdId: $tRpdId, tSpdDetId: $tSpdDetId, tipeSpdId: $tipeSpdId, tipeSpd: $tipeSpd, biaya: $biaya, biayaRealisasi: $biayaRealisasi, detailTransport: $detailTransport, mKndDinasId: $mKndDinasId, isKendaraanDinas: $isKendaraanDinas, catatanRealisasi: $catatanRealisasi, creatorId: $creatorId, lastEditorId: $lastEditorId, createdAt: $createdAt, updatedAt: $updatedAt)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TRpdDetImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.tRpdId, tRpdId) || other.tRpdId == tRpdId) &&
+            const DeepCollectionEquality().equals(other.tSpdDetId, tSpdDetId) &&
+            (identical(other.tipeSpdId, tipeSpdId) ||
+                other.tipeSpdId == tipeSpdId) &&
+            (identical(other.tipeSpd, tipeSpd) || other.tipeSpd == tipeSpd) &&
+            (identical(other.biaya, biaya) || other.biaya == biaya) &&
+            (identical(other.biayaRealisasi, biayaRealisasi) ||
+                other.biayaRealisasi == biayaRealisasi) &&
+            (identical(other.detailTransport, detailTransport) ||
+                other.detailTransport == detailTransport) &&
+            const DeepCollectionEquality()
+                .equals(other.mKndDinasId, mKndDinasId) &&
+            (identical(other.isKendaraanDinas, isKendaraanDinas) ||
+                other.isKendaraanDinas == isKendaraanDinas) &&
+            (identical(other.catatanRealisasi, catatanRealisasi) ||
+                other.catatanRealisasi == catatanRealisasi) &&
+            const DeepCollectionEquality().equals(other.creatorId, creatorId) &&
+            const DeepCollectionEquality()
+                .equals(other.lastEditorId, lastEditorId) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      tRpdId,
+      const DeepCollectionEquality().hash(tSpdDetId),
+      tipeSpdId,
+      tipeSpd,
+      biaya,
+      biayaRealisasi,
+      detailTransport,
+      const DeepCollectionEquality().hash(mKndDinasId),
+      isKendaraanDinas,
+      catatanRealisasi,
+      const DeepCollectionEquality().hash(creatorId),
+      const DeepCollectionEquality().hash(lastEditorId),
+      createdAt,
+      updatedAt);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TRpdDetImplCopyWith<_$TRpdDetImpl> get copyWith =>
+      __$$TRpdDetImplCopyWithImpl<_$TRpdDetImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$TRpdDetImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _TRpdDet implements TRpdDet {
+  const factory _TRpdDet(
+      {@JsonKey(name: "id") final int? id,
+      @JsonKey(name: "t_rpd_id") final int? tRpdId,
+      @JsonKey(name: "t_spd_det_id") final dynamic tSpdDetId,
+      @JsonKey(name: "tipe_spd_id") final int? tipeSpdId,
+      @JsonKey(name: "tipe_spd") final String? tipeSpd,
+      @JsonKey(name: "biaya") final int? biaya,
+      @JsonKey(name: "biaya_realisasi") final int? biayaRealisasi,
+      @JsonKey(name: "detail_transport") final String? detailTransport,
+      @JsonKey(name: "m_knd_dinas_id") final dynamic mKndDinasId,
+      @JsonKey(name: "is_kendaraan_dinas") final bool? isKendaraanDinas,
+      @JsonKey(name: "catatan_realisasi") final String? catatanRealisasi,
+      @JsonKey(name: "creator_id") final dynamic creatorId,
+      @JsonKey(name: "last_editor_id") final dynamic lastEditorId,
+      @JsonKey(name: "created_at") final String? createdAt,
+      @JsonKey(name: "updated_at") final String? updatedAt}) = _$TRpdDetImpl;
+
+  factory _TRpdDet.fromJson(Map<String, dynamic> json) = _$TRpdDetImpl.fromJson;
+
+  @override
+  @JsonKey(name: "id")
+  int? get id;
+  @override
+  @JsonKey(name: "t_rpd_id")
+  int? get tRpdId;
+  @override
+  @JsonKey(name: "t_spd_det_id")
+  dynamic get tSpdDetId;
+  @override
+  @JsonKey(name: "tipe_spd_id")
+  int? get tipeSpdId;
+  @override
+  @JsonKey(name: "tipe_spd")
+  String? get tipeSpd;
+  @override
+  @JsonKey(name: "biaya")
+  int? get biaya;
+  @override
+  @JsonKey(name: "biaya_realisasi")
+  int? get biayaRealisasi;
+  @override
+  @JsonKey(name: "detail_transport")
+  String? get detailTransport;
+  @override
+  @JsonKey(name: "m_knd_dinas_id")
+  dynamic get mKndDinasId;
+  @override
+  @JsonKey(name: "is_kendaraan_dinas")
+  bool? get isKendaraanDinas;
+  @override
+  @JsonKey(name: "catatan_realisasi")
+  String? get catatanRealisasi;
+  @override
+  @JsonKey(name: "creator_id")
+  dynamic get creatorId;
+  @override
+  @JsonKey(name: "last_editor_id")
+  dynamic get lastEditorId;
+  @override
+  @JsonKey(name: "created_at")
+  String? get createdAt;
+  @override
+  @JsonKey(name: "updated_at")
+  String? get updatedAt;
+  @override
+  @JsonKey(ignore: true)
+  _$$TRpdDetImplCopyWith<_$TRpdDetImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

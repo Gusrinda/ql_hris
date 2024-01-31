@@ -129,8 +129,9 @@ class _DownloadBerkasPageState extends State<DownloadBerkasPage> {
                         padding: EdgeInsets.all(20.sp),
                         child: Column(
                           children: [
+                            const SizedBox(height: 10),
                             DashboardItem(
-                              label: 'Prosedur SOP Perusahaan',
+                              label: 'SOP Perusahaan',
                               image: 'assets/images/sop_sj.png',
                               kategoriBerkas: kategoriBerkas
                                   .where((item) => item.kategori == 'SOP')
@@ -188,15 +189,15 @@ class DashboardItem extends StatelessWidget {
         );
       },
       child: Container(
-        margin: const EdgeInsets.only(bottom: 20),
+        margin: const EdgeInsets.only(bottom: 15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Color(0xFFDDDDDD)),
+          border: Border.all(color: Color.fromARGB(255, 219, 220, 255)),
           color: MyColorsConst.whiteColor,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              offset: Offset(0, 0),
+              color: MyColorsConst.primaryColor.withOpacity(0.15),
+              offset: const Offset(0, 2),
               blurRadius: 5,
             ),
           ],
@@ -217,24 +218,12 @@ class DashboardItem extends StatelessWidget {
                   Text(
                     label,
                     style: GoogleFonts.poppins(
-                      fontSize: 12.sp,
+                      color: MyColorsConst.darkColor,
+                      fontSize: 13.sp,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                 ],
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 10.sp),
-                child: Center(
-                  child: Icon(
-                    Icons.file_download_outlined,
-                    size: 20.sp,
-                    color: MyColorsConst.primaryColor,
-                  ),
-                ),
               ),
             ),
           ],

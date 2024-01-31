@@ -516,14 +516,14 @@ class ListViewCuti extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              margin: const EdgeInsets.only(bottom: 7, left: 5, right: 3),
+              margin: const EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    offset: Offset(0, 0),
-                    blurRadius: 5,
+                    color: MyColorsConst.darkColor.withOpacity(0.25),
+                    offset: Offset(2, 3.5),
+                    blurRadius: 7,
                   ),
                 ],
                 color: MyColorsConst.whiteColor,
@@ -622,11 +622,12 @@ class ListViewCuti extends StatelessWidget {
               right: 0,
               child: Container(
                 height: 30,
-                padding: EdgeInsets.symmetric(horizontal: 10.sp, vertical: 3.sp),
+                padding:
+                    EdgeInsets.symmetric(horizontal: 10.sp, vertical: 3.sp),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(10.sp),
-                    bottomLeft: Radius.circular(10.sp),
+                    topRight: Radius.circular(7.sp),
+                    bottomLeft: Radius.circular(7.sp),
                   ),
                   color: currentColor,
                 ),

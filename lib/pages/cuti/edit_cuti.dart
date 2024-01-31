@@ -87,6 +87,10 @@ class _EditCutiPageState extends State<EditCutiPage> {
   int weekdaysCount = 0;
   bool dateFromError = false;
   bool dateToError = false;
+  final _picker = ImagePicker();
+  File? uploadedFile;
+  String fileName = "";
+  String fileUrl = "";
 
   @override
   void initState() {
@@ -112,69 +116,6 @@ class _EditCutiPageState extends State<EditCutiPage> {
     selectedDateFrom = parseDateString(widget.dateFrom);
     selectedDateTo = parseDateString(widget.dateTo);
     weekdaysCount = widget.dataCuti?.interval ?? 0;
-  }
-
-  final _picker = ImagePicker();
-  File? uploadedFile;
-  String fileName = "";
-  String fileUrl = "";
-
-  Future<XFile?> captureFile(BuildContext context) async {
-    try {
-      final pickFile = await _picker.pickImage(
-        source: ImageSource.camera,
-        preferredCameraDevice: CameraDevice.front,
-      );
-
-      if (pickFile == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Gagal Mengambil File!'),
-            backgroundColor: MyColorsConst.redColor,
-          ),
-        );
-        return null;
-      }
-      return pickFile;
-    } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
-      return null;
-    }
-  }
-
-  Future<FilePickerResult?> uploadFile(BuildContext context) async {
-    try {
-      FilePickerResult? pickedFileNonCamera =
-          await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['pdf', 'jpeg', 'jpg', 'png'],
-      );
-
-      if (pickedFileNonCamera != null) {
-        PlatformFile file = pickedFileNonCamera.files.first;
-        setState(() {
-          uploadedFile = File(file.path ?? '');
-          fileName = file.name;
-          fileUrl = file.path ?? '';
-        });
-        print('Path: ${file.path}');
-        print('File Name: $fileName');
-        print('Size: ${file.size}');
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            duration: Duration(seconds: 2),
-            content: Text('Gagal Mengambil File!'),
-            backgroundColor: MyColorsConst.redColor,
-          ),
-        );
-        return null;
-      }
-      return pickedFileNonCamera;
-    } on PlatformException catch (e) {
-      print('Failed to upload file: $e');
-      return null;
-    }
   }
 
   TimeOfDay convertStringToTimeOfDay(String timeString) {
@@ -227,6 +168,73 @@ class _EditCutiPageState extends State<EditCutiPage> {
     var selectAlasanCuti = context.read<AddCutiBloc>().dataAlasanCuti;
     var selectTipeCuti = context.read<AddCutiBloc>().dataTipeCuti;
     String selectedTipeCutiDisplay = "";
+
+    Future<XFile?> captureFile(BuildContext context) async {
+      try {
+        final pickFile = await _picker.pickImage(
+          source: ImageSource.camera,
+          preferredCameraDevice: CameraDevice.front,
+        );
+
+        if (pickFile == null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Gagal Mengambil File!'),
+              backgroundColor: MyColorsConst.redColor,
+            ),
+          );
+          return null;
+        }
+
+        context
+            .read<AddCutiBloc>()
+            .add(OnUploadingFile(storedFile: File(pickFile.path)));
+
+        return pickFile;
+      } on PlatformException catch (e) {
+        print('Failed to pick image: $e');
+        return null;
+      }
+    }
+
+    Future<FilePickerResult?> uploadFile(BuildContext context) async {
+      try {
+        FilePickerResult? pickedFileNonCamera =
+            await FilePicker.platform.pickFiles(
+          type: FileType.custom,
+          allowedExtensions: ['pdf', 'jpeg', 'jpg', 'png'],
+        );
+
+        if (pickedFileNonCamera != null) {
+          PlatformFile file = pickedFileNonCamera.files.first;
+          setState(() {
+            uploadedFile = File(file.path ?? '');
+            fileName = file.name;
+            fileUrl = file.path ?? '';
+          });
+          print('Path: ${file.path}');
+          print('File Name: $fileName');
+          print('Size: ${file.size}');
+
+          context
+              .read<AddCutiBloc>()
+              .add(OnUploadingFile(storedFile: uploadedFile));
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              duration: Duration(seconds: 2),
+              content: Text('Gagal Mengambil File!'),
+              backgroundColor: MyColorsConst.redColor,
+            ),
+          );
+          return null;
+        }
+        return pickedFileNonCamera;
+      } on PlatformException catch (e) {
+        print('Failed to upload file: $e');
+        return null;
+      }
+    }
 
     void _showTipeMenu(BuildContext context) async {
       if (selectTipeCuti.isEmpty) {
@@ -318,6 +326,34 @@ class _EditCutiPageState extends State<EditCutiPage> {
           Navigator.pop(context);
           Navigator.pop(context);
           widget.reloadDataCallback();
+        } else if (state is UploadingFileSuccess) {
+          LoadingDialog.dismissDialog(context);
+          await showDialog(
+            context: context,
+            builder: (_) => DialogCustom(
+              state: DialogCustomItem.success,
+              message: state.message,
+            ),
+          );
+        } else if (state is AddCutiFailed) {
+          LoadingDialog.dismissDialog(context);
+          await showDialog(
+            context: context,
+            builder: (_) => DialogCustom(
+              state: DialogCustomItem.error,
+              message: state.message,
+            ),
+          );
+          Navigator.of(context).pop();
+        } else if (state is UploadingFileFailed) {
+          LoadingDialog.dismissDialog(context);
+          await showDialog(
+            context: context,
+            builder: (_) => DialogCustom(
+              state: DialogCustomItem.error,
+              message: state.message,
+            ),
+          );
         } else if (state is AddCutiFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
@@ -748,21 +784,17 @@ class _EditCutiPageState extends State<EditCutiPage> {
                                               ),
                                             ],
                                           ),
+                                          const SizedBox(height: 20),
                                           Row(
                                             children: [
                                               Text(
-                                                'Foto Ijazah',
+                                                'Surat Dokter',
                                                 style: GoogleFonts.poppins(
                                                   fontSize: 13.sp,
                                                   color:
                                                       MyColorsConst.darkColor,
                                                   fontWeight: FontWeight.w600,
                                                 ),
-                                              ),
-                                              Text(
-                                                ' *',
-                                                style: GoogleFonts.poppins(
-                                                    color: Colors.red),
                                               ),
                                             ],
                                           ),
@@ -933,7 +965,6 @@ class _EditCutiPageState extends State<EditCutiPage> {
                                                 ),
                                               ],
                                             ),
-                                          SizedBox(height: 15.sp),
                                         },
                                         SizedBox(
                                           height: 20.sp,
@@ -1041,6 +1072,7 @@ class _EditCutiPageState extends State<EditCutiPage> {
                                                       keterangan: widget
                                                           .keteranganController
                                                           .text,
+                                                      suratDokter: fileName,
                                                       dateFrom: widget
                                                           .dateFromController
                                                           .text,

@@ -527,16 +527,18 @@ class ListViewDinas extends StatelessWidget {
           children: [
             Container(
               // height: 105,
-              margin: const EdgeInsets.only(bottom: 7, left: 5, right: 3),
+              margin: const EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
                 // border: Border.all(color: const Color(0xFFDDDDDD)),
                 boxShadow: [
-                  BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      offset: Offset(0, 0),
-                      blurRadius: 5)
-                ],
+                                                      BoxShadow(
+                                                        color: MyColorsConst.darkColor
+                                                            .withOpacity(0.25),
+                                                        offset: Offset(2, 3.5),
+                                                        blurRadius: 7,
+                                                      ),
+                                                    ],
                 color: MyColorsConst.whiteColor,
               ),
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -654,11 +656,12 @@ class ListViewDinas extends StatelessWidget {
               right: 0,
               child: Container(
                 height: 30,
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(10.sp),
-                    bottomLeft: Radius.circular(10.sp),
+                    topRight: Radius.circular(7.sp),
+                    bottomLeft: Radius.circular(7.sp),
                   ),
                   color: currentColor,
                 ),

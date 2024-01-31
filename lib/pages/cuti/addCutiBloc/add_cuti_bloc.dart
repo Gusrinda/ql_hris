@@ -62,6 +62,32 @@ class AddCutiBloc extends Bloc<AddCutiEvent, AddCutiState> {
       }
     });
 
+    on<OnUploadingFile>((event, emit) async {
+      emit(AddCutiLoading());
+      var resToken = await GeneralSharedPreferences.getUserToken();
+      if (resToken is ServicesSuccess) {
+        var res = await CutiServices.uploadFile(
+          resToken.response["token"],
+          event.storedFile,
+        );
+
+        if (res is ServicesSuccess) {
+          emit(UploadingFileSuccess(message: "Surat Dokter Telah Terkirim"));
+          print(res.response);
+        } else if (res is ServicesFailure) {
+          if (res.errorResponse == null) {
+            await GeneralSharedPreferences.removeUserToken();
+            emit(AddCutiFailedUserExpired(message: "Token expired"));
+          } else {
+            emit(UploadingFileFailed(message: res.errorResponse));
+            print("Response from API: ${res.errorResponse}");
+          }
+        }
+      } else if (resToken is ServicesFailure) {
+        emit(AddCutiFailedInBackground(message: 'Response format is invalid'));
+      }
+    });
+
     on<OnSelectAlasanCuti>(
       (event, emit) async {
         emit(AddCutiLoading());
@@ -152,20 +178,19 @@ class AddCutiBloc extends Bloc<AddCutiEvent, AddCutiState> {
       var resToken = await GeneralSharedPreferences.getUserToken();
       if (resToken is ServicesSuccess) {
         var res = await CutiServices.editCuti(
-          resToken.response["token"],
-          event.cutiID,
-          resToken.response["m_comp_id"] ?? -99,
-          resToken.response["m_dir_id"] ?? -99,
-          resToken.response["m_kary_id"] ?? -99,
-          event.keterangan,
-          event.alasan ?? -99,
-          event.tipeCuti,
-          event.dateFrom,
-          event.dateTo,
-          event.timeFrom ?? "08:00",
-          event.timeTo ?? "08:00",
-          event.suratDokter
-        );
+            resToken.response["token"],
+            event.cutiID,
+            resToken.response["m_comp_id"] ?? -99,
+            resToken.response["m_dir_id"] ?? -99,
+            resToken.response["m_kary_id"] ?? -99,
+            event.keterangan,
+            event.alasan ?? -99,
+            event.tipeCuti,
+            event.dateFrom,
+            event.dateTo,
+            event.timeFrom ?? "08:00",
+            event.timeTo ?? "08:00",
+            event.suratDokter);
         if (res is ServicesSuccess) {
           emit(AddCutiSuccess(message: "Edit pengajuan cuti berhasil"));
           print(res.response);

@@ -81,8 +81,9 @@ class _DashboardDinasPageState extends State<DashboardDinasPage> {
                   padding: EdgeInsets.all(20),
                   child: Column(
                     children: [
+                      const SizedBox(height: 10),
                       DashboardItem(
-                        label: 'Rencana Perjalanan Dinas',
+                        label: '(SPD)\nSurat Perjalanan Dinas',
                         image: 'assets/images/history_spd.png',
                         onTap: () {
                           Navigator.push(
@@ -98,7 +99,7 @@ class _DashboardDinasPageState extends State<DashboardDinasPage> {
                         },
                       ),
                       DashboardItem(
-                        label: 'Realisasi Perjalanan Dinas',
+                        label: '(REPD)\nRealisasi Perjalanan Dinas',
                         image: 'assets/images/pengajuan_cuti.png',
                         onTap: () {
                           Navigator.push(
@@ -141,15 +142,15 @@ class DashboardItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.only(bottom: 20),
+        margin: EdgeInsets.only(bottom: 15.sp),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Color(0xFFDDDDDD)),
+          border: Border.all(color: Color.fromARGB(255, 219, 220, 255)),
           color: MyColorsConst.whiteColor,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              offset: Offset(0, 0),
+              color: MyColorsConst.primaryColor.withOpacity(0.15),
+              offset: const Offset(0, 2),
               blurRadius: 5,
             ),
           ],
@@ -172,6 +173,7 @@ class DashboardItem extends StatelessWidget {
                     style: GoogleFonts.poppins(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w700,
+                      color: MyColorsConst.darkColor,
                     ),
                   ),
                 ],
@@ -184,8 +186,8 @@ class DashboardItem extends StatelessWidget {
                 child: Center(
                   child: Icon(
                     Icons.arrow_forward_ios_rounded,
-                    size: 12.sp,
-                    color: MyColorsConst.primaryColor,
+                    size: 16.sp,
+                    color: MyColorsConst.darkColor,
                   ),
                 ),
               ),

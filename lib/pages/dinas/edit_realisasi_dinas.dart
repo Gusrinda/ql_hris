@@ -128,33 +128,42 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
     });
     widget.totalBiayaRealisasiController
         .addListener(_onTotalBiayaRealisasiChanged);
+    widget.totalBiayaController.addListener(_onTotalBiayaRealisasiChanged);
   }
 
   void _onTotalBiayaRealisasiChanged() {
     // Ambil nilai dari totalBiayaController dan totalBiayaRealisasiController
     double totalBiaya = _parseCurrency(widget.totalBiayaController.text);
+    print("Total Biaya = ${widget.totalBiayaController.text} >>> $totalBiaya");
     double totalBiayaRealisasi =
         _parseCurrency(widget.totalBiayaRealisasiController.text);
+    print(
+        "Total Realisasi = ${widget.totalBiayaRealisasiController.text} >>> $totalBiayaRealisasi");
 
     // Hitung selisihnya
     double selisih = totalBiaya - totalBiayaRealisasi;
+    print("Operasi [ $totalBiaya - $totalBiayaRealisasi ]");
+    print("#Hasil Selisih = $selisih >>> ${formatRupiah(selisih)} \n");
 
     // Set nilai baru ke totalBiayaRencanaSelisihController dengan format uang
-    widget.totalBiayaRencanaSelisihController.text = _formatCurrency(selisih);
+    widget.totalBiayaRencanaSelisihController.text = formatRupiah(selisih);
   }
 
   double _parseCurrency(String currencyString) {
-    // Hapus "Rp " dan ganti koma jika ada
-    String cleanedString =
-        currencyString.replaceAll('Rp ', '').replaceAll('.', '');
+    String cleanedString = currencyString
+        .replaceAll('Rp ', '')
+        .replaceAll('.', '')
+        .replaceAll(',', '.');
 
     // Parse string menjadi double
     return double.tryParse(cleanedString) ?? 0;
   }
 
-  String _formatCurrency(double amount) {
-    // Format nilai sebagai uang
-    return 'Rp ${NumberFormat('#,###').format(amount)}';
+  String formatRupiah(double? value) {
+    return NumberFormat.currency(
+      locale: 'id_ID',
+      symbol: 'Rp ',
+    ).format(value ?? 0.0).replaceAll(',00', '');
   }
 
   // @override
@@ -213,49 +222,51 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
       }
     }
 
-    // double calculateTotalCost() {
-    //   double totalCost = 0.0;
-
-    //   // Iterate through each expense detail and sum up the costs
-    //   for (var expense in expenseDetails) {
-    //     double biayaRealisasi =
-    //         double.tryParse(expense.biayaRealisasiController.text) ?? 0.0;
-    //     totalCost += biayaRealisasi;
-    //   }
-
-    //   return totalCost;
-    // }
-
-    // void onDataChanged() {
-    //   // Call the function to calculate the total cost
-    //   double totalCost = calculateTotalCost();
-
-    //   // Update the totalBiayaRealisasiController
-    //   widget.totalBiayaRealisasiController.text = totalCost.toString();
-    // }
-
-    double calculateTotalCost() {
-      double totalCost = 0.0;
+    double calculateTotalRealisasi() {
+      double totalCalcRealisasi = 0.0;
 
       // Iterate through each expense detail and sum up the costs
       for (var expense in expenseDetails) {
         double biayaRealisasi =
             double.tryParse(expense.biayaRealisasiController.text) ?? 0.0;
-        totalCost += biayaRealisasi;
+        totalCalcRealisasi += biayaRealisasi;
       }
 
-      return totalCost;
+      return totalCalcRealisasi;
     }
 
-    void onDataChanged() {
+    void onDataRealisasiChanged() {
       // Call the function to calculate the total cost
-      double totalCost = calculateTotalCost();
+      double totalCalcRealisasi = calculateTotalRealisasi();
 
       // Format the total cost as currency
-      String formattedTotalCost = formatRupiah(totalCost);
+      String formattedTotalCost = formatRupiah(totalCalcRealisasi);
 
       // Update the totalBiayaRealisasiController
       widget.totalBiayaRealisasiController.text = formattedTotalCost;
+    }
+
+    double calculateTotalBiaya() {
+      double totalCalcBiaya = 0.0;
+
+      // Iterate through each expense detail and sum up the costs
+      for (var expense in expenseDetails) {
+        double biayaAwal = double.tryParse(expense.costController.text) ?? 0.0;
+        totalCalcBiaya += biayaAwal;
+      }
+
+      return totalCalcBiaya;
+    }
+
+    void onDataBiayaChanged() {
+      // Call the function to calculate the total cost
+      double totalCalcBiaya = calculateTotalBiaya();
+
+      // Format the total cost as currency
+      String formattedTotalCost = formatRupiah(totalCalcBiaya);
+
+      // Update the totalBiayaRealisasiController
+      widget.totalBiayaController.text = formattedTotalCost;
     }
 
     return BlocListener<AddRealisasiDinasBloc, AddRealisasiDinasState>(
@@ -691,7 +702,7 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
                                 hintText: 'Autofill Tanggal',
                                 labelTag: 'Label-TanggalAwalRspd',
                                 formTag: 'Form-TanggalAwalRspd',
-                                labelForm: 'Tanggal Acara Awal',
+                                labelForm: 'Tanggal Berangkat Dinas',
                                 validator: (value) {},
                                 enabled: false,
                                 errorTextStyle:
@@ -704,7 +715,7 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
                                 hintText: 'Autofill Tanggal',
                                 labelTag: 'Label-TanggalAkhirRspd',
                                 formTag: 'Form-TanggalAkhirRspd',
-                                labelForm: 'Tanggal Acara Akhir',
+                                labelForm: 'Tanggal Pulang Dinas',
                                 validator: (value) {},
                                 enabled: false,
                                 errorTextStyle:
@@ -968,7 +979,9 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
                                               .remove(expenseDetails[index]);
                                         });
                                       },
-                                      onBiayaChanged: onDataChanged,
+                                      onRealisasiChanged:
+                                          onDataRealisasiChanged,
+                                      onBiayaChanged: onDataBiayaChanged,
                                       indexForm: index,
                                     );
                                   },
@@ -978,7 +991,8 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
                                 onPressed: () {
                                   setState(() {
                                     expenseDetails.add(ExpenseDetail());
-                                    onDataChanged();
+                                    onDataRealisasiChanged();
+                                    onDataBiayaChanged();
                                   });
                                 },
                                 child: Text('Tambah Biaya'),
@@ -1024,6 +1038,11 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
                                                 .totalBiayaRencanaSelisihController
                                                 .value
                                                 .text);
+
+                                        double totalBiaya = parseCurrency(widget
+                                            .totalBiayaController.value.text);
+                                        print(
+                                            "${widget.totalBiayaRencanaSelisihController.text} >>> $totalBiayaSelisih");
                                         print(
                                             "${widget.totalBiayaRencanaSelisihController.text} >>> $totalBiayaSelisih");
 
@@ -1047,8 +1066,14 @@ class EditRealisasiDinasPageState extends State<EditRealisasiDinasPage> {
                                             onContinue: () => context
                                                 .read<AddRealisasiDinasBloc>()
                                                 .add(
-                                                  AddRealisasiDinasSubmited(
+                                                  EditRealisasiDinasSubmited(
+                                                    rpdID: dataDetailrealisasiDinas
+                                                            ?.dataDetailrealisasiDinas
+                                                            ?.id ??
+                                                        -99,
                                                     tSpdId: idNomorSpd,
+                                                    totalBiayaSPD:
+                                                        totalBiaya.toDouble(),
                                                     totalBiayaSelisih:
                                                         totalBiayaSelisih
                                                             .toDouble(),
@@ -1124,12 +1149,14 @@ class ExpenseDetail {
 class DynamicFormField extends StatefulWidget {
   final ExpenseDetail expenseDetail;
   final VoidCallback onDelete;
+  final VoidCallback onRealisasiChanged;
   final VoidCallback onBiayaChanged;
   final int indexForm;
 
   const DynamicFormField({
     required this.expenseDetail,
     required this.onDelete,
+    required this.onRealisasiChanged,
     required this.onBiayaChanged,
     required this.indexForm,
   });
@@ -1226,6 +1253,7 @@ class _DynamicFormFieldState extends State<DynamicFormField> {
           onTap: () {},
           onChanged: (value) {
             updateNoteTop(value!, isBiayaAwal: false);
+            widget.onBiayaChanged();
           },
           noteTop: noteTopBiayaAwal,
           controller: widget.expenseDetail.costController,
@@ -1256,7 +1284,7 @@ class _DynamicFormFieldState extends State<DynamicFormField> {
           onTap: () {},
           onChanged: (value) {
             updateNoteTop(value!, isBiayaAwal: true);
-            widget.onBiayaChanged();
+            widget.onRealisasiChanged();
           },
           controller: widget.expenseDetail.biayaRealisasiController,
           noteTop: noteTopRealisasi.toString(),
@@ -1289,6 +1317,7 @@ class _DynamicFormFieldState extends State<DynamicFormField> {
                 onPressed: () {
                   widget.onDelete();
                   widget.onBiayaChanged();
+                  widget.onRealisasiChanged();
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red.shade700),

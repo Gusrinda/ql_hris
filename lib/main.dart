@@ -7,10 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sj_presensi_mobile/pages/approval/bloc/approval_bloc.dart';
+import 'package:sj_presensi_mobile/pages/authentication/check_version/check_version_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/data_diri/edit_data_diri.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/data_pendidikan/add_pendidikan.bloc/add_data_pendidikan_bloc.dart';
 import 'package:sj_presensi_mobile/pages/splash/splash_page.dart';
 
 import 'utils/const.dart';
@@ -66,6 +65,9 @@ class _MyAppState extends State<MyApp> {
           BlocProvider(
             create: (context) => ProfileBloc(),
           ),
+          BlocProvider(
+            create: (context) => CheckVersionBloc(),
+          )
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

@@ -225,13 +225,16 @@ class _LemburPageState extends State<LemburPage> {
                     ),
                     color: Colors.white,
                   ),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, left: 20, right: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 15.sp,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
@@ -319,26 +322,26 @@ class _LemburPageState extends State<LemburPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 15.sp,
+                      ),
+                      SizedBox(
+                        height: 15.sp,
+                      ),
+                      Expanded(
+                        child: BlocBuilder<ListLemburBloc, ListLemburState>(
+                          builder: (context, state) {
+                            var listlembur =
+                                context.read<ListLemburBloc>().listlembur;
+                            debugPrint("LIST LEMBUR ? ${listlembur}");
+                            return CardListView(
+                              listlembur: listlembur,
+                              formatDate: formatDate,
+                              extractTime: extractTime,
+                              reloadDataCallback: loadData,
+                            );
+                          },
                         ),
-                        Expanded(
-                          child: BlocBuilder<ListLemburBloc, ListLemburState>(
-                            builder: (context, state) {
-                              var listlembur =
-                                  context.read<ListLemburBloc>().listlembur;
-                              debugPrint("LIST LEMBUR ? ${listlembur}");
-                              return CardListView(
-                                listlembur: listlembur,
-                                formatDate: formatDate,
-                                extractTime: extractTime,
-                                reloadDataCallback: loadData,
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -378,172 +381,177 @@ class CardListView extends StatelessWidget {
               String currentStatus = data.status ?? '';
               Color currentColor = getColorFromStatus(currentStatus);
 
-              return ListTile(
-                contentPadding: EdgeInsets.zero,
-                subtitle: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DetailLemburPage(
-                          data: data,
-                          lemburID : data.id ?? 0,
-                          tipeLemburId : data.tipeLemburId,
-                          tipeLemburValue: data.tipeLemburValue,
-                          nomorFromList: data.nomor,
-                          tanggal: data.tanggal,
-                          jamMulai: data.jamMulai,
-                          jamSelesai: data.jamSelesai,
-                          noDoc: data.noDoc,
-                          doc: data.doc,
-                          keterangan: data.keterangan,
-                          alasanId : data.alasanId,
-                          alasanValue: data.alasanValue,
-                          picId : data.picId,
-                          picValue : data.picName,
-                          reloadDataCallback: reloadDataCallback,
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                child: ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  subtitle: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailLemburPage(
+                            data: data,
+                            lemburID: data.id ?? 0,
+                            tipeLemburId: data.tipeLemburId,
+                            tipeLemburValue: data.tipeLemburValue,
+                            nomorFromList: data.nomor,
+                            tanggal: data.tanggal,
+                            jamMulai: data.jamMulai,
+                            jamSelesai: data.jamSelesai,
+                            noDoc: data.noDoc,
+                            doc: data.doc,
+                            keterangan: data.keterangan,
+                            alasanId: data.alasanId,
+                            alasanValue: data.alasanValue,
+                            picId: data.picId,
+                            picValue: data.picName,
+                            reloadDataCallback: reloadDataCallback,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  child: Stack(
-                    children: [
-                      // Container(
-                      //   margin: EdgeInsets.only(right: 3),
-                      //   height: 110,
-                      //   decoration: BoxDecoration(
-                      //     borderRadius: BorderRadius.circular(6),
-                      //     color: Color(0XFF0068D4),
-                      //   ),
-                      // ),
-                      Container(
-                        // height: 110,
-                        margin:
-                            const EdgeInsets.only(bottom: 7, left: 5, right: 3),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                offset: Offset(0, 0),
-                                blurRadius: 5)
-                          ],
-                          color: MyColorsConst.whiteColor,
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              height: 20.sp,
-                            ),
-                            Text(
-                              data.tipeLemburValue ?? '',
-                              style: GoogleFonts.poppins(
-                                color: MyColorsConst.darkColor,
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 2.sp,
-                            ),
-                            Text(
-                              "${data.nomor ?? 0}",
-                              style: GoogleFonts.poppins(
-                                color: MyColorsConst.primaryColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10.sp,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Text(
-                                    'Tanggal',
-                                    style: GoogleFonts.poppins(
-                                      color: Colors.grey,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 3,
-                                  child: Text(
-                                    '${data.tanggal}',
-                                    style: GoogleFonts.poppins(
-                                        color: Colors.black,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10.sp,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Text(
-                                    'Jam',
-                                    style: GoogleFonts.poppins(
-                                      color: Colors.grey,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 3,
-                                  child: Text(
-                                    "${extractTime(data.jamMulai)} - ${extractTime(data.jamSelesai)}",
-                                    style: GoogleFonts.poppins(
-                                        color: Colors.black,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w400),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        child: Container(
-                          height: 30,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.sp, vertical: 3.sp),
+                      );
+                    },
+                    child: Stack(
+                      children: [
+                        // Container(
+                        //   margin: EdgeInsets.only(right: 3),
+                        //   height: 110,
+                        //   decoration: BoxDecoration(
+                        //     borderRadius: BorderRadius.circular(6),
+                        //     color: Color(0XFF0068D4),
+                        //   ),
+                        // ),
+                        Container(
+                          // height: 110,
+                          margin: const EdgeInsets.only(
+                              bottom: 7, left: 5, right: 3),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(10.sp),
-                              bottomLeft: Radius.circular(10.sp),
-                            ),
-                            color: currentColor,
+                            borderRadius: BorderRadius.circular(6),
+                            boxShadow: [
+                              BoxShadow(
+                                color:
+                                    MyColorsConst.darkColor.withOpacity(0.25),
+                                offset: Offset(2, 3.5),
+                                blurRadius: 7,
+                              ),
+                            ],
+                            color: MyColorsConst.whiteColor,
                           ),
-                          child: Center(
-                            child: Text(
-                              mapStatusToString(currentStatus),
-                              style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontWeight: FontWeight.w600,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 15),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                height: 20.sp,
+                              ),
+                              Text(
+                                data.tipeLemburValue ?? '',
+                                style: GoogleFonts.poppins(
+                                  color: MyColorsConst.darkColor,
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 2.sp,
+                              ),
+                              Text(
+                                "${data.nomor ?? 0}",
+                                style: GoogleFonts.poppins(
+                                  color: MyColorsConst.primaryColor,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10.sp,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Text(
+                                      'Tanggal',
+                                      style: GoogleFonts.poppins(
+                                        color: Colors.grey,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 3,
+                                    child: Text(
+                                      '${data.tanggal}',
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.black,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10.sp,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Text(
+                                      'Jam',
+                                      style: GoogleFonts.poppins(
+                                        color: Colors.grey,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 3,
+                                    child: Text(
+                                      "${extractTime(data.jamMulai)} - ${extractTime(data.jamSelesai)}",
+                                      style: GoogleFonts.poppins(
+                                          color: Colors.black,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Positioned(
+                          top: 0,
+                          right: 0,
+                          child: Container(
+                            height: 30,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.sp, vertical: 3.sp),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(7.sp),
+                                bottomLeft: Radius.circular(7.sp),
+                              ),
+                              color: currentColor,
+                            ),
+                            child: Center(
+                              child: Text(
+                                mapStatusToString(currentStatus),
+                                style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               );

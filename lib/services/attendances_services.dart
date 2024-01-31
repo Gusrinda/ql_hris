@@ -59,7 +59,9 @@ class AttendancesServices {
         "${date.year}-${date.month.toString().padLeft(2, '0')}-$lastDateStr";
     print("Tanggal Terakhir bulan ini adalah tanggal $formattedDate");
     var url = Uri.parse(
-        "${MyGeneralConst.API_URL}/operation/presensi_absensi?scopes=filter&date_from=${date.year}-${date.month.toString().padLeft(2, '0')}-1&date_to=$formattedDate");
+        "${MyGeneralConst.API_URL}/operation/presensi_absensi/get_absen?periode=${date.year}-${date.month.toString().padLeft(2, '0')}");
+    // var url = Uri.parse(
+    //     "${MyGeneralConst.API_URL}/operation/presensi_absensi?where=this.created_at between '${date.year}-${date.month.toString().padLeft(2, '0')}-01 00:00:00' and '$formattedDate 23:59:59'");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,

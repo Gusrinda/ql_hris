@@ -113,11 +113,11 @@ class BiodataKaryawanService {
 
       print("Files yang diUpload:");
       print("File KTP : ${File(ktpFoto?.path ?? "")}");
-      print("File KTP : ${File(pasFoto?.path ?? "")}");
+      print("File Pas Foto : ${File(pasFoto?.path ?? "")}");
       // print("File KTP : ${File(bpjsFoto?.path ?? "")}");
-      print("File KTP : ${File(kkFoto?.path ?? "")}");
-      print("File KTP : ${File(npwpFoto?.path ?? "")}");
-      print("File KTP : ${File(berkasLain?.path ?? "")}");
+      print("File KK : ${File(kkFoto?.path ?? "")}");
+      print("File NPWP : ${File(npwpFoto?.path ?? "")}");
+      print("File Berkas Lain : ${File(berkasLain?.path ?? "")}");
 
       // Create a map for the request body
       Object requestBody = {

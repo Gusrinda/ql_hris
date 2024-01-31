@@ -351,10 +351,11 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                     // border: Border.all(color: const Color(0xFFDDDDDD)),
                                                     boxShadow: [
                                                       BoxShadow(
-                                                          color: Colors.black
-                                                              .withOpacity(0.1),
-                                                          offset: Offset(0, 0),
-                                                          blurRadius: 5)
+                                                        color: MyColorsConst.darkColor
+                                                            .withOpacity(0.25),
+                                                        offset: Offset(2, 3.5),
+                                                        blurRadius: 7,
+                                                      ),
                                                     ],
                                                     color: MyColorsConst
                                                         .whiteColor,
@@ -484,10 +485,10 @@ class _RealisasiDinasPageState extends State<RealisasiDinasPage> {
                                                           BorderRadius.only(
                                                         topRight:
                                                             Radius.circular(
-                                                                10.sp),
+                                                                7.sp),
                                                         bottomLeft:
                                                             Radius.circular(
-                                                                10.sp),
+                                                                7.sp),
                                                       ),
                                                       color: currentColor,
                                                     ),

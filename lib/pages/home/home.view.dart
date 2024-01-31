@@ -154,7 +154,7 @@ class _HomePageState extends State<HomePage> {
                                         maxRadius: 25.sp,
                                         backgroundColor: Colors.black54,
                                         child: fotoProfil !=
-                                                "https://server.qqltech.com:7005/"
+                                                "${MyGeneralConst.API_URL}/"
                                             ? ClipOval(
                                                 child: Image.network(
                                                   fotoProfil ??

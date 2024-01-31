@@ -12,7 +12,7 @@ class HitoryAttendanceInitial extends HistoryAttendanceState {}
 class HistoryAttendanceLoading extends HistoryAttendanceState {}
 
 class HistorySuccessInBackground extends HistoryAttendanceState {
-  List<Datum> dataHistory;
+  List<DataPresensi> dataHistory;
 
   HistorySuccessInBackground({
     required this.dataHistory,

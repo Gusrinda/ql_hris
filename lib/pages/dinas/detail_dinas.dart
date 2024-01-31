@@ -284,9 +284,9 @@ class _DetailDinasPageState extends State<DetailDinasPage> {
                                     'Nama PIC', widget.data?.namaPic ?? '-'),
                                 _buildText(
                                     'Tanggal Pengajuan', widget.tanggal ?? '-'),
-                                _buildText('Tanggal Acara Awal',
+                                _buildText('Tanggal Berangkat Dinas',
                                     widget.tanggalAwal ?? '-'),
-                                _buildText('Tanggal Acara Akhir',
+                                _buildText('Tanggal Pulang Dinas',
                                     widget.tanggalAkhir ?? '-'),
                                 _buildText('Zona Awal', widget.zonaAwal ?? '-'),
                                 _buildText(

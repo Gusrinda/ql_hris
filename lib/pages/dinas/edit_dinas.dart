@@ -349,7 +349,8 @@ class _EditDinasPageState extends State<EditDinasPage> {
                         "Pastikan Data Revisi Pengajuan Dinas Sudah Benar?",
                     durationInSec: 7,
                     onContinue: () => context.read<AddDinasBloc>().add(
-                          AddDinasSubmited(
+                          EditDinasSubmited(
+                              spdID: widget.dataDinas?.id ?? -99,
                               divisi: int.parse(widget.idDivisiController.text),
                               departemen:
                                   int.parse(widget.idDepartemenController.text),
@@ -1097,7 +1098,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                         Row(
                                           children: [
                                             FormTextLabel(
-                                              label: "Tanggal Acara Awal",
+                                              label: "Tanggal Berangkat Dinas",
                                               labelColor:
                                                   MyColorsConst.darkColor,
                                             ),
@@ -1113,7 +1114,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           height: 5,
                                         ),
                                         _buildDateTextField(
-                                          "Pilih Tanggal Acara Awal",
+                                          "Pilih Tanggal Berangkat Dinas",
                                           widget.tanggalAwalController,
                                           selectedTanggalAwal,
                                           (selectedDate) {
@@ -1124,7 +1125,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           },
                                           (value) {
                                             if (value == null) {
-                                              return 'Pilih Tanggal Acara Awal';
+                                              return 'Pilih Tanggal Berangkat Dinas';
                                             }
                                             return null;
                                           },
@@ -1135,7 +1136,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                         Row(
                                           children: [
                                             FormTextLabel(
-                                              label: "Tanggal Acara Akhir",
+                                              label: "Tanggal Pulang Dinas",
                                               labelColor:
                                                   MyColorsConst.darkColor,
                                             ),
@@ -1151,7 +1152,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           height: 8,
                                         ),
                                         _buildDateTextField(
-                                          "Pilih Tanggal Acara Akhir",
+                                          "Pilih Tanggal Pulang Dinas",
                                           widget.tanggalAkhirController,
                                           selectedTanggalAkhir,
                                           (selectedDate) {
@@ -1162,7 +1163,7 @@ class _EditDinasPageState extends State<EditDinasPage> {
                                           },
                                           (value) {
                                             if (value == null) {
-                                              return 'Pilih Tanggal Acara Akhir';
+                                              return 'Pilih Tanggal Pulang Dinas';
                                             }
                                             return null;
                                           },

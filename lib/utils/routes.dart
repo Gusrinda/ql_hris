@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sj_presensi_mobile/pages/approval/approval.view.dart';
 import 'package:sj_presensi_mobile/pages/approval/bloc/approval_bloc.dart';
 import 'package:sj_presensi_mobile/pages/approval/detail_approval.view.dart';
+import 'package:sj_presensi_mobile/pages/authentication/check_version/check_version_bloc.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/bloc/login_bloc.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
@@ -105,7 +106,10 @@ class RouteGenerator {
       //   });
       case SplashPage.routeName:
         return MaterialPageRoute(builder: (context) {
-          return const SplashPage();
+          return BlocProvider(
+            create: (context) => CheckVersionBloc(),
+            child: SplashPage(),
+          );
         });
       case LoginPage.routeName:
         return MaterialPageRoute(builder: (context) {

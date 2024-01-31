@@ -64,64 +64,6 @@ class _AddCutiPageState extends State<AddCutiPage> {
   String fileName = "";
   String fileUrl = "";
 
-  Future<XFile?> captureFile(BuildContext context) async {
-    try {
-      final pickFile = await _picker.pickImage(
-        source: ImageSource.camera,
-        preferredCameraDevice: CameraDevice.front,
-      );
-
-      if (pickFile == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Gagal Mengambil File!'),
-            backgroundColor: MyColorsConst.redColor,
-          ),
-        );
-        return null;
-      }
-      return pickFile;
-    } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
-      return null;
-    }
-  }
-
-  Future<FilePickerResult?> uploadFile(BuildContext context) async {
-    try {
-      FilePickerResult? pickedFileNonCamera =
-          await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['pdf', 'jpeg', 'jpg', 'png'],
-      );
-
-      if (pickedFileNonCamera != null) {
-        PlatformFile file = pickedFileNonCamera.files.first;
-        setState(() {
-          uploadedFile = File(file.path ?? '');
-          fileName = file.name;
-          fileUrl = file.path ?? '';
-        });
-        print('Path: ${file.path}');
-        print('File Name: $fileName');
-        print('Size: ${file.size}');
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            duration: Duration(seconds: 2),
-            content: Text('Gagal Mengambil File!'),
-            backgroundColor: MyColorsConst.redColor,
-          ),
-        );
-        return null;
-      }
-      return pickedFileNonCamera;
-    } on PlatformException catch (e) {
-      print('Failed to upload file: $e');
-      return null;
-    }
-  }
-
   DateTime? parseDate(String? date) {
     try {
       return date != null ? DateTime.parse(date).toLocal() : null;
@@ -137,6 +79,73 @@ class _AddCutiPageState extends State<AddCutiPage> {
     var selectAlasanCuti = context.read<AddCutiBloc>().dataAlasanCuti;
     var selectTipeCuti = context.read<AddCutiBloc>().dataTipeCuti;
     String selectedTipeCutiDisplay = "";
+
+    Future<XFile?> captureFile(BuildContext context) async {
+      try {
+        final pickFile = await _picker.pickImage(
+          source: ImageSource.camera,
+          preferredCameraDevice: CameraDevice.front,
+        );
+
+        if (pickFile == null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Gagal Mengambil File!'),
+              backgroundColor: MyColorsConst.redColor,
+            ),
+          );
+          return null;
+        }
+
+        context
+            .read<AddCutiBloc>()
+            .add(OnUploadingFile(storedFile: File(pickFile.path)));
+
+        return pickFile;
+      } on PlatformException catch (e) {
+        print('Failed to pick image: $e');
+        return null;
+      }
+    }
+
+    Future<FilePickerResult?> uploadFile(BuildContext context) async {
+      try {
+        FilePickerResult? pickedFileNonCamera =
+            await FilePicker.platform.pickFiles(
+          type: FileType.custom,
+          allowedExtensions: ['pdf', 'jpeg', 'jpg', 'png'],
+        );
+
+        if (pickedFileNonCamera != null) {
+          PlatformFile file = pickedFileNonCamera.files.first;
+          setState(() {
+            uploadedFile = File(file.path ?? '');
+            fileName = file.name;
+            fileUrl = file.path ?? '';
+          });
+          print('Path: ${file.path}');
+          print('File Name: $fileName');
+          print('Size: ${file.size}');
+
+          context
+              .read<AddCutiBloc>()
+              .add(OnUploadingFile(storedFile: uploadedFile));
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              duration: Duration(seconds: 2),
+              content: Text('Gagal Mengambil File!'),
+              backgroundColor: MyColorsConst.redColor,
+            ),
+          );
+          return null;
+        }
+        return pickedFileNonCamera;
+      } on PlatformException catch (e) {
+        print('Failed to upload file: $e');
+        return null;
+      }
+    }
 
     void _showTipeMenu(BuildContext context) async {
       if (selectTipeCuti.isEmpty) {
@@ -227,6 +236,15 @@ class _AddCutiPageState extends State<AddCutiPage> {
           Navigator.of(context).pop();
           Navigator.pop(context);
           widget.reloadDataCallback();
+        } else if (state is UploadingFileSuccess) {
+          LoadingDialog.dismissDialog(context);
+          await showDialog(
+            context: context,
+            builder: (_) => DialogCustom(
+              state: DialogCustomItem.success,
+              message: state.message,
+            ),
+          );
         } else if (state is AddCutiFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
@@ -237,6 +255,15 @@ class _AddCutiPageState extends State<AddCutiPage> {
             ),
           );
           Navigator.of(context).pop();
+        } else if (state is UploadingFileFailed) {
+          LoadingDialog.dismissDialog(context);
+          await showDialog(
+            context: context,
+            builder: (_) => DialogCustom(
+              state: DialogCustomItem.error,
+              message: state.message,
+            ),
+          );
         } else if (state is AddCutiFailedUserExpired) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
@@ -943,13 +970,7 @@ class _AddCutiPageState extends State<AddCutiPage> {
                                                       keterangan: widget
                                                           .keteranganController
                                                           .text,
-                                                      suratDokter: uploadedFile !=
-                                                                  null &&
-                                                              uploadedFile!.path
-                                                                  .isNotEmpty
-                                                          ? File(uploadedFile!
-                                                              .path)
-                                                          : null,
+                                                      suratDokter: fileName,
                                                       dateFrom: widget
                                                           .dateFromController
                                                           .text,

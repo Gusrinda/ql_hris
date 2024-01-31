@@ -32,20 +32,21 @@ class CutiServices {
       String dateTo,
       String? timeFrom,
       String? timeTo,
-      File? suratDokter) async {
+      String? suratDokter) async {
     var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_cuti");
+
     print("Ini yang dikirim saat POST Cuti :");
-    print("alasan_id : ${alasan}");
-    print("tipe_cuti_id : ${tipeCuti}");
-    print("date_from : ${dateFrom}");
-    print("date_to : ${dateTo}");
-    print("keterangan : ${keterangan}");
-    print("Ini mCompID : ${mCompID}");
-    print("Ini mDirID : ${mDirID}");
-    print("Ini mKaryID : ${mKaryID}");
-    print("Ini timeFrom : ${timeFrom}");
-    print("Ini timeTo : ${timeTo}");
-    print("File Surat Dokter : ${File(suratDokter?.path ?? "")}");
+    print("alasan_id : $alasan");
+    print("tipe_cuti_id : $tipeCuti");
+    print("date_from : $dateFrom");
+    print("date_to : $dateTo");
+    print("keterangan : $keterangan");
+    print("Ini mCompID : $mCompID");
+    print("Ini mDirID : $mDirID");
+    print("Ini mKaryID : $mKaryID");
+    print("Ini timeFrom : $timeFrom");
+    print("Ini timeTo : $timeTo");
+    print("Nama File Surat Dokter : $suratDokter");
 
     Object requestBody = {
       'm_comp_id': mCompID,
@@ -58,11 +59,25 @@ class CutiServices {
       'time_from': timeFrom,
       'time_to': timeTo,
       'keterangan': keterangan,
+      'attachment': suratDokter
     }..removeWhere(
         (key, value) => value == null || value == '' || value == -99);
 
+    return await GeneralServices.baseService(
+      url: url,
+      method: GeneralServicesMethod.post,
+      headers: GeneralServices.addToken2Headers(token),
+      body: json.encode(requestBody),
+    );
+  }
+
+  static Future<Object> uploadFile(String token, File? storedFile) async {
+    var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_cuti/upload");
+
+    Object requestBody = {'field': "attachment"};
+
     Map<String, File?> files = {
-      'attachment': File(suratDokter?.path ?? ''),
+      'file': File(storedFile?.path ?? ''),
     }..removeWhere((key, value) => value == null || value.path.isEmpty);
 
     // Pengecekan tambahan untuk menghapus yang data path kosong
@@ -111,19 +126,20 @@ class CutiServices {
       String dateTo,
       String? timeFrom,
       String? timeTo,
-      File? suratDokter) async {
+      String? suratDokter) async {
     var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_cuti/$cutiID");
     print("Ini yang dikirim saat PUT Cuti :");
-    print("alasan_id : ${alasan}");
-    print("tipe_cuti_id : ${tipeCuti}");
-    print("date_from : ${dateFrom}");
-    print("date_to : ${dateTo}");
-    print("keterangan : ${keterangan}");
-    print("Ini mCompID : ${mCompID}");
-    print("Ini mDirID : ${mDirID}");
-    print("Ini mKaryID : ${mKaryID}");
-    print("Ini timeFrom : ${timeFrom}");
-    print("Ini timeTo : ${timeTo}");
+    print("alasan_id : $alasan");
+    print("tipe_cuti_id : $tipeCuti");
+    print("date_from : $dateFrom");
+    print("date_to : $dateTo");
+    print("keterangan : $keterangan");
+    print("Ini mCompID : $mCompID");
+    print("Ini mDirID : $mDirID");
+    print("Ini mKaryID : $mKaryID");
+    print("Ini timeFrom : $timeFrom");
+    print("Ini timeTo : $timeTo");
+    print("Nama File Surat Dokter : $suratDokter");
 
     Object requestBody = {
       "m_comp_id": mCompID,
