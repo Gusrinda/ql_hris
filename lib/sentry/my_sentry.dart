@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ql_absensi_express_mobile/services/sentry_services.dart';
-import 'package:ql_absensi_express_mobile/utils/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sj_presensi_mobile/services/sentry_services.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
 import 'dart:io' show Platform;
 
 class MySentry {
@@ -10,7 +11,7 @@ class MySentry {
       platform = "Android";
     }
 
-    platform = "QL Absensi Express: $platform";
+    platform = "Sukses Jaya Absensi Express: $platform";
     var res = await SentryServices.addSentry(platform, exception, stackTrace);
     if (res is ServicesSuccess) {
       debugPrint(res.response["message"]);

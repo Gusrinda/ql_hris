@@ -7,9 +7,23 @@ abstract class ProfileEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetDataProfile extends ProfileEvent {}
+class GetDataProfile extends ProfileEvent {
+  GetDataProfile();
+  @override
+  List<Object> get props => [];
+}
 
-class LogoutProfile extends ProfileEvent {}
+class LogoutProfile extends ProfileEvent {
+  String username;
+  String password;
+
+  LogoutProfile({
+    required this.username,
+    required this.password,
+  });
+  @override
+  List<Object> get props => [username, password];
+}
 
 class EditDataProfile extends ProfileEvent {
   String? phoneNumber;
@@ -41,9 +55,11 @@ class EditPasswordProfile extends ProfileEvent {
 }
 
 class EditImageProfile extends ProfileEvent {
+  // int? userId;
   String? imagePath;
 
   EditImageProfile({
+    // required this.userId,
     required this.imagePath,
   });
 

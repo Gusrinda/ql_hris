@@ -12,27 +12,39 @@ class CheckInOutInitial extends CheckInOutState {}
 class CheckInOutLoading extends CheckInOutState {}
 
 class CheckInOutSuccessInBackground extends CheckInOutState {
-  String name;
+  String? name;
+  String? fotoProfil;
+  InfoCuti? infoCuti;
   bool isCheckin;
 
   CheckInOutSuccessInBackground({
-    required this.name,
+    this.name,
+    this.fotoProfil,
+    this.infoCuti,
     required this.isCheckin,
   });
 
   @override
-  List<Object> get props => [name, isCheckin];
+  List<Object> get props => [name!, fotoProfil!, infoCuti!, isCheckin];
 }
 
 class InfoCheckInOutSuccessInBackground extends CheckInOutState {
-  String name;
+  String? name;
+  String? fotoProfil;
+  InfoCuti? infoCuti;
 
   InfoCheckInOutSuccessInBackground({
-    required this.name,
+    this.name,
+    this.fotoProfil,
+    this.infoCuti,
   });
 
   @override
-  List<Object> get props => [name];
+  List<Object> get props => [
+        name!,
+        fotoProfil!,
+        infoCuti!,
+      ];
 }
 
 class CheckInOutFailedInBackground extends CheckInOutState {}

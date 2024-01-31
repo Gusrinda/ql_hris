@@ -13,7 +13,14 @@ class ProfileLoading extends ProfileState {}
 
 class ProfileSuccessInBackground extends ProfileState {}
 
-class LogoutSuccessInBackground extends ProfileState {}
+class LogoutSuccessInBackground extends ProfileState {
+  String message;
+
+  LogoutSuccessInBackground({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
 
 class ChangePasswordSuccess extends ProfileState {
   String message;
@@ -35,15 +42,19 @@ class ChangePasswordFailed extends ProfileState {
 
 class GetDataProfileSuccess extends ProfileState {
   String? imagePath;
+  String? username;
+  int? employeeId;
   String? name;
-  String? employeeId;
   String? email;
   String? phoneNumber;
+  DataProfile? dataProfile;
 
   GetDataProfileSuccess({
     required this.imagePath,
+    required this.username,
     required this.name,
     this.employeeId,
+    this.dataProfile,
     required this.email,
     this.phoneNumber,
   });
@@ -52,9 +63,11 @@ class GetDataProfileSuccess extends ProfileState {
   List<Object> get props => [
         imagePath ?? "",
         name ?? "",
+        username ?? "",
         employeeId ?? "",
         email ?? "",
         phoneNumber ?? "",
+        dataProfile ?? []
       ];
 }
 

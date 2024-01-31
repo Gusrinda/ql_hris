@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ql_absensi_express_mobile/componens/dialog_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/componens/loading_dialog_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/pages/authentication/login/login_page.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/componens/appar_custom_main.dart';
+import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
+import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_bloc/notifikasi_bloc.dart';
+import 'package:sj_presensi_mobile/pages/notifikasi/notifikasi_page.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
 class HomeCheckInOutPage extends StatelessWidget {
   // static const routeName = 'HomeCheckInOutPage';
@@ -24,7 +30,7 @@ class HomeCheckInOutPage extends StatelessWidget {
             context: context,
             builder: (_) => const DialogCustom(
               state: DialogCustomItem.info,
-              message: "Anda sudah melakukan presensi harian!",
+              message: "Anda sudah melakukan presensi hari ini!",
             ),
           );
         } else if (state is CheckInOutFailed) {
@@ -56,97 +62,153 @@ class HomeCheckInOutPage extends StatelessWidget {
         }
       },
       child: SafeArea(
-        child: SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: size.height - (size.height * 1 / 9.5),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    BlocBuilder<CheckInOutBloc, CheckInOutState>(
-                      builder: (context, state) {
-                        String? name;
-                        if (state is InfoCheckInOutSuccessInBackground) {
-                          name = state.name;
-                        } else if (state is CheckInOutSuccessInBackground) {
-                          name = state.name;
-                        }
-                        return RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            style: const TextStyle(
-                              color: MyColorsConst.darkColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
+        child: BlocBuilder<CheckInOutBloc, CheckInOutState>(
+          builder: (context, state) {
+            String? name;
+            if (state is InfoCheckInOutSuccessInBackground) {
+              name = state.name;
+            } else if (state is CheckInOutSuccessInBackground) {
+              name = state.name;
+            }
+            return Scaffold(
+              backgroundColor: MyColorsConst.whiteColor,
+              appBar: appBarCustomMain(
+                title: "Selamat Datang, ${name ?? "-"}!",
+                // padLeft: 10,
+                actions: [
+                  Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: Offset.zero,
+                        ),
+                      ],
+                    ),
+                    height: MediaQuery.of(context).size.width * 0.1,
+                    width: MediaQuery.of(context).size.width * 0.1,
+                    child: IconButton(
+                      splashRadius: 25,
+                      iconSize: 20,
+                      icon: const Icon(Icons.notifications_active),
+                      onPressed: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider(
+                              create: (context) => NotifikasiBloc()
+                                ..add(
+                                  GetListNotifikasi(),
+                                ),
+                              child: NotifikasiPage(),
                             ),
-                            children: <TextSpan>[
-                              const TextSpan(text: 'Hi'),
-                              TextSpan(
-                                text: ' ${name ?? "-"}',
-                                style: const TextStyle(
-                                    color: MyColorsConst.primaryColor),
-                              ),
-                              const TextSpan(text: '\nYuk isi presensimu!'),
-                            ],
                           ),
                         );
                       },
                     ),
-                    BlocBuilder<CheckInOutBloc, CheckInOutState>(
-                      builder: (context, state) {
-                        return buttonCheckInOut(
-                          size: size,
-                          iconPath: "assets/images/homepage_checkin.png",
-                          title: "Check In",
-                          color: MyColorsConst.greenColor,
-                          enable: state is CheckInOutSuccessInBackground
-                              ? state.isCheckin
-                              : false,
-                          onPressed: () async {
-                            await Navigator.of(context).pushNamed(
-                              AddCheckInOutPage.routeName,
-                              arguments: ProcessCheckInOutPageState.checkin,
-                            );
-                            context
-                                .read<CheckInOutBloc>()
-                                .add(AttendanceStateChecked());
-                          },
-                        );
-                      },
+                  ),
+                ],
+              ),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BlocProvider(
+                        create: (context) => HistoryAttendanceBloc()
+                          ..add(
+                            GetAttendancesHistory(
+                              date: DateTime.now(),
+                            ),
+                          ),
+                        child: const HistoryPage(),
+                      ),
                     ),
-                    BlocBuilder<CheckInOutBloc, CheckInOutState>(
-                      builder: (context, state) {
-                        return buttonCheckInOut(
-                          size: size,
-                          iconPath: "assets/images/homepage_checkout.png",
-                          title: "Check Out",
-                          color: MyColorsConst.redColor,
-                          enable: state is CheckInOutSuccessInBackground
-                              ? !state.isCheckin
-                              : false,
-                          onPressed: () async {
-                            await Navigator.of(context).pushNamed(
-                              AddCheckInOutPage.routeName,
-                              arguments: ProcessCheckInOutPageState.checkout,
-                            );
-                            context
-                                .read<CheckInOutBloc>()
-                                .add(AttendanceStateChecked());
-                          },
-                        );
-                      },
-                    ),
-                  ],
+                  );
+                },
+                backgroundColor: MyColorsConst.primaryLightColor,
+                child: const Icon(
+                  Icons.pending_actions_rounded,
+                  size: 32,
                 ),
               ),
-            ),
-          ),
+              body: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Yuk isi absensimu!",
+                        style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w600, fontSize: 14),
+                      ),
+                      BlocBuilder<CheckInOutBloc, CheckInOutState>(
+                        builder: (context, state) {
+                          return buttonCheckInOut(
+                            size: size,
+                            iconPath: "assets/images/check_in_door.png",
+                            title: "Check In",
+                            color: MyColorsConst.whiteColor,
+                            enable: state is CheckInOutSuccessInBackground
+                                ? state.isCheckin
+                                : false,
+                            checkInType: true,
+                            onPressed: () async {
+                              await Navigator.of(context).pushNamed(
+                                AddCheckInOutPage.routeName,
+                                arguments: ProcessCheckInOutPageState.checkin,
+                              );
+                              context
+                                  .read<CheckInOutBloc>()
+                                  .add(AttendanceStateChecked());
+                            },
+                          );
+                        },
+                      ),
+                      BlocBuilder<CheckInOutBloc, CheckInOutState>(
+                        builder: (context, state) {
+                          return buttonCheckInOut(
+                            size: size,
+                            iconPath: "assets/images/check_out_door.png",
+                            title: "Check Out",
+                            color: MyColorsConst.whiteColor,
+                            enable: state is CheckInOutSuccessInBackground
+                                ? !state.isCheckin
+                                : false,
+                            checkInType: false,
+                            onPressed: () async {
+                              await Navigator.of(context).pushNamed(
+                                AddCheckInOutPage.routeName,
+                                arguments: ProcessCheckInOutPageState.checkout,
+                              );
+                              context
+                                  .read<CheckInOutBloc>()
+                                  .add(AttendanceStateChecked());
+                            },
+                          );
+                        },
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -159,33 +221,52 @@ class HomeCheckInOutPage extends StatelessWidget {
     color,
     enable,
     required VoidCallback onPressed,
+    required bool checkInType,
   }) {
     return Column(
       children: [
-        Image.asset(
-          iconPath,
-          width: size.width / 2,
-        ),
-        SizedBox(
-          width: size.width * 3 / 6 + 15,
-          height: size.width * 1 / 5,
+        Container(
+          width: size.width * 1 / 2,
+          height: size.width * 1 / 2,
           child: ElevatedButton(
             onPressed: enable ? onPressed : null,
             style: OutlinedButton.styleFrom(
-              backgroundColor: enable ? color : MyColorsConst.disableColor,
+              elevation: enable ? 5 : 0,
+              backgroundColor: enable ? color : Colors.grey.shade200,
+              foregroundColor:
+                  enable ? MyColorsConst.greenColor : MyColorsConst.redColor,
               padding: const EdgeInsets.symmetric(vertical: 12),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(10),
                 side: BorderSide.none,
               ),
             ),
-            child: Text(
-              title,
-              style: const TextStyle(
-                color: MyColorsConst.whiteColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 10),
+                  child: Image.asset(
+                    enable
+                        ? iconPath
+                        : (checkInType
+                            ? "assets/images/closed_door.png"
+                            : "assets/images/closed_out_door.png"),
+                    width: size.width / 3,
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  title,
+                  // textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(
+                    color: enable ? MyColorsConst.darkColor : Colors.grey,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -200,7 +281,7 @@ class HomeCheckInOutPage extends StatelessWidget {
 //             onPressed: onPress,
 //             child: Text(
 //               title,
-//               style: const TextStyle(
+//               style: GoogleFonts.poppins(
 //                 color: MyColorsConst.whiteColor,
 //                 fontWeight: FontWeight.bold,
 //                 fontSize: 16,
@@ -217,7 +298,7 @@ class HomeCheckInOutPage extends StatelessWidget {
 //             ),
 //             child: Text(
 //               title,
-//               style: const TextStyle(
+//               style: GoogleFonts.poppins(
 //                 color: MyColorsConst.whiteColor,
 //                 fontWeight: FontWeight.bold,
 //                 fontSize: 16,

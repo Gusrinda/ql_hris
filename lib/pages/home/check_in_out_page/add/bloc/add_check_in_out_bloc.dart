@@ -1,13 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/add/add_check_in_out_form_model.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/add/location.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/add/time.dart';
-import 'package:ql_absensi_express_mobile/services/attendances_services.dart';
-import 'package:ql_absensi_express_mobile/utils/services.dart';
-import 'package:ql_absensi_express_mobile/utils/shared_pref.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_form_model.dart';
+import 'package:sj_presensi_mobile/services/attendances_services.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
+import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
 part 'add_check_in_out_event.dart';
 part 'add_check_in_out_state.dart';
@@ -17,6 +13,12 @@ class AddCheckInOutBloc extends Bloc<AddCheckInOutEvent, AddCheckInOutState> {
   AddCheckInOutBloc() : super(AddCheckInOutInitial()) {
     on<AddCheckInOutSubmited>((event, emit) async {
       emit(AddCheckInOutLoading());
+      // print("Image Submit : ${formDataSubmited.imagePath}");
+      print("Address Submit : ${formDataSubmited.address}");
+      print("isOnSite Submit : ${formDataSubmited.isOnSite}");
+      print("Latitude Submit : ${formDataSubmited.latitude}");
+      print("Longitude Submit : ${formDataSubmited.longitude}");
+      print("Catatan Submit : ${event.catatan}");
       if (formDataSubmited.imagePath == null) {
         emit(AddCheckInOutFailed(message: "Foto kehadiran harus di isi!"));
       } else if (formDataSubmited.address == null ||
@@ -27,22 +29,73 @@ class AddCheckInOutBloc extends Bloc<AddCheckInOutEvent, AddCheckInOutState> {
       } else {
         var resToken = await GeneralSharedPreferences.getUserToken();
         if (resToken is ServicesSuccess) {
-          var res = await AttendancesServices.addAttendance(
-            resToken.response["token"],
-            formDataSubmited.imagePath,
-            formDataSubmited.address,
-            formDataSubmited.isOnSite,
-            formDataSubmited.latitude,
-            formDataSubmited.longitude,
-          );
-          if (res is ServicesSuccess) {
-            emit(AddCheckInOutSuccess(message: "Tambah presensi berhasil!"));
-          } else if (res is ServicesFailure) {
-            if (res.errorResponse == null) {
-              await GeneralSharedPreferences.removeUserToken();
-              emit(AddCheckInOutFailedUserExpired(message: "Token expired"));
-            } else {
-              emit(AddCheckInOutFailed(message: res.errorResponse));
+          print("resToken : ${resToken.response["token"]}");
+          var resStatus = await AttendancesServices.getAttendanceState(
+              resToken.response["token"]);
+
+          if (resStatus is ServicesSuccess) {
+            final jsonData = resStatus.response["data"];
+            final status = jsonData["status"];
+            if (status == "NOT ATTEND") {
+              var res = await AttendancesServices.addAttendanceIn(
+                resToken.response["token"],
+                formDataSubmited.imagePath,
+                formDataSubmited.address,
+                formDataSubmited.isOnSite,
+                formDataSubmited.latitude,
+                formDataSubmited.longitude,
+                event.catatan
+              );
+              if (res is ServicesSuccess) {
+                emit(AddCheckInOutSuccess(message: "Check-In Berhasil!\n\nSelamat Bekerja😊"));
+              } else if (res is ServicesFailure) {
+                if (res.errorResponse == null) {
+                  emit(AddCheckInOutFailedUserExpired(
+                      message: "Presensi Gagal!"));
+                } else if (res.code == 500) {
+                  emit(AddCheckInOutFailed(message: res.errorResponse));
+                  await GeneralSharedPreferences.removeUserToken();
+                  emit(
+                      AddCheckInOutFailedUserExpired(message: "Token expired"));
+                } else if (res.code == 401) {
+                  emit(AddCheckInOutFailed(message: res.errorResponse));
+                  await GeneralSharedPreferences.removeUserToken();
+                  emit(
+                      AddCheckInOutFailedUserExpired(message: "Token expired"));
+                } else {
+                  emit(AddCheckInOutFailed(message: res.errorResponse));
+                }
+              }
+            } else if (status == "WORKING") {
+              var res = await AttendancesServices.addAttendanceOut(
+                resToken.response["token"],
+                formDataSubmited.imagePath,
+                formDataSubmited.address,
+                formDataSubmited.isOnSite,
+                formDataSubmited.latitude,
+                formDataSubmited.longitude,
+                event.catatan
+              );
+              if (res is ServicesSuccess) {
+                emit(AddCheckInOutSuccess(message: "Check-Out Berhasil!\n\nTerima Kasih Telah Bekerja Keras Hari Ini😊"));
+              } else if (res is ServicesFailure) {
+                if (res.errorResponse == null) {
+                  emit(AddCheckInOutFailedUserExpired(
+                      message: "Presensi Gagal!"));
+                } else if (res.code == 500) {
+                  emit(AddCheckInOutFailed(message: res.errorResponse));
+                  await GeneralSharedPreferences.removeUserToken();
+                  emit(
+                      AddCheckInOutFailedUserExpired(message: "Token expired"));
+                } else if (res.code == 401) {
+                  emit(AddCheckInOutFailed(message: res.errorResponse));
+                  await GeneralSharedPreferences.removeUserToken();
+                  emit(
+                      AddCheckInOutFailedUserExpired(message: "Token expired"));
+                } else {
+                  emit(AddCheckInOutFailed(message: res.errorResponse));
+                }
+              }
             }
           }
         } else if (resToken is ServicesFailure) {
@@ -50,6 +103,7 @@ class AddCheckInOutBloc extends Bloc<AddCheckInOutEvent, AddCheckInOutState> {
         }
       }
     });
+
     on<AddCheckInOutFormDataAdded>((event, emit) async {
       formDataSubmited = formDataSubmited.copyWith(
         imagePath: event.formData.imagePath,

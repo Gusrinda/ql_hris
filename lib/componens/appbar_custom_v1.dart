@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
 AppBar appBarCustomV1({
   required String title,
@@ -11,23 +13,19 @@ AppBar appBarCustomV1({
       padding: EdgeInsets.only(left: padLeft),
       child: Text(
         title,
-        style: const TextStyle(
-          color: MyColorsConst.whiteColor,
-          fontSize: 16,
+        style: GoogleFonts.poppins(
+          color: MyColorsConst.darkColor,
+          fontSize: 12,
           fontWeight: FontWeight.bold,
         ),
       ),
     ),
-    elevation: 0,
-    backgroundColor: MyColorsConst.primaryColor,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(
-        bottom: Radius.circular(12),
-      ),
-    ),
+    elevation: 1,
+    backgroundColor: MyColorsConst.whiteColor,
     iconTheme: const IconThemeData(
-      color: MyColorsConst.whiteColor,
+      color: MyColorsConst.primaryColor,
     ),
     actions: actions,
+    centerTitle: true,
   );
 }

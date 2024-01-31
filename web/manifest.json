@@ -1,6 +1,6 @@
 {
-    "name": "ql_absensi_express_mobile",
-    "short_name": "ql_absensi_express_mobile",
+    "name": "sj_presensi_mobile",
+    "short_name": "sj_presensi_mobile",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

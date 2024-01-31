@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
 class SortByCustomV1 extends StatefulWidget {
   Function(bool? sortState) onTap;
@@ -45,7 +46,7 @@ class _SortByCustomV1State extends State<SortByCustomV1> {
           children: [
             Text(
               _sortState ? "Terlama" : "Terbaru",
-              style: const TextStyle(
+              style: GoogleFonts.poppins(
                 color: MyColorsConst.primaryColor,
                 fontWeight: FontWeight.normal,
                 fontSize: 12,
@@ -64,4 +65,3 @@ class _SortByCustomV1State extends State<SortByCustomV1> {
     );
   }
 }
-
