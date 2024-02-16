@@ -73,6 +73,7 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           title: 'My Success',
           theme: ThemeData(
+            useMaterial3: false,
             scaffoldBackgroundColor: Colors.white,
             brightness: Brightness.light,
             primaryColor: MyColorsConst.primaryColor,

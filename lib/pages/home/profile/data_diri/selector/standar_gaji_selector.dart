@@ -41,7 +41,7 @@ class StandarGajiSearchDelegate extends SearchDelegate<DataStandarGaji?> {
   Widget buildResults(BuildContext context) {
     final searchResults = dataStandarGajiList
         .where((element) =>
-            element.kode!.toLowerCase().contains(query.toLowerCase()))
+            element.kode?.toLowerCase().contains(query.toLowerCase()) ?? false)
         .toList();
 
     return ListView.builder(

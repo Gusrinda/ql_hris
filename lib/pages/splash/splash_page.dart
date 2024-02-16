@@ -9,7 +9,9 @@ import 'package:sj_presensi_mobile/pages/authentication/check_version/check_vers
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/services/model/check_version/check_version.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
+import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class SplashPage extends StatefulWidget {
   static const routeName = '/SplashPage';
@@ -29,13 +31,22 @@ class _SplashPageState extends State<SplashPage> {
         context.read<CheckVersionBloc>().add(GetVersion());
       }),
     );
+    _requestPermissions();
+  }
+
+  Future<void> _requestPermissions() async {
+    await [
+      Permission.storage,
+      Permission.manageExternalStorage,
+    ].request();
   }
 
   void handleCheckVersionSuccess(CheckVersionSuccess state) async {
     if (await state.isVersionMatch) {
       Navigator.of(context).pushReplacementNamed(LoginPage.routeName);
     } else {
-      _showUpdateDialog(state.dataVersion!);
+      // Navigator.of(context).pushReplacementNamed(LoginPage.routeName);
+      _showUpdateDialog(state.dataVersion as DataVersion);
     }
   }
 
@@ -121,9 +132,7 @@ class _SplashPageState extends State<SplashPage> {
       context: context,
       barrierColor: Colors.black.withOpacity(0.7),
       builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10)
-        ) ,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         title: RichText(
           text: TextSpan(
             style: GoogleFonts.poppins(
@@ -163,22 +172,50 @@ class _SplashPageState extends State<SplashPage> {
                 )),
           ],
         ),
-        actionsPadding: EdgeInsets.symmetric(horizontal: 10.sp, vertical: 10.sp),
+        actionsPadding:
+            EdgeInsets.symmetric(horizontal: 20.sp, vertical: 20.sp),
         actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              _launchDownloadLink(dataVersion.link ?? "");
-              context.read<CheckVersionBloc>().add(GetVersion());
-            },
-            style: TextButton.styleFrom(
-              backgroundColor: MyColorsConst.primaryColor.withOpacity(0.1),
-              padding: EdgeInsets.symmetric(horizontal: 20.sp)
-            ),
-            child: Text("Download",
-                style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.w600,
-                )),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              // Link(
+              //   target: LinkTarget.self,
+              //   uri: Uri.parse('${dataVersion.link}'),
+              //   builder: (context, followLink) => GestureDetector(
+              //     onTap: followLink,
+              //     child: TextButton(
+              //       onPressed: () {
+              //         Navigator.of(context).pop();
+              //         context.read<CheckVersionBloc>().add(GetVersion());
+              //       },
+              //       style: TextButton.styleFrom(
+              //           backgroundColor:
+              //               Colors.green.shade800.withOpacity(0.1),
+              //           padding: EdgeInsets.symmetric(horizontal: 20.sp)),
+              //       child: Text("Alternatif",
+              //           style: GoogleFonts.poppins(
+              //             fontWeight: FontWeight.w600,
+              //             color: Colors.green.shade800
+              //           )),
+              //     ),
+              //   ),
+              // ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _launchDownloadLink(dataVersion.link ?? "");
+                  context.read<CheckVersionBloc>().add(GetVersion());
+                },
+                style: TextButton.styleFrom(
+                    backgroundColor:
+                        MyColorsConst.primaryColor.withOpacity(0.1),
+                    padding: EdgeInsets.symmetric(horizontal: 20.sp)),
+                child: Text("Download",
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                    )),
+              ),
+            ],
           ),
         ],
       ),
@@ -186,11 +223,11 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void _launchDownloadLink(String downloadLink) async {
-    if (await canLaunchUrl(Uri.parse(downloadLink))) {
       await launchUrl(Uri.parse(downloadLink));
-      context.read<CheckVersionBloc>().add(GetVersion());
-    } else {
-      print('Could not launch $downloadLink');
-    }
+    // if (await canLaunchUrl(Uri.parse(downloadLink))) {
+    //   context.read<CheckVersionBloc>().add(GetVersion());
+    // } else {
+    //   print('Could not launch $downloadLink');
+    // }
   }
 }

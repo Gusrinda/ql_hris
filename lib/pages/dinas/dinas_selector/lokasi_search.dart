@@ -43,8 +43,8 @@ class LokasiTujuanSearchDelegate extends SearchDelegate<DataLokasiTujuan?> {
   Widget buildResults(BuildContext context) {
     final searchResults = dataLokasi
         .where((element) =>
-            element.nama!.toLowerCase().contains(query.toLowerCase()) ||
-            element.desc!.toLowerCase().contains(query.toLowerCase()))
+            (element.nama?.toLowerCase().contains(query.toLowerCase()) ?? false) ||
+            (element.desc?.toLowerCase().contains(query.toLowerCase()) ?? false))
         .toList();
 
     return ListView.builder(

@@ -42,7 +42,7 @@ class JenisSpdSearchDelegate extends SearchDelegate<DataJenisSpd?> {
   Widget buildResults(BuildContext context) {
     final searchResults = dataJenisSpd
         .where((element) =>
-            element.value!.toLowerCase().contains(query.toLowerCase()))
+            element.value?.toLowerCase().contains(query.toLowerCase()) ?? false)
         .toList();
 
     return ListView.builder(

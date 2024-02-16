@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PengumumanCard extends StatelessWidget {
   const PengumumanCard(
@@ -148,6 +150,45 @@ class PengumumanCard extends StatelessWidget {
           maxChildSize: 1.0,
           expand: false,
           builder: (BuildContext context, ScrollController scrollController) {
+            Text processDetailText(String detail) {
+              RegExp urlRegExp = RegExp(r'https?://\S+');
+              Iterable<RegExpMatch> matches = urlRegExp.allMatches(detail);
+
+              List<InlineSpan> children = [];
+
+              int start = 0;
+              for (RegExpMatch match in matches) {
+                children
+                    .add(TextSpan(text: detail.substring(start, match.start)));
+                String? url = match.group(0);
+                children.add(
+                  TextSpan(
+                    text: url,
+                    style: TextStyle(color: Colors.blue.shade600),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        launchUrl (Uri.parse(url ?? ''));
+                      },
+                  ),
+                );
+                start = match.end;
+              }
+
+              if (start < detail.length) {
+                children.add(TextSpan(text: detail.substring(start)));
+              }
+
+              return Text.rich(
+                TextSpan(children: children),
+                textAlign: TextAlign.justify,
+                style: GoogleFonts.poppins(
+                  fontSize: 12.sp,
+                  color: Colors.grey.shade800,
+                  fontWeight: FontWeight.w400,
+                ),
+              );
+            }
+
             return Container(
               padding: EdgeInsets.all(16.sp),
               decoration: BoxDecoration(
@@ -212,14 +253,7 @@ class PengumumanCard extends StatelessWidget {
                         fontWeight: FontWeight.w500),
                   ),
                   SizedBox(height: 20.sp),
-                  Text(
-                    detail ?? '',
-                    textAlign: TextAlign.justify,
-                    style: GoogleFonts.poppins(
-                        fontSize: 12.sp,
-                        color: Colors.grey.shade800,
-                        fontWeight: FontWeight.w400),
-                  ),
+                  processDetailText(detail ?? ""),
                   SizedBox(height: 3.sp),
                 ],
               ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/bloc/pengumuman_bloc.dart';
@@ -36,6 +37,17 @@ class _DashboardViewState extends State<DashboardView> {
   void dispose() {
     _pageController.dispose();
     super.dispose();
+    _requestPermissions();
+  }
+
+  Future<void> _requestPermissions() async {
+    await [
+      Permission.camera,
+      Permission.mediaLibrary,
+      Permission.storage,
+      Permission.photos,
+      Permission.location,
+    ].request();
   }
 
   Future<void> _onRefresh() async {
@@ -76,7 +88,9 @@ class _DashboardViewState extends State<DashboardView> {
             ),
             TextButton(
               style: TextButton.styleFrom(
-                  backgroundColor: Colors.white, side: BorderSide(width: 1, color: MyColorsConst.primaryColor)),
+                  backgroundColor: Colors.white,
+                  side:
+                      BorderSide(width: 1, color: MyColorsConst.primaryColor)),
               onPressed: () => Navigator.of(context).pop(true),
               child: Text(
                 'Ya',

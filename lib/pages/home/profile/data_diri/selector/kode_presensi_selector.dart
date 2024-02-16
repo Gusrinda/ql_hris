@@ -54,10 +54,14 @@ class KodePresensiSearchDelegate extends SearchDelegate<DataKodePresensi?> {
 
     final searchResults = dataKodePresensi
         .where((element) =>
-            element.kode!.toLowerCase().contains(query.toLowerCase()) ||
-            element.waktuMulai!.toLowerCase().contains(query.toLowerCase()) ||
-            element.waktuAkhir!.toLowerCase().contains(query.toLowerCase()) ||
-            element.desc!.toLowerCase().contains(query.toLowerCase()))
+            (element.kode?.toLowerCase().contains(query.toLowerCase()) ??
+                false) ||
+            (element.waktuMulai?.toLowerCase().contains(query.toLowerCase()) ??
+                false) ||
+            (element.waktuAkhir?.toLowerCase().contains(query.toLowerCase()) ??
+                false) ||
+            (element.desc?.toLowerCase().contains(query.toLowerCase()) ??
+                false))
         .toList();
 
     return ListView.builder(

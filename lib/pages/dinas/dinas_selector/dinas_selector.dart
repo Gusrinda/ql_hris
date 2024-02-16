@@ -40,7 +40,8 @@ class DinasApprovedSearchDelegate extends SearchDelegate<DataDinas?> {
   Widget buildResults(BuildContext context) {
     final searchResult = dataDinasApproved
         .where((element) =>
-            element.nomor!.toLowerCase().contains(query.toLowerCase()) &&
+            (element.nomor?.toLowerCase().contains(query.toLowerCase()) ??
+                false) &&
             element.status == 'APPROVED')
         .toList();
     return ListView.builder(

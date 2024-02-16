@@ -44,11 +44,18 @@ class TemplateSpdSearchDelegate extends SearchDelegate<DataTemplateSpd?> {
   Widget buildResults(BuildContext context) {
     final searchResult = dataTemplateSpd
         .where((element) =>
-            element.kode!.toLowerCase().contains(query.toLowerCase()) ||
-            element.mDivisiNama!.toLowerCase().contains(query.toLowerCase())||
-            element.mDeptNama!.toLowerCase().contains(query.toLowerCase())||
-            element.mPosisiDescKerja!.toLowerCase().contains(query.toLowerCase())||
-            element.desc!.toLowerCase().contains(query.toLowerCase()))
+            (element.kode?.toLowerCase().contains(query.toLowerCase()) ??
+                false) ||
+            (element.mDivisiNama?.toLowerCase().contains(query.toLowerCase()) ??
+                false) ||
+            (element.mDeptNama?.toLowerCase().contains(query.toLowerCase()) ??
+                false) ||
+            (element.mPosisiDescKerja
+                    ?.toLowerCase()
+                    .contains(query.toLowerCase()) ??
+                false) ||
+            (element.desc?.toLowerCase().contains(query.toLowerCase()) ??
+                false))
         .toList();
 
     return ListView.builder(

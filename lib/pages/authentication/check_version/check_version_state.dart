@@ -18,17 +18,14 @@ class CheckVersionSuccess extends CheckVersionState {
     print("isVersionMatch Dijalankan");
 
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    final String? pubspecVersion = packageInfo.version;
+    final String pubspecVersion = packageInfo.version;
     print("Current App Version From pubspec.yaml: $pubspecVersion");
-
-    // Ubah Versinya Manual ambil dari version pubspec.yaml
-    String staticPubspecVersion = "5.5.0";
 
     if (dataVersion != null && dataVersion!.version != null) {
       final String appVersion = dataVersion!.version!;
       print("New App Version: $appVersion");
 
-      final String pubspecAppVersion = pubspecVersion ?? staticPubspecVersion;
+      final String pubspecAppVersion = pubspecVersion;
       print("Current App Version: $pubspecAppVersion");
 
       return appVersion == pubspecAppVersion;

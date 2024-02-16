@@ -41,7 +41,7 @@ class PosisiSearchDelegate extends SearchDelegate<DataPosisi?> {
   Widget buildResults(BuildContext context) {
     final searchResults = dataPosisi
         .where((element) =>
-            element.descKerja!.toLowerCase().contains(query.toLowerCase()))
+            element.descKerja?.toLowerCase().contains(query.toLowerCase()) ?? false)
         .toList();
 
     return ListView.builder(

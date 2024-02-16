@@ -43,8 +43,10 @@ class DepartemenSearchDelegate extends SearchDelegate<DataDepartemen?> {
   Widget buildResults(BuildContext context) {
     final searchResults = dataDepartemen
         .where((element) =>
-            element.nama!.toLowerCase().contains(query.toLowerCase()) ||
-            element.mDivisiNama!.toLowerCase().contains(query.toLowerCase()))
+            (element.nama?.toLowerCase().contains(query.toLowerCase()) ??
+                false) ||
+            (element.mDivisiNama?.toLowerCase().contains(query.toLowerCase()) ??
+                false))
         .toList();
 
     return ListView.builder(

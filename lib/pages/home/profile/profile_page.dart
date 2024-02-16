@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/image_form_custom_v2.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
@@ -52,11 +53,14 @@ class _ProfilePageState extends State<ProfilePage> {
 
   GetDataProfileSuccess? data;
 
+  late String appVersion = "Loading...";
+
   @override
   void initState() {
     super.initState();
     _onRefresh();
     loadData();
+    getVersion();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ProfileBloc>().add(GetDataProfile());
     });
@@ -79,6 +83,18 @@ class _ProfilePageState extends State<ProfilePage> {
     } catch (error) {
       print('Refresh Error: $error');
     }
+  }
+
+  Future<void> getVersion() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    final String? pubspecVersion = packageInfo.version;
+    print("Current App Version From pubspec.yaml: $pubspecVersion");
+
+    String staticPubspecVersion = "5.6.1";
+
+    setState(() {
+      appVersion = pubspecVersion ?? staticPubspecVersion;
+    });
   }
 
   @override
@@ -180,7 +196,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: Colors.white,
                         ),
                         child: Padding(
-                          padding: EdgeInsets.all(16.0.sp),
+                          padding: EdgeInsets.all(20.sp),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -204,16 +220,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                     },
                                   ),
                                   const SizedBox(width: 25),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                4 /
-                                                7,
-                                        child: Text(
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
                                           data?.name ?? "-",
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
@@ -222,56 +234,56 @@ class _ProfilePageState extends State<ProfilePage> {
                                             fontWeight: FontWeight.w700,
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(height: 5),
-                                      RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: 'Username: ',
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 10.sp,
-                                                color: MyColorsConst
-                                                    .lightDarkColor,
-                                                fontWeight: FontWeight.w500,
+                                        SizedBox(height: 5),
+                                        RichText(
+                                          text: TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: 'Username: ',
+                                                style: GoogleFonts.poppins(
+                                                  fontSize: 10.sp,
+                                                  color: MyColorsConst
+                                                      .lightDarkColor,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
                                               ),
-                                            ),
-                                            TextSpan(
-                                              text: data?.dataProfile?.username,
-                                              style: GoogleFonts.poppins(
-                                                fontStyle: FontStyle.italic,
-                                                fontSize: 12.sp,
-                                                color: MyColorsConst.darkColor,
-                                                fontWeight: FontWeight.w500,
+                                              TextSpan(
+                                                text: data?.dataProfile?.username,
+                                                style: GoogleFonts.poppins(
+                                                  fontStyle: FontStyle.italic,
+                                                  fontSize: 12.sp,
+                                                  color: MyColorsConst.darkColor,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      RichText(
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: 'Atasan: ',
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 10.sp,
-                                                color: MyColorsConst
-                                                    .lightDarkColor,
-                                                fontWeight: FontWeight.w500,
+                                        RichText(
+                                          text: TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: 'Atasan: ',
+                                                style: GoogleFonts.poppins(
+                                                  fontSize: 10.sp,
+                                                  color: MyColorsConst
+                                                      .lightDarkColor,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
                                               ),
-                                            ),
-                                            TextSpan(
-                                              text: data?.dataProfile?.atasan,
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 10.sp,
-                                                color: MyColorsConst.darkColor,
-                                                fontWeight: FontWeight.w500,
+                                              TextSpan(
+                                                text: data?.dataProfile?.atasan,
+                                                style: GoogleFonts.poppins(
+                                                  fontSize: 10.sp,
+                                                  color: MyColorsConst.darkColor,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
@@ -454,6 +466,52 @@ class _ProfilePageState extends State<ProfilePage> {
                                             ),
                                           );
                                         }),
+                              SizedBox(height: 30.sp),
+                              Row(
+                                children: [
+                                  Icon(
+                                    CupertinoIcons.info_circle_fill,
+                                    color: Colors.blue.shade600,
+                                    size: 13.sp,
+                                  ),
+                                  const SizedBox(width: 3),
+                                  Text(
+                                    'Informasi Aplikasi',
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: MyColorsConst.lightDarkColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Divider(
+                                color:
+                                    MyColorsConst.primaryColor.withOpacity(0.1),
+                                thickness: 1,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Version",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.w400,
+                                      color: MyColorsConst.lightDarkColor,
+                                    ),
+                                  ),
+                                  Text(
+                                    appVersion,
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: MyColorsConst.darkColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
                               SizedBox(height: 100.sp)
                             ],
                           ),

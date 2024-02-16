@@ -41,8 +41,10 @@ class DivisiSearchDelegate extends SearchDelegate<DataDivisi?> {
   Widget buildResults(BuildContext context) {
     final searchResults = dataDivisi
         .where((tipeCuti) =>
-            tipeCuti.nama!.toLowerCase().contains(query.toLowerCase()) ||
-            tipeCuti.mDirNama!.toLowerCase().contains(query.toLowerCase()))
+            (tipeCuti.nama?.toLowerCase().contains(query.toLowerCase()) ??
+                false) ||
+            (tipeCuti.mDirNama?.toLowerCase().contains(query.toLowerCase()) ??
+                false))
         .toList();
 
     return ListView.builder(

@@ -42,7 +42,8 @@ class TipeCutiSearchDelegate extends SearchDelegate<DataTipeCuti?> {
   Widget buildResults(BuildContext context) {
     final searchResults = tipeCutiData
         .where((tipeCuti) =>
-            tipeCuti.value!.toLowerCase().contains(query.toLowerCase()))
+            (tipeCuti.value?.toLowerCase().contains(query.toLowerCase())) ??
+            false)
         .toList();
 
     return ListView.builder(
@@ -54,9 +55,7 @@ class TipeCutiSearchDelegate extends SearchDelegate<DataTipeCuti?> {
               title: Text(
                 searchResults[index].value ?? '-',
                 style: GoogleFonts.poppins(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500
-                ),
+                    fontSize: 14.sp, fontWeight: FontWeight.w500),
               ),
               onTap: () {
                 close(context, searchResults[index]);
@@ -113,7 +112,7 @@ class _TipeCutiSearchDelegate extends SearchDelegate<DataTipeCuti?> {
   Widget buildResults(BuildContext context) {
     final searchResults = tipeCutiData
         .where((tipeCuti) =>
-            tipeCuti.value!.toLowerCase().contains(query.toLowerCase()))
+            tipeCuti.value?.toLowerCase().contains(query.toLowerCase()) ?? false)
         .toList();
 
     return ListView.builder(
@@ -173,7 +172,7 @@ class AlasanCutiSearchDelegate extends SearchDelegate<Datum?> {
   Widget buildResults(BuildContext context) {
     final searchResults = alasanCutiData
         .where((alasanCutiData) =>
-            alasanCutiData.value!.toLowerCase().contains(query.toLowerCase()))
+            alasanCutiData.value?.toLowerCase().contains(query.toLowerCase()) ?? false)
         .toList();
 
     return ListView.builder(
@@ -243,7 +242,7 @@ class _AlasanCutiSearchDelegate extends SearchDelegate<Datum?> {
   Widget buildResults(BuildContext context) {
     final searchResults = alasanCutiData
         .where((alasanCutiData) =>
-            alasanCutiData.value!.toLowerCase().contains(query.toLowerCase()))
+            alasanCutiData.value?.toLowerCase().contains(query.toLowerCase()) ?? false)
         .toList();
 
     return ListView.builder(

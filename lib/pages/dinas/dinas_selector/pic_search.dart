@@ -41,7 +41,7 @@ class PicSearchDelegate extends SearchDelegate<DataPic?> {
   Widget buildResults(BuildContext context) {
     final searchResults = dataPic
         .where((element) =>
-            element.name!.toLowerCase().contains(query.toLowerCase()))
+            element.name?.toLowerCase().contains(query.toLowerCase()) ?? false)
         .toList();
 
     return ListView.builder(

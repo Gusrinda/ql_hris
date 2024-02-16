@@ -41,8 +41,10 @@ class ZonaSearchDelegate extends SearchDelegate<DataZona?> {
   Widget buildResults(BuildContext context) {
     final searchResults = dataZona
         .where((element) =>
-            element.nama!.toLowerCase().contains(query.toLowerCase()) ||
-            element.desc!.toLowerCase().contains(query.toLowerCase()))
+            (element.nama?.toLowerCase().contains(query.toLowerCase()) ??
+                false) ||
+            (element.desc?.toLowerCase().contains(query.toLowerCase()) ??
+                false))
         .toList();
 
     return ListView.builder(

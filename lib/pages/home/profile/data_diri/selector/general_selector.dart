@@ -41,7 +41,7 @@ class GeneralSearchDelegate extends SearchDelegate<DataGeneral?> {
   Widget buildResults(BuildContext context) {
     final searchResults = dataList
         .where((element) =>
-            element.value!.toLowerCase().contains(query.toLowerCase()))
+            element.value?.toLowerCase().contains(query.toLowerCase()) ?? false)
         .toList();
 
     return ListView.builder(
