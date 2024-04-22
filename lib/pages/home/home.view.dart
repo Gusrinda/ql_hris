@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/approval/approval.view.dart';
@@ -40,12 +41,23 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    _requestPermissions();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<CheckInOutBloc>().add(AttendanceStateChecked());
       context.read<PengumumanBloc>().add(GetListPengumuman());
       context.read<ApprovalBloc>().add(GetListApproval());
     });
     // BlocProvider.of<CheckInOutBloc>(context).add(AttendanceStateChecked());
+  }
+
+  Future<void> _requestPermissions() async {
+    await [
+      Permission.camera,
+      Permission.mediaLibrary,
+      Permission.storage,
+      Permission.photos,
+      Permission.location,
+    ].request(); 
   }
 
   Future<void> _onRefresh() async {

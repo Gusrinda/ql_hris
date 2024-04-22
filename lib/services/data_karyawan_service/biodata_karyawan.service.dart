@@ -1,20 +1,18 @@
 // ignore_for_file: avoid_print, curly_braces_in_flow_control_structures
 
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:sj_presensi_mobile/utils/const.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
-import 'package:sj_presensi_mobile/utils/services_no_source_mobile.dart';
-import 'package:http/http.dart' as http;
 
 class BiodataKaryawanService {
   static Future<Object> getBiodataKaryawan(String token) async {
     var url = Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/data_diri");
-    return await GeneralServicesNoMobile.baseService(
+    return await GeneralServices.baseService(
       url: url,
-      method: GeneralServicesMethodNoMobile.get,
-      headers: GeneralServicesNoMobile.addToken2Headers(token),
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(
+          token: token, isServiceNoMobile: true),
     );
   }
 
@@ -185,7 +183,10 @@ class BiodataKaryawanService {
         url: Uri.parse(
             "${MyGeneralConst.API_URL}/operation/m_kary/data_diri_update"),
         method: GeneralServicesMethod.postMultiFiles,
-        headers: GeneralServices.addToken2Headers(token),
+        headers: GeneralServices.addToken2Headers(
+          token: token,
+          isServiceNoMobile: false,
+        ),
         body: requestBody,
         files: files,
       );
@@ -203,7 +204,8 @@ class BiodataKaryawanService {
       //   url: Uri.parse(
       //       "${MyGeneralConst.API_URL}/operation/m_kary/data_diri_update"),
       //   method: GeneralServicesMethod.post,
-      //   headers: GeneralServices.addToken2Headers(token),
+      //   headers: GeneralServices.addToken2Headers(token: token,
+//  isServiceNoMobile: false,),
       //   body: json.encode(requestBody),
       //   // files: filesMap,
       // );
@@ -223,5 +225,4 @@ class BiodataKaryawanService {
       );
     }
   }
-
 }

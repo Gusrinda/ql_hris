@@ -17,7 +17,7 @@ import 'package:sj_presensi_mobile/services/model/list_general/response_kota.dar
 import 'package:sj_presensi_mobile/services/model/list_general/response_standar_gaji.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
-import 'package:sj_presensi_mobile/utils/services_no_source_mobile.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 import 'package:http/http.dart' as http;
 
@@ -313,7 +313,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
           var res = await ListGeneralService.getStandartGaji(
               resToken.response["token"]);
 
-          if (res is ServicesSuccessNoMobile) {
+          if (res is ServicesSuccess) {
             if (res.response is Map<String, dynamic>) {
               print(res.response);
 
@@ -332,7 +332,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               emit(EditBiodataFailedInBackground(
                   message: 'Gagal Mengambil Data'));
             }
-          } else if (res is ServicesFailureNoMobile) {
+          } else if (res is ServicesFailure) {
             if (res.errorResponse == null) {
               await GeneralSharedPreferences.removeUserToken();
               emit(EditBiodataFailedUserExpired(message: "Token expired"));
@@ -623,7 +623,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
           // print("Ini Token: ${resToken.response}");
           var res =
               await ListGeneralService.getKodePre(resToken.response["token"]);
-          if (res is ServicesSuccessNoMobile) {
+          if (res is ServicesSuccess) {
             if (res.response is Map<String, dynamic>) {
               print(res.response);
               //Mengubah hasil response api ke model kelas
@@ -641,7 +641,7 @@ class EditBiodataBloc extends Bloc<EditBiodataEvent, EditBiodataState> {
               emit(EditBiodataFailedInBackground(
                   message: 'Gagal Mengambil Data'));
             }
-          } else if (res is ServicesFailureNoMobile) {
+          } else if (res is ServicesFailure) {
             if (res.errorResponse == null) {
               await GeneralSharedPreferences.removeUserToken();
               emit(EditBiodataFailedUserExpired(message: "Token expired"));

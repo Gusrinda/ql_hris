@@ -10,7 +10,10 @@ class DataOrganisasiServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -21,7 +24,10 @@ class DataOrganisasiServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.delete,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
       body: json.encode({
         "id": dataID,
       }),
@@ -52,7 +58,10 @@ class DataOrganisasiServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.post,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
       body: json.encode({
         "m_comp_id": compId,
         "m_dir_id": dirId,
@@ -82,7 +91,10 @@ class DataOrganisasiServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.put,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
       body: json.encode({
         "id": organisasiId,
         "m_comp_id": compId,

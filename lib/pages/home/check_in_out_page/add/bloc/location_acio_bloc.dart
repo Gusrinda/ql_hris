@@ -8,6 +8,7 @@ part 'location_acio_state.dart';
 
 class LocationAcioBloc extends Bloc<LocationAcioEvent, LocationAcioState> {
   LocationAcioBloc(MyLocation myLocation) : super(LocationAcioInitial()) {
+    
     on<StartLocationTrackingLocationAcio>(
       (event, emit) async {
         emit(LocationAcioLoading());
@@ -54,6 +55,7 @@ class LocationAcioBloc extends Bloc<LocationAcioEvent, LocationAcioState> {
         });
       },
     );
+    
     on<GetLastLocationTrackingLocationAcio>(
       (event, emit) async {
         emit(LocationAcioLoading());

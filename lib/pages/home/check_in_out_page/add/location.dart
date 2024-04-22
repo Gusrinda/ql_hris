@@ -2,7 +2,6 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:sj_presensi_mobile/services/attendances_services.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:sj_presensi_mobile/utils/shared_pref.dart';
@@ -78,8 +77,9 @@ class MyLocation {
       desiredAccuracy: LocationAccuracy.high,
       forceAndroidLocationManager: true,
     );
-    
-    ServicesSuccess resToken = await GeneralSharedPreferences.getUserToken() as ServicesSuccess;
+
+    ServicesSuccess resToken =
+        await GeneralSharedPreferences.getUserToken() as ServicesSuccess;
 
     // String token = '';
     double lat = position.latitude;
@@ -105,8 +105,8 @@ class MyLocation {
   Future<bool> checkIsOnSite(String token, double lat, double long) async {
     var url = Uri.parse(
         "${MyGeneralConst.API_URL}/operation/presensi_absensi/distance_check?lat=$lat&long=$long");
-    var response =
-        await http.get(url, headers: GeneralServices.addToken2Headers(token));
+    var response = await http.get(url,
+        headers: GeneralServices.addToken2Headers(token: token));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -127,11 +127,13 @@ class MyLocation {
     );
 
     if (position != null) {
-      ServicesSuccess resToken = await GeneralSharedPreferences.getUserToken() as ServicesSuccess;
+      ServicesSuccess resToken =
+          await GeneralSharedPreferences.getUserToken() as ServicesSuccess;
 
       double lat = position.latitude;
       double long = position.longitude;
-      bool isOnSite = await checkIsOnSite(resToken.response["token"], lat, long);
+      bool isOnSite =
+          await checkIsOnSite(resToken.response["token"], lat, long);
 
       List<Placemark> placemarks = await placemarkFromCoordinates(
         lat,

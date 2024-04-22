@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:sj_presensi_mobile/services/berkas_services.dart';
 import 'package:sj_presensi_mobile/services/model/berkas_model.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
-import 'package:sj_presensi_mobile/utils/services_no_source_mobile.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
 part 'berkas_event.dart';
@@ -19,7 +19,7 @@ class BerkasBloc extends Bloc<BerkasEvent, BerkasState> {
       if (resToken is ServicesSuccess) {
         var res =
             await BerkasServices.getBerkas(resToken.response["token"]);
-        if (res is ServicesSuccessNoMobile) {
+        if (res is ServicesSuccess) {
           if (res.response is Map<String, dynamic>) {
             print("INI RES: ${res.response}");
             BerkasModel dataResponse =
@@ -39,7 +39,7 @@ class BerkasBloc extends Bloc<BerkasEvent, BerkasState> {
             emit(KategoriBerkasFailed(message: res.errorResponse));
           }
         }
-      } else if (resToken is ServicesFailureNoMobile) {
+      } else if (resToken is ServicesFailure) {
         emit(KategoriBerkasFailedInBackground(message: "Response Invalid"));
       }
     });

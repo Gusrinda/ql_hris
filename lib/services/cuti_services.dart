@@ -16,7 +16,10 @@ class CutiServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -66,7 +69,10 @@ class CutiServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.post,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
       body: json.encode(requestBody),
     );
   }
@@ -87,7 +93,10 @@ class CutiServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.postMultiFiles,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
       body: requestBody,
       files: files,
     );
@@ -99,7 +108,10 @@ class CutiServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -109,7 +121,10 @@ class CutiServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -159,7 +174,10 @@ class CutiServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.put,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
       body: json.encode(requestBody),
     );
   }

@@ -248,7 +248,8 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                             buildCardImage(
                               dataPresensi: widget.data,
                               checkIn: true,
-                              url: "${widget.checkinFoto}",
+                              url:
+                                  "${widget.checkinFoto?.replaceAll("${MyGeneralConst.API_URL}/${MyGeneralConst.API_URL}/", "${MyGeneralConst.API_URL}/")}",
                               address: widget.checkinAddress ?? '-',
                               onSite: "${widget.checkinOnScope}",
                             ),
@@ -263,7 +264,8 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                             buildCardImage(
                               dataPresensi: widget.data,
                               checkIn: false,
-                              url: "${widget.checkoutFoto}",
+                              url:
+                                  "${widget.checkoutFoto?.replaceAll("${MyGeneralConst.API_URL}/${MyGeneralConst.API_URL}/", "${MyGeneralConst.API_URL}/")}",
                               address: widget.checkoutAddress ?? '-',
                               onSite: "${widget.checkoutOnScope}",
                             ),
@@ -551,48 +553,84 @@ Padding buildCardImage({
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Text(
-                    (onSite != null && onSite.toLowerCase() == 'true')
-                        ? "In-Scope"
-                        : (onSite != null && onSite.toLowerCase() == 'false')
-                            ? "Out-Scope"
-                            : "-",
-                    style: GoogleFonts.poppins(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w600,
-                      color: (onSite != null && onSite.toLowerCase() == 'true')
-                          ? Colors.green
-                          : (onSite != null && onSite.toLowerCase() == 'false')
-                              ? Colors.red
-                              : MyColorsConst.darkColor,
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 15,
+                      vertical: 5,
+                    ),
+                    decoration: BoxDecoration(
+                        color:
+                            (onSite != null && onSite.toLowerCase() == 'true')
+                                ? Colors.green.withOpacity(0.1)
+                                : (onSite != null &&
+                                        onSite.toLowerCase() == 'false')
+                                    ? Colors.red.withOpacity(0.1)
+                                    : MyColorsConst.darkColor.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.my_location_outlined,
+                          size: 15,
+                          color:
+                              (onSite != null && onSite.toLowerCase() == 'true')
+                                  ? Colors.green
+                                  : (onSite != null &&
+                                          onSite.toLowerCase() == 'false')
+                                      ? Colors.red
+                                      : MyColorsConst.darkColor,
+                        ),
+                        const SizedBox(width: 3),
+                        Text(
+                          (onSite != null && onSite.toLowerCase() == 'true')
+                              ? "In-Scope"
+                              : (onSite != null &&
+                                      onSite.toLowerCase() == 'false')
+                                  ? "Out-Scope"
+                                  : "-",
+                          style: GoogleFonts.poppins(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w600,
+                            color: (onSite != null &&
+                                    onSite.toLowerCase() == 'true')
+                                ? Colors.green
+                                : (onSite != null &&
+                                        onSite.toLowerCase() == 'false')
+                                    ? Colors.red
+                                    : MyColorsConst.darkColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(height: 10.sp),
-                  Text(
-                    "Alasan Out-Scope",
-                    style: GoogleFonts.poppins(
-                      fontSize: 10.sp,
-                      color: MyColorsConst.lightDarkColor,
-                      fontWeight: FontWeight.w500,
+                  if (onSite != null && onSite.toLowerCase() == 'false') ...{
+                    Text(
+                      "Alasan Out-Scope",
+                      style: GoogleFonts.poppins(
+                        fontSize: 10.sp,
+                        color: MyColorsConst.lightDarkColor,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  Text(
-                    checkIn
-                        ? dataPresensi?.catatanIn ?? "-"
-                        : dataPresensi?.catatanOut ?? "-",
-                    style: GoogleFonts.poppins(
-                      fontSize: 12.sp,
-                      color: MyColorsConst.darkColor,
-                      fontWeight: FontWeight.w600,
+                    Text(
+                      checkIn
+                          ? dataPresensi?.catatanIn ?? "-"
+                          : dataPresensi?.catatanOut ?? "-",
+                      style: GoogleFonts.poppins(
+                        fontSize: 12.sp,
+                        color: MyColorsConst.darkColor,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
+                  },
                 ],
               ),
             ),
           ],
         ),
-        checkIn ?
-        const SizedBox() : SizedBox(height: 100.sp),
+        checkIn ? const SizedBox() : SizedBox(height: 100.sp),
       ],
     ),
   );

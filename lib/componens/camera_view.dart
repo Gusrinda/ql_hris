@@ -23,7 +23,11 @@ class _CameraCapturePageState extends State<CameraCapturePage> {
   }
 
   Future<void> _initializeCamera() async {
-    _controller = CameraController(widget.camera, ResolutionPreset.high);
+    _controller = CameraController(
+      widget.camera,
+      ResolutionPreset.high,
+      enableAudio: false,
+    );
     await _controller.initialize();
     if (mounted) {
       setState(() {});
@@ -64,10 +68,9 @@ class _CameraCapturePageState extends State<CameraCapturePage> {
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               style: GoogleFonts.poppins(
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.w500
-              ),
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500),
             ),
           ),
           body: Stack(

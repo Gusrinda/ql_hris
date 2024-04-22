@@ -11,7 +11,10 @@ class AttendancesServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -22,7 +25,10 @@ class AttendancesServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.postMultiPart,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
       body: {
         "address": address,
         "lat": latitude,
@@ -40,7 +46,10 @@ class AttendancesServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.postMultiPart,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
       body: {
         "address": address,
         "lat": latitude,
@@ -65,7 +74,10 @@ class AttendancesServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 }
@@ -74,7 +86,10 @@ Future<bool> checkIsOnSite(String token, double lat, double long) async {
   var url = Uri.parse(
       "${MyGeneralConst.API_URL}/operation/presensi_absensi/distance_check?lat=$lat&long=$long");
   var response =
-      await http.get(url, headers: GeneralServices.addToken2Headers(token));
+      await http.get(url, headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ));
 
   if (response.statusCode == 200) {
     final data = json.decode(response.body);

@@ -40,20 +40,31 @@ class GeneralServices {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
   };
-  static Map<String, String> addToken2Headers(String token) {
-    Map<String, String> headers = Map<String, String>.from(_headers)
-      ..addAll({'Authorization': "Bearer $token", 'Source': "mobile"});
+  static Map<String, String> addToken2Headers({
+    required String token,
+    bool? isServiceNoMobile,
+  }) {
+    if (isServiceNoMobile == true) {
+      Map<String, String> headers = Map<String, String>.from(_headers)
+        ..addAll({'Authorization': "Bearer $token"});
 
-    return headers;
+      return headers;
+    } else {
+      Map<String, String> headers = Map<String, String>.from(_headers)
+        ..addAll({'Authorization': "Bearer $token", 'Source': "mobile"});
+
+      return headers;
+    }
   }
 
-  static Future<Object> baseService(
-      {required Uri url,
-      required GeneralServicesMethod method,
-      Map<String, String>? headers = _headers,
-      Object? body,
-      String? imagePath,
-      Map<String?, File?>? files}) async {
+  static Future<Object> baseService({
+    required Uri url,
+    required GeneralServicesMethod method,
+    Map<String, String>? headers = _headers,
+    Object? body,
+    String? imagePath,
+    Map<String?, File?>? files,
+  }) async {
     try {
       print("URL API: ${url}");
       print("BODY API: ${body}");

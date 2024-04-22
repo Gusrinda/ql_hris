@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/image_form_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
@@ -357,46 +356,67 @@ class AddCheckInOutPage extends StatelessWidget {
                         ),
                         BlocBuilder<AddCheckInOutBloc, AddCheckInOutState>(
                           builder: (context, state) {
-                            return TextButtonCustomV1(
-                              text: dataLayout[formState!.index]["btnText"]
-                                  as String,
-                              backgroundColor: dataLayout[formState!.index]
-                                  ["btnColor"] as Color,
-                              textColor: MyColorsConst.whiteColor,
-                              onPressed: state is AddCheckInOutLoading
-                                  ? null
-                                  : state is AddCheckInOutButtonActivate
-                                      ? () async {
-                                          if (state.isOnSite) {
-                                            context
-                                                .read<AddCheckInOutBloc>()
-                                                .add(AddCheckInOutSubmited(
-                                                    catatan: catatanController
-                                                            ?.value.text ??
-                                                        "-"));
-                                          } else {
-                                            context
-                                                .read<AddCheckInOutBloc>()
-                                                .add(AddCheckInOutSubmited(
-                                                    catatan: catatanController
-                                                            ?.value.text ??
-                                                        "-"));
-                                            // showDialog(
-                                            //   context: context,
-                                            //   builder: (_) => DialogCustom(
-                                            //     state: DialogCustomItem.warning,
-                                            //     message:
-                                            //         "Anda sedang berada di luar area kantor! \nPresensi akan gagal apabila dilanjutkan.",
-                                            //     durationInSec: 5,
-                                            //     onContinue: () => context
-                                            //         .read<AddCheckInOutBloc>()
-                                            //         .add(AddCheckInOutSubmited()),
-                                            //   ),
-                                            // );
-                                          }
-                                        }
-                                      : null,
-                            );
+                            return ValueListenableBuilder<TextEditingValue>(
+                                valueListenable: catatanController!,
+                                builder: (context, value, child) {
+                                  bool canActivateButton(
+                                      AddCheckInOutState state,
+                                      TextEditingValue value) {
+                                    if (state is AddCheckInOutButtonActivate &&
+                                        !state.isOnSite) {
+                                      if (value.text.isNotEmpty) {
+                                        return true;
+                                      } else {
+                                        return false;
+                                      }
+                                    } else if (state
+                                            is AddCheckInOutButtonActivate &&
+                                        state.isOnSite) {
+                                      return true;
+                                    } else {
+                                      return false;
+                                    }
+                                  }
+
+                                  bool canActivate =
+                                      canActivateButton(state, value);
+
+                                  return TextButtonCustomV1(
+                                    text: dataLayout[formState!.index]
+                                        ["btnText"] as String,
+                                    backgroundColor:
+                                        dataLayout[formState!.index]["btnColor"]
+                                            as Color,
+                                    textColor: MyColorsConst.whiteColor,
+                                    onPressed: state is AddCheckInOutLoading
+                                        ? null
+                                        : canActivate
+                                            ? () async {
+                                                if (state
+                                                        is AddCheckInOutButtonActivate &&
+                                                    state.isOnSite) {
+                                                  context
+                                                      .read<AddCheckInOutBloc>()
+                                                      .add(AddCheckInOutSubmited(
+                                                          catatan:
+                                                              catatanController
+                                                                      ?.value
+                                                                      .text ??
+                                                                  "-"));
+                                                } else {
+                                                  context
+                                                      .read<AddCheckInOutBloc>()
+                                                      .add(AddCheckInOutSubmited(
+                                                          catatan:
+                                                              catatanController
+                                                                      ?.value
+                                                                      .text ??
+                                                                  "-"));
+                                                }
+                                              }
+                                            : null,
+                                  );
+                                });
                           },
                         ),
                       ],

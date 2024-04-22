@@ -1,6 +1,5 @@
 import 'package:sj_presensi_mobile/utils/const.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
-import 'package:sj_presensi_mobile/utils/services_no_source_mobile.dart';
 
 class ListGeneralService {
   static Future<Object> getTingkatPendidikan(String token) async {
@@ -9,7 +8,10 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -19,7 +21,10 @@ class ListGeneralService {
   //   return await GeneralServices.baseService(
   //     url: url,
   //     method: GeneralServicesMethod.get,
-  //     headers: GeneralServices.addToken2Headers(token),
+  //     headers: GeneralServices.addToken2Headers(
+      //   token: token,
+      //   isServiceNoMobile: false,
+      // ),
   //   );
   // }
 
@@ -29,7 +34,10 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -39,7 +47,10 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -49,7 +60,10 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -59,7 +73,10 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -69,7 +86,10 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -79,7 +99,10 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -89,7 +112,10 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -99,17 +125,20 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
   static Future<Object> getKodePre(String token) async {
     var url = Uri.parse(
         "${MyGeneralConst.API_URL}/operation/m_jam_kerja?paginate=1000");
-    return await GeneralServicesNoMobile.baseService(
+    return await GeneralServices.baseService(
       url: url,
-      method: GeneralServicesMethodNoMobile.get,
-      headers: GeneralServicesNoMobile.addToken2Headers(token),
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token: token, isServiceNoMobile: true),
     );
   }
 
@@ -119,7 +148,10 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -129,7 +161,10 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -139,7 +174,10 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -149,7 +187,10 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -159,7 +200,10 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -169,27 +213,30 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
   static Future<Object> getStandartGaji(String token) async {
     var url = Uri.parse(
         "${MyGeneralConst.API_URL}/operation/m_standart_gaji?paginate=1000");
-    return await GeneralServicesNoMobile.baseService(
+    return await GeneralServices.baseService(
       url: url,
-      method: GeneralServicesMethodNoMobile.get,
-      headers: GeneralServicesNoMobile.addToken2Headers(token),
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token: token, isServiceNoMobile: true),
     );
   }
 
   // static Future<Object> getKodePresensi(String token) async {
   //   var url = Uri.parse(
   //       "${MyGeneralConst.API_URL}/operation/m_jam_kerja?paginate=100");
-  //   return await GeneralServicesNoMobile.baseService(
+  //   return await GeneralServices.baseService(
   //     url: url,
-  //     method: GeneralServicesMethodNoMobile.get,
-  //     headers: GeneralServicesNoMobile.addToken2Headers(token),
+  //     method: GeneralServicesMethod.get,
+  //     headers: GeneralServices.addToken2Headers(token: token, isServiceNoMobile: true),
   //   );
   // }
 
@@ -199,7 +246,10 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -209,7 +259,10 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -219,7 +272,10 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -229,7 +285,10 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -239,7 +298,10 @@ class ListGeneralService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 }

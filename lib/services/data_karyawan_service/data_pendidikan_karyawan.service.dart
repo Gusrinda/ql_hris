@@ -12,7 +12,10 @@ class DataKaryawanService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -23,7 +26,10 @@ class DataKaryawanService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.post,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
       body: json.encode({
         "id": dataID,
       }),
@@ -64,7 +70,10 @@ class DataKaryawanService {
       print("ijazah_foto : ${ijazahFoto}");
 
       var request = http.MultipartRequest('POST', url)
-        ..headers.addAll(GeneralServices.addToken2Headers(token));
+        ..headers.addAll(GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ));
 
       // Mengirimkan Data Biasa
       request.fields['m_comp_id'] = compId.toString();
@@ -154,7 +163,10 @@ class DataKaryawanService {
       print("ijazah_foto : ${ijazahFoto}");
 
       var request = http.MultipartRequest('POST', url)
-        ..headers.addAll(GeneralServices.addToken2Headers(token));
+        ..headers.addAll(GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ));
 
       // Mengirimkan Data Biasa
       request.fields['m_comp_id'] = compId.toString();

@@ -5,7 +5,7 @@ import 'package:sj_presensi_mobile/services/model/dinas/detail_realisasi_dinas_m
 import 'package:sj_presensi_mobile/services/model/dinas/response_detail_spd.dart';
 import 'package:sj_presensi_mobile/services/realisasi_dinas_services.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
-import 'package:sj_presensi_mobile/utils/services_no_source_mobile.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
 part 'detail_realisasi_dinas_event.dart';
@@ -24,7 +24,7 @@ class DetailRealisasiDinasBloc
       if (resToken is ServicesSuccess) {
         var res = await RealisasiDinasServices.getDetailRealisasiDinas(
             resToken.response["token"], event.id);
-        if (res is ServicesSuccessNoMobile) {
+        if (res is ServicesSuccess) {
           debugPrint(res.response.toString());
           print(res);
           //Mengubah hasil response api ke model kelas
@@ -41,7 +41,7 @@ class DetailRealisasiDinasBloc
               dataDetailrealisasiDinas: detailRealisasiDinas,
             ),
           );
-        } else if (res is ServicesFailureNoMobile) {
+        } else if (res is ServicesFailure) {
           if (res.errorResponse == null) {
             await GeneralSharedPreferences.removeUserToken();
             emit(DetailRealisasiDinasFailedUserExpired(

@@ -11,7 +11,10 @@ class DataPengalamanKerjaService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -21,7 +24,10 @@ class DataPengalamanKerjaService {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.delete,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
       body: json.encode({
         "id": dataID,
       }),
@@ -61,7 +67,10 @@ class DataPengalamanKerjaService {
       print("suratReferensi : ${suratReferensi}");
 
       var request = http.MultipartRequest('POST', url)
-        ..headers.addAll(GeneralServices.addToken2Headers(token));
+        ..headers.addAll(GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ));
 
       // Mengirimkan Data Biasa
       request.fields['m_comp_id'] = compId.toString();
@@ -169,7 +178,10 @@ class DataPengalamanKerjaService {
       return await GeneralServices.baseService(
         url: Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/pk_update"),
         method: GeneralServicesMethod.putMultiFiles,
-        headers: GeneralServices.addToken2Headers(token),
+        headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
         body: requestBody,
         files: files,
       );
@@ -210,7 +222,10 @@ class DataPengalamanKerjaService {
   //         Uri.parse("${MyGeneralConst.API_URL}/operation/m_kary/pk_update");
 
   //     var request = http.MultipartRequest('POST', url)
-  //       ..headers.addAll(GeneralServices.addToken2Headers(token));
+  //       ..headers.addAll(GeneralServices.addToken2Headers(
+      //   token: token,
+      //   isServiceNoMobile: false,
+      // ));
 
   //     // Mengirimkan Data Biasa
   //     request.fields['id'] = pengalamanId.toString();

@@ -9,7 +9,7 @@ import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_ou
 import 'package:sj_presensi_mobile/pages/home/pengumuman/bloc/pengumuman_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/list_bahasa_bloc/list_bahasa_bloc.dart';
-import 'package:sj_presensi_mobile/pages/home/profile/data_diri/bloc/biodata_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/data_diri/biodata/biodata_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_keluarga/list_keluarga_bloc/list_keluarga_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_organisasi/list_organisas_bloc/list_organisasi_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_pelatihan/list_pelatihan_bloc/list_pelatihan_bloc.dart';
@@ -37,17 +37,6 @@ class _DashboardViewState extends State<DashboardView> {
   void dispose() {
     _pageController.dispose();
     super.dispose();
-    _requestPermissions();
-  }
-
-  Future<void> _requestPermissions() async {
-    await [
-      Permission.camera,
-      Permission.mediaLibrary,
-      Permission.storage,
-      Permission.photos,
-      Permission.location,
-    ].request();
   }
 
   Future<void> _onRefresh() async {

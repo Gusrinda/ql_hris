@@ -6,7 +6,7 @@ import 'package:sj_presensi_mobile/services/approval_services.dart';
 import 'package:sj_presensi_mobile/services/model/list_approval/response_detail_approval.dart';
 import 'package:sj_presensi_mobile/services/model/list_approval/response_list_approval.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
-import 'package:sj_presensi_mobile/utils/services_no_source_mobile.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
 part 'approval_event.dart';
@@ -23,7 +23,7 @@ class ApprovalBloc extends Bloc<ApprovalEvent, ApprovalState> {
       if (resToken is ServicesSuccess) {
         var res =
             await ApprovalServices.getApproval(resToken.response["token"]);
-        if (res is ServicesSuccessNoMobile) {
+        if (res is ServicesSuccess) {
           if (res.response is Map<String, dynamic>) {
             print(res.response);
             ResponseListApproval? dataResponse =
@@ -39,7 +39,7 @@ class ApprovalBloc extends Bloc<ApprovalEvent, ApprovalState> {
             emit(ListApprovalFailedInBackground(
                 message: 'Gagal mengambil data'));
           }
-        } else if (res is ServicesFailureNoMobile) {
+        } else if (res is ServicesFailure) {
           if (res.errorResponse == null) {
             await GeneralSharedPreferences.removeUserToken();
             emit(ListApprovalFailedUserExpired(message: "Token expired"));
@@ -64,7 +64,7 @@ class ApprovalBloc extends Bloc<ApprovalEvent, ApprovalState> {
             event.approvalID,
           );
 
-          if (response is ServicesSuccessNoMobile) {
+          if (response is ServicesSuccess) {
             if (response.response is Map<String, dynamic>) {
               final dataResponse =
                   ResponseDetailApproval.fromJson(response.response);
@@ -87,7 +87,7 @@ class ApprovalBloc extends Bloc<ApprovalEvent, ApprovalState> {
               emit(DetailApprovalFailedInBackground(
                   message: 'Gagal Mendapatkan Data'));
             }
-          } else if (response is ServicesFailureNoMobile) {
+          } else if (response is ServicesFailure) {
             if (response.errorResponse == null) {
               await GeneralSharedPreferences.removeUserToken();
               emit(DetailApprovalFailedUserExpired(message: 'Token expired'));

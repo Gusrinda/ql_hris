@@ -655,13 +655,9 @@ class RouteGenerator {
 
   static Route<dynamic> _errorRoute() {
     return MaterialPageRoute(builder: (_) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Route Error'),
-        ),
-        body: const Center(
-          child: Text('Route Error'),
-        ),
+      return BlocProvider(
+        create: (context) => CheckVersionBloc(),
+        child: SplashPage(),
       );
     });
   }

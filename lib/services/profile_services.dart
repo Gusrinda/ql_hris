@@ -12,7 +12,10 @@ class ProfileServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -25,7 +28,10 @@ class ProfileServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.putMultipart,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
       body: {
         "id": userId,
       },
@@ -33,24 +39,6 @@ class ProfileServices {
     );
   }
 
-  // static Future<Object> editImageProfile(
-  //     String token, int userId, password,
-  //     {String? imagePath}) async {
-  //   var url =
-  //       Uri.parse("${MyGeneralConst.API_URL}/operation/default_users/$userId");
-  //   var body = {
-  //     "password": password,
-  //   };
-  //   return await GeneralServices.baseService(
-  //     url: url,
-  //     method: imagePath != null
-  //         ? GeneralServicesMethod.putMultipart
-  //         : GeneralServicesMethod.put,
-  //     headers: GeneralServices.addToken2Headers(token),
-  //     body: imagePath == null ? json.encode(body) : body,
-  //     imagePath: imagePath,
-  //   );
-  // }
 
   static Future<Object> editDataProfile(
     String token,
@@ -63,7 +51,10 @@ class ProfileServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.put,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
       body: jsonEncode(
         {
           "password": password,
@@ -72,42 +63,4 @@ class ProfileServices {
       ),
     );
   }
-
-  // static Future<Object> editProfile(
-  //     String token, email, employeeID, name, phoneNumber,
-  //     {String? imagePath}) async {
-  //   var url = Uri.parse("${MyGeneralConst.API_URL}/user/edit-profile");
-  //   var body = {
-  //     "inputEmail": email,
-  //     "inputEmployeeID": employeeID,
-  //     "inputName": name,
-  //     "inputPhoneNumber": phoneNumber,
-  //   };
-  //   return await GeneralServices.baseService(
-  //     url: url,
-  //     method: imagePath != null
-  //         ? GeneralServicesMethod.postMultiPart
-  //         : GeneralServicesMethod.post,
-  //     headers: GeneralServices.addToken2Headers(token),
-  //     body: imagePath == null ? json.encode(body) : body,
-  //     imagePath: imagePath,
-  //   );
-  // }
-
-  // static Future<Object> editProfilePassword(
-  //     String token, oldPassword, newPassword) async {
-  //   var url = Uri.parse("${MyGeneralConst.API_URL}/user/edit-password");
-  //   // var url = Uri.https(MyGeneralConst.API_URL, "user/edit-password");
-  //   return await GeneralServices.baseService(
-  //     url: url,
-  //     method: GeneralServicesMethod.post,
-  //     headers: GeneralServices.addToken2Headers(token),
-  //     body: json.encode(
-  //       {
-  //         "inputOldPassword": oldPassword,
-  //         "inputNewPassword": newPassword,
-  //       },
-  //     ),
-  //   );
-  // }
 }

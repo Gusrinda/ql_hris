@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sj_presensi_mobile/services/berkas_services.dart';
 import 'package:sj_presensi_mobile/services/model/berkas_model.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
-import 'package:sj_presensi_mobile/utils/services_no_source_mobile.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
 part 'list_berkas_event.dart';
@@ -20,7 +20,7 @@ class ListBerkasBloc extends Bloc<ListBerkasEvent, ListBerkasState> {
       if (resToken is ServicesSuccess) {
         var res = await BerkasServices.getListBerkas(
             resToken.response["token"], event.kategori);
-        if (res is ServicesSuccessNoMobile) {
+        if (res is ServicesSuccess) {
           if (res.response is Map<String, dynamic>) {
             print("INI RES: ${res.response}");
             BerkasModel dataResponse = BerkasModel.fromJson(res.response);
@@ -39,7 +39,7 @@ class ListBerkasBloc extends Bloc<ListBerkasEvent, ListBerkasState> {
             emit(ListBerkasFailed(message: res.errorResponse));
           }
         }
-      } else if (resToken is ServicesFailureNoMobile) {
+      } else if (resToken is ServicesFailure) {
         emit(ListBerkasFailedInBackground(message: "Response Invalid"));
       }
     });

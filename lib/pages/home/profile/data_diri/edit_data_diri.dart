@@ -620,9 +620,11 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
               noRek: controllers.noRekController?.value.text,
               atasNamaRek: controllers.atasNamaController?.value.text,
             ));
-        isLastStepPressed = true; // Tambahkan ini di step terakhir
+        isLastStepPressed = true;
         break;
       default:
+        Navigator.of(context).pop();
+        Navigator.pop(context);
         break;
     }
   }
@@ -712,7 +714,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                 });
               },
             ),
-          } else if (currentStep == 5) ...{
+          } else ...{
             TextButtonCustomV1(
               text: buttonTexts[currentStep],
               height: 50,
@@ -1542,8 +1544,8 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
               );
               Navigator.of(context).pop();
               Navigator.pop(context);
+              widget.reloadDataCallback();
             }
-            widget.reloadDataCallback();
           } else if (state is EditBiodataFailed) {
             LoadingDialog.dismissDialog(context);
             await showDialog(
@@ -1630,707 +1632,724 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                           ),
                           color: Colors.white,
                         ),
-                        child: Stepper(
-                          elevation: 0,
-                          controlsBuilder: (context, details) =>
-                              controlBuilders(context, details),
-                          type: StepperType.horizontal,
-                          onStepTapped: onStepTapped,
-                          onStepContinue: continueStep,
-                          onStepCancel: cancelStep,
-                          currentStep: currentStep,
-                          steps: [
-                            Step(
-                              label: Text(
-                                'Informasi',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 8.5.sp,
-                                    color: MyColorsConst.darkColor,
-                                    fontWeight: FontWeight.w600),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Stepper(
+                            elevation: 0,
+                            // physics: ScrollPhysics(),
+                            // connectorThickness: 3,
+                            controlsBuilder: (context, details) =>
+                                controlBuilders(context, details),
+                            type: StepperType.horizontal,
+                            onStepTapped: onStepTapped,
+                            onStepContinue: continueStep,
+                            onStepCancel: cancelStep,
+                            currentStep: currentStep,
+                            steps: [
+                              Step(
+                                label: Text(
+                                  'Informasi',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 8.5.sp,
+                                      color: MyColorsConst.darkColor,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                title: SizedBox.shrink(),
+                                content: Column(
+                                  children: [
+                                    FormDropDownData(
+                                      showRedStar: false,
+                                      onTap: () {
+                                        _showDivisi(context);
+                                      },
+                                      hintText: 'Pilih Divisi',
+                                      labelForm: 'Divisi',
+                                      labelTag: 'Label-DivisiDiri',
+                                      formTag: 'Form-DivisiDiri',
+                                      valueController:
+                                          controllers.valueDivisiController!,
+                                      idController:
+                                          controllers.idDivisiController!,
+                                    ),
+                                    FormDropDownData(
+                                      showRedStar: false,
+                                      onTap: () {
+                                        _showDepartemen(context);
+                                      },
+                                      hintText: 'Pilih Departemen',
+                                      labelForm: 'Departemen',
+                                      labelTag: 'Label-DepartemenDiri',
+                                      formTag: 'Form-DepartemenDiri',
+                                      valueController: controllers
+                                          .valueDepartemenController!,
+                                      idController:
+                                          controllers.idDepartemenController!,
+                                    ),
+                                    FormDropDownData(
+                                      showRedStar: false,
+                                      onTap: () {
+                                        _showPosisi(context);
+                                      },
+                                      hintText: 'Pilih Posisi',
+                                      labelForm: 'Posisi',
+                                      labelTag: 'Label-PosisiDiri',
+                                      formTag: 'Form-PosisiDiri',
+                                      valueController:
+                                          controllers.valuePosisiController!,
+                                      idController:
+                                          controllers.idPosisiController!,
+                                    ),
+                                    FormDropDownData(
+                                      showRedStar: false,
+                                      onTap: () {
+                                        _showZona(context);
+                                      },
+                                      hintText: 'Pilih Zona',
+                                      labelForm: 'Zona',
+                                      labelTag: 'Label-ZonaDiri',
+                                      formTag: 'Form-ZonaDiri',
+                                      valueController:
+                                          controllers.valueZonaController!,
+                                      idController:
+                                          controllers.idZonaController!,
+                                    ),
+                                    FormDropDownData(
+                                      showRedStar: false,
+                                      onTap: () {
+                                        showKodePresensiMenu(context);
+                                      },
+                                      hintText: 'Pilih Kode Presensi',
+                                      labelForm: 'Kode Presensi',
+                                      labelTag: 'Label-KodePresensi',
+                                      formTag: 'Form-KodePresensi',
+                                      valueController: controllers
+                                          .valueKodePresensiController!,
+                                      idController:
+                                          controllers.idKodePresensiController!,
+                                    ),
+                                  ],
+                                ),
+                                isActive: currentStep >= 0,
+                                state: currentStep >= 0
+                                    ? StepState.complete
+                                    : StepState.disabled,
                               ),
-                              title: SizedBox.shrink(),
-                              content: Column(
-                                children: [
-                                  FormDropDownData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      _showDivisi(context);
-                                    },
-                                    hintText: 'Pilih Divisi',
-                                    labelForm: 'Divisi',
-                                    labelTag: 'Label-DivisiDiri',
-                                    formTag: 'Form-DivisiDiri',
-                                    valueController:
-                                        controllers.valueDivisiController!,
-                                    idController:
-                                        controllers.idDivisiController!,
-                                  ),
-                                  FormDropDownData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      _showDepartemen(context);
-                                    },
-                                    hintText: 'Pilih Departemen',
-                                    labelForm: 'Departemen',
-                                    labelTag: 'Label-DepartemenDiri',
-                                    formTag: 'Form-DepartemenDiri',
-                                    valueController:
-                                        controllers.valueDepartemenController!,
-                                    idController:
-                                        controllers.idDepartemenController!,
-                                  ),
-                                  FormDropDownData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      _showPosisi(context);
-                                    },
-                                    hintText: 'Pilih Posisi',
-                                    labelForm: 'Posisi',
-                                    labelTag: 'Label-PosisiDiri',
-                                    formTag: 'Form-PosisiDiri',
-                                    valueController:
-                                        controllers.valuePosisiController!,
-                                    idController:
-                                        controllers.idPosisiController!,
-                                  ),
-                                  FormDropDownData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      _showZona(context);
-                                    },
-                                    hintText: 'Pilih Zona',
-                                    labelForm: 'Zona',
-                                    labelTag: 'Label-ZonaDiri',
-                                    formTag: 'Form-ZonaDiri',
-                                    valueController:
-                                        controllers.valueZonaController!,
-                                    idController: controllers.idZonaController!,
-                                  ),
-                                  FormDropDownData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      showKodePresensiMenu(context);
-                                    },
-                                    hintText: 'Pilih Kode Presensi',
-                                    labelForm: 'Kode Presensi',
-                                    labelTag: 'Label-KodePresensi',
-                                    formTag: 'Form-KodePresensi',
-                                    valueController: controllers
-                                        .valueKodePresensiController!,
-                                    idController:
-                                        controllers.idKodePresensiController!,
-                                  ),
-                                ],
+                              Step(
+                                label: Text(
+                                  'Data Diri',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 8.5.sp,
+                                      color: MyColorsConst.darkColor,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                title: SizedBox.shrink(),
+                                // title: SizedBox.shrink(),
+                                content: Column(
+                                  children: [
+                                    FormDateData(
+                                      showRedStar: false,
+                                      onTap: () {
+                                        showTahunMenu(
+                                            context,
+                                            controllers
+                                                .tanggalMasukController!);
+                                      },
+                                      hintText: 'Pilih Tanggal',
+                                      labelForm: 'Tanggal Masuk Kerja',
+                                      labelTag: 'Label-TanggalMasuk',
+                                      formTag: 'Form-TanggalMasuk',
+                                      valueController:
+                                          controllers.tanggalMasukController!,
+                                      idController:
+                                          controllers.tanggalMasukController!,
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'Tuliskan NIK',
+                                      labelForm: 'NIK',
+                                      labelTag: 'Label-NIK',
+                                      formTag: 'Form-NIK',
+                                      controller: controllers.nikController!,
+                                      enabled: true,
+                                      validator: (value) {},
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'Tuliskan Nama Depan Anda',
+                                      labelForm: 'Nama Depan',
+                                      labelTag: 'Label-NamaDepanDiri',
+                                      formTag: 'Form-NamaDepanDiri',
+                                      controller:
+                                          controllers.namaDepanController!,
+                                      validator: (value) {},
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'Tuliskan Nama Belakang Anda',
+                                      labelForm: 'Nama Belakang',
+                                      labelTag: 'Label-NamaBelakangDiri',
+                                      formTag: 'Form-NamaBelakangDiri',
+                                      controller:
+                                          controllers.namaBelakangController!,
+                                      validator: (value) {},
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'Tuliskan Nama Panggilan Anda',
+                                      labelForm: 'Nama Panggilan',
+                                      labelTag: 'Label-NamaPanggilan',
+                                      formTag: 'Form-NamaPanggilan',
+                                      controller:
+                                          controllers.namaPanggilanController!,
+                                      validator: (value) {},
+                                    ),
+                                    FormDropDownData(
+                                      showRedStar: false,
+                                      onTap: () {
+                                        showGenderMenu(context);
+                                      },
+                                      hintText: 'Laki-laki / Perempuan',
+                                      labelForm: 'Jenis Kelamin',
+                                      labelTag: 'Label-JenisKelamin',
+                                      formTag: 'Form-JenisKelamin',
+                                      valueController: controllers
+                                          .valueJenisKelaminController!,
+                                      idController: controllers
+                                          .valueJenisKelaminController!,
+                                    ),
+                                    FormDropDownData(
+                                      showRedStar: false,
+                                      onTap: () {
+                                        showKotaMenu(context);
+                                      },
+                                      hintText: 'Pilih Tempat Lahir',
+                                      labelForm: 'Tempat Lahir',
+                                      labelTag: 'Label-TempatLahir',
+                                      formTag: 'Form-TempatLahir',
+                                      valueController: controllers
+                                          .valueTempatLahirController!,
+                                      idController:
+                                          controllers.idTempatLahirController!,
+                                    ),
+                                    FormDateData(
+                                      showRedStar: false,
+                                      onTap: () {
+                                        showTahunMenu(
+                                            context,
+                                            controllers
+                                                .tanggalLahirController!);
+                                      },
+                                      hintText: 'Pilih Tanggal Lahir',
+                                      labelForm: 'Tanggal Lahir',
+                                      labelTag: 'Label-TanggalLahir',
+                                      formTag: 'Form-TanggalLahir',
+                                      valueController:
+                                          controllers.tanggalLahirController!,
+                                      idController:
+                                          controllers.tanggalLahirController!,
+                                    ),
+                                    FormDropDownData(
+                                      showRedStar: false,
+                                      onTap: () {
+                                        showProvinsiMenu(context);
+                                      },
+                                      hintText: 'Pilih Provinsi',
+                                      labelForm: 'Provinsi',
+                                      labelTag: 'Label-Provinsi',
+                                      formTag: 'Form-Provinsi',
+                                      valueController:
+                                          controllers.valueProvinsiController!,
+                                      idController:
+                                          controllers.idProvinsiController!,
+                                    ),
+                                    FormDropDownData(
+                                      showRedStar: false,
+                                      onTap: () {
+                                        showKotabyProvinsiMenu(context);
+                                      },
+                                      hintText: 'Pilih Kota',
+                                      labelForm: 'Kota',
+                                      labelTag: 'Label-Kota',
+                                      formTag: 'Form-Kota',
+                                      valueController:
+                                          controllers.valueKotaController!,
+                                      idController:
+                                          controllers.idKotaController!,
+                                    ),
+                                    FormDropDownData(
+                                      showRedStar: false,
+                                      onTap: () {
+                                        showKecamatanMenu(context);
+                                      },
+                                      hintText: 'Pilih Kecamatan',
+                                      labelForm: 'Kecamatan',
+                                      labelTag: 'Label-Kecamatan',
+                                      formTag: 'Form-Kecamatan',
+                                      valueController:
+                                          controllers.valueKecamatanController!,
+                                      idController:
+                                          controllers.idKecamatanController!,
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'Tuliskan Kode Pos',
+                                      labelForm: 'Kode Pos',
+                                      labelTag: 'Label-KodePos',
+                                      formTag: 'Form-KodePos',
+                                      controller:
+                                          controllers.kodePosController!,
+                                      validator: (value) {},
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText:
+                                          'Tuliskan Alamat Domisili Tinggal',
+                                      labelForm: 'Alamat Tinggal',
+                                      labelTag: 'Label-AlamatTinggal',
+                                      formTag: 'Form-AlamatTinggal',
+                                      controller: controllers
+                                          .alamatDomisiliTinggalController!,
+                                      validator: (value) {},
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'Tuliskan No. Telepon',
+                                      labelForm: 'No. Telepon',
+                                      labelTag: 'Label-NoTelepon',
+                                      formTag: 'Form-NoTelepon',
+                                      controller: controllers.noTelpController!,
+                                      validator: (value) {},
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'Tuliskan No. Telepon Lainnya',
+                                      labelForm: 'No. Telepon Lainnya',
+                                      labelTag: 'Label-NoTeleponLainnya',
+                                      formTag: 'Form-NoTeleponLainnya',
+                                      controller:
+                                          controllers.noTelpLainnyaController!,
+                                      validator: (value) {},
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'Tuliskan No. Telepon Darurat',
+                                      labelForm: 'No. Telepon Darurat',
+                                      labelTag: 'Label-NoTelpDarurat',
+                                      formTag: 'Form-NoTelpDarurat',
+                                      controller:
+                                          controllers.noTelpDaruratController!,
+                                      validator: (value) {},
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'Tuliskan Nama Kontak Darurat',
+                                      labelForm: 'Nama Kontak Darurat',
+                                      labelTag: 'Label-KontakDarurat',
+                                      formTag: 'Form-KontakDarurat',
+                                      controller: controllers
+                                          .namaKontakDaruratController!,
+                                      validator: (value) {},
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'Contoh: Adik Kandung',
+                                      labelForm: 'Hubungan Dengan Karyawan',
+                                      labelTag: 'Label-HubunganKaryawan',
+                                      formTag: 'Form-HubunganKaryawan',
+                                      controller:
+                                          controllers.hubkaryawanController!,
+                                      validator: (value) {},
+                                    ),
+                                    FormDropDownData(
+                                      showRedStar: false,
+                                      onTap: () {
+                                        showAgamaMenu(context);
+                                      },
+                                      hintText: 'Pilih Agama',
+                                      labelForm: 'Agama',
+                                      labelTag: 'Label-Agama',
+                                      formTag: 'Form-Agama',
+                                      valueController:
+                                          controllers.valueAgamaController!,
+                                      idController:
+                                          controllers.idAgamaController!,
+                                    ),
+                                    FormDropDownData(
+                                      showRedStar: false,
+                                      onTap: () {
+                                        showGolDarahMenu(context);
+                                      },
+                                      hintText: 'Pilih Golongan Darah',
+                                      labelForm: 'Golongan Darah',
+                                      labelTag: 'Label-GolonganDarah',
+                                      formTag: 'Form-GolonganDarah',
+                                      valueController:
+                                          controllers.valueGolDarahController!,
+                                      idController:
+                                          controllers.idGolDarahController!,
+                                    ),
+                                    FormDropDownData(
+                                      showRedStar: false,
+                                      onTap: () {
+                                        showStatusNikahMenu(context);
+                                      },
+                                      hintText: 'Pilih Status Pernikahan',
+                                      labelForm: 'Status Pernikahan',
+                                      labelTag: 'Label-StatusPernikahan',
+                                      formTag: 'Form-StatusPernikahan',
+                                      valueController: controllers
+                                          .valueStatusPernikahanController!,
+                                      idController: controllers
+                                          .idStatusPernikahanController!,
+                                    ),
+                                    FormDropDownData(
+                                      showRedStar: false,
+                                      onTap: () {
+                                        showTanggunganMenu(context);
+                                      },
+                                      hintText: 'Pilih Jumlah Tanggungan',
+                                      labelForm: 'Jumlah Tanggungan',
+                                      labelTag: 'Label-JumlahTanggungan',
+                                      formTag: 'Form-JumlahTanggungan',
+                                      valueController: controllers
+                                          .valueJumlahTanggunganController!,
+                                      idController: controllers
+                                          .idJumlahTanggunganController!,
+                                    ),
+                                    const SizedBox(height: 20),
+                                  ],
+                                ),
+                                isActive: currentStep >= 1,
+                                state: currentStep >= 1
+                                    ? StepState.complete
+                                    : StepState.disabled,
                               ),
-                              isActive: currentStep >= 0,
-                              state: currentStep >= 0
-                                  ? StepState.complete
-                                  : StepState.disabled,
-                            ),
-                            Step(
-                              label: Text(
-                                'Data Diri',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 8.5.sp,
-                                    color: MyColorsConst.darkColor,
-                                    fontWeight: FontWeight.w600),
+                              Step(
+                                label: Text(
+                                  'Info Lain',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 8.5.sp,
+                                      color: MyColorsConst.darkColor,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                title: SizedBox.shrink(),
+                                content: Column(
+                                  children: [
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'Tuliskan No. KTP',
+                                      labelForm: 'No. KTP',
+                                      labelTag: 'Label-NoKtp',
+                                      formTag: 'Form-NoKtp',
+                                      controller: controllers.noKtpController!,
+                                      validator: (value) {},
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'Tuliskan Alamat Sesuai KTP',
+                                      labelForm: 'Alamat Asli Sesuai KTP',
+                                      labelTag: 'Label-AlamatKTP',
+                                      formTag: 'Form-AlamatKTP',
+                                      controller:
+                                          controllers.alamatKtpController!,
+                                      validator: (value) {},
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'Tuliskan No. Kartu Keluarga',
+                                      labelForm: 'No. Kartu Keluarga',
+                                      labelTag: 'Label-NoKk',
+                                      formTag: 'Form-NoKk',
+                                      controller: controllers.noKkController!,
+                                      validator: (value) {},
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'Tuliskan No. NPWP',
+                                      labelForm: 'No. NPWP',
+                                      labelTag: 'Label-NoNpwp',
+                                      formTag: 'Form-NoNpwp',
+                                      controller: controllers.noNpwpController!,
+                                      validator: (value) {},
+                                    ),
+                                    // FormDateData(
+                                    //   showRedStar: false,
+                                    //   onTap: () {
+                                    //     showTahunMenu(context,
+                                    //         controllers.tanggalNpwpController!);
+                                    //   },
+                                    //   hintText: 'Pilih Tanggal',
+                                    //   labelForm: 'Tanggal Berlaku NPWP',
+                                    //   labelTag: 'Label-TanggalNpwp',
+                                    //   formTag: 'Form-TanggalNpwp',
+                                    //   valueController:
+                                    //       controllers.tanggalNpwpController!,
+                                    //   idController:
+                                    //       controllers.tanggalNpwpController!,
+                                    // ),
+                                    // FileSelectionWidget(
+                                    //   onFileSelected: (file, fileUrl) {
+                                    //     setState(() {
+                                    //       bpjs = file;
+                                    //       fileNameBpjs =
+                                    //           file.path.split('/').last;
+                                    //     });
+                                    //   },
+                                    //   title: 'Foto BPJS',
+                                    //   fileName: fileNameBpjs,
+                                    //   selectedFile: bpjs,
+                                    // ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'Tuliskan No. BPJS Kesehatan',
+                                      labelForm: 'No. BPJS Kesehatan',
+                                      labelTag: 'Label-NoBpjsKes',
+                                      formTag: 'Form-NoBpjsKes',
+                                      controller: controllers
+                                          .noBpjsKesehatanController!,
+                                      validator: (value) {},
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText:
+                                          'Tuliskan No. BPJS Ketenagakerjaan',
+                                      labelForm: 'No. BPJS Ketenagakerjaan',
+                                      labelTag: 'Label-NoBpjsKer',
+                                      formTag: 'Form-NoBpjsKer',
+                                      controller: controllers
+                                          .noBpjsKetenagakerjaanController!,
+                                      validator: (value) {},
+                                    ),
+                                    FormDropDownData(
+                                      showRedStar: false,
+                                      onTap: () {
+                                        showTipeBPJS(context);
+                                      },
+                                      hintText: 'Pilih Tipe BPJS',
+                                      labelForm: 'Tipe BPJS',
+                                      labelTag: 'Label-TipeBpjs',
+                                      formTag: 'Form-TipeBpjs',
+                                      valueController:
+                                          controllers.valueTipeBPJSController!,
+                                      idController:
+                                          controllers.idTipeBPJSController!,
+                                    ),
+                                  ],
+                                ),
+                                isActive: currentStep >= 2,
+                                state: currentStep >= 2
+                                    ? StepState.complete
+                                    : StepState.disabled,
                               ),
-                              title: SizedBox.shrink(),
-                              // title: SizedBox.shrink(),
-                              content: Column(
-                                children: [
-                                  FormDateData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      showTahunMenu(context,
-                                          controllers.tanggalMasukController!);
-                                    },
-                                    hintText: 'Pilih Tanggal',
-                                    labelForm: 'Tanggal Masuk Kerja',
-                                    labelTag: 'Label-TanggalMasuk',
-                                    formTag: 'Form-TanggalMasuk',
-                                    valueController:
-                                        controllers.tanggalMasukController!,
-                                    idController:
-                                        controllers.tanggalMasukController!,
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'Tuliskan NIK',
-                                    labelForm: 'NIK',
-                                    labelTag: 'Label-NIK',
-                                    formTag: 'Form-NIK',
-                                    controller: controllers.nikController!,
-                                    enabled: true,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'Tuliskan Nama Depan Anda',
-                                    labelForm: 'Nama Depan',
-                                    labelTag: 'Label-NamaDepanDiri',
-                                    formTag: 'Form-NamaDepanDiri',
-                                    controller:
-                                        controllers.namaDepanController!,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'Tuliskan Nama Belakang Anda',
-                                    labelForm: 'Nama Belakang',
-                                    labelTag: 'Label-NamaBelakangDiri',
-                                    formTag: 'Form-NamaBelakangDiri',
-                                    controller:
-                                        controllers.namaBelakangController!,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'Tuliskan Nama Panggilan Anda',
-                                    labelForm: 'Nama Panggilan',
-                                    labelTag: 'Label-NamaPanggilan',
-                                    formTag: 'Form-NamaPanggilan',
-                                    controller:
-                                        controllers.namaPanggilanController!,
-                                    validator: (value) {},
-                                  ),
-                                  FormDropDownData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      showGenderMenu(context);
-                                    },
-                                    hintText: 'Laki-laki / Perempuan',
-                                    labelForm: 'Jenis Kelamin',
-                                    labelTag: 'Label-JenisKelamin',
-                                    formTag: 'Form-JenisKelamin',
-                                    valueController: controllers
-                                        .valueJenisKelaminController!,
-                                    idController: controllers
-                                        .valueJenisKelaminController!,
-                                  ),
-                                  FormDropDownData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      showKotaMenu(context);
-                                    },
-                                    hintText: 'Pilih Tempat Lahir',
-                                    labelForm: 'Tempat Lahir',
-                                    labelTag: 'Label-TempatLahir',
-                                    formTag: 'Form-TempatLahir',
-                                    valueController:
-                                        controllers.valueTempatLahirController!,
-                                    idController:
-                                        controllers.idTempatLahirController!,
-                                  ),
-                                  FormDateData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      showTahunMenu(context,
-                                          controllers.tanggalLahirController!);
-                                    },
-                                    hintText: 'Pilih Tanggal Lahir',
-                                    labelForm: 'Tanggal Lahir',
-                                    labelTag: 'Label-TanggalLahir',
-                                    formTag: 'Form-TanggalLahir',
-                                    valueController:
-                                        controllers.tanggalLahirController!,
-                                    idController:
-                                        controllers.tanggalLahirController!,
-                                  ),
-                                  FormDropDownData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      showProvinsiMenu(context);
-                                    },
-                                    hintText: 'Pilih Provinsi',
-                                    labelForm: 'Provinsi',
-                                    labelTag: 'Label-Provinsi',
-                                    formTag: 'Form-Provinsi',
-                                    valueController:
-                                        controllers.valueProvinsiController!,
-                                    idController:
-                                        controllers.idProvinsiController!,
-                                  ),
-                                  FormDropDownData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      showKotabyProvinsiMenu(context);
-                                    },
-                                    hintText: 'Pilih Kota',
-                                    labelForm: 'Kota',
-                                    labelTag: 'Label-Kota',
-                                    formTag: 'Form-Kota',
-                                    valueController:
-                                        controllers.valueKotaController!,
-                                    idController: controllers.idKotaController!,
-                                  ),
-                                  FormDropDownData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      showKecamatanMenu(context);
-                                    },
-                                    hintText: 'Pilih Kecamatan',
-                                    labelForm: 'Kecamatan',
-                                    labelTag: 'Label-Kecamatan',
-                                    formTag: 'Form-Kecamatan',
-                                    valueController:
-                                        controllers.valueKecamatanController!,
-                                    idController:
-                                        controllers.idKecamatanController!,
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'Tuliskan Kode Pos',
-                                    labelForm: 'Kode Pos',
-                                    labelTag: 'Label-KodePos',
-                                    formTag: 'Form-KodePos',
-                                    controller: controllers.kodePosController!,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText:
-                                        'Tuliskan Alamat Domisili Tinggal',
-                                    labelForm: 'Alamat Tinggal',
-                                    labelTag: 'Label-AlamatTinggal',
-                                    formTag: 'Form-AlamatTinggal',
-                                    controller: controllers
-                                        .alamatDomisiliTinggalController!,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'Tuliskan No. Telepon',
-                                    labelForm: 'No. Telepon',
-                                    labelTag: 'Label-NoTelepon',
-                                    formTag: 'Form-NoTelepon',
-                                    controller: controllers.noTelpController!,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'Tuliskan No. Telepon Lainnya',
-                                    labelForm: 'No. Telepon Lainnya',
-                                    labelTag: 'Label-NoTeleponLainnya',
-                                    formTag: 'Form-NoTeleponLainnya',
-                                    controller:
-                                        controllers.noTelpLainnyaController!,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'Tuliskan No. Telepon Darurat',
-                                    labelForm: 'No. Telepon Darurat',
-                                    labelTag: 'Label-NoTelpDarurat',
-                                    formTag: 'Form-NoTelpDarurat',
-                                    controller:
-                                        controllers.noTelpDaruratController!,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'Tuliskan Nama Kontak Darurat',
-                                    labelForm: 'Nama Kontak Darurat',
-                                    labelTag: 'Label-KontakDarurat',
-                                    formTag: 'Form-KontakDarurat',
-                                    controller: controllers
-                                        .namaKontakDaruratController!,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'Contoh: Adik Kandung',
-                                    labelForm: 'Hubungan Dengan Karyawan',
-                                    labelTag: 'Label-HubunganKaryawan',
-                                    formTag: 'Form-HubunganKaryawan',
-                                    controller:
-                                        controllers.hubkaryawanController!,
-                                    validator: (value) {},
-                                  ),
-                                  FormDropDownData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      showAgamaMenu(context);
-                                    },
-                                    hintText: 'Pilih Agama',
-                                    labelForm: 'Agama',
-                                    labelTag: 'Label-Agama',
-                                    formTag: 'Form-Agama',
-                                    valueController:
-                                        controllers.valueAgamaController!,
-                                    idController:
-                                        controllers.idAgamaController!,
-                                  ),
-                                  FormDropDownData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      showGolDarahMenu(context);
-                                    },
-                                    hintText: 'Pilih Golongan Darah',
-                                    labelForm: 'Golongan Darah',
-                                    labelTag: 'Label-GolonganDarah',
-                                    formTag: 'Form-GolonganDarah',
-                                    valueController:
-                                        controllers.valueGolDarahController!,
-                                    idController:
-                                        controllers.idGolDarahController!,
-                                  ),
-                                  FormDropDownData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      showStatusNikahMenu(context);
-                                    },
-                                    hintText: 'Pilih Status Pernikahan',
-                                    labelForm: 'Status Pernikahan',
-                                    labelTag: 'Label-StatusPernikahan',
-                                    formTag: 'Form-StatusPernikahan',
-                                    valueController: controllers
-                                        .valueStatusPernikahanController!,
-                                    idController: controllers
-                                        .idStatusPernikahanController!,
-                                  ),
-                                  FormDropDownData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      showTanggunganMenu(context);
-                                    },
-                                    hintText: 'Pilih Jumlah Tanggungan',
-                                    labelForm: 'Jumlah Tanggungan',
-                                    labelTag: 'Label-JumlahTanggungan',
-                                    formTag: 'Form-JumlahTanggungan',
-                                    valueController: controllers
-                                        .valueJumlahTanggunganController!,
-                                    idController: controllers
-                                        .idJumlahTanggunganController!,
-                                  ),
-                                  const SizedBox(height: 20),
-                                ],
+                              Step(
+                                label: Text(
+                                  'Berkas',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 8.5.sp,
+                                      color: MyColorsConst.darkColor,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                title: SizedBox.shrink(),
+                                // title: SizedBox.shrink(),
+                                content: Column(
+                                  children: [
+                                    FileSelectionWidget(
+                                      onFileSelected: (file, fileUrl) {
+                                        setState(() {
+                                          fotoKaryawan = file;
+                                          fileNameFotoKaryawan =
+                                              file.path.split('/').last;
+                                        });
+                                      },
+                                      title: 'Foto Karyawan',
+                                      fileName: fileNameFotoKaryawan,
+                                      selectedFile: fotoKaryawan,
+                                    ),
+                                    // FilePickerWidget(
+                                    //   onFileSelected: (File? file) {
+                                    //     setState(() {
+                                    //       fotoKaryawan = file;
+                                    //       // Dapatkan nama file dari path
+                                    //       fileNameFotoKaryawan = fotoKaryawan !=
+                                    //               null
+                                    //           ? fotoKaryawan!.path.split('/').last
+                                    //           : "";
+                                    //       print(
+                                    //           'Selected file: $fileNameFotoKaryawan');
+                                    //     });
+                                    //   },
+                                    //   title: 'Foto Karyawan',
+                                    //   fileName: fileNameFotoKaryawan,
+                                    //   selectedFile: fotoKaryawan,
+                                    // ),
+                                    FileSelectionWidget(
+                                      onFileSelected: (file, fileUrl) {
+                                        setState(() {
+                                          ktp = file;
+                                          fileNameKtp =
+                                              file.path.split('/').last;
+                                        });
+                                      },
+                                      title: 'Foto KTP',
+                                      fileName: fileNameKtp,
+                                      selectedFile: ktp,
+                                    ),
+                                    FileSelectionWidget(
+                                      onFileSelected: (file, fileUrl) {
+                                        setState(() {
+                                          kartukeluarga = file;
+                                          fileNameKk =
+                                              file.path.split('/').last;
+                                        });
+                                      },
+                                      title: 'Foto Kartu Keluarga',
+                                      fileName: fileNameKk,
+                                      selectedFile: kartukeluarga,
+                                    ),
+                                    FileSelectionWidget(
+                                      onFileSelected: (file, fileUrl) {
+                                        setState(() {
+                                          npwp = file;
+                                          fileNameNpwp =
+                                              file.path.split('/').last;
+                                        });
+                                      },
+                                      title: 'Foto NPWP',
+                                      fileName: fileNameNpwp,
+                                      selectedFile: npwp,
+                                    ),
+                                    FileSelectionWidget(
+                                      onFileSelected: (file, fileUrl) {
+                                        setState(() {
+                                          berkaspendukung = file;
+                                          fileNameBerkasPendukung =
+                                              file.path.split('/').last;
+                                        });
+                                      },
+                                      title: 'Berkas Pendukung Lainnya',
+                                      fileName: fileNameBerkasPendukung,
+                                      selectedFile: berkaspendukung,
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'Tuliskan Keterangan',
+                                      labelForm: 'Keterangan Berkas Pendukung',
+                                      labelTag: 'Label-KeteranganDiri',
+                                      formTag: 'Form-KeteranganDiri',
+                                      controller:
+                                          controllers.keteranganController!,
+                                      validator: (value) {},
+                                    ),
+                                  ],
+                                ),
+                                isActive: currentStep >= 3,
+                                state: currentStep >= 3
+                                    ? StepState.complete
+                                    : StepState.disabled,
                               ),
-                              isActive: currentStep >= 1,
-                              state: currentStep >= 1
-                                  ? StepState.complete
-                                  : StepState.disabled,
-                            ),
-                            Step(
-                              label: Text(
-                                'Info Lain',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 8.5.sp,
-                                    color: MyColorsConst.darkColor,
-                                    fontWeight: FontWeight.w600),
+                              Step(
+                                label: Text(
+                                  'Ukuran',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 8.5.sp,
+                                      color: MyColorsConst.darkColor,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                title: SizedBox.shrink(),
+                                // title: SizedBox.shrink(),
+                                content: Column(
+                                  children: [
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'S / M / L / XL / XXL',
+                                      labelForm: 'Ukuran Baju',
+                                      labelTag: 'Label-UkBaju',
+                                      formTag: 'Form-UkBaju',
+                                      controller: controllers.ukBajuController!,
+                                      validator: (value) {},
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'Contoh: 32',
+                                      labelForm: 'Ukuran Celana',
+                                      labelTag: 'Label-UkCelana',
+                                      formTag: 'Form-UkCelana',
+                                      controller:
+                                          controllers.ukCelanaController!,
+                                      validator: (value) {},
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'Contoh: 43',
+                                      labelForm: 'Ukuran Sepatu',
+                                      labelTag: 'Label-UkSepatu',
+                                      formTag: 'Form-UkSepatu',
+                                      controller:
+                                          controllers.ukSepatuontroller!,
+                                      validator: (value) {},
+                                    ),
+                                  ],
+                                ),
+                                isActive: currentStep >= 4,
+                                state: currentStep >= 4
+                                    ? StepState.complete
+                                    : StepState.disabled,
                               ),
-                              title: SizedBox.shrink(),
-                              content: Column(
-                                children: [
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'Tuliskan No. KTP',
-                                    labelForm: 'No. KTP',
-                                    labelTag: 'Label-NoKtp',
-                                    formTag: 'Form-NoKtp',
-                                    controller: controllers.noKtpController!,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'Tuliskan Alamat Sesuai KTP',
-                                    labelForm: 'Alamat Asli Sesuai KTP',
-                                    labelTag: 'Label-AlamatKTP',
-                                    formTag: 'Form-AlamatKTP',
-                                    controller:
-                                        controllers.alamatKtpController!,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'Tuliskan No. Kartu Keluarga',
-                                    labelForm: 'No. Kartu Keluarga',
-                                    labelTag: 'Label-NoKk',
-                                    formTag: 'Form-NoKk',
-                                    controller: controllers.noKkController!,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'Tuliskan No. NPWP',
-                                    labelForm: 'No. NPWP',
-                                    labelTag: 'Label-NoNpwp',
-                                    formTag: 'Form-NoNpwp',
-                                    controller: controllers.noNpwpController!,
-                                    validator: (value) {},
-                                  ),
-                                  // FormDateData(
-                                  //   showRedStar: false,
-                                  //   onTap: () {
-                                  //     showTahunMenu(context,
-                                  //         controllers.tanggalNpwpController!);
-                                  //   },
-                                  //   hintText: 'Pilih Tanggal',
-                                  //   labelForm: 'Tanggal Berlaku NPWP',
-                                  //   labelTag: 'Label-TanggalNpwp',
-                                  //   formTag: 'Form-TanggalNpwp',
-                                  //   valueController:
-                                  //       controllers.tanggalNpwpController!,
-                                  //   idController:
-                                  //       controllers.tanggalNpwpController!,
-                                  // ),
-                                  // FileSelectionWidget(
-                                  //   onFileSelected: (file, fileUrl) {
-                                  //     setState(() {
-                                  //       bpjs = file;
-                                  //       fileNameBpjs =
-                                  //           file.path.split('/').last;
-                                  //     });
-                                  //   },
-                                  //   title: 'Foto BPJS',
-                                  //   fileName: fileNameBpjs,
-                                  //   selectedFile: bpjs,
-                                  // ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'Tuliskan No. BPJS Kesehatan',
-                                    labelForm: 'No. BPJS Kesehatan',
-                                    labelTag: 'Label-NoBpjsKes',
-                                    formTag: 'Form-NoBpjsKes',
-                                    controller:
-                                        controllers.noBpjsKesehatanController!,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText:
-                                        'Tuliskan No. BPJS Ketenagakerjaan',
-                                    labelForm: 'No. BPJS Ketenagakerjaan',
-                                    labelTag: 'Label-NoBpjsKer',
-                                    formTag: 'Form-NoBpjsKer',
-                                    controller: controllers
-                                        .noBpjsKetenagakerjaanController!,
-                                    validator: (value) {},
-                                  ),
-                                  FormDropDownData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      showTipeBPJS(context);
-                                    },
-                                    hintText: 'Pilih Tipe BPJS',
-                                    labelForm: 'Tipe BPJS',
-                                    labelTag: 'Label-TipeBpjs',
-                                    formTag: 'Form-TipeBpjs',
-                                    valueController:
-                                        controllers.valueTipeBPJSController!,
-                                    idController:
-                                        controllers.idTipeBPJSController!,
-                                  ),
-                                ],
+                              Step(
+                                label: Text(
+                                  'Pembayaran',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 8.5.sp,
+                                      color: MyColorsConst.darkColor,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                title: SizedBox.shrink(),
+                                // title: SizedBox.shrink(),
+                                content: Column(
+                                  children: [
+                                    FormDropDownData(
+                                      showRedStar: false,
+                                      onTap: () {
+                                        showNamaBank(context);
+                                      },
+                                      hintText: 'Pilih Nama Bank',
+                                      labelForm: 'Nama Bank',
+                                      labelTag: 'Label-NamaBank',
+                                      formTag: 'Form-NamaBank',
+                                      valueController:
+                                          controllers.valueNamaBankController!,
+                                      idController:
+                                          controllers.idNamaBankController!,
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText: 'Tuliskan Nomor Rekening',
+                                      labelForm: 'Nomor Rekening',
+                                      labelTag: 'Label-NoRek',
+                                      formTag: 'Form-NoRek',
+                                      controller: controllers.noRekController!,
+                                      validator: (value) {},
+                                    ),
+                                    FormInputData(
+                                      showRedStar: false,
+                                      hintText:
+                                          'Tuliskan Atas Nama Pemilik Rekening',
+                                      labelForm: 'Atas Nama Rekening',
+                                      labelTag: 'Label-NamaRek',
+                                      formTag: 'Form-NamaRek',
+                                      controller:
+                                          controllers.atasNamaController!,
+                                      validator: (value) {},
+                                    ),
+                                  ],
+                                ),
+                                isActive: currentStep >= 5,
+                                state: currentStep >= 5
+                                    ? StepState.complete
+                                    : StepState.disabled,
                               ),
-                              isActive: currentStep >= 2,
-                              state: currentStep >= 2
-                                  ? StepState.complete
-                                  : StepState.disabled,
-                            ),
-                            Step(
-                              label: Text(
-                                'Berkas',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 8.5.sp,
-                                    color: MyColorsConst.darkColor,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              title: SizedBox.shrink(),
-                              // title: SizedBox.shrink(),
-                              content: Column(
-                                children: [
-                                  FileSelectionWidget(
-                                    onFileSelected: (file, fileUrl) {
-                                      setState(() {
-                                        fotoKaryawan = file;
-                                        fileNameFotoKaryawan =
-                                            file.path.split('/').last;
-                                      });
-                                    },
-                                    title: 'Foto Karyawan',
-                                    fileName: fileNameFotoKaryawan,
-                                    selectedFile: fotoKaryawan,
-                                  ),
-                                  // FilePickerWidget(
-                                  //   onFileSelected: (File? file) {
-                                  //     setState(() {
-                                  //       fotoKaryawan = file;
-                                  //       // Dapatkan nama file dari path
-                                  //       fileNameFotoKaryawan = fotoKaryawan !=
-                                  //               null
-                                  //           ? fotoKaryawan!.path.split('/').last
-                                  //           : "";
-                                  //       print(
-                                  //           'Selected file: $fileNameFotoKaryawan');
-                                  //     });
-                                  //   },
-                                  //   title: 'Foto Karyawan',
-                                  //   fileName: fileNameFotoKaryawan,
-                                  //   selectedFile: fotoKaryawan,
-                                  // ),
-                                  FileSelectionWidget(
-                                    onFileSelected: (file, fileUrl) {
-                                      setState(() {
-                                        ktp = file;
-                                        fileNameKtp = file.path.split('/').last;
-                                      });
-                                    },
-                                    title: 'Foto KTP',
-                                    fileName: fileNameKtp,
-                                    selectedFile: ktp,
-                                  ),
-                                  FileSelectionWidget(
-                                    onFileSelected: (file, fileUrl) {
-                                      setState(() {
-                                        kartukeluarga = file;
-                                        fileNameKk = file.path.split('/').last;
-                                      });
-                                    },
-                                    title: 'Foto Kartu Keluarga',
-                                    fileName: fileNameKk,
-                                    selectedFile: kartukeluarga,
-                                  ),
-                                  FileSelectionWidget(
-                                    onFileSelected: (file, fileUrl) {
-                                      setState(() {
-                                        npwp = file;
-                                        fileNameNpwp =
-                                            file.path.split('/').last;
-                                      });
-                                    },
-                                    title: 'Foto NPWP',
-                                    fileName: fileNameNpwp,
-                                    selectedFile: npwp,
-                                  ),
-                                  FileSelectionWidget(
-                                    onFileSelected: (file, fileUrl) {
-                                      setState(() {
-                                        berkaspendukung = file;
-                                        fileNameBerkasPendukung =
-                                            file.path.split('/').last;
-                                      });
-                                    },
-                                    title: 'Berkas Pendukung Lainnya',
-                                    fileName: fileNameBerkasPendukung,
-                                    selectedFile: berkaspendukung,
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'Tuliskan Keterangan',
-                                    labelForm: 'Keterangan Berkas Pendukung',
-                                    labelTag: 'Label-KeteranganDiri',
-                                    formTag: 'Form-KeteranganDiri',
-                                    controller:
-                                        controllers.keteranganController!,
-                                    validator: (value) {},
-                                  ),
-                                ],
-                              ),
-                              isActive: currentStep >= 3,
-                              state: currentStep >= 3
-                                  ? StepState.complete
-                                  : StepState.disabled,
-                            ),
-                            Step(
-                              label: Text(
-                                'Ukuran',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 8.5.sp,
-                                    color: MyColorsConst.darkColor,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              title: SizedBox.shrink(),
-                              // title: SizedBox.shrink(),
-                              content: Column(
-                                children: [
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'S / M / L / XL / XXL',
-                                    labelForm: 'Ukuran Baju',
-                                    labelTag: 'Label-UkBaju',
-                                    formTag: 'Form-UkBaju',
-                                    controller: controllers.ukBajuController!,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'Contoh: 32',
-                                    labelForm: 'Ukuran Celana',
-                                    labelTag: 'Label-UkCelana',
-                                    formTag: 'Form-UkCelana',
-                                    controller: controllers.ukCelanaController!,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'Contoh: 43',
-                                    labelForm: 'Ukuran Sepatu',
-                                    labelTag: 'Label-UkSepatu',
-                                    formTag: 'Form-UkSepatu',
-                                    controller: controllers.ukSepatuontroller!,
-                                    validator: (value) {},
-                                  ),
-                                ],
-                              ),
-                              isActive: currentStep >= 4,
-                              state: currentStep >= 4
-                                  ? StepState.complete
-                                  : StepState.disabled,
-                            ),
-                            Step(
-                              label: Text(
-                                'Pembayaran',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 8.5.sp,
-                                    color: MyColorsConst.darkColor,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              title: SizedBox.shrink(),
-                              // title: SizedBox.shrink(),
-                              content: Column(
-                                children: [
-                                  FormDropDownData(
-                                    showRedStar: false,
-                                    onTap: () {
-                                      showNamaBank(context);
-                                    },
-                                    hintText: 'Pilih Nama Bank',
-                                    labelForm: 'Nama Bank',
-                                    labelTag: 'Label-NamaBank',
-                                    formTag: 'Form-NamaBank',
-                                    valueController:
-                                        controllers.valueNamaBankController!,
-                                    idController:
-                                        controllers.idNamaBankController!,
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText: 'Tuliskan Nomor Rekening',
-                                    labelForm: 'Nomor Rekening',
-                                    labelTag: 'Label-NoRek',
-                                    formTag: 'Form-NoRek',
-                                    controller: controllers.noRekController!,
-                                    validator: (value) {},
-                                  ),
-                                  FormInputData(
-                                    showRedStar: false,
-                                    hintText:
-                                        'Tuliskan Atas Nama Pemilik Rekening',
-                                    labelForm: 'Atas Nama Rekening',
-                                    labelTag: 'Label-NamaRek',
-                                    formTag: 'Form-NamaRek',
-                                    controller: controllers.atasNamaController!,
-                                    validator: (value) {},
-                                  ),
-                                ],
-                              ),
-                              isActive: currentStep >= 5,
-                              state: currentStep >= 5
-                                  ? StepState.complete
-                                  : StepState.disabled,
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       );
                     },

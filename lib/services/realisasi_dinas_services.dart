@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:sj_presensi_mobile/utils/const.dart';
 import 'package:sj_presensi_mobile/utils/services.dart';
-import 'package:sj_presensi_mobile/utils/services_no_source_mobile.dart';
 
 class RealisasiDinasServices {
   static Future<Object> getListDinasApprove(String token) async {
@@ -11,17 +10,20 @@ class RealisasiDinasServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
   // static Future<Object> getListRealisasiDinas(String token) async {
   //   var url =
   //       Uri.parse("${MyGeneralConst.API_URL}/operation/t_rpd?paginate=1000");
-  //   return await GeneralServicesNoMobile.baseService(
+  //   return await GeneralServices.baseService(
   //     url: url,
-  //     method: GeneralServicesMethodNoMobile.get,
-  //     headers: GeneralServicesNoMobile.addToken2Headers(token),
+  //     method: GeneralServicesMethod.get,
+  //     headers: GeneralServices.addToken2Headers(token: token, isServiceNoMobile: true),
   //   );
   // }
 
@@ -36,7 +38,10 @@ class RealisasiDinasServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -55,7 +60,10 @@ class RealisasiDinasServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.post,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
       body: json.encode({
         "t_spd_id": tSpdId,
         "total_biaya_spd": totalBiayaSPD,
@@ -82,7 +90,10 @@ class RealisasiDinasServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.put,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
       body: json.encode({
         "t_spd_id": tSpdId,
         "total_biaya_spd": totalBiayaSPD,
@@ -98,16 +109,19 @@ class RealisasiDinasServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
   static Future<Object> getDetailRealisasiDinas(String token, int id) async {
     var url = Uri.parse("${MyGeneralConst.API_URL}/operation/t_rpd/$id");
-    return await GeneralServicesNoMobile.baseService(
+    return await GeneralServices.baseService(
       url: url,
-      method: GeneralServicesMethodNoMobile.get,
-      headers: GeneralServicesNoMobile.addToken2Headers(token),
+      method: GeneralServicesMethod.get,
+      headers: GeneralServices.addToken2Headers(token: token, isServiceNoMobile: true),
     );
   }
 
@@ -117,7 +131,10 @@ class RealisasiDinasServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 }
