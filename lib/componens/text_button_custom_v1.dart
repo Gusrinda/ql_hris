@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
 class TextButtonCustomV1 extends StatelessWidget {
   final String text;
+
   final double? width;
+  final double? height;
   final EdgeInsetsGeometry? margin;
   final Color? backgroundColor, textColor;
   final double? textSize;
@@ -12,10 +16,11 @@ class TextButtonCustomV1 extends StatelessWidget {
     Key? key,
     required this.text,
     this.width,
+    this.height,
     this.margin,
     this.backgroundColor,
     this.textColor = Colors.white,
-    this.textSize = 16,
+    this.textSize,
     required this.onPressed,
   }) : super(key: key);
 
@@ -23,14 +28,18 @@ class TextButtonCustomV1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
+      height: height,
       margin: margin,
       child: ElevatedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
-          backgroundColor: onPressed != null ? backgroundColor : MyColorsConst.disableColor,
-          padding: const EdgeInsets.symmetric(vertical: 12),
+          foregroundColor: MyColorsConst.primaryColor,
+          elevation: 0,
+          backgroundColor:
+              onPressed != null ? backgroundColor : MyColorsConst.disableColor,
+          padding: EdgeInsets.symmetric(vertical: 13.sp),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(7),
             side: BorderSide.none,
           ),
         ),
@@ -39,10 +48,10 @@ class TextButtonCustomV1 extends StatelessWidget {
           children: [
             Text(
               text,
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                 color: textColor,
                 fontWeight: FontWeight.bold,
-                fontSize: textSize,
+                fontSize: textSize ?? 13.sp,
               ),
             ),
           ],

@@ -1,21 +1,28 @@
 import 'dart:convert';
 
-import 'package:ql_absensi_express_mobile/sentry/my_sentry.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
-import 'package:ql_absensi_express_mobile/utils/services.dart';
+import 'package:sj_presensi_mobile/sentry/my_sentry.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GeneralSharedPreferences {
   static final Future<SharedPreferences> _pref =
       SharedPreferences.getInstance();
 
-  static Future<Object> saveUserToken(String token) async {
+  static Future<Object> saveUserToken(
+      String token, int id, int mCompId, int mDirId, int mKaryId) async {
     var pref = await _pref;
     return await pref
         .setString(
       MyGeneralConst.PREF_USER_TOKEN,
       json.encode(
-        {"token": token},
+        {
+          "token": token,
+          "id": id,
+          "m_comp_id": mCompId,
+          "m_dir_id": mDirId,
+          "m_kary_id": mKaryId
+        },
       ),
     )
         .then(
@@ -43,7 +50,22 @@ class GeneralSharedPreferences {
       );
     }
     return ServicesFailure(
-      code: MyGeneralConst.CODE_NULL_RESPONSE,
+      code: MyGeneralConst.CODE_BAD_REQUEST,
+      errorResponse: "User Token not found!",
+    );
+  }
+
+  static Future<Object> getUserId() async {
+    var pref = await _pref;
+    var data = pref.getString(MyGeneralConst.PREF_USER_TOKEN);
+    if (data != null) {
+      return ServicesSuccess(
+        code: MyGeneralConst.CODE_PROCESS_SUCCESS,
+        response: json.decode(data),
+      );
+    }
+    return ServicesFailure(
+      code: MyGeneralConst.CODE_BAD_REQUEST,
       errorResponse: "User Token not found!",
     );
   }
@@ -58,7 +80,7 @@ class GeneralSharedPreferences {
       );
     } else {
       return ServicesFailure(
-        code: MyGeneralConst.CODE_NULL_RESPONSE,
+        code: MyGeneralConst.CODE_BAD_REQUEST,
         errorResponse: "Remove User Token Failed!",
       );
     }

@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:ql_absensi_express_mobile/componens/appbar_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/componens/dialog_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/componens/loading_dialog_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/componens/text_button_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/componens/text_form_custom_v3.dart';
-import 'package:ql_absensi_express_mobile/pages/authentication/login/login_page.dart';
-import 'package:ql_absensi_express_mobile/pages/home/report/add/bloc/add_report_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/report/report_detail_page.dart';
-import 'package:ql_absensi_express_mobile/services/model/report_detail_page_model.dart';
-import 'package:ql_absensi_express_mobile/services/model/report_model.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/componens/appbar_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/text_form_custom_v3.dart';
+import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/home/report/add/bloc/add_report_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/report/report_detail_page.dart';
+import 'package:sj_presensi_mobile/services/model/report_detail_page_model.dart';
+import 'package:sj_presensi_mobile/services/model/report_model.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
 class AddReportPage extends StatelessWidget {
   static const routeName = '/AddReportPage';

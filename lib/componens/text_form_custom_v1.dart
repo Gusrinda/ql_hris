@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
 class TextFormCustomV1 extends StatefulWidget {
-  final String titleText;
+  final String? titleText;
   final String hintText;
   final double? width, height;
   final EdgeInsetsGeometry? margin;
@@ -14,8 +16,7 @@ class TextFormCustomV1 extends StatefulWidget {
   final TextEditingController? controller;
   const TextFormCustomV1({
     Key? key,
-    required this.titleText,
-    required this.hintText,
+    this.titleText,
     this.width,
     this.height,
     this.margin,
@@ -25,6 +26,7 @@ class TextFormCustomV1 extends StatefulWidget {
     this.enable = true,
     this.validator,
     this.controller,
+    required this.hintText,
   }) : super(key: key);
 
   @override
@@ -50,33 +52,26 @@ class _TextFormCustomV1State extends State<TextFormCustomV1> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            widget.titleText,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-              color: MyColorsConst.primaryColor,
+            widget.titleText!,
+            style: GoogleFonts.poppins(
+              fontSize: 13.sp,
+              fontWeight: FontWeight.w600,
+              color: MyColorsConst.darkColor,
             ),
           ),
-          const SizedBox(height: 6),
+          SizedBox(height: 6.sp),
           Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(color: Color(0xFFDDDDDD)),
               color: MyColorsConst.whiteColor,
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-              boxShadow: [
-                BoxShadow(
-                  color: MyColorsConst.shadowColor,
-                  blurRadius: 2,
-                  offset: Offset(2, 2),
-                  spreadRadius: 1,
-                ),
-              ],
             ),
             child: TextFormField(
               controller: widget.controller,
               enabled: widget.enable,
               keyboardType: widget.keyboardType,
               obscureText: _isPasswordShowed,
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                 fontSize: widget.textSize,
                 color: widget.enable!
                     ? MyColorsConst.darkColor
@@ -85,7 +80,7 @@ class _TextFormCustomV1State extends State<TextFormCustomV1> {
               validator: widget.validator,
               decoration: InputDecoration(
                 hintText: widget.hintText,
-                hintStyle: TextStyle(
+                hintStyle: GoogleFonts.poppins(
                   fontSize: widget.textSize,
                   color: MyColorsConst.lightDarkColor,
                   fontWeight: FontWeight.w300,
@@ -100,12 +95,12 @@ class _TextFormCustomV1State extends State<TextFormCustomV1> {
                           });
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          padding: EdgeInsets.symmetric(horizontal: 8.sp),
                           child: Icon(
                             _isPasswordShowed
                                 ? Icons.visibility
                                 : Icons.visibility_off,
-                            color: MyColorsConst.darkColor,
+                            color: MyColorsConst.lightDarkColor,
                             size: 24,
                           ),
                         ),
@@ -115,17 +110,8 @@ class _TextFormCustomV1State extends State<TextFormCustomV1> {
                     ? const BoxConstraints(minWidth: 0, minHeight: 0)
                     : null,
                 contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 15),
+                    EdgeInsets.symmetric(horizontal: 12.sp, vertical: 15.sp),
                 border: InputBorder.none,
-                focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: MyColorsConst.primaryColor,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(12),
-                  ),
-                ),
                 filled: true,
                 fillColor: widget.enable! ? Colors.transparent : Colors.black12,
               ),

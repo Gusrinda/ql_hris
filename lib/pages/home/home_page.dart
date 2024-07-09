@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/check_in_out_page/home_check_in_out_page.dart';
-import 'package:ql_absensi_express_mobile/pages/home/cubit/home_cubit.dart';
-import 'package:ql_absensi_express_mobile/pages/home/history/bloc/history_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/history/history_page.dart';
-import 'package:ql_absensi_express_mobile/pages/home/profile/bloc/profile_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/profile/profile_page.dart';
-import 'package:ql_absensi_express_mobile/pages/home/report/bloc/reports_history_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/report/reports_history_page.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
+import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
+import 'package:sj_presensi_mobile/pages/dinas/list_dinas_bloc/list_dinas_bloc.dart';
+import 'package:sj_presensi_mobile/pages/dinas/dinas_page.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/check_in_out_page/home_check_in_out_page.dart';
+import 'package:sj_presensi_mobile/pages/home/cubit/home_cubit.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/profile/profile_page.dart';
+import 'package:sj_presensi_mobile/pages/lembur/lembur_bloc/list_lembur_bloc.dart';
+import 'package:sj_presensi_mobile/pages/lembur/lembur_page.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
 class HomePage extends StatelessWidget {
-  static const routeName = 'HomePage';
-  const HomePage({super.key});
+  // static const routeName = 'HomePage';
+
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,28 +26,46 @@ class HomePage extends StatelessWidget {
           BlocBuilder<HomeNavigationCubit, HomeNavigationState>(
         builder: (context, state) {
           return BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
             currentIndex: state.index,
-            showUnselectedLabels: false,
+            backgroundColor: MyColorsConst.whiteColor,
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
             selectedItemColor: MyColorsConst.primaryColor,
             unselectedItemColor: MyColorsConst.lightDarkColor,
+            selectedLabelStyle: GoogleFonts.poppins(
+              fontWeight: FontWeight.w500,
+              fontSize: 7,
+            ),
+            unselectedLabelStyle: GoogleFonts.poppins(
+              fontWeight: FontWeight.w500,
+              fontSize: 7,
+            ),
+            iconSize: 21,
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.home,
+                  Icons.assignment,
                 ),
-                label: "Home",
+                label: "Absensi",
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.history_edu_rounded,
+                  Icons.access_time_filled,
                 ),
-                label: "History",
+                label: "Lembur",
               ),
               BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.task_rounded,
+                  Icons.directions_car,
                 ),
-                label: "Report",
+                label: "Perjalanan Dinas",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.article,
+                ),
+                label: "Pengajuan Cuti",
               ),
               BottomNavigationBarItem(
                 icon: Icon(
@@ -59,12 +81,15 @@ class HomePage extends StatelessWidget {
                   provider.getNavBarItem(HomeNavBarItem.home);
                   break;
                 case 1:
-                  provider.getNavBarItem(HomeNavBarItem.history);
+                  provider.getNavBarItem(HomeNavBarItem.lembur);
                   break;
                 case 2:
-                  provider.getNavBarItem(HomeNavBarItem.reports);
+                  provider.getNavBarItem(HomeNavBarItem.dinas);
                   break;
                 case 3:
+                  provider.getNavBarItem(HomeNavBarItem.cuti);
+                  break;
+                case 4:
                   provider.getNavBarItem(HomeNavBarItem.profile);
                   break;
               }
@@ -73,41 +98,53 @@ class HomePage extends StatelessWidget {
         },
       ),
       body: BlocBuilder<HomeNavigationCubit, HomeNavigationState>(
-          builder: (context, state) {
-        if (state.navbarItem == HomeNavBarItem.home) {
-          return BlocProvider(
-            create: (context) =>
-                CheckInOutBloc()..add(AttendanceStateChecked()),
-            child: const HomeCheckInOutPage(),
-          );
-        } else if (state.navbarItem == HomeNavBarItem.history) {
-          return BlocProvider(
-            create: (context) => HistoryBloc()
-              ..add(
-                GetAttendancesHistory(
-                  date: DateTime.now(),
+        builder: (context, state) {
+          if (state.navbarItem == HomeNavBarItem.home) {
+            return BlocProvider(
+              create: (context) =>
+                  CheckInOutBloc()..add(AttendanceStateChecked()),
+              child: const HomeCheckInOutPage(),
+            );
+          }
+          else if (state.navbarItem == HomeNavBarItem.lembur) {
+            return BlocProvider(
+              create: (context) => ListLemburBloc()
+                ..add(
+                  GetListLembur(
+                    date: DateTime.now(),
+                  ),
                 ),
-              ),
-            child: const HistoryPage(),
-          );
-        } else if (state.navbarItem == HomeNavBarItem.reports) {
-          return BlocProvider(
-            create: (context) => ReportsHistoryBloc()
-              ..add(
-                GetReportsHistory(
-                  date: DateTime.now(),
+              child: LemburPage(),
+            );
+          } else if (state.navbarItem == HomeNavBarItem.dinas) {
+            return BlocProvider(
+              create: (context) => ListDinasBloc()
+               ..add(
+                  GetListDinas(
+                    date: DateTime.now(),
+                  ),
                 ),
-              ),
-            child: ReportsHistoryPage(),
-          );
-        } else if (state.navbarItem == HomeNavBarItem.profile) {
-          return BlocProvider(
-            create: (context) => ProfileBloc()..add(GetDataProfile()),
-            child: ProfilePage(),
-          );
-        }
-        return Container();
-      }),
+              child: DinasPage(),
+            );
+          } else if (state.navbarItem == HomeNavBarItem.cuti) {
+            return BlocProvider(
+              create: (context) => ListCutiBloc()
+                ..add(
+                  GetListCuti(
+                    date: DateTime.now(),
+                  ),
+                ),
+              child: CutiPage(),
+            );
+          } else if (state.navbarItem == HomeNavBarItem.profile) {
+            return BlocProvider(
+              create: (context) => ProfileBloc()..add(GetDataProfile()),
+              child: ProfilePage(),
+            );
+          }
+          return Container();
+        },
+      ),
     );
   }
 }

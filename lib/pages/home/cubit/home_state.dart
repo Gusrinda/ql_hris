@@ -1,6 +1,6 @@
 part of 'home_cubit.dart';
 
-enum HomeNavBarItem { home, history, reports, profile }
+enum HomeNavBarItem { home, lembur, dinas, cuti, profile }
 
 abstract class HomeNavBarState extends Equatable {
   @override

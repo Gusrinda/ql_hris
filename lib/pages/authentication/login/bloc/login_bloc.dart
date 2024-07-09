@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:ql_absensi_express_mobile/services/auth_services.dart';
-import 'package:ql_absensi_express_mobile/utils/services.dart';
-import 'package:ql_absensi_express_mobile/utils/shared_pref.dart';
+import 'package:sj_presensi_mobile/services/auth_services.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
+import 'package:sj_presensi_mobile/utils/shared_pref.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -14,13 +14,31 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       (event, emit) async {
         if (event.status) {
           emit(LoginLoading());
-          var res = await AuthServices.login(event.email, event.password);
+          print("Status: ${event.status}");
+          print("Username: ${event.username}, Password: ${event.password}");
+          var res = await AuthServices.login(event.username, event.password);
           if (res is ServicesSuccess) {
-            await GeneralSharedPreferences.saveUserToken(res.response["token"]);
+            try {
+              await GeneralSharedPreferences.saveUserToken(
+                res.response["token"].toString(),
+                res.response['data']['id'],
+                res.response['data']['m_comp_id'] ?? 1,
+                res.response['data']['m_dir_id'] ?? 9,
+                res.response['data']['m_kary_id'] ?? 1,
+              );
+              print("Token: ${res.response['data']['m_comp_id']}");
+              print("Token: ${res.response['data']['m_dir_id']}");
+              print("Token: ${res.response['data']['m_kary_id']}");
+              print("Token: ${res.response["token"]}");
+              // print("Res: ${res.response}");
+            } catch (e) {
+              print("An error occurred: $e");
+            }
             emit(LoginSuccess(message: "Login berhasil!"));
           } else if (res is ServicesFailure) {
             emit(LoginFailed(
-                message: "Login failed! ${res.errorResponse?? ''}"));
+                // message: "Login failed! ${res.errorResponse ?? ''}"));
+                message: "Login Gagal! \nAkun tidak ditemukan"));
           }
         }
       },
@@ -37,7 +55,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           } else if (res is ServicesFailure) {
             await GeneralSharedPreferences.removeUserToken();
             emit(LoginFailed(
-                message: "Login failed! ${res.errorResponse?? 'Token expired'}"));
+                message:
+                    "Login failed! ${res.errorResponse ?? 'Token expired'}"));
           }
         } else if (resToken is ServicesFailure) {
           emit(LoginFailedInBackground());

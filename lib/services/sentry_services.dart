@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:ql_absensi_express_mobile/utils/const.dart';
-import 'package:ql_absensi_express_mobile/utils/services.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
 
 class SentryServices {
   static Future<Object> addSentry(platform, exception, st) async {

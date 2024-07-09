@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:ql_absensi_express_mobile/utils/const.dart';
-import 'package:ql_absensi_express_mobile/utils/services.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
 
 class AuthServices {
   static Future<Object> register(email, password, name) async {
@@ -17,15 +17,15 @@ class AuthServices {
     );
   }
 
-  static Future<Object> login(email, password) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/auth/login");
+  static Future<Object> login(username, password) async {
+    var url = Uri.parse("${MyGeneralConst.API_URL}/login");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.post,
       body: json.encode(
         {
-          "inputEmail": email,
-          "inputPassword": password,
+          "username": username,
+          "password": password,
         },
       ),
     );
@@ -45,21 +45,26 @@ class AuthServices {
   }
 
   static Future<Object> logout(String token) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/auth/logout");
+    var url = Uri.parse("${MyGeneralConst.API_URL}/logout");
     return await GeneralServices.baseService(
       url: url,
-      method: GeneralServicesMethod.delete,
-      headers: GeneralServices.addToken2Headers(token),
+      method: GeneralServicesMethod.post,
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
   static Future<Object> checkTokenAvailable(String token) async {
-    var url = Uri.parse("${MyGeneralConst.API_URL}/user/get-profile");
-    // var url = Uri.https(MyGeneralConst.API_URL, "user/get-profile");
+    var url = Uri.parse("${MyGeneralConst.API_URL}/me");
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 }

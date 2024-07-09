@@ -7,6 +7,8 @@ abstract class LocationAcioEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class FetchLocationAcio extends LocationAcioEvent {}
+
 class StartLocationTrackingLocationAcio extends LocationAcioEvent {}
 
 class GetLastLocationTrackingLocationAcio extends LocationAcioEvent {}

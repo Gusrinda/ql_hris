@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:ql_absensi_express_mobile/utils/const.dart';
-import 'package:ql_absensi_express_mobile/utils/services.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/utils/services.dart';
 
 class ReportsServices {
   static Future<Object> getReportState(String token) async {
@@ -9,7 +9,10 @@ class ReportsServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -19,7 +22,10 @@ class ReportsServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.post,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
       body: json.encode({
         "inputPastTask": pastTask,
         "inputNextTask": nextTask,
@@ -34,7 +40,10 @@ class ReportsServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 
@@ -44,7 +53,10 @@ class ReportsServices {
     return await GeneralServices.baseService(
       url: url,
       method: GeneralServicesMethod.get,
-      headers: GeneralServices.addToken2Headers(token),
+      headers: GeneralServices.addToken2Headers(
+        token: token,
+        isServiceNoMobile: false,
+      ),
     );
   }
 }

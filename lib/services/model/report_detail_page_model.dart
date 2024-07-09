@@ -1,5 +1,4 @@
-import 'package:intl/intl.dart';
-import 'package:ql_absensi_express_mobile/services/model/report_model.dart';
+import 'package:sj_presensi_mobile/services/model/report_model.dart';
 
 class ReportDetailPageModel {
   String? title;

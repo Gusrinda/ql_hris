@@ -1,11 +1,15 @@
 import 'dart:io';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:ql_absensi_express_mobile/sentry/my_sentry.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/componens/camera_view.dart';
+import 'package:sj_presensi_mobile/main.dart';
+import 'package:sj_presensi_mobile/sentry/my_sentry.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
 class ImageFormCustomV1 extends StatefulWidget {
   Function(String? filePath) onImageSelected;
@@ -28,87 +32,103 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV1> {
     final size = MediaQuery.of(context).size;
     return InkWell(
       onTap: imageFile == null ? () => _pickImage(ImageSource.camera) : null,
-      child: Container(
-        width: double.infinity,
-        height: size.width * 3 / 6,
-        alignment: Alignment.center,
-        decoration: const BoxDecoration(
-          color: MyColorsConst.lightDarkColor,
-          borderRadius: BorderRadius.all(
-            Radius.circular(10),
-          ),
-        ),
-        child: Stack(
-          fit: StackFit.expand,
+      // onTap: imageFile == null
+      //     ? () async {
+      //         final firstCamera = cameras[1];
+
+      //         Navigator.push(
+      //           context,
+      //           MaterialPageRoute(
+      //               builder: (context) => CameraCapturePage(
+      //                     camera: firstCamera,
+      //                   )),
+      //         );
+      //       }
+      //     : null,
+      child: AspectRatio(
+        aspectRatio: 1,
+        child: Container(
+          width: double.infinity,
+          // height: size.width,
           alignment: Alignment.center,
-          children: [
-            SizedBox(
-              width: double.infinity,
-              height: double.infinity,
-              child: imageFile != null
-                  ? ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.file(
-                        imageFile!,
-                        fit: BoxFit.fitWidth,
-                      ),
-                    )
-                  : Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
-                          Icons.photo_camera,
-                          color: MyColorsConst.semiDarkColor,
-                          size: 45,
-                        ),
-                        SizedBox(height: 6),
-                        Text(
-                          "Ketuk untuk ambil gambar",
-                          style: TextStyle(
-                            color: MyColorsConst.darkColor,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
+          decoration: const BoxDecoration(
+            color: MyColorsConst.shadowColor,
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
             ),
-            Visibility(
-              visible: imageFile != null,
-              child: Positioned(
-                bottom: 8,
-                left: 8,
-                child: InkWell(
-                  onTap: () => _pickImage(ImageSource.camera),
-                  child: Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      color: MyColorsConst.redColor,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: const [
-                        Icon(
-                          Icons.replay,
-                          size: 15,
-                          color: MyColorsConst.whiteColor,
+          ),
+          child: Stack(
+            fit: StackFit.expand,
+            alignment: Alignment.center,
+            children: [
+              SizedBox(
+                width: double.infinity,
+                height: double.infinity,
+                child: imageFile != null
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          imageFile!,
+                          fit: BoxFit.fitWidth,
                         ),
-                        SizedBox(width: 6),
-                        Text(
-                          "Ambil Ulang",
-                          style: TextStyle(
-                            color: MyColorsConst.whiteColor,
-                            fontSize: 12,
+                      )
+                    : Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.camera_alt,
+                            color: MyColorsConst.semiDarkColor,
+                            size: 45,
                           ),
-                        ),
-                      ],
+                          SizedBox(height: 6),
+                          Text(
+                            "Ketuk untuk ambil gambar",
+                            style: GoogleFonts.poppins(
+                              color: MyColorsConst.darkColor,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+              ),
+              Visibility(
+                visible: imageFile != null,
+                child: Positioned(
+                  bottom: 8,
+                  left: 8,
+                  child: InkWell(
+                    onTap: () => _pickImage(ImageSource.camera),
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: MyColorsConst.redColor,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.replay,
+                            size: 15,
+                            color: MyColorsConst.whiteColor,
+                          ),
+                          SizedBox(width: 6),
+                          Text(
+                            "Ambil Ulang",
+                            style: GoogleFonts.poppins(
+                              color: MyColorsConst.whiteColor,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -138,8 +158,18 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV1> {
     try {
       var status = await Permission.camera.request();
       if (status.isGranted) {
-        final image = await ImagePicker().pickImage(
-            source: source, preferredCameraDevice: CameraDevice.front);
+        // final image = await ImagePicker().pickImage(
+        //     source: source, preferredCameraDevice: CameraDevice.front);
+
+        final firstCamera = cameras[1];
+
+        final image = await Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => CameraCapturePage(
+                      camera: firstCamera,
+                    )));
+
         if (image != null) {
           final imageComp = await testCompressAndGetFile(
               File(image.path), _addStringComp(image.path, image.name));
@@ -147,9 +177,10 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV1> {
             imageFile = File(imageComp!.path);
             widget.onImageSelected(imageFile?.path);
           });
+          print("ImageFile: ${imageFile}");
         } else {
           setState(() {
-            widget.onImageSelectedError("Failed to take a picture!");
+            widget.onImageSelectedError("Gagal untuk mengambil gambar!");
           });
         }
       } else {

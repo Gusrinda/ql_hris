@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
-import 'package:ql_absensi_express_mobile/componens/datepicker_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/componens/dialog_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/componens/loading_dialog_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/componens/sortby_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/pages/authentication/login/login_page.dart';
-import 'package:ql_absensi_express_mobile/pages/home/report/add/add_report_page.dart';
-import 'package:ql_absensi_express_mobile/pages/home/report/bloc/reports_history_bloc.dart';
-import 'package:ql_absensi_express_mobile/pages/home/report/report_detail_page.dart';
-import 'package:ql_absensi_express_mobile/services/model/report_detail_page_model.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/componens/datepicker_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/sortby_custom_v1.dart';
+import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/home/report/add/add_report_page.dart';
+import 'package:sj_presensi_mobile/pages/home/report/bloc/reports_history_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/report/report_detail_page.dart';
+import 'package:sj_presensi_mobile/services/model/report_detail_page_model.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
 class ReportsHistoryPage extends StatelessWidget {
   const ReportsHistoryPage({super.key});
@@ -104,9 +105,9 @@ class ReportsHistoryPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   "Periode",
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                     color: MyColorsConst.primaryColor,
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
@@ -117,9 +118,9 @@ class ReportsHistoryPage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       "Tanggal",
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         color: MyColorsConst.darkColor,
                         fontSize: 12,
                         fontWeight: FontWeight.normal,
@@ -140,9 +141,9 @@ class ReportsHistoryPage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       "Sort By ",
-                      style: TextStyle(
+                      style: GoogleFonts.poppins(
                         color: MyColorsConst.darkColor,
                         fontSize: 12,
                         fontWeight: FontWeight.normal,
@@ -159,9 +160,9 @@ class ReportsHistoryPage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 12),
-                const Text(
+                Text(
                   "Rekam Laporan",
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                     color: MyColorsConst.primaryColor,
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
@@ -201,9 +202,9 @@ class ReportsHistoryPage extends StatelessWidget {
                                     height: size.width * 1 / 2,
                                   ),
                                   const SizedBox(height: 8),
-                                  const Text(
+                                  Text(
                                     "Tidak ada data yang ditampilkan!",
-                                    style: TextStyle(
+                                    style: GoogleFonts.poppins(
                                       color: MyColorsConst.darkColor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
@@ -284,7 +285,7 @@ class ReportsHistoryPage extends StatelessWidget {
           ),
           title: Text(
             DateFormat('EEEE, dd-MM-yyyy', 'id_ID').format(date),
-            style: const TextStyle(
+            style: GoogleFonts.poppins(
               fontSize: 14,
               fontWeight: FontWeight.bold,
               fontStyle: FontStyle.italic,

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
 class DatePickerCustomV1 extends StatefulWidget {
   Function(DateTime? date) onDateSelected;
@@ -35,16 +36,16 @@ class _DatePickerCustomV1State extends State<DatePickerCustomV1> {
             selectedMonthTextColor: MyColorsConst.whiteColor,
             unselectedMonthTextColor: Colors.green,
             roundedCornersRadius: 12,
-            confirmWidget: const Text(
+            confirmWidget: Text(
               'Confirm',
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                 fontWeight: FontWeight.bold,
                 color: MyColorsConst.primaryColor,
               ),
             ),
-            cancelWidget: const Text(
+            cancelWidget: Text(
               'Cancel',
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                 fontWeight: FontWeight.bold,
                 color: MyColorsConst.primaryColor,
               ),
@@ -79,7 +80,7 @@ class _DatePickerCustomV1State extends State<DatePickerCustomV1> {
               selectedDate != null
                   ? DateFormat('MMMM y').format(selectedDate!)
                   : DateFormat('MMMM y').format(DateTime.now()),
-              style: const TextStyle(
+              style: GoogleFonts.poppins(
                 color: MyColorsConst.primaryColor,
                 fontWeight: FontWeight.normal,
                 fontSize: 12,

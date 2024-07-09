@@ -1,30 +1,150 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:lottie/lottie.dart';
-import 'package:month_picker_dialog/month_picker_dialog.dart';
-import 'package:ql_absensi_express_mobile/componens/datepicker_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/componens/dialog_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/componens/loading_dialog_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/componens/sortby_custom_v1.dart';
-import 'package:ql_absensi_express_mobile/pages/authentication/login/login_page.dart';
-import 'package:ql_absensi_express_mobile/pages/home/history/bloc/history_bloc.dart';
-import 'package:ql_absensi_express_mobile/services/model/attendances_model.dart';
-import 'package:ql_absensi_express_mobile/utils/const.dart';
+import 'package:sj_presensi_mobile/componens/HRIS/monthYearPicker_custom.dart';
+import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
+import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dart';
+import 'package:sj_presensi_mobile/services/model/history_attendance_model.dart';
+import 'package:sj_presensi_mobile/utils/const.dart';
 
-class HistoryPage extends StatelessWidget {
-  // static const routeName = 'HistoryPage';
+final Map<String, dynamic> stateDict = {
+  "ATTEND NO CHECKOU": {
+    "name": "Hadir Tidak Check-Out",
+  },
+  "WORKING": {
+    "name": "Belum Check-Out",
+  },
+  "ATTEND": {
+    "name": "Hadir",
+  },
+  "NOT ATTEND": {
+    "name": "Tidak Hadir",
+  },
+  "CUTI": {
+    "name": "Cuti",
+  },
+  "CUTI BERSAMA": {
+    "name": "Cuti Bersama",
+  },
+  "HARI LIBUR": {
+    "name": "Hari Libur",
+  },
+};
+
+final Map<String, dynamic> stateDictType = {
+  "Hari Kerja": {
+    "name": "Hari Kerja",
+  },
+  "Hari Libur": {
+    "name": "Hari Libur",
+  },
+  "Cuti Bersama": {
+    "name": "Cuti Bersama",
+  },
+};
+
+class HistoryPage extends StatefulWidget {
+  static const routeName = '/HistoryPage';
   const HistoryPage({super.key});
+
+  @override
+  State<HistoryPage> createState() => _HistoryPageState();
+}
+
+class _HistoryPageState extends State<HistoryPage> {
+  String formatDate(String date) {
+    if (date == null || date.isEmpty) {
+      return "";
+    }
+
+    try {
+      DateTime dateTime = DateFormat("dd-MM-yyyy").parse(date);
+      String formattedDate =
+          DateFormat("EEEE, dd MMMM yyyy", "id").format(dateTime);
+      return formattedDate;
+    } catch (e) {
+      print("Error parsing date: $e");
+      return "";
+    }
+  }
+
+  String mapStatusToString(String status) {
+    if (stateDict.containsKey(status)) {
+      return stateDict[status]['name'];
+    } else {
+      return 'Tidak Diketahui';
+    }
+  }
+
+  Color getColorFromStatus(String status) {
+    if (stateDict.containsKey(status)) {
+      switch (status) {
+        case "WORKING":
+          return const Color(0xFF0068D4);
+        case "NOT ATTEND":
+          return const Color(0xFFED1B24);
+        case "ATTEND NO CHECKOUT":
+          return Colors.green.shade700;
+        case "ATTEND":
+          return const Color(0xFF0CA356);
+        case "CUTI":
+          return const Color(0xFFED1B24);
+        case "CUTI BERSAMA":
+          return Colors.deepOrange.shade700;
+        case "HARI LIBUR":
+          return Colors.purple.shade800;
+        default:
+          return Colors.black87; // warna default
+      }
+    } else {
+      return Colors.grey; // warna default
+    }
+  }
+
+  String mapTypeToString(String status) {
+    if (stateDictType.containsKey(status)) {
+      return stateDictType[status]['name'];
+    } else {
+      return 'Tidak Diketahui';
+    }
+  }
+
+  Color getColorFromType(String type) {
+    if (stateDictType.containsKey(type)) {
+      switch (type) {
+        case "Hari Kerja":
+          return const Color(0xFF0CA356);
+        case "Hari Libur":
+          return const Color(0xFFED1B24);
+        case "Cuti Bersama":
+          return const Color(0xFF0068D4);
+        default:
+          return Colors.black87; // warna default
+      }
+    } else {
+      return Colors.grey; // warna default
+    }
+  }
+
+  DateTime? selectedMonth;
+  DateTime? selectedYear;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return BlocListener<HistoryBloc, HistoryState>(
+
+    return BlocListener<HistoryAttendanceBloc, HistoryAttendanceState>(
       listener: (context, state) async {
-        if (state is HistoryLoading) {
+        // print("LISTEN STATUS SEKARANG ${state}");
+
+        if (state is HistoryAttendanceLoading) {
           LoadingDialog.showLoadingDialog(context);
-        } else if (state is HistoryFailed) {
+        } else if (state is HistoryAttendanceFailed) {
           LoadingDialog.dismissDialog(context);
           await showDialog(
             context: context,
@@ -52,307 +172,478 @@ class HistoryPage extends StatelessWidget {
           LoadingDialog.dismissDialog(context);
         }
       },
-      child: SafeArea(
-        child: Scaffold(
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "Periode",
-                  style: TextStyle(
-                    color: MyColorsConst.primaryColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Tanggal",
-                      style: TextStyle(
-                        color: MyColorsConst.darkColor,
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    DatePickerCustomV1(
-                      onDateSelected: (date) => context.read<HistoryBloc>().add(
-                            GetAttendancesHistory(
-                              date: date ?? DateTime.now(),
-                            ),
-                          ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Sort By ",
-                      style: TextStyle(
-                        color: MyColorsConst.darkColor,
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    SortByCustomV1(
-                      onTap: (sortState) => context.read<HistoryBloc>().add(
-                            SortByDateAttendancesHistory(
-                              sortState: sortState ?? false,
-                            ),
-                          ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                const Text(
-                  "Rekam Presensi",
-                  style: TextStyle(
-                    color: MyColorsConst.primaryColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Expanded(
-                  child: BlocBuilder<HistoryBloc, HistoryState>(
-                    builder: (context, state) {
-                      var attendances = context.read<HistoryBloc>().attendances;
-                      return attendances.isNotEmpty
-                          ? ListView.builder(
-                              itemCount: attendances.length,
-                              itemBuilder: (context, index) {
-                                var data = attendances
-                                    .elementAt(index)
-                                    .attendancesDetails;
-                                return buildCard(
-                                  key:
-                                      Key("${attendances.elementAt(index).id}"),
-                                  date: attendances.elementAt(index).date,
-                                  state: attendances.elementAt(index).status,
-                                  dataCheckIn: data!.isNotEmpty
-                                      ? data.elementAt(0)
-                                      : null,
-                                  dataCheckOut: data.length > 1
-                                      ? data.elementAt(1)
-                                      : null,
-                                );
-                              },
-                            )
-                          : Center(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Lottie.asset(
-                                    "assets/lotties/json/lottie_nodata.json",
-                                    height: size.width * 1 / 2,
-                                  ),
-                                  const SizedBox(height: 8),
-                                  const Text(
-                                    "Tidak ada data yang ditampilkan!",
-                                    style: TextStyle(
-                                      color: MyColorsConst.darkColor,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                    },
-                  ),
-                ),
+      child: Scaffold(
+        // appBar: appBarCustomV1(
+        //   title: "History Presensi",
+        //   padLeft: 8,
+        // ),
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                MyColorsConst.primaryDarkColor,
+                MyColorsConst.primaryColor,
               ],
+              stops: [0.0, 0.1],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Container buildCard({
-    required Key key,
-    required date,
-    required state,
-    AttendanceDetailModel? dataCheckIn,
-    AttendanceDetailModel? dataCheckOut,
-  }) {
-    var stateDict = {
-      "attend_no_checkout": {
-        "name": "Tidak Check Out",
-        "mainColor": MyColorsConst.primaryColor,
-        "subColor": MyColorsConst.primaryLight2Color,
-      },
-      "attend": {
-        "name": "Hadir",
-        "mainColor": MyColorsConst.primaryColor,
-        "subColor": MyColorsConst.primaryLight2Color,
-      },
-      "working": {
-        "name": "Bekerja",
-        "mainColor": MyColorsConst.primaryColor,
-        "subColor": MyColorsConst.primaryLight2Color,
-      },
-      "absent": {
-        "name": "Tidak Hadir",
-        "mainColor": MyColorsConst.redColor,
-        "subColor": MyColorsConst.lightRedColor,
-      },
-      "day_off": {
-        "name": "Libur",
-        "mainColor": MyColorsConst.darkColor,
-        "subColor": MyColorsConst.lightDarkColor,
-      },
-    };
-    return Container(
-      key: key,
-      margin: const EdgeInsets.only(bottom: 8),
-      child: ListTileTheme(
-        dense: true,
-        child: ExpansionTile(
-          collapsedBackgroundColor: stateDict[state]!["mainColor"] as Color,
-          collapsedTextColor: MyColorsConst.whiteColor,
-          collapsedIconColor: MyColorsConst.whiteColor,
-          backgroundColor: stateDict[state]!["mainColor"] as Color,
-          textColor: MyColorsConst.whiteColor,
-          iconColor: MyColorsConst.whiteColor,
-          title: SizedBox(
-            width: double.infinity,
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  DateFormat('EEEE, dd-MM-yyyy', 'id_ID').format(date),
-                  style: const TextStyle(fontSize: 14),
-                ),
-                Text(
-                  stateDict[state]!["name"] as String,
-                  style: const TextStyle(fontSize: 14),
-                ),
-              ],
-            ),
-          ),
-          children: <Widget>[
-            Container(
-              width: double.infinity,
-              color: stateDict[state]!["subColor"] as Color,
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  buildSubCard(
-                    checkIn: true,
-                    url: dataCheckIn?.imagePath,
-                    datetime: dataCheckIn?.time,
-                    onSite: dataCheckIn?.onSite,
-                  ),
-                  buildSubCard(
-                    checkIn: false,
-                    url: dataCheckOut?.imagePath,
-                    datetime: dataCheckOut?.time,
-                    onSite: dataCheckOut?.onSite,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Padding buildSubCard({
-    String? url,
-    DateTime? datetime,
-    bool? onSite,
-    checkIn = true,
-  }) {
-    var errImage = Builder(builder: (context) {
-      final size = MediaQuery.of(context).size;
-      return Container(
-        width: size.width * 1 / 6,
-        height: size.width * 1 / 6,
-        decoration: const BoxDecoration(
-          color: MyColorsConst.lightDarkColor,
-          shape: BoxShape.circle,
-        ),
-        child: Icon(
-          Icons.close,
-          size: size.width * 1 / 6,
-          color: MyColorsConst.semiDarkColor,
-        ),
-      );
-    });
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            checkIn ? "Check In" : "Check Out",
-            style: TextStyle(
-              fontSize: 14,
-              color:
-                  checkIn ? MyColorsConst.greenColor : MyColorsConst.redColor,
-            ),
-          ),
-          const SizedBox(height: 6),
-          url != null
-              ? CachedNetworkImage(
-                  imageUrl: url,
-                  imageBuilder: (context, imageProvider) {
-                    final size = MediaQuery.of(context).size;
-                    return Container(
-                      width: size.width * 1 / 6,
-                      height: size.width * 1 / 6,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
+          child: Column(
+            children: [
+              SizedBox(height: 40.sp),
+              Container(
+                padding: EdgeInsets.only(left: 5.0.sp),
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_back_ios_rounded,
+                        size: 18,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      width: size.width * 1 / 5,
+                    ),
+                    Expanded(
+                      child: Text(
+                        "Riwayat Presensi",
+                        style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
                         ),
-                        shape: BoxShape.circle,
                       ),
-                    );
-                  },
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => errImage,
-                )
-              : errImage,
-          const SizedBox(height: 6),
-          Text(
-            datetime != null ? DateFormat('HH:mm:ss').format(datetime) : "-",
-            style: TextStyle(
-              fontSize: 14,
-              color:
-                  checkIn ? MyColorsConst.greenColor : MyColorsConst.redColor,
-            ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                    color: Colors.white,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Bulan",
+                                  style: GoogleFonts.poppins(
+                                    color: MyColorsConst.darkColor,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                                MonthPicker(
+                                  onTap: (DateTime? months, DateTime? years) {
+                                    if (months != null) {
+                                      setState(() {
+                                        selectedMonth = months;
+                                      });
+                                      print(
+                                          "ini bulan terpilih ${selectedMonth} ${selectedYear}");
+                                      DateTime newDate;
+                                      if (selectedYear != null) {
+                                        newDate = DateTime(
+                                            selectedYear!.year,
+                                            selectedMonth!.month,
+                                            DateTime.now().day);
+                                      } else {
+                                        newDate = DateTime(
+                                            DateTime.now().year,
+                                            selectedMonth!.month,
+                                            DateTime.now().day);
+                                      }
+
+                                      context.read<HistoryAttendanceBloc>().add(
+                                            GetAttendancesHistory(
+                                              date: newDate,
+                                            ),
+                                          );
+                                    }
+                                  },
+                                  selectedYear: selectedYear,
+                                ),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Tahun",
+                                  style: GoogleFonts.poppins(
+                                    color: MyColorsConst.darkColor,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                                YearPickerCustom(
+                                  onTap: (DateTime? years, DateTime? months) {
+                                    if (years != null) {
+                                      setState(() {
+                                        selectedYear = years;
+                                      });
+                                      print(
+                                          "ini tahun yang dipilih ${selectedYear} ${selectedMonth}");
+
+                                      DateTime newDate;
+                                      if (selectedMonth != null) {
+                                        newDate = DateTime(selectedYear!.year,
+                                            selectedMonth!.month);
+                                      } else {
+                                        newDate = DateTime(selectedYear!.year,
+                                            DateTime.now().month);
+                                      }
+
+                                      context.read<HistoryAttendanceBloc>().add(
+                                            GetAttendancesHistory(
+                                              date: newDate,
+                                            ),
+                                          );
+                                    }
+                                  },
+                                  selectedMonth: selectedMonth,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10.sp,
+                      ),
+                      Expanded(
+                        child: BlocBuilder<HistoryAttendanceBloc,
+                            HistoryAttendanceState>(
+                          builder: (context, state) {
+                            // Aku butuh data attendance
+                            // Data attendace didapat dari BLOC historyAttendance
+                            List<DataPresensi>? attendances = context
+                                .read<HistoryAttendanceBloc>()
+                                .attendances;
+
+                            debugPrint("ATTENDANCE ? ${attendances}");
+
+                            return attendances.isNotEmpty
+                                ? ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: attendances.length,
+                                    itemBuilder: (context, index) {
+                                      DataPresensi? data = attendances[index];
+                                      String currentStatus =
+                                          data.status as String;
+                                      Color currentColor =
+                                          getColorFromStatus(currentStatus);
+                                      Color currentColorFromType =
+                                          getColorFromType(
+                                              data.type.toString());
+                                      return Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 20.sp),
+                                        child: ListTile(
+                                          contentPadding: EdgeInsets.zero,
+                                          subtitle: GestureDetector(
+                                            child: Stack(
+                                              children: [
+                                                Container(
+                                                  margin: const EdgeInsets.only(
+                                                      bottom: 7),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            7),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: MyColorsConst
+                                                            .darkColor
+                                                            .withOpacity(0.2),
+                                                        offset: Offset(2, 3.5),
+                                                        blurRadius: 7,
+                                                      ),
+                                                    ],
+                                                    color: MyColorsConst
+                                                        .whiteColor,
+                                                  ),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 10.sp,
+                                                      vertical: 10.sp),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                                horizontal: 7,
+                                                                vertical: 2),
+                                                        decoration: BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        3),
+                                                            color:
+                                                                currentColorFromType
+                                                                    .withOpacity(
+                                                                        0.15)),
+                                                        child: Text(
+                                                          data.type ?? '-',
+                                                          style: GoogleFonts.poppins(
+                                                              color:
+                                                                  currentColorFromType,
+                                                              fontSize: 10.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
+                                                        ),
+                                                      ),
+                                                      SizedBox(height: 7.sp),
+                                                      Text(
+                                                        formatDate(
+                                                            data.dateToIdn ??
+                                                                ''),
+                                                        style: GoogleFonts.poppins(
+                                                            color: MyColorsConst
+                                                                .darkColor,
+                                                            fontSize: 14.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w600),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 10.sp,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Expanded(
+                                                            flex: 2,
+                                                            child: Row(
+                                                              children: [
+                                                                Text(
+                                                                  'In  ',
+                                                                  style: GoogleFonts
+                                                                      .poppins(
+                                                                    fontSize:
+                                                                        12.sp,
+                                                                    color: Colors
+                                                                        .grey,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  data.checkinTime ??
+                                                                      "-",
+                                                                  style: GoogleFonts
+                                                                      .poppins(
+                                                                    fontSize:
+                                                                        12.sp,
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            flex: 4,
+                                                            child: Row(
+                                                              children: [
+                                                                Text(
+                                                                  'Out  ',
+                                                                  style: GoogleFonts
+                                                                      .poppins(
+                                                                    fontSize:
+                                                                        12.sp,
+                                                                    color: Colors
+                                                                        .grey,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  data.checkoutTime ??
+                                                                      "-",
+                                                                  style: GoogleFonts
+                                                                      .poppins(
+                                                                    fontSize:
+                                                                        12,
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+
+                                                      // Text.rich(
+                                                      //   TextSpan(
+                                                      //     text: 'out ',
+                                                      //     style: GoogleFonts
+                                                      //         .poppins(
+                                                      //       fontSize: 12,
+                                                      //       color: Color(
+                                                      //           0XFF8F8F8F),
+                                                      //       fontWeight:
+                                                      //           FontWeight.w400,
+                                                      //     ),
+                                                      //     children: <TextSpan>[
+                                                      //       TextSpan(
+                                                      //         text: data
+                                                      //                     .checkoutTime !=
+                                                      //                 null
+                                                      //             ? "${data.checkoutTime}"
+                                                      //             : "-",
+                                                      //         style: GoogleFonts
+                                                      //             .poppins(
+                                                      //           fontSize: 12,
+                                                      //           color: Color(
+                                                      //               0XFF8F8F8F),
+                                                      //           fontWeight:
+                                                      //               FontWeight
+                                                      //                   .w700,
+                                                      //         ),
+                                                      //       ),
+                                                      //     ],
+                                                      //   ),
+                                                      // ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  top: 0,
+                                                  right: 0,
+                                                  child: Container(
+                                                    height: 30,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 10.sp,
+                                                            vertical: 3.sp),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topRight:
+                                                            Radius.circular(
+                                                                7.sp),
+                                                        bottomLeft:
+                                                            Radius.circular(
+                                                                7.sp),
+                                                      ),
+                                                      color: currentColor,
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        mapStatusToString(
+                                                            currentStatus),
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          color: Colors.white,
+                                                          fontSize: 10.sp,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        DetailHistoryAbsensiPage(
+                                                      data: data,
+                                                      status: data.status,
+                                                      checkinFoto:
+                                                          data.checkinFoto,
+                                                      checkoutFoto:
+                                                          data.checkoutFoto,
+                                                      checkinTime:
+                                                          data.checkinTime,
+                                                      checkoutTime:
+                                                          data.checkoutTime,
+                                                      tanggal: data.tanggal
+                                                          .toString(),
+                                                      checkoutAddress:
+                                                          data.checkoutAddress,
+                                                      checkinAddress:
+                                                          data.checkinAddress,
+                                                      checkinOnScope:
+                                                          data.checkinOnScope,
+                                                      checkoutOnScope:
+                                                          data.checkoutOnScope,
+                                                    ),
+                                                  ));
+                                            },
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  )
+                                : Center(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          "assets/images/box_nodata.png",
+                                          height: size.width * 1 / 2,
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          "Tidak ada data yang ditampilkan!",
+                                          style: GoogleFonts.poppins(
+                                            color: MyColorsConst.darkColor,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 6),
-          Text(
-            onSite != null
-                ? onSite
-                    ? "On Scope"
-                    : "Out Scope"
-                : "-",
-            style: TextStyle(
-              fontSize: 14,
-              color:
-                  checkIn ? MyColorsConst.greenColor : MyColorsConst.redColor,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
