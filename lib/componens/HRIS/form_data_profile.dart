@@ -252,22 +252,22 @@ class FormCatatanData extends StatelessWidget {
 }
 
 class FormInputData extends StatelessWidget {
-  const FormInputData(
-      {Key? key,
-      this.enabled = true,
-      this.input = "",
-      this.onTap,
-      required this.controller,
-      required this.validator,
-      this.errorTextStyle,
-      required this.labelForm,
-      required this.labelTag,
-      required this.formTag,
-      required this.hintText,
-      this.showRedStar = true,
-      this.inputType = TextInputType.text,
-      this.onChanged})
-      : super(key: key);
+  const FormInputData({
+    Key? key,
+    this.enabled = true,
+    this.input = "",
+    this.onTap,
+    required this.controller,
+    required this.validator,
+    this.errorTextStyle,
+    required this.labelForm,
+    required this.labelTag,
+    required this.formTag,
+    required this.hintText,
+    this.showRedStar = true,
+    this.inputType = TextInputType.text,
+    this.onChanged,
+  }) : super(key: key);
 
   final ValueChanged<String?>? onChanged;
   final bool enabled;
@@ -880,8 +880,9 @@ class FormDateData extends StatelessWidget {
 
               // ),
               child: TextFormField(
-                readOnly: true,
+                readOnly: !enabled,
                 onTap: onTap,
+                enabled: enabled,
                 controller: valueController,
                 style: GoogleFonts.poppins(
                     fontSize: 13.sp,
@@ -892,24 +893,27 @@ class FormDateData extends StatelessWidget {
                   contentPadding: EdgeInsets.all(18.sp),
                   fillColor: Colors.transparent,
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                           width: 1.5, color: MyColorsConst.formBorderColor),
                       borderRadius: BorderRadius.circular(10)),
                   border: OutlineInputBorder(
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                           width: 1.5, color: MyColorsConst.formBorderColor),
                       borderRadius: BorderRadius.circular(10)),
                   focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                          width: 1.5, color: MyColorsConst.primaryColor),
+                          width: 1.5,
+                          color: enabled == true
+                              ? MyColorsConst.primaryColor
+                              : MyColorsConst.formBorderColor),
                       borderRadius: BorderRadius.circular(10)),
                   focusedErrorBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 1.5, color: Color(0XFF0b00020)),
+                      borderSide: const BorderSide(
+                          width: 1.5, color: Color(0XFF0b00020)),
                       borderRadius: BorderRadius.circular(10)),
                   errorBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 1.5, color: Color(0XFF0b00020)),
+                      borderSide: const BorderSide(
+                          width: 1.5, color: Color(0XFF0b00020)),
                       borderRadius: BorderRadius.circular(10)),
                   suffixIcon: Padding(
                     padding: EdgeInsets.all(8.sp),

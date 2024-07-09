@@ -105,7 +105,7 @@ class _DashboardViewState extends State<DashboardView> {
             children: [
               Expanded(
                 child: PageView(
-                  // physics: NeverScrollableScrollPhysics(),
+                  physics: NeverScrollableScrollPhysics(),
                   controller: _pageController,
                   onPageChanged: (index) {
                     setState(() {

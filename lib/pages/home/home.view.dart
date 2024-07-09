@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,7 +58,7 @@ class _HomePageState extends State<HomePage> {
       Permission.storage,
       Permission.photos,
       Permission.location,
-    ].request(); 
+    ].request();
   }
 
   Future<void> _onRefresh() async {
@@ -166,14 +167,33 @@ class _HomePageState extends State<HomePage> {
                                         maxRadius: 25.sp,
                                         backgroundColor: Colors.black54,
                                         child: fotoProfil !=
-                                                "${MyGeneralConst.API_URL}/"
+                                                "//${MyGeneralConst.API_URL}/"
                                             ? ClipOval(
-                                                child: Image.network(
-                                                  fotoProfil ??
-                                                      "https://i.pinimg.com/564x/de/6e/8d/de6e8d53598eecfb6a2d86919b267791.jpg",
+                                                child: CachedNetworkImage(
+                                                  imageUrl: fotoProfil ??
+                                                      'https://i.pinimg.com/564x/de/6e/8d/de6e8d53598eecfb6a2d86919b267791.jpg',
+                                                  width: double.infinity,
+                                                  height: 170,
                                                   fit: BoxFit.cover,
-                                                  width: 50.sp,
-                                                  height: 50.sp,
+                                                  progressIndicatorBuilder: (context,
+                                                          url,
+                                                          downloadProgress) =>
+                                                      CircularProgressIndicator(
+                                                          value:
+                                                              downloadProgress
+                                                                  .progress),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          Container(
+                                                    decoration: BoxDecoration(
+                                                        color: MyColorsConst
+                                                            .primaryLight3Color),
+                                                    child: const Icon(
+                                                      Icons.person,
+                                                      color: MyColorsConst
+                                                          .primaryColor,
+                                                    ),
+                                                  ),
                                                 ),
                                               )
                                             : Column(
@@ -225,19 +245,23 @@ class _HomePageState extends State<HomePage> {
                                             Text(
                                               '#SJGWarrior',
                                               style: GoogleFonts.poppins(
-                                                  color: Colors.white,
+                                                  color: MyColorsConst
+                                                      .primaryLight2Color,
                                                   fontSize: 10.sp,
                                                   fontWeight: FontWeight.w700,
                                                   fontStyle: FontStyle.italic),
                                             ),
-                                            Text(
-                                              name ?? 'Karyawan SJ',
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: GoogleFonts.poppins(
-                                                color: Colors.white,
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w600,
+                                            FittedBox(
+                                              fit: BoxFit.scaleDown,
+                                              child: Text(
+                                                name ?? 'Karyawan SJ',
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: GoogleFonts.poppins(
+                                                  color: Colors.white,
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -323,8 +347,21 @@ class _HomePageState extends State<HomePage> {
                             child: Container(
                               padding: const EdgeInsets.symmetric(vertical: 15),
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(7),
-                                  color: Colors.white),
+                                borderRadius: BorderRadius.circular(7),
+                                // color: Colors.white,
+                                gradient: LinearGradient(
+                                  colors: [
+                                    MyColorsConst.whiteColor.withOpacity(1),
+                                    MyColorsConst.whiteColor.withOpacity(1),
+                                  ],
+                                  begin: AlignmentDirectional.topStart,
+                                  end: AlignmentDirectional.bottomEnd,
+                                ),
+                                border: Border.all(
+                                  width: 1.5,
+                                  color: Colors.white.withOpacity(0.3),
+                                ),
+                              ),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment:
@@ -379,7 +416,7 @@ class _HomePageState extends State<HomePage> {
                                               style: GoogleFonts.poppins(
                                                   fontSize: 9.sp,
                                                   fontWeight: FontWeight.w500,
-                                                  color: Colors.grey.shade500),
+                                                  color: Colors.grey.shade600),
                                             )
                                           ],
                                         ),
@@ -439,7 +476,7 @@ class _HomePageState extends State<HomePage> {
                                               style: GoogleFonts.poppins(
                                                   fontSize: 9.sp,
                                                   fontWeight: FontWeight.w500,
-                                                  color: Colors.grey.shade500),
+                                                  color: Colors.grey.shade600),
                                             )
                                           ],
                                         ),
@@ -498,7 +535,7 @@ class _HomePageState extends State<HomePage> {
                                               style: GoogleFonts.poppins(
                                                   fontSize: 9.sp,
                                                   fontWeight: FontWeight.w500,
-                                                  color: Colors.grey.shade500),
+                                                  color: Colors.grey.shade600),
                                             )
                                           ],
                                         ),

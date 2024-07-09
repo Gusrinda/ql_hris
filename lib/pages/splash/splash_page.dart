@@ -9,7 +9,6 @@ import 'package:sj_presensi_mobile/pages/authentication/check_version/check_vers
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
 import 'package:sj_presensi_mobile/services/model/check_version/check_version.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
-import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:permission_handler/permission_handler.dart';
 

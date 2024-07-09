@@ -638,7 +638,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
             TextButtonCustomV1(
               text: buttonTexts[currentStep],
               textSize: 13.sp,
-              height: 50,
+              height: 50.sp,
               backgroundColor: MyColorsConst.primaryColor.withOpacity(0.15),
               textColor: MyColorsConst.primaryColor,
               onPressed: () {
@@ -654,7 +654,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
             TextButtonCustomV1(
               text: buttonTexts[currentStep],
               textSize: 13.sp,
-              height: 50,
+              height: 50.sp,
               backgroundColor: MyColorsConst.primaryColor.withOpacity(0.15),
               textColor: MyColorsConst.primaryColor,
               onPressed: () {
@@ -670,7 +670,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
             TextButtonCustomV1(
               text: buttonTexts[currentStep],
               textSize: 13.sp,
-              height: 50,
+              height: 50.sp,
               backgroundColor: MyColorsConst.primaryColor.withOpacity(0.15),
               textColor: MyColorsConst.primaryColor,
               onPressed: () {
@@ -686,7 +686,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
             TextButtonCustomV1(
               text: buttonTexts[currentStep],
               textSize: 13.sp,
-              height: 50,
+              height: 50.sp,
               backgroundColor: MyColorsConst.primaryColor.withOpacity(0.15),
               textColor: MyColorsConst.primaryColor,
               onPressed: () {
@@ -702,7 +702,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
             TextButtonCustomV1(
               text: buttonTexts[currentStep],
               textSize: 13.sp,
-              height: 50,
+              height: 50.sp,
               backgroundColor: MyColorsConst.primaryColor.withOpacity(0.15),
               textColor: MyColorsConst.primaryColor,
               onPressed: () {
@@ -717,7 +717,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
           } else ...{
             TextButtonCustomV1(
               text: buttonTexts[currentStep],
-              height: 50,
+              height: 50.sp,
               backgroundColor: MyColorsConst.primaryColor.withOpacity(0.15),
               textColor: MyColorsConst.primaryColor,
               onPressed: () {
@@ -1758,6 +1758,7 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                       labelForm: 'Tanggal Masuk Kerja',
                                       labelTag: 'Label-TanggalMasuk',
                                       formTag: 'Form-TanggalMasuk',
+                                      enabled: false,
                                       valueController:
                                           controllers.tanggalMasukController!,
                                       idController:
@@ -1766,11 +1767,11 @@ class _EditDataDiriPageState extends State<EditDataDiriPage> {
                                     FormInputData(
                                       showRedStar: false,
                                       hintText: 'Tuliskan NIK',
-                                      labelForm: 'NIK',
+                                      labelForm: 'NIK (Karyawan)',
                                       labelTag: 'Label-NIK',
                                       formTag: 'Form-NIK',
                                       controller: controllers.nikController!,
-                                      enabled: true,
+                                      enabled: false,
                                       validator: (value) {},
                                     ),
                                     FormInputData(

@@ -1,5 +1,9 @@
+import 'dart:developer';
+
+import 'package:detect_fake_location/detect_fake_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -12,19 +16,28 @@ import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/add_check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/location_acio_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/bloc/time_acio_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/dashboard.view.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
 enum ProcessCheckInOutPageState { checkin, checkout }
 
-class AddCheckInOutPage extends StatelessWidget {
+class AddCheckInOutPage extends StatefulWidget {
   static const routeName = '/ProcessCheckInOutPage';
   final ProcessCheckInOutPageState? formState;
-  final TextEditingController? catatanController = TextEditingController();
 
   AddCheckInOutPage({
     super.key,
     this.formState = ProcessCheckInOutPageState.checkin,
   });
+
+  @override
+  State<AddCheckInOutPage> createState() => _AddCheckInOutPageState();
+}
+
+class _AddCheckInOutPageState extends State<AddCheckInOutPage> {
+  final TextEditingController? catatanController = TextEditingController();
+  bool isFakeLocation = false;
+
   final dataLayout = [
     {
       "title": "Masuk",
@@ -37,6 +50,133 @@ class AddCheckInOutPage extends StatelessWidget {
       "btnText": "Check Out",
     }
   ];
+
+  @override
+  void initState() {
+    detectFakeLocation(context);
+    super.initState();
+  }
+
+  Future<void> detectFakeLocation(BuildContext context) async {
+    log("Mencoba mendeteksi Fake Location");
+    bool isFakeLocationTemp = await DetectFakeLocation().detectFakeLocation();
+
+    if (isFakeLocationTemp) {
+      setState(() {
+        isFakeLocation = isFakeLocationTemp;
+      });
+      showDialog(
+        context: context,
+        barrierColor: Colors.red.shade900.withOpacity(0.85),
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return PopScope(
+            canPop: false,
+            onPopInvoked: (didPop) {
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  DashboardView.routeName, (Route<dynamic> route) => false);
+            },
+            child: AlertDialog(
+              title: Text('Fake Location Detected!!!',
+                  style: GoogleFonts.poppins(
+                    fontSize: 14.sp,
+                    color: MyColorsConst.redColor,
+                    fontWeight: FontWeight.w700,
+                  )),
+              content: Text(
+                  'Anda terdeteksi menggunakan Fake GPS Location. Mohon matikan untuk melanjutkan presensi!',
+                  style: GoogleFonts.poppins(
+                    fontSize: 12.sp,
+                    color: MyColorsConst.darkColor,
+                    fontWeight: FontWeight.w400,
+                  )),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () async {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        DashboardView.routeName,
+                        (Route<dynamic> route) => false);
+                  },
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    } else {
+      bool isLocationServiceEnabled =
+          await Geolocator.isLocationServiceEnabled();
+      LocationPermission locationPermission =
+          await Geolocator.checkPermission();
+
+      if (!isLocationServiceEnabled ||
+          locationPermission == LocationPermission.denied) {
+        // Meminta izin lokasi
+        locationPermission = await Geolocator.requestPermission();
+      }
+
+      if (locationPermission == LocationPermission.whileInUse ||
+          locationPermission == LocationPermission.always) {
+        Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high,
+        );
+
+        if (position.isMocked) {
+          // Lokasi adalah palsu atau mock
+          log('Lokasi palsu terdeteksi!');
+          showDialog(
+            context: context,
+            barrierColor: Colors.red.shade900.withOpacity(0.85),
+            barrierDismissible: true,
+            builder: (BuildContext context) {
+              return PopScope(
+                canPop: false,
+                onPopInvoked: (didPop) {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      DashboardView.routeName, (Route<dynamic> route) => false);
+                },
+                child: AlertDialog(
+                  title: Text('Fake Location Detected!!!',
+                      style: GoogleFonts.poppins(
+                        fontSize: 14.sp,
+                        color: MyColorsConst.redColor,
+                        fontWeight: FontWeight.w700,
+                      )),
+                  content: Text(
+                      'Anda terdeteksi menggunakan Fake GPS Location. Mohon matikan untuk melanjutkan presensi!',
+                      style: GoogleFonts.poppins(
+                        fontSize: 12.sp,
+                        color: MyColorsConst.darkColor,
+                        fontWeight: FontWeight.w400,
+                      )),
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text('OK'),
+                      onPressed: () async {
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            DashboardView.routeName,
+                            (Route<dynamic> route) => false);
+                      },
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+          setState(() {
+            isFakeLocation = true;
+          });
+        } else {
+          // Lokasi adalah asli
+          log('Lokasi GPS asli.');
+          setState(() {
+            isFakeLocation = false;
+          });
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +264,7 @@ class AddCheckInOutPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        "Presensi ${dataLayout[formState!.index]["title"] as String}",
+                        "Presensi ${dataLayout[widget.formState!.index]["title"] as String}",
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -354,71 +494,75 @@ class AddCheckInOutPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        BlocBuilder<AddCheckInOutBloc, AddCheckInOutState>(
-                          builder: (context, state) {
-                            return ValueListenableBuilder<TextEditingValue>(
-                                valueListenable: catatanController!,
-                                builder: (context, value, child) {
-                                  bool canActivateButton(
-                                      AddCheckInOutState state,
-                                      TextEditingValue value) {
-                                    if (state is AddCheckInOutButtonActivate &&
-                                        !state.isOnSite) {
-                                      if (value.text.isNotEmpty) {
+                        if (isFakeLocation == false)
+                          BlocBuilder<AddCheckInOutBloc, AddCheckInOutState>(
+                            builder: (context, state) {
+                              return ValueListenableBuilder<TextEditingValue>(
+                                  valueListenable: catatanController!,
+                                  builder: (context, value, child) {
+                                    bool canActivateButton(
+                                        AddCheckInOutState state,
+                                        TextEditingValue value) {
+                                      if (state
+                                              is AddCheckInOutButtonActivate &&
+                                          !state.isOnSite) {
+                                        if (value.text.isNotEmpty) {
+                                          return true;
+                                        } else {
+                                          return false;
+                                        }
+                                      } else if (state
+                                              is AddCheckInOutButtonActivate &&
+                                          state.isOnSite) {
                                         return true;
                                       } else {
                                         return false;
                                       }
-                                    } else if (state
-                                            is AddCheckInOutButtonActivate &&
-                                        state.isOnSite) {
-                                      return true;
-                                    } else {
-                                      return false;
                                     }
-                                  }
 
-                                  bool canActivate =
-                                      canActivateButton(state, value);
+                                    bool canActivate =
+                                        canActivateButton(state, value);
 
-                                  return TextButtonCustomV1(
-                                    text: dataLayout[formState!.index]
-                                        ["btnText"] as String,
-                                    backgroundColor:
-                                        dataLayout[formState!.index]["btnColor"]
-                                            as Color,
-                                    textColor: MyColorsConst.whiteColor,
-                                    onPressed: state is AddCheckInOutLoading
-                                        ? null
-                                        : canActivate
-                                            ? () async {
-                                                if (state
-                                                        is AddCheckInOutButtonActivate &&
-                                                    state.isOnSite) {
-                                                  context
-                                                      .read<AddCheckInOutBloc>()
-                                                      .add(AddCheckInOutSubmited(
-                                                          catatan:
-                                                              catatanController
-                                                                      ?.value
-                                                                      .text ??
-                                                                  "-"));
-                                                } else {
-                                                  context
-                                                      .read<AddCheckInOutBloc>()
-                                                      .add(AddCheckInOutSubmited(
-                                                          catatan:
-                                                              catatanController
-                                                                      ?.value
-                                                                      .text ??
-                                                                  "-"));
+                                    return TextButtonCustomV1(
+                                      text: dataLayout[widget.formState!.index]
+                                          ["btnText"] as String,
+                                      backgroundColor:
+                                          dataLayout[widget.formState!.index]
+                                              ["btnColor"] as Color,
+                                      textColor: MyColorsConst.whiteColor,
+                                      onPressed: state is AddCheckInOutLoading
+                                          ? null
+                                          : canActivate
+                                              ? () async {
+                                                  if (state
+                                                          is AddCheckInOutButtonActivate &&
+                                                      state.isOnSite) {
+                                                    context
+                                                        .read<
+                                                            AddCheckInOutBloc>()
+                                                        .add(AddCheckInOutSubmited(
+                                                            catatan:
+                                                                catatanController
+                                                                        ?.value
+                                                                        .text ??
+                                                                    "-"));
+                                                  } else {
+                                                    context
+                                                        .read<
+                                                            AddCheckInOutBloc>()
+                                                        .add(AddCheckInOutSubmited(
+                                                            catatan:
+                                                                catatanController
+                                                                        ?.value
+                                                                        .text ??
+                                                                    "-"));
+                                                  }
                                                 }
-                                              }
-                                            : null,
-                                  );
-                                });
-                          },
-                        ),
+                                              : null,
+                                    );
+                                  });
+                            },
+                          ),
                       ],
                     ),
                   ),

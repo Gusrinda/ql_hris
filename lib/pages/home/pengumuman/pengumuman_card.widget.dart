@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -49,9 +50,24 @@ class PengumumanCard extends StatelessWidget {
                       topRight: Radius.circular(5)),
                   child: AspectRatio(
                       aspectRatio: 16 / 9.sp,
-                      child: Image.network(
-                        imageUrl ?? '',
-                        fit: BoxFit.fitWidth,
+                      child: CachedNetworkImage(
+                        imageUrl: imageUrl ?? '',
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) =>
+                                LinearProgressIndicator(
+                                    value: downloadProgress.progress,
+                                    backgroundColor: MyColorsConst.primaryColor
+                                        .withOpacity(0.5)),
+                        errorWidget: (context, url, error) => Container(
+                          decoration:
+                              BoxDecoration(color: Colors.grey.shade200),
+                          child: const Icon(
+                            Icons.image_not_supported_rounded,
+                            color: Colors.grey,
+                          ),
+                        ),
                       )),
                 ),
                 SizedBox(height: 5.sp),
@@ -167,7 +183,7 @@ class PengumumanCard extends StatelessWidget {
                     style: TextStyle(color: Colors.blue.shade600),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        launchUrl (Uri.parse(url ?? ''));
+                        launchUrl(Uri.parse(url ?? ''));
                       },
                   ),
                 );

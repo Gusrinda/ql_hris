@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:convert';
@@ -117,43 +119,64 @@ class MyLocation {
   }
 
   Future<MyLocationModel> getLastLocation() async {
-    final hasPermission = await _handlePermission();
-    if (!hasPermission.isSuccess) {
-      return MyLocationModel(myLocationMessage: hasPermission);
-    }
+    try {
+      final hasPermission = await _handlePermission();
+      if (!hasPermission.isSuccess) {
+        return MyLocationModel(myLocationMessage: hasPermission);
+      }
 
-    Position? position = await Geolocator.getLastKnownPosition(
-      forceAndroidLocationManager: true,
-    );
-
-    if (position != null) {
-      ServicesSuccess resToken =
-          await GeneralSharedPreferences.getUserToken() as ServicesSuccess;
-
-      double lat = position.latitude;
-      double long = position.longitude;
-      bool isOnSite =
-          await checkIsOnSite(resToken.response["token"], lat, long);
-
-      List<Placemark> placemarks = await placemarkFromCoordinates(
-        lat,
-        long,
-        localeIdentifier: "id_ID",
+      Position? position = await Geolocator.getLastKnownPosition(
+        forceAndroidLocationManager: true,
       );
+
+      if (position != null) {
+        ServicesSuccess resToken =
+            await GeneralSharedPreferences.getUserToken() as ServicesSuccess;
+
+        double lat = position.latitude;
+        double long = position.longitude;
+        bool isOnSite =
+            await checkIsOnSite(resToken.response["token"], lat, long);
+
+        try {
+          List<Placemark> placemarks = await placemarkFromCoordinates(
+            lat,
+            long,
+            localeIdentifier: "id_ID",
+          );
+
+          return MyLocationModel(
+            myLocationMessage: hasPermission,
+            isOnSite: isOnSite,
+            latitude: lat.toString(),
+            longitude: long.toString(),
+            address:
+                "${placemarks[0].street}, ${placemarks[0].locality}, ${placemarks[0].subAdministrativeArea}, ${placemarks[0].administrativeArea}, ${placemarks[0].country}, ${placemarks[0].postalCode}",
+          );
+        } catch (geocodingError) {
+          log("Geocoding error: $geocodingError");
+          return MyLocationModel(
+            myLocationMessage: hasPermission,
+            isOnSite: isOnSite,
+            latitude: lat.toString(),
+            longitude: long.toString(),
+            address: "Alamat tidak tersedia",
+          );
+        }
+      }
 
       return MyLocationModel(
         myLocationMessage: hasPermission,
-        isOnSite: isOnSite,
-        latitude: lat.toString(),
-        longitude: long.toString(),
-        address:
-            "${placemarks[0].street}, ${placemarks[0].locality}, ${placemarks[0].subAdministrativeArea}, ${placemarks[0].administrativeArea}, ${placemarks[0].country}, ${placemarks[0].postalCode}",
+      );
+    } catch (e) {
+      log("Error in getLastLocation: $e");
+      return MyLocationModel(
+        myLocationMessage: MyLocationMessage(
+          isSuccess: false,
+          message: "Terjadi kesalahan saat mengambil lokasi",
+        ),
       );
     }
-
-    return MyLocationModel(
-      myLocationMessage: hasPermission,
-    );
   }
 
   Stream<MyLocationModel> getLocation({int timeInterval = 1}) async* {

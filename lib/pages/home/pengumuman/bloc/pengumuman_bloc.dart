@@ -20,11 +20,11 @@ class PengumumanBloc extends Bloc<PengumumanEvent, PengumumanState> {
             await PengumumanServices.getPengumuman(resToken.response["token"]);
         if (res is ServicesSuccess) {
           if (res.response is Map<String, dynamic>) {
-            print("INI RES: ${res.response}");
+            // print("INI RES: ${res.response}");
             PengumumanModel dataResponse =
                 PengumumanModel.fromJson(res.response);
             listpengumuman = dataResponse.data ?? [];
-            print("GET Pengumuman: $listpengumuman}");
+            // print("GET Pengumuman: $listpengumuman}");
             emit(ListPengumumanSuccess(dataPengumuman: listpengumuman));
           } else {
             emit(ListPengumumanFailedInBackground(

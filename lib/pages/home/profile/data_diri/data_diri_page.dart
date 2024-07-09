@@ -101,25 +101,31 @@ class _DataDiriPageState extends State<DataDiriPage> {
                       IconButton(
                         icon: Icon(
                           Icons.arrow_back_ios_rounded,
-                          size: 18,
+                          size: 18.sp,
                         ),
                         onPressed: () {
                           Navigator.pop(context);
                         },
                         color: Colors.white,
                       ),
-                      SizedBox(
-                        width: size.width * 1 / 3.8,
-                      ),
                       Expanded(
                         child: Text(
                           "Biodata",
+                          textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w600,
                             color: Colors.white,
                           ),
                         ),
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.arrow_back_ios_rounded,
+                          size: 18.sp,
+                        ),
+                        onPressed: () {},
+                        color: Colors.transparent,
                       ),
                     ],
                   ),
@@ -210,8 +216,8 @@ class _DataDiriPageState extends State<DataDiriPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  buildInfoText(
-                                      'NIK', biodata?.bioData?.nik ?? '-'),
+                                  buildInfoText('NIK (Karyawan)',
+                                      biodata?.bioData?.nik ?? '-'),
                                   buildInfoText('Nama Panggilan',
                                       biodata?.bioData?.namaPanggilan ?? '-'),
                                   buildInfoText('Tempat Lahir',
@@ -804,9 +810,10 @@ class _DataDiriPageState extends State<DataDiriPage> {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            color: isActive ? Colors.green.shade500.withOpacity(0.15) : Colors.red.shade500.withOpacity(0.15)
-          ),
+              borderRadius: BorderRadius.circular(5),
+              color: isActive
+                  ? Colors.green.shade500.withOpacity(0.15)
+                  : Colors.red.shade500.withOpacity(0.15)),
           child: Text(
             value,
             style: GoogleFonts.poppins(

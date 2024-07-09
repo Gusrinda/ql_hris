@@ -172,10 +172,6 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
     Color currentColorFromType =
         getColorFromType(widget.data?.type.toString() ?? 'Hari Kerja');
     return Scaffold(
-      // appBar: appBarCustomV1(
-      //   title: "Detail Absensi",
-      //   padLeft: 8,
-      // ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -193,10 +189,11 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 40.sp),
+                SizedBox(height: 45.sp),
                 Container(
                   padding: EdgeInsets.all(5.0.sp),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
                         icon: const Icon(
@@ -208,18 +205,24 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                         },
                         color: Colors.white,
                       ),
-                      SizedBox(
-                        width: size.width * 1 / 4.5,
-                      ),
                       Expanded(
                         child: Text(
                           "Detail Absensi",
+                          textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
-                            fontSize: 14,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w600,
                             color: Colors.white,
                           ),
                         ),
+                      ),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.arrow_back_ios_rounded,
+                          size: 18,
+                        ),
+                        onPressed: () {},
+                        color: Colors.transparent,
                       ),
                     ],
                   ),
@@ -245,13 +248,29 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                             SizedBox(
                               height: 55.sp,
                             ),
-                            buildCardImage(
-                              dataPresensi: widget.data,
-                              checkIn: true,
-                              url:
-                                  "${widget.checkinFoto?.replaceAll("${MyGeneralConst.API_URL}/${MyGeneralConst.API_URL}/", "${MyGeneralConst.API_URL}/")}",
-                              address: widget.checkinAddress ?? '-',
-                              onSite: "${widget.checkinOnScope}",
+                            GestureDetector(
+                              onTap: () {
+                                if (widget.checkinFoto!.isNotEmpty) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => PhotoZoomScreen(
+                                          imgUrl:
+                                              "${widget.checkinFoto?.replaceAll("${MyGeneralConst.API_URL}/${MyGeneralConst.API_URL}/", "${MyGeneralConst.API_URL}/")}"),
+                                    ),
+                                  );
+                                } else {
+                                  null;
+                                }
+                              },
+                              child: buildCardImage(
+                                dataPresensi: widget.data,
+                                checkIn: true,
+                                url:
+                                    "${widget.checkinFoto?.replaceAll("${MyGeneralConst.API_URL}/${MyGeneralConst.API_URL}/", "${MyGeneralConst.API_URL}/")}",
+                                address: widget.checkinAddress ?? '-',
+                                onSite: "${widget.checkinOnScope}",
+                              ),
                             ),
                             Padding(
                               padding: EdgeInsets.symmetric(
@@ -261,13 +280,29 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                                 thickness: 1,
                               ),
                             ),
-                            buildCardImage(
-                              dataPresensi: widget.data,
-                              checkIn: false,
-                              url:
-                                  "${widget.checkoutFoto?.replaceAll("${MyGeneralConst.API_URL}/${MyGeneralConst.API_URL}/", "${MyGeneralConst.API_URL}/")}",
-                              address: widget.checkoutAddress ?? '-',
-                              onSite: "${widget.checkoutOnScope}",
+                            GestureDetector(
+                              onTap: () {
+                                if (widget.checkoutFoto!.isNotEmpty) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => PhotoZoomScreen(
+                                          imgUrl:
+                                              "${widget.checkoutFoto?.replaceAll("${MyGeneralConst.API_URL}/${MyGeneralConst.API_URL}/", "${MyGeneralConst.API_URL}/")}"),
+                                    ),
+                                  );
+                                } else {
+                                  null;
+                                }
+                              },
+                              child: buildCardImage(
+                                dataPresensi: widget.data,
+                                checkIn: false,
+                                url:
+                                    "${widget.checkoutFoto?.replaceAll("${MyGeneralConst.API_URL}/${MyGeneralConst.API_URL}/", "${MyGeneralConst.API_URL}/")}",
+                                address: widget.checkoutAddress ?? '-',
+                                onSite: "${widget.checkoutOnScope}",
+                              ),
                             ),
                           ],
                         ),
@@ -278,15 +313,15 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
               ],
             ),
             Positioned(
-              top: 100,
-              left: 20,
-              right: 20,
+              top: 95.sp,
+              left: 20.sp,
+              right: 20.sp,
               child: Stack(
                 children: [
                   Container(
                     margin: EdgeInsets.only(bottom: 7.sp),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(7),
+                      borderRadius: BorderRadius.circular(7.sp),
                       boxShadow: [
                         BoxShadow(
                           color: MyColorsConst.darkColor.withOpacity(0.2),
@@ -359,7 +394,7 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                                   Text(
                                     'Out  ',
                                     style: GoogleFonts.poppins(
-                                      fontSize: 10,
+                                      fontSize: 12.sp,
                                       color: Colors.grey,
                                       fontWeight: FontWeight.w400,
                                     ),
@@ -367,7 +402,7 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                                   Text(
                                     widget.checkoutTime ?? "-",
                                     style: GoogleFonts.poppins(
-                                      fontSize: 12,
+                                      fontSize: 12.sp,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w400,
                                     ),
@@ -384,7 +419,7 @@ class _DetailHistoryAbsensiPageState extends State<DetailHistoryAbsensiPage> {
                     top: 0,
                     right: 0,
                     child: Container(
-                      height: 30,
+                      height: 30.sp,
                       padding: EdgeInsets.symmetric(
                           horizontal: 7.sp, vertical: 3.sp),
                       decoration: BoxDecoration(
@@ -477,7 +512,7 @@ Padding buildCardImage({
         Text(
           checkIn ? "Check In" : "Check Out",
           style: GoogleFonts.poppins(
-            fontSize: 12,
+            fontSize: 12.sp,
             color: checkIn ? Colors.green : Colors.red,
             fontWeight: FontWeight.w600,
           ),
@@ -554,9 +589,9 @@ Padding buildCardImage({
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 15,
-                      vertical: 5,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 15.sp,
+                      vertical: 5.sp,
                     ),
                     decoration: BoxDecoration(
                         color:
@@ -572,7 +607,7 @@ Padding buildCardImage({
                       children: [
                         Icon(
                           Icons.my_location_outlined,
-                          size: 15,
+                          size: 15.sp,
                           color:
                               (onSite != null && onSite.toLowerCase() == 'true')
                                   ? Colors.green
@@ -634,4 +669,54 @@ Padding buildCardImage({
       ],
     ),
   );
+}
+
+class PhotoZoomScreen extends StatelessWidget {
+  final String imgUrl;
+
+  const PhotoZoomScreen({
+    Key? key,
+    required this.imgUrl,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'Preview Foto',
+          style: GoogleFonts.poppins(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: MyColorsConst.whiteColor,
+          ),
+        ),
+        centerTitle: true,
+      ),
+      body: InteractiveViewer(
+        boundaryMargin: const EdgeInsets.all(20.0),
+        minScale: 0.1,
+        maxScale: 4.0,
+        child: Center(
+          child: CachedNetworkImage(
+            imageUrl: imgUrl,
+            fit: BoxFit.contain,
+            progressIndicatorBuilder: (context, url, downloadProgress) =>
+                CircularProgressIndicator(
+              value: downloadProgress.progress,
+            ),
+            errorWidget: (context, url, error) => Container(
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+              ),
+              child: const Icon(
+                Icons.image_not_supported_rounded,
+                color: Colors.grey,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }

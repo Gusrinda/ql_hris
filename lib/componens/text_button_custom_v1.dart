@@ -20,7 +20,7 @@ class TextButtonCustomV1 extends StatelessWidget {
     this.margin,
     this.backgroundColor,
     this.textColor = Colors.white,
-    this.textSize = 14,
+    this.textSize,
     required this.onPressed,
   }) : super(key: key);
 
@@ -51,7 +51,7 @@ class TextButtonCustomV1 extends StatelessWidget {
               style: GoogleFonts.poppins(
                 color: textColor,
                 fontWeight: FontWeight.bold,
-                fontSize: textSize,
+                fontSize: textSize ?? 13.sp,
               ),
             ),
           ],
