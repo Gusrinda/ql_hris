@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +14,7 @@ import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/pages/approval/approval.view.dart';
 import 'package:sj_presensi_mobile/pages/approval/bloc/approval_bloc.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/birthday/birthday_card.dart';
 import 'package:sj_presensi_mobile/pages/cuti/cuti_page.dart';
 import 'package:sj_presensi_mobile/pages/cuti/listCutiBloc/list_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/dinas/dashboard_dinas.dart';
@@ -19,6 +23,7 @@ import 'package:sj_presensi_mobile/pages/download_berkas/kategori_berkas_bloc/be
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
+import 'package:sj_presensi_mobile/pages/home/home_bloc/home_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/bloc/pengumuman_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/list_pengumuman.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/pengumuman_card.widget.dart';
@@ -44,6 +49,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _requestPermissions();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<HomeBloc>().add(const OnGetBirthday());
       context.read<CheckInOutBloc>().add(AttendanceStateChecked());
       context.read<PengumumanBloc>().add(GetListPengumuman());
       context.read<ApprovalBloc>().add(GetListApproval());
@@ -65,6 +71,7 @@ class _HomePageState extends State<HomePage> {
     try {
       // Dispatch the CheckInOutEvent to refresh the data
       WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.read<HomeBloc>().add(const OnGetBirthday());
         context.read<CheckInOutBloc>().add(AttendanceStateChecked());
         context.read<PengumumanBloc>().add(GetListPengumuman());
         context.read<ApprovalBloc>().add(GetListApproval());
@@ -117,6 +124,7 @@ class _HomePageState extends State<HomePage> {
           }
         },
         child: Scaffold(
+          backgroundColor: MyColorsConst.primaryBGColor,
           body: SingleChildScrollView(
             child: CustomPaint(
               painter: BackgroundPainter(),
@@ -171,7 +179,7 @@ class _HomePageState extends State<HomePage> {
                                             ? ClipOval(
                                                 child: CachedNetworkImage(
                                                   imageUrl: fotoProfil ??
-                                                      'https://i.pinimg.com/564x/de/6e/8d/de6e8d53598eecfb6a2d86919b267791.jpg',
+                                                      'https://st4.depositphotos.com/9998432/24428/v/450/depositphotos_244284796-stock-illustration-person-gray-photo-placeholder-man.jpg',
                                                   width: double.infinity,
                                                   height: 170,
                                                   fit: BoxFit.cover,
@@ -186,12 +194,12 @@ class _HomePageState extends State<HomePage> {
                                                       (context, url, error) =>
                                                           Container(
                                                     decoration: BoxDecoration(
-                                                        color: MyColorsConst
-                                                            .primaryLight3Color),
+                                                        color: Colors
+                                                            .grey.shade200),
                                                     child: const Icon(
-                                                      Icons.person,
-                                                      color: MyColorsConst
-                                                          .primaryColor,
+                                                      Icons
+                                                          .image_not_supported_rounded,
+                                                      color: Colors.grey,
                                                     ),
                                                   ),
                                                 ),
@@ -344,203 +352,227 @@ class _HomePageState extends State<HomePage> {
                           const SizedBox(height: 20.0),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(vertical: 15),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(7),
-                                // color: Colors.white,
-                                gradient: LinearGradient(
-                                  colors: [
-                                    MyColorsConst.whiteColor.withOpacity(1),
-                                    MyColorsConst.whiteColor.withOpacity(1),
-                                  ],
-                                  begin: AlignmentDirectional.topStart,
-                                  end: AlignmentDirectional.bottomEnd,
-                                ),
-                                border: Border.all(
-                                  width: 1.5,
-                                  color: Colors.white.withOpacity(0.3),
-                                ),
-                              ),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                      flex: 1,
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const Icon(
-                                              CupertinoIcons.bag_badge_minus,
-                                              color: MyColorsConst.primaryColor,
-                                            ),
-                                            const SizedBox(height: 7),
-                                            RichText(
-                                              text: TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text:
-                                                        "${infoCuti?.sisaCutiMasaKerja?.toString() ?? '-'}",
-                                                    style: GoogleFonts.poppins(
-                                                      fontSize: 18.sp,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color: MyColorsConst
-                                                          .primaryColor,
-                                                    ),
-                                                  ),
-                                                  TextSpan(
-                                                    text:
-                                                        " / ${infoCuti?.cutiMasaKerja?.toString() ?? '-'}\nHari",
-                                                    style: GoogleFonts.poppins(
-                                                      height: 1,
-                                                      fontSize: 12.sp,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color: MyColorsConst
-                                                          .darkColor,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            const SizedBox(height: 5),
-                                            Text(
-                                              "Cuti Masa Kerja",
-                                              style: GoogleFonts.poppins(
-                                                  fontSize: 9.sp,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.grey.shade600),
-                                            )
-                                          ],
-                                        ),
-                                      )),
-                                  Container(
-                                    width: 1,
-                                    height: 60.sp,
-                                    color: MyColorsConst.disableColor,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(7),
+                              child: BackdropFilter(
+                                filter:
+                                    ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                                child: Container(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 15),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(7),
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Colors.white.withOpacity(1),
+                                        Colors.white.withOpacity(0.9),
+                                      ],
+                                      begin: AlignmentDirectional.topStart,
+                                      end: AlignmentDirectional.bottomEnd,
+                                    ),
+                                    border: Border.all(
+                                      width: 1.5,
+                                      color: Colors.white.withOpacity(0.3),
+                                    ),
                                   ),
-                                  Expanded(
-                                      flex: 1,
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const Icon(
-                                              CupertinoIcons
-                                                  .calendar_badge_minus,
-                                              color: MyColorsConst.primaryColor,
-                                            ),
-                                            const SizedBox(height: 7),
-                                            RichText(
-                                              text: TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text:
-                                                        "${infoCuti?.sisaCutiReguler?.toString() ?? '-'}",
-                                                    style: GoogleFonts.poppins(
-                                                      fontSize: 18.sp,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color: MyColorsConst
-                                                          .primaryColor,
-                                                    ),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 15),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Icon(
+                                                  CupertinoIcons
+                                                      .bag_badge_minus,
+                                                  color: MyColorsConst
+                                                      .primaryColor,
+                                                ),
+                                                const SizedBox(height: 7),
+                                                RichText(
+                                                  text: TextSpan(
+                                                    children: [
+                                                      TextSpan(
+                                                        text:
+                                                            "${infoCuti?.sisaCutiMasaKerja?.toString() ?? '0'}",
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          fontSize: 18.sp,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: MyColorsConst
+                                                              .primaryColor,
+                                                        ),
+                                                      ),
+                                                      TextSpan(
+                                                        text:
+                                                            " / ${infoCuti?.cutiMasaKerja?.toString() ?? '0'}\nHari",
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          height: 1,
+                                                          fontSize: 12.sp,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: MyColorsConst
+                                                              .darkColor,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
-                                                  TextSpan(
-                                                    text:
-                                                        " / ${infoCuti?.cutiReguler?.toString() ?? '-'}\nHari",
-                                                    style: GoogleFonts.poppins(
-                                                      height: 1,
-                                                      fontSize: 12.sp,
+                                                ),
+                                                const SizedBox(height: 5),
+                                                Text(
+                                                  "Cuti Masa Kerja",
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 9.sp,
                                                       fontWeight:
-                                                          FontWeight.w600,
-                                                      color: MyColorsConst
-                                                          .darkColor,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
+                                                          FontWeight.w500,
+                                                      color:
+                                                          Colors.grey.shade600),
+                                                )
+                                              ],
                                             ),
-                                            const SizedBox(height: 5),
-                                            Text(
-                                              "Cuti Tahunan",
-                                              style: GoogleFonts.poppins(
-                                                  fontSize: 9.sp,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.grey.shade600),
-                                            )
-                                          ],
-                                        ),
-                                      )),
-                                  Container(
-                                    width: 1,
-                                    height: 60,
-                                    color: MyColorsConst.disableColor,
+                                          )),
+                                      Container(
+                                        width: 1,
+                                        height: 60.sp,
+                                        color: MyColorsConst.disableColor,
+                                      ),
+                                      Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 15),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Icon(
+                                                  CupertinoIcons
+                                                      .calendar_badge_minus,
+                                                  color: MyColorsConst
+                                                      .primaryColor,
+                                                ),
+                                                const SizedBox(height: 7),
+                                                RichText(
+                                                  text: TextSpan(
+                                                    children: [
+                                                      TextSpan(
+                                                        text:
+                                                            "${infoCuti?.sisaCutiReguler?.toString() ?? '0'}",
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          fontSize: 18.sp,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: MyColorsConst
+                                                              .primaryColor,
+                                                        ),
+                                                      ),
+                                                      TextSpan(
+                                                        text:
+                                                            " / ${infoCuti?.cutiReguler?.toString() ?? '0'}\nHari",
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          height: 1,
+                                                          fontSize: 12.sp,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: MyColorsConst
+                                                              .darkColor,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 5),
+                                                Text(
+                                                  "Cuti Tahunan",
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 9.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color:
+                                                          Colors.grey.shade600),
+                                                )
+                                              ],
+                                            ),
+                                          )),
+                                      Container(
+                                        width: 1,
+                                        height: 60,
+                                        color: MyColorsConst.disableColor,
+                                      ),
+                                      Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 15),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const Icon(
+                                                  CupertinoIcons.timer,
+                                                  color: MyColorsConst
+                                                      .primaryColor,
+                                                ),
+                                                const SizedBox(height: 7),
+                                                RichText(
+                                                  text: TextSpan(
+                                                    children: [
+                                                      TextSpan(
+                                                        text:
+                                                            "${infoCuti?.sisaCutiP24?.toString() ?? '0'}",
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          fontSize: 18.sp,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: MyColorsConst
+                                                              .primaryColor,
+                                                        ),
+                                                      ),
+                                                      TextSpan(
+                                                        text:
+                                                            " / ${infoCuti?.cutiP24?.toString() ?? '0'}\nMenit",
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          height: 1,
+                                                          fontSize: 12.sp,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: MyColorsConst
+                                                              .darkColor,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 5),
+                                                Text(
+                                                  "P24",
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 9.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color:
+                                                          Colors.grey.shade600),
+                                                )
+                                              ],
+                                            ),
+                                          ))
+                                    ],
                                   ),
-                                  Expanded(
-                                      flex: 1,
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 15),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const Icon(
-                                              CupertinoIcons.timer,
-                                              color: MyColorsConst.primaryColor,
-                                            ),
-                                            const SizedBox(height: 7),
-                                            RichText(
-                                              text: TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text:
-                                                        "${infoCuti?.sisaCutiP24?.toString() ?? '-'}",
-                                                    style: GoogleFonts.poppins(
-                                                      fontSize: 18.sp,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color: MyColorsConst
-                                                          .primaryColor,
-                                                    ),
-                                                  ),
-                                                  TextSpan(
-                                                    text:
-                                                        " / ${infoCuti?.cutiP24?.toString() ?? '-'}\nMenit",
-                                                    style: GoogleFonts.poppins(
-                                                      height: 1,
-                                                      fontSize: 12.sp,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color: MyColorsConst
-                                                          .darkColor,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            const SizedBox(height: 5),
-                                            Text(
-                                              "P24",
-                                              style: GoogleFonts.poppins(
-                                                  fontSize: 9.sp,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.grey.shade600),
-                                            )
-                                          ],
-                                        ),
-                                      ))
-                                ],
+                                ),
                               ),
                             ),
                           ),
@@ -758,7 +790,38 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 30),
+                          BlocListener<HomeBloc, HomeState>(
+                            listener: (context, state) {},
+                            child: BlocBuilder<HomeBloc, HomeState>(
+                              builder: (context, state) {
+                                var dataBirthday =
+                                    state.responseDataKaryawan?.data ?? [];
+
+                                // log("HBD $dataBirthday");
+
+                                if (dataBirthday == null ||
+                                    dataBirthday == []) {
+                                  return const SizedBox();
+                                } else if (dataBirthday.isNotEmpty) {
+                                  // _audioPlayer.play(AssetSource(
+                                  //     'sounds/Selamat Ulang Tahun.mp3'));
+                                  return Column(
+                                    children: [
+                                      SizedBox(height: 20.sp),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20),
+                                        child: birthdaySection(context),
+                                      ),
+                                      SizedBox(height: 20.sp),
+                                    ],
+                                  );
+                                } else {
+                                  return const SizedBox();
+                                }
+                              },
+                            ),
+                          ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: Row(

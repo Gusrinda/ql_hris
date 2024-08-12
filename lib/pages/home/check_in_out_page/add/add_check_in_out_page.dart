@@ -53,127 +53,83 @@ class _AddCheckInOutPageState extends State<AddCheckInOutPage> {
 
   @override
   void initState() {
-    detectFakeLocation(context);
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      detectFakeLocation(context);
+    });
   }
 
   Future<void> detectFakeLocation(BuildContext context) async {
     log("Mencoba mendeteksi Fake Location");
-    bool isFakeLocationTemp = await DetectFakeLocation().detectFakeLocation();
+    LoadingDialog.showLoadingDialog(context);
+    bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
+    LocationPermission locationPermission = await Geolocator.checkPermission();
 
-    if (isFakeLocationTemp) {
-      setState(() {
-        isFakeLocation = isFakeLocationTemp;
-      });
-      showDialog(
-        context: context,
-        barrierColor: Colors.red.shade900.withOpacity(0.85),
-        barrierDismissible: true,
-        builder: (BuildContext context) {
-          return PopScope(
-            canPop: false,
-            onPopInvoked: (didPop) {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  DashboardView.routeName, (Route<dynamic> route) => false);
-            },
-            child: AlertDialog(
-              title: Text('Fake Location Detected!!!',
-                  style: GoogleFonts.poppins(
-                    fontSize: 14.sp,
-                    color: MyColorsConst.redColor,
-                    fontWeight: FontWeight.w700,
-                  )),
-              content: Text(
-                  'Anda terdeteksi menggunakan Fake GPS Location. Mohon matikan untuk melanjutkan presensi!',
-                  style: GoogleFonts.poppins(
-                    fontSize: 12.sp,
-                    color: MyColorsConst.darkColor,
-                    fontWeight: FontWeight.w400,
-                  )),
-              actions: <Widget>[
-                TextButton(
-                  child: Text('OK'),
-                  onPressed: () async {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                        DashboardView.routeName,
-                        (Route<dynamic> route) => false);
-                  },
-                ),
-              ],
-            ),
-          );
-        },
+    if (!isLocationServiceEnabled ||
+        locationPermission == LocationPermission.denied) {
+      // Meminta izin lokasi
+      locationPermission = await Geolocator.requestPermission();
+    }
+
+    if (locationPermission == LocationPermission.whileInUse ||
+        locationPermission == LocationPermission.always) {
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
       );
-    } else {
-      bool isLocationServiceEnabled =
-          await Geolocator.isLocationServiceEnabled();
-      LocationPermission locationPermission =
-          await Geolocator.checkPermission();
 
-      if (!isLocationServiceEnabled ||
-          locationPermission == LocationPermission.denied) {
-        // Meminta izin lokasi
-        locationPermission = await Geolocator.requestPermission();
-      }
-
-      if (locationPermission == LocationPermission.whileInUse ||
-          locationPermission == LocationPermission.always) {
-        Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high,
+      if (position.isMocked) {
+        // Lokasi adalah palsu atau mock
+        log('Lokasi palsu terdeteksi!');
+        LoadingDialog.dismissDialog(context);
+        showDialog(
+          context: context,
+          barrierColor: Colors.red.shade900.withOpacity(0.85),
+          barrierDismissible: true,
+          builder: (BuildContext context) {
+            return PopScope(
+              canPop: false,
+              onPopInvoked: (didPop) {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    DashboardView.routeName, (Route<dynamic> route) => false);
+              },
+              child: AlertDialog(
+                title: Text('Fake Location Detected!!!',
+                    style: GoogleFonts.poppins(
+                      fontSize: 14.sp,
+                      color: MyColorsConst.redColor,
+                      fontWeight: FontWeight.w700,
+                    )),
+                content: Text(
+                    'Anda terdeteksi menggunakan Fake GPS Location. Mohon matikan untuk melanjutkan presensi!',
+                    style: GoogleFonts.poppins(
+                      fontSize: 12.sp,
+                      color: MyColorsConst.darkColor,
+                      fontWeight: FontWeight.w400,
+                    )),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text('OK'),
+                    onPressed: () async {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          DashboardView.routeName,
+                          (Route<dynamic> route) => false);
+                    },
+                  ),
+                ],
+              ),
+            );
+          },
         );
-
-        if (position.isMocked) {
-          // Lokasi adalah palsu atau mock
-          log('Lokasi palsu terdeteksi!');
-          showDialog(
-            context: context,
-            barrierColor: Colors.red.shade900.withOpacity(0.85),
-            barrierDismissible: true,
-            builder: (BuildContext context) {
-              return PopScope(
-                canPop: false,
-                onPopInvoked: (didPop) {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      DashboardView.routeName, (Route<dynamic> route) => false);
-                },
-                child: AlertDialog(
-                  title: Text('Fake Location Detected!!!',
-                      style: GoogleFonts.poppins(
-                        fontSize: 14.sp,
-                        color: MyColorsConst.redColor,
-                        fontWeight: FontWeight.w700,
-                      )),
-                  content: Text(
-                      'Anda terdeteksi menggunakan Fake GPS Location. Mohon matikan untuk melanjutkan presensi!',
-                      style: GoogleFonts.poppins(
-                        fontSize: 12.sp,
-                        color: MyColorsConst.darkColor,
-                        fontWeight: FontWeight.w400,
-                      )),
-                  actions: <Widget>[
-                    TextButton(
-                      child: Text('OK'),
-                      onPressed: () async {
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            DashboardView.routeName,
-                            (Route<dynamic> route) => false);
-                      },
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
-          setState(() {
-            isFakeLocation = true;
-          });
-        } else {
-          // Lokasi adalah asli
-          log('Lokasi GPS asli.');
-          setState(() {
-            isFakeLocation = false;
-          });
-        }
+        setState(() {
+          isFakeLocation = true;
+        });
+      } else {
+        // Lokasi adalah asli
+        log('Lokasi GPS asli.');
+        setState(() {
+          isFakeLocation = false;
+        });
+        LoadingDialog.dismissDialog(context);
       }
     }
   }
@@ -248,6 +204,7 @@ class _AddCheckInOutPageState extends State<AddCheckInOutPage> {
               Container(
                 padding: EdgeInsets.only(left: 5.0.sp),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
                       icon: const Icon(
@@ -259,18 +216,21 @@ class _AddCheckInOutPageState extends State<AddCheckInOutPage> {
                       },
                       color: Colors.white,
                     ),
-                    SizedBox(
-                      width: size.width * 0.5 / 2.4,
-                    ),
-                    Expanded(
-                      child: Text(
-                        "Presensi ${dataLayout[widget.formState!.index]["title"] as String}",
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
+                    Text(
+                      "Presensi ${dataLayout[widget.formState!.index]["title"] as String}",
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
                       ),
+                    ),
+                    IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back_ios_rounded,
+                        size: 18,
+                      ),
+                      onPressed: () {},
+                      color: Colors.transparent,
                     ),
                   ],
                 ),
@@ -286,7 +246,7 @@ class _AddCheckInOutPageState extends State<AddCheckInOutPage> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 16),
+                        horizontal: 20, vertical: 20),
                     child: Column(
                       children: [
                         Expanded(
@@ -313,7 +273,7 @@ class _AddCheckInOutPageState extends State<AddCheckInOutPage> {
                                     );
                                   },
                                 ),
-                                const SizedBox(height: 24),
+                                const SizedBox(height: 20),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -359,10 +319,10 @@ class _AddCheckInOutPageState extends State<AddCheckInOutPage> {
                                                   ),
                                                   const SizedBox(width: 5),
                                                   Text(
-                                                    '${data != null ? DateFormat('HH:mm:ss').format(data.dateTime) : "-"}',
+                                                    '${data != null ? DateFormat('HH : mm : ss').format(data.dateTime) : "-"}',
                                                     style: GoogleFonts.poppins(
                                                         // fontFamily: 'Poppins',
-                                                        fontSize: 12,
+                                                        fontSize: 12.sp,
                                                         fontWeight:
                                                             FontWeight.w500),
                                                   ),
@@ -414,20 +374,78 @@ class _AddCheckInOutPageState extends State<AddCheckInOutPage> {
                                               textSize: 12,
                                               textBold: FontWeight.normal,
                                             ),
-                                            buildDetailCard(
-                                              title: "Keterangan",
-                                              text: isLoading
-                                                  ? "Loading..."
-                                                  : data != null
-                                                      ? data.isOnSite
-                                                          ? 'On Scope'
-                                                          : 'Out Scope'
-                                                      : "-",
-                                              color: data != null
-                                                  ? data.isOnSite
-                                                      ? MyColorsConst.greenColor
-                                                      : MyColorsConst.redColor
-                                                  : MyColorsConst.darkColor,
+                                            SizedBox(height: 20.sp),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Container(
+                                                  child: Text(
+                                                    "Status Lokasi",
+                                                    style: GoogleFonts.poppins(
+                                                      color: MyColorsConst
+                                                          .darkColor,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 12,
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(height: 8),
+                                                Container(
+                                                  // padding: EdgeInsets.all(5.sp),
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(
+                                                        isLoading
+                                                            ? Icons
+                                                                .hourglass_empty
+                                                            : data != null
+                                                                ? data.isOnSite
+                                                                    ? Icons
+                                                                        .check_circle
+                                                                    : Icons
+                                                                        .cancel
+                                                                : Icons
+                                                                    .check_circle,
+                                                        color: data != null
+                                                            ? data.isOnSite
+                                                                ? MyColorsConst
+                                                                    .greenColor
+                                                                : MyColorsConst
+                                                                    .redColor
+                                                            : MyColorsConst
+                                                                .darkColor,
+                                                        size: 18.sp,
+                                                      ),
+                                                      SizedBox(width: 3.sp),
+                                                      Text(
+                                                        isLoading
+                                                            ? "Loading..."
+                                                            : data != null
+                                                                ? data.isOnSite
+                                                                    ? 'On Scope'
+                                                                    : 'Out Scope'
+                                                                : "-",
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          color: data != null
+                                                              ? data.isOnSite
+                                                                  ? MyColorsConst
+                                                                      .greenColor
+                                                                  : MyColorsConst
+                                                                      .redColor
+                                                              : MyColorsConst
+                                                                  .darkColor,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontSize: 12,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                             SizedBox(
                                               height: 10,
@@ -442,8 +460,7 @@ class _AddCheckInOutPageState extends State<AddCheckInOutPage> {
                                               Padding(
                                                 padding:
                                                     const EdgeInsets.symmetric(
-                                                        vertical: 10,
-                                                        horizontal: 9),
+                                                        vertical: 10),
                                                 child: TextFormField(
                                                   controller:
                                                       catatanController!,
@@ -587,7 +604,7 @@ class _AddCheckInOutPageState extends State<AddCheckInOutPage> {
       children: [
         Container(
           // width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.symmetric(vertical: 5),
           child: Text(
             title,
             style: GoogleFonts.poppins(
@@ -599,7 +616,6 @@ class _AddCheckInOutPageState extends State<AddCheckInOutPage> {
         ),
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(8),
           decoration: const BoxDecoration(
             color: MyColorsConst.whiteColor,
             borderRadius: BorderRadius.only(

@@ -244,7 +244,7 @@ class _LemburPageState extends State<LemburPage> {
                                   "Bulan",
                                   style: GoogleFonts.poppins(
                                     color: MyColorsConst.darkColor,
-                                    fontSize: 10,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.normal,
                                   ),
                                 ),
@@ -287,7 +287,7 @@ class _LemburPageState extends State<LemburPage> {
                                   "Tahun",
                                   style: GoogleFonts.poppins(
                                     color: MyColorsConst.darkColor,
-                                    fontSize: 10,
+                                    fontSize: 12.sp,
                                     fontWeight: FontWeight.normal,
                                   ),
                                 ),

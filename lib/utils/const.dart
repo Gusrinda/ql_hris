@@ -60,6 +60,7 @@ class MyColorsConst {
 
   static const primaryColor = Color(0XFF0068D4);
   static const primaryDarkColor = Color(0XFF002F61);
+  static const primaryBGColor = Color(0XFFF9FAFF);
   static const primaryLightColor = Color.fromARGB(255, 0, 125, 255);
   static const primaryLight2Color = Color.fromARGB(255, 226, 241, 255);
   static const primaryLight3Color = Color.fromARGB(255, 182, 220, 255);

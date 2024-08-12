@@ -6,6 +6,7 @@ import 'package:sj_presensi_mobile/pages/approval/detail_approval.view.dart';
 import 'package:sj_presensi_mobile/pages/authentication/check_version/check_version_bloc.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/bloc/login_bloc.dart';
 import 'package:sj_presensi_mobile/pages/authentication/login/login_page.dart';
+import 'package:sj_presensi_mobile/pages/birthday/birthday.view.dart';
 import 'package:sj_presensi_mobile/pages/cuti/addCutiBloc/add_cuti_bloc.dart';
 import 'package:sj_presensi_mobile/pages/cuti/add_cuti.dart';
 import 'package:sj_presensi_mobile/pages/cuti/detail_cuti.dart';
@@ -38,6 +39,7 @@ import 'package:sj_presensi_mobile/pages/home/dashboard.view.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/detail_history_absensi.dart';
 import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
+import 'package:sj_presensi_mobile/pages/home/home_bloc/home_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/bloc/pengumuman_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/list_pengumuman.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
@@ -270,6 +272,13 @@ class RouteGenerator {
       case DashboardDinasPage.routeName:
         return MaterialPageRoute(builder: (context) {
           return const DashboardDinasPage();
+        });
+      case listBirthdayTodayPage.routeName:
+        return MaterialPageRoute(builder: (context) {
+          return BlocProvider(
+            create: (context) => HomeBloc(),
+            child: listBirthdayTodayPage(),
+          );
         });
       case AddDinasPage.routeName:
         return MaterialPageRoute(builder: (context) {

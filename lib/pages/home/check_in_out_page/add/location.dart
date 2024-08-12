@@ -88,10 +88,10 @@ class MyLocation {
     double long = position.longitude;
     bool isOnSite = await checkIsOnSite(resToken.response["token"], lat, long);
 
+    setLocaleIdentifier("id_ID");
     List<Placemark> placemarks = await placemarkFromCoordinates(
       lat,
       long,
-      localeIdentifier: "id_ID",
     );
 
     return MyLocationModel(
@@ -139,10 +139,10 @@ class MyLocation {
             await checkIsOnSite(resToken.response["token"], lat, long);
 
         try {
+          setLocaleIdentifier("id_ID");
           List<Placemark> placemarks = await placemarkFromCoordinates(
             lat,
             long,
-            localeIdentifier: "id_ID",
           );
 
           return MyLocationModel(

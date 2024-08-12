@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/add/add_check_in_out_page.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/home_bloc/home_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/pengumuman/bloc/pengumuman_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/bloc/profile_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/profile/data_bahasa/list_bahasa_bloc/list_bahasa_bloc.dart';
@@ -121,6 +122,9 @@ class _DashboardViewState extends State<DashboardView> {
                         ),
                         BlocProvider(
                           create: (context) => ListLemburBloc(),
+                        ),
+                        BlocProvider(
+                          create: (context) => HomeBloc(),
                         ),
                       ],
                       child: HomePage(),

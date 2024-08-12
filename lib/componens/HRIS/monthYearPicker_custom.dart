@@ -49,7 +49,7 @@ class _MonthPickerState extends State<MonthPicker> {
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 1 / 2.3,
-        height: 40,
+        height: 40.sp,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),
           border: Border.all(color: const Color(0xFFDDDDDD)),
@@ -63,7 +63,7 @@ class _MonthPickerState extends State<MonthPicker> {
                 child: Text(
                   _selectedMonth ?? '',
                   style: GoogleFonts.poppins(
-                    fontSize: 13,
+                    fontSize: 13.sp,
                     color: Colors.black,
                     fontWeight: FontWeight.w500,
                   ),
@@ -71,10 +71,10 @@ class _MonthPickerState extends State<MonthPicker> {
               ),
             ),
             const Spacer(),
-            const Icon(
+            Icon(
               Icons.keyboard_arrow_down_rounded,
               color: Colors.blue,
-              size: 25,
+              size: 25.sp,
             ),
             SizedBox(
               width: 5.sp,
@@ -238,10 +238,10 @@ class _YearPickerCustomState extends State<YearPickerCustom> {
               ),
             ),
             const Spacer(),
-            const Icon(
+            Icon(
               Icons.keyboard_arrow_down_rounded,
               color: MyColorsConst.primaryColor,
-              size: 25,
+              size: 25.sp,
             ),
             SizedBox(
               width: 5.sp,
