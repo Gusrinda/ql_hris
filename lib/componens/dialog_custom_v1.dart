@@ -37,7 +37,7 @@ class _DialogCustomState extends State<DialogCustom> {
   void initState() {
     super.initState();
     if (widget.state != DialogCustomItem.warning) {
-      timer = Timer(Duration(seconds: widget.durationInSec), () {
+      timer = Timer(Duration(seconds: widget.durationInSec ?? 3), () {
         Navigator.of(context).pop();
       });
     }
@@ -46,7 +46,7 @@ class _DialogCustomState extends State<DialogCustom> {
   @override
   void dispose() {
     if (widget.state != DialogCustomItem.warning) {
-      timer!.cancel();
+      timer?.cancel();
       timer = null;
     }
     super.dispose();
@@ -91,7 +91,7 @@ class _DialogCustomState extends State<DialogCustom> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             Lottie.asset(dataLottie[widget.state.index]["asset"] as String,
                 height: 100,
                 repeat: dataLottie[widget.state.index]["asset"] ==
@@ -116,35 +116,44 @@ class _DialogCustomState extends State<DialogCustom> {
             const SizedBox(height: 20),
             widget.state != DialogCustomItem.warning &&
                     widget.state != DialogCustomItem.confirm
-                ? dialogButton(
-                    context,
-                    text: 'Tutup',
-                    color: dataLottie[widget.state.index]["color"] as Color,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+                ? SizedBox(
+                    width: 100,
+                    child: dialogButton(
+                      context,
+                      text: 'Tutup',
+                      color: dataLottie[widget.state.index]["color"] as Color,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
                   )
                 : Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      dialogButton(
-                        context,
-                        text: 'Batal',
-                        color: MyColorsConst.lightDarkColor,
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
+                      Expanded(
+                        child: dialogButton(
+                          context,
+                          text: 'Batal',
+                          color: MyColorsConst.lightDarkColor,
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
                       ),
-                      dialogButton(
-                        context,
-                        text: 'Lanjutkan',
-                        color: dataLottie[widget.state.index]["color"] as Color,
-                        onPressed: widget.onContinue!,
+                      SizedBox(width: 10.sp),
+                      Expanded(
+                        child: dialogButton(
+                          context,
+                          text: 'Lanjutkan',
+                          color:
+                              dataLottie[widget.state.index]["color"] as Color,
+                          onPressed: widget.onContinue!,
+                        ),
                       )
                     ],
                   ),
-            SizedBox(height: 10.sp),
+            SizedBox(height: 5.sp),
           ],
         ),
       ),
@@ -160,12 +169,13 @@ class _DialogCustomState extends State<DialogCustom> {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        elevation: 1,
-        fixedSize: const Size(100, 40),
+        elevation: 0,
+        // fixedSize: const Size(100, 40),
+        padding: EdgeInsets.symmetric(horizontal: 20.sp, vertical: 10.sp),
         backgroundColor: Colors.white,
         side: BorderSide(color: color, width: 1.2),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(100),
         ),
       ),
       child: Text(
@@ -176,6 +186,7 @@ class _DialogCustomState extends State<DialogCustom> {
     );
   }
 }
+
 // class DialogCustom extends StatelessWidget {
 //   final DialogCustomItem state;
 //   final String message;

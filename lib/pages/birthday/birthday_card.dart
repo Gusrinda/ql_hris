@@ -10,8 +10,9 @@ Widget birthdaySection(BuildContext context) {
       Navigator.pushNamed(context, listBirthdayTodayPage.routeName);
     },
     child: Container(
+      width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(7.sp),
+        borderRadius: BorderRadius.circular(10.sp),
         // border: Border.all(color: Color.fromARGB(255, 219, 220, 255)),
         color: MyColorsConst.whiteColor,
         boxShadow: [
@@ -33,7 +34,7 @@ Widget birthdaySection(BuildContext context) {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Ada Yang Ulang Tahun Hari Ini",
+                "HAPPY BIRTHDAY SJG WARRIOR",
                 style: GoogleFonts.poppins(
                   color: MyColorsConst.darkColor,
                   fontSize: 12.sp,
@@ -42,7 +43,8 @@ Widget birthdaySection(BuildContext context) {
               ),
               SizedBox(height: 2.sp),
               Text(
-                "Kepoin yuk siapa aja",
+                "Pantau terus siapa saja yang ultah",
+                maxLines: 2,
                 style: GoogleFonts.poppins(
                   color: MyColorsConst.darkColor,
                   fontSize: 12.sp,
@@ -120,7 +122,7 @@ class _BirthdaySectionState extends State<BirthdaySection>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Ada Yang Ulang Tahun Hari Ini",
+                      "Ada Yang Ulang Tahun Bulan Ini",
                       style: GoogleFonts.poppins(
                         color: MyColorsConst.darkColor,
                         fontSize: 12.sp,
@@ -129,7 +131,7 @@ class _BirthdaySectionState extends State<BirthdaySection>
                     ),
                     SizedBox(height: 2.sp),
                     Text(
-                      "Kepoin yuk siapa aja",
+                      "Pantau terus siapa yang ultah hari ini",
                       style: GoogleFonts.poppins(
                         color: MyColorsConst.darkColor,
                         fontSize: 12.sp,

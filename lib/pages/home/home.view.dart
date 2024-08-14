@@ -21,6 +21,7 @@ import 'package:sj_presensi_mobile/pages/dinas/dashboard_dinas.dart';
 import 'package:sj_presensi_mobile/pages/download_berkas/download_berkas_page.dart';
 import 'package:sj_presensi_mobile/pages/download_berkas/kategori_berkas_bloc/berkas_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/check_in_out_page/bloc/check_in_out_bloc.dart';
+import 'package:sj_presensi_mobile/pages/home/cuti.widget.dart';
 import 'package:sj_presensi_mobile/pages/home/history/attendance_history/history_attendance_bloc.dart';
 import 'package:sj_presensi_mobile/pages/home/history/history_page.dart';
 import 'package:sj_presensi_mobile/pages/home/home_bloc/home_bloc.dart';
@@ -350,251 +351,254 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           const SizedBox(height: 20.0),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(7),
-                              child: BackdropFilter(
-                                filter:
-                                    ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                                child: Container(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 15),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(7),
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        Colors.white.withOpacity(1),
-                                        Colors.white.withOpacity(0.9),
-                                      ],
-                                      begin: AlignmentDirectional.topStart,
-                                      end: AlignmentDirectional.bottomEnd,
-                                    ),
-                                    border: Border.all(
-                                      width: 1.5,
-                                      color: Colors.white.withOpacity(0.3),
-                                    ),
-                                  ),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                          flex: 1,
-                                          child: Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 15),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                const Icon(
-                                                  CupertinoIcons
-                                                      .bag_badge_minus,
-                                                  color: MyColorsConst
-                                                      .primaryColor,
-                                                ),
-                                                const SizedBox(height: 7),
-                                                RichText(
-                                                  text: TextSpan(
-                                                    children: [
-                                                      TextSpan(
-                                                        text:
-                                                            "${infoCuti?.sisaCutiMasaKerja?.toString() ?? '0'}",
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                          fontSize: 18.sp,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          color: MyColorsConst
-                                                              .primaryColor,
-                                                        ),
-                                                      ),
-                                                      TextSpan(
-                                                        text:
-                                                            " / ${infoCuti?.cutiMasaKerja?.toString() ?? '0'}\nHari",
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                          height: 1,
-                                                          fontSize: 12.sp,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: MyColorsConst
-                                                              .darkColor,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 5),
-                                                Text(
-                                                  "Cuti Masa Kerja",
-                                                  style: GoogleFonts.poppins(
-                                                      fontSize: 9.sp,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color:
-                                                          Colors.grey.shade600),
-                                                )
-                                              ],
-                                            ),
-                                          )),
-                                      Container(
-                                        width: 1,
-                                        height: 60.sp,
-                                        color: MyColorsConst.disableColor,
-                                      ),
-                                      Expanded(
-                                          flex: 1,
-                                          child: Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 15),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                const Icon(
-                                                  CupertinoIcons
-                                                      .calendar_badge_minus,
-                                                  color: MyColorsConst
-                                                      .primaryColor,
-                                                ),
-                                                const SizedBox(height: 7),
-                                                RichText(
-                                                  text: TextSpan(
-                                                    children: [
-                                                      TextSpan(
-                                                        text:
-                                                            "${infoCuti?.sisaCutiReguler?.toString() ?? '0'}",
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                          fontSize: 18.sp,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          color: MyColorsConst
-                                                              .primaryColor,
-                                                        ),
-                                                      ),
-                                                      TextSpan(
-                                                        text:
-                                                            " / ${infoCuti?.cutiReguler?.toString() ?? '0'}\nHari",
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                          height: 1,
-                                                          fontSize: 12.sp,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: MyColorsConst
-                                                              .darkColor,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 5),
-                                                Text(
-                                                  "Cuti Tahunan",
-                                                  style: GoogleFonts.poppins(
-                                                      fontSize: 9.sp,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color:
-                                                          Colors.grey.shade600),
-                                                )
-                                              ],
-                                            ),
-                                          )),
-                                      Container(
-                                        width: 1,
-                                        height: 60,
-                                        color: MyColorsConst.disableColor,
-                                      ),
-                                      Expanded(
-                                          flex: 1,
-                                          child: Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 15),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                const Icon(
-                                                  CupertinoIcons.timer,
-                                                  color: MyColorsConst
-                                                      .primaryColor,
-                                                ),
-                                                const SizedBox(height: 7),
-                                                RichText(
-                                                  text: TextSpan(
-                                                    children: [
-                                                      TextSpan(
-                                                        text:
-                                                            "${infoCuti?.sisaCutiP24?.toString() ?? '0'}",
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                          fontSize: 18.sp,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          color: MyColorsConst
-                                                              .primaryColor,
-                                                        ),
-                                                      ),
-                                                      TextSpan(
-                                                        text:
-                                                            " / ${infoCuti?.cutiP24?.toString() ?? '0'}\nMenit",
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                          height: 1,
-                                                          fontSize: 12.sp,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: MyColorsConst
-                                                              .darkColor,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 5),
-                                                Text(
-                                                  "P24",
-                                                  style: GoogleFonts.poppins(
-                                                      fontSize: 9.sp,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color:
-                                                          Colors.grey.shade600),
-                                                )
-                                              ],
-                                            ),
-                                          ))
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                          CutiCard(
+                            infoCuti: infoCuti ?? InfoCuti(),
                           ),
-                          const SizedBox(height: 20),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Text(
-                              "Menu",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white),
-                            ),
-                          ),
-                          const SizedBox(height: 5),
+                          // Padding(
+                          //   padding: const EdgeInsets.symmetric(horizontal: 20),
+                          //   child: ClipRRect(
+                          //     borderRadius: BorderRadius.circular(7),
+                          //     child: BackdropFilter(
+                          //       filter:
+                          //           ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                          //       child: Container(
+                          //         padding:
+                          //             const EdgeInsets.symmetric(vertical: 15),
+                          //         decoration: BoxDecoration(
+                          //           borderRadius: BorderRadius.circular(10.sp),
+                          //           gradient: LinearGradient(
+                          //             colors: [
+                          //               Colors.white.withOpacity(1),
+                          //               Colors.white.withOpacity(0.9),
+                          //             ],
+                          //             begin: AlignmentDirectional.topStart,
+                          //             end: AlignmentDirectional.bottomEnd,
+                          //           ),
+                          //           border: Border.all(
+                          //             width: 1.5,
+                          //             color: Colors.white.withOpacity(0.3),
+                          //           ),
+                          //         ),
+                          //         child: Row(
+                          //           crossAxisAlignment:
+                          //               CrossAxisAlignment.center,
+                          //           mainAxisAlignment:
+                          //               MainAxisAlignment.spaceBetween,
+                          //           children: [
+                          //             Expanded(
+                          //                 flex: 1,
+                          //                 child: Container(
+                          //                   padding: EdgeInsets.symmetric(
+                          //                       horizontal: 15),
+                          //                   child: Column(
+                          //                     crossAxisAlignment:
+                          //                         CrossAxisAlignment.start,
+                          //                     children: [
+                          //                       const Icon(
+                          //                         CupertinoIcons
+                          //                             .bag_badge_minus,
+                          //                         color: MyColorsConst
+                          //                             .primaryColor,
+                          //                       ),
+                          //                       const SizedBox(height: 7),
+                          //                       RichText(
+                          //                         text: TextSpan(
+                          //                           children: [
+                          //                             TextSpan(
+                          //                               text:
+                          //                                   "${infoCuti?.sisaCutiMasaKerja?.toString() ?? '0'}",
+                          //                               style:
+                          //                                   GoogleFonts.poppins(
+                          //                                 fontSize: 18.sp,
+                          //                                 fontWeight:
+                          //                                     FontWeight.w700,
+                          //                                 color: MyColorsConst
+                          //                                     .primaryColor,
+                          //                               ),
+                          //                             ),
+                          //                             TextSpan(
+                          //                               text:
+                          //                                   " / ${infoCuti?.cutiMasaKerja?.toString() ?? '0'}\nHari",
+                          //                               style:
+                          //                                   GoogleFonts.poppins(
+                          //                                 height: 1,
+                          //                                 fontSize: 12.sp,
+                          //                                 fontWeight:
+                          //                                     FontWeight.w600,
+                          //                                 color: MyColorsConst
+                          //                                     .darkColor,
+                          //                               ),
+                          //                             ),
+                          //                           ],
+                          //                         ),
+                          //                       ),
+                          //                       const SizedBox(height: 5),
+                          //                       Text(
+                          //                         "Cuti Masa Kerja",
+                          //                         style: GoogleFonts.poppins(
+                          //                             fontSize: 9.sp,
+                          //                             fontWeight:
+                          //                                 FontWeight.w500,
+                          //                             color:
+                          //                                 Colors.grey.shade600),
+                          //                       )
+                          //                     ],
+                          //                   ),
+                          //                 )),
+                          //             Container(
+                          //               width: 1,
+                          //               height: 60.sp,
+                          //               color: MyColorsConst.disableColor,
+                          //             ),
+                          //             Expanded(
+                          //                 flex: 1,
+                          //                 child: Container(
+                          //                   padding: EdgeInsets.symmetric(
+                          //                       horizontal: 15),
+                          //                   child: Column(
+                          //                     crossAxisAlignment:
+                          //                         CrossAxisAlignment.start,
+                          //                     children: [
+                          //                       const Icon(
+                          //                         CupertinoIcons
+                          //                             .calendar_badge_minus,
+                          //                         color: MyColorsConst
+                          //                             .primaryColor,
+                          //                       ),
+                          //                       const SizedBox(height: 7),
+                          //                       RichText(
+                          //                         text: TextSpan(
+                          //                           children: [
+                          //                             TextSpan(
+                          //                               text:
+                          //                                   "${infoCuti?.sisaCutiReguler?.toString() ?? '0'}",
+                          //                               style:
+                          //                                   GoogleFonts.poppins(
+                          //                                 fontSize: 18.sp,
+                          //                                 fontWeight:
+                          //                                     FontWeight.w700,
+                          //                                 color: MyColorsConst
+                          //                                     .primaryColor,
+                          //                               ),
+                          //                             ),
+                          //                             TextSpan(
+                          //                               text:
+                          //                                   " / ${infoCuti?.cutiReguler?.toString() ?? '0'}\nHari",
+                          //                               style:
+                          //                                   GoogleFonts.poppins(
+                          //                                 height: 1,
+                          //                                 fontSize: 12.sp,
+                          //                                 fontWeight:
+                          //                                     FontWeight.w600,
+                          //                                 color: MyColorsConst
+                          //                                     .darkColor,
+                          //                               ),
+                          //                             ),
+                          //                           ],
+                          //                         ),
+                          //                       ),
+                          //                       const SizedBox(height: 5),
+                          //                       Text(
+                          //                         "Cuti Tahunan",
+                          //                         style: GoogleFonts.poppins(
+                          //                             fontSize: 9.sp,
+                          //                             fontWeight:
+                          //                                 FontWeight.w500,
+                          //                             color:
+                          //                                 Colors.grey.shade600),
+                          //                       )
+                          //                     ],
+                          //                   ),
+                          //                 )),
+                          //             Container(
+                          //               width: 1,
+                          //               height: 60,
+                          //               color: MyColorsConst.disableColor,
+                          //             ),
+                          //             Expanded(
+                          //                 flex: 1,
+                          //                 child: Container(
+                          //                   padding: EdgeInsets.symmetric(
+                          //                       horizontal: 15),
+                          //                   child: Column(
+                          //                     crossAxisAlignment:
+                          //                         CrossAxisAlignment.start,
+                          //                     children: [
+                          //                       const Icon(
+                          //                         CupertinoIcons.timer,
+                          //                         color: MyColorsConst
+                          //                             .primaryColor,
+                          //                       ),
+                          //                       const SizedBox(height: 7),
+                          //                       RichText(
+                          //                         text: TextSpan(
+                          //                           children: [
+                          //                             TextSpan(
+                          //                               text:
+                          //                                   "${infoCuti?.sisaCutiP24?.toString() ?? '0'}",
+                          //                               style:
+                          //                                   GoogleFonts.poppins(
+                          //                                 fontSize: 18.sp,
+                          //                                 fontWeight:
+                          //                                     FontWeight.w700,
+                          //                                 color: MyColorsConst
+                          //                                     .primaryColor,
+                          //                               ),
+                          //                             ),
+                          //                             TextSpan(
+                          //                               text:
+                          //                                   " / ${infoCuti?.cutiP24?.toString() ?? '0'}\nMenit",
+                          //                               style:
+                          //                                   GoogleFonts.poppins(
+                          //                                 height: 1,
+                          //                                 fontSize: 12.sp,
+                          //                                 fontWeight:
+                          //                                     FontWeight.w600,
+                          //                                 color: MyColorsConst
+                          //                                     .darkColor,
+                          //                               ),
+                          //                             ),
+                          //                           ],
+                          //                         ),
+                          //                       ),
+                          //                       const SizedBox(height: 5),
+                          //                       Text(
+                          //                         "P24",
+                          //                         style: GoogleFonts.poppins(
+                          //                             fontSize: 9.sp,
+                          //                             fontWeight:
+                          //                                 FontWeight.w500,
+                          //                             color:
+                          //                                 Colors.grey.shade600),
+                          //                       )
+                          //                     ],
+                          //                   ),
+                          //                 ))
+                          //           ],
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                          SizedBox(height: 20.sp),
+                          // Padding(
+                          //   padding: const EdgeInsets.symmetric(horizontal: 20),
+                          //   child: Text(
+                          //     "Menu",
+                          //     style: GoogleFonts.poppins(
+                          //         fontSize: 14.sp,
+                          //         fontWeight: FontWeight.w600,
+                          //         color: Colors.white),
+                          //   ),
+                          // ),
+                          // const SizedBox(height: 5),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: Container(
                               padding: EdgeInsets.symmetric(
                                   vertical: 20, horizontal: 10),
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(7),
+                                  borderRadius: BorderRadius.circular(10.sp),
                                   color: Colors.white,
                                   boxShadow: [
                                     BoxShadow(
@@ -866,7 +870,7 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                           ),
-                          const SizedBox(height: 5),
+                          SizedBox(height: 10.sp),
                           BlocBuilder<PengumumanBloc, PengumumanState>(
                             builder: (context, state) {
                               var listPengumuman =
@@ -875,7 +879,7 @@ class _HomePageState extends State<HomePage> {
                                   ? 5
                                   : listPengumuman.length;
                               return Container(
-                                constraints: BoxConstraints(maxHeight: 300.sp),
+                                constraints: BoxConstraints(maxHeight: 280.sp),
                                 child: listPengumuman.isNotEmpty
                                     ? ListView.builder(
                                         scrollDirection: Axis.horizontal,

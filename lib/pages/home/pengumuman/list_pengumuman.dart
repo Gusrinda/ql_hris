@@ -94,18 +94,24 @@ class _ListPengumumanPageState extends State<ListPengumumanPage> {
                       },
                       color: Colors.white,
                     ),
-                    SizedBox(
-                      width: size.width * 1 / 6.5,
-                    ),
                     Expanded(
                       child: Text(
                         "Semua Pengumuman",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.poppins(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
                         ),
                       ),
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_back_ios_rounded,
+                        size: 18,
+                      ),
+                      onPressed: () {},
+                      color: Colors.transparent,
                     ),
                   ],
                 ),
@@ -124,7 +130,7 @@ class _ListPengumumanPageState extends State<ListPengumumanPage> {
                         color: Colors.white,
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(20.sp),
+                        padding: EdgeInsets.only(left: 20.sp, right: 10.sp),
                         child: Column(
                           children: [
                             Expanded(
@@ -135,8 +141,7 @@ class _ListPengumumanPageState extends State<ListPengumumanPage> {
                                       itemBuilder: (context, index) {
                                         var pengumuman = listPengumuman[index];
                                         return Padding(
-                                          padding:
-                                              EdgeInsets.only(bottom: 15.sp),
+                                          padding: EdgeInsets.only(bottom: 15.sp),
                                           child: PengumumanCard(
                                             imageUrl: pengumuman.thumb,
                                             judul: pengumuman.judul,

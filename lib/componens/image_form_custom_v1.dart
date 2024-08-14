@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
@@ -51,8 +53,8 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV1> {
           width: double.infinity,
           // height: size.width,
           alignment: Alignment.center,
-          decoration: const BoxDecoration(
-            color: MyColorsConst.shadowColor,
+          decoration: BoxDecoration(
+            color: Colors.grey.shade300,
             borderRadius: BorderRadius.all(
               Radius.circular(10),
             ),
@@ -77,17 +79,17 @@ class _ImageFormCustomV1State extends State<ImageFormCustomV1> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            Icons.camera_alt,
-                            color: MyColorsConst.semiDarkColor,
-                            size: 45,
+                            CupertinoIcons.camera_fill,
+                            color: Colors.grey.shade600,
+                            size: 35.sp,
                           ),
-                          SizedBox(height: 6),
+                          SizedBox(height: 3.sp),
                           Text(
                             "Ketuk untuk ambil gambar",
                             style: GoogleFonts.poppins(
-                              color: MyColorsConst.darkColor,
-                              fontSize: 12,
-                            ),
+                                color: Colors.grey.shade600,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),

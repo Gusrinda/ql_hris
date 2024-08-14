@@ -31,9 +31,9 @@ class PengumumanCard extends StatelessWidget {
       child: Container(
         width: 210.sp,
         margin: EdgeInsets.only(right: 10.sp),
-        padding: EdgeInsets.all(10.sp),
+        padding: EdgeInsets.all(5.sp),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(7),
+          borderRadius: BorderRadius.circular(10.sp),
           color: Colors.white,
           border: Border.all(width: 1.sp, color: Colors.grey.shade300),
         ),
@@ -45,9 +45,7 @@ class PengumumanCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(5),
-                      topRight: Radius.circular(5)),
+                  borderRadius: BorderRadius.all(Radius.circular(8.sp)),
                   child: AspectRatio(
                       aspectRatio: 16 / 9.sp,
                       child: CachedNetworkImage(
@@ -71,78 +69,109 @@ class PengumumanCard extends StatelessWidget {
                       )),
                 ),
                 SizedBox(height: 5.sp),
-                Row(
-                  children: [
-                    Icon(
-                      CupertinoIcons.calendar,
-                      size: 12.sp,
-                      color: Colors.grey,
-                    ),
-                    SizedBox(
-                      width: 3.sp,
-                    ),
-                    Text(
-                      tanggal ?? '',
-                      style: GoogleFonts.poppins(
-                          fontSize: 9.sp,
-                          color: Colors.grey,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 5.sp),
-                Text(
-                  judul ?? '',
-                  textAlign: TextAlign.start,
-                  style: GoogleFonts.poppins(
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w700,
-                      color: MyColorsConst.darkColor),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Text(
-                  tag ?? '',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.poppins(
-                      fontSize: 8.sp,
-                      color: MyColorsConst.primaryColor,
-                      fontWeight: FontWeight.w500),
-                ),
-                SizedBox(height: 7.sp),
-                Text(
-                  detail ?? '',
-                  textAlign: TextAlign.justify,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.poppins(
-                      fontSize: 9.sp,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w500),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 5.sp,
+                    vertical: 3.sp,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        judul ?? '',
+                        textAlign: TextAlign.start,
+                        style: GoogleFonts.poppins(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w700,
+                            color: MyColorsConst.darkColor),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      SizedBox(height: 5.sp),
+                      Text(
+                        tag ?? '',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.poppins(
+                            fontSize: 8.sp,
+                            color: MyColorsConst.primaryColor,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      SizedBox(height: 10.sp),
+                      Text(
+                        detail ?? '',
+                        textAlign: TextAlign.justify,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.poppins(
+                            fontSize: 9.sp,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
-            InkWell(
-              onTap: () {
-                _showDetailSlider(context);
-              },
-              child: Container(
-                padding: EdgeInsets.all(10.sp),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: MyColorsConst.primaryLight2Color),
-                child: Text(
-                  "Baca Selengkapnya",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.poppins(
-                      fontSize: 10.sp,
-                      fontWeight: FontWeight.w600,
-                      color: MyColorsConst.primaryColor),
-                ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 5.sp, horizontal: 5.sp),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        CupertinoIcons.calendar,
+                        size: 12.sp,
+                        color: Colors.grey,
+                      ),
+                      SizedBox(
+                        width: 3.sp,
+                      ),
+                      Text(
+                        tanggal ?? '',
+                        style: GoogleFonts.poppins(
+                            fontSize: 9.sp,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(3.sp),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: MyColorsConst.primaryColor),
+                    child: Icon(
+                      Icons.keyboard_double_arrow_up_rounded,
+                      size: 20.sp,
+                      color: Colors.white,
+                    ),
+                  )
+                ],
               ),
-            )
+            ),
+            // InkWell(
+            //   onTap: () {
+            //     _showDetailSlider(context);
+            //   },
+            //   child: Container(
+            //     padding: EdgeInsets.all(10.sp),
+            //     width: double.infinity,
+            //     decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.circular(5),
+            //         color: MyColorsConst.primaryLight2Color),
+            //     child: Text(
+            //       "Baca Selengkapnya",
+            //       textAlign: TextAlign.center,
+            //       style: GoogleFonts.poppins(
+            //           fontSize: 10.sp,
+            //           fontWeight: FontWeight.w600,
+            //           color: MyColorsConst.primaryColor),
+            //     ),
+            //   ),
+            // )
           ],
         ),
       ),
@@ -241,7 +270,7 @@ class PengumumanCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 5.sp),
+                  SizedBox(height: 10.sp),
                   Row(
                     children: [
                       Icon(

@@ -203,12 +203,12 @@ class _listBirthdayTodayPageState extends State<listBirthdayTodayPage> {
                                           horizontal: 15.sp, vertical: 15.sp),
                                       decoration: BoxDecoration(
                                           color: isPast
-                                              ? const Color(0xFFEEF0F3)
+                                              ? Color(0xFFFFF8F8)
                                               : Colors.white,
                                           border: Border.all(
                                               color: isPast
-                                              ? MyColorsConst.redColor
-                                              : MyColorsConst.primaryColor,
+                                                  ? MyColorsConst.redColor
+                                                  : MyColorsConst.primaryColor,
                                               width: 0.5),
                                           borderRadius:
                                               BorderRadius.circular(10.sp)),
@@ -236,7 +236,9 @@ class _listBirthdayTodayPageState extends State<listBirthdayTodayPage> {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  birthday.namaLengkap?.toUpperCase() ?? "-",
+                                                  birthday.namaLengkap
+                                                          ?.toUpperCase() ??
+                                                      "-",
                                                   style: GoogleFonts.poppins(
                                                       fontSize: 13.sp,
                                                       color: MyColorsConst
@@ -358,18 +360,41 @@ String formatTglUmur(String tanggalString) {
   // Parse string tanggal ke DateTime
   DateTime tanggal = DateFormat('dd/MM/yyyy').parse(tanggalString);
 
-  // Format tanggal ke string yang diinginkan
-  String hari = DateFormat('EEEE', 'id_ID').format(tanggal);
-  String tanggalLengkap = DateFormat('dd MMM yyyy', 'id_ID').format(tanggal);
+  // Ubah tahun ke tahun saat ini
+  DateTime tanggalDenganTahunSaatIni =
+      DateTime(DateTime.now().year, tanggal.month, tanggal.day);
 
-  // Hitung umur
-  int umur = DateTime.now().year - tanggal.year;
-  if (DateTime.now().month < tanggal.month ||
-      (DateTime.now().month == tanggal.month &&
-          DateTime.now().day < tanggal.day)) {
-    umur--;
-  }
+  // Format tanggal ke string yang diinginkan
+  String hari = DateFormat('EEEE', 'id_ID').format(tanggalDenganTahunSaatIni);
+  String tanggalLengkap =
+      DateFormat('dd MMMM', 'id_ID').format(tanggalDenganTahunSaatIni);
 
   // Gabungkan semua informasi
-  return '$hari, $tanggalLengkap ($umur Tahun)';
+  return '$hari, $tanggalLengkap';
 }
+
+
+// String formatTglUmur(String tanggalString) {
+//   // Inisialisasi lokal untuk Bahasa Indonesia
+//   initializeDateFormatting('id_ID', null);
+
+//   // Parse string tanggal ke DateTime
+//   DateTime tanggal = DateFormat('dd/MM/yyyy').parse(tanggalString);
+
+//   // Format tanggal ke string yang diinginkan
+//   String hari = DateFormat('EEEE', 'id_ID').format(tanggal);
+//   String tanggalLengkap = DateFormat('dd MMM yyyy', 'id_ID').format(tanggal);
+
+//   // Hitung umur
+//   int umur = DateTime.now().year - tanggal.year;
+//   if (DateTime.now().month < tanggal.month ||
+//       (DateTime.now().month == tanggal.month &&
+//           DateTime.now().day < tanggal.day)) {
+//     umur--;
+//   }
+
+//   // Gabungkan semua informasi
+//   return '$hari, $tanggalLengkap ($umur Tahun)';
+// }
+
+
