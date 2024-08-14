@@ -1,7 +1,7 @@
 name: sj_presensi_mobile
 description: My Success Apps.
 publish_to: 'none'
-version: 3.6.3
+version: 3.7.0
 
 environment:
   sdk: '>=3.4.3 <4.0.0'
