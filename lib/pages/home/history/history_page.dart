@@ -259,17 +259,10 @@ class _HistoryPageState extends State<HistoryPage> {
                                       print(
                                           "ini bulan terpilih ${selectedMonth} ${selectedYear}");
                                       DateTime newDate;
-                                      if (selectedYear != null) {
-                                        newDate = DateTime(
-                                            selectedYear!.year,
-                                            selectedMonth!.month,
-                                            DateTime.now().day);
-                                      } else {
-                                        newDate = DateTime(
-                                            DateTime.now().year,
-                                            selectedMonth!.month,
-                                            DateTime.now().day);
-                                      }
+                                      newDate = DateTime(
+                                          selectedYear?.year ??
+                                              DateTime.now().year,
+                                          selectedMonth!.month);
 
                                       context.read<HistoryAttendanceBloc>().add(
                                             GetAttendancesHistory(

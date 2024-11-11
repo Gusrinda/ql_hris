@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -73,7 +75,7 @@ class _MonthPickerState extends State<MonthPicker> {
             const Spacer(),
             Icon(
               Icons.keyboard_arrow_down_rounded,
-              color: Colors.blue,
+              color: MyColorsConst.primaryColor,
               size: 25.sp,
             ),
             SizedBox(
@@ -102,7 +104,7 @@ class _MonthPickerState extends State<MonthPicker> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          height: 300,
+          height: 300.sp,
           decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
@@ -115,24 +117,24 @@ class _MonthPickerState extends State<MonthPicker> {
               Expanded(
                 child: CupertinoPicker(
                   backgroundColor: Colors.transparent,
-                  itemExtent: 40,
+                  itemExtent: 40.sp,
                   onSelectedItemChanged: (int index) {
                     setState(() {
                       _tempSelectedMonth = _months[index];
                     });
                   },
+                  scrollController: FixedExtentScrollController(
+                    initialItem: initialIndex,
+                  ),
                   children: _months.map((String month) {
                     return Center(
                       child: Text(
                         month,
                         style: GoogleFonts.poppins(
-                            fontSize: 16, fontWeight: FontWeight.w500),
+                            fontSize: 16.sp, fontWeight: FontWeight.w500),
                       ),
                     );
                   }).toList(),
-                  scrollController: FixedExtentScrollController(
-                    initialItem: initialIndex,
-                  ),
                 ),
               ),
               Row(
@@ -165,10 +167,10 @@ class _MonthPickerState extends State<MonthPicker> {
                           _selected = DateTime(
                             widget.selectedYear?.year ?? DateTime.now().year,
                             _months.indexOf(_selectedMonth!) + 1,
-                            DateTime.now().day,
+                            1,
                           );
 
-                          print(_months.indexOf(_selectedMonth!) + 1);
+                          log("Index ${_months.indexOf(_selectedMonth!) + 1} \n $_selected");
                         });
                         widget.onTap(_selected, widget.selectedYear);
                       }

@@ -299,7 +299,6 @@ class _CutiPageState extends State<CutiPage> {
                                         selectedYear?.year ??
                                             DateTime.now().year,
                                         selectedMonth!.month,
-                                        DateTime.now().day,
                                       );
 
                                       context.read<ListCutiBloc>().add(

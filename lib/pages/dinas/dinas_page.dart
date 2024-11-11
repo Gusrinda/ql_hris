@@ -283,17 +283,12 @@ class _DinasPageState extends State<DinasPage> {
                                       print(
                                           "ini bulan terpilih ${selectedMonth} ${selectedYear}");
                                       DateTime newDate;
-                                      if (selectedYear != null) {
-                                        newDate = DateTime(
-                                            selectedYear!.year,
-                                            selectedMonth!.month,
-                                            DateTime.now().day);
-                                      } else {
-                                        newDate = DateTime(
-                                            DateTime.now().year,
-                                            selectedMonth!.month,
-                                            DateTime.now().day);
-                                      }
+                                      newDate = DateTime(
+                                        selectedYear != null
+                                            ? selectedYear!.year
+                                            : DateTime.now().year,
+                                        selectedMonth!.month,
+                                      );
 
                                       context.read<ListDinasBloc>().add(
                                             GetListDinas(
@@ -532,13 +527,12 @@ class ListViewDinas extends StatelessWidget {
                 borderRadius: BorderRadius.circular(6),
                 // border: Border.all(color: const Color(0xFFDDDDDD)),
                 boxShadow: [
-                                                      BoxShadow(
-                                                        color: MyColorsConst.darkColor
-                                                            .withOpacity(0.25),
-                                                        offset: Offset(2, 3.5),
-                                                        blurRadius: 7,
-                                                      ),
-                                                    ],
+                  BoxShadow(
+                    color: MyColorsConst.darkColor.withOpacity(0.25),
+                    offset: Offset(2, 3.5),
+                    blurRadius: 7,
+                  ),
+                ],
                 color: MyColorsConst.whiteColor,
               ),
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),

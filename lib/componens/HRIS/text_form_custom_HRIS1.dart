@@ -13,6 +13,7 @@ class TextFormCustomHRIS1 extends StatefulWidget {
   final bool? enable;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
+  final TextInputAction textInputAction;
   const TextFormCustomHRIS1({
     Key? key,
     this.labelText,
@@ -25,6 +26,7 @@ class TextFormCustomHRIS1 extends StatefulWidget {
     this.enable = true,
     this.validator,
     this.controller,
+    this.textInputAction = TextInputAction.next,
   }) : super(key: key);
 
   @override
@@ -55,6 +57,7 @@ class _TextFormCustomHRIS1State extends State<TextFormCustomHRIS1> {
             enabled: widget.enable,
             keyboardType: widget.keyboardType,
             obscureText: _isPasswordShowed,
+            textInputAction: widget.textInputAction,
             style: GoogleFonts.poppins(
               fontSize: widget.textSize,
               fontWeight: FontWeight.w500,

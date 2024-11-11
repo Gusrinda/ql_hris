@@ -100,7 +100,7 @@ class AuthenticationLayout extends StatelessWidget {
                             //     color: Colors.white,
                             //     borderRadius: BorderRadius.circular(6)),
                             child: Image.asset(
-                              width: size.width * 1 / 3,
+                              width: size.width * 1 / 2.5,
                               layoutData[layoutState.index]["image2"] as String,
                             ),
                           ),
@@ -122,14 +122,14 @@ class AuthenticationLayout extends StatelessWidget {
                           ),
                           SizedBox(height: 10.sp),
                           SizedBox(
-                            width: size.width * 1/2,
+                            width: size.width * 1 / 2,
                             child: Text(
-                              layoutData[layoutState.index]["subTitle"] as String,
+                              layoutData[layoutState.index]["subTitle"]
+                                  as String,
                               style: GoogleFonts.poppins(
-                                color: MyColorsConst.darkColor,
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w500
-                              ),
+                                  color: MyColorsConst.darkColor,
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                         ],

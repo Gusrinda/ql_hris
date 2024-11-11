@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sj_presensi_mobile/componens/dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/loading_dialog_custom_v1.dart';
 import 'package:sj_presensi_mobile/componens/text_button_custom_v1.dart';
@@ -11,12 +13,52 @@ import 'package:sj_presensi_mobile/pages/authentication/login/bloc/login_bloc.da
 import 'package:sj_presensi_mobile/pages/home/dashboard.view.dart';
 import 'package:sj_presensi_mobile/utils/const.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   static const routeName = 'LoginPage';
   LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  bool _rememberMe = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  // Method untuk load data dari SharedPreferences
+  Future<void> _loadUserData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _rememberMe = prefs.getBool('rememberMe') ?? false;
+      if (_rememberMe) {
+        usernameController.text = prefs.getString('username') ?? '';
+        passwordController.text = prefs.getString('password') ?? '';
+      }
+    });
+  }
+
+  // Method untuk simpan data ke SharedPreferences
+  Future<void> _saveUserData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (_rememberMe) {
+      await prefs.setBool('rememberMe', true);
+      await prefs.setString('username', usernameController.text);
+      await prefs.setString('password', passwordController.text);
+    } else {
+      await prefs.setBool('rememberMe', false);
+      await prefs.remove('username');
+      await prefs.remove('password');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +110,36 @@ class LoginPage extends StatelessWidget {
             validator: MultiValidator([
               RequiredValidator(errorText: "Masukkan Password"),
             ]),
+            textInputAction: TextInputAction.next,
           ),
-          SizedBox(height: 40.sp),
+          SizedBox(height: 5.sp),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Checkbox(
+                value: _rememberMe,
+                visualDensity: VisualDensity.compact,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                side: const BorderSide(color: Colors.white),
+                onChanged: (value) {
+                  setState(() {
+                    _rememberMe = value ?? false;
+                  });
+                },
+                checkColor: Colors.white, // Checkmark color
+              ),
+              Text(
+                "Ingat Saya",
+                style: GoogleFonts.poppins(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white),
+              ),
+            ],
+          ),
+          SizedBox(height: 20.sp),
           TextButtonCustomV1(
             width: size.width,
             height: 50.sp,
@@ -78,18 +148,25 @@ class LoginPage extends StatelessWidget {
             backgroundColor: MyColorsConst.primaryColor,
             textColor: MyColorsConst.whiteColor,
             onPressed: () {
-              context.read<LoginBloc>().add(
-                    LoginSubmited(
-                      username: usernameController.text,
-                      password: passwordController.text,
-                      status: _formKey.currentState!.validate(),
-                    ),
-                  );
+              _handleLogin();
             },
           ),
           SizedBox(height: 40.sp),
         ],
       ),
     );
+  }
+
+  void _handleLogin() async {
+    if (_formKey.currentState!.validate()) {
+      await _saveUserData(); // Simpan data jika login berhasil
+      context.read<LoginBloc>().add(
+            LoginSubmited(
+              username: usernameController.text,
+              password: passwordController.text,
+              status: true,
+            ),
+          );
+    }
   }
 }
